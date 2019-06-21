@@ -56,6 +56,7 @@ describe('utils/sanitizeFirestore', () => {
       ],
       qt_passed: true,
       qt_score: 28,
+      a_null_value: null,
     };
 
     const sanitized = sanitizeFirestore(data);
@@ -71,6 +72,7 @@ describe('utils/sanitizeFirestore', () => {
     ]);
     expect(sanitized.qt_passed).toEqual(true);
     expect(sanitized.qt_score).toEqual(28);
+    expect(sanitized.a_null_value).toBeNull();
   });
 
   it("doesn't change the input object (when passed by reference)", () => {
@@ -84,6 +86,18 @@ describe('utils/sanitizeFirestore', () => {
     sanitizeFirestore(data);
 
     expect(data.applied_date).toBe(timestamp);
+  });
+
+  it('returns a new object', () => {
+    const data = {
+      name: 'John Smith',
+      email: 'johnsmith@example.com',
+    };
+
+    const sanitized = sanitizeFirestore(data);
+
+    expect(sanitized).toEqual(data);
+    expect(sanitized).not.toBe(data);
   });
 
   const falsy = [null, undefined, false];
