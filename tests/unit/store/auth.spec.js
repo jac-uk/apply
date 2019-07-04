@@ -32,13 +32,13 @@ describe('store/auth', () => {
     });
 
     describe('setCurrentUser', () => {
-      describe('user is `null` (user is not logged in)', () => {
+      describe('user is `null` (user is not signed in)', () => {
         it('runs `setCurrentUser` mutation with `null`', () => {
           actions.setCurrentUser(context, null);
           expect(context.commit).toHaveBeenCalledWith('setCurrentUser', null);
         });
       });
-      describe('user object is supplied (user is logged in)', () => {
+      describe('user object is supplied (user is signed in)', () => {
         it('runs `setCurrentUser` mutation with data from the user object', () => {
           const user = {
             uid: 'abc123',
@@ -64,14 +64,14 @@ describe('store/auth', () => {
   });
 
   describe('getters', () => {
-    describe('isLoggedIn', () => {
-      describe('given a user is not logged in', () => {
+    describe('isSignedIn', () => {
+      describe('given a user is not signed in', () => {
         it('returns false', () => {
-          expect(getters.isLoggedIn(state)).toBe(false);
+          expect(getters.isSignedIn(state)).toBe(false);
         });
       });
 
-      describe('given a user is logged in', () => {
+      describe('given a user is signed in', () => {
         beforeEach(() => {
           state.currentUser = {
             uid: 'abc123',
@@ -81,19 +81,19 @@ describe('store/auth', () => {
         });
 
         it('returns true', () => {
-          expect(getters.isLoggedIn(state)).toBe(true);
+          expect(getters.isSignedIn(state)).toBe(true);
         });
       });
     });
 
     describe('currentUserId', () => {
-      describe('given a user is not logged in', () => {
+      describe('given a user is not signed in', () => {
         it('returns null', () => {
           expect(getters.currentUserId(state)).toBe(null);
         });
       });
 
-      describe('given user with ID `abc123` is logged in', () => {
+      describe('given user with ID `abc123` is signed in', () => {
         beforeEach(() => {
           state.currentUser = {
             uid: 'abc123',
@@ -109,13 +109,13 @@ describe('store/auth', () => {
     });
 
     describe('isEmailVerified', () => {
-      describe('given a user is not logged in', () => {
+      describe('given a user is not signed in', () => {
         it('returns null', () => {
           expect(getters.isEmailVerified(state)).toBe(false);
         });
       });
 
-      describe('given a non-verified user is logged in', () => {
+      describe('given a non-verified user is signed in', () => {
         beforeEach(() => {
           state.currentUser = {
             uid: 'abc123',
@@ -129,7 +129,7 @@ describe('store/auth', () => {
         });
       });
 
-      describe('given a verified user is logged in', () => {
+      describe('given a verified user is signed in', () => {
         beforeEach(() => {
           state.currentUser = {
             uid: 'abc123',
@@ -145,13 +145,13 @@ describe('store/auth', () => {
     });
 
     describe('currentUserEmail', () => {
-      describe('given a user is not logged in', () => {
+      describe('given a user is not signed in', () => {
         it('returns null', () => {
           expect(getters.currentUserEmail(state)).toBe(null);
         });
       });
 
-      describe('given user with email `user@example.com` is logged in', () => {
+      describe('given user with email `user@example.com` is signed in', () => {
         beforeEach(() => {
           state.currentUser = {
             uid: 'abc123',

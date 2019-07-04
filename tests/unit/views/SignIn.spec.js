@@ -1,10 +1,10 @@
 import {shallowMount} from "@vue/test-utils";
-import Login from '@/views/Login';
+import SignIn from '@/views/SignIn';
 import FirebaseUI from '@/components/FirebaseUI';
 
-describe('Login view', () => {
+describe('SignIn view', () => {
   const createTestSubject = () => {
-    return shallowMount(Login);
+    return shallowMount(SignIn);
   };
 
   let wrapper;
@@ -16,7 +16,7 @@ describe('Login view', () => {
     expect(wrapper.find(FirebaseUI).exists()).toBe(true);
   });
 
-  describe('when `FirebaseUI` emits a `signInSuccess` event (upon successful login)', () => {
+  describe('when `FirebaseUI` emits a `signInSuccess` event (upon successful sign in)', () => {
     const authResult = {
       additionalUserInfo: {},
       credential: null,
@@ -36,7 +36,7 @@ describe('Login view', () => {
       wrapper.find(FirebaseUI).vm.$emit('signInSuccess', authResult);
     });
 
-    it('updates the vuex auth store with the logged in user object', () => {
+    it('updates the vuex auth store with the authenticated user object', () => {
       expect(wrapper.vm.$store.dispatch).toHaveBeenCalledWith('setCurrentUser', authResult.user);
     });
 

@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="mb-5">
-    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-4" v-if="isLoggedIn">
+    <nav class="navbar navbar-expand-sm navbar-light bg-light mb-4" v-if="isSignedIn">
       <div class="container">
         <RouterLink to="/" class="navbar-brand">
           <img src="@/assets/jac-logo.svg" alt="Judicial Appointments Commission" width="197" height="66">
@@ -11,7 +11,7 @@
               <RouterLink to="/apply" class="nav-link" active-class="active">Apply</RouterLink>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" @click.prevent="logOut">Logout</a>
+              <a class="nav-link" href="#" @click.prevent="signOut">Sign out</a>
             </li>
           </ul>
         </div>
@@ -23,27 +23,28 @@
 </template>
 
 <script>
-import {auth} from '@/firebase';
+  import { mapGetters } from 'vuex';
+  import {auth} from '@/firebase';
 
-export default {
-  methods: {
-    logOut() {
-      auth().signOut();
-    }
-  },
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isLoggedIn;
-    },
-  },
-  watch: {
-    isLoggedIn(loggedIn) {
-      if (loggedIn === false) {
-        this.$router.push('/login');
+  export default {
+    methods: {
+      signOut() {
+        auth().signOut();
       }
     },
-  },
-}
+    computed: {
+      ...mapGetters([
+        'isSignedIn',
+      ]),
+    },
+    watch: {
+      isSignedIn(signedIn) {
+        if (signedIn === false) {
+          this.$router.push({name: 'sign-in'});
+        }
+      },
+    },
+  }
 </script>
 
 <style lang="scss">

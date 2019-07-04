@@ -4,7 +4,7 @@ import store from '@/store';
 
 // Views
 import Apply from '@/views/Apply';
-import Login from '@/views/Login';
+import SignIn from '@/views/SignIn';
 import VerifyEmail from '@/views/VerifyEmail';
 
 // Form Sections
@@ -94,21 +94,21 @@ const router = new Router({
       ],
     },
     {
-      path: '/login',
-      name: 'login',
-      component: Login,
+      path: '/sign-in',
+      name: 'sign-in',
+      component: SignIn,
     },
     {
       path: '/verify-email',
       name: 'verify-email',
       component: VerifyEmail,
       beforeEnter: (to, from, next) => {
-        const isLoggedIn = store.getters.isLoggedIn;
+        const isSignedIn = store.getters.isSignedIn;
         const isEmailVerified = store.getters.isEmailVerified;
 
-        if (!isLoggedIn) {
+        if (!isSignedIn) {
           // User must be logged in
-          return next({name: 'login'});
+          return next({name: 'sign-in'});
         }
 
         if (isEmailVerified) {
@@ -133,24 +133,21 @@ const router = new Router({
   },
 });
 
-// Check that the user has permission to access this route (i.e. is the user logged in?)
-// Redirect to login if not authenticated
-
 /**
  * Verify User's Access
  *
- * - redirect to the login page if required
+ * - redirect to the sign in page if required
  * - show 'verify your email' page if required
  * - otherwise display the page
  */
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const isLoggedIn = store.getters.isLoggedIn;
+  const isSignedIn = store.getters.isSignedIn;
   const isEmailVerified = store.getters.isEmailVerified;
 
-  if (requiresAuth && !isLoggedIn) {
+  if (requiresAuth && !isSignedIn) {
     // User must be logged in
-    return next({name: 'login'});
+    return next({name: 'sign-in'});
   }
 
   if (requiresAuth && !isEmailVerified) {

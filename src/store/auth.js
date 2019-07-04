@@ -21,7 +21,7 @@ const module = {
     },
   },
   getters: {
-    isLoggedIn(state) {
+    isSignedIn(state) {
       return (state.currentUser !== null);
     },
     currentUserId(state) {
