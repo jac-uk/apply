@@ -55,7 +55,7 @@ export default {
           'LinkedIn',
           'Word of mouth',
           'From one of the presiding judges',
-        ]
+        ],
       },
     };
   },
