@@ -109,16 +109,6 @@
         </div>
       </fieldset>
 
-      <fieldset>
-        <legend>Have you attended an outreach event on JAC selection exercises?</legend>
-        <SelectList id="has_attended_outreach_event" :options="selectListOptions.yesNo" v-model="applicant.has_attended_outreach_event" />
-      </fieldset>
-
-      <fieldset>
-        <legend>Did you participate in a Judicial Work Shadowing Scheme?</legend>
-        <SelectList id="participated_in_judicial_work_shadowing_scheme" :options="selectListOptions.yesNo" v-model="applicant.participated_in_judicial_work_shadowing_scheme" />
-      </fieldset>
-
       <SaveAndContinueButtons :isSaving="isSaving" @saveAndContinue="saveAndContinue" />
     </form>
   </section>

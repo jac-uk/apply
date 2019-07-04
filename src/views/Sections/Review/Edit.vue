@@ -11,6 +11,7 @@
     <Preferences />
     <Declarations />
     <Diversity />
+    <Outreach />
     <p v-if="application.state != 'submitted'">
       You are applying for <strong>{{vacancy.jac_ref}}: {{vacancy.title}}</strong>
     </p>
@@ -45,6 +46,7 @@ import Character from '@/views/Sections/Character/Show';
 import Preferences from '@/views/Sections/Preferences/Show';
 import Declarations from '@/views/Sections/Declarations/Show';
 import Diversity from '@/views/Sections/Diversity/Show';
+import Outreach from '@/views/Sections/Outreach/Show';
 export default {
   components: {
     BooleanInput,
@@ -57,7 +59,8 @@ export default {
     Character,
     Preferences,
     Declarations,
-    Diversity
+    Diversity,
+    Outreach
   },
   data() {
     return {

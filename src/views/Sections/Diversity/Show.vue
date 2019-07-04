@@ -99,17 +99,6 @@
         :singleResponse ="applicant.religion"
         />
 
-      <ShowSelectList
-        changeLink="/apply/diversity"
-        title="Have you attended an outreach event on JAC selection exercises?"
-        :singleResponse ="applicant.has_attended_outreach_event"
-        />
-
-      <ShowSelectList
-        changeLink="/apply/diversity"
-        title="Did you participate in a Judicial Work Shadowing Scheme?"
-        :singleResponse ="applicant.participated_in_judicial_work_shadowing_scheme"
-        />
     </div>
   </section>
 </template>
