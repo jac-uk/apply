@@ -5,7 +5,11 @@
 
       <fieldset>
         <legend>Your assessors</legend>
-        <div class="fieldset-text">Guidance on choosing your two assessors.</div>
+        <div class="fieldset-text">
+          <a href="https://www.judicialappointments.gov.uk/references-guidance-candidates" target="_blank">
+            Guidance on choosing your two assessors
+          </a>
+        </div>
         <RepeatableFields v-model="applicant.assessors" :component="repeatableFields.Assessor" :max="2" />
       </fieldset>
 
