@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section class="card mb-3">
     <div class="card-header">
       <h2 class="card-title">Outreach</h2>
     </div>
@@ -12,17 +12,30 @@
         :records="applicant.how_did_you_hear"
         />
 
-      <ShowSelectList
-        changeLink="/apply/outreach"
-        title="Have you attended an outreach event on JAC selection exercises?"
-        :singleResponse ="applicant.has_attended_outreach_event"
-        />
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Have you attended an outreach event on JAC selection exercises?</th>
+            <td>{{ applicant.has_attended_outreach_event ? "Yes" : "No" }}</td>
+            <td>
+              <RouterLink to="/apply/outreach">Change</RouterLink>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-      <ShowSelectList
-        changeLink="/apply/outreach"
-        title="Did you participate in a Judicial Work Shadowing Scheme?"
-        :singleResponse ="applicant.participated_in_judicial_work_shadowing_scheme"
-        />
+      <table class="table">
+        <tbody>
+          <tr>
+            <th scope="row">Did you participate in a Judicial Work Shadowing Scheme?</th>
+            <td>{{ applicant.participated_in_judicial_work_shadowing_scheme ? "Yes" : "No" }}</td>
+            <td>
+              <RouterLink to="/apply/outreach">Change</RouterLink>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
     </div>
   </section>
 </template>
