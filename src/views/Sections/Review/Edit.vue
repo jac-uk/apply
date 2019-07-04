@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Check your answers before sending your application</h2>
+    <h2>Check your answers before submitting your application</h2>
     <Citizenship />
     <Personal />
     <Qualifications />
