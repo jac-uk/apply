@@ -52,9 +52,10 @@
       <fieldset :disabled="application.state === 'submitted'">
         <legend>Additional Selection Criterion</legend>
         <div class="fieldset-text">
-          Refer to the ‘Additional Selection Criteria’ section of
-          <a href="https://www.judicialappointments.gov.uk/128-senior-circuit-judge-designated-civil-judge-information-page" target="_blank">the vacancy information page</a>
-          for more information about this requirement.
+          Refer to the
+          <a href="https://www.judicialappointments.gov.uk/128-senior-circuit-judge-designated-civil-judge-information-page#additional-selection-criterion"
+             target="_blank">‘Additional Selection Criterion’</a>
+          section of the vacancy information page for more information about this requirement.
         </div>
         <div class="form-group">
           <label for="additional_selection_criteria">Provide details of how you meet this requirement</label>
@@ -65,9 +66,10 @@
       <fieldset :disabled="application.state === 'submitted'">
         <legend>Reasonable Length of Service</legend>
         <div class="fieldset-text">
-          Refer to the ‘Reasonable Length of Service’ section of
-          <a href="https://www.judicialappointments.gov.uk/128-senior-circuit-judge-designated-civil-judge-information-page" target="_blank">the vacancy information page</a>
-          for more information about this requirement.
+          Refer to the
+          <a href="https://www.judicialappointments.gov.uk/128-senior-circuit-judge-designated-civil-judge-information-page#reasonable-length-of-service"
+             target="_blank">‘Reasonable Length of Service’</a>
+          section of the vacancy information page for more information about this requirement.
         </div>
         <div class="form-group">
           <label>Are you able to provide 3 years’ service?</label>
