@@ -46,7 +46,6 @@ export default {
           'Jane Furniss CBE',
           'Andrew Kennon',
           'Sarah Lee',
-          'Professor Noel Lloyd CBE',
           'Judge Fiona Monk',
           'Brie Stevens-Hoare',
           'Dame Valerie Strachan DCB',
