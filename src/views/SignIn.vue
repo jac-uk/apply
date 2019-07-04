@@ -6,11 +6,10 @@
         <img src="@/assets/jac-logo.svg" alt="Judicial Appointments Commission" width="197" height="66">
       </div>
       <p>
-        To apply for this role, you’ll need to create an account with your email address and a password. We’ll send you
-        a link to verify your email address.
+        To apply for this role, create an account with your email address and choose a password.
       </p>
       <p>
-        If you’ve already registered, sign in to return to your application.
+        If you’ve already created an account, sign in to return to your application.
       </p>
       <FirebaseUI @signInSuccess="loginRedirect" />
     </div>
