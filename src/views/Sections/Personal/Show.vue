@@ -13,7 +13,14 @@
               <RouterLink to="/apply/personal">Change</RouterLink>
             </td>
           </tr>
-          <tr v-if="applicant.date_of_birth && applicant.date_of_birth.toLocaleDateString()">
+          <tr>
+            <th scope="row">Preferred Name</th>
+            <td>{{ applicant.preferred_name }}</td>
+            <td>
+              <RouterLink to="/apply/personal">Change</RouterLink>
+            </td>
+          </tr>
+          <tr>
             <th scope="row">Date of Birth</th>
             <td>{{ applicant.date_of_birth.toLocaleDateString() }}</td>
             <td>
