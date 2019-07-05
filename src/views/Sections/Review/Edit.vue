@@ -12,7 +12,7 @@
     <Declarations />
     <Diversity />
     <Outreach />
-    <div class="form-actions">
+    <div class="form-actions" v-if="application.state != 'submitted'">
       <button class="btn btn-primary mr-2" @click.prevent="saveAndSubmit">
         Submit application
       </button>
