@@ -27,7 +27,7 @@
       <table class="table">
         <tbody>
           <tr>
-            <th scope="row">Did you participate in a Judicial Work Shadowing Scheme?</th>
+            <th scope="row">Have you taken part in the Judicial Work Shadowing Scheme?</th>
             <td>{{ applicant.participated_in_judicial_work_shadowing_scheme ? "Yes" : "No" }}</td>
             <td>
               <RouterLink to="/apply/outreach">Change</RouterLink>
