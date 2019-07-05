@@ -5,7 +5,7 @@
       <SelectList :options="selectListOptions.types" v-model="row.type" :id="inputIds.type" />
     </div>
     <div class="form-group">
-      <label :for="inputIds.relationship">What is your relationship to the assessor?</label>
+      <label :for="inputIds.relationship">What is the assessor’s relationship to you?</label>
       <input class="form-control" type="text" :id="inputIds.relationship" v-model="row.relationship" />
     </div>
     <div class="form-group">
