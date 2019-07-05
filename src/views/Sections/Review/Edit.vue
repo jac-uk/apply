@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import BooleanInput from '@/components/BooleanInput';
 import Citizenship from '@/views/Sections/Citizenship/Show';
 import Experience from '@/views/Sections/Experience/Show';
 import Personal from '@/views/Sections/Personal/Show';
@@ -38,7 +37,6 @@ import Diversity from '@/views/Sections/Diversity/Show';
 import Outreach from '@/views/Sections/Outreach/Show';
 export default {
   components: {
-    BooleanInput,
     Citizenship,
     Experience,
     Personal,
