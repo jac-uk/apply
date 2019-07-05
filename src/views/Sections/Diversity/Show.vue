@@ -1,5 +1,5 @@
 <template>
-  <section class="card">
+  <section class="card mb-3">
     <div class="card-header">
       <h2 class="card-title">Diversity</h2>
     </div>
