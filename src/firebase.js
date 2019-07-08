@@ -19,11 +19,6 @@ firebase.initializeApp(config);
 // Initialise Firestore
 const firestore = firebase.firestore();
 
-// Disable deprecated features (as recommended by Firestore docs: https://firebase.google.com/docs/firestore/quickstart)
-firestore.settings({
-  timestampsInSnapshots: true
-});
-
 // Other firebase exports
 const auth = firebase.auth;
 const functions = firebase.functions;
