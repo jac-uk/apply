@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test": "TZ='Europe/London' vue-cli-service test:unit",
-    "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand --reporters=default --reporters=jest-junit"
+    "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "dependencies": {
     "@sentry/browser": "^5.5.0",
@@ -32,7 +32,6 @@
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "firebase-mock": "^2.2.10",
-    "jest-junit": "^6.4.0",
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.5.21"
