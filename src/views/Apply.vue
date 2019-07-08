@@ -59,8 +59,9 @@
         .then(() => {
           this.loaded = true;
         })
-        .catch(() => {
+        .catch((e) => {
           this.loadFailed = true;
+          throw e;
         });
 
       this.$store.dispatch('setCurrentPagePath', this.$route.path);
