@@ -9,6 +9,8 @@
     "test": "TZ='Europe/London' vue-cli-service test:unit"
   },
   "dependencies": {
+    "@sentry/browser": "^5.5.0",
+    "@sentry/integrations": "^5.5.0",
     "bootstrap": "^4.3.1",
     "clone": "^2.1.2",
     "firebase": "^5.7.2",
