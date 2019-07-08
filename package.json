@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "TZ='Europe/London' vue-cli-service test:unit"
+    "test": "TZ='Europe/London' vue-cli-service test:unit",
+    "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand --reporters=default --reporters=jest-junit"
   },
   "dependencies": {
     "@sentry/browser": "^5.5.0",
