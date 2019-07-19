@@ -3,8 +3,8 @@ module.exports = {
     loaderOptions: {
       sass: {
         // always import main.scss first
-        data: `@import "@/main.scss";`
-      }
-    }
-  }
+        data: '@import "@/main.scss";',
+      },
+    },
+  },
 };

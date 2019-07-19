@@ -108,8 +108,8 @@
       return {
         application: this.$store.getters.application(),
       };
-    }
-  }
+    },
+  };
 </script>
 
 <style scoped>

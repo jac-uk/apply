@@ -30,10 +30,10 @@
         applicant: this.$store.getters.applicant(),
         isSaving: false,
         options: [
-          {value: "British", label: "I am a citizen of the United Kingdom"},
-          {value: "Irish", label: "I am a citizen of the Republic of Ireland"},
-          {value: "Commonwealth", label: "I am a citizen of another Commonwealth country"},
-          {value: "Non-Commonwealth", label: "I am none of these"},
+          {value: 'British', label: 'I am a citizen of the United Kingdom',},
+          {value: 'Irish', label: 'I am a citizen of the Republic of Ireland',},
+          {value: 'Commonwealth', label: 'I am a citizen of another Commonwealth country',},
+          {value: 'Non-Commonwealth', label: 'I am none of these',}
         ],
       };
     },
@@ -47,6 +47,6 @@
         await this.save();
         this.$emit('continue');
       },
-    }
-  }
+    },
+  };
 </script>

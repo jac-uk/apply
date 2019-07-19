@@ -18,7 +18,7 @@
         required: true,
       },
     },
-  }
+  };
 </script>
 
 <style scoped>

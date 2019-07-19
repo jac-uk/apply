@@ -1,6 +1,6 @@
-import {firestore} from "@/firebase";
-import clone from "clone";
-import sanitizeFirestore from "@/utils/sanitizeFirestore";
+import {firestore} from '@/firebase';
+import clone from 'clone';
+import sanitizeFirestore from '@/utils/sanitizeFirestore';
 
 const module = {
   state: {
@@ -12,7 +12,7 @@ const module = {
     },
   },
   actions: {
-    async loadApplicant({commit, getters}) {
+    async loadApplicant({commit, getters,}) {
       if (!getters.applicantDoc) {
         throw new Error('Cannot get Applicant doc (currentUserId is not set)');
       }
@@ -25,7 +25,7 @@ const module = {
         commit('setApplicant', {});
       }
     },
-    async saveApplicant({commit, getters}, data) {
+    async saveApplicant({commit, getters,}, data) {
       if (!getters.applicantDoc) {
         throw new Error('Cannot get Applicant doc (currentUserId is not set)');
       }

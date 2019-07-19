@@ -24,7 +24,7 @@ import SelectList from '@/components/SelectList';
 
 export default {
   components: {
-    SelectList
+    SelectList,
   },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
           'As I progress in the exercise I undertake to ensure that any relevant materials provided to me as part of the selection process are kept secure and not shared with anyone else.',
           'I understand that the Judicial Appointments Commission will automatically refer any suspected breach of this agreement to the Bar Standards Board, the Solicitors Regulatory Authority, CILEx Regulation, Judicial Conduct Investigations Office or other relevant regulatory body to consider as a potential breach of my professional obligations, or as misconduct, and this could result in disciplinary action by my regulator.',
           'I understand that the Judicial Appointments Commission takes very seriously the integrity of the selection process and any evidence that a candidate has breached this agreement might result in disqualification from this and future exercises.'
-        ]
+        ],
       },
     };
   },
@@ -51,8 +51,8 @@ export default {
       await this.$store.dispatch('saveApplicant', this.applicant);
       this.isSaving = false;
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

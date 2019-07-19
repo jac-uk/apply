@@ -29,9 +29,9 @@
       loginRedirect(authResult) {
         this.$store.dispatch('setCurrentUser', authResult.user);
         this.$router.push('/');
-      }
-    }
-  }
+      },
+    },
+  };
 </script>
 
 <style scoped>

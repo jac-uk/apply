@@ -129,10 +129,10 @@ export default {
   data() {
     return {
       applicant: this.$store.getters.applicant(),
-      isSaving: false
+      isSaving: false,
     };
   },
-}
+};
 </script>
 
 <style scoped>

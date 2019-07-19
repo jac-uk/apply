@@ -12,8 +12,8 @@
   export default {
     data() {
       return {
-        applyPages: this.$store.getters.applyPages
+        applyPages: this.$store.getters.applyPages,
       };
-    }
-  }
+    },
+  };
 </script>

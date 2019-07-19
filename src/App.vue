@@ -30,21 +30,21 @@
     methods: {
       signOut() {
         auth().signOut();
-      }
+      },
     },
     computed: {
       ...mapGetters([
-        'isSignedIn',
+        'isSignedIn'
       ]),
     },
     watch: {
       isSignedIn(signedIn) {
         if (signedIn === false) {
-          this.$router.push({name: 'sign-in'});
+          this.$router.push({name: 'sign-in',});
         }
       },
     },
-  }
+  };
 </script>
 
 <style lang="scss">

@@ -56,22 +56,22 @@ const module = {
       {
         title: 'Submitted',
         path: '/apply/submitted',
-      },
+      }
     ],
     currentPage: undefined,
   },
   mutations: {
     setCurrentPage(state, currentPage) {
       state.currentPage = currentPage;
-    }
+    },
   },
   actions: {
-    setCurrentPagePath({commit, state}, path) {
+    setCurrentPagePath({commit, state,}, path) {
       const currentPage = state.applyPages.find((page) => {
         return page.path === path;
       });
       commit('setCurrentPage', currentPage);
-    }
+    },
   },
   getters: {
     applyPages: state => {

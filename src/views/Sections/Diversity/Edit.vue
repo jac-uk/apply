@@ -129,14 +129,14 @@
         isSaving: false,
         selectListOptions: {
           sharingConsent: [
-            {value: true, label: 'You may share my diversity data with the Ministry of Justice, Judicial Office and HM Courts and Tribunals Service (for monitoring purposes only)'},
-            {value: false, label: 'Do NOT share my diversity data'},
+            {value: true, label: 'You may share my diversity data with the Ministry of Justice, Judicial Office and HM Courts and Tribunals Service (for monitoring purposes only)',},
+            {value: false, label: 'Do NOT share my diversity data',}
           ],
           professionalBackground: [
             'Barrister',
             'CILEx',
             'Solicitor',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           currentLegalRole: [
             'Academic',
@@ -149,14 +149,14 @@
             'Salaried court judge',
             'Salaried tribunal judge',
             'Solicitor',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           feePaidJudicialRole: [
             'Fee-paid court post',
             'Fee-paid tribunal post',
             'I have not previously held a fee-paid role',
             'Other fee-paid judicial office',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           schoolTypes: [
             'UK state school – selective',
@@ -164,13 +164,13 @@
             'UK independent or fee-paying school',
             'UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)',
             'I attended a school outside of the UK',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           universityAttendance: [
             'I did not go to university',
             'I went to university and was the first generation in my family to do so',
             'I went to university but was not first generation in my family to do so',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           ethnicities: {
             asian: [
@@ -178,36 +178,36 @@
               'Chinese',
               'Indian',
               'Pakistani',
-              'Any other Asian background',
+              'Any other Asian background'
             ],
             black: [
               'African',
               'Caribbean',
-              'Any other Black/African/Caribbean background',
+              'Any other Black/African/Caribbean background'
             ],
             white: [
               'English, Welsh, Scottish, Northern Ireland, British',
               'Irish',
               'Gypsy or Irish Traveller',
-              'Any other White background',
+              'Any other White background'
             ],
             mixed: [
               'White and Black Caribbean',
               'White and Black African',
               'White and Asian',
-              'Any other mixed or multiple ethnic background',
+              'Any other mixed or multiple ethnic background'
             ],
           },
           gender: [
             'Female',
             'Male',
             'Other',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           yesNo: [
             'Yes',
             'No',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           sexualOrientation: [
             'Bisexual',
@@ -215,7 +215,7 @@
             'Gay woman/ lesbian',
             'Heterosexual/ straight',
             'Other',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
           religion: [
             'Atheist',
@@ -226,7 +226,7 @@
             'Muslim',
             'No religion',
             'Sikh',
-            'Prefer not to answer',
+            'Prefer not to answer'
           ],
         },
       };
@@ -242,5 +242,5 @@
         this.isSaving = false;
       },
     },
-  }
+  };
 </script>

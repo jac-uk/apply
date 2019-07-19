@@ -45,7 +45,7 @@
         if (this.multiple && !(this.value instanceof Array)) {
           this.inputValue = [];
         }
-      }
+      },
     },
     computed: {
       type() {
@@ -54,7 +54,7 @@
       divClass() {
         return [
           'custom-control',
-          'custom-' + this.type,
+          'custom-' + this.type
         ];
       },
       inputValue: {
@@ -63,7 +63,7 @@
         },
         set(value) {
           this.$emit('input', value);
-        }
+        },
       },
       inputOptions() {
         return this.options.map(option => {
@@ -87,6 +87,6 @@
     },
     created() {
       this.makeValueAnArrayIfMultiple();
-    }
-  }
+    },
+  };
 </script>

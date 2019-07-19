@@ -27,7 +27,7 @@ export default {
   components: {
     SaveAndContinueButtons,
     BooleanInput,
-    SelectList
+    SelectList,
   },
   data() {
     return {
@@ -37,7 +37,7 @@ export default {
         sitting_patterns: [
            '80%',
            '90%',
-           'Blocks of at least 6 to 8 weeks',
+           'Blocks of at least 6 to 8 weeks'
         ],
       },
     };
@@ -52,6 +52,6 @@ export default {
       await this.$store.dispatch('saveApplicant', this.applicant);
       this.isSaving = false;
     },
-  }
-}
+  },
+};
 </script>

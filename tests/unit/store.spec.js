@@ -9,7 +9,7 @@ import vacancy from '@/store/vacancy';
 
 jest.mock('vue', () => {
   return {
-    use: jest.fn()
+    use: jest.fn(),
   };
 });
 
@@ -17,7 +17,7 @@ jest.mock('vuex', () => {
   return {
     Store: jest.fn((config) => {
       return config;
-    })
+    }),
   };
 });
 
@@ -38,7 +38,7 @@ describe('Vuex store', () => {
     ['auth', auth],
     ['applicant', applicant],
     ['application', application],
-    ['vacancy', vacancy],
+    ['vacancy', vacancy]
   ];
   it.each(modules)('registers module `%s`', (moduleName, module) => {
     expect(store.modules[moduleName]).toBe(module);

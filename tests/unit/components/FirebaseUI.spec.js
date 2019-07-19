@@ -6,17 +6,17 @@ const mockFirebaseAuth = jest.fn();
 import {auth} from '@/firebase';
 jest.mock('@/firebase', () => {
   const mock = {
-    auth: jest.fn(() => (mockFirebaseAuth))
+    auth: jest.fn(() => (mockFirebaseAuth)),
   };
   mock.auth.EmailAuthProvider = {
-    PROVIDER_ID: 'email'
+    PROVIDER_ID: 'email',
   };
   return mock;
 });
 
 const mockUiInstance = {
   start: jest.fn(),
-  delete: jest.fn()
+  delete: jest.fn(),
 };
 
 import firebaseui from 'firebaseui';
@@ -25,9 +25,9 @@ jest.mock('firebaseui', () => {
     auth: {
       AuthUI: jest.fn(() => mockUiInstance),
       CredentialHelper: {
-        NONE: 'none'
-      }
-    }
+        NONE: 'none',
+      },
+    },
   };
 });
 
@@ -66,13 +66,13 @@ describe('FirebaseUI component', () => {
       signInOptions: [
         {
           provider: auth.EmailAuthProvider.PROVIDER_ID,
-          requireDisplayName: false
+          requireDisplayName: false,
         }
       ],
       credentialHelper: firebaseui.auth.CredentialHelper.NONE,
       callbacks: {
-        signInSuccessWithAuthResult: wrapper.vm.signInSuccess
-      }
+        signInSuccessWithAuthResult: wrapper.vm.signInSuccess,
+      },
     });
   });
 

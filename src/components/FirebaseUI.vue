@@ -7,7 +7,7 @@
   import firebaseui from 'firebaseui';
 
   export default {
-    name: "FirebaseUI",
+    name: 'FirebaseUI',
     mounted() {
       this.ui = new firebaseui.auth.AuthUI(auth());
       this.ui.start('#firebaseui-auth-container', this.uiConfig);
@@ -21,15 +21,15 @@
           signInOptions: [
             {
               provider: auth.EmailAuthProvider.PROVIDER_ID,
-              requireDisplayName: false
+              requireDisplayName: false,
             }
           ],
           credentialHelper: firebaseui.auth.CredentialHelper.NONE,
           callbacks: {
-            signInSuccessWithAuthResult: this.signInSuccess
-          }
-        }
-      }
+            signInSuccessWithAuthResult: this.signInSuccess,
+          },
+        },
+      };
     },
     methods: {
       signInSuccess(authResult) {
@@ -37,8 +37,8 @@
         // Return false to disable FirebaseUI auth redirect
         return false;
       },
-    }
-  }
+    },
+  };
 </script>
 
 <style src="firebaseui/dist/firebaseui.css"></style>

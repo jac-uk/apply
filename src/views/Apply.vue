@@ -22,14 +22,14 @@
 </template>
 
 <script>
-  import ApplicationNav from "@/components/ApplicationNav";
-  import Banner from "@/components/Banner";
+  import ApplicationNav from '@/components/ApplicationNav';
+  import Banner from '@/components/Banner';
 
   export default {
-    name: "Apply",
+    name: 'Apply',
     components: {
       ApplicationNav,
-      Banner
+      Banner,
     },
     data() {
       return {
@@ -44,7 +44,7 @@
         return Promise.all([
           this.$store.dispatch('loadApplicant'),
           this.$store.dispatch('loadVacancy'),
-          this.$store.dispatch('loadApplication'),
+          this.$store.dispatch('loadApplication')
         ]);
       },
       nextPage() {
@@ -71,5 +71,5 @@
         this.$store.dispatch('setCurrentPagePath', to.path);
       },
     },
-  }
+  };
 </script>

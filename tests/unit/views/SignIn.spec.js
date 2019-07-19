@@ -1,4 +1,4 @@
-import {shallowMount} from "@vue/test-utils";
+import {shallowMount} from '@vue/test-utils';
 import SignIn from '@/views/SignIn';
 import FirebaseUI from '@/components/FirebaseUI';
 
@@ -26,11 +26,11 @@ describe('SignIn view', () => {
 
     beforeEach(() => {
       wrapper.vm.$router = {
-        push: jest.fn()
+        push: jest.fn(),
       };
 
       wrapper.vm.$store = {
-        dispatch: jest.fn()
+        dispatch: jest.fn(),
       };
 
       wrapper.find(FirebaseUI).vm.$emit('signInSuccess', authResult);

@@ -48,6 +48,6 @@
       return {
         applicant: this.$store.getters.applicant(),
       };
-    }
-  }
+    },
+  };
 </script>

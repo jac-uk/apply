@@ -36,6 +36,6 @@ export default {
       vacancy: this.$store.getters.vacancy,
       application: this.$store.getters.application(),
     };
-  }
-}
+  },
+};
 </script>

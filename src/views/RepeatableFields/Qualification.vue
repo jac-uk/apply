@@ -29,7 +29,7 @@
     },
     props: [
       'row',
-      'index',
+      'index'
     ],
     computed: {
       qualificationInputId() {
@@ -39,5 +39,5 @@
         return `qualification_${this.index}_college`;
       },
     },
-  }
+  };
 </script>

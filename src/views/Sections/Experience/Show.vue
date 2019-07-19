@@ -120,8 +120,8 @@ export default {
     return {
       applicant: this.$store.getters.applicant(),
     };
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -135,12 +135,12 @@
 
   export default {
     components: {
-      CharacterTable
+      CharacterTable,
     },
     data() {
       return {
         applicant: this.$store.getters.applicant(),
       };
-    }
-  }
+    },
+  };
 </script>

@@ -30,12 +30,12 @@ export default {
     return {
       applicant: this.$store.getters.applicant(),
       options: {
-        "British": "I am a citizen of the United Kingdom",
-        "Irish": "I am a citizen of the Republic of Ireland",
-        "Commonwealth": "I am a citizen of another Commonwealth country",
-        "Non-Commonwealth": "I am none of these",
+        'British': 'I am a citizen of the United Kingdom',
+        'Irish': 'I am a citizen of the Republic of Ireland',
+        'Commonwealth': 'I am a citizen of another Commonwealth country',
+        'Non-Commonwealth': 'I am none of these',
       },
     };
   },
-}
+};
 </script>

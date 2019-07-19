@@ -23,8 +23,8 @@ export default {
   },
   data() {
     return {
-      applicant: this.$store.getters.applicant()
-    }
+      applicant: this.$store.getters.applicant(),
+    };
   },
-}
+};
 </script>

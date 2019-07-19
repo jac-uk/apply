@@ -1,5 +1,5 @@
 import sanitizeFirestore from '@/utils/sanitizeFirestore';
-import {Timestamp} from "@/firebase";
+import {Timestamp} from '@/firebase';
 
 describe('utils/sanitizeFirestore', () => {
   const date = new Date('2015-12-23 22:33:44');
@@ -28,13 +28,13 @@ describe('utils/sanitizeFirestore', () => {
             data: {
               with: {
                 a: {
-                  timestamp: timestamp
-                }
-              }
-            }
-          }
-        }
-      }
+                  timestamp: timestamp,
+                },
+              },
+            },
+          },
+        },
+      },
     };
 
     const sanitized = sanitizeFirestore(data);
@@ -75,7 +75,7 @@ describe('utils/sanitizeFirestore', () => {
     expect(sanitized.a_null_value).toBeNull();
   });
 
-  it("doesn't change the input object (when passed by reference)", () => {
+  it('doesn\'t change the input object (when passed by reference)', () => {
     const data = {
       name: 'John Smith',
       applied_date: timestamp,

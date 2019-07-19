@@ -37,7 +37,7 @@
     },
     props: [
       'row',
-      'index',
+      'index'
     ],
     data() {
       return {
@@ -52,10 +52,10 @@
         selectListOptions: {
           types: [
             'Professional',
-            'Judicial',
+            'Judicial'
           ],
         },
       };
-    }
-  }
+    },
+  };
 </script>

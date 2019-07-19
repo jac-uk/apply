@@ -1,4 +1,4 @@
-import {Timestamp} from "@/firebase";
+import {Timestamp} from '@/firebase';
 
 /**
  * A utility method to sanitize data from a Firestore record

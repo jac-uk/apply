@@ -80,8 +80,8 @@ export default {
       applicant: this.$store.getters.applicant(),
       isSaving: false,
     };
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

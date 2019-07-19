@@ -121,7 +121,7 @@
     components: {
       SaveAndContinueButtons,
       RepeatableFields,
-      BooleanInput
+      BooleanInput,
     },
     data() {
       return {
@@ -143,6 +143,6 @@
         await this.$store.dispatch('saveApplicant', this.applicant);
         this.isSaving = false;
       },
-    }
-  }
+    },
+  };
 </script>

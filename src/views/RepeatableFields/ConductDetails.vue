@@ -28,18 +28,18 @@
     },
     props: [
       'row',
-      'index',
+      'index'
     ],
     data() {
       return {
         inputIds: {
           details: `conduct_${uid}_details`,
           circumstances: `conduct_${uid}_circumstances`,
-        }
+        },
       };
     },
     created() {
       uid++;
     },
-  }
+  };
 </script>

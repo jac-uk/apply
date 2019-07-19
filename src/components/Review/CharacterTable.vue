@@ -45,18 +45,18 @@ export default {
   props: {
     answeredYes: Boolean,
     records: Array,
-    title: String
+    title: String,
   },
   computed: {
     visibleRecords: function () {
       if(this.answeredYes) {
-        return this.records
+        return this.records;
       } else {
-        return {}
+        return {};
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped>

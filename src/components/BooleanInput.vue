@@ -34,11 +34,11 @@
         },
         set(value) {
           this.$emit('input', value);
-        }
+        },
       },
     },
     created() {
       uid++;
-    }
-  }
+    },
+  };
 </script>

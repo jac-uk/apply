@@ -44,5 +44,5 @@ export default {
     singleResponse: String,
     title: String,
   },
-}
+};
 </script>

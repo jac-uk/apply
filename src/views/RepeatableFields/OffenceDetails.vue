@@ -36,7 +36,7 @@
     },
     props: [
       'row',
-      'index',
+      'index'
     ],
     data() {
       return {
@@ -44,11 +44,11 @@
           offence: `offence_${uid}_offence`,
           sentence: `offence_${uid}_sentence`,
           circumstances: `offence_${uid}_circumstances`,
-        }
+        },
       };
     },
     created() {
       uid++;
     },
-  }
+  };
 </script>

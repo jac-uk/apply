@@ -68,6 +68,6 @@
       if (this.rows.length === 0) {
         this.addRow();
       }
-    }
-  }
+    },
+  };
 </script>

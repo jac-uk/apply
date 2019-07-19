@@ -54,7 +54,7 @@ export default {
           'Twitter',
           'LinkedIn',
           'Word of mouth',
-          'From one of the presiding judges',
+          'From one of the presiding judges'
         ],
       },
     };
@@ -70,5 +70,5 @@ export default {
       this.isSaving = false;
     },
   },
-}
+};
 </script>

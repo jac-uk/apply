@@ -59,7 +59,7 @@
           if (int < 1) int = 1;
           if (int > 31) int = 31;
           this.day = int;
-        }
+        },
       },
       monthInput: {
         get() {
@@ -79,7 +79,7 @@
           if (int < 1) int = 1;
           if (int > 12) int = 12;
           this.month = int;
-        }
+        },
       },
       yearInput: {
         get() {
@@ -94,7 +94,7 @@
           }
 
           this.year = int;
-        }
+        },
       },
       dateConstructor() {
         const day = this.day;
@@ -123,7 +123,7 @@
             this.month = value.getUTCMonth() + 1;
             this.year = value.getUTCFullYear();
           }
-        }
+        },
       },
     },
     methods: {
@@ -136,7 +136,7 @@
           date2 instanceof Date &&
           date1.getTime() === date2.getTime()
         );
-      }
+      },
     },
     watch: {
       value(newValue, oldValue) {
@@ -152,7 +152,7 @@
       this.date = this.value;
       uid++;
     },
-  }
+  };
 </script>
 
 <style scoped>

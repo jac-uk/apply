@@ -108,12 +108,12 @@ import ShowSelectList from '@/components/SelectList/Show';
 
 export default {
   components: {
-    ShowSelectList
+    ShowSelectList,
   },
   data() {
     return {
       applicant: this.$store.getters.applicant(),
     };
   },
-}
+};
 </script>

@@ -30,7 +30,7 @@ export default {
   components: {
     SaveAndContinueButtons,
     BooleanInput,
-    SelectList
+    SelectList,
   },
   data() {
     return {
@@ -52,7 +52,7 @@ export default {
           'His Honour Judge Phillip Sycamore',
           'Sir Simon Wessely',
           'Dame Philippa Whipple DBE'
-        ]
+        ],
       },
     };
   },
@@ -66,6 +66,6 @@ export default {
       await this.$store.dispatch('saveApplicant', this.applicant);
       this.isSaving = false;
     },
-  }
-}
+  },
+};
 </script>

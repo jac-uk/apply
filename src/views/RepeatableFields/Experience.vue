@@ -117,7 +117,7 @@
     },
     props: [
       'row',
-      'index',
+      'index'
     ],
     data() {
       return {
@@ -138,7 +138,7 @@
         selectListOptions: {
           appointmentTypes: [
             'Salaried',
-            'Fee-paid',
+            'Fee-paid'
           ],
           circuits: [
             'London and south east',
@@ -146,7 +146,7 @@
             'Midlands',
             'Northern',
             'North eastern',
-            'Wales',
+            'Wales'
           ],
           activities: [
             'Carrying out of judicial functions of any court or tribunals',
@@ -156,7 +156,7 @@
             'Assisting (whether or not in the course of such practice) persons involved in proceedings for the resolution of issues arising under the law',
             'Acting (whether or not in the course of such practice) as a mediator in connection with attempts to resolve issues that are the subject of proceedings or could be, if not resolved',
             'Drafting (whether or not in the course of such practice) documents intended to affect persons’ rights and obligations',
-            'Teaching or researching law',
+            'Teaching or researching law'
           ],
         },
       };
@@ -167,7 +167,7 @@
       },
       pastTense() {
         return !this.row.currently_in_job;
-      }
+      },
     },
-  }
+  };
 </script>

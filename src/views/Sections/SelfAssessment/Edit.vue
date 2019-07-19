@@ -117,6 +117,6 @@ export default {
       await this.$store.dispatch('saveApplication', this.application);
       this.isSaving = false;
     },
-  }
-}
+  },
+};
 </script>

@@ -45,7 +45,7 @@ export default {
     Preferences,
     Declarations,
     Diversity,
-    Outreach
+    Outreach,
   },
   data() {
     return {
@@ -64,6 +64,6 @@ export default {
       await this.$store.dispatch('saveApplication', this.application);
       this.isSaving = false;
     },
-  }
-}
+  },
+};
 </script>

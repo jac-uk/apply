@@ -7,7 +7,7 @@ const initSentry = () => {
   Sentry.init({
     dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
     environment: process.env.NODE_ENV,
-    integrations: [new Integrations.Vue({Vue, attachProps: true})],
+    integrations: [new Integrations.Vue({Vue, attachProps: true,})],
   });
   setUserScope();
 };

@@ -94,14 +94,14 @@
         isSaving: false,
         selectListOptions: {
           qualifiedProfessions: [
-            {value: 'Barrister', label: 'Barrister'},
-            {value: 'Solicitor', label: 'Solicitor'},
-            {value: 'Advocate', label: 'Advocate'},
+            {value: 'Barrister', label: 'Barrister',},
+            {value: 'Solicitor', label: 'Solicitor',},
+            {value: 'Advocate', label: 'Advocate',}
           ],
           qualifiedLocations: [
             'England and Wales',
             'Scotland',
-            'Northern Ireland',
+            'Northern Ireland'
           ],
         },
         repeatableFields: {
@@ -119,6 +119,6 @@
         await this.$store.dispatch('saveApplicant', this.applicant);
         this.isSaving = false;
       },
-    }
-  }
+    },
+  };
 </script>

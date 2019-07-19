@@ -63,7 +63,7 @@ export default {
     otherCaption: String,
     other: String,
   },
-}
+};
 </script>
 
 <style scoped>
