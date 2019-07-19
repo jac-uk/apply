@@ -15,7 +15,7 @@
     "semi": "error",
     "func-style": ["error", "expression"],
     "prefer-arrow-callback": "error",
-    "quotes": ["error", "single"],
+    "quotes": ["error", "single", { "avoidEscape": true}],
     "eol-last": ["error", "always"]
   },
   "parserOptions": {
