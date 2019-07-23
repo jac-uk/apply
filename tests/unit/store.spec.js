@@ -38,7 +38,7 @@ describe('Vuex store', () => {
     ['auth', auth],
     ['applicant', applicant],
     ['application', application],
-    ['vacancy', vacancy]
+    ['vacancy', vacancy],
   ];
   it.each(modules)('registers module `%s`', (moduleName, module) => {
     expect(store.modules[moduleName]).toBe(module);

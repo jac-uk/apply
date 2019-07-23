@@ -3,7 +3,12 @@
     <Banner class="text-center" />
     <div class="login-container">
       <div class="text-center mb-3 mt-5">
-        <img src="@/assets/jac-logo.svg" alt="Judicial Appointments Commission" width="197" height="66">
+        <img
+          src="@/assets/jac-logo.svg"
+          alt="Judicial Appointments Commission"
+          width="197"
+          height="66"
+        >
       </div>
       <p>
         To apply for this role, create an account with your email address and choose a password.
@@ -17,21 +22,21 @@
 </template>
 
 <script>
-  import FirebaseUI from '@/components/FirebaseUI';
-  import Banner from '@/components/Banner';
+import FirebaseUI from '@/components/FirebaseUI';
+import Banner from '@/components/Banner';
 
-  export default {
-    components: {
-      FirebaseUI,
-      Banner,
+export default {
+  components: {
+    FirebaseUI,
+    Banner,
+  },
+  methods: {
+    loginRedirect(authResult) {
+      this.$store.dispatch('setCurrentUser', authResult.user);
+      this.$router.push('/');
     },
-    methods: {
-      loginRedirect(authResult) {
-        this.$store.dispatch('setCurrentUser', authResult.user);
-        this.$router.push('/');
-      },
-    },
-  };
+  },
+};
 </script>
 
 <style scoped>

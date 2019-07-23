@@ -7,16 +7,35 @@
         <legend>Are you related to, or known to any of the JAC Commissioners?</legend>
         <BooleanInput v-model="applicant.are_you_known_to_the_commissioners" />
 
-        <div class="form-group mt-3" v-if="applicant.are_you_known_to_the_commissioners">
+        <div
+          v-if="applicant.are_you_known_to_the_commissioners"
+          class="form-group mt-3"
+        >
           <label for="known_to_commissioners">Select all the Commissioners that apply:</label>
-          <SelectList id="known_to_commissioners" :multiple="true" :options="selectListOptions.known_to_commissioners" v-model="applicant.known_to_commissioners" />
+          <SelectList
+            id="known_to_commissioners"
+            v-model="applicant.known_to_commissioners"
+            :multiple="true"
+            :options="selectListOptions.known_to_commissioners"
+          />
         </div>
-        <div class="form-group mt-3" v-if="applicant.are_you_known_to_the_commissioners">
+        <div
+          v-if="applicant.are_you_known_to_the_commissioners"
+          class="form-group mt-3"
+        >
           <label for="how_do_you_know_them_details">How do you know them?</label>
-          <textarea id="how_do_you_know_them_details" class="form-control" v-model="applicant.how_do_you_know_the_commissioners" placeholder="Please provide details."></textarea>
+          <textarea
+            id="how_do_you_know_them_details"
+            v-model="applicant.how_do_you_know_the_commissioners"
+            class="form-control"
+            placeholder="Please provide details."
+          />
         </div>
       </fieldset>
-      <SaveAndContinueButtons :isSaving="isSaving" @saveAndContinue="saveAndContinue" />
+      <SaveAndContinueButtons
+        :is-saving="isSaving"
+        @saveAndContinue="saveAndContinue"
+      />
     </form>
   </section>
 </template>
@@ -51,7 +70,7 @@ export default {
           'Dame Valerie Strachan DCB',
           'His Honour Judge Phillip Sycamore',
           'Sir Simon Wessely',
-          'Dame Philippa Whipple DBE'
+          'Dame Philippa Whipple DBE',
         ],
       },
     };

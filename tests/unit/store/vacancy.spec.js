@@ -7,7 +7,7 @@ jest.mock('@/firebase', () => {
   const firebase = require('firebase-mock');
   const firestore = firebase.MockFirebaseSdk().firestore();
   firestore.autoFlush();
-  return {firestore,};
+  return {firestore};
 });
 
 describe('store/vacancy', () => {
@@ -25,7 +25,7 @@ describe('store/vacancy', () => {
   describe('mutations', () => {
     describe('setVacancy', () => {
       it('stores the supplied data in the state', () => {
-        const data = {title: 'Example Vacancy Title',};
+        const data = {title: 'Example Vacancy Title'};
         mutations.setVacancy(state, data);
         expect(state.data).toBe(data);
       });
@@ -65,8 +65,8 @@ describe('store/vacancy', () => {
 
       describe('happy path', () => {
         const docId = 'hsQqdvAfZpSw94X2B8nA';
-        const data = {title: 'Example Vacancy Title',};
-        const sanitizedData = {title: 'Example Vacancy Title', sanitized: true,};
+        const data = {title: 'Example Vacancy Title'};
+        const sanitizedData = {title: 'Example Vacancy Title', sanitized: true};
 
         beforeEach(async () => {
           state.id = docId;
@@ -99,7 +99,7 @@ describe('store/vacancy', () => {
   describe('getters', () => {
     describe('vacancy', () => {
       it('returns the vacancy data object from state (passed by reference)', () => {
-        const data = {title: 'Example Vacancy Title',};
+        const data = {title: 'Example Vacancy Title'};
         state.data = data;
         expect(getters.vacancy(state)).toBe(data);
       });

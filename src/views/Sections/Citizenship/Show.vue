@@ -1,23 +1,32 @@
 <template>
   <section class="card mb-3">
     <div class="card-header">
-      <h3 class="card-title">Citizenship</h3>
+      <h3 class="card-title">
+        Citizenship
+      </h3>
     </div>
 
     <div class="card-body">
       <table class="table">
         <tbody>
           <tr>
-            <th scope="row">What is your citizenship?</th>
+            <th scope="row">
+              What is your citizenship?
+            </th>
             <td>{{ options[applicant.citizenship] }}</td>
             <td>
-              <RouterLink to="/apply/citizenship">Change</RouterLink>
+              <RouterLink to="/apply/citizenship">
+                Change
+              </RouterLink>
             </td>
           </tr>
         </tbody>
       </table>
 
-      <div v-if="applicant.citizenship === 'Non-Commonwealth'" class="mt-3">
+      <div
+        v-if="applicant.citizenship === 'Non-Commonwealth'"
+        class="mt-3"
+      >
         Email <a href="mailto:dcj128@judicialappointments.gov.uk">dcj128@judicialappointments.gov.uk</a> to provide further details
       </div>
     </div>

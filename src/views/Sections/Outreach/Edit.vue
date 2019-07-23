@@ -1,17 +1,37 @@
 <template>
   <section>
     <form @submit.prevent="save">
-
       <fieldset>
         <legend>How did you hear about this vacancy?</legend>
-        <div class="fieldset-text">Select all that apply</div>
-        <SelectList id="how_did_you_hear" :multiple="true" :options="selectListOptions.heard_about_from" v-model="applicant.how_did_you_hear" />
+        <div class="fieldset-text">
+          Select all that apply
+        </div>
+        <SelectList
+          id="how_did_you_hear"
+          v-model="applicant.how_did_you_hear"
+          :multiple="true"
+          :options="selectListOptions.heard_about_from"
+        />
         <div class="custom-control custom-checkbox">
-          <input class="custom-control-input" type="checkbox" id="how_did_you_hear_has_other" :value="true" v-model="applicant.how_did_you_hear_has_other">
-          <label class="custom-control-label" for="how_did_you_hear_has_other">
+          <input
+            id="how_did_you_hear_has_other"
+            v-model="applicant.how_did_you_hear_has_other"
+            class="custom-control-input"
+            type="checkbox"
+            :value="true"
+          >
+          <label
+            class="custom-control-label"
+            for="how_did_you_hear_has_other"
+          >
             Other form of communication (please specify)
           </label>
-          <input v-if="applicant.how_did_you_hear_has_other" type="text" class="form-control" v-model="applicant.how_did_you_hear_other">
+          <input
+            v-if="applicant.how_did_you_hear_has_other"
+            v-model="applicant.how_did_you_hear_other"
+            type="text"
+            class="form-control"
+          >
         </div>
       </fieldset>
 
@@ -25,7 +45,10 @@
         <BooleanInput v-model="applicant.taken_part_in_judicial_work_shadowing_scheme" />
       </fieldset>
 
-      <SaveAndContinueButtons :isSaving="isSaving" @saveAndContinue="saveAndContinue" />
+      <SaveAndContinueButtons
+        :is-saving="isSaving"
+        @saveAndContinue="saveAndContinue"
+      />
     </form>
   </section>
 </template>
@@ -54,7 +77,7 @@ export default {
           'Twitter',
           'LinkedIn',
           'Word of mouth',
-          'From one of the presiding judges'
+          'From one of the presiding judges',
         ],
       },
     };

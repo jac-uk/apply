@@ -52,7 +52,7 @@ describe('utils/sanitizeFirestore', () => {
       },
       emails: [
         'jsmith@gmail.com',
-        'john.smith@outlook.com'
+        'john.smith@outlook.com',
       ],
       qt_passed: true,
       qt_score: 28,
@@ -68,7 +68,7 @@ describe('utils/sanitizeFirestore', () => {
     });
     expect(sanitized.emails).toEqual([
       'jsmith@gmail.com',
-      'john.smith@outlook.com'
+      'john.smith@outlook.com',
     ]);
     expect(sanitized.qt_passed).toEqual(true);
     expect(sanitized.qt_score).toEqual(28);

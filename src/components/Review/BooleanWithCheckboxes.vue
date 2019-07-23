@@ -1,13 +1,16 @@
 <template>
   <article>
-    <table class="table" v-if="answeredYes">
+    <table
+      v-if="answeredYes"
+      class="table"
+    >
       <tbody>
         <tr>
           <th>
             {{ title }}
           </th>
           <td class="p-3 text-right">
-             Yes
+            Yes
           </td>
         </tr>
         <tr>
@@ -15,8 +18,13 @@
             {{ subtitle }}
           </th>
         </tr>
-        <tr v-for="record in records" :key="record">
-          <td colspan="2">{{ record }}</td>
+        <tr
+          v-for="record in records"
+          :key="record"
+        >
+          <td colspan="2">
+            {{ record }}
+          </td>
         </tr>
         <tr v-if="other">
           <th v-if="otherCaption">
@@ -28,13 +36,21 @@
         </tr>
         <tr>
           <td colspan="10">
-            <RouterLink :to="changeLink" class="float-right">Change</RouterLink>
+            <RouterLink
+              :to="changeLink"
+              class="float-right"
+            >
+              Change
+            </RouterLink>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <table class="table" v-else>
+    <table
+      v-else
+      class="table"
+    >
       <tbody>
         <tr>
           <th class="boolean_no">
@@ -44,7 +60,12 @@
             No
           </td>
           <td class="p-3 text-right">
-            <RouterLink :to="changeLink" class="float-right">Change</RouterLink>
+            <RouterLink
+              :to="changeLink"
+              class="float-right"
+            >
+              Change
+            </RouterLink>
           </td>
         </tr>
       </tbody>

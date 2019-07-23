@@ -7,7 +7,7 @@ jest.mock('@/firebase', () => {
   const firebase = require('firebase-mock');
   const firestore = firebase.MockFirebaseSdk().firestore();
   firestore.autoFlush();
-  return {firestore,};
+  return {firestore};
 });
 
 describe('store/application', () => {
@@ -25,10 +25,10 @@ describe('store/application', () => {
   describe('mutations', () => {
     describe('setApplication', () => {
       const id = 'abc123';
-      const data = {status: 'draft',};
+      const data = {status: 'draft'};
 
       beforeEach(() => {
-        mutations.setApplication(state, {id, data,});
+        mutations.setApplication(state, {id, data});
       });
 
       it('stores the supplied document ID in the state', () => {
@@ -59,8 +59,8 @@ describe('store/application', () => {
 
       describe('application already exists in Firestore', () => {
         const docId = 'abc123';
-        const data = {state: 'draft',};
-        const sanitizedData = {state: 'draft', sanitized: true, updatedAt: expect.any(Date),};
+        const data = {state: 'draft'};
+        const sanitizedData = {state: 'draft', sanitized: true, updatedAt: expect.any(Date)};
 
         beforeEach(async () => {
           getters.applicantDoc = 'applicants/4jsbvO27RJYqSRsgZM9sPhDFLDU2';
@@ -86,7 +86,7 @@ describe('store/application', () => {
         });
 
         it('commits the document ID and sanitized data', () => {
-          expect(context.commit).toHaveBeenCalledWith('setApplication', {id: docId, data: sanitizedData,});
+          expect(context.commit).toHaveBeenCalledWith('setApplication', {id: docId, data: sanitizedData});
         });
       });
 
@@ -108,7 +108,7 @@ describe('store/application', () => {
               'setApplication',
               {
                 id: null,
-                data: { createdAt: expect.any(Date), state: 'draft', updatedAt: expect.any(Date), },
+                data: { createdAt: expect.any(Date), state: 'draft', updatedAt: expect.any(Date) },
               }
             );
         });
@@ -151,7 +151,7 @@ describe('store/application', () => {
         });
 
         it('saves data to Firestore with `applicant` and `vacancy` relational keys', async () => {
-          const data = {status: 'submitted',};
+          const data = {status: 'submitted'};
           await actions.saveApplication(context, data);
           expect(getters.applicationDoc.set).toHaveBeenCalledTimes(1);
           expect(getters.applicationDoc.set).toHaveBeenCalledWith({
@@ -162,15 +162,15 @@ describe('store/application', () => {
         });
 
         it('does not change the original input data (not passed by reference)', async () => {
-          const data = {status: 'submitted',};
+          const data = {status: 'submitted'};
           await actions.saveApplication(context, data);
-          expect(data).toEqual({status: 'submitted',});
+          expect(data).toEqual({status: 'submitted'});
         });
 
         it('commits the document ID and a copy of the data (not the input object passed by reference)', async () => {
-          const data = {status: 'submitted',};
+          const data = {status: 'submitted'};
           await actions.saveApplication(context, data);
-          expect(context.commit).toHaveBeenCalledWith('setApplication', {id: 'abc123', data,});
+          expect(context.commit).toHaveBeenCalledWith('setApplication', {id: 'abc123', data});
           const committedData = context.commit.mock.calls[0][1].data;
           expect(committedData).not.toBe(data);
         });
@@ -197,7 +197,7 @@ describe('store/application', () => {
   describe('getters', () => {
     describe('application()', () => {
       beforeEach(() => {
-        state.data = {status: 'draft',};
+        state.data = {status: 'draft'};
       });
 
       it('is a function (so vuex does not cache output)', () => {

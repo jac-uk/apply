@@ -3,7 +3,7 @@ module.exports = {
     'js',
     'jsx',
     'json',
-    'vue'
+    'vue',
   ],
   transform: {
     '^.+\\.vue$': 'vue-jest',
@@ -14,18 +14,18 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
   snapshotSerializers: [
-    'jest-serializer-vue'
+    'jest-serializer-vue',
   ],
   testMatch: [
-    '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)'
+    '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
   ],
   testURL: 'http://localhost/',
   collectCoverage: true,
   collectCoverageFrom: [
-    'src/**/*.{js,vue}'
+    'src/**/*.{js,vue}',
   ],
   coverageReporters: [
     'html',
-    'text-summary'
+    'text-summary',
   ],
 };

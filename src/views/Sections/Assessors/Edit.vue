@@ -6,48 +6,58 @@
       <fieldset>
         <legend>Your assessors</legend>
         <div class="fieldset-text">
-          <a href="https://www.judicialappointments.gov.uk/references-guidance-candidates" target="_blank">
+          <a
+            href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
+            target="_blank"
+          >
             Guidance on choosing your two assessors
           </a>
         </div>
-        <RepeatableFields v-model="applicant.assessors" :component="repeatableFields.Assessor" :max="2" />
+        <RepeatableFields
+          v-model="applicant.assessors"
+          :component="repeatableFields.Assessor"
+          :max="2"
+        />
       </fieldset>
 
-      <SaveAndContinueButtons :isSaving="isSaving" @saveAndContinue="saveAndContinue" />
+      <SaveAndContinueButtons
+        :is-saving="isSaving"
+        @saveAndContinue="saveAndContinue"
+      />
     </form>
   </section>
 </template>
 
 <script>
-  import Assessor from '@/views/RepeatableFields/Assessor';
-  import RepeatableFields from '@/components/RepeatableFields';
-  import SaveAndContinueButtons from '@/components/SaveAndContinueButtons';
+import Assessor from '@/views/RepeatableFields/Assessor';
+import RepeatableFields from '@/components/RepeatableFields';
+import SaveAndContinueButtons from '@/components/SaveAndContinueButtons';
 
-  export default {
-    components: {
-      SaveAndContinueButtons,
-      RepeatableFields,
-    },
-    data() {
-      return {
-        applicant: this.$store.getters.applicant(),
-        vacancy: this.$store.getters.vacancy,
-        isSaving: false,
-        repeatableFields: {
-          Assessor,
-        },
-      };
-    },
-    methods: {
-      async saveAndContinue() {
-        await this.save();
-        this.$emit('continue');
+export default {
+  components: {
+    SaveAndContinueButtons,
+    RepeatableFields,
+  },
+  data() {
+    return {
+      applicant: this.$store.getters.applicant(),
+      vacancy: this.$store.getters.vacancy,
+      isSaving: false,
+      repeatableFields: {
+        Assessor,
       },
-      async save() {
-        this.isSaving = true;
-        await this.$store.dispatch('saveApplicant', this.applicant);
-        this.isSaving = false;
-      },
+    };
+  },
+  methods: {
+    async saveAndContinue() {
+      await this.save();
+      this.$emit('continue');
     },
-  };
+    async save() {
+      this.isSaving = true;
+      await this.$store.dispatch('saveApplicant', this.applicant);
+      this.isSaving = false;
+    },
+  },
+};
 </script>

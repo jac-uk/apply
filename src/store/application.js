@@ -8,13 +8,13 @@ const module = {
     id: null,
   },
   mutations: {
-    setApplication(state, {id, data,}) {
+    setApplication(state, {id, data}) {
       state.id = id;
       state.data = data;
     },
   },
   actions: {
-    async loadApplication({commit, getters,}) {
+    async loadApplication({commit, getters}) {
       if (!getters.applicantDoc || !getters.vacancyDoc) {
         throw new Error('Applicant and Vacancy docs must exist to load an Application');
       }
@@ -27,7 +27,7 @@ const module = {
         .get();
 
       if (results.empty) {
-        commit('setApplication', {id: null, data: { state: 'draft', createdAt: new Date, updatedAt: new Date,},});
+        commit('setApplication', {id: null, data: { state: 'draft', createdAt: new Date, updatedAt: new Date}});
       } else {
         const doc = results.docs[0];
 
@@ -37,10 +37,10 @@ const module = {
         data = sanitizeFirestore(data);
         data.updatedAt = new Date;
 
-        commit('setApplication', {id: doc.id, data,});
+        commit('setApplication', {id: doc.id, data});
       }
     },
-    async saveApplication({commit, getters,}, data) {
+    async saveApplication({commit, getters}, data) {
       if (!getters.applicantDoc || !getters.vacancyDoc) {
         throw new Error('Applicant and Vacancy docs must exist to save an Application');
       }
@@ -48,7 +48,7 @@ const module = {
       saveData.applicant = getters.applicantDoc;
       saveData.vacancy = getters.vacancyDoc;
       await getters.applicationDoc.set(saveData);
-      commit('setApplication', {id: getters.applicationDoc.id, data: clone(data),});
+      commit('setApplication', {id: getters.applicationDoc.id, data: clone(data)});
     },
   },
   getters: {

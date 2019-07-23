@@ -1,7 +1,9 @@
 <template>
   <section class="card mb-3">
     <div class="card-header">
-      <h2 class="card-title">Diversity</h2>
+      <h2 class="card-title">
+        Diversity
+      </h2>
     </div>
     <div class="card-body">
       <table class="table mb-3">
@@ -22,83 +24,87 @@
         </tr>
         <tr>
           <td>
-            <RouterLink to="/apply/diversity" class="float-right">Change</RouterLink>
+            <RouterLink
+              to="/apply/diversity"
+              class="float-right"
+            >
+              Change
+            </RouterLink>
           </td>
         </tr>
       </table>
 
       <ShowSelectList
-        changeLink="/apply/diversity"
-        :hasOther="applicant.professional_background_has_other"
+        change-link="/apply/diversity"
+        :has-other="applicant.professional_background_has_other"
         :other="applicant.professional_background_other"
         title="What is your professional background?"
         :records="applicant.professional_background"
-        />
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
-        :hasOther="applicant.current_legal_role_has_other"
+        change-link="/apply/diversity"
+        :has-other="applicant.current_legal_role_has_other"
         :other="applicant.current_legal_role_other"
         title="What is your current legal role?"
         :records="applicant.current_legal_role"
-        />
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="Do you hold, or have you held in the past, a fee-paid judicial role?"
-        :singleResponse ="applicant.fee_paid_judicial"
-        />
+        :single-response="applicant.fee_paid_judicial"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="Between the ages 11 to 18, did you mainly attend a state or fee-paying school?"
-        :singleResponse ="applicant.school_type"
-        />
+        :single-response="applicant.school_type"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="Did you go to university and if so, were you the first generation from your family to go?"
-        :singleResponse ="applicant.university_attendance"
-        />
+        :single-response="applicant.university_attendance"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="What is your ethnic group?"
         :other="applicant.ethnicity_other"
-        :singleResponse ="applicant.ethnicity"
-        />
+        :single-response="applicant.ethnicity"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="What is your gender?"
-        :singleResponse ="applicant.gender"
-        />
+        :single-response="applicant.gender"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="Is your gender identity the same as the gender you were assigned at birth?"
-        :singleResponse ="applicant.gender_same_as_birth"
-        />
+        :single-response="applicant.gender_same_as_birth"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="How would you describe your sexual orientation?"
-        :singleResponse ="applicant.sexual_orientation"
-        />
+        :single-response="applicant.sexual_orientation"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="Do you have a disability, as defined by the Equality Act 2010?"
-        :singleResponse ="applicant.disability"
-        />
+        :single-response="applicant.disability"
+      />
 
       <ShowSelectList
-        changeLink="/apply/diversity"
+        change-link="/apply/diversity"
         title="What is your religion or belief?"
         :other="applicant.religion_other"
-        :singleResponse ="applicant.religion"
-        />
-
+        :single-response="applicant.religion"
+      />
     </div>
   </section>
 </template>

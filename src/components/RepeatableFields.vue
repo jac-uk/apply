@@ -1,16 +1,34 @@
 <template>
   <div>
-    <div class="card mb-3" v-for="(row, index) in rows" :key="index">
-      <component class="card-body" :row="row" :index="index" :is="component">
+    <div
+      v-for="(row, index) in rows"
+      :key="index"
+      class="card mb-3"
+    >
+      <component
+        :is="component"
+        class="card-body"
+        :row="row"
+        :index="index"
+      >
         <template slot="removeButton">
-          <button @click.prevent="removeRow(index)" class="btn btn-secondary" type="button">
+          <button
+            class="btn btn-secondary"
+            type="button"
+            @click.prevent="removeRow(index)"
+          >
             Remove
           </button>
         </template>
       </component>
     </div>
     <div class="text-right">
-      <button @click.prevent="addRow" class="btn btn-primary" type="button" v-if="canAddRow">
+      <button
+        v-if="canAddRow"
+        class="btn btn-primary"
+        type="button"
+        @click.prevent="addRow"
+      >
         Add another
       </button>
     </div>
@@ -18,56 +36,56 @@
 </template>
 
 <script>
-  export default {
-    name: 'RepeatableFields',
-    props: {
-      value: {
-        validator: (value) => (value instanceof Array || value === null || value === undefined),
-        required: true,
-      },
-      component: {
-        required: true,
-      },
-      max: {
-        required: false,
-        default: false,
-        type: [Number, Boolean],
-      },
+export default {
+  name: 'RepeatableFields',
+  props: {
+    value: {
+      validator: (value) => (value instanceof Array || value === null || value === undefined),
+      required: true,
     },
-    data() {
-      return {
-        rows: [],
-      };
+    component: {
+      required: true,
     },
-    computed: {
-      canAddRow() {
-        if (this.max) {
-          return this.rows.length < this.max;
-        } else {
-          return true;
-        }
-      },
+    max: {
+      required: false,
+      default: false,
+      type: [Number, Boolean],
     },
-    methods: {
-      addRow() {
-        if (this.canAddRow) {
-          this.rows.push({});
-        }
-      },
-      removeRow(index) {
-        this.rows.splice(index, 1);
-      },
-    },
-    created() {
-      if (this.value instanceof Array) {
-        this.rows = this.value;
+  },
+  data() {
+    return {
+      rows: [],
+    };
+  },
+  computed: {
+    canAddRow() {
+      if (this.max) {
+        return this.rows.length < this.max;
       } else {
-        this.$emit('input', this.rows);
-      }
-
-      if (this.rows.length === 0) {
-        this.addRow();
+        return true;
       }
     },
-  };
+  },
+  created() {
+    if (this.value instanceof Array) {
+      this.rows = this.value;
+    } else {
+      this.$emit('input', this.rows);
+    }
+
+    if (this.rows.length === 0) {
+      this.addRow();
+    }
+  },
+  methods: {
+    addRow() {
+      if (this.canAddRow) {
+        this.rows.push({});
+      }
+    },
+    removeRow(index) {
+      this.rows.splice(index, 1);
+    },
+  },
+};
 </script>

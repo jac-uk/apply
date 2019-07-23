@@ -1,11 +1,17 @@
 <template>
   <section class="card mb-3">
     <div class="card-header">
-      <h3 class="card-title">Your assessors</h3>
+      <h3 class="card-title">
+        Your assessors
+      </h3>
     </div>
 
     <div class="card-body">
-      <table class="table mb-6" v-for="assessor in applicant.assessors" :key="assessor.id">
+      <table
+        v-for="assessor in applicant.assessors"
+        :key="assessor.id"
+        class="table mb-6"
+      >
         <tbody>
           <tr>
             <th>Assessor Type</th>
@@ -33,7 +39,12 @@
           </tr>
           <tr>
             <td colspan="10">
-              <RouterLink to="/apply/assessors" class="float-right">Change</RouterLink>
+              <RouterLink
+                to="/apply/assessors"
+                class="float-right"
+              >
+                Change
+              </RouterLink>
             </td>
           </tr>
         </tbody>
@@ -43,11 +54,11 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        applicant: this.$store.getters.applicant(),
-      };
-    },
-  };
+export default {
+  data() {
+    return {
+      applicant: this.$store.getters.applicant(),
+    };
+  },
+};
 </script>

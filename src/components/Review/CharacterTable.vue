@@ -1,6 +1,9 @@
 <template>
   <article>
-    <table class="table" v-if="answeredYes">
+    <table
+      v-if="answeredYes"
+      class="table"
+    >
       <thead>
         <tr>
           <th colspan="10">
@@ -8,21 +11,47 @@
           </th>
         </tr>
       </thead>
-      <tbody v-for="record in visibleRecords" :key="record.id">
-        <tr v-for="(value, key) in record" :key="value.id">
-          <th class="text-capitalize offence_key">{{ key.replace('_', ' ') }}</th>
-          <td v-if="value instanceof Date" class="offence_info">{{ value.toLocaleDateString("en-GB", { month: "numeric", year: "numeric" }) }}</td>
-          <td v-else class="offence_info">{{ value }}</td>
+      <tbody
+        v-for="record in visibleRecords"
+        :key="record.id"
+      >
+        <tr
+          v-for="(value, key) in record"
+          :key="value.id"
+        >
+          <th class="text-capitalize offence_key">
+            {{ key.replace('_', ' ') }}
+          </th>
+          <td
+            v-if="value instanceof Date"
+            class="offence_info"
+          >
+            {{ value.toLocaleDateString("en-GB", { month: "numeric", year: "numeric" }) }}
+          </td>
+          <td
+            v-else
+            class="offence_info"
+          >
+            {{ value }}
+          </td>
         </tr>
         <tr>
           <td colspan="10">
-            <RouterLink to="/apply/character" class="float-right">Change</RouterLink>
+            <RouterLink
+              to="/apply/character"
+              class="float-right"
+            >
+              Change
+            </RouterLink>
           </td>
         </tr>
       </tbody>
     </table>
 
-    <table class="table" v-else>
+    <table
+      v-else
+      class="table"
+    >
       <tbody>
         <tr>
           <th class="boolean_no">
@@ -32,7 +61,12 @@
             No
           </td>
           <td class="p-3 text-right">
-            <RouterLink to="/apply/character" class="float-right">Change</RouterLink>
+            <RouterLink
+              to="/apply/character"
+              class="float-right"
+            >
+              Change
+            </RouterLink>
           </td>
         </tr>
       </tbody>

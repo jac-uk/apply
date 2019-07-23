@@ -12,11 +12,20 @@
     <Declarations />
     <Diversity />
     <Outreach />
-    <div class="form-actions" v-if="application.state != 'submitted'">
-      <button class="btn btn-primary mr-2" @click.prevent="saveAndSubmit">
+    <div
+      v-if="application.state != 'submitted'"
+      class="form-actions"
+    >
+      <button
+        class="btn btn-primary mr-2"
+        @click.prevent="saveAndSubmit"
+      >
         Submit application
       </button>
-      <span class="spinner-border spinner-border-sm text-secondary" v-if="isSaving"></span>
+      <span
+        v-if="isSaving"
+        class="spinner-border spinner-border-sm text-secondary"
+      />
     </div>
   </section>
 </template>

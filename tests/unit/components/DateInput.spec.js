@@ -4,7 +4,7 @@ import DateInput from '@/components/DateInput';
 describe('components/DateInput', () => {
   const createTestSubject = (value) => {
     return shallowMount(DateInput, {
-      propsData: {value,},
+      propsData: {value},
     });
   };
 
@@ -20,7 +20,7 @@ describe('components/DateInput', () => {
         const goodValues = [
           ['a Date object', new Date()],
           ['a null value', null],
-          ['an undefined value', undefined]
+          ['an undefined value', undefined],
         ];
 
         it.each(goodValues)('accepts %s', (label, value) => {
@@ -33,7 +33,7 @@ describe('components/DateInput', () => {
           ['a String', '2019-01-01'],
           ['a Number', 1550583417768],
           ['boolean true', true],
-          ['boolean false', true]
+          ['boolean false', true],
         ];
 
         it.each(badValues)('does not accept %s', (label, value) => {
@@ -56,7 +56,7 @@ describe('components/DateInput', () => {
       describe('valid values', () => {
         const goodValues = [
           ['date'],
-          ['month']
+          ['month'],
         ];
 
         it.each(goodValues)('accepts "%s"', (value) => {
@@ -69,7 +69,7 @@ describe('components/DateInput', () => {
           ['ymd'],
           ['ym'],
           ['a bad string'],
-          [true]
+          [true],
         ];
 
         it.each(badValues)('does not accept "%s"', (value) => {
@@ -89,14 +89,14 @@ describe('components/DateInput', () => {
       describe('getter', () => {
         describe('given `day` is null', () => {
           it('returns null', () => {
-            subject.setData({ day: null, });
+            subject.setData({ day: null });
             expect(subject.vm.dayInput).toBe(null);
           });
         });
 
         describe('given `day` is a number', () => {
           it('returns `day` as a string', () => {
-            subject.setData({ day: 15, });
+            subject.setData({ day: 15 });
             const value = subject.vm.dayInput;
 
             expect(typeof value).toBe('string');
@@ -105,7 +105,7 @@ describe('components/DateInput', () => {
           });
 
           it('zero pads single digit values to 2 characters', () => {
-            subject.setData({ day: 1, });
+            subject.setData({ day: 1 });
             const value = subject.vm.dayInput;
 
             expect(typeof value).toBe('string');
@@ -154,14 +154,14 @@ describe('components/DateInput', () => {
       describe('getter', () => {
         describe('given `month` is null', () => {
           it('returns null', () => {
-            subject.setData({ month: null, });
+            subject.setData({ month: null });
             expect(subject.vm.monthInput).toBe(null);
           });
         });
 
         describe('given `month` is a number', () => {
           it('returns `month` as a string', () => {
-            subject.setData({ month: 10, });
+            subject.setData({ month: 10 });
             const value = subject.vm.monthInput;
 
             expect(typeof value).toBe('string');
@@ -170,7 +170,7 @@ describe('components/DateInput', () => {
           });
 
           it('zero pads single digit values to 2 characters', () => {
-            subject.setData({ month: 1, });
+            subject.setData({ month: 1 });
             const value = subject.vm.monthInput;
 
             expect(typeof value).toBe('string');
@@ -219,14 +219,14 @@ describe('components/DateInput', () => {
       describe('getter', () => {
         describe('given `year` is null', () => {
           it('returns null', () => {
-            subject.setData({ year: null, });
+            subject.setData({ year: null });
             expect(subject.vm.yearInput).toBe(null);
           });
         });
 
         describe('given `year` is a number', () => {
           it('returns `year` as a number', () => {
-            subject.setData({ year: 1986, });
+            subject.setData({ year: 1986 });
             const value = subject.vm.yearInput;
 
             expect(typeof value).toBe('number');
@@ -255,21 +255,21 @@ describe('components/DateInput', () => {
     describe('dateConstructor', () => {
       describe('given property type="date"', () => {
         beforeEach(() => {
-          subject.setProps({type: 'date',});
+          subject.setProps({type: 'date'});
         });
 
         describe('and `day`, `month` and `year` fields are set', () => {
           it('returns an array of Date constructor arguments', () => {
-            subject.setData({day: 12, month: 4, year: 1980,});
+            subject.setData({day: 12, month: 4, year: 1980});
             expect(subject.vm.dateConstructor).toHaveLength(3);
             expect(subject.vm.dateConstructor).toEqual([1980, 3, 12]);
           });
 
           it('adjusts month to be zero-indexed, as required by Date constructor', () => {
-            subject.setData({day: 1, month: 1, year: 1960,});
+            subject.setData({day: 1, month: 1, year: 1960});
             expect(subject.vm.dateConstructor).toEqual([1960, 0, 1]);
 
-            subject.setData({day: 25, month: 12, year: 1960,});
+            subject.setData({day: 25, month: 12, year: 1960});
             expect(subject.vm.dateConstructor).toEqual([1960, 11, 25]);
           });
         });
@@ -277,21 +277,21 @@ describe('components/DateInput', () => {
 
       describe('given property type="month"', () => {
         beforeEach(() => {
-          subject.setProps({type: 'month',});
+          subject.setProps({type: 'month'});
         });
 
         describe('and `month` and `year` fields are set', () => {
           it('returns an array of Date constructor arguments', () => {
-            subject.setData({day: 12, month: 4, year: 1980,});
+            subject.setData({day: 12, month: 4, year: 1980});
             expect(subject.vm.dateConstructor).toHaveLength(2);
             expect(subject.vm.dateConstructor).toEqual([1980, 3]);
           });
 
           it('adjusts month to be zero-indexed, as required by Date constructor', () => {
-            subject.setData({day: 1, month: 1, year: 1960,});
+            subject.setData({day: 1, month: 1, year: 1960});
             expect(subject.vm.dateConstructor).toEqual([1960, 0]);
 
-            subject.setData({day: 25, month: 12, year: 1960,});
+            subject.setData({day: 25, month: 12, year: 1960});
             expect(subject.vm.dateConstructor).toEqual([1960, 11]);
           });
         });
@@ -299,13 +299,13 @@ describe('components/DateInput', () => {
 
       describe('given at least one field is null', () => {
         const nullValueCombinations = [
-          ['`day` is null',                      {day: null, month: 4,    year: 1980,}],
-          ['`month` is null',                    {day: 12,   month: null, year: 1980,}],
-          ['`year` is null',                     {day: 12,   month: 4,    year: null,}],
-          ['`day` and `month` are null',         {day: null, month: null, year: 1980,}],
-          ['`day` and `year` are null',          {day: null, month: 4,    year: null,}],
-          ['`month` and `year` are null',        {day: 12,   month: null, year: null,}],
-          ['`day`, `month` and `year` are null', {day: null, month: null, year: null,}]
+          ['`day` is null',                      {day: null, month: 4,    year: 1980}],
+          ['`month` is null',                    {day: 12,   month: null, year: 1980}],
+          ['`year` is null',                     {day: 12,   month: 4,    year: null}],
+          ['`day` and `month` are null',         {day: null, month: null, year: 1980}],
+          ['`day` and `year` are null',          {day: null, month: 4,    year: null}],
+          ['`month` and `year` are null',        {day: 12,   month: null, year: null}],
+          ['`day`, `month` and `year` are null', {day: null, month: null, year: null}],
         ];
 
         it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
@@ -319,7 +319,7 @@ describe('components/DateInput', () => {
       describe('getter', () => {
         describe('given the date is not set (`dateConstructor` returns null)', () => {
           it('returns null', () => {
-            subject.setData({day: null, month: null, year: null,});
+            subject.setData({day: null, month: null, year: null});
             expect(subject.vm.date).toBe(null);
           });
         });
@@ -331,7 +331,7 @@ describe('components/DateInput', () => {
 
           it('is created as a UTC Date (not in local timezone)', () => {
             // Choosing a date where London is in BST so we can test local time vs UTC
-            subject.setData({day: 1, month: 6, year: 2018,});
+            subject.setData({day: 1, month: 6, year: 2018});
 
             const args = subject.vm.dateConstructor;
             const utcTime = Date.UTC(...args);
@@ -346,7 +346,7 @@ describe('components/DateInput', () => {
       describe('setter', () => {
         describe('given a non-Date value', () => {
           it('does nothing', () => {
-            subject.setData({day: 17, month: 5, year: 2018,});
+            subject.setData({day: 17, month: 5, year: 2018});
             subject.vm.date = null;
             expect(subject.vm.day).toBe(17);
             expect(subject.vm.month).toBe(5);
@@ -394,7 +394,7 @@ describe('components/DateInput', () => {
           const secondDate = new Date('1975-04-19');
 
           const subject = createTestSubject(firstDate);
-          subject.setProps({value: secondDate,});
+          subject.setProps({value: secondDate});
 
           expect(mockDateSetter).toHaveBeenCalledTimes(2);
           expect(mockDateSetter).toHaveBeenNthCalledWith(1, firstDate);
@@ -409,7 +409,7 @@ describe('components/DateInput', () => {
           const secondDate = new Date('1960-01-01');
 
           const subject = createTestSubject(firstDate);
-          subject.setProps({value: secondDate,});
+          subject.setProps({value: secondDate});
 
           expect(mockDateSetter).toHaveBeenCalledTimes(1);
           expect(mockDateSetter.mock.calls[0][0]).toBe(firstDate);
@@ -451,7 +451,7 @@ describe('components/DateInput', () => {
       describe('Day input', () => {
         let input;
         beforeEach(() => {
-          input = subject.find({ ref: 'dayInput', });
+          input = subject.find({ ref: 'dayInput' });
         });
 
         describe('is lazily bound to `dayInput`', () => {
@@ -485,12 +485,12 @@ describe('components/DateInput', () => {
 
     describe('given property type="month"', () => {
       beforeEach(() => {
-        subject.setProps({type: 'month',});
+        subject.setProps({type: 'month'});
       });
 
       describe('Day input', () => {
         it('is not rendered', () => {
-          const input = subject.find({ ref: 'dayInput', });
+          const input = subject.find({ ref: 'dayInput' });
           expect(input.exists()).toBe(false);
         });
       });
@@ -499,7 +499,7 @@ describe('components/DateInput', () => {
     describe('Month input', () => {
       let input;
       beforeEach(() => {
-        input = subject.find({ ref: 'monthInput', });
+        input = subject.find({ ref: 'monthInput' });
       });
 
       describe('is lazily bound to `monthInput`', () => {
@@ -533,7 +533,7 @@ describe('components/DateInput', () => {
     describe('Year input', () => {
       let input;
       beforeEach(() => {
-        input = subject.find({ ref: 'yearInput', });
+        input = subject.find({ ref: 'yearInput' });
       });
 
       describe('is lazily bound to `yearInput`', () => {
@@ -574,18 +574,18 @@ describe('components/DateInput', () => {
 
     describe('inputs have globally unique ID attributes', () => {
       it('Day input has a unique ID attribute', () => {
-        const id1 = subject1.find({ref: 'dayInput',}).element.id;
-        const id2 = subject2.find({ref: 'dayInput',}).element.id;
+        const id1 = subject1.find({ref: 'dayInput'}).element.id;
+        const id2 = subject2.find({ref: 'dayInput'}).element.id;
         expect(id1).not.toEqual(id2);
       });
       it('Month input has a unique ID attribute', () => {
-        const id1 = subject1.find({ref: 'monthInput',}).element.id;
-        const id2 = subject2.find({ref: 'monthInput',}).element.id;
+        const id1 = subject1.find({ref: 'monthInput'}).element.id;
+        const id2 = subject2.find({ref: 'monthInput'}).element.id;
         expect(id1).not.toEqual(id2);
       });
       it('Year input has a unique ID attribute', () => {
-        const id1 = subject1.find({ref: 'yearInput',}).element.id;
-        const id2 = subject2.find({ref: 'yearInput',}).element.id;
+        const id1 = subject1.find({ref: 'yearInput'}).element.id;
+        const id2 = subject2.find({ref: 'yearInput'}).element.id;
         expect(id1).not.toEqual(id2);
       });
     });

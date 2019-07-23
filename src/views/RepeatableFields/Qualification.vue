@@ -2,42 +2,55 @@
   <div>
     <div class="form-group">
       <label :for="qualificationInputId">Qualification</label>
-      <input type="text" class="form-control" :id="qualificationInputId" v-model="row.qualification">
+      <input
+        :id="qualificationInputId"
+        v-model="row.qualification"
+        type="text"
+        class="form-control"
+      >
     </div>
     <div class="form-group">
       <label :for="collegeInputId">College or university</label>
-      <input type="text" class="form-control" :id="collegeInputId" v-model="row.college">
+      <input
+        :id="collegeInputId"
+        v-model="row.college"
+        type="text"
+        class="form-control"
+      >
     </div>
     <div class="form-group">
       <label>Qualification date</label>
       <div class="fieldset-text">
         For example, 02 2017
       </div>
-      <DateInput v-model="row.date" type="month" />
+      <DateInput
+        v-model="row.date"
+        type="month"
+      />
     </div>
-    <slot name="removeButton"></slot>
+    <slot name="removeButton" />
   </div>
 </template>
 
 <script>
-  import DateInput from '@/components/DateInput';
+import DateInput from '@/components/DateInput';
 
-  export default {
-    name: 'Qualification',
-    components: {
-      DateInput,
+export default {
+  name: 'Qualification',
+  components: {
+    DateInput,
+  },
+  props: [
+    'row',
+    'index',
+  ],
+  computed: {
+    qualificationInputId() {
+      return `qualification_${this.index}_qualification`;
     },
-    props: [
-      'row',
-      'index'
-    ],
-    computed: {
-      qualificationInputId() {
-        return `qualification_${this.index}_qualification`;
-      },
-      collegeInputId() {
-        return `qualification_${this.index}_college`;
-      },
+    collegeInputId() {
+      return `qualification_${this.index}_college`;
     },
-  };
+  },
+};
 </script>
