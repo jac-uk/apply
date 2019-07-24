@@ -76,13 +76,34 @@
 <script>
 export default {
   props: {
-    answeredYes: Boolean,
-    changeLink: String,
-    records: Array,
-    subtitle: String,
-    title: String,
-    otherCaption: String,
-    other: String,
+    answeredYes: {
+      type: Boolean,
+      required: true,
+    },
+    changeLink: {
+      type: String,
+      required: true,
+    },
+    records: {
+      type: Array,
+      required: true,
+    },
+    subtitle: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    otherCaption: {
+      type: String,
+      required: true,
+    },
+    other: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

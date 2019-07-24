@@ -37,6 +37,7 @@ export default {
   props: {
     value: {
       required: true,
+      validator: (value) => ([true, false, null, undefined].indexOf(value) !== -1),
     },
   },
   data() {

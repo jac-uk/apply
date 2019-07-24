@@ -40,10 +40,16 @@ export default {
   components: {
     DateInput,
   },
-  props: [
-    'row',
-    'index',
-  ],
+  props: {
+    row: {
+      type: Object,
+      required: true,
+    },
+    index: {
+      type: Number,
+      required: true,
+    },
+  },
   computed: {
     qualificationInputId() {
       return `qualification_${this.index}_qualification`;

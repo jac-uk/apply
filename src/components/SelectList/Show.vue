@@ -48,12 +48,30 @@
 <script>
 export default {
   props: {
-    changeLink: String,
-    hasOther: Boolean,
-    other: String,
-    records: Array,
-    singleResponse: String,
-    title: String,
+    changeLink: {
+      type: String,
+      required: true,
+    },
+    hasOther: {
+      type: Boolean,
+      required: true,
+    },
+    other: {
+      type: String,
+      required: true,
+    },
+    records: {
+      type: Array,
+      required: true,
+    },
+    singleResponse: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

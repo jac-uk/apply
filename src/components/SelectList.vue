@@ -55,6 +55,7 @@ export default {
       default: false,
     },
     value: {
+      validator: (value) => (value instanceof Array || typeof value === 'string' || value === null || value === undefined),
       required: true,
     },
   },

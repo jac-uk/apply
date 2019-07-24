@@ -77,9 +77,18 @@
 <script>
 export default {
   props: {
-    answeredYes: Boolean,
-    records: Array,
-    title: String,
+    answeredYes: {
+      type: Boolean,
+      required: true,
+    },
+    records: {
+      type: Array,
+      required: true,
+    },
+    title: {
+      type: String,
+      required: true,
+    },
   },
   computed: {
     visibleRecords: function () {

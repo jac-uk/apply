@@ -51,11 +51,6 @@ import { mapGetters } from 'vuex';
 import {auth} from '@/firebase';
 
 export default {
-  methods: {
-    signOut() {
-      auth().signOut();
-    },
-  },
   computed: {
     ...mapGetters([
       'isSignedIn',
@@ -66,6 +61,11 @@ export default {
       if (signedIn === false) {
         this.$router.push({name: 'sign-in'});
       }
+    },
+  },
+  methods: {
+    signOut() {
+      auth().signOut();
     },
   },
 };
