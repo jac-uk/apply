@@ -48,7 +48,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import {auth} from '@/firebase';
+import { auth } from '@/firebase';
 
 export default {
   computed: {
@@ -59,7 +59,7 @@ export default {
   watch: {
     isSignedIn(signedIn) {
       if (signedIn === false) {
-        this.$router.push({name: 'sign-in'});
+        this.$router.push({ name: 'sign-in' });
       }
     },
   },

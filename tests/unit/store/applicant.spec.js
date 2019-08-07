@@ -1,13 +1,13 @@
 import applicant from '@/store/applicant';
 import sanitizeFirestore from '@/utils/sanitizeFirestore';
-import {firestore} from '@/firebase';
+import { firestore } from '@/firebase';
 
 jest.mock('@/utils/sanitizeFirestore');
 jest.mock('@/firebase', () => {
   const firebase = require('firebase-mock');
   const firestore = firebase.MockFirebaseSdk().firestore();
   firestore.autoFlush();
-  return {firestore};
+  return { firestore };
 });
 
 describe('store/applicant', () => {
@@ -24,7 +24,7 @@ describe('store/applicant', () => {
   describe('mutations', () => {
     describe('setApplicant', () => {
       it('stores the supplied data in the state', () => {
-        const data = {name: 'John Smith'};
+        const data = { name: 'John Smith' };
         mutations.setApplicant(state, data);
         expect(state.data).toBe(data);
       });
@@ -57,8 +57,8 @@ describe('store/applicant', () => {
 
       describe('applicant exists in Firestore', () => {
         const docId = '4jsbvO27RJYqSRsgZM9sPhDFLDU2';
-        const data = {name: 'John Smith'};
-        const sanitizedData = {name: 'John Smith', sanitized: true};
+        const data = { name: 'John Smith' };
+        const sanitizedData = { name: 'John Smith', sanitized: true };
 
         beforeEach(async () => {
           getters.applicantDoc = firestore.collection('applicants').doc(docId);
@@ -108,7 +108,7 @@ describe('store/applicant', () => {
 
       describe('happy path', () => {
         const docId = '4jsbvO27RJYqSRsgZM9sPhDFLDU2';
-        const data = {name: 'John Smith'};
+        const data = { name: 'John Smith' };
 
         beforeEach(async () => {
           getters.applicantDoc = firestore.collection('applicants').doc(docId);
@@ -139,7 +139,7 @@ describe('store/applicant', () => {
   describe('getters', () => {
     describe('applicant()', () => {
       beforeEach(() => {
-        state.data = {name: 'John Smith'};
+        state.data = { name: 'John Smith' };
       });
 
       it('is a function (so vuex does not cache output)', () => {

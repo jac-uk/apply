@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import {auth} from '@/firebase';
+import { auth } from '@/firebase';
 import firebaseui from 'firebaseui';
 
 export default {

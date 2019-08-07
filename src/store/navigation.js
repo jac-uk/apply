@@ -66,7 +66,7 @@ const module = {
     },
   },
   actions: {
-    setCurrentPagePath({commit, state}, path) {
+    setCurrentPagePath({ commit, state }, path) {
       const currentPage = state.applyPages.find((page) => {
         return page.path === path;
       });

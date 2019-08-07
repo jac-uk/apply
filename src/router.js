@@ -108,7 +108,7 @@ const router = new Router({
 
         if (!isSignedIn) {
           // User must be logged in
-          return next({name: 'sign-in'});
+          return next({ name: 'sign-in' });
         }
 
         if (isEmailVerified) {
@@ -128,7 +128,7 @@ const router = new Router({
     if (savedPosition) {
       return savedPosition;
     } else {
-      return {x: 0, y: 0};
+      return { x: 0, y: 0 };
     }
   },
 });
@@ -147,12 +147,12 @@ router.beforeEach((to, from, next) => {
 
   if (requiresAuth && !isSignedIn) {
     // User must be logged in
-    return next({name: 'sign-in'});
+    return next({ name: 'sign-in' });
   }
 
   if (requiresAuth && !isEmailVerified) {
     // User must verify their email address
-    return next({name: 'verify-email'});
+    return next({ name: 'verify-email' });
   }
 
   return next();

@@ -3,7 +3,7 @@ import FirebaseUI from '@/components/FirebaseUI';
 
 const mockFirebaseAuth = jest.fn();
 
-import {auth} from '@/firebase';
+import { auth } from '@/firebase';
 jest.mock('@/firebase', () => {
   const mock = {
     auth: jest.fn(() => (mockFirebaseAuth)),

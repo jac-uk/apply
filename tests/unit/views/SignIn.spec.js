@@ -1,4 +1,4 @@
-import {shallowMount} from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import SignIn from '@/views/SignIn';
 import FirebaseUI from '@/components/FirebaseUI';
 

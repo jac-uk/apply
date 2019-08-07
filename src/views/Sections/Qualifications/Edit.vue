@@ -144,9 +144,9 @@ export default {
       isSaving: false,
       selectListOptions: {
         qualifiedProfessions: [
-          {value: 'Barrister', label: 'Barrister'},
-          {value: 'Solicitor', label: 'Solicitor'},
-          {value: 'Advocate', label: 'Advocate'},
+          { value: 'Barrister', label: 'Barrister' },
+          { value: 'Solicitor', label: 'Solicitor' },
+          { value: 'Advocate', label: 'Advocate' },
         ],
         qualifiedLocations: [
           'England and Wales',

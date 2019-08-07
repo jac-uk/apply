@@ -278,8 +278,8 @@ export default {
       isSaving: false,
       selectListOptions: {
         sharingConsent: [
-          {value: true, label: 'You may share my diversity data with the Ministry of Justice, Judicial Office and HM Courts and Tribunals Service (for monitoring purposes only)'},
-          {value: false, label: 'Do NOT share my diversity data'},
+          { value: true, label: 'You may share my diversity data with the Ministry of Justice, Judicial Office and HM Courts and Tribunals Service (for monitoring purposes only)' },
+          { value: false, label: 'Do NOT share my diversity data' },
         ],
         professionalBackground: [
           'Barrister',

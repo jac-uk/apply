@@ -1,4 +1,4 @@
-import {firestore} from '@/firebase';
+import { firestore } from '@/firebase';
 import sanitizeFirestore from '@/utils/sanitizeFirestore';
 
 const module = {
@@ -15,7 +15,7 @@ const module = {
     },
   },
   actions: {
-    async loadVacancy({commit, state, getters}) {
+    async loadVacancy({ commit, state, getters }) {
       if (!state.id) {
         throw new Error('You must set the Vacancy ID first using the setVacancyId mutation');
       }
