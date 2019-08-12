@@ -29,6 +29,7 @@
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.15.0",
     "eslint-plugin-vue": "^5.0.0",
+    "firebase-tools": "^7.2.2",
     "sass": "^1.18.0",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
