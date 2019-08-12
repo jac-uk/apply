@@ -1,33 +1,27 @@
-# Application form
+## Apply 
 
-This directory contains the application form used by candidates when applying for a vacancy.
+[![CircleCI](https://circleci.com/gh/jac-uk/apply.svg?style=svg)](https://circleci.com/gh/jac-uk/apply)
 
-This is a [Vue.js](https://vuejs.org) application created using the [Vue CLI](https://cli.vuejs.org).
-
-The production site can be found at https://apply.judicialappointments.digital
+This is the Vue SPA for candidate applications. By default, it deploys to `digital-staging-apply`.
 
 ## Project setup
-
 ```
 npm install
 ```
 
 ### Compiles and hot-reloads for development
-
 ```
 npm run serve
 ```
 
 ### Compiles and minifies for production
-
 ```
 npm run build
 ```
 
-### Runs unit tests
-
+### Run your tests
 ```
-npm test
+npm run test
 ```
 
 ### Lints and fixes files
@@ -35,9 +29,37 @@ npm test
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Project deploy 
 
-## Browser support
+By default `firebase deploy` deploys to `staging`.
 
-Works in modern browsers (Chrome, Firefox, Safari, Edge).
+### Manually deploy to production
+
+To manually deploy to production use either: 
+
+```
+firebase deploy --project production
+```
+
+**or** 
+
+```
+firebase use production
+firebase deploy
+```
+
+### Continuous deployment
+
+Merging to `master` automatically triggers a deploy to `production`.
+
+Merging to `stating` automatically triggers a deploy to `staging`.
+
+
+### CircleCI configuration 
+
+The CircleCI instance has to have a `FIREBASE_DEPLOY_TOKEN` set.  This is tied to a specific firebase user.  If that user leaves
+the organisation, the token will need to be reset.  To do so run `firebase login:ci` and follow the instructions there and then on
+CircleCI.
+
+
+
