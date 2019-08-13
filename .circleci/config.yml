@@ -57,7 +57,7 @@ jobs:
           at: ~/digital-platform
       - run:
           name: 'Deploy to production'
-          command: node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --project production
+          command: npm run deploy-production
 
   build-and-deploy-staging:
     executor: default
@@ -66,7 +66,7 @@ jobs:
           at: ~/digital-platform
       - run:
           name: 'Deploy to staging'
-          command: node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --project staging
+          command: npm run deploy-staging
 
 workflows:
   version: 2
