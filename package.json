@@ -5,6 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-staging": "vue-cli-service build --mode staging",
+    "build-production": "vue-cli-service build --mode production",
     "deploy-staging": "vue-cli-service build --mode staging; firebase deploy -P staging",
     "deploy-production": "vue-cli-service build --mode production; firebase deploy -P production",
     "lint": "vue-cli-service lint",
