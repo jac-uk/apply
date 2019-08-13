@@ -14,6 +14,11 @@ export default new Router({
       component: Home
     },
     {
+      path: '/sign-in',
+      name: 'sign-in',
+      component: () => import('./views/SignIn')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
