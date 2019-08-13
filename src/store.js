@@ -1,16 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import auth from '@/store/auth';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
+const store = new Vuex.Store({
+  // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
+  strict: process.env.NODE_ENV !== 'production',
 
+  modules: {
+    auth,
   },
-  mutations: {
+  state: {},
+  actions: {},
+  getters: {},
+});
 
-  },
-  actions: {
-
-  }
-})
+export default store;
