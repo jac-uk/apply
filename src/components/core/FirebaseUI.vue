@@ -15,7 +15,6 @@ export default {
           {
             provider: auth.EmailAuthProvider.PROVIDER_ID,
             signInMethod: auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD,
-            requireDisplayName: true,
           },
         ],
         credentialHelper: firebaseui.auth.CredentialHelper.NONE,
