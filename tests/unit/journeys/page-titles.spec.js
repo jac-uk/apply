@@ -26,10 +26,30 @@ describe('Page titles', () => {
     });
   });
 
-  describe.each(routes)('%s', (routeName, routeTitle) => {
-     beforeEach(() => {
-      router.push({ name: routeName });
+  const user = {
+    uid: 'abc123',
+    email: 'user@judicialappointments.digital',
+  };
+
+  describe('sign in', () => {
+    beforeEach(() => {
+      router.push({ name: 'sign-in' });
     });
+
+    it('contains Sign In', () => {
+      expect(document.title).toContain('Sign In');
+    });
+
+    it('contains Judicial Appointments Commission', () => {
+      expect(document.title).toContain('Judicial Appointments Commission');
+    });
+  });
+
+  describe.each(routes)('%s', (routeName, routeTitle) => {
+    beforeEach(() => {
+     store.dispatch('setCurrentUser', user);
+     router.push({ name: routeName, params: { id: 123 } });
+   });
 
     it(`contains ${routeTitle}`, () => {
       expect(document.title).toContain(routeTitle);
