@@ -1,21 +1,59 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
+import store from '@/store';
 
-Vue.use(Router)
+import JobAdvert from '@/views/JobAdvert';
+import SignIn from '@/views/SignIn';
 
-export default new Router({
+Vue.use(Router);
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import(/* webpackChunkName: 'home' */ '@/views/Home'),
+      path: '/job-advert',
+      name: 'job-advert',
+      component: JobAdvert,
+      meta: {
+        requiresAuth: true,
+        title: 'Job Advert',
+      },
     },
     {
       path: '/sign-in',
       name: 'sign-in',
-      component: () => import(/* webpackChunkName: 'sign-in' */ '@/views/SignIn'),
+      component: SignIn,
+      meta: {
+        title: 'Sign In',
+      },
     },
-  ]
-})
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
+});
+
+// Global before guard to verify if a user can have access to other than sign-in pages.
+// It redirects unauthorized users to a sign-in page.
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+  const isSignedIn = store.getters.isSignedIn;
+
+  if (requiresAuth && !isSignedIn) {
+    return next({ name: 'sign-in' });
+  }
+
+  return next();
+});
+
+// Global after hook to set an appropriate title for the page
+router.afterEach((to) => {
+  document.title = `${to.meta.title} | Judicial Appointments Commission`;
+});
+
+export default router;
