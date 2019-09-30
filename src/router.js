@@ -1,21 +1,34 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 
-Vue.use(Router)
+import JobAdvert from '@/views/JobAdvert';
 
-export default new Router({
+Vue.use(Router);
+
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: () => import(/* webpackChunkName: 'home' */ '@/views/Home'),
+      path: '/JobAdvert',
+      name: 'job-advert',
+      component: JobAdvert,
+      meta: {
+        title: 'Job Advert',
+      },
     },
-    {
-      path: '/sign-in',
-      name: 'sign-in',
-      component: () => import(/* webpackChunkName: 'sign-in' */ '@/views/SignIn'),
-    },
-  ]
-})
+  ],
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
+});
+// Global after hook to set an appropriate title for the page
+router.afterEach((to) => {
+  document.title = `${to.meta.title} | Judicial Appointments Commission`;
+});
+
+export default router;

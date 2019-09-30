@@ -17,7 +17,7 @@
 <script>
 export default {
   components: {
-    FirebaseUI: () => import("@/components/core/FirebaseUI")
+    FirebaseUI: () => import('@/components/core/FirebaseUI'),
   },
   methods: {
     loginRedirect(authResult) {
