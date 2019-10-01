@@ -8,6 +8,7 @@ Vue.config.productionTip = false;
 let vueInstance = false;
 auth().onAuthStateChanged( (user) => {
   store.dispatch('setCurrentUser', user);
+  
   if (!vueInstance) {
     vueInstance = new Vue({
       el: '#app',

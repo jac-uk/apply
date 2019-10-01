@@ -14,7 +14,9 @@
           </div>
           <div class="govuk-grid-column-one-third">
             <button
+              v-if="$route.name !== 'sign-in'"
               class="govuk-button"
+              @click="signOut"
             >
               Sign Out
             </button>
@@ -43,12 +45,19 @@
 </template>
 
 <script>
+import { auth } from '@/firebase';
 
 export default {
   name: 'App',
   data: () => ({
     //
   }),
+  methods: {
+    signOut() {
+      auth().signOut();
+      this.$router.go('/sign-in');
+    },
+  },
 };
 </script>
 

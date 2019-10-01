@@ -3,7 +3,6 @@ import App from '@/App';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 
-const id = 12345;
 const routes = [
   ['job-advert', '/job-advert'],
 ];
@@ -43,7 +42,7 @@ describe('Sign in journey', () => {
 
     describe.each(routes)('when they visit page %s', (routeName) => {
       it('loads sign in page',() => {
-        router.push({ name: routeName, params: { id } });
+        router.push({ name: routeName });
         expect(subject.vm.$route.path).toBe('/sign-in');
       });
     });
@@ -56,7 +55,7 @@ describe('Sign in journey', () => {
 
     describe.each(routes)('when they visit page %s', (routeName, routePath) => {
       it(`loads ${routePath}`,() => {
-        router.push({ name: routeName, params: { id } });
+        router.push({ name: routeName });
         expect(subject.vm.$route.path).toBe(routePath);
       });
     });
