@@ -27,6 +27,14 @@ const router = new Router({
       meta: {
         title: 'Sign In',
       },
+      beforeEnter: (to, from, next) => {
+        const isSignedIn = store.getters.isSignedIn;
+        if(isSignedIn) {
+          return next({ name: 'job-advert' });
+        }
+
+        return next();
+      },
     },
   ],
   scrollBehavior(to, from, savedPosition) {
