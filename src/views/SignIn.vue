@@ -7,7 +7,6 @@
           alt="Judicial Appointments Commission"
           width="197"
           height="66"
-          style="text-align: center"
         >
       </div>
       <p class="govuk-hint govuk-body govuk-!-margin-bottom-7">
