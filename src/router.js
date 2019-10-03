@@ -12,6 +12,10 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '*',
+      redirect: '/job-advert',
+    },
+    {
       path: '/job-advert',
       name: 'job-advert',
       component: JobAdvert,
