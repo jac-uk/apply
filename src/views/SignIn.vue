@@ -10,7 +10,7 @@
         >
       </div>
       <p class="govuk-hint govuk-body govuk-!-margin-bottom-7">
-        Sign in please!
+        Sign in to apply with your judicialappointments.digital Google account
       </p>
       <FirebaseUI @signInSuccess="loginRedirect" />
     </div>
@@ -28,7 +28,7 @@ export default {
   methods: {
     loginRedirect(authResult) {
       this.$store.dispatch('setCurrentUser', authResult.user);
-      this.$router.push('/');
+      this.$router.push('/job-advert');
     },
   },
 };
