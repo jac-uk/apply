@@ -10,7 +10,7 @@
         >
       </div>
       <p class="govuk-hint govuk-body govuk-!-margin-bottom-7">
-        Sign in to apply with your judicialappointments.digital Google account
+        Enter your email address
       </p>
       <FirebaseUI @signInSuccess="loginRedirect" />
     </div>
