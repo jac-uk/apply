@@ -5,6 +5,7 @@ import Vuex from 'vuex';
 
 const routes = [
   ['job-advert', '/job-advert'],
+  ['eligibility-checker', '/eligibility-checker'],
 ];
 
 describe('Sign in journey', () => {
