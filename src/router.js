@@ -4,6 +4,7 @@ import store from '@/store';
 
 import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
+import EligibilityChecker from '@/views/EligibilityChecker';
 
 Vue.use(Router);
 
@@ -22,6 +23,15 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         title: 'Job Advert',
+      },
+    },
+    {
+      path: '/eligibility-checker',
+      name: 'eligibility-checker',
+      component: EligibilityChecker,
+      meta: {
+        requiresAuth: true,
+        title: 'Eligibility Checker',
       },
     },
     {
