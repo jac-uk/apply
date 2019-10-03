@@ -91,7 +91,7 @@
       </p>
     </div>
 
-    <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third govuk-!-padding-bottom-8 container-border-bottom">
       <h2 class="govuk-heading-m">
         Related content
       </h2>
@@ -116,7 +116,6 @@
         >How to
           choose your independent assessors</a>
       </p>
-      <hr class="govuk-section-break govuk-section-break--xl govuk-section-break--visible">
     </div>
   </div>
 </template>
@@ -148,3 +147,9 @@ export default {
 };
 
 </script>
+
+<style scoped>
+ .container-border-bottom {
+   border-bottom: 1px solid #b1b4b6
+ }
+</style>
