@@ -134,7 +134,6 @@
 <script>
 import Timeline from '@/components/Page/Timeline';
 
-
 export default {
   components: {
     Timeline,
