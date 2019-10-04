@@ -35,9 +35,5 @@ describe('views/PersonalDetails', () => {
     it('renders the TextField components', () => {
       expect(wrapper.find(TextField).exists()).toBe(true);
     });
-
-    it('renders the RadioItem components', () => {
-      expect(wrapper.find(TextField).exists()).toBe(true);
-    });
   });
 });
