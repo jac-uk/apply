@@ -5,6 +5,8 @@ import store from '@/store';
 import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
 import EligibilityChecker from '@/views/EligibilityChecker';
+import EligibilityPass from '@/views/EligibilityPass';
+import EligibilityFail from '@/views/EligibilityFail';
 
 Vue.use(Router);
 
@@ -32,6 +34,24 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         title: 'Eligibility Checker',
+      },
+    },
+    {
+      path: '/eligibility-pass',
+      name: 'eligibility-pass',
+      component: EligibilityPass,
+      meta: {
+        requiresAuth: true,
+        title: 'Eligibility Pass',
+      },
+    },
+    {
+      path: '/eligibility-fail',
+      name: 'eligibility-fail',
+      component: EligibilityFail,
+      meta: {
+        requiresAuth: true,
+        title: 'Eligibility Fail',
       },
     },
     {
