@@ -39,14 +39,3 @@ export default {
 };
 
 </script>
-
-<style scoped>
-.govuk-link {
-  text-decoration: underline;
-  color: #1d70b8;
-}
-.govuk-link:hover {
-  text-decoration: underline;
-  color: #4c2c92;
-}
-</style>
