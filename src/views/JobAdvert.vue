@@ -87,7 +87,10 @@
       </button>
 
       <p class="govuk-body">
-        <a href="#">Or get email updates about this role</a>
+        <a
+          class="govuk-link"
+          href="#"
+        >Or get email updates about this role</a>
       </p>
     </div>
 
@@ -97,24 +100,32 @@
       </h2>
       <p class="govuk-body">
         <a
+          class="govuk-link"
           href="https://www.judicialappointments.gov.uk/overview-selection-process"
           target="_blank"
-        >How we shortlist
-          candidates</a>
+        >
+          How we shortlist candidates
+        </a>
       </p>
+
       <p class="govuk-body">
         <a
+          class="govuk-link"
           href="https://www.judicialappointments.gov.uk/completing-your-self-assessment"
           target="_blank"
-        >How to
-          write your self-assessment competency statements</a>
+        >
+          How to write your self-assessment competency statements
+        </a>
       </p>
+
       <p class="govuk-body">
         <a
+          class="govuk-link"
           href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
           target="_blank"
-        >How to
-          choose your independent assessors</a>
+        >
+          How to choose your independent assessors
+        </a>
       </p>
     </div>
   </div>
