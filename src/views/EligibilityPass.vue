@@ -14,8 +14,6 @@
         Based on your answers, it looks like you can apply for this role.
       </p>
 
-
-
       <button class="govuk-button">
         Continue
       </button>
@@ -25,9 +23,7 @@
 
 <script>
 
-
 export default {
-
 };
 
 </script>
