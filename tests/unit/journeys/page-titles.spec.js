@@ -8,6 +8,7 @@ const routes = [
   ['eligibility-checker', 'Eligibility Checker'],
   ['eligibility-pass', 'Eligibility Pass'],
   ['eligibility-fail', 'Eligibility Fail'],
+  ['personal-details', 'Personal Details'],
 ];
 
 describe('Page titles', () => {

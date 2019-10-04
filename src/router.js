@@ -7,6 +7,7 @@ import SignIn from '@/views/SignIn';
 import EligibilityChecker from '@/views/EligibilityChecker';
 import EligibilityPass from '@/views/EligibilityPass';
 import EligibilityFail from '@/views/EligibilityFail';
+import PersonalDetails from '@/views/PersonalDetails';
 
 Vue.use(Router);
 
@@ -52,6 +53,15 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         title: 'Eligibility Fail',
+      },
+    },
+    {
+      path: '/personal-details',
+      name: 'personal-details',
+      component: PersonalDetails,
+      meta: {
+        requiresAuth: true,
+        title: 'Personal Details',
       },
     },
     {

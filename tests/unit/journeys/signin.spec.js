@@ -8,6 +8,7 @@ const routes = [
   ['eligibility-checker', '/eligibility-checker'],
   ['eligibility-pass', '/eligibility-pass'],
   ['eligibility-fail', '/eligibility-fail'],
+  ['personal-details', '/personal-details'],
 ];
 
 describe('Sign in journey', () => {
