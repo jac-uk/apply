@@ -148,17 +148,4 @@ export default {
     },
   },
 };
-
 </script>
-
-<style scoped>
-.govuk-hint .govuk-link {
-  text-decoration: underline;
-  color: #1d70b8;
-}
-
-.govuk-hint .govuk-link:hover {
-  text-decoration: underline;
-  color: #4c2c92;
-}
-</style>
