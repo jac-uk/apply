@@ -19,8 +19,6 @@
         You can continue to apply, but it might be unlikely that you'll be offered a position.
       </p>
 
-
-
       <button class="govuk-button">
         Back to JAC homepage
       </button>
@@ -37,20 +35,17 @@
 
 <script>
 
-
 export default {
-
 };
 
 </script>
 
 <style scoped>
-.govuk-hint .govuk-link {
+.govuk-link {
   text-decoration: underline;
   color: #1d70b8;
 }
-
-.govuk-hint .govuk-link:hover {
+.govuk-link:hover {
   text-decoration: underline;
   color: #4c2c92;
 }
