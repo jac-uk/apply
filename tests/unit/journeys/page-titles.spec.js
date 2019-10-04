@@ -6,6 +6,8 @@ import Vuex from 'vuex';
 const routes = [
   ['job-advert', 'Job Advert'],
   ['eligibility-checker', 'Eligibility Checker'],
+  ['eligibility-pass', 'Eligibility Pass'],
+  ['eligibility-fail', 'Eligibility Fail'],
 ];
 
 describe('Page titles', () => {
