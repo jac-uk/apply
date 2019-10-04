@@ -2,10 +2,10 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
-        <h3 class="govuk-caption-xl govuk-!-padding-bottom-5">
+        <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
           092 Registrar of Criminal Appeals, Master of the Crown Office and Queen’s Coroner &amp;
           Attorney
-        </h3>
+        </span>
 
         <h1 class="govuk-heading-xl">
           Check if you're eligible
