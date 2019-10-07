@@ -2,7 +2,6 @@ import PersonalDetails from '@/views/PersonalDetails';
 import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 
-
 const createTestSubject = () => {
   return shallowMount(PersonalDetails);
 };
