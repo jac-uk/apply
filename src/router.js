@@ -8,6 +8,7 @@ import EligibilityChecker from '@/views/EligibilityChecker';
 import EligibilityPass from '@/views/EligibilityPass';
 import EligibilityFail from '@/views/EligibilityFail';
 import PersonalDetails from '@/views/PersonalDetails';
+import TaskList from '@/views/TaskList';
 
 Vue.use(Router);
 
@@ -62,6 +63,15 @@ const router = new Router({
       meta: {
         requiresAuth: true,
         title: 'Personal Details',
+      },
+    },
+    {
+      path: '/task-list',
+      name: 'task-list',
+      component: TaskList,
+      meta: {
+        requiresAuth: true,
+        title: 'Task List',
       },
     },
     {
