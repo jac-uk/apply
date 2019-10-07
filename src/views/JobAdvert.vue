@@ -157,9 +157,3 @@ export default {
 };
 
 </script>
-
-<style scoped>
- .container-border-bottom {
-   border-bottom: 1px solid #b1b4b6
- }
-</style>
