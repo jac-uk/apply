@@ -35,6 +35,10 @@ body {
   font-family: $govuk-font-family;
 }
 
+.container-border-bottom {
+   border-bottom: 1px solid #b1b4b6
+ }
+
 /* JAC buttons */
 .govuk-button {
   background-color: #753880;
