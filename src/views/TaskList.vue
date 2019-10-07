@@ -10,68 +10,66 @@
         Application form
       </h1>
 
-      <ul class="app-task-list">
-        <ul class="app-task-list__items">
-          <li class="app-task-list__item">
-            <span class=" govuk-body app-task-list__task-name">
-              <a
-                class="govuk-link govuk-!-font-weight-bold"
-                href="#"
-              >
-                Qualifications
-              </a>
-            </span>
-            <span class="status govuk-body">Not added</span>
-          </li>
+      <ul class="govuk-list govuk-!-margin-bottom-7">
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <a
+              class="govuk-link govuk-!-font-weight-bold"
+              href="#"
+            >
+              Qualifications
+            </a>
+          </span>
+          <span class="status govuk-body">Not added</span>
+        </li>
 
-          <li class="app-task-list__item">
-            <span class="govuk-body app-task-list__task-name">
-              <a
-                class="govuk-link govuk-!-font-weight-bold"
-                href="#"
-              >
-                Read declaration
-              </a>
-            </span>
-            <span class="status govuk-body">Not added</span>
-          </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <a
+              class="govuk-link govuk-!-font-weight-bold"
+              href="#"
+            >
+              Legal work experience
+            </a>
+          </span>
+          <span class="status govuk-body">Not added</span>
+        </li>
 
-          <li class="app-task-list__item">
-            <span class=" govuk-body app-task-list__task-name">
-              <a
-                class="govuk-link govuk-!-font-weight-bold"
-                href="#"
-              >
-                Judicial experience
-              </a>
-            </span>
-            <span class="status govuk-body">Not added</span>
-          </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <a
+              class="govuk-link govuk-!-font-weight-bold"
+              href="#"
+            >
+              Judicial experience
+            </a>
+          </span>
+          <span class="status govuk-body">Not added</span>
+        </li>
 
-          <li class="app-task-list__item">
-            <span class=" govuk-body app-task-list__task-name">
-              <a
-                class="govuk-link govuk-!-font-weight-bold"
-                href="#"
-              >
-                Independent assessors
-              </a>
-            </span>
-            <span class="status govuk-body">Not added</span>
-          </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <a
+              class="govuk-link govuk-!-font-weight-bold"
+              href="#"
+            >
+              Independent assessors
+            </a>
+          </span>
+          <span class="status govuk-body">Not added</span>
+        </li>
 
-          <li class="app-task-list__item">
-            <span class=" govuk-body app-task-list__task-name">
-              <a
-                class="govuk-link govuk-!-font-weight-bold"
-                href="#"
-              >
-                Self-assessment competencies
-              </a>
-            </span>
-            <span class="status govuk-body">Not added</span>
-          </li>
-        </ul>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <a
+              class="govuk-link govuk-!-font-weight-bold"
+              href="#"
+            >
+              Self-assessment competencies
+            </a>
+          </span>
+          <span class="status govuk-body">Not added</span>
+        </li>
       </ul>
 
       <button class="govuk-button">
@@ -88,22 +86,13 @@ export default {
 </script>
 
 <style scoped>
-.app-task-list__items {
-  font-weight: 400;
-  font-size: 16px;
-  font-size: 1rem;
-  line-height: 1.25;
-  margin-bottom: 40px;
-  list-style: none;
-  padding-left: 0;
-}
-.app-task-list__item {
-  border-bottom: 1px solid #b1b4b6;
-  margin-bottom: 0 !important;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
+
 .status {
   float: right;
 }
+
+.container-border-bottom {
+   border-bottom: 1px solid #b1b4b6
+ }
+
 </style>
