@@ -1,9 +1,8 @@
 <template>
   <div>
-
     <RadioGroup
       :id="qualificationType"
-      v-model="row.qualificationType"
+      v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
     >
@@ -27,7 +26,7 @@
 
     <RadioGroup
       :id="qualificationLocation"
-      v-model="row.qualificationLocation"
+      v-model="row.location"
       label="Where are you qualified?"
       hint="Choose 1 option."
     >
@@ -47,7 +46,7 @@
 
     <DateInput
       :id="qualificationDate"
-      v-model="row.qualificationDate"
+      v-model="row.date"
       label="When did you qualify?"
       type="month"
     />
@@ -62,7 +61,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 
 export default {
-  name: 'Qualifications',
+  name: 'Qualification',
   components: {
     RadioGroup,
     RadioItem,
