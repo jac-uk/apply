@@ -2,14 +2,13 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
-
         <h1 class="govuk-heading-xl">
           Qualifications
         </h1>
 
         <RepeatableFields
           v-model="qualifications"
-          :component="repeatableFields.Qualifications"
+          :component="repeatableFields.Qualification"
         />
 
         <button class="govuk-button">
@@ -22,7 +21,7 @@
 
 <script>
 import RepeatableFields from '@/components/RepeatableFields';
-import Qualifications from '@/components/RepeatableFields/Qualifications';
+import Qualification from '@/components/RepeatableFields/Qualification';
 
 export default {
   components: {
@@ -31,7 +30,7 @@ export default {
   data(){
     return {
       repeatableFields: {
-        Qualifications,
+        Qualification,
       },
       qualifications: null,
     };

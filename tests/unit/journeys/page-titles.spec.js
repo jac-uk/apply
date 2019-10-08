@@ -10,6 +10,7 @@ const routes = [
   ['eligibility-fail', 'Eligibility Fail'],
   ['personal-details', 'Personal Details'],
   ['task-list', 'Task List'],
+  ['qualifications', 'Qualifications'],
 ];
 
 describe('Page titles', () => {
