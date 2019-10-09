@@ -1,10 +1,10 @@
-import EligibilityFail from '@/views/EligibilityFail';
+import EligibilityPass from '@/views/Eligibility/EligibilityPass';
 import { shallowMount } from '@vue/test-utils';
 
-describe('views/EligibilityFail', () => {
+describe('views/Eligibility/EligibilityPass', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(EligibilityFail);
+    wrapper = shallowMount(EligibilityPass);
   });
 
   describe('template', () => {
