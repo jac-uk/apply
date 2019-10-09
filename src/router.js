@@ -4,9 +4,13 @@ import store from '@/store';
 
 import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
-import EligibilityChecker from '@/views/EligibilityChecker';
-import EligibilityPass from '@/views/EligibilityPass';
-import EligibilityFail from '@/views/EligibilityFail';
+
+//Eligibility
+import Eligibility from '@/views/Eligibility/Eligibility';
+import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
+import EligibilityPass from '@/views/Eligibility/EligibilityPass';
+import EligibilityFail from '@/views/Eligibility/EligibilityFail';
+
 import PersonalDetails from '@/views/PersonalDetails';
 import TaskList from '@/views/TaskList';
 import Qualifications from '@/views/Qualifications';
@@ -31,31 +35,37 @@ const router = new Router({
       },
     },
     {
-      path: '/eligibility-checker',
-      name: 'eligibility-checker',
-      component: EligibilityChecker,
-      meta: {
-        requiresAuth: true,
-        title: 'Eligibility Checker',
-      },
-    },
-    {
-      path: '/eligibility-pass',
-      name: 'eligibility-pass',
-      component: EligibilityPass,
-      meta: {
-        requiresAuth: true,
-        title: 'Eligibility Pass',
-      },
-    },
-    {
-      path: '/eligibility-fail',
-      name: 'eligibility-fail',
-      component: EligibilityFail,
-      meta: {
-        requiresAuth: true,
-        title: 'Eligibility Fail',
-      },
+      path: '/eligibility/',
+      component: Eligibility,
+      children: [
+        {
+          path: '',
+          component: EligibilityChecker,
+          name: 'eligibility-checker',
+          meta: {
+            requiresAuth: true,
+            title: 'Eligibility Checker',
+          },
+        },
+        {
+          path: 'eligibility-pass',
+          component: EligibilityPass,
+          name: 'eligibility-pass',
+          meta: {
+            requiresAuth: true,
+            title: 'Eligibility Pass',
+          },
+        },
+        {
+          path: 'eligibility-fail',
+          component: EligibilityFail,
+          name: 'eligibility-fail',
+          meta: {
+            requiresAuth: true,
+            title: 'Eligibility Fail',
+          },
+        },
+      ],
     },
     {
       path: '/personal-details',

@@ -1,4 +1,4 @@
-import EligibilityChecker from '@/views/EligibilityChecker';
+import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
@@ -7,7 +7,7 @@ const createTestSubject = () => {
   return shallowMount(EligibilityChecker);
 };
 
-describe('views/EligibilityChecker', () => {
+describe('views/Eligibility/EligibilityChecker', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();

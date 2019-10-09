@@ -5,9 +5,9 @@ import Vuex from 'vuex';
 
 const routes = [
   ['job-advert', '/job-advert'],
-  ['eligibility-checker', '/eligibility-checker'],
-  ['eligibility-pass', '/eligibility-pass'],
-  ['eligibility-fail', '/eligibility-fail'],
+  ['eligibility-checker', '/eligibility/'],
+  ['eligibility-pass', '/eligibility/eligibility-pass'],
+  ['eligibility-fail', '/eligibility/eligibility-fail'],
   ['personal-details', '/personal-details'],
   ['task-list', '/task-list'],
   ['qualifications', '/qualifications'],
