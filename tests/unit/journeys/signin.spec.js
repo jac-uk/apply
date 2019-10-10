@@ -8,9 +8,19 @@ const routes = [
   ['eligibility-checker', '/eligibility/'],
   ['eligibility-pass', '/eligibility/eligibility-pass'],
   ['eligibility-fail', '/eligibility/eligibility-fail'],
-  ['personal-details', '/personal-details'],
   ['task-list', '/task-list'],
-  ['qualifications', '/qualifications'],
+  ['apply-task-list', '/apply/'],
+  ['character-information', '/apply/character-information'],
+  ['equality-and-diversity-survey', '/apply/equality-and-diversity-survey'],
+  ['pre-application-judicial-education', '/apply/pre-application-judicial-education'],
+  ['personal-details', '/apply/personal-details'],
+  ['assessors-details', '/apply/assessors-details'],
+  ['self-assessment-competencies', '/apply/self-assessment-competencies'],
+  ['review', '/apply/review'],
+  ['judicial-experience', '/apply/judicial-experience'],
+  ['post-qualification-work-experience', '/apply/post-qualification-work-experience'],
+  ['relevant-qualifications', '/apply/relevant-qualifications'],
+  ['part-time-working-preferences', '/apply/part-time-working-preferences'],
 ];
 
 describe('Sign in journey', () => {
