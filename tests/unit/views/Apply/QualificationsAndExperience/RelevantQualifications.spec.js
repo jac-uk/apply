@@ -1,12 +1,12 @@
-import PersonalDetails from '@/views/PersonalDetails';
+import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import { shallowMount } from '@vue/test-utils';
-import TextField from '@/components/Form/TextField';
+import RepeatableFields from '@/components/RepeatableFields';
 
 const createTestSubject = () => {
-  return shallowMount(PersonalDetails);
+  return shallowMount(RelevantQualifications);
 };
 
-describe('views/PersonalDetails', () => {
+describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
@@ -25,14 +25,14 @@ describe('views/PersonalDetails', () => {
       expect(wrapper.find('form').exists()).toBe(true);
     });
 
-    it('the <form> contains a "Save and continue" submit button', () => {
+    it('the <form> contains a "Continue" submit button', () => {
       const button = wrapper.find('form button');
       expect(button.element.type).toBe('submit');
-      expect(button.text()).toBe('Save and continue');
+      expect(button.text()).toBe('Continue');
     });
 
-    it('renders the TextField components', () => {
-      expect(wrapper.find(TextField).exists()).toBe(true);
+    it('renders the RepeatableFields components', () => {
+      expect(wrapper.find(RepeatableFields).exists()).toBe(true);
     });
   });
 });

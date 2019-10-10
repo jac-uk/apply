@@ -8,9 +8,19 @@ const routes = [
   ['eligibility-checker', 'Eligibility Checker'],
   ['eligibility-pass', 'Eligibility Pass'],
   ['eligibility-fail', 'Eligibility Fail'],
-  ['personal-details', 'Personal Details'],
+  ['apply-task-list', 'Apply for a role task list'],
+  ['character-information', 'Declare character information'],
+  ['equality-and-diversity-survey', 'Take the equality and diversity survey'],
+  ['pre-application-judicial-education', 'Pre-application judicial education'],
+  ['personal-details', 'Add personal details'],
+  ['assessors-details', 'Give independent assessors details'],
+  ['self-assessment-competencies', 'Upload self-assessment competencies'],
+  ['review', 'Review application'],
+  ['judicial-experience', 'Add judicial experience'],
+  ['post-qualification-work-experience', 'Add post-qualification work experience'],
+  ['relevant-qualifications', 'Add relevant qualifications'],
+  ['part-time-working-preferences', 'Set part-time working preferences'],
   ['task-list', 'Task List'],
-  ['qualifications', 'Qualifications'],
 ];
 
 describe('Page titles', () => {
