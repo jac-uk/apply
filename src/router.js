@@ -6,10 +6,10 @@ import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
 
 //Eligibility
-import Eligibility from '@/views/Eligibility/Eligibility';
-import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
-import EligibilityPass from '@/views/Eligibility/EligibilityPass';
-import EligibilityFail from '@/views/Eligibility/EligibilityFail';
+// import Eligibility from '@/views/Eligibility/Eligibility';
+// import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
+// import EligibilityPass from '@/views/Eligibility/EligibilityPass';
+// import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
@@ -48,39 +48,36 @@ const router = new Router({
         title: 'Job Advert',
       },
     },
-    {
-      path: '/eligibility/',
-      component: Eligibility,
-      children: [
-        {
-          path: '',
-          component: EligibilityChecker,
-          name: 'eligibility-checker',
-          meta: {
-            requiresAuth: true,
-            title: 'Eligibility Checker',
-          },
-        },
-        {
-          path: 'eligibility-pass',
-          component: EligibilityPass,
-          name: 'eligibility-pass',
-          meta: {
-            requiresAuth: true,
-            title: 'Eligibility Pass',
-          },
-        },
-        {
-          path: 'eligibility-fail',
-          component: EligibilityFail,
-          name: 'eligibility-fail',
-          meta: {
-            requiresAuth: true,
-            title: 'Eligibility Fail',
-          },
-        },
-      ],
-    },
+    // {
+    //   path: '/eligibility/',
+    //   component: Eligibility,
+    //   children: [
+    //     {
+    //       path: '',
+    //       component: EligibilityChecker,
+    //       name: 'eligibility-checker',
+    //       meta: {
+    //         title: 'Eligibility Checker',
+    //       },
+    //     },
+    //     {
+    //       path: 'eligibility-pass',
+    //       component: EligibilityPass,
+    //       name: 'eligibility-pass',
+    //       meta: {
+    //         title: 'Eligibility Pass',
+    //       },
+    //     },
+    //     {
+    //       path: 'eligibility-fail',
+    //       component: EligibilityFail,
+    //       name: 'eligibility-fail',
+    //       meta: {
+    //         title: 'Eligibility Fail',
+    //       },
+    //     },
+    //   ],
+    // },
     // Apply for a role
     {
       path: '/apply/',
