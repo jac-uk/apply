@@ -15,32 +15,32 @@
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'personal-details'}"
             >
               Add personal details
-            </a>
+            </router-link>
           </span>
         </li>
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'character-information'}"
             >
               Declare character information
-            </a>
+            </router-link>
           </span>
         </li>
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'equality-and-diversity-survey'}"
             >
               Take the equality and diversity survey
-            </a>
+            </router-link>
           </span>
         </li>
       </ul>
@@ -51,12 +51,12 @@
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'part-time-working-preferences'}"
             >
               Set part-time working preferences
-            </a>
+            </router-link>
           </span>
         </li>
       </ul>
@@ -67,32 +67,32 @@
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'relevant-qualifications'}"
             >
               Add relevant qualifications
-            </a>
+            </router-link>
           </span>
         </li>
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'post-qualification-work-experience'}"
             >
               Add post-qualification work experience
-            </a>
+            </router-link>
           </span>
         </li>
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'judicial-experience'}"
             >
               Add judicial experience
-            </a>
+            </router-link>
           </span>
         </li>
       </ul>
@@ -103,22 +103,22 @@
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'assessors-details'}"
             >
               Give independent assessors' details
-            </a>
+            </router-link>
           </span>
         </li>
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'self-assessment-competencies'}"
             >
               Upload self-assessment competencies
-            </a>
+            </router-link>
           </span>
         </li>
       </ul>
@@ -129,12 +129,12 @@
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
-            <a
+            <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              href="#"
+              :to="{name: 'review'}"
             >
               Review application
-            </a>
+            </router-link>
           </span>
         </li>
       </ul>
