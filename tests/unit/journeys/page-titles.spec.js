@@ -20,7 +20,6 @@ const routes = [
   ['post-qualification-work-experience', 'Add post-qualification work experience'],
   ['relevant-qualifications', 'Add relevant qualifications'],
   ['part-time-working-preferences', 'Set part-time working preferences'],
-  ['task-list', 'Task List'],
 ];
 
 describe('Page titles', () => {
