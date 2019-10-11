@@ -13,7 +13,7 @@ import SignIn from '@/views/SignIn';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
-import ApplyTaskList from '@/views/Apply/ApplyTaskList';
+import TaskList from '@/views/Apply/TaskList';
 import CharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
@@ -25,9 +25,6 @@ import JudicialExperience from '@/views/Apply/QualificationsAndExperience/Judici
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
-
-// other
-import TaskList from '@/views/TaskList';
 
 Vue.use(Router);
 
@@ -85,8 +82,8 @@ const router = new Router({
       children: [
       {
           path: '',
-          component: ApplyTaskList,
-          name: 'apply-task-list',
+          component: TaskList,
+          name: 'task-list',
           meta: {
             requiresAuth: true,
             title: 'Apply for a role task list',
@@ -192,15 +189,6 @@ const router = new Router({
           },
         },
       ],
-    },
-    {
-      path: '/task-list',
-      name: 'task-list',
-      component: TaskList,
-      meta: {
-        requiresAuth: true,
-        title: 'Task List',
-      },
     },
     {
       path: '/sign-in',
