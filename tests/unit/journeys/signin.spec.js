@@ -8,7 +8,6 @@ const routes = [
   // ['eligibility-checker', '/eligibility/'],
   // ['eligibility-pass', '/eligibility/eligibility-pass'],
   // ['eligibility-fail', '/eligibility/eligibility-fail'],
-  ['task-list', '/task-list'],
   ['apply-task-list', '/apply/'],
   ['character-information', '/apply/character-information'],
   ['equality-and-diversity-survey', '/apply/equality-and-diversity-survey'],

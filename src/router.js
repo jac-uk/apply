@@ -26,9 +26,6 @@ import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExpe
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 
-// other
-import TaskList from '@/views/TaskList';
-
 Vue.use(Router);
 
 const router = new Router({
@@ -192,15 +189,6 @@ const router = new Router({
           },
         },
       ],
-    },
-    {
-      path: '/task-list',
-      name: 'task-list',
-      component: TaskList,
-      meta: {
-        requiresAuth: true,
-        title: 'Task List',
-      },
     },
     {
       path: '/sign-in',
