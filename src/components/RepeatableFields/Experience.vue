@@ -1,26 +1,26 @@
 <template>
   <div>
     <TextField
-      :id="jobTitle"
+      :id="experienceJobTitle"
       v-model="row.jobTitle"
       label="Job title"
     />
 
     <TextField
-      :id="orgBusinessName"
+      :id="experienceOrgBusinessName"
       v-model="row.orgBusinessName"
       label="Organisation or business name"
     />
 
     <DateInput
-      :id="startDate"
+      :id="experienceStartDate"
       v-model="row.startDate"
       label="Start date"
       type="month"
     />
 
     <DateInput
-      :id="endDate"
+      :id="experienceEndDate"
       v-model="row.endDate"
       label="End date"
       hint="Leave this blank if you're currently in this role."
@@ -28,7 +28,7 @@
     />
 
     <CheckboxGroup
-      :id="tasks"
+      :id="experienceTasks"
       v-model="row.tasks"
       label="Law-related tasks in this role"
     >
@@ -80,7 +80,7 @@
         label="None of the above - Any activity that, in the relevant decision-maker's opinion, is of a broadly similar nature to those listed above"
       >
         <TextareaInput
-          :id="otherTasks"
+          :id="experienceOtherTasks"
           v-model="row.otherTasks"
           label="List your different law-related tasks"
           rows="2"
@@ -119,23 +119,23 @@ export default {
     },
   },
   computed: {
-    jobTitle() {
-      return `job_title_${this.index}`;
+    experienceJobTitle() {
+      return `experience_job_title_${this.index}`;
     },
-    orgBusinessName() {
-      return `org_business_name_${this.index}`;
+    experienceOrgBusinessName() {
+      return `experience_org_business_name_${this.index}`;
     },
-    startDate() {
-      return `start_date_${this.index}`;
+    experienceStartDate() {
+      return `experience_start_date_${this.index}`;
     },
-    endDate() {
-      return `end_date_${this.index}`;
+    experienceEndDate() {
+      return `experience_end_date_${this.index}`;
     },
-    tasks() {
-      return `tasks_${this.index}`;
+    experienceTasks() {
+      return `experience_tasks_${this.index}`;
     },
-    otherTasks() {
-      return `other_tasks_${this.index}`;
+    experienceOtherTasks() {
+      return `experience_other_tasks_${this.index}`;
     },
   },
 };
