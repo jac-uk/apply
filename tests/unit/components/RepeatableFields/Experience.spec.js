@@ -48,45 +48,45 @@ describe('@/components/RepeatableFields/Experience', () => {
   });
 
   describe('computed properties', () => {
-    describe('jobTitle', () => {
+    describe('experienceJobTitle', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 4, row: {} });
-        expect(wrapper.vm.jobTitle).toBe('job_title_4');
+        expect(wrapper.vm.experienceJobTitle).toBe('experience_job_title_4');
       });
     });
 
-    describe('orgBusinessName', () => {
+    describe('experienceOrgBusinessName', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
-        expect(wrapper.vm.orgBusinessName).toBe('org_business_name_5');
+        expect(wrapper.vm.experienceOrgBusinessName).toBe('experience_org_business_name_5');
       });
     });
 
-    describe('startDate', () => {
+    describe('experienceStartDate', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
-        expect(wrapper.vm.startDate).toBe('start_date_5');
+        expect(wrapper.vm.experienceStartDate).toBe('experience_start_date_5');
       });
     });
 
-    describe('endDate', () => {
+    describe('experienceEndDate', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
-        expect(wrapper.vm.endDate).toBe('end_date_5');
+        expect(wrapper.vm.experienceEndDate).toBe('experience_end_date_5');
       });
     });
 
-    describe('tasks', () => {
+    describe('experienceTasks', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
-        expect(wrapper.vm.tasks).toBe('tasks_5');
+        expect(wrapper.vm.experienceTasks).toBe('experience_tasks_5');
       });
     });
 
-    describe('otherTasks', () => {
+    describe('experienceOtherTasks', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
-        expect(wrapper.vm.otherTasks).toBe('other_tasks_5');
+        expect(wrapper.vm.experienceOtherTasks).toBe('experience_other_tasks_5');
       });
     });
   });
