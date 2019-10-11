@@ -1,9 +1,5 @@
-import ApplyTaskList from '@/views/Apply/ApplyTaskList';
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Router from 'vue-router';
-
-const localVue = createLocalVue();
-localVue.use(Router);
+import TaskList from '@/views/Apply/TaskList';
+import { shallowMount } from '@vue/test-utils';
 
 const mockRoute = {
   name: 'name-of-current-route',
@@ -17,8 +13,7 @@ const mockRouter = {
 };
 
 const createTestSubject = () => {
-  return shallowMount(ApplyTaskList, {
-    localVue,
+  return shallowMount(TaskList, {
     mocks: {
       $route: mockRoute,
       $router: mockRouter,
@@ -29,7 +24,7 @@ const createTestSubject = () => {
   });
 };
 
-describe('views/ApplyTaskList', () => {
+describe('views/TaskList', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
