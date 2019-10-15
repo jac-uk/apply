@@ -46,7 +46,7 @@
           id="first-assessor-Phone"
           v-model="firstAssessorPhone"
           label="Phone"
-          type="number"
+          type="tel"
         />
 
         <h2 class="govuk-heading-l">
@@ -68,7 +68,7 @@
           id="second-assessor-Phone"
           v-model="secondAssessorPhone"
           label="Phone"
-          type="number"
+          type="tel"
         />
 
         <button class="govuk-button">
