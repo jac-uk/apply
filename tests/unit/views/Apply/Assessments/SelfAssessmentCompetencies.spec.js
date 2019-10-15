@@ -33,5 +33,9 @@ describe('views/Assessments/SelfAssessmentCompetencies', () => {
     it('contains a govuk file upload', () => {
       expect(wrapper.contains('.govuk-file-upload')).toBe(true);
     });
+
+    it('contains a <a> for downloads', () => {
+      expect(wrapper.contains('a')).toBe(true);
+    });
   });
 });
