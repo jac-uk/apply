@@ -1,6 +1,7 @@
 import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
+import DateInput from '@/components/Form/DateInput';
 
 const createTestSubject = () => {
   return shallowMount(PersonalDetails);
@@ -33,6 +34,10 @@ describe('@/views/Apply/AccountProfile/PersonalDetails', () => {
 
     it('renders the TextField components', () => {
       expect(wrapper.find(TextField).exists()).toBe(true);
+    });
+
+    it('renders the DateInput components', () => {
+      expect(wrapper.find(DateInput).exists()).toBe(true);
     });
   });
 });
