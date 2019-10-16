@@ -17,29 +17,23 @@
         </p>
 
         <div class="govuk-form-group">
-          <label
-            class="govuk-heading-m"
-            for="file-upload-1"
-          >
+          <h2 class="govuk-heading-m">
             Download assessments template
-          </label>
+          </h2>
 
           <a
+            ref="templateDownloadLink"
             class="govuk-link govuk-body-m"
             href="#"
-            download="assessments-template.doc"
           >
             assessments-template.doc
           </a>
         </div>
 
         <div class="govuk-form-group">
-          <label
-            class="govuk-heading-m"
-            for="file-upload-2"
-          >
+          <h2 class="govuk-heading-m">
             Upload finished assessments
-          </label>
+          </h2>
           <input
             id="file-upload-2"
             class="govuk-file-upload"
