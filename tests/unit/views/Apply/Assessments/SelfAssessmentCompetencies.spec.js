@@ -34,8 +34,11 @@ describe('views/Assessments/SelfAssessmentCompetencies', () => {
       expect(wrapper.contains('.govuk-file-upload')).toBe(true);
     });
 
-    it('contains a <a> for downloads', () => {
-      expect(wrapper.contains('a')).toBe(true);
+    it('contains a link to download the competencies template document', () => {
+      const link = wrapper.find({ ref: 'templateDownloadLink' });
+      expect(link.is('a')).toBe(true);
+      expect(link.attributes('href')).toBe('#');
+      expect(link.text()).toBe('assessments-template.doc');
     });
   });
 });
