@@ -2,23 +2,33 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-full">
-
         <h1 class="govuk-heading-xl">
           Review your application
         </h1>
 
-        <h2 class="govuk-heading-l">
-          Personal details
-        </h2>
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Personal details
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'personal-details'}"
+          >
+            Change
+          </router-link>
+        </div>
 
         <dl class="govuk-summary-list">
-
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Full name
             </dt>
             <dd class="govuk-summary-list__value">
-               ... goes here
+              ... goes here
             </dd>
           </div>
 
@@ -54,18 +64,28 @@
               Citizenship
             </dt>
             <dd class="govuk-summary-list__value">
-               ... goes here
+              ... goes here
             </dd>
           </div>
-
         </dl>
 
-        <h2 class="govuk-heading-l govuk-!-margin-top-9">
-          Character information
-        </h2>
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Character information
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'character-information'}"
+          >
+            Change
+          </router-link>
+        </div>
 
         <dl class="govuk-summary-list">
-
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been cautioned or convicted of a criminal offence
@@ -146,15 +166,25 @@
               ... goes here
             </dd>
           </div>
-
         </dl>
 
-        <h2 class="govuk-heading-l govuk-!-margin-top-9">
-          Equality and diversity information
-        </h2>
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Equality and diversity information
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'equality-and-diversity-survey'}"
+          >
+            Change
+          </router-link>
+        </div>
 
         <dl class="govuk-summary-list">
-
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Ethnic group
@@ -273,154 +303,224 @@
           </div>
         </dl>
 
-        <h2 class="govuk-heading-l"> Qualifications </h2>
-        <dl class="govuk-summary-list">
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Qualifications
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'relevant-qualifications'}"
+          >
+            Change
+          </router-link>
+        </div>
 
-          <ul class="govuk-list">
-            <li v-for="item in qualifications" class="govuk-!-margin-bottom-8">
+        <dl
+          v-for="item in qualifications"
+          :key="item.name"
+          class="govuk-summary-list govuk-!-margin-bottom-8"
+        >
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Qualification
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.type }}</li>
+              </ul>
+            </dd>
+          </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Qualification
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>type</li>
-                  </ul>
-                </dd>
-              </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Location
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.location }}</li>
+              </ul>
+            </dd>
+          </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Location
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>location</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Date qualified
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>Date</li>
-                  </ul>
-                </dd>
-              </div>
-
-            </li>
-          </ul>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Date qualified
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.date }}</li>
+              </ul>
+            </dd>
+          </div>
         </dl>
 
-        <h2 class="govuk-heading-l"> Post-qualification experience </h2>
-        <dl class="govuk-summary-list">
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Post-qualification experience
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'post-qualification-work-experience'}"
+          >
+            Change
+          </router-link>
+        </div>
 
-          <ul class="govuk-list">
-            <li v-for="item in experience">
+        <dl
+          v-for="item in experience"
+          :key="item.name"
+          class="govuk-summary-list govuk-!-margin-bottom-8"
+        >
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Job title
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.jobTitle }}</li>
+              </ul>
+            </dd>
+          </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Job title
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>job title</li>
-                  </ul>
-                </dd>
-              </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Organisation or business
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.buisness }}</li>
+              </ul>
+            </dd>
+          </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Organisation or business
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>org/buisness</li>
-                  </ul>
-                </dd>
-              </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Dates worked
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list">
+                <li>{{ item.startDate }} to {{ item.endDate }}</li>
+              </ul>
+            </dd>
+          </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Dates worked
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>date to date</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Law-related tasks
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list govuk-list--bullet">
-                    <li>task</li>
-                    <li>task</li>
-                    <li>task</li>
-                  </ul>
-                </dd>
-              </div>
-              <hr class="govuk-section-break govuk-section-break--l">
-
-            </li>
-          </ul>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Law-related tasks
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list govuk-list--bullet">
+                <li
+                  v-for="task in item.tasks"
+                  :key="task.name"
+                >
+                  {{ task }}
+                </li>
+              </ul>
+            </dd>
+          </div>
         </dl>
 
-      </dl>
-
-      <h2 class="govuk-heading-l govuk-!-margin-top-9">
-        Independent assessors
-      </h2>
-
-      <dl class="govuk-summary-list">
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Full name
-          </dt>
-          <dd class="govuk-summary-list__value">
-            ...  Assessor 1's goes here
-          </dd>
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Independent assessors
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'assessors-details'}"
+          >
+            Change
+          </router-link>
         </div>
 
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Email
-          </dt>
-          <dd class="govuk-summary-list__value">
-            ... Assessor 1's goes here
-          </dd>
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Full name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              ...  Assessor 1's goes here
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Email
+            </dt>
+            <dd class="govuk-summary-list__value">
+              ... Assessor 1's goes here
+            </dd>
+          </div>
+
+          <hr class="govuk-section-break govuk-section-break--xl">
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Full name
+            </dt>
+            <dd class="govuk-summary-list__value">
+              ...  Assessor 2's goes here
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Email
+            </dt>
+            <dd class="govuk-summary-list__value">
+              ... Assessor 2's goes here
+            </dd>
+          </div>
+        </dl>
+
+        <div class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Self-assessment competencies
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'self-assessment-competencies'}"
+          >
+            Change
+          </router-link>
         </div>
 
-        <hr class="govuk-section-break govuk-section-break--xl">
+        <dl class="govuk-summary-list govuk-!-margin-bottom-8">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Finished statements
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <a
+                ref="templateDownloadLink"
+                class="govuk-link govuk-body-m"
+                href="#"
+              >
+                fancy-judge-stuff.doc
+              </a>
+            </dd>
+          </div>
+        </dl>
 
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Full name
-          </dt>
-          <dd class="govuk-summary-list__value">
-            ...  Assessor 2's goes here
-          </dd>
-        </div>
-
-        <div class="govuk-summary-list__row">
-          <dt class="govuk-summary-list__key">
-            Email
-          </dt>
-          <dd class="govuk-summary-list__value">
-            ... Assessor 2's goes here
-          </dd>
-        </div>
-
-      </dl>
-
+        <button class="govuk-button">
+          Send application
+        </button>
       </div>
     </form>
   </div>
@@ -430,14 +530,11 @@
 export default {
   data(){
     return {
-      qualifications: [1,2,],
-      experience: [1,2,3],
+      qualifications: [{ type: 'Developer 1', location: 'London', date: '25/10/2019' }, { type: 'Developer 2', location: 'London', date: '25/10/2020' }],
+      experience: [{ jobTitle: 'Developer 1', buisness: 'London', startDate: '25/10/2019', endDate: '25/10/2020', tasks: ['Task1', 'Task2', 'Task3'] },
+                   { jobTitle: 'Developer 2', buisness: 'London', startDate: '25/10/2021', endDate: '25/10/2022', tasks: ['Task1', 'Task2', 'Task3'] },
+                   { jobTitle: 'Developer 3', buisness: 'London', startDate: '25/10/2023', endDate: '25/10/2024', tasks: ['Task1', 'Task2', 'Task3'] }],
     };
-  },
-  computed: {
-    exercise() {
-
-    },
   },
 };
 </script>
@@ -451,9 +548,7 @@ export default {
     }
   }
 
-  .govuk-summary-list__row {
-    width: 100%;
+  .change-link {
+    float: right;
   }
-
-
 </style>
