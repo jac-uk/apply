@@ -121,7 +121,17 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'self-assessment-competencies'}"
             >
-              (Legal) Upload self-assessment competencies (Leadership) Upload CV, upload statement of suitability
+              (Legal) Upload self-assessment competencies (Leadership) Upload CV
+            </router-link>
+          </span>
+        </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <router-link
+              class="govuk-link govuk-!-font-weight-bold"
+              :to="{name: ''}"
+            >
+              (Leadership) upload statement of suitability
             </router-link>
           </span>
         </li>
