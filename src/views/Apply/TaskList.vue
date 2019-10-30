@@ -99,6 +99,8 @@
         </li>
       </ul>
 
+      // FIXME: Add logic to amend these titles depending on type of exercise.
+
       <h2 class="govuk-heading-m">
         4. Assessments
       </h2>
@@ -119,7 +121,7 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'self-assessment-competencies'}"
             >
-              Upload self-assessment competencies
+              (Legal) Upload self-assessment competencies (Leadership) Upload CV, upload statement of suitability
             </router-link>
           </span>
         </li>
