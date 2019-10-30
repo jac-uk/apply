@@ -64,7 +64,9 @@
       // FIXME: Add logic to amend these titles depending on type of exercise.
 
       <h2 class="govuk-heading-m">
-        3. (Legal) Qualifications and experience (Non Legal) Experience (Leadership) qualifications, Memberships and experience
+        3. (Legal) Qualifications and experience
+        (Non Legal) Experience
+        (Leadership) qualifications, Memberships and experience
       </h2>
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
@@ -121,7 +123,8 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'self-assessment-competencies'}"
             >
-              (Legal) Upload self-assessment competencies (Leadership) Upload CV
+              (Legal) Upload self-assessment competencies
+              (Leadership) Upload CV
             </router-link>
           </span>
         </li>
