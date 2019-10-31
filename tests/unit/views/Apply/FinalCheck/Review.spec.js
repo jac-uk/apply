@@ -33,5 +33,6 @@ describe('views/Apply/FinalCheck', () => {
       expect(button.element.type).toBe('submit');
       expect(button.text()).toBe('Send application');
     });
+
   });
 });
