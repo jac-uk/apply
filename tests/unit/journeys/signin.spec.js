@@ -20,6 +20,7 @@ const routes = [
   ['post-qualification-work-experience', '/apply/post-qualification-work-experience'],
   ['relevant-qualifications', '/apply/relevant-qualifications'],
   ['part-time-working-preferences', '/apply/part-time-working-preferences'],
+  ['statement-of-suitability', '/apply/statement-of-suitability'],
 ];
 
 describe('Sign in journey', () => {
