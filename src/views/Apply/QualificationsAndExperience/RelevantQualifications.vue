@@ -100,7 +100,6 @@
             <TextField
               v-model="otherProfessionalMemberships"
               label="Associations or Institutes"
-
             />
             <TextField
               v-model="otherProfessionalMembershipsDate"
@@ -133,7 +132,7 @@ export default {
     RepeatableFields,
     RadioItem,
     RadioGroup,
-    TextField
+    TextField,
   },
   data(){
     return {
