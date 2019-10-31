@@ -142,7 +142,7 @@ export default {
       qualifications: null,
       professionalMemberships: null,
       otherProfessionalMemberships: null,
-      unknownVariable: 'non-legal',
+      unknownVariable: null,
     };
   },
   methods: {
