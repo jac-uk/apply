@@ -303,7 +303,7 @@
           </div>
         </dl>
 
-        <div class="govuk-!-margin-top-9">
+        <div v-if="unknownVariable !== 'non-legal'" class="govuk-!-margin-top-9">
           <h2
             class="govuk-heading-l"
             style="display:inline-block;"
@@ -355,6 +355,43 @@
                 <li>{{ item.date }}</li>
               </ul>
             </dd>
+          </div>
+        </dl>
+
+        <div v-if="unknownVariable === 'non-legal'" class="govuk-!-margin-top-9">
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Memberships
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'relevant-qualifications'}"
+          >
+            Change
+          </router-link>
+        </div>
+
+        <dl
+          class="govuk-summary-list govuk-!-margin-bottom-8"
+        >
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Memberships
+            </dt>
+            <dd class="govuk-summary-list__value">
+              <ul class="govuk-list govuk-list--bullet">
+                <li
+                  v-for="item in memberships"
+                  :key="item.name"
+                >
+                  {{ item }}
+                </li>
+              </ul>
+            </dd>
+
           </div>
         </dl>
 
@@ -485,7 +522,11 @@
           </div>
         </dl>
 
-        <div class="govuk-!-margin-top-9">
+        <div
+          v-if="unknownVariable !== 'non-legal'"
+          class="govuk-!-margin-top-9"
+          id="self-competencies-heading"
+        >
           <h2
             class="govuk-heading-l"
             style="display:inline-block;"
@@ -496,6 +537,26 @@
             class="govuk-link govuk-body-m change-link"
             style="display:inline-block;"
             :to="{name: 'self-assessment-competencies'}"
+          >
+            Change
+          </router-link>
+        </div>
+
+        <div
+          v-if="unknownVariable === 'non-legal'"
+          class="govuk-!-margin-top-9"
+          id="statement-of-suitability-heading"
+        >
+          <h2
+            class="govuk-heading-l"
+            style="display:inline-block;"
+          >
+            Statement of suitability
+          </h2>
+          <router-link
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            :to="{name: 'statement-of-suitability'}"
           >
             Change
           </router-link>
@@ -534,6 +595,8 @@ export default {
       experience: [{ jobTitle: 'Developer 1', buisness: 'London', startDate: '25/10/2019', endDate: '25/10/2020', tasks: ['Task1', 'Task2', 'Task3'] },
                    { jobTitle: 'Developer 2', buisness: 'London', startDate: '25/10/2021', endDate: '25/10/2022', tasks: ['Task1', 'Task2', 'Task3'] },
                    { jobTitle: 'Developer 3', buisness: 'London', startDate: '25/10/2023', endDate: '25/10/2024', tasks: ['Task1', 'Task2', 'Task3'] }],
+      unknownVariable: null,
+      memberships: ['Membership 1', 'Membership 2', 'Membership 3'],
     };
   },
 };
