@@ -303,7 +303,10 @@
           </div>
         </dl>
 
-        <div v-if="unknownVariable !== 'non-legal'" class="govuk-!-margin-top-9">
+        <div
+          v-if="unknownVariable !== 'non-legal'"
+          class="govuk-!-margin-top-9"
+        >
           <h2
             class="govuk-heading-l"
             style="display:inline-block;"
@@ -358,7 +361,10 @@
           </div>
         </dl>
 
-        <div v-if="unknownVariable === 'non-legal'" class="govuk-!-margin-top-9">
+        <div
+          v-if="unknownVariable === 'non-legal'"
+          class="govuk-!-margin-top-9"
+        >
           <h2
             class="govuk-heading-l"
             style="display:inline-block;"
@@ -391,7 +397,6 @@
                 </li>
               </ul>
             </dd>
-
           </div>
         </dl>
 
@@ -523,9 +528,9 @@
         </dl>
 
         <div
-          v-if="unknownVariable === 'legal' || unknownVariable === 'senior' "
-          class="govuk-!-margin-top-9"
+          v-if="unknownVariable !== 'non-legal' || unknownVariable !== 'leadership' "
           id="self-competencies-heading"
+          class="govuk-!-margin-top-9"
         >
           <h2
             class="govuk-heading-l"
@@ -557,13 +562,12 @@
               </dd>
             </div>
           </dl>
-
         </div>
 
         <div
           v-if="unknownVariable === 'non-legal' || unknownVariable === 'leadership' "
-          class="govuk-!-margin-top-9"
           id="self-competencies-heading"
+          class="govuk-!-margin-top-9"
         >
           <h2
             class="govuk-heading-l"
@@ -601,9 +605,7 @@
               </dd>
             </div>
           </dl>
-
         </div>
-
 
         <button class="govuk-button">
           Send application
@@ -621,7 +623,7 @@ export default {
       experience: [{ jobTitle: 'Developer 1', buisness: 'London', startDate: '25/10/2019', endDate: '25/10/2020', tasks: ['Task1', 'Task2', 'Task3'] },
                    { jobTitle: 'Developer 2', buisness: 'London', startDate: '25/10/2021', endDate: '25/10/2022', tasks: ['Task1', 'Task2', 'Task3'] },
                    { jobTitle: 'Developer 3', buisness: 'London', startDate: '25/10/2023', endDate: '25/10/2024', tasks: ['Task1', 'Task2', 'Task3'] }],
-      unknownVariable: 'leadership',
+      unknownVariable: null,
       memberships: ['Membership 1', 'Membership 2', 'Membership 3'],
     };
   },
