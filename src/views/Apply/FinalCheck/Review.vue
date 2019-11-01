@@ -304,7 +304,6 @@
         </dl>
 
         <div
-          v-if="unknownVariable !== 'non-legal'"
           class="govuk-!-margin-top-9"
         >
           <h2
@@ -362,7 +361,6 @@
         </dl>
 
         <div
-          v-if="unknownVariable === 'non-legal'"
           class="govuk-!-margin-top-9"
         >
           <h2
