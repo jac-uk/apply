@@ -71,11 +71,83 @@
           <RadioItem
             value="general-medical-council"
             label="General Medical Council"
-          />
+          >
+            <RadioGroup
+              id="general-medical-council-conditional-registration"
+              v-model="GeneralMedicalCouncilConditionalRegistration"
+              label="Is your registration conditional?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes (if you do have this you might not be successful in this post)"
+              >
+                <DateInput
+                  id="gmc-yes-date"
+                  v-model="gmcConditionalYesDate"
+                  label="When did you become a member?"
+                />
+                <TextField
+                  v-model="gmcConditionalYesNumber"
+                  label="Membership number?"
+                />
+                <TextField
+                  v-model="gmcConditionalYesDetails"
+                  label="Give details of the conditions and dates"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              >
+                <DateInput
+                  id="gmc-no-date"
+                  v-model="gmcConditionalNoDate"
+                  label="When did you become a member?"
+                />
+                <TextField
+                  v-model="gmcConditionalNoNumber"
+                  label="Membership number?"
+                />
+              </RadioItem>
+            </RadioGroup>
+          </RadioItem>
           <RadioItem
             value="royal-college-of-psychiatrists"
-            label="Royal College of Psychaitrists"
-          />
+            label="Royal College of Psychiatrists"
+          >
+            <RadioGroup
+              id="royal-college-of-psychiatrists-fellow-3-years"
+              v-model="royalCollegePsychiatristsFellow3Years"
+              label="You have been a member or fellow for 3 years?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <TextField
+                  v-model="rcpYesDate"
+                  label="When did you become a member?"
+                />
+                <TextField
+                  v-model="rcpYesNumber"
+                  label="Membership number?"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No (if less than 3 years you might not be successful in this post)"
+              >
+                <TextField
+                  v-model="rcpNoDate"
+                  label="When did you become a member?"
+                />
+                <TextField
+                  v-model="rcpNoNumber"
+                  label="Membership number?"
+                />
+              </RadioItem>
+            </RadioGroup>
+          </RadioItem>
           <RadioItem
             value="royal-institution-of-chartered-surveyors"
             label="Royal Institution of Chartered Surveyors"
@@ -89,10 +161,6 @@
               label="Membership number?"
             />
           </RadioItem>
-          <RadioItem
-            value="royal-institute-of-british-architects"
-            label="Royal Institute of British Architects"
-          />
           <RadioItem
             value="other"
             label="Other"
@@ -126,6 +194,7 @@ import Qualification from '@/components/RepeatableFields/Qualification';
 import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextField from '@/components/Form/TextField';
+import DateInput from '@/components/Form/DateInput';
 
 export default {
   components: {
@@ -133,6 +202,7 @@ export default {
     RadioItem,
     RadioGroup,
     TextField,
+    DateInput,
   },
   data(){
     return {
@@ -141,7 +211,28 @@ export default {
       },
       qualifications: null,
       professionalMemberships: null,
+      charteredAssociationBuildingEngineersDate: null,
+      charteredAssociationBuildingEngineersNumber: null,
+      charteredInstituteBuildingDate: null,
+      charteredInstituteBuildingNumber: null,
+      charteredInstituteEnvironmentalHealthDate: null,
+      charteredInstituteEnvironmentalHealthNumber: null,
+      GeneralMedicalCouncilConditionalRegistration: null,
+      gmcConditionalYesDate: null,
+      gmcConditionalYesNumber: null,
+      gmcConditionalYesDetails: null,
+      gmcConditionalNoDate: null,
+      gmcConditionalNoNumber: null,
+      royalCollegePsychiatristsFellow3Years: null,
+      rcpYesDate: null,
+      rcpYesNumber: null,
+      rcpNoDate: null,
+      rcpNoNumber: null,
+      royalInstitutionCharteredSurveyorsDate: null,
+      royalInstitutionCharteredSurveyorsNumber: null,
       otherProfessionalMemberships: null,
+      otherProfessionalMembershipsDate: null,
+      otherProfessionalMembershipsNumber: null,
       unknownVariable: null,
     };
   },
