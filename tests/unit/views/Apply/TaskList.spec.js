@@ -44,7 +44,7 @@ describe('views/TaskList', () => {
       it('renders the 3rd block h2 as Memberships and experience if the role is non-legal', () => {
          wrapper.setData({ unknownVariable: 'non-legal' });
          expect(wrapper.find('#memberships-and-experience').exists()).toBe(true);
-         expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and experience');
+         expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
        });
    });
  });
