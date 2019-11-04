@@ -25,6 +25,7 @@ import JudicialExperience from '@/views/Apply/QualificationsAndExperience/Judici
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
+import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 
 Vue.use(Router);
 
@@ -186,6 +187,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Set part-time working preferences',
+          },
+        },
+        {
+          path: 'leadership-statement-of-suitability',
+          component: LeadershipSuitability,
+          name: 'leadership-statement-of-suitability',
+          meta: {
+            requiresAuth: true,
+            title: 'Statement of suitability',
           },
         },
       ],
