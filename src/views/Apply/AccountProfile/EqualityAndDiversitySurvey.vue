@@ -25,8 +25,9 @@
             href="https://www.judicialappointments.gov.uk/providing-diversity-information-jac"
             target="_blank"
           >
-            our commitment to equality and diversity
+            our commitment to equality and diversity.
           </a>
+          We share this with the Ministry of Justice, Judicial Office and Her Majesty's Courts and Tribunal Service.
         </p>
 
         <RadioGroup
