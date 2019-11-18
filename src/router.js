@@ -25,6 +25,7 @@ import JudicialExperience from '@/views/Apply/QualificationsAndExperience/Judici
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
+import Confirmation from '@/views/Apply/Confirmation';
 
 Vue.use(Router);
 
@@ -188,6 +189,15 @@ const router = new Router({
             title: 'Set part-time working preferences',
           },
         },
+        {
+            path: 'confirmation',
+            component: Confirmation,
+            name: 'confirmation',
+            meta: {
+              requiresAuth: true,
+              title: 'Confirmation',
+            },
+          },
       ],
     },
     {
