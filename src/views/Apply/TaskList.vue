@@ -155,13 +155,29 @@
             </router-link>
           </span>
         </li>
-        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+        <li
+          v-if="unknownVariable !== 'non-legal'"
+          class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
+        >
           <span class="govuk-body">
             <router-link
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'self-assessment-competencies'}"
             >
               Upload self-assessment competencies
+            </router-link>
+          </span>
+        </li>
+        <li
+          v-if="unknownVariable === 'non-legal'"
+          class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
+        >
+          <span class="govuk-body">
+            <router-link
+              class="govuk-link govuk-!-font-weight-bold"
+              :to="{name: 'statement-of-suitability'}"
+            >
+              Statement of suitability
             </router-link>
           </span>
         </li>
@@ -187,17 +203,22 @@
 </template>
 
 <script>
+
 export default {
 
   data(){
     return {
       unknownVariable: null,
+
     };
   },
+  methods: {
+    save() {
 
+    },
+  },
 };
 </script>
-
 <style scoped>
 
 .status {
