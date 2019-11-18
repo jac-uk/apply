@@ -3,26 +3,27 @@ import App from '@/App';
 import Router from 'vue-router';
 import Vuex from 'vuex';
 
+const id = 12345;
 const routes = [
   ['job-advert', '/job-advert'],
   // ['eligibility-checker', '/eligibility/'],
   // ['eligibility-pass', '/eligibility/eligibility-pass'],
   // ['eligibility-fail', '/eligibility/eligibility-fail'],
-  ['task-list', '/apply/'],
-  ['character-information', '/apply/character-information'],
-  ['equality-and-diversity-survey', '/apply/equality-and-diversity-survey'],
-  ['pre-application-judicial-education', '/apply/pre-application-judicial-education'],
-  ['personal-details', '/apply/personal-details'],
-  ['assessors-details', '/apply/assessors-details'],
-  ['self-assessment-competencies', '/apply/self-assessment-competencies'],
-  ['review', '/apply/review'],
-  ['judicial-experience', '/apply/judicial-experience'],
-  ['post-qualification-work-experience', '/apply/post-qualification-work-experience'],
-  ['relevant-qualifications', '/apply/relevant-qualifications'],
-  ['part-time-working-preferences', '/apply/part-time-working-preferences'],
-  ['leadership-statement-of-suitability', '/apply/leadership-statement-of-suitability'],
-  ['statement-of-suitability', '/apply/statement-of-suitability'],
-  ['confirmation', '/apply/confirmation'],
+  ['task-list', `/apply/${id}/`],
+  ['character-information', `/apply/${id}/character-information`],
+  ['equality-and-diversity-survey', `/apply/${id}/equality-and-diversity-survey`],
+  ['pre-application-judicial-education', `/apply/${id}/pre-application-judicial-education`],
+  ['personal-details', `/apply/${id}/personal-details`],
+  ['assessors-details', `/apply/${id}/assessors-details`],
+  ['self-assessment-competencies', `/apply/${id}/self-assessment-competencies`],
+  ['review', `/apply/${id}/review`],
+  ['judicial-experience', `/apply/${id}/judicial-experience`],
+  ['post-qualification-work-experience', `/apply/${id}/post-qualification-work-experience`],
+  ['relevant-qualifications', `/apply/${id}/relevant-qualifications`],
+  ['part-time-working-preferences', `/apply/${id}/part-time-working-preferences`],
+  ['leadership-statement-of-suitability', `/apply/${id}/leadership-statement-of-suitability`],
+  ['statement-of-suitability', `/apply/${id}/statement-of-suitability`],
+  ['confirmation', `/apply/${id}/confirmation`],
 ];
 
 describe('Sign in journey', () => {
@@ -31,7 +32,7 @@ describe('Sign in journey', () => {
   let store;
 
   beforeEach(() => {
-  const localVue = createLocalVue();
+    const localVue = createLocalVue();
     localVue.use(Router);
     localVue.use(Vuex);
 
@@ -60,7 +61,7 @@ describe('Sign in journey', () => {
 
     describe.each(routes)('when they visit page %s', (routeName) => {
       it('loads sign in page',() => {
-        router.push({ name: routeName });
+        router.push({ name: routeName, params: { id } });
         expect(subject.vm.$route.path).toBe('/sign-in');
       });
     });
@@ -73,7 +74,7 @@ describe('Sign in journey', () => {
 
     describe.each(routes)('when they visit page %s', (routeName, routePath) => {
       it(`loads ${routePath}`,() => {
-        router.push({ name: routeName });
+        router.push({ name: routeName, params: { id } });
         expect(subject.vm.$route.path).toBe(routePath);
       });
     });
