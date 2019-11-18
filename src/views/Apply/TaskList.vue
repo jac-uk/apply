@@ -61,9 +61,13 @@
         </li>
       </ul>
 
-      <h2 class="govuk-heading-m">
+      <h2
+        id="qualifications-and-experience"
+        class="govuk-heading-m"
+      >
         3. Qualifications and experience
       </h2>
+
       <ul class="govuk-list govuk-!-margin-bottom-9">
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
@@ -92,6 +96,46 @@
               :to="{name: 'judicial-experience'}"
             >
               Add judicial experience
+            </router-link>
+          </span>
+        </li>
+      </ul>
+
+      <h2
+        v-if="unknownVariable === 'non-legal'"
+        id="memberships-and-experience"
+        class="govuk-heading-m"
+      >
+        3. Memberships and Experience
+      </h2>
+      <ul class="govuk-list govuk-!-margin-bottom-9">
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
+          <span class="govuk-body">
+            <router-link
+              class="govuk-link govuk-!-font-weight-bold"
+              :to="{name: ''}"
+            >
+              add memberships
+            </router-link>
+          </span>
+        </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <router-link
+              class="govuk-link govuk-!-font-weight-bold"
+              :to="{name: ''}"
+            >
+              add experience
+            </router-link>
+          </span>
+        </li>
+        <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom">
+          <span class="govuk-body">
+            <router-link
+              class="govuk-link govuk-!-font-weight-bold"
+              :to="{name: ''}"
+            >
+              add gaps in employment
             </router-link>
           </span>
         </li>
@@ -144,6 +188,12 @@
 
 <script>
 export default {
+
+  data(){
+    return {
+      unknownVariable: null,
+    };
+  },
 
 };
 </script>
