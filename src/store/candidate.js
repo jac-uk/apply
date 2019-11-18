@@ -8,8 +8,8 @@ const collection = firestore.collection('candidates');
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(({ bindFirestoreRef }, id) => {
-      const firestoreRef = collection.doc(id);
+    bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
+      const firestoreRef = collection.doc(rootState.auth.currentUser.uid);
       return bindFirestoreRef('record', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
