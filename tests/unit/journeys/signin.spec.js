@@ -21,8 +21,9 @@ const routes = [
   ['post-qualification-work-experience', `/apply/${id}/post-qualification-work-experience`],
   ['relevant-qualifications', `/apply/${id}/relevant-qualifications`],
   ['part-time-working-preferences', `/apply/${id}/part-time-working-preferences`],
+  ['leadership-statement-of-suitability', `/apply/${id}/leadership-statement-of-suitability`],
   ['statement-of-suitability', `/apply/${id}/statement-of-suitability`],
-  ['confirmation', `/apply/${id}/confirmation`],  
+  ['confirmation', `/apply/${id}/confirmation`]
 ];
 
 describe('Sign in journey', () => {
