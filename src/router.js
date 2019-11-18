@@ -78,7 +78,7 @@ const router = new Router({
     // },
     // Apply for a role
     {
-      path: '/apply/',
+      path: '/apply/:id',
       component: Apply,
       children: [
       {
@@ -233,6 +233,7 @@ router.beforeEach((to, from, next) => {
   const isSignedIn = store.getters.isSignedIn;
 
   if (requiresAuth && !isSignedIn) {
+    // @todo Save destination so we can navigate there after sign-in
     return next({ name: 'sign-in' });
   }
 
