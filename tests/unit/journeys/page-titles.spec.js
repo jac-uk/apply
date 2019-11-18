@@ -21,6 +21,7 @@ const routes = [
   ['relevant-qualifications', 'Add relevant qualifications'],
   ['part-time-working-preferences', 'Set part-time working preferences'],
   ['statement-of-suitability', 'Statement of suitability'],
+  ['confirmation', 'Confirmation'],
 ];
 
 describe('Page titles', () => {

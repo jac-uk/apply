@@ -26,6 +26,7 @@ import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExpe
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
+import Confirmation from '@/views/Apply/Confirmation';
 
 Vue.use(Router);
 
@@ -198,6 +199,15 @@ const router = new Router({
             title: 'Statement of suitability',
           },
         },
+        {
+            path: 'confirmation',
+            component: Confirmation,
+            name: 'confirmation',
+            meta: {
+              requiresAuth: true,
+              title: 'Confirmation',
+            },
+          },
       ],
     },
     {
