@@ -12,28 +12,28 @@
 
         <TextField
           id="fullName"
-          v-model="fullName"
+          v-model="candidate.fullName"
           label="Full name"
           hint="You do not need to include any titles."
         />
 
         <TextField
           id="email"
-          v-model="email"
+          v-model="candidate.email"
           label="Email address"
           type="email"
         />
 
         <DateInput
           id="date-of-birth"
-          v-model="dateOfBirth"
+          v-model="candidate.dateOfBirth"
           label="Date of birth"
           hint="For example, 27 3 1964"
         />
 
         <TextField
           id="national-insurance-number"
-          v-model="nationalInsuranceNumber"
+          v-model="candidate.nationalInsuranceNumber"
           label="National Insurance number"
           hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
           class="govuk-!-width-one-half"
@@ -57,17 +57,20 @@ export default {
     DateInput,
   },
   data(){
+    const candidate = this.$store.getters['candidate/data']();
     return {
-      fullName: null,
-      email: null,
-      dateOfBirth: null,
-      nationalInsuranceNumber: null,
-
+      candidate: {
+        fullName: candidate && candidate.fullName || null,
+        email: candidate && candidate.email || null,
+        dateOfBirth: candidate && candidate.dateOfBirth || null,
+        nationalInsuranceNumber: candidate && candidate.nationalInsuranceNumber || null,
+      },
     };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('candidate/save', this.candidate);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
