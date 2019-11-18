@@ -7,6 +7,7 @@ Vue.use(Vuex);
 import auth from '@/store/auth';
 import exercise from '@/store/exercise';
 import candidate from '@/store/candidate';
+import application from '@/store/application';
 
 const store = new Vuex.Store({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
     auth,
     exercise,
     candidate,
+    application,
   },
   state: {},
   mutations: {
