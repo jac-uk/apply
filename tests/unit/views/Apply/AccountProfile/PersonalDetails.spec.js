@@ -3,8 +3,31 @@ import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
 
+const candidate = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    candidate: {
+      record: {},
+    },
+  },
+  getters: {
+    'candidate/data': () => candidate,
+  },
+};
+
+const mockRouter = {
+  push: jest.fn(),
+};
+
 const createTestSubject = () => {
-  return shallowMount(PersonalDetails);
+  return shallowMount(PersonalDetails, {
+    mocks: {
+      $store: mockStore,
+      $router: mockRouter,
+    },
+  });
 };
 
 describe('@/views/Apply/AccountProfile/PersonalDetails', () => {

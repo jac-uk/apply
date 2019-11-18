@@ -65,7 +65,7 @@ describe('Page titles', () => {
   describe.each(routes)('%s', (routeName, routeTitle) => {
     beforeEach(() => {
      store.dispatch('setCurrentUser', user);
-     router.push({ name: routeName });
+     router.push({ name: routeName, params: { id: 123 } });
    });
 
     it(`contains ${routeTitle}`, () => {
