@@ -3,16 +3,33 @@
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">
-          Self-assessment competencies
+          Statement of suitability
         </h1>
 
         <p class="govuk-body-l">
-          Download the template on this page to complete your self-assessment
-          competency statements. It details the specific skills and experience
-          you'll need to demonstrate for this role.
+          Intro text provided by team.
         </p>
 
-        <p class="govuk-body-l">
+        <RadioGroup
+          id="meet-requirements"
+          v-model="meetRequirements"
+          label="Do you meet this requirement?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          />
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
+
+        <p class="govuk-body">
+          In 250 words tell us how.
+        </p>
+
+        <p class="govuk-body">
           Come back to this page to upload your finished statements.
         </p>
 
@@ -50,9 +67,14 @@
 </template>
 
 <script>
+import RadioGroup from '@/components/Form/RadioGroup';
+import RadioItem from '@/components/Form/RadioItem';
 
 export default {
-
+  components: {
+    RadioGroup,
+    RadioItem,
+  },
   data(){
     return {
 
