@@ -21,27 +21,25 @@ export default {
       loadFailed: false,
     };
   },
-  mounted() {
+  async mounted() {
     const id = this.$route.params.id;
-    this.$store.dispatch('exercise/bind', id)
-      .then((data) => {
-        if(data === null) {
-          this.redirectToErrorPage();
-        } else {
-          this.loaded = true;
-          this.loadCandidateAndApplication();
-        }
-      }).catch((e) => {
-        this.loadFailed = true;
-        throw e;
-      });
+    try {
+      let exercise = await this.$store.dispatch('exercise/bind', id);
+      if (exercise === null) {
+        this.redirectToErrorPage();
+      } else {
+        await this.$store.dispatch('candidate/bind');
+        await this.$store.dispatch('application/bind');
+        this.loaded = true;
+      }
+    } catch (e) {
+      this.loadFailed = true;
+      throw e;
+    }
   },
   methods: {
     redirectToErrorPage() {
       this.$router.replace({ name: 'exercise-not-found' });
-    },
-    loadCandidateAndApplication () {
-      this.$store.dispatch('candidate/bind', this.$store.state.auth.currentUser.uid);
     },
   },
 };

@@ -21,7 +21,7 @@
 
         <RadioGroup
           id="declared-bankrupt"
-          v-model="declaredBankrupt"
+          v-model="application.declaredBankrupt"
           label="Have you ever been declared bankrupt?"
         >
           <RadioItem
@@ -33,10 +33,10 @@
             label="No"
           />
         </RadioGroup>
-
+        
         <RadioGroup
           id="financial-difficulties"
-          v-model="financialDifficulties"
+          v-model="application.financialDifficulties"
           label="Have you filed late tax returns, been fined by HMRC or
           had other financial difficulties more than 3 times in the last 5 years?"
         >
@@ -46,7 +46,7 @@
           >
             <TextareaInput
               id="financial-difficulties-details"
-              v-model="financialDifficultiesDetails"
+              v-model="application.financialDifficultiesDetails"
               label="Add details of late filling, fines or other difficulties"
             />
           </RadioItem>
@@ -58,7 +58,7 @@
 
         <RadioGroup
           id="live-conduct-negligence-investigation"
-          v-model="conductNegligenceInvestigation"
+          v-model="application.conductNegligenceInvestigation"
           label="Are you the subject of a live professional conduct or negligence investigation?"
         >
           <RadioItem
@@ -67,7 +67,7 @@
           >
             <TextareaInput
               id="conduct-negligence-investigation-details"
-              v-model="conductNegligenceInvestigationDetails"
+              v-model="application.conductNegligenceInvestigationDetails"
               label="Add details of conduct or negligence investigations"
             />
           </RadioItem>
@@ -79,7 +79,7 @@
 
         <RadioGroup
           id="drink-drug-mobile-motoring-offence"
-          v-model="drinkDrugMobileMotoringOffence"
+          v-model="application.drinkDrugMobileMotoringOffence"
           label="Have you had a motoring offence involving drink or drug
           driving, or driving while using a mobile in the last 10 years?"
         >
@@ -89,7 +89,7 @@
           >
             <TextareaInput
               id="drink-drug-mobile-motoring-offence-details"
-              v-model="drinkDrugMobileMotoringOffenceDetails"
+              v-model="application.drinkDrugMobileMotoringOffenceDetails"
               label="Add details of driving offences"
             />
           </RadioItem>
@@ -101,7 +101,7 @@
 
         <RadioGroup
           id="disqualified-from-driving"
-          v-model="disqualifiedFromDriving"
+          v-model="application.disqualifiedFromDriving"
           label="Have you been disqualified from driving in the last 5 years?"
         >
           <RadioItem
@@ -110,7 +110,7 @@
           >
             <TextareaInput
               id="disqualified-from-driving-details"
-              v-model="disqualifiedFromDrivingDetails"
+              v-model="application.disqualifiedFromDrivingDetails"
               label="Add details of disqualification"
             />
           </RadioItem>
@@ -122,7 +122,7 @@
 
         <RadioGroup
           id="motoring-offences-and->6points"
-          v-model="motoringOffencesAndSixPlusPoints"
+          v-model="application.motoringOffencesAndSixPlusPoints"
           label="Do you have any motoring offences and more than 6 points on your licence?"
         >
           <RadioItem
@@ -131,7 +131,7 @@
           >
             <TextareaInput
               id="motoring-offences-and->6points-details"
-              v-model="motoringOffencesAndSixPlusPointsDetails"
+              v-model="application.motoringOffencesAndSixPlusPointsDetails"
               label="Add details of motoring offences or licence points"
             />
           </RadioItem>
@@ -143,7 +143,7 @@
 
         <RadioGroup
           id="criminal-conviction-causion"
-          v-model="criminalConvictionCaution"
+          v-model="application.criminalConvictionCaution"
           label="Have you had a criminal conviction in the last 10 years or a criminal caution in the last 5 years?"
         >
           <RadioItem
@@ -152,7 +152,7 @@
           >
             <TextareaInput
               id="criminal-conviction-causion-details"
-              v-model="criminalConvictionCautionDetails"
+              v-model="application.criminalConvictionCautionDetails"
               label="Add details of criminal conviction"
             />
           </RadioItem>
@@ -164,7 +164,7 @@
 
         <RadioGroup
           id="other-character-issues"
-          v-model="otherCharacterIssues"
+          v-model="application.otherCharacterIssues"
           label="Do you have any other issues that you think we should know about when considering your character?"
         >
           <RadioItem
@@ -173,7 +173,7 @@
           >
             <TextareaInput
               id="other-character-issues-details"
-              v-model="otherCharacterIssuesDetails"
+              v-model="application.otherCharacterIssuesDetails"
               label="Add details of other character issues"
             />
           </RadioItem>
@@ -203,7 +203,7 @@ export default {
     TextareaInput,
   },
   data(){
-    return {
+    const defaults = {
       declaredBankrupt: null,
       financialDifficulties: null,
       financialDifficultiesDetails: null,
@@ -219,12 +219,17 @@ export default {
       criminalConvictionCautionDetails: null,
       otherCharacterIssues: null,
       otherCharacterIssuesDetails: null,
-
+    };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
+    return {
+      application: application,
     };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
