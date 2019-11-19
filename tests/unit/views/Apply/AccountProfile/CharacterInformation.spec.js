@@ -3,8 +3,26 @@ import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 
+const application = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    application: {
+      record: {},
+    },
+  },
+  getters: {
+    'application/data': () => application,
+  },
+};
+
 const createTestSubject = () => {
-  return shallowMount(CharacterInformation);
+  return shallowMount(CharacterInformation, {
+    mocks: {
+      $store: mockStore,
+    },
+  });
 };
 
 describe('@/views/Apply/AccountProfile/CharacterInformation', () => {
