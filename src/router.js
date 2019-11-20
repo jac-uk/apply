@@ -29,6 +29,8 @@ import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitabili
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
 import Confirmation from '@/views/Apply/Confirmation';
 
+import Martin from '@/views/Apply/AccountProfile/Martin';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -217,6 +219,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Confirmation',
+          },
+        },
+        {
+          path: 'martin',
+          component: Martin,
+          name: 'martin',
+          meta: {
+            requiresAuth: true,
+            title: 'Martin',
           },
         },
       ],
