@@ -2,8 +2,26 @@ import AssessorDetails from '@/views/Apply/Assessments/AssessorsDetails';
 import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 
+const application = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    application: {
+      record: {},
+    },
+  },
+  getters: {
+    'application/data': () => application,
+  },
+};
+
 const createTestSubject = () => {
-  return shallowMount(AssessorDetails);
+  return shallowMount(AssessorDetails, {
+    mocks: {
+      $store: mockStore,
+    },
+  });
 };
 
 describe('views/Assessments/AssessorDetails', () => {

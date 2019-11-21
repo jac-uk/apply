@@ -33,18 +33,18 @@
 
         <TextField
           id="first-assessor-full-name"
-          v-model="firstAssessorFullName"
+          v-model="application.firstAssessorFullName"
           label="Full name"
         />
         <TextField
           id="first-assessor-email"
-          v-model="firstAssessorEmail"
+          v-model="application.firstAssessorEmail"
           label="Email"
           type="email"
         />
         <TextField
           id="first-assessor-Phone"
-          v-model="firstAssessorPhone"
+          v-model="application.firstAssessorPhone"
           label="Phone"
           type="tel"
         />
@@ -55,18 +55,18 @@
 
         <TextField
           id="second-assessor-full-name"
-          v-model="secondAssessorFullName"
+          v-model="application.secondAssessorFullName"
           label="Full name"
         />
         <TextField
           id="second-assessor-email"
-          v-model="secondAssessorEmail"
+          v-model="application.secondAssessorEmail"
           label="Email"
           type="email"
         />
         <TextField
           id="second-assessor-Phone"
-          v-model="secondAssessorPhone"
+          v-model="application.secondAssessorPhone"
           label="Phone"
           type="tel"
         />
@@ -88,19 +88,25 @@ export default {
 
   },
   data(){
-    return {
+    const defaults = {
       firstAssessorFullName: null,
       firstAssessorEmail: null,
       firstAssessorPhone: null,
       secondAssessorFullName: null,
       secondAssessorEmail: null,
       secondAssessorPhone: null,
-
     };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
+    return {
+      application: application,
+    };
+
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
