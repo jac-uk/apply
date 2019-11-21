@@ -2,7 +2,7 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import TextField from '@/components/Form/Textfield';
+// import TextField from '@/components/Form/Textfield';
 import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
