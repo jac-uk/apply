@@ -7,7 +7,7 @@
         </h1>
 
         <RepeatableFields
-          v-model="experience"
+          v-model="application.experience"
           :component="repeatableFields.Experience"
         />
 
@@ -28,17 +28,25 @@ export default {
     RepeatableFields,
   },
   data(){
+    const defaults =  {
+      experience: null,
+    };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
     return {
+      application: application,
+      
       repeatableFields: {
         Experience,
       },
-      experience: null,
     };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
+
 };
 </script>
