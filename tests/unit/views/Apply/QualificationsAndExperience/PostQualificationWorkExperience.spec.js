@@ -2,8 +2,26 @@ import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExpe
 import { shallowMount } from '@vue/test-utils';
 import RepeatableFields from '@/components/RepeatableFields';
 
+const application = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    application: {
+      record: {},
+    },
+  },
+  getters: {
+    'application/data': () => application,
+  },
+};
+
 const createTestSubject = () => {
-  return shallowMount(PostQualificationWorkExperience);
+  return shallowMount(PostQualificationWorkExperience, {
+    mocks: {
+      $store: mockStore,
+    },
+  });
 };
 
 describe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
