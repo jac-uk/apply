@@ -2,13 +2,31 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import TextField from '@/components/Form/TextField';
+// import TextField from '@/components/Form/Textfield';
 import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
+const application = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    application: {
+      record: {},
+    },
+  },
+  getters: {
+    'application/data': () => application,
+  },
+};
+
 const createTestSubject = () => {
-  return shallowMount(EqualityAndDiversitySurvey);
+  return shallowMount(EqualityAndDiversitySurvey, {
+    mocks: {
+      $store: mockStore,
+    },
+  });
 };
 
 describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
@@ -44,20 +62,21 @@ describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
       expect(wrapper.find(RadioItem).exists()).toBe(true);
     });
 
-    it('renders the CheckboxGroup components', () => {
-      expect(wrapper.find(CheckboxGroup).exists()).toBe(true);
+    // it('renders the TextField components', () => {
+    //   wrapper.setData({ currentLegalRole: 'other-current-legal-role' });
+    //   expect(wrapper.find(TextField).exists()).toBe(true);
+    // });
+
+    it('renders the TextareaInput components', () => {
+      expect(wrapper.find(TextareaInput).exists()).toBe(true);
     });
 
     it('renders the CheckboxItem components', () => {
       expect(wrapper.find(CheckboxItem).exists()).toBe(true);
     });
 
-    it('renders the TextField components', () => {
-      expect(wrapper.find(TextField).exists()).toBe(true);
-    });
-
-    it('renders the TextareaInput components', () => {
-      expect(wrapper.find(TextareaInput).exists()).toBe(true);
+    it('renders the CheckboxGroup components', () => {
+      expect(wrapper.find(CheckboxGroup).exists()).toBe(true);
     });
   });
 });

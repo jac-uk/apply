@@ -32,7 +32,7 @@
 
         <RadioGroup
           id="has-taken-paje"
-          v-model="hasTakenPAJE"
+          v-model="application.hasTakenPAJE"
           label="Have you taken part in the Pre-application judicial education (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
@@ -58,7 +58,7 @@
 
         <RadioGroup
           id="ethnic-group"
-          v-model="ethnicGroup"
+          v-model="application.ethnicGroup"
           label="What's your ethnic group?"
         >
           <RadioItem
@@ -162,7 +162,7 @@
 
         <RadioGroup
           id="religion-faith"
-          v-model="religionFaith"
+          v-model="application.religionFaith"
           label="What religion or faith are you?"
         >
           <RadioItem
@@ -207,7 +207,7 @@
           >
             <TextField
               id="other-religion-details"
-              v-model="otherReligionDetails"
+              v-model="application.otherReligionDetails"
               label="Religion or belief"
               class="govuk-!-width-two-thirds"
             />
@@ -216,7 +216,7 @@
 
         <RadioGroup
           id="gender"
-          v-model="gender"
+          v-model="application.gender"
           label="What gender are you?"
         >
           <RadioItem
@@ -239,7 +239,7 @@
 
         <RadioGroup
           id="changed-gender"
-          v-model="changedGender"
+          v-model="application.changedGender"
           label="Have you ever changed gender?"
         >
           <RadioItem
@@ -258,7 +258,7 @@
 
         <RadioGroup
           id="sexual-orientation"
-          v-model="sexualOrientation"
+          v-model="application.sexualOrientation"
           label="How would you describe your sexual orientation?"
         >
           <RadioItem
@@ -289,7 +289,7 @@
 
         <RadioGroup
           id="disability"
-          v-model="disability"
+          v-model="application.disability"
           label="Do you have a disability?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
@@ -313,7 +313,7 @@
           >
             <TextareaInput
               id="disability-details"
-              v-model="disabilityDetails"
+              v-model="application.disabilityDetails"
               label="Add disability details"
             />
           </RadioItem>
@@ -325,7 +325,7 @@
 
         <RadioGroup
           id="state-or-fee-school"
-          v-model="stateOrFeeSchool"
+          v-model="application.stateOrFeeSchool"
           label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
         >
           <RadioItem
@@ -356,7 +356,7 @@
 
         <RadioGroup
           id="oxbridge-universities"
-          v-model="oxbridgeUni"
+          v-model="application.oxbridgeUni"
           label="Did you go to either of the Oxbridge universities?"
         >
           <RadioItem
@@ -375,7 +375,7 @@
 
         <RadioGroup
           id="first-generation-student"
-          v-model="firstGenerationStudent"
+          v-model="application.firstGenerationStudent"
           label="Were you the first generation in your family to go to university?"
         >
           <RadioItem
@@ -398,7 +398,7 @@
 
         <CheckboxGroup
           id="professional-background"
-          v-model="professionalBackground"
+          v-model="application.professionalBackground"
           label="What is your professional background?"
           hint="Select all that apply."
         >
@@ -426,7 +426,7 @@
 
         <CheckboxGroup
           id="current-legal-role"
-          v-model="currentLegalRole"
+          v-model="application.currentLegalRole"
           label="What is your current legal role?"
           hint="Select all that apply."
         >
@@ -480,7 +480,7 @@
           >
             <TextField
               id="other-current-legal-role-details"
-              v-model="otherCurrentLegalRoleDetails"
+              v-model="application.otherCurrentLegalRoleDetails"
               label="Current legal role"
               class="govuk-!-width-two-thirds"
             />
@@ -489,7 +489,7 @@
 
         <RadioGroup
           id="fee-paid-judicial-role"
-          v-model="feePaidJudicialRole"
+          v-model="application.feePaidJudicialRole"
           label="Do you hold, or have you held in the past, a fee-paid judicial role?"
         >
           <RadioItem
@@ -542,7 +542,7 @@ export default {
 
   },
   data(){
-    return {
+    const defaults = {
       hasTakenPAJE: BooleanOrNull(null),
       ethnicGroup: null,
       religionFaith: null,
@@ -559,12 +559,17 @@ export default {
       currentLegalRole: null,
       otherCurrentLegalRoleDetails: null,
       feePaidJudicialRole: null,
-
+    };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
+    return {
+      application: application,
     };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
