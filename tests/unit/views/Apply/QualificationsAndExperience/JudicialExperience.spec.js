@@ -2,7 +2,7 @@ import JudicialExperience from '@/views/Apply/QualificationsAndExperience/Judici
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import TextareaInput from '@/components/Form/TextareaInput';
+// import TextareaInput from '@/components/Form/TextareaInput';
 
 const application = {};
 
