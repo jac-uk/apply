@@ -2,10 +2,28 @@ import JudicialExperience from '@/views/Apply/QualificationsAndExperience/Judici
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import TextareaInput from '@/components/Form/TextareaInput';
+// import TextareaInput from '@/components/Form/TextareaInput';
+
+const application = {};
+
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    application: {
+      record: {},
+    },
+  },
+  getters: {
+    'application/data': () => application,
+  },
+};
 
 const createTestSubject = () => {
-  return shallowMount(JudicialExperience);
+  return shallowMount(JudicialExperience, {
+    mocks: {
+      $store: mockStore,
+    },
+  });
 };
 
 describe('views/QualificationsAndExperience/JudicialExperience', () => {
@@ -41,9 +59,9 @@ describe('views/QualificationsAndExperience/JudicialExperience', () => {
       expect(wrapper.find(RadioItem).exists()).toBe(true);
     });
 
-    it('renders the TextareaInput components', () => {
-      wrapper.setData({ hasBeenJudge: true, thirtyDaysSitting: false });
-      expect(wrapper.find(TextareaInput).exists()).toBe(true);
-    });
+    // it('renders the TextareaInput components', () => {
+    //   wrapper.setData({ hasBeenJudge: true, thirtyDaysSitting: false });
+    //   expect(wrapper.find(TextareaInput).exists()).toBe(true);
+    // });
   });
 });

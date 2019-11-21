@@ -8,7 +8,7 @@
 
         <RadioGroup
           id="has-been-judge"
-          v-model="hasBeenJudge"
+          v-model="application.hasBeenJudge"
           label="Have you ever been a judge?"
         >
           <RadioItem
@@ -22,9 +22,9 @@
         </RadioGroup>
 
         <RadioGroup
-          v-if="hasBeenJudge === false"
+          v-if="application.hasBeenJudge === false"
           id="similar-role"
-          v-model="similarRole"
+          v-model="application.similarRole"
           label="Have you ever held a similar role on a quasi-judicial body?"
         >
           <RadioItem
@@ -64,9 +64,9 @@
         </RadioGroup>
 
         <RadioGroup
-          v-if="hasBeenJudge === true || hasBeenJudge === false && similarRole === true"
+          v-if="application.hasBeenJudge === true || application.hasBeenJudge === false && application.similarRole === true"
           id="30-days-sitting"
-          v-model="thirtyDaysSitting"
+          v-model="application.thirtyDaysSitting"
           label="Do you have at least 30 sitting days?"
         >
           <RadioItem
@@ -80,11 +80,11 @@
         </RadioGroup>
 
         <TextareaInput
-          v-if="hasBeenJudge === true && thirtyDaysSitting === false ||
-            hasBeenJudge === false && similarRole === false ||
-            hasBeenJudge === false && similarRole === true && thirtyDaysSitting === false"
+          v-if="application.hasBeenJudge === true && application.thirtyDaysSitting === false ||
+            application.hasBeenJudge === false && application.similarRole === false ||
+            application.hasBeenJudge === false && application.similarRole === true && application.thirtyDaysSitting === false"
           id="gained-experience"
-          v-model="gainedExperience"
+          v-model="application.gainedExperience"
           label="Explain how you've gained significant judicial experience."
         />
 
@@ -108,16 +108,22 @@ export default {
     TextareaInput,
   },
   data(){
-    return {
+    const defaults = {
       hasBeenJudge: null,
       thirtyDaysSitting: null,
       similarRole: null,
       gainedExperience: null,
     };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
+    return {
+      application: application,
+    };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
