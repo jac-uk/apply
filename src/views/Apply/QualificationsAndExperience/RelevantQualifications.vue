@@ -18,14 +18,14 @@
 
         <RepeatableFields
           v-if="unknownVariable !== 'non-legal'"
-          v-model="qualifications"
+          v-model="application.qualifications"
           :component="repeatableFields.Qualification"
         />
 
         <RadioGroup
           v-if="unknownVariable === 'non-legal'"
           id="professional-memberships"
-          v-model="professionalMemberships"
+          v-model="application.professionalMemberships"
           label="What professional memberships do you have?"
         >
           <RadioItem
@@ -33,11 +33,11 @@
             label="Chartered Association of Building Engineers"
           >
             <TextField
-              v-model="charteredAssociationBuildingEngineersDate"
+              v-model="application.charteredAssociationBuildingEngineersDate"
               label="When did you become a member?"
             />
             <TextField
-              v-model="charteredAssociationBuildingEngineersNumber"
+              v-model="application.charteredAssociationBuildingEngineersNumber"
               label="Membership number?"
             />
           </RadioItem>
@@ -46,11 +46,11 @@
             label="Chartered Institute of Building"
           >
             <TextField
-              v-model="charteredInstituteBuildingDate"
+              v-model="application.charteredInstituteBuildingDate"
               label="When did you become a member?"
             />
             <TextField
-              v-model="charteredInstituteBuildingNumber"
+              v-model="application.charteredInstituteBuildingNumber"
               label="Membership number?"
             />
           </RadioItem>
@@ -60,11 +60,11 @@
             label="Chartered Institute of Environmental Health"
           >
             <TextField
-              v-model="charteredInstituteEnvironmentalHealthDate"
+              v-model="application.charteredInstituteEnvironmentalHealthDate"
               label="When did you become a member?"
             />
             <TextField
-              v-model="charteredInstituteEnvironmentalHealthNumber"
+              v-model="application.charteredInstituteEnvironmentalHealthNumber"
               label="Membership number?"
             />
           </RadioItem>
@@ -74,7 +74,7 @@
           >
             <RadioGroup
               id="general-medical-council-conditional-registration"
-              v-model="GeneralMedicalCouncilConditionalRegistration"
+              v-model="application.GeneralMedicalCouncilConditionalRegistration"
               label="Is your registration conditional?"
             >
               <RadioItem
@@ -83,15 +83,15 @@
               >
                 <DateInput
                   id="gmc-yes-date"
-                  v-model="gmcConditionalYesDate"
+                  v-model="application.gmcConditionalYesDate"
                   label="When did you become a member?"
                 />
                 <TextField
-                  v-model="gmcConditionalYesNumber"
+                  v-model="application.gmcConditionalYesNumber"
                   label="Membership number?"
                 />
                 <TextField
-                  v-model="gmcConditionalYesDetails"
+                  v-model="application.gmcConditionalYesDetails"
                   label="Give details of the conditions and dates"
                 />
               </RadioItem>
@@ -101,11 +101,11 @@
               >
                 <DateInput
                   id="gmc-no-date"
-                  v-model="gmcConditionalNoDate"
+                  v-model="application.gmcConditionalNoDate"
                   label="When did you become a member?"
                 />
                 <TextField
-                  v-model="gmcConditionalNoNumber"
+                  v-model="application.gmcConditionalNoNumber"
                   label="Membership number?"
                 />
               </RadioItem>
@@ -117,7 +117,7 @@
           >
             <RadioGroup
               id="royal-college-of-psychiatrists-fellow-3-years"
-              v-model="royalCollegePsychiatristsFellow3Years"
+              v-model="application.royalCollegePsychiatristsFellow3Years"
               label="You have been a member or fellow for 3 years?"
             >
               <RadioItem
@@ -125,11 +125,11 @@
                 label="Yes"
               >
                 <TextField
-                  v-model="rcpYesDate"
+                  v-model="application.rcpYesDate"
                   label="When did you become a member?"
                 />
                 <TextField
-                  v-model="rcpYesNumber"
+                  v-model="application.rcpYesNumber"
                   label="Membership number?"
                 />
               </RadioItem>
@@ -138,11 +138,11 @@
                 label="No (if less than 3 years you might not be successful in this post)"
               >
                 <TextField
-                  v-model="rcpNoDate"
+                  v-model="application.rcpNoDate"
                   label="When did you become a member?"
                 />
                 <TextField
-                  v-model="rcpNoNumber"
+                  v-model="application.rcpNoNumber"
                   label="Membership number?"
                 />
               </RadioItem>
@@ -153,11 +153,11 @@
             label="Royal Institution of Chartered Surveyors"
           >
             <TextField
-              v-model="royalInstitutionCharteredSurveyorsDate"
+              v-model="application.royalInstitutionCharteredSurveyorsDate"
               label="When did you become a member?"
             />
             <TextField
-              v-model="royalInstitutionCharteredSurveyorsNumber"
+              v-model="application.royalInstitutionCharteredSurveyorsNumber"
               label="Membership number?"
             />
           </RadioItem>
@@ -166,15 +166,15 @@
             label="Other"
           >
             <TextField
-              v-model="otherProfessionalMemberships"
+              v-model="application.otherProfessionalMemberships"
               label="Associations or Institutes"
             />
             <TextField
-              v-model="otherProfessionalMembershipsDate"
+              v-model="application.otherProfessionalMembershipsDate"
               label="When did you become a member?"
             />
             <TextField
-              v-model="otherProfessionalMembershipsNumber"
+              v-model="application.otherProfessionalMembershipsNumber"
               label="Membership number?"
             />
           </RadioItem>
@@ -205,10 +205,7 @@ export default {
     DateInput,
   },
   data(){
-    return {
-      repeatableFields: {
-        Qualification,
-      },
+    const defaults = {
       qualifications: null,
       professionalMemberships: null,
       charteredAssociationBuildingEngineersDate: null,
@@ -235,10 +232,20 @@ export default {
       otherProfessionalMembershipsNumber: null,
       unknownVariable: null,
     };
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
+    return {
+      application: application,
+      repeatableFields: {
+        Qualification,
+      },
+
+    };
   },
   methods: {
-    save() {
-
+    async save() {
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
