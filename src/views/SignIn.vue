@@ -13,6 +13,7 @@
         Enter your email address
       </p>
       <FirebaseUI @signInSuccess="loginRedirect" />
+      {{ exerciseId }}
     </div>
   </div>
 </template>
@@ -24,10 +25,21 @@ export default {
   components: {
     FirebaseUI,
   } ,
+  computed: {
+    exerciseId () {
+      return this.$store.state.exercise.record && this.$store.state.exercise.record.id;
+    },
+  },
   methods: {
     loginRedirect(authResult) {
-      this.$store.dispatch('setCurrentUser', authResult.user);
-      this.$router.push('/vacancies');
+      this.$store.dispatch('auth/setCurrentUser', authResult.user);
+      if (this.exerciseId) {
+        console.log('login successful, go to exercise', this.exerciseId);
+        this.$router.go(`/apply/${this.exerciseId}`);
+      } else {
+        console.log('login successful, go to vacancies list');
+        this.$router.go('/vacancies');
+      }
     },
   },
 };
