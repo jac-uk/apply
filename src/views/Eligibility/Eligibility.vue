@@ -1,10 +1,9 @@
 <template>
   <div class="govuk-grid-row">
-    <form @submit.prevent="save">
+    <form @submit.prevent="passOrFail">
       <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
           {{ vacancy.referenceNumber }} {{ vacancy.name }}
-          Attorney
         </span>
 
         <h1 class="govuk-heading-xl">
@@ -18,7 +17,7 @@
 
         <RadioGroup
           id="citizenship"
-          v-model="citizenship"
+          v-model="eligibility.citizenship"
           label="Citizenship"
         >
           <p class="govuk-body-m">
@@ -37,7 +36,7 @@
 
         <RadioGroup
           id="character"
-          v-model="character"
+          v-model="eligibility.character"
           label="Character"
         >
           <p class="govuk-body-m govuk-!-margin-top-0">
@@ -64,7 +63,7 @@
 
         <RadioGroup
           id="reasonable-length-of-service"
-          v-model="reasonableLOS"
+          v-model="eligibility.reasonableLOS"
           label="Reasonable length of service"
         >
           <p class="govuk-body-m">
@@ -82,7 +81,7 @@
 
         <RadioGroup
           id="qualifications-and-experience"
-          v-model="qualificationsExperience"
+          v-model="eligibility.qualificationsExperience"
           label="Qualifications and experience"
         >
           <p class="govuk-body-m govuk-!-margin-top-0">
@@ -136,20 +135,31 @@ export default {
   },
   data(){
     return {
-      citizenship: booleanOrNull(null),
-      character: booleanOrNull(null),
-      reasonableLOS: booleanOrNull(null),
-      qualificationsExperience: booleanOrNull(null),
+      eligibility: {
+        citizenship: booleanOrNull(null),
+        character: booleanOrNull(null),
+        reasonableLOS: booleanOrNull(null),
+        qualificationsExperience: booleanOrNull(null),
+      },
     };
   },
   computed: {
     vacancy () {
       return this.$store.state.exercise.record;
     },
-  },  
+  },
   methods: {
-    save() {
-
+    passOrFail () {
+      let isOkay = true;
+      if (this.eligibility.citizenship !== true ) { isOkay = false; }
+      if (this.eligibility.character !== true) { isOkay = false; }
+      if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
+      if (this.eligibility.qualificationsExperience !== true) { isOkay = false; }
+      if (isOkay) {
+        this.$router.push({ name: 'eligibility-pass' });
+      } else {
+        this.$router.push({ name: 'eligibility-fail' });
+      }
     },
   },
 };

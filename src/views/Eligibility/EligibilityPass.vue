@@ -2,8 +2,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
-        092 Registrar of Criminal Appeals, Master of the Crown Office and Queen’s Coroner &amp;
-        Attorney
+        {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
 
       <h1 class="govuk-heading-xl">
@@ -24,6 +23,11 @@
 <script>
 
 export default {
+  computed: {
+    vacancy () {
+      return this.$store.state.exercise.record;
+    },
+  },
 };
 
 </script>
