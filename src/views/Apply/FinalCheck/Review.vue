@@ -6,6 +6,8 @@
           Review your application
         </h1>
 
+        <h1> {{ exercise.name }} </h1>
+
         <div class="govuk-!-margin-top-9">
           <h2
             class="govuk-heading-l"
@@ -369,7 +371,7 @@
         </dl>
 
         <div
-          v-if="exercise.typeOfExercise === 'non-legal' "
+          v-if="isNonLegal"
           class="govuk-!-margin-top-9"
         >
           <h2
@@ -388,7 +390,7 @@
         </div>
 
         <dl
-          v-if="exercise.typeOfExercise === 'non-legal' "
+          v-if="isNonLegal"
           class="govuk-summary-list govuk-!-margin-bottom-8"
         >
           <div class="govuk-summary-list__row">
@@ -529,7 +531,7 @@
         </dl>
 
         <div
-          v-if="exercise.typeOfExercise === 'non-legal' || exercise.typeOfExercise === 'leadership' "
+          v-if="isNonLegal || isLeadership"
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
         >
@@ -566,7 +568,6 @@
         </div>
 
         <div
-          v-if="exercise.typeOfExercise === 'non-legal' || exercise.typeOfExercise === 'leadership' "
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
         >
@@ -618,16 +619,6 @@
 
 <script>
 export default {
-  // // data(){
-  // //   // // const exercise = this.$store.getters['exercise/data']();
-  // //   // const application = this.$store.getters['application/data']();
-  // //   // const candidate = this.$store.getters['candidate/data']();
-  // //   // return {
-  // //   //   // exercise: exercise,
-  // //   //   application: application,
-  // //   //   candidate: candidate,
-  // //   // };
-  // },
   computed: {
     exercise () {
       return this.$store.state.exercise.record;
@@ -637,6 +628,18 @@ export default {
     },
     candidate () {
       return this.$store.state.candidate.record;
+    },
+    isNonLegal () {
+      return this.exercise.typeOfExercise === 'non-legal';
+    },
+    isLegal () {
+      return this.exercise.typeOfExercise === 'legal';
+    },
+    isLeadership () {
+      return this.exercise.typeOfExercise === 'leadership';
+    },
+    isSenior () {
+      return this.exercise.typeOfExercise == 'senior';
     },
   },
 };
