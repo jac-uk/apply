@@ -271,13 +271,13 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters.isSignedIn;
-
   if (requiresAuth && !isSignedIn) {
     // @todo Save destination so we can navigate there after sign-in
     return next({ name: 'sign-in' });
+  } else {
+    return next();
   }
 
-  return next();
 });
 
 // Global after hook to set an appropriate title for the page

@@ -71,7 +71,7 @@ export default {
     },
     signOut() {
       auth().signOut();
-      this.$router.go('/sign-in');
+      this.$router.go('/vacancies');
     },
   },
 };
