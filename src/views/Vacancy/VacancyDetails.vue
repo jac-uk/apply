@@ -22,11 +22,7 @@
       </h2>
 
       <p class="govuk-body">
-        As {{ vacancy.name }}... blah blah blah
-      </p>
-
-      <p class="govuk-body">
-        NEEDS CODING - bunch of stuff about what it takes to be a judge.
+        {{ vacancy.aboutTheRole }}
       </p>
 
       <h2 class="govuk-heading-l">
