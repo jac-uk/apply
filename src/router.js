@@ -79,7 +79,22 @@ const router = new Router({
             title: 'Eligibility Checker',
           },
         },
-
+        {
+          path: 'eligibility-pass',
+          component: EligibilityPass,
+          name: 'eligibility-pass',
+          meta: {
+            title: 'Eligibility Pass',
+          },
+        },        
+        {
+          path: 'eligibility-fail',
+          component: EligibilityFail,
+          name: 'eligibility-fail',
+          meta: {
+            title: 'Eligibility Fail',
+          },
+        },
       ],
     },
     // {
