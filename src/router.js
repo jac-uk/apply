@@ -97,36 +97,6 @@ const router = new Router({
         },
       ],
     },
-    // {
-    //   path: '/eligibility/',
-    //   component: Eligibility,
-    //   children: [
-    //     {
-    //       path: '',
-    //       component: EligibilityChecker,
-    //       name: 'eligibility-checker',
-    //       meta: {
-    //         title: 'Eligibility Checker',
-    //       },
-    //     },
-    //     {
-    //       path: 'eligibility-pass',
-    //       component: EligibilityPass,
-    //       name: 'eligibility-pass',
-    //       meta: {
-    //         title: 'Eligibility Pass',
-    //       },
-    //     },
-    //     {
-    //       path: 'eligibility-fail',
-    //       component: EligibilityFail,
-    //       name: 'eligibility-fail',
-    //       meta: {
-    //         title: 'Eligibility Fail',
-    //       },
-    //     },
-    //   ],
-    // },
     // Apply for a role
     {
       path: '/apply/:id',
@@ -277,14 +247,14 @@ const router = new Router({
       meta: {
         title: 'Sign In',
       },
-      beforeEnter: (to, from, next) => {
-        const isSignedIn = store.getters.isSignedIn;
-        if(isSignedIn) {
-          return next({ name: 'job-advert' });
-        }
+      // beforeEnter: (to, from, next) => {
+      //   const isSignedIn = store.getters.isSignedIn;
+      //   if(isSignedIn) {
+      //     return next({ name: 'job-advert' });
+      //   }
 
-        return next();
-      },
+      //   return next();
+      // },
     },
   ],
   scrollBehavior(to, from, savedPosition) {

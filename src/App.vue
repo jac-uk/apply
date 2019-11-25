@@ -14,11 +14,18 @@
           </div>
           <div class="govuk-grid-column-one-third">
             <button
-              v-if="$route.name !== 'sign-in'"
+              v-if="isSignedIn"
               class="govuk-button"
               @click="signOut"
             >
               Sign Out
+            </button>
+            <button
+              v-else
+              class="govuk-button"
+              @click="signIn"
+            >
+              Sign In
             </button>
           </div>
         </div>
@@ -52,7 +59,16 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    isSignedIn() {
+      // @todo sync up with vuex store
+      return auth().currentUser ? true : false;
+    },
+  },
   methods: {
+    signIn() {
+      this.$router.push({ name: 'sign-in' });
+    },
     signOut() {
       auth().signOut();
       this.$router.go('/sign-in');
