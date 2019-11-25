@@ -3,7 +3,7 @@
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
-          092 Registrar of Criminal Appeals, Master of the Crown Office and Queen’s Coroner &amp;
+          {{ vacancy.referenceNumber }} {{ vacancy.name }}
           Attorney
         </span>
 
@@ -142,6 +142,11 @@ export default {
       qualificationsExperience: booleanOrNull(null),
     };
   },
+  computed: {
+    vacancy () {
+      return this.$store.state.exercise.record;
+    },
+  },  
   methods: {
     save() {
 
