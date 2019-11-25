@@ -5,7 +5,7 @@
         {{ vacancy.name }}
       </h1>
 
-      <p><span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> NEEDS CODING </span></p>
+      <p><span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span></p>
       <p><span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span></p>
       <p><span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping }}</span></p>
       <p class="govuk-!-margin-bottom-8">
@@ -66,11 +66,13 @@
         details about what you’ll need to prepare for the day.
       </p>
 
-      <button
+      <RouterLink
         class="govuk-button"
+        data-module="govuk-button"
+        :to="{ name: 'vacancy-message' }"
       >
-        Check if you're eligible and apply
-      </button>
+        Check if you're eligibile and apply
+      </RouterLink>
 
       <p class="govuk-body">
         <a
