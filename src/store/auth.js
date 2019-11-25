@@ -1,4 +1,5 @@
 const module = {
+  namespaced: true,
   state: {
     currentUser: null,
   },

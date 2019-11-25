@@ -7,12 +7,13 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
       <p>Pellentesque elit eget gravida cum sociis natoque penatibus et magnis. </p>
       <p>Fermentum posuere urna nec tincidunt praesent semper feugiat.</p>  
-      <button
+      <RouterLink
         class="govuk-button govuk-button--secondary"
         data-module="govuk-button"
+        :to="{ name: 'eligibility' }"
       >
         Continue
-      </button>      
+      </RouterLink>   
     </div>
   </div>
 </template>
