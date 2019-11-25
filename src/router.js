@@ -2,14 +2,18 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 
-import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
 
+// Vacancies
+import Vacancies from '@/views/Vacancies';
+import Vacancy from '@/views/Vacancy';
+import VacancyDetails from '@/views/Vacancy/VacancyDetails';
+import VacancyMessage from '@/views/Vacancy/VacancyMessage';
+
 //Eligibility
-// import Eligibility from '@/views/Eligibility/Eligibility';
-// import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
-// import EligibilityPass from '@/views/Eligibility/EligibilityPass';
-// import EligibilityFail from '@/views/Eligibility/EligibilityFail';
+import Eligibility from '@/views/Eligibility/Eligibility';
+import EligibilityPass from '@/views/Eligibility/EligibilityPass';
+import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
@@ -37,16 +41,46 @@ const router = new Router({
   routes: [
     {
       path: '*',
-      redirect: '/job-advert',
+      redirect: '/vacancies',
     },
     {
-      path: '/job-advert',
-      name: 'job-advert',
-      component: JobAdvert,
+      path: '/vacancies',
+      name: 'vacancies',
+      component: Vacancies,
       meta: {
-        requiresAuth: true,
-        title: 'Job Advert',
+        title: 'Vacancies',
       },
+    },
+    {
+      path: '/vacancy/:id',
+      component: Vacancy,
+      children: [
+        {
+          path: '',
+          component: VacancyDetails,
+          name: 'vacancy-details',
+          meta: {
+            title: 'Vacancy details',
+          },
+        },
+        {
+          path: 'message',
+          component: VacancyMessage,
+          name: 'vacancy-message',
+          meta: {
+            title: 'Vacancy message',
+          },
+        },
+        {
+          path: 'eligibility',
+          component: Eligibility,
+          name: 'eligibility',
+          meta: {
+            title: 'Eligibility Checker',
+          },
+        },
+
+      ],
     },
     // {
     //   path: '/eligibility/',
