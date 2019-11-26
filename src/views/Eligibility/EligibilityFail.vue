@@ -23,10 +23,13 @@
       </button>
 
       <p class="govuk-body-m">
-        <a
+        <RouterLink
           class="govuk-link"
-          href="#"
-        >Continue to apply</a>
+          data-module="govuk-button"
+          :to="{ name: 'sign-in' }"
+        >
+          Continue to apply
+        </RouterLink>         
       </p>
     </div>
   </div>

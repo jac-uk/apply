@@ -12,10 +12,13 @@
       <p class="govuk-body-m">
         Based on your answers, it looks like you can apply for this role.
       </p>
-
-      <button class="govuk-button">
+      <RouterLink
+        class="govuk-button"
+        data-module="govuk-button"
+        :to="{ name: 'sign-in' }"
+      >
         Continue
-      </button>
+      </RouterLink> 
     </div>
   </div>
 </template>
