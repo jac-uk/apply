@@ -48,7 +48,7 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ candidate.dateOfBirth }}
+              {{ candidate.dateOfBirth.toLocaleDateString() }}
             </dd>
           </div>
 
@@ -61,14 +61,14 @@
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Citizenship
             </dt>
             <dd class="govuk-summary-list__value">
               ... goes here
             </dd>
-          </div>
+          </div> -->
         </dl>
 
         <div class="govuk-!-margin-top-9">
@@ -93,36 +93,46 @@
               Been cautioned or convicted of a criminal offence
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.criminalConvictionCaution }}:
-              {{ application.criminalConvictionCautionDetails }}
+              {{ booleanAmender(application.criminalConvictionCaution) }}
+              <p
+                v-if="detailsDetector(application.criminalConvictionCautionDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.criminalConvictionCautionDetails }}
+              </p>
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Received a non-motoring penalty notice
             </dt>
             <dd class="govuk-summary-list__value">
               UNSURE
             </dd>
-          </div>
+          </div> -->
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been disqualified from driving, or convicted for driving under the influence of drink or drugs
             </dt>
             <dd class="govuk-summary-list__value">
               UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have any endorsements on your licence, or received any motoring fixed-penalty notices
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.motoringOffencesAndSixPlusPoints }}:
-              {{ application.motoringOffencesAndSixPlusPointsDetails }}
+              {{ booleanAmender(application.motoringOffencesAndSixPlusPoints) }}:
+              <p
+                v-if="detailsDetector(application.motoringOffencesAndSixPlusPoints)"
+                class="govuk-body"
+              >
+                Details: {{ application.motoringOffencesAndSixPlusPointsDetails }}
+              </p>
             </dd>
           </div>
 
@@ -131,7 +141,7 @@
               Been declared bankrupt
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.declaredBankrupt }}
+              {{ booleanAmender(application.declaredBankrupt) }}
             </dd>
           </div>
 
@@ -140,8 +150,13 @@
               Filed late tax returns or been fined my HMRC
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.financialDifficulties }}:
-              {{ application.financialDifficultiesDetails }}
+              {{ booleanAmender(application.financialDifficulties) }}:
+              <p
+                v-if="detailsDetector(application.financialDifficultiesDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.financialDifficultiesDetails }}
+              </p>
             </dd>
           </div>
 
@@ -150,27 +165,37 @@
               Been subject to professional negligence, wrongful dismissal, discrimination or harassment proceedings
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.conductNegligenceInvestigation }}:
-              {{ application.conductNegligenceInvestigationDetails }}
+              {{ booleanAmender(application.conductNegligenceInvestigation) }}:
+              <p
+                v-if="detailsDetector(application.conductNegligenceInvestigationDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.conductNegligenceInvestigationDetails }}
+              </p>
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been subject to complaints or disciplinary action, or been asked to resign from a position
             </dt>
             <dd class="govuk-summary-list__value">
               UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have any other issues that you think we should know about when considering your character
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.otherCharacterIssues }}:
-              {{ application.otherCharacterIssuesDetails }}
+              {{ booleanAmender(application.otherCharacterIssues) }}:
+              <p
+                v-if="detailsDetector(application.otherCharacterIssuesDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.otherCharacterIssuesDetails }}
+              </p>
             </dd>
           </div>
         </dl>
@@ -206,8 +231,13 @@
               Religion or faith are you
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.religionFaith }}:
-              {{ application.otherReligionDetails }}
+              {{ application.religionFaith }}
+              <p
+                v-if="detailsDetector(application.otherReligionDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.otherReligionDetails }}
+              </p>
             </dd>
           </div>
 
@@ -225,18 +255,18 @@
               Changed gender
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.changedGender }}
+              {{ booleanAmender(application.changedGender) }}
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been declared bankrupt
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
@@ -252,8 +282,13 @@
               Disability
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.disability }}:
-              {{ application.disabilityDetails }}
+              {{ booleanAmender(application.disability) }}
+              <p
+                v-if="detailsDetector(application.disabilityDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.disabilityDetails }}
+              </p>
             </dd>
           </div>
 
@@ -271,7 +306,7 @@
               Attended Oxbridge universities
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.oxbridgeUni }}
+              {{ booleanAmender(application.oxbridgeUni) }}
             </dd>
           </div>
 
@@ -280,7 +315,7 @@
               First generation to go to university
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.firstGenerationStudent }}
+              {{ booleanAmender(application.firstGenerationStudent) }}
             </dd>
           </div>
 
@@ -288,8 +323,15 @@
             <dt class="govuk-summary-list__key">
               Professional background
             </dt>
-            <dd class="govuk-summary-list__value">
-              {{ application.professionalBackground }}
+            <dd
+              class="govuk-summary-list__value"
+            >
+              <li
+                v-for="item in application.currentLegalRole"
+                :key="item.name"
+              >
+                {{ item }}
+              </li>
             </dd>
           </div>
 
@@ -297,9 +339,13 @@
             <dt class="govuk-summary-list__key">
               Current legal role
             </dt>
-            <dd class="govuk-summary-list__value">
-              {{ application.currentLegalRole }}:
-              {{ application.otherCurrentLegalRoleDetails }}
+            <dd
+              class="govuk-summary-list__value"
+            >
+              {{ item }}
+              <p class="govuk-body">
+                {{ application.otherCurrentLegalRoleDetails }}
+              </p>
             </dd>
           </div>
 
@@ -364,7 +410,7 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.date }}</li>
+                <li>{{ item.date.toLocaleDateString() }}</li>
               </ul>
             </dd>
           </div>
@@ -452,7 +498,7 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.startDate }} to {{ item.endDate }}</li>
+                <li>{{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}</li>
               </ul>
             </dd>
           </div>
@@ -640,6 +686,15 @@ export default {
     },
     isSenior () {
       return this.exercise.typeOfExercise == 'senior';
+    },
+  },
+  methods: {
+    booleanAmender (value) {
+      if (value === true) { return 'Yes'; }
+      if (value === false) { return 'No'; }
+    },
+    detailsDetector (value) {
+      if (value !== null) {return true;}
     },
   },
 };
