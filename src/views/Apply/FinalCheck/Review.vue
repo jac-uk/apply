@@ -48,7 +48,9 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ candidate.dateOfBirth.toLocaleDateString() }}
+              <p v-if="candidate.dateOfBirth">
+                {{ candidate.dateOfBirth.toLocaleDateString() }}
+              </p>
             </dd>
           </div>
 
@@ -327,7 +329,7 @@
               class="govuk-summary-list__value"
             >
               <li
-                v-for="item in application.currentLegalRole"
+                v-for="item in application.professionalBackground"
                 :key="item.name"
               >
                 {{ item }}
@@ -342,10 +344,12 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ item }}
-              <p class="govuk-body">
-                {{ application.otherCurrentLegalRoleDetails }}
-              </p>
+              <li
+                v-for="item in application.currentLegalRole"
+                :key="item.name"
+              >
+                {{ item }}
+              </li>
             </dd>
           </div>
 
@@ -410,7 +414,9 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.date.toLocaleDateString() }}</li>
+                <li v-if="item.date">
+                  {{ item.date.toLocaleDateString() }}
+                </li>
               </ul>
             </dd>
           </div>
@@ -498,7 +504,9 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}</li>
+                <li v-if="item.startDate && item.endDate">
+                  {{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}
+                </li>
               </ul>
             </dd>
           </div>
