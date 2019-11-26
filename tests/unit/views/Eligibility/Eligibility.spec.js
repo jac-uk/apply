@@ -3,8 +3,18 @@ import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 
+const mockStore = {
+  state: {
+    exercise: {
+      record: {},
+    },
+  },
+};
+
 const createTestSubject = () => {
-  return shallowMount(Eligibility);
+  return shallowMount(Eligibility, { mocks: {
+    $store: mockStore,
+  } });
 };
 
 describe('views/Eligibility/Eligibility', () => {
