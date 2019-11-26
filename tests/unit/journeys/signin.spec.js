@@ -68,7 +68,7 @@ describe('Sign in journey', () => {
 
   describe('for authenticated user', () => {
     beforeEach(() => {
-      store.dispatch('setCurrentUser', user);
+      store.dispatch('auth/setCurrentUser', user);
     });
 
     describe.each(routes)('when they visit page %s', (routeName, routePath) => {

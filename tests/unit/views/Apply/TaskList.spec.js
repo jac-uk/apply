@@ -9,11 +9,20 @@ const mockRoute = {
 const mockRouter = {
  replace: jest.fn(),
 };
+const mockStore = {
+  dispatch: jest.fn(),
+  state: {
+    exercise: {
+      record: {},
+    },
+  },
+};
 const createTestSubject = () => {
  return shallowMount(TaskList, {
    mocks: {
      $route: mockRoute,
      $router: mockRouter,
+     $store: mockStore,
    },
    stubs: {
      'RouterLink': true,
