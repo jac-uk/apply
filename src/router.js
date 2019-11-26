@@ -270,7 +270,7 @@ const router = new Router({
 // It redirects unauthorized users to a sign-in page.
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const isSignedIn = store.getters.isSignedIn;
+  const isSignedIn = store.getters['auth/isSignedIn'];
   if (requiresAuth && !isSignedIn) {
     // @todo Save destination so we can navigate there after sign-in
     return next({ name: 'sign-in' });

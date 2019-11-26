@@ -62,7 +62,7 @@ export default {
   computed: {
     isSignedIn() {
       // @todo sync up with vuex store
-      return auth().currentUser ? true : false;
+      return this.$store.getters['auth/isSignedIn'];
     },
   },
   methods: {
@@ -71,7 +71,9 @@ export default {
     },
     signOut() {
       auth().signOut();
-      this.$router.go('/vacancies');
+      if (this.$route.name != 'vacancies') {
+        this.$router.push({ name: 'vacancies' });
+      }
     },
   },
 };
