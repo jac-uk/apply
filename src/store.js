@@ -5,6 +5,7 @@ Vue.use(Vuex);
 
 // Vuex modules
 import auth from '@/store/auth';
+import vacancies from '@/store/vacancies';
 import exercise from '@/store/exercise';
 import candidate from '@/store/candidate';
 import application from '@/store/application';
@@ -14,6 +15,7 @@ const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     auth,
+    vacancies,
     exercise,
     candidate,
     application,

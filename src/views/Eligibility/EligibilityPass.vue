@@ -2,8 +2,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
-        092 Registrar of Criminal Appeals, Master of the Crown Office and Queen’s Coroner &amp;
-        Attorney
+        {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
 
       <h1 class="govuk-heading-xl">
@@ -13,10 +12,13 @@
       <p class="govuk-body-m">
         Based on your answers, it looks like you can apply for this role.
       </p>
-
-      <button class="govuk-button">
+      <RouterLink
+        class="govuk-button"
+        data-module="govuk-button"
+        :to="{ name: 'sign-in' }"
+      >
         Continue
-      </button>
+      </RouterLink> 
     </div>
   </div>
 </template>
@@ -24,6 +26,11 @@
 <script>
 
 export default {
+  computed: {
+    vacancy () {
+      return this.$store.state.exercise.record;
+    },
+  },
 };
 
 </script>

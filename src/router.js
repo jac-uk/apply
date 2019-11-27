@@ -2,14 +2,18 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 
-import JobAdvert from '@/views/JobAdvert';
 import SignIn from '@/views/SignIn';
 
+// Vacancies
+import Vacancies from '@/views/Vacancies';
+import Vacancy from '@/views/Vacancy';
+import VacancyDetails from '@/views/Vacancy/VacancyDetails';
+import VacancyMessage from '@/views/Vacancy/VacancyMessage';
+
 //Eligibility
-// import Eligibility from '@/views/Eligibility/Eligibility';
-// import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
-// import EligibilityPass from '@/views/Eligibility/EligibilityPass';
-// import EligibilityFail from '@/views/Eligibility/EligibilityFail';
+import Eligibility from '@/views/Eligibility/Eligibility';
+import EligibilityPass from '@/views/Eligibility/EligibilityPass';
+import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
@@ -37,47 +41,62 @@ const router = new Router({
   routes: [
     {
       path: '*',
-      redirect: '/job-advert',
+      redirect: '/vacancies',
     },
     {
-      path: '/job-advert',
-      name: 'job-advert',
-      component: JobAdvert,
+      path: '/vacancies',
+      name: 'vacancies',
+      component: Vacancies,
       meta: {
-        requiresAuth: true,
-        title: 'Job Advert',
+        title: 'Vacancies',
       },
     },
-    // {
-    //   path: '/eligibility/',
-    //   component: Eligibility,
-    //   children: [
-    //     {
-    //       path: '',
-    //       component: EligibilityChecker,
-    //       name: 'eligibility-checker',
-    //       meta: {
-    //         title: 'Eligibility Checker',
-    //       },
-    //     },
-    //     {
-    //       path: 'eligibility-pass',
-    //       component: EligibilityPass,
-    //       name: 'eligibility-pass',
-    //       meta: {
-    //         title: 'Eligibility Pass',
-    //       },
-    //     },
-    //     {
-    //       path: 'eligibility-fail',
-    //       component: EligibilityFail,
-    //       name: 'eligibility-fail',
-    //       meta: {
-    //         title: 'Eligibility Fail',
-    //       },
-    //     },
-    //   ],
-    // },
+    {
+      path: '/vacancy/:id',
+      component: Vacancy,
+      children: [
+        {
+          path: '',
+          component: VacancyDetails,
+          name: 'vacancy-details',
+          meta: {
+            title: 'Vacancy details',
+          },
+        },
+        {
+          path: 'message',
+          component: VacancyMessage,
+          name: 'vacancy-message',
+          meta: {
+            title: 'Vacancy message',
+          },
+        },
+        {
+          path: 'eligibility',
+          component: Eligibility,
+          name: 'eligibility',
+          meta: {
+            title: 'Eligibility Checker',
+          },
+        },
+        {
+          path: 'eligibility-pass',
+          component: EligibilityPass,
+          name: 'eligibility-pass',
+          meta: {
+            title: 'Eligibility Pass',
+          },
+        },        
+        {
+          path: 'eligibility-fail',
+          component: EligibilityFail,
+          name: 'eligibility-fail',
+          meta: {
+            title: 'Eligibility Fail',
+          },
+        },
+      ],
+    },
     // Apply for a role
     {
       path: '/apply/:id',
@@ -228,14 +247,14 @@ const router = new Router({
       meta: {
         title: 'Sign In',
       },
-      beforeEnter: (to, from, next) => {
-        const isSignedIn = store.getters.isSignedIn;
-        if(isSignedIn) {
-          return next({ name: 'job-advert' });
-        }
+      // beforeEnter: (to, from, next) => {
+      //   const isSignedIn = store.getters.isSignedIn;
+      //   if(isSignedIn) {
+      //     return next({ name: 'job-advert' });
+      //   }
 
-        return next();
-      },
+      //   return next();
+      // },
     },
   ],
   scrollBehavior(to, from, savedPosition) {
@@ -251,14 +270,14 @@ const router = new Router({
 // It redirects unauthorized users to a sign-in page.
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-  const isSignedIn = store.getters.isSignedIn;
-
+  const isSignedIn = store.getters['auth/isSignedIn'];
   if (requiresAuth && !isSignedIn) {
     // @todo Save destination so we can navigate there after sign-in
     return next({ name: 'sign-in' });
+  } else {
+    return next();
   }
 
-  return next();
 });
 
 // Global after hook to set an appropriate title for the page

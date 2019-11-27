@@ -1,13 +1,23 @@
-import EligibilityChecker from '@/views/Eligibility/EligibilityChecker';
+import Eligibility from '@/views/Eligibility/Eligibility';
 import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 
-const createTestSubject = () => {
-  return shallowMount(EligibilityChecker);
+const mockStore = {
+  state: {
+    exercise: {
+      record: {},
+    },
+  },
 };
 
-describe('views/Eligibility/EligibilityChecker', () => {
+const createTestSubject = () => {
+  return shallowMount(Eligibility, { mocks: {
+    $store: mockStore,
+  } });
+};
+
+describe('views/Eligibility/Eligibility', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();

@@ -6,6 +6,8 @@
           Review your application
         </h1>
 
+        <h1> {{ exercise.name }} </h1>
+
         <div class="govuk-!-margin-top-9">
           <h2
             class="govuk-heading-l"
@@ -25,10 +27,10 @@
         <dl class="govuk-summary-list">
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
-              Full name
+              Full Name
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ candidate.fullName }}
             </dd>
           </div>
 
@@ -37,7 +39,7 @@
               Email address
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ candidate.email }}
             </dd>
           </div>
 
@@ -46,7 +48,9 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              <p v-if="candidate.dateOfBirth">
+                {{ candidate.dateOfBirth.toLocaleDateString() }}
+              </p>
             </dd>
           </div>
 
@@ -55,18 +59,18 @@
               NI Number
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ candidate.nationalInsuranceNumber }}
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Citizenship
             </dt>
             <dd class="govuk-summary-list__value">
               ... goes here
             </dd>
-          </div>
+          </div> -->
         </dl>
 
         <div class="govuk-!-margin-top-9">
@@ -91,34 +95,46 @@
               Been cautioned or convicted of a criminal offence
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.criminalConvictionCaution) }}
+              <p
+                v-if="detailsDetector(application.criminalConvictionCautionDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.criminalConvictionCautionDetails }}
+              </p>
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Received a non-motoring penalty notice
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              UNSURE
             </dd>
-          </div>
+          </div> -->
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been disqualified from driving, or convicted for driving under the influence of drink or drugs
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have any endorsements on your licence, or received any motoring fixed-penalty notices
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.motoringOffencesAndSixPlusPoints) }}:
+              <p
+                v-if="detailsDetector(application.motoringOffencesAndSixPlusPoints)"
+                class="govuk-body"
+              >
+                Details: {{ application.motoringOffencesAndSixPlusPointsDetails }}
+              </p>
             </dd>
           </div>
 
@@ -127,7 +143,7 @@
               Been declared bankrupt
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.declaredBankrupt) }}
             </dd>
           </div>
 
@@ -136,7 +152,13 @@
               Filed late tax returns or been fined my HMRC
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.financialDifficulties) }}:
+              <p
+                v-if="detailsDetector(application.financialDifficultiesDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.financialDifficultiesDetails }}
+              </p>
             </dd>
           </div>
 
@@ -145,25 +167,37 @@
               Been subject to professional negligence, wrongful dismissal, discrimination or harassment proceedings
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.conductNegligenceInvestigation) }}:
+              <p
+                v-if="detailsDetector(application.conductNegligenceInvestigationDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.conductNegligenceInvestigationDetails }}
+              </p>
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been subject to complaints or disciplinary action, or been asked to resign from a position
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have any other issues that you think we should know about when considering your character
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.otherCharacterIssues) }}:
+              <p
+                v-if="detailsDetector(application.otherCharacterIssuesDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.otherCharacterIssuesDetails }}
+              </p>
             </dd>
           </div>
         </dl>
@@ -190,7 +224,7 @@
               Ethnic group
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.ethnicGroup }}
             </dd>
           </div>
 
@@ -199,7 +233,13 @@
               Religion or faith are you
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.religionFaith }}
+              <p
+                v-if="detailsDetector(application.otherReligionDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.otherReligionDetails }}
+              </p>
             </dd>
           </div>
 
@@ -208,7 +248,7 @@
               Gender
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.gender }}
             </dd>
           </div>
 
@@ -217,25 +257,25 @@
               Changed gender
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.changedGender) }}
             </dd>
           </div>
 
-          <div class="govuk-summary-list__row">
+          <!-- <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Been declared bankrupt
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              UNSURE
             </dd>
-          </div>
+          </div> -->
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Sexual orientation
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.sexualOrientation }}
             </dd>
           </div>
 
@@ -244,7 +284,13 @@
               Disability
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.disability) }}
+              <p
+                v-if="detailsDetector(application.disabilityDetails)"
+                class="govuk-body"
+              >
+                Details: {{ application.disabilityDetails }}
+              </p>
             </dd>
           </div>
 
@@ -253,7 +299,7 @@
               Attended state or fee-paying school
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.stateOrFeeSchool }}
             </dd>
           </div>
 
@@ -262,7 +308,7 @@
               Attended Oxbridge universities
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.oxbridgeUni) }}
             </dd>
           </div>
 
@@ -271,7 +317,7 @@
               First generation to go to university
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ booleanAmender(application.firstGenerationStudent) }}
             </dd>
           </div>
 
@@ -279,8 +325,15 @@
             <dt class="govuk-summary-list__key">
               Professional background
             </dt>
-            <dd class="govuk-summary-list__value">
-              ... goes here
+            <dd
+              class="govuk-summary-list__value"
+            >
+              <li
+                v-for="item in application.professionalBackground"
+                :key="item.name"
+              >
+                {{ item }}
+              </li>
             </dd>
           </div>
 
@@ -288,8 +341,15 @@
             <dt class="govuk-summary-list__key">
               Current legal role
             </dt>
-            <dd class="govuk-summary-list__value">
-              ... goes here
+            <dd
+              class="govuk-summary-list__value"
+            >
+              <li
+                v-for="item in application.currentLegalRole"
+                :key="item.name"
+              >
+                {{ item }}
+              </li>
             </dd>
           </div>
 
@@ -298,7 +358,7 @@
               Fee-paid judicial role experience
             </dt>
             <dd class="govuk-summary-list__value">
-              ... goes here
+              {{ application.feePaidJudicialRole }}
             </dd>
           </div>
         </dl>
@@ -322,7 +382,7 @@
         </div>
 
         <dl
-          v-for="item in qualifications"
+          v-for="item in application.qualifications"
           :key="item.name"
           class="govuk-summary-list govuk-!-margin-bottom-8"
         >
@@ -354,13 +414,16 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.date }}</li>
+                <li v-if="item.date">
+                  {{ item.date.toLocaleDateString() }}
+                </li>
               </ul>
             </dd>
           </div>
         </dl>
 
         <div
+          v-if="isNonLegal"
           class="govuk-!-margin-top-9"
         >
           <h2
@@ -379,6 +442,7 @@
         </div>
 
         <dl
+          v-if="isNonLegal"
           class="govuk-summary-list govuk-!-margin-bottom-8"
         >
           <div class="govuk-summary-list__row">
@@ -386,14 +450,7 @@
               Memberships
             </dt>
             <dd class="govuk-summary-list__value">
-              <ul class="govuk-list govuk-list--bullet">
-                <li
-                  v-for="item in memberships"
-                  :key="item.name"
-                >
-                  {{ item }}
-                </li>
-              </ul>
+              {{ application.professionalMemberships }}
             </dd>
           </div>
         </dl>
@@ -415,7 +472,7 @@
         </div>
 
         <dl
-          v-for="item in experience"
+          v-for="item in application.experience"
           :key="item.name"
           class="govuk-summary-list govuk-!-margin-bottom-8"
         >
@@ -436,7 +493,7 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.buisness }}</li>
+                <li>{{ item.orgBusinessName }}</li>
               </ul>
             </dd>
           </div>
@@ -447,7 +504,9 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li>{{ item.startDate }} to {{ item.endDate }}</li>
+                <li v-if="item.startDate && item.endDate">
+                  {{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}
+                </li>
               </ul>
             </dd>
           </div>
@@ -491,7 +550,7 @@
               Full name
             </dt>
             <dd class="govuk-summary-list__value">
-              ...  Assessor 1's goes here
+              {{ application.firstAssessorFullName }}
             </dd>
           </div>
 
@@ -500,7 +559,7 @@
               Email
             </dt>
             <dd class="govuk-summary-list__value">
-              ... Assessor 1's goes here
+              {{ application.firstAssessorEmail }}
             </dd>
           </div>
 
@@ -511,7 +570,7 @@
               Full name
             </dt>
             <dd class="govuk-summary-list__value">
-              ...  Assessor 2's goes here
+              {{ application.secondAssessorFullName }}
             </dd>
           </div>
 
@@ -520,13 +579,13 @@
               Email
             </dt>
             <dd class="govuk-summary-list__value">
-              ... Assessor 2's goes here
+              {{ application.secondAssessorEmail }}
             </dd>
           </div>
         </dl>
 
         <div
-          v-if="unknownVariable !== 'non-legal' || unknownVariable !== 'leadership' "
+          v-if="isNonLegal || isLeadership"
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
         >
@@ -563,7 +622,6 @@
         </div>
 
         <div
-          v-if="unknownVariable === 'non-legal' || unknownVariable === 'leadership' "
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
         >
@@ -615,15 +673,37 @@
 
 <script>
 export default {
-  data(){
-    return {
-      qualifications: [{ type: 'Developer 1', location: 'London', date: '25/10/2019' }, { type: 'Developer 2', location: 'London', date: '25/10/2020' }],
-      experience: [{ jobTitle: 'Developer 1', buisness: 'London', startDate: '25/10/2019', endDate: '25/10/2020', tasks: ['Task1', 'Task2', 'Task3'] },
-                   { jobTitle: 'Developer 2', buisness: 'London', startDate: '25/10/2021', endDate: '25/10/2022', tasks: ['Task1', 'Task2', 'Task3'] },
-                   { jobTitle: 'Developer 3', buisness: 'London', startDate: '25/10/2023', endDate: '25/10/2024', tasks: ['Task1', 'Task2', 'Task3'] }],
-      unknownVariable: null,
-      memberships: ['Membership 1', 'Membership 2', 'Membership 3'],
-    };
+  computed: {
+    exercise () {
+      return this.$store.state.exercise.record;
+    },
+    application () {
+      return this.$store.state.application.record;
+    },
+    candidate () {
+      return this.$store.state.candidate.record;
+    },
+    isNonLegal () {
+      return this.exercise.typeOfExercise === 'non-legal';
+    },
+    isLegal () {
+      return this.exercise.typeOfExercise === 'legal';
+    },
+    isLeadership () {
+      return this.exercise.typeOfExercise === 'leadership';
+    },
+    isSenior () {
+      return this.exercise.typeOfExercise == 'senior';
+    },
+  },
+  methods: {
+    booleanAmender (value) {
+      if (value === true) { return 'Yes'; }
+      if (value === false) { return 'No'; }
+    },
+    detailsDetector (value) {
+      if (value !== null) {return true;}
+    },
   },
 };
 </script>
