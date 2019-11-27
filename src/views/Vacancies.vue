@@ -4,7 +4,8 @@
       Open vacancies
     </h1>
     <ul class="govuk-list">
-      <li
+      <!-- <li
+
         class="govuk-!-margin-top-7"
       >
         <a
@@ -50,7 +51,7 @@
           for an alert about this exercise
         </p>
         <hr>
-      </li>
+      </li> -->
 
       <li
         v-for="vacancy in records"
@@ -111,9 +112,11 @@
 import { mapState } from 'vuex';
 
 export default {
-  computed: mapState('vacancies', [
-    'records',
-  ]),
+  computed: {
+    ...mapState('vacancies', [
+      'records',
+    ]),
+  },
   created() {
     this.$store.dispatch('vacancies/bind');
   },
