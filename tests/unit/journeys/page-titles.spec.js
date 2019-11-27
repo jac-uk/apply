@@ -4,7 +4,6 @@ import Router from 'vue-router';
 import Vuex from 'vuex';
 
 const routes = [
-  ['job-advert', 'Job Advert'],
   // ['eligibility-checker', 'Eligibility Checker'],
   // ['eligibility-pass', 'Eligibility Pass'],
   // ['eligibility-fail', 'Eligibility Fail'],
@@ -65,7 +64,7 @@ describe('Page titles', () => {
 
   describe.each(routes)('%s', (routeName, routeTitle) => {
     beforeEach(() => {
-     store.dispatch('setCurrentUser', user);
+     store.dispatch('auth/setCurrentUser', user);
      router.push({ name: routeName, params: { id: 123 } });
    });
 

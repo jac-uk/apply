@@ -3,19 +3,25 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import { auth } from '@/firebase';
-import * as Sentry from '@sentry/browser';
-import * as Integrations from '@sentry/integrations';
-
-Sentry.init({
-  dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
-  integrations: [new Integrations.Vue({ Vue, attachProps: true })],
-});
+// import * as Sentry from '@sentry/browser';
+// import * as Integrations from '@sentry/integrations';
+//
+// Sentry.init({
+//   dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
+//   integrations: [new Integrations.Vue({ Vue, attachProps: true })],
+// });
 Vue.config.productionTip = false;
 
 let vueInstance = false;
 auth().onAuthStateChanged( (user) => {
-  store.dispatch('setCurrentUser', user);
-
+  store.dispatch('auth/setCurrentUser', user);
+  if (store.getters['auth/isSignedIn']) {
+    if (store.getters['exercise/id']) {
+      router.push(`/apply/${store.getters['exercise/id']}`);
+    } else {
+      router.push('vacancies');
+    }
+  }
   if (!vueInstance) {
     vueInstance = new Vue({
       el: '#app',

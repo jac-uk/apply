@@ -1,10 +1,20 @@
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 import { shallowMount } from '@vue/test-utils';
 
+const mockStore = {
+  state: {
+    exercise: {
+      record: {},
+    },
+  },
+};
+
 describe('views/Eligibility/EligibilityFail', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(EligibilityFail);
+    wrapper = shallowMount(EligibilityFail, { mocks: {
+      $store: mockStore,
+    } });
   });
 
   describe('template', () => {

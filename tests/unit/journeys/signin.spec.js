@@ -5,7 +5,6 @@ import Vuex from 'vuex';
 
 const id = 12345;
 const routes = [
-  ['job-advert', '/job-advert'],
   // ['eligibility-checker', '/eligibility/'],
   // ['eligibility-pass', '/eligibility/eligibility-pass'],
   // ['eligibility-fail', '/eligibility/eligibility-fail'],
@@ -69,7 +68,7 @@ describe('Sign in journey', () => {
 
   describe('for authenticated user', () => {
     beforeEach(() => {
-      store.dispatch('setCurrentUser', user);
+      store.dispatch('auth/setCurrentUser', user);
     });
 
     describe.each(routes)('when they visit page %s', (routeName, routePath) => {
