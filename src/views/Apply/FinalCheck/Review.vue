@@ -504,8 +504,8 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
-                <li v-if="item.startDate && item.endDate">
-                  {{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}
+                <li v-if="item.startDate">
+                  {{ item.startDate.toLocaleDateString() }} to {{ endDateCleanser(item.endDate)}}
                 </li>
               </ul>
             </dd>
@@ -703,6 +703,13 @@ export default {
     },
     detailsDetector (value) {
       if (value !== null) {return true;}
+    },
+    endDateCleanser (value) {
+      if (value) {
+        return value.toLocaleDateString();
+      } else {
+        return 'present';
+      }
     },
   },
 };
