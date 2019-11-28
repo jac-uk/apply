@@ -15,10 +15,10 @@
       <RouterLink
         class="govuk-button"
         data-module="govuk-button"
-        :to="{ name: 'sign-in' }"
+        :to="applyLink"
       >
         Continue
-      </RouterLink> 
+      </RouterLink>
     </div>
   </div>
 </template>
@@ -27,8 +27,14 @@
 
 export default {
   computed: {
-    vacancy () {
+    vacancy() {
       return this.$store.state.exercise.record;
+    },
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
+    applyLink() {
+      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
     },
   },
 };

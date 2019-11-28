@@ -18,18 +18,22 @@
         You can continue to apply, but it might be unlikely that you'll be offered a position.
       </p>
 
-      <button class="govuk-button">
+      <RouterLink
+        class="govuk-button"
+        data-module="govuk-button"
+        :to="'/'"
+      >
         Back to JAC homepage
-      </button>
+      </RouterLink>          
 
       <p class="govuk-body-m">
         <RouterLink
           class="govuk-link"
           data-module="govuk-button"
-          :to="{ name: 'sign-in' }"
+          :to="applyLink"
         >
           Continue to apply
-        </RouterLink>         
+        </RouterLink>          
       </p>
     </div>
   </div>
@@ -41,6 +45,12 @@ export default {
   computed: {
     vacancy () {
       return this.$store.state.exercise.record;
+    },
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
+    applyLink() {
+      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
     },
   },
 };

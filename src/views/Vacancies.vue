@@ -112,6 +112,11 @@
 import { mapState } from 'vuex';
 
 export default {
+  filters: {
+    dateFormatter (date) {
+      return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
+    },
+  },
   computed: {
     ...mapState('vacancies', [
       'records',
@@ -119,11 +124,6 @@ export default {
   },
   created() {
     this.$store.dispatch('vacancies/bind');
-  },
-  filters: {
-    dateFormatter (date) {
-      return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
-    },
   },
 };
 </script>
