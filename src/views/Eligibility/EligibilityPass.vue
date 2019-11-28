@@ -18,8 +18,7 @@
         :to="applyLink"
       >
         Continue
-      </RouterLink>          
-
+      </RouterLink>
     </div>
   </div>
 </template>
