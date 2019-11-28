@@ -61,7 +61,6 @@ export default {
   }),
   computed: {
     isSignedIn() {
-      // @todo sync up with vuex store
       return this.$store.getters['auth/isSignedIn'];
     },
   },
