@@ -49,7 +49,7 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <p v-if="candidate.dateOfBirth">
-                {{ candidate.dateOfBirth.toLocaleDateString() }}
+                {{ dateFormatter(candidate.dateOfBirth) }}
               </p>
             </dd>
           </div>
@@ -415,7 +415,7 @@
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
                 <li v-if="item.date">
-                  {{ item.date.toLocaleDateString() }}
+                  {{ dateFormatter(item.date) }}
                 </li>
               </ul>
             </dd>
@@ -505,7 +505,7 @@
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
                 <li v-if="item.startDate">
-                  {{ item.startDate.toLocaleDateString() }} to {{ endDateCleanser(item.endDate)}}
+                  {{ experienceDateFormatter(item.startDate) }} to {{ experienceDateFormatter(item.endDate) }}
                 </li>
               </ul>
             </dd>
@@ -704,11 +704,16 @@ export default {
     detailsDetector (value) {
       if (value !== null) {return true;}
     },
-    endDateCleanser (value) {
-      if (value) {
-        return value.toLocaleDateString();
+    experienceDateFormatter (date) {
+      if (date instanceof Date) {
+        return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
       } else {
         return 'present';
+      }
+    },
+    dateFormatter (date) {
+      if (date instanceof Date) {
+        return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
       }
     },
   },
