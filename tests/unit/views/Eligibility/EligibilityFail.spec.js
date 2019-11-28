@@ -7,6 +7,9 @@ const mockStore = {
       record: {},
     },
   },
+  getters: {
+    'auth/isSignedIn': () => { },
+  },
 };
 
 describe('views/Eligibility/EligibilityFail', () => {

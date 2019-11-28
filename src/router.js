@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import store from '@/store';
 
 import SignIn from '@/views/SignIn';
+import SignUp from '@/views/SignUp';
 
 // Vacancies
 import Vacancies from '@/views/Vacancies';
@@ -247,14 +248,14 @@ const router = new Router({
       meta: {
         title: 'Sign In',
       },
-      // beforeEnter: (to, from, next) => {
-      //   const isSignedIn = store.getters.isSignedIn;
-      //   if(isSignedIn) {
-      //     return next({ name: 'job-advert' });
-      //   }
-
-      //   return next();
-      // },
+    },
+    {
+      path: '/sign-up',
+      name: 'sign-up',
+      component: SignUp,
+      meta: {
+        title: 'Create an account',
+      },
     },
   ],
   scrollBehavior(to, from, savedPosition) {

@@ -8,7 +8,29 @@
           </h1>
 
           <p class="govuk-body-l">
-            Or <a href="#">create an account</a> if you do not have one
+            Or 
+            <RouterLink
+              class="govuk-link"
+              data-module="govuk-button"
+              :to="{ name: 'sign-up' }"
+            >
+              create an account
+            </RouterLink>  
+            if you do not have one
+          </p>
+
+          <p>
+            <button
+              type="button"
+              class="govuk-button button-image"
+              @click="loginWithGoogle"
+            >
+              <img 
+                alt="Sign in with Google"
+                src="@/assets/btn_google_signin_light_normal_web@2x.png"
+                width="191"
+              >              
+            </button>
           </p>
 
           <TextField
@@ -23,7 +45,7 @@
             v-model="formData.password"
             label="Password"
             type="password"
-          />
+          />          
 
           <button class="govuk-button">
             Continue
@@ -53,6 +75,10 @@ export default {
     },
   },
   methods: {
+    loginWithGoogle() {
+      const provider = new auth.GoogleAuthProvider();
+      auth().signInWithPopup(provider);
+    },
     login() {
       if (this.formData.email && this.formData.password) {
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password);
@@ -70,4 +96,12 @@ export default {
     max-width: 360px;
     margin: 0 auto;
   }
+  .button-image {
+    padding: 0;
+    border: none;
+    margin: 0;
+    box-shadow: none;
+    background-color: transparent;
+  }
+
 </style>
