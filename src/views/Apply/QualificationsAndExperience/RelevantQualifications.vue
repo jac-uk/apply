@@ -3,33 +3,33 @@
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
         <h1
-          v-if="unknownVariable !== 'non-legal'"
+          v-if="exercise.typeOfExercise !== 'non-legal'"
           class="govuk-heading-xl"
         >
           Qualifications
         </h1>
 
         <h1
-          v-if="unknownVariable === 'non-legal'"
+          v-if="exercise.typeOfExercise === 'non-legal'"
           class="govuk-heading-xl"
         >
           Memberships
         </h1>
 
         <RepeatableFields
-          v-if="unknownVariable !== 'non-legal'"
+          v-if="exercise.typeOfExercise !== 'non-legal'"
           v-model="application.qualifications"
           :component="repeatableFields.Qualification"
         />
 
         <RadioGroup
-          v-if="unknownVariable === 'non-legal'"
+          v-if="exercise.typeOfExercise === 'non-legal'"
           id="professional-memberships"
           v-model="application.professionalMemberships"
           label="What professional memberships do you have?"
         >
           <RadioItem
-            value="chartered-association-of-building-engineers"
+            value="Chartered Association of Building Engineers"
             label="Chartered Association of Building Engineers"
           >
             <TextField
@@ -42,7 +42,7 @@
             />
           </RadioItem>
           <RadioItem
-            value="chartered-institute-of-building"
+            value="Chartered Institute of Building"
             label="Chartered Institute of Building"
           >
             <TextField
@@ -56,7 +56,7 @@
           </RadioItem>
 
           <RadioItem
-            value="chartered-institute-of-environmental-health"
+            value="Chartered Institute of Environmental Health"
             label="Chartered Institute of Environmental Health"
           >
             <TextField
@@ -69,7 +69,7 @@
             />
           </RadioItem>
           <RadioItem
-            value="general-medical-council"
+            value="General Medical Council"
             label="General Medical Council"
           >
             <RadioGroup
@@ -162,7 +162,7 @@
             />
           </RadioItem>
           <RadioItem
-            value="other"
+            value="Other"
             label="Other"
           >
             <TextField
@@ -230,7 +230,6 @@ export default {
       otherProfessionalMemberships: null,
       otherProfessionalMembershipsDate: null,
       otherProfessionalMembershipsNumber: null,
-      unknownVariable: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -241,6 +240,11 @@ export default {
       },
 
     };
+  },
+  computed: {
+    exercise () {
+      return this.$store.state.exercise.record;
+    },
   },
   methods: {
     async save() {

@@ -7,19 +7,19 @@
       hint="Choose 1 option."
     >
       <RadioItem
-        value="advocate-scotland"
+        value="Advocate - Scotland"
         label="Advocate - Scotland"
       />
       <RadioItem
-        value="barrister"
+        value="Barrister"
         label="Barrister"
       />
       <RadioItem
-        value="CILEx"
+        value="Fellow of the Chartered Institute of Legal Executives (CILEx)"
         label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
       />
       <RadioItem
-        value="solicitor"
+        value="Solicitor"
         label="Solicitor"
       />
     </RadioGroup>
@@ -31,15 +31,15 @@
       hint="Choose 1 option."
     >
       <RadioItem
-        value="england-wales"
+        value="England and Wales"
         label="England and Wales"
       />
       <RadioItem
-        value="northern-ireland"
+        value="Northern Ireland"
         label="Northern Ireland"
       />
       <RadioItem
-        value="scotland"
+        value="Scotland"
         label="Scotland"
       />
     </RadioGroup>

@@ -364,6 +364,7 @@
         </dl>
 
         <div
+          v-if="isLegal | isLeadership | isSenior"
           class="govuk-!-margin-top-9"
         >
           <h2
@@ -383,6 +384,7 @@
 
         <dl
           v-for="item in application.qualifications"
+          v-if="isLegal | isLeadership | isSenior"
           :key="item.name"
           class="govuk-summary-list govuk-!-margin-bottom-8"
         >
