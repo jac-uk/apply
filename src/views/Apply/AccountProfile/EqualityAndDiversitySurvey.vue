@@ -62,7 +62,7 @@
           label="What's your ethnic group?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
 
@@ -71,23 +71,23 @@
           </p>
 
           <RadioItem
-            value="bangladeshi"
+            value="Bangladeshi"
             label="Bangladeshi"
           />
           <RadioItem
-            value="chinese"
+            value="Chinese"
             label="Chinese"
           />
           <RadioItem
-            value="indian"
+            value="Indian"
             label="Indian"
           />
           <RadioItem
-            value="pakistani"
+            value="Pakistani"
             label="Pakistani"
           />
           <RadioItem
-            value="other-asian"
+            value="Any other Asian background"
             label="Any other Asian background"
           />
 
@@ -96,15 +96,15 @@
           </p>
 
           <RadioItem
-            value="african"
+            value="African"
             label="African"
           />
           <RadioItem
-            value="caribbean"
+            value="Caribbean"
             label="Caribbean"
           />
           <RadioItem
-            value="other-black"
+            value="Any other Black/African/Caribbean background"
             label="Any other Black/African/Caribbean background"
           />
 
@@ -113,19 +113,19 @@
           </p>
 
           <RadioItem
-            value="uk"
+            value="English, Welsh, Scottish, Northern Ireland, British"
             label="English, Welsh, Scottish, Northern Ireland, British"
           />
           <RadioItem
-            value="irish"
+            value="Irish"
             label="Irish"
           />
           <RadioItem
-            value="gypsy-irish-traveller"
+            value="Gypsy or Irish Traveller"
             label="Gypsy or Irish Traveller"
           />
           <RadioItem
-            value="other-white"
+            value="Any other White background"
             label="Any other White background"
           />
 
@@ -134,19 +134,19 @@
           </p>
 
           <RadioItem
-            value="white-black-caribbean"
+            value="White and Black Caribbean"
             label="White and Black Caribbean"
           />
           <RadioItem
-            value="white-black-african"
+            value="White and Black African"
             label="White and Black African"
           />
           <RadioItem
-            value="white-asian"
+            value="White and Asian"
             label="White and Asian"
           />
           <RadioItem
-            value="other-mixed"
+            value="Any other mixed or multiple ethnic backgrounds"
             label="Any other mixed or multiple ethnic backgrounds"
           />
 
@@ -155,7 +155,7 @@
           </p>
 
           <RadioItem
-            value="other-ethnic-group"
+            value="Other"
             label="Other"
           />
         </RadioGroup>
@@ -166,43 +166,43 @@
           label="What religion or faith are you?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
-            value="no-religion"
+            value="No religion"
             label="No religion"
           />
           <RadioItem
-            value="athiest"
+            value="Atheist"
             label="Atheist"
           />
           <RadioItem
-            value="buddhist"
+            value="Buddhist"
             label="Buddhist"
           />
           <RadioItem
-            value="christian"
+            value="Christian"
             label="Christian"
           />
           <RadioItem
-            value="hindu"
+            value="Hindu"
             label="Hindu"
           />
           <RadioItem
-            value="jewish"
+            value="Jewish"
             label="Jewish"
           />
           <RadioItem
-            value="muslim"
+            value="Muslim"
             label="Muslim"
           />
           <RadioItem
-            value="sikh"
+            value="Sikh"
             label="Sikh"
           />
           <RadioItem
-            value="other-religion"
+            value="Other"
             label="Other"
           >
             <TextField
@@ -220,19 +220,19 @@
           label="What gender are you?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
-            value="female"
+            value="Female"
             label="Female"
           />
           <RadioItem
-            value="male"
+            value="Male"
             label="Male"
           />
           <RadioItem
-            value="gender-neutral"
+            value="Gender neutral"
             label="Gender neutral"
           />
         </RadioGroup>
@@ -243,7 +243,7 @@
           label="Have you ever changed gender?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
@@ -262,27 +262,27 @@
           label="How would you describe your sexual orientation?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
-            value="bisexual"
+            value="Bisexual"
             label="Bisexual"
           />
           <RadioItem
-            value="gay-man"
+            value="Gay man"
             label="Gay man"
           />
           <RadioItem
-            value="gay-woman-lesbian"
+            value="Gay woman or lesbian"
             label="Gay woman or lesbian"
           />
           <RadioItem
-            value="heterosexual-straight"
+            value="Heterosexual or straight"
             label="Heterosexual or straight"
           />
           <RadioItem
-            value="other-sexual-orientation"
+            value="Other"
             label="Other"
           />
         </RadioGroup>
@@ -304,7 +304,7 @@
           </p>
 
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
@@ -329,27 +329,27 @@
           label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
-            value="uk-state-selective"
+            value="UK state school - selective"
             label="UK state school - selective"
           />
           <RadioItem
-            value="uk-state-non-selective"
+            value="UK state school - non-selective"
             label="UK state school - non-selective"
           />
           <RadioItem
-            value="uk-independent-fee"
+            value="UK independent or fee-paying school"
             label="UK independent or fee-paying school"
           />
           <RadioItem
-            value="uk-independent-fee-with-bursary"
+            value="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
             label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
           />
           <RadioItem
-            value="non-uk-educated"
+            value="I did not go to school in the UK"
             label="I did not go to school in the UK"
           />
         </RadioGroup>
@@ -360,7 +360,7 @@
           label="Did you go to either of the Oxbridge universities?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
@@ -379,7 +379,7 @@
           label="Were you the first generation in your family to go to university?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
@@ -391,7 +391,7 @@
             label="No"
           />
           <RadioItem
-            value="non-university-educated"
+            value="I did not go to university"
             label="I did not go to university"
           />
         </RadioGroup>
@@ -403,23 +403,23 @@
           hint="Select all that apply."
         >
           <CheckboxItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <CheckboxItem
-            value="barrister"
+            value="Barrister"
             label="Barrister"
           />
           <CheckboxItem
-            value="CILEx"
+            value="Fellow of the Chartered Institute of Legal Executives (CILEx)"
             label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
           />
           <CheckboxItem
-            value="solicitor"
+            value="Solicitor"
             label="Solicitor"
           />
           <CheckboxItem
-            value="other-professional-background"
+            value="Other"
             label="Other"
           />
         </CheckboxGroup>
@@ -431,23 +431,23 @@
           hint="Select all that apply."
         >
           <CheckboxItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <CheckboxItem
-            value="academic"
+            value="Academic"
             label="Academic"
           />
           <CheckboxItem
-            value="barrister"
+            value="Barrister"
             label="Barrister"
           />
           <CheckboxItem
-            value="CILEx"
+            value="Fellow of the Chartered Institute of Legal Executives (CILEx)"
             label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
           />
           <CheckboxItem
-            value="solicitor"
+            value="Solicitor"
             label="Solicitor"
           />
           <CheckboxItem
@@ -455,27 +455,27 @@
             label="Fee-paid court judge"
           />
           <CheckboxItem
-            value="fee-paid-tribunal-judge"
+            value="Fee-paid tribunal judge"
             label="Fee-paid tribunal judge"
           />
           <CheckboxItem
-            value="other-fee-paid-judicial-office-holder"
+            value="Other fee-paid judicial office holder"
             label="Other fee-paid judicial office holder"
           />
           <CheckboxItem
-            value="salaried-court-judge"
+            value="Salaried court judge"
             label="Salaried court judge"
           />
           <CheckboxItem
-            value="salaried-tribunal-judge"
+            value="Salaried tribunal judge"
             label="Salaried tribunal judge"
           />
           <CheckboxItem
-            value="other-salaried-judicial-office-holder"
+            value="Other salaried judicial office holder"
             label="Other salaried judicial office holder"
           />
           <CheckboxItem
-            value="other-current-legal-role"
+            value="Other"
             label="Other"
           >
             <TextField
@@ -493,23 +493,23 @@
           label="Do you hold, or have you held in the past, a fee-paid judicial role?"
         >
           <RadioItem
-            value="prefer-not-to-say"
+            value="Prefer not to say"
             label="Prefer not to say"
           />
           <RadioItem
-            value="no"
+            value="I have not previously held a fee-paid role"
             label="I have not previously held a fee-paid role"
           />
           <RadioItem
-            value="fee-paid-court-post"
+            value="Fee-paid court post"
             label="Fee-paid court post"
           />
           <RadioItem
-            value="fee-paid-tribunal-post"
+            value="Fee-paid tribunal post"
             label="Fee-paid tribunal post"
           />
           <RadioItem
-            value="other-fee-paid-judicial-office"
+            value="Other fee-paid judicial office"
             label="Other fee-paid judicial office"
           />
         </RadioGroup>

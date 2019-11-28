@@ -700,6 +700,7 @@ export default {
     booleanAmender (value) {
       if (value === true) { return 'Yes'; }
       if (value === false) { return 'No'; }
+      if (value === 'Prefer not to say') { return 'Prefer not to say'; }
     },
     detailsDetector (value) {
       if (value !== null) {return true;}
