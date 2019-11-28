@@ -13,7 +13,9 @@
               class="govuk-link"
               data-module="govuk-button"
               :to="{ name: 'sign-in' }"
-            >sign in</RouterLink>
+            >
+              sign in
+            </RouterLink>
             if you already have an account
           </p>
 
@@ -21,18 +23,22 @@
             v-if="errors.length > 0"
             class="govuk-error-summary"
             aria-labelledby="error-summary-title"
-            role="alert" tabindex="-1"
+            role="alert"
+            tabindex="-1"
             data-module="govuk-error-summary"
           >
             <h2
-              class="govuk-error-summary__title"
               id="error-summary-title"
+              class="govuk-error-summary__title"
             >
               There is a problem
             </h2>
             <div class="govuk-error-summary__body">
               <ul class="govuk-list govuk-error-summary__list">
-                <li v-for="error in errors" :key="error.ref">
+                <li
+                  v-for="error in errors"
+                  :key="error.ref"
+                >
                   <a :href="`#${error.ref}`">{{ error.message }}</a>
                 </li>
               </ul>
@@ -117,7 +123,6 @@ export default {
       if (isOk) {
         auth().createUserWithEmailAndPassword(this.formData.email, this.formData.password)
           .then((userCredential) => {
-            console.log('account created', userCredential.user.uid);
             const candidate = {
               fullName: this.formData.fullName,
               email: this.formData.email,

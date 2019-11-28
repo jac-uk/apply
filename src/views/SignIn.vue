@@ -13,7 +13,9 @@
               class="govuk-link"
               data-module="govuk-button"
               :to="{ name: 'sign-up' }"
-            >create an account</RouterLink>  
+            >
+              create an account
+            </RouterLink>  
             if you do not have one
           </p>
 
@@ -22,13 +24,13 @@
               type="button"
               class="govuk-button button-image"
               @click="loginWithGoogle"
-              >
-                <img 
-                  alt="Sign in with Google"
-                  src="@/assets/btn_google_signin_light_normal_web@2x.png"
-                  width="191"
-                />              
-              </button>
+            >
+              <img 
+                alt="Sign in with Google"
+                src="@/assets/btn_google_signin_light_normal_web@2x.png"
+                width="191"
+              >              
+            </button>
           </p>
 
           <TextField
@@ -74,26 +76,8 @@ export default {
   },
   methods: {
     loginWithGoogle() {
-      console.log('login with google');
       const provider = new auth.GoogleAuthProvider();
-      // auth().signInWithRedirect(provider);
-      auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        // ...
-      }).catch(function(error) {
-        console.log('error here');
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
+      auth().signInWithPopup(provider);
     },
     login() {
       if (this.formData.email && this.formData.password) {

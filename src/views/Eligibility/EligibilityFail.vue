@@ -51,7 +51,7 @@ export default {
     },
     applyLink() {
       return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
-    }
+    },
   },
 };
 
