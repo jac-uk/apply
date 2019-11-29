@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
+import VueAnalytics from 'vue-analytics';
 
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
@@ -87,7 +88,7 @@ const router = new Router({
           meta: {
             title: 'Eligibility Pass',
           },
-        },        
+        },
         {
           path: 'eligibility-fail',
           component: EligibilityFail,
@@ -265,6 +266,11 @@ const router = new Router({
       return { x: 0, y: 0 };
     }
   },
+});
+
+Vue.use(VueAnalytics, {
+  id: 'UA-153516887-1',
+  router,
 });
 
 // Global before guard to verify if a user can have access to other than sign-in pages.
