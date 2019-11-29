@@ -102,20 +102,23 @@
       </ul>
 
       <h2
-        v-if="unknownVariable === 'non-legal'"
+        v-if="vacancy.typeOfExercise === 'non-legal'"
         id="memberships-and-experience"
         class="govuk-heading-m"
       >
         3. Memberships and Experience
       </h2>
-      <ul class="govuk-list govuk-!-margin-bottom-9">
+      <ul
+        v-if="vacancy.typeOfExercise === 'non-legal'"
+        class="govuk-list govuk-!-margin-bottom-9"
+      >
         <li class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top">
           <span class="govuk-body">
             <router-link
               class="govuk-link govuk-!-font-weight-bold"
-              :to="{name: ''}"
+              :to="{name: 'relevant-qualifications'}"
             >
-              add memberships
+              Add memberships
             </router-link>
           </span>
         </li>
@@ -125,7 +128,7 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: ''}"
             >
-              add experience
+              Add experience
             </router-link>
           </span>
         </li>
@@ -135,7 +138,7 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: ''}"
             >
-              add gaps in employment
+              Add gaps in employment
             </router-link>
           </span>
         </li>
@@ -156,7 +159,7 @@
           </span>
         </li>
         <li
-          v-if="unknownVariable !== 'non-legal'"
+          v-if="vacancy.typeOfExercise !== 'non-legal'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
@@ -169,7 +172,7 @@
           </span>
         </li>
         <li
-          v-if="unknownVariable === 'leadership'"
+          v-if="vacancy.typeOfExercise === 'leadership'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
@@ -182,7 +185,7 @@
           </span>
         </li>
         <li
-          v-if="unknownVariable === 'non-legal'"
+          v-if="vacancy.typeOfExercise === 'non-legal'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
