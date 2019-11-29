@@ -3,6 +3,11 @@ import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import { auth } from '@/firebase';
+import VueAnalytics from 'vue-analytics';
+
+Vue.use(VueAnalytics, {
+  id: 'UA-153516887-1',
+});
 // import * as Sentry from '@sentry/browser';
 // import * as Integrations from '@sentry/integrations';
 //
