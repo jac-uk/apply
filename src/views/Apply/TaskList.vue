@@ -156,7 +156,6 @@
           </span>
         </li>
         <li
-          v-if="unknownVariable !== 'non-legal'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
@@ -164,12 +163,11 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'self-assessment-competencies'}"
             >
-              Upload self-assessment competencies
+              Upload self-assessment competencies (SelfAssessmentCompetencies)
             </router-link>
           </span>
         </li>
         <li
-          v-if="unknownVariable === 'leadership'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
@@ -177,12 +175,11 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'leadership-statement-of-suitability'}"
             >
-              Statement of suitability
+              Statement of suitability (LeadershipSuitability)
             </router-link>
           </span>
         </li>
         <li
-          v-if="unknownVariable === 'non-legal'"
           class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom"
         >
           <span class="govuk-body">
@@ -190,7 +187,7 @@
               class="govuk-link govuk-!-font-weight-bold"
               :to="{name: 'statement-of-suitability'}"
             >
-              Statement of suitability
+              Statement of suitability (StatementOfSuitability)
             </router-link>
           </span>
         </li>
