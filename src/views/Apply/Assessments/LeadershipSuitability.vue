@@ -3,7 +3,7 @@
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">
-          Statement of suitability
+          Statement of leadership suitability
         </h1>
 
         <p class="govuk-body-l">
@@ -35,7 +35,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Download assessments template
+            Download leadership suitability template
           </h2>
 
           <a
@@ -43,13 +43,13 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            assessments-template.doc
+            leadership-suitability-template.doc
           </a>
         </div>
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload finished assessments
+            Upload leadersip suitability assessment
           </h2>
           <input
             id="file-upload-1"
