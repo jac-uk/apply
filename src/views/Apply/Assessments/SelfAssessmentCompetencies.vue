@@ -18,7 +18,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Download assessments template
+            Download self assessment template
           </h2>
 
           <a
@@ -26,23 +26,23 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            assessments-template.doc
+            self-assessment-template.doc
           </a>
         </div>
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload finished assessments
+            Upload finished self assessment
           </h2>
           <input
             id="file-upload-1"
-            ref="finishAssessmentsFile"
+            ref="finishedSelfAssessmentFile"
             class="govuk-file-upload"
             type="file"
           >
           <div>
             <button @click="uploadFile('file-upload-1')">
-              Upload finished assessments
+              Upload finished self assessment
             </button>
           </div>          
         </div>
@@ -81,13 +81,13 @@ export default {
 
       // These are the folder names set up in Firebase Storage
       const folderNameMap = new Map([
-        ['file-upload-1', 'candidate-finished-assessments'],
+        ['file-upload-1', 'candidate-finished-self-assessment'],
       ]);
 
       const folderName = folderNameMap.get(elementId);
 
       // set the Firebase Storage file path and name here
-      // e.g. candidate-finished-assessments/myFile.docx
+      // e.g. candidate-finished-self-assessment/myFile.docx
       const fileSavePath = `${folderName}/${file.name}`;
 
       const storageRef = firebase.storage().ref();
@@ -130,8 +130,8 @@ export default {
               // Upload completed successfully, now we can get the download URL
               uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                 //console.log('File available at', downloadURL);
-                if (downloadURL.includes('candidate-finished-assessments')) {
-                  this.application.finishedAssessmentsUrl = downloadURL;
+                if (downloadURL.includes('candidate-finished-self-assessment')) {
+                  this.application.finishedSelfAssessmentUrl = downloadURL;
                   this.$store.dispatch('application/save', this.application);
                   alert('SUCCESS: file uploaded');
                 }
