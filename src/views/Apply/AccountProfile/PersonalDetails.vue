@@ -58,6 +58,7 @@ export default {
   },
   data(){
     const candidate = this.$store.getters['candidate/data']();
+    const application = this.$store.getters['application/data']();
     return {
       candidate: {
         fullName: candidate && candidate.fullName || null,
@@ -65,10 +66,13 @@ export default {
         dateOfBirth: candidate && candidate.dateOfBirth || null,
         nationalInsuranceNumber: candidate && candidate.nationalInsuranceNumber || null,
       },
+      application: application,
     };
   },
   methods: {
     async save() {
+      this.application.progress.personalDetails = true;
+      await this.$store.dispatch('application/save', this.application);
       await this.$store.dispatch('candidate/save', this.candidate);
       this.$router.push({ name: 'task-list' });
     },

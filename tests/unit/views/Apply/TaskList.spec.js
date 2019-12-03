@@ -15,6 +15,12 @@ const mockStore = {
     exercise: {
       record: {},
     },
+    candidate: {
+      record: {},
+    },
+    application: {
+      record: {},
+    },
   },
 };
 const createTestSubject = () => {
