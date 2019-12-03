@@ -60,6 +60,7 @@ export default {
   },
   methods: {
     save() {
+      this.application.progress.selfAssessmentCompetencies = true;
 
     },
   },

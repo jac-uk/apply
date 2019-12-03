@@ -17,9 +17,10 @@
           </h2>
           <ul class="govuk-list govuk-!-margin-bottom-9">
             <li
-              v-for="task in taskGroup.tasks"
+              v-for="(task, taskIndex) in taskGroup.tasks"
               :key="task.id"
-              class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom container-border-top"
+              class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom "
+              :class="{'container-border-top' : taskIndex === 0 }"
             >
               <div class="govuk-grid-row">
                 <div
@@ -81,7 +82,7 @@ export default {
     taskGroups() {
       if (this.applicationProgress) {
         return [
-          { 
+          {
             title: 'Account profile',
             tasks: [
               { title: 'Personal details', id: 'personal-details', done: this.applicationProgress.personalDetails },
@@ -92,15 +93,15 @@ export default {
           {
             title: 'Working preferences',
             tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: false },
+              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.application.progress.partTimeWorkingPreferences },
             ],
           },
           {
             title: 'Qualifications and experience',
             tasks: [
-              { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: false },
-              { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: false },
-              { title: 'Add judicial experience', id: 'judicial-experience', done: false },
+              { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.application.progress.relevantQualifications },
+              { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.application.progress.postQualificationWorkExperience },
+              { title: 'Add judicial experience', id: 'judicial-experience', done: this.application.progress.judicialExperience },
             ],
           },
           {
@@ -114,10 +115,10 @@ export default {
           {
             title: 'Assessments',
             tasks: [
-              { title: 'Give independent assessors\' details', id: 'assessors-details', done: false },
-              { title: 'Upload self-assessment competencies (SelfAssessmentCompetencies)', id: 'self-assessment-competencies', done: false },
-              { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: false },
-              { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: false },
+              { title: 'Give independent assessors\' details', id: 'assessors-details', done: this.application.progress.assessorsDetails },
+              { title: 'Upload self-assessment competencies (SelfAssessmentCompetencies)', id: 'self-assessment-competencies', done: this.application.progress.selfAssessmentCompetencies },
+              { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.application.progress.leadershipSuitability },
+              { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.application.progress.statementOfSuitability },
             ],
           },
           {
