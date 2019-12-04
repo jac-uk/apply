@@ -19,7 +19,7 @@ const mockStore = {
       record: {},
     },
     application: {
-      record: {},
+      record: { progress: { started: true } },
     },
   },
 };
@@ -52,12 +52,46 @@ describe('views/TaskList', () => {
    });
    describe('Experience h2', () => {
      it('renders the 3rd block h2 as Qualifications and experience if the role is legal', () => {
-        wrapper.setData({ unknownVariable: 'legal' });
+       let wrapper = shallowMount(TaskList, {
+         mocks: {
+           $store: {
+             state: {
+               exercise: {
+                 record: { typeOfExercise: 'legal'},
+               },
+               candidate: {
+                 record: {},
+               },
+               application: {
+                 record: {},
+               },
+             }
+           },
+           $route: mockRoute,
+           $router: mockRouter,
+         }
+        });
         expect(wrapper.find('#qualifications-and-experience').exists()).toBe(true);
         expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
       });
       it('renders the 3rd block h2 as Memberships and experience if the role is non-legal', () => {
-         wrapper.setData({ unknownVariable: 'non-legal' });
+        let wrapper = shallowMount(TaskList, {
+          mocks: {
+            $store: {
+              state: {
+                exercise: {
+                  record: { typeOfExercise: 'non-legal'},
+                },
+                candidate: {
+                  record: {},
+                },
+                application: {
+                  record: {},
+                },
+              }
+            }
+          }
+         });
          expect(wrapper.find('#memberships-and-experience').exists()).toBe(true);
          expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
        });
