@@ -72,6 +72,9 @@ export default {
     application() {
       return this.$store.state.application.record;
     },
+    isLegal() {
+      return this.vacancy.typeOfExercise ==='legal';
+    },
     applicationProgress() {
       if (this.application && this.application.progress) {
         return this.application.progress;
@@ -80,8 +83,9 @@ export default {
       }
     },
     taskGroups() {
+      let data = [];
       if (this.applicationProgress) {
-        return [
+        data.push(
           {
             title: 'Account profile',
             tasks: [
@@ -90,28 +94,39 @@ export default {
               { title: 'Take the equality and diversity survey', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
             ],
           },
+        );
+        data.push(
           {
             title: 'Working preferences',
             tasks: [
               { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.application.progress.partTimeWorkingPreferences },
             ],
           },
-          {
-            title: 'Qualifications and experience',
-            tasks: [
-              { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.application.progress.relevantQualifications },
-              { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.application.progress.postQualificationWorkExperience },
-              { title: 'Add judicial experience', id: 'judicial-experience', done: this.application.progress.judicialExperience },
-            ],
-          },
-          {
-            title: 'Memberships and Experience',
-            tasks: [
-              { title: 'add memberships', id: 'memberships', done: false },
-              { title: 'add experience', id: 'experience', done: false },
-              { title: 'add gaps in employment', id: 'employment-gaps', done: false },
-            ],
-          },
+        );
+        if (this.isLegal) {
+          data.push(
+            {
+              title: 'Qualifications and experience',
+              tasks: [
+                { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.application.progress.relevantQualifications },
+                { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.application.progress.postQualificationWorkExperience },
+                { title: 'Add judicial experience', id: 'judicial-experience', done: this.application.progress.judicialExperience },
+              ],
+            },
+          );
+        } else {
+          data.push(
+            {
+              title: 'Memberships and Experience',
+              tasks: [
+                { title: 'add memberships', id: 'memberships', done: false },
+                { title: 'add experience', id: 'experience', done: false },
+                { title: 'add gaps in employment', id: 'employment-gaps', done: false },
+              ],
+            },
+          );
+        }
+        data.push(
           {
             title: 'Assessments',
             tasks: [
@@ -121,16 +136,17 @@ export default {
               { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.application.progress.statementOfSuitability },
             ],
           },
+        );
+        data.push(
           {
             title: 'Apply',
             tasks: [
               { title: 'Review application', id: 'review', done: false },
             ],
           },
-        ];
-      } else {
-        return [];
+        );
       }
+      return data;
     },
   },
 };
