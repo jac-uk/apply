@@ -35,16 +35,11 @@
             Upload finished self assessment
           </h2>
           <input
-            id="file-upload-1"
-            ref="finishedSelfAssessmentFile"
+            id="self-assessment-file"
             class="govuk-file-upload"
             type="file"
+            @change="fileSelected"
           >
-          <div>
-            <button @click="uploadFile('file-upload-1')">
-              Upload finished self assessment
-            </button>
-          </div>          
         </div>
 
         <button class="govuk-button">
@@ -56,88 +51,38 @@
 </template>
 
 <script>
-import firebase from 'firebase';
+import '@/mixins/uploadMixin';
 
 export default {
-
   data(){
-    const defaults = {
-      finishedAssessmentsUrl: null,
-    };
+    const defaults = {};
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
       application: application,
+      files: {},
     };
-  },  
-  methods: {
-    save() {
-
+  },
+  computed: {
+    userId() {
+      return this.$store.state.auth.currentUser.uid;
     },
-    uploadFile(elementId) {
-      //console.log('uploadFile function fired');
-      const file = document.querySelector(`#${elementId}`).files[0];
-      //console.log(file);
+  },   
+  methods: {
+    async save() {
+      // check for statment of suitability file to upload
+      if (this.files['self-assessment-file']) {
+        await this.upload(this.files['self-assessment-file']);
+      }
+      
+      // check for CV file to upload
+      if (this.files['cv-file']) {
+        await this.upload(this.files['cv-file']);
+      }
 
-      // These are the folder names set up in Firebase Storage
-      const folderNameMap = new Map([
-        ['file-upload-1', 'candidate-finished-self-assessment'],
-      ]);
-
-      const folderName = folderNameMap.get(elementId);
-
-      // set the Firebase Storage file path and name here
-      // e.g. candidate-finished-self-assessment/myFile.docx
-      const fileSavePath = `${folderName}/${file.name}`;
-
-      const storageRef = firebase.storage().ref();
-
-      let uploadTask = storageRef.child(fileSavePath).put(file);
-
-      // Listen for state changes, errors, and completion of the upload.
-      uploadTask
-        .on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
-            (snapshot) => {
-              // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-              //let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              //console.log('Upload is ' + progress + '% done');
-              switch (snapshot.state) {
-              case firebase.storage.TaskState.PAUSED: // or 'paused'
-                //console.log('Upload is paused');
-                break;
-              case firebase.storage.TaskState.RUNNING: // or 'running'
-                //console.log('Upload is running');
-                break;
-              }
-            }, (error) => {
-
-              // A full list of error codes is available at
-              // https://firebase.google.com/docs/storage/web/handle-errors
-              switch (error.code) {
-              case 'storage/unauthorized':
-                // User doesn't have permission to access the object
-                break;
-
-              case 'storage/canceled':
-                // User canceled the upload
-                break;
-
-              case 'storage/unknown':
-                // Unknown error occurred, inspect error.serverResponse
-                break;
-              }
-            }, () => {
-              // Upload completed successfully, now we can get the download URL
-              uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                //console.log('File available at', downloadURL);
-                if (downloadURL.includes('candidate-finished-self-assessment')) {
-                  this.application.finishedSelfAssessmentUrl = downloadURL;
-                  this.$store.dispatch('application/save', this.application);
-                  alert('SUCCESS: file uploaded');
-                }
-              });
-            });
-    },    
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
+    },
   },
 };
 </script>
