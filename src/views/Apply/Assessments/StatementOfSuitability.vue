@@ -93,9 +93,10 @@ export default {
   },  
   methods: {
     async save() {
-      // check for statment of suitability file to upload
-      if (this.files['suitability-statement-file']) {
-        await this.upload(this.files['suitability-statement-file']);
+      // loop through this.files and upload them
+      const files = Object.values(this.files);
+      for (const file of files) {
+        await this.upload(file);
       }
 
       await this.$store.dispatch('application/save', this.application);

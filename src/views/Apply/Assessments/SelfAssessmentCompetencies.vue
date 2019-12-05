@@ -70,14 +70,10 @@ export default {
   },   
   methods: {
     async save() {
-      // check for statment of suitability file to upload
-      if (this.files['self-assessment-file']) {
-        await this.upload(this.files['self-assessment-file']);
-      }
-      
-      // check for CV file to upload
-      if (this.files['cv-file']) {
-        await this.upload(this.files['cv-file']);
+      // loop through this.files and upload them
+      const files = Object.values(this.files);
+      for (const file of files) {
+        await this.upload(file);
       }
 
       await this.$store.dispatch('application/save', this.application);
