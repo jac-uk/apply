@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Personal details
         </h1>
@@ -50,11 +51,13 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     TextField,
     DateInput,
+    BackLink,
   },
   data(){
     const candidate = this.$store.getters['candidate/data']();
