@@ -230,7 +230,7 @@ export default {
       otherProfessionalMemberships: null,
       otherProfessionalMembershipsDate: null,
       otherProfessionalMembershipsNumber: null,
-      unknownVariable: null,
+      unknownVariable: 'non-legal',
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -244,6 +244,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.relevantQualifications = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

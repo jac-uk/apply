@@ -99,6 +99,7 @@ export default {
         await this.upload(file);
       }
 
+      this.application.progress.statementOfSuitability = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

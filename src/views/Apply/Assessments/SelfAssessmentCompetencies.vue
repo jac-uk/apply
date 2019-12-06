@@ -76,6 +76,7 @@ export default {
         await this.upload(file);
       }
 
+      this.application.progress.selfAssessmentCompetencies = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

@@ -228,6 +228,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.characterInformation = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

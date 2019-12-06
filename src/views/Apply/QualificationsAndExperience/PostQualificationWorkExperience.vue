@@ -35,7 +35,7 @@ export default {
     const application = { ...defaults, ...data };
     return {
       application: application,
-      
+
       repeatableFields: {
         Experience,
       },
@@ -43,6 +43,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.postQualificationWorkExperience = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

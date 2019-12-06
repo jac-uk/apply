@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Personal details
         </h1>
@@ -50,14 +51,17 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     TextField,
     DateInput,
+    BackLink,
   },
   data(){
     const candidate = this.$store.getters['candidate/data']();
+    const application = this.$store.getters['application/data']();
     return {
       candidate: {
         fullName: candidate && candidate.fullName || null,
@@ -65,10 +69,13 @@ export default {
         dateOfBirth: candidate && candidate.dateOfBirth || null,
         nationalInsuranceNumber: candidate && candidate.nationalInsuranceNumber || null,
       },
+      application: application,
     };
   },
   methods: {
     async save() {
+      this.application.progress.personalDetails = true;
+      await this.$store.dispatch('application/save', this.application);
       await this.$store.dispatch('candidate/save', this.candidate);
       this.$router.push({ name: 'task-list' });
     },

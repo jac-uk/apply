@@ -105,13 +105,13 @@ export default {
   },   
   methods: {
     async save() {
-
       // loop through this.files and upload them
       const files = Object.values(this.files);
       for (const file of files) {
         await this.upload(file);
       }
 
+      this.application.progress.leadershipSuitability = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

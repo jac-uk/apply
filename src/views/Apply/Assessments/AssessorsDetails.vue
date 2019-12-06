@@ -105,6 +105,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.assessorsDetails = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },
