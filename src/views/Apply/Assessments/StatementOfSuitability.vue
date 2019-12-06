@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Statement of suitability
         </h1>
@@ -69,11 +70,13 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     RadioGroup,
     RadioItem,
+    BackLink,
   },
   data(){
     return {

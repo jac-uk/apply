@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1
           v-if="unknownVariable !== 'non-legal'"
           class="govuk-heading-xl"
@@ -195,6 +196,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
@@ -203,6 +205,7 @@ export default {
     RadioGroup,
     TextField,
     DateInput,
+    BackLink,
   },
   data(){
     const defaults = {
