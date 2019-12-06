@@ -99,7 +99,7 @@ export default {
           {
             title: 'Working preferences',
             tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.application.progress.partTimeWorkingPreferences },
+              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
             ],
           },
         );
@@ -108,9 +108,9 @@ export default {
             {
               title: 'Qualifications and experience',
               tasks: [
-                { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.application.progress.relevantQualifications },
-                { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.application.progress.postQualificationWorkExperience },
-                { title: 'Add judicial experience', id: 'judicial-experience', done: this.application.progress.judicialExperience },
+                { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
+                { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
+                { title: 'Add judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
               ],
             },
           );
@@ -130,10 +130,10 @@ export default {
           {
             title: 'Assessments',
             tasks: [
-              { title: 'Give independent assessors\' details', id: 'assessors-details', done: this.application.progress.assessorsDetails },
-              { title: 'Upload self-assessment competencies (SelfAssessmentCompetencies)', id: 'self-assessment-competencies', done: this.application.progress.selfAssessmentCompetencies },
-              { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.application.progress.leadershipSuitability },
-              { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.application.progress.statementOfSuitability },
+              { title: 'Give independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails },
+              { title: 'Upload self-assessment competencies (SelfAssessmentCompetencies)', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies },
+              { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability },
+              { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability },
             ],
           },
         );
