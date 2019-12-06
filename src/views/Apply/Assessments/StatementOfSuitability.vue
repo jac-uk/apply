@@ -82,6 +82,7 @@ export default {
   },
   methods: {
     save() {
+      this.application.progress.statementOfSuitability = true;
 
     },
   },

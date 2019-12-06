@@ -91,6 +91,7 @@ export default {
   },
   methods: {
     save() {
+      this.application.progress.leadershipSuitability = true;
     },
   },
 };
