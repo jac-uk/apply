@@ -30,6 +30,11 @@ export default {
       } else {
         await this.$store.dispatch('candidate/bind');
         await this.$store.dispatch('application/bind');
+        if (!this.$store.state.application.record) {
+          await this.$store.dispatch('application/save', {
+            progress: { started: true },
+          });
+        }
         this.loaded = true;
       }
     } catch (e) {

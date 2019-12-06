@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Self-assessment competencies
         </h1>
@@ -50,9 +51,12 @@
 </template>
 
 <script>
+import BackLink from '@/components/BackLink';
 
 export default {
-
+  components: {
+    BackLink,
+  },
   data(){
     return {
 
@@ -60,6 +64,7 @@ export default {
   },
   methods: {
     save() {
+      this.application.progress.selfAssessmentCompetencies = true;
 
     },
   },

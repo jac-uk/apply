@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Independent assessors
         </h1>
@@ -81,11 +82,12 @@
 
 <script>
 import TextField from '@/components/Form/TextField';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     TextField,
-
+    BackLink,
   },
   data(){
     const defaults = {
@@ -105,6 +107,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.assessorsDetails = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },
