@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Set part-time working preferences
         </h1>
@@ -37,11 +38,13 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     RadioGroup,
     RadioItem,
+    BackLink,
   },
   data(){
     const defaults = {
@@ -55,6 +58,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.partTimeWorkingPreferences = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

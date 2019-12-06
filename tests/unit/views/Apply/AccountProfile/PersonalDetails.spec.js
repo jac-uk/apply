@@ -11,9 +11,13 @@ const mockStore = {
     candidate: {
       record: {},
     },
+    application: {
+      record: {},
+    },
   },
   getters: {
     'candidate/data': () => candidate,
+    'application/data': () => {},
   },
 };
 

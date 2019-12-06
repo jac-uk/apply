@@ -2,8 +2,9 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
-          Take the equality and diversity survey
+          Equality and diversity
         </h1>
 
         <p class="govuk-body-l">
@@ -530,6 +531,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import BooleanOrNull from '@/helpers/booleanOrNull';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
@@ -539,7 +541,7 @@ export default {
     TextareaInput,
     CheckboxGroup,
     CheckboxItem,
-
+    BackLink,
   },
   data(){
     const defaults = {
@@ -568,6 +570,7 @@ export default {
   },
   methods: {
     async save() {
+      this.application.progress.equalityAndDiversitySurvey = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
     },

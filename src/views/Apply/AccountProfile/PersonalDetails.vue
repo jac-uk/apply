@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Personal details
         </h1>
@@ -112,6 +113,7 @@ import CheckboxItem from '@/components/Form/CheckboxItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
@@ -122,9 +124,11 @@ export default {
     TextareaInput,
     RadioGroup,
     RadioItem,
+    BackLink,
   },
   data(){
     const candidate = this.$store.getters['candidate/data']();
+    const application = this.$store.getters['application/data']();
     return {
       candidate: {
         fullName: candidate && candidate.fullName || null,
@@ -135,10 +139,13 @@ export default {
         reasonableAdjustments: candidate && candidate.reasonableAdjustments || null,
         reasonableAdjustmentsDetails: candidate && candidate.reasonableAdjustmentsDetails || null,
       },
+      application: application,
     };
   },
   methods: {
     async save() {
+      this.application.progress.personalDetails = true;
+      await this.$store.dispatch('application/save', this.application);
       await this.$store.dispatch('candidate/save', this.candidate);
       this.$router.push({ name: 'task-list' });
     },
