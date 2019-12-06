@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Statement of leadership suitability
         </h1>
@@ -83,11 +84,13 @@
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import '@/mixins/uploadMixin';
+import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     RadioGroup,
     RadioItem,
+    BackLink,
   },
   data(){
     const defaults = {};

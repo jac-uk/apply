@@ -40,6 +40,63 @@
           class="govuk-!-width-one-half"
         />
 
+        <CheckboxGroup
+          id="citizenship"
+          v-model="candidate.citizenship"
+          label="Citizenship"
+          hint="Select which countries you're a citizen of."
+        >
+          <CheckboxItem
+            value="uk"
+            label="UK"
+          />
+          <CheckboxItem
+            value="republic-of-ireland"
+            label="Republic of Ireland"
+          />
+          <CheckboxItem
+            value="another-commonwealth-country"
+            label="Another Commonwealth country"
+          />
+          <CheckboxItem
+            value="other"
+            label="Other"
+          />
+        </CheckboxGroup>
+
+        <RadioGroup
+          id="reasonable-adjustments"
+          v-model="candidate.reasonableAdjustments"
+          label="Reasonable Adjustments"
+        >
+          <p class="govuk-body-m govuk-!-margin-top-0">
+            With reference to our
+            <a
+              class="govuk-link"
+              href="#"
+              target="_blank"
+            >
+              reasonable adjustments policy
+            </a>
+            do you have a diability or long term al condition? If you need an adjustment
+            during the process let us know.
+          </p>
+          <RadioItem
+            :value="true"
+            label="Yes"
+          >
+            <TextareaInput
+              id="reasonable-adjustments-details"
+              v-model="candidate.reasonableAdjustmentsDetails"
+              label="Give details here"
+            />
+          </RadioItem>
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
+
         <button class="govuk-button">
           Save and continue
         </button>
@@ -51,12 +108,22 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import CheckboxGroup from '@/components/Form/CheckboxGroup';
+import CheckboxItem from '@/components/Form/CheckboxItem';
+import TextareaInput from '@/components/Form/TextareaInput';
+import RadioGroup from '@/components/Form/RadioGroup';
+import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
 
 export default {
   components: {
     TextField,
     DateInput,
+    CheckboxGroup,
+    CheckboxItem,
+    TextareaInput,
+    RadioGroup,
+    RadioItem,
     BackLink,
   },
   data(){
@@ -68,6 +135,9 @@ export default {
         email: candidate && candidate.email || null,
         dateOfBirth: candidate && candidate.dateOfBirth || null,
         nationalInsuranceNumber: candidate && candidate.nationalInsuranceNumber || null,
+        citizenship: candidate && candidate.citizenship || null,
+        reasonableAdjustments: candidate && candidate.reasonableAdjustments || null,
+        reasonableAdjustmentsDetails: candidate && candidate.reasonableAdjustmentsDetails || null,
       },
       application: application,
     };

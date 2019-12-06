@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
+        <BackLink />
         <h1 class="govuk-heading-xl">
           Self-assessment competencies
         </h1>
@@ -52,8 +53,12 @@
 
 <script>
 import '@/mixins/uploadMixin';
+import BackLink from '@/components/BackLink';
 
 export default {
+  components: {
+    BackLink,
+  },
   data(){
     const defaults = {};
     const data = this.$store.getters['application/data']();
