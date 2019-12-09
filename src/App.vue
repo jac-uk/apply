@@ -18,7 +18,10 @@
               >
             </div>
           </div>
-          <div class="govuk-grid-column-one-third">
+          <div
+            v-if="this.$route.name !== 'sign-in'"
+            class="govuk-grid-column-one-third"
+          >
             <button
               v-if="isSignedIn"
               class="govuk-button"
