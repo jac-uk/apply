@@ -36,6 +36,9 @@
             >
               Sign In
             </button>
+            <span class="govuk-phase-banner__text">
+              <b>You are now signed as Johnny Appleseed</b>
+            </span>
           </div>
         </div>
       </header>

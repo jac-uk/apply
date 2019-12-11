@@ -1,5 +1,8 @@
 <template>
   <div>
+  <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+      Applications
+  </h1>
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
       Open vacancies
     </h1>
