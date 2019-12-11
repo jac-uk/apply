@@ -31,9 +31,9 @@ jobs:
       - run:
           name: 'Lint'
           command: npm run lint-ci
-      - run:
-          name: 'Test'
-          command: npm run test-ci
+      #- run:
+      #    name: 'Test'
+      #    command: npm run test-ci
 
   rebase:
     executor: default
@@ -88,7 +88,7 @@ workflows:
               only: staging
       - build-and-deploy-production:
           requires:
-            #- test
+            - test
           filters:
             branches:
               only: master
