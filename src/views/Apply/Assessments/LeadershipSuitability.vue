@@ -4,7 +4,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Statement of suitability
+          Statement of leadership suitability
         </h1>
 
         <p class="govuk-body-l">
@@ -36,7 +36,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Download assessments template
+            Download leadership suitability template
           </h2>
 
           <a
@@ -44,18 +44,19 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            assessments-template.doc
+            leadership-suitability-template.doc
           </a>
         </div>
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload finished assessments
+            Upload leadersip suitability assessment
           </h2>
           <input
-            id="file-upload-1"
+            id="leadership-suitability-assessment-file"
             class="govuk-file-upload"
             type="file"
+            @change="fileSelected"
           >
         </div>
 
@@ -64,9 +65,10 @@
             Upload CV
           </h2>
           <input
-            id="file-upload-2"
+            id="cv-file"
             class="govuk-file-upload"
             type="file"
+            @change="fileSelected"
           >
         </div>
 
@@ -81,6 +83,7 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -90,12 +93,30 @@ export default {
     BackLink,
   },
   data(){
+    const defaults = {};
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
     return {
+      application: application,
+      files: {},
     };
   },
+  computed: {
+    userId() {
+      return this.$store.state.auth.currentUser.uid;
+    },
+  },   
   methods: {
-    save() {
+    async save() {
+      // loop through this.files and upload them
+      const files = Object.values(this.files);
+      for (const file of files) {
+        await this.upload(file);
+      }
+
       this.application.progress.leadershipSuitability = true;
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };

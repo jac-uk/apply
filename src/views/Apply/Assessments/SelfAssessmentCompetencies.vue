@@ -19,7 +19,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Download assessments template
+            Download self assessment template
           </h2>
 
           <a
@@ -27,18 +27,19 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            assessments-template.doc
+            self-assessment-template.doc
           </a>
         </div>
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload finished assessments
+            Upload finished self assessment
           </h2>
           <input
-            id="file-upload-2"
+            id="self-assessment-file"
             class="govuk-file-upload"
             type="file"
+            @change="fileSelected"
           >
         </div>
 
@@ -51,6 +52,7 @@
 </template>
 
 <script>
+import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -58,14 +60,30 @@ export default {
     BackLink,
   },
   data(){
+    const defaults = {};
+    const data = this.$store.getters['application/data']();
+    const application = { ...defaults, ...data };
     return {
-
+      application: application,
+      files: {},
     };
   },
+  computed: {
+    userId() {
+      return this.$store.state.auth.currentUser.uid;
+    },
+  },   
   methods: {
-    save() {
-      this.application.progress.selfAssessmentCompetencies = true;
+    async save() {
+      // loop through this.files and upload them
+      const files = Object.values(this.files);
+      for (const file of files) {
+        await this.upload(file);
+      }
 
+      this.application.progress.selfAssessmentCompetencies = true;
+      await this.$store.dispatch('application/save', this.application);
+      this.$router.push({ name: 'task-list' });
     },
   },
 };
