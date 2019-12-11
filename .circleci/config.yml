@@ -88,7 +88,7 @@ workflows:
               only: staging
       - build-and-deploy-production:
           requires:
-            - test
+            #- test
           filters:
             branches:
               only: master
