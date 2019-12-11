@@ -66,12 +66,20 @@ Vue.mixin({
                 //console.log('File available at', downloadURL);
                 // set proper Firestore value depending on the file name in the download url
                 if (downloadURL.includes('suitability-statement')) {
+                  
+                  // set uploadedSuitabilityStatement value in Firestore
                   this.application.uploadedSuitabilityStatement = 'suitability-statement';
                 } else if (downloadURL.includes('leadership-suitability-assessment')) {
+                  
+                  // set uploadedLeadershipSustainabilityAssessment value in Firestore
                   this.application.uploadedLeadershipSustainabilityAssessment = 'leadership-suitability-assessment';
                 } else if (downloadURL.includes('cv')) {
+                  
+                  // set uploadedCV value in Firestore
                   this.application.uploadedCV = 'cv';
                 } else if (downloadURL.includes('self-assessment')) {
+                  
+                  // set uploadedSelfAssessment value in Firestore
                   this.application.uploadedSelfAssessment = 'self-assessment';
                 }
 
