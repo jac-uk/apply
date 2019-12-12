@@ -13,7 +13,6 @@ Add new exercise
   <!--MAIN WRAPPER-->
   <main class="govuk-main-wrapper">
 
-
     <!--PAGE TITLE-->
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-full" style="text-align:right">

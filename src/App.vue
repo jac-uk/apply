@@ -36,8 +36,11 @@
             >
               Sign In
             </button>
-            <span class="govuk-phase-banner__text">
-              <b>You are now signed as Johnny Appleseed</b>
+            <span
+              v-if="isSignedIn"
+              class="govuk-phase-banner__text"
+            >
+              <b>You are now signed in as {{ userName }}</b>
             </span>
           </div>
         </div>
@@ -75,6 +78,9 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+    userName() {
+      return this.$store.state.auth.currentUser.displayName ? this.$store.state.auth.currentUser.displayName : this.$store.state.auth.currentUser.email;
+    },    
   },
   methods: {
     signIn() {
