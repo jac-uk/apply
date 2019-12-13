@@ -73,7 +73,10 @@ export default {
       return this.$store.state.application.record;
     },
     isLegal() {
-      return this.vacancy.typeOfExercise ==='legal';
+      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
+    },
+    isNonLegal() {
+      return this.vacancy.typeOfExercise ==='non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
     applicationProgress() {
       if (this.application && this.application.progress) {
@@ -95,48 +98,54 @@ export default {
             ],
           },
         );
-        data.push(
-          {
-            title: 'Working preferences',
-            tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-            ],
-          },
-        );
+        if (this.vacancy.isSPTWOffered) {
+          data.push(
+            {
+              title: 'Working preferences',
+              tasks: [
+                { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+              ],
+            },
+          );
+        }
         if (this.isLegal) {
           data.push(
             {
               title: 'Qualifications and experience',
               tasks: [
-                { title: 'Add relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
-                { title: 'Add post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
-                { title: 'Add judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
-              ],
-            },
-          );
-        } else {
-          data.push(
-            {
-              title: 'Memberships and Experience',
-              tasks: [
-                { title: 'add memberships', id: 'memberships', done: false },
-                { title: 'add experience', id: 'experience', done: false },
-                { title: 'add gaps in employment', id: 'employment-gaps', done: false },
+                { title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
+                { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
+                { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
+                { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
               ],
             },
           );
         }
-        data.push(
-          {
-            title: 'Assessments',
-            tasks: [
-              { title: 'Give independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails },
-              { title: 'Upload self-assessment competencies (SelfAssessmentCompetencies)', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies },
-              { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability },
-              { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability },
-            ],
-          },
-        );
+        if (this.isNonLegal) {
+          data.push(
+            {
+              title: 'Memberships and Experience',
+              tasks: [
+                { title: 'Relevant memberships', id: 'memberships', done: false },
+                { title: 'Relevant experience', id: 'experience', done: false },
+                { title: 'Gaps in employment', id: 'employment-gaps', done: false },
+              ],
+            },
+          );
+        }
+        if (this.vacancy.assessmentOptions !== 'none') {
+          data.push(
+            {
+              title: 'Assessments',
+              tasks: [
+                { title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails },
+                { title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies },
+                { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability },
+                { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability },
+              ],
+            },
+          );
+        }
         data.push(
           {
             title: 'Apply',
