@@ -67,7 +67,7 @@
           label="Reasonable length of service"
         >
           <p class="govuk-body-m">
-            You can work for at least 5 years before reaching the retirement age of 70.
+            You can work for at least {{ lengthOfService }} years before reaching the retirement age of {{ retirementAge }}.
           </p>
           <RadioItem
             :value="true"
@@ -80,13 +80,13 @@
         </RadioGroup>
 
         <RadioGroup
+          v-if="isLegal"
           id="qualifications-and-experience"
           v-model="eligibility.qualificationsExperience"
           label="Qualifications and experience"
         >
           <p class="govuk-body-m govuk-!-margin-top-0">
-            You're qualified in England or Wales as a barrister,
-            fellow of CILEx or solicitor, and have at least 5 years of
+            You're qualified in England or Wales as a {{ qualifications }} and have at least {{ postQualificationExperience }} years of
             <a
               class="govuk-link"
               href="https://www.judicialappointments.gov.uk/eligibility-tribunals"
@@ -94,7 +94,7 @@
             >post-qualification law-related work experience</a>.
           </p>
 
-          <p class="govuk-body-m govuk-!-margin-top-0">
+          <!-- <p class="govuk-body-m govuk-!-margin-top-0">
             You have experience of criminal law and procedure
             in the Crown Court and/or the Court of Appeal, Criminal Division and <a
               class="govuk-link"
@@ -102,7 +102,7 @@
               target="_blank"
             >sufficient
               directly relevant previous judicial experience</a>.
-          </p>
+          </p> -->
 
           <RadioItem
             :value="true"
@@ -147,6 +147,54 @@ export default {
     vacancy () {
       return this.$store.state.exercise.record;
     },
+    isLegal() {
+      if (this.vacancy.typeOfExercise === 'legal') {
+        return true;
+      }
+      if (this.vacancy.typeOfExercise === 'leadership') {
+        return true;
+      }
+      return false;
+    },
+    lengthOfService() {
+      if (this.vacancy.reasonableLengthService === 'other') {
+        return this.vacancy.otherLOS;
+      } else {
+        return this.vacancy.reasonableLengthService;
+      }
+    },
+    retirementAge() {
+      if (this.vacancy.retirementAge === 'other') {
+        return this.vacancy.otherRetirement;
+      } else {
+        return this.vacancy.retirementAge;
+      }
+    },
+    qualifications() {
+      let qualifications = '';
+      for (let i = 0, len = this.vacancy.qualifications.length; i < len; ++i) {
+        if (i > 0) {
+          if (i < len - 1) {
+            qualifications += ', ';
+          } else {
+            qualifications += ' or ';
+          }
+        }
+        if (this.vacancy.qualifications[i] === 'other') {
+          qualifications += this.vacancy.otherQualifications;
+        } else {
+          qualifications += this.$options.filters.lookup(this.vacancy.qualifications[i]);
+        }
+      }
+      return qualifications;
+    },
+    postQualificationExperience() {
+      if (this.vacancy.postQualificationExperience === 'other') {
+        return this.vacancy.otherYears;
+      } else {
+        return this.vacancy.postQualificationExperience;
+      }
+    },
   },
   methods: {
     passOrFail () {
@@ -154,7 +202,7 @@ export default {
       if (this.eligibility.citizenship !== true ) { isOkay = false; }
       if (this.eligibility.character !== true) { isOkay = false; }
       if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
-      if (this.eligibility.qualificationsExperience !== true) { isOkay = false; }
+      if (this.isLegal && this.eligibility.qualificationsExperience !== true) { isOkay = false; }
       if (isOkay) {
         this.$router.push({ name: 'eligibility-pass' });
       } else {
