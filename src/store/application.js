@@ -37,6 +37,8 @@ export default {
         const newDoc = data;
         newDoc.userId = rootState.auth.currentUser.uid;
         newDoc.exerciseId = rootState.exercise.record.id;
+        newDoc.exerciseName = rootState.exercise.record.name;
+        newDoc.exerciseRef = rootState.exercise.record.referenceNumber;
         const ref = await collection.add(newDoc);
         dispatch('bind', ref.id);
       }
