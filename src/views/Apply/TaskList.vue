@@ -1,6 +1,12 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
+      <RouterLink
+        class="govuk-back-link"
+        :to="{ name: 'applications' }"
+      >
+        Applications
+      </RouterLink>
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
@@ -126,9 +132,9 @@ export default {
             {
               title: 'Memberships and Experience',
               tasks: [
-                { title: 'Relevant memberships', id: 'memberships', done: false },
-                { title: 'Relevant experience', id: 'experience', done: false },
-                { title: 'Gaps in employment', id: 'employment-gaps', done: false },
+                { title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships },
+                { title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience },
+                { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
               ],
             },
           );

@@ -17,6 +17,9 @@ import Eligibility from '@/views/Eligibility/Eligibility';
 import EligibilityPass from '@/views/Eligibility/EligibilityPass';
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
+// Applications
+import Applications from '@/views/Applications';
+
 // Apply
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
@@ -98,6 +101,14 @@ const router = new Router({
           },
         },
       ],
+    },
+    {
+      path: '/applications',
+      name: 'applications',
+      component: Applications,
+      meta: {
+        title: 'Applications',
+      },
     },
     // Apply for a role
     {
