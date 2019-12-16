@@ -127,18 +127,20 @@ export default {
     BackLink,
   },
   data(){
-    const candidate = this.$store.getters['candidate/data']();
+const defaults = {
+      fullName: null,
+      email: null,
+      dateOfBirth: null,
+      nationalInsuranceNumber: null,
+      citizenship: null,
+      reasonableAdjustments: null,
+      reasonableAdjustmentsDetails: null,
+    };
+    const data = this.$store.getters['candidate/data']();
+    const candidate = { ...defaults, ...data };
     const application = this.$store.getters['application/data']();
     return {
-      candidate: {
-        fullName: candidate && candidate.fullName || null,
-        email: candidate && candidate.email || null,
-        dateOfBirth: candidate && candidate.dateOfBirth || null,
-        nationalInsuranceNumber: candidate && candidate.nationalInsuranceNumber || null,
-        citizenship: candidate && candidate.citizenship || null,
-        reasonableAdjustments: candidate && candidate.reasonableAdjustments || null,
-        reasonableAdjustmentsDetails: candidate && candidate.reasonableAdjustmentsDetails || null,
-      },
+      candidate: candidate,
       application: application,
     };
   },
