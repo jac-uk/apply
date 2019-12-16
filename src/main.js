@@ -25,7 +25,7 @@ auth().onAuthStateChanged( (user) => {
     if (store.getters['exercise/id']) {
       router.push(`/apply/${store.getters['exercise/id']}`);
     } else {
-      router.push('vacancies');
+      router.push('applications');
     }
   }
   if (!vueInstance) {

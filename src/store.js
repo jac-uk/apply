@@ -8,6 +8,7 @@ import auth from '@/store/auth';
 import vacancies from '@/store/vacancies';
 import exercise from '@/store/exercise';
 import candidate from '@/store/candidate';
+import applications from '@/store/applications';
 import application from '@/store/application';
 
 const store = new Vuex.Store({
@@ -18,6 +19,7 @@ const store = new Vuex.Store({
     vacancies,
     exercise,
     candidate,
+    applications,
     application,
   },
   state: {},
