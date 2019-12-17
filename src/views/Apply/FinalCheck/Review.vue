@@ -704,6 +704,14 @@ export default {
     detailsDetector (value) {
       if (value !== null) {return true;}
     },
+    async save() {
+      // change status from 'draft' to 'applied'
+      this.application.status = 'applied';
+      // TODO: set an application reference number here too.
+      await this.$store.dispatch('application/save', this.application);
+      // TODO: fix this so it navigates to the Confirmation page.
+      alert('Thanks for applying.');
+    },    
   },
 };
 </script>
