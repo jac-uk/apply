@@ -33,6 +33,9 @@ import Review from '@/views/Apply/FinalCheck/Review';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
+import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships';
+import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience';
+import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
@@ -130,7 +133,7 @@ const router = new Router({
           name: 'character-information',
           meta: {
             requiresAuth: true,
-            title: 'Declare character information',
+            title: 'Character information',
           },
         },
         {
@@ -157,7 +160,7 @@ const router = new Router({
           name: 'personal-details',
           meta: {
             requiresAuth: true,
-            title: 'Add personal details',
+            title: 'Personal details',
           },
         },
         {
@@ -175,7 +178,7 @@ const router = new Router({
           name: 'self-assessment-competencies',
           meta: {
             requiresAuth: true,
-            title: 'Upload self-assessment competencies',
+            title: 'Self-assessment competencies',
           },
         },
         {
@@ -193,7 +196,7 @@ const router = new Router({
           name: 'judicial-experience',
           meta: {
             requiresAuth: true,
-            title: 'Add judicial experience',
+            title: 'Judicial experience',
           },
         },
         {
@@ -202,7 +205,7 @@ const router = new Router({
           name: 'post-qualification-work-experience',
           meta: {
             requiresAuth: true,
-            title: 'Add post-qualification work experience',
+            title: 'Post-qualification work experience',
           },
         },
         {
@@ -211,7 +214,34 @@ const router = new Router({
           name: 'relevant-qualifications',
           meta: {
             requiresAuth: true,
-            title: 'Add relevant qualifications',
+            title: 'Relevant qualifications',
+          },
+        },
+        {
+          path: 'relevant-memberships',
+          component: RelevantMemberships,
+          name: 'relevant-memberships',
+          meta: {
+            requiresAuth: true,
+            title: 'Relevant memberships',
+          },
+        },
+        {
+          path: 'relevant-experience',
+          component: RelevantExperience,
+          name: 'relevant-experience',
+          meta: {
+            requiresAuth: true,
+            title: 'Relevant experience',
+          },
+        },
+        {
+          path: 'employment-gaps',
+          component: EmploymentGaps,
+          name: 'employment-gaps',
+          meta: {
+            requiresAuth: true,
+            title: 'Employment gaps',
           },
         },
         {
@@ -220,11 +250,10 @@ const router = new Router({
           name: 'part-time-working-preferences',
           meta: {
             requiresAuth: true,
-            title: 'Set part-time working preferences',
+            title: 'Part-time working preferences',
           },
         },
         {
-
           path: 'leadership-statement-of-suitability',
           component: LeadershipSuitability,
           name: 'leadership-statement-of-suitability',
