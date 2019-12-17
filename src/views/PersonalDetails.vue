@@ -1,5 +1,3 @@
-
-
 <template>
   <div>
     <RouterLink
@@ -15,7 +13,7 @@
     <div class="govuk-grid-column-one-quarter">
       <ul class="dwp-vertical-navigation">
         <li>
-          <a aria-current="page" href="tab-applications?current=tab-applications">
+          <a aria-current="page" href="Applications?current=Applications">
             Applications
           </a>
         </li>
