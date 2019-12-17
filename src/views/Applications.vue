@@ -1,7 +1,13 @@
 <template>
   <div>
+    <RouterLink
+      class="govuk-link"
+      :to="{ name: 'vacancies' }"
+    >
+      Vacancies
+    </RouterLink>    
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
-      Applications
+      My applications
     </h1>
     <ul class="govuk-list">
       <li

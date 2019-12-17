@@ -1,8 +1,12 @@
 <template>
   <div>
-    <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
-      Applications
-    </h1>
+    <RouterLink
+      v-if="isSignedIn"
+      class="govuk-link"
+      :to="{ name: 'applications' }"
+    >
+      My applications
+    </RouterLink>    
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
       Open vacancies
     </h1>
@@ -124,6 +128,9 @@ export default {
     ...mapState('vacancies', [
       'records',
     ]),
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
   },
   created() {
     this.$store.dispatch('vacancies/bind');
