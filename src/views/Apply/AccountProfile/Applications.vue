@@ -27,7 +27,7 @@ Add new exercise
         <ul class="dwp-vertical-navigation">
           <li>
             <a aria-current="page" href="tab-applications?current=tab-applications">
-              Applications
+              Applications --- 
             </a>
           </li>
           <li>
