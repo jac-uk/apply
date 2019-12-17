@@ -94,72 +94,79 @@ export default {
     taskGroups() {
       let data = [];
       if (this.applicationProgress) {
-        data.push(
-          {
-            title: 'Account profile',
-            tasks: [
-              { title: 'Personal details', id: 'personal-details', done: this.applicationProgress.personalDetails },
-              { title: 'Character information', id: 'character-information', done: this.applicationProgress.characterInformation },
-              { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
-            ],
-          },
-        );
+        data.push({
+          title: 'Account profile',
+          tasks: [
+            { title: 'Personal details', id: 'personal-details', done: this.applicationProgress.personalDetails },
+            { title: 'Character information', id: 'character-information', done: this.applicationProgress.characterInformation },
+            { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
+          ],
+        });
         if (this.vacancy.isSPTWOffered) {
-          data.push(
-            {
-              title: 'Working preferences',
-              tasks: [
-                { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-              ],
-            },
-          );
+          data.push({
+            title: 'Working preferences',
+            tasks: [
+              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+            ],
+          });
         }
         if (this.isLegal) {
-          data.push(
-            {
-              title: 'Qualifications and experience',
-              tasks: [
-                { title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
-                { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
-                { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
-                { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
-              ],
-            },
-          );
+          data.push({
+            title: 'Qualifications and experience',
+            tasks: [
+              { title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
+              { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
+              { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
+              { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
+            ],
+          });
         }
         if (this.isNonLegal) {
-          data.push(
-            {
-              title: 'Memberships and Experience',
-              tasks: [
-                { title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships },
-                { title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience },
-                { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
-              ],
-            },
-          );
-        }
-        if (this.vacancy.assessmentOptions !== 'none') {
-          data.push(
-            {
-              title: 'Assessments',
-              tasks: [
-                { title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails },
-                { title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies },
-                { title: 'Statement of suitability (LeadershipSuitability)', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability },
-                { title: 'Statement of suitability (StatementOfSuitability)', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability },
-              ],
-            },
-          );
-        }
-        data.push(
-          {
-            title: 'Apply',
+          data.push({
+            title: 'Memberships and Experience',
             tasks: [
-              { title: 'Review application', id: 'review', done: false },
+              { title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships },
+              { title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience },
+              { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
             ],
-          },
-        );
+          });
+        }
+        const assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
+        switch (this.vacancy.assessmentOptions) {
+        case 'self-assessment-with-competencies':
+          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+          break;
+        case 'statement-of-suitability-with-competencies':
+          // @todo what happens to leadership version?
+          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
+          // assessmentOptions.push({ title: 'Statement of suitability', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability });
+          break;
+        case 'statement-of-suitability-with-skills-and-abilities':
+          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
+          break;
+        case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+          // @todo build suitability and cv form?
+          assessmentOptions.push({ title: 'Statement of suitability and CV', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
+          break;
+        case 'statement-of-eligibility':
+          // @todo build statement of eligibility form?
+          assessmentOptions.push({ title: 'Statement of eligibility', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
+          break;
+        case 'none':
+          break;
+        default:
+        }
+        data.push({
+          title: 'Assessments',
+          tasks: assessmentOptions,
+        });
+
+        data.push({
+          title: 'Apply',
+          tasks: [
+            { title: 'Review application', id: 'review', done: false },
+          ],
+        });
       }
       return data;
     },

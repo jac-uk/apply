@@ -127,7 +127,7 @@ export default {
     BackLink,
   },
   data(){
-const defaults = {
+    const defaults = {
       fullName: null,
       email: null,
       dateOfBirth: null,

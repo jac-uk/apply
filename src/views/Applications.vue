@@ -9,13 +9,17 @@
         :key="application.id"
         class="govuk-!-margin-top-7"
       >
+        <span 
+          v-if="application.exerciseName && application.exerciseRef"
+          class="govuk-caption-l"
+        >{{ application.exerciseRef }}<br></span>
         <RouterLink
           class="govuk-link govuk-heading-m govuk-!-font-weight-bold govuk-!-margin-bottom-0"
           :to="{ name: 'task-list', params: { id: application.exerciseId } }"
         >
-          <span v-if="application.exerciseName">{{ application.exerciseName }}<br v-if="application.exerciseRef" />{{ application.exerciseRef }}</span>
+          <span v-if="application.exerciseName">{{ application.exerciseName }}</span>
           <span v-else-if="application.exerciseRef">{{ application.exerciseRef }}</span>
-          <span v-else>{{ application.exerciseId }}</span>          
+          <span v-else>{{ application.exerciseId }}</span>
         </RouterLink>
         Status: {{ application.status }}
       </li>
