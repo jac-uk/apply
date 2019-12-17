@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <RouterLink
-      class="govuk-link"
-      :to="{ name: 'vacancies' }"
-    >
-      Vacancies
-    </RouterLink>
+<div>
+  <RouterLink class="govuk-link" :to="{ name: 'vacancies' }">
+    Vacancies
+  </RouterLink>
 
-<div class="govuk-grid-row">
-
+  <div class="govuk-grid-row">
     <!--SIDE NAV-->
     <div class="govuk-grid-column-one-quarter">
       <ul class="dwp-vertical-navigation">
@@ -41,19 +37,9 @@
       <h1 class="govuk-heading-xl">Applications</h1>
 
       <ul class="govuk-list">
-        <li
-          v-for="application in records"
-          :key="application.id"
-          class="govuk-!-margin-top-7"
-        >
-          <span
-            v-if="application.exerciseName && application.exerciseRef"
-            class="govuk-caption-l"
-          >{{ application.exerciseRef }}<br></span>
-          <RouterLink
-            class="govuk-link govuk-heading-m govuk-!-font-weight-bold govuk-!-margin-bottom-0"
-            :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-          >
+        <li v-for="application in records" :key="application.id" class="govuk-!-margin-top-7">
+          <span v-if="application.exerciseName && application.exerciseRef" class="govuk-caption-l">{{ application.exerciseRef }}<br></span>
+          <RouterLink class="govuk-link govuk-heading-m govuk-!-font-weight-bold govuk-!-margin-bottom-0" :to="{ name: 'task-list', params: { id: application.exerciseId } }">
             <span v-if="application.exerciseName">{{ application.exerciseName }}</span>
             <span v-else-if="application.exerciseRef">{{ application.exerciseRef }}</span>
             <span v-else>{{ application.exerciseId }}</span>
@@ -94,11 +80,13 @@
     </div>
   </div>
 
-  </div>
+</div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {
+  mapState
+} from 'vuex';
 
 export default {
   computed: {
@@ -113,92 +101,90 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 /* Side nav */
 
 .dwp-vertical-navigation {
-  margin: 0 0 20px 0;
-  padding: 0;
+    margin: 0 0 20px;
+    padding: 0;
 }
 
 .dwp-vertical-navigation li {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
 
-  @include govuk-media-query($from: tablet) {
-    max-width: 200px;
-  }
+    @include govuk-media-query($from: tablet) {
+        max-width: 200px;
+    }
 }
 
 .dwp-vertical-navigation li a {
-  padding: 10px;
-  display: block;
+    padding: 10px;
+    display: block;
 
-  &:hover {
-    color: govuk-colour("dark-blue");
-  }
+    &:hover {
+        color: govuk-colour("dark-blue");
+    }
 }
 
 .dwp-vertical-navigation a[aria-current="page"] {
-  color: govuk-colour("blue");
-  font-weight: bold;
-  text-decoration: none;
-  border-left: 4px solid govuk-colour("blue");
-  background-color: govuk-colour("light-grey");
+    color: govuk-colour("blue");
+    font-weight: bold;
+    text-decoration: none;
+    border-left: 4px solid govuk-colour("blue");
+    background-color: govuk-colour("light-grey");
 }
 
-  .dwp-vertical-navigation {
+.dwp-vertical-navigation {
     margin: 0;
     padding: 0;
     > li {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      font-size: 1em;
-      > a {
-        padding: 0.625em;
-        display: block;
-        text-decoration: none;
-      }
-      > ul {
-        display: none;
-        > li {
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          font-size: 1em;
-          > a {
-            padding: 0.625em 0.625em 0.625em 1.25em;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 1em;
+        > a {
+            padding: 0.625em;
             display: block;
             text-decoration: none;
-          }
         }
-      }
-      &.on > a {
-        color: #1d70b8;
-        font-weight: bold;
-        background-color: #f3f2f1;
-      }
-      &.open {
-        border-left: 4px solid #1d70b8;
         > ul {
-          display: block;
-          padding-inline-start: 0;
-          > li {
-            &.on {
-              background-color: #f3f2f1;
-              > a {
-                color: #1d70b8;
-                font-weight: bold;
-                text-decoration: none;
-              }
+            display: none;
+            > li {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                font-size: 1em;
+                > a {
+                    padding: 0.625em 0.625em 0.625em 1.25em;
+                    display: block;
+                    text-decoration: none;
+                }
             }
-          }
         }
-      }
+        &.on > a {
+            color: #1d70b8;
+            font-weight: bold;
+            background-color: #f3f2f1;
+        }
+        &.open {
+            border-left: 4px solid #1d70b8;
+            > ul {
+                display: block;
+                padding-inline-start: 0;
+                > li {
+                    &.on {
+                        background-color: #f3f2f1;
+                        > a {
+                            color: #1d70b8;
+                            font-weight: bold;
+                            text-decoration: none;
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
-
+}
 </style>
