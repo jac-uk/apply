@@ -5,8 +5,8 @@
       class="govuk-link"
       :to="{ name: 'applications' }"
     >
-      My applications
-    </RouterLink>    
+      My applications -- 
+    </RouterLink>
     <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
       Open vacancies
     </h1>
