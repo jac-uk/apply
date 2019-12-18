@@ -19,14 +19,17 @@ import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
 // Applications
 import Applications from '@/views/Applications';
+import PersonalDetails from '@/views/PersonalDetails';
+import CharacterInformation from '@/views/CharacterInformation';
+import DiversityInformation from '@/views/DiversityInformation';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
-import CharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
+import ApplyCharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
-import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
+import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import AssessorsDetails from '@/views/Apply/Assessments/AssessorsDetails';
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
 import Review from '@/views/Apply/FinalCheck/Review';
@@ -57,6 +60,30 @@ const router = new Router({
       component: Vacancies,
       meta: {
         title: 'Vacancies',
+      },
+    },
+    {
+      path: '/personal-details',
+      name: 'personal-details',
+      component: PersonalDetails,
+      meta: {
+        title: 'Personal details',
+      },
+    },
+    {
+      path: 'character-information',
+      name: 'character-information',
+      component: CharacterInformation,
+      meta: {
+        title: 'Character information',
+      },
+    },
+    {
+      path: 'diversity-information',
+      name: 'diversity-information',
+      component: DiversityInformation,
+      meta: {
+        title: 'Diversity information',
       },
     },
     {
@@ -129,7 +156,7 @@ const router = new Router({
         },
         {
           path: 'character-information',
-          component: CharacterInformation,
+          component: ApplyCharacterInformation,
           name: 'character-information',
           meta: {
             requiresAuth: true,
@@ -156,7 +183,7 @@ const router = new Router({
         },
         {
           path: 'personal-details',
-          component: PersonalDetails,
+          component: ApplyPersonalDetails,
           name: 'personal-details',
           meta: {
             requiresAuth: true,

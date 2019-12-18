@@ -12,27 +12,36 @@
       <div class="govuk-grid-column-one-quarter">
         <ul class="dwp-vertical-navigation">
           <li>
-            <a
-              aria-current="page"
-              href="Applications?current=Applications"
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'applications' }"
             >
               Applications
-            </a>
+            </RouterLink>
           </li>
           <li>
-            <a href="PersonalDetails?current=PersonalDetails">
-              Personal details
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'personal-details' }"
+            >
+              Personal Details
+            </RouterLink>
           </li>
           <li>
-            <a href="DiversityInformation?current=DiversityInformation">
-              Diversity information
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'diversity-information' }"
+            >
+              Diversity Information
+            </RouterLink>
           </li>
           <li>
-            <a href="CharacterInformation?current=tab-CharacterInformation">
-              Character information
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'character-information' }"
+            >
+              Character Information
+            </RouterLink>
           </li>
         </ul>
       </div>
@@ -40,74 +49,74 @@
       <div class="govuk-grid-column-three-quarters">
         <!--HEADER-->
         <h1 class="govuk-heading-xl">
-          Applications
+          Diversity information
         </h1>
 
-        <ul class="govuk-list">
-          <li
-            v-for="application in records"
-            :key="application.id"
-            class="govuk-!-margin-top-7"
-          >
-            <span
-              v-if="application.exerciseName && application.exerciseRef"
-              class="govuk-caption-l"
-            >{{ application.exerciseRef }}<br></span>
-            <RouterLink
-              class="govuk-link govuk-heading-m govuk-!-font-weight-bold govuk-!-margin-bottom-0"
-              :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-            >
-              <span v-if="application.exerciseName">{{ application.exerciseName }}</span>
-              <span v-else-if="application.exerciseRef">{{ application.exerciseRef }}</span>
-              <span v-else>{{ application.exerciseId }}</span>
-            </RouterLink>
-            Status: {{ application.status }}
-          </li>
-        </ul>
-
-        <!--GREY PANEL-->
-        <h2 class="govuk-heading-m">
-          Current applications
-        </h2>
-        <div class="govuk-panel--s govuk-panel--grey">
-          <p class="govuk-body-l">
-            114 Judge of the First-tier Tribunal for England and
-            Wales
-          </p>
-          <p class="govuk-body">
-            <a href="#">Continue with
-              application</a>
-          </p>
-        </div>
-        <br><br>
-
-        <h2 class="govuk-heading-m">
-          Previous applications
-        </h2>
-        <!--TABLE-->
         <table class="govuk-table">
           <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Disability
+            </th>
             <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Circuit judge</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 17 February 2018
-            </td>
-            <td class="govuk-table__cell">
-              Selected
+              <a href="name">Change</a>
             </td>
           </tr>
           <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Ethnicity
+            </th>
             <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Recorder</a>
+              <a href="name">Change</a>
             </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Gender
+            </th>
             <td class="govuk-table__cell">
-              Closed 12 April 2017
+              <a href="name">Change</a>
             </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Religious beliefs
+            </th>
             <td class="govuk-table__cell">
-              Not selected
+              <a href="name">Change</a>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Sexual orientation
+            </th>
+            <td class="govuk-table__cell">
+              <a href="name">Change</a>
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <th
+              scope="row"
+              class="govuk-table__header"
+            >
+              Social mobility
+            </th>
+            <td class="govuk-table__cell">
+              <a href="name">Change</a>
             </td>
           </tr>
         </table>
