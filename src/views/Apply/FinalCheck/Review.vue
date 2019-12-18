@@ -83,7 +83,7 @@
           <router-link
             class="govuk-link govuk-body-m change-link"
             style="display:inline-block;"
-            :to="{name: 'character-information'}"
+            :to="{name: 'apply-character-information'}"
           >
             Change
           </router-link>
