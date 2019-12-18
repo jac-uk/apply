@@ -168,7 +168,7 @@ const router = new Router({
         {
           path: 'character-information',
           component: ApplyCharacterInformation,
-          name: 'character-information',
+          name: 'apply-character-information',
           meta: {
             requiresAuth: true,
             title: 'Character information',
