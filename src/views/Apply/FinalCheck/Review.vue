@@ -18,7 +18,7 @@
           <router-link
             class="govuk-link govuk-body-m change-link"
             style="display:inline-block;"
-            :to="{name: 'personal-details'}"
+            :to="{name: 'apply-personal-details'}"
           >
             Change
           </router-link>

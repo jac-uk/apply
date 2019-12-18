@@ -195,7 +195,7 @@ const router = new Router({
         {
           path: 'personal-details',
           component: ApplyPersonalDetails,
-          name: 'personal-details',
+          name: 'apply-personal-details',
           meta: {
             requiresAuth: true,
             title: 'Personal details',

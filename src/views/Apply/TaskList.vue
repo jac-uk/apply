@@ -97,7 +97,7 @@ export default {
         data.push({
           title: 'Account profile',
           tasks: [
-            { title: 'Personal details', id: 'personal-details', done: this.applicationProgress.personalDetails },
+            { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
             { title: 'Character information', id: 'apply-character-information', done: this.applicationProgress.characterInformation },
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
