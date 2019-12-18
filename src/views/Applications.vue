@@ -12,6 +12,12 @@
       <div class="govuk-grid-column-one-quarter">
         <ul class="dwp-vertical-navigation">
           <li>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'applications' }"
+            >
+              Applications
+            </RouterLink>
             <a
               aria-current="page"
               href="Applications?current=Applications"
@@ -20,19 +26,28 @@
             </a>
           </li>
           <li>
-            <a href="PersonalDetails?current=PersonalDetails">
-              Personal details
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'personal-details' }"
+            >
+              Personal Details
+            </RouterLink>
           </li>
           <li>
-            <a href="DiversityInformation?current=DiversityInformation">
-              Diversity information
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'diversity-information' }"
+            >
+              Diversity Information
+            </RouterLink>
           </li>
           <li>
-            <a href="CharacterInformation?current=tab-CharacterInformation">
-              Character information
-            </a>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'character-information' }"
+            >
+              Character Information
+            </RouterLink>
           </li>
         </ul>
       </div>
