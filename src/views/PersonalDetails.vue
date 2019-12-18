@@ -22,7 +22,7 @@
           <li>
             <RouterLink
               class="govuk-link"
-              :to="{ name: 'personal-details' }"
+              :to="{ name: 'apply-personal-details' }"
             >
               Personal Details
             </RouterLink>

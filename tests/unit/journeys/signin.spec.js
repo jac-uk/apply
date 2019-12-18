@@ -12,7 +12,7 @@ const routes = [
   ['apply-character-information', `/apply/${id}/apply-character-information`],
   ['equality-and-diversity-survey', `/apply/${id}/equality-and-diversity-survey`],
   ['pre-application-judicial-education', `/apply/${id}/pre-application-judicial-education`],
-  ['personal-details', `/apply/${id}/personal-details`],
+  ['apply-personal-details', `/apply/${id}/apply-personal-details`],
   ['assessors-details', `/apply/${id}/assessors-details`],
   ['self-assessment-competencies', `/apply/${id}/self-assessment-competencies`],
   ['review', `/apply/${id}/review`],
