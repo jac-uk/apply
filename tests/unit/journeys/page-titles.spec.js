@@ -11,7 +11,7 @@ const routes = [
   ['apply-character-information', 'Declare character information'],
   ['equality-and-diversity-survey', 'Take the equality and diversity survey'],
   ['pre-application-judicial-education', 'Pre-application judicial education'],
-  ['personal-details', 'Add personal details'],
+  ['apply-personal-details', 'Add personal details'],
   ['assessors-details', 'Give independent assessors details'],
   ['self-assessment-competencies', 'Upload self-assessment competencies'],
   ['review', 'Review application'],
