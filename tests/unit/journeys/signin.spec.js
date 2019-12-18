@@ -9,7 +9,7 @@ const routes = [
   // ['eligibility-pass', '/eligibility/eligibility-pass'],
   // ['eligibility-fail', '/eligibility/eligibility-fail'],
   ['task-list', `/apply/${id}/`],
-  ['character-information', `/apply/${id}/character-information`],
+  ['apply-character-information', `/apply/${id}/apply-character-information`],
   ['equality-and-diversity-survey', `/apply/${id}/equality-and-diversity-survey`],
   ['pre-application-judicial-education', `/apply/${id}/pre-application-judicial-education`],
   ['personal-details', `/apply/${id}/personal-details`],

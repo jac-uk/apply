@@ -8,7 +8,7 @@ const routes = [
   // ['eligibility-pass', 'Eligibility Pass'],
   // ['eligibility-fail', 'Eligibility Fail'],
   ['task-list', 'Apply for a role task list'],
-  ['character-information', 'Declare character information'],
+  ['apply-character-information', 'Declare character information'],
   ['equality-and-diversity-survey', 'Take the equality and diversity survey'],
   ['pre-application-judicial-education', 'Pre-application judicial education'],
   ['personal-details', 'Add personal details'],
