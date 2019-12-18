@@ -14,6 +14,12 @@
           <li>
             <RouterLink
               class="govuk-link"
+              :to="{ name: 'example-form' }"
+            >
+              Example
+            </RouterLink>
+            <RouterLink
+              class="govuk-link"
               :to="{ name: 'applications' }"
             >
               Applications
