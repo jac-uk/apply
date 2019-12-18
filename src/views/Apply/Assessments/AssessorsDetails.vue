@@ -6,6 +6,7 @@
         <h1 class="govuk-heading-xl">
           Independent assessors
         </h1>
+        <ErrorSummary :errors="errors" />
 
         <p class="govuk-body-l">
           Sometimes called 'referees', your independent assessors will give us
@@ -36,18 +37,21 @@
           id="first-assessor-full-name"
           v-model="application.firstAssessorFullName"
           label="Full name"
+          required
         />
         <TextField
           id="first-assessor-email"
           v-model="application.firstAssessorEmail"
           label="Email"
           type="email"
+          required
         />
         <TextField
           id="first-assessor-Phone"
           v-model="application.firstAssessorPhone"
           label="Phone"
           type="tel"
+          required
         />
 
         <h2 class="govuk-heading-l">
@@ -58,18 +62,21 @@
           id="second-assessor-full-name"
           v-model="application.secondAssessorFullName"
           label="Full name"
+          required
         />
         <TextField
           id="second-assessor-email"
           v-model="application.secondAssessorEmail"
           label="Email"
           type="email"
+          required
         />
         <TextField
           id="second-assessor-Phone"
           v-model="application.secondAssessorPhone"
           label="Phone"
           type="tel"
+          required
         />
 
         <button class="govuk-button">
@@ -81,14 +88,18 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     TextField,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       firstAssessorFullName: null,
@@ -107,9 +118,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.assessorsDetails = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.assessorsDetails = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };
