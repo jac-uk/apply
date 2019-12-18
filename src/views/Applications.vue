@@ -1,12 +1,5 @@
 <template>
   <div>
-    <RouterLink
-      class="govuk-link"
-      :to="{ name: 'vacancies' }"
-    >
-      Vacancies
-    </RouterLink>
-
     <div class="govuk-grid-row">
       <!--SIDE NAV-->
       <div class="govuk-grid-column-one-quarter">
@@ -14,22 +7,19 @@
           <li>
             <RouterLink
               class="govuk-link"
-              :to="{ name: 'example-form' }"
+              :to="{ name: 'vacancies' }"
             >
-              Example
+              Vacancies
             </RouterLink>
+          </li>
+          <li>
             <RouterLink
               class="govuk-link"
+              aria-current="page"
               :to="{ name: 'applications' }"
             >
               Applications
             </RouterLink>
-            <a
-              aria-current="page"
-              href="Applications?current=Applications"
-            >
-              Applications
-            </a>
           </li>
           <li>
             <RouterLink
@@ -64,48 +54,34 @@
           Applications
         </h1>
 
-        <ul class="govuk-list">
-          <li
-            v-for="application in records"
-            :key="application.id"
-            class="govuk-!-margin-top-7"
-          >
-            <span
-              v-if="application.exerciseName && application.exerciseRef"
-              class="govuk-caption-l"
-            >{{ application.exerciseRef }}<br></span>
-            <RouterLink
-              class="govuk-link govuk-heading-m govuk-!-font-weight-bold govuk-!-margin-bottom-0"
-              :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-            >
-              <span v-if="application.exerciseName">{{ application.exerciseName }}</span>
-              <span v-else-if="application.exerciseRef">{{ application.exerciseRef }}</span>
-              <span v-else>{{ application.exerciseId }}</span>
-            </RouterLink>
-            Status: {{ application.status }}
-          </li>
-        </ul>
-
         <!--GREY PANEL-->
         <h2 class="govuk-heading-m">
           Current applications
         </h2>
         <div class="govuk-panel--s govuk-panel--grey">
-          <p class="govuk-body-l">
-            114 Judge of the First-tier Tribunal for England and
-            Wales
-          </p>
-          <p class="govuk-body">
-            <a href="#">Continue with
-              application</a>
-          </p>
+          <div
+            v-for="application in records"
+            :key="application.id"          
+          >
+            <p class="govuk-body-l govuk-!-margin-bottom-0">
+              <span v-if="application.exerciseName || application.exerciseRef">{{ application.exerciseRef }} {{ application.exerciseName }}</span>
+              <span v-else>{{ application.exerciseId }}</span>
+            </p>
+            <p class="govuk-body">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'task-list', params: { id: application.exerciseId } }"
+              >
+                Continue with application
+              </RouterLink>
+            </p>
+          </div>
         </div>
         <br><br>
 
-        <h2 class="govuk-heading-m">
+        <!-- <h2 class="govuk-heading-m">
           Previous applications
         </h2>
-        <!--TABLE-->
         <table class="govuk-table">
           <tr class="govuk-table__row">
             <td class="govuk-table__cell">
@@ -131,7 +107,14 @@
               Not selected
             </td>
           </tr>
-        </table>
+        </table> -->
+
+        <RouterLink
+          class="govuk-link"
+          :to="{ name: 'example-form' }"
+        >
+          Example form
+        </RouterLink>
 
       <!--END MAIN WRAPPER-->
       </div>
@@ -156,91 +139,3 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-/* Side nav */
-
-.dwp-vertical-navigation {
-    margin: 0 0 20px;
-    padding: 0;
-}
-
-.dwp-vertical-navigation li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 16px;
-
-    @include govuk-media-query($from: tablet) {
-        max-width: 200px;
-    }
-}
-
-.dwp-vertical-navigation li a {
-    padding: 10px;
-    display: block;
-
-    &:hover {
-        color: govuk-colour("dark-blue");
-    }
-}
-
-.dwp-vertical-navigation a[aria-current="page"] {
-    color: govuk-colour("blue");
-    font-weight: bold;
-    text-decoration: none;
-    border-left: 4px solid govuk-colour("blue");
-    background-color: govuk-colour("light-grey");
-}
-
-.dwp-vertical-navigation {
-    margin: 0;
-    padding: 0;
-    > li {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        font-size: 1em;
-        > a {
-            padding: 0.625em;
-            display: block;
-            text-decoration: none;
-        }
-        > ul {
-            display: none;
-            > li {
-                list-style: none;
-                margin: 0;
-                padding: 0;
-                font-size: 1em;
-                > a {
-                    padding: 0.625em 0.625em 0.625em 1.25em;
-                    display: block;
-                    text-decoration: none;
-                }
-            }
-        }
-        &.on > a {
-            color: #1d70b8;
-            font-weight: bold;
-            background-color: #f3f2f1;
-        }
-        &.open {
-            border-left: 4px solid #1d70b8;
-            > ul {
-                display: block;
-                padding-inline-start: 0;
-                > li {
-                    &.on {
-                        background-color: #f3f2f1;
-                        > a {
-                            color: #1d70b8;
-                            font-weight: bold;
-                            text-decoration: none;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-</style>

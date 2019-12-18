@@ -1,117 +1,162 @@
 <template>
   <div>
-    <RouterLink
-      v-if="isSignedIn"
-      class="govuk-link"
-      :to="{ name: 'applications' }"
-    >
-      My applications -- 
-    </RouterLink>
-    <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
-      Open vacancies
-    </h1>
-    <ul class="govuk-list">
-      <!-- <li
-
-        class="govuk-!-margin-top-7"
+    <div class="govuk-grid-row">
+      <div
+        v-if="isSignedIn"
+        class="govuk-grid-column-one-quarter"
       >
-        <a
-          class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-          href="https://www.judicialappointments.gov.uk/vacancies/151"
-        >
-          Deputy Chairman of the Agricultural Land Tribunal for Wales
-        </a>
+        <ul class="dwp-vertical-navigation">
+          <li>
+            <RouterLink
+              class="govuk-link"
+              aria-current="page"
+              :to="{ name: 'vacancies' }"
+            >
+              Vacancies
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'applications' }"
+            >
+              Applications
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'personal-details' }"
+            >
+              Personal Details
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'diversity-information' }"
+            >
+              Diversity Information
+            </RouterLink>
+          </li>
+          <li>
+            <RouterLink
+              class="govuk-link"
+              :to="{ name: 'character-information' }"
+            >
+              Character Information
+            </RouterLink>
+          </li>
+        </ul>
+      </div>
 
-        <p>
-          <span
-            class="govuk-body govuk-!-font-weight-bold"
-          >
-            Launch Date:
-          </span>
-          <span
-            class="govuk-body"
-          >
-            28 October 2019 - 13:00
-          </span>
-        </p>
-        <p>
-          <span
-            class="govuk-body govuk-!-font-weight-bold"
-          >
-            Closing Date:
-          </span>
-          <span
-            class="govuk-body"
-          >
-            28 November 2019 - 13:00
-          </span>
-        </p>
-        <p> Insert a Summary about the role - This advert is on Jars</p>
+      <div :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }">
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+          Open vacancies
+        </h1>
+        <ul class="govuk-list">
+          <!-- <li
 
-        <p class="govuk-body govuk-!-margin-bottom-7">
-          <a
-            class="govuk-link govuk-body"
-            href="#"
+            class="govuk-!-margin-top-7"
           >
-            Sign up
-          </a>
-          for an alert about this exercise
-        </p>
-        <hr>
-      </li> -->
+            <a
+              class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+              href="https://www.judicialappointments.gov.uk/vacancies/151"
+            >
+              Deputy Chairman of the Agricultural Land Tribunal for Wales
+            </a>
 
-      <li
-        v-for="vacancy in records"
-        :key="vacancy.id"
-        class="govuk-!-margin-top-7"
-      >
-        <RouterLink
-          class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-          :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-        >
-          {{ vacancy.name }}
-        </RouterLink>
+            <p>
+              <span
+                class="govuk-body govuk-!-font-weight-bold"
+              >
+                Launch Date:
+              </span>
+              <span
+                class="govuk-body"
+              >
+                28 October 2019 - 13:00
+              </span>
+            </p>
+            <p>
+              <span
+                class="govuk-body govuk-!-font-weight-bold"
+              >
+                Closing Date:
+              </span>
+              <span
+                class="govuk-body"
+              >
+                28 November 2019 - 13:00
+              </span>
+            </p>
+            <p> Insert a Summary about the role - This advert is on Jars</p>
 
-        <p>
-          <span
-            class="govuk-body govuk-!-font-weight-bold"
-          >
-            Launch Date:
-          </span>
-          <span
-            v-if="vacancy.applicationOpenDate"
-            class="govuk-body"
-          >
-            {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
-          </span>
-        </p>
-        <p>
-          <span
-            class="govuk-body govuk-!-font-weight-bold"
-          >
-            Closing Date:
-          </span>
-          <span
-            v-if="vacancy.applicationCloseDate"
-            class="govuk-body"
-          >
-            {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
-          </span>
-        </p>
-        <p> Insert a Summary about the role</p>
+            <p class="govuk-body govuk-!-margin-bottom-7">
+              <a
+                class="govuk-link govuk-body"
+                href="#"
+              >
+                Sign up
+              </a>
+              for an alert about this exercise
+            </p>
+            <hr>
+          </li> -->
 
-        <p class="govuk-body govuk-!-margin-bottom-7">
-          <RouterLink
-            class="govuk-link govuk-body"
-            :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+          <li
+            v-for="vacancy in records"
+            :key="vacancy.id"
+            class="govuk-!-margin-top-7"
           >
-            Sign up
-          </RouterLink>
-          for an alert about this exercise
-        </p>
-        <hr>
-      </li>
-    </ul>
+            <RouterLink
+              class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+              :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+            >
+              {{ vacancy.name }}
+            </RouterLink>
+
+            <p>
+              <span
+                class="govuk-body govuk-!-font-weight-bold"
+              >
+                Launch Date:
+              </span>
+              <span
+                v-if="vacancy.applicationOpenDate"
+                class="govuk-body"
+              >
+                {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
+              </span>
+            </p>
+            <p>
+              <span
+                class="govuk-body govuk-!-font-weight-bold"
+              >
+                Closing Date:
+              </span>
+              <span
+                v-if="vacancy.applicationCloseDate"
+                class="govuk-body"
+              >
+                {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
+              </span>
+            </p>
+            <p> Insert a Summary about the role</p>
+            <p class="govuk-body govuk-!-margin-bottom-7">
+              <RouterLink
+                class="govuk-link govuk-body"
+                :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+              >
+                Sign up
+              </RouterLink>
+              for an alert about this exercise
+            </p>
+            <hr>
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -137,7 +182,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>
