@@ -82,7 +82,7 @@ const router = new Router({
       },
     },
     {
-      path: 'character-information',
+      path: '/character-information',
       name: 'character-information',
       component: CharacterInformation,
       meta: {
@@ -90,7 +90,7 @@ const router = new Router({
       },
     },
     {
-      path: 'diversity-information',
+      path: '/diversity-information',
       name: 'diversity-information',
       component: DiversityInformation,
       meta: {
