@@ -7,6 +7,8 @@
           Personal details
         </h1>
 
+        <ErrorSummary :errors="errors" />
+
         <p class="govuk-body-l">
           We'll use this information to confirm your identity if you contact us.
         </p>
@@ -16,6 +18,7 @@
           v-model="candidate.fullName"
           label="Full name"
           hint="You do not need to include any titles."
+          required
         />
 
         <TextField
@@ -23,11 +26,13 @@
           v-model="candidate.email"
           label="Email address"
           type="email"
+          required
         />
 
         <DateInput
           id="date-of-birth"
           v-model="candidate.dateOfBirth"
+          required
           label="Date of birth"
           hint="For example, 27 3 1964"
         />
@@ -38,11 +43,13 @@
           label="National Insurance number"
           hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
           class="govuk-!-width-one-half"
+          required
         />
 
         <CheckboxGroup
           id="citizenship"
           v-model="candidate.citizenship"
+          required
           label="Citizenship"
           hint="Select which countries you're a citizen of."
         >
@@ -67,6 +74,7 @@
         <RadioGroup
           id="reasonable-adjustments"
           v-model="candidate.reasonableAdjustments"
+          required
           label="Reasonable Adjustments"
         >
           <p class="govuk-body-m govuk-!-margin-top-0">
@@ -106,6 +114,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
@@ -117,6 +127,7 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     TextField,
     DateInput,
     CheckboxGroup,
@@ -126,6 +137,7 @@ export default {
     RadioItem,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       fullName: null,
@@ -146,10 +158,13 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.personalDetails = true;
-      await this.$store.dispatch('application/save', this.application);
-      await this.$store.dispatch('candidate/save', this.candidate);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.personalDetails = true;
+        await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('candidate/save', this.candidate);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };

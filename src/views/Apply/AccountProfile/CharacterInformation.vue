@@ -7,6 +7,12 @@
           Declare character information
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <p class="govuk-body-l">
           You must tell us about any character issues that could affect your
           suitability for this role. Read the
@@ -23,6 +29,7 @@
         <RadioGroup
           id="declared-bankrupt"
           v-model="application.declaredBankrupt"
+          required
           label="Have you ever been declared bankrupt?"
         >
           <RadioItem
@@ -34,10 +41,11 @@
             label="No"
           />
         </RadioGroup>
-        
+
         <RadioGroup
           id="financial-difficulties"
           v-model="application.financialDifficulties"
+          required
           label="Have you filed late tax returns, been fined by HMRC or
           had other financial difficulties more than 3 times in the last 5 years?"
         >
@@ -60,6 +68,7 @@
         <RadioGroup
           id="live-conduct-negligence-investigation"
           v-model="application.conductNegligenceInvestigation"
+          required
           label="Are you the subject of a live professional conduct or negligence investigation?"
         >
           <RadioItem
@@ -81,6 +90,7 @@
         <RadioGroup
           id="drink-drug-mobile-motoring-offence"
           v-model="application.drinkDrugMobileMotoringOffence"
+          required
           label="Have you had a motoring offence involving drink or drug
           driving, or driving while using a mobile in the last 10 years?"
         >
@@ -103,6 +113,7 @@
         <RadioGroup
           id="disqualified-from-driving"
           v-model="application.disqualifiedFromDriving"
+          required
           label="Have you been disqualified from driving in the last 5 years?"
         >
           <RadioItem
@@ -124,6 +135,7 @@
         <RadioGroup
           id="motoring-offences-and->6points"
           v-model="application.motoringOffencesAndSixPlusPoints"
+          required
           label="Do you have any motoring offences and more than 6 points on your licence?"
         >
           <RadioItem
@@ -145,6 +157,7 @@
         <RadioGroup
           id="criminal-conviction-causion"
           v-model="application.criminalConvictionCaution"
+          required
           label="Have you had a criminal conviction in the last 10 years or a criminal caution in the last 5 years?"
         >
           <RadioItem
@@ -166,6 +179,7 @@
         <RadioGroup
           id="other-character-issues"
           v-model="application.otherCharacterIssues"
+          required
           label="Do you have any other issues that you think we should know about when considering your character?"
         >
           <RadioItem
@@ -193,6 +207,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -200,11 +216,13 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     TextareaInput,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       declaredBankrupt: null,
@@ -231,9 +249,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.characterInformation = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.characterInformation = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };

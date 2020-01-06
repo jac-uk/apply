@@ -7,9 +7,16 @@
           Judicial experience
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <RadioGroup
           id="has-been-judge"
           v-model="application.hasBeenJudge"
+          required
           label="Have you ever been a judge?"
         >
           <RadioItem
@@ -98,6 +105,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -105,11 +114,13 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     TextareaInput,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       hasBeenJudge: null,
@@ -125,9 +136,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.judicialExperience = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.judicialExperience = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };

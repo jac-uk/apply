@@ -7,6 +7,12 @@
           Set part-time working preferences
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <p class="govuk-body-l">
           Part-time working is offered for some salaried roles. When it is
           offered, details will be discussed at selection day.
@@ -15,6 +21,7 @@
         <RadioGroup
           id="part-time-working-preferences"
           v-model="application.interestedInPartTime"
+          required
           label="Are you interested in part-time working?"
         >
           <RadioItem
@@ -36,16 +43,20 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       interestedInPartTime: null,
@@ -58,9 +69,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.partTimeWorkingPreferences = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.partTimeWorkingPreferences = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };

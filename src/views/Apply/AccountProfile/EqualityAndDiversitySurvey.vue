@@ -7,6 +7,12 @@
           Equality and diversity
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <p class="govuk-body-l">
           Giving this information means we can apply our
           <a
@@ -34,6 +40,7 @@
         <RadioGroup
           id="has-taken-paje"
           v-model="application.hasTakenPAJE"
+          required
           label="Have you taken part in the Pre-application judicial education (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
@@ -60,6 +67,7 @@
         <RadioGroup
           id="ethnic-group"
           v-model="application.ethnicGroup"
+          required
           label="What's your ethnic group?"
         >
           <RadioItem
@@ -164,6 +172,7 @@
         <RadioGroup
           id="religion-faith"
           v-model="application.religionFaith"
+          required
           label="What religion or faith are you?"
         >
           <RadioItem
@@ -218,6 +227,7 @@
         <RadioGroup
           id="gender"
           v-model="application.gender"
+          required
           label="What gender are you?"
         >
           <RadioItem
@@ -241,6 +251,7 @@
         <RadioGroup
           id="changed-gender"
           v-model="application.changedGender"
+          required
           label="Have you ever changed gender?"
         >
           <RadioItem
@@ -260,6 +271,7 @@
         <RadioGroup
           id="sexual-orientation"
           v-model="application.sexualOrientation"
+          required
           label="How would you describe your sexual orientation?"
         >
           <RadioItem
@@ -291,6 +303,7 @@
         <RadioGroup
           id="disability"
           v-model="application.disability"
+          required
           label="Do you have a disability?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
@@ -327,6 +340,7 @@
         <RadioGroup
           id="state-or-fee-school"
           v-model="application.stateOrFeeSchool"
+          required
           label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
         >
           <RadioItem
@@ -358,6 +372,7 @@
         <RadioGroup
           id="oxbridge-universities"
           v-model="application.oxbridgeUni"
+          required
           label="Did you go to either of the Oxbridge universities?"
         >
           <RadioItem
@@ -377,6 +392,7 @@
         <RadioGroup
           id="first-generation-student"
           v-model="application.firstGenerationStudent"
+          required
           label="Were you the first generation in your family to go to university?"
         >
           <RadioItem
@@ -400,6 +416,7 @@
         <CheckboxGroup
           id="professional-background"
           v-model="application.professionalBackground"
+          required
           label="What is your professional background?"
           hint="Select all that apply."
         >
@@ -428,6 +445,7 @@
         <CheckboxGroup
           id="current-legal-role"
           v-model="application.currentLegalRole"
+          required
           label="What is your current legal role?"
           hint="Select all that apply."
         >
@@ -491,6 +509,7 @@
         <RadioGroup
           id="fee-paid-judicial-role"
           v-model="application.feePaidJudicialRole"
+          required
           label="Do you hold, or have you held in the past, a fee-paid judicial role?"
         >
           <RadioItem
@@ -524,6 +543,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextField from '@/components/Form/TextField';
@@ -535,6 +556,7 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     TextField,
@@ -543,6 +565,7 @@ export default {
     CheckboxItem,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       hasTakenPAJE: BooleanOrNull(null),
@@ -570,9 +593,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.equalityAndDiversitySurvey = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.equalityAndDiversitySurvey = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };
