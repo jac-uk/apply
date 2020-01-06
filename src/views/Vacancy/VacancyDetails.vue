@@ -53,7 +53,7 @@
         <li>qualifications</li>
         <li>work experience</li>
         <li> self-assessment competency statements</li>
-        <li>independent assessors' details</li>
+        <li>independent assessor's details</li>
       </ul>
 
       <h3 class="govuk-heading-m">

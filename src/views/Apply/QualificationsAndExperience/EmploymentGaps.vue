@@ -6,12 +6,20 @@
         <h1 class="govuk-heading-xl">
           Gaps in employment
         </h1>
+
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <p class="govuk-body-l">
           Add dates and details of any gaps in employment you may have
         </p>
 
         <RepeatableFields
           v-model="application.employmentGaps"
+          required
           :component="repeatableFields.EmploymentGaps"
         />
 
@@ -24,15 +32,19 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RepeatableFields from '@/components/RepeatableFields';
 import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
 import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RepeatableFields,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults =  {
       employmentGaps: null,
@@ -48,9 +60,12 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.employmentGaps = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.employmentGaps = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 

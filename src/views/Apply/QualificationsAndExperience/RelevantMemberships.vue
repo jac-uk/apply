@@ -8,9 +8,16 @@
           Memberships
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <CheckboxGroup
           id="professional-memberships"
           v-model="application.professionalMemberships"
+          required
           label="What professional memberships do you have?"
         >
           <CheckboxItem
@@ -202,6 +209,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import RadioGroup from '@/components/Form/RadioGroup';
@@ -213,6 +222,7 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     CheckboxGroup,
     CheckboxItem,
     RadioGroup,
@@ -222,6 +232,7 @@ export default {
     DateInput,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       professionalMemberships: null,
@@ -269,9 +280,12 @@ export default {
       return this.vacancy.memberships.indexOf(ref) >= 0;
     },
     async save() {
-      this.application.progress.relevantMemberships = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.relevantMemberships = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
 };
