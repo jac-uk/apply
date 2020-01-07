@@ -61,23 +61,23 @@ const router = new Router({
       redirect: '/vacancies',
     },
     {
-    path: '/example-form',
-    name: 'example-form',
-    component: ExampleForm,
-    meta: {
-      requiresAuth: true,
-      title: 'Example Form',
+      path: '/example-form',
+      name: 'example-form',
+      component: ExampleForm,
+      meta: {
+        requiresAuth: true,
+        title: 'Example Form',
+      },
     },
-   },
-   {
-   path: '/home',
-   name: 'home',
-   component: Home,
-   meta: {
-     requiresAuth: true,
-     title: 'Home',
-   },
-  },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home,
+      meta: {
+        requiresAuth: true,
+        title: 'Home',
+      },
+    },
     {
       path: '/vacancies',
       name: 'vacancies',

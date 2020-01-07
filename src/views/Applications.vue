@@ -116,7 +116,7 @@
           Example form
         </RouterLink>
 
-        <br />
+        <br>
 
         <RouterLink
           class="govuk-link"
