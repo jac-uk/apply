@@ -7,6 +7,9 @@ import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
 
 // Vacancies
+// import Website from '@/Website/Home';
+
+// Vacancies
 import Vacancies from '@/views/Vacancies';
 import Vacancy from '@/views/Vacancy';
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
@@ -45,6 +48,7 @@ import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitabi
 import Confirmation from '@/views/Apply/Confirmation';
 
 import ExampleForm from '@/views/ExampleForm';
+import Home from '@/views/Home';
 
 Vue.use(Router);
 
@@ -64,6 +68,15 @@ const router = new Router({
       requiresAuth: true,
       title: 'Example Form',
     },
+   },
+   {
+   path: '/home',
+   name: 'home',
+   component: Home,
+   meta: {
+     requiresAuth: true,
+     title: 'Home',
+   },
   },
     {
       path: '/vacancies',
