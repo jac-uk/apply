@@ -81,7 +81,7 @@
             With reference to our
             <a
               class="govuk-link"
-              href="#"
+              href="https://www.judicialappointments.gov.uk/reasonable-adjustments-policy"
               target="_blank"
             >
               reasonable adjustments policy
