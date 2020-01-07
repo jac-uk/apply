@@ -61,7 +61,7 @@
         <div class="govuk-panel--s govuk-panel--grey">
           <div
             v-for="application in records"
-            :key="application.id"          
+            :key="application.id"
           >
             <p class="govuk-body-l govuk-!-margin-bottom-0">
               <span v-if="application.exerciseName || application.exerciseRef">{{ application.exerciseRef }} {{ application.exerciseName }}</span>
@@ -116,6 +116,15 @@
           Example form
         </RouterLink>
 
+        <br />
+
+        <RouterLink
+          class="govuk-link"
+          :to="{ name: 'home' }"
+        >
+          home
+        </RouterLink>
+
       <!--END MAIN WRAPPER-->
       </div>
     </div>
@@ -138,4 +147,3 @@ export default {
   },
 };
 </script>
-
