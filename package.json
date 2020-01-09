@@ -21,6 +21,7 @@
     "firebase": "^6.6.2",
     "firebaseui": "^4.3.0",
     "govuk-frontend": "^3.4.0",
+    "jspdf": "^1.5.3",
     "vue": "^2.6.10",
     "vue-analytics": "^5.18.0",
     "vue-router": "^3.1.3",
