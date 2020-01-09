@@ -110,11 +110,19 @@
             class="govuk-!-margin-top-7"
           >
             <RouterLink
+              v-if="vacancy.aboutTheRole"
               class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
               :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
             >
               {{ vacancy.name }}
             </RouterLink>
+
+            <span 
+              v-else
+              class="govuk-heading-m govuk-!-font-weight-bold"
+            >
+              {{ vacancy.name }}
+            </span>
 
             <p>
               <span
@@ -128,28 +136,36 @@
               >
                 {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
               </span>
+              <span
+                v-else
+                class="govuk-body"
+              >
+                {{ vacancy.estimatedLaunchDate | dateFormatter('month') }}
+              </span>
             </p>
-            <p>
+            <p v-if="vacancy.applicationCloseDate">
               <span
                 class="govuk-body govuk-!-font-weight-bold"
               >
                 Closing Date:
               </span>
               <span
-                v-if="vacancy.applicationCloseDate"
                 class="govuk-body"
               >
                 {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
               </span>
             </p>
-            <p> Insert a Summary about the role</p>
-            <p class="govuk-body govuk-!-margin-bottom-7">
-              <RouterLink
+            <p>{{ vacancy.roleSummary }}</p>
+            <p
+              v-if="vacancy.subscriberAlertsUrl"
+              class="govuk-body govuk-!-margin-bottom-7"
+            >
+              <a
                 class="govuk-link govuk-body"
-                :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+                :href="vacancy.subscriberAlertsUrl"
               >
                 Sign up
-              </RouterLink>
+              </a>
               for an alert about this exercise
             </p>
             <hr>
@@ -165,8 +181,13 @@ import { mapState } from 'vuex';
 
 export default {
   filters: {
-    dateFormatter (date) {
-      return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
+    dateFormatter (date, type) {
+      switch (type) {
+      case 'month':
+        return `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
+      default:
+        return `${date.getDate()} ${date.toLocaleString('en-US', { month: 'long' })} ${date.getFullYear()}`;
+      }
     },
   },
   computed: {
