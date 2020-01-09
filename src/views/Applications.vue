@@ -109,22 +109,6 @@
           </tr>
         </table> -->
 
-        <RouterLink
-          class="govuk-link"
-          :to="{ name: 'example-form' }"
-        >
-          Example form
-        </RouterLink>
-
-        <br>
-
-        <RouterLink
-          class="govuk-link"
-          :to="{ name: 'home' }"
-        >
-          home
-        </RouterLink>
-
       <!--END MAIN WRAPPER-->
       </div>
     </div>
