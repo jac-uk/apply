@@ -164,10 +164,7 @@
                 class="govuk-link govuk-body"
                 :href="vacancy.subscriberAlertsUrl"
                 target="_blank"
-              >
-                Sign up
-              </a>
-              for an alert about this exercise
+              >Sign up</a> for an alert about this exercise
             </p>
             <hr>
           </li>
