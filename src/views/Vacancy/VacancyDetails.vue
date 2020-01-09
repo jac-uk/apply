@@ -74,12 +74,16 @@
         Check if you're eligibile and apply
       </RouterLink>
 
-      <p class="govuk-body">
+      <p
+        v-if="vacancy.subscriberAlertsUrl"
+        class="govuk-body"
+      >
         <a
           class="govuk-link"
-          href="#"
+          :href="vacancy.subscriberAlertsUrl"
+          target="_blank"
         >Or get email updates about this role</a>
-      </p>
+      </p>      
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-padding-bottom-8 container-border-bottom">
