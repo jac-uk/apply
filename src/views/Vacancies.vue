@@ -163,6 +163,7 @@
               <a
                 class="govuk-link govuk-body"
                 :href="vacancy.subscriberAlertsUrl"
+                target="_blank"
               >
                 Sign up
               </a>
