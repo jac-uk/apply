@@ -47,9 +47,6 @@ import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitabili
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
 import Confirmation from '@/views/Apply/Confirmation';
 
-import ExampleForm from '@/views/ExampleForm';
-import Home from '@/views/Home';
-
 Vue.use(Router);
 
 const router = new Router({
@@ -59,24 +56,6 @@ const router = new Router({
     {
       path: '*',
       redirect: '/vacancies',
-    },
-    {
-      path: '/example-form',
-      name: 'example-form',
-      component: ExampleForm,
-      meta: {
-        requiresAuth: true,
-        title: 'Example Form',
-      },
-    },
-    {
-      path: '/home',
-      name: 'home',
-      component: Home,
-      meta: {
-        requiresAuth: true,
-        title: 'Home',
-      },
     },
     {
       path: '/vacancies',
