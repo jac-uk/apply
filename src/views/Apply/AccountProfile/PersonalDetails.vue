@@ -46,30 +46,30 @@
           required
         />
 
-        <CheckboxGroup
+        <RadioGroup
           id="citizenship"
           v-model="candidate.citizenship"
           required
           label="Citizenship"
-          hint="Select which countries you're a citizen of."
+          hint="Select one. If you have dual citizenship, please select the option most appropriate to you."
         >
-          <CheckboxItem
+          <RadioItem
             value="uk"
             label="UK"
           />
-          <CheckboxItem
+          <RadioItem
             value="republic-of-ireland"
             label="Republic of Ireland"
           />
-          <CheckboxItem
+          <RadioItem
             value="another-commonwealth-country"
             label="Another Commonwealth country"
           />
-          <CheckboxItem
+          <RadioItem
             value="other"
             label="Other"
           />
-        </CheckboxGroup>
+        </RadioGroup>
 
         <RadioGroup
           id="reasonable-adjustments"
@@ -118,8 +118,6 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
@@ -130,8 +128,6 @@ export default {
     ErrorSummary,
     TextField,
     DateInput,
-    CheckboxGroup,
-    CheckboxItem,
     TextareaInput,
     RadioGroup,
     RadioItem,
