@@ -10,6 +10,7 @@
         </h1>
 
         <RadioGroup
+          v-if="vacancy.schedule2Apply && vacancy.appliedSchedule == 'schedule-2-d'"
           id="applying-under-schedule-2-d"
           v-model="application.applyingUnderSchedule2d"
           label="Are you applying under Schedule 2(d)?"
@@ -29,8 +30,9 @@
             label="Yes"
           >
             <TextareaInput
-              v-model="application.yesApplyingUnderSchedule2d"
-              label="Explain how you've gained exeperience in law."
+              id="experience-under-schedule-2-d"
+              v-model="application.experienceUnderSchedule2D"
+              label="Explain how you've gained experience in law."
             />
           </RadioItem>
           <RadioItem
@@ -40,7 +42,8 @@
         </RadioGroup>
 
         <RadioGroup
-          id="applying-under-schedule-2-d"
+          v-if="vacancy.schedule2Apply && vacancy.appliedSchedule == 'schedule-2-3'"
+          id="applying-under-schedule-2-3"
           v-model="application.applyingUnderSchedule2Three"
           label="Are you applying under Schedule 2(3)?"
         >
@@ -59,8 +62,9 @@
             label="Yes"
           >
             <TextareaInput
-              v-model="application.yesApplyingUnderSchedule2Three"
-              label="Explain how you've gained exeperience in law."
+              id="experience-under-schedule-2-3"
+              v-model="application.experienceUnderSchedule2Three"
+              label="Explain how you've gained experience in law."
             />
           </RadioItem>
           <RadioItem
@@ -101,9 +105,9 @@ export default {
     const defaults = {
       qualifications: null,
       applyingUnderSchedule2d: null,
-      yesApplyingUnderSchedule2d: null,
+      experienceUnderSchedule2D: null,
       applyingUnderSchedule2Three: null,
-      yesApplyingUnderSchedule2Three: null,
+      experienceUnderSchedule2Three: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -113,6 +117,11 @@ export default {
         Qualification,
       },
     };
+  },
+  computed: {
+    vacancy() {
+      return this.$store.state.exercise.record;
+    },
   },
   methods: {
     async save() {
