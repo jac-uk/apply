@@ -64,8 +64,9 @@ jobs:
       - run:
           name: 'Deploy to staging'
           command: |
-           npm run build-staging
-           node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --project staging
+            npm run build-staging
+            node_modules/.bin/firebase target:apply hosting staging-candidate-app jac-apply-staging --project staging
+            node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --only hosting:staging-candidate-app --project staging
 
 workflows:
   version: 2
@@ -86,7 +87,7 @@ workflows:
             - test
           filters:
             branches:
-              only: staging
+              only: /staging-.*/
       - build-and-deploy-production:
           requires:
             - test
