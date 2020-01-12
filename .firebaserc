@@ -1,7 +1,23 @@
 {
   "projects": {
-    "production": "digital-platform-apply",
-    "staging": "digital-staging-apply",
-    "default": "digital-staging-apply"
+    "production": "platform-production-9207d",
+    "staging": "digital-platform-staging",
+    "default": "digital-platform-staging"
+  },
+  "targets": {
+    "digital-platform-staging": {
+      "hosting": {
+        "staging-candidate-app": [
+          "jac-apply-staging"
+        ]
+      }
+    },
+    "platform-production-9207d": {
+      "hosting": {
+        "production-candidate-app": [
+          "jac-apply-prod"
+        ]
+      }
+    }
   }
 }
