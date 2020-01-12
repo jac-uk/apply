@@ -71,7 +71,7 @@
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >
-        Check if you're eligibile and apply
+        Check if you're eligible and apply
       </RouterLink>
 
       <p
