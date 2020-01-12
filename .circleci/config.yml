@@ -53,6 +53,7 @@ jobs:
           name: 'Deploy to production'
           command: |
             npm run build-production
+            node_modules/.bin/firebase use production
             node_modules/.bin/firebase target:apply hosting production-candidate-app jac-apply-prod
             node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --only hosting:production-candidate-app --project production
 
