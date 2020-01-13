@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-grid-row">
-    <form @submit.prevent="passOrFail">
+    <form @submit.prevent="save">
       <div class="govuk-grid-column-two-thirds">
         <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
           {{ vacancy.referenceNumber }} {{ vacancy.name }}
@@ -10,18 +10,14 @@
           Check if you're eligible
         </h1>
 
-        <p class="govuk-body-l">
-          If you cannot meet all the requirements, you can still apply
-          but it could mean you’re unlikely to be offered a position.
-        </p>
-
         <RadioGroup
           id="citizenship"
           v-model="eligibility.citizenship"
           label="Citizenship"
+          required
         >
           <p class="govuk-body-m">
-            You're a citizen of the UK, the Republic of Ireland or another Commonwealth country.
+            Are you a citizen of the UK, the Republic of Ireland or another Commonwealth country?
           </p>
 
           <RadioItem
@@ -33,7 +29,7 @@
             label="No"
           />
         </RadioGroup>
-
+        <!-- 
         <RadioGroup
           id="character"
           v-model="eligibility.character"
@@ -94,7 +90,7 @@
             >post-qualification law-related work experience</a>.
           </p>
 
-          <!-- <p class="govuk-body-m govuk-!-margin-top-0">
+          <p class="govuk-body-m govuk-!-margin-top-0">
             You have experience of criminal law and procedure
             in the Crown Court and/or the Court of Appeal, Criminal Division and <a
               class="govuk-link"
@@ -102,7 +98,7 @@
               target="_blank"
             >sufficient
               directly relevant previous judicial experience</a>.
-          </p> -->
+          </p>
 
           <RadioItem
             :value="true"
@@ -112,7 +108,7 @@
             :value="false"
             label="No"
           />
-        </RadioGroup>
+        </RadioGroup> -->
 
         <button class="govuk-button">
           Continue
@@ -123,6 +119,7 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import booleanOrNull from '@/helpers/booleanOrNull';
@@ -131,8 +128,8 @@ export default {
   components: {
     RadioGroup,
     RadioItem,
-
   },
+  extends: Form,
   data(){
     return {
       eligibility: {
@@ -197,16 +194,19 @@ export default {
     },
   },
   methods: {
-    passOrFail () {
-      let isOkay = true;
-      if (this.eligibility.citizenship !== true ) { isOkay = false; }
-      if (this.eligibility.character !== true) { isOkay = false; }
-      if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
-      if (this.isLegal && this.eligibility.qualificationsExperience !== true) { isOkay = false; }
-      if (isOkay) {
-        this.$router.push({ name: 'eligibility-pass' });
-      } else {
-        this.$router.push({ name: 'eligibility-fail' });
+    save () {
+      this.validate();
+      if (this.isValid()) {
+        let isOkay = true;
+        if (this.eligibility.citizenship !== true ) { isOkay = false; }
+        // if (this.eligibility.character !== true) { isOkay = false; }
+        // if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
+        // if (this.isLegal && this.eligibility.qualificationsExperience !== true) { isOkay = false; }
+        if (isOkay) {
+          this.$router.push({ name: 'eligibility-pass' });
+        } else {
+          this.$router.push({ name: 'eligibility-fail' });
+        }
       }
     },
   },
