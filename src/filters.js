@@ -1,6 +1,6 @@
 import Vue from 'vue';
 
-Vue.filter('formatDate', 
+Vue.filter('formatDate',
 (value) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
@@ -8,7 +8,7 @@ Vue.filter('formatDate',
   }
 });
 
-Vue.filter('lookup', 
+Vue.filter('lookup',
 (value) => {
   if (value) {
     const lookup = {
@@ -57,6 +57,9 @@ Vue.filter('lookup',
       'statement-of-suitability-with-skills-and-abilities': 'Statement of Suitability with skills and abilities',
       'statement-of-suitability-with-skills-and-abilities-and-cv': 'Statement of Suitability with skills and abilities and CV',
       'statement-of-eligibility': 'Statement of eligibility',
+      'read': 'Read',
+      'write': 'Write',
+      'both': 'Both',
       'none': 'None',
       // 'xxx': 'xxx',
     };
