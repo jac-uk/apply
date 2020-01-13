@@ -90,7 +90,6 @@ export default {
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
           .catch((error) => {
             this.errors.push({ id: 'email', message: error.message });
-          // handle errors - e.g. account not valid
           });
       }    
     },
