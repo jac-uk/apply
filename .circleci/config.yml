@@ -87,7 +87,7 @@ workflows:
             - test
           filters:
             branches:
-              only: /staging-.*/
+              only: /staging.*/
       - build-and-deploy-production:
           requires:
             - test

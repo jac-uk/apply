@@ -7,9 +7,13 @@
 
       <p><span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span></p>
       <p><span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span></p>
-      <p><span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping }}</span></p>
+      <p><span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping | lookup }}</span></p>
       <p class="govuk-!-margin-bottom-8">
-        <span class="govuk-body govuk-!-font-weight-bold">Contact:</span> <span class="govuk-body"> {{ vacancy.exerciseMailbox }}</span>
+        <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
+        <a 
+          :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
+          class="govuk-body govuk-link"
+        >{{ vacancy.exerciseMailbox }}</a>
       </p>
 
       <h2 class="govuk-heading-l">
@@ -21,10 +25,8 @@
         Overview of the role
       </h2>
 
-      <p class="govuk-body">
-        {{ vacancy.aboutTheRole }}
-      </p>
-
+      <pre class="govuk-body pre">{{ vacancy.aboutTheRole }}</pre>
+      <!-- 
       <h2 class="govuk-heading-l">
         The selection process
       </h2>
@@ -64,7 +66,7 @@
         allow us to meet you in person to assess your suitability for the role. If you’re selected, we’ll email you a
         week before with
         details about what you’ll need to prepare for the day.
-      </p>
+      </p> -->
 
       <RouterLink
         class="govuk-button"
@@ -75,7 +77,7 @@
       </RouterLink>
 
       <p
-        v-if="vacancy.subscriberAlertsUrl"
+        v-if="showSubscribeForAlerts"
         class="govuk-body"
       >
         <a
@@ -140,6 +142,24 @@ export default {
       let timeline = exerciseTimeline(this.vacancy);
       return createTimeline(timeline);
     },
+    showSubscribeForAlerts() {
+      if (this.vacancy.subscriberAlertsUrl) {
+        if (this.vacancy.applicationOpenDate) {
+          const today = new Date();
+          return this.vacancy.applicationOpenDate > today;
+        }
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>
+
+<style scoped>
+.pre {
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+  font-family: inherit;  
+}
+</style>
