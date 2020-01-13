@@ -4,17 +4,14 @@
       New application process
     </h1>
     <div class="govuk-panel__body">
-      <p>If you've applied with JAC before, you'll notice that the process for this role is slightly different.</p>
+      <p>If you've applied with the JAC before, you'll notice that the process for this role is slightly different.</p>
       <p>You'll need to enter some personal details to create your new account profile, as well as professional information for your application.</p>
       <p>
         You can still 
-        <RouterLink
-          class="govuk-link text-white"
-          data-module="govuk-button"
-          :to="{ name: 'sign-in' }"
-        >
-          sign into your existing account
-        </RouterLink>  
+        <a 
+          href="https://www.judicialappointments.gov.uk/user"
+          target="_blank"
+        >sign in to your existing account</a>
         to access anything you need for this application, but you cannot apply there.
       </p>
       <RouterLink
