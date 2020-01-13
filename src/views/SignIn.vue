@@ -19,7 +19,7 @@
             if you do not have one
           </p>
 
-          <p>
+          <!-- <p>
             <button
               type="button"
               class="govuk-button button-image"
@@ -31,7 +31,7 @@
                 width="191"
               >              
             </button>
-          </p>
+          </p> -->
 
           <TextField
             id="email"
@@ -75,10 +75,10 @@ export default {
     },
   },
   methods: {
-    loginWithGoogle() {
-      const provider = new auth.GoogleAuthProvider();
-      auth().signInWithPopup(provider);
-    },
+    // loginWithGoogle() {
+    //   const provider = new auth.GoogleAuthProvider();
+    //   auth().signInWithPopup(provider);
+    // },
     login() {
       if (this.formData.email && this.formData.password) {
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password);
