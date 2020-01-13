@@ -86,8 +86,7 @@
             >
               reasonable adjustments policy
             </a>
-            do you have a disability or long term condition? If you need an adjustment
-            during the process let us know.
+            do you have a disability or long term health condition that means you need an adjustment during the process?
           </p>
           <RadioItem
             :value="true"
