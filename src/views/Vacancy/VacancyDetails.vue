@@ -25,7 +25,13 @@
         Overview of the role
       </h2>
 
-      <pre class="govuk-body pre">{{ vacancy.aboutTheRole }}</pre>
+      <!-- eslint-disable -->
+      <div 
+        class="govuk-body" 
+        v-html="vacancy.aboutTheRole"
+      />
+      <!-- eslint-enable -->
+
       <!-- 
       <h2 class="govuk-heading-l">
         The selection process
@@ -155,11 +161,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.pre {
-  white-space: pre-wrap; 
-  word-wrap: break-word;
-  font-family: inherit;  
-}
-</style>
