@@ -21,7 +21,7 @@
               Applications
             </RouterLink>
           </li>
-          <li>
+          <!-- <li>
             <RouterLink
               class="govuk-link"
               :to="{ name: 'personal-details' }"
@@ -44,7 +44,7 @@
             >
               Character Information
             </RouterLink>
-          </li>
+          </li> -->
         </ul>
       </div>
 
