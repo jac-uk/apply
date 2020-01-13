@@ -105,6 +105,27 @@ export default {
       }
       return outcome;
     },
+    workingPreferences(){
+      let tasklist =[];
+      if (this.isPartTimeAndWelsh) {
+        tasklist.push(
+          { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+          { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
+        );
+      } else if (this.isJustPartTime) {
+        tasklist.push(
+          { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+        );
+      } else if (this.isJustWelsh) {
+        tasklist.push(
+          { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
+        );
+      }
+      return {
+        title: 'Working preferences',
+        tasks: tasklist,
+      };
+    },
     applicationProgress() {
       if (this.application && this.application.progress) {
         return this.application.progress;
@@ -123,29 +144,7 @@ export default {
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
-        if (this.isPartTimeAndWelsh) {
-          data.push({
-            title: 'Working preferences',
-            tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-              { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
-            ],
-          });
-        } else if (this.isJustPartTime) {
-          data.push({
-            title: 'Working preferences',
-            tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-            ],
-          });
-        } else if (this.isJustWelsh) {
-          data.push({
-            title: 'Working preferences',
-            tasks: [
-              { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
-            ],
-          });
-        }
+        data.push(this.workingPreferences);
         if (this.isLegal) {
           data.push({
             title: 'Qualifications and experience',
