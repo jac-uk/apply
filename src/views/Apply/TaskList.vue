@@ -84,48 +84,6 @@ export default {
     isNonLegal() {
       return this.vacancy.typeOfExercise ==='non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
-    isPartTimeAndWelsh() {
-      let outcome = null;
-      if (this.vacancy.isSPTWOffered && this.vacancy.welshRequirement) {
-        outcome = true;
-      }
-      return outcome;
-    },
-    isJustPartTime() {
-      let outcome = null;
-      if (this.vacancy.isSPTWOffered && (this.vacancy.welshRequirement != true)) {
-        outcome = true;
-      }
-      return outcome;
-    },
-    isJustWelsh() {
-      let outcome = null;
-      if ((this.vacancy.isSPTWOffered != true) && this.vacancy.welshRequirement) {
-        outcome = true;
-      }
-      return outcome;
-    },
-    workingPreferences(){
-      let tasklist =[];
-      if (this.isPartTimeAndWelsh) {
-        tasklist.push(
-          { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-          { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
-        );
-      } else if (this.isJustPartTime) {
-        tasklist.push(
-          { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-        );
-      } else if (this.isJustWelsh) {
-        tasklist.push(
-          { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
-        );
-      }
-      return {
-        title: 'Working preferences',
-        tasks: tasklist,
-      };
-    },
     applicationProgress() {
       if (this.application && this.application.progress) {
         return this.application.progress;
@@ -144,7 +102,20 @@ export default {
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
-        data.push(this.workingPreferences);
+        const workingPreferencesTasklist = [];
+        if (this.vacancy.isSPTWOffered) {
+          workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
+        }
+        if (this.vacancy.welshRequirement) {
+          workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
+        }
+        if (workingPreferencesTasklist.length > 0) {
+          data.push({
+            title: 'Working preferences',
+            tasks: workingPreferencesTasklist,
+          });
+        }
+
         if (this.isLegal) {
           data.push({
             title: 'Qualifications and experience',
