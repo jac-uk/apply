@@ -33,6 +33,8 @@
             </button>
           </p> -->
 
+          <ErrorSummary :errors="errors" />
+
           <TextField
             id="email"
             v-model="formData.email"
@@ -57,16 +59,19 @@
 </template>
 
 <script>
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 
 export default {
   components: {
+    ErrorSummary,
     TextField,
   },
   data () {
     return {
       formData: {},
+      errors: [],
     };
   },
   computed: {
@@ -81,10 +86,12 @@ export default {
     // },
     login() {
       if (this.formData.email && this.formData.password) {
-        auth().signInWithEmailAndPassword(this.formData.email, this.formData.password);
-        // .catch((error) => {
-        //   // handle errors - e.g. account not valid
-        // });
+        this.errors = [];
+        auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+          .catch((error) => {
+            this.errors.push({ id: 'email', message: error.message });
+          // handle errors - e.g. account not valid
+          });
       }    
     },
   },
