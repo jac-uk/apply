@@ -65,12 +65,12 @@
           hint="You will be tested on this later in the process."
         >
           <RadioItem
-            :value="true"
-            label="Yes"
+            value="read"
+            label="Read"
           />
           <RadioItem
-            :value="false"
-            label="No"
+            value="write"
+            label="Write"
           />
           <RadioItem
             value="both"
