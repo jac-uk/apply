@@ -43,6 +43,7 @@ import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/Relev
 import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience';
 import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
+import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
 import Confirmation from '@/views/Apply/Confirmation';
@@ -281,6 +282,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Part-time working preferences',
+          },
+        },
+        {
+          path: 'welsh-posts',
+          component: WelshPosts,
+          name: 'welsh-posts',
+          meta: {
+            requiresAuth: true,
+            title: 'Welsh posts',
           },
         },
         {
