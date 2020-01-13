@@ -84,6 +84,27 @@ export default {
     isNonLegal() {
       return this.vacancy.typeOfExercise ==='non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
+    isPartTimeAndWelsh() {
+      let outcome = null;
+      if (this.vacancy.isSPTWOffered && this.vacancy.welshRequirement) {
+        outcome = true;
+      }
+      return outcome;
+    },
+    isJustPartTime() {
+      let outcome = null;
+      if (this.vacancy.isSPTWOffered && (this.vacancy.welshRequirement != true)) {
+        outcome = true;
+      }
+      return outcome;
+    },
+    isJustWelsh() {
+      let outcome = null;
+      if ((this.vacancy.isSPTWOffered != true) && this.vacancy.welshRequirement) {
+        outcome = true;
+      }
+      return outcome;
+    },
     applicationProgress() {
       if (this.application && this.application.progress) {
         return this.application.progress;
@@ -102,11 +123,26 @@ export default {
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
-        if (this.vacancy.isSPTWOffered) {
+        if (this.isPartTimeAndWelsh) {
           data.push({
             title: 'Working preferences',
             tasks: [
               { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+              { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
+            ],
+          });
+        } else if (this.isJustPartTime) {
+          data.push({
+            title: 'Working preferences',
+            tasks: [
+              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
+            ],
+          });
+        } else if (this.isJustWelsh) {
+          data.push({
+            title: 'Working preferences',
+            tasks: [
+              { title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts },
             ],
           });
         }
