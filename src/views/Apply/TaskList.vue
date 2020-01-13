@@ -102,14 +102,20 @@ export default {
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
+        const workingPreferencesTasklist = [];
         if (this.vacancy.isSPTWOffered) {
+          workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
+        }
+        if (this.vacancy.welshRequirement) {
+          workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
+        }
+        if (workingPreferencesTasklist.length > 0) {
           data.push({
             title: 'Working preferences',
-            tasks: [
-              { title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences },
-            ],
+            tasks: workingPreferencesTasklist,
           });
         }
+
         if (this.isLegal) {
           data.push({
             title: 'Qualifications and experience',
