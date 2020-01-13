@@ -23,7 +23,7 @@
               Applications
             </RouterLink>
           </li>
-          <li>
+          <!-- <li>
             <RouterLink
               class="govuk-link"
               :to="{ name: 'personal-details' }"
@@ -46,7 +46,7 @@
             >
               Character Information
             </RouterLink>
-          </li>
+          </li> -->
         </ul>
       </div>
 
@@ -157,7 +157,7 @@
             </p>
             <p>{{ vacancy.roleSummary }}</p>
             <p
-              v-if="vacancy.subscriberAlertsUrl"
+              v-if="showSignUp(vacancy)"
               class="govuk-body govuk-!-margin-bottom-7"
             >
               <a
@@ -198,6 +198,18 @@ export default {
   },
   created() {
     this.$store.dispatch('vacancies/bind');
+  },
+  methods: {
+    showSignUp(vacancy) {
+      if (vacancy.subscriberAlertsUrl) {
+        if (vacancy.applicationOpenDate) {
+          const today = new Date();
+          return vacancy.applicationOpenDate > today;
+        }
+        return true;
+      }
+      return false;
+    },
   },
 };
 </script>
