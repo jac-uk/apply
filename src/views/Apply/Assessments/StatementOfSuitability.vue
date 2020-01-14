@@ -7,8 +7,11 @@
           Statement of suitability
         </h1>
 
-        <p class="govuk-body-l">
-          Intro text provided by team.
+        <p
+          v-if="vacancy.aSCApply"
+          class="govuk-body-l"
+        >
+          {{ vacancy.yesASCApply }}
         </p>
 
         <RadioGroup
@@ -93,7 +96,10 @@ export default {
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
-  },  
+    vacancy() {
+      return this.$store.state.exercise.record;
+    },
+  },
   methods: {
     async save() {
       // loop through this.files and upload them
