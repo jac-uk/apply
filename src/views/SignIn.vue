@@ -19,19 +19,6 @@
             if you do not have one
           </p>
 
-          <!-- <p>
-            <button
-              type="button"
-              class="govuk-button button-image"
-              @click="loginWithGoogle"
-            >
-              <img 
-                alt="Sign in with Google"
-                src="@/assets/btn_google_signin_light_normal_web@2x.png"
-                width="191"
-              >              
-            </button>
-          </p> -->
 
           <ErrorSummary :errors="errors" />
 
