@@ -4,7 +4,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Set part-time working preferences
+          Part-time working preferences
         </h1>
 
         <ErrorSummary
@@ -14,8 +14,7 @@
         />
 
         <p class="govuk-body-l">
-          Part-time working is offered for some salaried roles. When it is
-          offered, details will be discussed at selection day.
+          Part-time working is available for this role.
         </p>
 
         <RadioGroup
