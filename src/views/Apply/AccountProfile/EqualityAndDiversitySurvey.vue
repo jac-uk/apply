@@ -14,46 +14,226 @@
         />
 
         <p class="govuk-body-l">
-          Giving this information means we can apply our
-          <a
-            class="govuk-link"
-            href="dicialappointments.gov.uk/equal-merit"
-            target="_blank"
-          >
-            equal merit rules
-          </a>
-          in appropriate circumstances.
+          The JAC is committed to equality and diversity and monitors selection
+          processes to ensure that they are fair. If you do not want to disclose your diversity
+          data in any given area, please select ‘Prefer not to say’ for the relevant question.
         </p>
-
         <p class="govuk-body-l">
-          This helps us meet
-          <a
-            class="govuk-link"
-            href="https://www.judicialappointments.gov.uk/providing-diversity-information-jac"
-            target="_blank"
-          >
-            our commitment to equality and diversity.
-          </a>
-          We share this with the Ministry of Justice, Judicial Office and Her Majesty's Courts and Tribunal Service.
+          The JAC will use the information you provide in two ways: where the Equal
+          Merit approach applies, and to monitor the selection process.
+          Other than for the purposes of Equal Merit, your diversity
+          monitoring information will not play any part in the selection process.
+        </p>
+        <p class="govuk-body-l">
+          If you are recommended for an appointment we will also share your
+          information with the Ministry of Justice, Judicial Office and Her
+          Majesty's Courts and Tribunal Service.
         </p>
 
         <RadioGroup
-          id="has-taken-paje"
-          v-model="application.hasTakenPAJE"
+          id="share-data"
+          v-model="application.shareData"
           required
-          label="Have you taken part in the Pre-application judicial education (PAJE)?"
+          label="You can opt out if you do not wish to share your data with
+          MoJ, HMCTS, and Judicial Office."
         >
-          <p class="govuk-hint govuk-!-margin-top-0">
-            The
-            <a
-              class="govuk-link"
-              href="https://www.judicialappointments.gov.uk/providing-diversity-information-jac"
-              target="_blank"
-            >
-              PAJE scheme
-            </a>
-            helps under-represented groups develop their understanding of the role and skills of judges.
-          </p>
+          <RadioItem
+            :value="true"
+            label="Share"
+          />
+          <RadioItem
+            :value="false"
+            label="Do not share"
+          />
+        </RadioGroup>
+
+        <CheckboxGroup
+          id="professional-background"
+          v-model="application.professionalBackground"
+          required
+          label="What is your professional background?"
+          hint="Select all that apply."
+        >
+          <CheckboxItem
+            value="barrister"
+            label="Barrister"
+          />
+          <CheckboxItem
+            value="CILEx"
+            label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
+          />
+          <CheckboxItem
+            value="solicitor"
+            label="Solicitor"
+          />
+          <CheckboxItem
+            value="other-professional-background"
+            label="Other"
+          >
+            <TextField
+              id="other-professional-background-details"
+              v-model="application.otherProfessionalBackgroundDetails"
+              label="Other role"
+              class="govuk-!-width-two-thirds"
+            />
+          </CheckboxItem>
+          <CheckboxItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </CheckboxGroup>
+
+        <CheckboxGroup
+          id="current-legal-role"
+          v-model="application.currentLegalRole"
+          required
+          label="What is your current legal role?"
+          hint="Select all that apply."
+        >
+          <CheckboxItem
+            value="academic"
+            label="Academic"
+          />
+          <CheckboxItem
+            value="barrister"
+            label="Barrister"
+          />
+          <CheckboxItem
+            value="CILEx"
+            label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
+          />
+          <CheckboxItem
+            value="solicitor"
+            label="Solicitor"
+          />
+          <CheckboxItem
+            value="fee-paid-court-judge"
+            label="Fee-paid court judge"
+          />
+          <CheckboxItem
+            value="fee-paid-tribunal-judge"
+            label="Fee-paid tribunal judge"
+          />
+          <CheckboxItem
+            value="other-fee-paid-judicial-office-holder"
+            label="Other fee-paid judicial office holder"
+          >
+            <TextField
+              id="other-fee-paid-judicial-office-holder-details"
+              v-model="application.otherCurrentFeePaidJudicialOfficeHolderDetails"
+              label="Other fee-paid Judicial Office holder role"
+              class="govuk-!-width-two-thirds"
+            />
+          </CheckboxItem>
+          <CheckboxItem
+            value="salaried-court-judge"
+            label="Salaried court judge"
+          />
+          <CheckboxItem
+            value="salaried-tribunal-judge"
+            label="Salaried tribunal judge"
+          />
+          <CheckboxItem
+            value="other-salaried-judicial-office-holder"
+            label="Other salaried Judicial Office holder"
+          >
+            <TextField
+              id="other-salaried-judicial-office-holder-details"
+              v-model="application.otherCurrentSalariedJudicialOfficeHolderDetails"
+              label="Other salaried Judicial Office holder role"
+              class="govuk-!-width-two-thirds"
+            />
+          </CheckboxItem>
+          <CheckboxItem
+            value="other-current-legal-role"
+            label="Other"
+          >
+            <TextField
+              id="other-current-legal-role-details"
+              v-model="application.otherCurrentLegalRoleDetails"
+              label="Current legal role"
+              class="govuk-!-width-two-thirds"
+            />
+          </CheckboxItem>
+          <CheckboxItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </CheckboxGroup>
+
+        <RadioGroup
+          id="fee-paid-judicial-role"
+          v-model="application.feePaidJudicialRole"
+          required
+          label="Do you hold, or have you ever held in the past, a fee-paid judicial role?"
+        >
+          <RadioItem
+            value="no"
+            label="I have not previously held a fee-paid role"
+          />
+          <RadioItem
+            value="fee-paid-court-post"
+            label="Fee-paid court post"
+          />
+          <RadioItem
+            value="fee-paid-tribunal-post"
+            label="Fee-paid tribunal post"
+          />
+          <RadioItem
+            value="other-fee-paid-judicial-office"
+            label="Other fee-paid Judicial Office"
+          >
+            <TextField
+              id="other-fee-paid-judicial-office-details"
+              v-model="application.otherFeePaidJudicialRoleDetails"
+              label="Other fee-paid Judicial Office role"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="state-or-fee-school"
+          v-model="application.stateOrFeeSchool"
+          required
+          label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
+        >
+          <RadioItem
+            value="uk-state-selective"
+            label="UK state school - selective"
+          />
+          <RadioItem
+            value="uk-state-non-selective"
+            label="UK state school - non-selective"
+          />
+          <RadioItem
+            value="uk-independent-fee"
+            label="UK independent or fee-paying school"
+          />
+          <RadioItem
+            value="uk-independent-fee-with-bursary"
+            label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
+          />
+          <RadioItem
+            value="non-uk-educated"
+            label="I did not go to school in the UK"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="oxbridge-universities"
+          v-model="application.oxbridgeUni"
+          required
+          label="Did you go to either Oxford or Cambridge universities?"
+        >
           <RadioItem
             :value="true"
             label="Yes"
@@ -61,6 +241,34 @@
           <RadioItem
             :value="false"
             label="No"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="first-generation-student"
+          v-model="application.firstGenerationStudent"
+          required
+          label="Were you the first generation in your family to go to university?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          />
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+          <RadioItem
+            value="non-university-educated"
+            label="I did not go to university"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
           />
         </RadioGroup>
 
@@ -93,7 +301,14 @@
           <RadioItem
             value="other-asian"
             label="Any other Asian background"
-          />
+          >
+            <TextField
+              id="other-asian-details"
+              v-model="application.otherEthnicGroupAsianDetails"
+              label="Other Asian background"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
 
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Black/African/Caribbean/Black British
@@ -110,7 +325,14 @@
           <RadioItem
             value="other-black"
             label="Any other Black/African/Caribbean background"
-          />
+          >
+            <TextField
+              id="other-black-details"
+              v-model="application.otherEthnicGroupBlackDetails"
+              label="Other Black/African/Caribbean background"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
 
           <p class="govuk-heading-s govuk-!-margin-top-6">
             White
@@ -131,7 +353,14 @@
           <RadioItem
             value="other-white"
             label="Any other White background"
-          />
+          >
+            <TextField
+              id="other-white-details"
+              v-model="application.otherEthnicGroupWhiteDetails"
+              label="Other White background"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
 
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Mixed or multiple ethnic backgrounds
@@ -152,7 +381,14 @@
           <RadioItem
             value="other-mixed"
             label="Any other mixed or multiple ethnic backgrounds"
-          />
+          >
+            <TextField
+              id="other-mixed-details"
+              v-model="application.otherEthnicGroupMixedDetails"
+              label="Other mixed or multiple ethnic backgrounds"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
 
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Other ethnic group
@@ -161,6 +397,145 @@
           <RadioItem
             value="other-ethnic-group"
             label="Other"
+          >
+            <TextField
+              id="other-ethnic-details"
+              v-model="application.otherEthnicGroupDetails"
+              label="Other ethnic background"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="gender"
+          v-model="application.gender"
+          required
+          label="What gender are you?"
+        >
+          <RadioItem
+            value="female"
+            label="Female"
+          />
+          <RadioItem
+            value="male"
+            label="Male"
+          />
+          <RadioItem
+            value="gender-neutral"
+            label="Gender neutral"
+          />
+          <RadioItem
+            value="other-gender"
+            label="Other"
+          >
+            <TextField
+              id="other-gender-details"
+              v-model="application.otherGenderDetails"
+              label="Other gender"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="changed-gender"
+          v-model="application.changedGender"
+          required
+          label="Is your gender identity the same as the sex you were assigned at birth?"
+          hint="This is about gender re-assignment."
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          />
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="sexual-orientation"
+          v-model="application.sexualOrientation"
+          required
+          label="How would you describe your sexual orientation?"
+        >
+          <RadioItem
+            value="bisexual"
+            label="Bisexual"
+          />
+          <RadioItem
+            value="gay-man"
+            label="Gay man"
+          />
+          <RadioItem
+            value="gay-woman-lesbian"
+            label="Gay woman or lesbian"
+          />
+          <RadioItem
+            value="heterosexual-straight"
+            label="Heterosexual or straight"
+          />
+          <RadioItem
+            value="other-sexual-orientation"
+            label="Other"
+          >
+            <TextField
+              id="other-sexual-orientation-details"
+              v-model="application.otherSexualOrientationDetails"
+              label="Other sexual orientation"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
+        </RadioGroup>
+
+        <RadioGroup
+          id="disability"
+          v-model="application.disability"
+          required
+          label="Do you have a disability?"
+        >
+          <p class="govuk-hint govuk-!-margin-top-0">
+            Disability is defined in the
+            <a
+              class="govuk-link"
+              href="https://www.gov.uk/definition-of-disability-under-equality-act-2010"
+              target="_blank"
+            >
+              Equality Act 2010.
+            </a>
+          </p>
+
+          <RadioItem
+            :value="true"
+            label="Yes"
+          >
+            <TextareaInput
+              id="disability-details"
+              v-model="application.disabilityDetails"
+              label="Add disability details"
+            />
+          </RadioItem>
+          <RadioItem
+            :value="false"
+            label="No"
           />
           <RadioItem
             value="prefer-not-to-say"
@@ -172,7 +547,7 @@
           id="religion-faith"
           v-model="application.religionFaith"
           required
-          label="What religion or faith are you?"
+          label="What religion or belief do you have?"
         >
           <RadioItem
             value="no-religion"
@@ -224,34 +599,10 @@
         </RadioGroup>
 
         <RadioGroup
-          id="gender"
-          v-model="application.gender"
+          id="atttended-outreach-events"
+          v-model="application.attendedOutreachEvents"
           required
-          label="What gender are you?"
-        >
-          <RadioItem
-            value="female"
-            label="Female"
-          />
-          <RadioItem
-            value="male"
-            label="Male"
-          />
-          <RadioItem
-            value="gender-neutral"
-            label="Gender neutral"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="changed-gender"
-          v-model="application.changedGender"
-          required
-          label="Have you ever changed gender?"
+          label="Have you attended an outreach event on JAC selection exercises?"
         >
           <RadioItem
             :value="true"
@@ -268,30 +619,18 @@
         </RadioGroup>
 
         <RadioGroup
-          id="sexual-orientation"
-          v-model="application.sexualOrientation"
+          id="participated-in-judicial-workshadowing-scheme"
+          v-model="application.participatedInJudicialWorkshadowingScheme"
           required
-          label="How would you describe your sexual orientation?"
+          label="Did you participate in a Judicial Workshadowing Scheme?"
         >
           <RadioItem
-            value="bisexual"
-            label="Bisexual"
+            :value="true"
+            label="Yes"
           />
           <RadioItem
-            value="gay-man"
-            label="Gay man"
-          />
-          <RadioItem
-            value="gay-woman-lesbian"
-            label="Gay woman or lesbian"
-          />
-          <RadioItem
-            value="heterosexual-straight"
-            label="Heterosexual or straight"
-          />
-          <RadioItem
-            value="other-sexual-orientation"
-            label="Other"
+            :value="false"
+            label="No"
           />
           <RadioItem
             value="prefer-not-to-say"
@@ -300,80 +639,22 @@
         </RadioGroup>
 
         <RadioGroup
-          id="disability"
-          v-model="application.disability"
+          id="has-taken-paje"
+          v-model="application.hasTakenPAJE"
           required
-          label="Do you have a disability?"
+          label="Have you taken part in the Pre-application judicial education (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
-            Disability is defined in the
+            The
             <a
               class="govuk-link"
-              href="https://www.gov.uk/definition-of-disability-under-equality-act-2010"
+              href="https://www.judicialappointments.gov.uk/providing-diversity-information-jac"
               target="_blank"
             >
-              Equality Act 2010.
+              PAJE scheme
             </a>
+            helps under-represented groups develop their understanding of the role and skills of judges.
           </p>
-
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <TextareaInput
-              id="disability-details"
-              v-model="application.disabilityDetails"
-              label="Add disability details"
-            />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="state-or-fee-school"
-          v-model="application.stateOrFeeSchool"
-          required
-          label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
-        >
-          <RadioItem
-            value="uk-state-selective"
-            label="UK state school - selective"
-          />
-          <RadioItem
-            value="uk-state-non-selective"
-            label="UK state school - non-selective"
-          />
-          <RadioItem
-            value="uk-independent-fee"
-            label="UK independent or fee-paying school"
-          />
-          <RadioItem
-            value="uk-independent-fee-with-bursary"
-            label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
-          />
-          <RadioItem
-            value="non-uk-educated"
-            label="I did not go to school in the UK"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="oxbridge-universities"
-          v-model="application.oxbridgeUni"
-          required
-          label="Did you go to either of the Oxbridge universities?"
-        >
           <RadioItem
             :value="true"
             label="Yes"
@@ -381,151 +662,6 @@
           <RadioItem
             :value="false"
             label="No"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="first-generation-student"
-          v-model="application.firstGenerationStudent"
-          required
-          label="Were you the first generation in your family to go to university?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-          <RadioItem
-            value="non-university-educated"
-            label="I did not go to university"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
-
-        <CheckboxGroup
-          id="professional-background"
-          v-model="application.professionalBackground"
-          required
-          label="What is your professional background?"
-          hint="Select all that apply."
-        >
-          <CheckboxItem
-            value="barrister"
-            label="Barrister"
-          />
-          <CheckboxItem
-            value="CILEx"
-            label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
-          />
-          <CheckboxItem
-            value="solicitor"
-            label="Solicitor"
-          />
-          <CheckboxItem
-            value="other-professional-background"
-            label="Other"
-          />
-          <CheckboxItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </CheckboxGroup>
-
-        <CheckboxGroup
-          id="current-legal-role"
-          v-model="application.currentLegalRole"
-          required
-          label="What is your current legal role?"
-          hint="Select all that apply."
-        >
-          <CheckboxItem
-            value="academic"
-            label="Academic"
-          />
-          <CheckboxItem
-            value="barrister"
-            label="Barrister"
-          />
-          <CheckboxItem
-            value="CILEx"
-            label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
-          />
-          <CheckboxItem
-            value="solicitor"
-            label="Solicitor"
-          />
-          <CheckboxItem
-            value="fee-paid-court-judge"
-            label="Fee-paid court judge"
-          />
-          <CheckboxItem
-            value="fee-paid-tribunal-judge"
-            label="Fee-paid tribunal judge"
-          />
-          <CheckboxItem
-            value="other-fee-paid-judicial-office-holder"
-            label="Other fee-paid judicial office holder"
-          />
-          <CheckboxItem
-            value="salaried-court-judge"
-            label="Salaried court judge"
-          />
-          <CheckboxItem
-            value="salaried-tribunal-judge"
-            label="Salaried tribunal judge"
-          />
-          <CheckboxItem
-            value="other-salaried-judicial-office-holder"
-            label="Other salaried judicial office holder"
-          />
-          <CheckboxItem
-            value="other-current-legal-role"
-            label="Other"
-          >
-            <TextField
-              id="other-current-legal-role-details"
-              v-model="application.otherCurrentLegalRoleDetails"
-              label="Current legal role"
-              class="govuk-!-width-two-thirds"
-            />
-          </CheckboxItem>
-          <CheckboxItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </CheckboxGroup>
-
-        <RadioGroup
-          id="fee-paid-judicial-role"
-          v-model="application.feePaidJudicialRole"
-          required
-          label="Do you hold, or have you held in the past, a fee-paid judicial role?"
-        >
-          <RadioItem
-            value="no"
-            label="I have not previously held a fee-paid role"
-          />
-          <RadioItem
-            value="fee-paid-court-post"
-            label="Fee-paid court post"
-          />
-          <RadioItem
-            value="fee-paid-tribunal-post"
-            label="Fee-paid tribunal post"
-          />
-          <RadioItem
-            value="other-fee-paid-judicial-office"
-            label="Other fee-paid judicial office"
           />
           <RadioItem
             value="prefer-not-to-say"
@@ -550,7 +686,6 @@ import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
-import BooleanOrNull from '@/helpers/booleanOrNull';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -567,22 +702,36 @@ export default {
   extends: Form,
   data(){
     const defaults = {
-      hasTakenPAJE: BooleanOrNull(null),
-      ethnicGroup: null,
-      religionFaith: null,
-      otherReligionDetails: null,
-      gender: null,
-      changedGender: null,
-      sexualOrientation: null,
-      disability: null,
-      disabilityDetails: null,
+      shareData: null,
+      professionalBackground: null,
+      otherProfessionalBackgroundDetails: null,
+      currentLegalRole: null,
+      otherCurrentFeePaidJudicialOfficeHolderDetails: null,
+      otherCurrentSalariedJudicialOfficeHolderDetails: null,
+      otherCurrentLegalRoleDetails: null,
+      feePaidJudicialRole: null,
+      otherFeePaidJudicialRoleDetails: null,
       stateOrFeeSchool: null,
       oxbridgeUni: null,
       firstGenerationStudent: null,
-      professionalBackground: null,
-      currentLegalRole: null,
-      otherCurrentLegalRoleDetails: null,
-      feePaidJudicialRole: null,
+      ethnicGroup: null,
+      otherEthnicGroupAsianDetails: null,
+      otherEthnicGroupBlackDetails: null,
+      otherEthnicGroupWhiteDetails: null,
+      otherEthnicGroupMixedDetails: null,
+      otherEthnicGroupDetails: null,
+      gender: null,
+      otherGenderDetails: null,
+      changedGender: null,
+      sexualOrientation: null,
+      otherSexualOrientationDetails: null,
+      disability: null,
+      disabilityDetails: null,
+      religionFaith: null,
+      otherReligionDetails: null,
+      attendedOutreachEvents: null,
+      participatedInJudicialWorkshadowingScheme: null,
+      hasTakenPAJE: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
