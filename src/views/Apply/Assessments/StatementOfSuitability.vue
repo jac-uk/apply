@@ -47,7 +47,7 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            statement-of-suitability-template.doc
+            {{ downloadNameGenerator }}
           </a>
         </div>
 
@@ -98,6 +98,18 @@ export default {
     },
     vacancy() {
       return this.$store.state.exercise.record;
+    },
+    downloadNameGenerator() {
+      let outcome = null;
+      if (this.vacancy.assessmentOptions == 'statement-of-suitability-with-competencies') {
+        outcome = 'statement-of-suitability-with-competencies.doc';
+      } else if (
+        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities' ||
+        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'
+      ) {
+        outcome = 'statement-of-suitability-with-skills-and-abilities.doc';
+      }
+      return outcome;
     },
   },
   methods: {
