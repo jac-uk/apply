@@ -48,7 +48,6 @@
             href="#"
           >
             {{ downloadNameGenerator }}
-            {{ fileName }}
           </a>
         </div>
 
