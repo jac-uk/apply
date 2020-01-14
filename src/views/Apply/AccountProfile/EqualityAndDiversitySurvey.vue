@@ -70,11 +70,6 @@
           required
           label="What's your ethnic group?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Asian/Asian British
           </p>
@@ -167,6 +162,10 @@
             value="other-ethnic-group"
             label="Other"
           />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <RadioGroup
@@ -175,10 +174,6 @@
           required
           label="What religion or faith are you?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             value="no-religion"
             label="No religion"
@@ -222,6 +217,10 @@
               class="govuk-!-width-two-thirds"
             />
           </RadioItem>
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <RadioGroup
@@ -230,10 +229,6 @@
           required
           label="What gender are you?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             value="female"
             label="Female"
@@ -246,6 +241,10 @@
             value="gender-neutral"
             label="Gender neutral"
           />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <RadioGroup
@@ -255,16 +254,16 @@
           label="Have you ever changed gender?"
         >
           <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-          <RadioItem
             :value="true"
             label="Yes"
           />
           <RadioItem
             :value="false"
             label="No"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
           />
         </RadioGroup>
 
@@ -274,10 +273,6 @@
           required
           label="How would you describe your sexual orientation?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             value="bisexual"
             label="Bisexual"
@@ -297,6 +292,10 @@
           <RadioItem
             value="other-sexual-orientation"
             label="Other"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
           />
         </RadioGroup>
 
@@ -318,10 +317,6 @@
           </p>
 
           <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-          <RadioItem
             :value="true"
             label="Yes"
           >
@@ -335,6 +330,10 @@
             :value="false"
             label="No"
           />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <RadioGroup
@@ -343,10 +342,6 @@
           required
           label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             value="uk-state-selective"
             label="UK state school - selective"
@@ -367,6 +362,10 @@
             value="non-uk-educated"
             label="I did not go to school in the UK"
           />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <RadioGroup
@@ -376,16 +375,16 @@
           label="Did you go to either of the Oxbridge universities?"
         >
           <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-          <RadioItem
             :value="true"
             label="Yes"
           />
           <RadioItem
             :value="false"
             label="No"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
           />
         </RadioGroup>
 
@@ -395,10 +394,6 @@
           required
           label="Were you the first generation in your family to go to university?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             :value="true"
             label="Yes"
@@ -411,6 +406,10 @@
             value="non-university-educated"
             label="I did not go to university"
           />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </RadioGroup>
 
         <CheckboxGroup
@@ -420,10 +419,6 @@
           label="What is your professional background?"
           hint="Select all that apply."
         >
-          <CheckboxItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <CheckboxItem
             value="barrister"
             label="Barrister"
@@ -440,6 +435,10 @@
             value="other-professional-background"
             label="Other"
           />
+          <CheckboxItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </CheckboxGroup>
 
         <CheckboxGroup
@@ -449,10 +448,6 @@
           label="What is your current legal role?"
           hint="Select all that apply."
         >
-          <CheckboxItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <CheckboxItem
             value="academic"
             label="Academic"
@@ -504,6 +499,10 @@
               class="govuk-!-width-two-thirds"
             />
           </CheckboxItem>
+          <CheckboxItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
+          />
         </CheckboxGroup>
 
         <RadioGroup
@@ -512,10 +511,6 @@
           required
           label="Do you hold, or have you held in the past, a fee-paid judicial role?"
         >
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
           <RadioItem
             value="no"
             label="I have not previously held a fee-paid role"
@@ -531,6 +526,10 @@
           <RadioItem
             value="other-fee-paid-judicial-office"
             label="Other fee-paid judicial office"
+          />
+          <RadioItem
+            value="prefer-not-to-say"
+            label="Prefer not to say"
           />
         </RadioGroup>
 
