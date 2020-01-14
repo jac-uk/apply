@@ -6,6 +6,7 @@ Vue.use(Vuex);
 // Vuex modules
 import auth from '@/store/auth';
 import vacancies from '@/store/vacancies';
+import vacancy from '@/store/vacancy';
 import exercise from '@/store/exercise';
 import candidate from '@/store/candidate';
 import applications from '@/store/applications';
@@ -17,6 +18,7 @@ const store = new Vuex.Store({
   modules: {
     auth,
     vacancies,
+    vacancy,
     exercise,
     candidate,
     applications,
