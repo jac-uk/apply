@@ -27,7 +27,7 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            self-assessment-template.doc
+            {{ downloadNameGenerator }}
           </a>
         </div>
 
@@ -72,7 +72,20 @@ export default {
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
-  },   
+    vacancy() {
+      return this.$store.state.exercise.record;
+    },
+    downloadNameGenerator() {
+      let outcome = null;
+      if (
+        this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
+        this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
+      ) {
+        outcome = 'self-assessment-with-competencies.doc';
+      }
+      return outcome;
+    },
+  },
   methods: {
     async save() {
       // loop through this.files and upload them
