@@ -7,8 +7,11 @@
           Statement of suitability
         </h1>
 
-        <p class="govuk-body-l">
-          Intro text provided by team.
+        <p
+          v-if="vacancy.aSCApply"
+          class="govuk-body-l"
+        >
+          {{ vacancy.yesASCApply }}
         </p>
 
         <RadioGroup
@@ -44,7 +47,7 @@
             class="govuk-link govuk-body-m"
             href="#"
           >
-            statement-of-suitability-template.doc
+            {{ downloadNameGenerator }}
           </a>
         </div>
 
@@ -93,7 +96,26 @@ export default {
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
-  },  
+    vacancy() {
+      return this.$store.state.exercise.record;
+    },
+    downloadNameGenerator() {
+      let outcome = null;
+      if (this.vacancy.assessmentOptions == 'statement-of-suitability-with-competencies') {
+        outcome = 'statement-of-suitability-with-competencies';
+      } else if (
+        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities' ||
+        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'
+      ) {
+        outcome = 'statement-of-suitability-with-skills-and-abilities';
+      }
+      let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+      if (fileName) {
+        outcome = outcome + fileName.split('.').pop();
+      }
+      return outcome;
+    },
+  },
   methods: {
     async save() {
       // loop through this.files and upload them
