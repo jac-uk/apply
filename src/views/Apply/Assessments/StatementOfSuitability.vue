@@ -48,6 +48,7 @@
             href="#"
           >
             {{ downloadNameGenerator }}
+            {{ fileName }}
           </a>
         </div>
 
@@ -102,12 +103,16 @@ export default {
     downloadNameGenerator() {
       let outcome = null;
       if (this.vacancy.assessmentOptions == 'statement-of-suitability-with-competencies') {
-        outcome = 'statement-of-suitability-with-competencies.doc';
+        outcome = 'statement-of-suitability-with-competencies';
       } else if (
         this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities' ||
         this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'
       ) {
-        outcome = 'statement-of-suitability-with-skills-and-abilities.doc';
+        outcome = 'statement-of-suitability-with-skills-and-abilities';
+      }
+      let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+      if (fileName) {
+        outcome = outcome + fileName.split('.').pop();
       }
       return outcome;
     },

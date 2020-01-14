@@ -81,7 +81,10 @@ export default {
         this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
         this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
       ) {
-        outcome = 'self-assessment-with-competencies.doc';
+        let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+        if(fileName) {
+          outcome = 'self-assessment-with-competencies.' + fileName.split('.').pop();
+        }
       }
       return outcome;
     },
