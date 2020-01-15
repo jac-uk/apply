@@ -16,7 +16,7 @@
 
         <RadioGroup
           id="meet-requirements"
-          v-model="meetRequirements"
+          v-model="vacancy.meetRequirements"
           label="Do you meet this requirement?"
         >
           <RadioItem
