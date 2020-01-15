@@ -48,9 +48,14 @@ npm run test
 npm run lint
 ```
 
-### Manually deploy to production
+### Manually deploy to staging
 
-To manually deploy to production use either: 
+```
+firebase use staging
+npm run deploy-staging
+```
+
+### Manually deploy to production
 
 ```
 firebase use production
