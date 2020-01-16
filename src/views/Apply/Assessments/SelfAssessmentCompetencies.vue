@@ -73,7 +73,7 @@ export default {
       return this.$store.state.auth.currentUser.uid;
     },
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     downloadNameGenerator() {
       let outcome = null;
