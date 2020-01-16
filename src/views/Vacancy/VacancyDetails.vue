@@ -1,7 +1,6 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <BackLink />
       <h1 class="govuk-heading-xl">
         {{ vacancy.name }}
       </h1>
@@ -143,14 +142,12 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
 import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 
 export default {
   components: {
-    BackLink,
     Timeline,
   },
   computed: {
