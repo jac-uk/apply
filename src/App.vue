@@ -57,11 +57,12 @@
                   </li>
 
                   <li class="app-c-topic-list__item">
-                    <a
+                    <RouterLink
                       class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
-                      href="https://apply.judicialappointments.digital/vacancies"
-                      target="_blank"
-                    >Judicial vacancies</a>
+                      :to="{ name: 'vacancies' }"
+                    >
+                      Judicial vacancies
+                    </RouterLink>
                   </li>
                   <li class="app-c-topic-list__item">
                     <button
