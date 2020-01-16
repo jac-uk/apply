@@ -78,7 +78,7 @@
         </div>
 
         <div
-          v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
+          v-if="vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
           class="govuk-form-group"
         >
           <h2 class="govuk-heading-m">
