@@ -120,7 +120,7 @@ export default {
   },
   computed: {
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
   },
   methods: {
