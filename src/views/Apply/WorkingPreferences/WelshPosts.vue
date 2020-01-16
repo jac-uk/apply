@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     isWelshAdministrationRequired() {
       return this.vacancy.welshRequirementType.includes('welsh-administration-questions');
@@ -138,7 +138,7 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.partTimeWorkingPreferences = true;
+        this.application.progress.welshPosts = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
       }
