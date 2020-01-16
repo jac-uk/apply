@@ -24,17 +24,19 @@ export default {
   async mounted() {
     const id = this.$route.params.id;
     try {
-      let exercise = await this.$store.dispatch('exercise/bind', id);
-      if (exercise === null) {
+      let vacancy = await this.$store.dispatch('vacancy/bind', id);
+      if (vacancy === null) {
         this.redirectToErrorPage();
       } else {
         await this.$store.dispatch('candidate/bind');
         await this.$store.dispatch('application/bind');
         if (!this.$store.state.application.record) {
           await this.$store.dispatch('application/save', {
+            status: 'draft',
             progress: { started: true },
           });
         }
+        await this.$store.dispatch('applications/bind');
         this.loaded = true;
       }
     } catch (e) {

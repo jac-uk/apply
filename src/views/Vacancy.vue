@@ -24,7 +24,6 @@ export default {
   async mounted() {
     const id = this.$route.params.id;
     try {
-      await this.$store.dispatch('exercise/bind', id);
       let vacancy = await this.$store.dispatch('vacancy/bind', id);
       if (vacancy === null) {
         this.redirectToErrorPage();
