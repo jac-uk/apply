@@ -1,8 +1,7 @@
-import Vue from 'vue';
 import firebase from '@firebase/app';
 import '@firebase/storage';
 
-Vue.mixin({
+export default {
   methods: {
     upload(item) {
       //console.log('upload function called');
@@ -22,7 +21,8 @@ Vue.mixin({
       const fileName = fileNameMap.get(item.type);
       
       // set the file path in Firebase storage here
-      const fileSavePath = `exercise-${this.application.exerciseId}/userid-${this.userId}/${fileName}.${fileExtension}`;
+      const fileSavePath = `/exercise/${this.application.exerciseId}/user/${this.userId}/${fileName}.${fileExtension}`;
+      //const fileSavePath = `exercise/test/user/user3/${fileName}.${fileExtension}`;
     
       const storageRef = firebase.storage().ref();
     
@@ -103,4 +103,4 @@ Vue.mixin({
       }
     },         
   },
-});
+};
