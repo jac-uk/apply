@@ -42,6 +42,7 @@ import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/Re
 import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships';
 import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience';
 import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
+import ReasonableLengthOfService from '@/views/Apply/QualificationsAndExperience/ReasonableLengthOfService';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
@@ -273,6 +274,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Employment gaps',
+          },
+        },
+        {
+          path: 'reasonable-length-of-service',
+          component: ReasonableLengthOfService,
+          name: 'reasonable-length-of-service',
+          meta: {
+            requiresAuth: true,
+            title: 'Reasonable length of service',
           },
         },
         {
