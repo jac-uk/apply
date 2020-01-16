@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <RouterLink
+        v-if="applications && applications.length > 1"
         class="govuk-back-link"
         :to="{ name: 'applications' }"
       >
@@ -70,13 +71,16 @@ export default {
   },
   computed: {
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     candidate() {
       return this.$store.state.candidate.record;
     },
     application() {
       return this.$store.state.application.record;
+    },
+    applications() {
+      return this.$store.state.applications.records;
     },
     isLegal() {
       return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
