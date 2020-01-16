@@ -22,8 +22,8 @@ let vueInstance = false;
 auth().onAuthStateChanged( (user) => {
   store.dispatch('auth/setCurrentUser', user);
   if (store.getters['auth/isSignedIn']) {
-    if (store.getters['exercise/id']) {
-      router.push(`/apply/${store.getters['exercise/id']}`);
+    if (store.getters['vacancy/id']) {
+      router.push(`/apply/${store.getters['vacancy/id']}`);
     } else {
       // router.push('applications');
     }

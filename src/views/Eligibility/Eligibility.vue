@@ -142,7 +142,7 @@ export default {
   },
   computed: {
     vacancy () {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     isLegal() {
       if (this.vacancy.typeOfExercise === 'legal') {

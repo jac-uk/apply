@@ -119,7 +119,7 @@ export default {
   },
   computed: {
     exerciseId () {
-      return this.$store.state.exercise.record && this.$store.state.exercise.record.id;
+      return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
   },
   methods: {

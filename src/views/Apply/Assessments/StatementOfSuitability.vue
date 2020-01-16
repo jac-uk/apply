@@ -78,7 +78,7 @@
         </div>
 
         <div
-          v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
+          v-if="vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
           class="govuk-form-group"
         >
           <h2 class="govuk-heading-m">
@@ -104,7 +104,7 @@
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
-import '@/mixins/uploadMixin';
+import uploadMixin from '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -114,12 +114,13 @@ export default {
     TextareaInput,
     BackLink,
   },
+  mixins: [uploadMixin],
   data(){
     const defaults = {
       selectionCriteriaAnswers: [],
     };
     const data = this.$store.getters['application/data']();
-    const vacancy = this.$store.state.exercise.record;
+    const vacancy = this.$store.state.vacancy.record;
     const application = { ...defaults, ...data };
     for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
       application.selectionCriteriaAnswers.push({
@@ -139,7 +140,7 @@ export default {
       return this.$store.state.auth.currentUser.uid;
     },
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     downloadNameGenerator() {
       let outcome = null;
@@ -153,7 +154,7 @@ export default {
       }
       let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
       if (fileName) {
-        outcome = outcome + fileName.split('.').pop();
+        outcome = outcome + '.' + fileName.split('.').pop();
       }
       return outcome;
     },
@@ -165,7 +166,6 @@ export default {
       for (const file of files) {
         await this.upload(file);
       }
-
       this.application.progress.statementOfSuitability = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
