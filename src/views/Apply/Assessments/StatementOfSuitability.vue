@@ -9,8 +9,8 @@
 
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
-            v-for="item in application.selectionCriteriaAnswers"
-            :key="item.index"
+            v-for="(item, index) in application.selectionCriteriaAnswers"
+            :key="index"
           >
             <p
               class="govuk-heading-m govuk-!-font-weight-bold"
@@ -22,7 +22,7 @@
             </p>
 
             <RadioGroup
-              :id="`meet_requirements_${item.title}`"
+              :id="`meet_requirements_${index}`"
               v-model="item.answer"
               label="Do you meet this requirement?"
             >
@@ -31,7 +31,7 @@
                 label="Yes"
               >
                 <TextareaInput
-                  :id="`meet_requirements_details${item.title}`"
+                  :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
                   label="In 250 words, tell us how."
                 />
@@ -77,7 +77,10 @@
           >
         </div>
 
-        <div class="govuk-form-group" v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'">
+        <div
+          v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
+          class="govuk-form-group"
+        >
           <h2 class="govuk-heading-m">
             Upload CV
           </h2>
