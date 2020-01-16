@@ -77,6 +77,18 @@
           >
         </div>
 
+        <div class="govuk-form-group" v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'">
+          <h2 class="govuk-heading-m">
+            Upload CV
+          </h2>
+          <input
+            id="cv-file"
+            class="govuk-file-upload"
+            type="file"
+            @change="fileSelected"
+          >
+        </div>
+
         <button class="govuk-button">
           Save and continue
         </button>
