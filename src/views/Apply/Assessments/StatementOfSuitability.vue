@@ -120,7 +120,7 @@ export default {
       selectionCriteriaAnswers: [],
     };
     const data = this.$store.getters['application/data']();
-    const vacancy = this.$store.state.exercise.record;
+    const vacancy = this.$store.state.vacancy.record;
     const application = { ...defaults, ...data };
     for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
       application.selectionCriteriaAnswers.push({
