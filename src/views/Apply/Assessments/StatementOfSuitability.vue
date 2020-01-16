@@ -7,34 +7,48 @@
           Statement of suitability
         </h1>
 
-        <p
-          v-if="vacancy.aSCApply"
-          class="govuk-body-l"
-        >
-          {{ vacancy.yesASCApply }}
-        </p>
+        <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
+          <div
+            v-for="(item, index) in application.selectionCriteriaAnswers"
+            :key="index"
+          >
+            <p
+              class="govuk-heading-m govuk-!-font-weight-bold"
+            >
+              {{ item.title }}
+            </p>
+            <p class="govuk-body">
+              {{ item.text }}
+            </p>
 
-        <RadioGroup
-          id="meet-requirements"
-          v-model="application.meetRequirements"
-          label="Do you meet this requirement?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+            <RadioGroup
+              :id="`meet_requirements_${index}`"
+              v-model="item.answer"
+              label="Do you meet this requirement?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <TextareaInput
+                  :id="`meet_requirements_details${index}`"
+                  v-model="item.answerDetails"
+                  label="In 250 words, tell us how."
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+          </div>
+        </div>
 
-        <p class="govuk-body">
-          In 250 words tell us how.
-        </p>
+        <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
-        <p class="govuk-body">
-          Come back to this page to upload your statement of suitability.
+        <p class="govuk-body-l">
+          Below is a blank template for the statement of suitability. Please save this document, fill it in,
+          then re-upload it to this page.
         </p>
 
         <div class="govuk-form-group">
@@ -63,6 +77,21 @@
           >
         </div>
 
+        <div
+          v-if="this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
+          class="govuk-form-group"
+        >
+          <h2 class="govuk-heading-m">
+            Upload CV
+          </h2>
+          <input
+            id="cv-file"
+            class="govuk-file-upload"
+            type="file"
+            @change="fileSelected"
+          >
+        </div>
+
         <button class="govuk-button">
           Save and continue
         </button>
@@ -74,6 +103,7 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import TextareaInput from '@/components/Form/TextareaInput';
 import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 
@@ -81,12 +111,24 @@ export default {
   components: {
     RadioGroup,
     RadioItem,
+    TextareaInput,
     BackLink,
   },
   data(){
-    const defaults = {};
+    const defaults = {
+      selectionCriteriaAnswers: [],
+    };
     const data = this.$store.getters['application/data']();
+    const vacancy = this.$store.state.exercise.record;
     const application = { ...defaults, ...data };
+    for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+      application.selectionCriteriaAnswers.push({
+        title: vacancy.selectionCriteria[i].title,
+        text: vacancy.selectionCriteria[i].title,
+        answer: null,
+        answerDetail: null,
+      });
+    }
     return {
       application: application,
       files: {},
