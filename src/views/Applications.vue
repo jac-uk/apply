@@ -69,10 +69,18 @@
             </p>
             <p class="govuk-body">
               <RouterLink
+                v-if="application.status == 'draft'"
                 class="govuk-link"
                 :to="{ name: 'task-list', params: { id: application.exerciseId } }"
               >
                 Continue with application
+              </RouterLink>
+              <RouterLink
+                v-else
+                class="govuk-link"
+                :to="{ name: 'review', params: { id: application.exerciseId } }"
+              >
+                View sent application
               </RouterLink>
             </p>
           </div>

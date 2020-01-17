@@ -2,7 +2,8 @@
   <div class="govuk-grid-row">
     <form @submit.prevent="save">
       <div class="govuk-grid-column-full">
-        <div class="govuk-!-margin-top-9">
+        <BackLink class="govuk-!-margin-top-0" />
+        <div class="govuk-!-margin-top-1">
           <h1 
             class="govuk-heading-xl"
             style="display:inline-block;"
@@ -19,7 +20,7 @@
           </a>
         </div>
 
-        <h1> {{ exercise.name }} </h1>
+        <h1> {{ vacancy.name }} </h1>
 
         <div class="govuk-!-margin-top-9">
           <h2
@@ -29,6 +30,7 @@
             Personal details
           </h2>
           <router-link
+            v-if="isDraftApplication"
             class="govuk-link govuk-body-m change-link"
             style="display:inline-block;"
             :to="{name: 'apply-personal-details'}"
@@ -95,6 +97,7 @@
               Character information
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'apply-character-information'}"
@@ -142,9 +145,9 @@
                 Have any endorsements on your licence, or received any motoring fixed-penalty notices
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.motoringOffencesAndSixPlusPoints) }}:
+                {{ booleanAmender(application.motoringOffencesAndSixPlusPoints) }}
                 <p
-                  v-if="detailsDetector(application.motoringOffencesAndSixPlusPoints)"
+                  v-if="detailsDetector(application.motoringOffencesAndSixPlusPointsDetails)"
                   class="govuk-body"
                 >
                   Details: {{ application.motoringOffencesAndSixPlusPointsDetails }}
@@ -166,7 +169,7 @@
                 Filed late tax returns or been fined my HMRC
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.financialDifficulties) }}:
+                {{ booleanAmender(application.financialDifficulties) }}
                 <p
                   v-if="detailsDetector(application.financialDifficultiesDetails)"
                   class="govuk-body"
@@ -181,7 +184,7 @@
                 Been subject to professional negligence, wrongful dismissal, discrimination or harassment proceedings
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.conductNegligenceInvestigation) }}:
+                {{ booleanAmender(application.conductNegligenceInvestigation) }}
                 <p
                   v-if="detailsDetector(application.conductNegligenceInvestigationDetails)"
                   class="govuk-body"
@@ -205,7 +208,7 @@
                 Have any other issues that you think we should know about when considering your character
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.otherCharacterIssues) }}:
+                {{ booleanAmender(application.otherCharacterIssues) }}
                 <p
                   v-if="detailsDetector(application.otherCharacterIssuesDetails)"
                   class="govuk-body"
@@ -224,6 +227,7 @@
               Equality and diversity information
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'equality-and-diversity-survey'}"
@@ -238,7 +242,7 @@
                 Ethnic group
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.ethnicGroup }}
+                {{ application.ethnicGroup | lookup }}
               </dd>
             </div>
 
@@ -247,7 +251,7 @@
                 Religion or faith are you
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.religionFaith }}
+                {{ application.religionFaith | lookup }}
                 <p
                   v-if="detailsDetector(application.otherReligionDetails)"
                   class="govuk-body"
@@ -262,7 +266,7 @@
                 Gender
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.gender }}
+                {{ application.gender | lookup }}
               </dd>
             </div>
 
@@ -289,7 +293,7 @@
                 Sexual orientation
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.sexualOrientation }}
+                {{ application.sexualOrientation | lookup }}
               </dd>
             </div>
 
@@ -313,7 +317,7 @@
                 Attended state or fee-paying school
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.stateOrFeeSchool }}
+                {{ application.stateOrFeeSchool | lookup }}
               </dd>
             </div>
 
@@ -346,7 +350,7 @@
                   v-for="item in application.professionalBackground"
                   :key="item.name"
                 >
-                  {{ item }}
+                  {{ item | lookup }}
                 </li>
               </dd>
             </div>
@@ -362,7 +366,7 @@
                   v-for="item in application.currentLegalRole"
                   :key="item.name"
                 >
-                  {{ item }}
+                  {{ item | lookup }}
                 </li>
               </dd>
             </div>
@@ -387,6 +391,7 @@
               Qualifications
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'relevant-qualifications'}"
@@ -447,6 +452,7 @@
               Memberships
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'relevant-qualifications'}"
@@ -477,6 +483,7 @@
               Post-qualification experience
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'post-qualification-work-experience'}"
@@ -550,6 +557,7 @@
               Independent assessors
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'assessors-details'}"
@@ -610,6 +618,7 @@
               Self-assessment competencies
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'self-assessment-competencies'}"
@@ -643,16 +652,23 @@
               class="govuk-heading-l"
               style="display:inline-block;"
             >
-              statement of suitability
+              Statement of suitability
             </h2>
             <router-link
+              v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
-              :to="{name: ''}"
+              :to="{name: 'statement-of-suitability'}"
             >
               Change
             </router-link>
 
+            <p class="govuk-body govuk-!-margin-bottom-8">
+              t.b.c
+            </p>
+
+            <!-- 
+              @todo: this needs sorting once the upload changes are done
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
               <div class="govuk-summary-list__row">
                 <dd class="govuk-summary-list__value">
@@ -674,11 +690,16 @@
                   </a>
                 </dd>
               </div>
-            </dl>
+            </dl> 
+            -->
           </div>
         </div><!-- END download-as-pdf-div -->
 
-        <button class="govuk-button">
+        <button
+          v-if="isDraftApplication"
+          :disabled="!canApply"
+          class="govuk-button"
+        >
           Send application
         </button>
       </div>
@@ -687,14 +708,18 @@
 </template>
 
 <script>
+import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
 //import html2canvas from 'html2canvas';
 
 export default {
+  components: {
+    BackLink,
+  },
   computed: {
-    exercise () {
-      return this.$store.state.exercise.record;
-    },
+    vacancy () {
+      return this.$store.state.vacancy.record;
+    },   
     application () {
       return this.$store.state.application.record;
     },
@@ -702,16 +727,73 @@ export default {
       return this.$store.state.candidate.record;
     },
     isNonLegal () {
-      return this.exercise.typeOfExercise === 'non-legal';
+      return this.vacancy.typeOfExercise === 'non-legal';
     },
     isLegal () {
-      return this.exercise.typeOfExercise === 'legal';
+      return this.vacancy.typeOfExercise === 'legal';
     },
     isLeadership () {
-      return this.exercise.typeOfExercise === 'leadership';
+      return this.vacancy.typeOfExercise === 'leadership';
     },
     isSenior () {
-      return this.exercise.typeOfExercise == 'senior';
+      return this.vacancy.typeOfExercise == 'senior';
+    },
+    isVacancyOpen() {
+      return this.$store.getters['vacancy/isOpen'];
+    },
+    isApplicationComplete() {
+      let isComplete = false;
+      if (this.application && this.application.progress) {
+        isComplete = true;
+        if (!this.application.progress.personalDetails) { isComplete = false; }
+        if (!this.application.progress.characterInformation) { isComplete = false; }
+        if (!this.application.progress.equalityAndDiversitySurvey) { isComplete = false; }
+        if (!this.application.progress.assessorsDetails) { isComplete = false; }
+        if (this.vacancy.isSPTWOffered) {
+          if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.welshRequirement) {
+          if (!this.application.progress.welshPosts) { isComplete = false; }
+        }
+        if (this.isLegal) {
+          if (!this.application.progress.relevantQualifications) { isComplete = false; }
+          if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
+          if (!this.application.progress.judicialExperience) { isComplete = false; }
+          if (!this.application.progress.employmentGaps) { isComplete = false; }
+        }
+        if (this.isNonLegal) {
+          if (!this.application.progress.relevantMemberships) { isComplete = false; }
+          if (!this.application.progress.relevantExperience) { isComplete = false; }
+          if (!this.application.progress.employmentGaps) { isComplete = false; }
+        }
+        switch (this.vacancy.assessmentOptions) {
+        case 'self-assessment-with-competencies':
+          if (!this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
+          break;
+        case 'statement-of-suitability-with-competencies':
+          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
+          break;
+        case 'statement-of-suitability-with-skills-and-abilities':
+          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
+          break;
+        case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
+          break;
+        case 'statement-of-eligibility':
+          if (!this.application.progress.statementOfEligibility) { isComplete = false; }
+          break;
+        default:
+        }
+      }
+      return isComplete;
+    },
+    isDraftApplication() {
+      return this.application.status === 'draft';
+    },
+    canApply () {
+      return this.isDraftApplication
+        && this.isVacancyOpen
+        && this.isApplicationComplete;
     },
   },
   methods: {
@@ -723,12 +805,8 @@ export default {
       if (value !== null) {return true;}
     },
     async save() {
-      // change status from 'draft' to 'applied'
-      this.application.status = 'applied';
-      // TODO: set an application reference number here too.
-      await this.$store.dispatch('application/save', this.application);
-      // TODO: fix this so it navigates to the Confirmation page.
-      alert('Thanks for applying.');
+      await this.$store.dispatch('application/submit');
+      this.$router.push({ name: 'confirmation' });
     },
     downloadAsPdf() {
       const pdf = new jsPDF();
