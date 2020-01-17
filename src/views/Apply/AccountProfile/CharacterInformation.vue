@@ -198,7 +198,10 @@
           />
         </RadioGroup>
 
-        <button class="govuk-button">
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
           Save and continue
         </button>
       </div>

@@ -92,7 +92,10 @@
           >
         </div>
 
-        <button class="govuk-button">
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
           Save and continue
         </button>
       </div>
@@ -120,15 +123,17 @@ export default {
       selectionCriteriaAnswers: [],
     };
     const data = this.$store.getters['application/data']();
-    const vacancy = this.$store.state.vacancy.record;
     const application = { ...defaults, ...data };
-    for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-      application.selectionCriteriaAnswers.push({
-        title: vacancy.selectionCriteria[i].title,
-        text: vacancy.selectionCriteria[i].title,
-        answer: null,
-        answerDetail: null,
-      });
+    const vacancy = this.$store.state.vacancy.record;
+    if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
+      for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+        application.selectionCriteriaAnswers.push({
+          title: vacancy.selectionCriteria[i].title,
+          text: vacancy.selectionCriteria[i].title,
+          answer: null,
+          answerDetail: null,
+        });
+      }
     }
     return {
       application: application,

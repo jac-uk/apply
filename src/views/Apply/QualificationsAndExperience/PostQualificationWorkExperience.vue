@@ -12,8 +12,11 @@
           :component="repeatableFields.Experience"
         />
 
-        <button class="govuk-button">
-          Continue
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
+          Save and continue
         </button>
       </div>
     </form>
