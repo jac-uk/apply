@@ -77,8 +77,12 @@
           v-model="application.qualifications"
           :component="repeatableFields.Qualification"
         />
-        <button class="govuk-button">
-          Continue
+
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
+          Save and continue
         </button>
       </div>
     </form>
