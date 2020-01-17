@@ -14,6 +14,7 @@
       <h1 class="govuk-heading-xl">
         Apply for the role
       </h1>
+
       <ol class="govuk-list">
         <li
           v-for="(taskGroup, index) in taskGroups"
@@ -128,6 +129,7 @@ export default {
               { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
               { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
               { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
+              { title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService },
             ],
           });
         }
@@ -138,6 +140,7 @@ export default {
               { title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships },
               { title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience },
               { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
+              { title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService },
             ],
           });
         }
