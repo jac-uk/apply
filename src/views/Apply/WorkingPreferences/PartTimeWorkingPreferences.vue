@@ -31,6 +31,7 @@
               id="part-time-working-preference-details"
               v-model="application.partTimeWorkingPreferencesDetails"
               label="With reference to the working patterns for this role, provide details of those you want to work."
+              required
             />
           </RadioItem>
           <RadioItem
@@ -70,6 +71,7 @@ export default {
   data(){
     const defaults = {
       interestedInPartTime: null,
+      partTimeWorkingPreferencesDetails: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
