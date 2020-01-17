@@ -35,7 +35,6 @@ import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import AssessorsDetails from '@/views/Apply/Assessments/AssessorsDetails';
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
-import Review from '@/views/Apply/FinalCheck/Review';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
@@ -46,7 +45,8 @@ import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTim
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
-import Confirmation from '@/views/Apply/Confirmation';
+import Review from '@/views/Apply/FinalCheck/Review';
+import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
 Vue.use(Router);
 
