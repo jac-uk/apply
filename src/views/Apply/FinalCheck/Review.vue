@@ -696,6 +696,7 @@
         </div><!-- END download-as-pdf-div -->
 
         <button
+          v-if="isDraftApplication"
           :disabled="!canApply"
           class="govuk-button"
         >
@@ -805,7 +806,7 @@ export default {
     },
     async save() {
       await this.$store.dispatch('application/submit');
-      // TODO: fix this so it navigates to the Confirmation page.
+      this.$router.push({ name: 'confirmation' });
     },
     downloadAsPdf() {
       const pdf = new jsPDF();
