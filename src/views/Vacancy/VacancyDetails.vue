@@ -5,10 +5,19 @@
         {{ vacancy.name }}
       </h1>
 
-      <p><span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span></p>
-      <p><span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span></p>
-      <p><span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping | lookup }}</span></p>
-      <p class="govuk-!-margin-bottom-8">
+      <p v-if="vacancy.immediateStart">
+        <span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span>
+      </p>
+      <p v-if="vacancy.location">
+        <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
+      </p>
+      <p v-if="vacancy.salaryGrouping">
+        <span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping | lookup }}</span>
+      </p>
+      <p
+        v-if="vacancy.exerciseMailbox"
+        class="govuk-!-margin-bottom-8"
+      >
         <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
         <a 
           :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
@@ -75,6 +84,7 @@
       </p> -->
 
       <RouterLink
+        v-if="isVacancyOpen"
         class="govuk-button"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
@@ -142,7 +152,10 @@ export default {
   },
   computed: {
     vacancy () {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
+    },
+    isVacancyOpen() {
+      return this.$store.getters['vacancy/isOpen'];
     },
     timeline() {
       let timeline = exerciseTimeline(this.vacancy);

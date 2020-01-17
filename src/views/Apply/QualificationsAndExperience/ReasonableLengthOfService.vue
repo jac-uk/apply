@@ -4,7 +4,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Part-time working preferences
+          Reasonable length of service
         </h1>
 
         <ErrorSummary
@@ -14,14 +14,12 @@
         />
 
         <p class="govuk-body-l">
-          Part-time working is available for this role.
+          Can you work for at least {{ vacancy.reasonableLengthService }} years before reaching the retirement age of {{ vacancy.retirementAge }}?
         </p>
 
         <RadioGroup
-          id="part-time-working-preferences"
-          v-model="application.interestedInPartTime"
-          required
-          label="Are you interested in part-time working?"
+          id="can-give-reasonable-los"
+          v-model="application.canGiveReasonableLOS"
         >
           <RadioItem
             :value="true"
@@ -30,14 +28,18 @@
           <RadioItem
             :value="false"
             label="No"
-          />
+          >
+            <TextareaInput
+              id="cant-give-reasonable-los-details"
+              v-model="application.cantGiveReasonableLOSDetails"
+              label="You can set out here why you think you should still be considered for this role.
+              The JAC will consider it when assessing your eligibility for this role."
+            />
+          </RadioItem>
         </RadioGroup>
 
-        <button
-          :disabled="application.status != 'draft'"
-          class="govuk-button"
-        >
-          Save and continue
+        <button class="govuk-button">
+          Continue
         </button>
       </div>
     </form>
@@ -49,6 +51,7 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -56,12 +59,14 @@ export default {
     ErrorSummary,
     RadioGroup,
     RadioItem,
+    TextareaInput,
     BackLink,
   },
   extends: Form,
   data(){
-    const defaults = {
-      interestedInPartTime: null,
+    const defaults =  {
+      canGiveReasonableLOS: null,
+      cantGiveReasonableLOSDetails: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -69,15 +74,21 @@ export default {
       application: application,
     };
   },
+  computed: {
+    vacancy() {
+      return this.$store.state.exercise.record;
+    },
+  },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.partTimeWorkingPreferences = true;
+        this.application.progress.employmentGaps = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
       }
     },
   },
+
 };
 </script>

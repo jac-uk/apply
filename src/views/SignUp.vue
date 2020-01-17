@@ -8,7 +8,7 @@
           </h1>
 
           <p class="govuk-body-l">
-            Or 
+            Or
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
@@ -16,7 +16,18 @@
             >
               sign in
             </RouterLink>
-            if you already have an account
+            if you already have an account.
+          </p>
+
+          <p class="govuk-body">
+            Find out more about how we
+            <a
+              class="govuk-link"
+              href="https://www.judicialappointments.gov.uk/accessing-your-information"
+              target="_blank"
+            >
+              process your data.
+            </a>
           </p>
 
           <div
@@ -85,7 +96,7 @@
             Continue
           </button>
         </div>
-      </form>       
+      </form>
     </div>
   </div>
 </template>
@@ -108,7 +119,7 @@ export default {
   },
   computed: {
     exerciseId () {
-      return this.$store.state.exercise.record && this.$store.state.exercise.record.id;
+      return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
   },
   methods: {
@@ -135,7 +146,7 @@ export default {
           .catch((error) => {
             this.errors.push({ ref: 'email', message: error.message });
           });
-      }  
+      }
     },
   },
 };

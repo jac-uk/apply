@@ -43,7 +43,10 @@
           >
         </div>
 
-        <button class="govuk-button">
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
           Save and continue
         </button>
       </div>
@@ -73,7 +76,7 @@ export default {
       return this.$store.state.auth.currentUser.uid;
     },
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
     downloadNameGenerator() {
       let outcome = null;

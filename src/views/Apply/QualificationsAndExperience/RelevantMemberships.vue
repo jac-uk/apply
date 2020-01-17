@@ -200,8 +200,11 @@
           </CheckboxItem>
         </CheckboxGroup>
 
-        <button class="govuk-button">
-          Continue
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button"
+        >
+          Save and continue
         </button>
       </div>
     </form>
@@ -272,7 +275,7 @@ export default {
   },
   computed: {
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
   },
   methods: {

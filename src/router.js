@@ -35,18 +35,19 @@ import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import AssessorsDetails from '@/views/Apply/Assessments/AssessorsDetails';
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
-import Review from '@/views/Apply/FinalCheck/Review';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications';
 import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships';
 import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience';
 import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
+import ReasonableLengthOfService from '@/views/Apply/QualificationsAndExperience/ReasonableLengthOfService';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
-import Confirmation from '@/views/Apply/Confirmation';
+import Review from '@/views/Apply/FinalCheck/Review';
+import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
 Vue.use(Router);
 
@@ -273,6 +274,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Employment gaps',
+          },
+        },
+        {
+          path: 'reasonable-length-of-service',
+          component: ReasonableLengthOfService,
+          name: 'reasonable-length-of-service',
+          meta: {
+            requiresAuth: true,
+            title: 'Reasonable length of service',
           },
         },
         {
