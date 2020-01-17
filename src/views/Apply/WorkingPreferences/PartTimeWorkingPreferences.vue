@@ -26,7 +26,13 @@
           <RadioItem
             :value="true"
             label="Yes"
-          />
+          >
+            <TextareaInput
+              id="part-time-working-preference-details"
+              v-model="application.partTimeWorkingPreferencesDetails"
+              label="With reference to the working patterns for this role, provide details of those you want to work."
+            />
+          </RadioItem>
           <RadioItem
             :value="false"
             label="No"
@@ -49,6 +55,7 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
+import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -56,6 +63,7 @@ export default {
     ErrorSummary,
     RadioGroup,
     RadioItem,
+    TextareaInput,
     BackLink,
   },
   extends: Form,
