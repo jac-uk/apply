@@ -20,7 +20,7 @@ export default {
         if (!snapshotRef.empty) {
           return dispatch('bindRef', collection.doc(snapshotRef.docs[0].id)); // @todo refine this!
         } else {
-          // do nothing
+          return dispatch('unbind');
         }
       }
     },
