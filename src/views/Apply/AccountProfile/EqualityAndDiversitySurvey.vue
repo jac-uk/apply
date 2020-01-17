@@ -19,8 +19,15 @@
           data in any given area, please select ‘Prefer not to say’ for the relevant question.
         </p>
         <p class="govuk-body-l">
-          The JAC will use the information you provide in two ways: where the Equal
-          Merit approach applies, and to monitor the selection process.
+          The JAC will use the information you provide in two ways: where the
+          <a
+            class="govuk-link"
+            href="https://www.judicialappointments.gov.uk/equal-merit"
+            target="_blank"
+          >
+            Equal Merit approach
+          </a>
+          applies, and to monitor the selection process.
           Other than for the purposes of Equal Merit, your diversity
           monitoring information will not play any part in the selection process.
         </p>
