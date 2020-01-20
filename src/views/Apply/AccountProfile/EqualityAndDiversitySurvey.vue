@@ -39,7 +39,7 @@
 
         <RadioGroup
           id="share-data"
-          v-model="application.shareData"
+          v-model="equalityAndDiversitySurvey.shareData"
           required
           label="You can opt out if you do not wish to share your data with
           MoJ, HMCTS, and Judicial Office."
@@ -56,7 +56,7 @@
 
         <CheckboxGroup
           id="professional-background"
-          v-model="application.professionalBackground"
+          v-model="equalityAndDiversitySurvey.professionalBackground"
           required
           label="What is your professional background?"
           hint="Select all that apply."
@@ -79,7 +79,7 @@
           >
             <TextField
               id="other-professional-background-details"
-              v-model="application.otherProfessionalBackgroundDetails"
+              v-model="equalityAndDiversitySurvey.otherProfessionalBackgroundDetails"
               label="Other role"
               class="govuk-!-width-two-thirds"
             />
@@ -92,7 +92,7 @@
 
         <CheckboxGroup
           id="current-legal-role"
-          v-model="application.currentLegalRole"
+          v-model="equalityAndDiversitySurvey.currentLegalRole"
           required
           label="What is your current legal role?"
           hint="Select all that apply."
@@ -127,7 +127,7 @@
           >
             <TextField
               id="other-fee-paid-judicial-office-holder-details"
-              v-model="application.otherCurrentFeePaidJudicialOfficeHolderDetails"
+              v-model="equalityAndDiversitySurvey.otherCurrentFeePaidJudicialOfficeHolderDetails"
               label="Other fee-paid Judicial Office holder role"
               class="govuk-!-width-two-thirds"
             />
@@ -146,7 +146,7 @@
           >
             <TextField
               id="other-salaried-judicial-office-holder-details"
-              v-model="application.otherCurrentSalariedJudicialOfficeHolderDetails"
+              v-model="equalityAndDiversitySurvey.otherCurrentSalariedJudicialOfficeHolderDetails"
               label="Other salaried Judicial Office holder role"
               class="govuk-!-width-two-thirds"
             />
@@ -157,7 +157,7 @@
           >
             <TextField
               id="other-current-legal-role-details"
-              v-model="application.otherCurrentLegalRoleDetails"
+              v-model="equalityAndDiversitySurvey.otherCurrentLegalRoleDetails"
               label="Current legal role"
               class="govuk-!-width-two-thirds"
             />
@@ -170,7 +170,7 @@
 
         <RadioGroup
           id="fee-paid-judicial-role"
-          v-model="application.feePaidJudicialRole"
+          v-model="equalityAndDiversitySurvey.feePaidJudicialRole"
           required
           label="Do you hold, or have you ever held in the past, a fee-paid judicial role?"
         >
@@ -192,7 +192,7 @@
           >
             <TextField
               id="other-fee-paid-judicial-office-details"
-              v-model="application.otherFeePaidJudicialRoleDetails"
+              v-model="equalityAndDiversitySurvey.otherFeePaidJudicialRoleDetails"
               label="Other fee-paid Judicial Office role"
               class="govuk-!-width-two-thirds"
             />
@@ -205,7 +205,7 @@
 
         <RadioGroup
           id="state-or-fee-school"
-          v-model="application.stateOrFeeSchool"
+          v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
           required
           label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
         >
@@ -237,7 +237,7 @@
 
         <RadioGroup
           id="oxbridge-universities"
-          v-model="application.oxbridgeUni"
+          v-model="equalityAndDiversitySurvey.oxbridgeUni"
           required
           label="Did you go to either Oxford or Cambridge universities?"
         >
@@ -257,7 +257,7 @@
 
         <RadioGroup
           id="first-generation-student"
-          v-model="application.firstGenerationStudent"
+          v-model="equalityAndDiversitySurvey.firstGenerationStudent"
           required
           label="Were you the first generation in your family to go to university?"
         >
@@ -281,7 +281,7 @@
 
         <RadioGroup
           id="ethnic-group"
-          v-model="application.ethnicGroup"
+          v-model="equalityAndDiversitySurvey.ethnicGroup"
           required
           label="What's your ethnic group?"
         >
@@ -311,7 +311,7 @@
           >
             <TextField
               id="other-asian-details"
-              v-model="application.otherEthnicGroupAsianDetails"
+              v-model="equalityAndDiversitySurvey.otherEthnicGroupAsianDetails"
               label="Other Asian background"
               class="govuk-!-width-two-thirds"
             />
@@ -335,7 +335,7 @@
           >
             <TextField
               id="other-black-details"
-              v-model="application.otherEthnicGroupBlackDetails"
+              v-model="equalityAndDiversitySurvey.otherEthnicGroupBlackDetails"
               label="Other Black/African/Caribbean background"
               class="govuk-!-width-two-thirds"
             />
@@ -363,7 +363,7 @@
           >
             <TextField
               id="other-white-details"
-              v-model="application.otherEthnicGroupWhiteDetails"
+              v-model="equalityAndDiversitySurvey.otherEthnicGroupWhiteDetails"
               label="Other White background"
               class="govuk-!-width-two-thirds"
             />
@@ -391,7 +391,7 @@
           >
             <TextField
               id="other-mixed-details"
-              v-model="application.otherEthnicGroupMixedDetails"
+              v-model="equalityAndDiversitySurvey.otherEthnicGroupMixedDetails"
               label="Other mixed or multiple ethnic backgrounds"
               class="govuk-!-width-two-thirds"
             />
@@ -407,7 +407,7 @@
           >
             <TextField
               id="other-ethnic-details"
-              v-model="application.otherEthnicGroupDetails"
+              v-model="equalityAndDiversitySurvey.otherEthnicGroupDetails"
               label="Other ethnic background"
               class="govuk-!-width-two-thirds"
             />
@@ -420,7 +420,7 @@
 
         <RadioGroup
           id="gender"
-          v-model="application.gender"
+          v-model="equalityAndDiversitySurvey.gender"
           required
           label="What gender are you?"
         >
@@ -442,7 +442,7 @@
           >
             <TextField
               id="other-gender-details"
-              v-model="application.otherGenderDetails"
+              v-model="equalityAndDiversitySurvey.otherGenderDetails"
               label="Other gender"
               class="govuk-!-width-two-thirds"
             />
@@ -455,7 +455,7 @@
 
         <RadioGroup
           id="changed-gender"
-          v-model="application.changedGender"
+          v-model="equalityAndDiversitySurvey.changedGender"
           required
           label="Is your gender identity the same as the sex you were assigned at birth?"
           hint="This is about gender re-assignment."
@@ -476,7 +476,7 @@
 
         <RadioGroup
           id="sexual-orientation"
-          v-model="application.sexualOrientation"
+          v-model="equalityAndDiversitySurvey.sexualOrientation"
           required
           label="How would you describe your sexual orientation?"
         >
@@ -502,7 +502,7 @@
           >
             <TextField
               id="other-sexual-orientation-details"
-              v-model="application.otherSexualOrientationDetails"
+              v-model="equalityAndDiversitySurvey.otherSexualOrientationDetails"
               label="Other sexual orientation"
               class="govuk-!-width-two-thirds"
             />
@@ -515,7 +515,7 @@
 
         <RadioGroup
           id="disability"
-          v-model="application.disability"
+          v-model="equalityAndDiversitySurvey.disability"
           required
           label="Do you have a disability?"
         >
@@ -536,7 +536,7 @@
           >
             <TextareaInput
               id="disability-details"
-              v-model="application.disabilityDetails"
+              v-model="equalityAndDiversitySurvey.disabilityDetails"
               label="Add disability details"
             />
           </RadioItem>
@@ -552,7 +552,7 @@
 
         <RadioGroup
           id="religion-faith"
-          v-model="application.religionFaith"
+          v-model="equalityAndDiversitySurvey.religionFaith"
           required
           label="What religion or belief do you have?"
         >
@@ -594,7 +594,7 @@
           >
             <TextField
               id="other-religion-details"
-              v-model="application.otherReligionDetails"
+              v-model="equalityAndDiversitySurvey.otherReligionDetails"
               label="Religion or belief"
               class="govuk-!-width-two-thirds"
             />
@@ -607,7 +607,7 @@
 
         <RadioGroup
           id="atttended-outreach-events"
-          v-model="application.attendedOutreachEvents"
+          v-model="equalityAndDiversitySurvey.attendedOutreachEvents"
           required
           label="Have you attended an outreach event on JAC selection exercises?"
         >
@@ -627,7 +627,7 @@
 
         <RadioGroup
           id="participated-in-judicial-workshadowing-scheme"
-          v-model="application.participatedInJudicialWorkshadowingScheme"
+          v-model="equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme"
           required
           label="Did you participate in a Judicial Workshadowing Scheme?"
         >
@@ -647,7 +647,7 @@
 
         <RadioGroup
           id="has-taken-paje"
-          v-model="application.hasTakenPAJE"
+          v-model="equalityAndDiversitySurvey.hasTakenPAJE"
           required
           label="Have you taken part in the Pre-application judicial education (PAJE)?"
         >
@@ -743,9 +743,11 @@ export default {
       participatedInJudicialWorkshadowingScheme: null,
       hasTakenPAJE: null,
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['candidate/equalityAndDiversitySurvey']();
+    const equalityAndDiversitySurvey = { ...defaults, ...data };
+    const application = this.$store.getters['application/data']();
     return {
+      equalityAndDiversitySurvey: equalityAndDiversitySurvey,
       application: application,
     };
   },
@@ -754,7 +756,9 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.application.progress.equalityAndDiversitySurvey = true;
+        this.application.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
         await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
         this.$router.push({ name: 'task-list' });
       }
     },

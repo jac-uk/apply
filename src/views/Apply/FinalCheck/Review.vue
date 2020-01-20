@@ -45,7 +45,7 @@
               Full Name
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ candidate.fullName }}
+              {{ application.personalDetails.fullName }}
             </dd>
           </div>
 
@@ -54,7 +54,7 @@
               Email address
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ candidate.email }}
+              {{ application.personalDetails.email }}
             </dd>
           </div>
 
@@ -63,8 +63,8 @@
               Date of birth
             </dt>
             <dd class="govuk-summary-list__value">
-              <p v-if="candidate.dateOfBirth">
-                {{ candidate.dateOfBirth.toLocaleDateString() }}
+              <p v-if="application.personalDetails.dateOfBirth">
+                {{ application.personalDetails.dateOfBirth.toLocaleDateString() }}
               </p>
             </dd>
           </div>
@@ -74,7 +74,7 @@
               NI Number
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ candidate.nationalInsuranceNumber }}
+              {{ application.personalDetails.nationalInsuranceNumber }}
             </dd>
           </div>
 
@@ -112,12 +112,12 @@
                 Been cautioned or convicted of a criminal offence
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.criminalConvictionCaution) }}
+                {{ booleanAmender(application.characterInformation.criminalConvictionCaution) }}
                 <p
-                  v-if="detailsDetector(application.criminalConvictionCautionDetails)"
+                  v-if="detailsDetector(application.characterInformation.criminalConvictionCautionDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.criminalConvictionCautionDetails }}
+                  Details: {{ application.characterInformation.criminalConvictionCautionDetails }}
                 </p>
               </dd>
             </div>
@@ -145,12 +145,12 @@
                 Have any endorsements on your licence, or received any motoring fixed-penalty notices
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.motoringOffencesAndSixPlusPoints) }}
+                {{ booleanAmender(application.characterInformation.motoringOffencesAndSixPlusPoints) }}
                 <p
-                  v-if="detailsDetector(application.motoringOffencesAndSixPlusPointsDetails)"
+                  v-if="detailsDetector(application.characterInformation.motoringOffencesAndSixPlusPointsDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.motoringOffencesAndSixPlusPointsDetails }}
+                  Details: {{ application.characterInformation.motoringOffencesAndSixPlusPointsDetails }}
                 </p>
               </dd>
             </div>
@@ -160,7 +160,7 @@
                 Been declared bankrupt
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.declaredBankrupt) }}
+                {{ booleanAmender(application.characterInformation.declaredBankrupt) }}
               </dd>
             </div>
 
@@ -169,12 +169,12 @@
                 Filed late tax returns or been fined my HMRC
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.financialDifficulties) }}
+                {{ booleanAmender(application.characterInformation.financialDifficulties) }}
                 <p
-                  v-if="detailsDetector(application.financialDifficultiesDetails)"
+                  v-if="detailsDetector(application.characterInformation.financialDifficultiesDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.financialDifficultiesDetails }}
+                  Details: {{ application.characterInformation.financialDifficultiesDetails }}
                 </p>
               </dd>
             </div>
@@ -184,12 +184,12 @@
                 Been subject to professional negligence, wrongful dismissal, discrimination or harassment proceedings
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.conductNegligenceInvestigation) }}
+                {{ booleanAmender(application.characterInformation.conductNegligenceInvestigation) }}
                 <p
-                  v-if="detailsDetector(application.conductNegligenceInvestigationDetails)"
+                  v-if="detailsDetector(application.characterInformation.conductNegligenceInvestigationDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.conductNegligenceInvestigationDetails }}
+                  Details: {{ application.characterInformation.conductNegligenceInvestigationDetails }}
                 </p>
               </dd>
             </div>
@@ -208,12 +208,12 @@
                 Have any other issues that you think we should know about when considering your character
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.otherCharacterIssues) }}
+                {{ booleanAmender(application.characterInformation.otherCharacterIssues) }}
                 <p
-                  v-if="detailsDetector(application.otherCharacterIssuesDetails)"
+                  v-if="detailsDetector(application.characterInformation.otherCharacterIssuesDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.otherCharacterIssuesDetails }}
+                  Details: {{ application.characterInformation.otherCharacterIssuesDetails }}
                 </p>
               </dd>
             </div>
@@ -242,7 +242,7 @@
                 Ethnic group
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.ethnicGroup | lookup }}
+                {{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}
               </dd>
             </div>
 
@@ -251,12 +251,12 @@
                 Religion or faith are you
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.religionFaith | lookup }}
+                {{ application.equalityAndDiversitySurvey.religionFaith | lookup }}
                 <p
-                  v-if="detailsDetector(application.otherReligionDetails)"
+                  v-if="detailsDetector(application.equalityAndDiversitySurvey.otherReligionDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.otherReligionDetails }}
+                  Details: {{ application.equalityAndDiversitySurvey.otherReligionDetails }}
                 </p>
               </dd>
             </div>
@@ -266,7 +266,7 @@
                 Gender
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.gender | lookup }}
+                {{ application.equalityAndDiversitySurvey.gender | lookup }}
               </dd>
             </div>
 
@@ -275,7 +275,7 @@
                 Changed gender
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.changedGender) }}
+                {{ booleanAmender(application.equalityAndDiversitySurvey.changedGender) }}
               </dd>
             </div>
 
@@ -293,7 +293,7 @@
                 Sexual orientation
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.sexualOrientation | lookup }}
+                {{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}
               </dd>
             </div>
 
@@ -304,10 +304,10 @@
               <dd class="govuk-summary-list__value">
                 {{ booleanAmender(application.disability) }}
                 <p
-                  v-if="detailsDetector(application.disabilityDetails)"
+                  v-if="detailsDetector(application.equalityAndDiversitySurvey.disabilityDetails)"
                   class="govuk-body"
                 >
-                  Details: {{ application.disabilityDetails }}
+                  Details: {{ application.equalityAndDiversitySurvey.disabilityDetails }}
                 </p>
               </dd>
             </div>
@@ -317,7 +317,7 @@
                 Attended state or fee-paying school
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.stateOrFeeSchool | lookup }}
+                {{ application.equalityAndDiversitySurvey.stateOrFeeSchool | lookup }}
               </dd>
             </div>
 
@@ -326,7 +326,7 @@
                 Attended Oxbridge universities
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.oxbridgeUni) }}
+                {{ booleanAmender(application.equalityAndDiversitySurvey.oxbridgeUni) }}
               </dd>
             </div>
 
@@ -335,7 +335,7 @@
                 First generation to go to university
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ booleanAmender(application.firstGenerationStudent) }}
+                {{ booleanAmender(application.equalityAndDiversitySurvey.firstGenerationStudent) }}
               </dd>
             </div>
 
@@ -347,7 +347,7 @@
                 class="govuk-summary-list__value"
               >
                 <li
-                  v-for="item in application.professionalBackground"
+                  v-for="item in application.equalityAndDiversitySurvey.professionalBackground"
                   :key="item.name"
                 >
                   {{ item | lookup }}
@@ -363,7 +363,7 @@
                 class="govuk-summary-list__value"
               >
                 <li
-                  v-for="item in application.currentLegalRole"
+                  v-for="item in application.equalityAndDiversitySurvey.currentLegalRole"
                   :key="item.name"
                 >
                   {{ item | lookup }}
@@ -376,7 +376,7 @@
                 Fee-paid judicial role experience
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.feePaidJudicialRole }}
+                {{ application.equalityAndDiversitySurvey.feePaidJudicialRole }}
               </dd>
             </div>
           </dl>
@@ -722,9 +722,6 @@ export default {
     },   
     application () {
       return this.$store.state.application.record;
-    },
-    candidate () {
-      return this.$store.state.candidate.record;
     },
     isNonLegal () {
       return this.vacancy.typeOfExercise === 'non-legal';

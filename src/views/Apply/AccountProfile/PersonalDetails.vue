@@ -15,7 +15,7 @@
 
         <TextField
           id="fullName"
-          v-model="candidate.fullName"
+          v-model="personalDetails.fullName"
           label="Full name"
           hint="You do not need to include any titles."
           required
@@ -23,7 +23,7 @@
 
         <TextField
           id="email"
-          v-model="candidate.email"
+          v-model="personalDetails.email"
           label="Email address"
           type="email"
           required
@@ -31,7 +31,7 @@
 
         <DateInput
           id="date-of-birth"
-          v-model="candidate.dateOfBirth"
+          v-model="personalDetails.dateOfBirth"
           required
           label="Date of birth"
           hint="For example, 27 3 1964"
@@ -39,7 +39,7 @@
 
         <TextField
           id="national-insurance-number"
-          v-model="candidate.nationalInsuranceNumber"
+          v-model="personalDetails.nationalInsuranceNumber"
           label="National Insurance number"
           hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
           class="govuk-!-width-one-half"
@@ -48,7 +48,7 @@
 
         <RadioGroup
           id="citizenship"
-          v-model="candidate.citizenship"
+          v-model="personalDetails.citizenship"
           required
           label="Citizenship"
           hint="Select one. If you have dual citizenship, please select the option most appropriate to you."
@@ -73,7 +73,7 @@
 
         <RadioGroup
           id="reasonable-adjustments"
-          v-model="candidate.reasonableAdjustments"
+          v-model="personalDetails.reasonableAdjustments"
           required
           label="Reasonable Adjustments"
         >
@@ -95,7 +95,7 @@
           >
             <TextareaInput
               id="reasonable-adjustments-details"
-              v-model="candidate.reasonableAdjustmentsDetails"
+              v-model="personalDetails.reasonableAdjustmentsDetails"
               label="Give details here"
             />
           </RadioItem>
@@ -147,11 +147,11 @@ export default {
       reasonableAdjustments: null,
       reasonableAdjustmentsDetails: null,
     };
-    const data = this.$store.getters['candidate/data']();
-    const candidate = { ...defaults, ...data };
+    const data = this.$store.getters['candidate/personalDetails']();
+    const personalDetails = { ...defaults, ...data };
     const application = this.$store.getters['application/data']();
     return {
-      candidate: candidate,
+      personalDetails: personalDetails,
       application: application,
     };
   },
@@ -160,8 +160,9 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.application.progress.personalDetails = true;
+        this.application.personalDetails = this.personalDetails;
         await this.$store.dispatch('application/save', this.application);
-        await this.$store.dispatch('candidate/save', this.candidate);
+        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'task-list' });
       }
     },
