@@ -5,13 +5,13 @@ import store from '@/store';
 import '@/filters';
 import { auth } from '@/firebase';
 import VueAnalytics from 'vue-analytics';
-import * as Sentry from '@sentry/browser';
-import * as Integrations from '@sentry/integrations';
-
-Sentry.init({
-  dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
-  integrations: [new Integrations.Vue({ Vue, attachProps: true })],
-});
+// import * as Sentry from '@sentry/browser';
+// import * as Integrations from '@sentry/integrations';
+//
+// Sentry.init({
+//   dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
+//   integrations: [new Integrations.Vue({ Vue, attachProps: true })],
+// });
 
 Vue.use(VueAnalytics, {
   id: 'UA-153516887-1',
