@@ -20,7 +20,7 @@
         We've sent a confirmation email to:
       </p>
       <p class="govuk-body govuk-!-font-weight-bold">
-        {{ candidate.email }}
+        {{ application.personalDetails.email }}
       </p>
 
       <h2 class="govuk-heading-m">
@@ -33,7 +33,7 @@
         We'll email you in {{ vacancy.shortlistingOutcomeDate | formatDate('month') }} to let you know either way.
       </p>
       <p class="govuk-body">
-        Now you can view your application and apply for other vacancies from your 
+        You can view your application and apply for other vacancies from your 
         <RouterLink
           class="govuk-link"
           :to="{ name: 'applications' }"
@@ -53,9 +53,6 @@ export default {
     },   
     application () {
       return this.$store.state.application.record;
-    },
-    candidate () {
-      return this.$store.state.candidate.record;
     },
   },
 };
