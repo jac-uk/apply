@@ -314,7 +314,10 @@
           >Senior Circuit Judge, Resident Judge</a>
         </span>
       </div>
-      <div style="color: #1d70b8; font-size: 24px" :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }">
+      <div
+        style="color: #1d70b8; font-size: 24px"
+        :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
+      >
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
           Future applications
         </h1>
@@ -323,53 +326,57 @@
           style="color: #1d70b8; font-size: 24px"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/181%20%26amp%3B%20182"
-          target="_blank"
-        >Chancery Master and Deputy Chancery Masters</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/181%20%26amp%3B%20182"
+            target="_blank"
+          >Chancery Master and Deputy Chancery Masters</a>
         </span>
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/156"
-          target="_blank"
-        >Fee-paid Disability Qualified Tribunal Member of the First-tier Tribunal Social Entitlement Chamber</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/156"
+            target="_blank"
+          >Fee-paid Disability Qualified Tribunal Member of the First-tier Tribunal Social Entitlement Chamber</a>
         </span>
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/152"
-          target="_blank"
-        >Fee-Paid Specialist Member of the Upper Tribunal assigned to the Administrative Appeals Chamber (Disclosure and Barring jurisdiction) and First-Tier Health, Education and Social Care Chamber (Care Standards jurisdiction)</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/152"
+            target="_blank"
+          >Fee-Paid Specialist Member of the Upper Tribunal assigned to the Administrative Appeals Chamber (Disclosure and Barring jurisdiction) and First-Tier Health, Education and Social Care Chamber (Care Standards jurisdiction)</a>
         </span>
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/159"
-          target="_blank"
-        >Fee Paid Lay Members First-tier Tribunal Health, Education and Social Care (HESC) and Mental Health Review Tribunal for Wales (MHRT)</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/159"
+            target="_blank"
+          >Fee Paid Lay Members First-tier Tribunal Health, Education and Social Care (HESC) and Mental Health Review Tribunal for Wales (MHRT)</a>
         </span>
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/155"
-          target="_blank"
-        >Circuit Judge 2020</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/155"
+            target="_blank"
+          >Circuit Judge 2020</a>
         </span>
-
       </div>
       <hr>
       <div :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }">
@@ -381,7 +388,8 @@
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-          <a style="font-size: 24px"
+          <a
+            style="font-size: 24px"
             class="govuk-link govuk-body"
             href="https://www.judicialappointments.gov.uk/vacancies/184"
             target="_blank"
@@ -392,67 +400,72 @@
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/147"
-          target="_blank"
-        >Judge Advocate General</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/147"
+            target="_blank"
+          >Judge Advocate General</a>
         </span>
 
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/151"
-          target="_blank"
-        >Deputy Chairman of the Agricultural Land Tribunal for Wales</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/151"
+            target="_blank"
+          >Deputy Chairman of the Agricultural Land Tribunal for Wales</a>
         </span>
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/148"
-          target="_blank"
-        >Fee-paid Medical Members, First-tier Tribunal, Social Entitlement Chamber (Social Security and Child Support)</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/148"
+            target="_blank"
+          >Fee-paid Medical Members, First-tier Tribunal, Social Entitlement Chamber (Social Security and Child Support)</a>
         </span>
 
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/150"
-          target="_blank"
-        >Fee-paid Medical Members First-tier Tribunal, Health, Education and Social Care Chamber (Mental Health)</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/150"
+            target="_blank"
+          >Fee-paid Medical Members First-tier Tribunal, Health, Education and Social Care Chamber (Mental Health)</a>
         </span>
 
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/149"
-          target="_blank"
-        >High Court Judge</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/149"
+            target="_blank"
+          >High Court Judge</a>
         </span>
 
         <span
           style="color: #1d70b8;"
           class="govuk-heading-m govuk-!-font-weight-bold"
         >
-        <a style="font-size: 24px"
-          class="govuk-link govuk-body"
-          href="https://www.judicialappointments.gov.uk/vacancies/176"
-          target="_blank"
-        >Senior Circuit Judge, Resident Judge</a>
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/176"
+            target="_blank"
+          >Senior Circuit Judge, Resident Judge</a>
         </span>
-
       </div>
     </div>
   </div>
