@@ -28,7 +28,7 @@
 
         <RadioGroup
           id="declared-bankrupt"
-          v-model="application.declaredBankrupt"
+          v-model="characterInformation.declaredBankrupt"
           required
           label="Have you ever been declared bankrupt?"
         >
@@ -44,7 +44,7 @@
 
         <RadioGroup
           id="financial-difficulties"
-          v-model="application.financialDifficulties"
+          v-model="characterInformation.financialDifficulties"
           required
           label="Have you filed late tax returns, been fined by HMRC or
           had other financial difficulties more than 3 times in the last 5 years?"
@@ -55,7 +55,7 @@
           >
             <TextareaInput
               id="financial-difficulties-details"
-              v-model="application.financialDifficultiesDetails"
+              v-model="characterInformation.financialDifficultiesDetails"
               label="Add details of late filling, fines or other difficulties"
             />
           </RadioItem>
@@ -67,7 +67,7 @@
 
         <RadioGroup
           id="live-conduct-negligence-investigation"
-          v-model="application.conductNegligenceInvestigation"
+          v-model="characterInformation.conductNegligenceInvestigation"
           required
           label="Are you the subject of a live professional conduct or negligence investigation?"
         >
@@ -77,7 +77,7 @@
           >
             <TextareaInput
               id="conduct-negligence-investigation-details"
-              v-model="application.conductNegligenceInvestigationDetails"
+              v-model="characterInformation.conductNegligenceInvestigationDetails"
               label="Add details of conduct or negligence investigations"
             />
           </RadioItem>
@@ -89,7 +89,7 @@
 
         <RadioGroup
           id="drink-drug-mobile-motoring-offence"
-          v-model="application.drinkDrugMobileMotoringOffence"
+          v-model="characterInformation.drinkDrugMobileMotoringOffence"
           required
           label="Have you had a motoring offence involving drink or drug
           driving, or driving while using a mobile in the last 10 years?"
@@ -100,7 +100,7 @@
           >
             <TextareaInput
               id="drink-drug-mobile-motoring-offence-details"
-              v-model="application.drinkDrugMobileMotoringOffenceDetails"
+              v-model="characterInformation.drinkDrugMobileMotoringOffenceDetails"
               label="Add details of driving offences"
             />
           </RadioItem>
@@ -112,7 +112,7 @@
 
         <RadioGroup
           id="disqualified-from-driving"
-          v-model="application.disqualifiedFromDriving"
+          v-model="characterInformation.disqualifiedFromDriving"
           required
           label="Have you been disqualified from driving in the last 5 years?"
         >
@@ -122,7 +122,7 @@
           >
             <TextareaInput
               id="disqualified-from-driving-details"
-              v-model="application.disqualifiedFromDrivingDetails"
+              v-model="characterInformation.disqualifiedFromDrivingDetails"
               label="Add details of disqualification"
             />
           </RadioItem>
@@ -134,7 +134,7 @@
 
         <RadioGroup
           id="motoring-offences-and->6points"
-          v-model="application.motoringOffencesAndSixPlusPoints"
+          v-model="characterInformation.motoringOffencesAndSixPlusPoints"
           required
           label="Do you have any motoring offences and more than 6 points on your licence?"
         >
@@ -144,7 +144,7 @@
           >
             <TextareaInput
               id="motoring-offences-and->6points-details"
-              v-model="application.motoringOffencesAndSixPlusPointsDetails"
+              v-model="characterInformation.motoringOffencesAndSixPlusPointsDetails"
               label="Add details of motoring offences or licence points"
             />
           </RadioItem>
@@ -156,7 +156,7 @@
 
         <RadioGroup
           id="criminal-conviction-causion"
-          v-model="application.criminalConvictionCaution"
+          v-model="characterInformation.criminalConvictionCaution"
           required
           label="Have you had a criminal conviction in the last 10 years or a criminal caution in the last 5 years?"
         >
@@ -166,7 +166,7 @@
           >
             <TextareaInput
               id="criminal-conviction-causion-details"
-              v-model="application.criminalConvictionCautionDetails"
+              v-model="characterInformation.criminalConvictionCautionDetails"
               label="Add details of criminal conviction"
             />
           </RadioItem>
@@ -178,7 +178,7 @@
 
         <RadioGroup
           id="other-character-issues"
-          v-model="application.otherCharacterIssues"
+          v-model="characterInformation.otherCharacterIssues"
           required
           label="Do you have any other issues that you think we should know about when considering your character?"
         >
@@ -188,7 +188,7 @@
           >
             <TextareaInput
               id="other-character-issues-details"
-              v-model="application.otherCharacterIssuesDetails"
+              v-model="characterInformation.otherCharacterIssuesDetails"
               label="Add details of other character issues"
             />
           </RadioItem>
@@ -226,7 +226,7 @@ export default {
     BackLink,
   },
   extends: Form,
-  data(){
+  data() {
     const defaults = {
       declaredBankrupt: null,
       financialDifficulties: null,
@@ -244,9 +244,11 @@ export default {
       otherCharacterIssues: null,
       otherCharacterIssuesDetails: null,
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['candidate/characterInformation']();
+    const characterInformation = { ...defaults, ...data };
+    const application = this.$store.getters['application/data']();
     return {
+      characterInformation: characterInformation,
       application: application,
     };
   },
@@ -255,7 +257,9 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.application.progress.characterInformation = true;
+        this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         this.$router.push({ name: 'task-list' });
       }
     },

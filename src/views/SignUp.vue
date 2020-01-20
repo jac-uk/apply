@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import firebase from '@firebase/app';
 import { auth } from '@/firebase';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
@@ -123,7 +124,7 @@ export default {
     },
   },
   methods: {
-    signUp() {
+    async signUp() {
       let isOk = true;
       this.errors = [];
       if (!this.formData.email) { isOk = false; }
@@ -132,20 +133,22 @@ export default {
       if (!this.formData.dateOfBirth) { isOk = false; }
       if (!this.formData.nationalInsuranceNumber) { isOk = false; }
       if (isOk) {
-        auth().createUserWithEmailAndPassword(this.formData.email, this.formData.password)
-          .then((userCredential) => {
-            const candidate = {
-              fullName: this.formData.fullName,
-              email: this.formData.email,
-              dateOfBirth: this.formData.dateOfBirth,
-              nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
-            };
-            this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-            this.$store.dispatch('candidate/save', candidate);
-          })
-          .catch((error) => {
-            this.errors.push({ ref: 'email', message: error.message });
+        try {
+          const userCredential = await auth().createUserWithEmailAndPassword(this.formData.email, this.formData.password);
+          await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
+          await this.$store.dispatch('candidate/create', {
+            created: firebase.firestore.FieldValue.serverTimestamp(),
           });
+          const personalDetails = {
+            fullName: this.formData.fullName,
+            email: this.formData.email,
+            dateOfBirth: this.formData.dateOfBirth,
+            nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
+          };
+          await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);          
+        } catch (error) {
+          this.errors.push({ ref: 'email', message: error.message });
+        }
       }
     },
   },
