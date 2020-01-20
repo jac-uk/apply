@@ -44,36 +44,44 @@ export default {
         dispatch('bind', ref.id);
       }
     },
-    submit: async ({ state }) => {
+    submit: async ({ state, dispatch }) => {
       if (state.record) {
-        const vacancyMetaRef = firestore.doc(`vacancies/${state.record.exerciseId}/meta/stats`);
-        const vacancyReferenceNumber = state.record.exerciseRef;
-        const applicationRef = firestore.doc(`applications/${state.record.id}`);
-        return firestore.runTransaction((transaction) => {
-          return transaction.get(vacancyMetaRef).then((doc) => {
-            let newApplicationsCount;
-            if (!doc.exists) {
-              newApplicationsCount = 1;
-            } else {
-              newApplicationsCount = doc.data().applicationsCount + 1;
-            }
-            const characters = 'abcdefghijklmnopqrstuvwxyz';
-            let randomCharacters = '';
-            for ( let i = 0, len = 3; i < len; i++ ) {
-              randomCharacters += characters.charAt(Math.floor(Math.random() * characters.length));
-            }
-            const applicationReferenceNumber = vacancyReferenceNumber + '-' + randomCharacters + (10000 + newApplicationsCount).toString().substr(1);
-            transaction.set(vacancyMetaRef, {
-              applicationsCount: newApplicationsCount, 
-            }, { merge: true });
-            transaction.update(applicationRef, {
-              status: 'applied',
-              referenceNumber: applicationReferenceNumber,
-              appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+        if (state.record.referenceNumber) {
+          const data = {
+            status: 'applied',
+            appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+          };
+          dispatch('save', data);
+        } else {
+          const vacancyMetaRef = firestore.doc(`vacancies/${state.record.exerciseId}/meta/stats`);
+          const vacancyReferenceNumber = state.record.exerciseRef;
+          const applicationRef = firestore.doc(`applications/${state.record.id}`);
+          return firestore.runTransaction((transaction) => {
+            return transaction.get(vacancyMetaRef).then((doc) => {
+              let newApplicationsCount;
+              if (!doc.exists) {
+                newApplicationsCount = 1;
+              } else {
+                newApplicationsCount = doc.data().applicationsCount + 1;
+              }
+              const characters = 'abcdefghijklmnopqrstuvwxyz';
+              let randomCharacters = '';
+              for ( let i = 0, len = 3; i < len; i++ ) {
+                randomCharacters += characters.charAt(Math.floor(Math.random() * characters.length));
+              }
+              const applicationReferenceNumber = vacancyReferenceNumber + '-' + randomCharacters + (10000 + newApplicationsCount).toString().substr(1);
+              transaction.set(vacancyMetaRef, {
+                applicationsCount: newApplicationsCount, 
+              }, { merge: true });
+              transaction.update(applicationRef, {
+                status: 'applied',
+                referenceNumber: applicationReferenceNumber,
+                appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+              });
+              return applicationReferenceNumber;
             });
-            return applicationReferenceNumber;
           });
-        });
+        }
       }
     },
   },
