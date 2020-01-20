@@ -26,37 +26,24 @@
           for detailed information.
         </p>
 
+        <h2 class="govuk-heading-l">
+          Criminal offences
+        </h2>
         <RadioGroup
-          id="declared-bankrupt"
-          v-model="characterInformation.declaredBankrupt"
+          id="criminal-offenses"
+          v-model="characterInformation.criminalOffences"
           required
-          label="Have you ever been declared bankrupt?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="financial-difficulties"
-          v-model="characterInformation.financialDifficulties"
-          required
-          label="Have you filed late tax returns, been fined by HMRC or
-          had other financial difficulties more than 3 times in the last 5 years?"
+          label="Have you ever been cautioned or convicted of a criminal offence?"
+          hint="This includes spent convictions."
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="financial-difficulties-details"
-              v-model="characterInformation.financialDifficultiesDetails"
-              label="Add details of late filling, fines or other difficulties"
+            <RepeatableFields
+              v-model="characterInformation.criminalOffenceDetails"
+              required
+              :component="repeatableFields.CriminalOffenceDetails"
             />
           </RadioItem>
           <RadioItem
@@ -65,20 +52,23 @@
           />
         </RadioGroup>
 
+        <h2 class="govuk-heading-l">
+          Fixed-penalty notices, non motoring
+        </h2>
         <RadioGroup
-          id="live-conduct-negligence-investigation"
-          v-model="characterInformation.conductNegligenceInvestigation"
+          id="non-motoring-fixed-pentalty-notice"
+          v-model="characterInformation.nonMotoringFixedPenaltyNotices"
           required
-          label="Are you the subject of a live professional conduct or negligence investigation?"
+          label="Have you received a non-motoring penalty notice in the last 4 years?"
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="conduct-negligence-investigation-details"
-              v-model="characterInformation.conductNegligenceInvestigationDetails"
-              label="Add details of conduct or negligence investigations"
+            <RepeatableFields
+              v-model="characterInformation.nonMotoringFixedPenaltyNoticesDetails"
+              required
+              :component="repeatableFields.NonMotoringFixedPenaltyNoticesDetails"
             />
           </RadioItem>
           <RadioItem
@@ -87,21 +77,44 @@
           />
         </RadioGroup>
 
+        <h2 class="govuk-heading-l">
+          Driving offences
+        </h2>
         <RadioGroup
-          id="drink-drug-mobile-motoring-offence"
-          v-model="characterInformation.drinkDrugMobileMotoringOffence"
+          id="driving-disqualification-drink-drugs"
+          v-model="characterInformation.drivingDisqualificationDrinkDrugs"
           required
-          label="Have you had a motoring offence involving drink or drug
-          driving, or driving while using a mobile in the last 10 years?"
+          label="Have you ever been disqualified from driving, or convicted for driving under the influence of drink or drugs?"
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="drink-drug-mobile-motoring-offence-details"
-              v-model="characterInformation.drinkDrugMobileMotoringOffenceDetails"
-              label="Add details of driving offences"
+            <RepeatableFields
+              v-model="characterInformation.drivingDisqualificationDrinkDrugsDetails"
+              required
+              :component="repeatableFields.DrivingDisqualificationDrinkDrugsDetails"
+            />
+          </RadioItem>
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
+        <RadioGroup
+          id="driving-endorsements-of-fixed-penalty"
+          v-model="characterInformation.endorsementsOrMotoringFixedPenalties"
+          required
+          label="Do you have any endorsements on your licence, or received any motoring fixed-penalty notices in the last 4 years?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          >
+            <RepeatableFields
+              v-model="characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
+              required
+              :component="repeatableFields.EndorsementsOrMotoringFixedPenaltiesDetails"
             />
           </RadioItem>
           <RadioItem
@@ -110,20 +123,44 @@
           />
         </RadioGroup>
 
+        <h2 class="govuk-heading-l">
+          Financial considerations
+        </h2>
         <RadioGroup
-          id="disqualified-from-driving"
-          v-model="characterInformation.disqualifiedFromDriving"
+          id="declared-bankrupt-or-iva"
+          v-model="characterInformation.declaredBankruptOrIVA"
           required
-          label="Have you been disqualified from driving in the last 5 years?"
+          label="Have you ever been declared bankrupt or entered into an Individual Voluntary Agreement (IVA)?"
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="disqualified-from-driving-details"
-              v-model="characterInformation.disqualifiedFromDrivingDetails"
-              label="Add details of disqualification"
+            <RepeatableFields
+              v-model="characterInformation.declaredBankruptOrIVADetails"
+              required
+              :component="repeatableFields.DeclaredBankruptOrIVADetails"
+            />
+          </RadioItem>
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
+        <RadioGroup
+          id="late-tax-return-or-fined-by-hmrc"
+          v-model="characterInformation.lateTaxReturnOrFined"
+          required
+          label="Have you ever filed late tax returns or been fined by HMRC?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          >
+            <RepeatableFields
+              v-model="characterInformation.lateTaxReturnOrFinedDetails"
+              required
+              :component="repeatableFields.LateTaxReturnOrFinedDetails"
             />
           </RadioItem>
           <RadioItem
@@ -132,20 +169,47 @@
           />
         </RadioGroup>
 
+        <h2 class="govuk-heading-l">
+          Professional complaints
+        </h2>
         <RadioGroup
-          id="motoring-offences-and->6points"
-          v-model="characterInformation.motoringOffencesAndSixPlusPoints"
+          id="involved-in-professional-misconduct"
+          v-model="characterInformation.involvedInProfessionalMisconduct"
           required
-          label="Do you have any motoring offences and more than 6 points on your licence?"
+          label="Have you ever been, or are you currently,
+          subject to professional misconduct, negligence, wrongful
+          dismissal, discrimination or harassment proceedings?"
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="motoring-offences-and->6points-details"
-              v-model="characterInformation.motoringOffencesAndSixPlusPointsDetails"
-              label="Add details of motoring offences or licence points"
+            <RepeatableFields
+              v-model="characterInformation.involvedInProfessionalMisconductDetails"
+              required
+              :component="repeatableFields.InvolvedInProfessionalMisconductDetails"
+            />
+          </RadioItem>
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
+        <RadioGroup
+          id="subject-to-diciplinary-or-asked-to-resign"
+          v-model="characterInformation.diciplinaryActionOrAskedToResign"
+          required
+          label="Have you ever been subject to complaints or disciplinary action,
+          or been asked to resign from a position?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          >
+            <RepeatableFields
+              v-model="characterInformation.diciplinaryActionOrAskedToResignDetails"
+              required
+              :component="repeatableFields.DiciplinaryActionOrAskedToResignDetails"
             />
           </RadioItem>
           <RadioItem
@@ -154,28 +218,9 @@
           />
         </RadioGroup>
 
-        <RadioGroup
-          id="criminal-conviction-causion"
-          v-model="characterInformation.criminalConvictionCaution"
-          required
-          label="Have you had a criminal conviction in the last 10 years or a criminal caution in the last 5 years?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <TextareaInput
-              id="criminal-conviction-causion-details"
-              v-model="characterInformation.criminalConvictionCautionDetails"
-              label="Add details of criminal conviction"
-            />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
+        <h2 class="govuk-heading-l">
+          Other considerations
+        </h2>
         <RadioGroup
           id="other-character-issues"
           v-model="characterInformation.otherCharacterIssues"
@@ -186,10 +231,10 @@
             :value="true"
             label="Yes"
           >
-            <TextareaInput
-              id="other-character-issues-details"
+            <RepeatableFields
               v-model="characterInformation.otherCharacterIssuesDetails"
-              label="Add details of other character issues"
+              required
+              :component="repeatableFields.OtherCharacterIssuesDetails"
             />
           </RadioItem>
           <RadioItem
@@ -197,7 +242,6 @@
             label="No"
           />
         </RadioGroup>
-
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button"
@@ -214,7 +258,16 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import TextareaInput from '@/components/Form/TextareaInput';
+import RepeatableFields from '@/components/RepeatableFields';
+import CriminalOffenceDetails from '@/components/RepeatableFields/CriminalOffenceDetails';
+import NonMotoringFixedPenaltyNoticesDetails from '@/components/RepeatableFields/NonMotoringFixedPenaltyNoticesDetails';
+import DrivingDisqualificationDrinkDrugsDetails from '@/components/RepeatableFields/DrivingDisqualificationDrinkDrugsDetails';
+import EndorsementsOrMotoringFixedPenaltiesDetails from '@/components/RepeatableFields/EndorsementsOrMotoringFixedPenaltiesDetails';
+import DeclaredBankruptOrIVADetails from '@/components/RepeatableFields/DeclaredBankruptOrIVADetails';
+import LateTaxReturnOrFinedDetails from '@/components/RepeatableFields/LateTaxReturnOrFinedDetails';
+import InvolvedInProfessionalMisconductDetails from '@/components/RepeatableFields/InvolvedInProfessionalMisconductDetails';
+import DiciplinaryActionOrAskedToResignDetails from '@/components/RepeatableFields/DiciplinaryActionOrAskedToResignDetails';
+import OtherCharacterIssuesDetails from '@/components/RepeatableFields/OtherCharacterIssuesDetails';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -222,25 +275,26 @@ export default {
     ErrorSummary,
     RadioGroup,
     RadioItem,
-    TextareaInput,
+    RepeatableFields,
     BackLink,
   },
   extends: Form,
   data() {
     const defaults = {
-      declaredBankrupt: null,
-      financialDifficulties: null,
-      financialDifficultiesDetails: null,
-      conductNegligenceInvestigation: null,
-      conductNegligenceInvestigationDetails: null,
-      drinkDrugMobileMotoringOffence: null,
-      drinkDrugMobileMotoringOffenceDetails: null,
-      disqualifiedFromDriving: null,
-      disqualifiedFromDrivingDetails: null,
-      motoringOffencesAndSixPlusPoints: null,
-      motoringOffencesAndSixPlusPointsDetails: null,
-      criminalConvictionCaution: null,
-      criminalConvictionCautionDetails: null,
+      criminalOffences: null,
+      criminalOffenceDetails: null,
+      nonMotoringFixedPenaltyNotices: null,
+      nonMotoringFixedPenaltyNoticesDetails: null,
+      drivingDisqualificationDrinkDrugs: null,
+      drivingDisqualificationDrinkDrugsDetails: null,
+      endorsementsOrMotoringFixedPenalties: null,
+      endorsementsOrMotoringFixedPenaltiesDetails: null,
+      declaredBankruptOrIVA: null,
+      declaredBankruptOrIVADetails: null,
+      lateTaxReturnOrFined: null,
+      lateTaxReturnOrFinedDetails: null,
+      involvedInProfessionalMisconduct: null,
+      involvedInProfessionalMisconductDetails: null,
       otherCharacterIssues: null,
       otherCharacterIssuesDetails: null,
     };
@@ -250,6 +304,17 @@ export default {
     return {
       characterInformation: characterInformation,
       application: application,
+      repeatableFields: {
+        CriminalOffenceDetails,
+        NonMotoringFixedPenaltyNoticesDetails,
+        DrivingDisqualificationDrinkDrugsDetails,
+        EndorsementsOrMotoringFixedPenaltiesDetails,
+        DeclaredBankruptOrIVADetails,
+        LateTaxReturnOrFinedDetails,
+        InvolvedInProfessionalMisconductDetails,
+        DiciplinaryActionOrAskedToResignDetails,
+        OtherCharacterIssuesDetails,
+      },
     };
   },
   methods: {
