@@ -38,6 +38,7 @@
                     </button>
                     <button
                       v-else
+                      :disabled="isSignInPage"
                       class="govuk-button"
                       @click="signIn"
                     >
@@ -92,6 +93,9 @@ export default {
     //
   }),
   computed: {
+    isSignInPage() {
+      return this.$route.name === 'sign-in';
+    },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
