@@ -19,7 +19,6 @@
               </div>
 
               <div class="govuk-grid-column-one-third organisation__margin-bottom">
-
                 <ol class="app-c-topic-list app-c-topic-list--small brand--ministry-of-justice ">
                   <li class="app-c-topic-list__item">
                     <RouterLink
@@ -66,7 +65,8 @@
                 alpha
               </strong>
               <span class="govuk-phase-banner__text">
-                This is a new service – your <a style="font-size: 16px"
+                This is a new service – your <a
+                  style="font-size: 16px"
                   class="govuk-link govuk-body"
                   href="https://docs.google.com/forms/d/e/1FAIpQLSexm0qgMV0tOQTFP4QUSegOOX89VeYhWwuofV---JZTOEXGIQ/viewform"
                   target="_blank"
