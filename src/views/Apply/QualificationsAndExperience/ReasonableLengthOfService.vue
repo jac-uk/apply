@@ -76,14 +76,14 @@ export default {
   },
   computed: {
     vacancy() {
-      return this.$store.state.exercise.record;
+      return this.$store.state.vacancy.record;
     },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.employmentGaps = true;
+        this.application.progress.reasonableLengthOfService = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
       }
