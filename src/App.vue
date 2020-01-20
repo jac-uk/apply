@@ -66,7 +66,11 @@
                 alpha
               </strong>
               <span class="govuk-phase-banner__text">
-                This is a new service – your feedback will help us improve it.
+                This is a new service – your <a style="font-size: 16px"
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/156"
+                  target="_blank"
+                >feedback</a> will help us improve it.
               </span>
             </p>
           </div>
