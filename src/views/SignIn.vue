@@ -88,6 +88,9 @@ export default {
       if (this.formData.email && this.formData.password) {
         this.errors = [];
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+          .then(() => {
+            this.$router.push('applications');
+          })
           .catch((error) => {
             this.errors.push({ id: 'email', message: error.message });
           });
