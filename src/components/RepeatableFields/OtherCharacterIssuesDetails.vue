@@ -1,14 +1,12 @@
 <template>
   <div>
+    <h2 class="govuk-heading-m">
+      Add details of any other relevant character issues, including dates.
+    </h2>
     <DateInput
       :id="`other_issues_date_${index}`"
       v-model="row.date"
-      label="Date of offence"
-    />
-    <TextField
-      :id="`other_issues_title_${index}`"
-      v-model="row.title"
-      label="Findings or actions"
+      label="Date"
     />
     <TextareaInput
       :id="`other_issues_details_${index}`"
@@ -22,14 +20,12 @@
 
 <script>
 import DateInput from '@/components/Form/DateInput';
-import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
   name: 'InvolvedInProfessionalMisconductDetails',
   components: {
     DateInput,
-    TextField,
     TextareaInput,
   },
   props: {
