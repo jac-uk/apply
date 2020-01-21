@@ -21,7 +21,7 @@
                 <ol class="app-c-topic-list app-c-topic-list--small brand--ministry-of-justice ">
                   <li class="app-c-topic-list__item nostyle">
                     <RouterLink
-                    class="govuk-button"
+                      class="govuk-button"
                       :to="{ name: 'vacancies' }"
                     >
                       Vacancies
