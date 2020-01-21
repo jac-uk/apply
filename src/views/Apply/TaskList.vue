@@ -111,6 +111,12 @@ export default {
         if (this.vacancy.isSPTWOffered) {
           workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
         }
+        if (this.vacancy.locationQuestion) {
+          workingPreferencesTasklist.push({ title: 'Location preferences', id: 'location-preferences', done: this.applicationProgress.locationPreferences });
+        }
+        if (this.vacancy.jurisdictionQuestion) {
+          workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
+        }
         if (this.vacancy.welshRequirement) {
           workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
         }
