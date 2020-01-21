@@ -169,6 +169,7 @@
             <hr>
           </li>
         </ul>
+        
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
           Future applications
         </h1>
