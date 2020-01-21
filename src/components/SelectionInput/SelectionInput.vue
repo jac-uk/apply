@@ -34,7 +34,6 @@
         v-model="selected"
         :answers="answers"
       />
-
     </fieldset>
   </div>  
 </template>
