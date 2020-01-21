@@ -145,7 +145,12 @@ export default {
             dateOfBirth: this.formData.dateOfBirth,
             nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
           };
-          await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);          
+          await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
+          if (this.$store.getters['vacancy/id']) {
+            this.$router.push({ path: `/apply/${this.$store.getters['vacancy/id']}` });
+          } else {
+            this.$router.push({ name: 'applications' });
+          }
         } catch (error) {
           this.errors.push({ ref: 'email', message: error.message });
         }
