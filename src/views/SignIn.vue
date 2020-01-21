@@ -88,6 +88,14 @@ export default {
       if (this.formData.email && this.formData.password) {
         this.errors = [];
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+          .then((userCredential) => {
+            this.$store.dispatch('auth/setCurrentUser', userCredential.user);
+            if (this.$store.getters['vacancy/id']) {
+              this.$router.push({ path: `/apply/${this.$store.getters['vacancy/id']}` });
+            } else {
+              this.$router.push({ name: 'applications' });
+            }
+          })
           .catch((error) => {
             this.errors.push({ id: 'email', message: error.message });
           });

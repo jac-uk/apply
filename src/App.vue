@@ -17,54 +17,17 @@
                   >
                 </div>
               </div>
-
               <div class="govuk-grid-column-one-third organisation__margin-bottom">
-                <nav
-                  role="navigation"
-                  class="gem-c-translation-nav gem-c-translation-nav gem-c-translation-nav--no-margin-top brand--ministry-of-justice"
-                  aria-label="Translations"
-                >
-                  <ul class="gem-c-translation-nav__list">
-                    <li class="gem-c-translation-nav__list-item">
-                      <span lang="en">English</span>
-                    </li>
-                    <li class="gem-c-translation-nav__list-item">
-                      <a
-                        hreflang="cy"
-                        lang="cy"
-                        rel="alternate"
-                        class="gem-c-translation-nav__link brand__color"
-                        href="https://www.judicialappointments.gov.uk/cymraeg"
-                      >Cymraeg</a>
-                    </li>
-                  </ul>
-                </nav>
-
                 <ol class="app-c-topic-list app-c-topic-list--small brand--ministry-of-justice ">
-                  <li class="app-c-topic-list__item">
-                    <a
-                      class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
-                      href="https://www.judicialappointments.gov.uk/business-plan"
-                      target="_blank"
-                    >How do I apply</a>
-                  </li>
-                  <li class="app-c-topic-list__item">
-                    <a
-                      class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
-                      href="https://www.judicialappointments.gov.uk/jac-official-statistics"
-                      target="_blank"
-                    >How do I qualify</a>
-                  </li>
-
-                  <li class="app-c-topic-list__item">
+                  <li class="app-c-topic-list__item nostyle">
                     <RouterLink
-                      class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
+                      class="govuk-button"
                       :to="{ name: 'vacancies' }"
                     >
-                      Judicial vacancies
+                      Vacancies
                     </RouterLink>
                   </li>
-                  <li class="app-c-topic-list__item">
+                  <li class="app-c-topic-list__item nostyle">
                     <button
                       v-if="isSignedIn"
                       class="govuk-button govuk-!-margin-bottom-0"
@@ -74,6 +37,7 @@
                     </button>
                     <button
                       v-else
+                      :disabled="isSignInPage"
                       class="govuk-button"
                       @click="signIn"
                     >
@@ -82,7 +46,7 @@
                   </li>
                   <li
                     v-if="isSignedIn"
-                    class="app-c-topic-list__item"
+                    class="app-c-topic-list__item nostyle"
                   >
                     <b>You are now signed in as {{ userName }}</b>
                   </li>
@@ -101,7 +65,12 @@
                 alpha
               </strong>
               <span class="govuk-phase-banner__text">
-                This is a new service – your feedback will help us improve it.
+                This is a new service – your <a
+                  style="font-size: 16px"
+                  class="govuk-link govuk-body"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSexm0qgMV0tOQTFP4QUSegOOX89VeYhWwuofV---JZTOEXGIQ/viewform"
+                  target="_blank"
+                >feedback</a> will help us improve it.
               </span>
             </p>
           </div>
@@ -123,6 +92,9 @@ export default {
     //
   }),
   computed: {
+    isSignInPage() {
+      return this.$route.name === 'sign-in';
+    },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
@@ -146,10 +118,13 @@ export default {
 
 <style lang="scss">
 // @import 'https://assets.publishing.service.gov.uk/static/govuk-template-c0b8ba8b1652aacad298d74f24752260187f538b50c40c2484f7f333cbc3cf2b.css';
-@import 'https://assets.publishing.service.gov.uk/static/fonts-e9ec5a5f82e5c2a17927ce356e5a054cb28025ec1547ec5d00f5c98d2ec5e481.css';
-@import 'https://assets.publishing.service.gov.uk/static/core-layout-535eb07d05bcae550061481a9cbefad8c4807bf8da32da77312cf8ef2ab616c0.css';
-@import 'https://assets.publishing.service.gov.uk/collections/application-1da0069f0ad5c09cfd287444f877560d89793e621ff13c1ababf63cc4eaceb8e.css';
+// @import 'https://assets.publishing.service.gov.uk/static/fonts-e9ec5a5f82e5c2a17927ce356e5a054cb28025ec1547ec5d00f5c98d2ec5e481.css';
+// @import 'https://assets.publishing.service.gov.uk/static/core-layout-535eb07d05bcae550061481a9cbefad8c4807bf8da32da77312cf8ef2ab616c0.css';
+// @import 'https://assets.publishing.service.gov.uk/collections/application-1da0069f0ad5c09cfd287444f877560d89793e621ff13c1ababf63cc4eaceb8e.css';
   // Required to include global main.scss styles
+  li.nostyle {
+      list-style-type: none;
+  }
   .govuk-grid-column-one-half {
     width: 100%;
     float: left;
