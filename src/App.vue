@@ -17,12 +17,11 @@
                   >
                 </div>
               </div>
-
               <div class="govuk-grid-column-one-third organisation__margin-bottom">
                 <ol class="app-c-topic-list app-c-topic-list--small brand--ministry-of-justice ">
                   <li class="app-c-topic-list__item nostyle">
                     <RouterLink
-                      class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
+                    class="govuk-button"
                       :to="{ name: 'vacancies' }"
                     >
                       Vacancies
