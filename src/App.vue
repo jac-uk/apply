@@ -20,7 +20,7 @@
 
               <div class="govuk-grid-column-one-third organisation__margin-bottom">
                 <ol class="app-c-topic-list app-c-topic-list--small brand--ministry-of-justice ">
-                  <li class="app-c-topic-list__item">
+                  <li class="app-c-topic-list__item nostyle">
                     <RouterLink
                       class="govuk-link app-c-topic-list__link app-c-topic-list__link--no-underline brand__color"
                       :to="{ name: 'vacancies' }"
@@ -28,7 +28,7 @@
                       Vacancies
                     </RouterLink>
                   </li>
-                  <li class="app-c-topic-list__item">
+                  <li class="app-c-topic-list__item nostyle">
                     <button
                       v-if="isSignedIn"
                       class="govuk-button govuk-!-margin-bottom-0"
@@ -47,7 +47,7 @@
                   </li>
                   <li
                     v-if="isSignedIn"
-                    class="app-c-topic-list__item"
+                    class="app-c-topic-list__item nostyle"
                   >
                     <b>You are now signed in as {{ userName }}</b>
                   </li>
@@ -123,6 +123,9 @@ export default {
 // @import 'https://assets.publishing.service.gov.uk/static/core-layout-535eb07d05bcae550061481a9cbefad8c4807bf8da32da77312cf8ef2ab616c0.css';
 // @import 'https://assets.publishing.service.gov.uk/collections/application-1da0069f0ad5c09cfd287444f877560d89793e621ff13c1ababf63cc4eaceb8e.css';
   // Required to include global main.scss styles
+  li.nostyle {
+      list-style-type: none;
+  }
   .govuk-grid-column-one-half {
     width: 100%;
     float: left;

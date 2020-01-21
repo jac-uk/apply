@@ -7,6 +7,10 @@
           Post-qualification experience
         </h1>
 
+        <p class="govuk-body-l">
+          Provide details of your career to date including any judicial appointments or quasi-judicial appointments
+        </p>
+
         <RepeatableFields
           v-model="application.experience"
           :component="repeatableFields.Experience"
