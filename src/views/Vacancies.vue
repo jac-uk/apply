@@ -321,7 +321,6 @@
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
           Future applications
         </h1>
-
         <span
           style="color: #1d70b8; font-size: 24px"
           class="govuk-heading-m govuk-!-font-weight-bold"
@@ -377,9 +376,6 @@
             target="_blank"
           >Circuit Judge 2020</a>
         </span>
-      </div>
-      <hr>
-      <div :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }">
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
           Exercises in progress
         </h1>
