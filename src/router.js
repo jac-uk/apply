@@ -43,6 +43,8 @@ import RelevantExperience from '@/views/Apply/QualificationsAndExperience/Releva
 import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
 import ReasonableLengthOfService from '@/views/Apply/QualificationsAndExperience/ReasonableLengthOfService';
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
+import LocationPreferences from '@/views/Apply/WorkingPreferences/LocationPreferences';
+import JurisdictionPreferences from '@/views/Apply/WorkingPreferences/JurisdictionPreferences';
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
@@ -292,6 +294,24 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Part-time working preferences',
+          },
+        },
+        {
+          path: 'location-preferences',
+          component: LocationPreferences,
+          name: 'location-preferences',
+          meta: {
+            requiresAuth: true,
+            title: 'Location preferences',
+          },
+        },
+        {
+          path: 'jurisdiction-preferences',
+          component: JurisdictionPreferences,
+          name: 'jurisdiction-preferences',
+          meta: {
+            requiresAuth: true,
+            title: 'Jurisdiction preferences',
           },
         },
         {
