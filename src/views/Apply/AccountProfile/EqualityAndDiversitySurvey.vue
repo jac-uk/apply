@@ -66,7 +66,7 @@
             label="Barrister"
           />
           <CheckboxItem
-            value="CILEx"
+            value="cilex"
             label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
           />
           <CheckboxItem
@@ -106,7 +106,7 @@
             label="Barrister"
           />
           <CheckboxItem
-            value="CILEx"
+            value="cilex"
             label="Fellow of the Chartered Institute of Legal Executives (CILEx)"
           />
           <CheckboxItem
@@ -175,7 +175,7 @@
           label="Do you hold, or have you ever held in the past, a fee-paid judicial role?"
         >
           <RadioItem
-            value="no"
+            :value="false"
             label="I have not previously held a fee-paid role"
           />
           <RadioItem
@@ -346,7 +346,7 @@
           </p>
 
           <RadioItem
-            value="uk"
+            value="uk-ethnic"
             label="English, Welsh, Scottish, Northern Ireland, British"
           />
           <RadioItem
