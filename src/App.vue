@@ -20,7 +20,6 @@
                 </div>
               </div>
               <div class="govuk-grid-column-one-third organisation__margin-bottom">
-
                 <button
                   v-if="isSignedIn"
                   class="govuk-button govuk-!-margin-right-1"
@@ -36,8 +35,12 @@
                 >
                   Sign In
                 </button>
-                <button style="background-color: #753880;" target="_blank" class="govuk-button" onclick="location.href='https://apply.judicialappointments.digital/vacancies';">
-                      Vacancies
+                <button
+                  :disabled="isVacanciesPage"
+                  class="govuk-button"
+                  @click="gotoVacancies"
+                >
+                  Vacancies
                 </button>
                 <br>
                 <span
@@ -90,6 +93,9 @@ export default {
     isSignInPage() {
       return this.$route.name === 'sign-in';
     },
+    isVacanciesPage() {
+      return this.$route.name === 'vacancies';
+    },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
@@ -106,6 +112,9 @@ export default {
       if (this.$route.name != 'vacancies') {
         this.$router.push({ name: 'vacancies' });
       }
+    },
+    gotoVacancies() {
+      this.$router.push({ name: 'vacancies' });
     },
   },
 };
