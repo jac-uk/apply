@@ -1,9 +1,12 @@
 <template>
   <div>
+    <h2 class="govuk-heading-m">
+      Add details of the complaint, findings or action taken against you, including dates.
+    </h2>
     <DateInput
       :id="`diciplinary_date_${index}`"
       v-model="row.date"
-      label="Date of offence"
+      label="Date"
     />
     <TextField
       :id="`diciplinary_title_${index}`"
