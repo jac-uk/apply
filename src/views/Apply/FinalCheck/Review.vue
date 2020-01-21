@@ -78,7 +78,7 @@
               Citizenship
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.personalDetails.Citizenship }}
+              {{ application.personalDetails.citizenship }}
             </dd>
           </div>
         </dl>
@@ -102,7 +102,7 @@
         </div>
 
         <dl class="govuk-summary-list">
-          <!-- <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever been cautioned or convicted of a criminal offence?
             </dt>
@@ -110,119 +110,113 @@
               class="govuk-summary-list__value"
             >
               {{ application.characterInformation.criminalOffences | lookup }}
-              <li
-                v-if="application.characterInformation.criminalOffencesDetails"
+              <ul
                 v-for="item in application.characterInformation.criminalOffencesDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you received a non-motoring penalty notice in the last 4 years?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.nonMotoringFixedPenaltyNotices | lookup }}:
-              <li
-                v-if="application.characterInformation.nonMotoringFixedPenaltyNoticesDetails"
+              {{ application.characterInformation.nonMotoringFixedPenaltyNotices | lookup }}
+              <ul
                 v-for="item in application.characterInformation.nonMotoringFixedPenaltyNoticesDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever been disqualified from driving, or convicted for driving under the influence of drink or drugs?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.drivingDisqualificationDrinkDrugs | lookup }}:
-              <li
-                v-if="application.characterInformation.drivingDisqualificationDrinkDrugsDetails"
+              {{ application.characterInformation.drivingDisqualificationDrinkDrugs | lookup }}
+              <ul
                 v-for="item in application.characterInformation.drivingDisqualificationDrinkDrugsDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Do you have any endorsements on your licence, or received any motoring fixed-penalty notices in the last 4 years?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.endorsementsOrMotoringFixedPenalties | lookup }}:
-              <li
-                v-if="application.characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
+              {{ application.characterInformation.endorsementsOrMotoringFixedPenalties | lookup }}
+              <ul
                 v-for="item in application.characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever been declared bankrupt or entered into an Individual Voluntary Agreement (IVA)?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.declaredBankruptOrIVA | lookup }}:
-              <li
-                v-if="application.characterInformation.declaredBankruptOrIVADetails"
+              {{ application.characterInformation.declaredBankruptOrIVA | lookup }}
+              <ul
                 v-for="item in application.characterInformation.declaredBankruptOrIVADetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever filed late tax returns or been fined by HMRC?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.lateTaxReturnOrFined | lookup }}:
-              <li
-                v-if="application.characterInformation.lateTaxReturnOrFinedDetails"
+              {{ application.characterInformation.lateTaxReturnOrFined | lookup }}
+              <ul
                 v-for="item in application.characterInformation.lateTaxReturnOrFinedDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever been, or are you currently, subject to professional misconduct, negligence, wrongful
               dismissal, discrimination or harassment proceedings?
@@ -230,20 +224,19 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.involvedInProfessionalMisconduct | lookup }}:
-              <li
-                v-if="application.characterInformation.involvedInProfessionalMisconductDetails"
+              {{ application.characterInformation.involvedInProfessionalMisconduct | lookup }}
+              <ul
                 v-for="item in application.characterInformation.involvedInProfessionalMisconductDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Have you ever been subject to complaints or disciplinary action,
               or been asked to resign from a position?
@@ -251,38 +244,37 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.diciplinaryActionOrAskedToResign | lookup }}:
-              <li
-                v-if="application.characterInformation.diciplinaryActionOrAskedToResignDetails"
+              {{ application.characterInformation.diciplinaryActionOrAskedToResign | lookup }}
+              <ul
                 v-for="item in application.characterInformation.diciplinaryActionOrAskedToResignDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
-
-          <!-- <div class="govuk-summary-list__row">
+          </div>
+          <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               Do you have any other issues that you think we should know about when considering your character?
             </dt>
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.otherCharacterIssues | lookup }}:
-              <li
-                v-if="application.characterInformation.otherCharacterIssuesDetails"
+              {{ application.characterInformation.otherCharacterIssues | lookup }}
+              <ul
                 v-for="item in application.characterInformation.otherCharacterIssuesDetails"
                 :key="item.name"
               >
-                {{ item.title }} - {{ item.date }}
-                {{ item.details}}
-
-              </li>
+                <li>
+                  {{ item.title }} - {{ item.date }}
+                  {{ item.details }}
+                </li>
+              </ul>
             </dd>
-          </div> -->
+          </div>
         </dl>
 
         <div class="govuk-!-margin-top-9">
@@ -606,32 +598,24 @@
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
-              :to="{name: 'relevant-qualifications'}"
+              :to="{name: 'relevant-memberships'}"
             >
               Change
             </router-link>
           </div>
-
           <dl
             class="govuk-summary-list govuk-!-margin-bottom-8"
           >
-            <!-- <div class="govuk-summary-list__row">
+          <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Memberships
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ application.professionalMemberships }}
               </dd>
-            </div> -->
+            </div>
           </dl>
         </div>
-
-
-
-
-
-
-        
 
         <div class="govuk-!-margin-top-9">
           <h2
@@ -701,6 +685,9 @@
                   :key="task.name"
                 >
                   {{ task }}
+                </li>
+                <li >
+                  {{ item.otherTasks }}
                 </li>
               </ul>
             </dd>
@@ -821,12 +808,6 @@
             Change
           </router-link>
 
-          <p class="govuk-body govuk-!-margin-bottom-8">
-            t.b.c
-          </p>
-
-          <!--
-            @todo: this needs sorting once the upload changes are done
           <dl class="govuk-summary-list govuk-!-margin-bottom-8">
             <div class="govuk-summary-list__row">
               <dd class="govuk-summary-list__value">
@@ -850,13 +831,14 @@
             </div>
           </dl>
 
-        <button
-          v-if="isDraftApplication"
-          :disabled="!canApply"
-          class="govuk-button"
-        >
-          Send application
-        </button>
+          <button
+            v-if="isDraftApplication"
+            :disabled="!canApply"
+            class="govuk-button"
+          >
+            Send application
+          </button>
+        </div>
       </div>
     </form>
   </div>
