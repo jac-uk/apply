@@ -20,7 +20,7 @@ Vue.filter('lookup',
       'academic': 'Academic',
       'administrative-appeals-chamber': 'Administrative Appeals Chamber',
       'advocate-scottish-bar': 'Advocate – enrolled with the Scottish bar',
-      'advocate-scotland'
+      'advocate-scotland': 'Advocate - Scotland',
       'african': 'African',
       'another-commonwealth-country': 'Another Commonwealth country',
       'approved': 'Approved',
