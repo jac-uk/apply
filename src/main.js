@@ -13,6 +13,9 @@ Sentry.init({
   integrations: [new Integrations.Vue({ Vue, attachProps: true })],
 });
 
+import LogRocket from 'logrocket';
+LogRocket.init('vpm4kc/jac');
+
 Vue.use(VueAnalytics, {
   id: 'UA-153516887-1',
 });
