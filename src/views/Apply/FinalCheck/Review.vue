@@ -606,7 +606,7 @@
             </div>
           </dl>
 
-          <div
+          <!-- <div
             v-if="isNonLegal || isLeadership"
             id="self-competencies-heading"
             class="govuk-!-margin-top-9"
@@ -642,8 +642,9 @@
                 </dd>
               </div>
             </dl>
-          </div>
+          </div> -->
 
+          <!-- 
           <div
             id="self-competencies-heading"
             class="govuk-!-margin-top-9"
@@ -666,8 +667,7 @@
             <p class="govuk-body govuk-!-margin-bottom-8">
               t.b.c
             </p>
-
-            <!-- 
+            
               @todo: this needs sorting once the upload changes are done
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
               <div class="govuk-summary-list__row">
@@ -691,8 +691,8 @@
                 </dd>
               </div>
             </dl> 
-            -->
           </div>
+          -->
         </div><!-- END download-as-pdf-div -->
 
         <button
