@@ -613,7 +613,7 @@
           <dl
             class="govuk-summary-list govuk-!-margin-bottom-8"
           >
-          <div class="govuk-summary-list__row">
+            <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Memberships
               </dt>
@@ -693,7 +693,7 @@
                 >
                   {{ task }}
                 </li>
-                <li >
+                <li>
                   {{ item.otherTasks }}
                 </li>
               </ul>
