@@ -13,6 +13,11 @@ Vue.filter('formatDate',
   }
 });
 
+Vue.filter('toYesNo',
+(value) => {
+  return value ? 'Yes' : 'No';
+});
+
 Vue.filter('lookup',
 (value) => {
   if (value) {
