@@ -7,11 +7,15 @@ import { auth } from '@/firebase';
 import VueAnalytics from 'vue-analytics';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import LogRocket from 'logrocket';
 
-Sentry.init({
-  dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
-  integrations: [new Integrations.Vue({ Vue, attachProps: true })],
-});
+if (process.env.NODE_ENV !== 'development') {
+  Sentry.init({
+    dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
+    integrations: [new Integrations.Vue({ Vue, attachProps: true })],
+  });
+  LogRocket.init('vpm4kc/jac');
+}
 
 Vue.use(VueAnalytics, {
   id: 'UA-153516887-1',
