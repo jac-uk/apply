@@ -14,7 +14,7 @@
         />
 
         <p class="govuk-body-l">
-          Can you work for at least {{ vacancy.reasonableLengthService }} years before reaching the retirement age of {{ vacancy.retirementAge }}?
+          Can you work for at least {{ lengthOfService }} years before reaching the retirement age of {{ retirementAge }}?
         </p>
 
         <RadioGroup
@@ -78,6 +78,20 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+    lengthOfService() {
+      if (this.vacancy.reasonableLengthService === 'other') {
+        return this.vacancy.otherLOS;
+      } else {
+        return this.vacancy.reasonableLengthService;
+      }
+    },
+    retirementAge() {
+      if (this.vacancy.retirementAge === 'other') {
+        return this.vacancy.otherRetirement;
+      } else {
+        return this.vacancy.retirementAge;
+      }
+    },    
   },
   methods: {
     async save() {
