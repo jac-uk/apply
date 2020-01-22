@@ -139,17 +139,25 @@ export default {
             ],
           });
         }
+        
         if (this.isNonLegal) {
-          data.push({
-            title: 'Memberships and Experience',
-            tasks: [
-              { title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships },
-              { title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience },
-              { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
-              { title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService },
-            ],
-          });
+          const tasks = [];
+          if (this.vacancy.memberships.length) {
+            if (this.vacancy.memberships.indexOf('none') === -1) {
+              tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
+            }            
+          }
+          tasks.push({ title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience });
+          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
+          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
+          if (tasks.length) {
+            data.push({
+              title: 'Memberships and Experience',
+              tasks: tasks,
+            });
+          }
         }
+
         const assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
         switch (this.vacancy.assessmentOptions) {
         case 'self-assessment-with-competencies':
