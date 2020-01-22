@@ -17,7 +17,6 @@
         <CheckboxGroup
           id="professional-memberships"
           v-model="application.professionalMemberships"
-          required
           label="What professional memberships do you have?"
         >
           <CheckboxItem
@@ -173,6 +172,27 @@
             />
             <TextareaInput
               v-model="application.royalInstitutionCharteredSurveyorsInformation"
+              label="Any information about your membership we need to be aware of?"
+              rows="2"
+            />
+          </CheckboxItem>
+          <CheckboxItem
+            v-if="showMembershipOption('royal-institute-of-british-architects')"
+            value="royal-institute-of-british-architects"
+            label="Royal Institute of British Architects"
+          >
+            <DateInput
+              id="royal-institute-of-british-architects-date"
+              v-model="application.royalInstituteBritishArchitectsDate"
+              label="When did you become a member?"
+              type="month"
+            />
+            <TextField
+              v-model="application.royalInstituteBritishArchitectsNumber"
+              label="Membership number?"
+            />
+            <TextareaInput
+              v-model="application.royalInstituteBritishArchitectsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
