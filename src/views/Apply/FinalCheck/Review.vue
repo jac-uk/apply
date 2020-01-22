@@ -11,8 +11,16 @@
           >
             Review your application
           </h1>
+          <a
+            href="#"
+            class="govuk-link govuk-body-m change-link"
+            style="display:inline-block;"
+            @click="downloadAsPdf"
+          >
+            Download As PDF
+          </a>
         </div>
-
+        
         <h1 class="govuk-heading-l">
           {{ vacancy.name }}
         </h1>
@@ -81,6 +89,25 @@
               {{ application.personalDetails.citizenship | lookup }}
             </dd>
           </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Reasonable adjustments
+            </dt>
+            <dd
+              class="govuk-summary-list__value"
+            >
+              {{ application.personalDetails.reasonableAdjustments | toYesNo }}
+              <ul
+                v-if="application.personalDetails.reasonableAdjustmentsDetails"
+                class="govuk-!-margin-top-1"
+              >
+                <li>
+                  {{ application.personalDetails.reasonableAdjustmentsDetails }}
+                </li>
+              </ul>
+            </dd>
+          </div>
         </dl>
 
         <!-- <div id="download-as-pdf-div"> -->
@@ -110,9 +137,9 @@
               class="govuk-summary-list__value"
             >
               {{ application.characterInformation.criminalOffences | toYesNo }}
-              <EventRenderer 
+              <EventRenderer
                 v-if="application.characterInformation.criminalOffences"
-                :events="application.characterInformation.criminalOffenceDetails" 
+                :events="application.characterInformation.criminalOffenceDetails"
               />
             </dd>
           </div>
@@ -123,16 +150,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.nonMotoringFixedPenaltyNotices | lookup }}
-              <ul
-                v-for="item in application.characterInformation.nonMotoringFixedPenaltyNoticesDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.nonMotoringFixedPenaltyNotices | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.nonMotoringFixedPenaltyNotices"
+                :events="application.characterInformation.nonMotoringFixedPenaltyNoticesDetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -143,9 +165,9 @@
               class="govuk-summary-list__value"
             >
               {{ application.characterInformation.drivingDisqualificationDrinkDrugs | toYesNo }}
-              <EventRenderer 
+              <EventRenderer
                 v-if="application.characterInformation.drivingDisqualificationDrinkDrugs"
-                :events="application.characterInformation.drivingDisqualificationDrinkDrugsDetails" 
+                :events="application.characterInformation.drivingDisqualificationDrinkDrugsDetails"
               />
             </dd>
           </div>
@@ -156,16 +178,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.endorsementsOrMotoringFixedPenalties | lookup }}
-              <ul
-                v-for="item in application.characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.endorsementsOrMotoringFixedPenalties | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.endorsementsOrMotoringFixedPenalties"
+                :events="application.characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -175,16 +192,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.declaredBankruptOrIVA | lookup }}
-              <ul
-                v-for="item in application.characterInformation.declaredBankruptOrIVADetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.declaredBankruptOrIVA | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.declaredBankruptOrIVA"
+                :events="application.characterInformation.declaredBankruptOrIVADetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -194,16 +206,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.lateTaxReturnOrFined | lookup }}
-              <ul
-                v-for="item in application.characterInformation.lateTaxReturnOrFinedDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.lateTaxReturnOrFined | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.lateTaxReturnOrFined"
+                :events="application.characterInformation.lateTaxReturnOrFinedDetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -214,16 +221,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.involvedInProfessionalMisconduct | lookup }}
-              <ul
-                v-for="item in application.characterInformation.involvedInProfessionalMisconductDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.involvedInProfessionalMisconduct | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.involvedInProfessionalMisconduct"
+                :events="application.characterInformation.involvedInProfessionalMisconductDetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -234,16 +236,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.diciplinaryActionOrAskedToResign | lookup }}
-              <ul
-                v-for="item in application.characterInformation.diciplinaryActionOrAskedToResignDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.diciplinaryActionOrAskedToResign | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.diciplinaryActionOrAskedToResign"
+                :events="application.characterInformation.diciplinaryActionOrAskedToResignDetails"
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -253,16 +250,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.otherCharacterIssues | lookup }}
-              <ul
-                v-for="item in application.characterInformation.otherCharacterIssuesDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date | formatDate }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.otherCharacterIssues | toYesNo }}
+              <EventRenderer
+                v-if="application.characterInformation.otherCharacterIssues"
+                :events="application.characterInformation.otherCharacterIssuesDetails"
+              />
             </dd>
           </div>
         </dl>
@@ -290,7 +282,7 @@
               Sharing your data:
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.shareData | lookup }}
+              {{ application.equalityAndDiversitySurvey.shareData | toYesNo }}
             </dd>
           </div>
 
@@ -301,7 +293,7 @@
             <dd
               class="govuk-summary-list__value"
             >
-              <ul>
+              <ul class="govuk-list">
                 <li
                   v-for="item in application.equalityAndDiversitySurvey.professionalBackground"
                   :key="item.name"
@@ -325,7 +317,7 @@
             <dd
               class="govuk-summary-list__value"
             >
-              <ul>
+              <ul class="govuk-list">
                 <li
                   v-for="item in application.equalityAndDiversitySurvey.currentLegalRole"
                   :key="item.name"
@@ -359,6 +351,21 @@
 
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
+              Do you hold, or have you ever held in the past, a fee-paid judicial role?
+            </dt>
+            <dd class="govuk-summary-list__value">
+              {{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}
+              <p
+                v-if="application.equalityAndDiversitySurvey.feePaidJudicialRole == 'other-current-legal-role'"
+                class="govuk-body govuk-!-margin-bottom-0"
+              >
+                {{ application.equalityAndDiversitySurvey.otherCurrentLegalRoleDetails }}
+              </p>
+            </dd>
+          </div>
+
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
               Attended state or fee-paying school
             </dt>
             <dd class="govuk-summary-list__value">
@@ -371,7 +378,7 @@
               Attended Oxbridge universities
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup }}
+              {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup | toYesNo }}
             </dd>
           </div>
 
@@ -380,7 +387,7 @@
               First generation to go to university
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup }}
+              {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup | toYesNo }}
             </dd>
           </div>
 
@@ -443,7 +450,7 @@
               Changed gender
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.changedGender | lookup }}
+              {{ application.equalityAndDiversitySurvey.changedGender | lookup | toYesNo }}
             </dd>
           </div>
 
@@ -467,7 +474,7 @@
               Disability
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.disability | lookup }}
+              {{ application.disability | lookup | toYesNo }}
               <p
                 v-if="application.equalityAndDiversitySurvey.disabilityDetails"
                 class="govuk-body"
@@ -484,7 +491,7 @@
             <dd class="govuk-summary-list__value">
               {{ application.equalityAndDiversitySurvey.religionFaith | lookup }}
               <p
-                v-if="detailsDetector(application.equalityAndDiversitySurvey.otherReligionDetails)"
+                v-if="application.equalityAndDiversitySurvey.otherReligionDetails"
                 class="govuk-body"
               >
                 {{ application.equalityAndDiversitySurvey.otherReligionDetails }}
@@ -497,7 +504,7 @@
               Attended Outreach events
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.attendedOutreachEvents | lookup }}
+              {{ application.equalityAndDiversitySurvey.attendedOutreachEvents | lookup | toYesNo }}
             </dd>
           </div>
 
@@ -506,7 +513,7 @@
               Participated in a Judicial Workshadowing Scheme
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme | lookup }}
+              {{ application.equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme | lookup | toYesNo }}
             </dd>
           </div>
 
@@ -515,7 +522,7 @@
               Participated in Pre-application judicial education
             </dt>
             <dd class="govuk-summary-list__value">
-              {{ application.equalityAndDiversitySurvey.hasTakenPAJE | lookup }}
+              {{ application.equalityAndDiversitySurvey.hasTakenPAJE | lookup | toYesNo }}
             </dd>
           </div>
         </dl>
@@ -581,7 +588,7 @@
             </div>
           </dl>
         </div>
-        <div v-if="isNonLegal">
+        <!-- <div v-if="isNonLegal">
           <div
             class="govuk-!-margin-top-9"
           >
@@ -612,7 +619,7 @@
               </dd>
             </div>
           </dl>
-        </div>
+        </div> -->
 
         <div class="govuk-!-margin-top-9">
           <h2
@@ -748,7 +755,7 @@
           </div>
         </dl>
 
-        <div
+        <!-- <div
           v-if="isNonLegal || isLeadership"
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
@@ -826,17 +833,16 @@
                 </a>
               </dd>
             </div>
-          </dl>
+          </dl> -->
+      </div><!-- END download-as-pdf-div -->
 
-          <button
-            v-if="isDraftApplication"
-            :disabled="!canApply"
-            class="govuk-button"
-          >
-            Send application
-          </button>
-        </div>
-      </div>
+      <button
+        v-if="isDraftApplication"
+        :disabled="!canApply"
+        class="govuk-button"
+      >
+        Send application
+      </button>
     </form>
   </div>
 </template>
@@ -930,13 +936,6 @@ export default {
     },
   },
   methods: {
-    booleanAmender (value) {
-      if (value === true) { return 'Yes'; }
-      if (value === false) { return 'No'; }
-    },
-    detailsDetector (value) {
-      if (value !== null) {return true;}
-    },
     async save() {
       await this.$store.dispatch('application/submit');
       this.$router.push({ name: 'confirmation' });
