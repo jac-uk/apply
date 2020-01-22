@@ -357,13 +357,14 @@
                 Do you hold, or have you ever held in the past, a fee-paid judicial role?
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.feePaidJudicialRole == 'other-current-legal-role'"
+                  v-if="application.equalityAndDiversitySurvey.feePaidJudicialRole == 'other-fee-paid-judicial-office'"
                   class="govuk-body govuk-!-margin-bottom-0"
                 >
-                  {{ application.equalityAndDiversitySurvey.otherCurrentLegalRoleDetails }}
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
+                  {{ application.equalityAndDiversitySurvey.otherFeePaidJudicialRoleDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
               </dd>
             </div>
 
@@ -399,37 +400,42 @@
                 Ethnic group
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherEthnicGroupAsianDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-asian'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherEthnicGroupAsianDetails }}
                 </p>
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherEthnicGroupBlackDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-white'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
-                  {{ application.equalityAndDiversitySurvey.otherEthnicGroupBlackDetails }}
-                </p>
-                <p
-                  v-if="application.equalityAndDiversitySurvey.otherEthnicGroupWhiteDetails"
-                  class="govuk-body"
-                >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherEthnicGroupWhiteDetails }}
                 </p>
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherEthnicGroupMixedDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-black'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+                  {{ application.equalityAndDiversitySurvey.otherEthnicGroupBlackDetails }}
+                </p>
+                <p
+                  v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-mixed'"
+                  class="govuk-body govuk-!-margin-bottom-0"
+                >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherEthnicGroupMixedDetails }}
                 </p>
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherEthnicGroupDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-ethnic-group'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherEthnicGroupDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
               </dd>
             </div>
 
@@ -438,13 +444,14 @@
                 Gender
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.equalityAndDiversitySurvey.gender | lookup }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherGenderDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.gender == 'other-gender'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherGenderDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
               </dd>
             </div>
 
@@ -462,13 +469,14 @@
                 Sexual orientation
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherSexualOrientationDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.sexualOrientation == 'other-sexual-orientation'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
-                  Other: {{ application.equalityAndDiversitySurvey.otherSexualOrientationDetails }}
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}</span>
+                  {{ application.equalityAndDiversitySurvey.otherSexualOrientationDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}</span>
               </dd>
             </div>
 
@@ -477,13 +485,14 @@
                 Disability
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.disability | lookup | toYesNo }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.disabilityDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.disability"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
                   {{ application.equalityAndDiversitySurvey.disabilityDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
               </dd>
             </div>
 
@@ -492,13 +501,14 @@
                 Religion or faith are you
               </dt>
               <dd class="govuk-summary-list__value">
-                {{ application.equalityAndDiversitySurvey.religionFaith | lookup }}
                 <p
-                  v-if="application.equalityAndDiversitySurvey.otherReligionDetails"
-                  class="govuk-body"
+                  v-if="application.equalityAndDiversitySurvey.religionFaith == 'other-religion'"
+                  class="govuk-body govuk-!-margin-bottom-0"
                 >
+                  <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.religionFaith | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherReligionDetails }}
                 </p>
+                <span v-else>{{ application.equalityAndDiversitySurvey.religionFaith | lookup }}</span>
               </dd>
             </div>
 
