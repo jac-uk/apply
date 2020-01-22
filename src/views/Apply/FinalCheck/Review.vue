@@ -59,7 +59,7 @@
             </dt>
             <dd class="govuk-summary-list__value">
               <p v-if="application.personalDetails.dateOfBirth">
-                {{ application.personalDetails.dateOfBirth.toLocaleDateString() }}
+                {{ application.personalDetails.dateOfBirth | formatDate }}
               </p>
             </dd>
           </div>
@@ -109,16 +109,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.criminalOffences | lookup }}
-              <ul
-                v-for="item in application.characterInformation.criminalOffenceDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.criminalOffences | toYesNo }}
+              <EventRenderer 
+                v-if="application.characterInformation.criminalOffences"
+                :events="application.characterInformation.criminalOffenceDetails" 
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -134,7 +129,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -147,16 +142,11 @@
             <dd
               class="govuk-summary-list__value"
             >
-              {{ application.characterInformation.drivingDisqualificationDrinkDrugs | lookup }}
-              <ul
-                v-for="item in application.characterInformation.drivingDisqualificationDrinkDrugsDetails"
-                :key="item.name"
-              >
-                <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
-                </li>
-                <li>{{ item.details }}</li>
-              </ul>
+              {{ application.characterInformation.drivingDisqualificationDrinkDrugs | toYesNo }}
+              <EventRenderer 
+                v-if="application.characterInformation.drivingDisqualificationDrinkDrugs"
+                :events="application.characterInformation.drivingDisqualificationDrinkDrugsDetails" 
+              />
             </dd>
           </div>
           <div class="govuk-summary-list__row">
@@ -172,7 +162,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -191,7 +181,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -210,7 +200,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -230,7 +220,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -250,7 +240,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -269,7 +259,7 @@
                 :key="item.name"
               >
                 <li>
-                  {{ item.title }} - {{ item.date.toLocaleDateString() }}
+                  {{ item.title }} - {{ item.date | formatDate }}
                 </li>
                 <li>{{ item.details }}</li>
               </ul>
@@ -584,7 +574,7 @@
               <dd class="govuk-summary-list__value">
                 <ul class="govuk-list">
                   <li v-if="item.date">
-                    {{ item.date.toLocaleDateString() }}
+                    {{ item.date | formatDate }}
                   </li>
                 </ul>
               </dd>
@@ -675,7 +665,7 @@
             <dd class="govuk-summary-list__value">
               <ul class="govuk-list">
                 <li v-if="item.startDate && item.endDate">
-                  {{ item.startDate.toLocaleDateString() }} to {{ item.endDate.toLocaleDateString() }}
+                  {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
                 </li>
               </ul>
             </dd>
@@ -854,10 +844,13 @@
 <script>
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
+import EventRenderer from '@/components/Page/EventRenderer';
 //import html2canvas from 'html2canvas';
+
 export default {
   components: {
     BackLink,
+    EventRenderer,
   },
   computed: {
     vacancy () {
