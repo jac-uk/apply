@@ -701,7 +701,7 @@
                     v-for="task in item.tasks"
                     :key="task.name"
                   >
-                    {{ task }}
+                    {{ task | lookup }}
                   </li>
                   <li>
                     {{ item.otherTasks }}
