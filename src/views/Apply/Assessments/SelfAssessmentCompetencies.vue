@@ -21,14 +21,11 @@
           <h2 class="govuk-heading-m">
             Download self assessment template
           </h2>
-
-          <a
-            ref="templateDownloadLink"
-            class="govuk-link govuk-body-m"
-            href="#"
-          >
-            {{ downloadNameGenerator }}
-          </a>
+          <DownloadLink
+            :file-name="vacancy.uploadedCandidateAssessmentFormTemplate"
+            :exercise-id="vacancy.id"
+            :title="downloadNameGenerator"
+          />
         </div>
 
         <div class="govuk-form-group">
@@ -55,13 +52,16 @@
 </template>
 
 <script>
-import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
+import DownloadLink from '@/components/DownloadLink';
+import uploadMixin from '@/mixins/uploadMixin';
 
 export default {
   components: {
     BackLink,
+    DownloadLink,
   },
+  mixins: [uploadMixin],
   data(){
     const defaults = {};
     const data = this.$store.getters['application/data']();
