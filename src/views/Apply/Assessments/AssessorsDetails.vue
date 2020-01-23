@@ -6,7 +6,7 @@
         <h1 class="govuk-heading-xl">
           Independent assessors
         </h1>
-        
+
         <ErrorSummary :errors="errors" />
 
         <p class="govuk-body-l">
@@ -41,6 +41,12 @@
           required
         />
         <TextField
+          id="first-assessor-title"
+          v-model="application.firstAssessorTitle"
+          label="Title or position"
+          required
+        />
+        <TextField
           id="first-assessor-email"
           v-model="application.firstAssessorEmail"
           label="Email"
@@ -63,6 +69,12 @@
           id="second-assessor-full-name"
           v-model="application.secondAssessorFullName"
           label="Full name"
+          required
+        />
+        <TextField
+          id="second-assessor-title"
+          v-model="application.secondAssessorTitle"
+          label="Title or position"
           required
         />
         <TextField
@@ -107,9 +119,11 @@ export default {
   data(){
     const defaults = {
       firstAssessorFullName: null,
+      firstAssessorTitle: null,
       firstAssessorEmail: null,
       firstAssessorPhone: null,
       secondAssessorFullName: null,
+      secondAssessorTitle: null,
       secondAssessorEmail: null,
       secondAssessorPhone: null,
     };
