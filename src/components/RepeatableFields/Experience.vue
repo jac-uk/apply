@@ -30,7 +30,7 @@
     <LawRelatedTasks
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"
-      :otherTasks.sync="row.otherTasks"
+      :other-tasks.sync="row.otherTasks"
     />
 
     <slot name="removeButton" />

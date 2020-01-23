@@ -52,11 +52,11 @@
       label="None of the above - Any activity that, in the relevant decision-maker's opinion, is of a broadly similar nature to those listed above"
     >
       <TextareaInput
-          :id="`${id}_other_tasks`"
-          v-model="localOtherTasks"
-          label="List your different law-related tasks"
-          rows="2"
-        />
+        :id="`${id}_other_tasks`"
+        v-model="localOtherTasks"
+        label="List your different law-related tasks"
+        rows="2"
+      />
     </CheckboxItem>
   </CheckboxGroup>
 </template>
