@@ -6,7 +6,6 @@
         <h1 class="govuk-heading-xl">
           Statement of suitability
         </h1>
-
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in application.selectionCriteriaAnswers"
@@ -74,21 +73,6 @@
           >
         </div>
 
-        <div
-          v-if="vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'"
-          class="govuk-form-group"
-        >
-          <h2 class="govuk-heading-m">
-            Upload CV
-          </h2>
-          <input
-            id="cv-file"
-            class="govuk-file-upload"
-            type="file"
-            @change="fileSelected"
-          >
-        </div>
-
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button"
@@ -104,9 +88,9 @@
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
-import uploadMixin from '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
+import uploadMixin from '@/mixins/uploadMixin';
 
 export default {
   components: {
