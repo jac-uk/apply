@@ -740,6 +740,15 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Title or position
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.firstAssessorTitle }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Email
               </dt>
               <dd class="govuk-summary-list__value">
@@ -760,6 +769,15 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Title or position
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.secondAssessorTitle }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Email
               </dt>
               <dd class="govuk-summary-list__value">
@@ -768,7 +786,7 @@
             </div>
           </dl>
 
-        <!-- <div
+          <!-- <div
           v-if="isNonLegal || isLeadership"
           id="self-competencies-heading"
           class="govuk-!-margin-top-9"
@@ -805,58 +823,53 @@
             </div>
           </dl>
         </div>
+        -->
 
-        <div
-          id="self-competencies-heading"
-          class="govuk-!-margin-top-9"
+          <div
+            v-if="showAssessments"
+            id="assessments-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Assessments
+            </h2>
+
+            <dl 
+              v-if="showStatementOfSuitability"
+              class="govuk-summary-list"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Statement of suitability
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedSuitabilityStatement">Your uploaded file has been received</span>
+                  <span v-else>Not yet received</span>
+                  <router-link
+                    v-if="isDraftApplication"
+                    class="govuk-link govuk-body-m change-link"
+                    style="display:inline-block;"
+                    :to="{name: 'statement-of-suitability'}"
+                  >
+                    Change
+                  </router-link>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div><!-- END download-as-pdf-div -->
+
+        <button
+          v-if="isDraftApplication"
+          :disabled="!canApply"
+          class="govuk-button"
         >
-          <h2
-            class="govuk-heading-l"
-            style="display:inline-block;"
-          >
-            Statement of suitability
-          </h2>
-          <router-link
-            v-if="isDraftApplication"
-            class="govuk-link govuk-body-m change-link"
-            style="display:inline-block;"
-            :to="{name: 'statement-of-suitability'}"
-          >
-            Change
-          </router-link>
-
-          <dl class="govuk-summary-list govuk-!-margin-bottom-8">
-            <div class="govuk-summary-list__row">
-              <dd class="govuk-summary-list__value">
-                <a
-                  class="govuk-link govuk-body-m"
-                  href="#"
-                >
-                  Upload CV
-                </a>
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dd class="govuk-summary-list__value">
-                <a
-                  class="govuk-link govuk-body-m"
-                  href="#"
-                >
-                  upload statement of suitability
-                </a>
-              </dd>
-            </div>
-          </dl> -->
-        </div>
-      </div><!-- END download-as-pdf-div -->
-
-      <button
-        v-if="isDraftApplication"
-        :disabled="!canApply"
-        class="govuk-button"
-      >
-        Send application
-      </button>
+          Send application
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -893,6 +906,22 @@ export default {
     },
     isVacancyOpen() {
       return this.$store.getters['vacancy/isOpen'];
+    },
+    showAssessments() {
+      if (this.showStatementOfSuitability) {
+        return true;
+      }
+      return false;
+    },
+    showStatementOfSuitability() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-competencies':
+      case 'statement-of-suitability-with-skills-and-abilities':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+        return true;
+      default:
+        return false;
+      }
     },
     isApplicationComplete() {
       let isComplete = false;

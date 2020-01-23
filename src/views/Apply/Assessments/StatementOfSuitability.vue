@@ -55,14 +55,11 @@
           <h2 class="govuk-heading-m">
             Download Statement Of Suitability template
           </h2>
-
-          <a
-            ref="templateDownloadLink"
-            class="govuk-link govuk-body-m"
-            href="#"
-          >
-            {{ downloadNameGenerator }}
-          </a>
+          <DownloadLink
+            :file-name="vacancy.uploadedCandidateAssessmentFormTemplate"
+            :exercise-id="vacancy.id"
+            :title="downloadNameGenerator"
+          />
         </div>
 
         <div class="govuk-form-group">
@@ -109,6 +106,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import uploadMixin from '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
+import DownloadLink from '@/components/DownloadLink';
 
 export default {
   components: {
@@ -116,6 +114,7 @@ export default {
     RadioItem,
     TextareaInput,
     BackLink,
+    DownloadLink,
   },
   mixins: [uploadMixin],
   data(){
