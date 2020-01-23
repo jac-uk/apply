@@ -740,6 +740,15 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Title or position
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.firstAssessorTitle }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Email
               </dt>
               <dd class="govuk-summary-list__value">
@@ -755,6 +764,15 @@
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ application.secondAssessorFullName }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Title or position
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.secondAssessorTitle }}
               </dd>
             </div>
 
