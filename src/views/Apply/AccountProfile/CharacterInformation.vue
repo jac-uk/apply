@@ -295,6 +295,8 @@ export default {
       lateTaxReturnOrFinedDetails: null,
       involvedInProfessionalMisconduct: null,
       involvedInProfessionalMisconductDetails: null,
+      diciplinaryActionOrAskedToResign: null,
+      diciplinaryActionOrAskedToResignDetails: null,
       otherCharacterIssues: null,
       otherCharacterIssuesDetails: null,
     };
