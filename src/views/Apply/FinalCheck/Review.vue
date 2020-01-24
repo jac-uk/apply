@@ -701,10 +701,14 @@
                     v-for="task in item.tasks"
                     :key="task.name"
                   >
-                    {{ task }}
-                  </li>
-                  <li>
-                    {{ item.otherTasks }}
+                    <p
+                      v-if="task == 'other'"
+                      class="govuk-body govuk-!-margin-bottom-0"
+                    >
+                      <span class="govuk-caption-m">{{ task | lookup }}</span>
+                      {{ item.otherTasks }}
+                    </p>
+                    <span v-else>{{ task | lookup }}</span>
                   </li>
                 </ul>
               </dd>
