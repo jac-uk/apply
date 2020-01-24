@@ -48,7 +48,7 @@
       label="Teaching or researching law"
     />
     <CheckboxItem
-      value="none"
+      value="other"
       label="None of the above - Any activity that, in the relevant decision-maker's opinion, is of a broadly similar nature to those listed above"
     >
       <TextareaInput
