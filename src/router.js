@@ -48,6 +48,8 @@ import JurisdictionPreferences from '@/views/Apply/WorkingPreferences/Jurisdicti
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
+import StatementOfEligibility from '@/views/Apply/Assessments/StatementOfEligibility';
+import CV from '@/views/Apply/Assessments/CV';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
@@ -339,6 +341,24 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Statement of suitability',
+          },
+        },
+        {
+          path: 'statement-of-eligibility',
+          component: StatementOfEligibility,
+          name: 'statement-of-eligibility',
+          meta: {
+            requiresAuth: true,
+            title: 'Statement of eligibility',
+          },
+        },
+        {
+          path: 'cv',
+          component: CV,
+          name: 'cv',
+          meta: {
+            requiresAuth: true,
+            title: 'Curriculum vitae (CV)',
           },
         },
         {

@@ -18,11 +18,18 @@
       label="Details"
       rows="2"
     />
+    <LawRelatedTasks
+      :id="`tasks_${index}`"
+      :tasks.sync="row.tasks"
+      :other-tasks.sync="row.otherTasks"
+    />
+
     <slot name="removeButton" />
   </div>
 </template>
 
 <script>
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
 
@@ -31,6 +38,7 @@ export default {
   components: {
     DateInput,
     TextareaInput,
+    LawRelatedTasks,
   },
   props: {
     row: {
