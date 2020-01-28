@@ -7,17 +7,17 @@
           Curriculum vitae (CV)
         </h1>
 
-        <div class="govuk-form-group">
-          <h2 class="govuk-heading-m">
-            Upload CV
-          </h2>
-          <input
-            id="cv-file"
-            class="govuk-file-upload"
-            type="file"
-            @change="fileSelected"
-          >
-        </div>
+        <ErrorSummary :errors="errors" />
+
+        <FileUpload 
+          id="cv-upload"
+          ref="cv"
+          v-model="application.uploadedCV"
+          name="cv"
+          :path="uploadPath"
+          label="Upload CV"
+          required
+        />
 
         <button
           :disabled="application.status != 'draft'"
@@ -31,21 +31,26 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
-import uploadMixin from '@/mixins/uploadMixin';
+import FileUpload from '@/components/Form/FileUpload';
 
 export default {
   components: {
+    ErrorSummary,
     BackLink,
+    FileUpload,
   },
-  mixins: [uploadMixin],
+  extends: Form,
   data(){
-    const defaults = {};
+    const defaults = {
+      uploadedCV: null,
+    };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
       application: application,
-      files: {},
     };
   },
   computed: {
@@ -55,16 +60,22 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+    uploadPath() {
+      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
+    },
   },
   methods: {
     async save() {
-      const files = Object.values(this.files);
-      for (const file of files) {
-        await this.upload(file);
+      this.validate();
+      if (this.isValid()) {
+        const isUploaded = await this.$refs['cv'].upload();
+        if (!isUploaded) {
+          return false;
+        }
+        this.application.progress.cv = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
       }
-      this.application.progress.cv = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
     },
   },
 };
