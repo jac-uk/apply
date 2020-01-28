@@ -169,7 +169,7 @@
             <hr>
           </li>
         </ul>
-        
+
         <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
           Future applications
         </h1>
@@ -180,9 +180,20 @@
           <a
             style="font-size: 24px"
             class="govuk-link govuk-body"
-            href="https://www.judicialappointments.gov.uk/vacancies/181%20%26amp%3B%20182"
+            href="https://www.judicialappointments.gov.uk/vacancies/182"
             target="_blank"
-          >Chancery Master and Deputy Chancery Masters</a>
+          >Chancery Master</a>
+        </span>
+        <span
+          style="color: #1d70b8; font-size: 24px"
+          class="govuk-heading-m govuk-!-font-weight-bold"
+        >
+          <a
+            style="font-size: 24px"
+            class="govuk-link govuk-body"
+            href="https://www.judicialappointments.gov.uk/vacancies/181"
+            target="_blank"
+          >Deputy Chancery Masters</a>
         </span>
         <span
           style="color: #1d70b8;"
