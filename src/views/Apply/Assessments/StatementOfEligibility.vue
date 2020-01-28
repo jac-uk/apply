@@ -60,7 +60,6 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
-import uploadMixin from '@/mixins/uploadMixin';
 
 export default {
   components: {
@@ -69,7 +68,6 @@ export default {
     TextareaInput,
     BackLink,
   },
-  mixins: [uploadMixin],
   data(){
     const defaults = {
       selectionCriteriaAnswers: [],
@@ -104,11 +102,6 @@ export default {
   },
   methods: {
     async save() {
-      // loop through this.files and upload them
-      const files = Object.values(this.files);
-      for (const file of files) {
-        await this.upload(file);
-      }
       this.application.progress.statementOfEligibility = true;
       await this.$store.dispatch('application/save', this.application);
       this.$router.push({ name: 'task-list' });
