@@ -15,11 +15,11 @@ if (process.env.NODE_ENV !== 'development') {
     integrations: [new Integrations.Vue({ Vue, attachProps: true })],
   });
   LogRocket.init('vpm4kc/jac');
+  Vue.use(VueAnalytics, {
+    id: 'UA-153516887-1',
+  });
 }
 
-Vue.use(VueAnalytics, {
-  id: 'UA-153516887-1',
-});
 Vue.config.productionTip = false;
 
 let vueInstance = false;
