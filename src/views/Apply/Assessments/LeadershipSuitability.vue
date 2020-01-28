@@ -86,7 +86,7 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-import '@/mixins/uploadMixin';
+// import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
 
 export default {
