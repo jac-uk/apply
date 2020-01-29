@@ -10,18 +10,15 @@
           <p class="govuk-!-font-weight-bold govuk-!-margin-top-3">
             {{ application.referenceNumber }}
           </p>
-          <!-- <p class="govuk-!-font-weight-bold govuk-!-margin-top-0">
-            {{ vacancy.referenceNumber }} {{ vacancy.name }}
-          </p> -->
         </h2>
       </div>
 
-      <p class="govuk-body govuk-!-margin-top-6 govuk-!-margin-bottom-0">
+      <!-- <p class="govuk-body govuk-!-margin-top-6 govuk-!-margin-bottom-0">
         We've sent a confirmation email to:
       </p>
       <p class="govuk-body govuk-!-font-weight-bold">
         {{ application.personalDetails.email }}
-      </p>
+      </p> -->
 
       <h2 class="govuk-heading-m">
         What happens next?
