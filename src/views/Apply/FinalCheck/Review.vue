@@ -790,45 +790,6 @@
             </div>
           </dl>
 
-          <!-- <div
-          v-if="isNonLegal || isLeadership"
-          id="self-competencies-heading"
-          class="govuk-!-margin-top-9"
-        >
-          <h2
-            class="govuk-heading-l"
-            style="display:inline-block;"
-          >
-            Self-assessment competencies
-          </h2>
-          <router-link
-            v-if="isDraftApplication"
-            class="govuk-link govuk-body-m change-link"
-            style="display:inline-block;"
-            :to="{name: 'self-assessment-competencies'}"
-          >
-            Change
-          </router-link>
-
-          <dl class="govuk-summary-list govuk-!-margin-bottom-8">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Finished statements
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <a
-                  ref="templateDownloadLink"
-                  class="govuk-link govuk-body-m"
-                  href="#"
-                >
-                  fancy-judge-stuff.doc
-                </a>
-              </dd>
-            </div>
-          </dl>
-        </div>
-        -->
-
           <div
             v-if="showStatementOfSuitability"
             id="assessments-heading"
@@ -841,9 +802,11 @@
               Statement of suitability
             </h2>
 
-            <dl
-              v-if="showStatementOfSuitability"
-              class="govuk-summary-list"
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'statement-of-eligibility'}"
             >
               Change
             </router-link>
