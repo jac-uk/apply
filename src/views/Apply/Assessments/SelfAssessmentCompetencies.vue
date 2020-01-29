@@ -4,13 +4,13 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Self-assessment competencies
+          Self assessment competencies
         </h1>
 
         <ErrorSummary :errors="errors" />
 
         <p class="govuk-body-l">
-          Download the template on this page to complete your self-assessment
+          Download the template on this page to complete your self assessment
           competency statements. It details the specific skills and experience
           you'll need to demonstrate for this role.
         </p>
