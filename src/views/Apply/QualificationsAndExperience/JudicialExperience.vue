@@ -87,7 +87,7 @@
               <p>
                 Quasi-judicial bodies have powers and procedures
                 similar to those of courts.  For example, involve complex
-                matters, dertermining facts and making decisions.
+                matters, determining facts and making decisions.
               </p>
 
               <p>Examples of quasi-judicial bodies include:</p>

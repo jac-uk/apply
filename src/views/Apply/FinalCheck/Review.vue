@@ -540,6 +540,140 @@
             </div>
           </dl>
 
+          <div class="govuk-!-margin-top-9">
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Location preferences
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'location-preferences'}"
+            >
+              Change
+            </router-link>
+          </div>
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ vacancy.locationQuestion }}
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                <p
+                  v-for="item in application.locationPreferences"
+                  :key="item.name"
+                  class="govuk-body"
+                >
+                  {{ item }}
+                </p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="govuk-!-margin-top-9">
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Jurisdiction preferences
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'jurisdiction-preferences'}"
+            >
+              Change
+            </router-link>
+          </div>
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                {{ vacancy.jurisdictionQuestion }}
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                <p
+                  v-for="item in application.jurisdictionPreferences"
+                  :key="item.name"
+                  class="govuk-body"
+                >
+                  {{ item }}
+                </p>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="govuk-!-margin-top-9">
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Welsh posts
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'welsh-posts'}"
+            >
+              Change
+            </router-link>
+          </div>
+          <dl class="govuk-summary-list">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Are you applying for a Welsh post?
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                {{ application.applyingForWelshPost | toYesNo }}
+              </dd>
+            </div>
+            <div
+              v-if="application.applyingForWelshPost"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Can you speak Welsh?
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                {{ application.canSpeakWelsh | toYesNo }}
+              </dd>
+            </div>
+            <div
+              v-if="application.applyingForWelshPost"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Can you read and write in Welsh?
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                <p
+                  v-if="application.canReadAndWriteWelsh == false "
+                >
+                  {{ application.canReadAndWriteWelsh | toYesNo }}
+                </p>
+                <p
+                  v-if="application.canReadAndWriteWelsh"
+                >
+                  {{ application.canReadAndWriteWelsh | lookup }}
+                </p>
+              </dd>
+            </div>
+          </dl>
+
           <div v-if="isLegal">
             <div
               class="govuk-!-margin-top-9"
@@ -711,6 +845,206 @@
                     <span v-else>{{ task | lookup }}</span>
                   </li>
                 </ul>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="govuk-!-margin-top-9">
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Judicial experience
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'judicial-experience'}"
+            >
+              Change
+            </router-link>
+          </div>
+
+          <dl
+            class="govuk-summary-list govuk-!-margin-bottom-8"
+          >
+            <div
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Are you a fee-paid or salaried judge?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.feePaidOrSalariedJudge | toYesNo }}
+              </dd>
+            </div>
+
+            <div
+              v-if="application.feePaidOrSalariedJudge === true"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Have you sat for at least 30 days?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body">
+                  {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
+                </p>
+                <p
+                  v-if="application.feePaidOrSalariedSittingDaysDetails"
+                  class="govuk-body"
+                >
+                  {{ application.feePaidOrSalariedSittingDaysDetails }}
+                </p>
+              </dd>
+            </div>
+
+            <div
+              v-if="application.feePaidOrSalariedSatForThirtyDays == false || application.feePaidOrSalariedJudge == false"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Have you declared an appointment or appointments in a quasi-judicial body in this application?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.declaredAppointmentInQuasiJudicialBody | toYesNo }}
+              </dd>
+            </div>
+
+            <div
+              v-if="application.declaredAppointmentInQuasiJudicialBody === true"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Have you sat for at least 30 days in one or all of these appointments?
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <p class="govuk-body">
+                  {{ application.quasiJudicialSatForThirtyDays | toYesNo }}
+                </p>
+                <p
+                  v-if="application.quasiJudicialSittingDaysDetails"
+                  class="govuk-body"
+                >
+                  {{ application.quasiJudicialSittingDaysDetails }}
+                </p>
+              </dd>
+            </div>
+
+            <div
+              v-if="application.declaredAppointmentInQuasiJudicialBody == false ||
+                application.quasiJudicialSatForThirtyDays == false"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                details of how you have acquired the necessary
+                skills for this role in some other significant way
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.skillsAquisitionDetails }}
+              </dd>
+            </div>
+          </dl>
+
+          <div
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Gaps in employment
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'employment-gaps'}"
+            >
+              Change
+            </router-link>
+          </div>
+
+          <dl
+            v-for="item in application.employmentGaps"
+            :key="item.name"
+            class="govuk-summary-list govuk-!-margin-bottom-8"
+          >
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Date of gap
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <ul class="govuk-list">
+                  <li v-if="item.startDate && item.endDate">
+                    {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                  </li>
+                </ul>
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Details
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <ul class="govuk-list">
+                  <li>{{ item.details }}</li>
+                </ul>
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Law-related tasks
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <ul class="govuk-list">
+                  <li
+                    v-for="task in item.tasks"
+                    :key="task.name"
+                  >
+                    <p
+                      v-if="task == 'other'"
+                      class="govuk-body govuk-!-margin-bottom-0"
+                    >
+                      <span class="govuk-caption-m">{{ task | lookup }}</span>
+                      {{ item.otherTasks }}
+                    </p>
+                    <span v-else>{{ task | lookup }}</span>
+                  </li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="govuk-!-margin-top-9">
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Reasonable length of service
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'reasonable-length-of-service'}"
+            >
+              Change
+            </router-link>
+          </div>
+          <dl class="govuk-summary-list govuk-!-margin-bottom-8">
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                Can work a resonable length of service
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.canGiveReasonableLOS | toYesNo }}
+                <p v-if="application.canGiveReasonableLOS == false">
+                  {{ application.cantGiveReasonableLOSDetails }}
+                </p>
               </dd>
             </div>
           </dl>
