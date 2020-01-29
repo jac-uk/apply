@@ -457,7 +457,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Changed gender
+                Gender is the same as sex assigned at birth
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ application.equalityAndDiversitySurvey.changedGender | lookup | toYesNo }}
@@ -841,7 +841,7 @@
               Assessments
             </h2>
 
-            <dl 
+            <dl
               v-if="showStatementOfSuitability"
               class="govuk-summary-list"
             >
