@@ -58,6 +58,14 @@
           </ul>
         </li>
       </ol>
+
+      <button
+        :disabled="!canApply"
+        class="govuk-button"
+        @click="reviewApplication"
+      >
+        Review application
+      </button>
     </div>
   </div>
 </template>
@@ -192,15 +200,93 @@ export default {
           title: 'Assessments',
           tasks: assessmentOptions,
         });
-
-        data.push({
-          title: 'Apply',
-          tasks: [
-            { title: 'Review application', id: 'review', done: false },
-          ],
-        });
       }
       return data;
+    },
+    // @todo the following are copied from Review.vue. Look to share them. Maybe use vuex.
+    showStatementOfSuitability() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-competencies':
+      case 'statement-of-suitability-with-skills-and-abilities':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+        return true;
+      default:
+        return false;
+      }
+    },
+    showCV() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'self-assessment-with-competencies-and-cv':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+        return true;
+      default:
+        return false;
+      }
+    },  
+    showStatementOfEligibility() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-eligibility':
+        return true;
+      default:
+        return false;
+      }
+    },
+    showSelfAssessment() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'self-assessment-with-competencies':
+      case 'self-assessment-with-competencies-and-cv':
+        return true;
+      default:
+        return false;
+      }
+    },
+    isApplicationComplete() {
+      let isComplete = false;
+      if (this.application && this.application.progress) {
+        isComplete = true;
+        if (!this.application.progress.personalDetails) { isComplete = false; }
+        if (!this.application.progress.characterInformation) { isComplete = false; }
+        if (!this.application.progress.equalityAndDiversitySurvey) { isComplete = false; }
+        if (!this.application.progress.assessorsDetails) { isComplete = false; }
+        if (this.vacancy.isSPTWOffered) {
+          if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.welshRequirement) {
+          if (!this.application.progress.welshPosts) { isComplete = false; }
+        }
+        if (this.isLegal) {
+          if (!this.application.progress.relevantQualifications) { isComplete = false; }
+          if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
+          if (!this.application.progress.judicialExperience) { isComplete = false; }
+          if (!this.application.progress.employmentGaps) { isComplete = false; }
+        }
+        if (this.isNonLegal) {
+          if (!this.application.progress.relevantMemberships) { isComplete = false; }
+          if (!this.application.progress.relevantExperience) { isComplete = false; }
+          if (!this.application.progress.employmentGaps) { isComplete = false; }
+        }
+        if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
+        if (this.showCV && !this.application.progress.cv) { isComplete = false; }
+        if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
+        if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
+      }
+      return isComplete;
+    },
+    isDraftApplication() {
+      return this.application.status === 'draft';
+    },
+    isVacancyOpen() {
+      return this.$store.getters['vacancy/isOpen'];
+    },
+    canApply () {
+      return this.isDraftApplication
+        && this.isVacancyOpen
+        && this.isApplicationComplete;
+    },
+  },
+  methods: {
+    reviewApplication() {
+      this.$router.push({ name: 'review' });
     },
   },
 };
