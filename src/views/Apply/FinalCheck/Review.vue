@@ -830,7 +830,7 @@
         -->
 
           <div
-            v-if="showAssessments"
+            v-if="showStatementOfSuitability"
             id="assessments-heading"
             class="govuk-!-margin-top-9"
           >
@@ -838,30 +838,152 @@
               class="govuk-heading-l"
               style="display:inline-block;"
             >
-              Assessments
+              Statement of suitability
             </h2>
 
             <dl
               v-if="showStatementOfSuitability"
               class="govuk-summary-list"
             >
-              <div class="govuk-summary-list__row">
+              Change
+            </router-link>
+
+            <dl class="govuk-summary-list">
+              <div
+                v-for="(item, index) in application.selectionCriteriaAnswers"
+                :key="index"              
+                class="govuk-summary-list__row"
+              >
                 <dt class="govuk-summary-list__key">
-                  Statement of suitability
+                  {{ item.title }}
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <span v-if="application.uploadedSuitabilityStatement">Your uploaded file has been received</span>
-                  <span v-else>Not yet received</span>
-                  <router-link
-                    v-if="isDraftApplication"
-                    class="govuk-link govuk-body-m change-link"
-                    style="display:inline-block;"
-                    :to="{name: 'statement-of-suitability'}"
-                  >
-                    Change
-                  </router-link>
+                  <span v-if="item.answer">
+                    {{ item.answerDetails }}
+                  </span>
+                  <span v-else>I do not meet this requirement</span>                  
                 </dd>
               </div>
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Upload statement of suitability
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>         
+            </dl>
+          </div>
+
+          <div
+            v-if="showStatementOfEligibility"
+            id="assessments-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Statement of eligibility
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'statement-of-eligibility'}"
+            >
+              Change
+            </router-link>
+
+            <dl class="govuk-summary-list">
+              <div
+                v-for="(item, index) in application.selectionCriteriaAnswers"
+                :key="index"              
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  {{ item.title }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="item.answer">
+                    {{ item.answerDetails }}
+                  </span>
+                  <span v-else>I do not meet this requirement</span>                  
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            v-if="showSelfAssessment"
+            id="self-assessment-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Self assessment competencies
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'self-assessment-competencies'}"
+            >
+              Change
+            </router-link>
+
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Upload finished self assessment
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedSelfAssessment">Your file has been received</span>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>         
+            </dl>
+          </div>
+
+          <div
+            v-if="showCV"
+            id="cv-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Curriculum vitae (CV)
+            </h2>
+            <router-link
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'cv'}"
+            >
+              Change
+            </router-link>
+
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Upload CV
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedCV">Your file has been received</span>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>         
             </dl>
           </div>
         </div><!-- END download-as-pdf-div -->
@@ -882,7 +1004,6 @@
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
 import EventRenderer from '@/components/Page/EventRenderer';
-//import html2canvas from 'html2canvas';
 
 export default {
   components: {
@@ -911,17 +1032,37 @@ export default {
     isVacancyOpen() {
       return this.$store.getters['vacancy/isOpen'];
     },
-    showAssessments() {
-      if (this.showStatementOfSuitability) {
-        return true;
-      }
-      return false;
-    },
     showStatementOfSuitability() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-competencies':
       case 'statement-of-suitability-with-skills-and-abilities':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+        return true;
+      default:
+        return false;
+      }
+    },
+    showCV() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'self-assessment-with-competencies-and-cv':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+        return true;
+      default:
+        return false;
+      }
+    },  
+    showStatementOfEligibility() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-eligibility':
+        return true;
+      default:
+        return false;
+      }
+    },
+    showSelfAssessment() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'self-assessment-with-competencies':
+      case 'self-assessment-with-competencies-and-cv':
         return true;
       default:
         return false;
@@ -952,24 +1093,10 @@ export default {
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
-        switch (this.vacancy.assessmentOptions) {
-        case 'self-assessment-with-competencies':
-          if (!this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
-          break;
-        case 'statement-of-suitability-with-competencies':
-          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities':
-          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-cv':
-          if (!this.application.progress.statementOfSuitability) { isComplete = false; }
-          break;
-        case 'statement-of-eligibility':
-          if (!this.application.progress.statementOfEligibility) { isComplete = false; }
-          break;
-        default:
-        }
+        if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
+        if (this.showCV && !this.application.progress.cv) { isComplete = false; }
+        if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
+        if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
       }
       return isComplete;
     },
