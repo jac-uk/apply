@@ -736,6 +736,178 @@
             </dl>
           </div>
 
+          <div v-if="(vacancy.memberships.indexOf('none') === -1)">
+            <div
+              class="govuk-!-margin-top-9"
+            >
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Memberships
+              </h2>
+              <router-link
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'relevant-memberships'}"
+              >
+                Change
+              </router-link>
+            </div>
+
+            <dl
+              class="govuk-summary-list govuk-!-margin-bottom-8"
+            >
+              <div
+                v-if="showMembershipOption('chartered-association-of-building-engineers')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Chartered Association of Building Engineers
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.charteredAssociationBuildingEngineersDate | formatDate }}</li>
+                    <li>{{ application.charteredAssociationBuildingEngineersNumber }}</li>
+                    <li>{{ application.charteredAssociationBuildingEngineersInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('chartered-institute-of-building')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Chartered Association of Building Engineers
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.charteredInstituteBuildingDate | formatDate }}</li>
+                    <li>{{ application.charteredInstituteBuildingNumber }}</li>
+                    <li>{{ application.charteredInstituteBuildingInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('chartered-institute-of-environmental-health')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Chartered Institute of Environmental Health
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.charteredInstituteEnvironmentalHealthDate | formatDate }}</li>
+                    <li>{{ application.charteredInstituteEnvironmentalHealthNumber }}</li>
+                    <li>{{ application.charteredInstituteEnvironmentalHealthInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('general-medical-council')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  General Medical Council
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.generalMedicalCouncilDate | formatDate }}</li>
+                    <li>{{ application.generalMedicalCouncilNumber }}</li>
+                    <li>{{ application.generalMedicalCouncilInformation }}</li>
+                  </ul>
+
+                  <ul
+                    v-if="application.generalMedicalCouncilConditional"
+                    class="govuk-list"
+                  >
+                    <p class="govuk-hint">
+                      Conditions
+                    </p>
+                    <li
+                      v-if="application.generalMedicalCouncilConditionalStartDate
+                        && application.generalMedicalCouncilConditionalEndDate"
+                    >
+                      {{ application.generalMedicalCouncilConditionalStartDate | formatDate }}
+                      to {{ application.generalMedicalCouncilConditionalEndDate | formatDate }}
+                    </li>
+                    <li>
+                      {{ application.generalMedicalCouncilConditionalDetails }}
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('royal-college-of-psychiatrists')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Royal College of Psychiatrists
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.royalCollegeOfPsychiatristsDate | formatDate }}</li>
+                    <li>{{ application.royalCollegeOfPsychiatristsNumber }}</li>
+                    <li>{{ application.royalCollegeOfPsychiatristsInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('royal-institution-of-chartered-surveyors')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Royal Institution of Chartered Surveyors
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.royalInstitutionCharteredSurveyorsDate | formatDate }}</li>
+                    <li>{{ application.royalInstitutionCharteredSurveyorsNumber }}</li>
+                    <li>{{ application.royalInstitutionCharteredSurveyorsInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('royal-institute-of-british-architects')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Royal Institute of British Architects
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.royalInstituteBritishArchitectsDate | formatDate }}</li>
+                    <li>{{ application.royalInstituteBritishArchitectsNumber }}</li>
+                    <li>{{ application.royalInstituteBritishArchitectsInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="showMembershipOption('other')"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Other membership
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ application.otherProfessionalMembershipsDate | formatDate }}</li>
+                    <li>{{ application.otherProfessionalMembershipsNumber }}</li>
+                    <li>{{ application.otherProfessionalMembershipsInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div v-if="isNonLegal">
             <div
               class="govuk-!-margin-top-9"
@@ -1184,7 +1356,7 @@
             <dl class="govuk-summary-list">
               <div
                 v-for="(item, index) in application.selectionCriteriaAnswers"
-                :key="index"              
+                :key="index"
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
@@ -1194,7 +1366,7 @@
                   <span v-if="item.answer">
                     {{ item.answerDetails }}
                   </span>
-                  <span v-else>I do not meet this requirement</span>                  
+                  <span v-else>I do not meet this requirement</span>
                 </dd>
               </div>
               <div
@@ -1207,7 +1379,7 @@
                   <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
                   <span v-else>Not yet received</span>
                 </dd>
-              </div>         
+              </div>
             </dl>
           </div>
 
@@ -1234,7 +1406,7 @@
             <dl class="govuk-summary-list">
               <div
                 v-for="(item, index) in application.selectionCriteriaAnswers"
-                :key="index"              
+                :key="index"
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
@@ -1244,7 +1416,7 @@
                   <span v-if="item.answer">
                     {{ item.answerDetails }}
                   </span>
-                  <span v-else>I do not meet this requirement</span>                  
+                  <span v-else>I do not meet this requirement</span>
                 </dd>
               </div>
             </dl>
@@ -1281,7 +1453,7 @@
                   <span v-if="application.uploadedSelfAssessment">Your file has been received</span>
                   <span v-else>Not yet received</span>
                 </dd>
-              </div>         
+              </div>
             </dl>
           </div>
 
@@ -1316,7 +1488,7 @@
                   <span v-if="application.uploadedCV">Your file has been received</span>
                   <span v-else>Not yet received</span>
                 </dd>
-              </div>         
+              </div>
             </dl>
           </div>
         </div><!-- END download-as-pdf-div -->
@@ -1383,7 +1555,7 @@ export default {
       default:
         return false;
       }
-    },  
+    },
     showStatementOfEligibility() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-eligibility':
@@ -1443,6 +1615,9 @@ export default {
     },
   },
   methods: {
+    showMembershipOption(ref) {
+      return this.application.professionalMemberships.indexOf(ref) >= 0;
+    },
     async save() {
       await this.$store.dispatch('application/submit');
       this.$router.push({ name: 'confirmation' });
