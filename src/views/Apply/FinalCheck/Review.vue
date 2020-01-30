@@ -735,217 +735,253 @@
               </div>
             </dl>
           </div>
-          <!-- <div v-if="isNonLegal">
-          <div
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
+
+          <div v-if="isNonLegal">
+            <div
+              class="govuk-!-margin-top-9"
             >
-              Memberships
-            </h2>
-            <router-link
-              v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'relevant-memberships'}"
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Experience
+              </h2>
+              <router-link
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'relevant-experience'}"
+              >
+                Change
+              </router-link>
+            </div>
+
+            <dl
+              v-for="item in application.experience"
+              :key="item.name"
+              class="govuk-summary-list govuk-!-margin-bottom-8"
             >
-              Change
-            </router-link>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Organisation or business
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ item.orgBusinessName }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Job title
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ item.jobTitle }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Date qualified
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li v-if="item.startDate && item.endDate">
+                      {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
           </div>
-          <dl
-            class="govuk-summary-list govuk-!-margin-bottom-8"
-          >
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Memberships
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.professionalMemberships }}
-              </dd>
-            </div>
-          </dl>
-        </div> -->
 
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
+          <div v-if="isLegal">
+            <div
+              class="govuk-!-margin-top-9"
             >
-              Post-qualification experience
-            </h2>
-            <router-link
-              v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'post-qualification-work-experience'}"
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Post-qualification experience
+              </h2>
+              <router-link
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'post-qualification-work-experience'}"
+              >
+                Change
+              </router-link>
+            </div>
+
+            <dl
+              v-for="item in application.experience"
+              :key="item.name"
+              class="govuk-summary-list govuk-!-margin-bottom-8"
             >
-              Change
-            </router-link>
-          </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Job title
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ item.jobTitle }}</li>
+                  </ul>
+                </dd>
+              </div>
 
-          <dl
-            v-for="item in application.experience"
-            :key="item.name"
-            class="govuk-summary-list govuk-!-margin-bottom-8"
-          >
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Job title
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li>{{ item.jobTitle }}</li>
-                </ul>
-              </dd>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Organisation or business
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ item.orgBusinessName }}</li>
+                  </ul>
+                </dd>
+              </div>
 
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Organisation or business
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li>{{ item.orgBusinessName }}</li>
-                </ul>
-              </dd>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Dates worked
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li v-if="item.startDate && item.endDate">
+                      {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                  </ul>
+                </dd>
+              </div>
 
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Dates worked
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li v-if="item.startDate && item.endDate">
-                    {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
-                  </li>
-                </ul>
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Law-related tasks
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li
-                    v-for="task in item.tasks"
-                    :key="task.name"
-                  >
-                    <p
-                      v-if="task == 'other'"
-                      class="govuk-body govuk-!-margin-bottom-0"
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Law-related tasks
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li
+                      v-for="task in item.tasks"
+                      :key="task.name"
                     >
-                      <span class="govuk-caption-m">{{ task | lookup }}</span>
-                      {{ item.otherTasks }}
-                    </p>
-                    <span v-else>{{ task | lookup }}</span>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
-
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Judicial experience
-            </h2>
-            <router-link
-              v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'judicial-experience'}"
-            >
-              Change
-            </router-link>
+                      <p
+                        v-if="task == 'other'"
+                        class="govuk-body govuk-!-margin-bottom-0"
+                      >
+                        <span class="govuk-caption-m">{{ task | lookup }}</span>
+                        {{ item.otherTasks }}
+                      </p>
+                      <span v-else>{{ task | lookup }}</span>
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          <dl
-            class="govuk-summary-list govuk-!-margin-bottom-8"
-          >
-            <div
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Are you a fee-paid or salaried judge?
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.feePaidOrSalariedJudge | toYesNo }}
-              </dd>
+          <div v-if="isLegal">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Judicial experience
+              </h2>
+              <router-link
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'judicial-experience'}"
+              >
+                Change
+              </router-link>
             </div>
 
-            <div
-              v-if="application.feePaidOrSalariedJudge === true"
-              class="govuk-summary-list__row"
+            <dl
+              class="govuk-summary-list govuk-!-margin-bottom-8"
             >
-              <dt class="govuk-summary-list__key">
-                Have you sat for at least 30 days?
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <p class="govuk-body">
-                  {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
-                </p>
-                <p
-                  v-if="application.feePaidOrSalariedSittingDaysDetails"
-                  class="govuk-body"
-                >
-                  {{ application.feePaidOrSalariedSittingDaysDetails }}
-                </p>
-              </dd>
-            </div>
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Are you a fee-paid or salaried judge?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.feePaidOrSalariedJudge | toYesNo }}
+                </dd>
+              </div>
 
-            <div
-              v-if="application.feePaidOrSalariedSatForThirtyDays == false || application.feePaidOrSalariedJudge == false"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Have you declared an appointment or appointments in a quasi-judicial body in this application?
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.declaredAppointmentInQuasiJudicialBody | toYesNo }}
-              </dd>
-            </div>
+              <div
+                v-if="application.feePaidOrSalariedJudge === true"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Have you sat for at least 30 days?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <p class="govuk-body">
+                    {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
+                  </p>
+                  <p
+                    v-if="application.feePaidOrSalariedSittingDaysDetails"
+                    class="govuk-body"
+                  >
+                    {{ application.feePaidOrSalariedSittingDaysDetails }}
+                  </p>
+                </dd>
+              </div>
 
-            <div
-              v-if="application.declaredAppointmentInQuasiJudicialBody === true"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Have you sat for at least 30 days in one or all of these appointments?
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <p class="govuk-body">
-                  {{ application.quasiJudicialSatForThirtyDays | toYesNo }}
-                </p>
-                <p
-                  v-if="application.quasiJudicialSittingDaysDetails"
-                  class="govuk-body"
-                >
-                  {{ application.quasiJudicialSittingDaysDetails }}
-                </p>
-              </dd>
-            </div>
+              <div
+                v-if="application.feePaidOrSalariedSatForThirtyDays == false || application.feePaidOrSalariedJudge == false"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Have you declared an appointment or appointments in a quasi-judicial body in this application?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.declaredAppointmentInQuasiJudicialBody | toYesNo }}
+                </dd>
+              </div>
 
-            <div
-              v-if="application.declaredAppointmentInQuasiJudicialBody == false ||
-                application.quasiJudicialSatForThirtyDays == false"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                details of how you have acquired the necessary
-                skills for this role in some other significant way
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.skillsAquisitionDetails }}
-              </dd>
-            </div>
-          </dl>
+              <div
+                v-if="application.declaredAppointmentInQuasiJudicialBody === true"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Have you sat for at least 30 days in one or all of these appointments?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <p class="govuk-body">
+                    {{ application.quasiJudicialSatForThirtyDays | toYesNo }}
+                  </p>
+                  <p
+                    v-if="application.quasiJudicialSittingDaysDetails"
+                    class="govuk-body"
+                  >
+                    {{ application.quasiJudicialSittingDaysDetails }}
+                  </p>
+                </dd>
+              </div>
+
+              <div
+                v-if="application.declaredAppointmentInQuasiJudicialBody == false ||
+                  application.quasiJudicialSatForThirtyDays == false"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  details of how you have acquired the necessary
+                  skills for this role in some other significant way
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.skillsAquisitionDetails }}
+                </dd>
+              </div>
+            </dl>
+          </div>
 
           <div
             class="govuk-!-margin-top-9"
