@@ -6,6 +6,9 @@
         <h1 class="govuk-heading-xl">
           Statement of suitability
         </h1>
+
+        <ErrorSummary :errors="errors" />
+
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in application.selectionCriteriaAnswers"
@@ -61,17 +64,15 @@
           />
         </div>
 
-        <div class="govuk-form-group">
-          <h2 class="govuk-heading-m">
-            Upload Statement of Suitability
-          </h2>
-          <input
-            id="suitability-statement-file"
-            class="govuk-file-upload"
-            type="file"
-            @change="fileSelected"
-          >
-        </div>
+        <FileUpload 
+          id="suitability-statement-file"
+          ref="suitability-statement"
+          v-model="application.uploadedSuitabilityStatement"
+          name="suitability-statement"
+          :path="uploadPath"
+          label="Upload Statement of Suitability"
+          required
+        />
 
         <button
           :disabled="application.status != 'draft'"
@@ -85,42 +86,48 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
+import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
-import uploadMixin from '@/mixins/uploadMixin';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     TextareaInput,
+    FileUpload,
     BackLink,
     DownloadLink,
   },
-  mixins: [uploadMixin],
+  extends: Form,
   data(){
     const defaults = {
       selectionCriteriaAnswers: [],
+      uploadedSuitabilityStatement: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
-    const vacancy = this.$store.state.vacancy.record;
-    if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
-      for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-        application.selectionCriteriaAnswers.push({
-          title: vacancy.selectionCriteria[i].title,
-          text: vacancy.selectionCriteria[i].title,
-          answer: null,
-          answerDetail: null,
-        });
+    if (application.selectionCriteriaAnswers.length === 0) {
+      const vacancy = this.$store.state.vacancy.record;
+      if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
+        for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+          application.selectionCriteriaAnswers.push({
+            title: vacancy.selectionCriteria[i].title,
+            text: vacancy.selectionCriteria[i].text,
+            answer: null,
+            answerDetails: null,
+          });
+        }
       }
     }
     return {
       application: application,
-      files: {},
     };
   },
   computed: {
@@ -129,6 +136,9 @@ export default {
     },
     vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    uploadPath() {
+      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
     },
     downloadNameGenerator() {
       let outcome = null;
@@ -149,14 +159,16 @@ export default {
   },
   methods: {
     async save() {
-      // loop through this.files and upload them
-      const files = Object.values(this.files);
-      for (const file of files) {
-        await this.upload(file);
+      this.validate();
+      if (this.isValid()) {
+        const isUploaded = await this.$refs['suitability-statement'].upload();
+        if (!isUploaded) {
+          return false;
+        }
+        this.application.progress.statementOfSuitability = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
       }
-      this.application.progress.statementOfSuitability = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
     },
   },
 };

@@ -4,11 +4,13 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Self-assessment competencies
+          Self assessment competencies
         </h1>
 
+        <ErrorSummary :errors="errors" />
+
         <p class="govuk-body-l">
-          Download the template on this page to complete your self-assessment
+          Download the template on this page to complete your self assessment
           competency statements. It details the specific skills and experience
           you'll need to demonstrate for this role.
         </p>
@@ -28,17 +30,15 @@
           />
         </div>
 
-        <div class="govuk-form-group">
-          <h2 class="govuk-heading-m">
-            Upload finished self assessment
-          </h2>
-          <input
-            id="self-assessment-file"
-            class="govuk-file-upload"
-            type="file"
-            @change="fileSelected"
-          >
-        </div>
+        <FileUpload 
+          id="self-assessment-upload"
+          ref="self-assessment"
+          v-model="application.uploadedSelfAssessment"
+          name="self-assessment"
+          :path="uploadPath"
+          label="Upload finished self assessment"
+          required
+        />
 
         <button
           :disabled="application.status != 'draft'"
@@ -52,23 +52,28 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
-import uploadMixin from '@/mixins/uploadMixin';
+import FileUpload from '@/components/Form/FileUpload';
 
 export default {
   components: {
+    ErrorSummary,
     BackLink,
     DownloadLink,
+    FileUpload,
   },
-  mixins: [uploadMixin],
+  extends: Form,
   data(){
-    const defaults = {};
+    const defaults = {
+      uploadedSelfAssessment: null,
+    };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
       application: application,
-      files: {},
     };
   },
   computed: {
@@ -77,6 +82,9 @@ export default {
     },
     vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    uploadPath() {
+      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
     },
     downloadNameGenerator() {
       let outcome = null;
@@ -94,15 +102,16 @@ export default {
   },
   methods: {
     async save() {
-      // loop through this.files and upload them
-      const files = Object.values(this.files);
-      for (const file of files) {
-        await this.upload(file);
+      this.validate();
+      if (this.isValid()) {
+        const isUploaded = await this.$refs['self-assessment'].upload();
+        if (!isUploaded) {
+          return false;
+        }
+        this.application.progress.selfAssessmentCompetencies = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
       }
-
-      this.application.progress.selfAssessmentCompetencies = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
     },
   },
 };
