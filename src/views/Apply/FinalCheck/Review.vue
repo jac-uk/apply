@@ -557,22 +557,27 @@
             </router-link>
           </div>
           <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                {{ vacancy.locationQuestion }}
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
+            <dt class="govuk-summary-list__key">
+              {{ vacancy.locationQuestion }}
+            </dt>
+            <dd
+              v-if="vacancy.locationQuestionType == 'single-choice'"
+              class="govuk-summary-list__value"
+            >
+              {{ application.locationPreferences }}
+            </dd>
+            <dd
+              v-else
+              class="govuk-summary-list__value"
+            >
+              <p
+                v-for="item in application.locationPreferences"
+                :key="item.name"
+                class="govuk-body"
               >
-                <p
-                  v-for="item in application.locationPreferences"
-                  :key="item.name"
-                  class="govuk-body"
-                >
-                  {{ item }}
-                </p>
-              </dd>
-            </div>
+                {{ item }}
+              </p>
+            </dd>
           </dl>
 
           <div class="govuk-!-margin-top-9">
@@ -597,6 +602,13 @@
                 {{ vacancy.jurisdictionQuestion }}
               </dt>
               <dd
+                v-if="vacancy.jurisdictionQuestionType == 'single-choice'"
+                class="govuk-summary-list__value"
+              >
+                {{ application.jurisdictionPreferences }}
+              </dd>
+              <dd
+                v-else
                 class="govuk-summary-list__value"
               >
                 <p
