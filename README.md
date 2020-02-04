@@ -14,7 +14,7 @@ npm install
 ```
 ### Add environment variables to project
 
-create .env file in root directory
+create .env file in root directory + credentials
 
 ### Compiles and hot-reloads for local development (If you're new, copy another developer's `.env` file)
 ```
