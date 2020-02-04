@@ -15,7 +15,6 @@ git clone git@github.com:jac-uk/apply.git
 ### Change directory into project directory
 ```
 cd apply
-
 ```
 ## Project setup
 ```
