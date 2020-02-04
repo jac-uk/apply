@@ -12,6 +12,9 @@ We have 2 Firebase projects:
 ```
 npm install
 ```
+### Add environment variables to project
+
+create .env file in root directory
 
 ### Compiles and hot-reloads for local development (If you're new, copy another developer's `.env` file)
 ```
