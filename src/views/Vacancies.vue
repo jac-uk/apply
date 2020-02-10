@@ -198,22 +198,23 @@ for an alert about this exercise
               </p>
             </li>
             <hr>
-
-            <li class="govuk-!-margin-top-7">
-              <span class="govuk-heading-m govuk-!-font-weight-bold">
-                Fee-paid Legal Members Mental Health Review Tribunal Wales
+            <span class="govuk-heading-m govuk-!-font-weight-bold">
+              Fee-paid Legal Members Mental Health Review Tribunal Wales
+            </span>
+            <p>
+              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 20 February 2020
               </span>
-              <p>
-                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body">   9 April 2020 at 13:00</span>
-              </p>
-              <p>
-                <a
-                  class="govuk-link govuk-body"
-                  href="https://www.judicialappointments.gov.uk/vacancies/161"
-                  target="_blank"
-                >Find out more</a>
-              </p>
-            </li>
+            </p>
+            <p>
+              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body"> 5 March 2020 at 13:00</span>
+            </p>
+            <p>
+              <a
+                class="govuk-link govuk-body"
+                href="https://www.judicialappointments.gov.uk/vacancies/161"
+                target="_blank"
+              >Find out more</a>
+            </p>
             <hr>
 
             <li class="govuk-!-margin-top-7">
