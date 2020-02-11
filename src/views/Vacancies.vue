@@ -559,7 +559,7 @@ for an alert about this exercise
             <hr>
           </li><li class="govuk-!-margin-top-7">
             <span class="govuk-heading-m govuk-!-font-weight-bold">
-              District Judge
+              District Test
             </span>
 
             <p>
