@@ -33,6 +33,13 @@ $govuk-font-family: "Khula", "HelveticaNeue", "Helvetica Neue", "Arial", "Helvet
 }
 
 // JAC bespoke css can go here
+hr  {
+  height: 1px;
+  color: black;
+  background-color: black;
+  border: none;
+}
+
 body {
   margin: 0;
   padding: 0;
