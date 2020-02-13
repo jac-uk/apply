@@ -333,6 +333,12 @@ for an alert about this exercise
               <span class="govuk-heading-m govuk-!-font-weight-bold">
                 Fee-Paid Specialist Member of the Upper Tribunal assigned to the Administrative Appeals Chamber (Disclosure and Barring jurisdiction) and First-Tier Health, Education and Social Care Chamber (Care Standards jurisdiction)
               </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body">18 February at 13:00</span>
+                <p>
+                  <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body">3 March 2020 at 13:00</span>
+                </p><p>
+              </p>
               <a
                 class="govuk-link govuk-body"
                 href="https://www.judicialappointments.gov.uk/vacancies/152"
@@ -343,389 +349,387 @@ for an alert about this exercise
             <hr>
           </ul>
         </div>
-      </div>
+        <div class="inProgressApplicationsList">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+            Exercises in progress
+          </h1>
 
-      <div class="inProgressApplicationsList">
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
-          Exercises in progress
-        </h1>
-
-        <ul class="govuk-list">
-          <li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Deputy District Judge (Civil)
-            </span>
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>20 March 2019</span>
-            </p>
-
-            <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 3 April 2019 </span></p><p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/116"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li>
-          <li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Fee-paid Judge of the First-tier Tribunal and Fee-paid Judge of the Employment Tribunal for England and Wales
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>  15 August 2019 at 13:00 </span>
-            </p>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 5 September 2019 at 13:00</span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/114"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li>
-          <li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-
-              Recorder 2019
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  6 August 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/133"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-
-              Fee-Paid (Specialist Information Rights) Member of the Upper Tribunal assigned to the Administrative Appeals Chamber and First-tier Tribunal General Regulatory Chamber (Information Rights) jurisdiction
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>  15 August 2019 at 13:00 </span>
-            </p>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-              <span> 5 September 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/140"
-                target="_blank"
-              >Find out more
-              </a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-
-              Chair of the Valuation Tribunal for England
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>  3 September 2019 at 13:00 </span>
-            </p>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date:</span>
-              <span> 17 September 2019 at 13:00</span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/143"
-                target="_blank"
-              >Find out more
-              </a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-
-              Regional Employment Judge
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  26 September 2019 at 13:00
+          <ul class="govuk-list">
+            <li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Deputy District Judge (Civil)
               </span>
-            </p><p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 10 October 2019 at 13:00 </span></p><p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/139"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Senior Circuit Judge, Designated Civil Judge
-            </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>20 March 2019</span>
+              </p>
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  10 October 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/177"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Fee-paid Appointed Person, Appeal Tribunal, Trade Marks and Fee-paid Appointed Person, Appeal Tribunal, Registered and Unregistered Design
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  16 October 2019 at 13:00 </span>
-            </p><p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/142"
-                target="_blank"
-              >
-                Find out more
-              </a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-
-              Chamber President of the First-tier Tribunal, Health, Education and Social Care Chamber
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  2 October 2019
+              <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 3 April 2019 </span></p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/116"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li>
+            <li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Judge of the First-tier Tribunal and Fee-paid Judge of the Employment Tribunal for England and Wales
               </span>
-            </p>
-            <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 16 October 2019 </span></p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/183"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-              s9(1) Authorisation to act as a High Court Judge
-            </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>  15 August 2019 at 13:00 </span>
+              </p>
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  16 October 2019 at 13:00 </span>
-            </p><p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/144"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 5 September 2019 at 13:00</span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/114"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li>
+            <li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-              Fee-paid Education Panel Members for the Special Educational Needs Tribunal for Wales (SENTW)
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  29 October 2019 at 13:00 </span>
-            </p><p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/174"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              District Judge
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  30 October 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/145"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Deputy Queens Bench Master
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-              <span>  14 November 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/153"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Senior Circuit Judge, Resident Judge
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  20 November 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/176"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              High Court Judge
-            </span>
-
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  Early October 2019
+                Recorder 2019
               </span>
-            </p>
-            <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 26 November 2019 at 13:00 </span></p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/149"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Fee-paid Medical Members, First-tier Tribunal, Social Entitlement Chamber (Social Security and Child Support)
-            </span>
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  27 November 2019 at 13:00 </span>
-            </p>
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/148"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Fee-paid Medical Members First-tier Tribunal, Health, Education and Social Care Chamber (Mental Health)
-            </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  6 August 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/133"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>  13 November 2019 at 13:00</span>
-            </p>
+                Fee-Paid (Specialist Information Rights) Member of the Upper Tribunal assigned to the Administrative Appeals Chamber and First-tier Tribunal General Regulatory Chamber (Information Rights) jurisdiction
+              </span>
 
-            <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 27 November 2019 at 13:00 </span></p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>  15 August 2019 at 13:00 </span>
+              </p>
 
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/150"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Deputy Chairman of the Agricultural Land Tribunal for Wales
-            </span>
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>  14 November 2019 at 13:00 </span>
-            </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                <span> 5 September 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/140"
+                  target="_blank"
+                >Find out more
+                </a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-              <span> 28 November 2019 at 13:00 </span>
-            </p>
+                Chair of the Valuation Tribunal for England
+              </span>
 
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/151"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Judge Advocate General
-            </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>  3 September 2019 at 13:00 </span>
+              </p>
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-              <span>19 November 2019</span>
-            </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date:</span>
+                <span> 17 September 2019 at 13:00</span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/143"
+                  target="_blank"
+                >Find out more
+                </a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-              <span> 3 December 2019 at 13:00 </span>
-            </p>
+                Regional Employment Judge
+              </span>
 
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/147"
-                target="_blank"
-              >Find out more</a>
-            </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  26 September 2019 at 13:00
+                </span>
+              </p><p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 10 October 2019 at 13:00 </span></p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/139"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Senior Circuit Judge, Designated Civil Judge
+              </span>
 
-            <hr>
-          </li><li class="govuk-!-margin-top-7">
-            <span class="govuk-heading-m govuk-!-font-weight-bold">
-              Senior Circuit Judge of the Employment Appeal Tribunal
-            </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  10 October 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/177"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Appointed Person, Appeal Tribunal, Trade Marks and Fee-paid Appointed Person, Appeal Tribunal, Registered and Unregistered Design
+              </span>
 
-            <p>
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-              <span>  17 December 2019 at 13:00 </span>
-            </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  16 October 2019 at 13:00 </span>
+              </p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/142"
+                  target="_blank"
+                >
+                  Find out more
+                </a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
 
-            <p>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/184"
-                target="_blank"
-              >Find out more</a>
-            </p>
-            <hr>
-          </li>
-        </ul>
+                Chamber President of the First-tier Tribunal, Health, Education and Social Care Chamber
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  2 October 2019
+                </span>
+              </p>
+              <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 16 October 2019 </span></p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/183"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+
+                s9(1) Authorisation to act as a High Court Judge
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  16 October 2019 at 13:00 </span>
+              </p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/144"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+
+                Fee-paid Education Panel Members for the Special Educational Needs Tribunal for Wales (SENTW)
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  29 October 2019 at 13:00 </span>
+              </p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/174"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                District Judge
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  30 October 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/145"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Deputy Queens Bench Master
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                <span>  14 November 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/153"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Senior Circuit Judge, Resident Judge
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  20 November 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/176"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                High Court Judge
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span>  Early October 2019
+                </span>
+              </p>
+              <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 26 November 2019 at 13:00 </span></p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/149"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Medical Members, First-tier Tribunal, Social Entitlement Chamber (Social Security and Child Support)
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span>  27 November 2019 at 13:00 </span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/148"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Medical Members First-tier Tribunal, Health, Education and Social Care Chamber (Mental Health)
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>  13 November 2019 at 13:00</span>
+              </p>
+
+              <p><span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span> 27 November 2019 at 13:00 </span></p>
+
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/150"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Deputy Chairman of the Agricultural Land Tribunal for Wales
+              </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>  14 November 2019 at 13:00 </span>
+              </p>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                <span> 28 November 2019 at 13:00 </span>
+              </p>
+
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/151"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Judge Advocate General
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                <span>19 November 2019</span>
+              </p>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                <span> 3 December 2019 at 13:00 </span>
+              </p>
+
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/147"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Senior Circuit Judge of the Employment Appeal Tribunal
+              </span>
+
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                <span>  17 December 2019 at 13:00 </span>
+              </p>
+
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/184"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
