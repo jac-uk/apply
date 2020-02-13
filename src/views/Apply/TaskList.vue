@@ -136,15 +136,17 @@ export default {
         }
 
         if (this.isLegal) {
+          const tasks = [];
+          tasks.push({ title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications });
+          tasks.push({ title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience });
+          if (this.vacancy.previousJudicialExperienceApply) {
+            tasks.push({ title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience });
+          }
+          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
+          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
           data.push({
             title: 'Qualifications and experience',
-            tasks: [
-              { title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
-              { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
-              { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
-              { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
-              { title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService },
-            ],
+            tasks: tasks,
           });
         }
         
