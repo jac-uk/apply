@@ -91,6 +91,7 @@
         </CheckboxGroup>
 
         <CheckboxGroup
+          v-if="isLegal"
           id="current-legal-role"
           v-model="equalityAndDiversitySurvey.currentLegalRole"
           required
@@ -626,6 +627,7 @@
         </RadioGroup>
 
         <RadioGroup
+          v-if="isLegal"
           id="participated-in-judicial-workshadowing-scheme"
           v-model="equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme"
           required
@@ -750,6 +752,14 @@ export default {
       equalityAndDiversitySurvey: equalityAndDiversitySurvey,
       application: application,
     };
+  },
+  computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
+    isLegal() {
+      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
+    },
   },
   methods: {
     async save() {
