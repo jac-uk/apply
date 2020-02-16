@@ -540,7 +540,10 @@
             </div>
           </dl>
 
-          <div class="govuk-!-margin-top-9">
+          <div
+            v-if="vacancy.locationQuestion"
+            class="govuk-!-margin-top-9"
+          >
             <h2
               class="govuk-heading-l"
               style="display:inline-block;"
@@ -555,32 +558,35 @@
             >
               Change
             </router-link>
-          </div>
-          <dl class="govuk-summary-list">
-            <dt class="govuk-summary-list__key">
-              {{ vacancy.locationQuestion }}
-            </dt>
-            <dd
-              v-if="vacancy.locationQuestionType == 'single-choice'"
-              class="govuk-summary-list__value"
-            >
-              {{ application.locationPreferences }}
-            </dd>
-            <dd
-              v-else
-              class="govuk-summary-list__value"
-            >
-              <p
-                v-for="item in application.locationPreferences"
-                :key="item.name"
-                class="govuk-body"
+            <dl class="govuk-summary-list">
+              <dt class="govuk-summary-list__key">
+                {{ vacancy.locationQuestion }}
+              </dt>
+              <dd
+                v-if="vacancy.locationQuestionType == 'single-choice'"
+                class="govuk-summary-list__value"
               >
-                {{ item }}
-              </p>
-            </dd>
-          </dl>
+                {{ application.locationPreferences }}
+              </dd>
+              <dd
+                v-else
+                class="govuk-summary-list__value"
+              >
+                <p
+                  v-for="item in application.locationPreferences"
+                  :key="item.name"
+                  class="govuk-body"
+                >
+                  {{ item }}
+                </p>
+              </dd>
+            </dl>
+          </div>
 
-          <div class="govuk-!-margin-top-9">
+          <div
+            v-if="vacancy.jurisdictionQuestion"
+            class="govuk-!-margin-top-9"
+          >
             <h2
               class="govuk-heading-l"
               style="display:inline-block;"
@@ -595,32 +601,32 @@
             >
               Change
             </router-link>
-          </div>
-          <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                {{ vacancy.jurisdictionQuestion }}
-              </dt>
-              <dd
-                v-if="vacancy.jurisdictionQuestionType == 'single-choice'"
-                class="govuk-summary-list__value"
-              >
-                {{ application.jurisdictionPreferences }}
-              </dd>
-              <dd
-                v-else
-                class="govuk-summary-list__value"
-              >
-                <p
-                  v-for="item in application.jurisdictionPreferences"
-                  :key="item.name"
-                  class="govuk-body"
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  {{ vacancy.jurisdictionQuestion }}
+                </dt>
+                <dd
+                  v-if="vacancy.jurisdictionQuestionType == 'single-choice'"
+                  class="govuk-summary-list__value"
                 >
-                  {{ item }}
-                </p>
-              </dd>
-            </div>
-          </dl>
+                  {{ application.jurisdictionPreferences }}
+                </dd>
+                <dd
+                  v-else
+                  class="govuk-summary-list__value"
+                >
+                  <p
+                    v-for="item in application.jurisdictionPreferences"
+                    :key="item.name"
+                    class="govuk-body"
+                  >
+                    {{ item }}
+                  </p>
+                </dd>
+              </div>
+            </dl>
+          </div>
 
           <div class="govuk-!-margin-top-9">
             <h2
@@ -748,7 +754,7 @@
             </dl>
           </div>
 
-          <div v-if="(vacancy.memberships.indexOf('none') === -1)">
+          <div v-if="showMemberships">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -1549,6 +1555,9 @@ export default {
     isVacancyOpen() {
       return this.$store.getters['vacancy/isOpen'];
     },
+    showMemberships() {
+      return this.vacancy.memberships && this.vacancy.memberships.indexOf('none') === -1;
+    },
     showStatementOfSuitability() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-competencies':
@@ -1567,7 +1576,7 @@ export default {
       default:
         return false;
       }
-    },
+    },  
     showStatementOfEligibility() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-eligibility':
@@ -1596,20 +1605,33 @@ export default {
         if (this.vacancy.isSPTWOffered) {
           if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
         }
+        if (this.vacancy.locationQuestion) {
+          if (!this.application.progress.locationPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.jurisdictionQuestion) {
+          if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
+        }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }
         }
         if (this.isLegal) {
           if (!this.application.progress.relevantQualifications) { isComplete = false; }
           if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
-          if (!this.application.progress.judicialExperience) { isComplete = false; }
+          if (this.vacancy.previousJudicialExperienceApply) {
+            if (!this.application.progress.judicialExperience) { isComplete = false; }
+          }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (!this.application.progress.relevantMemberships) { isComplete = false; }
+          if (this.vacancy.memberships.length) {
+            if (this.vacancy.memberships.indexOf('none') === -1) {
+              if (!this.application.progress.relevantMemberships) { isComplete = false; }
+            }            
+          }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
+        if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }

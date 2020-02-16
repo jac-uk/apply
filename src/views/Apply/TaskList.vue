@@ -253,20 +253,33 @@ export default {
         if (this.vacancy.isSPTWOffered) {
           if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
         }
+        if (this.vacancy.locationQuestion) {
+          if (!this.application.progress.locationPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.jurisdictionQuestion) {
+          if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
+        }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }
         }
         if (this.isLegal) {
           if (!this.application.progress.relevantQualifications) { isComplete = false; }
           if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
-          if (!this.application.progress.judicialExperience) { isComplete = false; }
+          if (this.vacancy.previousJudicialExperienceApply) {
+            if (!this.application.progress.judicialExperience) { isComplete = false; }
+          }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (!this.application.progress.relevantMemberships) { isComplete = false; }
+          if (this.vacancy.memberships.length) {
+            if (this.vacancy.memberships.indexOf('none') === -1) {
+              if (!this.application.progress.relevantMemberships) { isComplete = false; }
+            }            
+          }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
+        if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
