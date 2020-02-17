@@ -648,6 +648,7 @@
         </RadioGroup>
 
         <RadioGroup
+          v-if="isLegal"
           id="has-taken-paje"
           v-model="equalityAndDiversitySurvey.hasTakenPAJE"
           required
