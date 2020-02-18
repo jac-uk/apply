@@ -28,14 +28,6 @@
             :value="false"
             label="No"
           />
-
-          <p
-            v-if="isApplyingForWelshPost"
-            class="govuk-body"
-          >
-            During the process you may be asked questions about your
-            knowledge of the administration of justice in Wales.
-          </p>
         </RadioGroup>
 
         <RadioGroup
