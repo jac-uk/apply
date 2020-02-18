@@ -328,19 +328,6 @@ for an alert about this exercise
               </p>
             </li>
             <hr>
-
-            <li class="govuk-!-margin-top-7">
-              <span class="govuk-heading-m govuk-!-font-weight-bold">
-                Fee-Paid Specialist Member of the Upper Tribunal assigned to the Administrative Appeals Chamber (Disclosure and Barring jurisdiction) and First-Tier Health, Education and Social Care Chamber (Care Standards jurisdiction)
-              </span>
-              <a
-                class="govuk-link govuk-body"
-                href="https://www.judicialappointments.gov.uk/vacancies/152"
-                target="_blank"
-              >
-                Find out more</a>
-            </li>
-            <hr>
           </ul>
         </div>
       </div>
