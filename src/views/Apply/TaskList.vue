@@ -152,7 +152,7 @@ export default {
         
         if (this.isNonLegal) {
           const tasks = [];
-          if (this.vacancy.memberships.length) {
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
             }            
@@ -271,7 +271,7 @@ export default {
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (this.vacancy.memberships.length) {
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               if (!this.application.progress.relevantMemberships) { isComplete = false; }
             }            
