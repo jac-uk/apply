@@ -136,21 +136,23 @@ export default {
         }
 
         if (this.isLegal) {
+          const tasks = [];
+          tasks.push({ title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications });
+          tasks.push({ title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience });
+          if (this.vacancy.previousJudicialExperienceApply) {
+            tasks.push({ title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience });
+          }
+          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
+          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
           data.push({
             title: 'Qualifications and experience',
-            tasks: [
-              { title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications },
-              { title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience },
-              { title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience },
-              { title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps },
-              { title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService },
-            ],
+            tasks: tasks,
           });
         }
         
         if (this.isNonLegal) {
           const tasks = [];
-          if (this.vacancy.memberships.length) {
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
             }            
@@ -251,20 +253,33 @@ export default {
         if (this.vacancy.isSPTWOffered) {
           if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
         }
+        if (this.vacancy.locationQuestion) {
+          if (!this.application.progress.locationPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.jurisdictionQuestion) {
+          if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
+        }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }
         }
         if (this.isLegal) {
           if (!this.application.progress.relevantQualifications) { isComplete = false; }
           if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
-          if (!this.application.progress.judicialExperience) { isComplete = false; }
+          if (this.vacancy.previousJudicialExperienceApply) {
+            if (!this.application.progress.judicialExperience) { isComplete = false; }
+          }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (!this.application.progress.relevantMemberships) { isComplete = false; }
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
+            if (this.vacancy.memberships.indexOf('none') === -1) {
+              if (!this.application.progress.relevantMemberships) { isComplete = false; }
+            }            
+          }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
+        if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }

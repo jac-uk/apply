@@ -35,14 +35,14 @@ jobs:
       #    name: 'Test'
       #    command: npm run test-ci
 
-  rebase:
-    executor: default
-    steps:
-      - attach_workspace:
-          at: ~/digital-platform
-      - run:
-          name: 'Rebase against master'
-          command: git rebase master
+  # rebase:
+  #   executor: default
+  #   steps:
+  #     - attach_workspace:
+  #         at: ~/digital-platform
+  #     - run:
+  #         name: 'Rebase against master'
+  #         command: git rebase master
 
   build-and-deploy-production:
     executor: default
@@ -53,7 +53,7 @@ jobs:
           name: 'Deploy to production'
           command: |
             npm run build-production
-            node_modules/.bin/firebase target:apply hosting production-candidate-app jac-apply-prod --project production
+            node_modules/.bin/firebase target:apply hosting production-candidate-app apply-prod --project production
             node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --only hosting:production-candidate-app --project production
 
   build-and-deploy-staging:
@@ -76,21 +76,23 @@ workflows:
       - test:
           requires:
             - setup
-      - rebase:
-          requires:
-            - setup
-          filters:
-            branches:
-              ignore: master
+      # - rebase:
+      #     requires:
+      #       - setup
+      #     filters:
+      #       branches:
+      #         ignore: master
       - build-and-deploy-staging:
           requires:
             - test
           filters:
             branches:
-              only: /staging.*/
+              only: /release/.*/
       - build-and-deploy-production:
           requires:
             - test
           filters:
             branches:
-              only: master
+              only: 
+                - master
+                - /hotfix/.*/

@@ -12,10 +12,19 @@
           :show-save-button="true"
           @save="save"
         />
+        
+        <div v-if="vacancy.referenceNumber == 'JAC00006'">
+          <p class="govuk-body-l">
+            Part-time working is available for this role, it can only be
+            accommodated by working full weeks and in block periods of at least six weeks.
+          </p>
+        </div>
 
-        <p class="govuk-body-l">
-          Part-time working is available for this role.
-        </p>
+        <div v-else>
+          <p class="govuk-body-l">
+            Part-time working is available for this role.
+          </p>
+        </div>
 
         <RadioGroup
           id="part-time-working-preferences"
@@ -28,6 +37,7 @@
             label="Yes"
           >
             <TextareaInput
+              v-if="vacancy.referenceNumber !== 'JAC00006'"
               id="part-time-working-preference-details"
               v-model="application.partTimeWorkingPreferencesDetails"
               label="With reference to the working patterns for this role, provide details of those you want to work."
@@ -78,6 +88,11 @@ export default {
     return {
       application: application,
     };
+  },
+  computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
   },
   methods: {
     async save() {

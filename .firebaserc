@@ -15,7 +15,7 @@
     "platform-production-9207d": {
       "hosting": {
         "production-candidate-app": [
-          "jac-apply-prod"
+          "apply-prod"
         ]
       }
     }
