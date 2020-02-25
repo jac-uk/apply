@@ -178,6 +178,24 @@ for an alert about this exercise
           <ul class="govuk-list">
             <li class="govuk-!-margin-top-7">
               <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Judge of the First-tier Tribunal
+              </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 31 March 2020 at 13:00
+                </span>
+              </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body"> 14 April 2020 at 13:00</span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/157"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+              <hr>
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
                 Fee Paid Specialist Lay Members of the First-tier Tribunal Health,
                 Education and Social Care (HESC) and Mental Health Review Tribunal
                 for Wales (MHRT)
@@ -309,25 +327,6 @@ for an alert about this exercise
               </p>
             </li>
             <hr>
-
-            <li class="govuk-!-margin-top-7">
-              <span class="govuk-heading-m govuk-!-font-weight-bold"> Circuit Judge 2020
-              </span>
-              <p>
-                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body">  25 February 2020 at 13:00
-                </span>
-              </p>
-              <p>
-                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body">   17 March 2020 at 13:00</span>
-              </p><p>
-                <a
-                  class="govuk-link govuk-body"
-                  href="https://www.judicialappointments.gov.uk/vacancies/155"
-                  target="_blank"
-                >Find out more</a>
-              </p>
-            </li>
-            <hr>
           </ul>
         </div>
       </div>
@@ -338,6 +337,25 @@ for an alert about this exercise
         </h1>
 
         <ul class="govuk-list">
+          <li class="govuk-!-margin-top-7">
+            <span class="govuk-heading-m govuk-!-font-weight-bold"> Circuit Judge 2020
+            </span>
+            <p>
+              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body">  25 February 2020 at 13:00
+              </span>
+            </p>
+            <p>
+              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body">   17 March 2020 at 13:00</span>
+            </p><p>
+              <a
+                class="govuk-link govuk-body"
+                href="https://www.judicialappointments.gov.uk/vacancies/155"
+                target="_blank"
+              >Find out more</a>
+            </p>
+          </li>
+          <hr>
+          
           <li class="govuk-!-margin-top-7">
             <span class="govuk-heading-m govuk-!-font-weight-bold">
               Deputy District Judge (Civil)
