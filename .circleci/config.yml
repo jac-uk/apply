@@ -68,6 +68,18 @@ jobs:
             node_modules/.bin/firebase target:apply hosting staging-candidate-app jac-apply-staging --project staging
             node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --only hosting:staging-candidate-app --project staging
 
+  build-and-deploy-develop:
+    executor: default
+    steps:
+      - attach_workspace:
+          at: ~/digital-platform
+      - run:
+          name: 'Deploy to develop'
+          command: |
+            npm run build-develop
+            node_modules/.bin/firebase target:apply hosting develop-candidate-app jac-apply-develop --project develop
+            node_modules/.bin/firebase deploy --force --token=$FIREBASE_DEPLOY_TOKEN --only hosting:develop-candidate-app --project develop
+
 workflows:
   version: 2
   test-build-and-deploy:
@@ -82,6 +94,12 @@ workflows:
       #     filters:
       #       branches:
       #         ignore: master
+      - build-and-deploy-develop:
+          requires:
+            - test
+          filters:
+            branches:
+              only: /develop/
       - build-and-deploy-staging:
           requires:
             - test
