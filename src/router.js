@@ -5,6 +5,7 @@ import VueAnalytics from 'vue-analytics';
 
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
+import ResetPassword from '@/views/ResetPassword';
 
 // Vacancies
 // import Website from '@/Website/Home';
@@ -388,6 +389,14 @@ const router = new Router({
         title: 'Create an account',
       },
     },
+    {
+      path: '/reset-password',
+      name: 'reset-password',
+      component: ResetPassword,
+      meta: {
+        title: 'Reset your password',
+      },
+    },
   ],
   scrollBehavior(to, from, savedPosition) {
     if (savedPosition) {
@@ -414,7 +423,6 @@ router.beforeEach((to, from, next) => {
   } else {
     return next();
   }
-
 });
 
 // Global after hook to set an appropriate title for the page
