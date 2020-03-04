@@ -298,7 +298,7 @@ for an alert about this exercise
                 Fee-paid Disability Qualified Tribunal Member of the First-tier Tribunal Social Entitlement Chamber
               </span>
               <p>
-                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body">  March 2020</span>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 11 March 2020</span>
               </p><p>
                 <a
                   class="govuk-link govuk-body"
@@ -355,7 +355,7 @@ for an alert about this exercise
             </p>
           </li>
           <hr>
-          
+
           <li class="govuk-!-margin-top-7">
             <span class="govuk-heading-m govuk-!-font-weight-bold">
               Deputy District Judge (Civil)
