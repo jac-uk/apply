@@ -16,7 +16,7 @@
             >
               create an account
             </RouterLink>  
-            if you do not have one
+            if you do not have one.
           </p>
 
           <!-- <p>
@@ -47,13 +47,25 @@
             v-model="formData.password"
             label="Password"
             type="password"
-          />          
+          />
 
           <button class="govuk-button">
             Continue
           </button>
+
+          <p class="govuk-body">
+            Problems signing in?
+            <RouterLink
+              class="govuk-link"
+              data-module="govuk-button"
+              :to="{ name: 'reset-password' }"
+            >
+              Reset your password
+            </RouterLink>
+            here.
+          </p>
         </div>
-      </form>       
+      </form>
     </div>
   </div>
 </template>
