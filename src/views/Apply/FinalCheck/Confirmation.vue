@@ -20,17 +20,31 @@
         {{ application.personalDetails.email }}
       </p> -->
 
-      <h2 class="govuk-heading-m">
-        What happens next?
-      </h2>
+      <div v-if="vacancy.referenceNumber === 'JAC00014'">
+        <h2 class="govuk-heading-m">
+          What happens next?
+        </h2>
+
+        <p class="govuk-body">
+          We’ll contact you by 9 March 2020 to advise whether an online qualifying
+          test will be taking place. If you’ve not heard from us by this date,
+          please contact the selection exercise team.
+        </p>
+      </div>
+      <div v-else>
+        <h2 class="govuk-heading-m">
+          What happens next?
+        </h2>
+        <p class="govuk-body">
+          We'll now decide if you should be shortlisted for this role.
+        </p>
+        <p class="govuk-body">
+          We'll email you in {{ vacancy.shortlistingOutcomeDate | formatDate('month') }} to let you know either way.
+        </p>
+      </div>
+
       <p class="govuk-body">
-        We'll now decide if you should be shortlisted for this role.
-      </p>
-      <p class="govuk-body">
-        We'll email you in {{ vacancy.shortlistingOutcomeDate | formatDate('month') }} to let you know either way.
-      </p>
-      <p class="govuk-body">
-        You can view your application and apply for other vacancies from your 
+        You can view your application and apply for other vacancies from your
         <RouterLink
           class="govuk-link"
           :to="{ name: 'applications' }"
@@ -47,7 +61,7 @@ export default {
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;
-    },   
+    },
     application () {
       return this.$store.state.application.record;
     },
