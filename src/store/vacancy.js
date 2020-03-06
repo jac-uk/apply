@@ -46,5 +46,8 @@ export default {
       }
       return false;
     },
+    isLegal: (state) => {
+      return state.record.typeOfExercise ==='legal' || state.record.typeOfExercise ==='leadership';
+    },
   },
 };
