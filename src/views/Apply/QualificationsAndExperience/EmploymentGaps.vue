@@ -39,6 +39,7 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RepeatableFields from '@/components/RepeatableFields';
 import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
+import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploymentGaps';
 import BackLink from '@/components/BackLink';
 
 export default {
@@ -54,12 +55,21 @@ export default {
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
-    return {
-      application: application,
-      repeatableFields: {
-        EmploymentGaps,
-      },
-    };
+    if (this.$store.getters['vacancy/isLegal']) {
+      return {
+        application: application,
+        repeatableFields: {
+          EmploymentGaps: EmploymentGaps,
+        },
+      };
+    } else {
+      return {
+        application: application,
+        repeatableFields: {
+          EmploymentGaps: NonLegalEmploymentGaps,
+        },
+      };
+    }
   },
   methods: {
     async save() {
