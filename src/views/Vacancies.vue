@@ -194,10 +194,8 @@ for an alert about this exercise
                   target="_blank"
                 >Find out more</a>
               </p>
-
-            </li>
-            <hr>
-            <li class="govuk-!-margin-top-7">
+              <hr>
+            </li><li class="govuk-!-margin-top-7">
               <hr>
 
               <span class="govuk-heading-m govuk-!-font-weight-bold">
