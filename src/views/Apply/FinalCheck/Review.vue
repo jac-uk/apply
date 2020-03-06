@@ -311,7 +311,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Current legal role
               </dt>
@@ -521,7 +524,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Participated in a Judicial Workshadowing Scheme
               </dt>
@@ -530,7 +536,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Participated in Pre-application judicial education
               </dt>
@@ -1544,10 +1553,10 @@ export default {
       return this.$store.state.application.record;
     },
     isNonLegal () {
-      return this.vacancy.typeOfExercise === 'non-legal';
+      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
-    isLegal () {
-      return this.vacancy.typeOfExercise === 'legal';
+    isLegal() {
+      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
     },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';
