@@ -160,11 +160,8 @@ export default {
   methods: {
     async save() {
       this.validate();
+
       if (this.isValid()) {
-        const isUploaded = await this.$refs['suitability-statement'].upload();
-        if (!isUploaded) {
-          return false;
-        }
         this.application.progress.statementOfSuitability = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
