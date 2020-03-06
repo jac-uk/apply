@@ -1232,7 +1232,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Law-related tasks
               </dt>
