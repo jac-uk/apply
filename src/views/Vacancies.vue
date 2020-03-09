@@ -299,6 +299,22 @@ for an alert about this exercise
             <hr>
 
             <li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Disability Qualified Tribunal Member of the First-tier Tribunal Social Entitlement Chamber
+              </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 11 March 2020 at 13:00</span>
+              </p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/156"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+            </li>
+            <hr>
+
+            <li class="govuk-!-margin-top-7">
               <span class="govuk-heading-m govuk-!-font-weight-bold"> Senior Circuit Judge, Designated Family Judge
               </span>
               <p>
