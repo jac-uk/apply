@@ -160,11 +160,11 @@ describe('components/Form/FileUpload', () => {
       it('should not call .verifyFile() if fileName doesn\'t exist', () => {
         localVue.mixin({
           methods: {
-            verifyFile: mockVerifyFile
-          }
+            verifyFile: mockVerifyFile,
+          },
         });
 
-        const wrapper = shallowMount(FileUpload, {
+        shallowMount(FileUpload, {
           localVue,
           propsData: mockLocalProps,
         });
@@ -175,15 +175,15 @@ describe('components/Form/FileUpload', () => {
       it('should call .verifyFile() if fileName exists', () => {
         localVue.mixin({
           methods: {
-            verifyFile: mockVerifyFile
-          }
+            verifyFile: mockVerifyFile,
+          },
         });
 
         const mockPropsWithValue = Object.assign(mockLocalProps, {
-          value: 'mock_value'
+          value: 'mock_value',
         });
 
-        const wrapper = shallowMount(FileUpload, {
+        shallowMount(FileUpload, {
           localVue,
           propsData: mockPropsWithValue,
         });
@@ -192,16 +192,14 @@ describe('components/Form/FileUpload', () => {
       });
 
       it('should reset fileName if .verifyFile failed', async () => {
-        const mockResetFile = jest.fn()
-          .mockName('resetFile');
         localVue.mixin({
           methods: {
             verifyFile: mockVerifyFile
-              .mockReturnValue(false)
-          }
+              .mockReturnValue(false),
+          },
         });
         const mockPropsWithValue = Object.assign(mockLocalProps, {
-          value: 'mock_value'
+          value: 'mock_value',
         });
 
         const wrapper = shallowMount(FileUpload, {
