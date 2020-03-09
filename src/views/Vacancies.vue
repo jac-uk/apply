@@ -304,8 +304,16 @@ for an alert about this exercise
               </span>
               <p>
                 <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 11 March 2020 at 13:00</span>
+
               </p><p /><p>
                 <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body"> 25 March 2020 at 13:00</span>
+
+              </p><p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/156"
+                  target="_blank"
+                >Find out more</a>
               </p>
               <a
                 class="govuk-link govuk-body"
