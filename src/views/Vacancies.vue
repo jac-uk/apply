@@ -178,6 +178,26 @@ for an alert about this exercise
           <ul class="govuk-list">
             <li class="govuk-!-margin-top-7">
               <span class="govuk-heading-m govuk-!-font-weight-bold">
+                Fee-paid Financially Qualified Tribunal Member of the First-tier Tribunal, Social Entitlement Chamber, (SEC) Social Security and Child Support (SSCS) jurisdiction
+              </span>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span><span class="govuk-body"> 24 March 2020 at 13:00
+                </span>
+              </p>
+              <p>
+                <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span><span class="govuk-body"> 7 April 2020 at 13:00</span>
+              </p>
+              <p>
+                <a
+                  class="govuk-link govuk-body"
+                  href="https://www.judicialappointments.gov.uk/vacancies/162"
+                  target="_blank"
+                >Find out more</a>
+              </p>
+            </li>
+            <hr>
+            <li class="govuk-!-margin-top-7">
+              <span class="govuk-heading-m govuk-!-font-weight-bold">
                 Judge of the First-tier Tribunal
               </span>
               <p>
