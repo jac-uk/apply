@@ -119,6 +119,14 @@ export default {
       this.setError('');
       return this.upload(file);
     },
+    generateFileName(originalName) {
+      const parts = originalName.split('.');
+      if( parts.length === 1 || ( parts[0] === '' && parts.length === 2 )) {
+        return this.name;
+      }
+
+      return [this.name, parts.pop()].join('.');
+    },
     resetFile() {
       this.$refs.file = null;
       this.isUploading = false;
@@ -132,7 +140,7 @@ export default {
       }
 
       this.isUploading = true;
-      const fileName = `${this.name}.${file.name.split('.')[1]}`;
+      const fileName = this.generateFileName(file.name);
       const uploadRef = firebase.storage().ref(`${this.path}/${fileName}`);
 
       try {
