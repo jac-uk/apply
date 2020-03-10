@@ -311,7 +311,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Current legal role
               </dt>
@@ -521,7 +524,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Participated in a Judicial Workshadowing Scheme
               </dt>
@@ -530,7 +536,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Participated in Pre-application judicial education
               </dt>
@@ -628,69 +637,71 @@
             </dl>
           </div>
 
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Welsh posts
-            </h2>
-            <router-link
-              v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'welsh-posts'}"
-            >
-              Change
-            </router-link>
+          <div v-if="vacancy.welshRequirement">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Welsh posts
+              </h2>
+              <router-link
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'welsh-posts'}"
+              >
+                Change
+              </router-link>
+            </div>
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Are you applying for a Welsh post?
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                >
+                  {{ application.applyingForWelshPost | toYesNo }}
+                </dd>
+              </div>
+              <div
+                v-if="application.applyingForWelshPost"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Can you speak Welsh?
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                >
+                  {{ application.canSpeakWelsh | toYesNo }}
+                </dd>
+              </div>
+              <div
+                v-if="application.applyingForWelshPost"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Can you read and write in Welsh?
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                >
+                  <p
+                    v-if="application.canReadAndWriteWelsh == false "
+                  >
+                    {{ application.canReadAndWriteWelsh | toYesNo }}
+                  </p>
+                  <p
+                    v-if="application.canReadAndWriteWelsh"
+                  >
+                    {{ application.canReadAndWriteWelsh | lookup }}
+                  </p>
+                </dd>
+              </div>
+            </dl>            
           </div>
-          <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Are you applying for a Welsh post?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.applyingForWelshPost | toYesNo }}
-              </dd>
-            </div>
-            <div
-              v-if="application.applyingForWelshPost"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Can you speak Welsh?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.canSpeakWelsh | toYesNo }}
-              </dd>
-            </div>
-            <div
-              v-if="application.applyingForWelshPost"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Can you read and write in Welsh?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                <p
-                  v-if="application.canReadAndWriteWelsh == false "
-                >
-                  {{ application.canReadAndWriteWelsh | toYesNo }}
-                </p>
-                <p
-                  v-if="application.canReadAndWriteWelsh"
-                >
-                  {{ application.canReadAndWriteWelsh | lookup }}
-                </p>
-              </dd>
-            </div>
-          </dl>
 
           <div v-if="isLegal">
             <div
@@ -1221,7 +1232,10 @@
               </dd>
             </div>
 
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="isLegal"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Law-related tasks
               </dt>
@@ -1541,10 +1555,10 @@ export default {
       return this.$store.state.application.record;
     },
     isNonLegal () {
-      return this.vacancy.typeOfExercise === 'non-legal';
+      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
-    isLegal () {
-      return this.vacancy.typeOfExercise === 'legal';
+    isLegal() {
+      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
     },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';
