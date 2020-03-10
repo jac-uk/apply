@@ -70,7 +70,7 @@ Character Information
               </RouterLink>
 
               <a
-                v-if="vacancy.externalLink"
+                v-else-if="vacancy.externalLink"
                 class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
                 :href="vacancy.externalLink"
                 target="_blank"
@@ -116,7 +116,7 @@ Character Information
                   {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
                 </span>
               </p>
-              <p>{{ vacancy.roleSummary }}</p>
+              <p v-if="vacancy.roleSummary">{{ vacancy.roleSummary }}</p>
               <p
                 v-if="showSignUp(vacancy)"
                 class="govuk-body govuk-!-margin-bottom-7"
@@ -163,6 +163,7 @@ Character Information
                   {{ vacancy.estimatedLaunchDate | dateFormatter('month') }}
                 </span>
               </p>
+              <p v-if="vacancy.roleSummary">{{ vacancy.roleSummary }}</p>
               <p>
                 <RouterLink
                   v-if="vacancy.aboutTheRole"
@@ -227,6 +228,7 @@ Character Information
                   {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
                 </span>
               </p>
+              <p v-if="vacancy.roleSummary">{{ vacancy.roleSummary }}</p>
               <p>
                 <RouterLink
                   v-if="vacancy.aboutTheRole"
