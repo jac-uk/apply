@@ -150,7 +150,7 @@ export default {
         this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
       ) {
         let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
-        if(fileName) {
+        if (fileName) {
           outcome = 'self-assessment-with-competencies.' + fileName.split('.').pop();
         }
       }
@@ -161,10 +161,6 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        const isUploaded = await this.$refs['self-assessment'].upload();
-        if (!isUploaded) {
-          return false;
-        }
         this.application.progress.selfAssessmentCompetencies = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
