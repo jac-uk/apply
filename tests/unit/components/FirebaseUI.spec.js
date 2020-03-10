@@ -30,7 +30,7 @@ jest.mock('firebaseui', () => (
   },
 }));
 
-describe('FirebaseUI component', () => {
+xdescribe('FirebaseUI component', () => {
   const createTestSubject = () => {
     jest.clearAllMocks();
     return shallowMount(FirebaseUI);

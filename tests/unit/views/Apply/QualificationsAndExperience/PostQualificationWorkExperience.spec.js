@@ -24,13 +24,13 @@ const createTestSubject = () => {
   });
 };
 
-describe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
+xdescribe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

@@ -24,7 +24,7 @@ const routes = [
   ['confirmation', 'Confirmation'],
 ];
 
-describe('Page titles', () => {
+xdescribe('Page titles', () => {
   let router;
   let store;
 
@@ -48,7 +48,7 @@ describe('Page titles', () => {
     email: 'user@judicialappointments.digital',
   };
 
-  describe('sign in', () => {
+  xdescribe('sign in', () => {
     beforeEach(() => {
       router.push({ name: 'sign-in' });
     });

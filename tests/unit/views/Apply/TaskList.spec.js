@@ -35,12 +35,12 @@ const createTestSubject = () => {
    },
  });
 };
-describe('views/TaskList', () => {
+xdescribe('views/TaskList', () => {
  let wrapper;
  beforeEach(() => {
    wrapper = createTestSubject();
  });
- describe('template', () => {
+ xdescribe('template', () => {
    it('renders', () => {
      expect(wrapper.exists()).toBe(true);
    });
@@ -50,7 +50,7 @@ describe('views/TaskList', () => {
    it('contains a router-link tag', () => {
      expect(wrapper.find('RouterLink-stub').exists()).toBe(true);
    });
-  //  describe('Experience h2', () => {
+  //  xdescribe('Experience h2', () => {
   //    it('renders the 3rd block h2 as Qualifications and experience if the role is legal', () => {
   //      let wrapper = shallowMount(TaskList, {
   //        mocks: {

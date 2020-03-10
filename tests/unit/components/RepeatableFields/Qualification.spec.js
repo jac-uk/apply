@@ -12,15 +12,15 @@ const createTestSubject = (props) => {
   });
 };
 
-describe('@/components/RepeatableFields/Qualification', () => {
-  describe('name', () => {
+xdescribe('@/components/RepeatableFields/Qualification', () => {
+  xdescribe('name', () => {
     it('component name is "Qualification"', () => {
       expect(Qualification.name).toBe('Qualification');
     });
   });
 
-  describe('props', () => {
-    describe('row', () => {
+  xdescribe('props', () => {
+    xdescribe('row', () => {
       it('is required', () => {
         let prop = Qualification.props.row;
         expect(prop.required).toBe(true);
@@ -32,7 +32,7 @@ describe('@/components/RepeatableFields/Qualification', () => {
       });
     });
 
-    describe('index', () => {
+    xdescribe('index', () => {
       it('is required', () => {
         let prop = Qualification.props.index;
         expect(prop.required).toBe(true);
@@ -45,22 +45,22 @@ describe('@/components/RepeatableFields/Qualification', () => {
     });
   });
 
-  describe('computed properties', () => {
-    describe('qualificationType', () => {
+  xdescribe('computed properties', () => {
+    xdescribe('qualificationType', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 4, row: {} });
         expect(wrapper.vm.qualificationType).toBe('qualification_type_4');
       });
     });
 
-    describe('qualificationLocation', () => {
+    xdescribe('qualificationLocation', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.qualificationLocation).toBe('qualification_location_5');
       });
     });
 
-    describe('qualificationDate', () => {
+    xdescribe('qualificationDate', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.qualificationDate).toBe('qualification_date_5');
@@ -68,7 +68,7 @@ describe('@/components/RepeatableFields/Qualification', () => {
     });
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders DateInput', () => {
       let wrapper = createTestSubject({ index: 1, row: {} });
       expect(wrapper.find(DateInput).exists()).toBe(true);

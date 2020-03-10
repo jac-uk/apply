@@ -25,7 +25,7 @@ const routes = [
   ['confirmation', `/apply/${id}/confirmation`],
 ];
 
-describe('Sign in journey', () => {
+xdescribe('Sign in journey', () => {
   let subject;
   let router;
   let store;
@@ -50,8 +50,8 @@ describe('Sign in journey', () => {
     email: 'user@judicialappointments.digital',
   };
 
-  describe('for unauthenticated user', () => {
-    describe('when they visit page sign in', () => {
+  xdescribe('for unauthenticated user', () => {
+    xdescribe('when they visit page sign in', () => {
       it('loads sign in page', () => {
         router.push({ name: 'sign-in' });
         expect(subject.vm.$route.path).toBe('/sign-in');
@@ -66,7 +66,7 @@ describe('Sign in journey', () => {
     });
   });
 
-  describe('for authenticated user', () => {
+  xdescribe('for authenticated user', () => {
     beforeEach(() => {
       store.dispatch('auth/setCurrentUser', user);
     });

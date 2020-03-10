@@ -5,13 +5,13 @@ const createTestSubject = () => {
   return shallowMount(SelfAssessmentCompetencies);
 };
 
-describe('views/Assessments/SelfAssessmentCompetencies', () => {
+xdescribe('views/Assessments/SelfAssessmentCompetencies', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

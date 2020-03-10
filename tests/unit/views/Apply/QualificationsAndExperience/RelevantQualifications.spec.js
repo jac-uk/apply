@@ -25,18 +25,18 @@ const createTestSubject = () => {
   });
 };
 
-describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () => {
+xdescribe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
-    describe('h1', () => {
+    xdescribe('h1', () => {
       let h1;
       beforeEach( () => {
         h1 = wrapper.find('h1');
@@ -77,7 +77,7 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
       expect(button.text()).toBe('Continue');
     });
 
-    describe('Qualifications - RepeatableFields', () => {
+    xdescribe('Qualifications - RepeatableFields', () => {
 
       it('renders the RepeatableFields component', () => {
         wrapper.setData({ unknownVariable: 'legal' });
@@ -100,7 +100,7 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
       // });
     });
 
-    describe('What professional memberships do you have?', () => {
+    xdescribe('What professional memberships do you have?', () => {
 
       // it('renders the question if the role is non-legal', () => {
       //   wrapper.setData({ unknownVariable: 'non-legal' });
