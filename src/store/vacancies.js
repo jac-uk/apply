@@ -1,6 +1,8 @@
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
+import { isDateInFuture } from '@/helpers/date';
+import getStaticVacancies from '@/helpers/getStaticVacancies';
 
 export default {
   namespaced: true,
@@ -16,5 +18,41 @@ export default {
   },
   state: {
     records: [],
+  },
+
+  getters: {
+    vacancies: state => {
+      return state.records;
+    },
+    openVacancies: (state, getters) => {
+      const vacancies = getters.vacancies.concat(getStaticVacancies());
+
+      return vacancies.filter(vacancy => {
+        const openDate = vacancy.applicationOpenDate || vacancy.estimatedLaunchDate;
+        const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
+
+        return !isDateInFuture(openDate) && isDateInFuture(closeDate);
+      });
+    },
+    futureVacancies: (state, getters) => {
+      const vacancies = getters.vacancies.concat(getStaticVacancies());
+
+      return vacancies.filter(vacancy => {
+        const openDate = vacancy.applicationOpenDate || vacancy.estimatedLaunchDate;
+
+        return isDateInFuture(openDate);
+      });
+    },
+    inProgressVacancies: (state, getters) => {
+      const vacancies = getters.vacancies.concat(getStaticVacancies());
+
+      return vacancies.filter(vacancy => {
+        if (!vacancy.applicationCloseDate) {
+          return false;
+        }
+
+        return !isDateInFuture(vacancy.applicationCloseDate);
+      });
+    },
   },
 };

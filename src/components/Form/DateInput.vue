@@ -90,7 +90,7 @@
 
 <script>
 import parseAndClipNumber from '@/helpers/Form/parseAndClipNumber';
-import validateYear from '@/helpers/Form/validateYear';
+import { validateYear } from '@/helpers/date';
 import zeroPad from '@/helpers/Form/zeroPad';
 import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
