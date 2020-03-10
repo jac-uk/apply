@@ -84,7 +84,6 @@ Character Information
               >
                 {{ vacancy.name }}
               </span>
-
               <p>
                 <span
                   class="govuk-body govuk-!-font-weight-bold"
