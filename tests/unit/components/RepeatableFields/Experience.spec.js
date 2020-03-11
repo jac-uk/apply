@@ -14,15 +14,15 @@ const createTestSubject = (props) => {
   });
 };
 
-describe('@/components/RepeatableFields/Experience', () => {
-  describe('name', () => {
+xdescribe('@/components/RepeatableFields/Experience', () => {
+  xdescribe('name', () => {
     it('component name is "Experience"', () => {
       expect(Experience.name).toBe('Experience');
     });
   });
 
-  describe('props', () => {
-    describe('row', () => {
+  xdescribe('props', () => {
+    xdescribe('row', () => {
       it('is required', () => {
         let prop = Experience.props.row;
         expect(prop.required).toBe(true);
@@ -34,7 +34,7 @@ describe('@/components/RepeatableFields/Experience', () => {
       });
     });
 
-    describe('index', () => {
+    xdescribe('index', () => {
       it('is required', () => {
         let prop = Experience.props.index;
         expect(prop.required).toBe(true);
@@ -47,43 +47,43 @@ describe('@/components/RepeatableFields/Experience', () => {
     });
   });
 
-  describe('computed properties', () => {
-    describe('experienceJobTitle', () => {
+  xdescribe('computed properties', () => {
+    xdescribe('experienceJobTitle', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 4, row: {} });
         expect(wrapper.vm.experienceJobTitle).toBe('experience_job_title_4');
       });
     });
 
-    describe('experienceOrgBusinessName', () => {
+    xdescribe('experienceOrgBusinessName', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.experienceOrgBusinessName).toBe('experience_org_business_name_5');
       });
     });
 
-    describe('experienceStartDate', () => {
+    xdescribe('experienceStartDate', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.experienceStartDate).toBe('experience_start_date_5');
       });
     });
 
-    describe('experienceEndDate', () => {
+    xdescribe('experienceEndDate', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.experienceEndDate).toBe('experience_end_date_5');
       });
     });
 
-    describe('experienceTasks', () => {
+    xdescribe('experienceTasks', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.experienceTasks).toBe('experience_tasks_5');
       });
     });
 
-    describe('experienceOtherTasks', () => {
+    xdescribe('experienceOtherTasks', () => {
       it('returns the value that is created using index', () => {
         let wrapper = createTestSubject({ index: 5, row: {} });
         expect(wrapper.vm.experienceOtherTasks).toBe('experience_other_tasks_5');
@@ -91,7 +91,7 @@ describe('@/components/RepeatableFields/Experience', () => {
     });
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders DateInput', () => {
       let wrapper = createTestSubject({ index: 1, row: {} });
       expect(wrapper.find(DateInput).exists()).toBe(true);

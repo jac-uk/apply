@@ -25,13 +25,13 @@ const createTestSubject = () => {
   });
 };
 
-describe('@/views/Apply/AccountProfile/CharacterInformation', () => {
+xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
