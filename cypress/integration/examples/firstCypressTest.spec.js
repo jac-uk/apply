@@ -30,35 +30,63 @@ context('Actions', () => {
     // cy.get(':nth-child(1) > .govuk-link').click()
     cy.visit('https://apply-staging.judicialappointments.digital/vacancies')
     cy.wait(1000) //waits a second for database response, could be fixed
+    // cy.get('click').click('Legal test v2')
+    // cy.get('#fullName').clear().type('Test') // fills in full name with name
+    // cy.get('#main-content > div > div > div.govuk-grid-column-three-quarters > div.openApplicationsList > ul').children()
+    // .eq(-15).children().eq(0).click('Legal test v2')
+    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on button(check if you're eligible to apply)
+    // cy.get('.govuk-panel__body > .govuk-button').click() //clicks on continue
+    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on continue button
+    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on continue button
+    cy.contains('Legal test v2').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //
+    cy.get('.govuk-panel__body > .govuk-button').click() //clicks on continue
+    cy.get('#citizenship__1').click() //clicks on yes to citizenship question
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on continue
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() // clicks on continue
+    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on save and continue
+    cy.contains('Personal details').click() //clicks on personal details to start filling in the details
+    cy.get('#fullName').clear().type('test123@gmail.com') //fills in email address with email
+    cy.get('#date-of-birth-day').type('27') //fills in day of birth
+    cy.get('#date-of-birth-month').type('3') //fills in months of birth
+    cy.get('#date-of-birth-year').clear().type('1964') // fills in year of birth
+    cy.get('#national-insurance-number').clear().type('QQ 12 34 56 C') // fills in
+    cy.get('#citizenship__3').click()
+    cy.get('#reasonable-adjustments__8').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+    // assert?
+    cy.contains('Character information').click() //clicks on Character information
+    cy.get('#criminal-offenses__10').click() //clicks on no to being convicted of criminal offence
+    cy.get('#non-motoring-fixed-pentalty-notice__12').click() //clicks no to being convicted of non motoring penalty recently
+    cy.get('#driving-disqualification-drink-drugs__14').click() //clicks no to being disqualified from driving or convicted for DUIs
+    cy.get('#driving-endorsements-of-fixed-penalty__16').click() //clicks no to receiving endorsements on license
+    cy.get('#declared-bankrupt-or-iva__18').click() //clicks no to ever being declared bankrupt or entered IVA
+    cy.get('#late-tax-return-or-fined-by-hmrc__20').click() //clicks no to ever filed late tax returns or fined by HRMC
+    cy.get('#involved-in-professional-misconduct__40').click() //clicks no to being subject to professional misconduct etc
+    cy.get('#subject-to-diciplinary-or-asked-to-resign__42').click() //clicks no to ever being subject to complaints etc
+    cy.get('#other-character-issues__44').click() //clicks no when asked about any other character features about me
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click() //clicks on save and continue
+    // assert?
+    cy.contains('Equality and diversity').click() //clicks on equality and diversity link
+    cy.get('#share-data__45').click() //clicks on allow data to be shared from this application
+    cy.get('#professional-background__6').click() //clicks on previous background in the industry
+    cy.get('#current-legal-role__17').click() //
+    cy.get('#fee-paid-judicial-role__6').click()
+    cy.get('#state-or-fee-school__10').click()
+    cy.get('#oxbridge-universities__17').click()
+    cy.get('#first-generation-student__20').click()
+    cy.get('#ethnic-group__23').click()
+    cy.get('#gender__41').click()
+    cy.get('#changed-gender__46').click()
+    cy.get('#sexual-orientation__52').click() //Sexual orientation
+    cy.get('#disability__56').click() //Am i in any way disabled?
+    cy.get('#religion-faith__58').click()
 
-    cy.get('#main-content > div > div > div.govuk-grid-column-three-quarters > div.openApplicationsList > ul').children()
-    .eq(-15).children().eq(0).click()
-    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    // cy.get('.govuk-panel__body > .govuk-button').click()
-    // cy.get('#citizenship__1').click()
-    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    // cy.get(':nth-child(1) > .govuk-list > .container-border-top > .govuk-grid-row > .govuk-grid-column-three-quarters > .govuk-link').click()
-    // cy.get('#fullName').clear().type('Test')
-    // cy.get('#fullName').clear().type('test123@gmail.com')
-    // cy.get('#date-of-birth-day').type('27')
-    // cy.get('#date-of-birth-month').type('3')
-    // cy.get('#date-of-birth-year').clear().type('1964')
-    // cy.get('#national-insurance-number').clear().type('QQ 12 34 56 C')
-    // cy.get('#citizenship__3').click()
-    // cy.get('#reasonable-adjustments__8').click()
-    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    // // // assert?
     // cy.get(':nth-child(1) > .govuk-list > :nth-child(2) > .govuk-grid-row > .govuk-grid-column-three-quarters > .govuk-link').click()
-    // cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     // cy.get(':nth-child(1) > .govuk-list > :nth-child(3) > .govuk-grid-row > .govuk-grid-column-three-quarters > .govuk-link').click()
-    // cy.get('#share-data__27').click()
-    // cy.get('#professional-background__6').click()
-    // cy.get('#fee-paid-judicial-role__98').click()
     // cy.get('#state-or-fee-school__102').click()
     // cy.get('#state-or-fee-school__41')
     // //
-    // cy.get('#current-legal-role__17').click()
     // cy.get('#state-or-fee-school__34').click()
     // cy.get('#oxbridge-universities__41').click()
     // cy.get('#state-or-fee-school__34').click()
