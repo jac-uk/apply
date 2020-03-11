@@ -130,21 +130,21 @@ xdescribe('components/RepeatableFields', () => {
         expect(wrapper.vm.canAddRow).toBe(true);
       });
 
-      describe("when max is set and it's greater than number of rows", () => {
+      xdescribe("when max is set and it's greater than number of rows", () => {
         it('sets canAddRow value to true', () => {
           let wrapper = createTestSubject({ max: 5, value: [1, 2, 3] });
           expect(wrapper.vm.canAddRow).toBe(true);
         });
       });
 
-      describe("when max is set and it's less than number of rows", () => {
+      xdescribe("when max is set and it's less than number of rows", () => {
         it('sets canAddRow value to false', () => {
           let wrapper = createTestSubject({ max: 2, value: [1, 2, 3] });
           expect(wrapper.vm.canAddRow).toBe(false);
         });
       });
 
-      describe("when max is set and it's equal to number of rows", () => {
+      xdescribe("when max is set and it's equal to number of rows", () => {
         it('sets canAddRow value to true', () => {
           let wrapper = createTestSubject({ max: 3, value: [1, 2, 3] });
           expect(wrapper.vm.canAddRow).toBe(false);

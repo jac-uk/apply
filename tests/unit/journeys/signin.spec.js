@@ -58,7 +58,7 @@ xdescribe('Sign in journey', () => {
       });
     });
 
-    describe.each(routes)('when they visit page %s', (routeName) => {
+    xdescribe.each(routes)('when they visit page %s', (routeName) => {
       it('loads sign in page',() => {
         router.push({ name: routeName, params: { id } });
         expect(subject.vm.$route.path).toBe('/sign-in');
@@ -71,7 +71,7 @@ xdescribe('Sign in journey', () => {
       store.dispatch('auth/setCurrentUser', user);
     });
 
-    describe.each(routes)('when they visit page %s', (routeName, routePath) => {
+    xdescribe.each(routes)('when they visit page %s', (routeName, routePath) => {
       it(`loads ${routePath}`,() => {
         router.push({ name: routeName, params: { id } });
         expect(subject.vm.$route.path).toBe(routePath);
