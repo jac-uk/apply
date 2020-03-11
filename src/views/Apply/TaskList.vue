@@ -99,6 +99,7 @@ export default {
     },
     applicationProgress() {
       if (this.application && this.application.progress) {
+        // @TODO: should be calculated, we can't 100% rely on static field values
         return this.application.progress;
       } else {
         return {};

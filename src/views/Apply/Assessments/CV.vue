@@ -67,11 +67,8 @@ export default {
   methods: {
     async save() {
       this.validate();
+
       if (this.isValid()) {
-        const isUploaded = await this.$refs['cv'].upload();
-        if (!isUploaded) {
-          return false;
-        }
         this.application.progress.cv = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
