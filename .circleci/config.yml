@@ -32,9 +32,6 @@ jobs:
           name: 'Lint'
           command: npm run lint-ci
       - run:
-          name: 'Check env vars'
-          command: echo ${STAGING_FIREBASE_PROJECT_ID}
-      - run:
          name: 'Test'
          command: npm run test-ci
 
