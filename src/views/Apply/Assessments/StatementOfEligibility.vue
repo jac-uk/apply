@@ -7,6 +7,8 @@
           Statement of eligibility
         </h1>
 
+        <ErrorSummary :errors="errors" />
+
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in application.selectionCriteriaAnswers"
@@ -34,6 +36,7 @@
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
                   label="In 250 words, tell us how."
+                  required
                 />
               </RadioItem>
               <RadioItem
@@ -56,6 +59,8 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -63,11 +68,13 @@ import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RadioGroup,
     RadioItem,
     TextareaInput,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults = {
       selectionCriteriaAnswers: [],
