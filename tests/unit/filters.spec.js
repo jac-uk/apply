@@ -21,7 +21,7 @@ describe('global filters', () => {
         const date = new Date();
 
         const result = filters.formatDate(date, 'month');
-        expect(result).toEqual(`${date.toLocaleString('default', {month: 'long'})} ${date.getUTCFullYear()}`);
+        expect(result).toEqual(`${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`);
       });
     });
   });
@@ -68,13 +68,13 @@ describe('global filters', () => {
 
       const result = filters.lookup(nullValue);
 
-      expect(result).toEqual('Answer not supplied')
+      expect(result).toEqual('Answer not supplied');
     });
 
     it('returns "unanswered" if no value provided', () => {
       const result = filters.lookup();
 
-      expect(result).toEqual('Answer not supplied')
+      expect(result).toEqual('Answer not supplied');
     });
 
     describe('called with a String argument', () => {
@@ -92,7 +92,7 @@ describe('global filters', () => {
         const result = filters.lookup(invalidValue);
 
         expect(result).toEqual(invalidValue);
-      })
+      });
     });
   });
 });
