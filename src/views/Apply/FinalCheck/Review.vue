@@ -489,7 +489,7 @@
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
-                  v-if="application.equalityAndDiversitySurvey.disability"
+                  v-if="application.equalityAndDiversitySurvey.disability === true"
                   class="govuk-body govuk-!-margin-bottom-0"
                 >
                   <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
@@ -501,7 +501,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Religion or faith are you
+                Religion or faith
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
