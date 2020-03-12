@@ -130,16 +130,23 @@ context('Actions', () => {
     cy.get('#judicial-experience-completed').should('be.visible')
   })
 
-  it.only('user is able to fill out gaps in employment section', () => {
+  it('user is able to fill out gaps in employment section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/employment-gaps')
     cy.get('#start_date_0-month').type('02')
     cy.get('#start_date_0-year').type('2019')
     cy.get('#end_date_0-month').type('03')
     cy.get('#end_date_0-year').type('2019')
-    cy.get('#details_0').type('Took a vacation ok give me a break')
+    cy.get('#details_0').clear().type('Took a vacation ok give me a break')
     cy.get('#tasks_0__1').click()
     cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
     cy.get('#employment-gaps-completed').should('be.visible')
+  })
+
+  it('user is able to fill out reasonable length of service section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/reasonable-length-of-service')
+    cy.get('#can-give-reasonable-los__1').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+    cy.get('#reasonable-length-of-service-completed').should('be.visible')
   })
 
 })
