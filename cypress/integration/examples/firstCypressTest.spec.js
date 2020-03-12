@@ -108,4 +108,17 @@ context('Actions', () => {
     cy.get('#relevant-qualifications-completed').should('be.visible')
   })
 
+  it('user is able to fill out relevant qualifications section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/post-qualification-work-experience')
+    cy.get('#experience_job_title_0').clear().type('Beast mode')
+    cy.get('#experience_org_business_name_0').clear().type('Supreme Court master')
+    cy.get('#experience_start_date_0-month').clear().type('01')
+    cy.get('#experience_start_date_0-year').clear().type('2019')
+    cy.get('#experience_end_date_0-month').clear().type('02')
+    cy.get('#experience_end_date_0-year').clear().type('2019')
+    cy.get('#tasks_0__1').click()
+    cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
+    cy.get('#post-qualification-work-experience-completed').should('be.visible')
+  })
+
 })
