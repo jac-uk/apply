@@ -149,7 +149,7 @@ context('Actions', () => {
     cy.get('#reasonable-length-of-service-completed').should('be.visible')
   })
 
-  it.only('user is able to fill out independent assessors section', () => {
+  it('user is able to fill out independent assessors section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/assessors-details')
     cy.get('#first-assessor-full-name').clear().type('Test')
     cy.get('#first-assessor-title').clear().type('Boss man')
@@ -163,6 +163,14 @@ context('Actions', () => {
     cy.get('#assessors-details-completed').should('be.visible')
   })
 
+  it('user is able to review application after completing every section and able to click continue', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor')
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').should('be.visible')
+  })
 
-
+  it('user is able to send application after reviewing every section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/review')
+    cy.get('.govuk-grid-column-full > .govuk-button').should('be.visible')
+  })
+  
 })
