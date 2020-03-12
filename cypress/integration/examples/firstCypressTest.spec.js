@@ -149,4 +149,20 @@ context('Actions', () => {
     cy.get('#reasonable-length-of-service-completed').should('be.visible')
   })
 
+  it.only('user is able to fill out independent assessors section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/assessors-details')
+    cy.get('#first-assessor-full-name').clear().type('Test')
+    cy.get('#first-assessor-title').clear().type('Boss man')
+    cy.get('#first-assessor-email').clear().type('test321@gmail.com')
+    cy.get('#first-assessor-Phone').clear().type('07123456789')
+    cy.get('#second-assessor-full-name').clear().type('Tester')
+    cy.get('#second-assessor-title').clear().type('Supreme Court Leader')
+    cy.get('#second-assessor-email').clear().type('sett123@gmail.com')
+    cy.get('#second-assessor-Phone').clear().type('07987654321')
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+    cy.get('#assessors-details-completed').should('be.visible')
+  })
+
+
+
 })
