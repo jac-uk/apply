@@ -121,7 +121,7 @@ context('Actions', () => {
     cy.get('#post-qualification-work-experience-completed').should('be.visible')
   })
 
-  it.only('user is able to fill out judicial experience section', () => {
+  it('user is able to fill out judicial experience section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/judicial-experience')
     cy.get('#fee-or-salaried-judge__1').click()
     cy.get('#fee-or-salaried-sat-thirty-days__3').click()
@@ -130,6 +130,16 @@ context('Actions', () => {
     cy.get('#judicial-experience-completed').should('be.visible')
   })
 
-
+  it.only('user is able to fill out gaps in employment section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/employment-gaps')
+    cy.get('#start_date_0-month').type('02')
+    cy.get('#start_date_0-year').type('2019')
+    cy.get('#end_date_0-month').type('03')
+    cy.get('#end_date_0-year').type('2019')
+    cy.get('#details_0').type('Took a vacation ok give me a break')
+    cy.get('#tasks_0__1').click()
+    cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
+    cy.get('#employment-gaps-completed').should('be.visible')
+  })
 
 })
