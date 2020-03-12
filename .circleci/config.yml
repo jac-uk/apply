@@ -1,8 +1,9 @@
-# If you want your branch to automatically deploy to `staging`, prefix the branch name with `staging-`.
-#
-# All tests will be tested against the branch and the branch with `master` rebased onto it.
-#
-# Besides branches prefixed with `staging-`, only master will be automatically deployed (to the production environment).
+# Providing all tests pass then changes to the following branches are automatically deployed to the respective environment:-
+# `develop` -> Develop environment
+# `release/**` -> Staging environment
+# `hotfix/**` -> Production environment
+# `master` -> Production environment
+# TODO include rebase checks again, if useful
 version: 2.1
 executors:
   default:
