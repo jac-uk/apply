@@ -83,4 +83,11 @@ context('Actions', () => {
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#equality-and-diversity-survey-completed').should('be.visible')
   })
+
+  it.only('user is able to fill out location preferences section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/location-preferences')
+    cy.get('#location-preferences-answer-0').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+    cy.get('#location-preferences-completed').should('be.visible')
+  })
 })
