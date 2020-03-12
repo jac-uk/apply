@@ -98,5 +98,14 @@ context('Actions', () => {
     cy.get('#jurisdiction-preferences-completed').should('be.visible')
   })
 
+  it('user is able to fill out relevant qualifications section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/relevant-qualifications')
+    cy.get('#qualification_type_0__1').click()
+    cy.get('#qualification_location_0__5').click()
+    cy.get('#qualification_date_0-month').clear().type('12')
+    cy.get('#qualification_date_0-year').clear().type('2019')
+    cy.get('.govuk-grid-column-two-thirds > :nth-child(4)').click()
+    cy.get('#relevant-qualifications-completed').should('be.visible')
+  })
 
 })
