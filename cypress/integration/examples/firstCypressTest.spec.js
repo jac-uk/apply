@@ -108,7 +108,7 @@ context('Actions', () => {
     cy.get('#relevant-qualifications-completed').should('be.visible')
   })
 
-  it('user is able to fill out relevant qualifications section', () => {
+  it('user is able to fill out post qualification work experience section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/post-qualification-work-experience')
     cy.get('#experience_job_title_0').clear().type('Beast mode')
     cy.get('#experience_org_business_name_0').clear().type('Supreme Court master')
@@ -120,5 +120,16 @@ context('Actions', () => {
     cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
     cy.get('#post-qualification-work-experience-completed').should('be.visible')
   })
+
+  it.only('user is able to fill out judicial experience section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/judicial-experience')
+    cy.get('#fee-or-salaried-judge__1').click()
+    cy.get('#fee-or-salaried-sat-thirty-days__3').click()
+    cy.get('#fee-or-salaried-sitting-days-details').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+    cy.get('#judicial-experience-completed').should('be.visible')
+  })
+
+
 
 })
