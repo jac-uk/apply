@@ -50,6 +50,7 @@ export default {
       regex: {
         // eslint-disable-next-line
         email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+        tel: /^\+?[\d() -]+/,
       },
     };
   },
@@ -77,6 +78,7 @@ export default {
         if (event && event.target) {
           value = event.target.value;
         }
+
         if (this.required && (value === null || value.length === 0)) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
@@ -87,6 +89,11 @@ export default {
         if (this.type && this.type === 'email' && value) {
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
+          }
+        }
+        if (this.type && this.type === 'tel' && value) {
+          if (!this.regex.tel.test(value)) {
+            this.setError(`Enter a valid phone number for ${this.label}`);
           }
         }
         if (this.minLength && value) {
