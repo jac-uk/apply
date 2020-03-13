@@ -64,6 +64,15 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Phone number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.phone }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Date of birth
               </dt>
               <dd class="govuk-summary-list__value">
