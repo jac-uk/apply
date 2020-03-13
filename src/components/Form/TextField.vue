@@ -67,7 +67,7 @@ export default {
       switch (this.type) {
       case 'tel':
       case 'email':
-        return true;
+        return this.type;
       default:
         return false;
       }

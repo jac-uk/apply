@@ -108,15 +108,17 @@ describe('components/Form/TextField', () => {
 
     describe('autocomplete', () => {
       it('sets autocomplete for email', () => {
-        wrapper.setProps({ type: 'email' });
+        const type = 'email';
+        wrapper.setProps({ type });
 
-        expect(wrapper.find('input').attributes('autocomplete')).toBeTruthy();
+        expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
       });
 
       it('sets autocomplete for phone number', () => {
-        wrapper.setProps({ type: 'tel' });
+        const type = 'tel';
+        wrapper.setProps({ type });
 
-        expect(wrapper.find('input').attributes('autocomplete')).toBeTruthy();
+        expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
       });
 
       it('doesn\'t set autocomplete for other types', () => {

@@ -26,7 +26,6 @@
           v-model="personalDetails.email"
           label="Email address"
           type="email"
-          autocomplete="email"
           required
         />
 
@@ -35,7 +34,6 @@
           v-model="personalDetails.phone"
           label="Phone number"
           type="tel"
-          autocomplete="tel"
           hint="Optional. For international numbers include the country code."
         />
 
