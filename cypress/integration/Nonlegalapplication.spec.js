@@ -1,8 +1,6 @@
-/// <reference types="cypress" />
-// describe('')
+
 context('Actions', () => {
-  // beforeEach(() => {
-  // })
+
 
   it('user is able to sign in', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/sign-in')
@@ -36,7 +34,7 @@ context('Actions', () => {
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#apply-personal-details-completed').should('be.visible')
   })
-  
+
   it('user is able to fill out character information section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/character-information')
     cy.get('#criminal-offenses__2').click()
@@ -108,7 +106,7 @@ context('Actions', () => {
     cy.get('#relevant-experience-completed').should('be.visible')
   })
 
-  it('user is able to fill out employments section', () => {
+  it('user is able to fill out gaps employments section', () => {
     cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/employment-gaps')
     cy.get('#start_date_0-month').clear().type('03')
     cy.get('#start_date_0-year').clear().type('2020')
