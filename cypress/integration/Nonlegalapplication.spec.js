@@ -1,15 +1,7 @@
 /// <reference types="cypress" />
-
+// describe('')
 context('Actions', () => {
   // beforeEach(() => {
-  //
-  //   cy.wait(400)
-  //
-  //
-  //   // cy.get($body).then($body) => {
-  //   // if ($body.find('.govuk-\!-margin-right-1').length == 1 ) {
-  //   //   cy.get('.govuk-\!-margin-right-1').click()
-  //   // }
   // })
 
   it('user is able to sign in', () => {
@@ -21,20 +13,18 @@ context('Actions', () => {
     cy.get('.govuk-heading-xl').should('have.text', ' Applications ') //assertion
   })
 
-
-
-  it('user is able to click and enter legal vacancy', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/vacancy/GIIXvf2Pp0hMVIdEcfor/')
+  it('user is able to click and enter non legal vacancy', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/vacancy/sZhJ2BWMS52eDJ8yzC16/')
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('.govuk-panel__body > .govuk-button').click()
     cy.get('#citizenship__1').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    cy.get('.govuk-caption-xl').should('have.text', ' JAC00134 Legal test v2 ')
+    cy.get('.govuk-caption-xl').should('have.text', ' JAC00141 Non-legal test ')
   })
 
   it('user is able to fill out personal details section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/personal-details')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/personal-details')
     cy.get('#fullName').clear().type('Test')
     cy.get('#email').clear().type('test123@gmail.com')
     cy.get('#date-of-birth-day').clear().type('31')
@@ -46,9 +36,9 @@ context('Actions', () => {
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#apply-personal-details-completed').should('be.visible')
   })
-
+  
   it('user is able to fill out character information section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/character-information')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/character-information')
     cy.get('#criminal-offenses__2').click()
     cy.get('#non-motoring-fixed-pentalty-notice__4').click()
     cy.get('#driving-disqualification-drink-drugs__6').click()
@@ -62,11 +52,10 @@ context('Actions', () => {
     cy.get('#apply-character-information-completed').should('be.visible')
   })
 
-  it('user is able to fill out character information section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/equality-and-diversity-survey')
+  it('user is able to fill out equality and diversity section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/equality-and-diversity-survey')
     cy.get('#share-data__1').click()
     cy.get('#professional-background__2').click()
-    cy.get('#current-legal-role__6').click()
     cy.get('#fee-paid-judicial-role__4').click()
     cy.get('#state-or-fee-school__8').click()
     cy.get('#oxbridge-universities__15').click()
@@ -78,79 +67,67 @@ context('Actions', () => {
     cy.get('#disability__54').click()
     cy.get('#religion-faith__56').click()
     cy.get('#atttended-outreach-events__67').click()
-    cy.get('#participated-in-judicial-workshadowing-scheme__69').click()
-    cy.get('#has-taken-paje__72').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#equality-and-diversity-survey-completed').should('be.visible')
   })
 
+  it('user is able to fill out part time work section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/part-time-working-preferences')
+    cy.get('#part-time-working-preferences__2').click()
+    cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
+  })
+
   it('user is able to fill out location preferences section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/location-preferences')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/location-preferences')
     cy.get('#location-preferences-answer-0').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#location-preferences-completed').should('be.visible')
   })
 
   it('user is able to fill out jurisdiction preferences section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/jurisdiction-preferences')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/jurisdiction-preferences')
     cy.get('#jurisdiction-preferences-answer-0').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#jurisdiction-preferences-completed').should('be.visible')
   })
 
-  it('user is able to fill out relevant qualifications section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/relevant-qualifications')
-    cy.get('#qualification_type_0__1').click()
-    cy.get('#qualification_location_0__5').click()
-    cy.get('#qualification_date_0-month').clear().type('12')
-    cy.get('#qualification_date_0-year').clear().type('2019')
-    cy.get('.govuk-grid-column-two-thirds > :nth-child(4)').click()
-    cy.get('#relevant-qualifications-completed').should('be.visible')
-  })
-
-  it('user is able to fill out post qualification work experience section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/post-qualification-work-experience')
-    cy.get('#experience_job_title_0').clear().type('Beast mode')
-    cy.get('#experience_org_business_name_0').clear().type('Supreme Court master')
-    cy.get('#experience_start_date_0-month').clear().type('01')
-    cy.get('#experience_start_date_0-year').clear().type('2019')
-    cy.get('#experience_end_date_0-month').clear().type('02')
-    cy.get('#experience_end_date_0-year').clear().type('2019')
-    cy.get('#tasks_0__1').click()
-    cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
-    cy.get('#post-qualification-work-experience-completed').should('be.visible')
-  })
-
-  it('user is able to fill out judicial experience section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/judicial-experience')
-    cy.get('#fee-or-salaried-judge__1').click()
-    cy.get('#fee-or-salaried-sat-thirty-days__3').click()
-    cy.get('#fee-or-salaried-sitting-days-details').click()
+  it('user is able to fill out relevant memberships section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/relevant-memberships')
+    cy.get('#professional-memberships__1').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
-    cy.get('#judicial-experience-completed').should('be.visible')
+    cy.get('#relevant-memberships-completed').should('be.visible')
   })
 
-  it('user is able to fill out gaps in employment section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/employment-gaps')
-    cy.get('#start_date_0-month').type('02')
-    cy.get('#start_date_0-year').type('2019')
-    cy.get('#end_date_0-month').type('03')
-    cy.get('#end_date_0-year').type('2019')
-    cy.get('#details_0').clear().type('Took a vacation ok give me a break')
-    cy.get('#tasks_0__1').click()
+  it('user is able to fill out relevant experience section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/relevant-experience')
+    cy.get('#experience_job_title_0').clear().type('I was me')
+    cy.get('#experience_org_business_name_0').clear().type('I was the boss')
+    cy.get('#experience_start_date_0-month').clear().type('02')
+    cy.get('#experience_end_date_0-year').clear().type('2019')
+    cy.get('.govuk-grid-column-two-thirds > :nth-child(4)').click()
+    cy.get('#relevant-experience-completed').should('be.visible')
+  })
+
+  it('user is able to fill out employments section', () => {
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/employment-gaps')
+    cy.get('#start_date_0-month').clear().type('03')
+    cy.get('#start_date_0-year').clear().type('2020')
+    cy.get('#end_date_0-month').clear().type('04')
+    cy.get('#end_date_0-year').clear().type('2020')
+    cy.get('#details_0').clear().type('I took a break ok relax')
     cy.get('.govuk-grid-column-two-thirds > :nth-child(5)').click()
     cy.get('#employment-gaps-completed').should('be.visible')
   })
 
   it('user is able to fill out reasonable length of service section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/reasonable-length-of-service')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/reasonable-length-of-service')
     cy.get('#can-give-reasonable-los__1').click()
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#reasonable-length-of-service-completed').should('be.visible')
   })
 
   it('user is able to fill out independent assessors section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/assessors-details')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/assessors-details')
     cy.get('#first-assessor-full-name').clear().type('Test')
     cy.get('#first-assessor-title').clear().type('Boss man')
     cy.get('#first-assessor-email').clear().type('test321@gmail.com')
@@ -161,16 +138,17 @@ context('Actions', () => {
     cy.get('#second-assessor-Phone').clear().type('07987654321')
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').click()
     cy.get('#assessors-details-completed').should('be.visible')
+
   })
 
   it('user is able to review application after completing every section and able to click continue', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16')
     cy.get('.govuk-grid-column-two-thirds > .govuk-button').should('be.visible')
   })
 
   it('user is able to send application after reviewing every section', () => {
-    cy.visit('https://apply-staging.judicialappointments.digital/apply/GIIXvf2Pp0hMVIdEcfor/review')
+    cy.visit('https://apply-staging.judicialappointments.digital/apply/sZhJ2BWMS52eDJ8yzC16/review')
     cy.get('.govuk-grid-column-full > .govuk-button').should('be.visible')
+
   })
-  
 })
