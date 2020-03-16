@@ -652,7 +652,7 @@
           id="has-taken-paje"
           v-model="equalityAndDiversitySurvey.hasTakenPAJE"
           required
-          label="Have you taken part in the Pre-application judicial education (PAJE)?"
+          label="Have you taken part in the Pre-Application Judicial Education programme (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
             The
