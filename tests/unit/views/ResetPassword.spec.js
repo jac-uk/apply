@@ -18,7 +18,7 @@ jest.mock('@/firebase', () => {
   return { auth };
 });
 
-xdescribe('views/ResetPassword', () => {
+describe('views/ResetPassword', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(ResetPassword,{
@@ -28,7 +28,7 @@ xdescribe('views/ResetPassword', () => {
     });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -48,8 +48,8 @@ xdescribe('views/ResetPassword', () => {
     });
   });
 
-  xdescribe('methods', () => {
-    xdescribe('resetPassword', () => {
+  describe('methods', () => {
+    describe('resetPassword', () => {
       it('is a function', () => {
         expect(typeof wrapper.vm.resetPassword).toBe('function');
       });

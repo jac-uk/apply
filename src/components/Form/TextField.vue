@@ -25,6 +25,7 @@
       class="govuk-input"
       :class="[inputClass, {'govuk-input--error': hasError}]"
       :type="fieldType"
+      :autocomplete="autocomplete"
       @change="validate"
     >
   </div>
@@ -61,6 +62,15 @@ export default {
       set(val) {
         this.$emit('input', val);
       },
+    },
+    autocomplete() {
+      switch (this.type) {
+      case 'tel':
+      case 'email':
+        return this.type;
+      default:
+        return false;
+      }
     },
     fieldType() {
       switch(this.type) {
