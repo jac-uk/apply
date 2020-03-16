@@ -48,8 +48,11 @@ export default {
     },
   },
   async mounted() {
-    this.linkHref = await this.getDownloadURL();
-    console.log('linkhref', this.linkHref);
+    const downloadUrl = await this.getDownloadURL();
+
+    if (downloadUrl) {
+      this.linkHref = downloadUrl;
+    }
   },
   methods: {
     async getDownloadURL() {
