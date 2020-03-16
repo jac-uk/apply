@@ -1,18 +1,12 @@
 <template>
   <a
-    v-if="linkHref"
     class="govuk-link govuk-body-m"
     :class="{'download-visited' : visited }"
-    :download="fileName"
-    :href="linkHref"
+    href="javascript:void(0)"
+    @click.prevent="download(fileName)"
   >
     {{ linkText }}
   </a>
-  <span
-    v-else
-  >
-    {{ linkText }}
-  </span>
 </template>
 
 <script>
@@ -39,7 +33,6 @@ export default {
   data () {
     return {
       visited: false,
-      linkHref: '',
     };
   },
   computed: {
@@ -47,34 +40,54 @@ export default {
       return this.title ? this.title : this.fileName;
     },
   },
-  async mounted() {
-    const downloadUrl = await this.getDownloadURL();
-
-    if (downloadUrl) {
-      this.linkHref = downloadUrl;
-    }
-  },
   methods: {
-    async getDownloadURL() {
-      const fileRef = firebase.storage().ref(`exercise/${this.exerciseId}/${this.fileName}`);
+    download(fileName) {
+      this.visited = true;
+      // Create a reference to the file we want to download
+      const fileSavePath = `exercise/${this.exerciseId}/${fileName}`;
 
-      try {
-        const downloadUrl = await fileRef.getDownloadURL();
+      // Get a reference to the storage service, which is used to create references in your storage bucket
+      const storage = firebase.storage();
 
-        if (typeof downloadUrl === 'string' && downloadUrl.length) {
-          return downloadUrl;
+      // Create a storage reference from our storage service
+      const storageRef = storage.ref();
+
+      // Create a reference with an initial file path and name
+      const fileNameRef = storageRef.child(fileSavePath);
+
+      // Get the download URL
+      fileNameRef.getDownloadURL().then((url) => {
+        // open url in another window
+        window.open(url);
+      }).catch((error) => {
+
+        // A full list of error codes is available at
+        // https://firebase.google.com/docs/storage/web/handle-errors
+        switch (error.code) {
+        case 'storage/object-not-found':
+          // File doesn't exist
+          break;
+
+        case 'storage/unauthorized':
+          // User doesn't have permission to access the object
+          break;
+
+        case 'storage/canceled':
+          // User canceled the upload
+          break;
+
+        case 'storage/unknown':
+          // Unknown error occurred, inspect the server response
+          break;
         }
-        return false;
-      } catch (e) {
-        return false;
-      }
+      });
     },
   },
 };
 </script>
 
 <style scoped>
-  .download-visited {
-    color: #4c2c92;
-  }
+.download-visited {
+  color: #4c2c92;
+}
 </style>
