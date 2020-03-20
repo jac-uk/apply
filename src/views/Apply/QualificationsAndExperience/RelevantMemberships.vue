@@ -222,8 +222,8 @@
 
           <CheckboxItem
             v-for="membership in otherMemberships"
-            :key="membership.value"
             :id="membership.value"
+            :key="membership.value"
             :value="membership.value"
             :label="membership.label"
           >
