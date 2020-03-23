@@ -1,4 +1,4 @@
-import filters from '@/filters';
+import * as filters from '@/filters';
 
 describe('global filters', () => {
   describe('formatDate', () => {
