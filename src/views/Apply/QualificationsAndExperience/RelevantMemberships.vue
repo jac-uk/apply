@@ -283,7 +283,7 @@ export default {
     BackLink,
   },
   extends: Form,
-  data(){
+  data() {
     const defaults = {
       charteredAssociationBuildingEngineersDate: null,
       charteredAssociationBuildingEngineersInformation: null,
@@ -320,15 +320,17 @@ export default {
 
     // @NOTE fields for custom memberships
     const vacancy = this.$store.state.vacancy.record;
-    vacancy.otherMemberships.forEach(membership => {
-      if (vacancy.memberships.includes(membership.value)) {
-        defaults.memberships[membership.value] = {
-          date: null,
-          number: null,
-          information: null,
-        };
-      }
-    });
+    if (Array.isArray(vacancy.otherMemberships)) {
+      vacancy.otherMemberships.forEach(membership => {
+        if (vacancy.memberships.includes(membership.value)) {
+          defaults.memberships[membership.value] = {
+            date: null,
+            number: null,
+            information: null,
+          };
+        }
+      });
+    }
 
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -341,7 +343,10 @@ export default {
       return this.$store.state.vacancy.record;
     },
     otherMemberships() {
-      return this.vacancy.otherMemberships.filter(membership => this.vacancy.memberships.includes(membership.value));
+      if (Array.isArray(this.vacancy.otherMemberships)) {
+        return this.vacancy.otherMemberships.filter(membership => this.vacancy.memberships.includes(membership.value));
+      }
+      return null;
     },
   },
   methods: {
