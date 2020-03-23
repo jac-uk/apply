@@ -376,7 +376,7 @@
                   <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherFeePaidJudicialRoleDetails }}
                 </p>
-                <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
+                <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup | toYesNo }}</span>
               </dd>
             </div>
 
