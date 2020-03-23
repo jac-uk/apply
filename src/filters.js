@@ -1,7 +1,4 @@
-import Vue from 'vue';
-
-Vue.filter('formatDate',
-(value, type) => {
+const formatDate = (value, type) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
     switch (type) {
@@ -11,16 +8,19 @@ Vue.filter('formatDate',
         return objDate.toLocaleDateString();
     }
   }
-});
+};
 
-Vue.filter('toYesNo',
-(value) => {
-  return value ? 'Yes' : 'No';
-});
+const toYesNo = (value) => {
+  // Only convert booleans, not all falsy values mean "no"
+  if (typeof value === 'boolean') {
+    return value ? 'Yes' : 'No';
+  }
+  return value;
+};
 
-Vue.filter('lookup',
-(value) => {
-  if (value) {
+const lookup = (value) => {
+  if (typeof value === 'string') {
+    // @TODO: extract lookup values
     const lookup = {
       'academic': 'Academic',
       'acting-arbitrator': 'Acting as an arbitrator',
@@ -34,6 +34,7 @@ Vue.filter('lookup',
       'approved': 'Approved',
       'assisting-in-proceedings-for-resolution-of-issues-under-law': 'Assisting persons involved in proceedings for the resolution of issues arising under the law',
       'athiest': 'Atheist',
+      'atheist': 'Atheist',
       'bangladeshi': 'Bangladeshi',
       'barrister': 'Barrister',
       'bisexual': 'Bisexual',
@@ -185,5 +186,15 @@ Vue.filter('lookup',
     };
     return lookup[value] || value;
   }
+  // Default for unanswered question
+  if (typeof value === 'undefined' || value === null) {
+    return 'Answer not supplied';
+  }
   return value;
-});
+};
+
+export {
+  formatDate,
+  toYesNo,
+  lookup
+};

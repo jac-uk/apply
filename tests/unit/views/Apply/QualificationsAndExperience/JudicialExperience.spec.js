@@ -26,13 +26,13 @@ const createTestSubject = () => {
   });
 };
 
-describe('views/QualificationsAndExperience/JudicialExperience', () => {
+xdescribe('views/QualificationsAndExperience/JudicialExperience', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

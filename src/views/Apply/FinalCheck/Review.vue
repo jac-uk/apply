@@ -64,6 +64,15 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
+                Phone number
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.phone }}
+              </dd>
+            </div>
+
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
                 Date of birth
               </dt>
               <dd class="govuk-summary-list__value">
@@ -367,7 +376,7 @@
                   <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
                   {{ application.equalityAndDiversitySurvey.otherFeePaidJudicialRoleDetails }}
                 </p>
-                <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
+                <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup | toYesNo }}</span>
               </dd>
             </div>
 
@@ -489,19 +498,19 @@
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
-                  v-if="application.equalityAndDiversitySurvey.disability"
+                  v-if="application.equalityAndDiversitySurvey.disability === true"
                   class="govuk-body govuk-!-margin-bottom-0"
                 >
                   <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
                   {{ application.equalityAndDiversitySurvey.disabilityDetails }}
                 </p>
-                <span v-else>{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
+                <span v-else>{{ application.equalityAndDiversitySurvey.disability | lookup | toYesNo }}</span>
               </dd>
             </div>
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Religion or faith are you
+                Religion or faith
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
@@ -931,6 +940,23 @@
                     <li>{{ application.otherProfessionalMembershipsDate | formatDate }}</li>
                     <li>{{ application.otherProfessionalMembershipsNumber }}</li>
                     <li>{{ application.otherProfessionalMembershipsInformation }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-for="(membership, key) in otherMemberships"
+                :key="key"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  {{ membership.label }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ membership.date | formatDate }}</li>
+                    <li>{{ membership.number }}</li>
+                    <li>{{ membership.information }}</li>
                   </ul>
                 </dd>
               </div>
@@ -1660,6 +1686,22 @@ export default {
       return this.isDraftApplication
         && this.isVacancyOpen
         && this.isApplicationComplete;
+    },
+    otherMemberships() {
+      // @NOTE this is a bit ugly as we can't just lookup label
+      const selected = {};
+
+      this.application.professionalMemberships.forEach(membership => {
+        if (this.application.memberships[membership]) {
+          const otherMembership = this.vacancy.otherMemberships.find(m => m.value === membership);
+          selected[membership] = {
+            ...this.application.memberships[membership],
+            label: otherMembership.label,
+          };
+        }
+      });
+
+      return selected;
     },
   },
   methods: {

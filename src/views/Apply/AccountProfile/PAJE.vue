@@ -1,5 +1,5 @@
 <template>
-  <h1>Tell us if you've taken part in pre-application judicial education (PAJE)</h1>
+  <h1>Tell us if you've taken part in Pre-Application Judicial Education programme (PAJE)</h1>
 </template>
 
 export default {}

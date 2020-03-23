@@ -652,13 +652,13 @@
           id="has-taken-paje"
           v-model="equalityAndDiversitySurvey.hasTakenPAJE"
           required
-          label="Have you taken part in the Pre-application judicial education (PAJE)?"
+          label="Have you taken part in the Pre-Application Judicial Education programme (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
             The
             <a
               class="govuk-link"
-              href="https://www.judicialappointments.gov.uk/providing-diversity-information-jac"
+              href="https://www.judiciary.uk/about-the-judiciary/who-are-the-judiciary/diversity/pre-application-judicial-education-programme-paje/"
               target="_blank"
             >
               PAJE scheme

@@ -29,13 +29,13 @@ const createTestSubject = () => {
   });
 };
 
-describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
+xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

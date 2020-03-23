@@ -7,13 +7,13 @@ const createTestSubject = () => {
   return shallowMount(StatementOfSuitability);
 };
 
-describe('views/Assessments/StatementOfSuitability', () => {
+xdescribe('views/Assessments/StatementOfSuitability', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject();
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

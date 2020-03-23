@@ -10,7 +10,7 @@
         <ErrorSummary :errors="errors" />
 
         <p class="govuk-body-l">
-          We'll use this information to confirm your identity if you contact us.
+          We'll use this information to confirm your identity if you contact us or to contact you about your application.
         </p>
 
         <TextField
@@ -27,6 +27,14 @@
           label="Email address"
           type="email"
           required
+        />
+
+        <TextField
+          id="phone"
+          v-model="personalDetails.phone"
+          label="Phone number"
+          type="tel"
+          hint="Optional. For international numbers include the country code."
         />
 
         <DateInput
@@ -140,6 +148,7 @@ export default {
     const defaults = {
       fullName: null,
       email: null,
+      phone: null,
       dateOfBirth: null,
       nationalInsuranceNumber: null,
       citizenship: null,

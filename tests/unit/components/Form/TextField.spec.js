@@ -3,8 +3,14 @@ import TextField from '@/components/Form/TextField';
 
 describe('components/Form/TextField', () => {
   let wrapper;
+  const mockProps = {
+    id: 'mockId',
+  };
+
   beforeEach(() => {
-    wrapper = shallowMount(TextField);
+    wrapper = shallowMount(TextField, {
+      propsData: mockProps,
+    });
   });
 
   it('renders the component', () => {
@@ -97,6 +103,28 @@ describe('components/Form/TextField', () => {
         it('has the default <input> `type` text', () => {
           expect(wrapper.find('input').attributes('type')).toBe('text');
         });
+      });
+    });
+
+    describe('autocomplete', () => {
+      it('sets autocomplete for email', () => {
+        const type = 'email';
+        wrapper.setProps({ type });
+
+        expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
+      });
+
+      it('sets autocomplete for phone number', () => {
+        const type = 'tel';
+        wrapper.setProps({ type });
+
+        expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
+      });
+
+      it('doesn\'t set autocomplete for other types', () => {
+        wrapper.setProps({ type: 'text' });
+
+        expect(wrapper.find('input').attributes('autocomplete')).toBeFalsy();
       });
     });
   });
