@@ -24,8 +24,7 @@
     <input
       :id="id"
       v-model="text"
-      class="govuk-input govuk-!-width-three-quarters"
-      :class="[inputClass, {'govuk-input--error': hasError}]"
+      :class="[inputClass, 'govuk-input', 'govuk-!-width-three-quarters', {'govuk-input--error': hasError}]"
       :type="fieldType"
       :autocomplete="type"
     >
@@ -58,7 +57,7 @@ export default {
       type: String,
     },
     type: {
-      default: 'password',
+      default: 'current-password',
       type: String,
     },
   },
@@ -70,7 +69,7 @@ export default {
         containsCapitalLetters: /[A-Z]+/,
         containsDigits: /\d+/,
         containsSpecialCharacters: /[^A-Za-z\d]+/,
-        repeatedCharacters: /(.)\1{3,}/,
+        repeatedCharacters: /(.)\1{2,}/,
       },
     };
   },
@@ -97,17 +96,17 @@ export default {
     },
   },
   mounted() {
-    this.$root.$on('validate', this.validatePassword);
+    this.$root.$on('validate', this.handleValidatePassword);
   },
   beforeDestroy: function() {
     this.setError('');
-    this.$root.$off('validate', this.handleValidate);
+    this.$root.$off('validate', this.handleValidatePassword);
   },
   methods: {
     toggleVisibility() {
       this.showPassword = !this.showPassword;
     },
-    validatePassword(event) {
+    handleValidatePassword(event) {
       // don't bother checking if generic validation failed
       if (!this.hasError) {
         let value = this.value;
@@ -115,21 +114,24 @@ export default {
           value = event.target.value;
         }
 
-        if (!this.regex.containsCapitalLetters.test(value)) {
-          this.setError(`${this.label} must include at least one capital letter.`);
-        }
+        this.validatePassword(value);
+      }
+    },
+    validatePassword(password) {
+      if (!this.regex.containsCapitalLetters.test(password)) {
+        this.setError(`${this.label} must include at least one capital letter.`);
+      }
 
-        if (!this.regex.containsDigits.test(value)) {
-          this.setError(` ${this.label} must include at least one digit.`);
-        }
+      if (!this.regex.containsDigits.test(password)) {
+        this.setError(`${this.label} must include at least one digit.`);
+      }
 
-        if (!this.regex.containsSpecialCharacters.test(value)) {
-          this.setError(`${this.label} must include at least one special character - for example £, #, @, !, %, -, &, *`);
-        }
+      if (!this.regex.containsSpecialCharacters.test(password)) {
+        this.setError(`${this.label} must include at least one special character - for example £, #, @, !, %, -, &, *.`);
+      }
 
-        if (this.regex.repeatedCharacters.test(value)) {
-          this.setError(`${this.label} must include no more than 2 consecutive repeating characters.`);
-        }
+      if (this.regex.repeatedCharacters.test(password)) {
+        this.setError(`${this.label} must include no more than 2 consecutive repeating characters.`);
       }
     },
   },
