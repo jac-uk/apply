@@ -77,7 +77,10 @@
             required
           />
 
-          <button class="govuk-button">
+          <button
+            type="submit"
+            class="govuk-button"
+          >
             Continue
           </button>
         </div>
@@ -114,6 +117,7 @@ export default {
     },
   },
   methods: {
+    // @TODO: this should be handled by form
     scrollToTop () {
       this.$el.scrollIntoView();
     },
