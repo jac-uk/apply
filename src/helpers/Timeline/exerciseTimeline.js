@@ -85,11 +85,11 @@ const exerciseTimeline = (data) => {
     //   },
     // );
 
-    if(data.shortlistingMethods.includes('paper-sift')) {
-      timeline.push(
-        createShortlistingMethod('Sift', data.siftStartDate, data.siftEndDate)
-      );
-    }
+    // if(data.shortlistingMethods.includes('paper-sift')) {
+    //   timeline.push(
+    //     createShortlistingMethod('Sift', data.siftStartDate, data.siftEndDate)
+    //   );
+    // }
 
     if(data.shortlistingMethods.includes('name-blind-paper-sift')) {
       timeline.push(
@@ -111,7 +111,7 @@ const exerciseTimeline = (data) => {
       },
     );
   }
-  
+
   if (data.shortlistingMethods.includes('situational-judgement-qualifying-test')) {
     if (data.situationalJudgementTestDate) {
       timeline.push(
@@ -152,7 +152,7 @@ const exerciseTimeline = (data) => {
         },
       );
     }
-  }  
+  }
 
   if (data.shortlistingMethods.includes('scenario-test')) {
     if (data.scenarioTestDate) {
@@ -172,7 +172,7 @@ const exerciseTimeline = (data) => {
           dateString: isDate(data.scenarioTestOutcome) ? formatDate(data.scenarioTestOutcome) : null,
         },
       );
-    }  
+    }
   }
 
   if (data.contactIndependentAssessors) {
