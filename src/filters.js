@@ -34,6 +34,7 @@ const lookup = (value) => {
       'approved': 'Approved',
       'assisting-in-proceedings-for-resolution-of-issues-under-law': 'Assisting persons involved in proceedings for the resolution of issues arising under the law',
       'athiest': 'Atheist',
+      'atheist': 'Atheist',
       'bangladeshi': 'Bangladeshi',
       'barrister': 'Barrister',
       'bisexual': 'Bisexual',
@@ -192,8 +193,8 @@ const lookup = (value) => {
   return value;
 };
 
-export default {
+export {
   formatDate,
   toYesNo,
-  lookup,
+  lookup
 };

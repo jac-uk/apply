@@ -2,7 +2,7 @@ import Vue from 'vue';
 import App from '@/App';
 import router from '@/router';
 import store from '@/store';
-import filters from '@/filters';
+import * as filters from '@/filters';
 import { auth } from '@/firebase';
 import VueAnalytics from 'vue-analytics';
 import * as Sentry from '@sentry/browser';
