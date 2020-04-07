@@ -49,7 +49,7 @@ export default {
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
-        email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+        email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
         tel: /^\+?[\d() -]+/,
       },
     };
@@ -79,7 +79,7 @@ export default {
           value = event.target.value;
         }
 
-        if (this.required && (value === null || value.length === 0)) {
+        if (this.required && (value === null || value === undefined || value.length === 0)) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
           } else {

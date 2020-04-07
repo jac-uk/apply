@@ -21,6 +21,7 @@
         >
           <CheckboxItem
             v-if="showMembershipOption('chartered-association-of-building-engineers')"
+            id="chartered-association-of-building-engineers"
             value="chartered-association-of-building-engineers"
             label="Chartered Association of Building Engineers"
           >
@@ -31,10 +32,12 @@
               type="month"
             />
             <TextField
+              id="chartered-association-of-building-engineers-number"
               v-model="application.charteredAssociationBuildingEngineersNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="chartered-association-of-building-engineers-information"
               v-model="application.charteredAssociationBuildingEngineersInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -42,6 +45,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('chartered-institute-of-building')"
+            id="chartered-institute-of-building"
             value="chartered-institute-of-building"
             label="Chartered Institute of Building"
           >
@@ -52,10 +56,12 @@
               type="month"
             />
             <TextField
+              id="chartered-institute-of-building-number"
               v-model="application.charteredInstituteBuildingNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="chartered-institute-of-building-information"
               v-model="application.charteredInstituteBuildingInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -63,6 +69,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('chartered-institute-of-environmental-health')"
+            id="chartered-institute-of-environmental-health"
             value="chartered-institute-of-environmental-health"
             label="Chartered Institute of Environmental Health"
           >
@@ -73,10 +80,12 @@
               type="month"
             />
             <TextField
+              id="chartered-institute-of-environmental-health-number"
               v-model="application.charteredInstituteEnvironmentalHealthNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="chartered-institute-of-environmental-health-information"
               v-model="application.charteredInstituteEnvironmentalHealthInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -84,6 +93,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('general-medical-council')"
+            id="general-medical-council"
             value="general-medical-council"
             label="General Medical Council"
           >
@@ -94,6 +104,7 @@
               type="month"
             />
             <TextField
+              id="general-medical-council-number"
               v-model="application.generalMedicalCouncilNumber"
               label="Membership number?"
             />
@@ -117,6 +128,7 @@
                   label="End date"
                 />
                 <TextareaInput
+                  id="general-medical-council-conditional-registration-details"
                   v-model="application.generalMedicalCouncilConditionalDetails"
                   label="Give details of the conditions"
                   rows="2"
@@ -128,6 +140,7 @@
               />
             </RadioGroup>
             <TextareaInput
+              id="general-medical-council-information"
               v-model="application.generalMedicalCouncilInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -135,6 +148,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('royal-college-of-psychiatrists')"
+            id="royal-college-of-psychiatrists"
             value="royal-college-of-psychiatrists"
             label="Royal College of Psychiatrists"
           >
@@ -146,10 +160,12 @@
               type="month"
             />
             <TextField
+              id="royal-college-of-psychiatrists-number"
               v-model="application.royalCollegeOfPsychiatristsNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="royal-college-of-psychiatrists-information"
               v-model="application.royalCollegeOfPsychiatristsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -157,6 +173,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('royal-institution-of-chartered-surveyors')"
+            id="royal-institution-of-chartered-surveyors"
             value="royal-institution-of-chartered-surveyors"
             label="Royal Institution of Chartered Surveyors"
           >
@@ -167,10 +184,12 @@
               type="month"
             />
             <TextField
+              id="royal-institution-of-chartered-surveyors-number"
               v-model="application.royalInstitutionCharteredSurveyorsNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="royal-institution-of-chartered-surveyors-information"
               v-model="application.royalInstitutionCharteredSurveyorsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
@@ -178,6 +197,7 @@
           </CheckboxItem>
           <CheckboxItem
             v-if="showMembershipOption('royal-institute-of-british-architects')"
+            id="royal-institute-of-british-architects"
             value="royal-institute-of-british-architects"
             label="Royal Institute of British Architects"
           >
@@ -188,32 +208,39 @@
               type="month"
             />
             <TextField
+              id="royal-institute-of-british-architects-number"
               v-model="application.royalInstituteBritishArchitectsNumber"
               label="Membership number?"
             />
             <TextareaInput
+              id="royal-institute-of-british-architects-information"
               v-model="application.royalInstituteBritishArchitectsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
           </CheckboxItem>
+
           <CheckboxItem
-            v-if="showMembershipOption('other')"
-            value="other"
-            :label="vacancy.otherMemberships"
+            v-for="membership in otherMemberships"
+            :id="membership.value"
+            :key="membership.value"
+            :value="membership.value"
+            :label="membership.label"
           >
             <DateInput
-              id="other-date"
-              v-model="application.otherProfessionalMembershipsDate"
+              :id="`${membership.value}-date`"
+              v-model="application.memberships[membership.value].date"
               label="When did you become a member?"
               type="month"
             />
             <TextField
-              v-model="application.otherProfessionalMembershipsNumber"
+              :id="`${membership.value}-number`"
+              v-model="application.memberships[membership.value].number"
               label="Membership number?"
             />
             <TextareaInput
-              v-model="application.otherProfessionalMembershipsInformation"
+              :id="`${membership.value}-information`"
+              v-model="application.memberships[membership.value].information"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -256,7 +283,7 @@ export default {
     BackLink,
   },
   extends: Form,
-  data(){
+  data() {
     const defaults = {
       charteredAssociationBuildingEngineersDate: null,
       charteredAssociationBuildingEngineersInformation: null,
@@ -288,7 +315,23 @@ export default {
       royalInstitutionCharteredSurveyorsDate: null,
       royalInstitutionCharteredSurveyorsInformation: null,
       royalInstitutionCharteredSurveyorsNumber: null,
+      memberships: {},
     };
+
+    // @NOTE fields for custom memberships
+    const vacancy = this.$store.state.vacancy.record;
+    if (Array.isArray(vacancy.otherMemberships)) {
+      vacancy.otherMemberships.forEach(membership => {
+        if (vacancy.memberships.includes(membership.value)) {
+          defaults.memberships[membership.value] = {
+            date: null,
+            number: null,
+            information: null,
+          };
+        }
+      });
+    }
+
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
@@ -298,6 +341,12 @@ export default {
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    otherMemberships() {
+      if (Array.isArray(this.vacancy.otherMemberships)) {
+        return this.vacancy.otherMemberships.filter(membership => this.vacancy.memberships.includes(membership.value));
+      }
+      return null;
     },
   },
   methods: {

@@ -100,6 +100,69 @@ const exerciseTimeline = (data) => {
     if(data.shortlistingMethods.includes('telephone-assessment')) {
       timeline.push(createShortlistingMethod('Telephone assessment', data.telephoneAssessmentStartDate, data.telephoneAssessmentEndDate));
     }
+
+    if (data.shortlistingMethods.includes('situational-judgement-qualifying-test')) {
+      if (data.situationalJudgementTestDate) {
+        timeline.push(
+          {
+            entry: 'Situational judgement qualifying test (QT)',
+            date: getDateAndTime(data.situationalJudgementTestDate, data.situationalJudgementTestStartTime),
+            dateString: getDateAndTimeString(data.situationalJudgementTestDate, data.situationalJudgementTestStartTime, data.situationalJudgementTestEndTime),
+          },
+        );
+      }
+      if (data.situationalJudgementTestOutcome) {
+        timeline.push(
+          {
+            entry: 'Situational judgement QT outcome to candidates',
+            date: data.situationalJudgementTestOutcome,
+            dateString: isDate(data.situationalJudgementTestOutcome) ? formatDate(data.situationalJudgementTestOutcome) : null,
+          },
+        );
+      }
+    }
+
+    if (data.shortlistingMethods.includes('critical-analysis-qualifying-test')) {
+      if (data.criticalAnalysisTestDate) {
+        timeline.push(
+          {
+            entry: 'Critical analysis qualifying test (QT)',
+            date: getDateAndTime(data.criticalAnalysisTestDate, data.criticalAnalysisTestStartTime),
+            dateString: getDateAndTimeString(data.criticalAnalysisTestDate, data.criticalAnalysisTestStartTime, data.criticalAnalysisTestEndTime),
+          },
+        );
+      }
+      if (data.criticalAnalysisTestOutcome) {
+        timeline.push(
+          {
+            entry: 'Critical analysis QT outcome to candidates',
+            date: data.criticalAnalysisTestOutcome,
+            dateString: isDate(data.criticalAnalysisTestOutcome) ? formatDate(data.criticalAnalysisTestOutcome) : null,
+          },
+        );
+      }
+    }
+
+    if (data.shortlistingMethods.includes('scenario-test')) {
+      if (data.scenarioTestDate) {
+        timeline.push(
+          {
+            entry: 'Scenario test',
+            date: getDateAndTime(data.scenarioTestDate, data.scenarioTestStartTime),
+            dateString: getDateAndTimeString(data.scenarioTestDate, data.scenarioTestStartTime, data.scenarioTestEndTime),
+          },
+        );
+      }
+      if (data.scenarioTestOutcome) {
+        timeline.push(
+          {
+            entry: 'Scenario test outcome to candidates',
+            date: data.scenarioTestOutcome,
+            dateString: isDate(data.scenarioTestOutcome) ? formatDate(data.scenarioTestOutcome) : null,
+          },
+        );
+      }
+    }    
   }
 
   if (data.shortlistingOutcomeDate) {
@@ -111,6 +174,7 @@ const exerciseTimeline = (data) => {
       },
     );
   }
+
 
   if (data.shortlistingMethods.includes('situational-judgement-qualifying-test')) {
     if (data.situationalJudgementTestDate) {
@@ -175,6 +239,78 @@ const exerciseTimeline = (data) => {
     }
   }
 
+<<<<<<< HEAD
+=======
+
+
+  if (data.contactIndependentAssessors) {
+    timeline.push(
+      {
+        entry: 'JAC Contacts Independent Assessors',
+        date: data.contactIndependentAssessors,
+        dateString: isDate(data.contactIndependentAssessors) ? formatDate(data.contactIndependentAssessors) : null,
+      },
+    );
+  }
+
+  if (data.independentAssessmentsReturnDate) {
+    timeline.push(
+      {
+        entry: 'Return date for independent assessments',
+        date: data.independentAssessmentsReturnDate,
+        dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate) : null,
+      },
+    );
+  }
+
+  if (data.eligibilitySCCDate) {
+    timeline.push(
+      {
+        entry: 'Eligibility SCC',
+        date: data.eligibilitySCCDate,
+        dateString: isDate(data.eligibilitySCCDate) ? formatDate(data.eligibilitySCCDate) : null,
+      },
+    );
+  }
+  if (data.selectionDays && data.selectionDays.length > 0) {
+    for (var i = 0; i < data.selectionDays.length; i++) {
+      if (data.selectionDays[i].selectionDayStart) {
+        timeline.push(createSelectionDay(data.selectionDays[i]));
+      }
+    }
+  }
+
+  if (data.characterChecksDate) {
+    timeline.push(
+      {
+        entry: 'Character checks',
+        date: data.characterChecksDate,
+        dateString: isDate(data.characterChecksDate) ? formatDate(data.characterChecksDate) : null,
+      },
+    );
+  }
+
+  if (data.statutoryConsultationDate) {
+    timeline.push(
+      {
+        entry: 'Statutory consultation',
+        date: data.statutoryConsultationDate,
+        dateString: isDate(data.statutoryConsultationDate) ? formatDate(data.statutoryConsultationDate) : null,
+      },
+    );
+  }
+
+  if (data.characterAndSCCDate) {
+    timeline.push(
+      {
+        entry: 'Character and Selection SCC',
+        date: data.characterAndSCCDate,
+        dateString: isDate(data.characterAndSCCDate) ? formatDate(data.characterAndSCCDate) : null,
+      },
+    );
+  }
+
+>>>>>>> 9745782b7da03d9bf1619e03e1b08a91f27c8041
   if (data.finalOutcome) {
     timeline.push(
       {
