@@ -60,7 +60,25 @@
           <h2 class="govuk-heading-m">
             Download self assessment template
           </h2>
+
+          <ul
+            v-if="vacancy.downloads"
+            class="govuk-list"
+          >
+            <li
+              v-for="file in vacancy.downloads.candidateAssessementForms"
+              :key="file.file"
+            >
+              <DownloadLink
+                :file-name="file.file"
+                :exercise-id="vacancy.id"
+                :title="file.title"
+              />
+            </li>
+          </ul>
+
           <DownloadLink
+            v-else
             :file-name="vacancy.uploadedCandidateAssessmentFormTemplate"
             :exercise-id="vacancy.id"
             :title="downloadNameGenerator"

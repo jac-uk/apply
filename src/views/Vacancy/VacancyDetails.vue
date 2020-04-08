@@ -105,38 +105,74 @@
     </div>
 
     <div class="govuk-grid-column-one-third govuk-!-padding-bottom-8 container-border-bottom">
-      <h2 class="govuk-heading-m">
-        Related content
-      </h2>
-      <p class="govuk-body">
-        <a
-          class="govuk-link"
-          href="https://www.judicialappointments.gov.uk/overview-selection-process"
-          target="_blank"
-        >
-          How we shortlist candidates
-        </a>
-      </p>
+      <aside
+        class="jac-related-items"
+        role="complementary"
+      >
+        <h2 class="govuk-heading-m">
+          Related content
+        </h2>
 
-      <p class="govuk-body">
-        <a
-          class="govuk-link"
-          href="https://www.judicialappointments.gov.uk/completing-your-self-assessment"
-          target="_blank"
+        <nav
+          role="navigation"
+          aria-labelledby="subsection-title"
         >
-          How to write your self-assessment competency statements
-        </a>
-      </p>
-
-      <p class="govuk-body">
-        <a
-          class="govuk-link"
-          href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
-          target="_blank"
-        >
-          How to choose your independent assessors
-        </a>
-      </p>
+          <ul
+            v-if="vacancy.downloads"
+            class="govuk-list govuk-!-font-size-16"
+          >
+            <li
+              v-for="file in vacancy.downloads.jobDescriptions"
+              :key="file.file"
+            >
+              <DownloadLink
+                :file-name="file.file"
+                :exercise-id="vacancy.id"
+                :title="file.title"
+              />
+            </li>
+            <li
+              v-for="file in vacancy.downloads.termsAndConditions"
+              :key="file.file"
+            >
+              <DownloadLink
+                :file-name="file.file"
+                :exercise-id="vacancy.id"
+                :title="file.title"
+              />
+            </li>
+          </ul>
+          <ul class="govuk-list govuk-!-font-size-16">
+            <li>
+              <a
+                class="govuk-link govuk-link govuk-body-m"
+                href="https://www.judicialappointments.gov.uk/overview-selection-process"
+                target="_blank"
+              >
+                How we shortlist candidates
+              </a>
+            </li>
+            <li>
+              <a
+                class="govuk-link govuk-link govuk-body-m"
+                href="https://www.judicialappointments.gov.uk/completing-your-self-assessment"
+                target="_blank"
+              >
+                How to write your self-assessment competency statements
+              </a>
+            </li>
+            <li>
+              <a
+                class="govuk-link govuk-link govuk-body-m"
+                href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
+                target="_blank"
+              >
+                How to choose your independent assessors
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
     </div>
   </div>
 </template>
@@ -145,10 +181,12 @@
 import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
+import DownloadLink from '@/components/DownloadLink';
 
 export default {
   components: {
     Timeline,
+    DownloadLink,
   },
   computed: {
     vacancy () {

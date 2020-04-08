@@ -19,7 +19,13 @@
           v-for="error in errors"
           :key="error.id"
         >
-          <a :href="`#${error.id}-error`">{{ error.message }}</a>
+          <a
+            v-if="error.id"
+            :href="`#${error.id}-error`"
+          >
+            {{ error.message }}
+          </a>
+          <span v-else>{{ error.message }}</span>
         </li>
       </ul>
     </div>
@@ -36,7 +42,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>
