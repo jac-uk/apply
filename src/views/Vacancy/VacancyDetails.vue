@@ -117,7 +117,10 @@
           role="navigation"
           aria-labelledby="subsection-title"
         >
-          <ul class="govuk-list govuk-!-font-size-16">
+          <ul
+            v-if="vacancy.downloads"
+            class="govuk-list govuk-!-font-size-16"
+          >
             <li
               v-for="file in vacancy.downloads.jobDescriptions"
               :key="file.file"
