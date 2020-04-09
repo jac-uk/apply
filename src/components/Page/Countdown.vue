@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <div
-      v-if="status != 'upcoming'"
-      class="govuk-warning-text"
+  <div
+    v-if="status != 'upcoming'"
+    class="govuk-warning-text"
+  >
+    <span
+      class="govuk-warning-text__icon"
+      aria-hidden="true"
     >
+      !
+    </span>
+    <strong class="govuk-warning-text__text">
+      <span class="govuk-warning-text__assistive">Warning</span>
+      {{ message }}
       <span
-        class="govuk-warning-text__icon"
-        aria-hidden="true"
+        v-if="status === 'open'"
       >
-        !
+        Time left: {{ minutes | zeroPad }}:{{ seconds | zeroPad }}.
       </span>
-      <strong class="govuk-warning-text__text">
-        <span class="govuk-warning-text__assistive">Warning</span>
-        {{ message }}
-        <span
-          v-if="status === 'open'"
-        >
-          Time left: {{ minutes | zeroPad }}:{{ seconds | zeroPad }}.
-        </span>
-      </strong>
-    </div>
+    </strong>
   </div>
 </template>
 
