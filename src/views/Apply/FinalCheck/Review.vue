@@ -4,6 +4,13 @@
       <div class="govuk-grid-column-full">
         <BackLink class="govuk-!-margin-top-0" />
 
+        <Countdown
+          :close-time="vacancyCloseTime"
+          :countdown-length="60"
+        />
+
+        <ErrorSummary :errors="errors" />
+
         <div class="govuk-!-margin-top-1">
           <h1
             class="govuk-heading-xl"
@@ -1564,18 +1571,31 @@
 </template>
 
 <script>
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
 import EventRenderer from '@/components/Page/EventRenderer';
+import Countdown from '@/components/Page/Countdown';
 
 export default {
   components: {
     BackLink,
+    ErrorSummary,
     EventRenderer,
+    Countdown,
+  },
+  data() {
+    return {
+      errors: [],
+      canApply: false,
+    };
   },
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;
+    },
+    vacancyCloseTime() {
+      return this.$store.getters['vacancy/getCloseDate'];
     },
     application () {
       return this.$store.state.application.record;
@@ -1591,9 +1611,6 @@ export default {
     },
     isSenior () {
       return this.vacancy.typeOfExercise == 'senior';
-    },
-    isVacancyOpen() {
-      return this.$store.getters['vacancy/isOpen'];
     },
     showMemberships() {
       return this.vacancy.memberships && this.vacancy.memberships.indexOf('none') === -1;
@@ -1682,11 +1699,6 @@ export default {
     isDraftApplication() {
       return this.application.status === 'draft';
     },
-    canApply () {
-      return this.isDraftApplication
-        && this.isVacancyOpen
-        && this.isApplicationComplete;
-    },
     otherMemberships() {
       // @NOTE this is a bit ugly as we can't just lookup label
       const selected = {};
@@ -1704,13 +1716,33 @@ export default {
       return selected;
     },
   },
+  mounted() {
+    this.canApply = this.checkIfCanApply();
+
+    if (this.$store.getters['vacancy/isOpen']()) {
+      const self = this;
+      setInterval(() => {
+        self.canApply = self.checkIfCanApply();
+      }, 60 * 1000);
+    }
+  },
   methods: {
+    scrollToTop () {
+      this.$el.scrollIntoView();
+    },
     showMembershipOption(ref) {
       return this.application.professionalMemberships.indexOf(ref) >= 0;
     },
     async save() {
-      await this.$store.dispatch('application/submit');
-      this.$router.push({ name: 'confirmation' });
+      this.errors = [];
+      try {
+        await this.$store.dispatch('application/submit');
+
+        this.$router.push({ name: 'confirmation' });
+      } catch (error) {
+        this.errors.push({ message: 'Failed to submit application.' });
+        this.scrollToTop();
+      }
     },
     downloadAsPdf() {
       const pdf = new jsPDF();
@@ -1723,6 +1755,11 @@ export default {
         }
       );
       pdf.save('judicial-appointments-application.pdf');
+    },
+    checkIfCanApply() {
+      return this.isDraftApplication
+        && this.$store.getters['vacancy/isOpen']()
+        && this.isApplicationComplete;
     },
   },
 };
