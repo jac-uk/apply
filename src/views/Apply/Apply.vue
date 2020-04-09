@@ -21,12 +21,20 @@ export default {
       loadFailed: false,
     };
   },
+  computed: {
+    vacancyId() {
+      return this.$route.params.id;
+    },
+  },
   async mounted() {
-    const id = this.$route.params.id;
     try {
-      let vacancy = await this.$store.dispatch('vacancy/bind', id);
+      const today = Date.now();
+      let vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
+
       if (vacancy === null) {
         this.redirectToErrorPage();
+      } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
+        this.redirectToVacancyDetails();
       } else {
         await this.$store.dispatch('candidate/bind');
         await this.$store.dispatch('application/bind');
@@ -47,6 +55,14 @@ export default {
   methods: {
     redirectToErrorPage() {
       this.$router.replace({ name: 'exercise-not-found' });
+    },
+    redirectToVacancyDetails() {
+      this.$router.replace({
+        name: 'vacancy-details',
+        params: {
+          id: this.vacancyId,
+        },
+      });
     },
   },
 };

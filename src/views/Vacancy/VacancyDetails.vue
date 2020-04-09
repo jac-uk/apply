@@ -188,12 +188,14 @@ export default {
     Timeline,
     DownloadLink,
   },
+  data() {
+    return {
+      isVacancyOpen: false,
+    };
+  },
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;
-    },
-    isVacancyOpen() {
-      return this.$store.getters['vacancy/isOpen'];
     },
     timeline() {
       let timeline = exerciseTimeline(this.vacancy);
@@ -201,14 +203,25 @@ export default {
     },
     showSubscribeForAlerts() {
       if (this.vacancy.subscriberAlertsUrl) {
-        if (this.vacancy.applicationOpenDate) {
+        const openDate = this.$store.getters['vacancy/getOpenDate'];
+        if (openDate) {
           const today = new Date();
-          return this.vacancy.applicationOpenDate > today;
+          return openDate > today;
         }
         return true;
       }
       return false;
     },
+  },
+  mounted() {
+    this.isVacancyOpen = this.$store.getters['vacancy/isOpen']();
+
+    if (this.$store.getters['vacancy/isOpen']()) {
+      const self = this;
+      setInterval(() => {
+        self.isVacancyOpen = self.$store.getters['vacancy/isOpen']();
+      }, 60 * 1000);
+    }
   },
 };
 </script>

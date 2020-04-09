@@ -1,25 +1,19 @@
 <template>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
-        {{ vacancy.referenceNumber }} {{ vacancy.name }}
-      </span>
+  <div>
+    <h1 class="govuk-heading-xl">
+      It looks like you're eligible
+    </h1>
 
-      <h1 class="govuk-heading-xl">
-        It looks like you're eligible
-      </h1>
-
-      <p class="govuk-body-m">
-        Based on your answers, it looks like you can apply for this role.
-      </p>
-      <RouterLink
-        class="govuk-button"
-        data-module="govuk-button"
-        :to="applyLink"
-      >
-        Continue
-      </RouterLink>
-    </div>
+    <p class="govuk-body-m">
+      Based on your answers, it looks like you can apply for this role.
+    </p>
+    <RouterLink
+      class="govuk-button"
+      data-module="govuk-button"
+      :to="applyLink"
+    >
+      Continue
+    </RouterLink>
   </div>
 </template>
 

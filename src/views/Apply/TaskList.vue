@@ -8,6 +8,12 @@
       >
         Applications
       </RouterLink>
+
+      <Countdown
+        :close-time="vacancyCloseTime"
+        :countdown-length="60"
+      />
+
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
@@ -71,8 +77,12 @@
 </template>
 
 <script>
+import Countdown from '@/components/Page/Countdown';
 
 export default {
+  components: {
+    Countdown,
+  },
   data() {
     return {
       unknownVariable: null,
@@ -81,6 +91,9 @@ export default {
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    vacancyCloseTime() {
+      return this.$store.getters['vacancy/getCloseDate'];
     },
     candidate() {
       return this.$store.state.candidate.record;
@@ -292,7 +305,7 @@ export default {
       return this.application.status === 'draft';
     },
     isVacancyOpen() {
-      return this.$store.getters['vacancy/isOpen'];
+      return this.$store.getters['vacancy/isOpen']();
     },
     canApply () {
       return this.isDraftApplication
