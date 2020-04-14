@@ -85,11 +85,11 @@ const exerciseTimeline = (data) => {
     //   },
     // );
 
-    if(data.shortlistingMethods.includes('paper-sift')) {
-      timeline.push(
-        createShortlistingMethod('Sift', data.siftStartDate, data.siftEndDate)
-      );
-    }
+    // if(data.shortlistingMethods.includes('paper-sift')) {
+    //   timeline.push(
+    //     createShortlistingMethod('Sift', data.siftStartDate, data.siftEndDate)
+    //   );
+    // }
 
     if(data.shortlistingMethods.includes('name-blind-paper-sift')) {
       timeline.push(
@@ -162,7 +162,7 @@ const exerciseTimeline = (data) => {
           },
         );
       }
-    }    
+    }
   }
 
   if (data.shortlistingOutcomeDate) {
