@@ -23,28 +23,37 @@ export default {
       if (state.record === null) return null;
       return state.record.id;
     },
-    isOpen: (state) => {
+    isOpen: (state, getters) => () => {
       if (state.record.applicationOpenDate && state.record.applicationCloseDate) {
         const today = new Date();
-        const openDate = new Date(
-          state.record.applicationOpenDate.getFullYear(),
-          state.record.applicationOpenDate.getMonth(),
-          state.record.applicationOpenDate.getDate(), 
-          13,
-          0,
-          0
-        );
-        const closeDate = new Date(
-          state.record.applicationCloseDate.getFullYear(),
-          state.record.applicationCloseDate.getMonth(),
-          state.record.applicationCloseDate.getDate(), 
-          13,
-          0,
-          0
-        );
+        const openDate = getters.getOpenDate;
+        const closeDate = getters.getCloseDate;
+
         return today > openDate && today < closeDate;
       }
       return false;
+    },
+    getOpenDate: (state) => {
+      if (state.record === null) return null;
+      return new Date(
+        state.record.applicationOpenDate.getFullYear(),
+        state.record.applicationOpenDate.getMonth(),
+        state.record.applicationOpenDate.getDate(),
+        13,
+        0,
+        0
+      );
+    },
+    getCloseDate: (state) => {
+      if (state.record === null) return null;
+      return new Date(
+        state.record.applicationCloseDate.getFullYear(),
+        state.record.applicationCloseDate.getMonth(),
+        state.record.applicationCloseDate.getDate(),
+        13,
+        0,
+        0
+      );
     },
     isLegal: (state) => {
       return state.record.typeOfExercise ==='legal' || state.record.typeOfExercise ==='leadership';

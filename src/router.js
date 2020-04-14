@@ -18,6 +18,7 @@ import VacancyMessage from '@/views/Vacancy/VacancyMessage';
 
 //Eligibility
 import Eligibility from '@/views/Eligibility/Eligibility';
+import EligibilityCheck from '@/views/Eligibility/EligibilityCheck';
 import EligibilityPass from '@/views/Eligibility/EligibilityPass';
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
@@ -119,26 +120,35 @@ const router = new Router({
         {
           path: 'eligibility',
           component: Eligibility,
-          name: 'eligibility',
           meta: {
             title: 'Eligibility Checker',
           },
-        },
-        {
-          path: 'eligibility-pass',
-          component: EligibilityPass,
-          name: 'eligibility-pass',
-          meta: {
-            title: 'Eligibility Pass',
-          },
-        },
-        {
-          path: 'eligibility-fail',
-          component: EligibilityFail,
-          name: 'eligibility-fail',
-          meta: {
-            title: 'Eligibility Fail',
-          },
+          children: [
+            {
+              path: '',
+              component: EligibilityCheck,
+              name: 'eligibility',
+              meta: {
+                title: 'Eligibility Check',
+              },
+            },
+            {
+              path: 'pass',
+              component: EligibilityPass,
+              name: 'eligibility-pass',
+              meta: {
+                title: 'Eligibility Pass',
+              },
+            },
+            {
+              path: 'fail',
+              component: EligibilityFail,
+              name: 'eligibility-fail',
+              meta: {
+                title: 'Eligibility Fail',
+              },
+            },
+          ],
         },
       ],
     },
@@ -155,7 +165,7 @@ const router = new Router({
       path: '/apply/:id',
       component: Apply,
       children: [
-      {
+        {
           path: '',
           component: TaskList,
           name: 'task-list',

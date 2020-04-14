@@ -289,9 +289,10 @@ export default {
   methods: {
     showSignUp(vacancy) {
       if (vacancy.subscriberAlertsUrl) {
-        if (vacancy.applicationOpenDate) {
+        const openDate = this.$store.getters['vacancy/getOpenDate'];
+        if (openDate) {
           const today = new Date();
-          return vacancy.applicationOpenDate > today;
+          return openDate > today;
         }
         return true;
       }
