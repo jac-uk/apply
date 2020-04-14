@@ -162,7 +162,7 @@ const exerciseTimeline = (data) => {
           },
         );
       }
-    }    
+    }
   }
 
   if (data.shortlistingOutcomeDate) {
@@ -239,8 +239,7 @@ const exerciseTimeline = (data) => {
     }
   }
 
-<<<<<<< HEAD
-=======
+
 
 
   if (data.contactIndependentAssessors) {
@@ -310,7 +309,6 @@ const exerciseTimeline = (data) => {
     );
   }
 
->>>>>>> 9745782b7da03d9bf1619e03e1b08a91f27c8041
   if (data.finalOutcome) {
     timeline.push(
       {
