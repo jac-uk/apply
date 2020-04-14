@@ -1,7 +1,7 @@
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
-import { isDateInFuture } from '@/helpers/date';
+import { isDateInFuture, parseEstimatedDate } from '@/helpers/date';
 import getStaticVacancies from '@/helpers/getStaticVacancies';
 
 export default {
@@ -28,7 +28,7 @@ export default {
       const vacancies = getters.vacancies.concat(getStaticVacancies());
 
       return vacancies.filter(vacancy => {
-        const openDate = vacancy.applicationOpenDate || vacancy.estimatedLaunchDate;
+        const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
 
         return !isDateInFuture(openDate) && isDateInFuture(closeDate);
@@ -38,7 +38,7 @@ export default {
       const vacancies = getters.vacancies.concat(getStaticVacancies());
 
       return vacancies.filter(vacancy => {
-        const openDate = vacancy.applicationOpenDate || vacancy.estimatedLaunchDate;
+        const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
 
         return isDateInFuture(openDate);
       });

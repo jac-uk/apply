@@ -94,13 +94,13 @@ Character Information
                   v-if="vacancy.applicationOpenDate"
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
+                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
                 </span>
                 <span
                   v-else
                   class="govuk-body"
                 >
-                  {{ vacancy.estimatedLaunchDate | dateFormatter('month') }}
+                  {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
               <p v-if="vacancy.applicationCloseDate">
@@ -112,7 +112,7 @@ Character Information
                 <span
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
+                  {{ vacancy.applicationCloseDate | formatDate }} - 13:00
                 </span>
               </p>
               <p v-if="vacancy.roleSummary">
@@ -155,13 +155,13 @@ Character Information
                   v-if="vacancy.applicationOpenDate"
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
+                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
                 </span>
                 <span
                   v-else
                   class="govuk-body"
                 >
-                  {{ vacancy.estimatedLaunchDate | dateFormatter('month') }}
+                  {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
               <p v-if="vacancy.roleSummary">
@@ -210,13 +210,13 @@ Character Information
                   v-if="vacancy.applicationOpenDate"
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationOpenDate | dateFormatter }} - 13:00
+                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
                 </span>
                 <span
                   v-else
                   class="govuk-body"
                 >
-                  {{ vacancy.estimatedLaunchDate | dateFormatter('month') }}
+                  {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
               <p v-if="vacancy.applicationCloseDate">
@@ -228,7 +228,7 @@ Character Information
                 <span
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationCloseDate | dateFormatter }} - 13:00
+                  {{ vacancy.applicationCloseDate | formatDate }} - 13:00
                 </span>
               </p>
               <p v-if="vacancy.roleSummary">
@@ -263,16 +263,6 @@ Character Information
 import { mapGetters } from 'vuex';
 
 export default {
-  filters: {
-    dateFormatter (date, type) {
-      switch (type) {
-      case 'month':
-        return `${date.toLocaleString('default', { month: 'long' })} ${date.getUTCFullYear()}`;
-      default:
-        return `${date.getDate()} ${date.toLocaleString('en-GB', { month: 'long' })} ${date.getFullYear()}`;
-      }
-    },
-  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',

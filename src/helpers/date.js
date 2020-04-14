@@ -38,6 +38,22 @@ const formatDate = (date, type) => {
   return `${date.getDate()} ${month} ${date.getFullYear()}`;
 };
 
+const parseEstimatedDate = (value) => {
+  if (value instanceof Date) {
+    return value;
+  }
+
+  if (typeof value != 'string') {
+    return;
+  }
+  const parts = value.split('-');
+
+  const [year, month, day] = [...parts, 1];
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  return date;
+};
+
 const validateYear = (val) => {
   val = parseInt(val);
 
@@ -46,12 +62,12 @@ const validateYear = (val) => {
   }
 
   return val;
-
 };
 
 export {
   isDate,
   isDateInFuture,
   formatDate,
+  parseEstimatedDate,
   validateYear
 };
