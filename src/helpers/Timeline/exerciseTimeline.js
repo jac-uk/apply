@@ -175,7 +175,6 @@ const exerciseTimeline = (data) => {
     );
   }
 
-
   if (data.shortlistingMethods.includes('situational-judgement-qualifying-test')) {
     if (data.situationalJudgementTestDate) {
       timeline.push(
@@ -238,9 +237,6 @@ const exerciseTimeline = (data) => {
       );
     }
   }
-
-
-
 
   if (data.contactIndependentAssessors) {
     timeline.push(
