@@ -25,11 +25,15 @@
         >{{ vacancy.exerciseMailbox }}</a>
       </p>
 
-      <h2 class="govuk-heading-l">
-        Timeline
-      </h2>
-      <Timeline :data="timeline" />
-
+      <div
+        v-if="timeline.length"
+      >
+        <h2 class="govuk-heading-l">
+          Timeline
+        </h2>
+        <Timeline :data="timeline" />
+      </div>
+      
       <h2 class="govuk-heading-l">
         Overview of the role
       </h2>

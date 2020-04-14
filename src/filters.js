@@ -2,12 +2,31 @@ const formatDate = (value, type) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
     switch (type) {
-      case 'month':
-        return `${objDate.toLocaleString('default', { month: 'long' })} ${objDate.getUTCFullYear()}`;
-      default:
-        return objDate.toLocaleDateString();
+    case 'month':
+      return `${objDate.toLocaleString('en-GB', { month: 'long' })} ${objDate.getUTCFullYear()}`;
+    case 'datetime':
+      return objDate.toLocaleString('en-GB');
+    default:
+      return objDate.toLocaleDateString('en-GB');
     }
   }
+};
+
+const formatEstimatedDate = (value) => {
+  if (value instanceof Date) {
+    return formatDate(value, 'month');
+  }
+  const parts = value.split('-');
+
+  if (parts.length === 1) {
+    return value;
+  }
+
+  if (parts.length === 2) {
+    return formatDate(value, 'month');
+  }
+
+  return formatDate(value);
 };
 
 const toYesNo = (value) => {
@@ -195,6 +214,7 @@ const lookup = (value) => {
 
 export {
   formatDate,
+  formatEstimatedDate,
   toYesNo,
   lookup
 };
