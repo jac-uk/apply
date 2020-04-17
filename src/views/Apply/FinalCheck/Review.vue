@@ -880,6 +880,12 @@
                       {{ application.generalMedicalCouncilConditionalStartDate | formatDate }}
                       to {{ application.generalMedicalCouncilConditionalEndDate | formatDate }}
                     </li>
+                    <li
+                      v-if="application.generalMedicalCouncilConditionalStartDate
+                        && !application.generalMedicalCouncilConditionalEndDate"
+                    >
+                      {{ application.generalMedicalCouncilConditionalStartDate | formatDate }} — current
+                    </li>
                     <li>
                       {{ application.generalMedicalCouncilConditionalDetails }}
                     </li>
@@ -1022,9 +1028,15 @@
                   Date qualified
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li v-if="item.startDate && item.endDate">
+                  <ul
+                    v-if="item.startDate"
+                    class="govuk-list"
+                  >
+                    <li v-if="item.endDate">
                       {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                    <li v-else>
+                      {{ item.startDate | formatDate }} — current
                     </li>
                   </ul>
                 </dd>
@@ -1084,9 +1096,15 @@
                   Dates worked
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li v-if="item.startDate && item.endDate">
+                  <ul
+                    v-if="item.startDate"
+                    class="govuk-list"
+                  >
+                    <li v-if="item.endDate">
                       {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                    <li v-else>
+                      {{ item.startDate | formatDate }} — current
                     </li>
                   </ul>
                 </dd>
@@ -1246,9 +1264,15 @@
                 Date of gap
               </dt>
               <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li v-if="item.startDate && item.endDate">
+                <ul
+                  v-if="item.startDate"
+                  class="govuk-list"
+                >
+                  <li v-if="item.endDate">
                     {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                  </li>
+                  <li v-else>
+                    {{ item.startDate | formatDate }} — current
                   </li>
                 </ul>
               </dd>
