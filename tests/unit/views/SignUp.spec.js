@@ -1,17 +1,8 @@
+import { createTestSubject, mocks } from '../helpers';
 import SignUp from '@/views/SignUp';
-import { shallowMount } from '@vue/test-utils';
+
 import '@/firebase';
 import firebase from '@firebase/app';
-
-const mockRouter = {
-  push: jest.fn(),
-};
-const mockStore = {
-  dispatch: jest.fn(),
-  getters: {
-    'vacancy/id': jest.fn(),
-  },
-};
 
 const mockCreateUserWithEmailAndPassword = jest.fn();
 jest.mock('@/firebase', () => {
@@ -35,14 +26,8 @@ jest.mock('@firebase/app', () => {
 describe('views/SignUp', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(SignUp, {
-      mocks: {
-        $router: mockRouter,
-        $store: mockStore,
-      },
-      stubs: {
-        'RouterLink': true,
-      },
+    wrapper = createTestSubject(SignUp, {
+      stubs: ['RouterLink'],
     });
   });
 
@@ -149,7 +134,7 @@ describe('views/SignUp', () => {
 
       it('redirects to vacancy if createCandidate succeeded', async () => {
         wrapper.vm.createCandidate = jest.fn().mockReturnValue(true);
-        mockStore.getters['vacancy/id'] = null;
+        mocks.store.getters['vacancy/id'] = null;
 
         await wrapper.vm.signUp();
 
@@ -160,7 +145,7 @@ describe('views/SignUp', () => {
         const mockVacancyId = 'mock vacancy id';
 
         wrapper.vm.createCandidate = jest.fn().mockReturnValue(true);
-        mockStore.getters['vacancy/id'] = mockVacancyId;
+        mocks.store.getters['vacancy/id'] = mockVacancyId;
 
         await wrapper.vm.signUp();
 
@@ -179,7 +164,7 @@ describe('views/SignUp', () => {
 
       it('sets current user', async () => {
         await wrapper.vm.createCandidate(mockUserCredentials);
-        expect(mockStore.dispatch).toHaveBeenCalledWith('auth/setCurrentUser', mockUserCredentials.user);
+        expect(mocks.store.dispatch).toHaveBeenCalledWith('auth/setCurrentUser', mockUserCredentials.user);
       });
 
       it('creates candidate document', async () => {
@@ -187,7 +172,7 @@ describe('views/SignUp', () => {
         firebase.firestore.FieldValue.serverTimestamp.mockReturnValue(mockTimestamp);
 
         await wrapper.vm.createCandidate(mockUserCredentials);
-        expect(mockStore.dispatch).toHaveBeenCalledWith('candidate/create', {
+        expect(mocks.store.dispatch).toHaveBeenCalledWith('candidate/create', {
           created: mockTimestamp,
         });
       });
@@ -205,7 +190,7 @@ describe('views/SignUp', () => {
         });
 
         await wrapper.vm.createCandidate(mockUserCredentials);
-        expect(mockStore.dispatch).toHaveBeenCalledWith('candidate/savePersonalDetails', mockFormData);
+        expect(mocks.store.dispatch).toHaveBeenCalledWith('candidate/savePersonalDetails', mockFormData);
       });
     });
   });
