@@ -1,28 +1,34 @@
 import { shallowMount } from '@vue/test-utils';
 import Currency from '@/components/Form/Currency';
 
-xdescribe('components/Form/Currency', () => {
+describe('components/Form/Currency', () => {
   let wrapper;
+  const mockProps = {
+    id: 'mockId',
+    label: 'mock label',
+  };
   beforeEach(() => {
-    wrapper = shallowMount(Currency);
+    wrapper = shallowMount(Currency, {
+      propsData: mockProps,
+    });
   });
 
   it('renders the component', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  xdescribe('template', () => {
-    xdescribe('label', () => {
+  describe('template', () => {
+    describe('label', () => {
       it('sets the label to the value of the `label` prop', () => {
         wrapper.setProps({ label: 'My Form Label' });
         expect(wrapper.find('label').text()).toBe('My Form Label');
       });
     });
-  });
+  
 
-    xdescribe('hint', () => {
+    describe('hint', () => {
       let hint;
-      xdescribe('when the prop is set', () => {
+      describe('when the prop is set', () => {
         beforeEach(() => {
           wrapper.setProps({ hint: 'my_hint' });
           hint = wrapper.find('.govuk-hint');
@@ -36,7 +42,7 @@ xdescribe('components/Form/Currency', () => {
         });
       });
 
-      xdescribe('when the prop is not set', () => {
+      describe('when the prop is not set', () => {
         beforeEach(() => {
           hint = wrapper.find('.govuk-hint');
         });
@@ -47,7 +53,7 @@ xdescribe('components/Form/Currency', () => {
       });
     });
 
-    xdescribe('id', () => {
+    describe('id', () => {
       it('sets <label> `for` attribute', () => {
         wrapper.setProps({ id: 'my_unique_key' });
         expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
@@ -59,15 +65,20 @@ xdescribe('components/Form/Currency', () => {
       });
     });
 
-  xdescribe('`v-model` interface', () => {
-    xdescribe('when `currencyInput` changes', () => {
+    it('tests for £ exists', () => {
+      expect(wrapper.find('.moj-label__currency').text()).toBe('£');
+     })
+  });
+
+  describe('`v-model` interface', () => {
+    describe('when `currencyInput` changes', () => {
       it('emits an input event with the new value', () => {
         wrapper.setData({ currencyInput: '25' });
         expect(wrapper.emitted().input).toEqual([['25']]);
       });
     });
 
-    xdescribe('when value prop changes', () => {
+    describe('when value prop changes', () => {
       it('updates the `currencyInput` computed property', () => {
         wrapper.setProps({ value: 25 });
         expect(wrapper.vm.currencyInput).toEqual(25);
