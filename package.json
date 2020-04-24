@@ -15,6 +15,7 @@
     "lint": "vue-cli-service lint",
     "lint-ci": "vue-cli-service lint --no-fix",
     "test": "TZ='Europe/London' vue-cli-service test:unit",
+    "test:coverage": "TZ='Europe/London' vue-cli-service test:unit --coverage",
     "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "dependencies": {

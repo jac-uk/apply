@@ -23,3 +23,6 @@ yarn-error.log*
 
 # Deploy directories
 .firebase
+
+#Coverage report
+/coverage
