@@ -24,7 +24,6 @@ describe('components/Form/Currency', () => {
         expect(wrapper.find('label').text()).toBe('My Form Label');
       });
     });
-  
 
     describe('hint', () => {
       let hint;
@@ -67,7 +66,7 @@ describe('components/Form/Currency', () => {
 
     it('tests for £ exists', () => {
       expect(wrapper.find('.moj-label__currency').text()).toBe('£');
-     })
+     });
   });
 
   describe('`v-model` interface', () => {
