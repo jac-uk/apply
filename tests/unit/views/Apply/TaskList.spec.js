@@ -1,5 +1,6 @@
-import TaskList from '@/views/Apply/TaskList';
 import { shallowMount } from '@vue/test-utils';
+import TaskList from '@/views/Apply/TaskList';
+
 const mockRoute = {
  name: 'name-of-current-route',
  params: {
@@ -9,47 +10,78 @@ const mockRoute = {
 const mockRouter = {
  replace: jest.fn(),
 };
-const mockStore = {
-  dispatch: jest.fn(),
-  state: {
-    exercise: {
-      record: {},
+const mockStore = () => {
+  return {
+    dispatch: jest.fn(),
+    state: {
+      vacancy: {
+        record: {},
+      },
+      candidate: {
+        record: {},
+      },
+      application: {
+        record: { progress: { started: true } },
+      },
+      applications: {
+        records: [],
+      },
     },
-    candidate: {
-      record: {},
+    getters: {
+      'vacancy/getCloseDate': new Date(),
     },
-    application: {
-      record: { progress: { started: true } },
-    },
-  },
+  };
 };
 const createTestSubject = () => {
  return shallowMount(TaskList, {
    mocks: {
      $route: mockRoute,
      $router: mockRouter,
-     $store: mockStore,
+     $store: mockStore(),
    },
    stubs: {
      'RouterLink': true,
    },
  });
 };
-xdescribe('views/TaskList', () => {
+describe('views/TaskList', () => {
  let wrapper;
  beforeEach(() => {
    wrapper = createTestSubject();
  });
- xdescribe('template', () => {
+ describe('template', () => {
    it('renders', () => {
-     expect(wrapper.exists()).toBe(true);
+     expect(wrapper.exists()).toBeTrue();
    });
    it('contains a <h1>', () => {
-     expect(wrapper.contains('h1')).toBe(true);
+     expect(wrapper.contains('h1')).toBeTrue();
    });
-   it('contains a router-link tag', () => {
-     expect(wrapper.find('RouterLink-stub').exists()).toBe(true);
+   describe('back to applications link', () => {
+     describe('with applications available', () => {
+       beforeEach(() => {
+         wrapper.vm.$store.state.applications.records = [
+           { id: 'application1' },
+           { id: 'application2' },
+         ];
+       });
+       it('exists', () => {
+         expect(wrapper.find('.govuk-back-link').exists()).toBeTrue();
+       });
+       it('contains text \'Applications\'', () => {
+         expect(wrapper.find('.govuk-back-link').text()).toBe('Applications');
+       });
+       xit('is a RouterLink', () => {
+       });
+       xit('goes to applications page', () => {
+       });
+     });
+     describe('without applications', () => {
+       it('does not exist', () => {
+         expect(wrapper.find('.govuk-back-link').exists()).toBeFalse();
+       });
+     });
    });
+
   //  xdescribe('Experience h2', () => {
   //    it('renders the 3rd block h2 as Qualifications and experience if the role is legal', () => {
   //      let wrapper = shallowMount(TaskList, {
@@ -71,7 +103,7 @@ xdescribe('views/TaskList', () => {
   //          $router: mockRouter,
   //        }
   //       });
-  //       expect(wrapper.find('#qualifications-and-experience').exists()).toBe(true);
+  //       expect(wrapper.find('#qualifications-and-experience').exists()).toBeTrue();
   //       expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
   //     });
   //     it('renders the 3rd block h2 as Memberships and experience if the role is non-legal', () => {
@@ -92,7 +124,7 @@ xdescribe('views/TaskList', () => {
   //           }
   //         }
   //        });
-  //        expect(wrapper.find('#memberships-and-experience').exists()).toBe(true);
+  //        expect(wrapper.find('#memberships-and-experience').exists()).toBeTrue();
   //        expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
   //      });
   //  });
