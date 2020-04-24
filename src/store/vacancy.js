@@ -35,6 +35,7 @@ export default {
     },
     getOpenDate: (state) => {
       if (state.record === null) return null;
+      if (state.record.applicationOpenDate === null) return null;
       return new Date(
         state.record.applicationOpenDate.getFullYear(),
         state.record.applicationOpenDate.getMonth(),
@@ -46,6 +47,7 @@ export default {
     },
     getCloseDate: (state) => {
       if (state.record === null) return null;
+      if (state.record.applicationCloseDate === null) return null;
       return new Date(
         state.record.applicationCloseDate.getFullYear(),
         state.record.applicationCloseDate.getMonth(),
