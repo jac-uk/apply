@@ -16,54 +16,56 @@ describe('components/Form/FormField', () => {
   });
 
   describe('props', () => {
-    const { id, label, hint, messages, required, minLength, maxLength, pattern } = wrapper.vm.$options.props;
+    let props;
+    beforeEach(() => {
+      props = wrapper.vm.$options.props;
+    });
     describe('id', () => {
       it('is required', () => {
-        expect(id.required).toBeTruthy();
+        expect(props.id.required).toBeTruthy();
       });
       it('is a String', () => {
-        expect(id.type).toBe(String);
+        expect(props.id.type).toBe(String);
       });
       it('defaults to an empty string', () => {
-        expect(id.default).toBe('');
+        expect(props.id.default).toBe('');
       });
     });
     describe('label', () => {
       it('is a String', () => {
-        expect(label.type).toBe(String);
+        expect(props.label.type).toBe(String);
       });
     });
     describe('hint', () => {
       it('is a String', () => {
-        expect(hint.type).toBe(String);
+        expect(props.hint.type).toBe(String);
       });
     });
     describe('messages', () => {
       it('is an Object', () => {
-        expect(messages.type).toBe(Object);
+        expect(props.messages.type).toBe(Object);
       });
     });
     describe('required', () => {
       it('is a Boolean', () => {
-        expect(required.type).toBe(Boolean);
+        expect(props.required.type).toBe(Boolean);
       });
     });
     describe('minLength', () => {
       it('is a Number', () => {
-        expect(minLength.type).toBe(Number);
+        expect(props.minLength.type).toBe(Number);
       });
     });
     describe('maxLength', () => {
       it('is a Number', () => {
-        expect(maxLength.type).toBe(Number);
+        expect(props.maxLength.type).toBe(Number);
       });
     });
     describe('pattern', () => {
       it('is an Object', () => {
-        expect(pattern.type).toBe(Object);
+        expect(props.pattern.type).toBe(Object);
       });
     });
-
   });
 
   describe('computed', () => {
