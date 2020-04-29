@@ -54,7 +54,6 @@ export default {
         this.$emit('input', val);
       },
     },
-
   },
 };
 </script>

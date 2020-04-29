@@ -1,26 +1,23 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <RouterLink
+      <router-link
         v-if="applications && applications.length > 1"
         class="govuk-back-link"
         :to="{ name: 'applications' }"
       >
         Applications
-      </RouterLink>
-
+      </router-link>
       <Countdown
         :close-time="vacancyCloseTime"
         :countdown-length="60"
       />
-
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
       <h1 class="govuk-heading-xl">
         Apply for the role
       </h1>
-
       <ol class="govuk-list">
         <li
           v-for="(taskGroup, index) in taskGroups"
@@ -72,7 +69,7 @@
       >
         Review application
       </button>
-    </div>
+    </div> 
   </div>
 </template>
 
