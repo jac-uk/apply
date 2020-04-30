@@ -21,14 +21,14 @@ describe('components/ErrorSummary', () => {
     describe('with errors', () => {
       beforeEach(()=>{
 
-      })
+      });
       it('template tests', () => {
       });
     });
     describe('with no errors', () => {
       it('list doesn\'nt exist', () =>{
-        expect(wrapper.find('div#govuk-error-summary').exists()).toBe(false)
-      })
+        expect(wrapper.find('div#govuk-error-summary').exists()).toBe(false);
+      });
     });
   });
 

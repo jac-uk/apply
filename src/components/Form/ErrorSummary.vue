@@ -5,7 +5,8 @@
     aria-labelledby="error-summary-title"
     role="alert"
     tabindex="-1"
-    data-module="govuk-error-summary">
+    data-module="govuk-error-summary"
+  >
     <h2
       id="error-summary-title"
       class="govuk-error-summary__title"
