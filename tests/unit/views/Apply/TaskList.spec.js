@@ -90,7 +90,7 @@ describe('views/TaskList', () => {
         });
       });
       it('renders the 3rd block h2 as Qualifications', () => {
-        wrapper.vm.$store.state.vacancy.record = {typeOfExercise: 'legal'};
+        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'legal' };
         expect(wrapper.find('#qualifications-and-experience').exists()).toBeTrue();
        expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
       });
