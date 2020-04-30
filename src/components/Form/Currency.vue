@@ -57,6 +57,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
   .moj-label__currency {
     line-height: 1.25;
