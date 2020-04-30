@@ -30,7 +30,7 @@ xdescribe('@/components/RepeatableFields/Experience', () => {
 
       it('has type object', () => {
         let prop = Experience.props.row;
-        expect(prop.type).toBe(Object);
+        expect(prop.type).toBeObject();
       });
     });
 
@@ -42,7 +42,7 @@ xdescribe('@/components/RepeatableFields/Experience', () => {
 
       it('has type number', () => {
         let prop = Experience.props.index;
-        expect(prop.type).toBe(Number);
+        expect(prop.type).toBeNumber();
       });
     });
   });

@@ -71,53 +71,42 @@ describe('views/TaskList', () => {
       });
     });
 
-    xdescribe('when role is legal', () => {
+    describe('when role is legal', () => {
       beforeEach(() => {
-        wrapper = createTestSubject(TaskList, {
-          mocks: {
-            store: {
-              state: {
-                vacancy: {
-                  record: {
-                    typeOfExercise: 'legal',
-                  },
-                },
-              },
-            },
-          },
-          stubs: ['RouterLink','Countdown'],
-          propsData: [],
-        });
-      });
-      it('renders the 3rd block h2 as Qualifications', () => {
         wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'legal' };
-        expect(wrapper.find('#qualifications-and-experience').exists()).toBeTrue();
-       expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
+      });
+      it('renders the 2nd block h2 as Qualifications', () => {
+        expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
       });
     });
 
-    xdescribe('when role is non-legal', () => {
-      xit('renders the 3rd block h2 as Memberships and experience', () => {
-    // let wrapper = shallowMount(TaskList, {
-      // mocks: {
-      //   $store: {
-      //     state: {
-      //       exercise: {
-      //         record: { typeOfExercise: 'non-legal' },
-      //       },
-      //       candidate: {
-      //         record: {},
-      //       },
-      //       application: {
-      //         record: {},
-      //       },
-      //     },
-      //   },
-      // },
-      expect(wrapper.find('#memberships-and-experience').exists()).toBeTrue();
-      expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
+    describe('when role is non-legal', () => {
+      beforeEach(() => {
+        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'non-legal' };
+      });
+      it('renders the 2nd block h2 as Memberships and experience', () => {
+      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
+    });
+    });
+
+    describe('when role is leadership-non-legal', () => {
+      beforeEach(() => {
+        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership-non-legal' };
+      });
+      it('renders the 2nd block h2 as Memberships and experience', () => {
+      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
+    });
+    });
+
+    describe('when role is leadership', () => {
+      beforeEach(() => {
+        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership' };
+      });
+      it('renders the 2nd block h2 as Memberships and experience', () => {
+      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
     });
     });
     
   });
+
 });

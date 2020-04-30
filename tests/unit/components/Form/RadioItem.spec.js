@@ -87,7 +87,7 @@ xdescribe('components/Form/RadioItem', () => {
       });
 
       it('must be a String', () => {
-        expect(prop.type).toBe(String);
+        expect(prop.type).toBeString();
       });
     });
 
@@ -129,7 +129,7 @@ xdescribe('components/Form/RadioItem', () => {
       });
 
       it('must be a String', () => {
-        expect(prop.type).toBe(String);
+        expect(prop.type).toBeString();
       });
     });
   });

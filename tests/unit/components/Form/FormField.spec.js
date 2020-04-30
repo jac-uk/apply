@@ -25,7 +25,7 @@ describe('components/Form/FormField', () => {
             expect(props.id.required).toBeTruthy();
         });
         it('is a string', () => {
-            expect(props.id.type).toBe(String);
+            expect(props.id.type()).toBeString();
         });
         it('defaults as an empty string', () => {
             expect(props.id.default).toBe('');
@@ -36,7 +36,7 @@ describe('components/Form/FormField', () => {
             expect(props.label.required).toBeFalsy();
         });
         it('is a string', () => {
-            expect(props.label.type).toBe(String);
+            expect(props.label.type()).toBeString();
         });
         it('defaults as an empty string', () => {
             expect(props.label.default).toBe('');
@@ -47,7 +47,7 @@ describe('components/Form/FormField', () => {
             expect(props.hint.required).toBeFalsy();
         });
         it('is a string', () => {
-            expect(props.hint.type).toBe(String);
+            expect(props.hint.type()).toBeString();
         });
         it('defaults as an empty string', () => {
             expect(props.hint.default).toBe('');
@@ -59,7 +59,7 @@ describe('components/Form/FormField', () => {
             expect(props.messages.required).toBeFalsy();
         });
         it('is an Object', () => {
-            expect(props.messages.type).toBe(Object);
+            expect(props.messages.type()).toBeObject();
         });
         it('defaults as an empty Object', () => {
             expect(props.messages.default()).toEqual({});
@@ -71,7 +71,7 @@ describe('components/Form/FormField', () => {
             expect(props.required.required).toBeFalsy();
         });
         it('is a Boolean', () => {
-            expect(props.required.type).toBe(Boolean);
+            expect(props.required.type()).toBeBoolean();
         });
         it('defaults as undefined', () => {
             expect(props.required.default).toBe(undefined);
@@ -83,7 +83,7 @@ describe('components/Form/FormField', () => {
             expect(props.minLength.required).toBeFalsy();
         });
         it('is a Number', () => {
-            expect(props.minLength.type).toBe(Number);
+            expect(props.minLength.type()).toBeNumber();
         });
         it('defaults as undefined', () => {
             expect(props.minLength.default).toBe(0);
@@ -95,7 +95,7 @@ describe('components/Form/FormField', () => {
           expect(props.minLength.required).toBeFalsy();
       });
       it('is a Number', () => {
-          expect(props.maxLength.type).toBe(Number);
+          expect(props.maxLength.type()).toBeNumber();
       });
       it('defaults as undefined', () => {
           expect(props.minLength.default).toBe(0);
@@ -108,7 +108,7 @@ describe('components/Form/FormField', () => {
           //   expect(props.pattern).toBeObject());
           // });
           // it('is a contains match', () => {
-          //   expect(props.pattern.match).toBe(Object);
+          //   expect(props.pattern.match).toBeObject();
           // });
           // it('matches regex formatting', () => {
             //   expect(props.pattern.default()).toEqual({"match": /^/, "message": ""});

@@ -28,7 +28,7 @@ xdescribe('@/components/RepeatableFields/Qualification', () => {
 
       it('has type object', () => {
         let prop = Qualification.props.row;
-        expect(prop.type).toBe(Object);
+        expect(prop.type).toBeObject();
       });
     });
 
@@ -40,7 +40,7 @@ xdescribe('@/components/RepeatableFields/Qualification', () => {
 
       it('has type number', () => {
         let prop = Qualification.props.index;
-        expect(prop.type).toBe(Number);
+        expect(prop.type).toBeNumber();
       });
     });
   });

@@ -18,10 +18,10 @@ xdescribe('components/RepeatableFields', () => {
     expect(RepeatableFields.name).toBe('RepeatableFields');
   });
 
-  xdescribe('properties', () => {
+  xdescribe('props', () => {
     let prop;
 
-    xdescribe('component', () => {
+    describe('component', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.component;
       });
@@ -31,11 +31,11 @@ xdescribe('components/RepeatableFields', () => {
       });
 
       it('has type Object', () => {
-        expect(prop.type).toBe(Object);
+        expect(prop.type).toBeObject();
       });
     });
 
-    xdescribe('max', () => {
+    describe('max', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.max;
       });
