@@ -1,13 +1,13 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <router-link
+      <RouterLink
         v-if="applications && applications.length > 1"
         class="govuk-back-link"
         :to="{ name: 'applications' }"
       >
         Applications
-      </router-link>
+      </RouterLink>
       <Countdown
         :close-time="vacancyCloseTime"
         :countdown-length="60"
@@ -38,12 +38,12 @@
                   :aria-describedby="`${task.id}-completed`"
                   class="govuk-grid-column-three-quarters"
                 >
-                  <router-link
+                  <RouterLink
                     class="govuk-link govuk-!-font-weight-bold"
                     :to="{name: task.id}"
                   >
                     {{ task.title }}
-                  </router-link>
+                  </RouterLink>
                 </div>
                 <div class="govuk-grid-column-one-quarter">
                   <strong

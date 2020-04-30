@@ -2,16 +2,19 @@ import { shallowMount } from '@vue/test-utils';
 import TimeInput from '@/components/Form/TimeInput';
 import zeroPad from '@/helpers/Form/zeroPad';
 import parseAndClipNumber from '@/helpers/Form/parseAndClipNumber';
+
 jest.mock('@/helpers/Form/zeroPad', () => {
   return jest.fn().mockImplementation(() => {
     jest.fn();
   });
 });
+
 jest.mock('@/helpers/Form/parseAndClipNumber', () => {
   return jest.fn().mockImplementation(() => {
     jest.fn();
   });
 });
+
 describe('components/TimeInput', () => {
   const createTestSubject = (value) => {
     return shallowMount(TimeInput, {
@@ -21,62 +24,64 @@ describe('components/TimeInput', () => {
       },
     });
   };
-  describe('properties', () => {
-    let subject;
+  describe('template', () => {
+  });
+  describe('props', () => {
+    let wrapper;
     beforeEach(() => {
-      subject = createTestSubject(new Date(1988, 9, 3, 15, 15));
+      wrapper = createTestSubject(new Date(1988, 9, 3, 15, 15));
     });
     describe('legend attribute', () => {
       it('is set when label is passed', () => {
         const label = 'Launch date and time';
-        subject.setProps({ label });
-        expect(subject.find('legend').text()).toBe(label);
+        wrapper.setProps({ label });
+        expect(wrapper.find('legend').text()).toBe(label);
       });
       it('is not set if label is not passed', () => {
-        expect(subject.find('.govuk-fieldset__legend').exists()).toBe(false);
+        expect(wrapper.find('.govuk-fieldset__legend').exists()).toBe(false);
       });
     });
     describe('hint', () => {
       it('is displayed when provided', () => {
         const hint = 'For example, 31 05 2020 at 09:00';
-        subject.setProps({ hint, id: 'testid' });
-        expect(subject.find('#testid-hint').text()).toBe(hint);
+        wrapper.setProps({ hint, id: 'testid' });
+        expect(wrapper.find('#testid-hint').text()).toBe(hint);
       });
       it('does not display when not provided', () => {
-        subject.setProps({ id: 'testid' });
-        expect(subject.find('#testid-hint').exists()).toBe(false);
+        wrapper.setProps({ id: 'testid' });
+        expect(wrapper.find('#testid-hint').exists()).toBe(false);
       });
        it('sets aria-described by with the value of hint id', () => {
         const hint = 'For example, 31 05 2020 at 09:00';
-        subject.setProps({ hint, id: 'testid' });
-        expect(subject.find('.govuk-fieldset').attributes('aria-describedby')).toBe('testid-hint');
+        wrapper.setProps({ hint, id: 'testid' });
+        expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe('testid-hint');
       });
       it('undefined when no hint provided', () => {
-        expect(subject.find('.govuk-fieldset').attributes('aria-describedby')).toBe(undefined);
+        expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe(undefined);
       });
     });
     describe('id', () => {
       it('assigns id to govuk-date-input', () => {
-        expect(subject.find('.govuk-date-input').attributes().id).toBe('launch_time');
+        expect(wrapper.find('.govuk-date-input').attributes().id).toBe('launch_time');
       });
       it('is used to create ids for inputs', () => {
         const id = 'launch_time_test';
-        subject.setProps({ id });
-        expect(subject.findAll('.govuk-date-input__input').at(0).attributes().id).toBe(`${id}-hour`);
-        expect(subject.findAll('.govuk-date-input__input').at(1).attributes().id).toBe(`${id}-minute`);
+        wrapper.setProps({ id });
+        expect(wrapper.findAll('.govuk-date-input__input').at(0).attributes().id).toBe(`${id}-hour`);
+        expect(wrapper.findAll('.govuk-date-input__input').at(1).attributes().id).toBe(`${id}-minute`);
       });
       it('is used to create "for" attributes for labels', () => {
         const id = 'launch_time';
-        subject.setProps({ id });
-        expect(subject.findAll('.govuk-date-input__label').at(0).attributes().for).toBe(`${id}-hour`);
-        expect(subject.findAll('.govuk-date-input__label').at(1).attributes().for).toBe(`${id}-minute`);
+        wrapper.setProps({ id });
+        expect(wrapper.findAll('.govuk-date-input__label').at(0).attributes().for).toBe(`${id}-hour`);
+        expect(wrapper.findAll('.govuk-date-input__label').at(1).attributes().for).toBe(`${id}-minute`);
       });
     });
   });
   describe('computed properties', () => {
-    let subject;
+    let wrapper;
     beforeEach(() => {
-      subject = createTestSubject(new Date(2019, 7, 22, 15, 45));
+      wrapper = createTestSubject(new Date(2019, 7, 22, 15, 45));
     });
     describe('hourInput', () => {
       describe('getter', () => {
@@ -86,7 +91,7 @@ describe('components/TimeInput', () => {
       });
       describe('setter', () => {
         it('calls parseAndClipNumber function', () => {
-          subject.vm.hourInput = 4;
+          wrapper.vm.hourInput = 4;
           expect(parseAndClipNumber).toHaveBeenCalledWith(4, 0, 23);
         });
       });
@@ -99,7 +104,7 @@ describe('components/TimeInput', () => {
       });
       describe('setter', () => {
         it('calls parseAndClipNumber function', () => {
-          subject.vm.minuteInput = 89;
+          wrapper.vm.minuteInput = 89;
           expect(parseAndClipNumber).toHaveBeenCalledWith(89, 0, 59);
         });
       });
@@ -107,8 +112,8 @@ describe('components/TimeInput', () => {
     describe('dateConstructor', () => {
       describe('and `hours` and `minutes` fields are set', () => {
         it('returns an array of Date constructor arguments', () => {
-          expect(subject.vm.dateConstructor).toHaveLength(5);
-          expect(subject.vm.dateConstructor).toEqual([0, 0, 0, 15, 45]);
+          expect(wrapper.vm.dateConstructor).toHaveLength(5);
+          expect(wrapper.vm.dateConstructor).toEqual([0, 0, 0, 15, 45]);
         });
       });
       describe('given at least one field is null', () => {
@@ -118,8 +123,8 @@ describe('components/TimeInput', () => {
           ['`hour` and `minute` are null',        { hour: null, minute: null }],
         ];
         it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
-          subject.setData(data);
-          expect(subject.vm.dateConstructor).toBe(null);
+          wrapper.setData(data);
+          expect(wrapper.vm.dateConstructor).toBe(null);
         });
       });
     });
@@ -127,46 +132,46 @@ describe('components/TimeInput', () => {
       describe('getter', () => {
         describe('given the date is not set (`dateConstructor` returns null)', () => {
           it('returns null', () => {
-            subject.setData({ hour: null });
-            expect(subject.vm.date).toBe(null);
+            wrapper.setData({ hour: null });
+            expect(wrapper.vm.date).toBe(null);
           });
         });
         describe('given a date is set (`dateConstructor` returns constructor args)', () => {
           it('returns a Date object', () => {
-            expect(subject.vm.date).toBeInstanceOf(Date);
+            expect(wrapper.vm.date).toBeInstanceOf(Date);
           });
           it('is created as a UTC Date', () => {
-            subject.setData({ hour: 1, minute: 16 });
-            const args = subject.vm.dateConstructor;
+            wrapper.setData({ hour: 1, minute: 16 });
+            const args = wrapper.vm.dateConstructor;
             const utcTime = Date.UTC(...args);
-            expect(subject.vm.date.getTime()).toEqual(utcTime);
+            expect(wrapper.vm.date.getTime()).toEqual(utcTime);
           });
         });
         describe('return value', () => {
           it('returns date if dateConstructor is not null', () => {
-            subject.setData({ hour: 1, minute: 16 });
-            expect(subject.vm.date instanceof Date).toBe(true);
+            wrapper.setData({ hour: 1, minute: 16 });
+            expect(wrapper.vm.date instanceof Date).toBe(true);
           });
         });
       });
       describe('setter', () => {
         describe('given a non-Date value', () => {
           it('does nothing', () => {
-            subject.setData({ hour: 17, minute: 5 });
-            subject.vm.date = null;
-            expect(subject.vm.hour).toBe(17);
-            expect(subject.vm.minute).toBe(5);
+            wrapper.setData({ hour: 17, minute: 5 });
+            wrapper.vm.date = null;
+            expect(wrapper.vm.hour).toBe(17);
+            expect(wrapper.vm.minute).toBe(5);
           });
         });
         describe('given a Date object', () => {
           beforeEach(() => {
-            subject.vm.date = new Date(Date.UTC(2018, 1, 13, 2, 19));
+            wrapper.vm.date = new Date(Date.UTC(2018, 1, 13, 2, 19));
           });
           it("sets `hour` to the Date object's hour", () => {
-            expect(subject.vm.hour).toBe(2);
+            expect(wrapper.vm.hour).toBe(2);
           });
           it("sets `minute` to the Date object's minute", () => {
-            expect(subject.vm.minute).toBe(19);
+            expect(wrapper.vm.minute).toBe(19);
           });
         });
       });
@@ -189,8 +194,8 @@ describe('components/TimeInput', () => {
         it('sets `date` to equal the new `value`', () => {
           const firstDate = new Date('1960-01-01T19:20+01:00');
           const secondDate = new Date('1975-04-19T19:12+08:00');
-          const subject = createTestSubject(firstDate);
-          subject.setProps({ value: secondDate });
+          const wrapper = createTestSubject(firstDate);
+          wrapper.setProps({ value: secondDate });
           expect(mockDateSetter).toHaveBeenCalledTimes(2);
           expect(mockDateSetter).toHaveBeenNthCalledWith(1, firstDate);
           expect(mockDateSetter).toHaveBeenNthCalledWith(2, secondDate);
@@ -201,8 +206,8 @@ describe('components/TimeInput', () => {
           // Two equal dates as different objects
           const firstDate = new Date('1960-01-01T19:20+01:00');
           const secondDate = new Date('1960-01-01T19:20+01:00');
-          const subject = createTestSubject(firstDate);
-          subject.setProps({ value: secondDate });
+          const wrapper = createTestSubject(firstDate);
+          wrapper.setProps({ value: secondDate });
           expect(mockDateSetter).toHaveBeenCalledTimes(1);
           expect(mockDateSetter.mock.calls[0][0]).toBe(firstDate);
           expect(mockDateSetter.mock.calls[0][0]).not.toBe(secondDate);
@@ -211,10 +216,10 @@ describe('components/TimeInput', () => {
     });
     describe('when the internal `date` Date object changes', () => {
       it('emits an `input` event', () => {
-        const subject = createTestSubject(new Date());
+        const wrapper = createTestSubject(new Date());
         const newDate = new Date('1978-01-01T19:20+01:00');
-        subject.vm.date = newDate;
-        const emitted = subject.emitted().input;
+        wrapper.vm.date = newDate;
+        const emitted = wrapper.emitted().input;
         expect(emitted.length).toBeGreaterThan(0);
         expect(emitted).toContainEqual([new Date('1899-12-31T19:20+01:00')]);
       });
@@ -223,9 +228,9 @@ describe('components/TimeInput', () => {
   describe('#created lifecycle hook', () => {
     it('sets `date` to equal the `value` property', () => {
       const value = new Date('1978-01-01T19:20+01:00');
-      const subject = createTestSubject(value);
-      expect(subject.vm.date.getHours()).toEqual(value.getHours());
-      expect(subject.vm.date.getMinutes()).toEqual(value.getMinutes());
+      const wrapper = createTestSubject(value);
+      expect(wrapper.vm.date.getHours()).toEqual(value.getHours());
+      expect(wrapper.vm.date.getMinutes()).toEqual(value.getMinutes());
     });
   });
 });

@@ -3,10 +3,13 @@ import { createTestSubject } from '../../helpers';
 import TaskList from '@/views/Apply/TaskList';
 
 describe('views/TaskList', () => {
+
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(TaskList, {
-      stubs: ['router-link', 'Countdown'],
+      mocks: {},
+      stubs: ['RouterLink','Countdown'],
+      propsData: {},
     });
   });
 
@@ -14,7 +17,7 @@ describe('views/TaskList', () => {
     expect(wrapper.exists()).toBeTrue();
   });
 
-  describe('template has', () => {
+  describe('template', () => {
     describe('\'Apply for the role\' header', () => {
       it('exists', () => {
         expect(wrapper.contains('h1')).toBeTrue();
@@ -38,15 +41,15 @@ describe('views/TaskList', () => {
         it('contains text \'Applications\'', () => {
           expect(wrapper.find('.govuk-back-link').text()).toBe('Applications');
         });
-        // @TODO make test for :to prop of router-link
         xit('goes to applications page', () => {
+          // @TODO make test for :to prop of RouterLink
         });
-        it('is a router-link', () => {    
-        expect(wrapper.find('router-link-stub').exists()).toBeTrue();
+        it('is a RouterLink', () => {    
+        expect(wrapper.find('RouterLink-stub').exists()).toBeTrue();
         });
       });
       
-      describe('without applications', () => {
+      describe('without applications available', () => {
         beforeEach(() => {
           wrapper.vm.$store.state.applications.records = [];
         });
@@ -62,63 +65,59 @@ describe('views/TaskList', () => {
       });
     });
 
-    describe.only('vacancy name and reference number', () => {
+    describe('vacancy name and reference number', () => {
       it('exists', () => {
-        // console.log(wrapper.find('div.govuk-grid-column-two-thirds > span').html());
-        // console.log(wrapper.html());
         expect(wrapper.find('div.govuk-grid-column-two-thirds > span').exists()).toBeTrue();
       });
-      // @TODO provide and test for innertext
     });
 
-      // describe('Experience h2', () => {
-      //   beforeEach(() => {
-      //   });
-      //   describe('if the role is legal', () => {
-      //     it('does not exist', () => {
-      //       expect(wrapper.find('.govuk-back-link').exists()).toBeFalse();
-      //     });
-        //      let wrapper = shallowMount(TaskList, {
-    //        mocks: {
-    //          $store: {
-    //            state: {
-    //              exercise: {
-    //                record: { typeOfExercise: 'legal'},
-    //              },
-    //              candidate: {
-    //                record: {},
-    //              },
-    //              application: {
-    //                record: {},
-    //              },
-    //            }
-    //          },
-    //          $route: mockRoute,
-    //          $router: mockRouter,
-    //        }
-    //       });
-    //       expect(wrapper.find('#qualifications-and-experience').exists()).toBeTrue();
-    //       expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
-    //     });
-    //     it('renders the 3rd block h2 as Memberships and experience if the role is non-legal', () => {
-    //       let wrapper = shallowMount(TaskList, {
-    //         mocks: {
-    //           $store: {
-    //             state: {
-    //               exercise: {
-    //                 record: { typeOfExercise: 'non-legal'},
-    //               },
-    //               candidate: {
-    //                 record: {},
-    //               },
-    //               application: {
-    //                 record: {},
-    //               },
-    //             }
-    //           }
-    //         }
-    //        });
-    //        expect(wrapper.find('#memberships-and-experience').exists()).toBeTrue();
-    //        expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
-         });
+    xdescribe('when role is legal', () => {
+      beforeEach(() => {
+        wrapper = createTestSubject(TaskList, {
+          mocks: {
+            store: {
+              state: {
+                vacancy: {
+                  record: {
+                    typeOfExercise: 'legal',
+                  },
+                },
+              },
+            },
+          },
+          stubs: ['RouterLink','Countdown'],
+          propsData: [],
         });
+      });
+      it('renders the 3rd block h2 as Qualifications', () => {
+        wrapper.vm.$store.state.vacancy.record = {typeOfExercise: 'legal'};
+        expect(wrapper.find('#qualifications-and-experience').exists()).toBeTrue();
+       expect(wrapper.find('#qualifications-and-experience').text()).toBe('3. Qualifications and experience');
+      });
+    });
+
+    xdescribe('when role is non-legal', () => {
+      xit('renders the 3rd block h2 as Memberships and experience', () => {
+    // let wrapper = shallowMount(TaskList, {
+      // mocks: {
+      //   $store: {
+      //     state: {
+      //       exercise: {
+      //         record: { typeOfExercise: 'non-legal' },
+      //       },
+      //       candidate: {
+      //         record: {},
+      //       },
+      //       application: {
+      //         record: {},
+      //       },
+      //     },
+      //   },
+      // },
+      expect(wrapper.find('#memberships-and-experience').exists()).toBeTrue();
+      expect(wrapper.find('#memberships-and-experience').text()).toBe('3. Memberships and Experience');
+    });
+    });
+    
+  });
+});
