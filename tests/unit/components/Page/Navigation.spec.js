@@ -39,7 +39,7 @@ xdescribe('components/Page/Navigation', () => {
       });
 
       it('should be array', () => {
-        expect(prop.type).toBeArray();
+        expect(prop.type()).toBeArray();
       });
     });
 
@@ -57,7 +57,7 @@ xdescribe('components/Page/Navigation', () => {
       });
 
       it('should be string', () => {
-        expect(prop.type).toBeString();
+        expect(prop.type()).toBeString();
       });
     });
   });

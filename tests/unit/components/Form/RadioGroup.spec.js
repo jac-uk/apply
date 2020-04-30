@@ -34,7 +34,7 @@ xdescribe('components/Form/RadioGroup', () => {
       });
 
       it('must be a String', () => {
-        expect(prop.type).toBeString();
+        expect(prop.type()).toBeString();
       });
     });
 
@@ -49,7 +49,7 @@ xdescribe('components/Form/RadioGroup', () => {
       });
 
       it('must be a String', () => {
-        expect(prop.type).toBeString();
+        expect(prop.type()).toBeString();
       });
     });
 
@@ -63,7 +63,7 @@ xdescribe('components/Form/RadioGroup', () => {
       });
 
       it('must be a String', () => {
-        expect(prop.type).toBeString();
+        expect(prop.type()).toBeString();
       });
     });
 

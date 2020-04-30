@@ -33,7 +33,7 @@ xdescribe('components/Page/Timeline', () => {
       });
 
       it('should be array', () => {
-        expect(prop.type).toBeArray();
+        expect(prop.type()).toBeArray();
       });
     });
   });

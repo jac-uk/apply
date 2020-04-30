@@ -31,7 +31,7 @@ xdescribe('components/RepeatableFields', () => {
       });
 
       it('has type Object', () => {
-        expect(prop.type).toBeObject();
+        expect(prop.type()).toBeObject();
       });
     });
 
@@ -49,12 +49,12 @@ xdescribe('components/RepeatableFields', () => {
       });
 
       it('must be a Number or Boolean', () => {
-        expect(prop.type).toContain(Number);
-        expect(prop.type).toContain(Boolean);
-        expect(prop.type).not.toContain(String);
-        expect(prop.type).not.toContain(Object);
-        expect(prop.type).not.toContain(Array);
-        expect(prop.type).not.toContain(Function);
+        expect(prop.type()).toContain(Number);
+        expect(prop.type()).toContain(Boolean);
+        expect(prop.type()).not.toContain(String);
+        expect(prop.type()).not.toContain(Object);
+        expect(prop.type()).not.toContain(Array);
+        expect(prop.type()).not.toContain(Function);
       });
     });
 
