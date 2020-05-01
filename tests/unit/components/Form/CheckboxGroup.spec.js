@@ -1,4 +1,3 @@
-// import { shallowMount } from '@vue/test-utils';
 import { createTestSubject } from '../../helpers';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 

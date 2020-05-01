@@ -34,6 +34,7 @@ const mocks = {
     getters: {
       'vacancy/getCloseDate': new Date(),
       'vacancy/id': jest.fn(),
+      'application/data': () => jest.fn(),
     },
   },
 };
@@ -47,6 +48,7 @@ const createTestSubject = (component, customMountOptions = {
 }) => {
   return shallowMount(component, {
     localVue,
+    // router,
     mocks: {
       $route: mocks.route,
       $router: mocks.router,

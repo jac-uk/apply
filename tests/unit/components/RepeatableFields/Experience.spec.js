@@ -3,13 +3,13 @@ import { createTestSubject } from '../../helpers';
 import Experience from '@/components/RepeatableFields/Experience';
 
 describe('@/components/RepeatableFields/Experience', () => {
-  describe('name', () => {
+
+  describe('props', () => {
+
     it('component name is "Experience"', () => {
       expect(Experience.name).toBe('Experience');
     });
-  });
 
-  describe('props', () => {
     describe('row', () => {
       it('is required', () => {
         let prop = Experience.props.row;
@@ -99,21 +99,10 @@ describe('template', () => {
       expect(wrapper.find('DateInput-stub').exists()).toBe(true);
     });
 
-    xit('renders CheckboxGroup', () => {
-      expect(wrapper.find('CheckboxGroup-stub').exists()).toBe(true);
-    });
-
-    xit('renders CheckboxItem', () => {
-      expect(wrapper.find('CheckboxItem-stub').exists()).toBe(true);
-    });
-
     it('renders TextField', () => {
       expect(wrapper.find('TextField-stub').exists()).toBe(true);
     });
 
-    xit('renders TextareaInput', () => {
-      expect(wrapper.find('TextareaInput-stub').exists()).toBe(true);
-    });
   });
 });
 });

@@ -1,26 +1,17 @@
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 
-const mockStore = {
-  state: {
-    exercise: {
-      record: {},
-    },
-  },
-  getters: {
-    'auth/isSignedIn': () => { },
-  },
-};
-
-xdescribe('views/Eligibility/EligibilityFail', () => {
+describe('views/Eligibility/EligibilityFail', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(EligibilityFail, { mocks: {
-      $store: mockStore,
-    } });
+    wrapper = createTestSubject(EligibilityFail, {
+      mocks: {},
+      stubs: ['RouterLink'],
+      propsData: {},
+    });
   });
-
-  xdescribe('template', () => {
+  
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
