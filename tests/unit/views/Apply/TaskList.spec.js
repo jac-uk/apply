@@ -3,7 +3,6 @@ import { createTestSubject } from '../../helpers';
 import TaskList from '@/views/Apply/TaskList';
 
 describe('views/TaskList', () => {
-
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(TaskList, {

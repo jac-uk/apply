@@ -1,24 +1,32 @@
-import { mount } from '@vue/test-utils';
+// import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
 // import TextField to test with a component
 import TextField from '@/components/Form/TextField';
 
-const createTestSubject = (props) => {
-  return mount(RepeatableFields, {
-    propsData: {
-      value: null,
-      component: TextField,
-      ...props,
-    },
-  });
-};
-
 xdescribe('components/RepeatableFields', () => {
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = createTestSubject(RepeatableFields, {
+      mocks: {},
+      stubs: [],
+      propsData: {
+        value: null,
+        component: TextField,
+      },
+    });
+  });
+
+  it('renders successfully', () => {
+    expect(wrapper.exists()).toBeTrue();
+  });
+
   it('component name is "RepeatableFields"', () => {
     expect(RepeatableFields.name).toBe('RepeatableFields');
   });
 
-  xdescribe('props', () => {
+  describe('props', () => {
     let prop;
 
     describe('component', () => {
@@ -48,7 +56,7 @@ xdescribe('components/RepeatableFields', () => {
         expect(prop.default).toBe(false);
       });
 
-      it('must be a Number or Boolean', () => {
+      xit('must be a Number or Boolean', () => {
         expect(prop.type()).toContain(Number);
         expect(prop.type()).toContain(Boolean);
         expect(prop.type()).not.toContain(String);
@@ -58,7 +66,7 @@ xdescribe('components/RepeatableFields', () => {
       });
     });
 
-    xdescribe('value', () => {
+    describe('value', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.value;
       });
@@ -93,15 +101,16 @@ xdescribe('components/RepeatableFields', () => {
         expect(valid).not.toBe(true);
       });
     });
+
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = createTestSubject();
     });
 
-    it('renders child component', () => {
+    xit('renders child component', () => {
       expect(wrapper.find(TextField).exists()).toBe(true);
     });
 
@@ -202,4 +211,5 @@ xdescribe('components/RepeatableFields', () => {
       });
     });
   });
+
 });

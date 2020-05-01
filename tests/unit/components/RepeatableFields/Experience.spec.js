@@ -91,7 +91,7 @@ describe('@/components/RepeatableFields/Experience', () => {
     });
   });
 
-describe.only('template', () => {
+describe('template', () => {
   beforeEach(() => {
     wrapper.setProps({ index: 1, row: {} });
   });
