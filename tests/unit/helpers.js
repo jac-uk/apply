@@ -49,7 +49,6 @@ const createTestSubject = (component, customMountOptions = {
 }) => {
   return shallowMount(component, {
     localVue,
-    // router,
     mocks: {
       $route: mocks.route,
       $router: mocks.router,

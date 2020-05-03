@@ -47,6 +47,11 @@ describe('@/components/RepeatableFields/Experience', () => {
         },
       });
     });
+
+    it('renders the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+
   describe('computed properties', () => {
     describe('experienceJobTitle', () => {
       it('returns the value that is created using index', () => {
@@ -103,6 +108,10 @@ describe('template', () => {
       expect(wrapper.find('TextField-stub').exists()).toBe(true);
     });
 
+    it('renders LawRelatedTasks', () => {
+      expect(wrapper.find('LawRelatedTasks-stub').exists()).toBe(true);
+    });
   });
+
 });
 });

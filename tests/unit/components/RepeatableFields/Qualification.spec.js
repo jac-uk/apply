@@ -46,6 +46,9 @@ describe('component methods', () => {
       },
     });
   });
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
   describe('computed properties', () => {
     describe('qualificationType', () => {
       it('returns the value that is created using index', () => {

@@ -46,8 +46,10 @@ describe('component methods', () => {
       },
     });
   });
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
   describe('computed properties', () => {
-
     describe('Date-Input', () => {
       it('has id which reflects index', () => {
         wrapper.setProps({ index: 5 });
