@@ -19,6 +19,7 @@ const mocks = {
           typeOfExercise: null,
           referenceNumber: null,
           welshRequirement: null,
+          unknownVariable: null,
         },
       },
       candidate: {

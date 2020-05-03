@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import BackLink from '@/components/BackLink';
 
 describe('components/BackLink', () => {
@@ -9,10 +9,11 @@ describe('components/BackLink', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallowMount(BackLink, {
+    wrapper = createTestSubject(BackLink, {
       mocks: {
         $router: mockRouter,
       },
+      stubs: [],
     });
   });
   

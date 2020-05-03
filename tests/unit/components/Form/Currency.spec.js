@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import Currency from '@/components/Form/Currency';
 
 describe('components/Form/Currency', () => {
@@ -8,8 +8,9 @@ describe('components/Form/Currency', () => {
     // label: 'mock label',
   };
   beforeEach(() => {
-    wrapper = shallowMount(Currency, {
-        props: mockProps,
+    wrapper = createTestSubject(Currency, {
+      propsData: mockProps,
+      stubs: [],
     });
   });
   

@@ -12,7 +12,7 @@ describe('views/Assessments/LeadershipSuitability', () => {
   });
 
   describe('template', () => {
-    it('renders', () => {
+    it.only('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
