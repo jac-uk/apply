@@ -54,15 +54,6 @@ describe('@/components/RepeatableFields/CriminalOffenceDetails', () => {
     beforeEach(() => {
       wrapper.setProps({ index: 5, row: {} });
     });
-
-    describe('Date-Input', () => {
-      it('has id which reflects index', () => {
-        expect(wrapper.find('DateInput-stub').attributes('id')).toBe('offence_date_5');
-      });
-      it('renders DateInput', () => {
-        expect(wrapper.find('DateInput-stub').exists()).toBe(true);
-      });
-    });
     
       describe('TextField', () => {
         it('renders TextField', () => {
