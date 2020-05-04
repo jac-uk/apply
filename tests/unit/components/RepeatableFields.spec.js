@@ -1,7 +1,5 @@
-// import { shallowMount } from '@vue/test-utils';
 import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
-// import TextField to test with a component
 import TextField from '@/components/Form/TextField';
 
 xdescribe('components/RepeatableFields', () => {

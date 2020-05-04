@@ -1,7 +1,7 @@
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import { createTestSubject } from '../../../helpers';
 
-describe('views/Assessments/LeadershipSuitability', () => {
+xdescribe('views/Assessments/LeadershipSuitability', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(LeadershipSuitability, {
