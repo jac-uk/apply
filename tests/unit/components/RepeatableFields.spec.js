@@ -54,13 +54,9 @@ xdescribe('components/RepeatableFields', () => {
         expect(prop.default).toBe(false);
       });
 
-      xit('must be a Number or Boolean', () => {
-        expect(prop.type()).toContain(Number);
-        expect(prop.type()).toContain(Boolean);
-        expect(prop.type()).not.toContain(String);
-        expect(prop.type()).not.toContain(Object);
-        expect(prop.type()).not.toContain(Array);
-        expect(prop.type()).not.toContain(Function);
+      it('must be a Number or Boolean', () => {
+        expect(prop.type).toEqual([Number, Boolean]);
+        expect(prop.type).toEqual(expect.not.arrayContaining([String, Object, Array, Function]));
       });
     });
 
@@ -102,7 +98,7 @@ xdescribe('components/RepeatableFields', () => {
 
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = createTestSubject();
