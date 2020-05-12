@@ -6,7 +6,6 @@ describe('components/Form/FormField', () => {
   const mockProps = {
     id: 'mockId',
     label: 'mock label',
-    // bogus: 'bogus', // is this warren messing with us?
   };
 
   beforeEach(() => {

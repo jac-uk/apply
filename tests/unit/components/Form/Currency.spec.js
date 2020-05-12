@@ -10,7 +10,7 @@ describe('components/Form/Currency', () => {
   beforeEach(() => {
     wrapper = createTestSubject(Currency, {
       propsData: mockProps,
-      stubs: [],
+      stubs: ['FormFieldError'],
     });
   });
   
@@ -20,14 +20,36 @@ describe('components/Form/Currency', () => {
 
   describe('template', () => {
 
+    describe('containing div', () => {
+      describe('with errorMessage', () => {
+        it('has gov-uk-form-group--error class', () => {
+          wrapper.setData({ errorMessage: 'test error' });
+          expect(wrapper.find('div').attributes('class')).toContain('govuk-form-group--error');
+        });
+      });
+      describe('without errorMessage', () => {
+        it('doesn\'t have gov-uk-form-group--error class', () => {
+          wrapper.setData({ errorMessage: '' });
+          expect(wrapper.find('div').attributes('class')).not.toContain('govuk-form-group--error');
+        });
+      });
+    });
+
     describe('label', () => {
         it('sets the label to the value of the `label` prop', () => {
           wrapper.setProps({ label: 'My Form Label' });
           expect(wrapper.find('label').text()).toBe('My Form Label');
         });
+        it('id sets `for` attribute', () => {
+          wrapper.setProps({ id: 'my_unique_key' });
+          expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
+        });
+        it('has govuk-heading-m govuk-!-margin-bottom-2 classes', () => {
+          expect(wrapper.find('label').attributes('class')).toBe('govuk-heading-m govuk-!-margin-bottom-2');
+        });
     });
 
-    describe('hint', () => {
+    describe('hint span', () => {
           let hint;
       describe('when the prop is set', () => {
         beforeEach(() => {
@@ -51,21 +73,40 @@ describe('components/Form/Currency', () => {
       });
     });
 
-    describe('id', () => {
-      it('sets <label> `for` attribute', () => {
+    describe('FormFieldFrror', () => {
+      it('id sets `id` attribute', () => {
         wrapper.setProps({ id: 'my_unique_key' });
-        expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
+        expect(wrapper.find('formfielderror-stub').attributes().id).toBe('my_unique_key');
       });
 
-      it('sets <input> `id` attribute', () => {
-        wrapper.setProps({ id: 'my_unique_key' });
-        expect(wrapper.find('input').attributes().id).toBe('my_unique_key');
+      it('errorMessage sets `error-message` attribute', () => {
+        wrapper.setData({ errorMessage: 'test error' });
+        expect(wrapper.find('formfielderror-stub').attributes().errormessage).toBe('test error');
       });
     });
 
-    describe('id', () => {
-    it('£ exists', () => {
-      expect(wrapper.find('.moj-label__currency').text()).toBe('£');
+    describe('input', () => {
+      it('id sets `id` attribute', () => {
+        wrapper.setProps({ id: 'my_unique_key' });
+        expect(wrapper.find('input').attributes().id).toBe('my_unique_key');
+      });
+      xit('v-model', () => {
+      });
+      it('has govuk-input moj-input__currency govuk-input--width-10 classes', () => {
+        expect(wrapper.find('input').attributes('class')).toBe('govuk-input moj-input__currency govuk-input--width-10');
+      });
+      it('has input type of number', () => {
+        expect(wrapper.find('input').attributes('type')).toBe('number');
+      });
+      xit('@change', () => {
+      });
+    });
+    describe('currency label span', () => {
+      it('contains \'£\' text', () => {
+        expect(wrapper.find('span').text()).toBe('£');
+      });
+      it('has x class', () => {
+        expect(wrapper.find('span').attributes('class')).toBe('moj-label__currency');
       });
     });
   });

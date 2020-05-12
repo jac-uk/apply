@@ -1,7 +1,9 @@
 //helpers
 
-import EventRenderer from '@/components/Form/EventRenderer';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
 
-xdescribe('components/Form/EventRenderer', () => {
-  
+xdescribe('components/Form/LawRelatedTasks', () => {
+    xit('empty suite', () => {
+
+    });
 });
