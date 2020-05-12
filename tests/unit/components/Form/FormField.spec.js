@@ -220,13 +220,12 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ minLength: 10 });
           });
           it('errors if value is less than minLength', () => {
-            let errormessage = 'mock label should have 10 or more characters';
             wrapper.vm.validate({
                 target: {
                  value: '123456789',
                 },
               });
-            expect(wrapper.vm.$data.errorMessage).toBe(errormessage);
+            expect(wrapper.vm.$data.errorMessage).toBe(`${mockProps.label} should have 10 or more characters`);
           });
         });
         describe('maxLength errors', () =>{
@@ -234,7 +233,7 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ maxLength: 10 });
           });
           it('errors if value is more than MaxLength', () => {
-            let errormessage = 'mock label should have 10 or fewer characters';
+            let errormessage = `${mockProps.label} should have 10 or fewer characters`;
             wrapper.vm.validate({
               target: {
                 value: errormessage,
