@@ -265,19 +265,18 @@ describe('components/Form/FormField', () => {
         expect(wrapper.vm.$data.errorMessage).toBe('testError');
       });
 
-      // stuck here! this test needs fixing
-      xit('emits ?? event', () => {
-        const mockRoot = {
+      it('emits $root event', () => {
+        const $root = {
           $emit: jest.fn(),
         };
         const wrapper = shallowMount(FormField, {
-          parentComponent: mockRoot,
+          propsData: mockProps,
         });
+        wrapper.vm.$root = $root;
+      
         wrapper.vm.setError('testError');
-        // for (let [key, value] of Object.entries(wrapper) {
-        //   console.log( 1 `${key}: ${value}`);
-        // }
-        expect(mockRoot.$emit()).toHaveBeenCalled();  
+      
+        expect($root.$emit).toHaveBeenCalled();
       });
     });
 });

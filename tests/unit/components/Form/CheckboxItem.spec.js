@@ -7,12 +7,9 @@ describe('components/Form/CheckboxItem', () => {
   });
 
   it('throws an error if the parent component is not "CheckboxGroup"', () => {
-    /* eslint-disable no-console */
-    // Mock console.error because Vue catches errors thrown by components and logs them to console.error
-    // console.error = jest.fn();
-    const consoleError = jest.spyOn(console, 'error');
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     const BadParent = () => {
-      createTestSubject(CheckboxItem, {
+      return createTestSubject(CheckboxItem, {
         propsData: {
           label: 'Example checkbox item',
           value: 'example-value',
@@ -20,11 +17,9 @@ describe('components/Form/CheckboxItem', () => {
         stubs: [],
       });
     };
-    
     expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
-    // expect(consoleError).toHaveBeenCalled();
+    expect(consoleError).toHaveBeenCalled();
     consoleError.mockRestore();
-    /* eslint-enable no-console */
   });
 
   describe('properties', () => {
