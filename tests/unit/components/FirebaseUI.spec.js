@@ -1,3 +1,4 @@
+// @todo add in Monikas test helpers
 import { shallowMount } from '@vue/test-utils';
 import FirebaseUI from '@/components/FirebaseUI';
 import firebaseui from 'firebaseui';
@@ -30,7 +31,7 @@ jest.mock('firebaseui', () => (
   },
 }));
 
-xdescribe('FirebaseUI component', () => {
+describe('FirebaseUI component', () => {
   const createTestSubject = () => {
     jest.clearAllMocks();
     return shallowMount(FirebaseUI);

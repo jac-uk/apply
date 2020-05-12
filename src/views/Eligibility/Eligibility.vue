@@ -4,8 +4,8 @@
       <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
-
-      <router-view />
+      
+      <RouterView />
     </div>
   </div>
 </template>

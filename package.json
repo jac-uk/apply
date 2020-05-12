@@ -3,7 +3,7 @@
   "version": "1.4.1",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --mode develop",
     "build": "vue-cli-service build  --mode develop",
     "deploy": "vue-cli-service build --mode develop; firebase deploy --only hosting:develop-candidate-app -P develop",
     "build-develop": "vue-cli-service build --mode develop",
@@ -15,6 +15,7 @@
     "lint": "vue-cli-service lint",
     "lint-ci": "vue-cli-service lint --no-fix",
     "test": "TZ='Europe/London' vue-cli-service test:unit",
+    "test:coverage": "TZ='Europe/London' vue-cli-service test:unit --coverage",
     "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "dependencies": {

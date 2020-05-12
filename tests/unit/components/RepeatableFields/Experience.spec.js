@@ -1,28 +1,16 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
+
 import Experience from '@/components/RepeatableFields/Experience';
-import DateInput from '@/components/Form/DateInput';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import TextField from '@/components/Form/TextField';
-import TextareaInput from '@/components/Form/TextareaInput';
 
-const createTestSubject = (props) => {
-  return shallowMount(Experience, {
-    propsData: {
-      ...props,
-    },
-  });
-};
+describe('@/components/RepeatableFields/Experience', () => {
 
-xdescribe('@/components/RepeatableFields/Experience', () => {
-  xdescribe('name', () => {
+  describe('props', () => {
+
     it('component name is "Experience"', () => {
       expect(Experience.name).toBe('Experience');
     });
-  });
 
-  xdescribe('props', () => {
-    xdescribe('row', () => {
+    describe('row', () => {
       it('is required', () => {
         let prop = Experience.props.row;
         expect(prop.required).toBe(true);
@@ -30,11 +18,11 @@ xdescribe('@/components/RepeatableFields/Experience', () => {
 
       it('has type object', () => {
         let prop = Experience.props.row;
-        expect(prop.type).toBe(Object);
+        expect(prop.type()).toBeObject();
       });
     });
 
-    xdescribe('index', () => {
+    describe('index', () => {
       it('is required', () => {
         let prop = Experience.props.index;
         expect(prop.required).toBe(true);
@@ -42,79 +30,88 @@ xdescribe('@/components/RepeatableFields/Experience', () => {
 
       it('has type number', () => {
         let prop = Experience.props.index;
-        expect(prop.type).toBe(Number);
+        expect(prop.type()).toBeNumber();
       });
     });
   });
 
-  xdescribe('computed properties', () => {
-    xdescribe('experienceJobTitle', () => {
+  describe('component methods', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = createTestSubject(Experience, {
+        mocks: {},
+        stubs: [],
+        propsData: {
+          row: {},
+          index: 0,
+        },
+      });
+    });
+
+    it('renders the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
+
+  describe('computed properties', () => {
+    describe('experienceJobTitle', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 4, row: {} });
+        wrapper.setProps({ index: 4, row: {} });
         expect(wrapper.vm.experienceJobTitle).toBe('experience_job_title_4');
       });
     });
 
-    xdescribe('experienceOrgBusinessName', () => {
+    describe('experienceOrgBusinessName', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.experienceOrgBusinessName).toBe('experience_org_business_name_5');
       });
     });
 
-    xdescribe('experienceStartDate', () => {
+    describe('experienceStartDate', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.experienceStartDate).toBe('experience_start_date_5');
       });
     });
 
-    xdescribe('experienceEndDate', () => {
+    describe('experienceEndDate', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.experienceEndDate).toBe('experience_end_date_5');
       });
     });
 
-    xdescribe('experienceTasks', () => {
+    describe('experienceTasks', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.experienceTasks).toBe('experience_tasks_5');
       });
     });
 
-    xdescribe('experienceOtherTasks', () => {
+    describe('experienceOtherTasks', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.experienceOtherTasks).toBe('experience_other_tasks_5');
       });
     });
   });
 
-  xdescribe('template', () => {
+describe('template', () => {
+  beforeEach(() => {
+    wrapper.setProps({ index: 1, row: {} });
+  });
     it('renders DateInput', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(DateInput).exists()).toBe(true);
-    });
-
-    it('renders CheckboxGroup', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(CheckboxGroup).exists()).toBe(true);
-    });
-
-    it('renders CheckboxItem', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(CheckboxItem).exists()).toBe(true);
+      expect(wrapper.find('DateInput-stub').exists()).toBe(true);
     });
 
     it('renders TextField', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(TextField).exists()).toBe(true);
+      expect(wrapper.find('TextField-stub').exists()).toBe(true);
     });
 
-    it('renders TextareaInput', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(TextareaInput).exists()).toBe(true);
+    it('renders LawRelatedTasks', () => {
+      expect(wrapper.find('LawRelatedTasks-stub').exists()).toBe(true);
     });
   });
+
+});
 });

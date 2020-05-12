@@ -1,7 +1,7 @@
 <template>
   <div />
-</template>
-
+</template>  
+ 
 <script>
 export default {
   props: {
@@ -86,26 +86,31 @@ export default {
             this.setError(`Please enter a value for ${this.label}`);
           }
         }
+
         if (this.type && this.type === 'email' && value) {
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
           }
         }
+
         if (this.type && this.type === 'tel' && value) {
           if (!this.regex.tel.test(value)) {
             this.setError(`Enter a valid phone number for ${this.label}`);
           }
         }
+
         if (this.minLength && value) {
           if (value.length + 1 <= this.minLength) {
             this.setError(`${this.label} should have ${this.minLength} or more characters`);
           }
         }
+
         if (this.maxLength && value) {
           if (value.length > this.maxLength) {
             this.setError(`${this.label} should have ${this.maxLength} or fewer characters`);
           }
         }
+
         if (this.pattern && value) {
           if (!this.pattern.match.test(value)) {
             this.setError(this.pattern.message);
