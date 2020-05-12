@@ -206,8 +206,9 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ required: true });
           });
           it('when no value given', () => {
+            let labelError = 'Please enter a value for mock label'
             wrapper.vm.validate();
-            expect(wrapper.vm.$data.errorMessage).toBe('Please enter a value for mock label');
+            expect(wrapper.vm.$data.errorMessage).toBe(labelError);
           });
         });
         xdescribe('email errors', () =>{
@@ -221,12 +222,13 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ minLength: 10 });
           });
           it('errors if value is less than minLength', () => {
+            let errormessage = 'mock label should have 10 or more characters'
             wrapper.vm.validate({
                 target: {
                  value: '123456789',
                 },
               });
-            expect(wrapper.vm.$data.errorMessage).toBe('mock label should have 10 or more characters');
+            expect(wrapper.vm.$data.errorMessage).toBe(errormessage);
           });
         });
         describe('maxLength errors', () =>{
@@ -234,12 +236,13 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ maxLength: 10 });
           });
           it('errors if value is more than MaxLength', () => {
+            let errormessage = 'mock label should have 10 or fewer characters'
             wrapper.vm.validate({
               target: {
-                value: '12345678911',
+                value: errormessage,
               },
             });
-            expect(wrapper.vm.$data.errorMessage).toBe('mock label should have 10 or fewer characters');
+            expect(wrapper.vm.$data.errorMessage).toBe(errormessage);
           });
         });
         describe('pattern errors', () =>{
@@ -277,9 +280,8 @@ describe('components/Form/FormField', () => {
         // for (let [key, value] of Object.entries(wrapper) {
         //   console.log( 1 `${key}: ${value}`);
         // }
-        expect(mockRoot.$emit()).toHaveBeenCalled(); //<< cant listen to root level how? why are we so ignorant 
+        expect(mockRoot.$emit()).toHaveBeenCalled();  
       });
-
     });
 });
 

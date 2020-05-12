@@ -63,8 +63,10 @@ describe('components/Form/Currency', () => {
       });
     });
 
-    it('tests for £ exists', () => {
+    describe('id', () => {
+    it('£ exists', () => {
       expect(wrapper.find('.moj-label__currency').text()).toBe('£');
+      });
     });
   });
   
