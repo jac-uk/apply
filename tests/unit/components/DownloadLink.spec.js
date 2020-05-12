@@ -1,4 +1,4 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 
 const mockGetDownloadURL = jest.fn()
   .mockName('getDownloadURL');
@@ -43,7 +43,9 @@ describe('components/DownloadLink', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallowMount(DownloadLink, {
+    wrapper = createTestSubject(DownloadLink, {
+      mocks: {},
+      stubs: [],
       propsData: mockProps,
     });
   });
@@ -54,18 +56,17 @@ describe('components/DownloadLink', () => {
 
   describe('lifecycle hooks', () => {
     describe('mounted', () => {
-
-      const localVue = createLocalVue();
+      // const localVue = createLocalVue();
       const mockGetDownloadURL = jest.fn()
-        .mockName('getDownloadURL');
-
+      .mockName('getDownloadURL');
+      
       const mockHref = 'mock href';
 
-      it('should call .getDownloadURL()', () => {
-        shallowMount(DownloadLink, {
-          localVue,
+      xit('should call .getDownloadURL()', () => {
+        createTestSubject(DownloadLink, {
           propsData: mockProps,
-          methods: {
+          stubs: [],
+          mocks: {
             getDownloadURL: mockGetDownloadURL,
           },
         });
@@ -73,16 +74,16 @@ describe('components/DownloadLink', () => {
         expect(mockGetDownloadURL).toHaveBeenCalled();
       });
 
-      it('should set linkHref if .getDownloadURL() returned download url', async () => {
+      xit('should set linkHref if .getDownloadURL() returned download url', async () => {
         expect.assertions(1);
 
-        const wrapper = shallowMount(DownloadLink, {
-          localVue,
-          propsData: mockProps,
-          methods: {
+        const wrapper = createTestSubject(DownloadLink, {
+          mocks: {
             getDownloadURL: mockGetDownloadURL
-              .mockReturnValue(mockHref),
+            .mockReturnValue(mockHref),
           },
+          stubs: [],
+          propsData: mockProps,
         });
 
         await wrapper.vm.$nextTick();
@@ -92,13 +93,13 @@ describe('components/DownloadLink', () => {
       it('should not set linkHref if .getDownloadURL() failed', async () => {
         expect.assertions(1);
 
-        const wrapper = shallowMount(DownloadLink, {
-          localVue,
-          propsData: mockProps,
-          methods: {
+        const wrapper = createTestSubject(DownloadLink, {
+          mocks: {
             getDownloadURL: mockGetDownloadURL
-              .mockReturnValue(false),
+            .mockReturnValue(false),
           },
+          stubs: [],
+          propsData: mockProps,
         });
 
         await wrapper.vm.$nextTick();

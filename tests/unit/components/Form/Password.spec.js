@@ -1,4 +1,5 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
+
 import Password from '@/components/Form/Password';
 
 describe('components/Form/Password', () => {
@@ -9,10 +10,12 @@ describe('components/Form/Password', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallowMount(Password, {
+    wrapper = createTestSubject(Password, {
+      mocks: {},
+      stubs: [],
       propsData: mockProps,
     });
-  });
+  }); 
 
   it('renders the component', () => {
     expect(wrapper.exists()).toBeTrue();

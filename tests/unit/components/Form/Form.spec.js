@@ -6,8 +6,7 @@ describe('components/Form/Form', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(Form, {
-      mocks: {
-      },
+      mocks: {},
       stubs: [],
     });
   });

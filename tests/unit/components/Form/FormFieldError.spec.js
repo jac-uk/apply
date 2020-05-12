@@ -1,9 +1,11 @@
-//helpers
+// import { createTestSubject } from "../../helpers";
 
 // import FormFieldError from '@/components/Form/FormFieldError';
 
-xdescribe('components/Form/FormFieldError', () => {
-    xit('empty spec', () => {
+describe('components/Form/FormFieldError', () => {
+    describe('props', () => {
+        it('id', () => {
 
+        });
     });
 });

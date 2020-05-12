@@ -24,7 +24,9 @@ export default {
         return {};
       },
     },
-    required: Boolean,
+    required: {
+      type: Boolean,
+    },
     minLength: {
       type: Number,
       default: 0,

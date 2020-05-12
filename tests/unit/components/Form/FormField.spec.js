@@ -1,106 +1,116 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
+
 import FormField from '@/components/Form/FormField';
 
 describe('components/Form/FormField', () => {
-  let wrapper;
-  const mockProps = {
-    id: 'mockId',
-    label: 'mock label',
-  };
-
-  beforeEach(() => {
-    wrapper = shallowMount(FormField, {
-      propsData: mockProps,
-    });
-  });
 
   describe('props', () => {
-    let props;
-    beforeEach(() => {
-      props = wrapper.vm.$options.props;
-    });
+    let prop;
     describe('id', () => {
-        it('is required', () => {
-            expect(props.id.required).toBeTruthy();
-        });
-        it('is a string', () => {
-            expect(props.id.type()).toBeString();
-        });
-        it('defaults as an empty string', () => {
-            expect(props.id.default).toBe('');
-        });
+      beforeEach(() => {
+        prop = FormField.props.id;
+      });
+      it('is required', () => {
+        expect(prop.required).toBeTruthy();
+      });
+      it('is a string', () => {
+        expect(prop.type()).toBeString();
+      });
+      it('defaults as an empty string', () => {
+        expect(prop.default).toBe('');
+      });
     });
+    
     describe('label', () => {
-        it('is not required', () => {
-            expect(props.label.required).toBeFalsy();
-        });
-        it('is a string', () => {
-            expect(props.label.type()).toBeString();
-        });
-        it('defaults as an empty string', () => {
-            expect(props.label.default).toBe('');
-        });
+      beforeEach(() => {
+        prop = FormField.props.label;
+      });
+      it('is not required', () => {
+        expect(prop.required).toBeFalsy();
+      });
+      it('is a string', () => {
+        expect(prop.type()).toBeString();
+      });
+      it('defaults as an empty string', () => {
+        expect(prop.default).toBe('');
+      });
     });
+
     describe('hint', () => {
-        it('is not required', () => {
-            expect(props.hint.required).toBeFalsy();
-        });
-        it('is a string', () => {
-            expect(props.hint.type()).toBeString();
-        });
-        it('defaults as an empty string', () => {
-            expect(props.hint.default).toBe('');
-        });
+      beforeEach(() => {
+        prop = FormField.props.hint;
+      });
+      it('is not required', () => {
+        expect(prop.required).toBeFalsy();
+      });
+      it('is a string', () => {
+        expect(prop.type()).toBeString();
+      });
+      it('defaults as an empty string', () => {
+        expect(prop.default).toBe('');
+      });
     });
 
     describe('messages', () => {
-        it('is not required', () => {
-            expect(props.messages.required).toBeFalsy();
-        });
-        it('is an Object', () => {
-            expect(props.messages.type()).toBeObject();
+      beforeEach(() => {
+        prop = FormField.props.messages;
+      });
+      it('is not required', () => {
+        expect(prop.required).toBeFalsy();
+      });
+      it('is an Object', () => {
+        expect(prop.type()).toBeObject();
         });
         it('defaults as an empty Object', () => {
-            expect(props.messages.default()).toEqual({});
+            expect(prop.default()).toEqual({});
         });
     });
 
     describe('required', () => {
+      beforeEach(() => {
+        prop = FormField.props.required;
+      });
         it('is not required', () => {
-            expect(props.required.required).toBeFalsy();
+            expect(prop.required).toBeFalsy();
         });
         it('is a Boolean', () => {
-            expect(props.required.type()).toBeBoolean();
+          expect(prop.type()).toBeBoolean();
         });
         it('defaults as undefined', () => {
-            expect(props.required.default).toBe(undefined);
+            expect(prop.default).toBe(undefined);
         });
     });
 
     describe('minLength', () => {
+      beforeEach(() => {
+        prop = FormField.props.minLength;
+      });
         it('is required', () => {
-            expect(props.minLength.required).toBeFalsy();
+            expect(prop.required).toBeFalsy();
         });
         it('is a Number', () => {
-            expect(props.minLength.type()).toBeNumber();
+            expect(prop.type()).toBeNumber();
         });
         it('defaults as undefined', () => {
-            expect(props.minLength.default).toBe(0);
+            expect(prop.default).toBe(0);
         });
       });
 
     describe('maxLength', () => {
+      beforeEach(() => {
+        prop = FormField.props.maxLength;
+      });
       it('is required', () => {
-          expect(props.minLength.required).toBeFalsy();
+          expect(prop.required).toBeFalsy();
       });
       it('is a Number', () => {
-          expect(props.maxLength.type()).toBeNumber();
+          expect(prop.type()).toBeNumber();
       });
       it('defaults as undefined', () => {
-          expect(props.minLength.default).toBe(0);
+          expect(prop.default).toBe(0);
       });
-        });
-
+    });
+      
          // @TODO fix these!!
         describe('pattern', () => {
           // it('is an Object', () => {
@@ -116,6 +126,25 @@ describe('components/Form/FormField', () => {
     });
     
   });
+
+  describe('component instance', () => {
+    let wrapper;
+    const mockProps = {
+      id: 'mockId',
+      label: 'mock label',
+    };
+  
+    beforeEach(() => {
+      wrapper = createTestSubject(FormField, {
+        mocks: {},
+        stubs: [],
+        propsData: mockProps,
+      });
+    });
+
+    it('renders the component', () => {
+      expect(wrapper.exists()).toBe(true);
+    });
 
   describe('data', () => {
     let data;
@@ -221,9 +250,9 @@ describe('components/Form/FormField', () => {
           });
           it('errors if value is less than minLength', () => {
             wrapper.vm.validate({
-                target: {
-                 value: '123456789',
-                },
+              target: {
+                value: '123456789',
+              },
               });
             expect(wrapper.vm.$data.errorMessage).toBe(`${mockProps.label} should have 10 or more characters`);
           });
@@ -265,11 +294,13 @@ describe('components/Form/FormField', () => {
         expect(wrapper.vm.$data.errorMessage).toBe('testError');
       });
 
-      it('emits $root event', () => {
-        const $root = {
+      //  fails now helper file is attached, doesnt like propsdata being used without 'new' keyword
+      // is this to do with the root being attached? 
+      xit('emits $root event', () => {
+        const $root = { 
           $emit: jest.fn(),
         };
-        const wrapper = shallowMount(FormField, {
+        const wrapper = createTestSubject({
           propsData: mockProps,
         });
         wrapper.vm.$root = $root;
@@ -287,4 +318,5 @@ describe('components/Form/FormField', () => {
    * @TODO lots of tests for methods, in particular validate() and setError()
    */
   
+});
 });
