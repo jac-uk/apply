@@ -18,8 +18,8 @@ describe('components/Form/Form', () => {
 
   xdescribe('methods', () => {
       it('validates', () => {
-          wrapper.setData({errors:[]})
-          expect(wrapper.vm.isValid().toBe(false))
+          wrapper.setData({ errors:[] });
+          expect(wrapper.vm.isValid().toBe(false));
     });
   });
       

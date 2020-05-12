@@ -4,6 +4,6 @@
 
 xdescribe('components/Form/FormFieldError', () => {
     xit('empty spec', () => {
-        expect(props.id.required).toBeTruthy();
+
     });
 });

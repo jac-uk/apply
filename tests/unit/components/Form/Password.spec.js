@@ -142,9 +142,9 @@ describe('components/Form/Password', () => {
 
   describe('`v-model` interface', () => {
     describe('when text changes', () => {
-      xit('emits an input event with the new value', () => {
+      it('emits an input event with the new value', () => {
         wrapper.setData({ text: 'new-value' });
-        expect(wrapper.emitted()).toEqual([['new-value']]);
+        expect(wrapper.emitted().input).toEqual([['new-value']]);
       });
     });
 

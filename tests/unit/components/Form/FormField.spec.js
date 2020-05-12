@@ -205,9 +205,8 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ required: true });
           });
           it('when no value given', () => {
-            let labelError = 'Please enter a value for mock label'
             wrapper.vm.validate();
-            expect(wrapper.vm.$data.errorMessage).toBe(labelError);
+            expect(wrapper.vm.$data.errorMessage).toBe(`Please enter a value for ${mockProps.label}`);
           });
         });
         xdescribe('email errors', () =>{
@@ -221,7 +220,7 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ minLength: 10 });
           });
           it('errors if value is less than minLength', () => {
-            let errormessage = 'mock label should have 10 or more characters'
+            let errormessage = 'mock label should have 10 or more characters';
             wrapper.vm.validate({
                 target: {
                  value: '123456789',
@@ -235,7 +234,7 @@ describe('components/Form/FormField', () => {
             wrapper.setProps({ maxLength: 10 });
           });
           it('errors if value is more than MaxLength', () => {
-            let errormessage = 'mock label should have 10 or fewer characters'
+            let errormessage = 'mock label should have 10 or fewer characters';
             wrapper.vm.validate({
               target: {
                 value: errormessage,

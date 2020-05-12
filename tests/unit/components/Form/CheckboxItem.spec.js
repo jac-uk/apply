@@ -23,7 +23,7 @@ describe('components/Form/CheckboxItem', () => {
     
     expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
     // expect(consoleError).toHaveBeenCalled();
-    consoleError.mockRestore()
+    consoleError.mockRestore();
     /* eslint-enable no-console */
   });
 
