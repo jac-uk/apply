@@ -22,7 +22,7 @@ describe('components/Form/CheckboxItem', () => {
     consoleError.mockRestore();
   });
 
-  describe('properties', () => {
+  describe('props', () => {
     let prop;
     describe('label', () => {
       beforeEach(() => {
@@ -81,7 +81,7 @@ describe('components/Form/CheckboxItem', () => {
     });
   });
 
-  xdescribe('component', ()=>{
+  xdescribe('component instance', ()=>{
     let wrapper;
     beforeEach(()=>{
       wrapper = createTestSubject(CheckboxItem,{
@@ -94,7 +94,7 @@ describe('components/Form/CheckboxItem', () => {
       });
     });
 
-  xdescribe('data', () => {
+  describe('data', () => {
     describe('hasConditionalContent', () => {
       it('is true when slot content was supplied', () => {
         expect(wrapper.vm.hasConditionalContent).toBe(true);
@@ -235,5 +235,6 @@ describe('components/Form/CheckboxItem', () => {
       });
     });
   });
-});
+  });
+
 });

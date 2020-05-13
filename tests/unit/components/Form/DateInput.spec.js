@@ -2,6 +2,7 @@ import { createTestSubject } from '../../helpers';
 import DateInput from '@/components/Form/DateInput';
 
 describe('components/DateInput', () => {
+  
   describe('props', () => {
     describe('type', () => {
       let prop;
@@ -40,7 +41,7 @@ describe('components/DateInput', () => {
     });
   });
 
-  describe('rendered', () => {
+  describe('component instance', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = createTestSubject(DateInput, {
@@ -537,4 +538,5 @@ describe('components/DateInput', () => {
               
     });
   });
+
 });

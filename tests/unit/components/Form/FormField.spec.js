@@ -318,5 +318,6 @@ describe('components/Form/FormField', () => {
    * @TODO lots of tests for methods, in particular validate() and setError()
    */
   
-});
+  });
+
 });

@@ -1,25 +1,26 @@
-import { createTestSubject } from '../../helpers';
+// import { createTestSubject } from '../../helpers';
 
-import Form from '@/components/Form/Form';
+// import Form from '@/components/Form/Form';
 
-describe('components/Form/Form', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = createTestSubject(Form, {
-      mocks: {},
-      stubs: [],
-    });
-  });
+// describe('components/Form/Form', () => {
+//   describe('component instance', () => {  
+//   let wrapper;
+//   beforeEach(() => {
+//     wrapper = createTestSubject(Form, {
+//       mocks: {},
+//       stubs: [],
+//       propsData: {},
+//     });
+//   });
   
-  xit('renders the component', () => {
-    expect(wrapper.exists()).toBe(true);
-  });
+//   it('renders the component', () => {
+//     expect(wrapper.exists()).toBe(true);
+//   });
 
-  xdescribe('methods', () => {
-      it('validates', () => {
-          wrapper.setData({ errors:[] });
-          expect(wrapper.vm.isValid().toBe(false));
-    });
-  });
-      
-});
+//   xdescribe('methods', () => {
+//   });
+  
+// });
+// });
+  
+// How do we test this component when it is using querySelector in its mounted method? 

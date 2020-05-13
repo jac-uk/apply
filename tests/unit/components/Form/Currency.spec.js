@@ -2,6 +2,25 @@ import { createTestSubject } from '../../helpers';
 import Currency from '@/components/Form/Currency';
 
 describe('components/Form/Currency', () => {
+  describe('props', () => {
+    describe('value', () => {
+      let prop;
+      beforeEach(() => {
+        prop = Currency.props.value;
+      });
+      it('is not required', () => {
+        expect(prop.required).toBeFalsy();
+      });
+      it('defaults as null', () => {
+        expect(prop.default).toBe(null);
+      });
+      it('is a string', () => {
+        expect(prop.type).toBeString;
+      });
+    });
+  });
+
+  describe('component instance', () => {
   let wrapper;
   const mockProps = {
     id: 'mockId',
@@ -111,30 +130,6 @@ describe('components/Form/Currency', () => {
     });
   });
   
-  xdescribe('components', () => {
-  });
-  
-  xdescribe('extends', () => {
-  });
-  
-  describe('props', () => {
-    let props;
-    beforeEach(() => {
-      props = wrapper.vm.$options.props;
-    });
-    describe('value', () => {
-      it('is not required', () => {
-        expect(props.value.required).toBeFalsy();
-      });
-      it('defaults as null', () => {
-        expect(props.value.default).toBe(null);
-      });
-      it('is a string', () => {
-        expect(props.value.type).toBeString;
-      });
-    });
-  });
-  
   describe('computed', () => {
     describe('currencyInput', () => {
       beforeEach(() => {
@@ -168,4 +163,5 @@ describe('components/Form/Currency', () => {
     });
   });
 
+  });
 });

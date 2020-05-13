@@ -7,7 +7,7 @@ describe('components/Form/CheckboxGroup', () => {
     expect(CheckboxGroup.name).toBe('CheckboxGroup');
   });
 
-  describe('properties', () => {
+  describe('props', () => {
     let prop;
     describe('value', () => {
       beforeEach(() => {
@@ -94,8 +94,8 @@ describe('components/Form/CheckboxGroup', () => {
     });
   });
 
-  xdescribe('lifecycle hooks', () => {
-    describe('created', () => {
+  describe('lifecycle hooks', () => {
+    xdescribe('created', () => {
       describe('if value is an array', () => {
         it('does not call emit', ()=> {
           expect(inputMock).toHaveBeenCalledWith('??');
@@ -110,5 +110,7 @@ describe('components/Form/CheckboxGroup', () => {
       });
     });
   });
-});
+
+  });
+
 });
