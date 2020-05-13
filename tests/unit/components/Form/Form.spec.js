@@ -13,9 +13,9 @@
 //     });
 //   });
   
-//   it('renders the component', () => {
+   xit('renders the component', () => {
 //     expect(wrapper.exists()).toBe(true);
-//   });
+   });
 
 //   xdescribe('methods', () => {
 //   });
