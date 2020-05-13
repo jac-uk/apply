@@ -1,67 +1,64 @@
-import { shallowMount } from '@vue/test-utils';
-import RadioGroup from '@/components/Form/RadioGroup';
+import { createTestSubject } from '../../helpers';
 import RadioItem from '@/components/Form/RadioItem';
 
-const radioItemTemplate = ({ label, value, hint, content }) => {
-  let template = `<RadioItem label="${label}" value="${value}" `;
-  if (hint) {
-    template += `hint="${hint}" `;
-  }
+// import RadioGroup from '@/components/Form/RadioGroup';
 
-  if (content) {
-    template += `>${content}</RadioItem>`;
-  }
-  else {
-    template += '/>';
-  }
+// const radioItemTemplate = ({ label, value, hint, content }) => {
+//   let template = `<RadioItem label="${label}" value="${value}" `;
+//   if (hint) {
+//     template += `hint="${hint}" `;
+//   }
 
-  return template;
-};
+//   if (content) {
+//     template += `>${content}</RadioItem>`;
+//   }
+//   else {
+//     template += '/>';
+//   }
+//   return template;
+// };
 
-const createTestSubject = (options) => {
-  if (!options) {
-    options = {
-      label: 'Example radio item',
-      value: 'example-value',
-      hint: 'Something',
-      content:  'Conditional content',
-    };
-  }
+// const createTestSubject = (options) => {
+//   if (!options) {
+//     options = {
+//       label: 'Example radio item',
+//       value: 'example-value',
+//       hint: 'Something',
+//       content:  'Conditional content',
+//     };
+//   }
 
-  const radioItem = radioItemTemplate(options);
+//   const radioItem = radioItemTemplate(options);
 
-  // RadioItem depends on the parent component being RadioGroup
-  // So we're mocking RadioGroup with a RadioItem inside, and will return the RadioItem
-  const radios = shallowMount(RadioGroup, {
-    propsData: {
-      label: 'Example question',
-      id: 'example',
-      value: 'selected-radio-value',
-    },
-    stubs: {
-      RadioItem,
-    },
-    slots: {
-      default: [radioItem],
-    },
-  });
+//   // RadioItem depends on the parent component being RadioGroup
+//   // So we're mocking RadioGroup with a RadioItem inside, and will return the RadioItem
+//   const radios = shallowMount(RadioGroup, {
+//     propsData: {
+//       label: 'Example question',
+//       id: 'example',
+//       value: 'selected-radio-value',
+//     },
+//     stubs: {
+//       RadioItem,
+//     },
+//     slots: {
+//       default: [radioItem],
+//     },
+//   });
 
-  return radios.find(RadioItem);
-};
+//   return radios.find(RadioItem);
+// };
 
-xdescribe('components/Form/RadioItem', () => {
+describe('components/Form/RadioItem', () => {
   it('component name is "RadioItem"', () => {
     expect(RadioItem.name).toBe('RadioItem');
   });
 
   it('throws an error if the parent component is not "RadioGroup"', () => {
-    /* eslint-disable no-console */
-    // Mock console.error because Vue catches errors thrown by components and logs them to console.error
-    const originalConsoleError = console.error;
-    console.error = jest.fn();
-
-    const createWithBadParent = () => {
-      shallowMount(RadioItem, {
+    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const BadParent = () => {
+      return createTestSubject(RadioItem, {
+        stubs: [],
         propsData: {
           label: 'Example radio item',
           value: 'example-value',
@@ -69,9 +66,9 @@ xdescribe('components/Form/RadioItem', () => {
       });
     };
 
-    expect(createWithBadParent).toThrow('RadioItem component can only be used inside a RadioGroup component');
-    console.error = originalConsoleError;
-    /* eslint-enable no-console */
+    expect(BadParent).toThrow('RadioItem component can only be used inside a RadioGroup component');
+    expect(consoleError).toHaveBeenCalled();
+    consoleError.mockRestore();
   });
 
   xdescribe('properties', () => {

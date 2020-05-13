@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 describe('components/Form/TextareaInput', () => {
@@ -9,7 +9,9 @@ describe('components/Form/TextareaInput', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallowMount(TextareaInput, {
+    wrapper = createTestSubject(TextareaInput, {
+      mocks: {},
+      stubs: [],
       propsData: mockProps,
     });
   });

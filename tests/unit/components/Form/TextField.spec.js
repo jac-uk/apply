@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import TextField from '@/components/Form/TextField';
 
 describe('components/Form/TextField', () => {
@@ -8,7 +8,8 @@ describe('components/Form/TextField', () => {
   };
 
   beforeEach(() => {
-    wrapper = shallowMount(TextField, {
+    wrapper = createTestSubject(TextField, {
+      stubs: [],
       propsData: mockProps,
     });
   });

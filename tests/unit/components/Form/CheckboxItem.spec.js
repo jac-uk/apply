@@ -10,11 +10,11 @@ describe('components/Form/CheckboxItem', () => {
     const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
     const BadParent = () => {
       return createTestSubject(CheckboxItem, {
+        stubs: [],
         propsData: {
           label: 'Example checkbox item',
           value: 'example-value',
         },
-        stubs: [],
       });
     };
     expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
