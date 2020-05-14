@@ -81,9 +81,9 @@ describe('components/Form/CheckboxItem', () => {
     });
   });
 
-  xdescribe('component instance', ()=>{
+  xdescribe('component instance', () => {
     let wrapper;
-    beforeEach(()=>{
+    beforeEach(() => {
       wrapper = createTestSubject(CheckboxItem,{
         propsData: { 
           label: 'Example checkbox item',
