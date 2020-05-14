@@ -22,9 +22,7 @@ describe('components/Form/EventRenderer', () => {
         beforeEach(() => {
             wrapper = createTestSubject(EventRenderer, {
                 propsData: {
-                    tasks: [],
-                    id: 'my_unique_id',
-                    otherTasks: 'other_task_string',
+                    events: [],
                 },
                 stubs: [],
             });

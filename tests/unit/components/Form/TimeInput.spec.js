@@ -213,7 +213,7 @@ describe('components/TimeInput', () => {
   describe('#created lifecycle hook', () => {
     it('sets `date` to equal the `value` property', () => {
       const value = new Date('1978-01-01T19:20+01:00');
-      wrapper.setData({ value: value });
+      wrapper.setProps({ value: value });
       expect(wrapper.vm.date.getHours()).toEqual(value.getHours());
       expect(wrapper.vm.date.getMinutes()).toEqual(value.getMinutes());
     });

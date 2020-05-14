@@ -88,7 +88,7 @@ describe('components/Form/RadioGroup', () => {
     describe('<legend> element', () => {
       describe('when the `label` prop is set', () => {
         it('displays the label in a <legend> element', () => {
-          wrapper.setData({ label: 'Do you want cake?' });
+          wrapper.setProps({ label: 'Do you want cake?' });
           const legend = wrapper.find('legend');
           expect(legend.exists()).toBe(true);
           expect(legend.text()).toBe('Do you want cake?');
@@ -98,7 +98,7 @@ describe('components/Form/RadioGroup', () => {
 
       describe('when the `label` prop is empty', () => {
         it('does not render a <legend>', () => {
-          wrapper.setData({ label: '' });
+          wrapper.setProps({ label: '' });
           const legend = wrapper.find('legend');
           expect(legend.exists()).toBe(false);
         });
@@ -117,7 +117,7 @@ describe('components/Form/RadioGroup', () => {
       describe('when the `hint` prop is set', () => {
         let hint;
         beforeEach(() => {
-          wrapper.setData({
+          wrapper.setProps({
             label: 'Do you want cake?',
             hint: "It's victoria sponge",
             id: 'wants-cake',
@@ -143,9 +143,14 @@ describe('components/Form/RadioGroup', () => {
       describe('when the `hint` prop is not set', () => {
         let hint;
         beforeEach(() => {
-          wrapper = createTestSubject({
-            label: 'Do you want cake?',
-            hint: undefined,
+          wrapper = createTestSubject(RadioGroup,{
+            propsData: {
+              id: 'my_unique_id',
+              value: 'my_value',
+              label: 'Do you want cake?',
+              hint: undefined,
+            },
+            stubs: [],
           });
           hint = wrapper.find('span.govuk-hint');
         });
