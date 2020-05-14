@@ -2,6 +2,57 @@ import { createTestSubject } from '../../helpers';
 import TextField from '@/components/Form/TextField';
 
 describe('components/Form/TextField', () => {
+  describe('props', () => {
+    let prop;
+
+    describe('inputClass', () => {
+      beforeEach(() => {
+        prop = TextField.props.inputClass;
+      });
+
+      it('type is String', () => {
+        expect(prop.type()).toBeString();
+      });
+
+      it('defaults as \'\'', () => {
+        expect(prop.default).toBe('');
+      });
+
+    });
+    
+    describe('value', () => {
+      beforeEach(() => {
+        prop = TextField.props.value;
+      });
+
+      it('type is String', () => {
+        expect(prop.type()).toBeString();
+      });
+
+      it('defaults as \'\'', () => {
+        expect(prop.default).toBe('');
+      });
+
+    });
+
+    describe('type', () => {
+      beforeEach(() => {
+        prop = TextField.props.type;
+      });
+
+      it('type is String', () => {
+        expect(prop.type()).toBeString();
+      });
+
+      it('defaults as \'text\'', () => {
+        expect(prop.default).toBe('text');
+      });
+
+    });
+
+  });
+  describe('component instance', () => {
+
   let wrapper;
   const mockProps = {
     id: 'mockId',
@@ -145,4 +196,5 @@ describe('components/Form/TextField', () => {
       });
     });
   });
+});
 });

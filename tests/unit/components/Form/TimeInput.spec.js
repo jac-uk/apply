@@ -17,55 +17,32 @@ jest.mock('@/helpers/Form/parseAndClipNumber', () => {
 
 describe('components/TimeInput', () => {
 
-  // xdescribe('props', () => {
-  //   describe('legend attribute', () => {
-  //     it('is set when label is passed', () => {
-  //       const label = 'Launch date and time';
-  //       wrapper.setProps({ label });
-  //       expect(wrapper.find('legend').text()).toBe(label);
-  //     });
-  //     it('is not set if label is not passed', () => {
-  //       expect(wrapper.find('.govuk-fieldset__legend').exists()).toBe(false);
-  //     });
-  //   });
-  //   describe('hint', () => {
-  //     it('is displayed when provided', () => {
-  //       const hint = 'For example, 31 05 2020 at 09:00';
-  //       wrapper.setProps({ hint, id: 'testid' });
-  //       expect(wrapper.find('#testid-hint').text()).toBe(hint);
-  //     });
-  //     it('does not display when not provided', () => {
-  //       wrapper.setProps({ id: 'testid' });
-  //       expect(wrapper.find('#testid-hint').exists()).toBe(false);
-  //     });
-  //      it('sets aria-described by with the value of hint id', () => {
-  //       const hint = 'For example, 31 05 2020 at 09:00';
-  //       wrapper.setProps({ hint, id: 'testid' });
-  //       expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe('testid-hint');
-  //     });
-  //     it('undefined when no hint provided', () => {
-  //       expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe(undefined);
-  //     });
-  //   });
-  //   describe('id', () => {
-  //     it('assigns id to govuk-date-input', () => {
-  //       expect(wrapper.find('.govuk-date-input').attributes().id).toBe('launch_time');
-  //     });
-  //     it('is used to create ids for inputs', () => {
-  //       const id = 'launch_time_test';
-  //       wrapper.setProps({ id });
-  //       expect(wrapper.findAll('.govuk-date-input__input').at(0).attributes().id).toBe(`${id}-hour`);
-  //       expect(wrapper.findAll('.govuk-date-input__input').at(1).attributes().id).toBe(`${id}-minute`);
-  //     });
-  //     it('is used to create "for" attributes for labels', () => {
-  //       const id = 'launch_time';
-  //       wrapper.setProps({ id });
-  //       expect(wrapper.findAll('.govuk-date-input__label').at(0).attributes().for).toBe(`${id}-hour`);
-  //       expect(wrapper.findAll('.govuk-date-input__label').at(1).attributes().for).toBe(`${id}-minute`);
-  //     });
-  //   });
-  // });
-  
+  describe('props', () => {
+    let prop;
+
+    describe('value', () => {
+      beforeEach(() => {
+        prop = TimeInput.props.value;
+      });
+
+      it('is required', () => {
+        expect(prop.required).toBe(true);
+      });
+
+      const validTypes = [
+        ['null', null],
+        ['undefined', undefined],
+        ['a Date object', new Date()],
+      ];
+
+      it.each(validTypes)('can be %s', (label, value) => {
+        const valid = prop.validator(value);
+        expect(valid).toBe(true);
+      });
+    });
+
+  });
+
   describe('component instance', () => {
     let wrapper;
 
@@ -241,5 +218,55 @@ describe('components/TimeInput', () => {
       expect(wrapper.vm.date.getMinutes()).toEqual(value.getMinutes());
     });
   });
+
+  describe('properties', () => {
+      describe('legend attribute', () => {
+        it('is set when label is passed', () => {
+          const label = 'Launch date and time';
+          wrapper.setProps({ label });
+          expect(wrapper.find('legend').text()).toBe(label);
+        });
+        it('is not set if label is not passed', () => {
+          expect(wrapper.find('.govuk-fieldset__legend').exists()).toBe(false);
+        });
+      });
+      describe('hint', () => {
+        it('is displayed when provided', () => {
+          const hint = 'For example, 31 05 2020 at 09:00';
+          wrapper.setProps({ hint, id: 'testid' });
+          expect(wrapper.find('#testid-hint').text()).toBe(hint);
+        });
+        it('does not display when not provided', () => {
+          wrapper.setProps({ id: 'testid' });
+          expect(wrapper.find('#testid-hint').exists()).toBe(false);
+        });
+         it('sets aria-described by with the value of hint id', () => {
+          const hint = 'For example, 31 05 2020 at 09:00';
+          wrapper.setProps({ hint, id: 'testid' });
+          expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe('testid-hint');
+        });
+        it('undefined when no hint provided', () => {
+          expect(wrapper.find('.govuk-fieldset').attributes('aria-describedby')).toBe(undefined);
+        });
+      });
+      describe('id', () => {
+        it('assigns id to govuk-date-input', () => {
+          expect(wrapper.find('.govuk-date-input').attributes().id).toBe('launch_time');
+        });
+        it('is used to create ids for inputs', () => {
+          const id = 'launch_time_test';
+          wrapper.setProps({ id });
+          expect(wrapper.findAll('.govuk-date-input__input').at(0).attributes().id).toBe(`${id}-hour`);
+          expect(wrapper.findAll('.govuk-date-input__input').at(1).attributes().id).toBe(`${id}-minute`);
+        });
+        it('is used to create "for" attributes for labels', () => {
+          const id = 'launch_time';
+          wrapper.setProps({ id });
+          expect(wrapper.findAll('.govuk-date-input__label').at(0).attributes().for).toBe(`${id}-hour`);
+          expect(wrapper.findAll('.govuk-date-input__label').at(1).attributes().for).toBe(`${id}-minute`);
+        });
+      });
+    });  
+
   });
 });

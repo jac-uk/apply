@@ -3,6 +3,53 @@ import { createTestSubject } from '../../helpers';
 import Password from '@/components/Form/Password';
 
 describe('components/Form/Password', () => {
+  let prop;
+  describe('props', () => {
+
+      describe('inputClass', () => {
+          beforeEach(() => {
+              prop = Password.props.inputClass;
+          });
+          it('is a string', () => {
+              expect(prop.type()).toBeString();
+          });
+          it('defaults as an empty string', () => {
+              expect(prop.default).toBe('');
+          });
+      });
+
+      describe('value', () => {
+        beforeEach(() => {
+            prop = Password.props.value;
+        });
+        it('is not required', () => {
+            expect(prop.required).toBeFalsy();
+        });
+        it('is a string', () => {
+            expect(prop.type()).toBeString();
+        });
+        it('defaults as an empty string', () => {
+            expect(prop.default).toBe('');
+        });
+    });
+
+    describe('type', () => {
+      beforeEach(() => {
+          prop = Password.props.type;
+      });
+      it('is not required', () => {
+          expect(prop.required).toBeFalsy();
+      });
+      it('is a string', () => {
+          expect(prop.type()).toBeString();
+      });
+      it('defaults as an empty \'current-password\'', () => {
+          expect(prop.default).toBe('current-password');
+      });
+  });
+  });
+  describe('component instance', () => {
+
   let wrapper;
   const mockProps = {
     id: 'mockId',
@@ -253,5 +300,6 @@ describe('components/Form/Password', () => {
         });
       });
     });
+  });
   });
 });

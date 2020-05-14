@@ -2,6 +2,42 @@ import { createTestSubject } from '../../helpers';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 describe('components/Form/TextareaInput', () => {
+  describe('props', () => {
+    let prop;
+
+    describe('rows', () => {
+      beforeEach(() => {
+        prop = TextareaInput.props.rows;
+      });
+
+      it('must be a String', () => {
+        expect(prop.type()).toBeString();
+      });
+
+      it('defaults as \'5\'', () => {
+        expect(prop.default).toBe('5');
+      });
+
+    });
+
+    describe('value', () => {
+      beforeEach(() => {
+        prop = TextareaInput.props.value;
+      });
+
+      it('type is String', () => {
+        expect(prop.type()).toBeString();
+      });
+
+      it('defaults as \'\'', () => {
+        expect(prop.default).toBe('');
+      });
+      
+    });
+
+  });
+
+  describe('component instance', () => {
   let wrapper;
   const mockProps = {
     id: 'mockId',
@@ -93,5 +129,6 @@ describe('components/Form/TextareaInput', () => {
         expect(wrapper.vm.text).toEqual('my_value');
       });
     });
+  });
   });
 });

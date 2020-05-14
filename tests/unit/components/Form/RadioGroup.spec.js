@@ -7,7 +7,7 @@ describe('components/Form/RadioGroup', () => {
     expect(RadioGroup.name).toBe('RadioGroup');
   });
 
-  describe('properties', () => {
+  describe('props', () => {
     let prop;
 
     describe('value', () => {
@@ -176,5 +176,6 @@ describe('components/Form/RadioGroup', () => {
       });
     });
   });
-});
+  });
+  
 });
