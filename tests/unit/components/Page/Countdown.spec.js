@@ -1,12 +1,13 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import Countdown from '@/components/Page/Countdown';
 
 describe('page/Countdown', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Countdown, {
-      props: {
-        closeTime: Date.now(),
+    wrapper = createTestSubject(Countdown, {
+      stubs: [],
+      propsData: {
+        closeTime: new Date,
       },
     });
   });
@@ -29,7 +30,7 @@ describe('page/Countdown', () => {
       wrapper.setProps({ closeTime: new Date(Date.now() - 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10) });
       expect(wrapper.vm.$data.status).toBe('closed');
     });
-    xit('disables button', () => {
+    it('disables button', () => {
       wrapper.setProps({ closeTime: new Date(Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10) });
     });
   });
