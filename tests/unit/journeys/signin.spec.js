@@ -1,7 +1,5 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import App from '@/App';
-import Router from 'vue-router';
-import Vuex from 'vuex';
 
 const id = 12345;
 const routes = [
@@ -25,23 +23,18 @@ const routes = [
   ['confirmation', `/apply/${id}/confirmation`],
 ];
 
+// How much of the code in here is boilerplate/can be extracted
+// there seems to be a lot of specific code in here,
+//  perhaps journeys shouldn't be in units
+
 xdescribe('Sign in journey', () => {
-  let subject;
-  let router;
-  let store;
+  let wrapper;
 
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(Router);
-    localVue.use(Vuex);
-
-    router = require('@/router').default;
-    store = require('@/store').default;
     window.scrollTo = () => {};
-    subject = shallowMount(App, {
-      localVue,
-      router,
-      store,
+    wrapper = createTestSubject(App, {
+      propsData: {},
+      stubs: ['RouterView'],
     });
   });
 
@@ -53,28 +46,28 @@ xdescribe('Sign in journey', () => {
   describe('for unauthenticated user', () => {
     describe('when they visit page sign in', () => {
       it('loads sign in page', () => {
-        router.push({ name: 'sign-in' });
-        expect(subject.vm.$route.path).toBe('/sign-in');
+        wrapper.vm.$router.push({ name: 'sign-in' });
+        expect(wrapper.vm.$route.path).toBe('/sign-in');
       });
     });
 
     describe.each(routes)('when they visit page %s', (routeName) => {
       it('loads sign in page',() => {
-        router.push({ name: routeName, params: { id } });
-        expect(subject.vm.$route.path).toBe('/sign-in');
+        wrapper.vm.$router.push({ name: routeName, params: { id } });
+        expect(wrapper.vm.$route.path).toBe('/sign-in');
       });
     });
   });
 
-  xdescribe('for authenticated user', () => {
+  describe('for authenticated user', () => {
     beforeEach(() => {
-      store.dispatch('auth/setCurrentUser', user);
+      wrapper.vm.$store.dispatch('auth/setCurrentUser', user);
     });
 
-    xdescribe.each(routes)('when they visit page %s', (routeName, routePath) => {
+    describe.each(routes)('when they visit page %s', (routeName, routePath) => {
       it(`loads ${routePath}`,() => {
-        router.push({ name: routeName, params: { id } });
-        expect(subject.vm.$route.path).toBe(routePath);
+        wrapper.vm.$router.push({ name: routeName, params: { id } });
+        expect(wrapper.vm.$route.path).toBe(routePath);
       });
     });
   });

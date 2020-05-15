@@ -17,10 +17,4 @@
 //     expect(wrapper.exists()).toBe(true);
    });
 
-//   xdescribe('methods', () => {
-//   });
-  
-// });
-// });
-  
 // How do we test this component when it is using querySelector in its mounted method? 

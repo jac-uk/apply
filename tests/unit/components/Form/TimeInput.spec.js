@@ -93,8 +93,8 @@ describe('components/TimeInput', () => {
       });
     });
     describe('dateConstructor', () => {
-      xdescribe('and `hours` and `minutes` fields are set', () => {
-        it('returns an array of Date constructor arguments', () => {
+      describe('and `hours` and `minutes` fields are set', () => {
+        xit('returns an array of Date constructor arguments', () => {
           expect(wrapper.vm.dateConstructor).toHaveLength(5);
           expect(wrapper.vm.dateConstructor).toEqual([0, 0, 0, 15, 45]);
         });
@@ -146,7 +146,7 @@ describe('components/TimeInput', () => {
             expect(wrapper.vm.minute).toBe(5);
           });
         });
-        xdescribe('given a Date object', () => {
+        describe('given a Date object', () => {
           beforeEach(() => {
             wrapper.vm.date = new Date(Date.UTC(2018, 1, 13, 2, 19));
           });
@@ -161,7 +161,7 @@ describe('components/TimeInput', () => {
     });
   });
 
-  xdescribe('`v-model` interface', () => {
+  describe('`v-model` interface', () => {
     describe('when the `value` property changes', () => {
       let realDateSetter;
       let mockDateSetter;
@@ -175,7 +175,7 @@ describe('components/TimeInput', () => {
         TimeInput.computed.date.set = realDateSetter;
       });
       describe('given the new `value` is different from the current `date`', () => {
-        it('sets `date` to equal the new `value`', () => {
+        xit('sets `date` to equal the new `value`', () => {
           const firstDate = new Date('1960-01-01T19:20+01:00');
           const secondDate = new Date('1975-04-19T19:12+08:00');
           wrapper.setProps({ value: firstDate });
@@ -199,7 +199,7 @@ describe('components/TimeInput', () => {
       });
     });
     describe('when the internal `date` Date object changes', () => {
-      it('emits an `input` event', () => {
+      xit('emits an `input` event', () => {
         const wrapper = createTestSubject(new Date());
         const newDate = new Date('1978-01-01T19:20+01:00');
         wrapper.vm.date = newDate;

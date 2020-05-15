@@ -20,6 +20,7 @@ const mocks = {
           referenceNumber: null,
           welshRequirement: null,
           unknownVariable: null,
+          shortlistingOutcomeDate: null,
         },
       },
       candidate: {

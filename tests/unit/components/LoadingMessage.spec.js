@@ -1,17 +1,18 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import LoadingMessage from '@/components/LoadingMessage';
 
 describe('components/LoadingMessage', () => {
-  const createWrapper = (loadFailedValue) => {
-    return shallowMount(LoadingMessage, {
-      propsData: {
-        loadFailed: loadFailedValue,
-      },
-    });
-  };
-  
+  let wrapper;
   describe('when `loadFailed` is equal to `false`', () => {
-    const wrapper = createWrapper(false);
+    let loadFailedValue = false;
+    beforeEach(()=>{
+      wrapper = createTestSubject(LoadingMessage, {
+        propsData: {
+          loadFailed: loadFailedValue,
+        },
+        stubs: [],
+      });
+    });
     it('shows the "Loading" message', () => {
       expect(wrapper.find({ ref: 'loadingMessage' }).isVisible()).toBe(true);
     });
@@ -24,7 +25,15 @@ describe('components/LoadingMessage', () => {
   });
 
   describe('when `loadFailed` is equal to `true`', () => {
-    const wrapper = createWrapper(true);
+    let loadFailedValue = true;
+    beforeEach(()=>{
+      wrapper = createTestSubject(LoadingMessage, {
+        propsData: {
+          loadFailed: loadFailedValue,
+        },
+        stubs: [],
+      });
+    });
     it('shows the errorMessage', () => {
       expect(wrapper.find({ ref: 'errorMessage' }).isVisible()).toBe(true);
     });
@@ -38,4 +47,5 @@ describe('components/LoadingMessage', () => {
       expect(wrapper.find('div > p').text()).toBe('Reload the page and try again');
     });
   });
+
 });

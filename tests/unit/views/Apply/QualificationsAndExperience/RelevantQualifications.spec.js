@@ -27,22 +27,22 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
       });
 
       it('renders the h1 as `Qualifications` if the role is legal', () => {
-        // wrapper.setData({ unknownVariable: 'legal' });
+        wrapper.setProps({ unknownVariable: 'legal' });
           expect(h1.text()).toBe('Qualifications');
       });
 
       it('renders the h1 as `Qualifications` if the role is leadership', () => {
-        // wrapper.setData({ unknownVariable: 'leadership' });
+        // wrapper.setProps({ unknownVariable: 'leadership' });
           expect(h1.text()).toBe('Qualifications');
       });
 
       it('renders the h1 as `Qualifications` if the role is senior', () => {
-        // wrapper.setData({ unknownVariable: 'senior' });
+        // wrapper.setProps({ unknownVariable: 'senior' });
           expect(h1.text()).toBe('Qualifications');
       });
 
       xit('renders the h1 as `Memberships` if the role is non-legal', () => {
-        // wrapper.setData({ unknownVariable: 'non-legal' });
+        // wrapper.setProps({ unknownVariable: 'non-legal' });
           expect(h1.text()).toBe('Memberships');
       });
     });
@@ -59,48 +59,48 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
       });
     });
 
-    xdescribe('Qualifications - RepeatableFields', () => {
+    describe('Qualifications - RepeatableFields', () => {
       
       it('renders the RepeatableFields component', () => {
-        wrapper.setData({ unknownVariable: 'legal' });
+        wrapper.setProps({ unknownVariable: 'legal' });
         expect(wrapper.find('RepeatableFields-stub').exists()).toBe(true);
       });
 
       it('renders the RepeatableFields component if the role is leadership', () => {
-        wrapper.setData({ unknownVariable: 'leadership' });
+        wrapper.setProps({ unknownVariable: 'leadership' });
         expect(wrapper.find('RepeatableFields-stub').exists()).toBe(true);
       });
 
       it('renders the RepeatableFields component if the role is senior', () => {
-        wrapper.setData({ unknownVariable: 'senior' });
+        wrapper.setProps({ unknownVariable: 'senior' });
         expect(wrapper.find('RepeatableFields-stub').exists()).toBe(true);
       });
 
       xit('does not render the RepeatableFields component if the role is non-legal', () => {
-        wrapper.setData({ unknownVariable: 'non-legal' });
+        wrapper.setProps({ unknownVariable: 'non-legal' });
         expect(wrapper.find('RepeatableFields-stub').exists()).toBe(false);
       });
     });
 
-    xdescribe('What professional memberships do you have?', () => {
+    describe('What professional memberships do you have?', () => {
 
       xit('renders the question if the role is non-legal', () => {
-        wrapper.setData({ unknownVariable: 'non-legal' });
+        wrapper.setProps({ unknownVariable: 'non-legal' });
         expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
       });
 
       it('does not render the question if the role is legal', () => {
-        wrapper.setData({ unknownVariable: 'legal' });
+        wrapper.setProps({ unknownVariable: 'legal' });
         expect(wrapper.find('RadioGroup-stub').exists()).toBe(false);
       });
 
       it('does not render the question if the role is leadership', () => {
-        wrapper.setData({ unknownVariable: 'leadership' });
+        wrapper.setProps({ unknownVariable: 'leadership' });
         expect(wrapper.find('RadioGroup-stub').exists()).toBe(false);
       });
 
       it('does not render the question if the role is senior', () => {
-        wrapper.setData({ unknownVariable: 'senior' });
+        wrapper.setProps({ unknownVariable: 'senior' });
         expect(wrapper.find('RadioGroup-stub').exists()).toBe(false);
       });
     });

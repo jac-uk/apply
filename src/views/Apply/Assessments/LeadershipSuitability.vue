@@ -86,8 +86,9 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-// import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
+// could the fileUpload component be used here?
+// import FileUpload from '@/components/Form/FileUpload';
 
 export default {
   components: {

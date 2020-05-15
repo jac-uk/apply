@@ -1,5 +1,6 @@
+import { createTestSubject } from '../../../helpers';
+
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
-import { shallowMount } from '@vue/test-utils';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 // import TextField from '@/components/Form/Textfield';
@@ -7,35 +8,30 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
-const application = {};
-
-const mockStore = {
-  dispatch: jest.fn(),
-  state: {
-    application: {
-      record: {},
-    },
-  },
-  getters: {
-    'application/data': () => application,
-  },
-};
-
-const createTestSubject = () => {
-  return shallowMount(EqualityAndDiversitySurvey, {
-    mocks: {
-      $store: mockStore,
-    },
-  });
-};
+// const application = {};
+// 
+// const mockStore = {
+//   dispatch: jest.fn(),
+//   state: {
+//     application: {
+//       record: {},
+//     },
+//   },
+//   getters: {
+//     'application/data': () => application,
+//   },
+// };
 
 xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(EqualityAndDiversitySurvey, {
+      propsData: {},
+      stubs: [],
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

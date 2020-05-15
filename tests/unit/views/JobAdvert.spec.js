@@ -1,13 +1,16 @@
 import JobAdvert from '@/views/JobAdvert';
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 
-xdescribe('views/JobAdvert', () => {
+describe('views/JobAdvert', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(JobAdvert);
+    wrapper = createTestSubject(JobAdvert, {
+      propsData: {},
+      stubs: [],
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

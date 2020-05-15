@@ -1,7 +1,7 @@
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Assessments/LeadershipSuitability', () => {
+describe('views/Assessments/LeadershipSuitability', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(LeadershipSuitability, {
@@ -12,7 +12,7 @@ xdescribe('views/Assessments/LeadershipSuitability', () => {
   });
 
   describe('template', () => {
-    it('renders', () => {
+    it.only('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 

@@ -6,7 +6,7 @@ describe('components/Form/FormField', () => {
 
   describe('props', () => {
     let prop;
-    describe('id', () => {
+    describe.only('id', () => {
       beforeEach(() => {
         prop = FormField.props.id;
       });
@@ -238,11 +238,13 @@ describe('components/Form/FormField', () => {
             expect(wrapper.vm.$data.errorMessage).toBe(`Please enter a value for ${mockProps.label}`);
           });
         });
-        xdescribe('email errors', () =>{
-          
+        describe('email errors', () =>{
+          xit('when no value given', () => {
+          });
         });
-        xdescribe('tel errors', () =>{
-          
+        describe('tel errors', () =>{
+          xit('when no value given', () => {
+          });
         });
         describe('minLength errors', () => {
           beforeEach(() => {
@@ -294,14 +296,13 @@ describe('components/Form/FormField', () => {
         expect(wrapper.vm.$data.errorMessage).toBe('testError');
       });
 
-      //  fails now helper file is attached, doesnt like propsdata being used without 'new' keyword
-      // is this to do with the root being attached? 
-      xit('emits $root event', () => {
+      it('emits $root event', () => {
         const $root = { 
           $emit: jest.fn(),
         };
-        const wrapper = createTestSubject({
+        const wrapper = createTestSubject(FormField, {
           propsData: mockProps,
+          stubs: [],
         });
         wrapper.vm.$root = $root;
       

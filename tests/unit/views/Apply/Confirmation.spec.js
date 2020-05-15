@@ -1,13 +1,19 @@
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 
-xdescribe('views/Confirmation', () => {
+describe('views/Confirmation', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Confirmation);
+    wrapper = createTestSubject(Confirmation,{
+      propsData: [],
+      stubs:['RouterLink'],
+    });
+    // getting a warning due to formatDate filter failing, appears we need to mock shortlistingoutcome 
+    // something along the lines of below?
+    // wrapper.vm.$store.state.vacancy.record = { shortlistingOutcome: new Date };
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

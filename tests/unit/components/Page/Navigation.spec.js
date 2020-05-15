@@ -69,8 +69,8 @@ describe('components/Page/Navigation', () => {
       expect(wrapper.find('nav').attributes('aria-label')).toBe('MyTestLabel');
     });
 
-    xdescribe('aria-current attribute', () => {
-      it('is set for a link which is currently active', () => {
+    describe('aria-current attribute', () => {
+      xit('is set for a link which is currently active', () => {
         let links = wrapper.findAll('.nav-link');
         expect(links.at(0).attributes()).toHaveProperty('aria-current');
         expect(links.at(1).attributes()).not.toHaveProperty('aria-current');

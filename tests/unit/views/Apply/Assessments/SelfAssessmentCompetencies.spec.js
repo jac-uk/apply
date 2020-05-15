@@ -1,17 +1,16 @@
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
-import { shallowMount } from '@vue/test-utils';
-
-const createTestSubject = () => {
-  return shallowMount(SelfAssessmentCompetencies);
-};
+import { createTestSubject } from '../../../helpers';
 
 xdescribe('views/Assessments/SelfAssessmentCompetencies', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(SelfAssessmentCompetencies, {
+      propsData: {},
+      stubs: [],
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

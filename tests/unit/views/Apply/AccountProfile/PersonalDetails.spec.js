@@ -1,17 +1,19 @@
 import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import { createTestSubject } from '../../../helpers';
 
-// import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
 
 // const candidate = {};
 
+// like others this component refferences the QuerySelector in its mounted function
+// i would like some guidance on how to get around this
+
 xdescribe('@/views/Apply/AccountProfile/PersonalDetails', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(PersonalDetails, {
-      mocks: ['mockStore', 'mockRouter'],
+      mocks: [],
       stubs: [],
       propsData: {},
       });
