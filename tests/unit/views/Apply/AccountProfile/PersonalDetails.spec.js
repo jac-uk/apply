@@ -6,10 +6,10 @@ import DateInput from '@/components/Form/DateInput';
 
 // const candidate = {};
 
-// like others this component refferences the QuerySelector in its mounted function
+// like others this component references the QuerySelector in its mounted function
 // i would like some guidance on how to get around this
 
-xdescribe('@/views/Apply/AccountProfile/PersonalDetails', () => {
+describe('@/views/Apply/AccountProfile/PersonalDetails', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(PersonalDetails, {

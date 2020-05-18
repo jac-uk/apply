@@ -27,7 +27,7 @@ const routes = [
 // there seems to be a lot of specific code in here,
 //  perhaps journeys shouldn't be in units
 
-xdescribe('Sign in journey', () => {
+describe('Sign in journey', () => {
   let wrapper;
 
   beforeEach(() => {

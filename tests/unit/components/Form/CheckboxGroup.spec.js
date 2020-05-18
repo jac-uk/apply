@@ -95,7 +95,7 @@ describe('components/Form/CheckboxGroup', () => {
   });
 
   describe('lifecycle hooks', () => {
-    xdescribe('created', () => {
+    describe('created', () => {
       describe('if value is an array', () => {
         it('does not call emit', ()=> {
           expect(inputMock).toHaveBeenCalledWith('??');

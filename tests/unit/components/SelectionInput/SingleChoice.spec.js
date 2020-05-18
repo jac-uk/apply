@@ -54,7 +54,7 @@ describe('component/SingleChoice', () => {
         it('renders', () => {
             expect(wrapper.exists()).toBe(true);
         });
-    xdescribe('computed', () => {
+    describe('computed', () => {
         describe('selected', () => {
         beforeEach(() => {
             wrapper.vm.set('testError');

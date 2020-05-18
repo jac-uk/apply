@@ -81,7 +81,7 @@ describe('components/Form/CheckboxItem', () => {
     });
   });
 
-  xdescribe('component instance', () => {
+  describe('component instance', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = createTestSubject(CheckboxItem,{

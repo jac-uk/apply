@@ -24,7 +24,7 @@ const createTestSubject = () => {
   });
 };
 
-xdescribe('components/Form/RadioGroup and components/Form/RadioItem integration', () => {
+describe('components/Form/RadioGroup and components/Form/RadioItem integration', () => {
   let subject;
   let radios;
   beforeEach(() => {

@@ -1,12 +1,14 @@
+// this suite somehow interacts with the Form component and errors due to the queryselector
+
 import { createTestSubject } from '../../../helpers';
 
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+// import RadioGroup from '@/components/Form/RadioGroup';
+// import RadioItem from '@/components/Form/RadioItem';
 // import TextField from '@/components/Form/Textfield';
-import TextareaInput from '@/components/Form/TextareaInput';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
+// import TextareaInput from '@/components/Form/TextareaInput';
+// import CheckboxGroup from '@/components/Form/CheckboxGroup';
+// import CheckboxItem from '@/components/Form/CheckboxItem';
 
 // const application = {};
 // 
@@ -27,12 +29,18 @@ xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   beforeEach(() => {
     wrapper = createTestSubject(EqualityAndDiversitySurvey, {
       propsData: {},
-      stubs: [],
+      stubs: [
+        'TextareaInput',
+        'CheckboxItem',
+        'CheckboxGroup',
+        'RadioItem',
+        'RadioGroup',
+      ],
     });
   });
 
   describe('template', () => {
-    it('renders', () => {
+    it.only('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
@@ -51,11 +59,11 @@ xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
     });
 
     it('renders the RadioGroup components', () => {
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
 
     it('renders the RadioItem components', () => {
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
 
     // it('renders the TextField components', () => {
@@ -64,15 +72,15 @@ xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
     // });
 
     it('renders the TextareaInput components', () => {
-      expect(wrapper.find(TextareaInput).exists()).toBe(true);
+      expect(wrapper.find('TextareaInput-stub').exists()).toBe(true);
     });
 
     it('renders the CheckboxItem components', () => {
-      expect(wrapper.find(CheckboxItem).exists()).toBe(true);
+      expect(wrapper.find('CheckboxItem-stub').exists()).toBe(true);
     });
 
     it('renders the CheckboxGroup components', () => {
-      expect(wrapper.find(CheckboxGroup).exists()).toBe(true);
+      expect(wrapper.find('CheckboxGroup-stub').exists()).toBe(true);
     });
   });
 });

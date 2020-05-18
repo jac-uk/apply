@@ -1,7 +1,5 @@
 import CharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
 import { createTestSubject } from '../../../helpers';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
 
 // const application = {};
 
@@ -25,12 +23,12 @@ import RadioItem from '@/components/Form/RadioItem';
 //   });
 // };
 
-xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
+describe('@/views/Apply/AccountProfile/CharacterInformation', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(CharacterInformation, {
       propsData: {},
-      stubs: [],
+      stubs: ['RadioGroup','RadioItem'],
     });
   });
   
@@ -55,11 +53,11 @@ xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
     });
 
     it('renders the RadioGroup components', () => {
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
 
     it('renders the RadioItem components', () => {
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
   });
 

@@ -1,4 +1,7 @@
-// import { shallowMount, createLocalVue } from '@vue/test-utils';
+// Quite a different test base, couldnt manange to successfully integrate helpers
+// couldnt tell how to addd nessessary logic to either
+// this file or ../helpers.js
+
 import App from '@/App';
 // import Router from 'vue-router';
 // import Vuex from 'vuex';
@@ -26,20 +29,17 @@ const routes = [
 ];
 
 xdescribe('Page titles', () => {
-  let router;
-  let store;
-
+  let wrapper;
   beforeEach(() => {
     // const localVue = createLocalVue();
     // localVue.use(Router);
     // localVue.use(Vuex);
 
-    router = require('@/router').default;
-    store = require('@/store').default;
+    // router = require('@/router').default;
+    // store = require('@/store').default;
     window.scrollTo = () => {};
-    createTestSubject(App, {
-      router,
-      store,
+    wrapper = createTestSubject(App, {
+      stubs: ['RouterView'],
     });
   });
 
@@ -50,7 +50,7 @@ xdescribe('Page titles', () => {
 
   describe('sign in', () => {
     beforeEach(() => {
-      router.push({ name: 'sign-in' });
+      wrapper.vm.$router.push({ name: 'sign-in' });
     });
 
     it('contains Sign In', () => {

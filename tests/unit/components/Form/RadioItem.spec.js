@@ -114,7 +114,7 @@ describe('components/Form/RadioItem', () => {
     });
   });
 
-  xdescribe('component instance', () => {
+  describe('component instance', () => {
 
     it('throws an error if the parent component is not "RadioGroup"', () => {
       const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
