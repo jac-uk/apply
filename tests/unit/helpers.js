@@ -39,6 +39,7 @@ const mocks = {
       'vacancy/getCloseDate': new Date(),
       'vacancy/id': jest.fn(),
       'application/data': () => jest.fn(),
+      'vacancies/bind': () => jest.fn(), //see views/vacancies.spec.js
     },
   },
 };

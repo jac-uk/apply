@@ -1,4 +1,4 @@
-// *error-four* Quite a different test base, couldnt manange to successfully integrate helpers
+// *error-four* Quite a different test base, couldnt manage to successfully integrate helpers
 // couldnt tell how to add necessary logic to either 
 // this file or ../helpers.js
 
@@ -64,8 +64,8 @@ xdescribe('Page titles', () => {
 
   describe.each(routes)('%s', (routeName, routeTitle) => {
     beforeEach(() => {
-      store.dispatch('auth/setCurrentUser', user);
-      router.push({ name: routeName, params: { id: 123 } });
+      wrapper.vm.$store.dispatch('auth/setCurrentUser', user);
+      wrapper.vm.$router.push({ name: routeName, params: { id: 123 } });
     });
 
     it(`contains ${routeTitle}`, () => {
