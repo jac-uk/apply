@@ -24,7 +24,9 @@ const mocks = {
         },
       },
       candidate: {
-        record: {},
+        record: {
+          // personalDetails: null, see personaldetails.spec
+        },
       },
       application: {
         record: { progress: { started: true } },

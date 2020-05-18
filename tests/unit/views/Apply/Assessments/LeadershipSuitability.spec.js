@@ -1,4 +1,4 @@
-// this suite gives a warning due to an change event in the mount
+// *error-three* this suite gives a warning due to an change event in the mount
 
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import { createTestSubject } from '../../../helpers';
@@ -14,7 +14,7 @@ xdescribe('views/Assessments/LeadershipSuitability', () => {
   });
 
   describe('template', () => {
-    it.only('renders', () => {
+    it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 

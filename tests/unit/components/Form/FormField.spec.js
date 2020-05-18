@@ -6,7 +6,7 @@ describe('components/Form/FormField', () => {
 
   describe('props', () => {
     let prop;
-    describe.only('id', () => {
+    describe('id', () => {
       beforeEach(() => {
         prop = FormField.props.id;
       });

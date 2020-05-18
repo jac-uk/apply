@@ -1,7 +1,7 @@
-// this suite gives a warning due to an change event in the mount
+// *error-three* this suite gives a warning due to an change event in the mount
 
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
-import { createTestSubject } from '../../helpers';
+import { createTestSubject } from '../../../helpers';
 
 xdescribe('views/Confirmation', () => {
   let wrapper;

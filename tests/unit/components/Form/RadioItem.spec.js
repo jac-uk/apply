@@ -1,3 +1,6 @@
+// *error-five* component requires parent to be 
+// instance of radiogroup componenet,
+// how can we effectivly mock the parent
 import { createTestSubject } from '../../helpers';
 import RadioItem from '@/components/Form/RadioItem';
 
@@ -18,7 +21,7 @@ import RadioItem from '@/components/Form/RadioItem';
 //   return template;
 // };
 
-// const createTestSubject = (options) => {
+// const createTestwrapper = (options) => {
 //   if (!options) {
 //     options = {
 //       label: 'Example radio item',
@@ -132,44 +135,49 @@ describe('components/Form/RadioItem', () => {
       expect(consoleError).toHaveBeenCalled();
       consoleError.mockRestore();
     });
-    describe('data', () => {
-      let subject;
+    xdescribe('data', () => {
+      let wrapper;
       
       describe('hasConditionalContent', () => {
         it('is true when slot content was supplied', () => {
-          subject = createTestSubject({
-            label: 'Example radio item',
-            value: 'example-value',
-            content:  'Conditional content',
+          wrapper = createTestSubject(RadioItem, {
+            propsData: {
+              label: 'Example radio item',
+              value: 'example-value',
+              content:  'Conditional content',
+            },
+            stubs: [],
           });
-          expect(subject.vm.hasConditionalContent).toBe(true);
+          expect(wrapper.vm.hasConditionalContent).toBe(true);
         });
         
         it('is false when slot content was not supplied', () => {
-          subject = createTestSubject({
+          wrapper = createTestSubject({
             label: 'Example radio item',
             value: 'example-value',
           });
-          expect(subject.vm.hasConditionalContent).toBe(false);
+          expect(wrapper.vm.hasConditionalContent).toBe(false);
         });
       });
     });
     
-  describe('template', () => {
-    let subject;
+  xdescribe('template', () => {
+    let wrapper;
     beforeEach(() => {
-      subject = createTestSubject();
+      wrapper = createTestSubject(RadioItem, {
+
+      });
     });
     
     it('renders a `.govuk-radios__item` element', () => {
-      const item = subject.find('.govuk-radios__item');
+      const item = wrapper.find('.govuk-radios__item');
       expect(item.exists()).toBe(true);
     });
     
     describe('radio input', () => {
       let input;
       beforeEach(() => {
-        input = subject.find('input[type=radio]');
+        input = wrapper.find('input[type=radio]');
       });
 
       it('renders a radio input', () => {
@@ -184,7 +192,7 @@ describe('components/Form/RadioItem', () => {
     describe('label', () => {
       let label;
       beforeEach(() => {
-        label = subject.find('label');
+        label = wrapper.find('label');
       });
       
       it('renders a label', () => {
@@ -201,9 +209,9 @@ describe('components/Form/RadioItem', () => {
     });
 
     it('label `for` and input `id` attributes match', () => {
-      subject = createTestSubject();
-      const input = subject.find('input[type=radio]');
-      const label = subject.find('label');
+      wrapper = createTestSubject();
+      const input = wrapper.find('input[type=radio]');
+      const label = wrapper.find('label');
       expect(label.attributes('for')).toBe(input.attributes('id'));
     });
     
@@ -211,12 +219,12 @@ describe('components/Form/RadioItem', () => {
       let hint;
       describe('when the `hint` prop is set', () => {
         beforeEach(() => {
-          subject = createTestSubject({
+          wrapper = createTestSubject({
             label: 'My label',
             value: 'my-value',
             hint: 'Label hint text',
           });
-          hint = subject.find('.govuk-radios__hint');
+          hint = wrapper.find('.govuk-radios__hint');
         });
         
         it('renders a `.govuk-radios__hint` element', () => {
@@ -228,18 +236,18 @@ describe('components/Form/RadioItem', () => {
         });
         
         it('sets attribute `aria-describedby` on the input to reference the hint element', () => {
-          const input = subject.find('input[type=radio]');
+          const input = wrapper.find('input[type=radio]');
           expect(input.attributes('aria-describedby')).toBe(hint.attributes('id'));
         });
       });
       
       describe('when the `hint` prop is not set', () => {
         beforeEach(() => {
-          subject = createTestSubject({
+          wrapper = createTestSubject({
             label: 'My label',
             value: 'my-value',
           });
-          hint = subject.find('.govuk-radios__hint');
+          hint = wrapper.find('.govuk-radios__hint');
         });
         
         it('does not render', () => {
@@ -247,7 +255,7 @@ describe('components/Form/RadioItem', () => {
         });
         
         it('does not set attribute `aria-describedby` on the input', () => {
-          const input = subject.find('input[type=radio]');
+          const input = wrapper.find('input[type=radio]');
           expect(input.attributes()).not.toContainKey('aria-describedby');
         });
       });
@@ -257,21 +265,21 @@ describe('components/Form/RadioItem', () => {
       describe('when the radio value is selected', () => {
         describe('and conditional content was given', () => {
           it('renders conditional content', () => {
-            subject = createTestSubject({
+            wrapper = createTestSubject({
               value: 'selected-radio-value',
               content: 'Conditional content here',
             });
-            const conditional = subject.find('.govuk-radios__conditional');
+            const conditional = wrapper.find('.govuk-radios__conditional');
             expect(conditional.exists()).toBe(true);
           });
         });
         
         describe('and conditional content was not given', () => {
           it('does not render conditional content', () => {
-            subject = createTestSubject({
+            wrapper = createTestSubject({
               value: 'selected-radio-value',
             });
-            const conditional = subject.find('.govuk-radios__conditional');
+            const conditional = wrapper.find('.govuk-radios__conditional');
             expect(conditional.exists()).toBe(false);
           });
         });
@@ -279,11 +287,11 @@ describe('components/Form/RadioItem', () => {
       
       describe('when the radio value is not selected', () => {
         it('does not render conditional content', () => {
-          subject = createTestSubject({
+          wrapper = createTestSubject({
             value: 'not-selected-value',
             content: 'Conditional content here',
           });
-          const conditional = subject.find('.govuk-radios__conditional');
+          const conditional = wrapper.find('.govuk-radios__conditional');
           expect(conditional.exists()).toBe(false);
         });
       });

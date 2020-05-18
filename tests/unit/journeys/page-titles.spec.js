@@ -1,5 +1,5 @@
-// Quite a different test base, couldnt manange to successfully integrate helpers
-// couldnt tell how to addd nessessary logic to either
+// *error-four* Quite a different test base, couldnt manange to successfully integrate helpers
+// couldnt tell how to add necessary logic to either 
 // this file or ../helpers.js
 
 import App from '@/App';

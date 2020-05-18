@@ -97,12 +97,12 @@ describe('components/Form/CheckboxGroup', () => {
   describe('lifecycle hooks', () => {
     describe('created', () => {
       describe('if value is an array', () => {
-        it('does not call emit', ()=> {
+        xit('does not call emit', ()=> {
           expect(inputMock).toHaveBeenCalledWith('??');
         });
       });
       describe('if value is not an array', () => {
-        it('emits the initial empty array value', ()=> {
+        xit('emits the initial empty array value', ()=> {
           wrapper.setProps({ value: undefined });
           expect(inputMock).toHaveBeenCalledWith('??');
           // expect(wrapper.emitted()).toBe('??');
