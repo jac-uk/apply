@@ -1,4 +1,8 @@
-// @FIXME@ *error-four* logic needs to be added to helper
+// @FIXME@ *error-four* 
+// Quite a different test base, couldnt manage to successfully integrate helpers
+// couldnt tell how to add necessary logic to either 
+// this file or ../helpers.js
+
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
 import { createTestSubject } from '../../helpers';
 

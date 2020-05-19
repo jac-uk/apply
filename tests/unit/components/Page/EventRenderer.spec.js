@@ -3,6 +3,7 @@ import EventRenderer from '@/components/Page/EventRenderer';
 
 describe('components/Form/EventRenderer', () => {
     describe('props', () => {
+    describe('event', () => {
     let prop;
     beforeEach(() => {
         prop = EventRenderer.props.events;
@@ -16,8 +17,9 @@ describe('components/Form/EventRenderer', () => {
     it('defaults to empty array', () => {
         expect(prop.default).toEqual([]);
     });
-    });
-    describe('component instance', () => {
+});
+});
+describe('component instance', () => {
         let wrapper;
         beforeEach(() => {
             wrapper = createTestSubject(EventRenderer, {

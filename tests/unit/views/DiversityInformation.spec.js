@@ -12,4 +12,9 @@ describe('views/DiversityInformation', () => {
     it('renders the component', () => {
         expect(wrapper.exists()).toBe(true);
     });
+    describe('created hook', () => {
+        it('calls $store.dispatch(\'applications\'', () => {
+            expect(wrapper.vm.$store.dispatch).toHaveBeenCalled();
+        });
+    });
 }); 

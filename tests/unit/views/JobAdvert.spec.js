@@ -20,4 +20,10 @@ describe('views/JobAdvert', () => {
     });
   });
 
+  describe('computed', () => {
+    it('timeline returns an array', () => {
+      expect(wrapper.vm.timeline).toBeArray();
+    });
+  });
+
 });
