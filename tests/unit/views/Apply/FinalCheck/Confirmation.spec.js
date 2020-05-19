@@ -1,4 +1,4 @@
-// *error-three* this suite gives a warning due to an change event in the mount
+// @FIXME@ *error-three* this suite gives a warning due to an change event in the mount
 
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 import { createTestSubject } from '../../../helpers';

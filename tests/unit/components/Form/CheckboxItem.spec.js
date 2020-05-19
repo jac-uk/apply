@@ -1,6 +1,6 @@
-// *error-five* component requires parent to be 
-// instance of checkboxgroup componenet,
-// how can we effectivly mock the parent
+// @FIXME@ *error-five* component requires parent to be 
+// instance of checkboxgroup component,
+// how can we effectively mock the parent
 
 import { createTestSubject } from '../../helpers';
 import CheckboxItem from '@/components/Form/CheckboxItem';

@@ -1,4 +1,4 @@
-// *error-four* logic needs to be added to helper
+// @FIXME@ *error-four* logic needs to be added to helper
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
 import { createTestSubject } from '../../helpers';
 

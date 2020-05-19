@@ -2,9 +2,10 @@
 // is a hard coded file for the function to run from
 // this could be changed so the function can take an arg
 // or we could mock the data as we have tried below
-//*error-six unique component*
 
-// import getStaticVacancies from '@/helpers/getStaticVacancies';
+//@FIXME@ *error-six*
+
+// import '@/helpers/getStaticVacancies';
 
 xdescribe('/helpers/getStaticVacancies', () => {
     jest.mock('@/assets/vacancies.json', ()=> {
