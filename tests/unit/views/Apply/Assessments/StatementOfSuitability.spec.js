@@ -1,26 +1,23 @@
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
-import { shallowMount } from '@vue/test-utils';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-
-const createTestSubject = () => {
-  return shallowMount(StatementOfSuitability);
-};
+import { createTestSubject } from '../../../helpers';
 
 xdescribe('views/Assessments/StatementOfSuitability', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(StatementOfSuitability, {
+      mocks: {},
+      stubs: [],
+      propsData: {},
+    });
   });
-
-  xdescribe('template', () => {
-    it('renders', () => {
-      expect(wrapper.exists()).toBe(true);
-    });
-
-    it('contains a <h1>', () => {
-      expect(wrapper.contains('h1')).toBe(true);
-    });
+      it('renders', () => {
+        expect(wrapper.exists()).toBe(true);
+      });
+      
+      describe('template', () => {
+        it('contains a <h1>', () => {
+          expect(wrapper.contains('h1')).toBe(true);
+        });
 
     it('contains a <form>', () => {
       expect(wrapper.find('form').exists()).toBe(true);
@@ -33,11 +30,11 @@ xdescribe('views/Assessments/StatementOfSuitability', () => {
     });
 
     it('renders the RadioGroup component', () => {
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
 
     it('renders the RadioItem component', () => {
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
 
     it('contains a govuk file upload', () => {

@@ -5,13 +5,13 @@
         v-for="navItem in items"
         :key="navItem.name"
       >
-        <router-link 
+        <RouterLink 
           class="nav-link"
           :to="{name: navItem.name}"
           :aria-current="isActive(navItem.name) ? 'page' : false"
         >
           {{ navItem.page }} 
-        </router-link>
+        </RouterLink>
       </li>
     </ul>
   </nav>

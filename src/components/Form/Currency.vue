@@ -54,10 +54,10 @@ export default {
         this.$emit('input', val);
       },
     },
-
   },
 };
 </script>
+
 <style scoped>
   .moj-label__currency {
     line-height: 1.25;

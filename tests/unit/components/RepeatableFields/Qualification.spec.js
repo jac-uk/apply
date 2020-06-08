@@ -1,26 +1,15 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import Qualification from '@/components/RepeatableFields/Qualification';
-import DateInput from '@/components/Form/DateInput';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
 
-const createTestSubject = (props) => {
-  return shallowMount(Qualification, {
-    propsData: {
-      ...props,
-    },
-  });
-};
-
-xdescribe('@/components/RepeatableFields/Qualification', () => {
-  xdescribe('name', () => {
+describe('@/components/RepeatableFields/Qualification', () => {
+  describe('name', () => {
     it('component name is "Qualification"', () => {
       expect(Qualification.name).toBe('Qualification');
     });
   });
 
-  xdescribe('props', () => {
-    xdescribe('row', () => {
+  describe('props', () => {
+    describe('row', () => {
       it('is required', () => {
         let prop = Qualification.props.row;
         expect(prop.required).toBe(true);
@@ -28,11 +17,11 @@ xdescribe('@/components/RepeatableFields/Qualification', () => {
 
       it('has type object', () => {
         let prop = Qualification.props.row;
-        expect(prop.type).toBe(Object);
+        expect(prop.type()).toBeObject();
       });
     });
 
-    xdescribe('index', () => {
+    describe('index', () => {
       it('is required', () => {
         let prop = Qualification.props.index;
         expect(prop.required).toBe(true);
@@ -40,48 +29,65 @@ xdescribe('@/components/RepeatableFields/Qualification', () => {
 
       it('has type number', () => {
         let prop = Qualification.props.index;
-        expect(prop.type).toBe(Number);
+        expect(prop.type()).toBeNumber();
       });
     });
   });
 
-  xdescribe('computed properties', () => {
-    xdescribe('qualificationType', () => {
+describe('component methods', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = createTestSubject(Qualification, {
+      mocks: {},
+      stubs: [],
+      propsData: {
+        row: {},
+        index: 0,
+      },
+    });
+  });
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
+  describe('computed properties', () => {
+    describe('qualificationType', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 4, row: {} });
+        wrapper.setProps({ index: 4 });
         expect(wrapper.vm.qualificationType).toBe('qualification_type_4');
       });
     });
-
-    xdescribe('qualificationLocation', () => {
+    
+    describe('qualificationLocation', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5 });
         expect(wrapper.vm.qualificationLocation).toBe('qualification_location_5');
       });
     });
-
-    xdescribe('qualificationDate', () => {
+    
+    describe('qualificationDate', () => {
       it('returns the value that is created using index', () => {
-        let wrapper = createTestSubject({ index: 5, row: {} });
+        wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.qualificationDate).toBe('qualification_date_5');
       });
     });
   });
-
-  xdescribe('template', () => {
+  
+  describe('template', () => {
+    beforeEach(() => {
+      wrapper.setProps({ index: 1, row: {} });
+    });
     it('renders DateInput', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(DateInput).exists()).toBe(true);
+      expect(wrapper.find('DateInput-stub').exists()).toBe(true);
     });
-
+    
     it('renders RadioGroup', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
-
+    
     it('renders RadioItem', () => {
-      let wrapper = createTestSubject({ index: 1, row: {} });
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
   });
 });
+});
+

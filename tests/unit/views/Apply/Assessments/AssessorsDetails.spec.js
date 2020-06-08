@@ -1,36 +1,17 @@
 import AssessorDetails from '@/views/Apply/Assessments/AssessorsDetails';
-import { shallowMount } from '@vue/test-utils';
-import TextField from '@/components/Form/TextField';
+import { createTestSubject } from '../../../helpers';
 
-const application = {};
-
-const mockStore = {
-  dispatch: jest.fn(),
-  state: {
-    application: {
-      record: {},
-    },
-  },
-  getters: {
-    'application/data': () => application,
-  },
-};
-
-const createTestSubject = () => {
-  return shallowMount(AssessorDetails, {
-    mocks: {
-      $store: mockStore,
-    },
-  });
-};
-
-xdescribe('views/Assessments/AssessorDetails', () => {
+describe('views/Assessments/AssessorDetails', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(AssessorDetails, {
+      mocks: {},
+      stubs: [],
+      propsData: {},
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -50,7 +31,7 @@ xdescribe('views/Assessments/AssessorDetails', () => {
     });
 
     it('renders the TextField component', () => {
-      expect(wrapper.find(TextField).exists()).toBe(true);
+      expect(wrapper.find('TextField-stub').exists()).toBe(true);
     });
   });
 });

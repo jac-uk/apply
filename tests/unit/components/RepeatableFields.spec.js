@@ -1,27 +1,33 @@
-import { mount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
-// import TextField to test with a component
 import TextField from '@/components/Form/TextField';
 
-const createTestSubject = (props) => {
-  return mount(RepeatableFields, {
-    propsData: {
-      value: null,
-      component: TextField,
-      ...props,
-    },
-  });
-};
-
 xdescribe('components/RepeatableFields', () => {
+
+  let wrapper;
+  beforeEach(() => {
+    wrapper = createTestSubject(RepeatableFields, {
+      mocks: {},
+      stubs: [],
+      propsData: {
+        value: null,
+        component: TextField,
+      },
+    });
+  });
+
+  it('renders successfully', () => {
+    expect(wrapper.exists()).toBeTrue();
+  });
+
   it('component name is "RepeatableFields"', () => {
     expect(RepeatableFields.name).toBe('RepeatableFields');
   });
 
-  xdescribe('properties', () => {
+  describe('props', () => {
     let prop;
 
-    xdescribe('component', () => {
+    describe('component', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.component;
       });
@@ -31,11 +37,11 @@ xdescribe('components/RepeatableFields', () => {
       });
 
       it('has type Object', () => {
-        expect(prop.type).toBe(Object);
+        expect(prop.type()).toBeObject();
       });
     });
 
-    xdescribe('max', () => {
+    describe('max', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.max;
       });
@@ -49,16 +55,12 @@ xdescribe('components/RepeatableFields', () => {
       });
 
       it('must be a Number or Boolean', () => {
-        expect(prop.type).toContain(Number);
-        expect(prop.type).toContain(Boolean);
-        expect(prop.type).not.toContain(String);
-        expect(prop.type).not.toContain(Object);
-        expect(prop.type).not.toContain(Array);
-        expect(prop.type).not.toContain(Function);
+        expect(prop.type).toEqual([Number, Boolean]);
+        expect(prop.type).toEqual(expect.not.arrayContaining([String, Object, Array, Function]));
       });
     });
 
-    xdescribe('value', () => {
+    describe('value', () => {
       beforeEach(() => {
         prop = RepeatableFields.props.value;
       });
@@ -93,6 +95,7 @@ xdescribe('components/RepeatableFields', () => {
         expect(valid).not.toBe(true);
       });
     });
+
   });
 
   xdescribe('template', () => {
@@ -101,7 +104,7 @@ xdescribe('components/RepeatableFields', () => {
       wrapper = createTestSubject();
     });
 
-    it('renders child component', () => {
+    xit('renders child component', () => {
       expect(wrapper.find(TextField).exists()).toBe(true);
     });
 
@@ -202,4 +205,5 @@ xdescribe('components/RepeatableFields', () => {
       });
     });
   });
+
 });

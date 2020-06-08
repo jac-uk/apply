@@ -40,14 +40,14 @@
             >
               Personal details
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'apply-personal-details'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
 
           <dl class="govuk-summary-list">
@@ -134,14 +134,14 @@
             >
               Character information
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'apply-character-information'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
 
           <dl class="govuk-summary-list">
@@ -282,14 +282,14 @@
             >
               Equality and diversity information
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'equality-and-diversity-survey'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
 
           <dl class="govuk-summary-list">
@@ -575,14 +575,14 @@
             >
               Location preferences
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'location-preferences'}"
             >
               Change
-            </router-link>
+            </RouterLink>
             <dl class="govuk-summary-list">
               <dt class="govuk-summary-list__key">
                 {{ vacancy.locationQuestion }}
@@ -618,14 +618,14 @@
             >
               Jurisdiction preferences
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'jurisdiction-preferences'}"
             >
               Change
-            </router-link>
+            </RouterLink>
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -661,14 +661,14 @@
               >
                 Welsh posts
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'welsh-posts'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
@@ -729,14 +729,14 @@
               >
                 Qualifications
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-qualifications'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
 
             <dl
@@ -791,14 +791,14 @@
               >
                 Memberships
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-memberships'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
 
             <dl
@@ -879,6 +879,12 @@
                     >
                       {{ application.generalMedicalCouncilConditionalStartDate | formatDate }}
                       to {{ application.generalMedicalCouncilConditionalEndDate | formatDate }}
+                    </li>
+                    <li
+                      v-if="application.generalMedicalCouncilConditionalStartDate
+                        && !application.generalMedicalCouncilConditionalEndDate"
+                    >
+                      {{ application.generalMedicalCouncilConditionalStartDate | formatDate }} — current
                     </li>
                     <li>
                       {{ application.generalMedicalCouncilConditionalDetails }}
@@ -980,14 +986,14 @@
               >
                 Experience
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-experience'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
 
             <dl
@@ -1022,9 +1028,15 @@
                   Date qualified
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li v-if="item.startDate && item.endDate">
+                  <ul
+                    v-if="item.startDate"
+                    class="govuk-list"
+                  >
+                    <li v-if="item.endDate">
                       {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                    <li v-else>
+                      {{ item.startDate | formatDate }} — current
                     </li>
                   </ul>
                 </dd>
@@ -1042,14 +1054,14 @@
               >
                 Post-qualification experience
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'post-qualification-work-experience'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
 
             <dl
@@ -1084,9 +1096,15 @@
                   Dates worked
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li v-if="item.startDate && item.endDate">
+                  <ul
+                    v-if="item.startDate"
+                    class="govuk-list"
+                  >
+                    <li v-if="item.endDate">
                       {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                    <li v-else>
+                      {{ item.startDate | formatDate }} — current
                     </li>
                   </ul>
                 </dd>
@@ -1125,14 +1143,14 @@
               >
                 Judicial experience
               </h2>
-              <router-link
+              <RouterLink
                 v-if="isDraftApplication"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'judicial-experience'}"
               >
                 Change
-              </router-link>
+              </RouterLink>
             </div>
 
             <dl
@@ -1226,14 +1244,14 @@
             >
               Gaps in employment
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'employment-gaps'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
 
           <dl
@@ -1246,9 +1264,15 @@
                 Date of gap
               </dt>
               <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li v-if="item.startDate && item.endDate">
+                <ul
+                  v-if="item.startDate"
+                  class="govuk-list"
+                >
+                  <li v-if="item.endDate">
                     {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                  </li>
+                  <li v-else>
+                    {{ item.startDate | formatDate }} — current
                   </li>
                 </ul>
               </dd>
@@ -1299,14 +1323,14 @@
             >
               Reasonable length of service
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'reasonable-length-of-service'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
           <dl class="govuk-summary-list govuk-!-margin-bottom-8">
             <div class="govuk-summary-list__row">
@@ -1329,14 +1353,14 @@
             >
               Independent assessors
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'assessors-details'}"
             >
               Change
-            </router-link>
+            </RouterLink>
           </div>
 
           <dl class="govuk-summary-list">
@@ -1409,14 +1433,14 @@
               Statement of suitability
             </h2>
 
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'statement-of-eligibility'}"
             >
               Change
-            </router-link>
+            </RouterLink>
 
             <dl class="govuk-summary-list">
               <div
@@ -1459,14 +1483,14 @@
             >
               Statement of eligibility
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'statement-of-eligibility'}"
             >
               Change
-            </router-link>
+            </RouterLink>
 
             <dl class="govuk-summary-list">
               <div
@@ -1498,14 +1522,14 @@
             >
               Self assessment competencies
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'self-assessment-competencies'}"
             >
               Change
-            </router-link>
+            </RouterLink>
 
             <dl class="govuk-summary-list">
               <div
@@ -1533,14 +1557,14 @@
             >
               Curriculum vitae (CV)
             </h2>
-            <router-link
+            <RouterLink
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'cv'}"
             >
               Change
-            </router-link>
+            </RouterLink>
 
             <dl class="govuk-summary-list">
               <div

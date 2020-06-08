@@ -1,38 +1,17 @@
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience';
-import { shallowMount } from '@vue/test-utils';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-// import TextareaInput from '@/components/Form/TextareaInput';
+import { createTestSubject } from '../../../helpers';
 
-const application = {};
-
-const mockStore = {
-  dispatch: jest.fn(),
-  state: {
-    application: {
-      record: {},
-    },
-  },
-  getters: {
-    'application/data': () => application,
-  },
-};
-
-const createTestSubject = () => {
-  return shallowMount(JudicialExperience, {
-    mocks: {
-      $store: mockStore,
-    },
-  });
-};
-
-xdescribe('views/QualificationsAndExperience/JudicialExperience', () => {
+describe('views/QualificationsAndExperience/JudicialExperience', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(JudicialExperience, {
+      mocks: {},
+      stubs: [],
+      propsData: {},
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -52,16 +31,12 @@ xdescribe('views/QualificationsAndExperience/JudicialExperience', () => {
     });
 
     it('renders the RadioGroup components', () => {
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
 
     it('renders the RadioItem components', () => {
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
 
-    // it('renders the TextareaInput components', () => {
-    //   wrapper.setData({ hasBeenJudge: true, thirtyDaysSitting: false });
-    //   expect(wrapper.find(TextareaInput).exists()).toBe(true);
-    // });
   });
 });

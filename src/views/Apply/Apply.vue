@@ -1,7 +1,7 @@
 <template>
   <div>
     <LoadingMessage
-      v-if="loaded === false"
+      v-if="!loaded"
       :load-failed="loadFailed"
     />
     <RouterView v-else />

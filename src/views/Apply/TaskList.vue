@@ -8,19 +8,16 @@
       >
         Applications
       </RouterLink>
-
       <Countdown
         :close-time="vacancyCloseTime"
         :countdown-length="60"
       />
-
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
       <h1 class="govuk-heading-xl">
         Apply for the role
       </h1>
-
       <ol class="govuk-list">
         <li
           v-for="(taskGroup, index) in taskGroups"
@@ -41,12 +38,12 @@
                   :aria-describedby="`${task.id}-completed`"
                   class="govuk-grid-column-three-quarters"
                 >
-                  <router-link
+                  <RouterLink
                     class="govuk-link govuk-!-font-weight-bold"
                     :to="{name: task.id}"
                   >
                     {{ task.title }}
-                  </router-link>
+                  </RouterLink>
                 </div>
                 <div class="govuk-grid-column-one-quarter">
                   <strong
@@ -72,7 +69,7 @@
       >
         Review application
       </button>
-    </div>
+    </div> 
   </div>
 </template>
 
