@@ -61,7 +61,7 @@ import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/Pe
 import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
 import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
-import CharacterChecksCheckAnswers from '@/views/Apply/CharacterChecks/CheckAnswers';
+import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
@@ -441,12 +441,12 @@ const router = new Router({
               },
             },
             {
-              path: 'check-answers',
-              component: CharacterChecksCheckAnswers,
-              name: 'character-checks-check-answers',
+              path: 'review',
+              component: CharacterChecksReview,
+              name: 'character-checks-review',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Check answers',
+                title: 'Consent to character checks | Review',
               },
             },
             {

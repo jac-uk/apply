@@ -2,7 +2,7 @@
   <div>
     <RouterLink
       class="govuk-back-link"
-      :to="{ name: 'character-checks-check-answers' }"
+      :to="{ name: 'character-checks-review' }"
     >
       Back
     </RouterLink>
