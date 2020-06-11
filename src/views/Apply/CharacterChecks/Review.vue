@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="govuk-row">
     <RouterLink
       class="govuk-back-link"
       :to="{ name: 'character-checks-review' }"
@@ -7,31 +7,59 @@
       Back
     </RouterLink>
 
-    <div class="govuk-!-margin-top-8">
-      <h1 class="govuk-heading-xl">
-        Check your answers
-      </h1>
+    <h1 class="govuk-heading-xl">
+      Check your answers
+    </h1>
+
+    <div
+      v-for="(section, title) in answers"
+      :key="title"
+
+      class="govuk-summary-list govuk-!-margin-bottom-9 clearfix"
+    >
+      <h2 class="govuk-heading-l">
+        {{ title }}
+      </h2>
+      <dl
+        v-for="(answer, index) in section"
+        :key="index"
+      >
+        {{ index }}
+				
+        {{ answer }}
+      </dl>
     </div>
-    <RadioGroup>
-      <RadioItem />
-    </RadioGroup>
-    <DateInput />
-    <TextField />
+
+    <button
+      class="govuk-button"
+      data-module="govuk-button"
+    >
+      Continue
+    </button>
   </div>
 </template>
 <script>
-import { RadioItem } from '@/components/Form/RadioItem';
-import { RadioGroup } from '@/components/Form/RadioGroup';
-import { DateInput } from '@/components/Form/DateInput';
-import { TextField } from '@/components/Form/TextField';
 
 export default {
-  components: {
-    RadioItem,
-    RadioGroup,
-    DateInput,
-    TextField,
+  data() {
+    return {
+      answers: {
+        'Personal information': {
+          'Full Name':	'Max Talbot',
+          'Gender':	'Male',
+          'Date of birth':	new Date('11 June 1975'),
+          'Place of birth': 'New York, USA',
+          'Citizenship': 'American',
+          'National insurance number': 'QQ 12 34 45 C',
+        },
+        'Professional details': {
+          title: 'two',
+        },
+        'HMRC': {
+          title: 'three',
+        },
+      },
+    };
   },
 };
-    
 </script>
