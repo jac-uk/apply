@@ -57,6 +57,13 @@ import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
+import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
+import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
+import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
+import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
+import CharacterChecksCheckAnswers from '@/views/Apply/CharacterChecks/CheckAnswers';
+import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
+import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
 Vue.use(Router);
 
@@ -395,6 +402,69 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Consent to character checks',
+              },
+            },
+            {
+              path: 'personal-information',
+              component: CharacterChecksPersonalInformation,
+              name: 'character-checks-personal-information',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Personal information',
+              },
+            },
+            {
+              path: 'professional-details',
+              component: CharacterChecksProfessionalDetails,
+              name: 'character-checks-professional-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Professional details',
+              },
+            },
+            {
+              path: 'HMRC',
+              component: CharacterChecksHMRC,
+              name: 'character-checks-HMRC',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | HMRC',
+              },
+            },
+            {
+              path: 'more-details',
+              component: CharacterChecksMoreDetails,
+              name: 'character-checks-more-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | More details',
+              },
+            },
+            {
+              path: 'check-answers',
+              component: CharacterChecksCheckAnswers,
+              name: 'character-checks-check-answers',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Check answers',
+              },
+            },
+            {
+              path: 'declaration',
+              component: CharacterChecksDeclaration,
+              name: 'character-checks-declaration',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Declaration',
+              },
+            },
+            {
+              path: 'form-submitted',
+              component: CharacterChecksFormSubmitted,
+              name: 'character-checks-form-submitted',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Form Submitted',
               },
             },
           ],
