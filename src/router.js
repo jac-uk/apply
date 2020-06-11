@@ -55,6 +55,9 @@ import CV from '@/views/Apply/Assessments/CV';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
+import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
+import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -380,6 +383,21 @@ const router = new Router({
             requiresAuth: true,
             title: 'Confirmation',
           },
+        },
+        {
+          path: 'character-checks',
+          component: CharacterChecks,
+          children: [
+            {
+              path: '',
+              component: CharacterChecksIntro,
+              name: 'character-checks-intro',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks',
+              },
+            },
+          ],
         },
       ],
     },
