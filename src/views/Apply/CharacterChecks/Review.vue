@@ -1,32 +1,38 @@
 <template>
   <div class="govuk-row">
-    <RouterLink
-      class="govuk-back-link"
-      :to="{ name: 'character-checks-review' }"
-    >
-      Back
-    </RouterLink>
-
     <h1 class="govuk-heading-xl">
       Check your answers
     </h1>
-
-    <div
+    <div 
       v-for="(section, title) in answers"
       :key="title"
-
-      class="govuk-summary-list govuk-!-margin-bottom-9 clearfix"
+      class="govuk-row"
     >
       <h2 class="govuk-heading-l">
         {{ title }}
       </h2>
+
       <dl
-        v-for="(answer, index) in section"
-        :key="index"
+        class="govuk-summary-list"
       >
-        {{ index }}
-				
-        {{ answer }}
+        <tr
+          v-for="(answer, index) in section"
+          :key="index"
+        >
+          <dt class="govuk-summary-list__key govuk-!-width-one-third">
+            {{ index }}
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ answer }}
+          </dd>
+          <dd class="govuk-summary-list__actions">
+            <RouterLink 
+              :to="{ name: '' }"
+            >
+              Change
+            </RouterLink>
+          </dd>
+        </tr>
       </dl>
     </div>
 
@@ -47,7 +53,7 @@ export default {
         'Personal information': {
           'Full Name':	'Max Talbot',
           'Gender':	'Male',
-          'Date of birth':	new Date('11 June 1975'),
+          'Date of birth':	'11 June 1975',
           'Place of birth': 'New York, USA',
           'Citizenship': 'American',
           'National insurance number': 'QQ 12 34 45 C',
