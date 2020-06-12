@@ -17,7 +17,7 @@
       />
     </div>
     <RadioGroup
-      :id="`meet_requirements_${index}`"
+      id="has-Vat-Reg-Num"
       v-model="hasVATNum"
       label="Do you have a VAT registration number?"
       hint="All partnership, company and sole trader VAT registered number(s) that you have a personal responsibility for, whether they relate to the practice of law or not, will be required."
@@ -63,14 +63,12 @@
 import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextField from '@/components/Form/TextField';
-// import TextField from '@/components/Form/TextField';
 
 export default {
   components: {
     RadioItem,
     RadioGroup,
     TextField,
-    // TextField,
   },
   data(){
     return {
