@@ -146,26 +146,6 @@
               />
             </li>
             <li
-              v-for="file in vacancy.downloads.independentAssessors"
-              :key="file.file"
-            >
-              <DownloadLink
-                :file-name="file.file"
-                :exercise-id="vacancy.id"
-                :title="file.title"
-              />
-            </li>
-            <li
-              v-for="file in vacancy.downloads.candidateAssessementForms"
-              :key="file.file"
-            >
-              <DownloadLink
-                :file-name="file.file"
-                :exercise-id="vacancy.id"
-                :title="file.title"
-              />
-            </li>
-            <li
               v-for="file in vacancy.downloads.pensionsInformation"
               :key="file.file"
             >
