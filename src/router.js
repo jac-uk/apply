@@ -55,6 +55,16 @@ import CV from '@/views/Apply/Assessments/CV';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
+import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
+import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
+import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
+import CharacterChecksProfessionalBodies from '@/views/Apply/CharacterChecks/ProfessionalBodies';
+import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
+import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
+import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
+import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
+import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -380,6 +390,84 @@ const router = new Router({
             requiresAuth: true,
             title: 'Confirmation',
           },
+        },
+        {
+          path: 'character-checks',
+          component: CharacterChecks,
+          children: [
+            {
+              path: '',
+              component: CharacterChecksIntro,
+              name: 'character-checks-intro',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks',
+              },
+            },
+            {
+              path: 'personal-information',
+              component: CharacterChecksPersonalInformation,
+              name: 'character-checks-personal-information',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Personal information',
+              },
+            },
+            {
+              path: 'professional-bodies',
+              component: CharacterChecksProfessionalBodies,
+              name: 'character-checks-professional-bodies',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Professional bodies',
+              },
+            },
+            {
+              path: 'HMRC',
+              component: CharacterChecksHMRC,
+              name: 'character-checks-HMRC',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | HMRC',
+              },
+            },
+            {
+              path: 'more-details',
+              component: CharacterChecksMoreDetails,
+              name: 'character-checks-more-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | More details',
+              },
+            },
+            {
+              path: 'review',
+              component: CharacterChecksReview,
+              name: 'character-checks-review',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Review',
+              },
+            },
+            {
+              path: 'declaration',
+              component: CharacterChecksDeclaration,
+              name: 'character-checks-declaration',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Declaration',
+              },
+            },
+            {
+              path: 'form-submitted',
+              component: CharacterChecksFormSubmitted,
+              name: 'character-checks-form-submitted',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Form Submitted',
+              },
+            },
+          ],
         },
       ],
     },
