@@ -58,7 +58,7 @@ import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
-import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
+import CharacterChecksProfessionalBodies from '@/views/Apply/CharacterChecks/ProfessionalBodies';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
 import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
@@ -414,12 +414,12 @@ const router = new Router({
               },
             },
             {
-              path: 'professional-details',
-              component: CharacterChecksProfessionalDetails,
-              name: 'character-checks-professional-details',
+              path: 'professional-bodies',
+              component: CharacterChecksProfessionalBodies,
+              name: 'character-checks-professional-bodies',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Professional details',
+                title: 'Consent to character checks | Professional bodies',
               },
             },
             {

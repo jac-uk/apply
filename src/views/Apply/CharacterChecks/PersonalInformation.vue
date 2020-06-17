@@ -1,162 +1,214 @@
 <template>
-  <div>
-    <RouterLink
-      class="govuk-back-link"
-      :to="{ name: 'character-checks-intro' }"
-    >
-      Back
-    </RouterLink>
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--xl">
-      <h1 class="govuk-fieldset__heading govuk-!-margin-bottom-4">
-        Personal information (TBC)
-      </h1>
-    </legend>
+  <form @submit.prevent="save">
+    <div class="govuk-grid-column-two-thirds">
+      <BackLink />
 
-    <RadioGroup
-      id="has-been-magistrate"
-      v-model="title"
-      label="Title"
-      hint=""
-    >
-      <RadioItem
-        value="Mr"
-        label="Mr"
-      />
-      <RadioItem
-        value="Mrs"
-        label="Mrs"
-      />
-      <RadioItem
-        value="Miss"
-        label="Miss"
-      />
-      <RadioItem
-        value="Ms"
-        label="Ms"
-      />
-      <RadioItem
-        value="Other"
-        label="Other"
+      <h1 class="govuk-heading-xl">
+        Personal information
+      </h1>
+
+      <ErrorSummary :errors="errors" />
+
+      <RadioGroup
+        id="title"
+        v-model="personalDetails.title"
+        required
+        label="Title"
       >
-        <TextField
-          label="Title"
-          hint=""
+        <RadioItem
+          value="Mr"
+          label="Mr"
         />
-      </RadioItem>
-    </RadioGroup>
-    <TextField
-      label="Full name"
-      hint=""
-    />
-    <TextField
-      label="Other names (optional)"
-      hint=""
-    />
-    <TextField
-      label="Suffix (optional)"
-      hint=""
-    />
-    <RadioGroup
-      id="gender"
-      v-model="gender"
-      label="Gender"
-      hint=""
-    >
-      <RadioItem 
-        label="Female"
-        value="female"
-      />
-      <RadioItem 
-        label="Male"
-        value="male"
-      />
-      <RadioItem 
-        label="Gender neutral"
-        value="gender-neutral"
-      />
-      <RadioItem 
-        label="Other"
-        value="other"
-      >
-        <TextField 
-          label="Gender"
+        <RadioItem
+          value="Ms"
+          label="Ms"
         />
-      </RadioItem>
-      or
-      <RadioItem 
-        label="Prefer not to say"
-        value="preferNotToSay"
+        <RadioItem
+          value="Mrs"
+          label="Mrs"
+        />
+        <RadioItem
+          value="Miss"
+          label="Miss"
+        />
+        <RadioItem
+          value="Other"
+          label="Other"
+        >
+          <TextField
+            id="otherTitleDetails"
+            v-model="personalDetails.otherTitleDetails"
+            label="Title"
+            hint=""
+          />
+        </RadioItem>
+      </RadioGroup>
+
+      <TextField
+        id="fullName"
+        v-model="personalDetails.fullName"
+        label="Full name"
+        hint="You do not need to include any titles."
+        required
       />
-    </RadioGroup>
-    <DateInput 
-      label="Date of Birth"
-      hint="for example, 27 3 1964"
-    />
-    <TextField 
-      label="Place of Birth"
-    />
-    <TextField 
-      label="Citizenship"
-      hint="A Criminal Records Office ACRO checks are required for UK nationals and other citizenships."
-    />
-    <label
-      class="govuk-label govuk-label--m"
-      for="cf-address"
-    >Home address</label>
-    <TextField 
-      hint="Address line 1"
-    />
-    <TextField 
-      hint="Address line 2 (optional)"
-    />
-    <TextField 
-      hint="Town or city"
-    />
-    <TextField 
-      hint="County"
-    />
-    <TextField 
-      hint="Postcode"
-    />
-    <RadioGroup
-      label="Have you lived at this address for more than 5 years?"
-      hint="If you've lived anywhere else in the UK within the past 5 years you need to answer no and enter details."
-    >
-      <RadioItem 
-        label="Yes"
-        :value="true"
+
+      <TextField
+        id="otherNames"
+        v-model="personalDetails.otherNames"
+        label="Other names (optional)"
       />
-      <RadioItem 
-        label="No"
-        :value="false"
+
+      <TextField
+        id="suffix"
+        v-model="personalDetails.suffix"
+        label="Suffix (optional)"
+      />
+
+      <DateInput
+        id="dateOfBirth"
+        v-model="personalDetails.dateOfBirth"
+        required
+        label="Date of birth"
+        hint="For example, 27 3 1964"
+      />
+
+      <TextField
+        id="placeOfBirth"
+        v-model="personalDetails.placeOfBirth"
+        required
+        label="Place of Birth"
+        hint="Town or city and country."
+      />
+
+      <RadioGroup
+        id="citizenship"
+        v-model="personalDetails.citizenship"
+        required
+        label="Citizenship"
+        hint="Select one. If you have dual citizenship, please select the option most appropriate to you."
       >
-      <!-- @NOTE address input must be inserted here see prototype page ('https://jac-apply-prototype.herokuapp.com/current/submit-consent-form/personal-information) -->
-        <!-- @todo Address Input repeatable component? -->
-      </RadioItem>
-    </RadioGroup>
-    <TextField 
-      label="National insurance number"
-      hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
-    />
-  </div>
+        <RadioItem
+          value="uk"
+          label="UK"
+        />
+        <RadioItem
+          value="republic-of-ireland"
+          label="Republic of Ireland"
+        />
+        <RadioItem
+          value="another-commonwealth-country"
+          label="Another Commonwealth country"
+        />
+        <RadioItem
+          value="other"
+          label="Other"
+        />
+      </RadioGroup>
+
+      <Address
+        id="currentAddress"
+        v-model="personalDetails.address.current"
+        required
+        label="Address"
+      />
+
+      <RadioGroup
+        id="currentAddressMoreThan5Years"
+        v-model="personalDetails.address.currentMoreThan5Years"
+        required
+        label="Have you lived at this address for more than 5 years?"
+        hint="If you've lived anywhere else in the UK within the past 5 years you need to answer no and enter details."
+      >
+        <RadioItem
+          label="Yes"
+          :value="true"
+        />
+        <RadioItem
+          label="No"
+          :value="false"
+        >
+          <RepeatableFields
+            v-model="personalDetails.address.previous"
+            required
+            :component="repeatableFields.Addresses"
+          />
+        </RadioItem>
+      </RadioGroup>
+
+      <TextField
+        id="national-insurance-number"
+        v-model="personalDetails.nationalInsuranceNumber"
+        label="National Insurance number"
+        hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
+        class="govuk-!-width-one-half"
+        required
+      />
+
+      <button class="govuk-button">
+        Save and continue
+      </button>
+    </div>
+  </form>
 </template>
+
 <script>
+import BackLink from '@/components/BackLink';
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import RepeatableFields from '@/components/RepeatableFields';
+import Addresses from '@/components/RepeatableFields/Addresses';
+import Address from '@/components/Form/Address';
 
 export default {
   components: {
+    BackLink,
+    ErrorSummary,
     RadioItem,
     RadioGroup,
     TextField,
     DateInput,
+    Address,
+    RepeatableFields,
   },
-  data(){
-    return {
-      hasBeenMagistrate: '',
+  extends: Form,
+  data() {
+    const defaults = {
+      title: null,
+      otherTitleDetails: null,
+      otherNames: null,
+      suffix: null,
+      placeOfBirth: null,
+      address: {
+        current: {},
+        previous: [],
+        currentMoreThan5Years: null,
+      },
     };
+    const data = this.$store.getters['candidate/personalDetails']();
+    const personalDetails = { ...defaults, ...data };
+    const application = this.$store.getters['application/data']();
+    return {
+      personalDetails,
+      application,
+      repeatableFields: {
+        Addresses,
+      },
+    };
+  },
+  methods: {
+    async save() {
+      this.validate();
+      if (this.isValid()) {
+        this.application.personalDetails = this.personalDetails;
+        await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        this.$router.push({ name: 'character-checks-professional-bodies' });
+      }
+    },
   },
 };
     

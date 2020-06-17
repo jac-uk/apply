@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="govuk-grid-row">
     <LoadingMessage
       v-if="!loaded"
       :load-failed="loadFailed"
