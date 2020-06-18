@@ -3,7 +3,14 @@
     <BackLink />
 
     <h1 class="govuk-heading-xl">
-      Check your answers
+      <template
+        v-if="canEdit"
+        >
+        Check your answers
+      </template>
+      <template v-else>
+        Review sent answers
+      </template>
     </h1>
 
     <div class="govuk-!-margin-top-9">
@@ -14,6 +21,7 @@
         Personal details
       </h2>
       <RouterLink
+        v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
         :to="{name: 'character-checks-personal-information'}"
@@ -204,6 +212,7 @@
         Professional bodies
       </h2>
       <RouterLink
+        v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
         :to="{name: 'character-checks-professional-bodies'}"
@@ -245,6 +254,7 @@
         HMRC Check
       </h2>
       <RouterLink
+        v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
         :to="{name: 'character-checks-HMRC'}"
@@ -291,6 +301,7 @@
         Further information to disclose
       </h2>
       <RouterLink
+        v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
         :to="{name: 'character-checks-more-details'}"
@@ -315,6 +326,7 @@
     </dl>
 
     <button
+      v-if="canEdit"
       class="govuk-button"
       @click="next"
     >
@@ -338,6 +350,10 @@ export default {
     hasHMRCCheck() {
       const vacancy = this.$store.state.vacancy.record;
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
+    },
+    canEdit() {
+      // TODO: Should check applicationRecord.characterChecks.status once we have it
+      return !(this.application.characterChecks && this.application.characterChecks.declaration);
     },
   },
   methods: {
