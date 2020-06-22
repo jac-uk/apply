@@ -1,14 +1,17 @@
 <template>
-  <nav :aria-label="label">
-    <ul class="dwp-vertical-navigation">
-      <li 
+  <nav
+    class="moj-side-navigation"
+    aria-label="Side navigation"
+  >
+    <ul class="moj-side-navigation__list">
+      <li class="moj-side-navigation__item">
         v-for="navItem in items"
         :key="navItem.name"
-      >
+        >
         <RouterLink 
           class="nav-link"
           :to="{name: navItem.name}"
-          :aria-current="isActive(navItem.name) ? 'page' : false"
+          :aria-current="isActive(navItem.name) ? 'moj-side-navigation__item--active' : false"
         >
           {{ navItem.page }} 
         </RouterLink>
@@ -37,31 +40,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-  .dwp-vertical-navigation {
-    margin: 0;
-    padding: 0;
-
-  }
-
-  .dwp-vertical-navigation li {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
-  }
-
-  .dwp-vertical-navigation a[aria-current="page"] {
-    color: #1d70b8;
-    font-weight: bold;
-    text-decoration: none;
-    border-left: 4px solid #1d70b8;
-    background-color: #f3f2f1;
-  }
-
-  .dwp-vertical-navigation li a {
-    padding: 0.625em;
-    display: block;
-  }
-</style>

@@ -1,0 +1,93 @@
+// overwrite the font
+$govuk-font-family: "Khula", "HelveticaNeue", "Helvetica Neue", "Arial", "Helvetica", sans-serif;
+
+$govuk-assets-path: "~govuk-frontend/govuk/assets/";
+@import "~govuk-frontend/govuk/all";
+
+$moj-assets-path: "~@ministryofjustice/frontend/moj/assets/";
+@import "~@ministryofjustice/frontend/moj/all";
+
+@import "print";
+
+.float-right {
+  float: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.display-block {
+  display: block;
+}
+
+// background utility classes
+.background-light-grey {
+  background: govuk-colour("light-grey");
+}
+
+.background-blue {
+  background: govuk-colour("blue");
+}
+
+.background-blue * {
+  color: #fff;
+}
+
+// JAC bespoke css can go here
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $govuk-font-family;
+}
+
+.container-border-bottom {
+   border-bottom: 1px solid #b1b4b6
+ }
+
+/* JAC buttons */
+.govuk-button {
+  background-color: #753880;
+  box-shadow: 0 2px 0 #5e2d66;
+}
+
+.govuk-button:hover,
+.govuk-button:focus {
+  background-color: #5e2d66;
+}
+
+.govuk-button--secondary {
+  background-color: #f3f2f1;
+  box-shadow: 0 2px 0 #929191;
+  color: #0b0c0c;
+}
+
+.govuk-button--secondary:hover,
+.govuk-button--secondary:focus {
+  background-color: #dbdad9;
+  color: #0b0c0c;
+}
+
+.govuk-button--warning {
+  background-color: #d4351c;
+  box-shadow: 0 2px 0 #55150b;
+}
+
+.govuk-button--secondary:hover,
+.govuk-button--secondary:focus {
+  background-color: #dbdad9;
+  color: #0b0c0c;
+}
+
+// disabled inputs
+.govuk-input:disabled {
+  background-color: #ccc;
+}
