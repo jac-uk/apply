@@ -67,6 +67,12 @@ const createTestSubject = (component, customMountOptions = {
     mountOptions.parentComponent = customMountOptions.parent;
   }
 
+  if (customMountOptions.slots) {
+    mountOptions.slots = {
+      default: customMountOptions.slots,
+    };
+  }
+
   return shallowMount(component, mountOptions);
 };
 

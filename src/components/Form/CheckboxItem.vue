@@ -66,9 +66,9 @@ export default {
     showConditionalContent() {
       return this.hasConditionalContent && this.isChecked;
     },
-    isChecked() {
-      return this.$parent.inputValue.indexOf(this.value) !== -1;
-    },
+    // isChecked() {
+    //   return this.$parent.inputValue.indexOf(this.value) !== -1;
+    // },
   },
   created() {
     if (this.$parent.$options.name !== 'CheckboxGroup') {
