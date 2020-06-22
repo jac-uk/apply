@@ -50,9 +50,8 @@ const createTestSubject = (component, customMountOptions = {
   mocks: {},
   stubs: [],
   propsData: {},
-  parent: {},
 }) => {
-  return shallowMount(component, {
+  const mountOptions = {
     localVue,
     mocks: {
       $route: mocks.route,
@@ -62,8 +61,13 @@ const createTestSubject = (component, customMountOptions = {
     },
     stubs: [...customMountOptions.stubs],
     propsData: { ...customMountOptions.propsData },
-    parentComponent: parent ? parent : null,
-  });
+  };
+
+  if (customMountOptions.parent) {
+    mountOptions.parentComponent = customMountOptions.parent;
+  }
+
+  return shallowMount(component, mountOptions);
 };
 
 export {

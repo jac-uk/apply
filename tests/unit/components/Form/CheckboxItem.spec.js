@@ -6,6 +6,28 @@ import { createTestSubject } from '../../helpers';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
 describe('components/Form/CheckboxItem', () => {
+  let CheckboxGroup = {
+    name: 'CheckboxGroup',
+  };
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = createTestSubject(CheckboxItem,{
+      propsData: {
+        label: 'Example checkbox item',
+        value: ['example-value'],
+        content:  'Conditional content',
+      },
+      stubs: [],
+      parent: CheckboxGroup,
+    });
+  });
+
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBeTrue();
+    expect(wrapper.vm.$parent.$options.name).toEqual(CheckboxGroup.name);
+  });
+
   xit('component name is "CheckboxItem"', () => {
     expect(CheckboxItem.name).toBe('CheckboxItem');
   });
@@ -85,7 +107,7 @@ describe('components/Form/CheckboxItem', () => {
     });
   });
 
-  describe('component instance', () => {
+  xdescribe('component instance', () => {
     let wrapper;
     let parent = createTestSubject({
       name: 'CheckboxGroup',
