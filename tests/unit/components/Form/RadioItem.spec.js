@@ -1,56 +1,5 @@
-// @FIXME@ *error-five* component requires parent to be 
-// instance of radiogroup componenet,
-// how can we effectivly mock the parent
 import { createTestSubject } from '../../helpers';
 import RadioItem from '@/components/Form/RadioItem';
-
-// import RadioGroup from '@/components/Form/RadioGroup';
-
-// const radioItemTemplate = ({ label, value, hint, content }) => {
-//   let template = `<RadioItem label="${label}" value="${value}" `;
-//   if (hint) {
-//     template += `hint="${hint}" `;
-//   }
-
-//   if (content) {
-//     template += `>${content}</RadioItem>`;
-//   }
-//   else {
-//     template += '/>';
-//   }
-//   return template;
-// };
-
-// const createTestwrapper = (options) => {
-//   if (!options) {
-//     options = {
-//       label: 'Example radio item',
-//       value: 'example-value',
-//       hint: 'Something',
-//       content:  'Conditional content',
-//     };
-//   }
-
-//   const radioItem = radioItemTemplate(options);
-
-//   // RadioItem depends on the parent component being RadioGroup
-//   // So we're mocking RadioGroup with a RadioItem inside, and will return the RadioItem
-//   const radios = shallowMount(RadioGroup, {
-//     propsData: {
-//       label: 'Example question',
-//       id: 'example',
-//       value: 'selected-radio-value',
-//     },
-//     stubs: {
-//       RadioItem,
-//     },
-//     slots: {
-//       default: [radioItem],
-//     },
-//   });
-
-//   return radios.find(RadioItem);
-// };
 
 describe('components/Form/RadioItem', () => {
   it('component name is "RadioItem"', () => {
@@ -118,6 +67,30 @@ describe('components/Form/RadioItem', () => {
   });
 
   describe('component instance', () => {
+    let RadioGroup = {
+      name: 'RadioGroup',
+      template: '<div/>',
+      computed: {
+        inputValue(){
+          return 'example-value';
+        },
+      },
+    };
+    let wrapper;
+  
+    beforeEach(() => {
+      wrapper = createTestSubject(RadioItem,{
+        propsData: {
+          label: 'Example radio item',
+          value: 'example-value',
+          content: 'Conditional content',
+          hint: 'Label hint text',
+        },
+        stubs: [],
+        slots: ['<div>Test Slot</div>'],
+        parent: RadioGroup,
+      });
+    });
 
     it('throws an error if the parent component is not "RadioGroup"', () => {
       const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -135,40 +108,27 @@ describe('components/Form/RadioItem', () => {
       expect(consoleError).toHaveBeenCalled();
       consoleError.mockRestore();
     });
-    xdescribe('data', () => {
-      let wrapper;
-      
+    describe('data', () => {
       describe('hasConditionalContent', () => {
         it('is true when slot content was supplied', () => {
-          wrapper = createTestSubject(RadioItem, {
-            propsData: {
-              label: 'Example radio item',
-              value: 'example-value',
-              content:  'Conditional content',
-            },
-            stubs: [],
-          });
           expect(wrapper.vm.hasConditionalContent).toBe(true);
         });
         
         it('is false when slot content was not supplied', () => {
-          wrapper = createTestSubject({
-            label: 'Example radio item',
-            value: 'example-value',
+          wrapper = createTestSubject(RadioItem,{
+            propsData: {
+              label: 'Example radio item',
+              value: 'example-value',
+            },
+            stubs: [],
+            parent: RadioGroup,
           });
           expect(wrapper.vm.hasConditionalContent).toBe(false);
         });
       });
     });
     
-  xdescribe('template', () => {
-    let wrapper;
-    beforeEach(() => {
-      wrapper = createTestSubject(RadioItem, {
-
-      });
-    });
-    
+  describe('template', () => {
     it('renders a `.govuk-radios__item` element', () => {
       const item = wrapper.find('.govuk-radios__item');
       expect(item.exists()).toBe(true);
@@ -209,7 +169,6 @@ describe('components/Form/RadioItem', () => {
     });
 
     it('label `for` and input `id` attributes match', () => {
-      wrapper = createTestSubject();
       const input = wrapper.find('input[type=radio]');
       const label = wrapper.find('label');
       expect(label.attributes('for')).toBe(input.attributes('id'));
@@ -219,11 +178,6 @@ describe('components/Form/RadioItem', () => {
       let hint;
       describe('when the `hint` prop is set', () => {
         beforeEach(() => {
-          wrapper = createTestSubject({
-            label: 'My label',
-            value: 'my-value',
-            hint: 'Label hint text',
-          });
           hint = wrapper.find('.govuk-radios__hint');
         });
         
@@ -243,9 +197,13 @@ describe('components/Form/RadioItem', () => {
       
       describe('when the `hint` prop is not set', () => {
         beforeEach(() => {
-          wrapper = createTestSubject({
-            label: 'My label',
-            value: 'my-value',
+          wrapper = createTestSubject(RadioItem,{
+            propsData: {
+              label: 'Example radio item',
+              value: 'example-value',
+            },
+            stubs: [],
+            parent: RadioGroup,
           });
           hint = wrapper.find('.govuk-radios__hint');
         });
@@ -265,10 +223,6 @@ describe('components/Form/RadioItem', () => {
       describe('when the radio value is selected', () => {
         describe('and conditional content was given', () => {
           it('renders conditional content', () => {
-            wrapper = createTestSubject({
-              value: 'selected-radio-value',
-              content: 'Conditional content here',
-            });
             const conditional = wrapper.find('.govuk-radios__conditional');
             expect(conditional.exists()).toBe(true);
           });
@@ -276,8 +230,15 @@ describe('components/Form/RadioItem', () => {
         
         describe('and conditional content was not given', () => {
           it('does not render conditional content', () => {
-            wrapper = createTestSubject({
-              value: 'selected-radio-value',
+            wrapper = createTestSubject(RadioItem,{
+              propsData: {
+                label: 'Example radio item',
+                value: 'example-value',
+                hint: 'Label hint text',
+              },
+              stubs: [],
+              slots: [],
+              parent: RadioGroup,
             });
             const conditional = wrapper.find('.govuk-radios__conditional');
             expect(conditional.exists()).toBe(false);
@@ -287,9 +248,16 @@ describe('components/Form/RadioItem', () => {
       
       describe('when the radio value is not selected', () => {
         it('does not render conditional content', () => {
-          wrapper = createTestSubject({
-            value: 'not-selected-value',
-            content: 'Conditional content here',
+          wrapper = createTestSubject(RadioItem,{
+            propsData: {
+              label: 'Example radio item',
+              content: 'Conditional content',
+              value: null,
+              hint: 'Label hint text',
+            },
+            stubs: [],
+            slots: ['<div>Test Slot</div>'],
+            parent: RadioGroup,
           });
           const conditional = wrapper.find('.govuk-radios__conditional');
           expect(conditional.exists()).toBe(false);
