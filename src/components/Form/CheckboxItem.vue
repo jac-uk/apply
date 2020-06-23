@@ -63,14 +63,14 @@ export default {
     hintId() {
       return `${this.$parent.id}__${index}__hint`;
     },
-    showConditionalContent() {
+    showConditionalContent() {      
       return this.hasConditionalContent && this.isChecked;
     },
-    // isChecked() {
-    //   return this.$parent.inputValue.indexOf(this.value) !== -1;
-    // },
+    isChecked() {
+      return this.$parent.inputValue.indexOf(this.value) !== -1;
+    },
   },
-  created() {
+  beforeCreate() {
     if (this.$parent.$options.name !== 'CheckboxGroup') {
       throw new Error('CheckboxItem component can only be used inside a CheckboxGroup component');
     }
