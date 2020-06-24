@@ -28,7 +28,9 @@
           </a>
         </div>
 
-        <div id="download-as-pdf-div">
+        <div 
+          ref="download-as-pdf-div"
+        >
           <h1 class="govuk-heading-l">
             {{ vacancy.name }}
           </h1>
@@ -1771,7 +1773,7 @@ export default {
     downloadAsPdf() {
       const pdf = new jsPDF();
       pdf.fromHTML(
-        document.querySelector('#download-as-pdf-div'),
+        this.$refs['download-as-pdf-div'],
         15,
         15,
         {
