@@ -87,7 +87,7 @@ describe('components/Form/RadioItem', () => {
           hint: 'Label hint text',
         },
         stubs: [],
-        slots: ['<div>Test Slot</div>'],
+        slots: ['<div/>'],
         parent: RadioGroup,
       });
     });
@@ -256,7 +256,7 @@ describe('components/Form/RadioItem', () => {
               hint: 'Label hint text',
             },
             stubs: [],
-            slots: ['<div>Test Slot</div>'],
+            slots: ['<div/>'],
             parent: RadioGroup,
           });
           const conditional = wrapper.find('.govuk-radios__conditional');

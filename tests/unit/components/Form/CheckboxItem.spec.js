@@ -86,7 +86,7 @@ describe('components/Form/CheckboxItem', () => {
           content:  'Conditional content',
         },
         stubs: [],
-        slots: ['<div>Test Slot</div>'],
+        slots: ['<div/>'],
         parent: CheckboxGroup,
       });
     });
