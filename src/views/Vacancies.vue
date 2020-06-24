@@ -5,61 +5,80 @@
         v-if="isSignedIn"
         class="govuk-grid-column-one-quarter"
       >
-        <ul class="dwp-vertical-navigation">
-          <li>
-            <RouterLink
-              class="govuk-link"
-              aria-current="page"
-              :to="{ name: 'vacancies' }"
-            >
-              Vacancies
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="govuk-link"
-              :to="{ name: 'applications' }"
-            >
-              Applications
-            </RouterLink>
-          </li>
-          <!-- <li>
-    <RouterLink
-    class="govuk-link"
-    :to="{ name: 'personal-details' }"
-    >
-    Personal Details
+        <nav
+          class="moj-side-navigation"
+          aria-label="Side navigation"
+        >
+          <ul class="moj-side-navigation__list">
+            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+              <RouterLink
+                class="govuk-link"
+                aria-current="page"
+                :to="{ name: 'vacancies' }"
+              >
+                Vacancies
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'applications' }"
+              >
+                Applications
+              </RouterLink>
+            </li>
+            <!-- <li class="moj-side-navigation__item">
+      <RouterLink
+      class="govuk-link"
+      :to="{ name: 'personal-details' }"
+      >
+      Personal Details
+    </RouterLink>
+  </li>
+  <li class="moj-side-navigation__item">
+  <RouterLink
+  class="govuk-link"
+  :to="{ name: 'diversity-information' }"
+  >
+  Diversity Information
   </RouterLink>
-</li>
-<li>
-<RouterLink
-class="govuk-link"
-:to="{ name: 'diversity-information' }"
->
-Diversity Information
-</RouterLink>
-</li>
-<li>
-<RouterLink
-class="govuk-link"
-:to="{ name: 'character-information' }"
->
-Character Information
-</RouterLink>
-</li> -->
-        </ul>
+  </li>
+  <li class="moj-side-navigation__item">
+  <RouterLink
+  class="govuk-link"
+  :to="{ name: 'character-information' }"
+  >
+  Character Information
+  </RouterLink>
+  </li> -->
+          </ul>
+        </nav>
       </div>
 
-      <div :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }">
+      <div
+        class="govuk-!-padding-top-4"
+        :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
+      >
         <div class="openApplicationsList">
-          <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
             Open vacancies
           </h1>
-          <ul class="govuk-list">
+
+          <p
+            v-if="!openVacancies.length"
+            class="govuk-body govuk-!-margin-bottom-6"
+          >
+            No open vacancies at the moment.
+          </p>
+
+          <ul
+            v-else
+            class="govuk-list"
+          >
             <li
               v-for="vacancy in openVacancies"
               :key="vacancy.id"
-              class="govuk-!-margin-top-7"
+              class="govuk-!-margin-top-4"
             >
               <RouterLink
                 v-if="vacancy.aboutTheRole"
@@ -134,15 +153,25 @@ Character Information
         </div>
 
         <div class="futureApplicationsList">
-          <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
             Future applications
           </h1>
 
-          <ul class="govuk-list">
+          <p
+            v-if="!futureVacancies.length"
+            class="govuk-body govuk-!-margin-bottom-6"
+          >
+            No future vacancies at the moment.
+          </p>
+
+          <ul
+            v-else
+            class="govuk-list"
+          >
             <li
               v-for="vacancy in futureVacancies"
               :key="vacancy.id"
-              class="govuk-!-margin-top-7"
+              class="govuk-!-margin-top-4"
             >
               <span class="govuk-heading-m govuk-!-font-weight-bold">{{ vacancy.name }}</span>
               <p>
@@ -189,7 +218,7 @@ Character Information
         </div>
 
         <div class="inProgressApplicationsList">
-          <h1 class="govuk-heading-xl govuk-!-margin-bottom-9">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
             Exercises in progress
           </h1>
 
@@ -197,7 +226,7 @@ Character Information
             <li
               v-for="vacancy in inProgressVacancies"
               :key="vacancy.id"
-              class="govuk-!-margin-top-7"
+              class="govuk-!-margin-top-4"
             >
               <span class="govuk-heading-m govuk-!-font-weight-bold">{{ vacancy.name }}</span>
               <p>
@@ -250,7 +279,7 @@ Character Information
                   target="_blank"
                 >Find out more</a>
               </p>
-              <hr>
+              <hr class="govuk-section-break govuk-section-break--visible">
             </li>
           </ul>
         </div>

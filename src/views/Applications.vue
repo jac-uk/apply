@@ -1,93 +1,116 @@
 <template>
   <div>
     <div class="govuk-grid-row">
-      <!--SIDE NAV-->
       <div class="govuk-grid-column-one-quarter">
-        <ul class="dwp-vertical-navigation">
-          <li>
-            <RouterLink
-              class="govuk-link"
-              :to="{ name: 'vacancies' }"
-            >
-              Vacancies
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="govuk-link"
-              aria-current="page"
-              :to="{ name: 'applications' }"
-            >
-              Applications
-            </RouterLink>
-          </li>
-          <!-- <li>
-            <RouterLink
-              class="govuk-link"
-              :to="{ name: 'personal-details' }"
-            >
-              Personal Details
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="govuk-link"
-              :to="{ name: 'diversity-information' }"
-            >
-              Diversity Information
-            </RouterLink>
-          </li>
-          <li>
-            <RouterLink
-              class="govuk-link"
-              :to="{ name: 'character-information' }"
-            >
-              Character Information
-            </RouterLink>
-          </li> -->
-        </ul>
+        <nav
+          class="moj-side-navigation"
+          aria-label="Side navigation"
+        >
+          <ul class="moj-side-navigation__list">
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'vacancies' }"
+              >
+                Vacancies
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+              <RouterLink
+                class="govuk-link"
+                aria-current="page"
+                :to="{ name: 'applications' }"
+              >
+                Applications
+              </RouterLink>
+            </li>
+            <!-- <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'personal-details' }"
+              >
+                Personal Details
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'diversity-information' }"
+              >
+                Diversity Information
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'character-information' }"
+              >
+                Character Information
+              </RouterLink>
+            </li> -->
+          </ul>
+        </nav>
       </div>
 
-      <div class="govuk-grid-column-three-quarters">
-        <!--HEADER-->
+      <div class="govuk-grid-column-three-quarters govuk-!-padding-top-4">
         <h1 class="govuk-heading-xl">
-          Applications
+          Current applications
         </h1>
 
-        <!--GREY PANEL-->
-        <h2 class="govuk-heading-m">
-          Current applications
-        </h2>
-        <div class="govuk-panel--s govuk-panel--grey">
-          <div
+        <ul class="govuk-list">
+          <li
             v-for="application in records"
             :key="application.id"
+            class="govuk-!-margin-bottom-6"
           >
             <p class="govuk-body-l govuk-!-margin-bottom-0">
-              <span v-if="application.exerciseName || application.exerciseRef">{{ application.exerciseRef }} {{ application.exerciseName }}</span>
-              <span v-else>{{ application.exerciseId }}</span>
+              <template v-if="application.exerciseName || application.exerciseRef">
+                <b>{{ application.exerciseRef }}</b> {{ application.exerciseName }}
+              </template>
+              <template v-else>
+                {{ application.exerciseId }}
+              </template>
             </p>
-            <p class="govuk-body">
-              <RouterLink
-                v-if="application.status == 'draft'"
-                class="govuk-link"
-                :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-              >
-                Continue with application
-              </RouterLink>
-              <RouterLink
-                v-else
-                class="govuk-link"
-                :to="{ name: 'review', params: { id: application.exerciseId } }"
-              >
-                View sent application
-              </RouterLink>
-            </p>
-          </div>
-        </div>
-        <br><br>
 
-        <!-- <h2 class="govuk-heading-m">
+            <div class="moj-button-menu">
+              <div class="moj-button-menu__wrapper">
+                <RouterLink
+                  v-if="application.status == 'draft'"
+                  class="govuk-button moj-button-menu__item"
+                  :to="{ name: 'task-list', params: { id: application.exerciseId } }"
+                  role="button"
+                  data-module="govuk-button"
+                >
+                  Continue with application
+                </RouterLink>
+                <RouterLink
+                  v-else
+                  class="govuk-button govuk-button--secondary moj-button-menu__item"
+                  :to="{ name: 'review', params: { id: application.exerciseId } }"
+                  role="button"
+                  data-module="govuk-button"
+                >
+                  View sent application
+                </RouterLink>
+
+                <RouterLink
+                  v-if="application.characterChecks && application.characterChecks.declaration === true"
+                  class="govuk-button govuk-button--secondary moj-button-menu__item float-right"
+                  :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                  role="button"
+                  data-module="govuk-button"
+                >
+                  View good character checks consent
+                </RouterLink>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <hr class="govuk-section-break govuk-section-break--xl">
+
+        <!--
+         <h2 class="govuk-heading-m">
           Previous applications
         </h2>
         <table class="govuk-table">
@@ -116,8 +139,6 @@
             </td>
           </tr>
         </table> -->
-
-      <!--END MAIN WRAPPER-->
       </div>
     </div>
   </div>
