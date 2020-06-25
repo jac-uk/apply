@@ -2,6 +2,7 @@ import { createTestSubject } from '../helpers';
 
 const mockGetDownloadURL = jest.fn()
   .mockName('getDownloadURL');
+
 const mockRef = jest.fn()
   .mockName('ref')
   .mockReturnValue({
@@ -44,7 +45,9 @@ describe('components/DownloadLink', () => {
 
   beforeEach(() => {
     wrapper = createTestSubject(DownloadLink, {
-      mocks: {},
+      mocks: {
+        getDownloadURL: mockGetDownloadURL,
+      },
       stubs: [],
       propsData: mockProps,
     });
@@ -56,25 +59,14 @@ describe('components/DownloadLink', () => {
 
   describe('lifecycle hooks', () => {
     describe('mounted', () => {
-      // const localVue = createLocalVue();
-      const mockGetDownloadURL = jest.fn()
-      .mockName('getDownloadURL');
-      
+
       const mockHref = 'mock href';
 
-      xit('should call .getDownloadURL()', () => {
-        createTestSubject(DownloadLink, {
-          propsData: mockProps,
-          stubs: [],
-          mocks: {
-            getDownloadURL: mockGetDownloadURL,
-          },
-        });
-
+      it('should call .getDownloadURL()', () => {
         expect(mockGetDownloadURL).toHaveBeenCalled();
       });
 
-      xit('should set linkHref if .getDownloadURL() returned download url', async () => {
+      it('should set linkHref if .getDownloadURL() returned download url', async () => {
         expect.assertions(1);
 
         const wrapper = createTestSubject(DownloadLink, {
