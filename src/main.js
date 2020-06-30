@@ -4,9 +4,9 @@ import router from '@/router';
 import store from '@/store';
 import * as filters from '@/filters';
 import { auth } from '@/firebase';
-import VueAnalytics from 'vue-analytics';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
+import VueGtag from 'vue-gtag';
 import LogRocket from 'logrocket';
 
 if (process.env.NODE_ENV !== 'development') {
@@ -15,9 +15,10 @@ if (process.env.NODE_ENV !== 'development') {
     integrations: [new Integrations.Vue({ Vue, attachProps: true })],
   });
   LogRocket.init('vpm4kc/jac');
-  Vue.use(VueAnalytics, {
-    id: 'UA-153516887-1',
-  });
+
+  Vue.use(VueGtag, {
+    config: { id: 'UA-153516887-1' },
+  }, router);
 }
 
 Vue.config.productionTip = false;
