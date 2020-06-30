@@ -1,10 +1,11 @@
 import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
-// import TextField from '@/components/Form/TextField';
+
 let TextField = {
   name: 'TextField',
   template: '<div/>',
 };
+
 let array = [1, 2, 3];
 
 describe('components/RepeatableFields', () => {
