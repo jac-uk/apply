@@ -62,10 +62,6 @@ describe('components/TimeInput', () => {
   });
 
   describe('computed properties', () => {
-    // let wrapper;
-    // beforeEach(() => {
-      // wrapper = createTestSubject(new Date(2019, 7, 22, 15, 45));
-    // });
     describe('hourInput', () => {
       describe('getter', () => {
         it('calls zeroPad function', () => {

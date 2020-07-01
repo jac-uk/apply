@@ -86,10 +86,10 @@ describe('components/Form/RadioGroup', () => {
         describe('<legend> element', () => {
             describe('when the `label` prop is set', () => {
                 it('displays the label in a <legend> element', () => {
-                    wrapper.setProps({ label: 'Do you want cake?' });
+                    wrapper.setProps({ label: 'my_label' });
                     const legend = wrapper.find('legend');
                     expect(legend.exists()).toBe(true);
-                    expect(legend.text()).toBe('Do you want cake?');
+                    expect(legend.text()).toBe('my_label');
                     expect(legend.is('.govuk-fieldset__legend')).toBe(true);
                 });
             });
@@ -116,25 +116,25 @@ describe('components/Form/RadioGroup', () => {
                 let hint;
                 beforeEach(() => {
                     wrapper.setProps({
-                        label: 'Do you want cake?',
-                        hint: "It's victoria sponge",
-                        id: 'wants-cake',
+                        label: 'my_label',
+                        hint: "my_hint",
+                        id: 'my_mock_id',
                     });
                     hint = wrapper.find('span.govuk-hint');
                 });
 
                 it('displays the hint', () => {
                     expect(hint.exists()).toBe(true);
-                    expect(hint.text()).toBe("It's victoria sponge");
+                    expect(hint.text()).toBe("my_hint");
                 });
 
                 it('gives the hint element an `id` based on the main component `id`', () => {
-                expect(hint.attributes('id')).toBe('wants-cake__hint');
+                expect(hint.attributes('id')).toBe('my_mock_id__hint');
                 });
 
                 it('sets attribute `aria-describedby` on the <fieldset> to reference the hint element `id`', () => {
                     const fieldset = wrapper.find('fieldset');
-                    expect(fieldset.attributes('aria-describedby')).toBe('wants-cake__hint');
+                    expect(fieldset.attributes('aria-describedby')).toBe('my_mock_id__hint');
                 });
             });
 
@@ -145,7 +145,7 @@ describe('components/Form/RadioGroup', () => {
                         propsData: {
                         id: 'my_unique_id',
                         value: 'my_value',
-                        label: 'Do you want cake?',
+                        label: 'my_label',
                         hint: undefined,
                         },
                         stubs: [],
