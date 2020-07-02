@@ -26,6 +26,9 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
         expect(wrapper.contains('h1')).toBe(true);
       });
 
+      // error-eight
+      // @FIXME@ There is no logic to support the below logic that i can see!
+
       it('renders the h1 as `Qualifications` if the role is legal', () => {
         wrapper.setProps({ unknownVariable: 'legal' });
           expect(h1.text()).toBe('Qualifications');
@@ -41,10 +44,10 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
           expect(h1.text()).toBe('Qualifications');
       });
 
-      xit('renders the h1 as `Memberships` if the role is non-legal', () => {
-        // wrapper.setProps({ unknownVariable: 'non-legal' });
-          expect(h1.text()).toBe('Memberships');
-      });
+      // xit('renders the h1 as `Memberships` if the role is non-legal', () => {
+      //   // wrapper.setProps({ unknownVariable: 'non-legal' });
+      //     expect(h1.text()).toBe('Memberships');
+      // });
     });
     
     describe('Form', () => {
@@ -60,6 +63,7 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
     });
 
     describe('Qualifications - RepeatableFields', () => {
+      // @FIXME@ likewise here
       
       it('renders the RepeatableFields component', () => {
         wrapper.setProps({ unknownVariable: 'legal' });
@@ -76,18 +80,18 @@ describe('@/views/Apply/QualificationsAndExperience/RelevantQualifications', () 
         expect(wrapper.find('RepeatableFields-stub').exists()).toBe(true);
       });
 
-      xit('does not render the RepeatableFields component if the role is non-legal', () => {
-        wrapper.setProps({ unknownVariable: 'non-legal' });
-        expect(wrapper.find('RepeatableFields-stub').exists()).toBe(false);
-      });
+      // xit('does not render the RepeatableFields component if the role is non-legal', () => {
+      //   wrapper.setProps({ unknownVariable: 'non-legal' });
+      //   expect(wrapper.find('RepeatableFields-stub').exists()).toBe(false);
+      // });
     });
 
     describe('What professional memberships do you have?', () => {
 
-      xit('renders the question if the role is non-legal', () => {
-        wrapper.setProps({ unknownVariable: 'non-legal' });
-        expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
-      });
+      // xit('renders the question if the role is non-legal', () => {
+      //   wrapper.setProps({ unknownVariable: 'non-legal' });
+      //   expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
+      // });
 
       it('does not render the question if the role is legal', () => {
         wrapper.setProps({ unknownVariable: 'legal' });

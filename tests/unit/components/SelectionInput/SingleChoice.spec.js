@@ -1,7 +1,10 @@
 import { createTestSubject } from '../../helpers';
 import SingleChoice from '@/components/SelectionInput/SingleChoice';
-describe('component/SingleChoice', () => {
+
+describe('components/SelectionInput/SingleChoice', () => {
+    
     describe('props', () => {
+        
         describe('id', () => {
             let prop;
             beforeEach(() => {
@@ -14,6 +17,7 @@ describe('component/SingleChoice', () => {
                 expect(prop.type()).toBeString();
             });
         });
+        
         describe('answers', () => {
             let prop;
             beforeEach(() => {
@@ -26,6 +30,7 @@ describe('component/SingleChoice', () => {
                 expect(prop.type()).toBeArray();    
             });
         });
+        
         describe('value', () => {
             let prop;
             beforeEach(() => {
@@ -38,43 +43,42 @@ describe('component/SingleChoice', () => {
                 expect(prop.default).toBeNull();    
             });
         });
+        
     });
     
     describe('component instance', () => {
         let wrapper;
+            const mockProps = {
+                id: 'mockId',
+                label: 'mock label',
+                answers: ['selectedVal','secondVal','thirdVal'],
+                value: 'selectedVal',
+            };
+        
         beforeEach(() => {
             wrapper = createTestSubject(SingleChoice, {
-                propsData: {
-                    id: 'my_unique_key',
-                    answers: [],
+                mocks: {
+                    // $emit: $emit,
                 },
                 stubs: [],
+                propsData: mockProps,
             });
-    });
-    it('renders', () => {
-        expect(wrapper.exists()).toBe(true);
-    });
-    describe('computed', () => {
-        describe('selected', () => {
-        beforeEach(() => {
-            // wrapper.vm.setData('testError');
         });
-        xit('get', () => {
-            
+    
+        it('renders the component', () => {
+            expect(wrapper.exists()).toBe(true);
         });
-        xit('set', () => {
-            const $root = { 
-                $emit: jest.fn(),
-            };
-            const wrapper = createTestSubject(SingleChoice, {
-                propsData: {},
-                stubs: [],
+    
+        describe('computed', () => {
+            describe('selected', () => {
+                it('returns value (get)', () => {
+                    expect(wrapper.vm.selected).toBe('selectedVal');
+                });
+                it('emits value (set) on change', () => {
+                    wrapper.setData({ selected: 'secondVal' });
+                    expect(wrapper.emitted().input[0][0]).toBe('secondVal');
+                });
             });
-            wrapper.vm.$root = $root;
-            wrapper.vm.$set();
-            expect($root.$emit).toHaveBeenCalled();
-        });    
+        });
     });
-});
-});
 });

@@ -61,8 +61,8 @@ describe('components/DateInput', () => {
     });
 
     describe('form-group div', () => {
-      xit('errors', () => {
-        wrapper.setData({ hasError: true });
+      it('with an error', () => {
+        wrapper.setData({ errorMessage: 'mock error message' });
         expect(wrapper.find('div.govuk-form-group--error').exists()).toBe(true);
       });
       it('exists with no errors', () => {
@@ -313,20 +313,20 @@ describe('components/DateInput', () => {
       
       describe('given at least one field is null', () => {
         const nullValueCombinations = [
-                   ['`day` is null',                      { day: null, month: 4,    year: 1980 }],
-                   ['`month` is null',                    { day: 12,   month: null, year: 1980 }],
-                   ['`year` is null',                     { day: 12,   month: 4,    year: null }],
-                   ['`day` and `month` are null',         { day: null, month: null, year: 1980 }],
-                   ['`day` and `year` are null',          { day: null, month: 4,    year: null }],
-                   ['`month` and `year` are null',        { day: 12,   month: null, year: null }],
-                   ['`day`, `month` and `year` are null', { day: null, month: null, year: null }],
-                 ];
-        
-                 it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
-                   wrapper.setData(data);
-                   expect(wrapper.vm.dateConstructor).toBe(null);
-                 });
-                });
+          ['`day` is null',                      { day: null, month: 4,    year: 1980 }],
+          ['`month` is null',                    { day: 12,   month: null, year: 1980 }],
+          ['`year` is null',                     { day: 12,   month: 4,    year: null }],
+          ['`day` and `month` are null',         { day: null, month: null, year: 1980 }],
+          ['`day` and `year` are null',          { day: null, month: 4,    year: null }],
+          ['`month` and `year` are null',        { day: 12,   month: null, year: null }],
+          ['`day`, `month` and `year` are null', { day: null, month: null, year: null }],
+        ];
+
+        it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
+          wrapper.setData(data);
+          expect(wrapper.vm.dateConstructor).toBe(null);
+        });
+      });
       });    
     describe('date', () => {
         describe('getter', () => {
@@ -380,46 +380,32 @@ describe('components/DateInput', () => {
 
   describe('`v-model` interface', () => {
     describe('when the `value` property changes', () => {
-      let realDateSetter;
-      let mockDateSetter;
+
       let firstDate;
       let secondDate;
-      beforeEach(() => {
-        // Mock the date setter
-        realDateSetter = DateInput.computed.date.set;
-        mockDateSetter = jest.fn();
-        DateInput.computed.date.set = mockDateSetter;
-      });
-      
-      afterEach(() => {
-        DateInput.computed.date.set = realDateSetter;
-      });
-      
+
       describe('given the new `value` is different from the current `date`', () => {
-        xit('sets `date` to equal the new `value`', () => {
+        it('sets `date` to equal the new `value`', () => {
           firstDate = new Date('1960-01-01');
           secondDate = new Date('1975-04-19');
-          // const subject = createTestSubject(firstDate);
+          wrapper.setProps({ value: firstDate });
+          expect(wrapper.vm.date).toEqual(firstDate);
           wrapper.setProps({ value: secondDate });
-          expect(mockDateSetter).toHaveBeenCalledTimes(2);
-          expect(mockDateSetter).toHaveBeenNthCalledWith(1, firstDate);
-          expect(mockDateSetter).toHaveBeenNthCalledWith(2, secondDate);
+          expect(wrapper.vm.date).toEqual(secondDate);
         });
       });
 
       describe('given the new `value` is the same as the current `date`', () => {
-        xit('avoids an infinite feedback loop by doing nothing (does not set `date`)', () => {
+        it('avoids an infinite feedback loop by doing nothing (does not set `date`)', () => {
           // Two equal dates as different objects
           firstDate = new Date('1960-01-01');
           secondDate = new Date('1960-01-01');
-          // const subject = createTestSubject(firstDate);
+          wrapper.setProps({ value: firstDate });
+          expect(wrapper.vm.date).toEqual(firstDate);
           wrapper.setProps({ value: secondDate });
-          expect(mockDateSetter).toHaveBeenCalledTimes(1);
-          expect(mockDateSetter.mock.calls[0][0]).toBe(firstDate);
-          expect(mockDateSetter.mock.calls[0][0]).not.toBe(secondDate);
+          expect(wrapper.vm.date).toEqual(secondDate);        });
         });
       });
-    });
     
     describe('when the internal `date` Date object changes', () => {
       it('emits an `input` event', () => {
@@ -434,12 +420,12 @@ describe('components/DateInput', () => {
     });
 
     describe('#created lifecycle hook', () => {
-    xit('sets `date` to equal the `value` property', () => {
-      const value = new Date('1960-01-01');
-      // const subject = createTestSubject(value);
-      expect(wrapper.vm.date).not.toBe(value);
-      expect(wrapper.vm.date).toEqual(value);
-    });
+      it('sets `date` to equal the `value` property', () => {
+        const value = new Date('1960-01-01');
+        wrapper.setProps({ value: value });
+        expect(wrapper.vm.date).not.toBe(value);
+        expect(wrapper.vm.date).toEqual(value);
+      });
     });
     
     describe('input fields', () => {

@@ -117,7 +117,7 @@ describe('components/Form/RadioGroup', () => {
                 beforeEach(() => {
                     wrapper.setProps({
                         label: 'my_label',
-                        hint: "my_hint",
+                        hint: 'my_hint',
                         id: 'my_mock_id',
                     });
                     hint = wrapper.find('span.govuk-hint');
@@ -125,7 +125,7 @@ describe('components/Form/RadioGroup', () => {
 
                 it('displays the hint', () => {
                     expect(hint.exists()).toBe(true);
-                    expect(hint.text()).toBe("my_hint");
+                    expect(hint.text()).toBe('my_hint');
                 });
 
                 it('gives the hint element an `id` based on the main component `id`', () => {

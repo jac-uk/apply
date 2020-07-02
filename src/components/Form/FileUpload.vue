@@ -100,8 +100,9 @@ export default {
       },
     },
   },
-  async mounted () {
+  async mount () {
     if (typeof this.fileName === 'string' && this.fileName.length) {
+      
       const isUploaded = await this.verifyFile(this.fileName);
 
       if (!isUploaded) {
@@ -164,6 +165,7 @@ export default {
       }
     },
     async verifyFile(fileName) {
+      console.log('this shouldnt log when the function is mocked');
       if (!fileName) {
         return false;
       }

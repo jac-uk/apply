@@ -2,7 +2,7 @@ import { createTestSubject } from '../../helpers';
 import Navigation from '@/components/Page/Navigation';
 
 const navPages = [
-  { page: 'Test', name: 'nav-test-name1' },
+  { page: 'Test', name: 'name-of-current-route' },
   { page: 'Test2', name: 'nav-test-name2' },
 ];
 
@@ -70,7 +70,7 @@ describe('components/Page/Navigation', () => {
     });
 
     describe('aria-current attribute', () => {
-      xit('is set for a link which is currently active', () => {
+      it('is set for a link which is currently active', () => {
         let links = wrapper.findAll('.nav-link');
         expect(links.at(0).attributes()).toHaveProperty('aria-current');
         expect(links.at(1).attributes()).not.toHaveProperty('aria-current');
