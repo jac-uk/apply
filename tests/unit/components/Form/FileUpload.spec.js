@@ -226,10 +226,9 @@ describe('components/Form/FileUpload', () => {
         name: 'mock_name',
       };
       const mockVerifyFile = jest.fn()
-      .mockName('verifyFile')
-      .mockReturnValue('222');
+      .mockName('verifyFile');
       
-          it('should not call .verifyFile() if fileName doesn\'t exist', () => {
+      it('should not call .verifyFile() if fileName doesn\'t exist', () => {
           createTestSubject(FileUpload, {
             propsData: mockLocalProps,
             mocks: {
@@ -241,15 +240,16 @@ describe('components/Form/FileUpload', () => {
         expect(mockVerifyFile).not.toHaveBeenCalled();
       });
       
-      it.only('should call .verifyFile() if fileName exists', () => {
+      it('should call .verifyFile() if fileName exists', () => {
           createTestSubject(FileUpload, {
             propsData: {
               ...mockLocalProps,
               value: 'mock_value',
             },
-            mocks: {
+            methods: {
               verifyFile: mockVerifyFile,
             },
+            mocks: {},
             stubs: [],
           });
         
