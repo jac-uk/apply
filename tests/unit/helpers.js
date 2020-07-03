@@ -37,6 +37,7 @@ const mocks = {
     },
     getters: {
       'vacancy/getCloseDate': new Date(),
+      'vacancy/isOpen': jest.fn(),
       'vacancy/id': jest.fn(),
       'application/data': () => jest.fn(),
       'vacancies/bind': () => jest.fn(), //see views/vacancies.spec.js

@@ -5,7 +5,7 @@
 import App from '@/App';
 // import Router from 'vue-router';
 // import Vuex from 'vuex';
-import { createTestSubject } from '../helpers';
+import { createTestSubject } from '../unit/helpers';
 
 const routes = [
   // ['eligibility-checker', 'Eligibility Checker'],

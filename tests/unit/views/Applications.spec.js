@@ -1,12 +1,7 @@
-// @FIXME@ *error-four* 
-// Quite a different test base, couldnt manage to successfully integrate helpers
-// couldnt tell how to add necessary logic to either 
-// this file or ../helpers.js
-
 import Applications from '@/views/Applications';
 import { createTestSubject } from '../helpers';
 
-xdescribe('views/Applications', () => {  
+describe('views/Applications', () => {  
     let wrapper;  
     beforeEach(()=>{
         wrapper = createTestSubject(Applications, {
