@@ -1,16 +1,21 @@
-// @FIXME@ error issues with mapState
-
 import Applications from '@/views/Applications';
 import { createTestSubject } from '../helpers';
 
-xdescribe('views/Applications', () => {  
-    let wrapper;  
+jest.mock('vuex', () => {
+  return {
+    mapState: jest.fn(),
+  };
+});
+
+describe('views/Applications', () => {  
+    let wrapper;
+
     beforeEach(()=>{
         wrapper = createTestSubject(Applications, {
-            mocks: {},
-            stubs: ['RouterView'],
+            stubs: ['RouterView', 'RouterLink'],
         });
     });
+
     it('renders the component', () => {
         expect(wrapper.exists()).toBe(true);
     });
