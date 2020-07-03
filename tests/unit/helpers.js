@@ -20,7 +20,13 @@ const mocks = {
           referenceNumber: null,
           welshRequirement: null,
           unknownVariable: null,
-          // shortlistingOutcomeDate: null, see confirmation.spec.js
+          locationQuestion: '',
+          locationQuestionAnswers: [''],
+          locationQuestionType: '',
+          jurisdictionQuestion: '',
+          jurisdictionQuestionAnswers: [''],
+          jurisdictionQuestionType: '',
+          shortlistingOutcomeDate: '',
         },
       },
       candidate: {
@@ -29,7 +35,35 @@ const mocks = {
         },
       },
       application: {
-        record: { progress: { started: true } },
+        record: {
+          progress: {
+            started: true,
+          },
+        //   personalDetails:{
+        //     fullName: 'Jo Doe',
+        //   },
+        //   characterInformation: {
+        //     criminalOffences: false,
+        //   },
+        //   equalityAndDiversitySurvey: {
+        //     shareData: false,
+        //     feePaidJudicialRole: false,
+        //     otherFeePaidJudicialRoleDetails: 'other',
+        //     oxbridgeUni: false,
+        //     changedGender: false,
+        //     disability: false,
+        //     attendedOutreachEvents: false,
+        //     hasTakenPAJE: false,
+        //   },
+        //   feePaidOrSalariedJudge: false,
+        //   feePaidOrSalariedSatForThirtyDays: false,
+        //   declaredAppointmentInQuasiJudicialBody: false,
+        //   quasiJudicialSatForThirtyDays: false,
+        //   canGiveReasonableLOS: false,
+        //   applyingForWelshPost: false,
+        //   canSpeakWelsh: false,
+        //   canReadAndWriteWelsh: false,
+        },
       },
       applications: {
         records: [],

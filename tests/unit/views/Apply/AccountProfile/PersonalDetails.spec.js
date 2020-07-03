@@ -1,15 +1,11 @@
-// @FIXME@ *error-two* this suite somehow interacts with the Form component and errors due to the queryselector
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+//  component and errors due to the queryselector
 
 import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import { createTestSubject } from '../../../helpers';
 
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
-
-// const candidate = {};
-
-// like others this component references the QuerySelector in its mounted function
-// i would like some guidance on how to get around this
 
 xdescribe('@/views/Apply/AccountProfile/PersonalDetails', () => {
   let wrapper;

@@ -1,4 +1,5 @@
-// @FIXME@ *error-two* more mocks need to be added in the helper file (?)
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+//  component and errors due to the queryselector
 
 import Review from '@/views/Apply/FinalCheck/Review';
 import { createTestSubject } from '../../../helpers';

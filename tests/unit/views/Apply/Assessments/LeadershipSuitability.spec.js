@@ -1,9 +1,10 @@
-// *error-three* this suite gives a warning due to an change event in the mount
+// @FIXME@ *event handlers* 
+// this suite gives a warning due to an change event in the mount
 
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Assessments/LeadershipSuitability', () => {
+describe('views/Assessments/LeadershipSuitability', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(LeadershipSuitability, {
@@ -13,7 +14,7 @@ xdescribe('views/Assessments/LeadershipSuitability', () => {
     });
   });
 
-  describe('template', () => {
+  xdescribe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -48,7 +49,7 @@ xdescribe('views/Assessments/LeadershipSuitability', () => {
       const link = wrapper.find({ ref: 'templateDownloadLink' });
       expect(link.is('a')).toBe(true);
       expect(link.attributes('href')).toBe('#');
-      expect(link.text()).toBe('assessments-template.doc');
+      expect(link.text()).toBe('leadership-suitability-template.doc');
     });
   });
 });

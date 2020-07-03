@@ -87,7 +87,7 @@
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
-// could the fileUpload component be used here?
+// should the fileUpload component be used here?
 // import FileUpload from '@/components/Form/FileUpload';
 
 export default {

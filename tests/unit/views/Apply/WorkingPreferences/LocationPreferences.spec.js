@@ -4,7 +4,7 @@
 import LocationPreferences from '@/views/Apply/WorkingPreferences/LocationPreferences';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/WorkingPreferences/LocationPreferences', () => {
+describe('views/WorkingPreferences/LocationPreferences', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = createTestSubject(LocationPreferences, {

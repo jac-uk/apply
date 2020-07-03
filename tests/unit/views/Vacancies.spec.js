@@ -1,7 +1,5 @@
-// @FIXME@ *error-four* 
-// Quite a different test base, couldnt manage to successfully integrate helpers
-// couldnt tell how to add necessary logic to either 
-// this file or ../helpers.js
+// @FIXME@ error issues with mapGetters, see Applications.spec
+
 import Vacancies from '@/views/Vacancies';
 import { createTestSubject } from '../helpers';
 
