@@ -1,9 +1,13 @@
-// @FIXME@ error issues with mapGetters, see Applications.spec
-
 import Vacancies from '@/views/Vacancies';
 import { createTestSubject } from '../helpers';
 
-xdescribe('views/Vacancies', () => {  
+jest.mock('vuex', () => {
+    return {
+        mapGetters: jest.fn(),
+    };
+});
+
+describe('views/Vacancies', () => {  
     let wrapper;  
     beforeEach(()=>{
         wrapper = createTestSubject(Vacancies, {
