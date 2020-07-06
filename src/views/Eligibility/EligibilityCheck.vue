@@ -1,6 +1,9 @@
 <template>
   <div>
-    <form @submit.prevent="save">
+    <form
+      ref="formRef"
+      @submit.prevent="save"
+    >
       <h1 class="govuk-heading-xl">
         Check if you're eligible
       </h1>

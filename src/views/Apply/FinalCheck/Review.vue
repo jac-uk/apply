@@ -1,6 +1,9 @@
 <template>
   <div class="govuk-grid-row">
-    <form @submit.prevent="save">
+    <form 
+      ref="formRef"
+      @submit.prevent="save"
+    >
       <div class="govuk-grid-column-full">
         <BackLink class="govuk-!-margin-top-0" />
 
