@@ -4,7 +4,7 @@
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Assessments/SelfAssessmentCompetencies', () => {
+xdescribe('views/Apply/Assessments/SelfAssessmentCompetencies', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(SelfAssessmentCompetencies, {

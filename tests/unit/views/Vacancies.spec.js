@@ -7,11 +7,10 @@ jest.mock('vuex', () => {
     };
 });
 
-describe('views/Vacancies', () => {  
+xdescribe('views/Vacancies', () => {  
     let wrapper;  
     beforeEach(()=>{
         wrapper = createTestSubject(Vacancies, {
-            mocks: {},
             stubs: ['RouterView'],
         });
     });
