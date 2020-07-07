@@ -7,7 +7,15 @@
       :for="id"
       class="govuk-heading-m govuk-!-margin-bottom-2"
     >
-      {{ label }}
+      <span
+        v-if="labelHidden"
+        class="govuk-visually-hidden"
+      >
+        {{ label }}
+      </span>
+      <template v-else>
+        {{ label }}
+      </template>
     </label>
     <span
       v-if="hint"
@@ -44,6 +52,10 @@ export default {
     inputClass: {
       default: '',
       type: String,
+    },
+    labelHidden: {
+      default: false,
+      type: Boolean,
     },
     value: {
       default: '',

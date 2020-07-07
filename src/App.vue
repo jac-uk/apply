@@ -1,60 +1,57 @@
 <template>
   <div class="govuk-width-container">
-    <div class="govuk-main-wrapper">
+    <div>
+      <!-- HEADER SECTION -->
       <header class="header">
         <div class="govuk-grid-row">
-          <div class="govuk-grid-column-one-half">
-            <!-- HEADER SECTION -->
-            <div class="govuk-grid-row">
-              <div class="govuk-grid-column-two-thirds organisation__margin-bottom">
-                <div class="gem-c-organisation-logo brand--ministry-of-justice">
-                  <a href="https://judicialappointments.gov.uk/">
-                    <img
-                      src="@/assets/jac-logo.svg"
-                      alt="Judicial Appointments Commission"
-                      width="197"
-                      height="66"
-                      style="text-align: center"
-                    >
-                  </a>
-                </div>
-              </div>
-              <div class="govuk-grid-column-one-third organisation__margin-bottom">
-                <button
-                  v-if="isSignedIn"
-                  class="govuk-button govuk-!-margin-right-1"
-                  @click="signOut"
+          <div class="govuk-grid-column-two-thirds organisation__margin-bottom">
+            <div class="gem-c-organisation-logo brand--ministry-of-justice">
+              <a href="https://judicialappointments.gov.uk/">
+                <img
+                  src="@/assets/jac-logo.svg"
+                  alt="Judicial Appointments Commission"
+                  width="197"
+                  height="66"
+                  style="text-align: center"
                 >
-                  Sign Out
-                </button>
-                <button
-                  v-else
-                  :disabled="isSignInPage"
-                  class="govuk-button govuk-!-margin-right-1"
-                  @click="signIn"
-                >
-                  Sign In
-                </button>
-                <button
-                  :disabled="isVacanciesPage"
-                  class="govuk-button"
-                  @click="gotoVacancies"
-                >
-                  Vacancies
-                </button>
-                <br>
-                <span
-                  v-if="isSignedIn"
-                  class="app-c-topic-list__item nostyle"
-                >
-                  <b>You are now signed in as {{ userName }}</b>
-                </span>
-              </div>
+              </a>
             </div>
-            <!-- HEADER SECTION -->
+          </div>
+          <div class="govuk-grid-column-one-third organisation__margin-bottom">
+            <button
+              v-if="isSignedIn"
+              class="govuk-button govuk-!-margin-right-1"
+              @click="signOut"
+            >
+              Sign Out
+            </button>
+            <button
+              v-else
+              :disabled="isSignInPage"
+              class="govuk-button govuk-!-margin-right-1"
+              @click="signIn"
+            >
+              Sign In
+            </button>
+            <button
+              :disabled="isVacanciesPage"
+              class="govuk-button"
+              @click="gotoVacancies"
+            >
+              Vacancies
+            </button>
+            <br>
+            <span
+              v-if="isSignedIn"
+              class="app-c-topic-list__item nostyle"
+            >
+              <b>You are now signed in as {{ userName }}</b>
+            </span>
           </div>
         </div>
       </header>
+      <!-- HEADER SECTION -->
+
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
           <div class="govuk-phase-banner">
@@ -75,7 +72,10 @@
         </div>
       </div>
     </div>
-    <main id="main-content">
+    <main
+      id="main-content"
+      class="govuk-main-wrapper govuk-main-wrapper--auto-spacing"
+    >
       <RouterView />
     </main>
   </div>
@@ -131,6 +131,6 @@ export default {
   };
 
   .govuk-main-wrapper {
-    padding-top: 0px;
+    padding: 0px;
   }
 </style>
