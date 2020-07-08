@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@ministryofjustice/frontend": "0.0.19-alpha",
-    "@sentry/browser": "^5.10.0",
-    "@sentry/integrations": "^5.10.0",
+    "@sentry/browser": "^5.18.1",
+    "@sentry/integrations": "^5.18.1",
     "core-js": "^2.6.11",
     "firebase": "^6.6.2",
     "firebaseui": "^4.3.0",
@@ -30,6 +30,7 @@
     "logrocket": "^1.0.6",
     "vue": "^2.6.10",
     "vue-analytics": "^5.22.1",
+    "vue-gtag": "^1.7.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.4.0",
     "vuexfire": "^3.2.2"
