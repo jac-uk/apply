@@ -29,7 +29,6 @@
     "jspdf": "^1.5.3",
     "logrocket": "^1.0.6",
     "vue": "^2.6.10",
-    "vue-analytics": "^5.22.1",
     "vue-gtag": "^1.7.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.4.0",
