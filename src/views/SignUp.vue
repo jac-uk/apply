@@ -2,6 +2,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
       <form
+        ref="formRef"
         @submit.prevent="onSubmit"
       >
         <div class="govuk-grid-column-two-thirds">
