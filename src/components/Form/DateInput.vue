@@ -117,9 +117,6 @@ export default {
       year: null,
     };
   },
-  mounted(){
-    console.log(this.value);
-  },
   computed: {
     dayInput: {
       get() {
