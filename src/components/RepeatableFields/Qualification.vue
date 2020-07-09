@@ -43,8 +43,32 @@
         label="Scotland"
       />
     </RadioGroup>
-
+    <CheckboxGroup
+      v-if="row.type==='barrister'"
+      :id="qualificationDate"
+      v-model="row.completedPupillage"
+    >
+      <DateInput
+        :id="qualificationDate"
+        :v-model="row.date"
+        label="When did you complete pupillage?"
+        type="month"
+      />
+      <!-- @FIXME@ Date Input isnt cleared when completedPupillage is false -->
+      <CheckboxItem
+        :value="false"
+        label="I did not complete pupillage"
+      />
+      <TextareaInput
+        v-if="row.completedPupillage[0] === false"
+        :id="qualificationDate"
+        v-model="row.details"
+        label="Please provide some details"
+        rows="2"
+      />
+    </CheckboxGroup>
     <DateInput
+      v-else
       :id="qualificationDate"
       v-model="row.date"
       label="When did you qualify?"
@@ -57,15 +81,21 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
+import CheckboxGroup from '@/components/Form/CheckboxGroup';
+import CheckboxItem from '@/components/Form/CheckboxItem';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
+import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
   name: 'Qualification',
   components: {
     RadioGroup,
+    CheckboxGroup,
+    CheckboxItem,
     RadioItem,
     DateInput,
+    TextareaInput,
   },
   props: {
     row: {

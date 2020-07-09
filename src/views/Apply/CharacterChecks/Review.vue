@@ -5,7 +5,7 @@
     <h1 class="govuk-heading-xl">
       <template
         v-if="canEdit"
-        >
+      >
         Check your answers
       </template>
       <template v-else>
