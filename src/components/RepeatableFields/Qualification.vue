@@ -44,7 +44,28 @@
       />
     </RadioGroup>
 
+    <RadioGroup
+      v-if="row.type === 'barrister'"
+      :id="qualificationDate"
+      v-model="row.date"
+    >
+      <DateInput
+        v-if="row.type === 'barrister'"
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you complete pupillage?"
+        type="month"
+      />
+      <RadioItem
+        :value="false"
+        label="I did not complete pupillage"
+      />
+      <TextareaInput
+        v-if="row.date===false"
+      />
+    </RadioGroup>
     <DateInput
+      v-else
       :id="qualificationDate"
       v-model="row.date"
       label="When did you qualify?"
