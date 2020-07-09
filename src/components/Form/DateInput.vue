@@ -107,7 +107,7 @@ export default {
     },
     value: {
       required: true,
-      validator: (value) => (value instanceof Date || value === null || value === undefined),
+      validator: (value) => (value instanceof Date || value === null || value === undefined ),
     },
   },
   data() {
@@ -116,6 +116,9 @@ export default {
       month: null,
       year: null,
     };
+  },
+  mounted(){
+    console.log(this.value);
   },
   computed: {
     dayInput: {
