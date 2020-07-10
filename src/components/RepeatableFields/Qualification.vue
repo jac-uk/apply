@@ -43,30 +43,34 @@
         label="Scotland"
       />
     </RadioGroup>
-    <CheckboxGroup
+    <div
       v-if="row.type==='barrister'"
-      :id="qualificationDate"
-      v-model="row.completedPupillage"
     >
       <DateInput
         :id="qualificationDate"
         :v-model="row.date"
+        :value="row.date ? row.date : null"
         label="When did you complete pupillage?"
         type="month"
       />
-      <!-- @FIXME@ Date Input isnt cleared when completedPupillage is false -->
-      <CheckboxItem
-        :value="false"
-        label="I did not complete pupillage"
-      />
+      <CheckboxGroup
+        :id="qualificationDate"
+        v-model="row.completedPupillage"
+      >
+        <CheckboxItem
+          :value="false"
+          label="I did not complete pupillage"
+        />
+        <!-- @FIXME@ Date Input isnt cleared when completedPupillage is false -->
+      </CheckboxGroup>
       <TextareaInput
-        v-if="row.completedPupillage[0] === false"
+        v-if="row.completedPupillage && row.completedPupillage[0] === false"
         :id="qualificationDate"
         v-model="row.details"
         label="Please provide some details"
         rows="2"
       />
-    </CheckboxGroup>
+    </div>
     <DateInput
       v-else
       :id="qualificationDate"
