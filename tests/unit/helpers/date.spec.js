@@ -28,11 +28,19 @@ describe('helpers/date/isDateInFuture', () => {
 
     expect(dateHelper.isDateInFuture(date)).toBe(false);
   });
+
+  it('returns false if date is null', () => {
+    expect(dateHelper.isDateInFuture(null)).toBe(false);
+  });
 });
 
 describe('helpers/date/formatDate', () => {
   it('throws an error if the value passed is not an instance of Date', () => {
     expect(() => dateHelper.formatDate('string')).toThrow();
+  });
+
+  it('returns null if date is null', () => {
+    expect(dateHelper.formatDate(null)).toBe(null);
   });
 
   it('returns date in format "dd month year" if `type` is not passed', () => {
