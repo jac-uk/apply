@@ -43,7 +43,7 @@ const formatDate = (date, type) => {
 };
 
 const parseEstimatedDate = (value) => {
-  if (isDate(date)) {
+  if (isDate(value)) {
     return value;
   }
 
