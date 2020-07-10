@@ -683,11 +683,17 @@
         </RadioGroup>
 
         <button
+          v-if="!applicationClosed(vacancyCloseTime)"
           :disabled="application.status != 'draft'"
           class="govuk-button"
         >
           Save and continue
         </button>
+        <p
+          v-if="applicationClosed(vacancyCloseTime) && application.status == 'draft'"
+        >
+          Applications have now closed for this vaccancy. Your draft application cannot now be submitted.
+        </p>
       </div>
     </form>
   </div>
@@ -703,6 +709,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import BackLink from '@/components/BackLink';
+import { isDateInFuture } from '@/helpers/date';
 
 export default {
   components: {
@@ -761,6 +768,9 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+    vacancyCloseTime() {
+      return this.$store.getters['vacancy/getCloseDate'];
+    },
     isLegal() {
       return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
     },
@@ -775,6 +785,13 @@ export default {
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
         this.$router.push({ name: 'task-list' });
       }
+    },
+    applicationClosed(date){
+      if(date == null) return false;
+
+      const result = isDateInFuture(new Date(date));
+
+      return !result;
     },
   },
 };
