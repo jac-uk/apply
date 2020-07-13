@@ -2,8 +2,10 @@ const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
   // @NOTE: this is a bit silly, we should save full date instead of hardcoding the time
-  if(!(date instanceof Date)) {
-    throw 'Supplied date must be a Date object';
+  if(date == null){
+    return false;
+  } else if(!isDate(date)) {
+    throw `Supplied date (${date}) must be a Date object`;
   }
   
   const today = new Date();
@@ -21,8 +23,10 @@ const isDateInFuture = (date) => {
 };
 
 const formatDate = (date, type) => {
-  if(!(date instanceof Date)) {
-    throw 'Supplied date must be a Date object';
+  if(date == null) {
+    return null;
+  } else if(!isDate(date)) {
+    throw `Supplied date (${date}) must be a Date object`;
   }
 
   if(type && type === 'time') {
@@ -39,7 +43,7 @@ const formatDate = (date, type) => {
 };
 
 const parseEstimatedDate = (value) => {
-  if (value instanceof Date) {
+  if (isDate(value)) {
     return value;
   }
 
