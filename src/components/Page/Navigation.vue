@@ -34,9 +34,6 @@ export default {
       type: String,
     },
   },
-  // mounted(){
-  //   console.log(this.$route.name);
-  // },
   methods: {
     isActive(name) {
       return name === this.$route.name;

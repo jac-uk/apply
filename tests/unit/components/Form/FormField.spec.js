@@ -6,6 +6,13 @@
     $emit: jest.fn(),
   };
 
+  const mockProps = {
+    id: 'mockId',
+    label: 'mock label',
+    required: true,
+    requiredMessage: 'messages required',
+  };
+
   describe('components/Form/FormField', () => {
 
     describe('props', () => {
@@ -145,14 +152,9 @@
       
     });
 
-    describe('component instance', () => {
+  describe('component instance', () => {
     let wrapper;
 
-    const mockProps = {
-      id: 'mockId',
-      label: 'mock label',
-    };
-    
     beforeEach(() => {
       wrapper = createTestSubject(FormField, {
         mocks: {},
@@ -266,12 +268,9 @@
             });
             describe('when given required messages, but no value', () => {
               it('returns message required value', () => {
-                wrapper.setProps({ messages: {
-                  required: 'messages required',
-                },
-              });
+                wrapper.setProps({ messages: { required: mockProps.requiredMessage } });
               wrapper.vm.validate();
-              expect(wrapper.vm.$data.errorMessage).toBe('messages required');
+              expect(wrapper.vm.$data.errorMessage).toBe(mockProps.requiredMessage);
             });
             
             describe('when given no value', () => {

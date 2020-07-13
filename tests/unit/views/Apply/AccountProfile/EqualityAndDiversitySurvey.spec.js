@@ -1,6 +1,3 @@
-// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
-//  component and errors due to the queryselector
-
 import { createTestSubject } from '../../../helpers';
 
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
@@ -25,7 +22,7 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 //   },
 // };
 
-xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
+describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(EqualityAndDiversitySurvey, {
@@ -41,7 +38,7 @@ xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   });
 
   describe('template', () => {
-    it('renders', () => {
+    it.only('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 

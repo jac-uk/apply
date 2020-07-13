@@ -2,7 +2,7 @@
 // couldnt manage to successfully integrate helpers
 // couldnt tell how to add necessary logic to either 
 // this file or ../helpers.js
-import { createTestSubject } from '../helpers';
+import { createTestSubject } from '../unit/helpers';
 import App from '@/App';
 
 const id = 12345;

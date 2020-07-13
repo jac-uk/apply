@@ -34,101 +34,112 @@ describe('components/Form/CheckboxGroup', () => {
 
     describe('component instance', () => {
         let wrapper;
+
+        let mockProps = {
+            label: 'Example question',
+            id: 'example',
+            value: ['selected-Checkbox-value'],
+        };
+
+        let mockSlots = ['CheckboxItem components'];
+
         beforeEach(() => {
             wrapper = createTestSubject(CheckboxGroup, {
                 mocks: {},
                 stubs: [],
-                propsData: {
-                    label: 'Example question',
-                    id: 'example',
-                    value: ['selected-Checkbox-value'],
-                },
-                slots: ['CheckboxItem components'],
+                propsData: mockProps,
+                slots: mockSlots,
             });
         });
-    describe('`v-model` interface', () => {
-        describe('when the `value` property changes', () => {
-            it('updates computed property `inputValue`', () => {
-                expect(wrapper.vm.inputValue[0]).toBe('selected-Checkbox-value');
+
+        describe('`v-model` interface', () => {
+            describe('when the `value` property changes', () => {
+                it('updates computed property `inputValue`', () => {
+                    let updateVal = ['some-other-value'];
+                    expect(wrapper.vm.inputValue[0]).toBe(mockProps.value[0]);
                     wrapper.setProps({
-                        value: ['some-other-value'],
+                        value: updateVal,
                     });
-                expect(wrapper.vm.inputValue).toEqual(['some-other-value']);
-            });
-        });
-
-        describe('when computed property `inputValue` changes', () => {
-            it('emits an `input` event', () => {
-                wrapper.setData({
-                    inputValue: ['some-new-value'],
-                });
-
-                const emitted = wrapper.emitted().input;
-                expect(emitted).toBeArrayOfSize(1);
-                expect(emitted[0][0][0]).toBe('some-new-value');
-            });
-        });
-    });
-
-    describe('template', () => {
-        it('the root element has the `id` attribute which was passed in as prop `id`', () => {
-            expect(wrapper.is('#example')).toBe(true);
-        });
-
-        describe('<legend> element', () => {
-            describe('when the `label` prop is set', () => {
-                it('displays the label in a <legend> element', () => {
-                    wrapper.setProps({ label: 'my_label' });
-                    const legend = wrapper.find('legend');
-                    expect(legend.exists()).toBe(true);
-                    expect(legend.text()).toBe('my_label');
-                    expect(legend.is('.govuk-fieldset__legend')).toBe(true);
+                    expect(wrapper.vm.inputValue).toEqual(updateVal);
                 });
             });
 
-            describe('when the `label` prop is empty', () => {
-                it('does not render a <legend>', () => {
-                    wrapper.setProps({ label: '' });
-                    const legend = wrapper.find('legend');
-                    expect(legend.exists()).toBe(false);
+            describe('when computed property `inputValue` changes', () => {
+                let updateVal = ['some-new-value'];
+                
+                it('emits an `input` event', () => {
+                    wrapper.setData({
+                        inputValue: updateVal,
+                    });
+                    const emitted = wrapper.emitted().input;
+                    expect(emitted).toBeArrayOfSize(1);
+                    expect(emitted[0][0]).toBe(updateVal);
                 });
-            });
-
-            it('is wrapped in a <fieldset>', () => {
-                const fieldset = wrapper.find('fieldset');
-                expect(fieldset.exists()).toBe(true);
-                expect(fieldset.is('.govuk-fieldset')).toBe(true);
-                const legend = fieldset.find('legend');
-                expect(legend.exists()).toBe(true);
             });
         });
 
-        describe('hint text', () => {
-            describe('when the `hint` prop is set', () => {
-                let hint;
-                beforeEach(() => {
-                    wrapper.setProps({
+        describe('template', () => {
+            it('the root element has the `id` attribute which was passed in as prop `id`', () => {
+                expect(wrapper.is(`#${mockProps.id}`)).toBe(true);
+            });
+
+            describe('<legend> element', () => {
+                describe('when the `label` prop is set', () => {
+                    let mockLabel = { label: 'my_label' };
+                    it('displays the label in a <legend> element', () => {
+                        wrapper.setProps(mockLabel);
+                        const legend = wrapper.find('legend');
+                        expect(legend.exists()).toBe(true);
+                        expect(legend.text()).toBe(mockLabel.label);
+                        expect(legend.is('.govuk-fieldset__legend')).toBe(true);
+                    });
+                });
+
+                describe('when the `label` prop is empty', () => {
+                    it('does not render a <legend>', () => {
+                        wrapper.setProps({ label: '' });
+                        const legend = wrapper.find('legend');
+                        expect(legend.exists()).toBe(false);
+                    });
+                });
+
+                it('is wrapped in a <fieldset>', () => {
+                    const fieldset = wrapper.find('fieldset');
+                    expect(fieldset.contains('legend')).toBeTrue();
+                });
+            });
+
+            describe('hint text', () => {
+                describe('when the `hint` prop is set', () => {
+                    let hint;
+                    mockProps = {
                         label: 'my_label',
                         hint: 'my_hint',
                         id: 'my_mock_id',
+                        value: ['new-value'],
+                    };
+
+                    beforeEach(() => {
+                        wrapper.setProps({
+                            mockProps,
+                        });
+                        hint = wrapper.find('span.govuk-hint');
                     });
-                    hint = wrapper.find('span.govuk-hint');
-                });
 
-                it('displays the hint', () => {
-                    expect(hint.exists()).toBe(true);
-                    expect(hint.text()).toBe('my_hint');
-                });
+                    it('displays the hint', () => {
+                        expect(hint.exists()).toBe(true);
+                        expect(hint.text()).toBe(mockProps.hint);
+                    });
 
-                it('gives the hint element an `id` based on the main component `id`', () => {
-                expect(hint.attributes('id')).toBe('my_mock_id__hint');
-                });
+                    it('gives the hint element an `id` based on the main component `id`', () => {
+                        expect(hint.attributes('id')).toBe(`${mockProps.id}__hint`);
+                    });
 
-                it('sets attribute `aria-describedby` on the <fieldset> to reference the hint element `id`', () => {
-                    const fieldset = wrapper.find('fieldset');
-                    expect(fieldset.attributes('aria-describedby')).toBe('my_mock_id__hint');
+                    it('sets attribute `aria-describedby` on the <fieldset> to reference the hint element `id`', () => {
+                        const fieldset = wrapper.find('fieldset');
+                        expect(fieldset.attributes('aria-describedby')).toBe(`${mockProps.id}__hint`);
+                    });
                 });
-            });
 
             describe('when the `hint` prop is not set', () => {
                 let hint;
@@ -162,7 +173,7 @@ describe('components/Form/CheckboxGroup', () => {
                 });
 
                 it('renders default slot content', () => {
-                    expect(slotContainer.text()).toBe('CheckboxItem components');
+                    expect(slotContainer.text()).toBe(mockSlots[0]);
                 });
 
                 it('is inside the <fieldset>', () => {

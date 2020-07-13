@@ -1,6 +1,13 @@
 import { createTestSubject } from '../../helpers';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
+let mockProps = {
+  label: 'Example checkbox item',
+  value: 'example-value',
+  content:  'Conditional content',
+  hint: 'Label hint text',
+};
+
 describe('components/Form/CheckboxItem', () => {
 
   it('component name is "CheckboxItem"', () => {
@@ -80,11 +87,7 @@ describe('components/Form/CheckboxItem', () => {
   
     beforeEach(() => {
       wrapper = createTestSubject(CheckboxItem,{
-        propsData: {
-          label: 'Example checkbox item',
-          value: 'example-value',
-          content:  'Conditional content',
-        },
+        propsData: mockProps,
         stubs: [],
         slots: ['<div/>'],
         parent: CheckboxGroup,
@@ -96,10 +99,7 @@ describe('components/Form/CheckboxItem', () => {
       const BadParent = () => {
         return createTestSubject(CheckboxItem, {
           stubs: [],
-          propsData: {
-            label: 'Example checkbox item',
-            value: 'example-value',
-          },
+          propsData: mockProps,
         });
       };
       expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
@@ -120,11 +120,7 @@ describe('components/Form/CheckboxItem', () => {
         
         it('is false when slot content was not supplied', () => {
           wrapper = createTestSubject(CheckboxItem,{
-            propsData: {
-              label: 'Example checkbox item',
-              value: 'example-value',
-              content:  'Conditional content',
-            },
+            propsData: mockProps,
             stubs: [],
             parent: CheckboxGroup,
           });
@@ -169,7 +165,7 @@ describe('components/Form/CheckboxItem', () => {
         });
 
         it('contains the label text', () => {
-          expect(label.text()).toBe('Example checkbox item');
+          expect(label.text()).toBe(mockProps.label);
         });
       });
 
@@ -183,27 +179,17 @@ describe('components/Form/CheckboxItem', () => {
         let hint;
         describe('when the `hint` prop is set', () => {
           beforeEach(() => {
-            wrapper = createTestSubject(CheckboxItem,{
-              propsData: {
-                label: 'Example checkbox item',
-                value: 'example-value',
-                content:  'Conditional content',
-                hint: 'Label hint text',
-              },
-              stubs: [],
-              parent: CheckboxGroup,
-            });
             hint = wrapper.find('.govuk-checkboxes__hint');
           });
-
+          
           it('renders a `.govuk-checkboxes__hint` element', () => {
             expect(hint.exists()).toBe(true);
           });
-
+          
           it('contains the hint text', () => {
-            expect(hint.text()).toBe('Label hint text');
+            expect(hint.text()).toBe(mockProps.hint);
           });
-
+          
           it('sets attribute `aria-describedby` on the input to reference the hint element', () => {
             const input = wrapper.find('input[type=checkbox]');
             expect(input.attributes('aria-describedby')).toBe(hint.attributes('id'));
@@ -212,6 +198,7 @@ describe('components/Form/CheckboxItem', () => {
 
         describe('when the `hint` prop is not set', () => {
           beforeEach(() => {
+            wrapper.setProps({ hint: null })
             hint = wrapper.find('.govuk-checkboxes__hint');
           });
 
@@ -238,11 +225,7 @@ describe('components/Form/CheckboxItem', () => {
           describe('and conditional content was not given', () => {
             it('does not render conditional content', () => {
               wrapper = createTestSubject(CheckboxItem,{
-                propsData: {
-                  label: 'Example checkbox item',
-                  value: 'example-value',
-                  hint: 'Label hint text',
-                },
+                propsData: mockProps,
                 stubs: [],
                 parent: CheckboxGroup,
               });
@@ -255,12 +238,7 @@ describe('components/Form/CheckboxItem', () => {
         describe('when the checkbox value is not selected', () => {
           it('does not render conditional content', () => {
               wrapper = createTestSubject(CheckboxItem, {
-                propsData: {
-                  label: 'Example checkbox item',
-                  value: 'example-value',
-                  content:  'Conditional content',
-                  hint: 'Label hint text',
-                },
+                propsData: mockProps,
                 stubs: [],
                 parent: CheckboxGroup,
               });
