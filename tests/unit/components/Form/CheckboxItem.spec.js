@@ -198,7 +198,7 @@ describe('components/Form/CheckboxItem', () => {
 
         describe('when the `hint` prop is not set', () => {
           beforeEach(() => {
-            wrapper.setProps({ hint: null })
+            wrapper.setProps({ hint: null });
             hint = wrapper.find('.govuk-checkboxes__hint');
           });
 

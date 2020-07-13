@@ -56,16 +56,16 @@ describe('components/Form/RadioGroup', () => {
                 slots: ['RadioItem components'],
             });
         });
-    describe('`v-model` interface', () => {
-        describe('when the `value` property changes', () => {
-            it('updates computed property `inputValue`', () => {
-                expect(wrapper.vm.inputValue).toBe(mockProps.value);
-                wrapper.setProps({
-                    value: 'some-other-value',
+        describe('`v-model` interface', () => {
+            describe('when the `value` property changes', () => {
+                it('updates computed property `inputValue`', () => {
+                    expect(wrapper.vm.inputValue).toBe(mockProps.value);
+                    wrapper.setProps({
+                        value: 'some-other-value',
+                    });
+                    expect(wrapper.vm.inputValue).toBe('some-other-value');
                 });
-                expect(wrapper.vm.inputValue).toBe('some-other-value');
             });
-        });
 
         describe('when computed property `inputValue` changes', () => {
             let updatedVal = 'some-new-value';
@@ -84,7 +84,7 @@ describe('components/Form/RadioGroup', () => {
 
     describe('template', () => {
         it('the root element has the `id` attribute which was passed in as prop `id`', () => {
-            expect(wrapper.is('#example')).toBe(true);
+            expect(wrapper.is(`#${mockProps.id}`)).toBe(true);
         });
 
         describe('<legend> element', () => {

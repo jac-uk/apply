@@ -22,7 +22,7 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 //   },
 // };
 
-describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
+xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(EqualityAndDiversitySurvey, {
@@ -38,7 +38,7 @@ describe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   });
 
   describe('template', () => {
-    it.only('renders', () => {
+    it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
 
