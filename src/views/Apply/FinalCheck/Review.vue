@@ -1427,6 +1427,33 @@
           </dl>
 
           <div
+            v-if="application.selectionCriteriaAnswers"
+            class="govuk-!-margin-top-9"
+          >
+            <h2 class="govuk-heading-l">
+              Additional Selection Criteria
+            </h2>
+
+            <dl class="govuk-summary-list">
+              <div
+                v-for="(item, index) in application.selectionCriteriaAnswers"
+                :key="index"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  {{ item.title }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="item.answer">
+                    {{ item.answerDetails }}
+                  </span>
+                  <span v-else>I do not meet this requirement</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
             v-if="showStatementOfSuitability"
             id="assessments-heading"
             class="govuk-!-margin-top-9"
@@ -1442,78 +1469,22 @@
               v-if="isDraftApplication"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
-              :to="{name: 'statement-of-eligibility'}"
+              :to="{name: 'statement-of-suitability'}"
             >
               Change
             </RouterLink>
 
-            <dl class="govuk-summary-list">
-              <div
-                v-for="(item, index) in application.selectionCriteriaAnswers"
-                :key="index"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  {{ item.title }}
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <span v-if="item.answer">
-                    {{ item.answerDetails }}
-                  </span>
-                  <span v-else>I do not meet this requirement</span>
-                </dd>
-              </div>
-              <div
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Upload statement of suitability
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
-                  <span v-else>Not yet received</span>
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          <div
-            v-if="showStatementOfEligibility"
-            id="assessments-heading"
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
+            <div
+              class="govuk-summary-list__row"
             >
-              Statement of eligibility
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'statement-of-eligibility'}"
-            >
-              Change
-            </RouterLink>
-
-            <dl class="govuk-summary-list">
-              <div
-                v-for="(item, index) in application.selectionCriteriaAnswers"
-                :key="index"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  {{ item.title }}
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <span v-if="item.answer">
-                    {{ item.answerDetails }}
-                  </span>
-                  <span v-else>I do not meet this requirement</span>
-                </dd>
-              </div>
-            </dl>
+              <dt class="govuk-summary-list__key">
+                Uploaded statement of suitability
+              </dt>
+              <dd class="govuk-summary-list__value">
+                <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
+                <span v-else>Not yet received</span>
+              </dd>
+            </div>
           </div>
 
           <div
@@ -1541,7 +1512,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Upload finished self assessment
+                  Uploaded finished self assessment
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="application.uploadedSelfAssessment">Your file has been received</span>
@@ -1576,7 +1547,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Upload CV
+                  Uploaded CV
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="application.uploadedCV">Your file has been received</span>
