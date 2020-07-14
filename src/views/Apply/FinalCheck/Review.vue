@@ -1447,7 +1447,7 @@
                   <span v-if="item.answer">
                     {{ item.answerDetails }}
                   </span>
-                  <span v-else>Does not meet this requirement</span>
+                  <span v-else>I do not meet this requirement</span>
                 </dd>
               </div>
             </dl>
@@ -1478,7 +1478,7 @@
               class="govuk-summary-list__row"
             >
               <dt class="govuk-summary-list__key">
-                Upload statement of suitability
+                Uploaded statement of suitability
               </dt>
               <dd class="govuk-summary-list__value">
                 <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
@@ -1512,7 +1512,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Upload finished self assessment
+                  Uploaded finished self assessment
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="application.uploadedSelfAssessment">Your file has been received</span>
@@ -1547,7 +1547,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Upload CV
+                  Uploaded CV
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="application.uploadedCV">Your file has been received</span>
