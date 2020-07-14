@@ -55,7 +55,7 @@
       label="I did not complete pupillage"
     />
     <TextareaInput
-      v-if="row.completedPupillage && row.completedPupillage[0] === false"
+      v-if="row.qualificationNotComplete"
       :id="qualificationDetails"
       v-model="row.details"
       hint="Please provide some additional information"

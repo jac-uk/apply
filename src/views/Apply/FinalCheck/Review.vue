@@ -775,8 +775,17 @@
                 v-if="item.date"
                 class="govuk-summary-list__row"
               >
-                <dt class="govuk-summary-list__key">
-                  {{ item.type === 'barrister' ? "Date completed pupillage" : "Date qualified" }}
+                <dt
+                  v-if="item.type === 'barrister'"
+                  class="govuk-summary-list__key"
+                >
+                  Date completed pupillage
+                </dt>
+                <dt
+                  v-else
+                  class="govuk-summary-list__key"
+                >
+                  Date qualified
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
