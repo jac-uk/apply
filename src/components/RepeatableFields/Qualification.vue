@@ -43,41 +43,30 @@
         label="Scotland"
       />
     </RadioGroup>
+    <DateInput
+      :id="qualificationDate"
+      v-model="row.date"
+      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
+      type="month"
+      required 
+    />
+    <!-- ^^ required not working -->
     <div
       v-if="row.type==='barrister'"
     >
-      <DateInput
+      <Checkbox 
         :id="qualificationDate"
-        :v-model="row.date"
-        :value="row.date ? row.date : null"
-        label="When did you complete pupillage?"
-        type="month"
+        v-model="row.qualificationNotComplete"
+        label="I did not complete pupillage"
       />
-      <CheckboxGroup
-        :id="qualificationDate"
-        v-model="row.completedPupillage"
-      >
-        <CheckboxItem
-          :value="false"
-          label="I did not complete pupillage"
-        />
-        <!-- @FIXME@ Date Input isnt cleared when completedPupillage is false -->
-      </CheckboxGroup>
+
       <TextareaInput
-        v-if="row.completedPupillage && row.completedPupillage[0] === false"
+        v-if="row.qualificationNotComplete"
         :id="qualificationDate"
         v-model="row.details"
-        label="Please provide some details"
-        rows="2"
+        hint="Please provide some additional information"
       />
     </div>
-    <DateInput
-      v-else
-      :id="qualificationDate"
-      v-model="row.date"
-      label="When did you qualify?"
-      type="month"
-    />
 
     <slot name="removeButton" />
   </div>
@@ -85,8 +74,7 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
+import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -95,8 +83,7 @@ export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    CheckboxGroup,
-    CheckboxItem,
+    Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
