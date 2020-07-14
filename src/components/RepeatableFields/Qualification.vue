@@ -48,21 +48,20 @@
       v-model="row.date"
       :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
       type="month"
-      required 
     />
-    <!-- ^^ required not working -->
+
     <div
       v-if="row.type==='barrister'"
     >
       <Checkbox 
-        :id="qualificationDate"
+        :id="qualificationNotComplete"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
       />
 
       <TextareaInput
         v-if="row.qualificationNotComplete"
-        :id="qualificationDate"
+        :id="qualificationDetails"
         v-model="row.details"
         hint="Please provide some additional information"
       />
