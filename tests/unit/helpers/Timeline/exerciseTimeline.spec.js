@@ -119,14 +119,42 @@ describe('helpers/Form/exerciseTimeline', () => {
             expect(exerciseTimeline(timelineArray)).toEqual([]);
         });
     });
-    describe('SelectionDays', () => {
+    xdescribe('characterChecksDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
                 characterChecksDate: new Date(),
-                // finalOutcome: new Date(),
-                // equalMeritSecondStageStartDate: new Date,
-                // eMPSCCDate: new Date(),
-                // eMPOutcomeDate: new Date(),
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
+        });
+    });
+    xdescribe('finalOutcome', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                finalOutcome: new Date(),
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
+        });
+    });
+    xdescribe('equalMeritSecondStageStartDate', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                equalMeritSecondStageStartDate: new Date,
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
+        });
+    });
+    xdescribe('eMpSCCDate', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                eMPSCCDate: new Date(),
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
+        });
+    });
+    xdescribe('eMPOutComeDate', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                eMPOutcomeDate: new Date(),
             };
             expect(exerciseTimeline(timelineArray)).toEqual([]);
         });
