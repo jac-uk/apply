@@ -95,18 +95,10 @@ describe('helpers/Form/exerciseTimeline', () => {
             ]);
         });
     });
-    describe('independentAssessmentsReturnDate', () => {
+    describe('eligibilitySCCDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
                 eligibilitySCCDate: new Date('2000'),
-                // selectionDays: [
-                //     new Date(),
-                // ],
-                // characterChecksDate: new Date(),
-                // finalOutcome: new Date(),
-                // equalMeritSecondStageStartDate: new Date,
-                // eMPSCCDate: new Date(),
-                // eMPOutcomeDate: new Date(),
             };
             expect(exerciseTimeline(timelineArray)).toEqual([
                 {
@@ -115,6 +107,28 @@ describe('helpers/Form/exerciseTimeline', () => {
                     'entry': 'Eligibility SCC',
                 },
             ]);
+        });
+    });
+    describe('SelectionDays', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                selectionDays: [
+                    new Date(),
+                ],
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
+        });
+    });
+    describe('SelectionDays', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                characterChecksDate: new Date(),
+                // finalOutcome: new Date(),
+                // equalMeritSecondStageStartDate: new Date,
+                // eMPSCCDate: new Date(),
+                // eMPOutcomeDate: new Date(),
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([]);
         });
     });
 });
