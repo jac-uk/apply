@@ -1,41 +1,21 @@
 import CharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
-import { shallowMount } from '@vue/test-utils';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+import { createTestSubject } from '../../../helpers';
 
-const application = {};
-
-const mockStore = {
-  dispatch: jest.fn(),
-  state: {
-    application: {
-      record: {},
-    },
-  },
-  getters: {
-    'application/data': () => application,
-  },
-};
-
-const createTestSubject = () => {
-  return shallowMount(CharacterInformation, {
-    mocks: {
-      $store: mockStore,
-    },
-  });
-};
-
-xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
+describe('@/views/Apply/AccountProfile/CharacterInformation', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(CharacterInformation, {
+      propsData: {},
+      stubs: ['RadioGroup','RadioItem'],
+    });
+  });
+  
+  it('renders', () => {
+    expect(wrapper.exists()).toBe(true);
   });
 
-  xdescribe('template', () => {
-    it('renders', () => {
-      expect(wrapper.exists()).toBe(true);
-    });
-
+  describe('template', () => {
+  
     it('contains a <h1>', () => {
       expect(wrapper.contains('h1')).toBe(true);
     });
@@ -51,11 +31,12 @@ xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
     });
 
     it('renders the RadioGroup components', () => {
-      expect(wrapper.find(RadioGroup).exists()).toBe(true);
+      expect(wrapper.find('RadioGroup-stub').exists()).toBe(true);
     });
 
     it('renders the RadioItem components', () => {
-      expect(wrapper.find(RadioItem).exists()).toBe(true);
+      expect(wrapper.find('RadioItem-stub').exists()).toBe(true);
     });
   });
+
 });

@@ -1,7 +1,7 @@
 import ResetPassword from '@/views/ResetPassword';
-import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
+import { createTestSubject } from '../helpers';
 
 const fullPath = 'fullPath';
 const mockRouter = {
@@ -21,10 +21,13 @@ jest.mock('@/firebase', () => {
 describe('views/ResetPassword', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(ResetPassword,{
+    wrapper = createTestSubject(ResetPassword,{
       mocks: {
         $router: mockRouter,
       },
+      propsData: {
+      },
+      stubs: [],
     });
   });
 

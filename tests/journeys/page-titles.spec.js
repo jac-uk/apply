@@ -1,7 +1,11 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
+// @FIXME@ *error-four* Quite a different test base, couldnt manage to successfully integrate helpers
+// couldnt tell how to add necessary logic to either 
+// this file or ../helpers.js
+
 import App from '@/App';
-import Router from 'vue-router';
-import Vuex from 'vuex';
+// import Router from 'vue-router';
+// import Vuex from 'vuex';
+import { createTestSubject } from '../unit/helpers';
 
 const routes = [
   // ['eligibility-checker', 'Eligibility Checker'],
@@ -25,21 +29,17 @@ const routes = [
 ];
 
 xdescribe('Page titles', () => {
-  let router;
-  let store;
-
+  let wrapper;
   beforeEach(() => {
-    const localVue = createLocalVue();
-    localVue.use(Router);
-    localVue.use(Vuex);
+    // const localVue = createLocalVue();
+    // localVue.use(Router);
+    // localVue.use(Vuex);
 
-    router = require('@/router').default;
-    store = require('@/store').default;
+    // router = require('@/router').default;
+    // store = require('@/store').default;
     window.scrollTo = () => {};
-    shallowMount(App, {
-      localVue,
-      router,
-      store,
+    wrapper = createTestSubject(App, {
+      stubs: ['RouterView'],
     });
   });
 
@@ -48,9 +48,9 @@ xdescribe('Page titles', () => {
     email: 'user@judicialappointments.digital',
   };
 
-  xdescribe('sign in', () => {
+  describe('sign in', () => {
     beforeEach(() => {
-      router.push({ name: 'sign-in' });
+      wrapper.vm.$router.push({ name: 'sign-in' });
     });
 
     it('contains Sign In', () => {
@@ -62,11 +62,11 @@ xdescribe('Page titles', () => {
     });
   });
 
-  xdescribe.each(routes)('%s', (routeName, routeTitle) => {
+  describe.each(routes)('%s', (routeName, routeTitle) => {
     beforeEach(() => {
-     store.dispatch('auth/setCurrentUser', user);
-     router.push({ name: routeName, params: { id: 123 } });
-   });
+      wrapper.vm.$store.dispatch('auth/setCurrentUser', user);
+      wrapper.vm.$router.push({ name: routeName, params: { id: 123 } });
+    });
 
     it(`contains ${routeTitle}`, () => {
       expect(document.title).toContain(routeTitle);

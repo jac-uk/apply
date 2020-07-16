@@ -4,10 +4,11 @@
     aria-label="Side navigation"
   >
     <ul class="moj-side-navigation__list">
-      <li class="moj-side-navigation__item">
+      <li
         v-for="navItem in items"
         :key="navItem.name"
-        >
+        class="moj-side-navigation__item"
+      >
         <RouterLink 
           class="nav-link"
           :to="{name: navItem.name}"
