@@ -119,44 +119,64 @@ describe('helpers/Form/exerciseTimeline', () => {
             expect(exerciseTimeline(timelineArray)).toEqual([]);
         });
     });
-    xdescribe('characterChecksDate', () => {
+    describe('characterChecksDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
-                characterChecksDate: new Date(),
+                characterChecksDate: new Date('2001'),
             };
-            expect(exerciseTimeline(timelineArray)).toEqual([]);
+            expect(exerciseTimeline(timelineArray)).toEqual([{
+                'date': new Date('2001'),
+                'dateString': '1 January 2001',
+                'entry': 'Character checks',
+            }]);
         });
     });
-    xdescribe('finalOutcome', () => {
+    describe('finalOutcome', () => {
         it('formats and returns', () => {
             timelineArray = { 
-                finalOutcome: new Date(),
+                finalOutcome: new Date('2002'),
             };
-            expect(exerciseTimeline(timelineArray)).toEqual([]);
+            expect(exerciseTimeline(timelineArray)).toEqual([{
+                'date': new Date('2002'),
+                'dateString': 'January 2002',
+                'entry': 'Selection process outcome',
+            }]);
         });
     });
-    xdescribe('equalMeritSecondStageStartDate', () => {
+    describe('equalMeritSecondStageStartDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
-                equalMeritSecondStageStartDate: new Date,
+                equalMeritSecondStageStartDate: new Date('2003'),
             };
-            expect(exerciseTimeline(timelineArray)).toEqual([]);
+            expect(exerciseTimeline(timelineArray)).toEqual([{
+                'date': new Date('2003'),
+                'dateString': '',
+                'entry': 'Equal merit second stage',
+            }]);
         });
     });
-    xdescribe('eMpSCCDate', () => {
+    describe('eMpSCCDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
-                eMPSCCDate: new Date(),
+                eMPSCCDate: new Date('2004'),
             };
-            expect(exerciseTimeline(timelineArray)).toEqual([]);
+            expect(exerciseTimeline(timelineArray)).toEqual([{
+                'date': new Date('2004'),
+                'dateString': '1 January 2004',
+                'entry': 'EMP SCC',
+            }]);
         });
     });
-    xdescribe('eMPOutComeDate', () => {
+    describe('eMPOutComeDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
-                eMPOutcomeDate: new Date(),
+                eMPOutcomeDate: new Date('2005'),
             };
-            expect(exerciseTimeline(timelineArray)).toEqual([]);
+            expect(exerciseTimeline(timelineArray)).toEqual([{
+                'date': new Date('2005'),
+                'dateString': 'January 2005',
+                'entry': 'EMP Outcomes',
+            }]);
         });
     });
 });
