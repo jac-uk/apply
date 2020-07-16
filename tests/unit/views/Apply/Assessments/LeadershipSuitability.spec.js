@@ -1,3 +1,6 @@
+// @FIXME@ *event handlers* 
+// this suite gives a warning due to an change event in the mount
+
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import { createTestSubject } from '../../../helpers';
 
@@ -39,14 +42,14 @@ xdescribe('views/Assessments/LeadershipSuitability', () => {
     });
 
     it('contains a govuk file upload', () => {
-     expect(wrapper.contains('.govuk-file-upload')).toBe(true);
-   });
+      expect(wrapper.contains('.govuk-file-upload')).toBe(true);
+    });
 
-   xit('contains a link to download the competencies template document', () => {
-     const link = wrapper.find({ ref: 'templateDownloadLink' });
-     expect(link.is('a')).toBe(true);
-     expect(link.attributes('href')).toBe('#');
-     expect(link.text()).toBe('assessments-template.doc');
-   });
+    it('contains a link to download the competencies template document', () => {
+      const link = wrapper.find({ ref: 'templateDownloadLink' });
+      expect(link.is('a')).toBe(true);
+      expect(link.attributes('href')).toBe('#');
+      expect(link.text()).toBe('leadership-suitability-template.doc');
+    });
   });
 });

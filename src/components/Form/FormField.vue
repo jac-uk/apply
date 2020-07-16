@@ -10,6 +10,10 @@ export default {
       type: String,
       default: '',
     },
+    type: {
+      type: String,
+      default: '',
+    },
     label: {
       default: '',
       type: String,
@@ -24,7 +28,9 @@ export default {
         return {};
       },
     },
-    required: Boolean,
+    required: {
+      type: Boolean,
+    },
     minLength: {
       type: Number,
       default: 0,
@@ -67,18 +73,23 @@ export default {
     this.$root.$off('validate', this.handleValidate);
   },
   methods: {
+    setError(message) {
+      this.errorMessage = message;
+      this.$root.$emit('handle-error', { id: this.id, message: this.errorMessage });
+    },  
     handleValidate() {
       this.checkErrors = true;
       this.validate();
     },
     validate(event) {
       this.setError('');
+      
       if (this.checkErrors) {
         let value = this.value;
         if (event && event.target) {
           value = event.target.value;
         }
-
+        
         if (this.required && (value === null || value === undefined || value.length === 0)) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
@@ -117,11 +128,7 @@ export default {
           }
         }
       }
-    },
-    setError(message) {
-      this.errorMessage = message;
-      this.$root.$emit('handle-error', { id: this.id, message: this.errorMessage });
-    },    
+    },  
   },
 };
 </script>

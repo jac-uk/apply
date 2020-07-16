@@ -1,29 +1,14 @@
 import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
-import TextField from '@/components/Form/TextField';
 
-xdescribe('components/RepeatableFields', () => {
+let TextField = {
+  name: 'TextField',
+  template: '<div/>',
+};
 
-  let wrapper;
-  beforeEach(() => {
-    wrapper = createTestSubject(RepeatableFields, {
-      mocks: {},
-      stubs: [],
-      propsData: {
-        value: null,
-        component: TextField,
-      },
-    });
-  });
+let array = [1, 2, 3];
 
-  it('renders successfully', () => {
-    expect(wrapper.exists()).toBeTrue();
-  });
-
-  it('component name is "RepeatableFields"', () => {
-    expect(RepeatableFields.name).toBe('RepeatableFields');
-  });
-
+describe('components/RepeatableFields', () => {
   describe('props', () => {
     let prop;
 
@@ -98,105 +83,170 @@ xdescribe('components/RepeatableFields', () => {
 
   });
 
-  xdescribe('template', () => {
-    let wrapper;
-    beforeEach(() => {
-      wrapper = createTestSubject();
+  describe('component instance', () => {
+  let wrapper;
+  beforeEach(() => {
+    wrapper = createTestSubject(RepeatableFields, {
+      mocks: {},
+      stubs: [],
+      propsData: {
+        value: null,
+        component: TextField,
+      },
     });
+  });
 
-    xit('renders child component', () => {
+  it('renders successfully', () => {
+    expect(wrapper.exists()).toBeTrue();
+  });
+
+  it('component name is "RepeatableFields"', () => {
+    expect(RepeatableFields.name).toBe('RepeatableFields');
+  });
+
+  describe('template', () => {
+    it('renders single child component by default', () => {
       expect(wrapper.find(TextField).exists()).toBe(true);
     });
 
-    xdescribe('number of repeatable components', () => {
-      xdescribe('when value is not an instance of an array', () => {
+    describe('number of repeatable components', () => {
+      describe('when value is not an instance of an array', () => {
         it('renders one component', () => {
-         expect(wrapper.findAll(TextField)).toHaveLength(1);
+          expect(wrapper.findAll(TextField)).toHaveLength(1);
         });
       });
 
-      xdescribe('when value is an instance of an array', () => {
-        let array = [1, 2, 3];
-        let wrapper = createTestSubject({ value: array });
-
+      describe('when value is an instance of an array', () => {
         it('renders number of components equal to the length of the array', () => {
+          wrapper = createTestSubject(RepeatableFields, {
+            mocks: {},
+            stubs: [],
+            propsData: {
+              value: array,
+              component: TextField,
+            },
+          });
           expect(wrapper.findAll(TextField)).toHaveLength(3);
         });
       });
     });
   });
 
-  xdescribe('computed properties', () => {
-    xdescribe('canAddRow', () => {
-      xdescribe('when max is not set', () => {
-        let wrapper = createTestSubject();
+    describe('canAddRow', () => {
+      it('when max is not set', () => {
         expect(wrapper.vm.canAddRow).toBe(true);
       });
 
-      xdescribe("when max is set and it's greater than number of rows", () => {
+      describe("when max is set and it's greater than number of rows", () => {
         it('sets canAddRow value to true', () => {
-          let wrapper = createTestSubject({ max: 5, value: [1, 2, 3] });
+          wrapper = createTestSubject(RepeatableFields, {
+            mocks: {},
+            stubs: [],
+            propsData: {
+              value: array,
+              max: 5, 
+              component: TextField,
+            },
+          });
           expect(wrapper.vm.canAddRow).toBe(true);
         });
       });
 
-      xdescribe("when max is set and it's less than number of rows", () => {
+      describe("when max is set and it's less than number of rows", () => {
         it('sets canAddRow value to false', () => {
-          let wrapper = createTestSubject({ max: 2, value: [1, 2, 3] });
+          wrapper = createTestSubject(RepeatableFields, {
+            mocks: {},
+            stubs: [],
+            propsData: {
+              value: array,
+              max: 2, 
+              component: TextField,
+            },
+          });
           expect(wrapper.vm.canAddRow).toBe(false);
         });
       });
 
-      xdescribe("when max is set and it's equal to number of rows", () => {
+      describe("when max is set and it's equal to number of rows", () => {
         it('sets canAddRow value to true', () => {
-          let wrapper = createTestSubject({ max: 3, value: [1, 2, 3] });
+          wrapper = createTestSubject(RepeatableFields, {
+            mocks: {},
+            stubs: [],
+            propsData: {
+              value: array,
+              max: 3, 
+              component: TextField,
+            },
+          });
           expect(wrapper.vm.canAddRow).toBe(false);
-        });
       });
     });
   });
-
-  xdescribe('created hook', () => {
-    xdescribe('if value is an array', () => {
+  
+  describe('created hook', () => {
+    describe('if value is an array', () => {
       it('updates the value of rows and does not call emit', ()=> {
-        let array = [1, 2, 3];
-        let wrapper = createTestSubject({ value: array });
+        wrapper = createTestSubject(RepeatableFields, {
+          mocks: {},
+          stubs: [],
+          propsData: {
+            value: array,
+            max: 3, 
+            component: TextField,
+          },
+        });
         expect(wrapper.vm.rows).toBe(array);
         expect(wrapper.emitted().input).not.toBeTruthy();
       });
     });
 
-    xdescribe('if value is not an array', () => {
+    describe('if value is not an array', () => {
       it('emits the initial rows value', ()=> {
-        let wrapper = createTestSubject({ value: undefined });
+        wrapper.setProps({ value: undefined });
         expect(wrapper.emitted().input).toBeTruthy();
       });
     });
 
-    xdescribe('if rows array is empty', () => {
+    describe('if rows array is empty', () => {
       it('pushes an object to rows', ()=> {
-        let wrapper = createTestSubject({ value: undefined });
+        wrapper.setProps({ value: undefined });
         expect(wrapper.vm.rows).toContainEqual({});
       });
     });
   });
 
-  xdescribe('methods', () => {
-    xdescribe('addRow', () => {
+  describe('methods', () => {
+    describe('addRow', () => {
       it('increases numbers of rows and renders another instance of a component', () => {
-        let array = [1, 2, 3];
-        let wrapper = createTestSubject({ component: TextField, value: array });
-        expect(wrapper.vm.rows.length).toBe(3);
+        wrapper = createTestSubject(RepeatableFields, {
+          mocks: {},
+          stubs: [],
+          propsData: {
+            value: array,
+            max: undefined,
+            component: TextField,
+          },
+        });
 
+        expect(wrapper.vm.rows.length).toBe(3);
+        
         wrapper.vm.addRow();
         expect(wrapper.vm.rows.length).toBe(4);
       });
     });
 
-    xdescribe('removeRow', () => {
+    describe('removeRow', () => {
       it('removes an item at the index', () => {
-        let array = [1, 2, 3, 4];
-        let wrapper = createTestSubject({ component: TextField, value: array });
+        array = [1, 2, 3, 4];
+
+        wrapper = createTestSubject(RepeatableFields, {
+          mocks: {},
+          stubs: [],
+          propsData: {
+            value: array,
+            component: TextField,
+          },
+        });
 
         wrapper.vm.removeRow(2);
         expect(wrapper.vm.rows[0]).toBe(1);
@@ -206,4 +256,5 @@ xdescribe('components/RepeatableFields', () => {
     });
   });
 
+  });
 });

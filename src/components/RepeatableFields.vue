@@ -8,6 +8,7 @@
     >
       <component
         :is="component"
+        :id="`${index}`"
         :row="row"
         :index="index"
       >

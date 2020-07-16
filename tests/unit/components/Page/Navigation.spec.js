@@ -1,35 +1,15 @@
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../helpers';
 import Navigation from '@/components/Page/Navigation';
 
 const navPages = [
-  { page: 'Test', name: 'nav-test-name1' },
+  { page: 'Test', name: 'name-of-current-route' },
   { page: 'Test2', name: 'nav-test-name2' },
 ];
 
-const createTestSubject = (propsData) => {
-  return shallowMount(Navigation, {
-    propsData: {
-      ...propsData,
-    },
-    stubs: ['RouterLink'],
-    mocks: {
-      $route: {
-        name: 'nav-test-name1',
-      },
-    },
-  });
-};
-
-xdescribe('components/Page/Navigation', () => {
-  it('renders the component', () => {
-    let wrapper = createTestSubject({ items: navPages });
-    expect(wrapper.exists()).toBe(true);
-  });
-
-  xdescribe('properties', () => {
+describe('components/Page/Navigation', () => {
+  describe('props', () => {
     let prop;
-
-    xdescribe('data', () => {
+    describe('items', () => {
       beforeEach(() => {
         prop = Navigation.props.items;
       });
@@ -43,13 +23,13 @@ xdescribe('components/Page/Navigation', () => {
       });
     });
 
-    xdescribe('label', () => {
+    describe('label', () => {
       beforeEach(() => {
         prop = Navigation.props.label;
       });
 
       it('is optional', () => {
-        expect(prop.required).not.toBe(true);
+        expect(prop.required).toBeFalsy();
       });
 
       it('has default value', () => {
@@ -62,28 +42,41 @@ xdescribe('components/Page/Navigation', () => {
     });
   });
 
-  xdescribe('template', () => {
-    it('renders items that is passed as prop', () => {
-      let wrapper = createTestSubject({ items: navPages });
-      expect(wrapper.findAll('li').length).toBe(2);
+  describe('component instance', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = createTestSubject(Navigation, {
+        propsData: {
+          items: navPages,
+        },
+        stubs: ['RouterLink'],
+      });
     });
 
-    it('does not render if items array is empty', () => {
-      let wrapper = createTestSubject({ items: [] });
-      expect(wrapper.findAll('li').length).toBe(0);
+    it('renders the component', () => {
+      expect(wrapper.exists()).toBe(true);
     });
+    describe('template', () => {
+      it('renders items that is passed as prop', () => {
+        expect(wrapper.findAll('li').length).toBe(2);
+      });
 
-    it('sets aria-label with label prop', () => {
-      let wrapper = createTestSubject({ items: navPages, label: 'MyTestLabel' });
-      expect(wrapper.find('nav').attributes('aria-label')).toBe('MyTestLabel');
-    });
+      it('does not render if items array is empty', () => {
+        wrapper.setProps({ items: [] });
+        expect(wrapper.findAll('li').length).toBe(0);
+      });
 
-    xdescribe('aria-current attribute', () => {
-      it('is set for a link which is currently active', () => {
-        let wrapper = createTestSubject({ items: navPages });
-        let links = wrapper.findAll('.nav-link');
-        expect(links.at(0).attributes()).toHaveProperty('aria-current');
-        expect(links.at(1).attributes()).not.toHaveProperty('aria-current');
+      it('sets aria-label with label prop', () => {
+        wrapper.setProps({ label: 'MyTestLabel' });
+        expect(wrapper.find('nav').attributes('aria-label')).toBe('Side navigation');
+      });
+
+      describe('aria-current attribute', () => {
+        it('is set for a link which is currently active', () => {
+          let links = wrapper.findAll('.nav-link');
+          expect(links.at(0).attributes()).toHaveProperty('aria-current');
+          expect(links.at(1).attributes()).not.toHaveProperty('aria-current');
+        });
       });
     });
   });

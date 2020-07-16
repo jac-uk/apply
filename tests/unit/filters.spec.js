@@ -10,7 +10,7 @@ describe('global filters', () => {
 
     describe('called with a Date argument', () => {
 
-      xit('returns a full formatted date if a value was supplied', () => {
+      it('returns a full formatted date if a value was supplied', () => {
         const date = new Date();
 
         const result = filters.formatDate(date);

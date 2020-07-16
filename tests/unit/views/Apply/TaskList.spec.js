@@ -40,11 +40,8 @@ describe('views/TaskList', () => {
         it('contains text \'Applications\'', () => {
           expect(wrapper.find('.govuk-back-link').text()).toBe('Applications');
         });
-        xit('goes to applications page', () => {
-          // @TODO make test for :to prop of RouterLink
-        });
         it('is a RouterLink', () => {    
-        expect(wrapper.find('RouterLink-stub').exists()).toBeTrue();
+          expect(wrapper.find('RouterLink-stub').exists()).toBeTrue();
         });
       });
       

@@ -1,5 +1,4 @@
-// @todo add in Monikas test helpers
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../helpers';
 import FirebaseUI from '@/components/FirebaseUI';
 import firebaseui from 'firebaseui';
 import { auth } from '@/firebase';
@@ -9,6 +8,10 @@ const mockUiInstance = {
   start: jest.fn(),
   delete: jest.fn(),
 };
+
+// Can these mocks be moved to helpers? 
+// if so how do we move them over, if not
+// when should logic be added to helpers?
 
 jest.mock('@/firebase', () => {
   const mock = {
@@ -32,17 +35,18 @@ jest.mock('firebaseui', () => (
 }));
 
 describe('FirebaseUI component', () => {
-  const createTestSubject = () => {
-    jest.clearAllMocks();
-    return shallowMount(FirebaseUI);
-  };
-
   let wrapper;
-
-  beforeEach(() => {
-    wrapper = createTestSubject();
+  beforeAll(() => {
+    wrapper = createTestSubject(FirebaseUI,{
+      propsData: {},
+      stubs:[],
+    });
   });
 
+  it('renders the component', () => {
+    expect(wrapper.exists()).toBe(true);
+  });
+  
   it('renders a firebaseui-auth-container element in DOM', () => {
     expect(wrapper.find('#firebaseui-auth-container').exists()).toBe(true);
   });
@@ -92,7 +96,6 @@ describe('FirebaseUI component', () => {
 
   it('destroys the FirebaseUI instance when the component is destroyed', () => {
     wrapper.destroy();
-
     expect(mockUiInstance.delete).toBeCalledTimes(1);
   });
 
