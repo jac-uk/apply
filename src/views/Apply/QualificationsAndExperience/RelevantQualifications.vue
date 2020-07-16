@@ -80,7 +80,6 @@
           v-model="application.qualifications"
           :component="repeatableFields.Qualification"
         />
-
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button"

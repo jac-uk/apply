@@ -710,7 +710,7 @@
                   class="govuk-summary-list__value"
                 >
                   <p
-                    v-if="application.canReadAndWriteWelsh == false "
+                    v-if="application.canReadAndWriteWelsh == false"
                   >
                     {{ application.canReadAndWriteWelsh | toYesNo }}
                   </p>
@@ -771,14 +771,56 @@
                 </dd>
               </div>
 
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
+              <div
+                v-if="item.date"
+                class="govuk-summary-list__row"
+              >
+                <dt
+                  v-if="item.type === 'barrister'"
+                  class="govuk-summary-list__key"
+                >
+                  Date completed pupillage
+                </dt>
+                <dt
+                  v-else
+                  class="govuk-summary-list__key"
+                >
                   Date qualified
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
-                    <li v-if="item.date">
-                      {{ item.date | formatDate }}
+                    <li> {{ item.date | formatDate }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div 
+                v-if="item.qualificationNotComplete"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Completed pupillage
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>
+                      No
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+              
+              <div
+                v-if="item.qualificationNotComplete && item.details"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Did not complete pupillage notes
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>
+                      {{ item.details }}
                     </li>
                   </ul>
                 </dd>
