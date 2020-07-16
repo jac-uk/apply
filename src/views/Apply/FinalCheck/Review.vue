@@ -710,7 +710,7 @@
                   class="govuk-summary-list__value"
                 >
                   <p
-                    v-if="application.canReadAndWriteWelsh == false "
+                    v-if="application.canReadAndWriteWelsh == false"
                   >
                     {{ application.canReadAndWriteWelsh | toYesNo }}
                   </p>
@@ -794,39 +794,37 @@
                 </dd>
               </div>
 
-              <template
-                v-if="item.qualificationNotComplete && item.details"
+              <div 
+                v-if="item.qualificationNotComplete"
+                class="govuk-summary-list__row"
               >
-                <div 
-                  class="govuk-summary-list__row"
-                >
-                  <dt class="govuk-summary-list__key">
-                    Completed pupillage
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    <ul class="govuk-list">
-                      <li>
-                        No
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
-                
-                <div
-                  class="govuk-summary-list__row"
-                >
-                  <dt class="govuk-summary-list__key">
-                    Did not complete pupillage notes
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    <ul class="govuk-list">
-                      <li>
-                        {{ item.details }}
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
-              </template>
+                <dt class="govuk-summary-list__key">
+                  Completed pupillage
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>
+                      No
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+              
+              <div
+                v-if="item.qualificationNotComplete && item.details"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Did not complete pupillage notes
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>
+                      {{ item.details }}
+                    </li>
+                  </ul>
+                </dd>
+              </div>
             </dl>
           </div>
 
