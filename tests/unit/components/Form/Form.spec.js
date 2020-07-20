@@ -1,26 +1,20 @@
 import { createTestSubject } from '../../helpers';
 
 import Form from '@/components/Form/Form';
+//@FIXME@ Testing this suite requires the ref 'formRef' to be mocked
+xdescribe('components/Form/Form', () => {
+    describe('component instance', () => {  
+        let wrapper;
+        beforeEach(() => {
+        wrapper = createTestSubject(Form, {
+            mocks: {},
+            stubs: [],
+            propsData: {},
+            });
+        });
 
-describe('components/Form/Form', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = createTestSubject(Form, {
-      mocks: {
-      },
-      stubs: [],
+        it('renders the component', () => {
+            expect(wrapper.exists()).toBe(true);
+        });
     });
-  });
-  
-  xit('renders the component', () => {
-    expect(wrapper.exists()).toBe(true);
-  });
-
-  xdescribe('methods', () => {
-      it('validates', () => {
-          wrapper.setData({ errors:[] });
-          expect(wrapper.vm.isValid().toBe(false));
-    });
-  });
-      
 });

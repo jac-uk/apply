@@ -1,17 +1,19 @@
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+//  component and errors due to the queryselector
+
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../../helpers';
 
-const createTestSubject = () => {
-  return shallowMount(SelfAssessmentCompetencies);
-};
-
-xdescribe('views/Assessments/SelfAssessmentCompetencies', () => {
+xdescribe('views/Apply/Assessments/SelfAssessmentCompetencies', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = createTestSubject();
+    wrapper = createTestSubject(SelfAssessmentCompetencies, {
+      propsData: {},
+      stubs: [],
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });

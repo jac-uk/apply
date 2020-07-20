@@ -1,28 +1,20 @@
 import { createTestSubject } from '../../helpers';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
+let mockProps = {
+  label: 'Example checkbox item',
+  value: 'example-value',
+  content:  'Conditional content',
+  hint: 'Label hint text',
+};
+
 describe('components/Form/CheckboxItem', () => {
+
   it('component name is "CheckboxItem"', () => {
     expect(CheckboxItem.name).toBe('CheckboxItem');
   });
 
-  it('throws an error if the parent component is not "CheckboxGroup"', () => {
-    const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
-    const BadParent = () => {
-      return createTestSubject(CheckboxItem, {
-        propsData: {
-          label: 'Example checkbox item',
-          value: 'example-value',
-        },
-        stubs: [],
-      });
-    };
-    expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
-    expect(consoleError).toHaveBeenCalled();
-    consoleError.mockRestore();
-  });
-
-  describe('properties', () => {
+  describe('props', () => { 
     let prop;
     describe('label', () => {
       beforeEach(() => {
@@ -81,159 +73,181 @@ describe('components/Form/CheckboxItem', () => {
     });
   });
 
-  xdescribe('component', ()=>{
-    let wrapper;
-    beforeEach(()=>{
-      wrapper = createTestSubject(CheckboxItem,{
-        propsData: { 
-          label: 'Example checkbox item',
-          value: ['example-value'],
-          content:  'Conditional content',
+  describe('component instance', () => {
+    let CheckboxGroup = {
+      name: 'CheckboxGroup',
+      template: '<div/>',
+      computed: {
+        inputValue(){
+          return ['example-value','one-value', 'two-value'];
+        },
       },
-      stubs: [],
+    };
+    let wrapper;
+  
+    beforeEach(() => {
+      wrapper = createTestSubject(CheckboxItem,{
+        propsData: mockProps,
+        stubs: [],
+        slots: ['<div/>'],
+        parent: CheckboxGroup,
       });
     });
-
-  xdescribe('data', () => {
-    describe('hasConditionalContent', () => {
-      it('is true when slot content was supplied', () => {
-        expect(wrapper.vm.hasConditionalContent).toBe(true);
-      });
-
-      it('is false when slot content was not supplied', () => {
-        expect(wrapper.vm.hasConditionalContent).toBe(false);
-      });
+    
+    it('throws an error if the parent component is not "CheckboxGroup"', () => {
+      const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
+      const BadParent = () => {
+        return createTestSubject(CheckboxItem, {
+          stubs: [],
+          propsData: mockProps,
+        });
+      };
+      expect(BadParent).toThrow('CheckboxItem component can only be used inside a CheckboxGroup component');
+      expect(consoleError).toHaveBeenCalled();
+      consoleError.mockRestore();
     });
-  });
-
-  describe('template', () => {
-    it('renders a `.govuk-checkboxes__item` element', () => {
-      const item = wrapper.find('.govuk-checkboxes__item');
-      expect(item.exists()).toBe(true);
+  
+    it('renders the component', () => {
+      expect(wrapper.exists()).toBeTrue();
+      expect(wrapper.vm.$parent.$options.name).toEqual(CheckboxGroup.name);
     });
-
-    describe('checkbox input', () => {
-      let input;
-      beforeEach(() => {
-        input = wrapper.find('input[type=checkbox]');
-      });
-
-      it('renders a checkbox input', () => {
-        expect(input.exists()).toBe(true);
-      });
-
-      it('has class name `.govuk-checkboxes__input`', () => {
-        expect(input.is('.govuk-checkboxes__input')).toBe(true);
-      });
-    });
-
-    describe('label', () => {
-      let label;
-      beforeEach(() => {
-        label = wrapper.find('label');
-      });
-
-      it('renders a label', () => {
-        expect(label.exists()).toBe(true);
-      });
-
-      it('has class name `.govuk-checkboxes__label`', () => {
-        expect(label.is('.govuk-checkboxes__label')).toBe(true);
-      });
-
-      it('contains the label text', () => {
-        expect(label.text()).toBe('Example checkbox item');
-      });
-    });
-
-    it('label `for` and input `id` attributes match', () => {
-      wrapper = createTestSubject();
-      const input = wrapper.find('input[type=checkbox]');
-      const label = wrapper.find('label');
-      expect(label.attributes('for')).toBe(input.attributes('id'));
-    });
-
-    describe('hint', () => {
-      let hint;
-      describe('when the `hint` prop is set', () => {
-        beforeEach(() => {
-          wrapper = createTestSubject({
-            label: 'My label',
-            value: ['my-value'],
-            hint: 'Label hint text',
+    
+    describe('data', () => {
+      describe('hasConditionalContent', () => {
+        it('is true when slot content was supplied', () => {
+          expect(wrapper.vm.hasConditionalContent).toBe(true);
+        });
+        
+        it('is false when slot content was not supplied', () => {
+          wrapper = createTestSubject(CheckboxItem,{
+            propsData: mockProps,
+            stubs: [],
+            parent: CheckboxGroup,
           });
-          hint = wrapper.find('.govuk-checkboxes__hint');
-        });
-
-        it('renders a `.govuk-checkboxes__hint` element', () => {
-          expect(hint.exists()).toBe(true);
-        });
-
-        it('contains the hint text', () => {
-          expect(hint.text()).toBe('Label hint text');
-        });
-
-        it('sets attribute `aria-describedby` on the input to reference the hint element', () => {
-          const input = wrapper.find('input[type=checkbox]');
-          expect(input.attributes('aria-describedby')).toBe(hint.attributes('id'));
-        });
-      });
-
-      describe('when the `hint` prop is not set', () => {
-        beforeEach(() => {
-          wrapper = createTestSubject({
-            label: 'My label',
-            value: ['my-value'],
-          });
-          hint = wrapper.find('.govuk-checkboxes__hint');
-        });
-
-        it('does not render', () => {
-          expect(hint.exists()).toBe(false);
-        });
-
-        it('does not set attribute `aria-describedby` on the input', () => {
-          const input = wrapper.find('input[type=checkbox]');
-          expect(input.attributes()).not.toContainKey('aria-describedby');
+          expect(wrapper.vm.hasConditionalContent).toBe(false);
         });
       });
     });
 
-    describe('conditional content', () => {
-    describe('when the checkbox is selected', () => {
-      describe('and conditional content was given', () => {
-          it('renders conditional content', () => {
-            wrapper = createTestSubject({
-              value: ['selected-checkbox-value'],
-              content: 'Conditional content here',
+    describe('template', () => {
+      it('renders a `.govuk-checkboxes__item` element', () => {
+        const item = wrapper.find('.govuk-checkboxes__item');
+        expect(item.exists()).toBe(true);
+      });
+
+      describe('checkbox input', () => {
+        let input;
+        beforeEach(() => {
+          input = wrapper.find('input[type=checkbox]');
+        });
+
+        it('renders a checkbox input', () => {
+          expect(input.exists()).toBe(true);
+        });
+
+        it('has class name `.govuk-checkboxes__input`', () => {
+          expect(input.is('.govuk-checkboxes__input')).toBe(true);
+        });
+      });
+
+      describe('label', () => {
+        let label;
+        beforeEach(() => {
+          label = wrapper.find('label');
+        });
+
+        it('renders a label', () => {
+          expect(label.exists()).toBe(true);
+        });
+
+        it('has class name `.govuk-checkboxes__label`', () => {
+          expect(label.is('.govuk-checkboxes__label')).toBe(true);
+        });
+
+        it('contains the label text', () => {
+          expect(label.text()).toBe(mockProps.label);
+        });
+      });
+
+      it('label `for` and input `id` attributes match', () => {
+        const input = wrapper.find('input[type=checkbox]');
+        const label = wrapper.find('label');
+        expect(label.attributes('for')).toBe(input.attributes('id'));
+      });
+
+      describe('hint', () => {
+        let hint;
+        describe('when the `hint` prop is set', () => {
+          beforeEach(() => {
+            hint = wrapper.find('.govuk-checkboxes__hint');
+          });
+          
+          it('renders a `.govuk-checkboxes__hint` element', () => {
+            expect(hint.exists()).toBe(true);
+          });
+          
+          it('contains the hint text', () => {
+            expect(hint.text()).toBe(mockProps.hint);
+          });
+          
+          it('sets attribute `aria-describedby` on the input to reference the hint element', () => {
+            const input = wrapper.find('input[type=checkbox]');
+            expect(input.attributes('aria-describedby')).toBe(hint.attributes('id'));
+          });
+        });
+
+        describe('when the `hint` prop is not set', () => {
+          beforeEach(() => {
+            wrapper.setProps({ hint: null });
+            hint = wrapper.find('.govuk-checkboxes__hint');
+          });
+
+          it('does not render', () => {
+            expect(hint.exists()).toBe(false);
+          });
+
+          it('does not set attribute `aria-describedby` on the input', () => {
+            const input = wrapper.find('input[type=checkbox]');
+            expect(input.attributes()).not.toContainKey('aria-describedby');
+          });
+        });
+      });
+
+      describe('conditional content', () => {
+        describe('when the checkbox is selected', () => {
+          describe('and conditional content was given', () => {
+            it('renders conditional content', () => {
+              const conditional = wrapper.find('.govuk-checkboxes__conditional');
+              expect(conditional.exists()).toBe(true);
             });
-            const conditional = wrapper.find('.govuk-checkboxes__conditional');
-            expect(conditional.exists()).toBe(true);
+          });
+
+          describe('and conditional content was not given', () => {
+            it('does not render conditional content', () => {
+              wrapper = createTestSubject(CheckboxItem,{
+                propsData: mockProps,
+                stubs: [],
+                parent: CheckboxGroup,
+              });
+              const conditional = wrapper.find('.govuk-checkboxes__conditional');
+              expect(conditional.exists()).toBe(false);
+            });
           });
         });
 
-        describe('and conditional content was not given', () => {
+        describe('when the checkbox value is not selected', () => {
           it('does not render conditional content', () => {
-            wrapper = createTestSubject({
-              value: ['selected-checkbox-value'],
-            });
+              wrapper = createTestSubject(CheckboxItem, {
+                propsData: mockProps,
+                stubs: [],
+                parent: CheckboxGroup,
+              });
             const conditional = wrapper.find('.govuk-checkboxes__conditional');
             expect(conditional.exists()).toBe(false);
           });
         });
       });
-
-      describe('when the checkbox value is not selected', () => {
-        it('does not render conditional content', () => {
-          wrapper = createTestSubject({
-            value: ['not-selected-value'],
-            content: 'Conditional content here',
-          });
-          const conditional = wrapper.find('.govuk-checkboxes__conditional');
-          expect(conditional.exists()).toBe(false);
-        });
-      });
     });
   });
-});
+
 });
