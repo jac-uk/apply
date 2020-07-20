@@ -74,7 +74,7 @@
     </div>
     <main
       id="main-content"
-      class="govuk-main-wrapper govuk-main-wrapper--auto-spacing"
+      class="govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-4"
     >
       <RouterView />
     </main>
