@@ -1,5 +1,5 @@
 <template>
-  <div class="govuk-grid-row govuk-!-padding-top-4">
+  <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
         {{ vacancy.name }}

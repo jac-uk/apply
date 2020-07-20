@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="govuk-!-padding-top-4">
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
