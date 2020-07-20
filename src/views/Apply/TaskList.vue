@@ -102,10 +102,10 @@ export default {
       return this.$store.state.applications.records;
     },
     isLegal() {
-      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
+      return this.vacancy.typeOfExercise === 'legal' || this.vacancy.typeOfExercise ==='leadership';
     },
     isNonLegal() {
-      return this.vacancy.typeOfExercise ==='non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
+      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
     },
     applicationProgress() {
       if (this.application && this.application.progress) {

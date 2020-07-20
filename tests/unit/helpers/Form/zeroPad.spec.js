@@ -1,6 +1,6 @@
 import zeroPad from '@/helpers/Form/zeroPad';
 
-xdescribe('helpers/zeroPad', () => {
+describe('helpers/zeroPad', () => {
   it('adds zero in the beginning is the lengths of the number is one', () => {
     expect(zeroPad(3)).toBe('03');
   });

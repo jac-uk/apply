@@ -43,12 +43,22 @@
         label="Scotland"
       />
     </RadioGroup>
-
     <DateInput
       :id="qualificationDate"
       v-model="row.date"
-      label="When did you qualify?"
+      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
       type="month"
+    />
+    <Checkbox 
+      :id="qualificationNotComplete"
+      v-model="row.qualificationNotComplete"
+      label="I did not complete pupillage"
+    />
+    <TextareaInput
+      v-if="row.qualificationNotComplete"
+      :id="qualificationDetails"
+      v-model="row.details"
+      hint="Please provide some additional information"
     />
 
     <slot name="removeButton" />
@@ -57,15 +67,19 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
+import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
+import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
   name: 'Qualification',
   components: {
     RadioGroup,
+    Checkbox,
     RadioItem,
     DateInput,
+    TextareaInput,
   },
   props: {
     row: {

@@ -1,13 +1,19 @@
+// @FIXME@ *filters and mocked data* 
+// Filters are not working for mocked data
+
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
-import { shallowMount } from '@vue/test-utils';
+import { createTestSubject } from '../../../helpers';
 
 xdescribe('views/Confirmation', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Confirmation);
+    wrapper = createTestSubject(Confirmation,{
+      propsData: [],
+      stubs:['RouterLink'],
+    });
   });
 
-  xdescribe('template', () => {
+  describe('template', () => {
     it('renders', () => {
       expect(wrapper.exists()).toBe(true);
     });
