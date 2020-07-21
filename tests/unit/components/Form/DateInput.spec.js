@@ -2,6 +2,7 @@ import { createTestSubject } from '../../helpers';
 import DateInput from '@/components/Form/DateInput';
 
 describe('components/DateInput', () => {
+  
   describe('props', () => {
     describe('type', () => {
       let prop;
@@ -40,7 +41,7 @@ describe('components/DateInput', () => {
     });
   });
 
-  describe('rendered', () => {
+  describe('component instance', () => {
     let wrapper;
     beforeEach(() => {
       wrapper = createTestSubject(DateInput, {
@@ -60,8 +61,8 @@ describe('components/DateInput', () => {
     });
 
     describe('form-group div', () => {
-      xit('errors', () => {
-         wrapper.setData({ hasError: true });
+      it('with an error', () => {
+        wrapper.setData({ errorMessage: 'mock error message' });
         expect(wrapper.find('div.govuk-form-group--error').exists()).toBe(true);
       });
       it('exists with no errors', () => {
@@ -273,60 +274,59 @@ describe('components/DateInput', () => {
         });
       });
     describe('dateConstructor', () => {
-               describe('and `day`, `month` and `year` fields are set', () => {
-                 it('returns an array of Date constructor arguments', () => {
-                   wrapper.setData({ day: 12, month: 4, year: 1980 });
-                   expect(wrapper.vm.dateConstructor).toHaveLength(3);
-                   expect(wrapper.vm.dateConstructor).toEqual([1980, 3, 12]);
-                 });
+      describe('and `day`, `month` and `year` fields are set', () => {
+        it('returns an array of Date constructor arguments', () => {
+          wrapper.setData({ day: 12, month: 4, year: 1980 });
+            expect(wrapper.vm.dateConstructor).toHaveLength(3);
+            expect(wrapper.vm.dateConstructor).toEqual([1980, 3, 12]);
+          });
         
-                 it('adjusts month to be zero-indexed, as required by Date constructor', () => {
-                   wrapper.setData({ day: 1, month: 1, year: 1960 });
-                   expect(wrapper.vm.dateConstructor).toEqual([1960, 0, 1]);
+          it('adjusts month to be zero-indexed, as required by Date constructor', () => {
+            wrapper.setData({ day: 1, month: 1, year: 1960 });
+            expect(wrapper.vm.dateConstructor).toEqual([1960, 0, 1]);
         
-                   wrapper.setData({ day: 25, month: 12, year: 1960 });
-                   expect(wrapper.vm.dateConstructor).toEqual([1960, 11, 25]);
-                 });
-               });
+            wrapper.setData({ day: 25, month: 12, year: 1960 });
+            expect(wrapper.vm.dateConstructor).toEqual([1960, 11, 25]);
+          });
+      });
         
-               describe('given property type="month"', () => {
-                 beforeEach(() => {
-                   wrapper.setProps({ type: 'month' });
-                 });
+      describe('given property type="month"', () => {
+        beforeEach(() => {
+          wrapper.setProps({ type: 'month' });
+        });
         
-                 describe('and `month` and `year` fields are set', () => {
-                   it('returns an array of Date constructor arguments', () => {
-                     wrapper.setData({ month: 4, year: 1980 });
-                     expect(wrapper.vm.dateConstructor).toHaveLength(3);
-                     expect(wrapper.vm.dateConstructor).toEqual([1980, 3, 1]);
-                   });
-        
-                   it('adjusts month to be zero-indexed, as required by Date constructor', () => {
-                     wrapper.setData({ month: 1, year: 1960 });
-                     expect(wrapper.vm.dateConstructor).toEqual([1960, 0, 1]);
-        
-                     wrapper.setData({ month: 12, year: 1960 });
-                     expect(wrapper.vm.dateConstructor).toEqual([1960, 11, 1]);
-                   });
-                 });
-               });
-        
-               describe('given at least one field is null', () => {
-                 const nullValueCombinations = [
-                   ['`day` is null',                      { day: null, month: 4,    year: 1980 }],
-                   ['`month` is null',                    { day: 12,   month: null, year: 1980 }],
-                   ['`year` is null',                     { day: 12,   month: 4,    year: null }],
-                   ['`day` and `month` are null',         { day: null, month: null, year: 1980 }],
-                   ['`day` and `year` are null',          { day: null, month: 4,    year: null }],
-                   ['`month` and `year` are null',        { day: 12,   month: null, year: null }],
-                   ['`day`, `month` and `year` are null', { day: null, month: null, year: null }],
-                 ];
-        
-                 it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
-                   wrapper.setData(data);
-                   expect(wrapper.vm.dateConstructor).toBe(null);
-                 });
-                });
+        describe('and `month` and `year` fields are set', () => {
+          it('returns an array of Date constructor arguments', () => {
+            wrapper.setData({ month: 4, year: 1980 });
+            expect(wrapper.vm.dateConstructor).toHaveLength(3);
+            expect(wrapper.vm.dateConstructor).toEqual([1980, 3, 1]);
+          });
+          
+          it('adjusts month to be zero-indexed, as required by Date constructor', () => {
+            wrapper.setData({ month: 1, year: 1960 });
+            expect(wrapper.vm.dateConstructor).toEqual([1960, 0, 1]);
+            wrapper.setData({ month: 12, year: 1960 });
+            expect(wrapper.vm.dateConstructor).toEqual([1960, 11, 1]);
+          });
+        });
+      });
+      
+      describe('given at least one field is null', () => {
+        const nullValueCombinations = [
+          ['`day` is null',                      { day: null, month: 4,    year: 1980 }],
+          ['`month` is null',                    { day: 12,   month: null, year: 1980 }],
+          ['`year` is null',                     { day: 12,   month: 4,    year: null }],
+          ['`day` and `month` are null',         { day: null, month: null, year: 1980 }],
+          ['`day` and `year` are null',          { day: null, month: 4,    year: null }],
+          ['`month` and `year` are null',        { day: 12,   month: null, year: null }],
+          ['`day`, `month` and `year` are null', { day: null, month: null, year: null }],
+        ];
+
+        it.each(nullValueCombinations)('returns null (%s)', (label, data) => {
+          wrapper.setData(data);
+          expect(wrapper.vm.dateConstructor).toBe(null);
+        });
+      });
       });    
     describe('date', () => {
         describe('getter', () => {
@@ -378,32 +378,20 @@ describe('components/DateInput', () => {
       });
   });
 
-    xdescribe('`v-model` interface', () => {
+  describe('`v-model` interface', () => {
     describe('when the `value` property changes', () => {
-      let realDateSetter;
-      let mockDateSetter;
+
       let firstDate;
       let secondDate;
-      beforeEach(() => {
-        // Mock the date setter
-        realDateSetter = DateInput.computed.date.set;
-        mockDateSetter = jest.fn();
-        DateInput.computed.date.set = mockDateSetter;
-      });
-      
-      afterEach(() => {
-        DateInput.computed.date.set = realDateSetter;
-      });
-      
+
       describe('given the new `value` is different from the current `date`', () => {
         it('sets `date` to equal the new `value`', () => {
           firstDate = new Date('1960-01-01');
           secondDate = new Date('1975-04-19');
-          // const subject = createTestSubject(firstDate);
+          wrapper.setProps({ value: firstDate });
+          expect(wrapper.vm.date).toEqual(firstDate);
           wrapper.setProps({ value: secondDate });
-          expect(mockDateSetter).toHaveBeenCalledTimes(2);
-          expect(mockDateSetter).toHaveBeenNthCalledWith(1, firstDate);
-          expect(mockDateSetter).toHaveBeenNthCalledWith(2, secondDate);
+          expect(wrapper.vm.date).toEqual(secondDate);
         });
       });
 
@@ -412,14 +400,12 @@ describe('components/DateInput', () => {
           // Two equal dates as different objects
           firstDate = new Date('1960-01-01');
           secondDate = new Date('1960-01-01');
-          // const subject = createTestSubject(firstDate);
+          wrapper.setProps({ value: firstDate });
+          expect(wrapper.vm.date).toEqual(firstDate);
           wrapper.setProps({ value: secondDate });
-          expect(mockDateSetter).toHaveBeenCalledTimes(1);
-          expect(mockDateSetter.mock.calls[0][0]).toBe(firstDate);
-          expect(mockDateSetter.mock.calls[0][0]).not.toBe(secondDate);
+          expect(wrapper.vm.date).toEqual(secondDate);        });
         });
       });
-    });
     
     describe('when the internal `date` Date object changes', () => {
       it('emits an `input` event', () => {
@@ -433,108 +419,108 @@ describe('components/DateInput', () => {
     });
     });
 
-    xdescribe('#created lifecycle hook', () => {
-    it('sets `date` to equal the `value` property', () => {
-      const value = new Date('1960-01-01');
-      // const subject = createTestSubject(value);
-      expect(wrapper.vm.date).not.toBe(value);
-      expect(wrapper.vm.date).toEqual(value);
-    });
+    describe('#created lifecycle hook', () => {
+      it('sets `date` to equal the `value` property', () => {
+        const value = new Date('1960-01-01');
+        wrapper.setProps({ value: value });
+        expect(wrapper.vm.date).not.toBe(value);
+        expect(wrapper.vm.date).toEqual(value);
+      });
     });
     
-    xdescribe('input fields', () => {
-    // let subject;
-            //  beforeEach(() => {
-            //    subject = createTestSubject(new Date('2018-01-01'));
-            //  });
+    describe('input fields', () => {
+      beforeEach(() => {
+        wrapper.setProps({ value: new Date('2018-01-01') });
+      });
+
+      describe('given property type="date"', () => {
+        describe('Day input', () => {
+          let input;
+          beforeEach(() => {
+            input = wrapper.find({ ref: 'dayInput' });
+          });
+
+        describe('is lazily bound to `dayInput`', () => {
+                it('displays the value of `dayInput`', () => {
+                  expect(input.element.value).toBe(wrapper.vm.dayInput);
+                });
+                it('updates `dayInput` on change', () => {
+                  input.element.value = '12';
+                  input.trigger('change');
+                  expect(wrapper.vm.dayInput).toBe('12');
+                });
+                it('does nothing on input/keypress', () => {
+                  input.element.value = '12';
+                  input.trigger('input');
+                  expect(wrapper.vm.dayInput).not.toBe('12');
+                  expect(wrapper.vm.dayInput).toBe('01');
+                });
+              });
+            });
+          });
         
-            //  describe('given property type="date"', () => {
-            //    describe('Day input', () => {
-            //      let input;
-            //      beforeEach(() => {
-            //        input = wrapper.find({ ref: 'dayInput' });
-            //      });
+          describe('given property type="month"', () => {
+            beforeEach(() => {
+              wrapper.setProps({ type: 'month' });
+            });
         
-            //      describe('is lazily bound to `dayInput`', () => {
-            //        it('displays the value of `dayInput`', () => {
-            //          expect(input.element.value).toBe(wrapper.vm.dayInput);
-            //        });
-            //        it('updates `dayInput` on change', () => {
-            //          input.element.value = '12';
-            //          input.trigger('change');
-            //          expect(wrapper.vm.dayInput).toBe('12');
-            //        });
-            //        it('does nothing on input/keypress', () => {
-            //          input.element.value = '12';
-            //          input.trigger('input');
-            //          expect(wrapper.vm.dayInput).not.toBe('12');
-            //          expect(wrapper.vm.dayInput).toBe('01');
-            //        });
-            //      });
-            //    });
-            //  });
+          describe('Day input', () => {
+            it('is not rendered', () => {
+              const input = wrapper.find({ ref: 'dayInput' });
+              expect(input.exists()).toBe(false);
+            });
+          });
+        });
         
-             describe('given property type="month"', () => {
-               beforeEach(() => {
-                 wrapper.setProps({ type: 'month' });
-               });
+        describe('Month input', () => {
+          let input;
+          beforeEach(() => {
+            input = wrapper.find({ ref: 'monthInput' });
+          });
         
-               describe('Day input', () => {
-                 it('is not rendered', () => {
-                   const input = wrapper.find({ ref: 'dayInput' });
-                   expect(input.exists()).toBe(false);
-                 });
-               });
-             });
+              describe('is lazily bound to `monthInput`', () => {
+                it('displays the value of `monthInput`', () => {
+                  expect(input.element.value).toBe(wrapper.vm.monthInput);
+                });
+                it('updates `monthInput` on change', () => {
+                  input.element.value = '6';
+                  input.trigger('change');
+                  expect(wrapper.vm.monthInput).toBe('06');
+                });
+                it('does nothing on input/keypress', () => {
+                  input.element.value = '6';
+                  input.trigger('input');
+                  expect(wrapper.vm.monthInput).not.toBe('6');
+                  expect(wrapper.vm.monthInput).toBe('01');
+                });
+              });
+            });
         
-             describe('Month input', () => {
-               let input;
-               beforeEach(() => {
-                 input = wrapper.find({ ref: 'monthInput' });
-               });
+            describe('Year input', () => {
+              let input;
+              beforeEach(() => {
+                input = wrapper.find({ ref: 'yearInput' });
+              });
         
-               describe('is lazily bound to `monthInput`', () => {
-                 it('displays the value of `monthInput`', () => {
-                   expect(input.element.value).toBe(wrapper.vm.monthInput);
-                 });
-                 it('updates `monthInput` on change', () => {
-                   input.element.value = '6';
-                   input.trigger('change');
-                   expect(wrapper.vm.monthInput).toBe('06');
-                 });
-                 it('does nothing on input/keypress', () => {
-                   input.element.value = '6';
-                   input.trigger('input');
-                   expect(wrapper.vm.monthInput).not.toBe('6');
-                   expect(wrapper.vm.monthInput).toBe('01');
-                 });
-               });
-             });
-        
-             describe('Year input', () => {
-               let input;
-               beforeEach(() => {
-                 input = wrapper.find({ ref: 'yearInput' });
-               });
-        
-               describe('is lazily bound to `yearInput`', () => {
-                 it('displays the value of `yearInput`', () => {
-                   expect(input.element.value).toBe(wrapper.vm.yearInput.toString());
-                 });
-                 it('updates `yearInput` on change', () => {
-                   input.element.value = '2010';
-                   input.trigger('change');
-                   expect(wrapper.vm.yearInput).toBe(2010);
-                 });
-                 it('does nothing on input/keypress', () => {
-                   input.element.value = '2008';
-                   input.trigger('input');
-                   expect(wrapper.vm.yearInput).not.toBe('2008');
-                   expect(wrapper.vm.yearInput).toBe(2018);
+              describe('is lazily bound to `yearInput`', () => {
+                it('displays the value of `yearInput`', () => {
+                  expect(input.element.value).toBe(wrapper.vm.yearInput.toString());
+                });
+                it('updates `yearInput` on change', () => {
+                  input.element.value = '2010';
+                  input.trigger('change');
+                  expect(wrapper.vm.yearInput).toBe(2010);
+                });
+                it('does nothing on input/keypress', () => {
+                  input.element.value = '2008';
+                  input.trigger('input');
+                  expect(wrapper.vm.yearInput).not.toBe('2008');
+                  expect(wrapper.vm.yearInput).toBe(2018);
                   });
                 });
               });    
               
     });
   });
+
 });

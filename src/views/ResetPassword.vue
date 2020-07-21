@@ -1,7 +1,10 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <form @submit.prevent="resetPassword">
+      <form
+        ref="formRef"
+        @submit.prevent="resetPassword"
+      >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
             Forgotten password

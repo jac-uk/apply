@@ -71,7 +71,7 @@ export default {
       return this.hasConditionalContent && (this.$parent.inputValue === this.value);
     },
   },
-  created() {
+  beforeCreate() {
     if (this.$parent.$options.name !== 'RadioGroup') {
       throw new Error('RadioItem component can only be used inside a RadioGroup component');
     }

@@ -24,7 +24,7 @@ const createTestSubject = () => {
   });
 };
 
-xdescribe('components/Form/CheckboxGroup and components/Form/CheckboxItem integration', () => {
+describe('components/Form/CheckboxGroup and components/Form/CheckboxItem integration', () => {
   let subject;
   let checkboxes;
   beforeEach(() => {
