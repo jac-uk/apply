@@ -72,10 +72,6 @@ describe('@/components/RepeatableFields/CriminalOffenceDetails', () => {
           expect(wrapper.find('TextAreaInput-stub').attributes('id')).toBe('offence_details_5');
         });
       });
-
-      xit('renders remove slot', () => {
-        expect(wrapper.find('slot').exists()).toBe(true);
-      });
       
     });
   

@@ -100,8 +100,9 @@ export default {
       },
     },
   },
-  async mounted () {
+  async mounted() {
     if (typeof this.fileName === 'string' && this.fileName.length) {
+      
       const isUploaded = await this.verifyFile(this.fileName);
 
       if (!isUploaded) {

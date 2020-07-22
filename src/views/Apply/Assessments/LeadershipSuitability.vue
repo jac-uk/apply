@@ -1,6 +1,9 @@
 <template>
   <div class="govuk-grid-row">
-    <form @submit.prevent="save">
+    <form
+      ref="formRef"
+      @submit.prevent="save"
+    >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
@@ -86,8 +89,9 @@
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
-// import '@/mixins/uploadMixin';
 import BackLink from '@/components/BackLink';
+// should the fileUpload component be used here?
+// import FileUpload from '@/components/Form/FileUpload';
 
 export default {
   components: {

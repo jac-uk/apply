@@ -20,13 +20,50 @@ const mocks = {
           referenceNumber: null,
           welshRequirement: null,
           unknownVariable: null,
+          locationQuestion: '',
+          locationQuestionAnswers: [''],
+          locationQuestionType: '',
+          jurisdictionQuestion: '',
+          jurisdictionQuestionAnswers: [''],
+          jurisdictionQuestionType: '',
+          shortlistingOutcomeDate: '',
         },
       },
       candidate: {
-        record: {},
+        record: {
+          // personalDetails: null, see personaldetails.spec
+        },
       },
       application: {
-        record: { progress: { started: true } },
+        record: {
+          progress: {
+            started: true,
+          },
+        //   personalDetails:{
+        //     fullName: 'Jo Doe',
+        //   },
+        //   characterInformation: {
+        //     criminalOffences: false,
+        //   },
+        //   equalityAndDiversitySurvey: {
+        //     shareData: false,
+        //     feePaidJudicialRole: false,
+        //     otherFeePaidJudicialRoleDetails: 'other',
+        //     oxbridgeUni: false,
+        //     changedGender: false,
+        //     disability: false,
+        //     attendedOutreachEvents: false,
+        //     hasTakenPAJE: false,
+        //   },
+        //   feePaidOrSalariedJudge: false,
+        //   feePaidOrSalariedSatForThirtyDays: false,
+        //   declaredAppointmentInQuasiJudicialBody: false,
+        //   quasiJudicialSatForThirtyDays: false,
+        //   canGiveReasonableLOS: false,
+        //   applyingForWelshPost: false,
+        //   canSpeakWelsh: false,
+        //   canReadAndWriteWelsh: false,
+        },
       },
       applications: {
         records: [],
@@ -34,8 +71,11 @@ const mocks = {
     },
     getters: {
       'vacancy/getCloseDate': new Date(),
+      'vacancy/isOpen': jest.fn(),
       'vacancy/id': jest.fn(),
       'application/data': () => jest.fn(),
+      // 'vacancies/bind': () => jest.fn(), //see views/vacancies.spec.js
+      'candidate/characterInformation': () => jest.fn(),
     },
   },
 };
@@ -47,7 +87,7 @@ const createTestSubject = (component, customMountOptions = {
   stubs: [],
   propsData: {},
 }) => {
-  return shallowMount(component, {
+  const mountOptions = {
     localVue,
     mocks: {
       $route: mocks.route,
@@ -57,7 +97,23 @@ const createTestSubject = (component, customMountOptions = {
     },
     stubs: [...customMountOptions.stubs],
     propsData: { ...customMountOptions.propsData },
-  });
+  };
+
+  if (customMountOptions.parent) {
+    mountOptions.parentComponent = customMountOptions.parent;
+  }
+
+  if (customMountOptions.methods) {
+    mountOptions.methods = customMountOptions.methods;
+  }
+
+  if (customMountOptions.slots) {
+    mountOptions.slots = {
+      default: customMountOptions.slots,
+    };
+  }
+
+  return shallowMount(component, mountOptions);
 };
 
 export {

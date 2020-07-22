@@ -1,0 +1,34 @@
+@media print {
+  #header,
+  .govuk-back-link,
+  .jac-button-group,
+  .govuk-button,
+  .print-none {
+    display: none;
+  }
+
+  .print-full-width {
+    width: 100%;
+  }
+
+  .govuk-width-container {
+    margin-top: govuk-spacing(4);
+    margin-bottom: govuk-spacing(4);
+  }
+
+  .govuk-summary-list {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .govuk-summary-list__row {
+    display: table-row;
+  }
+  .govuk-summary-list__value,
+  .govuk-summary-list__value:last-child,
+  .govuk-summary-list__key {
+    display: table-cell;
+    width: auto;
+  }
+}

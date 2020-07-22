@@ -1,6 +1,9 @@
 <template>
   <div class="govuk-grid-row">
-    <form @submit.prevent="save">
+    <form
+      ref="formRef"
+      @submit.prevent="save"
+    >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1
@@ -77,7 +80,6 @@
           v-model="application.qualifications"
           :component="repeatableFields.Qualification"
         />
-
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button"

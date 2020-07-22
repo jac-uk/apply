@@ -2,9 +2,11 @@
   <div>
     <div
       v-if="!loadFailed"
-      ref="loadingMessage"
     >
-      <span class="spinner-border spinner-border-sm" />
+      <span
+        ref="loadingMessage"
+        class="spinner-border spinner-border-sm" 
+      />
       Loading...
     </div>
     <div

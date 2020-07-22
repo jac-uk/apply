@@ -1,17 +1,17 @@
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+//  component and errors due to the queryselector
+
 import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import { createTestSubject } from '../../../helpers';
 
-// import { shallowMount } from '@vue/test-utils';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
-
-// const candidate = {};
 
 xdescribe('@/views/Apply/AccountProfile/PersonalDetails', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(PersonalDetails, {
-      mocks: ['mockStore', 'mockRouter'],
+      mocks: [],
       stubs: [],
       propsData: {},
       });
