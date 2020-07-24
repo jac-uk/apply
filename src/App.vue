@@ -176,7 +176,6 @@ export default {
   }
 
   .page-container {
-    // background-color: orange;
     position: relative;
     min-height: 100vh;
   }
