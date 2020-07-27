@@ -11,24 +11,24 @@ describe('@/components/RepeatableFields/OtherCharIssueDetails', () => {
   describe('props', () => {
     describe('row', () => {
       it('is required', () => {
-        let prop = OtherCharIssueDetails.props.row;
+        const prop = OtherCharIssueDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = OtherCharIssueDetails.props.row;
+        const prop = OtherCharIssueDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = OtherCharIssueDetails.props.index;
+        const prop = OtherCharIssueDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = OtherCharIssueDetails.props.index;
+        const prop = OtherCharIssueDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

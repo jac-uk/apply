@@ -12,24 +12,24 @@ describe('components/RepeatableFields/LateTaxReturnOrFineddDetails', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = LateTaxReturnOrFinedDetails.props.row;
+        const prop = LateTaxReturnOrFinedDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = LateTaxReturnOrFinedDetails.props.row;
+        const prop = LateTaxReturnOrFinedDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = LateTaxReturnOrFinedDetails.props.index;
+        const prop = LateTaxReturnOrFinedDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = LateTaxReturnOrFinedDetails.props.index;
+        const prop = LateTaxReturnOrFinedDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

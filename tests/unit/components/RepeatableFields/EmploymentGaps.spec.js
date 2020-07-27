@@ -12,24 +12,24 @@ describe('components/RepeatableFields/EmploymentGaps', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = EmploymentGaps.props.row;
+        const prop = EmploymentGaps.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = EmploymentGaps.props.row;
+        const prop = EmploymentGaps.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = EmploymentGaps.props.index;
+        const prop = EmploymentGaps.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = EmploymentGaps.props.index;
+        const prop = EmploymentGaps.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

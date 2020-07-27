@@ -67,7 +67,7 @@ describe('components/Form/RadioItem', () => {
   });
 
   describe('component instance', () => {
-    let RadioGroup = {
+    const RadioGroup = {
       name: 'RadioGroup',
       template: '<div/>',
       computed: {

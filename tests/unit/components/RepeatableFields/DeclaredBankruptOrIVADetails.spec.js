@@ -12,24 +12,24 @@ describe('components/RepeatableFields/', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = DeclaredBankruptOrIvaDetails.props.row;
+        const prop = DeclaredBankruptOrIvaDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = DeclaredBankruptOrIvaDetails.props.row;
+        const prop = DeclaredBankruptOrIvaDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = DeclaredBankruptOrIvaDetails.props.index;
+        const prop = DeclaredBankruptOrIvaDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = DeclaredBankruptOrIvaDetails.props.index;
+        const prop = DeclaredBankruptOrIvaDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

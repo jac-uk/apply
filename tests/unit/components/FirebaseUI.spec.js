@@ -39,7 +39,7 @@ describe('FirebaseUI component', () => {
   beforeAll(() => {
     wrapper = createTestSubject(FirebaseUI,{
       propsData: {},
-      stubs:[],
+      stubs: [],
     });
   });
 

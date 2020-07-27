@@ -117,7 +117,7 @@ describe('components/Form/FileUpload', () => {
 
   describe('component instance', () => {
     let wrapper;
-    let mockProps = {
+    const mockProps = {
       id: 'my_unique_id',
       path: 'my_path',
       name: 'name',
@@ -278,7 +278,7 @@ describe('components/Form/FileUpload', () => {
   describe('methods', () => {
     const mockFileExtension = 'doc';
     const mockFile = {
-      name: 'mock file.' + mockFileExtension,
+      name: `mock file.${  mockFileExtension}`,
     };
     const errorMessage = 'File upload failed, please try again';
     

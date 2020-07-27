@@ -2,9 +2,9 @@ const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
   // @NOTE: this is a bit silly, we should save full date instead of hardcoding the time
-  if(date == null){
+  if (date == null){
     return false;
-  } else if(!isDate(date)) {
+  } else if (!isDate(date)) {
     throw `Supplied date (${date}) must be a Date object`;
   }
   
@@ -23,19 +23,19 @@ const isDateInFuture = (date) => {
 };
 
 const formatDate = (date, type) => {
-  if(date == null) {
+  if (date == null) {
     return null;
-  } else if(!isDate(date)) {
+  } else if (!isDate(date)) {
     throw `Supplied date (${date}) must be a Date object`;
   }
 
-  if(type && type === 'time') {
+  if (type && type === 'time') {
     return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).toLowerCase();
   }
 
-  let month = date.toLocaleString('en-US', { month: 'long' });
+  const month = date.toLocaleString('en-US', { month: 'long' });
 
-  if(type && type === 'month') {
+  if (type && type === 'month') {
     return `${month} ${date.getFullYear()}`;
   }
 
@@ -61,7 +61,7 @@ const parseEstimatedDate = (value) => {
 const validateYear = (val) => {
   val = parseInt(val);
 
-  if(isNaN(val) || val.toString().length !== 4) {
+  if (isNaN(val) || val.toString().length !== 4) {
     return null;
   }
 

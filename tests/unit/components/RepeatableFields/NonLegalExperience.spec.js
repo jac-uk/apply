@@ -12,24 +12,24 @@ describe('components/RepeatableFields/NonLegalExperience', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = NonLegalExperience.props.row;
+        const prop = NonLegalExperience.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = NonLegalExperience.props.row;
+        const prop = NonLegalExperience.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = NonLegalExperience.props.index;
+        const prop = NonLegalExperience.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = NonLegalExperience.props.index;
+        const prop = NonLegalExperience.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

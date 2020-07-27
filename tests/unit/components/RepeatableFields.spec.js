@@ -1,7 +1,7 @@
 import { createTestSubject } from '../helpers';
 import RepeatableFields from '@/components/RepeatableFields';
 
-let TextField = {
+const TextField = {
   name: 'TextField',
   template: '<div/>',
 };

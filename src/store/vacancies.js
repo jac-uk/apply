@@ -31,7 +31,7 @@ export default {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
         
-        if(!isDate(openDate)) return false;
+        if (!isDate(openDate)) return false;
 
         return !isDateInFuture(openDate) && isDateInFuture(closeDate);
       });
@@ -42,7 +42,7 @@ export default {
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         
-        if(!isDate(openDate)) return false;
+        if (!isDate(openDate)) return false;
 
         return isDateInFuture(openDate);
       });

@@ -12,24 +12,24 @@ describe('components/RepeatableFields/EndorsementsOrMotoringFixedPenaltiesDetail
 
     describe('row', () => {
       it('is required', () => {
-        let prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.row;
+        const prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.row;
+        const prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.index;
+        const prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.index;
+        const prop = EndorsementsOrMotoringFixedPenaltiesDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

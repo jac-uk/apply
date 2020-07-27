@@ -31,11 +31,11 @@ describe('components/DateInput', () => {
         expect(prop.required).toBe(true);
       });
       it('Value must be an instance of date', () => {
-        let prop = DateInput.props.value;
+        const prop = DateInput.props.value;
         expect(prop.validator(new Date)).toBe(true);
       });
       it('Value must be an instance of date', () => {
-        let prop = DateInput.props.value;
+        const prop = DateInput.props.value;
         expect(prop.validator(!Date)).toBe(false);
       });
     });
@@ -47,7 +47,7 @@ describe('components/DateInput', () => {
       wrapper = createTestSubject(DateInput, {
         mocks: {},
         stubs: [],
-        propsData:{
+        propsData: {
           id: '1',
           value: new Date,
         },

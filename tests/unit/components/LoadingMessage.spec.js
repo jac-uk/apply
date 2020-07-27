@@ -4,7 +4,7 @@ import LoadingMessage from '@/components/LoadingMessage';
 describe('components/LoadingMessage', () => {
   let wrapper;
   describe('when `loadFailed` is equal to `false`', () => {
-    let loadFailedValue = false;
+    const loadFailedValue = false;
     beforeEach(()=>{
       wrapper = createTestSubject(LoadingMessage, {
         propsData: {
@@ -25,7 +25,7 @@ describe('components/LoadingMessage', () => {
   });
 
   describe('when `loadFailed` is equal to `true`', () => {
-    let loadFailedValue = true;
+    const loadFailedValue = true;
     beforeEach(()=>{
       wrapper = createTestSubject(LoadingMessage, {
         propsData: {

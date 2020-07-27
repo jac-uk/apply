@@ -85,7 +85,7 @@ export default {
       }
     },
     fieldType() {
-      switch(this.type) {
+      switch (this.type) {
       case 'text':
       case 'email':
         return 'text'; // we are using custom email validation, so don't use html5 input types
