@@ -49,19 +49,24 @@
       :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
       type="month"
     />
-    <Checkbox 
-      :id="qualificationNotComplete"
-      v-model="row.qualificationNotComplete"
-      label="I did not complete pupillage"
-    />
-    <TextareaInput
-      v-if="row.qualificationNotComplete"
-      :id="qualificationDetails"
-      v-model="row.details"
-      hint="Please provide some additional information"
-    />
 
-    <slot name="removeButton" />
+    <div
+      v-if="row.type === 'barrister'"
+    >
+      <Checkbox
+        :id="qualificationNotComplete" 
+        v-model="row.qualificationNotComplete"
+        label="I did not complete pupillage"
+      />
+      <TextareaInput
+        v-if="row.qualificationNotComplete"
+        :id="qualificationDetails"
+        v-model="row.details"
+        hint="Please provide some additional information"
+      />
+    </div>
+
+  <slot name="removeButton" />
   </div>
 </template>
 
