@@ -9,6 +9,8 @@ $moj-assets-path: "~@ministryofjustice/frontend/moj/assets/";
 
 @import "print";
 
+$max-width: 1200px;
+
 .float-right {
   float: right;
 }
@@ -49,9 +51,13 @@ body {
   font-family: $govuk-font-family;
 }
 
+.govuk-width-container {
+  max-width: $max-width;
+}
+
 .container-border-bottom {
-   border-bottom: 1px solid #b1b4b6
- }
+  border-bottom: 1px solid #b1b4b6
+}
 
 /* JAC buttons */
 .govuk-button {
