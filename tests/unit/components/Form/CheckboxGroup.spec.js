@@ -41,7 +41,7 @@ describe('components/Form/CheckboxGroup', () => {
             value: ['selected-Checkbox-value'],
         };
 
-        let mockSlots = ['CheckboxItem components'];
+        const mockSlots = ['CheckboxItem components'];
 
         beforeEach(() => {
             wrapper = createTestSubject(CheckboxGroup, {
@@ -55,7 +55,7 @@ describe('components/Form/CheckboxGroup', () => {
         describe('`v-model` interface', () => {
             describe('when the `value` property changes', () => {
                 it('updates computed property `inputValue`', () => {
-                    let updateVal = ['some-other-value'];
+                    const updateVal = ['some-other-value'];
                     expect(wrapper.vm.inputValue[0]).toBe(mockProps.value[0]);
                     wrapper.setProps({
                         value: updateVal,
@@ -65,7 +65,7 @@ describe('components/Form/CheckboxGroup', () => {
             });
 
             describe('when computed property `inputValue` changes', () => {
-                let updateVal = ['some-new-value'];
+                const updateVal = ['some-new-value'];
                 
                 it('emits an `input` event', () => {
                     wrapper.setData({
@@ -85,7 +85,7 @@ describe('components/Form/CheckboxGroup', () => {
 
             describe('<legend> element', () => {
                 describe('when the `label` prop is set', () => {
-                    let mockLabel = { label: 'my_label' };
+                    const mockLabel = { label: 'my_label' };
                     it('displays the label in a <legend> element', () => {
                         wrapper.setProps(mockLabel);
                         const legend = wrapper.find('legend');

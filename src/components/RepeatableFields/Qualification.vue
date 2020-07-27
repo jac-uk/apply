@@ -66,7 +66,7 @@
       />
     </div>
 
-  <slot name="removeButton" />
+    <slot name="removeButton" />
   </div>
 </template>
 

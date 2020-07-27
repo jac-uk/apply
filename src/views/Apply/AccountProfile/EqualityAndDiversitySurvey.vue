@@ -762,7 +762,7 @@ export default {
       return this.$store.state.vacancy.record;
     },
     isLegal() {
-      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
+      return this.vacancy.typeOfExercise === 'legal' || this.vacancy.typeOfExercise === 'leadership';
     },
   },
   methods: {

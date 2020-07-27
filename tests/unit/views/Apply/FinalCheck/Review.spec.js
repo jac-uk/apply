@@ -9,7 +9,7 @@ xdescribe('views/Review', () => {
     beforeEach(() => {
         wrapper = createTestSubject(Review,{
             propsData: [],
-            stubs:['RouterLink'],
+            stubs: ['RouterLink'],
         });
     });
     describe('template', () => {

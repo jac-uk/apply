@@ -332,7 +332,7 @@
               wrapper.setProps({ maxLength: 10 });
             });
             it('errors if value is more than MaxLength', () => {
-              let errormessage = `${mockProps.label} should have 10 or fewer characters`;
+              const errormessage = `${mockProps.label} should have 10 or fewer characters`;
               wrapper.vm.validate({
                 target: {
                   value: errormessage,

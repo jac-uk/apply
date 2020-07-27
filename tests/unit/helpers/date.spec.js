@@ -16,14 +16,14 @@ describe('helpers/date/isDateInFuture', () => {
   });
 
   it('returns true if date is in the future', () => {
-    let date = new Date();
+    const date = new Date();
     date.setFullYear(date.getFullYear() + 1);
 
     expect(dateHelper.isDateInFuture(date)).toBe(true);
   });
 
   it('returns false if date is in the past', () => {
-    let date = new Date();
+    const date = new Date();
     date.setFullYear(date.getFullYear() - 1);
 
     expect(dateHelper.isDateInFuture(date)).toBe(false);

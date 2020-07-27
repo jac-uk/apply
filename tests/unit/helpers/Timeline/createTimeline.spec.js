@@ -21,7 +21,7 @@ const TimelineArray = [
     name: 'five',
   },
 ];
-let reversedTlArray = TimelineArray.reverse();
+const reversedTlArray = TimelineArray.reverse();
 
 describe('helpers/Form/createTimeline', () => {
   describe('given an array with a length of 5', () => {
