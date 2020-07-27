@@ -1,7 +1,7 @@
 <template>
   <div class="page-container">
     <header
-      class="govuk-width-container"
+      class="govuk-width-container header"
     >
       <div 
         class="header-background clearfix"
