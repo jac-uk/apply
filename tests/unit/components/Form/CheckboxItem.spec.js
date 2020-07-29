@@ -1,10 +1,10 @@
 import { createTestSubject } from '../../helpers';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 
-let mockProps = {
+const mockProps = {
   label: 'Example checkbox item',
   value: 'example-value',
-  content:  'Conditional content',
+  content: 'Conditional content',
   hint: 'Label hint text',
 };
 
@@ -74,7 +74,7 @@ describe('components/Form/CheckboxItem', () => {
   });
 
   describe('component instance', () => {
-    let CheckboxGroup = {
+    const CheckboxGroup = {
       name: 'CheckboxGroup',
       template: '<div/>',
       computed: {

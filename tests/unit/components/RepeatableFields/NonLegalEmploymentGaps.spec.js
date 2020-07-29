@@ -12,24 +12,24 @@ describe('components/RepeatableFields/NonLegalEmploymentGaps', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = NonLegalEmploymentGaps.props.row;
+        const prop = NonLegalEmploymentGaps.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = NonLegalEmploymentGaps.props.row;
+        const prop = NonLegalEmploymentGaps.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = NonLegalEmploymentGaps.props.index;
+        const prop = NonLegalEmploymentGaps.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = NonLegalEmploymentGaps.props.index;
+        const prop = NonLegalEmploymentGaps.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

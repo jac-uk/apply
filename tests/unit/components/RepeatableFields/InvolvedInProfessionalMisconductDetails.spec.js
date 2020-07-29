@@ -12,24 +12,24 @@ describe('components/RepeatableFields/InvolvedInProfessionalMisconductDetails', 
 
     describe('row', () => {
       it('is required', () => {
-        let prop = InvolvedInProfessionalMisconductDetails.props.row;
+        const prop = InvolvedInProfessionalMisconductDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = InvolvedInProfessionalMisconductDetails.props.row;
+        const prop = InvolvedInProfessionalMisconductDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = InvolvedInProfessionalMisconductDetails.props.index;
+        const prop = InvolvedInProfessionalMisconductDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = InvolvedInProfessionalMisconductDetails.props.index;
+        const prop = InvolvedInProfessionalMisconductDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

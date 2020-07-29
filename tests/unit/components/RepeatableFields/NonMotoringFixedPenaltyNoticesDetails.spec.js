@@ -12,24 +12,24 @@ describe('components/RepeatableFields/NonMotoringFixedPenaltyNoticesDetails', ()
 
     describe('row', () => {
       it('is required', () => {
-        let prop = NonMotoringFixedPenaltyNoticesDetails.props.row;
+        const prop = NonMotoringFixedPenaltyNoticesDetails.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = NonMotoringFixedPenaltyNoticesDetails.props.row;
+        const prop = NonMotoringFixedPenaltyNoticesDetails.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = NonMotoringFixedPenaltyNoticesDetails.props.index;
+        const prop = NonMotoringFixedPenaltyNoticesDetails.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = NonMotoringFixedPenaltyNoticesDetails.props.index;
+        const prop = NonMotoringFixedPenaltyNoticesDetails.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

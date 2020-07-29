@@ -232,7 +232,7 @@ export default {
       return this.$store.state.vacancy.record;
     },
     timeline() {
-      let timeline = exerciseTimeline(this.vacancy);
+      const timeline = exerciseTimeline(this.vacancy);
       return createTimeline(timeline);
     },
     showSubscribeForAlerts() {

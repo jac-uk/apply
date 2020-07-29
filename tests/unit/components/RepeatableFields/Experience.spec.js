@@ -12,24 +12,24 @@ describe('@/components/RepeatableFields/Experience', () => {
 
     describe('row', () => {
       it('is required', () => {
-        let prop = Experience.props.row;
+        const prop = Experience.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = Experience.props.row;
+        const prop = Experience.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = Experience.props.index;
+        const prop = Experience.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = Experience.props.index;
+        const prop = Experience.props.index;
         expect(prop.type()).toBeNumber();
       });
     });

@@ -170,9 +170,9 @@ export default {
         this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
         this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
       ) {
-        let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+        const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
         if (fileName) {
-          outcome = 'self-assessment-with-competencies.' + fileName.split('.').pop();
+          outcome = `self-assessment-with-competencies.${  fileName.split('.').pop()}`;
         }
       }
       return outcome;

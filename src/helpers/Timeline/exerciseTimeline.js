@@ -1,7 +1,7 @@
 import { isDate, formatDate } from '@/helpers/date';
 
 const getDateAndTime = (date, startTime) => {
-  if(!isDate(date) && !isDate(startTime)) {
+  if (!isDate(date) && !isDate(startTime)) {
     return null;
   }
   const result = date;
@@ -10,26 +10,26 @@ const getDateAndTime = (date, startTime) => {
 };
 
 const getDateAndTimeString = (date, startTime, endTime) => {
-  let dateString = isDate(date) && formatDate(date) || null;
-  let startTimeString = isDate(startTime) && formatDate(startTime, 'time') || null;
-  let endTimeString = isDate(endTime) && formatDate(endTime, 'time') || null;
-  if(!dateString && !startTimeString && !endTimeString) {
+  const dateString = isDate(date) && formatDate(date) || null;
+  const startTimeString = isDate(startTime) && formatDate(startTime, 'time') || null;
+  const endTimeString = isDate(endTime) && formatDate(endTime, 'time') || null;
+  if (!dateString && !startTimeString && !endTimeString) {
     return null;
   }
   return `${dateString} - ${startTimeString} to ${endTimeString}`;
 };
 
 const createSelectionDay = (selectionDay) => {
-  let selectionDayEntry = {
-    entry: 'Selection Day - ' + selectionDay.selectionDayLocation,
+  const selectionDayEntry = {
+    entry: `Selection Day - ${  selectionDay.selectionDayLocation}`,
     date: selectionDay.selectionDayStart,
     dateString: null,
   };
-  let selectionDayStart = isDate(selectionDay.selectionDayStart) && formatDate(selectionDay.selectionDayStart) || null;
-  let selectionDayEnd = isDate(selectionDay.selectionDayEnd) && formatDate(selectionDay.selectionDayEnd) || null;
-  if(!selectionDayStart || !selectionDayEnd) {
+  const selectionDayStart = isDate(selectionDay.selectionDayStart) && formatDate(selectionDay.selectionDayStart) || null;
+  const selectionDayEnd = isDate(selectionDay.selectionDayEnd) && formatDate(selectionDay.selectionDayEnd) || null;
+  if (!selectionDayStart || !selectionDayEnd) {
     selectionDayEntry.dateString = '';
-  } else if(selectionDayStart !== selectionDayEnd) {
+  } else if (selectionDayStart !== selectionDayEnd) {
     selectionDayEntry.dateString = `${selectionDayStart} to ${selectionDayEnd}`;
   } else {
     selectionDayEntry.dateString = `${selectionDayStart}`;
@@ -38,16 +38,16 @@ const createSelectionDay = (selectionDay) => {
 };
 
 const createShortlistingMethod = (method, startDate, endDate) => {
-  let shortlistingMethodEntry = {
+  const shortlistingMethodEntry = {
     entry: `${method}`,
     date: startDate,
     dateString: null,
   };
-  let formattedStartDate = isDate(startDate) && formatDate(startDate) || null;
-  let formattedEndDate = isDate(endDate) && formatDate(endDate) || null;
-  if(!formattedStartDate || !formattedEndDate) {
+  const formattedStartDate = isDate(startDate) && formatDate(startDate) || null;
+  const formattedEndDate = isDate(endDate) && formatDate(endDate) || null;
+  if (!formattedStartDate || !formattedEndDate) {
     shortlistingMethodEntry.dateString = '';
-  } else if(formattedStartDate !== formattedEndDate) {
+  } else if (formattedStartDate !== formattedEndDate) {
     shortlistingMethodEntry.dateString = `${formattedStartDate} to ${formattedEndDate}`;
   } else {
     shortlistingMethodEntry.dateString = `${formattedStartDate}`;
@@ -56,7 +56,7 @@ const createShortlistingMethod = (method, startDate, endDate) => {
 };
 
 const exerciseTimeline = (data) => {
-  let timeline = [];
+  const timeline = [];
 
   if (data.applicationOpenDate) {
     timeline.push(
@@ -91,13 +91,13 @@ const exerciseTimeline = (data) => {
     //   );
     // }
 
-    if(data.shortlistingMethods.includes('name-blind-paper-sift')) {
+    if (data.shortlistingMethods.includes('name-blind-paper-sift')) {
       timeline.push(
         createShortlistingMethod('Name-blind sift', data.nameBlindSiftStartDate, data.nameBlindSiftEndDate)
       );
     }
 
-    if(data.shortlistingMethods.includes('telephone-assessment')) {
+    if (data.shortlistingMethods.includes('telephone-assessment')) {
       timeline.push(createShortlistingMethod('Telephone assessment', data.telephoneAssessmentStartDate, data.telephoneAssessmentEndDate));
     }
 
@@ -205,7 +205,7 @@ const exerciseTimeline = (data) => {
     );
   }
   if (data.selectionDays && data.selectionDays.length > 0) {
-    for (var i = 0; i < data.selectionDays.length; i++) {
+    for (let i = 0; i < data.selectionDays.length; i++) {
       if (data.selectionDays[i].selectionDayStart) {
         timeline.push(createSelectionDay(data.selectionDays[i]));
       }

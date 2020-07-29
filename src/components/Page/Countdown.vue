@@ -75,10 +75,10 @@ export default {
   },
   methods: {
     tick(start, end) {
-      var now = new Date().getTime();
+      const now = new Date().getTime();
 
-      var timeSinceStart = now - start;
-      var timeRemaining = end - now;
+      const timeSinceStart = now - start;
+      const timeRemaining = end - now;
 
       if (timeSinceStart < 0) {
         this.status = 'upcoming';

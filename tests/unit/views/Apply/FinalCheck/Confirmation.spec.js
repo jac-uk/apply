@@ -9,7 +9,7 @@ xdescribe('views/Confirmation', () => {
   beforeEach(() => {
     wrapper = createTestSubject(Confirmation,{
       propsData: [],
-      stubs:['RouterLink'],
+      stubs: ['RouterLink'],
     });
   });
 

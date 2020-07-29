@@ -171,9 +171,9 @@ export default {
       ) {
         outcome = 'statement-of-suitability-with-skills-and-abilities';
       }
-      let fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+      const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
       if (fileName) {
-        outcome = outcome + '.' + fileName.split('.').pop();
+        outcome = `${outcome  }.${  fileName.split('.').pop()}`;
       }
       return outcome;
     },

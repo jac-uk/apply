@@ -3,7 +3,7 @@
     <header
       class="govuk-width-container header"
     >
-      <div 
+      <div
         class="header-background clearfix"
       >
         <div class="govuk-grid-column-two-thirds organisation__margin-bottom">
@@ -154,30 +154,29 @@ export default {
 </script>
 
 <style lang="scss">
+.govuk-grid-column-one-half {
+  width: 100%;
+  float: left;
+}
 
-  .govuk-grid-column-one-half {
-    width: 100%;
-    float: left;
-  }
-  
-  .header {
-    background-color: #fafafa;
-    padding: 1.25em 0.625em 0 0.625em;
-  };
+.header {
+  background-color: #fafafa;
+  padding: 1.25em 0.625em 0 0.625em;
+};
 
-  .govuk-footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  };
+.govuk-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+};
 
-  .govuk-main-wrapper {
-    padding: 0px;
-  }
+.govuk-main-wrapper {
+  padding: 0px;
+}
 
-  .page-container {
-    position: relative;
-    min-height: 100vh;
-  }
-
+.page-container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 10vh;
+}
 </style>

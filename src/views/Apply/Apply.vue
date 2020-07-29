@@ -29,7 +29,7 @@ export default {
   async mounted() {
     try {
       const today = Date.now();
-      let vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
+      const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
 
       if (vacancy === null) {
         this.redirectToErrorPage();

@@ -68,7 +68,7 @@ describe('components/Form/RadioGroup', () => {
             });
 
         describe('when computed property `inputValue` changes', () => {
-            let updatedVal = 'some-new-value';
+            const updatedVal = 'some-new-value';
             it('emits an `input` event', () => {
                 wrapper.setData({
                     inputValue: updatedVal,

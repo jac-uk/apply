@@ -1643,10 +1643,10 @@ export default {
       return this.$store.state.application.record;
     },
     isNonLegal () {
-      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise ==='leadership-non-legal';
+      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise === 'leadership-non-legal';
     },
     isLegal() {
-      return this.vacancy.typeOfExercise ==='legal' || this.vacancy.typeOfExercise ==='leadership';
+      return this.vacancy.typeOfExercise === 'legal' || this.vacancy.typeOfExercise === 'leadership';
     },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';

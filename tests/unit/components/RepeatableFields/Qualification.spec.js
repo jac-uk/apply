@@ -11,24 +11,24 @@ describe('@/components/RepeatableFields/Qualification', () => {
   describe('props', () => {
     describe('row', () => {
       it('is required', () => {
-        let prop = Qualification.props.row;
+        const prop = Qualification.props.row;
         expect(prop.required).toBe(true);
       });
 
       it('has type object', () => {
-        let prop = Qualification.props.row;
+        const prop = Qualification.props.row;
         expect(prop.type()).toBeObject();
       });
     });
 
     describe('index', () => {
       it('is required', () => {
-        let prop = Qualification.props.index;
+        const prop = Qualification.props.index;
         expect(prop.required).toBe(true);
       });
 
       it('has type number', () => {
-        let prop = Qualification.props.index;
+        const prop = Qualification.props.index;
         expect(prop.type()).toBeNumber();
       });
     });
