@@ -26,7 +26,7 @@
       Your file has been received.
       <a
         href="javascript:void(0)"
-        class="govuk-link" 
+        class="govuk-link"
         @click.prevent="replaceFile"
       >Replace</a>
     </p>
@@ -65,7 +65,7 @@ export default {
     value: {
       default: '',
       type: String,
-    },    
+    },
     name: {
       type: String,
       required: true,
@@ -85,6 +85,7 @@ export default {
       file: '',
       isReplacing: false,
       isUploading: false,
+      acceptableExtensions: ['docx', 'doc', 'odt', 'txt', 'fodt'],
     };
   },
   computed: {
@@ -100,9 +101,8 @@ export default {
       },
     },
   },
-  async mounted() {
+  async mounted () {
     if (typeof this.fileName === 'string' && this.fileName.length) {
-      
       const isUploaded = await this.verifyFile(this.fileName);
 
       if (!isUploaded) {
@@ -128,15 +128,31 @@ export default {
 
       return [this.name, parts.pop()].join('.');
     },
+    validFileExtension(originalName){
+      const parts = originalName.split('.');
+
+      if (parts.length < 2){
+        return false;
+      }
+
+      if (this.acceptableExtensions.includes(parts.pop())){
+        return true;
+      }
+
+      return false;
+    },
     resetFile() {
       this.$refs.file = null;
       this.isUploading = false;
     },
     async upload(file) {
       // @todo return more useful error messages
-
       if (!file) {
         this.setError('File upload failed, please try again');
+        return false;
+      } 
+      if (!this.validFileExtension(file.name)) {
+        this.setError(`Invalid file type. Choose from: ${this.acceptableExtensions}`);
         return false;
       }
 
