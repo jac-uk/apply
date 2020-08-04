@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode develop",
@@ -20,16 +20,16 @@
   },
   "dependencies": {
     "@ministryofjustice/frontend": "0.0.19-alpha",
-    "@sentry/browser": "^5.19.2",
-    "@sentry/integrations": "^5.19.2",
+    "@sentry/browser": "^5.20.1",
+    "@sentry/integrations": "^5.20.1",
     "core-js": "^2.6.11",
     "firebase": "^6.6.2",
-    "firebaseui": "^4.5.2",
-    "govuk-frontend": "^3.7.0",
+    "firebaseui": "^4.6.1",
+    "govuk-frontend": "^3.8.0",
     "jspdf": "^1.5.3",
-    "logrocket": "^1.0.9",
+    "logrocket": "^1.0.10",
     "vue": "^2.6.11",
-    "vue-gtag": "^1.7.1",
+    "vue-gtag": "^1.8.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.5.1",
     "vuexfire": "^3.2.3"
