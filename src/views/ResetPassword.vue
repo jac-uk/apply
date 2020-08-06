@@ -10,20 +10,37 @@
             Forgotten password
           </h1>
 
-          <p class="govuk-body-l">
-            We'll email you a link to reset your password.
-          </p>
+          <div 
+            v-if="resetSent"
+            class="govuk-panel govuk-panel--confirmation"
+          >
+            <h1 class="govuk-panel__title">
+              Please check your email
+            </h1>
+            <h2 class="govuk-panel__body govuk-!-font-size-27 govuk-!-margin-top-7">
+              If an account exists for <b>{{ formData.email }}</b>, we have now sent you a password reset link. <br>
+              Please check your junk or spam folders before contacting the JAC directly, if you don't receive this email.
+            </h2>
+          </div>
 
-          <TextField
-            id="email"
-            v-model="formData.email"
-            label="Email address"
-            type="email"
-          />
+          <div
+            v-if="!resetSent"
+          >
+            <p class="govuk-body-l">
+              We'll email you a link to reset your password.
+            </p>
 
-          <button class="govuk-button">
-            Send the link
-          </button>
+            <TextField
+              id="email"
+              v-model="formData.email"
+              label="Email address"
+              type="email"
+            />
+
+            <button class="govuk-button">
+              Send the link
+            </button>
+          </div>
         </div>
       </form>
     </div>
@@ -41,6 +58,7 @@ export default {
   data () {
     return {
       formData: {},
+      resetSent: false,
     };
   },
   methods: {
@@ -53,11 +71,11 @@ export default {
           url: returnUrl,
         })
           .then(() => {
-            this.$router.push({ name: 'sign-in' });
+            this.resetSent = true;
           })
-          .catch((error) => {
-            // Handled in the same way as success to prevent account enumeration attacks 
-            pass;
+          .catch(() => {
+            // Handled in the same way as success to prevent account enumeration attacks
+            this.resetSent = true;
           });
       }
     },
