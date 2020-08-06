@@ -14,8 +14,6 @@
             We'll email you a link to reset your password.
           </p>
 
-          <ErrorSummary :errors="errors" />
-
           <TextField
             id="email"
             v-model="formData.email"
@@ -33,19 +31,16 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 
 export default {
   components: {
-    ErrorSummary,
     TextField,
   },
   data () {
     return {
       formData: {},
-      errors: [],
     };
   },
   methods: {
@@ -61,8 +56,8 @@ export default {
             this.$router.push({ name: 'sign-in' });
           })
           .catch((error) => {
-            // TODO: if user doesn't exist, message user and prompt to create account
-            this.errors.push({ id: 'email', message: error.message });
+            // Handled in the same way as success to prevent account enumeration attacks 
+            pass;
           });
       }
     },
