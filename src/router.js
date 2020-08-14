@@ -188,7 +188,7 @@ const router = new Router({
       },
     },
     {
-      path: '/qualifying-test/:qualifyingTestId',
+      path: '/qualifying-tests/:qualifyingTestId',
       component: QualifyingTest,
       children: [
         {
