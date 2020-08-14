@@ -66,13 +66,12 @@ import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaratio
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
 // Qualifying Tests
-import QualifyingTests from '@/views/QualifyingTests';
+import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
-import QualifyingTestsList from '@/views/QualifyingTests/QualifyingTestsList';
-import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/QualifyingTestInformation';
-import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/QualifyingTestOverview';
-import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/QualifyingTestQuestion';
-import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/QualifyingTestSubmitted';
+import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
+import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
+import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
 Vue.use(Router);
 
@@ -182,57 +181,51 @@ const router = new Router({
     {
       path: '/qualifying-tests',
       component: QualifyingTests,
+      name: 'qualifying-tests',
+      meta: {
+        requiresAuth: true,
+        title: 'Qualifying Tests | List',
+      },
+    },
+    {
+      path: '/qualifyingTest/:qualifyingTestId',
+      component: QualifyingTest,
       children: [
         {
-          path: 'list',
-          component: QualifyingTestsList,
-          name: 'qualifying-tests-list',
+          path: 'information',
+          component: QualifyingTestInformation,
+          name: 'qualifying-test-information',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Tests | List',
+            title: 'Qualifying Test | Information',
           },
         },
         {
-          path: 'test/:qualifyingTestId',
-          component: QualifyingTest,
-          children: [
-            {
-              path: 'information',
-              component: QualifyingTestInformation,
-              name: 'qualifying-test-information',
-              meta: {
-                requiresAuth: true,
-                title: 'Qualifying Test | Information',
-              },
-            },
-            {
-              path: 'overview',
-              component: QualifyingTestOverview,
-              name: 'qualifying-test-overview',
-              meta: {
-                requiresAuth: true,
-                title: 'Qualifying Test | Overview',
-              },
-            },
-            {
-              path: 'question/:questionNumber',
-              component: QualifyingTestQuestion,
-              name: 'qualifying-test-question',
-              meta: {
-                requiresAuth: true,
-                title: 'Qualifying Test | Question',
-              },
-            },
-            {
-              path: 'submitted',
-              component: QualifyingTestSubmitted,
-              name: 'qualifying-test-submitted',
-              meta: {
-                requiresAuth: true,
-                title: 'Qualifying Test | Submitted',
-              },
-            },
-          ],
+          path: 'overview',
+          component: QualifyingTestOverview,
+          name: 'qualifying-test-overview',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Overview',
+          },
+        },
+        {
+          path: 'question/:questionNumber',
+          component: QualifyingTestQuestion,
+          name: 'qualifying-test-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Question',
+          },
+        },
+        {
+          path: 'submitted',
+          component: QualifyingTestSubmitted,
+          name: 'qualifying-test-submitted',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Submitted',
+          },
         },
       ],
     },

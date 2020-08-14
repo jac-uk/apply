@@ -28,7 +28,7 @@
             <li class="moj-side-navigation__item">
               <RouterLink
                 class="govuk-link"
-                :to="{ name: 'qualifying-tests-list' }"
+                :to="{ name: 'qualifying-tests' }"
               >
                 Qualifying Tests
               </RouterLink>
