@@ -8,9 +8,9 @@
             <h1 class="govuk-panel__title">
               Test Submitted
             </h1>
-            <div class="govuk-panel__body">
+            <!-- <div class="govuk-panel__body">
               Your reference number<br><strong>??????????</strong>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
