@@ -54,6 +54,7 @@ import CV from '@/views/Apply/Assessments/CV';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
+// Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
@@ -63,6 +64,14 @@ import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetail
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
+
+// Qualifying Tests
+import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
+import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
+import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
+import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
+import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
 Vue.use(Router);
 
@@ -168,6 +177,57 @@ const router = new Router({
       meta: {
         title: 'Applications',
       },
+    },
+    {
+      path: '/qualifying-tests',
+      component: QualifyingTests,
+      name: 'qualifying-tests',
+      meta: {
+        requiresAuth: true,
+        title: 'Qualifying Tests | List',
+      },
+    },
+    {
+      path: '/qualifying-tests/:qualifyingTestId',
+      component: QualifyingTest,
+      children: [
+        {
+          path: 'information',
+          component: QualifyingTestInformation,
+          name: 'qualifying-test-information',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Information',
+          },
+        },
+        {
+          path: 'overview',
+          component: QualifyingTestOverview,
+          name: 'qualifying-test-overview',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Overview',
+          },
+        },
+        {
+          path: 'question/:questionNumber',
+          component: QualifyingTestQuestion,
+          name: 'qualifying-test-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Question',
+          },
+        },
+        {
+          path: 'submitted',
+          component: QualifyingTestSubmitted,
+          name: 'qualifying-test-submitted',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Submitted',
+          },
+        },
+      ],
     },
     // Apply for a role
     {
