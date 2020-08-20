@@ -25,9 +25,9 @@
       </li>
       <li>
         <RouterLink
-          :to="{ name: 'qualifying-test-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
+          :to="{ name: 'qualifying-test-scenario-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
         >
-          QT Question
+          QT Scenario Question
         </RouterLink>
       </li>
     </ul>

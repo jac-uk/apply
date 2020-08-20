@@ -70,7 +70,7 @@ import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
 import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
-import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import ScenarioQuestion from '@/views/QualifyingTests/QualifyingTest/ScenarioQuestionPage';
 import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
 Vue.use(Router);
@@ -210,12 +210,12 @@ const router = new Router({
           },
         },
         {
-          path: 'question/:questionNumber',
-          component: QualifyingTestQuestion,
-          name: 'qualifying-test-question',
+          path: 'scenario-question/:questionNumber',
+          component: ScenarioQuestion,
+          name: 'qualifying-test-scenario-question',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Question',
+            title: 'Qualifying Test | Scenario question',
           },
         },
         {
