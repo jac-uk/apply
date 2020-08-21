@@ -73,3 +73,37 @@ describe('helpers/date/validateYear', () => {
     expect(dateHelper.validateYear(1980)).toBe(1980);
   });
 });
+
+describe('helpers/date/isToday', () => {
+  it('returns null if value is null', () => {
+    expect(dateHelper.isToday(null)).toBe(null);
+  });
+
+  it('returns null if value is not a number', () => {
+    expect(dateHelper.isToday('one thousand eighty four')).toBe(null);
+  });
+
+  it('returns true if date is today', () => {
+    expect(dateHelper.isToday(new Date())).toBeTruthy();
+  });
+
+  it('returns false if date is in the past', () => {
+    expect(dateHelper.isToday(new Date(1999, 1, 1))).toBeFalsy();
+  });
+
+  it('returns false if date is one day in the future', () => {
+    let testDate = new Date();
+    testDate.setDate(testDate.getDate + 1);
+    expect(dateHelper.isToday(testDate)).toBeFalsy();
+  });
+
+  it('returns false if date is one day in the past', () => {
+    let testDate = new Date();
+    testDate.setDate(testDate.getDate - 1);
+    expect(dateHelper.isToday(testDate)).toBeFalsy();
+  });
+
+  it('returns false if date is in the future', () => {
+    expect(dateHelper.isToday(new Date(2040, 1, 1))).toBeFalsy();
+  });
+});
