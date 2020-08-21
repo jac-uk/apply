@@ -41,7 +41,7 @@
       
       <Checkbox> 
         <label class="govuk-heading-m govuk-!-margin-bottom-2">
-          I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
+          I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise
         </label>
       </Checkbox>
       <button
