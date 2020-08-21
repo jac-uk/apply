@@ -32,6 +32,13 @@
             QT Situational Judgement Question
           </RouterLink>
         </li>
+        <li>
+        <RouterLink
+          :to="{ name: 'qualifying-test-scenario-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
+        >
+          QT Scenario Question
+        </RouterLink>
+      </li>
       </ul>
       <!-- Delete when necessary -->
 
