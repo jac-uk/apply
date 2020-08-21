@@ -1,5 +1,6 @@
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
+import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
 const collection = firestore.collection('qualifyingTestResponses');
