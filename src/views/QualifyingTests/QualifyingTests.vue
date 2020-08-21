@@ -25,13 +25,13 @@
             QT Submitted
           </RouterLink>
         </li>
-       <li>
-        <RouterLink
-          :to="{ name: 'qualifying-test-situational-judgement-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
-        >
-          QT Situational Judgement Question
-        </RouterLink>
-      </li>
+        <li>
+          <RouterLink
+            :to="{ name: 'qualifying-test-situational-judgement-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
+          >
+            QT Situational Judgement Question
+          </RouterLink>
+        </li>
       </ul>
       <!-- Delete when necessary -->
 
@@ -182,11 +182,6 @@
         <table 
           class="govuk-table"
         >
-          QT Submitted
-        </RouterLink>
-      </li>
-    </ul>
-  </div>   
           <thead class="govuk-table__head">
             <tr class="govuk-table__row">
               <th
@@ -238,9 +233,9 @@
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>   
-  </div>
+      </div> 
+    </div>
+  </div>   
 </template>
 
 <script>
