@@ -40,9 +40,9 @@
       </ol>
       
       <Checkbox> 
-        <label class="govuk-heading-m govuk-!-margin-bottom-2">
+        <span class="govuk-heading-m govuk-!-margin-bottom-2">
           I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise
-        </label>
+        </span>
       </Checkbox>
       <button
         href="#"
