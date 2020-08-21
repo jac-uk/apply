@@ -1,23 +1,30 @@
 <template>
-  <!-- [ Qualifying Test | Information Page | {{ $route.params.qualifyingTestId }} ] -->
-  <div class="govuk-grid-row">
+  <LoadingMessage
+    v-if="!loaded"
+    :load-failed="loadFailed"
+  />
+  <div
+    v-else
+    class="govuk-grid-row"
+  >
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-!-margin-bottom-6">
         <h1 class="govuk-heading-l govuk-!-margin-bottom-1">
-          009 Judge of the First-tier Tribunal Legal member Situational Judgement Test
+          {{ qualifyingTestResponse.qualifyingTest.title }}
         </h1>
-        <div>
+        <h2>
           Important information 
-        </div>
+        </h2>
         <ul>
           <li>
-            this test contains [ AMMOUNT ] questions
+            This test contains <b> {{ numberOfQuestions }} </b>
           </li>
           <li>
-            You have [ TIME ] minuites to complete this test, this includes [ EXTRA-TIME ] of reasonable adjustment time.
+            You have <b> {{ qualifyingTestResponse.duration.testDurationAdjusted }} minutes </b> to complete this test. 
+            <span v-if="extraTime"> This includes <b> {{ extraTimeAmount }} minutes </b> of reasonable adjustment time.</span>
           </li>
           <li>
-            You must submit your test by 21:00, [ DATE ]
+            You must submit your test by <b> {{ endTime }} </b>
           </li>
           <li>
             Make sure you've got a stable internet connection before you start
@@ -30,7 +37,8 @@
           </li>
         </ul>
       </div>
-      <Checkbox 
+      <Checkbox
+        id="confirm-checkbox"
         label="I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
       />
       <button
@@ -61,11 +69,64 @@
   </div>
 </template>
 <script>
+import LoadingMessage from '@/components/LoadingMessage';
 import Checkbox from '@/components/Form/Checkbox';
+import { isToday, formatDate } from '@/helpers/date';
 
 export default {
   components: {
     Checkbox,
+    LoadingMessage,
+  },
+  data(){
+    return {
+      loaded: false,
+      loadFailed: false,
+    };
+  },
+  computed: {
+    qualifyingTestResponse() {
+      return this.$store.state.qualifyingTestResponse.record;
+    },
+    endTime(){
+      const time = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate, 'time');
+      const day = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate);
+      return isToday(this.qualifyingTestResponse.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
+    },
+    extraTime(){
+      return this.qualifyingTestResponse.duration.reasonableAdjustment != 0;
+    },
+    extraTimeAmount(){
+      return this.qualifyingTestResponse.duration.testDurationAdjusted - this.qualifyingTestResponse.duration.testDuration;
+    },
+    numberOfQuestions(){
+      const questionLength = this.qualifyingTestResponse.qualifyingTest.questions.questions.length;
+      const plural = questionLength > 1 ? 's' : '';
+      if (this.qualifyingTestResponse.qualifyingTest.type === 'scenario') {
+        return `${questionLength} scenario${plural}, with several questions per scenario`;
+      } else {
+        return `${questionLength} question${plural}`;
+      }
+    },
+  },
+  async mounted() {
+    const id = this.$route.params.qualifyingTestId;
+    try {
+      const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', id);
+      if (qualifyingTestResponse === null) {
+        this.redirectToErrorPage();
+      } else {
+        this.loaded = true;
+      }
+    } catch (e) {
+      this.loadFailed = true;
+      throw e;
+    }
+  },
+  methods: {
+    redirectToErrorPage() {
+      this.$router.replace({ name: 'qualifying-test-not-found' });
+    },
   },
 };
 </script>
