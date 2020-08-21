@@ -37,51 +37,70 @@
           </li>
         </ul>
       </div>
-      <Checkbox
-        id="confirm-checkbox"
-        label="I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
-      />
-      <button
-        href="#"
-        role="button"
-        draggable="false"
-        class="govuk-button govuk-button--start"
-        data-module="govuk-button"
-        style="background-color:#00703c;"
+      <form
+        v-if="!expired"
+        ref="formRef"
+        @submit.prevent="onSubmit"
       >
-        Start now
-        <svg
-          class="govuk-button__start-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="17.5"
-          height="19"
-          viewBox="0 0 33 40"
-          aria-hidden="true"
-          focusable="false"
+        <fieldset
+          class="govuk-fieldset"
         >
-          <path
-            fill="currentColor"
-            d="M0 0h13l20 20-20 20H0l20-20z"
+          <Checkbox
+            id="confirm-checkbox"
+            v-model="confirmationChecked"
+            label="I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
+            :required="true"
+            :messages="{'required': 'Please confirm you agree'}"
           />
-        </svg>
-      </button>
+        </fieldset>
+        <!-- @TODO: this should be a component --> 
+        <button
+          class="govuk-button govuk-button--success"
+        >
+          <b v-if="!started">Start now</b>
+          <b v-else>Continue</b>
+          <svg
+            class="govuk-button__start-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            width="17.5"
+            height="19"
+            viewBox="0 0 33 40"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path
+              fill="currentColor"
+              d="M0 0h13l20 20-20 20H0l20-20z"
+            />
+          </svg>
+        </button>
+      </form>
+      <Warning
+        v-else
+        message="This Qualifying Test has ended. Please contact the selection exercise team."
+      />
     </div>
   </div>
 </template>
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
 import Checkbox from '@/components/Form/Checkbox';
-import { isToday, formatDate } from '@/helpers/date';
+import Form from '@/components/Form/Form';
+import Warning from '@/components/Warning';
+import { isToday, isDateInFuture, formatDate } from '@/helpers/date';
 
 export default {
   components: {
     Checkbox,
     LoadingMessage,
+    Warning,
   },
+  extends: Form,
   data(){
     return {
       loaded: false,
       loadFailed: false,
+      confirmationChecked: false,
     };
   },
   computed: {
@@ -108,6 +127,12 @@ export default {
         return `${questionLength} question${plural}`;
       }
     },
+    started(){
+      return this.qualifyingTestResponse.started != null;
+    },
+    expired(){
+      return !isDateInFuture(this.qualifyingTestResponse.qualifyingTest.endDate);
+    },
   },
   async mounted() {
     const id = this.$route.params.qualifyingTestId;
@@ -126,6 +151,20 @@ export default {
   methods: {
     redirectToErrorPage() {
       this.$router.replace({ name: 'qualifying-test-not-found' });
+    },
+    async onSubmit() {
+      this.validate();
+      if (this.isValid()) {
+        try {
+          this.qualifyingTestResponse.started = new Date();
+          await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+          this.$router.push({ name: 'qualifying-test-review' });
+          console.log('valid form');
+        } catch (error) {
+          this.errors.push({ message: error.message });
+          this.scrollToTop();
+        }
+      }
     },
   },
 };

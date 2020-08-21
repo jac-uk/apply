@@ -92,13 +92,13 @@ describe('helpers/date/isToday', () => {
   });
 
   it('returns false if date is one day in the future', () => {
-    let testDate = new Date();
+    const testDate = new Date();
     testDate.setDate(testDate.getDate + 1);
     expect(dateHelper.isToday(testDate)).toBeFalsy();
   });
 
   it('returns false if date is one day in the past', () => {
-    let testDate = new Date();
+    const testDate = new Date();
     testDate.setDate(testDate.getDate - 1);
     expect(dateHelper.isToday(testDate)).toBeFalsy();
   });

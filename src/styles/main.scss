@@ -82,6 +82,17 @@ body {
   color: #0b0c0c;
 }
 
+.govuk-button--success {
+  background-color: #00703c;
+  box-shadow: 0 2px 0 #002d18;
+  color: #f3f2f1;
+}
+
+.govuk-button--success:hover,
+.govuk-button--success:focus {
+  background-color: #005a30;
+}
+
 .govuk-button--warning {
   background-color: #d4351c;
   box-shadow: 0 2px 0 #55150b;
