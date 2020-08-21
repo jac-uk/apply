@@ -25,5 +25,8 @@ export default {
 
       return state.record.id;
     },
+    data: (state) => () => {
+      return clone(state.record);
+    },
   },
 };
