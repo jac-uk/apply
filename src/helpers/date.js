@@ -69,7 +69,7 @@ const validateYear = (val) => {
 };
 
 const isToday = (val) => {
-  if(!isDate(val)){ 
+  if (!isDate(val)){ 
     return null;
   }
   
