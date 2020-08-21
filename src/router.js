@@ -70,8 +70,10 @@ import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
 import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
-import ScenarioQuestion from '@/views/QualifyingTests/QualifyingTest/ScenarioQuestionPage';
 import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
+// Qualifying Test Questions
+import ScenarioQuestion from '@/views/QualifyingTests/QualifyingTest/ScenarioQuestionPage';
+import SituationalJudgementQuestion from '@/views/QualifyingTests/QualifyingTest/SituationalJudgementQuestionPage';
 
 Vue.use(Router);
 
@@ -216,6 +218,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Scenario question',
+          },
+        },
+        {
+          path: 'situational-judgement-question/:questionNumber',
+          component: SituationalJudgementQuestion,
+          name: 'qualifying-test-situational-judgement-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Situational Judgement Question',
           },
         },
         {
