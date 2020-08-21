@@ -74,6 +74,7 @@ import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Subm
 // Qualifying Test Questions
 import ScenarioQuestion from '@/views/QualifyingTests/QualifyingTest/ScenarioQuestionPage';
 import SituationalJudgementQuestion from '@/views/QualifyingTests/QualifyingTest/SituationalJudgementQuestionPage';
+import CriticalAnalysisQuestion from '@/views/QualifyingTests/QualifyingTest/CriticalAnalysisQuestionPage';
 
 Vue.use(Router);
 
@@ -227,6 +228,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Situational Judgement Question',
+          },
+        },
+        {
+          path: 'critical-analysis-question/:questionNumber',
+          component: CriticalAnalysisQuestion,
+          name: 'qualifying-test-critical-analysis-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Critical Analysis Question',
           },
         },
         {
