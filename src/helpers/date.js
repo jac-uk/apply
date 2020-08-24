@@ -68,10 +68,22 @@ const validateYear = (val) => {
   return val;
 };
 
+const isToday = (val) => {
+  if (!isDate(val)){ 
+    return null;
+  }
+  
+  const today = new Date();
+  return val.getDate() === today.getDate() &&
+    val.getMonth() === today.getMonth() &&
+    val.getFullYear() === today.getFullYear();
+};
+
 export {
   isDate,
   isDateInFuture,
   formatDate,
   parseEstimatedDate,
-  validateYear
+  validateYear,
+  isToday
 };
