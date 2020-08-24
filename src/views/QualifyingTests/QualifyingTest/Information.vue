@@ -1,10 +1,5 @@
 <template>
-  <LoadingMessage
-    v-if="!loaded"
-    :load-failed="loadFailed"
-  />
   <div
-    v-else
     class="govuk-grid-row"
   >
     <div class="govuk-grid-column-two-thirds">
@@ -47,9 +42,9 @@
           >
             <Checkbox
               id="confirm-checkbox"
-              name="confirm-checkbox"
               ref="confirm-checkbox"
               v-model="confirmationChecked"
+              name="confirm-checkbox"
               label="I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
               required
               :messages="{'required': 'Please confirm you agree'}"
@@ -86,7 +81,6 @@
   </div>
 </template>
 <script>
-import LoadingMessage from '@/components/LoadingMessage';
 import Checkbox from '@/components/Form/Checkbox';
 import Form from '@/components/Form/Form';
 import Warning from '@/components/Warning';
@@ -95,7 +89,6 @@ import { isToday, isDateInFuture, formatDate } from '@/helpers/date';
 export default {
   components: {
     Checkbox,
-    LoadingMessage,
     Warning,
   },
   extends: Form,
@@ -136,20 +129,6 @@ export default {
     expired(){
       return !isDateInFuture(this.qualifyingTestResponse.qualifyingTest.endDate);
     },
-  },
-  async mounted() {
-    const id = this.$route.params.qualifyingTestId;
-    try {
-      const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', id);
-      if (qualifyingTestResponse === null) {
-        this.redirectToErrorPage();
-      } else {
-        this.loaded = true;
-      }
-    } catch (e) {
-      this.loadFailed = true;
-      throw e;
-    }
   },
   methods: {
     redirectToErrorPage() {
