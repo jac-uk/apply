@@ -1,3 +1,4 @@
+import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
@@ -16,6 +17,11 @@ export default {
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('record');
     }),
+    save: async ({ state }, data) => {
+      data.lastUpdated = firebase.firestore.FieldValue.serverTimestamp();
+
+      return await collection.doc(state.record.id).update(data);
+    },
   },
   state: {
     record: null,
