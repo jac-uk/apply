@@ -2,22 +2,21 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <div class="govuk-!-margin-bottom-6">
-        <!-- [ Qualifying Test | Submitted | {{ $route.params.qualifyingTestId }} ] -->
         <div>
           <div class="govuk-panel govuk-panel--confirmation">
             <h1 class="govuk-panel__title">
               Test Submitted
             </h1>
-            <!-- <div class="govuk-panel__body">
-              Your reference number<br><strong>??????????</strong>
-            </div> -->
+            Your test has been submitted and is now complete.
           </div>
         </div>
       </div>
       <div class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6">
         Next Steps
         <p class="govuk-body-m govuk-!-margin-top-0">
-          You will be informed of the outcome of your situational judgement qualifying test by <strong>[ DATE ]</strong>
+          You will be informed of the outcome of your situational judgement qualifying test, as indicated on the <router-link :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`">
+            vacancy timeline
+          </router-link>.
           if you don't hear anything by this date, you should contact us at email@jacplaceholder.co.uk
         </p>
       </div>
@@ -59,7 +58,15 @@
     </div>
   </div>
 </template>
-
+<script>
+export default {
+  computed: {
+    qualifyingTestResponse() {
+      return this.$store.qualifyingTestResponse.record;
+    },
+  },
+};
+</script>
 <style>
   .govuk-inset-text {
     border-color: red;
