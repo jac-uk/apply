@@ -38,47 +38,50 @@
         </ul>
       </div>
       <form
-        v-if="!expired"
         ref="formRef"
         @submit.prevent="onSubmit"
       >
-        <fieldset
-          class="govuk-fieldset"
-        >
-          <Checkbox
-            id="confirm-checkbox"
-            v-model="confirmationChecked"
-            label="I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
-            :required="true"
-            :messages="{'required': 'Please confirm you agree'}"
-          />
-        </fieldset>
-        <!-- @TODO: this should be a component --> 
-        <button
-          class="govuk-button govuk-button--success"
-        >
-          <b v-if="!started">Start now</b>
-          <b v-else>Continue</b>
-          <svg
-            class="govuk-button__start-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="17.5"
-            height="19"
-            viewBox="0 0 33 40"
-            aria-hidden="true"
-            focusable="false"
+        <div v-if="!expired">      
+          <fieldset
+            class="govuk-fieldset"
           >
-            <path
-              fill="currentColor"
-              d="M0 0h13l20 20-20 20H0l20-20z"
+            <Checkbox
+              id="confirm-checkbox"
+              name="confirm-checkbox"
+              ref="confirm-checkbox"
+              v-model="confirmationChecked"
+              label="I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise"
+              required
+              :messages="{'required': 'Please confirm you agree'}"
             />
-          </svg>
-        </button>
+          </fieldset>
+          <!-- @TODO: this should be a component --> 
+          <button
+            class="govuk-button govuk-button--success"
+          >
+            <b v-if="!started">Start now</b>
+            <b v-else>Continue</b>
+            <svg
+              class="govuk-button__start-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="17.5"
+              height="19"
+              viewBox="0 0 33 40"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                fill="currentColor"
+                d="M0 0h13l20 20-20 20H0l20-20z"
+              />
+            </svg>
+          </button>
+        </div> 
+        <Warning
+          v-else
+          message="This Qualifying Test has ended. Please contact the selection exercise team."
+        />
       </form>
-      <Warning
-        v-else
-        message="This Qualifying Test has ended. Please contact the selection exercise team."
-      />
     </div>
   </div>
 </template>
@@ -159,7 +162,6 @@ export default {
           this.qualifyingTestResponse.started = new Date();
           await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
           this.$router.push({ name: 'qualifying-test-review' });
-          console.log('valid form');
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
