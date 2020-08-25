@@ -1,23 +1,79 @@
 <template>
-  <!-- [ Qualifying Test | Overview | {{ $route.params.qualifyingTestId }} ] -->
   <div class="govuk-grid-row govuk-!-margin-bottom-6">
     <div class="govuk-grid-column-two-thirds">
-      <h2
-        class="govuk-heading-l"
-      >
-        [ QT Overview Placeholder Title ]
+      <h2>
+        {{ qualifyingTestResponse.qualifyingTest.title }}
       </h2>
 
-      <ol class="moj-task-list">
+      <ol
+        v-if="!isScenario"
+        class="moj-task-list"
+      >
+        <li>
+          <h2 class="moj-task-list__section">
+            Questions
+          </h2>
+          <ul class="moj-task-list__items">
+            <li
+              v-for="(question, questionIndex) in qualifyingTestResponse.qualifyingTest.questions.questions"
+              :key="questionIndex"
+              class="moj-task-list__item"
+            >
+              <a
+                class="moj-task-list__task-name"
+                href="#"
+              >
+                {{ question.details }}
+              </a>
+              <strong class="govuk-tag moj-task-list__task-completed">
+                [ STATUS ]
+              </strong>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <ol
+        v-if="isScenario"
+        class="moj-task-list"
+      >
         <li
-          v-for="(section, index) in sections"
+          v-for="(section, index) in qualifyingTestResponse.qualifyingTest.questions.questions"
+          :key="index"
+        >
+          <h2 class="moj-task-list__section">
+            {{ `Scenario ${index + 1}` }}
+          </h2>
+          <ul class="moj-task-list__items">
+            <li
+              v-for="(question, questionIndex) in section.options"
+              :key="questionIndex"
+              class="moj-task-list__item"
+            >
+              <a
+                class="moj-task-list__task-name"
+                href="#"
+              >
+                {{ question.answer }}
+              </a>
+              <strong class="govuk-tag moj-task-list__task-completed">
+                [ STATUS ]
+              </strong>
+            </li>
+          </ul>
+        </li>
+      </ol>
+
+      <!-- <ol class="moj-task-list">
+        <li
+          v-for="(section, index) in qualifyingTestResponse.qualifyingTest.questions"
           :key="index"
         >
           <h2 class="moj-task-list__section">
             <span class="moj-task-list__section-number">
               {{ index + 1 }}.
             </span>
-            {{ section.title }}
+            {{ section.introduction }}
           </h2>
           <ul class="moj-task-list__items">
             <li
@@ -29,7 +85,7 @@
                 class="moj-task-list__task-name"
                 href="#"
               >
-                {{ question }}
+                {{ question.details }}
               </a>
               <strong class="govuk-tag moj-task-list__task-completed">
                 [ STATUS ]
@@ -37,13 +93,8 @@
             </li>
           </ul>
         </li>
-      </ol>
+      </ol> -->
       
-      <Checkbox> 
-        <span class="govuk-heading-m govuk-!-margin-bottom-2">
-          I confirm that i will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise
-        </span>
-      </Checkbox>
       <button
         href="#"
         role="button"
@@ -72,12 +123,8 @@
   </div>
 </template>
 <script>
-import Checkbox from '@/components/Form/Checkbox';
 
 export default {
-  components: {
-    Checkbox,
-  },
   data(){
     return {
       sections: [
@@ -99,6 +146,14 @@ export default {
         },
       ],
     };
+  },
+  computed: {
+    qualifyingTestResponse() {
+      return this.$store.state.qualifyingTestResponse.record;
+    },
+    isScenario(){
+      return this.qualifyingTestResponse.qualifyingTest.type === 'scenario' ? true : false;
+    },
   },
 };
 </script>
