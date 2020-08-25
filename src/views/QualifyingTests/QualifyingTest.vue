@@ -4,7 +4,10 @@
       v-if="loaded === false"
       :load-failed="loadFailed"
     />
-    <RouterView v-else />
+    <RouterView
+      v-else
+      :key="$route.fullPath"
+    />
   </div>
 </template>
 <script>

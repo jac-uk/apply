@@ -70,11 +70,9 @@ import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
 import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
+import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
 import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
-// Qualifying Test Questions
-import ScenarioQuestion from '@/views/QualifyingTests/QualifyingTest/ScenarioQuestionPage';
-import SituationalJudgementQuestion from '@/views/QualifyingTests/QualifyingTest/SituationalJudgementQuestionPage';
-import CriticalAnalysisQuestion from '@/views/QualifyingTests/QualifyingTest/CriticalAnalysisQuestionPage';
 
 Vue.use(Router);
 
@@ -213,30 +211,21 @@ const router = new Router({
           },
         },
         {
-          path: 'scenario-question/:questionNumber',
-          component: ScenarioQuestion,
-          name: 'qualifying-test-scenario-question',
+          path: 'question/:questionNumber',
+          component: QualifyingTestQuestion,
+          name: 'qualifying-test-question',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Scenario question',
+            title: 'Qualifying Test | Question',
           },
         },
         {
-          path: 'situational-judgement-question/:questionNumber',
-          component: SituationalJudgementQuestion,
-          name: 'qualifying-test-situational-judgement-question',
+          path: 'review',
+          component: QualifyingTestReview,
+          name: 'qualifying-test-review',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Situational Judgement Question',
-          },
-        },
-        {
-          path: 'critical-analysis-question/:questionNumber',
-          component: CriticalAnalysisQuestion,
-          name: 'qualifying-test-critical-analysis-question',
-          meta: {
-            requiresAuth: true,
-            title: 'Qualifying Test | Critical Analysis Question',
+            title: 'Qualifying Test | Review',
           },
         },
         {

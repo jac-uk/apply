@@ -13,7 +13,9 @@ export default {
   mounted: function () {
     this.$root.$on('handle-error', this.handleError);
     // Disable HTML5 validation
-    this.$refs.formRef.setAttribute('novalidate', true);
+    if (this.$refs.formRef) {
+      this.$refs.formRef.setAttribute('novalidate', true);
+    }
   },
   beforeDestroy: function() {
     this.$root.$off('handle-error', this.handleError);
