@@ -3,7 +3,7 @@
     <div class="govuk-grid-column-two-thirds">
       <!-- Delete when necessary -->
       <ul style="background-color:aqua; border: 5px dotted black;">
-        QT Dev nagvigation menu
+        <marquee><h2 style="background: -webkit-linear-gradient(red,orange,yellow,green,blue,indigo,violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">QT Dev nagvigation menu</h2></marquee>
         <li>
           <RouterLink
             :to="{ name: 'qualifying-test-information', params: { qualifyingTestId: '12345' } }"
@@ -257,6 +257,11 @@ import TabsList from '@/components/Page/TabsList';
 export default {
   components: {
     TabsList,
+  },
+  computed: {
+    qualifyingTestResponses() {
+      return this.$store.state.qualifyingTestResponses.records;
+    }, 
   },
   data(){
     return {
