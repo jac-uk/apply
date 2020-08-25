@@ -1,9 +1,9 @@
 <template>
   <div class="govuk-grid-row govuk-!-margin-bottom-6">
     <div class="govuk-grid-column-two-thirds">
-      <h2>
-        {{ qualifyingTestResponse.qualifyingTest.title }}
-      </h2>
+      <h1>
+        Answer Overview
+      </h1>
 
       <ol
         v-if="!isScenario"
@@ -63,68 +63,32 @@
           </ul>
         </li>
       </ol>
-
-      <!-- <ol class="moj-task-list">
-        <li
-          v-for="(section, index) in qualifyingTestResponse.qualifyingTest.questions"
-          :key="index"
-        >
-          <h2 class="moj-task-list__section">
-            <span class="moj-task-list__section-number">
-              {{ index + 1 }}.
-            </span>
-            {{ section.introduction }}
-          </h2>
-          <ul class="moj-task-list__items">
-            <li
-              v-for="(question, questionIndex) in section.questions"
-              :key="questionIndex"
-              class="moj-task-list__item"
-            >
-              <a
-                class="moj-task-list__task-name"
-                href="#"
-              >
-                {{ question.details }}
-              </a>
-              <strong class="govuk-tag moj-task-list__task-completed">
-                [ STATUS ]
-              </strong>
-            </li>
-          </ul>
-        </li>
-      </ol> -->
       
       <button
-        href="#"
-        role="button"
-        draggable="false"
-        class="govuk-button govuk-button--start"
-        data-module="govuk-button"
-        style="background-color:#00703c;"
+        class="govuk-button govuk-button--success"
+        @click="openModal"
       >
-        Start now
-        <svg
-          class="govuk-button__start-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="17.5"
-          height="19"
-          viewBox="0 0 33 40"
-          aria-hidden="true"
-          focusable="false"
-        >
-          <path
-            fill="currentColor"
-            d="M0 0h13l20 20-20 20H0l20-20z"
-          />
-        </svg>
+        Submit answers
       </button>
+      <Modal 
+        ref="modalRef"
+        button-text="Submit answers"
+        :cancelable="true"
+        :message="'Are you sure you want to submit your answers? This will end the test.'"
+        @confirmed="modalConfirmed"
+        @closed="modalClosed"
+      />
     </div>
   </div>
 </template>
 <script>
 
+import Modal from '@/components/Page/Modal';
+
 export default {
+  components: {
+    Modal,
+  },
   data(){
     return {
       sections: [
@@ -153,6 +117,17 @@ export default {
     },
     isScenario(){
       return this.qualifyingTestResponse.qualifyingTest.type === 'scenario' ? true : false;
+    },
+  },
+  methods: {
+    openModal(){
+      this.$refs.modalRef.openModal();
+    },
+    modalConfirmed(){
+      this.$router.push({ name: 'qualifying-test-submitted' });
+    },
+    modalClosed(){
+      //pass
     },
   },
 };
