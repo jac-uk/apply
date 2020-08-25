@@ -26,7 +26,7 @@
             </button>
           </span>
           <button
-            class="govuk-button govuk-button--start confirm"
+            class="govuk-button govuk-button--success"
             @click="confirmModal"
           >
             {{ buttonText }}
@@ -97,9 +97,6 @@ export default {
 }
 .modal__message {
   vertical-align: middle;
-}
-.confirm {
-  background-color: #00703c;
 }
 .deny {
   background-color: #f3f2f1;
