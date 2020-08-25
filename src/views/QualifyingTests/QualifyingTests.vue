@@ -67,7 +67,6 @@
         :tabs="tabs"
         :active-tab.sync="activeTab"
       />
-      <!-- OPEN QTs -->
       <div 
         class="govuk-tabs__panel"
         role="tabpanel"
