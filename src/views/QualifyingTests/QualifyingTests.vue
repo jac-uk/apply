@@ -1,9 +1,20 @@
 <template>
   <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
+    <LoadingMessage
+      v-if="loaded === false"
+      :load-failed="loadFailed"
+    />
+    <div
+      v-else
+      class="govuk-grid-column-two-thirds"
+    >
       <!-- Delete when necessary -->
       <ul style="background-color:aqua; border: 5px dotted black;">
-        QT Dev nagvigation menu
+        <marquee>
+          <h2 style="background: -webkit-linear-gradient(red,orange,yellow,green,blue,indigo,violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+            QT Dev nagvigation menu
+          </h2>
+        </marquee>
         <li>
           <RouterLink
             :to="{ name: 'qualifying-test-information', params: { qualifyingTestId: '12345' } }"
@@ -56,210 +67,57 @@
         :tabs="tabs"
         :active-tab.sync="activeTab"
       />
-      <!-- OPEN QTs -->
       <div 
-        v-if="activeTab === 'open'"
         class="govuk-tabs__panel"
         role="tabpanel"
       >
-        <h1 class="govuk-heading-l">
-          Open
+        <h1>
+          {{ activeTab }}
         </h1>
-        <table 
-          class="govuk-table"
+        <Table
+          data-key="id"
+          :data="getSelectedTableData()"
+          :columns="[
+            { title: 'Title' },
+            { title: 'Status' },
+            { title: 'Deadline' },
+          ]"
         >
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th
-                scope="col"
-                class="govuk-table__header"
+          <template #row="{row}">
+            <TableCell>
+              <RouterLink
+                :to="{ name: `/qualifying-tests/${row.id}/information` }"
               >
-                QTs
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header govuk-table__header--numeric"
-              >
-                Deadline date
-              </th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- FUTURE QTs -->
-      <div 
-        v-if="activeTab === 'future'"
-        class="govuk-tabs__panel"
-        role="tabpanel"
-      >
-        <h1 class="govuk-heading-l">
-          Future
-        </h1>
-        <table 
-          class="govuk-table"
-        >
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th
-                scope="col"
-                class="govuk-table__header"
-              >
-                QTs
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header govuk-table__header--numeric"
-              >
-                Deadline date
-              </th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <!-- PAST QTs -->
-      <div 
-        v-if="activeTab === 'past'"
-        class="govuk-tabs__panel"
-        role="tabpanel"
-      >
-        <h1 class="govuk-heading-l">
-          Past
-        </h1>
-        <table 
-          class="govuk-table"
-        >
-          <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-              <th
-                scope="col"
-                class="govuk-table__header"
-              >
-                QTs
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header"
-              >
-                Status
-              </th>
-              <th
-                scope="col"
-                class="govuk-table__header govuk-table__header--numeric"
-              >
-                Deadline date
-              </th>
-            </tr>
-          </thead>
-          <tbody class="govuk-table__body">
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-            <tr
-              class="govuk-table__row"
-            >
-              <td class="govuk-table__cell">
-                <a href="">QT title</a>
-              </td>
-              <td class="govuk-table__cell">
-                ??
-              </td>
-              <td class="govuk-table__cell govuk-table__cell--numeric">
-                DD/MM/YYYY - MM:HH
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div> 
+                {{ row.qualifyingTest.title }}
+              </RouterLink>
+            </TableCell>
+            <TableCell>{{ row.status != 'completed' ? 'incomplete' : 'complete' }}</TableCell>
+            <TableCell>{{ endTime(row) }}</TableCell>
+          </template>
+        </Table>
+      </div>      
     </div>
   </div>   
 </template>
 
 <script>
 import TabsList from '@/components/Page/TabsList';
+import Table from '@/components/Page/Table/Table'; 
+import TableCell from '@/components/Page/Table/TableCell'; 
+import LoadingMessage from '@/components/LoadingMessage';
+import { isToday, isDateInFuture, formatDate } from '@/helpers/date';
+
 export default {
   components: {
     TabsList,
+    Table, 
+    TableCell,
+    LoadingMessage,
   },
   data(){
     return {
+      loaded: false,
+      loadFailed: false,
       activeTab: 'open',
       tabs: [
         {
@@ -277,10 +135,88 @@ export default {
       ],
     };
   },
+  computed: {
+    qualifyingTestResponses() {
+      return this.$store.state.qualifyingTestResponses.records;
+    },
+    openTests(){
+      const tests = [];
+      for (const qt of this.qualifyingTestResponses){
+        if (qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'activated'){
+          tests.push(qt);
+        }
+      }
+      return tests;
+    },
+    futureTests(){
+      const tests = [];
+      for (const qt of this.qualifyingTestResponses){
+        if (qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'created'){
+          tests.push(qt);
+        }
+      }
+      return tests;
+    },
+    closedTests(){
+      const tests = [];
+      for (const qt of this.qualifyingTestResponses){
+        if (qt.statusLog.completed != null){
+          tests.push(qt);
+        }
+      }
+      return tests;
+    },
+    hasOpenTests(){
+      return this.openTests.length != 0 ? true : false;
+    },
+    hasFutureTests(){
+      return this.openTests.length != 0 ? true : false;
+    },
+    hasClosedTests(){
+      return this.openTests.length != 0 ? true : false;
+    },
+  },
+  mounted() {
+    this.$store.dispatch('qualifyingTestResponses/bind').then((data) => {
+      if (data === null) {
+        this.redirectToPage();
+      } else {
+        this.loaded = true;
+      }
+    }).catch((e) => {
+      this.loadFailed = true;
+      throw e;
+    });
+  },
+  destroyed() {
+    this.$store.dispatch('qualifyingTestResponses/unbind');
+  },
+  methods: {
+    endTime(qualifyingTest){
+      const time = formatDate(qualifyingTest.qualifyingTest.endDate, 'time');
+      const day = formatDate(qualifyingTest.qualifyingTest.endDate);
+      return isToday(qualifyingTest.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
+    },
+    getSelectedTableData(){
+      switch (this.activeTab){
+      case 'open':
+        return this.openTests;
+      case 'future':
+        return this.futureTests;
+      case 'past':
+        return this.closedTests;
+      default:
+        return [];
+      }
+    },
+  },
 };
 </script>
 
 <style>
+  h1{
+    text-transform: capitalize;
+  }
   .govuk-tabs{
     margin-bottom: 0;
   }
