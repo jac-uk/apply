@@ -69,7 +69,6 @@ import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubm
 import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
-import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
 import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
 import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scenario';
 import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
@@ -200,16 +199,6 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Information',
-            fullPageMode: true,
-          },
-        },
-        {
-          path: 'overview',
-          component: QualifyingTestOverview,
-          name: 'qualifying-test-overview',
-          meta: {
-            requiresAuth: true,
-            title: 'Qualifying Test | Overview',
             fullPageMode: true,
           },
         },

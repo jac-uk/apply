@@ -46,6 +46,7 @@ export default {
 
       const duration = this.qualifyingTestResponse.duration.testDurationAdjusted;
       const startTime = this.qualifyingTestResponse.statusLog.started;
+
       const endTime = new Date(startTime.getTime() + duration * minute);
 
       if (endTime < Date.now()) {
