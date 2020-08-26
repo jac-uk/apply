@@ -4,7 +4,7 @@
       id="criticalAnalysisRadio"
       v-model="localValue"
       :label="question"
-      hint="Choose 1 option."
+      hint="Choose one option."
     >
       <RadioItem
         v-for="(item, index) in answers"

@@ -17,13 +17,12 @@
 </template>
 <script>
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
-import Scenario from '@/views/QualifyingTests/QualifyingTest/Question/Scenario';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
   components: {
     CriticalAnalysis,
-    Scenario,
     SituationalJudgement,
   },
   computed: {
@@ -52,7 +51,7 @@ export default {
   created() {
     if (!this.question.response) {
       let selection = null;
-      if (this.questionType === 'scenario') {
+      if (this.questionType === QUALIFYING_TEST.TYPE.SCENARIO) {
         selection = new Array(this.question.options.length);
       }
       this.question.response = {

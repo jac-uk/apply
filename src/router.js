@@ -71,6 +71,7 @@ import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
 import QualifyingTestOverview from '@/views/QualifyingTests/QualifyingTest/Overview';
 import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scenario';
 import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
 import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
@@ -217,6 +218,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Question',
+          },
+        },
+        {
+          path: 'scenario/:scenarioNumber/:questionNumber',
+          component: QualifyingTestScenario,
+          name: 'qualifying-test-scenario',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Scenario',
           },
         },
         {
