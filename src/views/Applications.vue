@@ -24,6 +24,16 @@
                 Applications
               </RouterLink>
             </li>
+            <!-- @TODO remove QT link ?-->
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'qualifying-tests' }"
+              >
+                Qualifying Tests
+              </RouterLink>
+            </li>
+            <!-- @TODO remove QT link ?-->
             <!-- <li class="moj-side-navigation__item">
               <RouterLink
                 class="govuk-link"
