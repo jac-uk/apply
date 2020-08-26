@@ -57,6 +57,14 @@ export default {
   },
   mounted() {
     const id = this.$route.params.qualifyingTestId;
+    this.$store.dispatch('qualifyingTestResponses/bind').then((data) => {
+      if (data === null) {
+        this.redirectToPage();
+      }
+    }).catch((e) => {
+      this.loadFailed = true;
+      throw e;
+    });
     this.$store.dispatch('qualifyingTestResponse/bind', id)
       .then((data) => {
         if (data === null) {
@@ -71,6 +79,7 @@ export default {
       });
   },
   destroyed() {
+    this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
