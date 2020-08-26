@@ -30,10 +30,10 @@ const formatDate = (date, type) => {
   }
 
   if (type && type === 'time') {
-    return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).toLowerCase();
+    return date.toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric' }).toLowerCase();
   }
 
-  const month = date.toLocaleString('en-US', { month: 'long' });
+  const month = date.toLocaleString('en-GB', { month: 'long' });
 
   if (type && type === 'month') {
     return `${month} ${date.getFullYear()}`;

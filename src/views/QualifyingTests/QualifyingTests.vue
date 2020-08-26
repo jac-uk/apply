@@ -61,7 +61,7 @@
           <template #row="{row}">
             <TableCell>
               <RouterLink
-                :to="{ name: `/qualifying-tests/${row.id}/information` }"
+                :to="{ path: `/qualifying-tests/${row.id}/information` }"
               >
                 {{ row.qualifyingTest.title }}
               </RouterLink>

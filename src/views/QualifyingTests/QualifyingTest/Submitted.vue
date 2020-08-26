@@ -1,40 +1,49 @@
 <template>
-  <div class="govuk-grid-row">
-    <div class="govuk-grid-column-two-thirds">
-      <div class="govuk-!-margin-bottom-6">
-        <div>
-          <div class="govuk-panel govuk-panel--confirmation">
-            <h1 class="govuk-panel__title">
-              Test Submitted
-            </h1>
-            Your test has been submitted and is now complete.
-          </div>
-        </div>
-      </div>
-      <div class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6">
-        Next Steps
-        <p class="govuk-body-m govuk-!-margin-top-0">
-          You will be informed of the outcome of your qualifying test, as indicated on the <router-link :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`">
-            vacancy timeline
-          </router-link>.
-          <br>
-          You may now close this page. 
-        </p>
-      </div>
-      <!-- TODO: this should be a component --> 
-      <div
-        v-if="upcomingTest != false"
-        class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6"
-      >
+  <div>
+    <div class="govuk-panel govuk-panel--confirmation govuk-!-margin-bottom-6">
+      <h1 class="govuk-panel__title">
+        Test Submitted
+      </h1>
+      Your test has been submitted and is now complete.
+    </div>
+
+    <div class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6">
+      Next Steps
+
+      <p class="govuk-body-m govuk-!-margin-top-0">
+        You will be informed of the outcome of your qualifying test, as indicated on the <router-link :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`">
+          vacancy timeline
+        </router-link>.
+        <br>
+        You may now close this page.
+      </p>
+    </div>
+
+    <!-- TODO: this should be a component -->
+    <div
+      v-if="upcomingTests"
+      class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6"
+    >
+      <p class="govuk-body">
         You have another Qualifying Test to complete:
-        <div class="govuk-inset-text">
-          <a href="">
-            {{ upcomingTest.qualifyingTest.title }}<br>
-          </a>
-          <strong class="red-text">
-            by {{ endTime(upcomingTest) }}
-          </strong>
-        </div>
+      </p>
+
+      <div class="govuk-inset-text">
+        <ul class="govuk-list">
+          <li
+            v-for="upcomingTest in upcomingTests"
+            :key="upcomingTest.id"
+          >
+            <RouterLink
+              :to="{ path: `/qualifying-tests/${upcomingTest.id}/information` }"
+            >
+              {{ upcomingTest.qualifyingTest.title }}<br>
+            </RouterLink>
+            <strong class="red-text">
+              by {{ endTime(upcomingTest) }}
+            </strong>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -50,13 +59,8 @@ export default {
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records;
     },
-    upcomingTest(){
-      for (const qt of this.qualifyingTestResponses){
-        if (qt.statusLog.completed === null){
-          return qt;
-        }
-      }
-      return false;
+    upcomingTests(){
+      return this.qualifyingTestResponses.filter(qt => !qt.statusLog.completed);
     },
   },
   async mounted() {
