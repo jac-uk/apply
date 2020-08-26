@@ -7,7 +7,7 @@
       hint="Choose one option."
     >
       <RadioItem
-        v-for="(item, index) in answers"
+        v-for="(item, index) in options"
         :key="index"
         :value="index"
         :label="item.answer"
@@ -26,8 +26,8 @@ export default {
   },
   props: {
     value: {
-      type: String,
-      validator: (value) => (value instanceof Array || value === null || value === undefined),
+      type: Number,
+      default: null,
       required: true,
     },
     question: {

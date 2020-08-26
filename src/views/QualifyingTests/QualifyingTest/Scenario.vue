@@ -82,8 +82,8 @@ export default {
     const questionNumber = this.$route.params.questionNumber;
     
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
-    // TODO: scenario = this.qualifyingTestResponse.qualifyingTest.questions.questions[this.scenarioNumber - 1]
-    const scenario = qualifyingTestResponse.qualifyingTest.questions.questions[scenarioNumber - 1];
+
+    const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
 
     if (!scenario.responses) {
       scenario.responses = new Array(scenario.options.length).fill().map(() => ({
@@ -93,12 +93,10 @@ export default {
       }));
     }
 
-    const response = scenario.responses[questionNumber - 1];
-
     return {
       qualifyingTestResponse,
       scenario,
-      response,
+      response: scenario.responses[questionNumber - 1],
       showDetails: true,
     };
   },
@@ -110,7 +108,7 @@ export default {
       return parseInt(this.$route.params.questionNumber);
     },
     isLastScenario() {
-      return this.scenarioNumber === this.qualifyingTestResponse.qualifyingTest.questions.questions.length;
+      return this.scenarioNumber === this.qualifyingTestResponse.testQuestions.questions.length;
     },
     isLastQuestion() {
       return this.questionNumber === this.scenario.options.length;
