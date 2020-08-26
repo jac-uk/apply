@@ -1,6 +1,7 @@
 <template>
   <div class="page-container">
     <header
+      v-if="!fullPageMode"
       class="govuk-width-container header"
     >
       <div
@@ -79,6 +80,7 @@
     </main>
 
     <footer
+      v-if="!fullPageMode"
       class="govuk-footer"
       role="contentinfo"
     >
@@ -128,6 +130,9 @@ export default {
     },
     isVacanciesPage() {
       return this.$route.name === 'vacancies';
+    },
+    fullPageMode() {
+      return this.$route.meta.fullPageMode;
     },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];

@@ -10,11 +10,7 @@
     >
       <!-- Delete when necessary -->
       <ul style="background-color:aqua; border: 5px dotted black;">
-        <marquee>
-          <h2 style="background: -webkit-linear-gradient(red,orange,yellow,green,blue,indigo,violet); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-            QT Dev nagvigation menu
-          </h2>
-        </marquee>
+        QT Dev navigation menu
         <li>
           <RouterLink
             :to="{ name: 'qualifying-test-information', params: { qualifyingTestId: '12345' } }"
@@ -34,27 +30,6 @@
             :to="{ name: 'qualifying-test-submitted', params: { qualifyingTestId: '12345' } }"
           >
             QT Submitted
-          </RouterLink>
-        </li>
-        <li>
-          <RouterLink
-            :to="{ name: 'qualifying-test-situational-judgement-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
-          >
-            QT Situational Judgement Question
-          </RouterLink>
-        </li>
-        <li>
-          <RouterLink
-            :to="{ name: 'qualifying-test-scenario-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
-          >
-            QT Scenario Question
-          </RouterLink>
-        </li>
-        <li>
-          <RouterLink
-            :to="{ name: 'qualifying-test-scenario-question', params: { qualifyingTestId: '12345', questionNumber: '1' } }"
-          >
-            QT Critical analysis Question
           </RouterLink>
         </li>
       </ul>
