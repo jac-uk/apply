@@ -200,6 +200,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Information',
+            fullPageMode: true,
           },
         },
         {
@@ -209,6 +210,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Overview',
+            fullPageMode: true,
           },
         },
         {
@@ -218,6 +220,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Question',
+            fullPageMode: true,
           },
         },
         {
@@ -227,6 +230,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Scenario',
+            fullPageMode: true,
           },
         },
         {
@@ -236,6 +240,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Review',
+            fullPageMode: true,
           },
         },
         {
@@ -245,6 +250,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Submitted',
+            fullPageMode: true,
           },
         },
       ],

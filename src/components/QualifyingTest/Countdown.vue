@@ -1,6 +1,9 @@
 <template>
-  <div :class="`countdown ${bckClass}`">
-    Time remaining:  <span>{{ formattedTimeLeft }}</span>
+  <div
+    class="countdown govuk-!-margin-bottom-4"
+    :class="bckClass"
+  >
+    Time remaining: <span>{{ formattedTimeLeft }}</span>
   </div>
 </template>
 
@@ -110,14 +113,18 @@ export default {
 
       // warning
       if (this.timeLeft === this.warning * 60) {
-        this.bckClass = 'warning';
         this.$emit('change', { ...this.doTimerObject, action: 'warning' });
+      }
+      if (this.timeLeft <= this.warning * 60) {
+        this.bckClass = 'warning';
       }
 
       // alert
       if (this.timeLeft === this.alert * 60) {
-        this.bckClass = 'alert';
         this.$emit('change', { ...this.doTimerObject, action: 'alert' });
+      }
+      if (this.timeLeft <= this.alert * 60) {
+        this.bckClass = 'alert';
       }
     },
     doTimeLeft() {
@@ -128,24 +135,25 @@ export default {
 };
 </script>
 
-<style>
+<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
 .countdown {
   background-color: green;
   color: white;
   text-align: center;
   font-weight: bold;
   padding: 10px;
-}
 
-.countdown span {
-  font-weight: bold;
-  display: inline-block;
-}
-.warning {
-  background-color: yellow;
-  color: black;
-}
-.alert {
-  background-color: red;
+  span {
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  &.warning {
+    background-color: yellow;
+    color: black;
+  }
+  &.alert {
+    background-color: red;
+  }
 }
 </style>

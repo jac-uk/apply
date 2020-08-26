@@ -69,6 +69,7 @@
     </div>
   </form>
 </template>
+
 <script>
 import TextareaInput from '@/components/Form/TextareaInput';
 
