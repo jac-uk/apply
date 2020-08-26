@@ -17,6 +17,7 @@ const QUALIFYING_TEST = {
     APPROVED: 'approved',
     INITIALISED: 'initialised',
     ACTIVATED: 'activated',
+    NOT_STARTED: 'not-started',
     STARTED: 'started',
     PAUSED: 'paused',
     COMPLETED: 'completed',

@@ -78,7 +78,8 @@ export default {
   },
 };
 </script>
-<style>
+
+<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
   .govuk-inset-text {
     border-color: red;
   }

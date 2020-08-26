@@ -124,18 +124,18 @@ export default {
     };
   },
   computed: {
-    endTime(){
+    endTime() {
       const time = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate, 'time');
       const day = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate);
       return isToday(this.qualifyingTestResponse.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
     },
-    extraTime(){
+    extraTime() {
       return this.qualifyingTestResponse.duration.reasonableAdjustment != 0;
     },
-    extraTimeAmount(){
+    extraTimeAmount() {
       return this.qualifyingTestResponse.duration.testDurationAdjusted - this.qualifyingTestResponse.duration.testDuration;
     },
-    numberOfQuestions(){
+    numberOfQuestions() {
       const questionLength = this.qualifyingTestResponse.testQuestions.questions.length;
       const plural = questionLength > 1 ? 's' : '';
       if (this.qualifyingTestResponse.qualifyingTest.type === 'scenario') {
@@ -147,10 +147,13 @@ export default {
     additionalInstructions() {
       return this.qualifyingTestResponse.qualifyingTest.additionalInstructions;
     },
-    started(){
-      return this.qualifyingTestResponse.statusLog.started != null;
+    isStarted() {
+      return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.STARTED && this.qualifyingTestResponse.statusLog.started != null;
     },
-    expired(){
+    isCompleted() {
+      return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.COMPLETED && this.qualifyingTestResponse.statusLog.completed != null;
+    },
+    expired() {
       return !isDateInFuture(this.qualifyingTestResponse.qualifyingTest.endDate);
     },
     nextPage() {

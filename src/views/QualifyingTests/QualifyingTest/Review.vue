@@ -32,6 +32,12 @@
               >
                 Completed
               </strong>
+              <strong
+                v-else
+                class="govuk-tag govuk-tag--grey"
+              >
+                Skipped
+              </strong>
             </li>
           </ul>
         </li>
@@ -67,6 +73,12 @@
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed
+              </strong>
+              <strong
+                v-else
+                class="govuk-tag govuk-tag--grey"
+              >
+                Skipped
               </strong>
             </li>
           </ul>
