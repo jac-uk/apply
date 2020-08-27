@@ -72,6 +72,7 @@
 
 <script>
 import TextareaInput from '@/components/Form/TextareaInput';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
   components: {
@@ -136,6 +137,10 @@ export default {
     },
   },
   created() {
+    if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
+      return this.$router.replace({ name: 'qualifying-tests' });
+    }
+
     this.response.started = Date.now();
   },
   methods: {

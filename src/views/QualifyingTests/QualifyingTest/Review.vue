@@ -21,9 +21,9 @@
               class="moj-task-list__item"
             >
               <RouterLink
-              :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
-              class="moj-task-list__task-name"
-            >
+                :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
+                class="moj-task-list__task-name"
+              >
                 Question {{ questionIndex + 1 }}
               </RouterLink>
               <strong

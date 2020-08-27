@@ -19,16 +19,15 @@
         class="govuk-tabs__panel"
         role="tabpanel"
       >
-        <h1>
-          {{ activeTab }}
-        </h1>
+        <h1>{{ activeTab }}</h1>
+
         <Table
           data-key="id"
           :data="getSelectedTableData()"
           :columns="[
             { title: 'Title' },
             { title: 'Status' },
-            { title: 'Deadline' },
+            { title: activeTab === 'future' ? 'Start' : 'Deadline' },
           ]"
         >
           <template #row="{row}">
@@ -44,7 +43,14 @@
               </div>
             </TableCell>
             <TableCell>{{ status(row.status) | lookup }}</TableCell>
-            <TableCell>{{ endTime(row) }}</TableCell>
+            <TableCell
+              v-if="activeTab === 'future'"
+            >
+              {{ prettyDate(row.qualifyingTest.startDate) }}
+            </TableCell>
+            <TableCell v-else>
+              {{ prettyDate(row.qualifyingTest.endDate) }}
+            </TableCell>
           </template>
         </Table>
       </div>
@@ -93,13 +99,25 @@ export default {
       return this.$store.state.qualifyingTestResponses.records;
     },
     openTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'activated');
+      return this.qualifyingTestResponses.filter(qt => (
+        !isDateInFuture(qt.qualifyingTest.startDate) &&
+        isDateInFuture(qt.qualifyingTest.endDate) && (
+          qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED
+        )
+      ));
     },
     futureTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'created');
+      return this.qualifyingTestResponses.filter(qt => (
+        (isDateInFuture(qt.qualifyingTest.startDate) || (
+          isDateInFuture(qt.qualifyingTest.endDate) && qt.status === QUALIFYING_TEST.STATUS.CREATED
+        ))
+      ));
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => !isDateInFuture(qt.qualifyingTest.endDate));
+      return this.qualifyingTestResponses.filter(qt => (
+        !isDateInFuture(qt.qualifyingTest.endDate) ||
+        qt.status == QUALIFYING_TEST.STATUS.COMPLETED
+      ));
     },
     isOpenTests(){
       return this.activeTab === 'open';
@@ -129,10 +147,10 @@ export default {
 
       return QUALIFYING_TEST.STATUS.NOT_STARTED;
     },
-    endTime(qualifyingTest) {
-      const time = formatDate(qualifyingTest.qualifyingTest.endDate, 'time');
-      const day = formatDate(qualifyingTest.qualifyingTest.endDate);
-      return isToday(qualifyingTest.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
+    prettyDate(date) {
+      const time = formatDate(date, 'time');
+      const day = formatDate(date);
+      return isToday(date) ? `${time} today` : `${time} on ${day}`;
     },
     getSelectedTableData() {
       switch (this.activeTab){
