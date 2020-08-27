@@ -32,30 +32,6 @@
                 Qualifying Tests
               </RouterLink>
             </li>
-            <!-- <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link"
-                :to="{ name: 'personal-details' }"
-              >
-                Personal Details
-              </RouterLink>
-            </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link"
-                :to="{ name: 'diversity-information' }"
-              >
-                Diversity Information
-              </RouterLink>
-            </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link"
-                :to="{ name: 'character-information' }"
-              >
-                Character Information
-              </RouterLink>
-            </li> -->
           </ul>
         </nav>
       </div>
