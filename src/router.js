@@ -199,7 +199,6 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Information',
-            fullPageMode: true,
           },
         },
         {
@@ -239,7 +238,6 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Qualifying Test | Submitted',
-            fullPageMode: true,
           },
         },
       ],
