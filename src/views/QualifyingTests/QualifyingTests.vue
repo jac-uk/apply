@@ -99,7 +99,7 @@ export default {
       return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'created');
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed != null);
+      return this.qualifyingTestResponses.filter(qt => !isDateInFuture(qt.qualifyingTest.endDate));
     },
     isOpenTests(){
       return this.activeTab === 'open';
