@@ -10,9 +10,20 @@
       :options="question.options"
     />
 
-    <button class="govuk-button">
-      Save and continue
-    </button>
+    <div class="moj-button-menu">
+      <div class="moj-button-menu__wrapper">
+        <button
+          class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+          type="button"
+          @click="skip"
+        >
+          Skip
+        </button>
+        <button class="moj-button-menu__item govuk-button">
+          Save and continue
+        </button>
+      </div>
+    </div>
   </form>
 </template>
 <script>
@@ -80,8 +91,14 @@ export default {
     this.response.started = Date.now();
   },
   methods: {
+    async skip() {
+      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+
+      this.$router.push(this.nextPage);
+    },
     async save() {
       this.response.completed = Date.now();
+
       await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
 
       this.$router.push(this.nextPage);
