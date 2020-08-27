@@ -34,10 +34,14 @@
           <template #row="{row}">
             <TableCell>
               <RouterLink
+                v-if="isOpenTests"
                 :to="{ path: `/qualifying-tests/${row.id}/information` }"
               >
                 {{ row.qualifyingTest.title }}
               </RouterLink>
+              <div v-else>
+                {{ row.qualifyingTest.title }}
+              </div>
             </TableCell>
             <TableCell>{{ status(row.status) | lookup }}</TableCell>
             <TableCell>{{ endTime(row) }}</TableCell>
@@ -96,6 +100,9 @@ export default {
     },
     closedTests(){
       return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed != null);
+    },
+    isOpenTests(){
+      return this.activeTab === 'open';
     },
   },
   mounted() {
