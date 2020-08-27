@@ -75,7 +75,8 @@ export default {
           this.loaded = true;
         }
       }).catch((e) => {
-        this.loadFailed = true;
+        // this.loadFailed = true;
+        this.redirectToPage();
         throw e;
       });
   },
@@ -85,7 +86,7 @@ export default {
   },
   methods: {
     redirectToPage() {
-      this.$router.replace({ name: 'qualifying-tests' });
+      this.$router.replace({ name: 'not-found' });
     },
   },
 };
