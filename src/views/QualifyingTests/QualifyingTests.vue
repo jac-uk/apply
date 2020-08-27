@@ -4,45 +4,89 @@
       v-if="loaded === false"
       :load-failed="loadFailed"
     />
-    <div
+    <div 
       v-else
-      class="govuk-grid-column-two-thirds"
     >
-      <h1 class="govuk-heading-xl">
-        Online tests
-      </h1>
-      <TabsList
-        :tabs="tabs"
-        :active-tab.sync="activeTab"
-      />
-      <div
-        class="govuk-tabs__panel"
-        role="tabpanel"
-      >
-        <h1>
-          {{ activeTab }}
-        </h1>
-        <Table
-          data-key="id"
-          :data="getSelectedTableData()"
-          :columns="[
-            { title: 'Title' },
-            { title: 'Status' },
-            { title: 'Deadline' },
-          ]"
+      <div class="govuk-grid-column-one-quarter">
+        <nav
+          class="moj-side-navigation"
+          aria-label="Side navigation"
         >
-          <template #row="{row}">
-            <TableCell>
+          <ul class="moj-side-navigation__list">
+            <li class="moj-side-navigation__item">
               <RouterLink
-                :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                class="govuk-link"
+                :to="{ name: 'vacancies' }"
               >
-                {{ row.qualifyingTest.title }}
+                Vacancies
               </RouterLink>
-            </TableCell>
-            <TableCell>{{ status(row.status) | lookup }}</TableCell>
-            <TableCell>{{ endTime(row) }}</TableCell>
-          </template>
-        </Table>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'applications' }"
+              >
+                Applications
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+              <RouterLink
+                class="govuk-link"
+                aria-current="page"
+                :to="{ name: 'qualifying-tests' }"
+              >
+                Qualifying Tests
+              </RouterLink>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div
+        class="govuk-grid-column-two-thirds"
+      >
+        <h1 class="govuk-heading-xl govuk-!-margin-bottom-0">
+          Online tests
+        </h1>
+        <TabsList
+          :tabs="tabs"
+          :active-tab.sync="activeTab"
+        />
+        <div
+          class="govuk-tabs__panel"
+          role="tabpanel"
+        >
+          <h1 class="govuk-!-margin-0">
+            {{ activeTab }}
+          </h1>
+          <span
+            v-if="!getSelectedTableData().length"
+            class="govuk-body"
+          >
+            No {{ activeTab }} tests to display
+          </span>
+          <Table
+            v-else
+            data-key="id"
+            :data="getSelectedTableData()"
+            :columns="[
+              { title: 'Title' },
+              { title: 'Status' },
+              { title: 'Deadline' },
+            ]"
+          >
+            <template #row="{row}">
+              <TableCell>
+                <RouterLink
+                  :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                >
+                  {{ row.qualifyingTest.title }}
+                </RouterLink>
+              </TableCell>
+              <TableCell>{{ status(row.status) | lookup }}</TableCell>
+              <TableCell>{{ endTime(row) }}</TableCell>
+            </template>
+          </Table>
+        </div>
       </div>
     </div>
   </div>
