@@ -24,7 +24,6 @@
                 Applications
               </RouterLink>
             </li>
-            <!-- @TODO remove QT link ?-->
             <li class="moj-side-navigation__item">
               <RouterLink
                 class="govuk-link"
@@ -33,7 +32,6 @@
                 Qualifying Tests
               </RouterLink>
             </li>
-            <!-- @TODO remove QT link ?-->
             <!-- <li class="moj-side-navigation__item">
               <RouterLink
                 class="govuk-link"
