@@ -186,7 +186,7 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (!this.isStarted && !this.confirmationChecked) {
+          if (!this.hasStarted && !this.confirmationChecked) {
             throw new Error('You must agree to keep this test confidential.');
           }
           this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.STARTED;
