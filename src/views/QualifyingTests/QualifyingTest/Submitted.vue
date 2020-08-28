@@ -11,17 +11,34 @@
       Next Steps
 
       <p class="govuk-body-m govuk-!-margin-top-0">
-        You will be informed of the outcome of your qualifying test, as indicated on the <router-link :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`">
+        You will be informed of the outcome of your qualifying test, as indicated on the 
+        <router-link 
+          class="govuk-link"
+          :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`"
+        >
           vacancy timeline
         </router-link>.
         <br>
-        You may now close this page.
+        You may now close this page or return to the 
+        <router-link
+          class="govuk-link"
+          to="/"
+        >
+          homepage
+        </router-link>
+        or back to
+        <router-link
+          class="govuk-link"
+          :to="{ name: 'qualifying-tests' }"
+        >
+          your qualifying tests.
+        </router-link>
       </p>
     </div>
 
     <!-- TODO: this should be a component -->
     <div
-      v-if="upcomingTests"
+      v-if="upcomingTests.length"
       class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6"
     >
       <p class="govuk-body">

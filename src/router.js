@@ -74,6 +74,9 @@ import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scena
 import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
 import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
+// Error pages
+import NotFound from '@/views/NotFound.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -81,8 +84,16 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '*',
+      path: '/',
       redirect: '/vacancies',
+    },
+    {
+      path: '*',
+      component: NotFound,
+      name: 'not-found',
+      meta: {
+        title: 'Error',
+      },
     },
     {
       path: '/vacancies',

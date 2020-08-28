@@ -4,57 +4,92 @@
       v-if="loaded === false"
       :load-failed="loadFailed"
     />
-    <div
-      v-else
-      class="govuk-grid-column-two-thirds"
-    >
-      <h1 class="govuk-heading-xl">
-        Online tests
-      </h1>
-      <TabsList
-        :tabs="tabs"
-        :active-tab.sync="activeTab"
-      />
-      <div
-        class="govuk-tabs__panel"
-        role="tabpanel"
-      >
-        <h1>{{ activeTab }}</h1>
-
-        <Table
-          data-key="id"
-          :data="getSelectedTableData()"
-          :columns="[
-            { title: 'Title' },
-            { title: 'Status' },
-            { title: activeTab === 'future' ? 'Start' : 'Deadline' },
-          ]"
+    <template v-else>
+      <div class="govuk-grid-column-one-quarter">
+        <nav
+          class="moj-side-navigation"
+          aria-label="Side navigation"
         >
-          <template #row="{row}">
-            <TableCell>
+          <ul class="moj-side-navigation__list">
+            <li class="moj-side-navigation__item">
               <RouterLink
-                v-if="isOpenTests"
-                :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                class="govuk-link"
+                :to="{ name: 'vacancies' }"
               >
-                {{ row.qualifyingTest.title }}
+                Vacancies
               </RouterLink>
-              <div v-else>
-                {{ row.qualifyingTest.title }}
-              </div>
-            </TableCell>
-            <TableCell>{{ status(row.status) | lookup }}</TableCell>
-            <TableCell
-              v-if="activeTab === 'future'"
-            >
-              {{ prettyDate(row.qualifyingTest.startDate) }}
-            </TableCell>
-            <TableCell v-else>
-              {{ prettyDate(row.qualifyingTest.endDate) }}
-            </TableCell>
-          </template>
-        </Table>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'applications' }"
+              >
+                Applications
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+              <RouterLink
+                class="govuk-link"
+                aria-current="page"
+                :to="{ name: 'qualifying-tests' }"
+              >
+                Qualifying Tests
+              </RouterLink>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </div>
+
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          Online tests
+        </h1>
+
+        <TabsList
+          :tabs="tabs"
+          :active-tab.sync="activeTab"
+        />
+        <div
+          class="govuk-tabs__panel"
+          role="tabpanel"
+        >
+          <h1>{{ activeTab }}</h1>
+
+          <Table
+            data-key="id"
+            :data="getSelectedTableData()"
+            :columns="[
+              { title: 'Title' },
+              { title: 'Status' },
+              { title: activeTab === 'future' ? 'Start' : 'Deadline' },
+            ]"
+          >
+            <template #row="{row}">
+              <TableCell>
+                <RouterLink
+                  v-if="isOpenTests"
+                  :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                >
+                  {{ row.qualifyingTest.title }}
+                </RouterLink>
+                <template v-else>
+                  {{ row.qualifyingTest.title }}
+                </template>
+              </TableCell>
+              <TableCell>{{ status(row.status) | lookup }}</TableCell>
+              <TableCell>
+                <template v-if="activeTab === 'future'">
+                  {{ prettyDate(row.qualifyingTest.startDate) }}
+                </template>
+                <template v-else>
+                  {{ prettyDate(row.qualifyingTest.endDate) }}
+                </template>
+              </TableCell>
+            </template>
+          </Table>
+        </div>
+      </div>
+    </template>
   </div>
 </template>
 
