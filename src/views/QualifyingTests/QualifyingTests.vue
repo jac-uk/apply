@@ -53,7 +53,7 @@
           class="govuk-tabs__panel"
           role="tabpanel"
         >
-          <h1>{{ activeTab }}</h1>
+          <h1>{{ activeTab | capitalize }}</h1>
 
           <Table
             data-key="id"
@@ -67,7 +67,7 @@
             <template #row="{row}">
               <TableCell>
                 <RouterLink
-                  v-if="isOpenTests"
+                  v-if="activeTab === 'open'"
                   :to="{ path: `/qualifying-tests/${row.id}/information` }"
                 >
                   {{ row.qualifyingTest.title }}
@@ -154,9 +154,6 @@ export default {
         qt.status == QUALIFYING_TEST.STATUS.COMPLETED
       ));
     },
-    isOpenTests(){
-      return this.activeTab === 'open';
-    },
   },
   mounted() {
     this.$store.dispatch('qualifyingTestResponses/bind').then((data) => {
@@ -204,15 +201,12 @@ export default {
 </script>
 
 <style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
-h1{
-  text-transform: capitalize;
-}
-.govuk-tabs{
+.govuk-tabs {
   margin-bottom: 0;
 }
-.govuk-tabs__panel{
-  margin-bottom: 10;
-  padding: 30px 20px;
+.govuk-tabs__panel {
+  margin-bottom: 10px;
+  padding: 20px 20px;
   border: 1px solid #b1b4b6;
   border-top: 0;
 }
