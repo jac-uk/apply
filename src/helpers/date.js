@@ -1,7 +1,6 @@
 const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
-  // @NOTE: this is a bit silly, we should save full date instead of hardcoding the time
   if (date == null){
     return false;
   } else if (!isDate(date)) {
@@ -14,9 +13,9 @@ const isDateInFuture = (date) => {
     date.getFullYear(),
     date.getMonth(),
     date.getDate(),
-    13,
-    0,
-    0
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
   );
 
   return date > today;

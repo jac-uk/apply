@@ -4,9 +4,7 @@
       v-if="loaded === false"
       :load-failed="loadFailed"
     />
-    <div 
-      v-else
-    >
+    <template v-else>
       <div class="govuk-grid-column-one-quarter">
         <nav
           class="moj-side-navigation"
@@ -41,12 +39,12 @@
           </ul>
         </nav>
       </div>
-      <div
-        class="govuk-grid-column-two-thirds"
-      >
-        <h1 class="govuk-heading-xl govuk-!-margin-bottom-0">
+
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
           Online tests
         </h1>
+
         <TabsList
           :tabs="tabs"
           :active-tab.sync="activeTab"
@@ -55,40 +53,43 @@
           class="govuk-tabs__panel"
           role="tabpanel"
         >
-          <h1 class="govuk-!-margin-0">
-            {{ activeTab }}
-          </h1>
-          <span
-            v-if="!getSelectedTableData().length"
-            class="govuk-body"
-          >
-            No {{ activeTab }} tests to display
-          </span>
+          <h1>{{ activeTab }}</h1>
+
           <Table
-            v-else
             data-key="id"
             :data="getSelectedTableData()"
             :columns="[
               { title: 'Title' },
               { title: 'Status' },
-              { title: 'Deadline' },
+              { title: activeTab === 'future' ? 'Start' : 'Deadline' },
             ]"
           >
             <template #row="{row}">
               <TableCell>
                 <RouterLink
+                  v-if="isOpenTests"
                   :to="{ path: `/qualifying-tests/${row.id}/information` }"
                 >
                   {{ row.qualifyingTest.title }}
                 </RouterLink>
+                <template v-else>
+                  {{ row.qualifyingTest.title }}
+                </template>
               </TableCell>
               <TableCell>{{ status(row.status) | lookup }}</TableCell>
-              <TableCell>{{ endTime(row) }}</TableCell>
+              <TableCell>
+                <template v-if="activeTab === 'future'">
+                  {{ prettyDate(row.qualifyingTest.startDate) }}
+                </template>
+                <template v-else>
+                  {{ prettyDate(row.qualifyingTest.endDate) }}
+                </template>
+              </TableCell>
             </template>
           </Table>
         </div>
       </div>
-    </div>
+    </template>
   </div>
 </template>
 
@@ -133,13 +134,28 @@ export default {
       return this.$store.state.qualifyingTestResponses.records;
     },
     openTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'activated');
+      return this.qualifyingTestResponses.filter(qt => (
+        !isDateInFuture(qt.qualifyingTest.startDate) &&
+        isDateInFuture(qt.qualifyingTest.endDate) && (
+          qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED
+        )
+      ));
     },
     futureTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed === null && isDateInFuture(qt.qualifyingTest.endDate) && qt.status === 'created');
+      return this.qualifyingTestResponses.filter(qt => (
+        (isDateInFuture(qt.qualifyingTest.startDate) || (
+          isDateInFuture(qt.qualifyingTest.endDate) && qt.status === QUALIFYING_TEST.STATUS.CREATED
+        ))
+      ));
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => qt.statusLog.completed != null);
+      return this.qualifyingTestResponses.filter(qt => (
+        !isDateInFuture(qt.qualifyingTest.endDate) ||
+        qt.status == QUALIFYING_TEST.STATUS.COMPLETED
+      ));
+    },
+    isOpenTests(){
+      return this.activeTab === 'open';
     },
   },
   mounted() {
@@ -166,10 +182,10 @@ export default {
 
       return QUALIFYING_TEST.STATUS.NOT_STARTED;
     },
-    endTime(qualifyingTest) {
-      const time = formatDate(qualifyingTest.qualifyingTest.endDate, 'time');
-      const day = formatDate(qualifyingTest.qualifyingTest.endDate);
-      return isToday(qualifyingTest.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
+    prettyDate(date) {
+      const time = formatDate(date, 'time');
+      const day = formatDate(date);
+      return isToday(date) ? `${time} today` : `${time} on ${day}`;
     },
     getSelectedTableData() {
       switch (this.activeTab){

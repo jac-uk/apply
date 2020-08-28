@@ -56,37 +56,32 @@ export default {
       return (endTime - Date.now()) / minute;
     },
   },
-  mounted() {
-    const id = this.$route.params.qualifyingTestId;
-    this.$store.dispatch('qualifyingTestResponses/bind').then((data) => {
-      if (data === null) {
-        this.redirectToPage();
+  async mounted() {
+    try {
+      const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', this.$route.params.qualifyingTestId);
+      if (qualifyingTestResponse === null) {
+        return this.redirectToList();
       }
-    }).catch((e) => {
+
+      const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
+
+      if (!isQTOpen) {
+        return this.redirectToList();
+      }
+
+      this.loaded = true;
+    } catch (e) {
       this.loadFailed = true;
       throw e;
-    });
-    this.$store.dispatch('qualifyingTestResponse/bind', id)
-      .then((data) => {
-        if (data === null) {
-          this.redirectToPage();
-        }
-        else {
-          this.loaded = true;
-        }
-      }).catch((e) => {
-        // this.loadFailed = true;
-        this.redirectToPage();
-        throw e;
-      });
+    }
   },
   destroyed() {
     this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
-    redirectToPage() {
-      this.$router.replace({ name: 'not-found' });
+    redirectToList() {
+      this.$router.replace({ name: 'qualifying-tests' });
     },
   },
 };

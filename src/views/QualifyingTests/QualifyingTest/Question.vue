@@ -10,14 +10,26 @@
       :options="question.options"
     />
 
-    <button class="govuk-button">
-      Save and continue
-    </button>
+    <div class="moj-button-menu">
+      <div class="moj-button-menu__wrapper">
+        <button
+          class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+          type="button"
+          @click="skip"
+        >
+          Skip
+        </button>
+        <button class="moj-button-menu__item govuk-button">
+          Save and continue
+        </button>
+      </div>
+    </div>
   </form>
 </template>
 <script>
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
   components: {
@@ -77,11 +89,21 @@ export default {
     },
   },
   created() {
+    if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
+      return this.$router.replace({ name: 'qualifying-tests' });
+    }
+
     this.response.started = Date.now();
   },
   methods: {
+    async skip() {
+      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+
+      this.$router.push(this.nextPage);
+    },
     async save() {
       this.response.completed = Date.now();
+
       await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
 
       this.$router.push(this.nextPage);

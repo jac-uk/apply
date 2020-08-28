@@ -20,12 +20,12 @@
               :key="questionIndex"
               class="moj-task-list__item"
             >
-              <a
+              <RouterLink
+                :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
                 class="moj-task-list__task-name"
-                href="#"
               >
                 Question {{ questionIndex + 1 }}
-              </a>
+              </RouterLink>
               <strong
                 v-if="question.response.completed"
                 class="govuk-tag moj-task-list__task-completed"
@@ -61,12 +61,12 @@
               :key="questionIndex"
               class="moj-task-list__item"
             >
-              <a
+              <RouterLink
+                :to="{ name: `qualifying-test-scenario`, params: { scenarioNumber: index + 1, questionNumber: questionIndex + 1 } }"
                 class="moj-task-list__task-name"
-                href="#"
               >
                 Question {{ questionIndex + 1 }}
-              </a>
+              </RouterLink>
 
               <strong
                 v-if="scenario.responses[questionIndex].completed"

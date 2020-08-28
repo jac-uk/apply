@@ -30,8 +30,12 @@ export default {
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
-        
+
         if (!isDate(openDate)) return false;
+
+        // FIXME: workaround for hardcoded times
+        openDate.setHours(13);
+        closeDate.setHours(13);
 
         return !isDateInFuture(openDate) && isDateInFuture(closeDate);
       });
@@ -41,8 +45,11 @@ export default {
 
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
-        
+
         if (!isDate(openDate)) return false;
+
+        // FIXME: workaround for hardcoded times
+        openDate.setHours(13);
 
         return isDateInFuture(openDate);
       });
@@ -54,8 +61,12 @@ export default {
         if (!vacancy.applicationCloseDate) {
           return false;
         }
+        const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
 
-        return !isDateInFuture(vacancy.applicationCloseDate);
+        // FIXME: workaround for hardcoded times
+        closeDate.setHours(13);
+
+        return !isDateInFuture(closeDate);
       });
     },
   },

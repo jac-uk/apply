@@ -35,5 +35,13 @@ export default {
     data: (state) => () => {
       return clone(state.record);
     },
+    isOpen: (state) => {
+      if (state.record.qualifyingTest.startDate && state.record.qualifyingTest.endDate) {
+        const today = new Date();
+
+        return today > state.record.qualifyingTest.startDate && today < state.record.qualifyingTest.endDate;
+      }
+      return false;
+    },
   },
 };

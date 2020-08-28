@@ -1,10 +1,16 @@
 <template>
   <div class="govuk-grid-column-two-thirds">
-    <div class="govuk-!-margin-bottom-6">
-      <h1 class="govuk-heading-l">
-        {{ qualifyingTestResponse.qualifyingTest.title }}
-      </h1>
+    <h1 class="govuk-heading-l">
+      {{ qualifyingTestResponse.qualifyingTest.title }}
+    </h1>
 
+    <Banner
+      v-if="hasCompleted"
+      message="You have already finished this test."
+      status="information"
+    />
+
+    <template v-else>
       <ErrorSummary :errors="errors" />
 
       <h2 class="govuk-heading-m">
@@ -12,7 +18,9 @@
       </h2>
 
       <ul class="govuk-list govuk-list--bullet">
-        <li>
+        <li
+          v-if="numberOfQuestions"
+        >
           This test contains <b>{{ numberOfQuestions }}.</b>
         </li>
         <li>
@@ -47,20 +55,19 @@
           </li>
         </ul>
       </template>
-    </div>
 
-    <form
-      ref="formRef"
-      @submit.prevent="onSubmit"
-    >
-      <Warning
-        v-if="expired"
-        message="This Qualifying Test has ended. Please contact the selection exercise team."
-      />
+      <form
+        ref="formRef"
+        @submit.prevent="onSubmit"
+      >
+        <Banner
+          v-if="qtNotActivatedYet"
+          message="This Qualifying Test is not open yet."
+          status="information"
+        />
 
-      <div v-else>
         <fieldset
-          v-if="!started"
+          v-else
           class="govuk-fieldset"
         >
           <Checkbox
@@ -73,46 +80,37 @@
           >
             <b>I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise.</b>
           </Checkbox>
-        </fieldset>
 
-        <!-- @TODO: this should be a component -->
-        <button
-          class="govuk-button govuk-button--success"
-        >
-          <b v-if="!started">Start now</b>
-          <b v-else>Continue</b>
-          <svg
-            class="govuk-button__start-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            width="17.5"
-            height="19"
-            viewBox="0 0 33 40"
-            aria-hidden="true"
-            focusable="false"
+          <StartButton
+            :disabled="!confirmationChecked"
           >
-            <path
-              fill="currentColor"
-              d="M0 0h13l20 20-20 20H0l20-20z"
-            />
-          </svg>
-        </button>
-      </div>
-    </form>
+            <template v-if="hasStarted">
+              Continue
+            </template>
+            <template v-else>
+              Start now
+            </template>
+          </StartButton>
+        </fieldset>
+      </form>
+    </template>
   </div>
 </template>
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import Checkbox from '@/components/Form/Checkbox';
-import Warning from '@/components/Warning';
-import { isToday, isDateInFuture, formatDate } from '@/helpers/date';
+import StartButton from '@/components/Page/StartButton';
+import Banner from '@/components/Page/Banner';
+import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
   components: {
     ErrorSummary,
     Checkbox,
-    Warning,
+    StartButton,
+    Banner,
   },
   extends: Form,
   data() {
@@ -136,6 +134,9 @@ export default {
       return this.qualifyingTestResponse.duration.testDurationAdjusted - this.qualifyingTestResponse.duration.testDuration;
     },
     numberOfQuestions() {
+      if (!this.qualifyingTestResponse.testQuestions.questions) {
+        return false;
+      }
       const questionLength = this.qualifyingTestResponse.testQuestions.questions.length;
       const plural = questionLength > 1 ? 's' : '';
       if (this.qualifyingTestResponse.qualifyingTest.type === 'scenario') {
@@ -147,14 +148,14 @@ export default {
     additionalInstructions() {
       return this.qualifyingTestResponse.qualifyingTest.additionalInstructions;
     },
-    isStarted() {
+    hasStarted() {
       return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.STARTED && this.qualifyingTestResponse.statusLog.started != null;
     },
-    isCompleted() {
+    hasCompleted() {
       return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.COMPLETED && this.qualifyingTestResponse.statusLog.completed != null;
     },
-    expired() {
-      return !isDateInFuture(this.qualifyingTestResponse.qualifyingTest.endDate);
+    qtNotActivatedYet() {
+      return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.CREATED;
     },
     nextPage() {
       if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
@@ -185,7 +186,7 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (!this.started && !this.confirmationChecked) {
+          if (!this.hasStarted && !this.confirmationChecked) {
             throw new Error('You must agree to keep this test confidential.');
           }
           this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.STARTED;

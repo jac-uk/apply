@@ -80,6 +80,9 @@ export default {
       return this.qualifyingTestResponses.filter(qt => !qt.statusLog.completed);
     },
   },
+  created() {
+    this.$store.dispatch('qualifyingTestResponses/bind');
+  },
   async mounted() {
     if (this.qualifyingTestResponse.statusLog.completed === null){
       this.qualifyingTestResponse.statusLog.completed = new Date();
