@@ -1,5 +1,11 @@
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
+const capitalize = (value) => {
+  if (!value) return '';
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
 const formatDate = (value, type) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
@@ -230,6 +236,7 @@ const lookup = (value) => {
 };
 
 export {
+  capitalize,
   formatDate,
   formatEstimatedDate,
   toYesNo,

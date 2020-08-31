@@ -45,7 +45,7 @@ export default {
 
     if (!question.response) {
       question.response = {
-        selection: null,
+        selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
         started: null,
         completed: null,
       };
@@ -89,7 +89,7 @@ export default {
     },
   },
   created() {
-    if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
+    if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
 

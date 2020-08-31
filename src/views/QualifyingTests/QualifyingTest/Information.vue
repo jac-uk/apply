@@ -70,26 +70,26 @@
           v-else
           class="govuk-fieldset"
         >
-          <Checkbox
-            id="confirm-checkbox"
-            ref="confirm-checkbox"
-            v-model="confirmationChecked"
-            name="confirm-checkbox"
-            required
-            :messages="{'required': 'Please confirm you agree'}"
-          >
-            <b>I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise.</b>
-          </Checkbox>
+          <template v-if="!hasStarted">
+            <Checkbox
+              id="confirm-checkbox"
+              ref="confirm-checkbox"
+              v-model="confirmationChecked"
+              name="confirm-checkbox"
+              required
+              :messages="{'required': 'Please confirm you agree'}"
+            >
+              <b>I confirm I will keep this test confidential and not share scenarios or questions at any point during or after the selection exercise.</b>
+            </Checkbox>
 
-          <StartButton
-            :disabled="!confirmationChecked"
-          >
-            <template v-if="hasStarted">
-              Continue
-            </template>
-            <template v-else>
+            <StartButton
+              :disabled="!confirmationChecked"
+            >
               Start now
-            </template>
+            </StartButton>
+          </template>
+          <StartButton>
+            Continue
           </StartButton>
         </fieldset>
       </form>
@@ -178,9 +178,6 @@ export default {
   methods: {
     scrollToTop () {
       this.$el.scrollIntoView();
-    },
-    redirectToErrorPage() {
-      this.$router.replace({ name: 'qualifying-test-not-found' });
     },
     async onSubmit() {
       this.validate();

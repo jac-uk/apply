@@ -2,6 +2,17 @@
   <div class="govuk-radios__item-container">
     <div class="govuk-radios__item">
       <input
+        v-if="field"
+        :id="inputId"
+        v-model="$parent.inputValue[field]"
+        class="govuk-radios__input"
+        type="radio"
+        :name="inputName[field]"
+        :value="value"
+        :aria-describedby="hint ? hintId : false"
+      >
+      <input
+        v-else
         :id="inputId"
         v-model="$parent.inputValue"
         class="govuk-radios__input"
@@ -47,6 +58,10 @@ export default {
       required: true,
       validator: () => true,
     },
+    field: {
+      default: null,
+      type: String,
+    },
     hint: {
       default: '',
       type: String,
@@ -80,7 +95,7 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
   // We need to wrap both the input & conditional content in one top-level element
   // This is because Vue doesn't (yet) support components with multiple top-level elements (e.g. React Fragments)
   // This results in our markup structure differing slightly from the officially documented markup for this component
