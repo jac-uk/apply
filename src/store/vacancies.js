@@ -28,12 +28,18 @@ export default {
       const vacancies = getters.vacancies.concat(getStaticVacancies());
 
       return vacancies.filter(vacancy => {
-        const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
-        const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
-        
-        if (!isDate(openDate)) return false;
 
-        return !isDateInFuture(openDate) && isDateInFuture(closeDate);
+          const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
+          const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
+          const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
+
+          if (!isDate(openDate)) return false;
+          
+          // FIXME: workaround for hardcoded times
+          openDate.setHours(13);
+          closeDate.setHours(13);
+          
+          return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates;
       });
     },
     futureVacancies: (state, getters) => {
@@ -41,10 +47,14 @@ export default {
 
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
-        
+        const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
+
         if (!isDate(openDate)) return false;
 
-        return isDateInFuture(openDate);
+        // FIXME: workaround for hardcoded times
+        openDate.setHours(13);
+
+        return isDateInFuture(openDate) || hasOnlyEstimates;
       });
     },
     inProgressVacancies: (state, getters) => {
