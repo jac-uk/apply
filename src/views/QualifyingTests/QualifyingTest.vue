@@ -8,7 +8,7 @@
       <Countdown
         v-if="timeLeft"
         :duration="timeLeft"
-        :warning="14"
+        :warning="5"
         :alert="1"
       />
 
