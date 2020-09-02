@@ -19,7 +19,10 @@
         >
           Skip
         </button>
-        <button class="moj-button-menu__item govuk-button">
+        <button 
+          class="moj-button-menu__item govuk-button"
+          :disabled="!canSaveAndContinue"
+        >
           Save and continue
         </button>
       </div>
@@ -27,6 +30,7 @@
   </form>
 </template>
 <script>
+import firebase from '@/firebase';
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
 import { QUALIFYING_TEST } from '@/helpers/constants';
@@ -72,7 +76,15 @@ export default {
     questionType() {
       return this.qualifyingTestResponse.qualifyingTest.type;
     },
-
+    canSaveAndContinue() {
+      switch (this.qualifyingTestResponse.qualifyingTest.type) {
+      case QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT:
+        return this.response.selection.mostAppropriate >= 0 && this.response.selection.leastAppropriate >= 0;
+      case QUALIFYING_TEST.TYPE.CRITICAL_ANALYSIS:
+        return this.response.selection >= 0;
+      }
+      return false;
+    },
     nextPage() {
       if (this.isLastQuestion) {
         return {
@@ -88,24 +100,22 @@ export default {
       };
     },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+    }
   },
   methods: {
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
   },

@@ -1,7 +1,7 @@
 <template>
   <fieldset class="govuk-fieldset">
     <RadioGroup
-      id="criticalAnalysisRadio"
+      id="situationalJudgementRadio"
       v-model="localValue"
       :label="question"
       hint="Please select which of the options below are 'most appropriate' and 'least appropriate'. You can only choose one answer as most appropriate and one answer as least appropriate."
