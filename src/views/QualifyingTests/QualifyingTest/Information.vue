@@ -88,7 +88,7 @@
               Start now
             </StartButton>
           </template>
-          <StartButton>
+          <StartButton v-else>
             Continue
           </StartButton>
         </fieldset>
@@ -97,6 +97,7 @@
   </div>
 </template>
 <script>
+import firebase from '@/firebase';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import Checkbox from '@/components/Form/Checkbox';
@@ -183,14 +184,15 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (!this.hasStarted && !this.confirmationChecked) {
-            throw new Error('You must agree to keep this test confidential.');
+          if (!this.hasStarted) {
+            if (!this.confirmationChecked) {
+              throw new Error('You must agree to keep this test confidential.');
+            }
+            // @TODO move this into a store action e.g. `qualifyingTestResponse/start`
+            this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.STARTED;
+            this.qualifyingTestResponse.statusLog.started = firebase.firestore.FieldValue.serverTimestamp();
+            await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
           }
-          this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.STARTED;
-          this.qualifyingTestResponse.statusLog.started = new Date();
-
-          await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
           this.$router.push(this.nextPage);
         } catch (error) {
           this.errors.push({ message: error.message });

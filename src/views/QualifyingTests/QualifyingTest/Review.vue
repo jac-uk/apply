@@ -34,7 +34,7 @@
               </strong>
               <strong
                 v-else
-                class="govuk-tag govuk-tag--grey"
+                class="govuk-tag govuk-tag--grey float-right"
               >
                 Skipped
               </strong>

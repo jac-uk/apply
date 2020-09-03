@@ -19,7 +19,10 @@
         >
           Skip
         </button>
-        <button class="moj-button-menu__item govuk-button">
+        <button 
+          class="moj-button-menu__item govuk-button"
+          :disabled="!canSaveAndContinue"
+        >
           Save and continue
         </button>
       </div>
@@ -27,6 +30,7 @@
   </form>
 </template>
 <script>
+import firebase from '@/firebase';
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
 import { QUALIFYING_TEST } from '@/helpers/constants';
@@ -65,16 +69,27 @@ export default {
     isLastQuestion() {
       return this.questionNumber === this.qualifyingTestResponse.testQuestions.questions.length;
     },
-
+    hasStartedAllQuestions() {
+      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find(question => !(question.response && question.response.started));
+      return firstQuestionNotStarted ? false : true;
+    },
     introduction() {
       return this.qualifyingTestResponse.qualifyingTest.questions.introduction;
     },
     questionType() {
       return this.qualifyingTestResponse.qualifyingTest.type;
     },
-
+    canSaveAndContinue() {
+      switch (this.qualifyingTestResponse.qualifyingTest.type) {
+      case QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT:
+        return this.response.selection.mostAppropriate >= 0 && this.response.selection.leastAppropriate >= 0;
+      case QUALIFYING_TEST.TYPE.CRITICAL_ANALYSIS:
+        return this.response.selection != null && this.response.selection >= 0;
+      }
+      return false;
+    },
     nextPage() {
-      if (this.isLastQuestion) {
+      if (this.isLastQuestion || this.hasStartedAllQuestions) {
         return {
           name: 'qualifying-test-review',
         };
@@ -88,24 +103,28 @@ export default {
       };
     },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+    }
   },
   methods: {
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
     },
   },
