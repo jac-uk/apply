@@ -8,7 +8,7 @@
     >
       <div class="container">
         <div class="modal__title govuk-!-padding-2 govuk-heading-m">
-          Are you sure?
+          {{ title }}
         </div>
         <div class="modal__content govuk-!-padding-4">
           <p class="modal__message govuk-body-l">
@@ -44,6 +44,10 @@ export default {
     cancelable: {
       type: Boolean,
       default: true,
+    },
+    title: {
+      type: String,
+      default: 'Are you sure?',
     },
     buttonText: {
       type: String,
