@@ -69,7 +69,10 @@ export default {
     isLastQuestion() {
       return this.questionNumber === this.qualifyingTestResponse.testQuestions.questions.length;
     },
-
+    hasStartedAllQuestions() {
+      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find(question => !(question.response && question.response.started));
+      return firstQuestionNotStarted ? false : true;
+    },
     introduction() {
       return this.qualifyingTestResponse.qualifyingTest.questions.introduction;
     },
@@ -86,7 +89,7 @@ export default {
       return false;
     },
     nextPage() {
-      if (this.isLastQuestion) {
+      if (this.isLastQuestion || this.hasStartedAllQuestions) {
         return {
           name: 'qualifying-test-review',
         };
@@ -106,7 +109,10 @@ export default {
     }
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
   },
   methods: {
@@ -115,7 +121,10 @@ export default {
     },
     async save() {
       this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
     },
   },
