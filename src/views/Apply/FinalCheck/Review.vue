@@ -1745,15 +1745,17 @@ export default {
       // @NOTE this is a bit ugly as we can't just lookup label
       const selected = {};
 
-      this.application.professionalMemberships.forEach(membership => {
-        if (this.application.memberships[membership]) {
-          const otherMembership = this.vacancy.otherMemberships.find(m => m.value === membership);
-          selected[membership] = {
-            ...this.application.memberships[membership],
-            label: otherMembership.label,
-          };
-        }
-      });
+      if (this.application.professionalMemberships) {
+        this.application.professionalMemberships.forEach(membership => {
+          if (this.application.memberships[membership]) {
+            const otherMembership = this.vacancy.otherMemberships.find(m => m.value === membership);
+            selected[membership] = {
+              ...this.application.memberships[membership],
+              label: otherMembership.label,
+            };
+          }
+        });
+      }
 
       return selected;
     },
@@ -1773,7 +1775,8 @@ export default {
       this.$el.scrollIntoView();
     },
     showMembershipOption(ref) {
-      return this.application.professionalMemberships.indexOf(ref) >= 0;
+      const professionalMemberships = this.application.professionalMemberships;
+      return professionalMemberships && professionalMemberships.indexOf(ref) >= 0;
     },
     async save() {
       this.errors = [];
