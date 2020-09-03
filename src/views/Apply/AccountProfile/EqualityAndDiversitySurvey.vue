@@ -17,35 +17,34 @@
         />
 
         <p class="govuk-body-l">
-          The JAC is committed to equality and diversity and monitors selection
-          processes to ensure that they are fair. If you do not want to disclose your diversity
-          data in any given area, please select ‘Prefer not to say’ for the relevant question.
+          The JAC is committed to equality and diversity and monitors selection processes to ensure that they are fair. 
+          If you do not want to disclose your diversity data in any given area, please select ‘Prefer not to say’ for the relevant question.
         </p>
         <p class="govuk-body-l">
-          The JAC will use the information you provide in two ways: where the
-          <a
+          The JAC will use the information you provide in two ways: where the <a
             class="govuk-link"
             href="https://www.judicialappointments.gov.uk/equal-merit"
             target="_blank"
-          >
-            Equal Merit approach
-          </a>
-          applies, and to monitor the selection process.
-          Other than for the purposes of Equal Merit, your diversity
-          monitoring information will not play any part in the selection process.
+          >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit, 
+          your diversity monitoring information will not play any part in the selection process.
         </p>
         <p class="govuk-body-l">
-          If you are recommended for an appointment we will also share your
-          information with the Ministry of Justice, Judicial Office and Her
-          Majesty's Courts and Tribunal Service.
+          The JAC may also use the information you provided for the purpose of “<a
+            class="govuk-link"
+            href="https://www.judicialappointments.gov.uk/diversity-strategy"
+            target="_blank"
+          >Outreach</a>”, to support our statutory duty to encourage diversity in the pool of applicants for judicial appointment.
+        </p>
+        <p class="govuk-body-l">
+          If you are recommended for an appointment we will also share your information with the Ministry of Justice, 
+          Judicial Office and Her Majesty's Courts and Tribunal Service.
         </p>
 
         <RadioGroup
           id="share-data"
           v-model="equalityAndDiversitySurvey.shareData"
           required
-          label="You can opt out if you do not wish to share your data with
-          MoJ, HMCTS, and Judicial Office."
+          label="You can opt out if you do not wish to share your data with MoJ, HMCTS, and Judicial Office."
         >
           <RadioItem
             :value="true"
