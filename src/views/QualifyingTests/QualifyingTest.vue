@@ -5,11 +5,28 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <Countdown
+      <!-- <Countdown
         v-if="timeLeft"
         :duration="timeLeft"
         :warning="5"
         :alert="1"
+      /> -->
+      <Countdown2
+        v-if="showCountdown"
+        :start-time="qualifyingTestResponse.statusLog.started"
+        :duration="qualifyingTestResponse.duration.testDurationAdjusted"
+        :warning="5"
+        :alert="1"
+        @change="handleCountdown"
+      />
+
+      <Modal 
+        ref="modalRef"
+        title="Time has expired"
+        button-text="I understand"
+        :cancelable="false"
+        message="Your time to complete this test has expired, we will submit the answers you have completed so far."
+        @confirmed="btnModalConfirmed"
       />
 
       <RouterView :key="$route.fullPath" />
@@ -18,12 +35,14 @@
 </template>
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
-import Countdown from '@/components/QualifyingTest/Countdown';
+import Modal from '@/components/Page/Modal';
+import Countdown2 from '@/components/QualifyingTest/Countdown2';
 
 export default {
   components: {
     LoadingMessage,
-    Countdown,
+    Modal,
+    Countdown2,
   },
   data() {
     return {
@@ -35,25 +54,8 @@ export default {
     qualifyingTestResponse() {
       return this.$store.state.qualifyingTestResponse.record;
     },
-    timeLeft() {
-      if (
-        this.qualifyingTestResponse.statusLog.completed ||
-        !this.qualifyingTestResponse.statusLog.started
-      ) {
-        return false;
-      }
-      const minute = 60 * 1000;
-
-      const duration = this.qualifyingTestResponse.duration.testDurationAdjusted;
-      const startTime = this.qualifyingTestResponse.statusLog.started;
-
-      const endTime = new Date(startTime.getTime() + duration * minute);
-
-      if (endTime < Date.now()) {
-        return false;
-      }
-
-      return (endTime - Date.now()) / minute;
+    showCountdown() {
+      return this.qualifyingTestResponse.statusLog && this.qualifyingTestResponse.statusLog.started && !this.qualifyingTestResponse.statusLog.completed;
     },
   },
   async mounted() {
@@ -82,6 +84,17 @@ export default {
   methods: {
     redirectToList() {
       this.$router.replace({ name: 'qualifying-tests' });
+    },
+    handleCountdown(params) {
+      if (params.action === 'ended') {
+        this.openModal();
+      }
+    },
+    openModal(){
+      this.$refs.modalRef.openModal();
+    },
+    btnModalConfirmed() {
+      this.$router.push({ name: 'qualifying-test-submitted' });
     },
   },
 };

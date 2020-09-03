@@ -17,10 +17,13 @@ export default {
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('record');
     }),
-    save: async ({ state }, data) => {
-      data.lastUpdated = firebase.firestore.FieldValue.serverTimestamp();
-
-      return await collection.doc(state.record.id).update(data);
+    save: async ({ state, getters }, data) => {
+      // @TODO make sure QT is still open
+      if (!state.record.statusLog.started || getters.timeLeft) {
+        data.lastUpdated = firebase.firestore.FieldValue.serverTimestamp();
+        return await collection.doc(state.record.id).update(data);
+      }
+      return false;
     },
   },
   state: {
@@ -43,5 +46,21 @@ export default {
       }
       return false;
     },
+    timeLeft: (state) => {
+      if (
+        state.record.statusLog.completed ||
+        !state.record.statusLog.started
+      ) {
+        return false;
+      }
+      const minute = 60 * 1000;
+      const duration = state.record.duration.testDurationAdjusted;
+      const startTime = state.record.statusLog.started;
+      const endTime = new Date(startTime.getTime() + duration * minute);
+      if (endTime < Date.now()) {
+        return false;
+      }
+      return (endTime - Date.now());
+    },    
   },
 };

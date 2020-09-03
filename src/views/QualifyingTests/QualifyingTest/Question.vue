@@ -84,7 +84,7 @@ export default {
       case QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT:
         return this.response.selection.mostAppropriate >= 0 && this.response.selection.leastAppropriate >= 0;
       case QUALIFYING_TEST.TYPE.CRITICAL_ANALYSIS:
-        return this.response.selection >= 0;
+        return this.response.selection != null && this.response.selection >= 0;
       }
       return false;
     },
