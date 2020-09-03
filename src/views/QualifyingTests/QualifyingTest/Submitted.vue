@@ -66,6 +66,7 @@
   </div>
 </template>
 <script>
+import firebase from '@/firebase';
 import { isToday, formatDate } from '@/helpers/date';
 
 export default {
@@ -84,9 +85,12 @@ export default {
     this.$store.dispatch('qualifyingTestResponses/bind');
   },
   async mounted() {
-    if (this.qualifyingTestResponse.statusLog.completed === null){
-      this.qualifyingTestResponse.statusLog.completed = new Date();
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+    // complete the test if we're still within time
+    if (this.$store.getters['qualifyingTestResponse/timeLeft'] && this.qualifyingTestResponse.statusLog.completed === null) {
+      const data = {
+        'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
   },
   methods: {

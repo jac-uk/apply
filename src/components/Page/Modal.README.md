@@ -39,11 +39,15 @@ export default {
   A boolean for showing or hiding a secondary button to dismiss the modal, intended to allow using the modal both in circumstances where the user will be forced to progress and times when the modal can be used as a confirmation and the user can revert/cancel the action which triggered the modal. (eg. countdown at 0).
   true by default so cancel button will appear.
 
+  title: 
+  String for modal title
+  'Are you sure?' by default.
+
   buttonText: 
   String for confirmation button text as this changes from 'start test' to 'confirm' in various uses. 
   'Accept' by default.
 
-  buttonText: 
+  message: 
   String for modal message content text as this changes in each use. 
   'Please confirm' by default.
 
