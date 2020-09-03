@@ -62,3 +62,12 @@ export default {
   },
 };
 </script>
+
+<style scoped type="scss">
+  @media (min-width: 720px) {
+    .govuk-radios__item-container {
+        display: inline-block;
+        margin-right: 30px;
+    }
+  }
+</style>
