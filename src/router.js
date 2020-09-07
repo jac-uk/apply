@@ -46,6 +46,7 @@ import ReasonableLengthOfService from '@/views/Apply/QualificationsAndExperience
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import LocationPreferences from '@/views/Apply/WorkingPreferences/LocationPreferences';
 import JurisdictionPreferences from '@/views/Apply/WorkingPreferences/JurisdictionPreferences';
+import AdditionalWorkingPreferences from '@/views/Apply/WorkingPreferences/AdditionalWorkingPreferences';
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
@@ -418,6 +419,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Jurisdiction preferences',
+          },
+        },
+        {
+          path: 'additional-working-preferences',
+          component: AdditionalWorkingPreferences,
+          name: 'additional-working-preferences',
+          meta: {
+            requiresAuth: true,
+            title: 'Additional working preferences',
           },
         },
         {
