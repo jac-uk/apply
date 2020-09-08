@@ -30,14 +30,14 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
+            <!-- <li class="moj-side-navigation__item">
               <RouterLink
                 class="govuk-link"
                 :to="{ name: 'qualifying-tests' }"
               >
                 Qualifying Tests
               </RouterLink>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>
