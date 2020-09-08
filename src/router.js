@@ -46,6 +46,7 @@ import ReasonableLengthOfService from '@/views/Apply/QualificationsAndExperience
 import PartTimeWorkingPreferences from '@/views/Apply/WorkingPreferences/PartTimeWorkingPreferences';
 import LocationPreferences from '@/views/Apply/WorkingPreferences/LocationPreferences';
 import JurisdictionPreferences from '@/views/Apply/WorkingPreferences/JurisdictionPreferences';
+import AdditionalWorkingPreferences from '@/views/Apply/WorkingPreferences/AdditionalWorkingPreferences';
 import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
@@ -54,6 +55,7 @@ import CV from '@/views/Apply/Assessments/CV';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
+// Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
@@ -64,6 +66,18 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
+// Qualifying Tests
+import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
+import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
+import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
+import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scenario';
+import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
+import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
+
+// Error pages
+import NotFound from '@/views/NotFound.vue';
+
 Vue.use(Router);
 
 const router = new Router({
@@ -71,8 +85,16 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '*',
+      path: '/',
       redirect: '/vacancies',
+    },
+    {
+      path: '*',
+      component: NotFound,
+      name: 'not-found',
+      meta: {
+        title: 'Error',
+      },
     },
     {
       path: '/vacancies',
@@ -168,6 +190,69 @@ const router = new Router({
       meta: {
         title: 'Applications',
       },
+    },
+    {
+      path: '/qualifying-tests',
+      component: QualifyingTests,
+      name: 'qualifying-tests',
+      meta: {
+        requiresAuth: true,
+        title: 'Qualifying Tests | List',
+      },
+    },
+    {
+      path: '/qualifying-tests/:qualifyingTestId',
+      component: QualifyingTest,
+      children: [
+        {
+          path: 'information',
+          component: QualifyingTestInformation,
+          name: 'qualifying-test-information',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Information',
+          },
+        },
+        {
+          path: 'question/:questionNumber',
+          component: QualifyingTestQuestion,
+          name: 'qualifying-test-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Question',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'scenario/:scenarioNumber/:questionNumber',
+          component: QualifyingTestScenario,
+          name: 'qualifying-test-scenario',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Scenario',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'review',
+          component: QualifyingTestReview,
+          name: 'qualifying-test-review',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Review',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'submitted',
+          component: QualifyingTestSubmitted,
+          name: 'qualifying-test-submitted',
+          meta: {
+            requiresAuth: true,
+            title: 'Qualifying Test | Submitted',
+          },
+        },
+      ],
     },
     // Apply for a role
     {
@@ -334,6 +419,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Jurisdiction preferences',
+          },
+        },
+        {
+          path: 'additional-working-preferences',
+          component: AdditionalWorkingPreferences,
+          name: 'additional-working-preferences',
+          meta: {
+            requiresAuth: true,
+            title: 'Additional working preferences',
           },
         },
         {

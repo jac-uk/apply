@@ -64,8 +64,12 @@ export default {
         if (!vacancy.applicationCloseDate) {
           return false;
         }
+        const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
 
-        return !isDateInFuture(vacancy.applicationCloseDate);
+        // FIXME: workaround for hardcoded times
+        closeDate.setHours(13);
+
+        return !isDateInFuture(closeDate);
       });
     },
   },

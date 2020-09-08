@@ -136,6 +136,9 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
         }
+        if (this.vacancy.additionalWorkingPreferences) {
+          workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
+        }
         if (this.vacancy.welshRequirement) {
           workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
         }
@@ -269,6 +272,9 @@ export default {
         }
         if (this.vacancy.jurisdictionQuestion) {
           if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
+        }
+        if (this.vacancy.additionalWorkingPreferences) {
+          if (!this.application.progress.additionalWorkingPreferences) { isComplete = false; }
         }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }

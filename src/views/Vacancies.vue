@@ -10,10 +10,13 @@
           aria-label="Side navigation"
         >
           <ul class="moj-side-navigation__list">
-            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+            <li
+              class="moj-side-navigation__item"
+              :class="this.$route.name === 'vacancies' ? 'moj-side-navigation__item--active' : null"
+            >
               <RouterLink
                 class="govuk-link"
-                aria-current="page"
+                :aria-current="this.$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
               >
                 Vacancies
@@ -27,30 +30,14 @@
                 Applications
               </RouterLink>
             </li>
-            <!-- <li class="moj-side-navigation__item">
-      <RouterLink
-      class="govuk-link"
-      :to="{ name: 'personal-details' }"
-      >
-      Personal Details
-    </RouterLink>
-  </li>
-  <li class="moj-side-navigation__item">
-  <RouterLink
-  class="govuk-link"
-  :to="{ name: 'diversity-information' }"
-  >
-  Diversity Information
-  </RouterLink>
-  </li>
-  <li class="moj-side-navigation__item">
-  <RouterLink
-  class="govuk-link"
-  :to="{ name: 'character-information' }"
-  >
-  Character Information
-  </RouterLink>
-  </li> -->
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'qualifying-tests' }"
+              >
+                Qualifying Tests
+              </RouterLink>
+            </li>
           </ul>
         </nav>
       </div>

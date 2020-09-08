@@ -1,3 +1,11 @@
+import { QUALIFYING_TEST } from '@/helpers/constants';
+
+const capitalize = (value) => {
+  if (!value) return '';
+  value = value.toString();
+  return value.charAt(0).toUpperCase() + value.slice(1);
+};
+
 const formatDate = (value, type) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
@@ -203,6 +211,21 @@ const lookup = (value) => {
       'write': 'Write',
       // 'xxx': 'xxx',
     };
+
+    lookup[QUALIFYING_TEST.STATUS.CREATED] = 'Created';
+    lookup[QUALIFYING_TEST.STATUS.SUBMITTED] = 'Submitted for approval';
+    lookup[QUALIFYING_TEST.STATUS.APPROVED] = 'Approved';
+    lookup[QUALIFYING_TEST.STATUS.INITIALISED] = 'Initialised';
+    lookup[QUALIFYING_TEST.STATUS.ACTIVATED] = 'Activated';
+    lookup[QUALIFYING_TEST.STATUS.NOT_STARTED] = 'Not started';
+    lookup[QUALIFYING_TEST.STATUS.STARTED] = 'Started';
+    lookup[QUALIFYING_TEST.STATUS.COMPLETED] = 'Completed';
+    lookup[QUALIFYING_TEST.STATUS.PAUSED] = 'Paused';
+
+    lookup[QUALIFYING_TEST.TYPE.SCENARIO] = 'Scenario';
+    lookup[QUALIFYING_TEST.TYPE.CRITICAL_ANALYSIS] = 'Critical analysis';
+    lookup[QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT] = 'Situational judgement';
+
     return lookup[value] || value;
   }
   // Default for unanswered question
@@ -213,6 +236,7 @@ const lookup = (value) => {
 };
 
 export {
+  capitalize,
   formatDate,
   formatEstimatedDate,
   toYesNo,

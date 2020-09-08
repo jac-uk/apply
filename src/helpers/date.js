@@ -1,7 +1,6 @@
 const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
-  // @NOTE: this is a bit silly, we should save full date instead of hardcoding the time
   if (date == null){
     return false;
   } else if (!isDate(date)) {
@@ -14,9 +13,9 @@ const isDateInFuture = (date) => {
     date.getFullYear(),
     date.getMonth(),
     date.getDate(),
-    13,
-    0,
-    0
+    date.getHours(),
+    date.getMinutes(),
+    date.getSeconds(),
   );
 
   return date > today;
@@ -30,10 +29,10 @@ const formatDate = (date, type) => {
   }
 
   if (type && type === 'time') {
-    return date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true }).toLowerCase();
+    return date.toLocaleString('en-GB', { hour: 'numeric', minute: 'numeric' }).toLowerCase();
   }
 
-  const month = date.toLocaleString('en-US', { month: 'long' });
+  const month = date.toLocaleString('en-GB', { month: 'long' });
 
   if (type && type === 'month') {
     return `${month} ${date.getFullYear()}`;
@@ -68,10 +67,22 @@ const validateYear = (val) => {
   return val;
 };
 
+const isToday = (val) => {
+  if (!isDate(val)){ 
+    return null;
+  }
+  
+  const today = new Date();
+  return val.getDate() === today.getDate() &&
+    val.getMonth() === today.getMonth() &&
+    val.getFullYear() === today.getFullYear();
+};
+
 export {
   isDate,
   isDateInFuture,
   formatDate,
   parseEstimatedDate,
-  validateYear
+  validateYear,
+  isToday
 };
