@@ -76,6 +76,34 @@
       class="govuk-width-container govuk-main-wrapper govuk-main-wrapper--auto-spacing"
       role="main"
     >
+      <!-- <Countdown2
+        :start-time="new Date()"
+        :duration="10000000"
+        :warning="5"
+        :alert="1"
+        @change="handleCountdown"
+      >
+        <template 
+          v-slot:left-slot
+        >
+          <router-link
+            class="govuk-link float-left"
+            :to="{ name: 'vacancies' }"
+          >
+            Back
+          </router-link>
+        </template>
+        <template
+          v-slot:right-slot
+        >
+          <router-link
+            :to="{ name: 'vacancies' }"
+            class="govuk-link float-right"
+          >
+            Exit
+          </router-link>
+        </template>
+      </Countdown2> -->
       <RouterView />
     </main>
 
@@ -86,7 +114,7 @@
     >
       <div class="govuk-width-container">
         <div class="govuk-footer__meta">
-          <!-- <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+          <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
             <h2 class="govuk-visually-hidden">
               Support links
             </h2>
@@ -109,7 +137,7 @@
               href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
               rel="license"
             >Open Government Licence v3.0</a>, except where otherwise stated</span>
-          </div> -->
+          </div>
         </div>
       </div>
     </footer>
@@ -118,9 +146,13 @@
 
 <script>
 import { auth } from '@/firebase';
+// import Countdown2 from '@/components/QualifyingTest/Countdown2';
 
 export default {
   name: 'App',
+  components: {
+    // Countdown2,
+  },
   data: () => ({
     //
   }),
@@ -154,6 +186,11 @@ export default {
     gotoVacancies() {
       this.$router.push({ name: 'vacancies' });
     },
+    handleCountdown(params) {
+      if (params.action === 'ended') {
+        this.openModal();
+      }
+    },
   },
 };
 </script>
@@ -170,7 +207,7 @@ export default {
 };
 
 .govuk-footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 };
@@ -182,6 +219,5 @@ export default {
 .page-container {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 10vh;
 }
 </style>
