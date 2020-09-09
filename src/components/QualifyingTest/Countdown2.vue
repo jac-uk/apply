@@ -4,7 +4,13 @@
     class="countdown govuk-!-margin-bottom-4"
     :class="bckClass"
   >
+    <slot
+      name="left-slot"
+    />
     Time remaining: <span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}</span>
+    <slot
+      name="right-slot"
+    />
   </div>
 </template>
 
@@ -96,24 +102,24 @@ export default {
 </script>
 
 <style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
-.countdown {
-  background-color: green;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px;
-
-  span {
+  .countdown {
+    background-color: green;
+    color: white;
+    text-align: center;
     font-weight: bold;
-    display: inline-block;
-  }
+    padding: 10px;
 
-  &.warning {
-    background-color: yellow;
-    color: black;
+    span {
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &.warning {
+      background-color: yellow;
+      color: black;
+    }
+    &.alert {
+      background-color: red;
+    }
   }
-  &.alert {
-    background-color: red;
-  }
-}
 </style>
