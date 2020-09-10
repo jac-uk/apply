@@ -32,15 +32,14 @@
           <a
             class="govuk-link countdown-link"
             href=""
-            @click.prevent="btnExit"
+            @click.prevent="openExitModal"
           >
             Exit Test
           </a>
         </template>
       </Countdown2>
       <Modal 
-        v-if="timeElapsed"
-        ref="modalRef"
+        ref="timeElapsedModalRef"
         title="Time has expired"
         button-text="I understand"
         :cancelable="false"
@@ -49,13 +48,12 @@
       />
 
       <Modal 
-        v-else
-        ref="modalRef"
+        ref="exitModalRef"
         title="Are you sure?"
         button-text="Exit test"
         :cancelable="true"
         message="Are you sure you want to exit this test? The timer will continue ticking down even if you do?"
-        @confirmed="btnModalConfirmed"
+        @confirmed="btnExitModalConfirmed"
       />
 
       <RouterView :key="$route.fullPath" />
@@ -77,7 +75,6 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
-      timeElapsed: false,
     };
   },
   computed: {
@@ -118,9 +115,6 @@ export default {
     btnPrevious() {
       this.$router.replace({ params: { questionNumber: this.$route.params.questionNumber - 1 } });
     },
-    btnExit() {
-      this.openModal();
-    },
     redirectToList() {
       this.$router.replace({ name: 'qualifying-tests' });
     },
@@ -133,8 +127,14 @@ export default {
     openModal(){
       this.$refs.modalRef.openModal();
     },
+    openExitModal(){
+      this.$refs.exitModalRef.openModal();
+    },
     btnModalConfirmed() {
-      this.timeElapsed ? this.$router.push({ name: 'qualifying-test-submitted' }) : this.$router.push({ name: 'vacancies' });
+      this.$router.push({ name: 'qualifying-test-submitted' });
+    },
+    btnExitModalConfirmed() {
+      this.$router.push({ name: 'qualifying-tests' });
     },
   },
 };
