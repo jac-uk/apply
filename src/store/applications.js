@@ -7,7 +7,9 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
       const firestoreRef = firestore
-        .collection('applications').where('userId', '==', rootState.auth.currentUser.uid);
+        .collection('applications')
+        .where('userId', '==', rootState.auth.currentUser.uid)
+        .limit(200);  // @TODO enable paging
       return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
