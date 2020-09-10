@@ -60,6 +60,18 @@ export default {
       },
     },
   },
+  watch: {
+    'localValue.leastAppropriate': function (value) {
+      if (value === this.localValue.mostAppropriate) {
+        this.localValue.mostAppropriate = null;
+      }
+    },
+    'localValue.mostAppropriate': function (value) {
+      if (value === this.localValue.leastAppropriate) {
+        this.localValue.leastAppropriate = null;
+      }
+    },
+  },
 };
 </script>
 
