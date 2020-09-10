@@ -77,8 +77,24 @@ export default {
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records;
     },
+    sameApplicationID(qt){
+      return qt.vacancy.id === this.$store.state.qualifyingTestResponse.record.vacancy.id;
+    },
+    notThisTest(qt){
+      return qt.id != this.$store.state.qualifyingTestResponse.record.id;
+    },
+    isOpen(qt){
+      return qt.statusLog.started;
+    },
+    notComplete(qt){
+      return !qt.statusLog.completed;
+    },
     upcomingTests(){
-      return this.qualifyingTestResponses.filter(qt => !qt.statusLog.completed);
+      return this.qualifyingTestResponses.filter((qt) => {
+        if (this.sameApplicationID(qt) && this.notThisTest(qt) && this.isOpen(qt) && this.notComplete(qt)) {
+          return true;
+        }
+      });
     },
   },
   created() {
