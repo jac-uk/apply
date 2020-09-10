@@ -5,12 +5,6 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <!-- <Countdown
-        v-if="timeLeft"
-        :duration="timeLeft"
-        :warning="5"
-        :alert="1"
-      /> -->
       <Countdown2
         v-if="showCountdown"
         :start-time="qualifyingTestResponse.statusLog.started"
@@ -18,14 +12,49 @@
         :warning="5"
         :alert="1"
         @change="handleCountdown"
-      />
-
+      >
+        <template 
+          v-slot:left-slot
+        >
+          〈
+          <a
+            v-if="showPrevious"
+            class="govuk-link countdown-link"
+            href=""
+            @click.prevent="btnPrevious"
+          >
+            Previous Question
+          </a>
+        </template>
+        <template
+          v-slot:right-slot
+        >
+          <a
+            class="govuk-link countdown-link"
+            href=""
+            @click.prevent="btnExit"
+          >
+            Exit Test
+          </a>
+        </template>
+      </Countdown2>
       <Modal 
+        v-if="timeElapsed"
         ref="modalRef"
         title="Time has expired"
         button-text="I understand"
         :cancelable="false"
         message="Your time to complete this test has expired, we will submit the answers you have completed so far."
+        @confirmed="btnModalConfirmed"
+      />
+
+      <Modal 
+        v-else
+        ref="modalRef"
+        title="Are you sure?"
+        button-text="Exit test"
+        :cancelable="true"
+        message="Are you sure you want to exit this test? The timer will continue ticking down even if you do?"
         @confirmed="btnModalConfirmed"
       />
 
@@ -48,9 +77,13 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      timeElapsed: false,
     };
   },
   computed: {
+    showPrevious() {
+      return this.$route.params.questionNumber > 1;
+    },
     qualifyingTestResponse() {
       return this.$store.state.qualifyingTestResponse.record;
     },
@@ -82,11 +115,18 @@ export default {
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
+    btnPrevious() {
+      this.$router.replace({ params: { questionNumber: this.$route.params.questionNumber - 1 } });
+    },
+    btnExit() {
+      this.openModal();
+    },
     redirectToList() {
       this.$router.replace({ name: 'qualifying-tests' });
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
+        this.timeElapsed = true;
         this.openModal();
       }
     },
@@ -94,8 +134,13 @@ export default {
       this.$refs.modalRef.openModal();
     },
     btnModalConfirmed() {
-      this.$router.push({ name: 'qualifying-test-submitted' });
+      this.timeElapsed ? this.$router.push({ name: 'qualifying-test-submitted' }) : this.$router.push({ name: 'vacancies' });
     },
   },
 };
 </script>
+<style>
+  .countdown-links{
+    color: white !important;
+  }
+</style>

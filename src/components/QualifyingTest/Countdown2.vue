@@ -4,13 +4,17 @@
     class="countdown govuk-!-margin-bottom-4"
     :class="bckClass"
   >
-    <slot
-      name="left-slot"
-    />
+    <div class="float-left">
+      <slot
+        name="left-slot"
+      />
+    </div>
     Time remaining: <span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}</span>
-    <slot
-      name="right-slot"
-    />
+    <div class="float-right">
+      <slot
+        name="right-slot"
+      />
+    </div>
   </div>
 </template>
 
