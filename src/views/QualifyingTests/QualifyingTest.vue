@@ -1,5 +1,5 @@
 <template>
-  <div class="govuk-grid-row">
+  <div class="qt_page">
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
@@ -99,3 +99,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.qt_page{
+  padding-top: 25px;
+}
+</style>
