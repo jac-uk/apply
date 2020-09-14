@@ -19,7 +19,7 @@
             v-show="cancelable"
           >
             <button
-              class="govuk-button govuk-!-padding-2 govuk-button--secondary govuk-!-margin-right-3 deny"
+              class="govuk-button govuk-button--secondary govuk-!-margin-right-3 deny"
               @click="closeModal"
             >
               Cancel

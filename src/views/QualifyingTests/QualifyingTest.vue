@@ -12,15 +12,48 @@
         :warning="5"
         :alert="5"
         @change="handleCountdown"
-      />
-
+      >
+        <template 
+          v-slot:left-slot
+        >
+          〈
+          <a
+            v-if="showPrevious"
+            class="govuk-link countdown-link"
+            href=""
+            @click.prevent="btnPrevious"
+          >
+            Previous Question
+          </a>
+        </template>
+        <template
+          v-slot:right-slot
+        >
+          <a
+            class="govuk-link countdown-link"
+            href=""
+            @click.prevent="openExitModal"
+          >
+            Exit Test
+          </a>
+        </template>
+      </Countdown2>
       <Modal 
-        ref="modalRef"
+        ref="timeElapsedModalRef"
         title="Time has expired"
         button-text="I understand"
         :cancelable="false"
         message="Your time to complete this test has expired, we will submit the answers you have completed so far."
         @confirmed="btnModalConfirmed"
+      />
+
+      <Modal 
+        ref="exitModalRef"
+        title="Are you sure?"
+        button-text="Exit test"
+        :cancelable="true"
+        message="Are you sure you want to exit this test? The timer will continue ticking down even if you do?"
+        @confirmed="btnExitModalConfirmed"
       />
 
       <RouterView :key="$route.fullPath" />
@@ -45,6 +78,9 @@ export default {
     };
   },
   computed: {
+    showPrevious() {
+      return this.$route.params.questionNumber > 1;
+    },
     qualifyingTestResponse() {
       return this.$store.state.qualifyingTestResponse.record;
     },
@@ -90,23 +126,36 @@ export default {
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
+    btnPrevious() {
+      this.$router.replace({ params: { questionNumber: this.$route.params.questionNumber - 1 } });
+    },
     redirectToList() {
       this.$router.replace({ name: 'qualifying-tests' });
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
-        this.openModal();
+        this.openTimeElapsedModal();
       }
     },
-    openModal(){
-      this.$refs.modalRef.openModal();
+    openTimeElapsedModal(){
+      this.$refs.timeElapsedModalRef.openModal();
+    },
+    openExitModal(){
+      this.$refs.exitModalRef.openModal();
     },
     btnModalConfirmed() {
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
+    btnExitModalConfirmed() {
+      this.$router.push({ name: 'qualifying-tests' });
+    },
   },
 };
 </script>
+<style>
+  .countdown-links{
+    color: white !important;
+  }
 <style scoped>
 .qt_page{
   padding-top: 25px;
