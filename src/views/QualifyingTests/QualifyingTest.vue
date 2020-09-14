@@ -5,18 +5,12 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <!-- <Countdown
-        v-if="timeLeft"
-        :duration="timeLeft"
-        :warning="5"
-        :alert="1"
-      /> -->
       <Countdown2
-        v-if="showCountdown"
+        v-if="testInProgress"
         :start-time="qualifyingTestResponse.statusLog.started"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
-        :alert="1"
+        :alert="5"
         @change="handleCountdown"
       />
 
@@ -54,10 +48,24 @@ export default {
     qualifyingTestResponse() {
       return this.$store.state.qualifyingTestResponse.record;
     },
-    showCountdown() {
-      return this.qualifyingTestResponse.statusLog && this.qualifyingTestResponse.statusLog.started && !this.qualifyingTestResponse.statusLog.completed;
+    qualifyingTestId() {
+      return this.qualifyingTestResponse.qualifyingTest.id;
+    },
+    testInProgress() {
+      return this.$store.getters['qualifyingTestResponse/testInProgress'];
     },
   },
+  watch: {
+    qualifyingTestResponse: function (newVal) {
+      if (newVal) {
+        if (this.testInProgress) {
+          this.$store.dispatch('connectionMonitor/start', `qualifyingTest/${this.qualifyingTestId}`);
+        } else {
+          this.$store.dispatch('connectionMonitor/stop');
+        }
+      }
+    },
+  },  
   async mounted() {
     try {
       const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', this.$route.params.qualifyingTestId);
