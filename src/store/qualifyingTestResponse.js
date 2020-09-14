@@ -54,30 +54,21 @@ export default {
       return false;
     },
     timeLeft: (state) => {
-      // !state.record.statusLog.started
       if (
         state.record.statusLog.completed
       ) {
-        // eslint-disable-next-line no-console
-        console.log('===TIMELEFT: state.record.statusLog.completed');
         return 0;
       }
       const minute = 60 * 1000;
       const duration = state.record.duration.testDurationAdjusted;
       const startTime = state.record.statusLog.started;
       if (startTime === null) {
-        // eslint-disable-next-line no-console
-        console.log('===TIMELEFT: no startTime');
         return duration * minute;
       }
       const endTime = new Date(startTime.getTime() + duration * minute);
       if (endTime < Date.now()) {
-        // eslint-disable-next-line no-console
-        console.log('===TIMELEFT: end time reached');
         return 0;
       }
-      // eslint-disable-next-line no-console
-      console.log('===TIMELEFT: time counting');
       return (endTime - Date.now());
     }, 
     testInProgress: (state, getters) => {

@@ -92,8 +92,6 @@ export default {
     },
     isTimeLeft() {
       const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
-      // eslint-disable-next-line no-console
-      console.log('amountTimeLeft', amountTimeLeft);
       return amountTimeLeft > 0;
     },
     isNotCompleted() {
@@ -128,9 +126,6 @@ export default {
       // noTimeLeft > redirect
       const noTimeLeft = !this.isTimeLeft;
       const isCompleted = !this.isNotCompleted;
-      
-      // eslint-disable-next-line no-console
-      console.log('noTimeLeft', noTimeLeft, 'isCompleted', isCompleted );
 
       if (noTimeLeft || isCompleted) {
         return this.redirectToList();
