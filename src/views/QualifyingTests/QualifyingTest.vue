@@ -90,6 +90,15 @@ export default {
     testInProgress() {
       return this.$store.getters['qualifyingTestResponse/testInProgress'];
     },
+    isTimeLeft() {
+      const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
+      // eslint-disable-next-line no-console
+      console.log('amountTimeLeft', amountTimeLeft);
+      return amountTimeLeft > 0;
+    },
+    isNotCompleted() {
+      return this.qualifyingTestResponse.statusLog.completed === null;
+    },
   },
   watch: {
     qualifyingTestResponse: function (newVal) {
@@ -112,6 +121,18 @@ export default {
       const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
 
       if (!isQTOpen) {
+        return this.redirectToList();
+      }
+
+      // isNotCompleted > redirect
+      // noTimeLeft > redirect
+      const noTimeLeft = !this.isTimeLeft;
+      const isCompleted = !this.isNotCompleted;
+      
+      // eslint-disable-next-line no-console
+      console.log('noTimeLeft', noTimeLeft, 'isCompleted', isCompleted );
+
+      if (noTimeLeft || isCompleted) {
         return this.redirectToList();
       }
 
