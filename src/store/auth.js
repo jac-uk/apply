@@ -18,7 +18,7 @@ const module = {
           email: user.email,
           emailVerified: user.emailVerified,
           displayName: user.displayName,
-      });
+        });
       }
     },
   },
