@@ -7,7 +7,7 @@
     <template v-else>
       <Countdown2
         v-if="testInProgress"
-        :start-time="qualifyingTestResponse.statusLog.started"
+        :start-time="new Date()"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
         :alert="5"
