@@ -24,7 +24,7 @@
                 :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
                 class="moj-task-list__task-name"
               >
-                Question {{ questionIndex + 1 }}
+                {{ questionIndex + 1 }}. {{ question.details.substring(0,55) }}...
               </RouterLink>
               <strong
                 v-if="question.response.completed"
