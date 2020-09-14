@@ -156,8 +156,7 @@ export default {
   .countdown-links{
     color: white !important;
   }
-<style scoped>
-.qt_page{
-  padding-top: 25px;
-}
+  .qt_page{
+    padding-top: 25px;
+  }
 </style>
