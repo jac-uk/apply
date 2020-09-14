@@ -4,7 +4,17 @@
     class="countdown govuk-!-margin-bottom-4"
     :class="bckClass"
   >
+    <div class="float-left">
+      <slot
+        name="left-slot"
+      />
+    </div>
     Time remaining: <span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}</span>
+    <div class="float-right">
+      <slot
+        name="right-slot"
+      />
+    </div>
   </div>
 </template>
 
@@ -111,15 +121,19 @@ export default {
 
   span {
     font-weight: bold;
-    display: inline-block;
-  }
+    padding: 10px;
 
-  &.warning {
-    background-color: yellow;
-    color: black;
+    span {
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &.warning {
+      background-color: yellow;
+      color: black;
+    }
+    &.alert {
+      background-color: red;
+    }
   }
-  &.alert {
-    background-color: red;
-  }
-}
 </style>
