@@ -173,11 +173,11 @@ export default {
     padding: 1.25em 0.625em 0 0.625em;
   };
 
-  .govuk-footer {
-    position: relative;
-    bottom: 0;
-    width: 100%;
-  };
+.govuk-footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+};
 
   .govuk-main-wrapper {
     padding: 0px;
