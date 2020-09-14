@@ -7,7 +7,7 @@
     <template v-else>
       <Countdown2
         v-if="testInProgress"
-        :start-time="qualifyingTestResponse.statusLog.started"
+        :start-time="qualifyingTestResponse.statusLog.started"	
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
         :alert="5"
@@ -156,8 +156,7 @@ export default {
   .countdown-links{
     color: white !important;
   }
-<style scoped>
-.qt_page{
-  padding-top: 25px;
-}
+  .qt_page{
+    padding-top: 25px;
+  }
 </style>
