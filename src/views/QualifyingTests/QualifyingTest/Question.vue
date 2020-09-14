@@ -1,33 +1,35 @@
 <template>
-  <form
-    ref="formRef"
-    @submit.prevent="save"
-  >
-    <component
-      :is="questionType"
-      v-model="response.selection"
-      :question="`${questionNumber}. ${question.details}`"
-      :options="question.options"
-    />
+  <div class="govuk-grid-column-two-thirds">
+    <form
+      ref="formRef"
+      @submit.prevent="save"
+    >
+      <component
+        :is="questionType"
+        v-model="response.selection"
+        :question="`${questionNumber}. ${question.details}`"
+        :options="question.options"
+      />
 
-    <div class="moj-button-menu">
-      <div class="moj-button-menu__wrapper">
-        <button
-          class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
-          type="button"
-          @click="skip"
-        >
-          Skip
-        </button>
-        <button 
-          class="moj-button-menu__item govuk-button"
-          :disabled="!canSaveAndContinue"
-        >
-          Save and continue
-        </button>
+      <div class="moj-button-menu">
+        <div class="moj-button-menu__wrapper">
+          <button
+            class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+            type="button"
+            @click="skip"
+          >
+            Skip
+          </button>
+          <button 
+            class="moj-button-menu__item govuk-button"
+            :disabled="!canSaveAndContinue"
+          >
+            Save and continue
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 <script>
 import firebase from '@/firebase';
