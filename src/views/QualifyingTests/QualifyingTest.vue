@@ -120,12 +120,11 @@ export default {
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
-        this.timeElapsed = true;
-        this.openModal();
+        this.openTimeElapsedModal();
       }
     },
-    openModal(){
-      this.$refs.modalRef.openModal();
+    openTimeElapsedModal(){
+      this.$refs.timeElapsedModalRef.openModal();
     },
     openExitModal(){
       this.$refs.exitModalRef.openModal();

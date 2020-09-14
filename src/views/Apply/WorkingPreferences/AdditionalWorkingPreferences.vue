@@ -20,7 +20,9 @@
           v-for="(additionalWorkingPreference, index) in vacancy.additionalWorkingPreferences"
           :key="index"
         >
-          <div class="govuk-caption-xl">{{ additionalWorkingPreference.topic }}</div>
+          <div class="govuk-caption-xl">
+            {{ additionalWorkingPreference.topic }}
+          </div>
           <SelectionInput
             :id="`additional-working-preference-${index}`"
             v-model="localAdditionalPreferences[index]"
