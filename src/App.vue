@@ -86,7 +86,7 @@
     >
       <div class="govuk-width-container">
         <div class="govuk-footer__meta">
-          <!-- <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
+          <div class="govuk-footer__meta-item govuk-footer__meta-item--grow">
             <h2 class="govuk-visually-hidden">
               Support links
             </h2>
@@ -104,12 +104,16 @@
                 d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
               />
             </svg>
-            <span class="govuk-footer__licence-description">All content is available under the <a
-              class="govuk-footer__link"
-              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
-              rel="license"
-            >Open Government Licence v3.0</a>, except where otherwise stated</span>
-          </div> -->
+            <span class="govuk-footer__licence-description">All content is available under the 
+              <a
+                class="govuk-footer__link"
+                href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+                rel="license"
+              >
+                Open Government Licence v3.0
+              </a>
+              , except where otherwise stated</span>
+          </div>
         </div>
       </div>
     </footer>
@@ -159,15 +163,15 @@ export default {
 </script>
 
 <style lang="scss">
-.govuk-grid-column-one-half {
-  width: 100%;
-  float: left;
-}
+  .govuk-grid-column-one-half {
+    width: 100%;
+    float: left;
+  }
 
-.header {
-  background-color: #fafafa;
-  padding: 1.25em 0.625em 0 0.625em;
-};
+  .header {
+    background-color: #fafafa;
+    padding: 1.25em 0.625em 0 0.625em;
+  };
 
 .govuk-footer {
   position: relative;
@@ -175,12 +179,12 @@ export default {
   width: 100%;
 };
 
-.govuk-main-wrapper {
-  padding: 0px;
-}
+  .govuk-main-wrapper {
+    padding: 0px;
+  }
 
-.page-container {
-  position: relative;
-  min-height: 100vh;
-}
+  .page-container {
+    position: relative;
+    min-height: 100vh;
+  }
 </style>

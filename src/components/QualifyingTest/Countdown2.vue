@@ -125,15 +125,19 @@ export default {
 
   span {
     font-weight: bold;
-    display: inline-block;
-  }
+    padding: 10px;
 
-  &.warning {
-    background-color: yellow;
-    color: black;
+    span {
+      font-weight: bold;
+      display: inline-block;
+    }
+
+    &.warning {
+      background-color: yellow;
+      color: black;
+    }
+    &.alert {
+      background-color: red;
+    }
   }
-  &.alert {
-    background-color: red;
-  }
-}
 </style>
