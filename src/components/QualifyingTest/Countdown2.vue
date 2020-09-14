@@ -106,10 +106,20 @@ export default {
 </script>
 
 <style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
-  .countdown {
-    background-color: green;
-    color: white;
-    text-align: center;
+.countdown {
+  background-color: green;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+
+  span {
     font-weight: bold;
     padding: 10px;
 

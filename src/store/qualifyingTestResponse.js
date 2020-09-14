@@ -3,6 +3,7 @@ import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 const collection = firestore.collection('qualifyingTestResponses');
 
@@ -11,7 +12,6 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef }, id) => {
       const firestoreRef = collection.doc(id);
-
       return bindFirestoreRef('record', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
@@ -24,6 +24,13 @@ export default {
         return await collection.doc(state.record.id).update(data);
       }
       return false;
+    },
+    startTest: async (context) => {
+      const data = {
+        status: QUALIFYING_TEST.STATUS.STARTED,
+        'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
+      };
+      await context.dispatch('save', data);
     },
   },
   state: {
@@ -61,6 +68,11 @@ export default {
         return false;
       }
       return (endTime - Date.now());
-    },    
+    }, 
+    testInProgress: (state, getters) => {
+      return state.record.status === QUALIFYING_TEST.STATUS.STARTED
+        && getters.isOpen
+        && getters.timeLeft;
+    },
   },
 };
