@@ -290,7 +290,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('vacancies/bind');
+    this.$store.dispatch('vacancies/bind');  
   },
   methods: {
     showSignUp(vacancy) {
