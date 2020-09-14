@@ -90,6 +90,13 @@ export default {
     testInProgress() {
       return this.$store.getters['qualifyingTestResponse/testInProgress'];
     },
+    isTimeLeft() {
+      const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
+      return amountTimeLeft > 0;
+    },
+    isNotCompleted() {
+      return this.qualifyingTestResponse.statusLog.completed === null;
+    },
   },
   watch: {
     qualifyingTestResponse: function (newVal) {
@@ -112,6 +119,15 @@ export default {
       const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
 
       if (!isQTOpen) {
+        return this.redirectToList();
+      }
+
+      // isNotCompleted > redirect
+      // noTimeLeft > redirect
+      const noTimeLeft = !this.isTimeLeft;
+      const isCompleted = !this.isNotCompleted;
+
+      if (noTimeLeft || isCompleted) {
         return this.redirectToList();
       }
 
