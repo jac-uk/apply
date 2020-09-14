@@ -19,14 +19,14 @@
           vacancy timeline
         </router-link>.
         <br>
-        You may now close this page or return to the 
+        You may now close this page, return to the 
         <router-link
           class="govuk-link"
           to="/"
         >
           homepage
         </router-link>
-        or back to
+        or go back to
         <router-link
           class="govuk-link"
           :to="{ name: 'qualifying-tests' }"
@@ -77,21 +77,10 @@ export default {
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records;
     },
-    sameApplicationID(qt){
-      return qt.vacancy.id === this.$store.state.qualifyingTestResponse.record.vacancy.id;
-    },
-    notThisTest(qt){
-      return qt.id != this.$store.state.qualifyingTestResponse.record.id;
-    },
-    isOpen(qt){
-      return qt.statusLog.started;
-    },
-    notComplete(qt){
-      return !qt.statusLog.completed;
-    },
     upcomingTests(){
       return this.qualifyingTestResponses.filter((qt) => {
-        if (this.sameApplicationID(qt) && this.notThisTest(qt) && this.isOpen(qt) && this.notComplete(qt)) {
+        console.log(this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt));
+        if (this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
           return true;
         }
       });
@@ -114,6 +103,18 @@ export default {
       const time = formatDate(qualifyingTest.qualifyingTest.endDate, 'time');
       const day = formatDate(qualifyingTest.qualifyingTest.endDate);
       return isToday(qualifyingTest.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
+    },
+    sameVacancyID(qt){
+      return qt.vacancy.id === this.$store.state.qualifyingTestResponse.record.vacancy.id;
+    },
+    notThisTest(qt){
+      return qt.id !== this.$store.state.qualifyingTestResponse.record.id;
+    },
+    isOpen(qt){
+      return qt.statusLog.started;
+    },
+    notComplete(qt){
+      return !qt.statusLog.completed;
     },
   },
 };
