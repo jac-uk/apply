@@ -97,7 +97,6 @@
   </div>
 </template>
 <script>
-import firebase from '@/firebase';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import Checkbox from '@/components/Form/Checkbox';
@@ -188,10 +187,7 @@ export default {
             if (!this.confirmationChecked) {
               throw new Error('You must agree to keep this test confidential.');
             }
-            // @TODO move this into a store action e.g. `qualifyingTestResponse/start`
-            this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.STARTED;
-            this.qualifyingTestResponse.statusLog.started = firebase.firestore.FieldValue.serverTimestamp();
-            await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+            await this.$store.dispatch('qualifyingTestResponse/startTest');
           }
           this.$router.push(this.nextPage);
         } catch (error) {

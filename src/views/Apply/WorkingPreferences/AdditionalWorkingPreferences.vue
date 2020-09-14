@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Jurisdiction preferences
+          Additional working preferences
         </h1>
 
         <ErrorSummary
@@ -16,16 +16,24 @@
           @save="save"
         />
 
-        <SelectionInput
-          id="jurisdiction-preferences"
-          v-model="application.jurisdictionPreferences"
-          :title="vacancy.jurisdictionQuestion"
-          :answers="vacancy.jurisdictionQuestionAnswers"
-          :type="vacancy.jurisdictionQuestionType"
-        /> 
+        <div
+          v-for="(additionalWorkingPreference, index) in vacancy.additionalWorkingPreferences"
+          :key="index"
+        >
+          <div class="govuk-caption-xl">
+            {{ additionalWorkingPreference.topic }}
+          </div>
+          <SelectionInput
+            :id="`additional-working-preference-${index}`"
+            v-model="localAdditionalPreferences[index]"
+            :title="additionalWorkingPreference.question"
+            :answers="additionalWorkingPreference.answers"
+            :type="additionalWorkingPreference.questionType"
+          />
+        </div>
 
         <button
-          :disabled="!application.jurisdictionPreferences || application.status != 'draft'"
+          :disabled="!localAdditionalPreferences.length || application.status != 'draft'"
           class="govuk-button"
         >
           Save and continue
@@ -50,12 +58,19 @@ export default {
   extends: Form,
   data(){
     const defaults = {
-      jurisdictionPreferences: null,
+      additionalWorkingPreferences: [],
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
+    const localAdditionalPreferences = [];
+    if (application.additionalWorkingPreferences && application.additionalWorkingPreferences.length) {
+      application.additionalWorkingPreferences.forEach(item => {
+        localAdditionalPreferences.push(item.selection);
+      });
+    }
     return {
       application: application,
+      localAdditionalPreferences: localAdditionalPreferences,
     };
   },
   computed: {
@@ -67,7 +82,10 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.jurisdictionPreferences = true;
+        this.application.progress.additionalWorkingPreferences = true;
+        this.application.additionalWorkingPreferences = this.localAdditionalPreferences.map(item => {
+          return { selection: item };
+        });
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });
       }
