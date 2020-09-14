@@ -18,13 +18,15 @@
             <li
               v-for="(question, questionIndex) in questions"
               :key="questionIndex"
-              class="moj-task-list__item"
+              class="moj-task-list__item display-flex"
             >
               <RouterLink
                 :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
-                class="moj-task-list__task-name"
+                class="moj-task-list__task-name truncated-container"
               >
-                {{ questionIndex + 1 }}. {{ question.details.substring(0,55) }}...
+                <span class="truncated">
+                  {{ question.details }}
+                </span>
               </RouterLink>
               <strong
                 v-if="question.response.completed"
@@ -143,4 +145,18 @@ export default {
   },
 };
 </script>
-
+<style scoped>
+  .truncated{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
+  .truncated-container{
+    width: auto;
+    overflow: hidden;
+    display: grid;
+  }
+  .display-flex{
+    display: flex;
+  }
+</style>
