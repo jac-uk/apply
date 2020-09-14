@@ -170,7 +170,7 @@ export default {
 };
 
 .govuk-footer {
-  position: absolute;
+  position: relative;
   bottom: 0;
   width: 100%;
 };
@@ -182,6 +182,5 @@ export default {
 .page-container {
   position: relative;
   min-height: 100vh;
-  padding-bottom: 10vh;
 }
 </style>
