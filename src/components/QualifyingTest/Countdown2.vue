@@ -1,10 +1,15 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown govuk-!-margin-bottom-4"
+    class="countdown govuk-!-margin-bottom-4 grid-row"
     :class="bckClass"
   >
-    <span>
+    <span class="float-left column-one-third">
+      <slot
+        name="left-slot"
+      />
+    </span>
+    <span class="column-one-third">
       Time remaining: {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
       <svg
         v-if="bckClass === 'alert'"
@@ -18,6 +23,11 @@
           d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
         />
       </svg>
+    </span>
+    <span class="float-right column-one-third">
+      <slot
+        name="right-slot"
+      />
     </span>
   </div>
 </template>
@@ -119,13 +129,13 @@ export default {
 
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   z-index: 1;
 
   span {
-    font-weight: bold;
-    padding: 10px;
+    width: 33.3%;
+    text-align: center;
 
     span {
       font-weight: bold;
@@ -139,6 +149,12 @@ export default {
     &.alert {
       background-color: red;
     }
+  }
+  .float-left{
+    text-align: left;
+  }
+  .float-right{
+    text-align: right;
   }
 }
 </style>
