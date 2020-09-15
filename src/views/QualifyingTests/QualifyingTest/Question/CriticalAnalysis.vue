@@ -27,7 +27,7 @@ export default {
   props: {
     value: {
       required: true,
-      validator: (value) => (value instanceof Number || value === null || value === undefined),
+      validator: (value) => (value >= 0 || value === null || value === undefined),
     },
     question: {
       type: String,

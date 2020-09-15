@@ -3,6 +3,7 @@ import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 const collection = firestore.collection('qualifyingTestResponses');
 
@@ -11,7 +12,6 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef }, id) => {
       const firestoreRef = collection.doc(id);
-
       return bindFirestoreRef('record', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
@@ -24,6 +24,14 @@ export default {
         return await collection.doc(state.record.id).update(data);
       }
       return false;
+    },
+    startTest: async (context) => {
+      const data = {
+        status: QUALIFYING_TEST.STATUS.STARTED,
+        'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
+        'candidate.id': firebase.auth().currentUser.uid,
+      };
+      await context.dispatch('save', data);
     },
   },
   state: {
@@ -48,19 +56,26 @@ export default {
     },
     timeLeft: (state) => {
       if (
-        state.record.statusLog.completed ||
-        !state.record.statusLog.started
+        state.record.statusLog.completed
       ) {
-        return false;
+        return 0;
       }
       const minute = 60 * 1000;
       const duration = state.record.duration.testDurationAdjusted;
       const startTime = state.record.statusLog.started;
+      if (startTime === null) {
+        return duration * minute;
+      }
       const endTime = new Date(startTime.getTime() + duration * minute);
       if (endTime < Date.now()) {
-        return false;
+        return 0;
       }
       return (endTime - Date.now());
-    },    
+    }, 
+    testInProgress: (state, getters) => {
+      return state.record.status === QUALIFYING_TEST.STATUS.STARTED
+        && getters.isOpen
+        && getters.timeLeft;
+    },
   },
 };
