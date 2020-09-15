@@ -76,7 +76,7 @@
                   {{ row.qualifyingTest.title }}
                 </template>
               </TableCell>
-              <TableCell>{{ status(row.status) | lookup }}</TableCell>
+              <TableCell>{{ status(row) | lookup }}</TableCell>
               <TableCell>
                 <template v-if="activeTab === 'future'">
                   {{ prettyDate(row.qualifyingTest.startDate) }}
@@ -98,7 +98,7 @@ import TabsList from '@/components/Page/TabsList';
 import Table from '@/components/Page/Table/Table';
 import TableCell from '@/components/Page/Table/TableCell';
 import LoadingMessage from '@/components/LoadingMessage';
-import { isToday, isDateInFuture, formatDate } from '@/helpers/date';
+import { isToday, isDateInFuture, formatDate, helperTimeLeft } from '@/helpers/date';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
@@ -134,12 +134,12 @@ export default {
       return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
     openTests(){
-      return this.qualifyingTestResponses.filter(qt => (
-        !isDateInFuture(qt.qualifyingTest.startDate) &&
-        isDateInFuture(qt.qualifyingTest.endDate) && (
-          qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED
-        )
-      ));
+      return this.qualifyingTestResponses.filter(qt => {
+        const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
+        const startEndNotInFuture = !isDateInFuture(qt.qualifyingTest.startDate) && isDateInFuture(qt.qualifyingTest.endDate);
+        const activatedOrStarted = qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED;
+        return startEndNotInFuture && activatedOrStarted && !timeout;
+      });
     },
     futureTests(){
       return this.qualifyingTestResponses.filter(qt => (
@@ -149,10 +149,11 @@ export default {
       ));
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => (
-        !isDateInFuture(qt.qualifyingTest.endDate) ||
-        qt.status == QUALIFYING_TEST.STATUS.COMPLETED
-      ));
+      return this.qualifyingTestResponses.filter(qt => {
+        const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
+        const pastDateAndCompleted = (!isDateInFuture(qt.qualifyingTest.endDate) || qt.status == QUALIFYING_TEST.STATUS.COMPLETED);
+        return timeout || pastDateAndCompleted;
+      });
     },
   },
   async mounted() {
@@ -170,11 +171,18 @@ export default {
     this.$store.dispatch('qualifyingTestResponses/unbindDryRuns');
   },
   methods: {
-    status(testStatus) {
-      if (testStatus === QUALIFYING_TEST.STATUS.STARTED ||
-        testStatus === QUALIFYING_TEST.STATUS.COMPLETED) {
-        return testStatus;
+    status(obj) {
+      const startedOrCompleted = obj.status === QUALIFYING_TEST.STATUS.STARTED || obj.status === QUALIFYING_TEST.STATUS.COMPLETED;
+      const timeout = this.isTimeOut(obj.status, obj.statusLog.completed, this.isTimeLeft(obj));
+
+      if (timeout) {
+        return 'DNF';
       }
+
+      if (startedOrCompleted) {
+        return obj.status;
+      }
+
       return QUALIFYING_TEST.STATUS.NOT_STARTED;
     },
     prettyDate(date) {
@@ -193,6 +201,13 @@ export default {
       default:
         return [];
       }
+    },
+    isTimeLeft(qt) {
+      return helperTimeLeft(qt) > 0;
+    },
+    isTimeOut(testStatus, logCompleted, isTimeLeft) {
+      const timeout = (testStatus == QUALIFYING_TEST.STATUS.STARTED && logCompleted === null && !isTimeLeft);
+      return timeout;
     },
   },
 };
