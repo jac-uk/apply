@@ -724,6 +724,89 @@
             </dl>            
           </div>
 
+          <div
+            v-if="application.additionalWorkingPreferences"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Additional Preferences
+            </h2>
+            <RouterLink
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'additional-working-preferences'}"
+            >
+              Change
+            </RouterLink>
+
+            <dl
+              v-for="(item, index) in application.additionalWorkingPreferences"
+              :key="item.name"
+              class="govuk-summary-list govuk-!-margin-bottom-8"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  {{ vacancy.additionalWorkingPreferences[index].question }} 
+                  <span class="govuk-body govuk-!-font-size-19">
+                    ({{ vacancy.additionalWorkingPreferences[index].questionType | lookup }})
+                  </span>
+                </dt>
+                <dd 
+                  v-if="vacancy.additionalWorkingPreferences[index].questionType === 'single-choice'"
+                  class="govuk-summary-list__value"
+                >
+                  <ul class="govuk-list">
+                    <li>{{ item.selection }}</li>
+                  </ul>
+                </dd>
+                <dd 
+                  v-if="vacancy.additionalWorkingPreferences[index].questionType === 'multiple-choice'"
+                  class="govuk-summary-list__value"
+                >
+                  <ul class="govuk-list">
+                    <li>
+                      <span
+                        v-for="(option, count) in vacancy.additionalWorkingPreferences[index].answers"
+                        :key="option"
+                      >
+                        <strong
+                          v-if="item.selection.includes(option.answer)"
+                        > {{ option.answer }} </strong>
+                        <span
+                          v-else
+                        >
+                          {{ option.answer }}
+                        </span>
+                        <span
+                          v-if="count+1!==vacancy.additionalWorkingPreferences[index].answers.length"
+                        >,</span>
+                      </span>
+                    </li>
+                  </ul>
+                </dd>
+                <dd 
+                  v-if="vacancy.additionalWorkingPreferences[index].questionType === 'ranked-choice'"
+                  class="govuk-summary-list__value"
+                >
+                  <ul class="govuk-list">
+                    <li>
+                      <span
+                        v-for="(choice, count) in item.selection"
+                        :key="choice"
+                      >
+                        <strong>{{ count+1 }}.</strong> {{ choice }}
+                      </span>
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div v-if="isLegal">
             <div
               class="govuk-!-margin-top-9"
