@@ -88,7 +88,10 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
     testInProgress() {
-      return this.$store.getters['qualifyingTestResponse/testInProgress'];
+      return this.qualifyingTestResponse 
+        && this.qualifyingTestResponse.statusLog 
+        && this.qualifyingTestResponse.statusLog.started 
+        && this.$store.getters['qualifyingTestResponse/testInProgress'];
     },
     isTimeLeft() {
       const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
@@ -122,7 +125,7 @@ export default {
         return this.redirectToList();
       }
 
-      // isNotCompleted > redirect
+      // isCompleted > redirect
       // noTimeLeft > redirect
       const noTimeLeft = !this.isTimeLeft;
       const isCompleted = !this.isNotCompleted;

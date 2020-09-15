@@ -29,6 +29,7 @@ export default {
       const data = {
         status: QUALIFYING_TEST.STATUS.STARTED,
         'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
+        'candidate.id': firebase.auth().currentUser.uid,
       };
       await context.dispatch('save', data);
     },
