@@ -116,7 +116,6 @@
         <h2 class="govuk-heading-m">
           Related content
         </h2>
-
         <nav
           role="navigation"
           aria-labelledby="subsection-title"
@@ -176,7 +175,7 @@
               />
             </li>
           </ul>
-          <ul class="govuk-list govuk-!-font-size-16">
+          <!-- <ul class="govuk-list govuk-!-font-size-16">
             <li>
               <a
                 class="govuk-link govuk-link govuk-body-m"
@@ -204,7 +203,7 @@
                 How to choose your independent assessors
               </a>
             </li>
-          </ul>
+          </ul> -->
         </nav>
       </aside>
     </div>
