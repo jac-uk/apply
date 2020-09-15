@@ -131,7 +131,7 @@ export default {
   },
   computed: {
     qualifyingTestResponses() {
-      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns);
+      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
     openTests(){
       return this.qualifyingTestResponses.filter(qt => (
