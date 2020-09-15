@@ -746,7 +746,7 @@
             <dl
               v-for="(item, index) in application.additionalWorkingPreferences"
               :key="index"
-              class="govuk-summary-list govuk-!-margin-bottom-8"
+              class="govuk-summary-list"
             >
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
