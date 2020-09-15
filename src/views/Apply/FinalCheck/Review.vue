@@ -745,7 +745,7 @@
 
             <dl
               v-for="(item, index) in application.additionalWorkingPreferences"
-              :key="item.name"
+              :key="index"
               class="govuk-summary-list govuk-!-margin-bottom-8"
             >
               <div class="govuk-summary-list__row">
@@ -771,7 +771,7 @@
                     <li>
                       <span
                         v-for="(option, count) in vacancy.additionalWorkingPreferences[index].answers"
-                        :key="option"
+                        :key="count"
                       >
                         <strong
                           v-if="item.selection.includes(option.answer)"
@@ -796,7 +796,7 @@
                     <li>
                       <span
                         v-for="(choice, count) in item.selection"
-                        :key="choice"
+                        :key="count"
                       >
                         <strong>{{ count+1 }}.</strong> {{ choice }}
                       </span>
