@@ -4,6 +4,7 @@ import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { QUALIFYING_TEST } from '@/helpers/constants';
+import { helperTimeLeft } from '@/helpers/date';
 
 const collection = firestore.collection('qualifyingTestResponses');
 
@@ -55,22 +56,7 @@ export default {
       return false;
     },
     timeLeft: (state) => {
-      if (
-        state.record.statusLog.completed
-      ) {
-        return 0;
-      }
-      const minute = 60 * 1000;
-      const duration = state.record.duration.testDurationAdjusted;
-      const startTime = state.record.statusLog.started;
-      if (startTime === null) {
-        return duration * minute;
-      }
-      const endTime = new Date(startTime.getTime() + duration * minute);
-      if (endTime < Date.now()) {
-        return 0;
-      }
-      return (endTime - Date.now());
+      return helperTimeLeft(state.record);
     }, 
     testInProgress: (state, getters) => {
       return state.record.status === QUALIFYING_TEST.STATUS.STARTED

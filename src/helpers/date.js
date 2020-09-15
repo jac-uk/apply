@@ -78,11 +78,45 @@ const isToday = (val) => {
     val.getFullYear() === today.getFullYear();
 };
 
+const helperTimeLeft = (obj) => {
+  /*
+    obj: {
+      duration: {
+        testDurationAdjusted: minutes
+      },
+      statusLog {
+        completed: timestamp,
+        started: timestamp,
+    }
+  */
+  if (obj) {
+    if (obj.statusLog && obj.statusLog.completed) {
+      return 0;
+    }
+    if (obj.duration) {
+      const minute = 60 * 1000;
+      const duration = obj.duration.testDurationAdjusted;
+      const startTime = obj.statusLog && obj.statusLog.started;
+      if (startTime === null) {
+        return duration * minute;
+      }
+      const endTime = new Date(startTime.getTime() + duration * minute);
+      if (endTime < Date.now()) {
+        return 0;
+      }
+      return (endTime - Date.now());
+    }
+  } else {
+    return 0;
+  }
+};
+
 export {
   isDate,
   isDateInFuture,
   formatDate,
   parseEstimatedDate,
   validateYear,
-  isToday
+  isToday,
+  helperTimeLeft
 };
