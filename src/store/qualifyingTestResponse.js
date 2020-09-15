@@ -29,6 +29,7 @@ export default {
       const data = {
         status: QUALIFYING_TEST.STATUS.STARTED,
         'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
+        'candidate.id': firebase.auth().currentUser.uid,
       };
       await context.dispatch('save', data);
     },
@@ -55,17 +56,19 @@ export default {
     },
     timeLeft: (state) => {
       if (
-        state.record.statusLog.completed ||
-        !state.record.statusLog.started
+        state.record.statusLog.completed
       ) {
-        return false;
+        return 0;
       }
       const minute = 60 * 1000;
       const duration = state.record.duration.testDurationAdjusted;
       const startTime = state.record.statusLog.started;
+      if (startTime === null) {
+        return duration * minute;
+      }
       const endTime = new Date(startTime.getTime() + duration * minute);
       if (endTime < Date.now()) {
-        return false;
+        return 0;
       }
       return (endTime - Date.now());
     }, 

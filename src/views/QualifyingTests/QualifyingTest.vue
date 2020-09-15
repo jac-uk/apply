@@ -87,7 +87,17 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
     testInProgress() {
-      return this.$store.getters['qualifyingTestResponse/testInProgress'];
+      return this.qualifyingTestResponse 
+        && this.qualifyingTestResponse.statusLog 
+        && this.qualifyingTestResponse.statusLog.started 
+        && this.$store.getters['qualifyingTestResponse/testInProgress'];
+    },
+    isTimeLeft() {
+      const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
+      return amountTimeLeft > 0;
+    },
+    isNotCompleted() {
+      return this.qualifyingTestResponse.statusLog.completed === null;
     },
   },
   watch: {
@@ -111,6 +121,15 @@ export default {
       const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
 
       if (!isQTOpen) {
+        return this.redirectToList();
+      }
+
+      // isCompleted > redirect
+      // noTimeLeft > redirect
+      const noTimeLeft = !this.isTimeLeft;
+      const isCompleted = !this.isNotCompleted;
+
+      if (noTimeLeft || isCompleted) {
         return this.redirectToList();
       }
 

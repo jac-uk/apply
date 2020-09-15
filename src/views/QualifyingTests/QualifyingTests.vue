@@ -131,7 +131,7 @@ export default {
   },
   computed: {
     qualifyingTestResponses() {
-      return this.$store.state.qualifyingTestResponses.records;
+      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
     openTests(){
       return this.qualifyingTestResponses.filter(qt => (
@@ -155,20 +155,19 @@ export default {
       ));
     },
   },
-  mounted() {
-    this.$store.dispatch('qualifyingTestResponses/bind').then((data) => {
-      if (data === null) {
-        this.redirectToPage();
-      } else {
-        this.loaded = true;
-      }
-    }).catch((e) => {
+  async mounted() {
+    try {
+      await this.$store.dispatch('qualifyingTestResponses/bind');
+      await this.$store.dispatch('qualifyingTestResponses/bindDryRuns');
+      this.loaded = true;
+    } catch (e) {
       this.loadFailed = true;
       throw e;
-    });
+    }
   },
   destroyed() {
     this.$store.dispatch('qualifyingTestResponses/unbind');
+    this.$store.dispatch('qualifyingTestResponses/unbindDryRuns');
   },
   methods: {
     status(testStatus) {
@@ -176,7 +175,6 @@ export default {
         testStatus === QUALIFYING_TEST.STATUS.COMPLETED) {
         return testStatus;
       }
-
       return QUALIFYING_TEST.STATUS.NOT_STARTED;
     },
     prettyDate(date) {
