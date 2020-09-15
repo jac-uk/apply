@@ -16,14 +16,13 @@
         <template 
           v-slot:left-slot
         >
-          〈
           <a
             v-if="showPrevious"
             class="govuk-link countdown-link"
             href=""
             @click.prevent="btnPrevious"
           >
-            Previous Question
+            〈 Previous Question
           </a>
         </template>
         <template
