@@ -26,3 +26,5 @@ yarn-error.log*
 
 #Coverage report
 /coverage
+env.staging.local
+env.production.local

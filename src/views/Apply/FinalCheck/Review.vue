@@ -725,6 +725,26 @@
           </div>
 
           <div
+            v-if="vacancy.yesSalaryDetails"
+            class="govuk-!-margin-top-9"
+          >
+            <h2 class="govuk-heading-l">
+              Part Time Working Preferences
+            </h2>
+
+            <dl class="govuk-summary-list">
+              <dt class="govuk-summary-list__key">
+                {{ vacancy.yesSalaryDetails }}
+              </dt>
+              <dd
+                class="govuk-summary-list__value"
+              >
+                {{ application.partTimeWorkingPreferencesDetails }}
+              </dd>
+            </dl>
+          </div>
+
+          <div
             v-if="application.additionalWorkingPreferences"
             class="govuk-!-margin-top-9"
           >
