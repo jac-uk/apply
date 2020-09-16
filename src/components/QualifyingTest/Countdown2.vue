@@ -10,7 +10,11 @@
       />
     </span>
     <span class="column-one-third">
-      Time remaining: {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+      Time remaining: 
+      <span 
+        v-if="hours" 
+        class="hours"
+      >{{ hours | zeroPad }}:</span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
       <svg
         v-if="bckClass === 'alert'"
         class="moj-banner__icon"
@@ -71,7 +75,7 @@ export default {
       end: '',
       interval: '',
       //days: '',
-      //hours: '',
+      hours: '',
       minutes: '',
       seconds: '',
       bckClass: '',
@@ -99,11 +103,13 @@ export default {
 
       if (timeRemaining > 0) {
         this.calculateTimeLeft(timeRemaining);
-        if (this.minutes < this.warning) {
-          this.bckClass = 'warning';
-        }
-        if (this.minutes < this.alert) {
-          this.bckClass = 'alert';
+        if (this.hours < 1) {
+          if (this.minutes < this.warning) {
+            this.bckClass = 'warning';
+          }
+          if (this.minutes < this.alert) {
+            this.bckClass = 'alert';
+          }
         }
       } else {
         clearInterval(this.interval);
@@ -112,6 +118,7 @@ export default {
       }
     },
     calculateTimeLeft(timeRemaining) {
+      this.hours = Math.floor((timeRemaining % (24 * 60 * minute)) / (60 * minute));
       this.minutes = Math.floor((timeRemaining % (60 * minute)) / (minute));
       this.seconds = Math.floor((timeRemaining % (minute)) / 1000);
     },
@@ -140,6 +147,9 @@ export default {
     span {
       font-weight: bold;
       display: inline-block;
+      &.hours {
+        display: inline;
+      }
     }
 
     &.warning {
