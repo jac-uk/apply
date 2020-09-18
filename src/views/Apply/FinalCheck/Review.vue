@@ -1310,7 +1310,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt 
-                  v-if="vacancy.previousJudicialExperienceApply">
+                  v-if="vacancy.previousJudicialExperienceApply"
                   class="govuk-summary-list__key">
                   Are you a fee-paid or salaried judge?
                 </dt>
@@ -1324,7 +1324,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Have you sat for at least 30 days?
+                  {{ vacancy.pjeDays ? `Have you sat for at least ${vacancy.pjeDays} days?` : 'Have you sat for at least 30 days?' }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <p class="govuk-body">
