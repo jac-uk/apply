@@ -58,11 +58,7 @@
           <Table
             data-key="id"
             :data="getSelectedTableData()"
-            :columns="[
-              { title: 'Title' },
-              { title: 'Status' },
-              { title: activeTab === 'future' ? 'Start' : 'Deadline' },
-            ]"
+            :columns="getSelectedTableColumns()"
           >
             <template #row="{row}">
               <TableCell>
@@ -84,6 +80,22 @@
                 <template v-else>
                   {{ prettyDate(row.qualifyingTest.endDate) }}
                 </template>
+              </TableCell>
+              <TableCell
+                v-if="activeTab === 'past' && showFeedbackColumn"
+              >
+                <a
+                  v-if="row.qualifyingTest.feedbackSurvey"
+                  :href="row.qualifyingTest.feedbackSurvey"
+                  class="govuk-link"
+                >
+                  Click here
+                </a>
+                <span
+                  v-else
+                >
+                  ---
+                </span>
               </TableCell>
             </template>
           </Table>
@@ -130,6 +142,9 @@ export default {
     };
   },
   computed: {
+    showFeedbackColumn() {
+      return this.closedTests.some((element) => element.qualifyingTest.feedbackSurvey);
+    },
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
@@ -157,6 +172,7 @@ export default {
     },
   },
   async mounted() {
+    this.qualifyingTest;
     try {
       await this.$store.dispatch('qualifyingTestResponses/bind');
       await this.$store.dispatch('qualifyingTestResponses/bindDryRuns');
@@ -201,6 +217,17 @@ export default {
       default:
         return [];
       }
+    },
+    getSelectedTableColumns() {
+      const result = [
+        { title: 'Title' },
+        { title: 'Status' },
+        { title: this.activeTab === 'future' ? 'Start' : 'Deadline' },
+      ];
+      if (this.activeTab === 'past' && this.showFeedbackColumn) {
+        result.push({ title: 'Feedback Survey' });
+      }
+      return result;
     },
     isTimeLeft(qt) {
       return helperTimeLeft(qt) > 0;
