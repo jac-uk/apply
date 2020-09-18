@@ -1,6 +1,5 @@
 <template>
   <div class="govuk-grid-row">
-    {{ vacancy }}
     <form 
       ref="formRef"
       @submit.prevent="save"
@@ -43,7 +42,7 @@
           v-if="application.feePaidOrSalariedJudge === true"
           id="fee-or-salaried-sat-thirty-days"
           v-model="application.feePaidOrSalariedSatForThirtyDays"
-          :label="application.pjeDays ? `Have you sat for at least ${application.pjeDays} days?` : 'Have you sat for at least 30 days?'"
+          :label="vacancy.pjeDays ? `Have you sat for at least ${vacancy.pjeDays} days?` : 'Have you sat for at least 30 days?'"
         >
           <RadioItem
             :value="true"
@@ -184,6 +183,11 @@ export default {
     return {
       application: application,
     };
+  },
+  computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
   },
   methods: {
     async save() {
