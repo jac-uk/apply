@@ -1,5 +1,6 @@
 <template>
   <div class="govuk-grid-row">
+    {{ vacancy }}
     <form 
       ref="formRef"
       @submit.prevent="save"
@@ -42,7 +43,7 @@
           v-if="application.feePaidOrSalariedJudge === true"
           id="fee-or-salaried-sat-thirty-days"
           v-model="application.feePaidOrSalariedSatForThirtyDays"
-          label="Have you sat for at least 30 days?"
+          :label="application.pjeDays ? `Have you sat for at least ${application.pjeDays} days?` : 'Have you sat for at least 30 days?'"
         >
           <RadioItem
             :value="true"
@@ -177,7 +178,6 @@ export default {
       declaredAppointmentInQuasiJudicialBody: null,
       quasiJudicialSatForThirtyDays: null,
       quasiJudicialSittingDaysDetails: null,
-      skillsAquisitionDetails: null,
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };

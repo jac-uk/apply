@@ -1285,7 +1285,7 @@
             </dl>
           </div>
 
-          <div v-if="isLegal">
+          <div v-if="isLegal && vacancy.previousJudicialExperienceApply">
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-l"
@@ -1309,7 +1309,9 @@
               <div
                 class="govuk-summary-list__row"
               >
-                <dt class="govuk-summary-list__key">
+                <dt 
+                  v-if="vacancy.previousJudicialExperienceApply">
+                  class="govuk-summary-list__key">
                   Are you a fee-paid or salaried judge?
                 </dt>
                 <dd class="govuk-summary-list__value">
