@@ -37,7 +37,6 @@
         </router-link>
       </p>
     </div>
-
     <!-- TODO: this should be a component -->
     <div
       v-if="upcomingTests.length"
@@ -65,13 +64,27 @@
         </ul>
       </div>
     </div>
+    <div
+      v-else-if="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
+    >
+      <Banner
+        :link="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
+        message="Click here to fill out our technical feedback survey"
+        status="information"
+      />
+    </div>
   </div>
 </template>
 <script>
 import firebase from '@/firebase';
-import { isToday, formatDate } from '@/helpers/date';
+import Banner from '@/components/Page/Banner';
+import { isToday, formatDate, helperTimeLeft } from '@/helpers/date';
+import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
+  components: {
+    Banner,
+  },
   computed: {
     qualifyingTestResponse() {
       return this.$store.state.qualifyingTestResponse.record;
@@ -81,7 +94,7 @@ export default {
     },
     upcomingTests(){
       return this.qualifyingTestResponses.filter((qt) => {
-        if (this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
+        if (this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt)), this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
           return true;
         }
       });
@@ -118,8 +131,15 @@ export default {
     isOpen(qt){
       return qt.statusLog.started;
     },
+    isTimeLeft(qt) {
+      return helperTimeLeft(qt) > 0;
+    },
+    isTimeOut(testStatus, logCompleted, isTimeLeft) {
+      const timeout = (status == QUALIFYING_TEST.STATUS.STARTED && logCompleted === null && !isTimeLeft);
+      return timeout;
+    },
     notComplete(qt){
-      return !qt.statusLog.completed;
+      return !qt.statusLog.completed || !this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
     },
   },
 };
