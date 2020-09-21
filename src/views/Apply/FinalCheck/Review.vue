@@ -1311,7 +1311,8 @@
               >
                 <dt 
                   v-if="vacancy.previousJudicialExperienceApply"
-                  class="govuk-summary-list__key">
+                  class="govuk-summary-list__key"
+                >
                   Are you a fee-paid or salaried judge?
                 </dt>
                 <dd class="govuk-summary-list__value">
