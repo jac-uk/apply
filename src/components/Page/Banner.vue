@@ -18,7 +18,15 @@
 
     <div class="moj-banner__message">
       <span class="moj-banner__assistive">{{ status }}</span>
-      <span class="moj-banner__text">{{ message }}</span>
+      <span 
+        v-if="!link"
+        class="moj-banner__text"
+      >{{ message }}</span>
+      <a
+        v-else
+        :href="link"
+        class="govuk-link moj-banner__text "
+      >{{ message }}</a>
     </div>
   </div>
 </template>
@@ -33,6 +41,11 @@ const icons = {
 export default {
   props: {
     message: {
+      type: String,
+      default: null,
+      // @TODO add validator?
+    },
+    link: {
       type: String,
       default: null,
       // @TODO add validator?
