@@ -94,8 +94,7 @@ export default {
     },
     upcomingTests(){
       return this.qualifyingTestResponses.filter((qt) => {
-        if (this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt))) {
-          // if (this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
+        if (this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt)), this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
           return true;
         }
       });
