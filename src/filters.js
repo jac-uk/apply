@@ -45,6 +45,8 @@ const toYesNo = (value) => {
   return value;
 };
 
+const showAlternative = (value, optional) => value || optional;
+
 const lookup = (value) => {
   if (typeof value === 'string') {
     // @TODO: extract lookup values
@@ -240,5 +242,6 @@ export {
   formatDate,
   formatEstimatedDate,
   toYesNo,
-  lookup
+  lookup,
+  showAlternative
 };
