@@ -126,12 +126,13 @@
       <template 
         v-slot:left-slot
       >
-        <!-- <a
+        <a
           class="govuk-link countdown-link"
           href=""
         >
-          〈 Previous Question
-        </a> -->
+          <span>〈 </span>
+          Previous Question
+        </a>
       </template>
       <template
         v-slot:right-slot
