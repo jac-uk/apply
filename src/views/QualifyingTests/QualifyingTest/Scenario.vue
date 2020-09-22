@@ -51,21 +51,23 @@
           <div class="jac-scenario__additional">
             <dl ref="accordion">
               <span 
-                v-for="(additional, index) of additionals"
+                v-for="(document, index) of scenario.documents"
                 :key="index"
               >
                 <dt 
                   :class="`govuk-heading-m ${index === 0 ? 'open' : 'close'}`"
                   @click.prevent="clickAdditional(index)"
                 >
-                  {{ additional.title | showAlternative(`Additional Reading ${index}`) }}
+                  {{ document.title | showAlternative(`Additional Reading ${index}`) }}
                   <button>
                     <img 
                       src="@/assets/plus.png"
                     >
                   </button>
                 </dt>
-                <dd>{{ additional.content }}</dd>
+                <!-- eslint-disable -->
+                <dd v-html="document.content" />
+                <!-- eslint-enable -->
               </span>
             </dl>
           </div>
@@ -101,20 +103,11 @@ export default {
 
     const response = scenario.responses[questionNumber - 1];
 
-    const additionals =  [
-      {
-        title: scenario.title,
-        content: scenario.details,
-      },
-      ...scenario.additional,
-    ];
-
     return {
       qualifyingTestResponse,
       scenario,
       response,
       showDetails: true,
-      additionals,
     };
   },
   computed: {
