@@ -8,17 +8,17 @@
       <h1 
         class="govuk-heading-l"
       >
-        {{ newScenario.title }}
+        {{ scenario.title }}
       </h1>
       <div class="govuk-grid-row">
-        <div class="govuk-grid-column-two-thirds">
+        <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
           <div 
             class="govuk-character-count"
           >
             <TextareaInput
               id="scenario-question"
               v-model="response.text"
-              :label="`${questionNumber}. ${question.answer}`"
+              :label="`${questionNumber}. ${question.question}`"
               hint="Answer below:"
               rows="10"
               required
@@ -26,8 +26,8 @@
             <div class="govuk-body">
               <span>{{ wordsCounter }}</span>
               <span>/</span>
-              <span>{{ question.words }}</span>
-              <span> words {{ reachMaxWords }}</span>
+              <span>{{ question.wordLimit }}</span>
+              <span> words <!-- {{ reachMaxWords }} --></span>
             </div>
           </div>
 
@@ -47,31 +47,18 @@
           </div>
         </div>
 
-        <div class="govuk-grid-column-one-third">
+        <div class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop">
           <div class="jac-scenario__additional">
             <dl ref="accordion">
-              <dt 
-                class="govuk-heading-m open"
-                @click.prevent="clickAdditional(0)"
-              >
-                {{ newScenario.title }}
-                <button>
-                  <img 
-                    src="@/assets/plus.png" 
-                  >
-                </button>
-              </dt>
-              <dd>{{ newScenario.details }}</dd>
               <span 
-                v-for="(additional, index) of newScenario.additional"
+                v-for="(additional, index) of additionals"
                 :key="index"
-                :class="{closed: additional.active}"
               >
                 <dt 
-                  class="govuk-heading-m close"
-                  @click.prevent="clickAdditional(index + 1)"
+                  :class="`govuk-heading-m ${index === 0 ? 'open' : 'close'}`"
+                  @click.prevent="clickAdditional(index)"
                 >
-                  {{ additional.title }}
+                  {{ additional.title | showAlternative(`Additional Reading ${index}`) }}
                   <button>
                     <img 
                       src="@/assets/plus.png"
@@ -98,32 +85,11 @@ export default {
   },
   data() {
     const scenarioNumber = this.$route.params.scenarioNumber;
-    // eslint-disable-next-line no-console
-    console.log('scenarioNumber', scenarioNumber);
     const questionNumber = this.$route.params.questionNumber;
     
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
 
-    // const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
-    const scenario = {
-      'details': "<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>",
-      'options': [
-        { 'answer': 'Do you agree with Question 1?' },
-        { 'answer': 'Expand for question 2' },
-      ],
-      'responses': [
-        {
-          'completed': 1600691961483,
-          'started': 1600691937286,
-          'text': 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old to write some more words until it reaches 39.',
-        },
-        {
-          'completed': null,
-          'started': 1600702668088,
-          'text': null,
-        },
-      ],
-    };
+    const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
 
     if (!scenario.responses) {
       scenario.responses = new Array(scenario.options.length).fill().map(() => ({
@@ -135,11 +101,20 @@ export default {
 
     const response = scenario.responses[questionNumber - 1];
 
+    const additionals =  [
+      {
+        title: scenario.title,
+        content: scenario.details,
+      },
+      ...scenario.additional,
+    ];
+
     return {
       qualifyingTestResponse,
       scenario,
       response,
       showDetails: true,
+      additionals,
     };
   },
   computed: {
@@ -158,29 +133,8 @@ export default {
     introduction() {
       return this.qualifyingTestResponse.qualifyingTest.questions.introduction;
     },
-    newScenario() {
-      return {
-        details: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mauris tellus, placerat id blandit et, pellentesque id nibh. Curabitur congue justo odio, ac aliquam urna efficitur vitae. Nam ullamcorper porta dui, sit amet gravida urna pulvinar sit amet. Pellentesque vulputate aliquam fermentum. Suspendisse ac magna sed sem ornare dignissim. Praesent mollis velit ut enim mollis, vitae congue sapien pretium. Donec sed lectus lacus.',
-        title: 'The Language Scenario',
-        additional: [
-          {
-            content: 'Additionl 1 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mauris tellus, placerat id blandit et, pellentesque id nibh. Curabitur congue justo odio, ac aliquam urna efficitur vitae. Nam ullamcorper porta dui, sit amet gravida urna pulvinar sit amet. Pellentesque vulputate aliquam fermentum. Suspendisse ac magna sed sem ornare dignissim. Praesent mollis velit ut enim mollis, vitae congue sapien pretium. Donec sed lectus lacus.',
-            title: 'Additional Material 1',
-          },
-          {
-            content: 'Additionl 2 - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras mauris tellus, placerat id blandit et, pellentesque id nibh. Curabitur congue justo odio, ac aliquam urna efficitur vitae. Nam ullamcorper porta dui, sit amet gravida urna pulvinar sit amet. Pellentesque vulputate aliquam fermentum. Suspendisse ac magna sed sem ornare dignissim. Praesent mollis velit ut enim mollis, vitae congue sapien pretium. Donec sed lectus lacus.',
-            title: 'Additional Material 2',
-          },
-        ],
-      };
-    },
     question() {
-      // return this.scenario.options[this.questionNumber - 1].answer;
-      // questions
-      return {
-        answer: 'What does Lord Thomas think about the length of time it took to enact the Law Reform(Miscelaneous Provisions) Act 1934?',
-        words: 230,
-      };
+      return this.scenario.options[this.questionNumber - 1];
     },
     nextPage() {
       if (this.isLastScenario && this.isLastQuestion) {
@@ -262,9 +216,9 @@ export default {
 }
 
 .jac-scenario__additional dt {
-  padding: 15px 20px 10px 20px;
+  padding: 15px 40px 10px 20px;
   margin: 0;
-  border-bottom: 1px solid silver;
+  border-bottom: 1px solid rgb(253, 196, 196);
   color: #1d70b8;
   position: relative;
   cursor: pointer;
@@ -286,6 +240,7 @@ export default {
   background-color: transparent;
   border: 0;
   cursor: pointer;
+  outline: none;
 }
 
 .jac-scenario__additional dt button img {
