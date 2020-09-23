@@ -61,7 +61,7 @@
                   {{ document.title | showAlternative(`Additional Reading ${index}`) }}
                   <button>
                     <img 
-                      src="@/assets/plus.png"
+                      :src="icon(index)"
                     >
                   </button>
                 </dt>
@@ -80,6 +80,8 @@
 <script>
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
+import plusIcon from '@/assets/plus.png';
+import minusIcon from '@/assets/minus.png';
 
 export default {
   components: {
@@ -185,13 +187,24 @@ export default {
     clickAdditional(index) {
       const elList = this.$refs.accordion.querySelectorAll('dt');
       elList.forEach((item, i) => {
+        const image = item.querySelectorAll('button img')[0];
+        
         item.classList.remove('open');   
         item.classList.add('close');
+        image.src = plusIcon;
         if (index === i) {
           item.classList.remove('close');   
           item.classList.add('open');
+          image.src = minusIcon;
         }
       });
+    },
+    icon(index) {
+      if (index === 0) {
+        return minusIcon; 
+      } else {
+        return plusIcon;
+      }
     },
   },
 };
