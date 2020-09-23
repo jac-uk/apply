@@ -1325,7 +1325,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  {{ vacancy.pjeDays ? `Have you sat for at least ${vacancy.pjeDays} days?` : 'Have you sat for at least 30 days?' }}
+                  {{ `Have you sat for at least ${vacancy.pjeDays || 30 } days?` }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <p class="govuk-body">
@@ -1357,7 +1357,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  Have you sat for at least 30 days in one or all of these appointments?
+                  {{ `Have you sat for at least ${ vacancy.pjeDays || 30 } in one or all of these appointments?` }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <p class="govuk-body">
