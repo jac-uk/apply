@@ -10,8 +10,8 @@
         :start-time="qualifyingTestResponse.statusLog.started"	
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
-        :alert="5"
-        :mobileView="isMobile"
+        :alert="1"
+        :mobile-view="isMobile"
         @change="handleCountdown"
       >
         <template 
@@ -79,7 +79,7 @@ export default {
     };
   },
   computed: {
-    isMobile() {
+    isMobile() {  // TODO really this should be a CSS-only solution
       return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
     },
     showPrevious() {
