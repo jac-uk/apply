@@ -125,9 +125,6 @@ import { auth } from '@/firebase';
 
 export default {
   name: 'App',
-  data: () => ({
-    //
-  }),
   computed: {
     isSignInPage() {
       return this.$route.name === 'sign-in';
