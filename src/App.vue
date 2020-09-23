@@ -163,10 +163,10 @@ export default {
 </script>
 
 <style lang="scss">
-  .govuk-grid-column-one-half {
-    width: 100%;
-    float: left;
-  }
+  // .govuk-grid-column-one-half {
+    // width: 100%;
+    // float: left;
+  // }
 
   .header {
     background-color: #fafafa;

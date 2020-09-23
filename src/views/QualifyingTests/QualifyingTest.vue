@@ -170,11 +170,18 @@ export default {
   },
 };
 </script>
-<style>
-  .countdown-links{
-    color: white !important;
+
+<style lang="scss">
+
+.countdown-link {
+  color: white !important;
+}
+
+.qt_page {
+  padding-top: 65px;
+  
+  @include govuk-media-query($from: tablet) {
+    padding-top: 40px;
   }
-  .qt_page{
-    padding-top: 25px;
-  }
+}
 </style>
