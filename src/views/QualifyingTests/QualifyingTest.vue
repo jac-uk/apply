@@ -11,6 +11,7 @@
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
         :alert="5"
+        :mobileView="isMobile"
         @change="handleCountdown"
       >
         <template 
@@ -22,7 +23,8 @@
             href=""
             @click.prevent="btnPrevious"
           >
-            〈 Previous Question
+            <span>〈 </span>
+            {{ isMobile ? 'Previous' : 'Previous Question' }}
           </a>
         </template>
         <template
@@ -77,6 +79,9 @@ export default {
     };
   },
   computed: {
+    isMobile() {
+      return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
+    },
     showPrevious() {
       return this.$route.params.questionNumber > 1;
     },

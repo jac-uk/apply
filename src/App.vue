@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <!-- <header
+    <header
       v-if="!fullPageMode"
       class="govuk-width-container header"
     >
@@ -116,47 +116,15 @@
           </div>
         </div>
       </div>
-    </footer> -->
-    <Countdown2
-      :start-time="new Date()"	
-      :duration="10000000"
-      :warning="5"
-      :alert="5"
-    >
-      <template 
-        v-slot:left-slot
-      >
-        <a
-          class="govuk-link countdown-link"
-          href=""
-        >
-          <span>〈 </span>
-          Previous Question
-        </a>
-      </template>
-      <template
-        v-slot:right-slot
-      >
-        <a
-          class="govuk-link countdown-link"
-          href=""
-        >
-          Exit Test
-        </a>
-      </template>
-    </Countdown2>
+    </footer>
   </div>
 </template>
 
 <script>
 import { auth } from '@/firebase';
-import Countdown2 from '@/components/QualifyingTest/Countdown2';
 
 export default {
   name: 'App',
-  components: {
-    Countdown2,
-  },
   computed: {
     isSignInPage() {
       return this.$route.name === 'sign-in';

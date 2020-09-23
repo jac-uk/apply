@@ -10,7 +10,7 @@
       />
     </div>
     <div class="column-one-third float-centre">
-      Time remaining: 
+      {{ mobileView ? '' : 'Time Remaining: '}}
       <span 
         v-if="hours" 
         class="hours"
@@ -56,6 +56,10 @@ export default {
       type: Date,
       required: true,
     },
+    mobileView: {
+      type: Boolean,
+      default: false,
+    },
     duration: {
       type: Number,
       required: false,
@@ -98,6 +102,13 @@ export default {
     }, second);
   },
   methods: {
+    isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     tick(start, end) {
       const now = new Date().getTime();
 
@@ -162,12 +173,6 @@ export default {
     &.alert {
       background-color: red;
     }
-  }
-  .float-left{
-    text-align: left;
-  }
-  .float-right{
-    text-align: right;
   }
   a:visited{
     color: white;
