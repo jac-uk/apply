@@ -10,15 +10,13 @@
       />
     </div>
     <div class="column-one-third float-centre">
-      {{ mobileView ? '' : 'Time Remaining: '}}
+      {{ mobileView ? '' : 'Time Remaining: ' }}
       <span 
         v-if="hours" 
         class="hours"
-      >
-        {{ hours | zeroPad }}:
-      </span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+      >{{ hours | zeroPad }}:</span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
       <svg
-        v-if="bckClass === 'alert'"
+        v-if="bckClass"
         class="moj-banner__icon"
         focusable="false"
         xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +137,7 @@ export default {
 };
 </script>
 
-<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
+<style lang="scss" scoped>
 .countdown {
   background-color: green;
   color: white;
@@ -154,6 +152,10 @@ export default {
   width: 99%;
   z-index: 1;
 
+  &.alert {
+    background-color: red;
+  }
+
   div {
     width: 33.3%;
     text-align: center;
@@ -164,14 +166,6 @@ export default {
       &.hours {
         display: inline;
       }
-    }
-
-    &.warning {
-      background-color: yellow;
-      color: black;
-    }
-    &.alert {
-      background-color: red;
     }
   }
   a:visited{
