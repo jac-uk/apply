@@ -42,7 +42,7 @@
           v-if="application.feePaidOrSalariedJudge === true"
           id="fee-or-salaried-sat-thirty-days"
           v-model="application.feePaidOrSalariedSatForThirtyDays"
-          :label="vacancy.pjeDays ? `Have you sat for at least ${vacancy.pjeDays} days?` : 'Have you sat for at least 30 days?'"
+          :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
         >
           <RadioItem
             :value="true"
@@ -111,7 +111,7 @@
           v-if="application.declaredAppointmentInQuasiJudicialBody === true"
           id="quasi-judicial-sat-thirty-days"
           v-model="application.quasiJudicialSatForThirtyDays"
-          label="Have you sat for at least 30 days in one or all of these appointments?"
+          :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days in one or all of these appointments?`"
         >
           <RadioItem
             :value="true"
