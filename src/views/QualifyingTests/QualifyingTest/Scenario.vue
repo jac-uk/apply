@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
@@ -167,27 +168,31 @@ export default {
       return reachedMaxWords;
     },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+    }
   },
   methods: {
     toggleAccordion() {
       this.showDetails = !this.showDetails;
     },
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
     },
     clickAdditional(index) {
