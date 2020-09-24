@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
@@ -198,8 +199,11 @@ export default {
       this.$router.push(this.nextPage);
     },
     async saveDatabase() {
-      this.response.completed = Date.now();
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
     },
     clickAdditional(index) {
       const elList = this.$refs.accordion.querySelectorAll('dt');
