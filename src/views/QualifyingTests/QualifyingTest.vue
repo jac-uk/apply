@@ -57,7 +57,10 @@
         @confirmed="btnExitModalConfirmed"
       />
 
-      <RouterView :key="$route.fullPath" />
+      <RouterView 
+        :key="$route.fullPath" 
+        :time-is-up="timerEnded" 
+      />
     </template>
   </div>
 </template>
@@ -76,6 +79,7 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      timerEnded: false,
     };
   },
   computed: {
@@ -92,10 +96,11 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
     testInProgress() {
-      return this.qualifyingTestResponse 
+      const result = this.qualifyingTestResponse 
         && this.qualifyingTestResponse.statusLog 
         && this.qualifyingTestResponse.statusLog.started 
         && this.$store.getters['qualifyingTestResponse/testInProgress'];
+      return result;
     },
     isTimeLeft() {
       const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
@@ -157,6 +162,7 @@ export default {
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
+        this.timerEnded = true;
         this.openTimeElapsedModal();
       }
     },

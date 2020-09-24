@@ -84,6 +84,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
@@ -166,29 +167,46 @@ export default {
       const reachedMaxWords = this.wordsCounter > maxWords;
       return reachedMaxWords;
     },
+    timeIsUp() {
+      return this.$attrs['time-is-up'];
+    },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+    }
+  },
+  updated() {
+    console.log('========= UPDATED', this.timeIsUp);
+    if (this.timeIsUp) {
+      console.log('timeIsUp', this.timeIsUp);
+      this.saveDatabase();
+    }
   },
   methods: {
     toggleAccordion() {
       this.showDetails = !this.showDetails;
     },
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      await this.saveDatabase();
       this.$router.push(this.nextPage);
+    },
+    async saveDatabase() {
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
     },
     clickAdditional(index) {
       const elList = this.$refs.accordion.querySelectorAll('dt');
