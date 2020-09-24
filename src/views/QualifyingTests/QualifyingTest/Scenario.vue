@@ -171,12 +171,17 @@ export default {
       return this.$attrs['time-is-up'];
     },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+    }
   },
   updated() {
     console.log('========= UPDATED', this.timeIsUp);
@@ -190,8 +195,6 @@ export default {
       this.showDetails = !this.showDetails;
     },
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
