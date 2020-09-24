@@ -69,7 +69,7 @@
     >
       <Banner
         :link="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
-        message="Click here to fill out our technical feedback survey"
+        message="Click here to fill out our feedback survey"
         status="information"
       />
     </div>
