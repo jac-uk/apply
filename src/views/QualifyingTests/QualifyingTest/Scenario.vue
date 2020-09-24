@@ -184,9 +184,7 @@ export default {
     }
   },
   updated() {
-    console.log('========= UPDATED', this.timeIsUp);
     if (this.timeIsUp) {
-      console.log('timeIsUp', this.timeIsUp);
       this.saveDatabase();
     }
   },
