@@ -57,7 +57,10 @@
         @confirmed="btnExitModalConfirmed"
       />
 
-      <RouterView :key="$route.fullPath" />
+      <RouterView 
+        :key="$route.fullPath" 
+        :time-is-up="timerEnded" 
+      />
     </template>
   </div>
 </template>
@@ -76,6 +79,7 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      timerEnded: false,
     };
   },
   computed: {
@@ -157,6 +161,7 @@ export default {
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
+        this.timerEnded = true;
         this.openTimeElapsedModal();
       }
     },

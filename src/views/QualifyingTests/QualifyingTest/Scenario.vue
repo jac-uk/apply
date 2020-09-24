@@ -166,6 +166,9 @@ export default {
       const reachedMaxWords = this.wordsCounter > maxWords;
       return reachedMaxWords;
     },
+    timeIsUp() {
+      return this.$attrs['time-is-up'];
+    },
   },
   created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
@@ -173,6 +176,13 @@ export default {
     }
 
     this.response.started = Date.now();
+  },
+  updated() {
+    console.log('========= UPDATED', this.timeIsUp);
+    if (this.timeIsUp) {
+      console.log('timeIsUp', this.timeIsUp);
+      this.saveDatabase();
+    }
   },
   methods: {
     toggleAccordion() {
@@ -184,11 +194,12 @@ export default {
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      await this.saveDatabase();
       this.$router.push(this.nextPage);
+    },
+    async saveDatabase() {
+      this.response.completed = Date.now();
+      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
     },
     clickAdditional(index) {
       const elList = this.$refs.accordion.querySelectorAll('dt');
