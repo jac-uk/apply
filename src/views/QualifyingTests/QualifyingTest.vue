@@ -92,10 +92,11 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
     testInProgress() {
-      return this.qualifyingTestResponse 
+      const result = this.qualifyingTestResponse 
         && this.qualifyingTestResponse.statusLog 
         && this.qualifyingTestResponse.statusLog.started 
         && this.$store.getters['qualifyingTestResponse/testInProgress'];
+      return result;
     },
     isTimeLeft() {
       const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
