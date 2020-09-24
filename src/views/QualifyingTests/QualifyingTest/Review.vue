@@ -61,13 +61,15 @@
             <li
               v-for="(question, questionIndex) in scenario.options"
               :key="questionIndex"
-              class="moj-task-list__item"
+              class="moj-task-list__item display-flex"
             >
               <RouterLink
                 :to="{ name: `qualifying-test-scenario`, params: { scenarioNumber: index + 1, questionNumber: questionIndex + 1 } }"
-                class="moj-task-list__task-name"
+                class="moj-task-list__task-name truncated-container"
               >
-                Question {{ questionIndex + 1 }}
+                <span class="truncated">
+                  {{ question.question }}
+                </span>
               </RouterLink>
 
               <strong

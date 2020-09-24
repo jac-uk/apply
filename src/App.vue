@@ -125,9 +125,6 @@ import { auth } from '@/firebase';
 
 export default {
   name: 'App',
-  data: () => ({
-    //
-  }),
   computed: {
     isSignInPage() {
       return this.$route.name === 'sign-in';
@@ -163,10 +160,10 @@ export default {
 </script>
 
 <style lang="scss">
-  .govuk-grid-column-one-half {
-    width: 100%;
-    float: left;
-  }
+  // .govuk-grid-column-one-half {
+    // width: 100%;
+    // float: left;
+  // }
 
   .header {
     background-color: #fafafa;

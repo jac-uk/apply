@@ -1,22 +1,22 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown govuk-!-margin-bottom-4 grid-row"
+    class="countdown govuk-!-margin-bottom-4"
     :class="bckClass"
   >
-    <span class="float-left column-one-third">
+    <div class="float-left column-one-third">
       <slot
         name="left-slot"
       />
-    </span>
-    <span class="column-one-third">
-      Time remaining: 
+    </div>
+    <div class="column-one-third float-centre">
+      {{ mobileView ? '' : 'Time Remaining: ' }}
       <span 
         v-if="hours" 
         class="hours"
       >{{ hours | zeroPad }}:</span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
       <svg
-        v-if="bckClass === 'alert'"
+        v-if="bckClass"
         class="moj-banner__icon"
         focusable="false"
         xmlns="http://www.w3.org/2000/svg"
@@ -27,12 +27,12 @@
           d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
         />
       </svg>
-    </span>
-    <span class="float-right column-one-third">
+    </div>
+    <div class="float-right column-one-third">
       <slot
         name="right-slot"
       />
-    </span>
+    </div>
   </div>
 </template>
 
@@ -53,6 +53,10 @@ export default {
     startTime: {
       type: Date,
       required: true,
+    },
+    mobileView: {
+      type: Boolean,
+      default: false,
     },
     duration: {
       type: Number,
@@ -96,6 +100,13 @@ export default {
     }, second);
   },
   methods: {
+    isMobile() {
+      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     tick(start, end) {
       const now = new Date().getTime();
 
@@ -126,21 +137,26 @@ export default {
 };
 </script>
 
-<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
+<style lang="scss" scoped>
 .countdown {
   background-color: green;
   color: white;
   text-align: center;
   font-weight: bold;
   padding: 10px;
+  display: flex;
 
   position: fixed;
   top: 0;
-  right: 0;
-  width: 100%;
+  left: 0;
+  width: 99%;
   z-index: 1;
 
-  span {
+  &.alert {
+    background-color: red;
+  }
+
+  div {
     width: 33.3%;
     text-align: center;
 
@@ -151,20 +167,13 @@ export default {
         display: inline;
       }
     }
+  }
+  a:visited{
+    color: white;
+  }
+  .column-one-third{
+    // background-color: aqua;
+  }
 
-    &.warning {
-      background-color: yellow;
-      color: black;
-    }
-    &.alert {
-      background-color: red;
-    }
-  }
-  .float-left{
-    text-align: left;
-  }
-  .float-right{
-    text-align: right;
-  }
 }
 </style>

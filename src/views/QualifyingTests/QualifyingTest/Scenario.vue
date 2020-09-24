@@ -1,78 +1,94 @@
 <template>
-  <form
-    ref="formRef"
-    class="js-enabled"
-    @submit.prevent="save"
-  >
-    <div
-      id="accordion-default"
-      class="govuk-accordion"
-      data-module="govuk-accordion"
+  <div class="jac-scenario">
+    <form
+      ref="formRef"
+      class="js-enabled"
+      @submit.prevent="save"
     >
-      <div
-        class="govuk-accordion__section"
-        :class="{ 'govuk-accordion__section--expanded': showDetails }"
-        @click="toggleAccordion"
+      <h1 
+        class="govuk-heading-l"
       >
-        <div class="govuk-accordion__section-header">
-          <h2 class="govuk-accordion__section-heading">
-            <button
-              id="accordion-default-heading-1"
-              type="button"
-              aria-controls="accordion-default-content-1"
-              class="govuk-accordion__section-button"
-              :aria-expanded="showDetails"
-            >
-              Scenario {{ scenarioNumber }}
-              <span
-                class="govuk-accordion__icon"
-                :aria-hidden="showDetails"
-              />
-            </button>
-          </h2>
+        {{ scenario.documents[0].title }}
+      </h1>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
+          <div 
+            class="govuk-character-count"
+          >
+            <TextareaInput
+              id="scenario-question"
+              v-model="response.text"
+              :label="`${questionNumber}. ${question.question}`"
+              hint="Answer below:"
+              rows="10"
+              required
+            />
+            <div class="govuk-body">
+              <span>{{ wordsCounter }}</span>
+              <span>/</span>
+              <span>{{ question.wordLimit }}</span>
+              <span> words</span> 
+              <div v-if="reachMaxWords">
+                You have reached the limit of <strong>{{ question.wordLimit }}</strong> words for this answer. Please remove some words.
+              </div>
+            </div>
+          </div>
+
+          <div class="moj-button-menu">
+            <div class="moj-button-menu__wrapper">
+              <button
+                class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+                type="button"
+                @click="skip"
+              >
+                Skip
+              </button>
+              <button
+                class="moj-button-menu__item govuk-button"
+                :disabled="reachMaxWords"
+              >
+                Save and continue
+              </button>
+            </div>
+          </div>
         </div>
-        <div
-          id="accordion-default-content-1"
-          class="govuk-accordion__section-content"
-          aria-labelledby="accordion-default-heading-1"
-        >
-          <!-- eslint-disable -->
-          <div
-            v-html="scenario.details"
-          />
-          <!-- eslint-enable -->
+
+        <div class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop">
+          <div class="jac-scenario__additional">
+            <dl ref="accordion">
+              <span 
+                v-for="(document, index) of scenario.documents"
+                :key="index"
+              >
+                <dt 
+                  :class="`govuk-heading-m ${index === 0 ? 'open' : 'close'}`"
+                  @click.prevent="clickAdditional(index)"
+                >
+                  {{ document.title | showAlternative(`Additional Reading ${index}`) }}
+                  <button>
+                    <img 
+                      :src="icon(index)"
+                    >
+                  </button>
+                </dt>
+                <!-- eslint-disable -->
+                <dd v-html="document.content" />
+                <!-- eslint-enable -->
+              </span>
+            </dl>
+          </div>
         </div>
       </div>
-    </div>
-
-    <TextareaInput
-      id="scenario-question"
-      v-model="response.text"
-      :label="`${questionNumber}. ${question}`"
-      rows="10"
-      required
-    />
-
-    <div class="moj-button-menu">
-      <div class="moj-button-menu__wrapper">
-        <button
-          class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
-          type="button"
-          @click="skip"
-        >
-          Skip
-        </button>
-        <button class="moj-button-menu__item govuk-button">
-          Save and continue
-        </button>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
+import firebase from '@/firebase';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
+import plusIcon from '@/assets/plus.png';
+import minusIcon from '@/assets/minus.png';
 
 export default {
   components: {
@@ -94,10 +110,12 @@ export default {
       }));
     }
 
+    const response = scenario.responses[questionNumber - 1];
+
     return {
       qualifyingTestResponse,
       scenario,
-      response: scenario.responses[questionNumber - 1],
+      response,
       showDetails: true,
     };
   },
@@ -118,7 +136,7 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.questions.introduction;
     },
     question() {
-      return this.scenario.options[this.questionNumber - 1].answer;
+      return this.scenario.options[this.questionNumber - 1];
     },
     nextPage() {
       if (this.isLastScenario && this.isLastQuestion) {
@@ -135,30 +153,121 @@ export default {
         },
       };
     },
+    wordsCounter() {
+      let content = this.response.text;
+      if (content === '' || content === null) {
+        return 0;
+      }
+      content = content.trim().split(/[\s]+/);
+      const words = content.length;
+      return words;
+    },
+    reachMaxWords () {
+      const maxWords = this.question.wordLimit;
+      const reachedMaxWords = this.wordsCounter > maxWords;
+      return reachedMaxWords;
+    },
   },
-  created() {
+  async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-
-    this.response.started = Date.now();
+    if (!this.response.started) {
+      this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+    }
   },
   methods: {
     toggleAccordion() {
       this.showDetails = !this.showDetails;
     },
     async skip() {
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = Date.now();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      const data = {
+        testQuestions: this.qualifyingTestResponse.testQuestions,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
+    },
+    clickAdditional(index) {
+      const elList = this.$refs.accordion.querySelectorAll('dt');
+      elList.forEach((item, i) => {
+        const image = item.querySelectorAll('button img')[0];
+        
+        item.classList.remove('open');   
+        item.classList.add('close');
+        image.src = plusIcon;
+        if (index === i) {
+          item.classList.remove('close');   
+          item.classList.add('open');
+          image.src = minusIcon;
+        }
+      });
+    },
+    icon(index) {
+      if (index === 0) {
+        return minusIcon; 
+      } else {
+        return plusIcon;
+      }
     },
   },
 };
 </script>
+
+<style lang="css" scoped>
+
+.jac-scenario__additional {
+  border: 1px solid silver;
+}
+
+.jac-scenario__additional dl {
+  padding: 0;
+  margin: 0;
+}
+
+.jac-scenario__additional dt {
+  padding: 15px 40px 10px 20px;
+  margin: 0;
+  border-bottom: 1px solid rgb(253, 196, 196);
+  color: #1d70b8;
+  position: relative;
+  cursor: pointer;
+}
+
+.jac-scenario__additional dt.open + dd {
+  display: block;
+}
+
+.jac-scenario__additional dt.close + dd {
+  display: none;
+}
+
+.jac-scenario__additional dt button {
+  padding: 0;
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.jac-scenario__additional dt button img {
+  width: 50%;
+}
+
+.jac-scenario__additional dd {
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid silver;
+}
+
+</style>
