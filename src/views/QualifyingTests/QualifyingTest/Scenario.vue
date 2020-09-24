@@ -28,7 +28,9 @@
               <span>/</span>
               <span>{{ question.wordLimit }}</span>
               <span> words</span> 
-              <div v-if="reachMaxWords">You have reached the limit of <strong>{{ question.wordLimit }}</strong> words for this answer. Please remove some words.</div>
+              <div v-if="reachMaxWords">
+                You have reached the limit of <strong>{{ question.wordLimit }}</strong> words for this answer. Please remove some words.
+              </div>
             </div>
           </div>
 
@@ -41,7 +43,10 @@
               >
                 Skip
               </button>
-              <button class="moj-button-menu__item govuk-button" :disabled="reachMaxWords">
+              <button
+                class="moj-button-menu__item govuk-button"
+                :disabled="reachMaxWords"
+              >
                 Save and continue
               </button>
             </div>
