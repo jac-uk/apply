@@ -8,10 +8,11 @@
       <h1 
         class="govuk-heading-l"
       >
-        {{ scenario.documents[0].title }}
+        {{ qualifyingTestResponse.qualifyingTest.title }}
       </h1>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
+          <p>{{ qualifyingTestResponse.testQuestions.introduction }}</p>
           <div 
             class="govuk-character-count"
           >
