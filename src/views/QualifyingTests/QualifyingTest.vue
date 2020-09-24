@@ -6,7 +6,7 @@
     />
     <template v-else>
       <Countdown2
-        v-if="testInProgress"
+        v-if="testInProgress && !isInformationPage"
         :start-time="qualifyingTestResponse.statusLog.started"	
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
@@ -109,6 +109,9 @@ export default {
     isNotCompleted() {
       return this.qualifyingTestResponse.statusLog.completed === null || this.qualifyingTestResponse.statusLog.completed === undefined;
     },
+    isInformationPage() {
+      return this.$route.name === 'qualifying-test-information';
+    },
   },
   watch: {
     qualifyingTestResponse: function (newVal) {
@@ -176,7 +179,10 @@ export default {
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     btnExitModalConfirmed() {
-      this.$router.push({ name: 'qualifying-tests' });
+      this.timerEnded = true;
+      this.$nextTick(() => {  // ensures change is picked up before we leave this route
+        this.$router.push({ name: 'qualifying-tests' });
+      });
     },
   },
 };
