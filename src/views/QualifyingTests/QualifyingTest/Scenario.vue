@@ -8,10 +8,11 @@
       <h1 
         class="govuk-heading-l"
       >
-        {{ scenario.documents[0].title }}
+        {{ qualifyingTestResponse.qualifyingTest.title }}
       </h1>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
+          <p>{{ qualifyingTestResponse.testQuestions.introduction }}</p>
           <div 
             class="govuk-character-count"
           >
@@ -210,15 +211,21 @@ export default {
       const elList = this.$refs.accordion.querySelectorAll('dt');
       elList.forEach((item, i) => {
         const image = item.querySelectorAll('button img')[0];
-        
-        item.classList.remove('open');   
-        item.classList.add('close');
-        image.src = plusIcon;
         if (index === i) {
-          item.classList.remove('close');   
-          item.classList.add('open');
-          image.src = minusIcon;
-        }
+          if (item.classList.contains('open')) {
+            item.classList.remove('open');   
+            item.classList.add('close');
+            image.src = plusIcon;
+          } else {
+            item.classList.remove('close');   
+            item.classList.add('open');
+            image.src = minusIcon;
+          }
+        } else {
+          item.classList.remove('open');   
+          item.classList.add('close');
+          image.src = plusIcon;
+        }        
       });
     },
     icon(index) {
