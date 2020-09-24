@@ -102,7 +102,7 @@ export default {
       return amountTimeLeft > 0;
     },
     isNotCompleted() {
-      return this.qualifyingTestResponse.statusLog.completed === null;
+      return this.qualifyingTestResponse.statusLog.completed === null || this.qualifyingTestResponse.statusLog.completed === undefined;
     },
   },
   watch: {

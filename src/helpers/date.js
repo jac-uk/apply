@@ -97,7 +97,8 @@ const helperTimeLeft = (obj) => {
       const minute = 60 * 1000;
       const duration = obj.duration.testDurationAdjusted;
       const startTime = obj.statusLog && obj.statusLog.started;
-      if (startTime === null) {
+
+      if (startTime === null || startTime === undefined) {
         return duration * minute;
       }
       const endTime = new Date(startTime.getTime() + duration * minute);
