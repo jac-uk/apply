@@ -8,7 +8,7 @@
       <h1 
         class="govuk-heading-l"
       >
-        {{ scenario.title }}
+        {{ scenario.documents[0].title }}
       </h1>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
@@ -27,7 +27,8 @@
               <span>{{ wordsCounter }}</span>
               <span>/</span>
               <span>{{ question.wordLimit }}</span>
-              <span> words <!-- {{ reachMaxWords }} --></span>
+              <span> words</span> 
+              <div v-if="reachMaxWords">You have reached the limit of <strong>{{ question.wordLimit }}</strong> words for this answer. Please remove some words.</div>
             </div>
           </div>
 
@@ -40,7 +41,7 @@
               >
                 Skip
               </button>
-              <button class="moj-button-menu__item govuk-button">
+              <button class="moj-button-menu__item govuk-button" :disabled="reachMaxWords">
                 Save and continue
               </button>
             </div>
@@ -156,7 +157,7 @@ export default {
       return words;
     },
     reachMaxWords () {
-      const maxWords = this.question.words;
+      const maxWords = this.question.wordLimit;
       const reachedMaxWords = this.wordsCounter > maxWords;
       return reachedMaxWords;
     },
