@@ -157,6 +157,11 @@ export default {
     width: auto;
     overflow: hidden;
     display: grid;
+    flex-grow: 1;
+  }
+  .govuk-tag {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .display-flex{
     display: flex;
