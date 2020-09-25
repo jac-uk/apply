@@ -95,6 +95,12 @@ export default {
   components: {
     TextareaInput,
   },
+  props: {
+    timeIsUp: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     const scenarioNumber = this.$route.params.scenarioNumber;
     const questionNumber = this.$route.params.questionNumber;
@@ -168,10 +174,16 @@ export default {
       const reachedMaxWords = this.wordsCounter > maxWords;
       return reachedMaxWords;
     },
-    timeIsUp() {
-      return this.$attrs['time-is-up'];
-    },
   },
+  watch: {
+    timeIsUp: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.timeIsUp) { // time is up therefore save form, if there are unsaved changes
+          this.saveResponse(false);
+        }
+      }
+    },
+  },  
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
@@ -184,11 +196,6 @@ export default {
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
   },
-  updated() {
-    if (this.timeIsUp) {
-      this.saveDatabase();
-    }
-  },
   methods: {
     toggleAccordion() {
       this.showDetails = !this.showDetails;
@@ -197,11 +204,14 @@ export default {
       this.$router.push(this.nextPage);
     },
     async save() {
-      await this.saveDatabase();
+      await this.saveResponse(true);
       this.$router.push(this.nextPage);
     },
-    async saveDatabase() {
-      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+    async saveResponse(markAsCompleted) {
+      // TODO only save if there are un-saved changes
+      if (markAsCompleted) {
+        this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      }
       const data = {
         testQuestions: this.qualifyingTestResponse.testQuestions,
       };
@@ -253,7 +263,7 @@ export default {
 .jac-scenario__additional dt {
   padding: 15px 40px 10px 20px;
   margin: 0;
-  border-bottom: 1px solid rgb(253, 196, 196);
+  border-bottom: 1px solid silver;
   color: #1d70b8;
   position: relative;
   cursor: pointer;
