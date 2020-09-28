@@ -29,14 +29,20 @@
                 </span>
               </RouterLink>
               <strong
-                v-if="question.response.completed"
+                v-if="!responses[questionIndex]"
+                class="govuk-tag govuk-tag--grey"
+              >
+                Not started
+              </strong>
+              <strong
+                v-else-if="responses[questionIndex].completed"
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed
               </strong>
               <strong
                 v-else
-                class="govuk-tag govuk-tag--grey float-right"
+                class="govuk-tag govuk-tag--grey"
               >
                 Skipped
               </strong>
@@ -73,7 +79,13 @@
               </RouterLink>
 
               <strong
-                v-if="scenario.responses[questionIndex].completed"
+                v-if="!(responses[index] && responses[index].responsesForScenario[questionIndex])"
+                class="govuk-tag govuk-tag--grey"
+              >
+                Not started
+              </strong>
+              <strong
+                v-else-if="responses[index].responsesForScenario[questionIndex].completed"
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed
@@ -125,6 +137,9 @@ export default {
   computed: {
     questions() {
       return this.qualifyingTestResponse.testQuestions.questions;
+    },
+    responses() {
+      return this.qualifyingTestResponse.responses;
     },
     isScenario(){
       return this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO;

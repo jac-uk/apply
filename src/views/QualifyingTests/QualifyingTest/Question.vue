@@ -44,23 +44,28 @@ export default {
   },
   data() {
     const questionNumber = this.$route.params.questionNumber;
-
+    const questionNumberIndex = questionNumber - 1;
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
+    const question = qualifyingTestResponse.testQuestions.questions[questionNumberIndex];
+    let responses = qualifyingTestResponse.responses;
 
-    const question = qualifyingTestResponse.testQuestions.questions[questionNumber - 1];
-
-    if (!question.response) {
-      question.response = {
-        selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
-        started: null,
-        completed: null,
-      };
+    if (responses.length === 0) {
+      responses = new Array(qualifyingTestResponse.testQuestions.questions.length)
+        .fill()
+        .map(()=> {
+          return ({
+            selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
+            started: null,
+            completed: null,
+          });
+        });
     }
 
     return {
       qualifyingTestResponse,
       question,
-      response: question.response,
+      response: responses[questionNumberIndex],
+      responses,
       showDetails: true,
     };
   },
@@ -72,7 +77,7 @@ export default {
       return this.questionNumber === this.qualifyingTestResponse.testQuestions.questions.length;
     },
     hasStartedAllQuestions() {
-      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find(question => !(question.response && question.response.started));
+      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find((question, index) => !(this.qualifyingTestResponse.responses[index] && this.qualifyingTestResponse.responses[index].started));
       return firstQuestionNotStarted ? false : true;
     },
     introduction() {
@@ -112,7 +117,7 @@ export default {
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -124,7 +129,7 @@ export default {
     async save() {
       this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
