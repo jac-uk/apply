@@ -49,7 +49,7 @@
         <ul class="govuk-list">
           <li>
             <RouterLink
-              :to="{ path: `/qualifying-tests/${upcomingTest.id}/information` }"
+              :to="{ name: 'qualifying-test-information', params: { qualifyingTestId: upcomingTest.id }}"
             >
               {{ upcomingTest.qualifyingTest.title }}<br>
             </RouterLink>
