@@ -109,20 +109,18 @@ export default {
 
     const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
 
-    if (!scenario.responses) {
-      scenario.responses = new Array(scenario.options.length).fill().map(() => ({
+    if (!qualifyingTestResponse.responses[scenarioNumber - 1]) {
+      qualifyingTestResponse.responses[scenarioNumber - 1] = new Array(scenario.options.length).fill().map(() => ({
         text: null,
         started: null,
         completed: null,
       }));
     }
 
-    const response = scenario.responses[questionNumber - 1];
-
     return {
       qualifyingTestResponse,
       scenario,
-      response,
+      response: qualifyingTestResponse.responses[scenarioNumber - 1][questionNumber - 1],
       showDetails: true,
     };
   },
@@ -191,7 +189,7 @@ export default {
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.qualifyingTestResponse.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -213,7 +211,7 @@ export default {
         this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       }
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.qualifyingTestResponse.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     },
