@@ -121,11 +121,11 @@ export default {
                 completed: null,
               }
             ));
-          return ({ 'answers': newItem });
+          return ({ 'responsesForScenario': newItem });
         });
     }
 
-    const response = responses[scenarioNumber - 1].answers[questionNumber - 1];
+    const response = responses[scenarioNumber - 1].responsesForScenario[questionNumber - 1];
 
     return {
       qualifyingTestResponse,

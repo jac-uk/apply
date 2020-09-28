@@ -79,13 +79,13 @@
               </RouterLink>
 
               <strong
-                v-if="!(responses[index] && responses[index][questionIndex])"
+                v-if="!(responses[index] && responses[index].responsesForScenario[questionIndex])"
                 class="govuk-tag govuk-tag--grey"
               >
                 Not started
               </strong>
               <strong
-                v-else-if="responses[index][questionIndex].completed"
+                v-else-if="responses[index].responsesForScenario[questionIndex].completed"
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed

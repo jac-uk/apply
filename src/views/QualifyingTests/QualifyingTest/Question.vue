@@ -45,23 +45,27 @@ export default {
   data() {
     const questionNumber = this.$route.params.questionNumber;
     const questionNumberIndex = questionNumber - 1;
-
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
-
     const question = qualifyingTestResponse.testQuestions.questions[questionNumberIndex];
+    let responses = qualifyingTestResponse.responses;
 
-    if (!qualifyingTestResponse.responses[questionNumberIndex]) {
-      qualifyingTestResponse.responses[questionNumberIndex] = {
-        selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
-        started: null,
-        completed: null,
-      };
+    if (responses.length === 0) {
+      responses = new Array(qualifyingTestResponse.testQuestions.questions.length)
+        .fill()
+        .map(()=> {
+          return ({
+            selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
+            started: null,
+            completed: null,
+          });
+        });
     }
 
     return {
       qualifyingTestResponse,
       question,
-      response: qualifyingTestResponse.responses[questionNumberIndex],
+      response: responses[questionNumberIndex],
+      responses,
       showDetails: true,
     };
   },
@@ -113,7 +117,7 @@ export default {
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        responses: this.qualifyingTestResponse.responses,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -125,7 +129,7 @@ export default {
     async save() {
       this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        responses: this.qualifyingTestResponse.responses,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
