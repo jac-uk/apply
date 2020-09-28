@@ -49,8 +49,8 @@ export default {
 
     const question = qualifyingTestResponse.testQuestions.questions[questionNumber - 1];
 
-    if (!question.response) {
-      question.response = {
+    if (!qualifyingTestResponse.responses[questionNumber - 1]) {
+      qualifyingTestResponse.responses[questionNumber - 1] = {
         selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
         started: null,
         completed: null,
@@ -60,7 +60,7 @@ export default {
     return {
       qualifyingTestResponse,
       question,
-      response: question.response,
+      response: qualifyingTestResponse.responses[questionNumber - 1],
       showDetails: true,
     };
   },
@@ -72,7 +72,7 @@ export default {
       return this.questionNumber === this.qualifyingTestResponse.testQuestions.questions.length;
     },
     hasStartedAllQuestions() {
-      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find(question => !(question.response && question.response.started));
+      const firstQuestionNotStarted = this.qualifyingTestResponse.testQuestions.questions.find((question, index) => !(this.qualifyingTestResponse.responses[index] && this.qualifyingTestResponse.responses[index].started));
       return firstQuestionNotStarted ? false : true;
     },
     introduction() {
@@ -112,7 +112,7 @@ export default {
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.qualifyingTestResponse.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -124,7 +124,7 @@ export default {
     async save() {
       this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.qualifyingTestResponse.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       this.$router.push(this.nextPage);
