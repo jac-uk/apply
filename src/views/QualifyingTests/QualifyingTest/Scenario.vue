@@ -194,10 +194,15 @@ export default {
     },
   },  
   async created() {
+    console.log('created response:', this.response);
+    console.log('created responses:', this.responses);
+    
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-    if (!this.response.started) {
+    // if (!this.response.started) {
+    // eslint-disable-next-line no-constant-condition
+    if (1 == 1) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
         responses: this.responses,
