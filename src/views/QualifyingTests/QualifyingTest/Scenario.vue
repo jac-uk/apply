@@ -104,25 +104,40 @@ export default {
   data() {
     const scenarioNumber = this.$route.params.scenarioNumber;
     const questionNumber = this.$route.params.questionNumber;
-    
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
-
     const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
+    let responses = qualifyingTestResponse.responses; // New data model with responses on the root
 
-    if (!scenario.responses) {
-      scenario.responses = new Array(scenario.options.length).fill().map(() => ({
-        text: null,
-        started: null,
-        completed: null,
-      }));
+    if (responses.length === 0) {
+      responses = new Array(qualifyingTestResponse.testQuestions.questions.length)
+        .fill()
+        .map((item, id)=> {
+          const newItem = new Array(qualifyingTestResponse.testQuestions.questions[id].options.length)
+            .fill()
+            .map(() => (
+              {
+                text: null,
+                started: null,
+                completed: null,
+              }
+            ));
+          return ({ 'answers': newItem });
+        });
     }
 
-    const response = scenario.responses[questionNumber - 1];
+    // eslint-disable-next-line no-console
+    console.log('responses: ', responses);
+
+    const response = responses[scenarioNumber - 1].answers[questionNumber - 1];
+
+    // eslint-disable-next-line no-console
+    console.log('response: ', response);
 
     return {
       qualifyingTestResponse,
       scenario,
       response,
+      responses,
       showDetails: true,
     };
   },
@@ -185,13 +200,18 @@ export default {
     },
   },  
   async created() {
+    console.log('created response:', this.response);
+    console.log('created responses:', this.responses);
+    
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-    if (!this.response.started) {
+    // if (!this.response.started) {
+    // eslint-disable-next-line no-constant-condition
+    if (1 == 1) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -212,8 +232,9 @@ export default {
       if (markAsCompleted) {
         this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
       }
+      // testQuestions: this.qualifyingTestResponse.testQuestions,
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     },
