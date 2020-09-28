@@ -125,13 +125,7 @@ export default {
         });
     }
 
-    // eslint-disable-next-line no-console
-    console.log('responses: ', responses);
-
     const response = responses[scenarioNumber - 1].answers[questionNumber - 1];
-
-    // eslint-disable-next-line no-console
-    console.log('response: ', response);
 
     return {
       qualifyingTestResponse,
@@ -200,9 +194,6 @@ export default {
     },
   },  
   async created() {
-    console.log('created response:', this.response);
-    console.log('created responses:', this.responses);
-    
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
