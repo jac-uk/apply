@@ -194,9 +194,6 @@ export default {
     },
   },  
   async created() {
-    console.log('created response:', this.response);
-    console.log('created responses:', this.responses);
-    
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
