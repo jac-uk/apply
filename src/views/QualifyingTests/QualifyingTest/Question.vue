@@ -44,13 +44,14 @@ export default {
   },
   data() {
     const questionNumber = this.$route.params.questionNumber;
+    const questionNumberIndex = questionNumber - 1;
 
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
 
-    const question = qualifyingTestResponse.testQuestions.questions[questionNumber - 1];
+    const question = qualifyingTestResponse.testQuestions.questions[questionNumberIndex];
 
-    if (!qualifyingTestResponse.responses[questionNumber - 1]) {
-      qualifyingTestResponse.responses[questionNumber - 1] = {
+    if (!qualifyingTestResponse.responses[questionNumberIndex]) {
+      qualifyingTestResponse.responses[questionNumberIndex] = {
         selection: qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT ? {} : null,
         started: null,
         completed: null,
@@ -60,7 +61,7 @@ export default {
     return {
       qualifyingTestResponse,
       question,
-      response: qualifyingTestResponse.responses[questionNumber - 1],
+      response: qualifyingTestResponse.responses[questionNumberIndex],
       showDetails: true,
     };
   },
