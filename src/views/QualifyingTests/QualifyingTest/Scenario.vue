@@ -197,9 +197,7 @@ export default {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-    // if (!this.response.started) {
-    // eslint-disable-next-line no-constant-condition
-    if (1 == 1) {
+    if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
         responses: this.responses,
