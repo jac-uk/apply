@@ -1,5 +1,8 @@
 <template>
-  <div class="govuk-grid-column-two-thirds">
+  <div 
+    v-if="qualifyingTestResponse"
+    class="govuk-grid-column-two-thirds"
+  >
     <h1 class="govuk-heading-l">
       {{ qualifyingTestResponse.qualifyingTest.title }}
     </h1>
@@ -114,14 +117,14 @@ export default {
   },
   extends: Form,
   data() {
-    const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
-
     return {
       confirmationChecked: false,
-      qualifyingTestResponse,
     };
   },
   computed: {
+    qualifyingTestResponse() {
+      return this.$store.getters['qualifyingTestResponse/data']();
+    },
     endTime() {
       const time = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate, 'time');
       const day = formatDate(this.qualifyingTestResponse.qualifyingTest.endDate);
