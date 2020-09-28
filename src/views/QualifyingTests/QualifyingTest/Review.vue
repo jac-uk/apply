@@ -109,6 +109,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase';
 import Modal from '@/components/Page/Modal';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
@@ -134,11 +135,12 @@ export default {
       this.$refs.modalRef.openModal();
     },
     async modalConfirmed(){
-      this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.COMPLETED;
-      this.qualifyingTestResponse.statusLog.completed = new Date();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      const data = {
+        status: QUALIFYING_TEST.STATUS.COMPLETED,
+        'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+      await this.$store.dispatch('connectionMonitor/stop');
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     modalClosed(){

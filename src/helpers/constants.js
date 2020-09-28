@@ -24,6 +24,16 @@ const QUALIFYING_TEST = {
   },
 };
 
+const QUALIFYING_TEST_RESPONSE = {
+  STATUS: {
+    CREATED: 'created',
+    ACTIVATED: 'activated',
+    STARTED: 'started',
+    COMPLETED: 'completed',
+    CANCELLED: 'cancelled',
+  },
+};
+
 const DEFAULT = {
   YES: 'Yes',
   NO: 'No',
@@ -32,5 +42,6 @@ const DEFAULT = {
 export {
   STATUS,
   QUALIFYING_TEST,
+  QUALIFYING_TEST_RESPONSE,
   DEFAULT
 };
