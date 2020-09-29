@@ -203,6 +203,11 @@ export default {
           assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
           assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
           break;
+        case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
+          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
+          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
+          break;
         case 'statement-of-eligibility':
           if (this.vacancy.aSCApply && this.vacancy.selectionCriteria && this.vacancy.selectionCriteria.length) {
             assessmentOptions.push({ title: 'Statement of eligibility', id: 'statement-of-eligibility', done: this.applicationProgress.statementOfEligibility });

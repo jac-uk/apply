@@ -1704,7 +1704,43 @@
               </div>
             </dl>
           </div>
-        </div><!-- END download-as-pdf-div -->
+
+          <div
+            v-if="showCoveringLetter"
+            id="covering-letter-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Covering Letter
+            </h2>
+            <RouterLink
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'covering-letter'}"
+            >
+              Change
+            </RouterLink>
+
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Uploaded Covering Letter
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedCoveringLetter">Your file has been received</span>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <!-- END download-as-pdf-div -->
 
         <button
           v-if="isDraftApplication"
@@ -1773,8 +1809,17 @@ export default {
         return false;
       }
     },
+    showCoveringLetter() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
+        return true;
+      default:
+        return false;
+      }
+    },  
     showCV() {
       switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
       case 'self-assessment-with-competencies-and-cv':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
         return true;
