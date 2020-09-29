@@ -1804,6 +1804,8 @@ export default {
       case 'statement-of-suitability-with-competencies':
       case 'statement-of-suitability-with-skills-and-abilities':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
         return true;
       default:
         return false;
@@ -1811,7 +1813,10 @@ export default {
     },
     showCoveringLetter() {
       switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
         return true;
       default:
         return false;
@@ -1821,6 +1826,7 @@ export default {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
         return true;
       default:
@@ -1839,6 +1845,8 @@ export default {
       switch (this.vacancy.assessmentOptions) {
       case 'self-assessment-with-competencies':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
         return true;
       default:
         return false;
@@ -1861,6 +1869,9 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
         }
+        if (this.vacancy.additionalWorkingPreferences) {
+          if (!this.application.progress.additionalWorkingPreferences) { isComplete = false; }
+        }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }
         }
@@ -1873,7 +1884,7 @@ export default {
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (this.vacancy.memberships.length) {
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               if (!this.application.progress.relevantMemberships) { isComplete = false; }
             }            
@@ -1884,6 +1895,7 @@ export default {
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
+        if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
         if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
       }
