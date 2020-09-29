@@ -1704,7 +1704,43 @@
               </div>
             </dl>
           </div>
-        </div><!-- END download-as-pdf-div -->
+
+          <div
+            v-if="showCoveringLetter"
+            id="covering-letter-heading"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Covering Letter
+            </h2>
+            <RouterLink
+              v-if="isDraftApplication"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'covering-letter'}"
+            >
+              Change
+            </RouterLink>
+
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Uploaded Covering Letter
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="application.uploadedCoveringLetter">Your file has been received</span>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <!-- END download-as-pdf-div -->
 
         <button
           v-if="isDraftApplication"
@@ -1768,14 +1804,29 @@ export default {
       case 'statement-of-suitability-with-competencies':
       case 'statement-of-suitability-with-skills-and-abilities':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
         return true;
       default:
         return false;
       }
     },
+    showCoveringLetter() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
+        return true;
+      default:
+        return false;
+      }
+    },  
     showCV() {
       switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
         return true;
       default:
@@ -1794,6 +1845,8 @@ export default {
       switch (this.vacancy.assessmentOptions) {
       case 'self-assessment-with-competencies':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
         return true;
       default:
         return false;
@@ -1816,6 +1869,9 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
         }
+        if (this.vacancy.additionalWorkingPreferences) {
+          if (!this.application.progress.additionalWorkingPreferences) { isComplete = false; }
+        }
         if (this.vacancy.welshRequirement) {
           if (!this.application.progress.welshPosts) { isComplete = false; }
         }
@@ -1828,7 +1884,7 @@ export default {
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (this.isNonLegal) {
-          if (this.vacancy.memberships.length) {
+          if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               if (!this.application.progress.relevantMemberships) { isComplete = false; }
             }            
@@ -1839,6 +1895,7 @@ export default {
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
+        if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
         if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
       }
