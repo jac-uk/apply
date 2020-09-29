@@ -95,28 +95,43 @@ export default {
   components: {
     TextareaInput,
   },
+  props: {
+    timeIsUp: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     const scenarioNumber = this.$route.params.scenarioNumber;
     const questionNumber = this.$route.params.questionNumber;
-    
     const qualifyingTestResponse = this.$store.getters['qualifyingTestResponse/data']();
-
     const scenario = qualifyingTestResponse.testQuestions.questions[scenarioNumber - 1];
+    let responses = qualifyingTestResponse.responses; // New data model with responses on the root
 
-    if (!scenario.responses) {
-      scenario.responses = new Array(scenario.options.length).fill().map(() => ({
-        text: null,
-        started: null,
-        completed: null,
-      }));
+    if (responses.length === 0) {
+      responses = new Array(qualifyingTestResponse.testQuestions.questions.length)
+        .fill()
+        .map((item, id)=> {
+          const newItem = new Array(qualifyingTestResponse.testQuestions.questions[id].options.length)
+            .fill()
+            .map(() => (
+              {
+                text: null,
+                started: null,
+                completed: null,
+              }
+            ));
+          return ({ 'responsesForScenario': newItem });
+        });
     }
 
-    const response = scenario.responses[questionNumber - 1];
+    const response = responses[scenarioNumber - 1].responsesForScenario[questionNumber - 1];
 
     return {
       qualifyingTestResponse,
       scenario,
       response,
+      responses,
       showDetails: true,
     };
   },
@@ -169,6 +184,15 @@ export default {
       return reachedMaxWords;
     },
   },
+  watch: {
+    timeIsUp: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.timeIsUp) { // time is up therefore save form, if there are unsaved changes
+          this.saveResponse(false);
+        }
+      }
+    },
+  },  
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
@@ -176,7 +200,7 @@ export default {
     if (!this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
@@ -189,12 +213,19 @@ export default {
       this.$router.push(this.nextPage);
     },
     async save() {
-      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      await this.saveResponse(true);
+      this.$router.push(this.nextPage);
+    },
+    async saveResponse(markAsCompleted) {
+      // TODO only save if there are un-saved changes
+      if (markAsCompleted) {
+        this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      }
+      // testQuestions: this.qualifyingTestResponse.testQuestions,
       const data = {
-        testQuestions: this.qualifyingTestResponse.testQuestions,
+        responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
-      this.$router.push(this.nextPage);
     },
     clickAdditional(index) {
       const elList = this.$refs.accordion.querySelectorAll('dt');
@@ -242,7 +273,7 @@ export default {
 .jac-scenario__additional dt {
   padding: 15px 40px 10px 20px;
   margin: 0;
-  border-bottom: 1px solid rgb(253, 196, 196);
+  border-bottom: 1px solid silver;
   color: #1d70b8;
   position: relative;
   cursor: pointer;

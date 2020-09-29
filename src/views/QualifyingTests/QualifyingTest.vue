@@ -6,7 +6,7 @@
     />
     <template v-else>
       <Countdown2
-        v-if="testInProgress"
+        v-if="testInProgress && !isInformationPage"
         :start-time="qualifyingTestResponse.statusLog.started"	
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
@@ -57,7 +57,10 @@
         @confirmed="btnExitModalConfirmed"
       />
 
-      <RouterView :key="$route.fullPath" />
+      <RouterView 
+        :key="$route.fullPath" 
+        :time-is-up="timerEnded" 
+      />
     </template>
   </div>
 </template>
@@ -76,6 +79,7 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      timerEnded: false,
     };
   },
   computed: {
@@ -105,6 +109,9 @@ export default {
     isNotCompleted() {
       return this.qualifyingTestResponse.statusLog.completed === null || this.qualifyingTestResponse.statusLog.completed === undefined;
     },
+    isInformationPage() {
+      return this.$route.name === 'qualifying-test-information';
+    },
   },
   watch: {
     qualifyingTestResponse: function (newVal) {
@@ -116,40 +123,46 @@ export default {
         }
       }
     },
-  },  
+    '$route.params.qualifyingTestId'() {
+      this.loadQualifyingTestResponse();
+    },
+  },
   async mounted() {
-    try {
-      const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', this.$route.params.qualifyingTestId);
-      if (qualifyingTestResponse === null) {
-        return this.redirectToList();
-      }
-
-      const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
-
-      if (!isQTOpen) {
-        return this.redirectToList();
-      }
-
-      // isCompleted > redirect
-      // noTimeLeft > redirect
-      const noTimeLeft = !this.isTimeLeft;
-      const isCompleted = !this.isNotCompleted;
-
-      if (noTimeLeft || isCompleted) {
-        return this.redirectToList();
-      }
-
-      this.loaded = true;
-    } catch (e) {
-      this.loadFailed = true;
-      throw e;
-    }
+    await this.loadQualifyingTestResponse();
   },
   destroyed() {
     this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
+    async loadQualifyingTestResponse() {
+      try {
+        const qualifyingTestResponse = await this.$store.dispatch('qualifyingTestResponse/bind', this.$route.params.qualifyingTestId);
+        if (qualifyingTestResponse === null) {
+          return this.redirectToList();
+        }
+
+        const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
+
+        if (!isQTOpen) {
+          return this.redirectToList();
+        }
+
+        // isCompleted > redirect
+        // noTimeLeft > redirect
+        const noTimeLeft = !this.isTimeLeft;
+        const isCompleted = !this.isNotCompleted;
+
+        if (noTimeLeft || isCompleted) {
+          return this.redirectToList();
+        }
+
+        this.loaded = true;
+      } catch (e) {
+        this.loadFailed = true;
+        throw e;
+      }
+    },
     btnPrevious() {
       this.$router.replace({ params: { questionNumber: this.$route.params.questionNumber - 1 } });
     },
@@ -158,6 +171,7 @@ export default {
     },
     handleCountdown(params) {
       if (params.action === 'ended') {
+        this.timerEnded = true;
         this.openTimeElapsedModal();
       }
     },
@@ -171,7 +185,10 @@ export default {
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     btnExitModalConfirmed() {
-      this.$router.push({ name: 'qualifying-tests' });
+      this.timerEnded = true;
+      this.$nextTick(() => {  // ensures change is picked up before we leave this route
+        this.$router.push({ name: 'qualifying-tests' });
+      });
     },
   },
 };

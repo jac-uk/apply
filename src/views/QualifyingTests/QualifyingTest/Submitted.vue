@@ -37,9 +37,8 @@
         </router-link>
       </p>
     </div>
-    <!-- TODO: this should be a component -->
     <div
-      v-if="upcomingTests.length"
+      v-if="upcomingTest"
       class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6"
     >
       <p class="govuk-body">
@@ -48,12 +47,9 @@
 
       <div class="govuk-inset-text">
         <ul class="govuk-list">
-          <li
-            v-for="upcomingTest in upcomingTests"
-            :key="upcomingTest.id"
-          >
+          <li>
             <RouterLink
-              :to="{ path: `/qualifying-tests/${upcomingTest.id}/information` }"
+              :to="{ name: 'qualifying-test-information', params: { qualifyingTestId: upcomingTest.id }}"
             >
               {{ upcomingTest.qualifyingTest.title }}<br>
             </RouterLink>
@@ -76,10 +72,9 @@
   </div>
 </template>
 <script>
-import firebase from '@/firebase';
 import Banner from '@/components/Page/Banner';
-import { isToday, formatDate, helperTimeLeft } from '@/helpers/date';
-import { QUALIFYING_TEST } from '@/helpers/constants';
+import { isToday, formatDate } from '@/helpers/date';
+import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 
 export default {
   components: {
@@ -92,9 +87,13 @@ export default {
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records;
     },
-    upcomingTests(){
-      return this.qualifyingTestResponses.filter((qt) => {
-        if (this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt)), this.isOpen(qt) && this.sameVacancyID(qt) && this.notComplete(qt) && this.notThisTest(qt)) {
+    upcomingTest() { 
+      return this.qualifyingTestResponses.find((qt) => {
+        if (
+          this.notThisTest(qt) &&
+          this.sameVacancyID(qt) &&
+          this.isReadyToStart(qt)
+        ) {
           return true;
         }
       });
@@ -103,43 +102,24 @@ export default {
   created() {
     this.$store.dispatch('qualifyingTestResponses/bind');
   },
-  async mounted() {
-    // complete the test if we're still within time
-    if (this.$store.getters['qualifyingTestResponse/timeLeft'] && this.qualifyingTestResponse.statusLog.completed === null) {
-      const data = {
-        'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
-      };
-      await this.$store.dispatch('qualifyingTestResponse/save', data);
-    }
-  },
   methods: {
-    endTime(qualifyingTest){
+    endTime(qualifyingTest) {
       const time = formatDate(qualifyingTest.qualifyingTest.endDate, 'time');
       const day = formatDate(qualifyingTest.qualifyingTest.endDate);
       return isToday(qualifyingTest.qualifyingTest.endDate) ? `${time} today` : `${time} on ${day}`;
     },
-    sameVacancyID(qt){
+    sameVacancyID(qt) {
       if (qt.vacancy && this.$store.state.qualifyingTestResponse.record.vacancy) {
         return qt.vacancy.id === this.$store.state.qualifyingTestResponse.record.vacancy.id;
       } else {
         return false;
       }
     },
-    notThisTest(qt){
+    notThisTest(qt) {
       return qt.id !== this.$store.state.qualifyingTestResponse.record.id;
     },
-    isOpen(qt){
-      return qt.statusLog.started;
-    },
-    isTimeLeft(qt) {
-      return helperTimeLeft(qt) > 0;
-    },
-    isTimeOut(testStatus, logCompleted, isTimeLeft) {
-      const timeout = (status == QUALIFYING_TEST.STATUS.STARTED && logCompleted === null && !isTimeLeft);
-      return timeout;
-    },
-    notComplete(qt){
-      return !qt.statusLog.completed || !this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
+    isReadyToStart(qt) {
+      return qt.status === QUALIFYING_TEST_RESPONSE.STATUS.ACTIVATED;
     },
   },
 };

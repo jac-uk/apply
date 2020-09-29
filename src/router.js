@@ -52,6 +52,7 @@ import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitabili
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
 import StatementOfEligibility from '@/views/Apply/Assessments/StatementOfEligibility';
 import CV from '@/views/Apply/Assessments/CV';
+import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 
@@ -473,6 +474,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Curriculum vitae (CV)',
+          },
+        },
+        {
+          path: 'covering-letter',
+          component: CoveringLetter,
+          name: 'covering-letter',
+          meta: {
+            requiresAuth: true,
+            title: 'Covering Letter',
           },
         },
         {

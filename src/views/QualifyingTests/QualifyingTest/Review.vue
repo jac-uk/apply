@@ -29,14 +29,20 @@
                 </span>
               </RouterLink>
               <strong
-                v-if="question.response.completed"
+                v-if="!responses[questionIndex]"
+                class="govuk-tag govuk-tag--grey"
+              >
+                Not started
+              </strong>
+              <strong
+                v-else-if="responses[questionIndex].completed"
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed
               </strong>
               <strong
                 v-else
-                class="govuk-tag govuk-tag--grey float-right"
+                class="govuk-tag govuk-tag--grey"
               >
                 Skipped
               </strong>
@@ -73,7 +79,13 @@
               </RouterLink>
 
               <strong
-                v-if="scenario.responses[questionIndex].completed"
+                v-if="!(responses[index] && responses[index].responsesForScenario[questionIndex])"
+                class="govuk-tag govuk-tag--grey"
+              >
+                Not started
+              </strong>
+              <strong
+                v-else-if="responses[index].responsesForScenario[questionIndex].completed"
                 class="govuk-tag moj-task-list__task-completed"
               >
                 Completed
@@ -109,6 +121,7 @@
 </template>
 
 <script>
+import firebase from '@/firebase';
 import Modal from '@/components/Page/Modal';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
@@ -125,6 +138,9 @@ export default {
     questions() {
       return this.qualifyingTestResponse.testQuestions.questions;
     },
+    responses() {
+      return this.qualifyingTestResponse.responses;
+    },
     isScenario(){
       return this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO;
     },
@@ -134,11 +150,12 @@ export default {
       this.$refs.modalRef.openModal();
     },
     async modalConfirmed(){
-      this.qualifyingTestResponse.status = QUALIFYING_TEST.STATUS.COMPLETED;
-      this.qualifyingTestResponse.statusLog.completed = new Date();
-
-      await this.$store.dispatch('qualifyingTestResponse/save', this.qualifyingTestResponse);
-
+      const data = {
+        status: QUALIFYING_TEST.STATUS.COMPLETED,
+        'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', data);
+      await this.$store.dispatch('connectionMonitor/stop');
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     modalClosed(){
@@ -157,6 +174,11 @@ export default {
     width: auto;
     overflow: hidden;
     display: grid;
+    flex-grow: 1;
+  }
+  .govuk-tag {
+    margin-top: 0;
+    margin-bottom: 0;
   }
   .display-flex{
     display: flex;
