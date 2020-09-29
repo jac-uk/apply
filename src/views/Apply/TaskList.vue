@@ -136,7 +136,7 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
         }
-        if (this.vacancy.additionalWorkingPreferences) {
+        if (this.vacancy.additionalWorkingPreferences.length) {
           workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
         }
         if (this.vacancy.welshRequirement) {
