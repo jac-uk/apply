@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown govuk-!-margin-bottom-4"
+    class="govuk-width-container countdown"
     :class="bckClass"
   >
     <div class="float-left column-one-third">
@@ -9,7 +9,7 @@
         name="left-slot"
       />
     </div>
-    <div class="column-one-third float-centre">
+    <div class="govuk-grid-column-one-third">
       {{ mobileView ? '' : 'Time Remaining: ' }}
       <span 
         v-if="hours" 
@@ -138,41 +138,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.govuk-width-container{
+  max-width: 100%;
+}
 .countdown {
   background-color: green;
-  color: white;
-  text-align: center;
-  font-weight: bold;
   padding: 10px;
-  display: flex;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 99%;
-  z-index: 1;
-
+  
   &.alert {
     background-color: red;
   }
 
   div {
-    width: 33.3%;
     text-align: center;
-
-    span {
-      font-weight: bold;
-      display: inline-block;
-      &.hours {
-        display: inline;
-      }
-    }
-  }
-  a:visited{
-    color: white;
-  }
-  .column-one-third{
-    // background-color: aqua;
   }
 
 }
