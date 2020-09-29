@@ -61,7 +61,6 @@
           </ul>
         </li>
       </ol>
-
       <button
         :disabled="!canApply"
         class="govuk-button"
@@ -191,6 +190,15 @@ export default {
           assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
           assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
           break;
+        case 'self-assessment-with-competencies-and-covering-letter':
+          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
+          break;
+        case 'self-assessment-with-competencies-and-cv-and-covering-letter':
+          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
+          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
+          break;
         case 'statement-of-suitability-with-competencies':
           // @todo what happens to leadership version?
           assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
@@ -203,8 +211,12 @@ export default {
           assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
           assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
           break;
+        case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
+          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
+          break;
         case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
           assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
           assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
           break;
@@ -230,14 +242,29 @@ export default {
       case 'statement-of-suitability-with-competencies':
       case 'statement-of-suitability-with-skills-and-abilities':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
         return true;
       default:
         return false;
       }
     },
+    showCoveringLetter() {
+      switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
+        return true;
+      default:
+        return false;
+      }
+    },  
     showCV() {
       switch (this.vacancy.assessmentOptions) {
+      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
       case 'statement-of-suitability-with-skills-and-abilities-and-cv':
         return true;
       default:
@@ -256,6 +283,8 @@ export default {
       switch (this.vacancy.assessmentOptions) {
       case 'self-assessment-with-competencies':
       case 'self-assessment-with-competencies-and-cv':
+      case 'self-assessment-with-competencies-and-covering-letter':
+      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
         return true;
       default:
         return false;
@@ -304,6 +333,7 @@ export default {
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
+        if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
         if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
       }
