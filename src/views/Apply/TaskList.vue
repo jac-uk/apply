@@ -309,7 +309,7 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
         }
-        if (this.vacancy.additionalWorkingPreferences) {
+        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
           if (!this.application.progress.additionalWorkingPreferences) { isComplete = false; }
         }
         if (this.vacancy.welshRequirement) {
