@@ -23,8 +23,9 @@
             href=""
             @click.prevent="btnPrevious"
           >
-            <span>〈 </span>
-            {{ isMobile ? 'Previous' : 'Previous Question' }}
+            <span>
+              <span>❮ {{ isMobile ? 'Previous' : 'Previous Question' }}</span>
+            </span>
           </a>
         </template>
         <template
@@ -56,11 +57,14 @@
         message="Are you sure you want to exit this test? The timer will continue ticking down even if you do?"
         @confirmed="btnExitModalConfirmed"
       />
-
-      <RouterView 
-        :key="$route.fullPath" 
-        :time-is-up="timerEnded" 
-      />
+      <div
+        class="govuk-!-margin-left-5 govuk-!-margin-right-5"
+      >
+        <RouterView 
+          :key="$route.fullPath" 
+          :time-is-up="timerEnded" 
+        />
+      </div>
     </template>
   </div>
 </template>
@@ -196,15 +200,17 @@ export default {
 
 <style lang="scss">
 
-.countdown-link {
-  color: white !important;
-}
-
-.qt_page {
-  padding-top: 65px;
-  
-  @include govuk-media-query($from: tablet) {
-    padding-top: 40px;
+  .govuk-width-container{
+    max-width: 100%;
+    padding-top: 0 !important;
   }
-}
-</style>
+
+  .countdown-link {
+    color: white !important;
+  }
+
+  .qt_page {
+    padding-top: 60px;
+  }
+
+</style>6

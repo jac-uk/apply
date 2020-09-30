@@ -11,12 +11,17 @@
     </div>
     <div class="govuk-grid-column-one-third">
       <span>
-        {{ mobileView ? '' : 'Time Remaining: ' }}
+        <span style="margin-right: 5px;">
+          {{ mobileView ? '' : 'Time Remaining:' }}
+        </span>
         <span 
           v-if="hours" 
-          class="hours"
         >
-          {{ hours | zeroPad }}:</span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+          {{ hours | zeroPad }}:
+        </span>
+        <span>
+          {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+        </span>
         <svg
           v-if="bckClass"
           class="moj-banner__icon"
@@ -140,11 +145,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-
-  .govuk-width-container{
-    max-width: 100%;
-  }
+<style lang="scss">
 
   span {
     vertical-align: middle;
@@ -156,9 +157,13 @@ export default {
     color: white;
     text-align: center;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 0;
     display: flex;
-    
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9;
+
     &.alert {
       background-color: red;
     }
@@ -175,6 +180,7 @@ export default {
 
   .float-left {
     text-align: left !important;
+    left: 0;
   }
 
 </style>
