@@ -10,6 +10,7 @@ describe('views/TaskList', () => {
       stubs: ['RouterLink','Countdown'],
       propsData: {},
     });
+    wrapper.vm.$store.state.vacancy.record = { additionalWorkingPreferences: [] };
   });
 
   it('renders successfully', () => {
@@ -67,42 +68,50 @@ describe('views/TaskList', () => {
       });
     });
 
-    describe('when role is legal', () => {
-      beforeEach(() => {
-        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'legal' };
-      });
-      it('renders the 2nd block h2 as Qualifications', () => {
-        expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
-      });
-    });
+    describe('role type', () => {
 
-    describe('when role is non-legal', () => {
-      beforeEach(() => {
-        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'non-legal' };
-      });
-      it('renders the 2nd block h2 as Memberships and experience', () => {
-      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
-    });
-    });
+        it('renders the 1st block h2 as Account profile', () => {
+          expect(wrapper.findAll('h2').at(0).text()).toBe('1. Account profile');
+        });
 
-    describe('when role is leadership-non-legal', () => {
-      beforeEach(() => {
-        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership-non-legal' };
-      });
-      it('renders the 2nd block h2 as Memberships and experience', () => {
-      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
-    });
-    });
+        describe('when role is legal', () => {
+          beforeEach(() => {
+            wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'legal', additionalWorkingPreferences: [] };
+          });
+          it('renders the 2nd block h2 as Assessments', () => {
+            expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
+          });
+        });
 
-    describe('when role is leadership', () => {
-      beforeEach(() => {
-        wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership' };
-      });
-      it('renders the 2nd block h2 as Memberships and experience', () => {
-      expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
-    });
-    });
+        describe('when role is non-legal', () => {
+          beforeEach(() => {
+            wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'non-legal' };
+          });
+
+          it('renders the 2nd block h2 as Memberships and experience', () => {
+            expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
+          });
+        });
+
+        describe('when role is leadership-non-legal', () => {
+          beforeEach(() => {
+            wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership-non-legal' };
+          });
+          it('renders the 2nd block h2 as Memberships and experience', () => {
+            expect(wrapper.findAll('h2').at(1).text()).toBe('2. Memberships and Experience');
+          });
+        });
+
+        describe('when role is leadership', () => {
+          beforeEach(() => {
+            wrapper.vm.$store.state.vacancy.record = { typeOfExercise: 'leadership' };
+          });
+          it('renders the 2nd block h2 as Memberships and experience', () => {
+            expect(wrapper.findAll('h2').at(1).text()).toBe('2. Qualifications and experience');
+          });
+        });
     
-  });
+      });
+    });
 
 });
