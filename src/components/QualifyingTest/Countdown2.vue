@@ -1,34 +1,42 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown govuk-!-margin-bottom-4"
+    class="countdown"
     :class="bckClass"
   >
-    <div class="float-left column-one-third">
+    <div class="float-left govuk-grid-column-one-third">
       <slot
         name="left-slot"
       />
     </div>
-    <div class="column-one-third float-centre">
-      {{ mobileView ? '' : 'Time Remaining: ' }}
-      <span 
-        v-if="hours" 
-        class="hours"
-      >{{ hours | zeroPad }}:</span>{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
-      <svg
-        v-if="bckClass"
-        class="moj-banner__icon"
-        focusable="false"
-        xmlns="http://www.w3.org/2000/svg"
-        height="25"
-        width="25"
-      >
-        <path
-          d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
-        />
-      </svg>
+    <div class="govuk-grid-column-one-third">
+      <span>
+        <span style="margin-right: 5px;">
+          {{ mobileView ? '' : 'Time Remaining:' }}
+        </span>
+        <span 
+          v-if="hours" 
+        >
+          {{ hours | zeroPad }}:
+        </span>
+        <span>
+          {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+        </span>
+        <svg
+          v-if="bckClass"
+          class="moj-banner__icon"
+          focusable="false"
+          xmlns="http://www.w3.org/2000/svg"
+          height="25"
+          width="25"
+        >
+          <path
+            d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
+          />
+        </svg>
+      </span>
     </div>
-    <div class="float-right column-one-third">
+    <div class="float-right govuk-grid-column-one-third">
       <slot
         name="right-slot"
       />
@@ -137,43 +145,42 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.countdown {
-  background-color: green;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px;
-  display: flex;
+<style lang="scss">
 
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 99%;
-  z-index: 1;
-
-  &.alert {
-    background-color: red;
+  span {
+    vertical-align: middle;
+    display: inline-block;
   }
 
-  div {
-    width: 33.3%;
-    text-align: center;
-
-    span {
-      font-weight: bold;
-      display: inline-block;
-      &.hours {
-        display: inline;
-      }
-    }
-  }
-  a:visited{
+  .countdown {
+    background-color: green;
     color: white;
-  }
-  .column-one-third{
-    // background-color: aqua;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+    display: flex;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9;
+
+    &.alert {
+      background-color: red;
+    }
+
+    div {
+      text-align: center;
+    }
+
   }
 
-}
+  .float-right {
+    text-align: right !important;
+  }
+
+  .float-left {
+    text-align: left !important;
+    left: 0;
+  }
+
 </style>
