@@ -5,6 +5,7 @@
     <main
       id="main-content"
       class="govuk-width-container govuk-main-wrapper govuk-main-wrapper--auto-spacing"
+      :class="fullPageMode ? 'govuk-!-margin-0' : ''"
       role="main"
     >
       <RouterView />

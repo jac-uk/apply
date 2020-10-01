@@ -23,7 +23,7 @@
           <div class="govuk-grid-column-one-third organisation__margin-bottom">
             <button
               v-if="isSignedIn"
-              class="govuk-button govuk-button--secondary govuk-!-margin-right-1"
+              class="govuk-button govuk-!-margin-right-1"
               data-module="govuk-button"
               @click="signOut"
             >
@@ -32,7 +32,7 @@
             <button
               v-else
               :disabled="isSignInPage"
-              class="govuk-button govuk-button--secondary govuk-!-margin-right-1"
+              class="govuk-button govuk-!-margin-right-1"
               data-module="govuk-button"
               @click="signIn"
             >
@@ -40,7 +40,7 @@
             </button>
             <button
               :disabled="isVacanciesPage"
-              class="govuk-button govuk-button--secondary"
+              class="govuk-button"
               data-module="govuk-button"
               @click="gotoVacancies"
             >
@@ -49,7 +49,8 @@
             <br>
             <span
               v-if="isSignedIn"
-              class="app-c-topic-list__item nostyle"
+              class="app-c-topic-list__item"
+              style="color:black;"
             >
               <b>You are now signed in as {{ userName }}</b>
             </span>
@@ -169,27 +170,28 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  header {
-    background-color: #753880 !important;
-    border-bottom: none !important;
-    // padding: 1.25em 0.625em 0 0.625em;
-    // margin: 0 !important;
-    // width: 99%;
-    overflow: hidden;
-    // max-width: $max-width !important;
+  .govuk-header {
+      // background-color: #753880 !important;
+      background-color: #fafafa !important;
+      border-bottom: none !important;
+      // padding: 1.25em 0.625em 0 0.625em;
+      // margin: 0 !important;
+      // width: 99%;
+      overflow: hidden;
+      // max-width: $max-width !important;
+    .govuk-header__container{
+      border-bottom: 0 !important;
+    }
+    img {
+      // filter: brightness(0) saturate(1) invert(1);
+    }
   };
-  .govuk-header__container{
-    border-bottom: 0 !important;
-  }
-  img {
-    filter: brightness(0) saturate(1) invert(1);
-  }
   .moj-button-menu{
     width:37px;
   }
   @media screen and (min-width: 1200px) {
-      .moj-button-menu {
-        width:375px;
-      }
+    .moj-button-menu {
+      width:375px;
+    }
   }
 </style>
