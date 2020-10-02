@@ -1,45 +1,52 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown"
+    class="countdown govuk-!-padding-2"
     :class="bckClass"
   >
-    <div class="float-left govuk-grid-column-one-third">
-      <slot
-        name="left-slot"
-      />
-    </div>
-    <div class="govuk-grid-column-one-third">
-      <span>
-        <span style="margin-right: 5px;">
-          {{ mobileView ? '' : 'Time Remaining:' }}
-        </span>
-        <span 
-          v-if="hours" 
+    <div class="govuk-!-margin-bottom-1 govuk-width-container">
+      <div class="text-left govuk-grid-column-one-third">
+        <div
+          class="header-background clearfix"
+          style="display: flex;"
         >
-          {{ hours | zeroPad }}:
-        </span>
-        <span>
-          {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
-        </span>
-        <svg
-          v-if="bckClass"
-          class="moj-banner__icon"
-          focusable="false"
-          xmlns="http://www.w3.org/2000/svg"
-          height="25"
-          width="25"
-        >
-          <path
-            d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
+          <slot
+            name="left-slot"
           />
-        </svg>
-      </span>
-    </div>
-    <div class="float-right govuk-grid-column-one-third">
-      <slot
-        name="right-slot"
-      />
+        </div>
+      </div>
+      <div class="text-center govuk-grid-column-one-third">
+        <span>
+          <span style="margin-right: 5px;">
+            {{ mobileView ? '' : 'Time Remaining:' }}
+          </span>
+          <span 
+            v-if="hours" 
+          >
+            {{ hours | zeroPad }}:
+          </span>
+          <span>
+            {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+          </span>
+          <svg
+            v-if="bckClass"
+            class="moj-banner__icon"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            height="25"
+            width="25"
+          >
+            <path
+              d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="text-right govuk-grid-column-one-third">
+        <slot
+          name="right-slot"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -157,8 +164,7 @@ export default {
     color: white;
     text-align: center;
     font-weight: bold;
-    padding: 10px 0;
-    display: flex;
+    padding-bottom: 10px;
     position: fixed;
     width: 100%;
     top: 0;
@@ -174,13 +180,19 @@ export default {
 
   }
 
-  .float-right {
+  .text-right {
     text-align: right !important;
+    min-height: 1px;
   }
 
-  .float-left {
+  .text-center {
+    text-align: center !important;
+    min-height: 1px;
+  }
+
+  .text-left {
     text-align: left !important;
-    left: 0;
+    min-height: 1px;
   }
 
 </style>

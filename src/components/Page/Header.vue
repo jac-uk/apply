@@ -187,11 +187,11 @@ export default {
     }
   };
   .moj-button-menu{
-    width:37px;
+    // width:37px;
   }
   @media screen and (min-width: 1200px) {
     .moj-button-menu {
-      width:375px;
+      // width:375px;
     }
   }
 </style>
