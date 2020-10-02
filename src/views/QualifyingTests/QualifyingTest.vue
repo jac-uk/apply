@@ -17,16 +17,17 @@
         <template 
           v-slot:left-slot
         >
-          <a
+          <span
             v-if="showPrevious"
-            class="govuk-link countdown-link"
-            href=""
-            @click.prevent="btnPrevious"
           >
-            <span>
-              <span>❮ {{ isMobile ? 'Previous' : 'Previous Question' }}</span>
-            </span>
-          </a>
+            <a 
+              href=""
+              class="govuk-link countdown-link"
+              @click.prevent="btnPrevious"
+            >
+              ❮ {{ isMobile ? 'Previous' : 'Previous Question' }}
+            </a>
+          </span>
         </template>
         <template
           v-slot:right-slot
@@ -198,7 +199,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
   .govuk-width-container{
     max-width: 100%;
