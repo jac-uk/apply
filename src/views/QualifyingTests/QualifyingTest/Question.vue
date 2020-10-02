@@ -1,5 +1,10 @@
 <template>
   <div class="govuk-grid-column-two-thirds">
+    <Banner
+      v-if="questionStartedOnPreviousTest"
+      status="warning"
+      message="You cannot amend your answer for this question as it was started on a previous test"
+    />
     <form
       ref="formRef"
       @submit.prevent="save"
@@ -20,7 +25,7 @@
           >
             Skip
           </button>
-          <button 
+          <button
             class="moj-button-menu__item govuk-button"
             :disabled="!canSaveAndContinue"
           >
@@ -36,11 +41,13 @@ import firebase from '@/firebase';
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
 import { QUALIFYING_TEST } from '@/helpers/constants';
+import Banner from '@/components/Page/Banner';
 
 export default {
   components: {
     CriticalAnalysis,
     SituationalJudgement,
+    Banner,
   },
   data() {
     const questionNumber = this.$route.params.questionNumber;
@@ -86,7 +93,18 @@ export default {
     questionType() {
       return this.qualifyingTestResponse.qualifyingTest.type;
     },
+    questionStartedOnPreviousTest() {
+      if (this.response.started && this.response.completed) {
+        if (this.response.started < this.qualifyingTestResponse.qualifyingTest.startDate) {
+          return true;
+        }
+      }
+      return false;
+    },
     canSaveAndContinue() {
+      if (this.questionStartedOnPreviousTest) {
+        return false;
+      }
       switch (this.qualifyingTestResponse.qualifyingTest.type) {
       case QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT:
         return this.response.selection.mostAppropriate >= 0 && this.response.selection.leastAppropriate >= 0;
