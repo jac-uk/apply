@@ -11,7 +11,7 @@
       <Countdown2
         v-if="testInProgress && !isInformationPage"
         :start-time="qualifyingTestResponse.statusLog.started"	
-        :duration="10000000"
+        :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
         :alert="1"
         :mobile-view="isMobile"
