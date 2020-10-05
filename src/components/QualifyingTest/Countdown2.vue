@@ -70,8 +70,8 @@ export default {
       required: true,
     },
     endTime: {
-      type: Date,
-      required: true,
+      type: [String, Date],
+      default: 'Fri Dec 31 2049 23:59:59 GMT+0000 (Greenwich Mean Time)',
     },
     mobileView: {
       type: Boolean,
