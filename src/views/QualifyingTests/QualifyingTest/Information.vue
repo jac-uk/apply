@@ -44,7 +44,7 @@
         </li>
       </ul>
 
-      <template v-if="additionalInstructions.length">
+      <template v-if="hasAdditionalInstructions">
         <h2 class="govuk-heading-m">
           Additional instructions
         </h2>
@@ -156,6 +156,13 @@ export default {
     },
     hasCompleted() {
       return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.COMPLETED && this.qualifyingTestResponse.statusLog.completed != null;
+    },
+    hasAdditionalInstructions(){
+      let result;
+      this.additionalInstructions.forEach(instruction => {
+        result = !!Object.keys(instruction).length;
+      });
+      return result;
     },
     qtNotActivatedYet() {
       return this.qualifyingTestResponse.status === QUALIFYING_TEST.STATUS.CREATED;
