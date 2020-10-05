@@ -70,8 +70,8 @@ export default {
       required: true,
     },
     endTime: {
-      type: [String, Date],
-      default: 'Fri Dec 31 2049 23:59:59 GMT+0000 (Greenwich Mean Time)',
+      type: Date,
+      default: null,
     },
     mobileView: {
       type: Boolean,
@@ -110,11 +110,13 @@ export default {
     end.setMinutes(end.getMinutes() + this.duration);
 
     // #495 Absolute End
-    const absoluteEnd = new Date(this.endTime);
-    const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
-  
-    if (isAbsoluteEndBeforetheEnd) {
-      end = absoluteEnd;
+    if (this.endTime !== null) {
+      const absoluteEnd = new Date(this.endTime);
+      const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
+    
+      if (isAbsoluteEndBeforetheEnd) {
+        end = absoluteEnd;
+      }
     }
     // END #495 Absolute End
 
