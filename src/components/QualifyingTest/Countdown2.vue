@@ -100,7 +100,6 @@ export default {
   mounted() {
     const start = new Date(this.startTime);
     let end = new Date(this.startTime);
-
     end.setMinutes(end.getMinutes() + this.duration);
 
     // #495 Absolute End
