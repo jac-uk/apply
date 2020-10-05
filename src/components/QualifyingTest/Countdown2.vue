@@ -111,9 +111,9 @@ export default {
 
     // #495 Absolute End
     const absoluteEnd = new Date(this.endTime);
-    const isAbsluteEndBeforeTheEnd = absoluteEnd < end;
+    const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
   
-    if (isAbsluteEndBeforeTheEnd) {
+    if (isAbsoluteEndBeforetheEnd) {
       end = absoluteEnd;
     }
     // END #495 Absolute End
