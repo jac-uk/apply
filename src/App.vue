@@ -4,8 +4,8 @@
 
     <main
       id="main-content"
-      class="govuk-width-container govuk-main-wrapper govuk-main-wrapper--auto-spacing"
-      :class="fullPageMode ? 'govuk-!-margin-0' : ''"
+      class="govuk-width-container"
+      :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing'"
       role="main"
     >
       <RouterView />
@@ -43,5 +43,6 @@ export default {
   .page-container {
     position: relative;
     min-height: 100%;
+    overflow: hidden;
   }
 </style>

@@ -40,6 +40,6 @@
 <style lang="scss" >
   .govuk-footer {
     display: flow-root;
-    width: 99%;
+    width: 100%;
   };
 </style>

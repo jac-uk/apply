@@ -4,7 +4,6 @@
       <div class="govuk-header__container govuk-!-margin-bottom-1 govuk-width-container">
         <div
           class="header-background clearfix"
-          style="display: flex;"
         >
           <div class="govuk-grid-column-two-thirds organisation__margin-bottom">
             <div class="gem-c-organisation-logo brand--ministry-of-justice">
@@ -173,7 +172,7 @@ export default {
   .govuk-header {
       // background-color: #753880 !important;
       background-color: #fafafa !important;
-      border-bottom: none !important;
+      border-bottom: 1px solid #b1b4b6 !important;
       // padding: 1.25em 0.625em 0 0.625em;
       // margin: 0 !important;
       // width: 99%;
@@ -187,11 +186,11 @@ export default {
     }
   };
   .moj-button-menu{
-    width:37px;
+    // width:37px;
   }
   @media screen and (min-width: 1200px) {
     .moj-button-menu {
-      width:375px;
+      // width:375px;
     }
   }
 </style>

@@ -1,5 +1,8 @@
 <template>
-  <div class="qt_page">
+  <div
+    class="qt_page"
+    style="word-break:break-word;"
+  >
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
@@ -203,7 +206,7 @@ export default {
 <style lang="scss" scoped>
 
   .govuk-width-container{
-    max-width: 100%;
+    width: 100%;
     padding-top: 0 !important;
   }
 
@@ -212,6 +215,7 @@ export default {
   }
 
   .qt_page {
+    width: 100vw !important;
     padding-top: 60px;
   }
 
