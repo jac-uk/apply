@@ -1,5 +1,8 @@
 <template>
-  <div class="qt_page">
+  <div
+    class="qt_page"
+    style="word-break:break-word;"
+  >
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
@@ -7,7 +10,8 @@
     <template v-else>
       <Countdown2
         v-if="testInProgress && !isInformationPage"
-        :start-time="qualifyingTestResponse.statusLog.started"	
+        :start-time="qualifyingTestResponse.statusLog.started"
+        :end-time="qualifyingTestResponse.qualifyingTest.endDate"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
         :warning="5"
         :alert="1"
@@ -17,15 +21,17 @@
         <template 
           v-slot:left-slot
         >
-          <a
+          <span
             v-if="showPrevious"
-            class="govuk-link countdown-link"
-            href=""
-            @click.prevent="btnPrevious"
           >
-            <span>〈 </span>
-            {{ isMobile ? 'Previous' : 'Previous Question' }}
-          </a>
+            <a 
+              href=""
+              class="govuk-link countdown-link"
+              @click.prevent="btnPrevious"
+            >
+              ❮ {{ isMobile ? 'Previous' : 'Previous Question' }}
+            </a>
+          </span>
         </template>
         <template
           v-slot:right-slot
@@ -56,11 +62,14 @@
         message="Are you sure you want to exit this test? The timer will continue ticking down even if you do?"
         @confirmed="btnExitModalConfirmed"
       />
-
-      <RouterView 
-        :key="$route.fullPath" 
-        :time-is-up="timerEnded" 
-      />
+      <div
+        class="govuk-!-margin-left-5 govuk-!-margin-right-5"
+      >
+        <RouterView 
+          :key="$route.fullPath" 
+          :time-is-up="timerEnded" 
+        />
+      </div>
     </template>
   </div>
 </template>
@@ -194,17 +203,20 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
-.countdown-link {
-  color: white !important;
-}
-
-.qt_page {
-  padding-top: 65px;
-  
-  @include govuk-media-query($from: tablet) {
-    padding-top: 40px;
+  .govuk-width-container{
+    width: 100%;
+    padding-top: 0 !important;
   }
-}
-</style>
+
+  .countdown-link {
+    color: white !important;
+  }
+
+  .qt_page {
+    width: 100vw !important;
+    padding-top: 60px;
+  }
+
+</style>6
