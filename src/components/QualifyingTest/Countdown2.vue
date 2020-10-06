@@ -69,6 +69,10 @@ export default {
       type: Date,
       required: true,
     },
+    endTime: {
+      type: Date,
+      default: null,
+    },
     mobileView: {
       type: Boolean,
       default: false,
@@ -102,8 +106,19 @@ export default {
   },
   mounted() {
     const start = new Date(this.startTime);
-    const end = new Date(this.startTime);
+    let end = new Date(this.startTime);
     end.setMinutes(end.getMinutes() + this.duration);
+
+    // #495 Absolute End
+    if (this.endTime !== null) {
+      const absoluteEnd = new Date(this.endTime);
+      const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
+    
+      if (isAbsoluteEndBeforetheEnd) {
+        end = absoluteEnd;
+      }
+    }
+    // END #495 Absolute End
 
     this.start = start.getTime();
     this.end = end.getTime();
