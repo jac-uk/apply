@@ -56,6 +56,12 @@ export default {
     SituationalJudgement,
     Banner,
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.isComingFromReview = from.name === 'qualifying-test-review';
+      return true;
+    });
+  },
   data() {
     const questionNumber = this.$route.params.questionNumber;
     const questionNumberIndex = questionNumber - 1;
@@ -128,7 +134,7 @@ export default {
       return false;
     },
     nextPage() {
-      if (this.isLastQuestion || this.hasStartedAllQuestions) {
+      if (this.isLastQuestion || this.hasStartedAllQuestions || this.isComingFromReview) {
         return {
           name: 'qualifying-test-review',
         };
