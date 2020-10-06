@@ -11,18 +11,21 @@
         :key="index"
       >
         <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-          {{ item.answer }}
+          {{ item.answer }} 
         </h3>
-        <RadioItem
-          :value="index"
-          field="mostAppropriate"
-          label="Most appropriate"
-        />
-        <RadioItem
-          :value="index"
-          field="leastAppropriate"
-          label="Least appropriate"
-        />
+        <p>
+          <RadioItem
+            :value="index"
+            field="mostAppropriate"
+            label="Most appropriate"
+          />
+          <br>
+          <RadioItem
+            :value="index"
+            field="leastAppropriate"
+            label="Least appropriate"
+          />
+        </p>
       </div>
     </RadioGroup>
   </fieldset>

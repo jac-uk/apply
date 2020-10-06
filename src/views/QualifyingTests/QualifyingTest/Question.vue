@@ -16,6 +16,13 @@
         :options="question.options"
       />
 
+      <p 
+        v-if="!canSaveAndContinue && isSituationalJudgment" 
+        class="govuk-hint"
+      >
+        Please select one option 'Most appropriate' and one 'Least appropriate' before clicking on 'Save and continue'.
+      </p>
+
       <div class="moj-button-menu">
         <div class="moj-button-menu__wrapper">
           <button
@@ -93,6 +100,9 @@ export default {
     questionType() {
       return this.qualifyingTestResponse.qualifyingTest.type;
     },
+    isSituationalJudgment() {
+      return this.questionType === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT;
+    },
     questionStartedOnPreviousTest() {
       if (this.response.started && this.response.completed) {
         if (this.response.started < this.qualifyingTestResponse.qualifyingTest.startDate) {
@@ -107,7 +117,11 @@ export default {
       }
       switch (this.qualifyingTestResponse.qualifyingTest.type) {
       case QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT:
-        return this.response.selection.mostAppropriate >= 0 && this.response.selection.leastAppropriate >= 0;
+        // eslint-disable-next-line no-case-declarations
+        const haveMost = this.response.selection.mostAppropriate !== null && this.response.selection.mostAppropriate !== undefined;
+        // eslint-disable-next-line no-case-declarations
+        const haveLeast = this.response.selection.leastAppropriate !== null && this.response.selection.leastAppropriate !== undefined;
+        return haveMost && haveLeast;
       case QUALIFYING_TEST.TYPE.CRITICAL_ANALYSIS:
         return this.response.selection != null && this.response.selection >= 0;
       }
