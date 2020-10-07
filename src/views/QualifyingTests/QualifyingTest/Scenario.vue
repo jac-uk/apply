@@ -101,6 +101,12 @@ export default {
       default: false,
     },
   },
+  beforeRouteEnter (to, from, next) {
+    next(vm => {
+      vm.isComingFromReview = from.name === 'qualifying-test-review';
+      return true;
+    });
+  },
   data() {
     const scenarioNumber = this.$route.params.scenarioNumber;
     const questionNumber = this.$route.params.questionNumber;
@@ -155,7 +161,7 @@ export default {
       return this.scenario.options[this.questionNumber - 1];
     },
     nextPage() {
-      if (this.isLastScenario && this.isLastQuestion) {
+      if ((this.isLastScenario && this.isLastQuestion) || this.isComingFromReview) {
         return {
           name: 'qualifying-test-review',
         };
