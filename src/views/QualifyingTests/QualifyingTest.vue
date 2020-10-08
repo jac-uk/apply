@@ -63,7 +63,7 @@
         @confirmed="btnExitModalConfirmed"
       />
       <div
-        class="govuk-!-margin-left-5 govuk-!-margin-right-5 govuk-width-container"
+        class="govuk-!-margin-left-5 govuk-!-margin-right-5"
       >
         <RouterView
           :key="$route.fullPath"
@@ -215,8 +215,7 @@ export default {
   }
 
   .qt_page {
-    width: 100vw !important;
     padding-top: 60px;
   }
 
-</style>6
+</style>
