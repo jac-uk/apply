@@ -18,13 +18,13 @@
         :mobile-view="isMobile"
         @change="handleCountdown"
       >
-        <template 
+        <template
           v-slot:left-slot
         >
           <span
             v-if="showPrevious"
           >
-            <a 
+            <a
               href=""
               class="govuk-link countdown-link"
               @click.prevent="btnPrevious"
@@ -45,7 +45,7 @@
           </a>
         </template>
       </Countdown2>
-      <Modal 
+      <Modal
         ref="timeElapsedModalRef"
         title="Time has expired"
         button-text="I understand"
@@ -54,7 +54,7 @@
         @confirmed="btnModalConfirmed"
       />
 
-      <Modal 
+      <Modal
         ref="exitModalRef"
         title="Are you sure?"
         button-text="Exit test"
@@ -65,9 +65,9 @@
       <div
         class="govuk-!-margin-left-5 govuk-!-margin-right-5"
       >
-        <RouterView 
-          :key="$route.fullPath" 
-          :time-is-up="timerEnded" 
+        <RouterView
+          :key="$route.fullPath"
+          :time-is-up="timerEnded"
         />
       </div>
     </template>
@@ -105,9 +105,9 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
     testInProgress() {
-      const result = this.qualifyingTestResponse 
-        && this.qualifyingTestResponse.statusLog 
-        && this.qualifyingTestResponse.statusLog.started 
+      const result = this.qualifyingTestResponse
+        && this.qualifyingTestResponse.statusLog
+        && this.qualifyingTestResponse.statusLog.started
         && this.$store.getters['qualifyingTestResponse/testInProgress'];
       return result;
     },
@@ -181,6 +181,7 @@ export default {
     handleCountdown(params) {
       if (params.action === 'ended') {
         this.timerEnded = true;
+        this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
       }
     },
