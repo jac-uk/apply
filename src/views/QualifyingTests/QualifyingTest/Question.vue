@@ -3,8 +3,12 @@
     <Banner
       v-if="questionStartedOnPreviousTest"
       status="warning"
-      message="You cannot amend your answer for this question as it was started on a previous test"
-    />
+    >
+      <template>
+        You cannot amend your answer for this question as it was started on a previous test
+      </template>
+    </Banner>
+    
     <form
       ref="formRef"
       @submit.prevent="save"

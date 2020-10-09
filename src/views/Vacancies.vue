@@ -46,6 +46,22 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
+        <Banner
+          status="information"
+        > 
+          <template>
+            <span>
+              You are invited to apply for 
+              <a
+                href=""
+                class="govuk-link"
+              >
+                {{ "null" }}
+              </a>
+            </span>
+          </template>
+        </Banner>
+
         <div class="openApplicationsList">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-6 govuk-!-margin-top-6">
             Open vacancies
@@ -277,8 +293,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Banner from '@/components/Page/Banner';
 
 export default {
+  components: {
+    Banner,
+  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',
