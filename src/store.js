@@ -8,6 +8,7 @@ import auth from '@/store/auth';
 import vacancies from '@/store/vacancies';
 import vacancy from '@/store/vacancy';
 import candidate from '@/store/candidate';
+import invitations from '@/store/invitations';
 import applications from '@/store/applications';
 import application from '@/store/application';
 import qualifyingTestResponse from '@/store/qualifyingTestResponse';
@@ -22,6 +23,7 @@ const store = new Vuex.Store({
     vacancies,
     vacancy,
     candidate,
+    invitations,
     applications,
     application,
     qualifyingTestResponse,

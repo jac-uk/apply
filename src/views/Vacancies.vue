@@ -46,6 +46,8 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
+        <!-- if invite -->
+        {{ invitations.length }}
         <Banner
           status="information"
         > 
@@ -298,6 +300,12 @@ import Banner from '@/components/Page/Banner';
 export default {
   components: {
     Banner,
+  },
+  data() {
+    const invitations = this.$store.getters['invitations/data']();
+    return {
+      invitations: invitations,
+    };
   },
   computed: {
     ...mapGetters('vacancies', [
