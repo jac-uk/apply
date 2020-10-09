@@ -5,10 +5,13 @@
     <main
       id="main-content"
       class="govuk-width-container"
-      :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing'"
       role="main"
     >
-      <RouterView />
+      <div
+        :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing'"
+      >
+        <RouterView />
+      </div>
     </main>
 
     <Footer
