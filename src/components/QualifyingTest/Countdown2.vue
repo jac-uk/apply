@@ -184,6 +184,7 @@ export default {
     width: 100%;
     top: 0;
     z-index: 9;
+    left: 0;
 
     &.alert {
       background-color: red;

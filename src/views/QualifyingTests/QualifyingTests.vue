@@ -192,7 +192,7 @@ export default {
       const timeout = this.isTimeOut(obj.status, obj.statusLog.completed, this.isTimeLeft(obj));
 
       if (timeout) {
-        return 'DNF';
+        return 'Completed - Out of time';
       }
 
       if (startedOrCompleted) {

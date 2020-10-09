@@ -47,7 +47,7 @@
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
         <div class="openApplicationsList">
-          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6 govuk-!-margin-top-6">
             Open vacancies
           </h1>
 
@@ -140,7 +140,7 @@
         </div>
 
         <div class="futureApplicationsList">
-          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
+          <h1 class="govuk-heading-xl govuk-!-margin-bottom-6 govuk-!-margin-top-6">
             Future applications
           </h1>
 
@@ -204,7 +204,7 @@
           </ul>
         </div>
 
-        <div class="inProgressApplicationsList">
+        <!-- <div class="inProgressApplicationsList">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
             Exercises in progress
           </h1>
@@ -269,7 +269,7 @@
               <hr class="govuk-section-break govuk-section-break--visible">
             </li>
           </ul>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
