@@ -46,21 +46,25 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
-        <!-- if invite -->
-        {{ invitations.length }}
         <Banner
+          v-if="invitations.length"
           status="information"
         > 
           <template>
-            <span>
-              You are invited to apply for 
-              <a
-                href=""
-                class="govuk-link"
-              >
-                {{ "null" }}
-              </a>
-            </span>
+            <div
+              v-for="invite in invitations"
+              :key="invite.id"
+            >
+              <span>
+                You are invited to apply for 
+                <a
+                  href="" 
+                  class="govuk-link"
+                >
+                  {{ invite.vacancy.title }}
+                </a>
+              </span>
+            </div>
           </template>
         </Banner>
 
@@ -301,12 +305,6 @@ export default {
   components: {
     Banner,
   },
-  data() {
-    const invitations = this.$store.getters['invitations/data']();
-    return {
-      invitations: invitations,
-    };
-  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',
@@ -316,8 +314,12 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+    invitations() {
+      return this.$store.getters['invitations/data']();
+    },
   },
   created() {
+    this.$store.dispatch('invitations/bind');
     this.$store.dispatch('vacancies/bind');  
   },
   methods: {
