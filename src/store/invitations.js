@@ -13,8 +13,10 @@ export default {
   },
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
-      const firestoreRef = collection.where('candidate.email', '==', rootState.auth.currentUser.email);
-      return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
+      if (rootState.auth.currentUser){
+        const firestoreRef = collection.where('candidate.email', '==', rootState.auth.currentUser.email);
+        return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
+      }
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('records');

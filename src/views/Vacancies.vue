@@ -57,12 +57,11 @@
             >
               <span>
                 You are invited to apply for 
-                <a
-                  href="" 
-                  class="govuk-link"
+                <RouterLink
+                  :to="{ name: 'vacancy-details', params: { id: invite.vacancy.id } }"
                 >
-                  {{ invite.vacancy.title }}
-                </a>
+                  {{ invite.vacancy.name }}
+                </RouterLink>
               </span>
             </div>
           </template>
