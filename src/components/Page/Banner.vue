@@ -1,6 +1,5 @@
 <template>
   <div
-    v-if="message"
     :class="status ? 'moj-banner moj-banner--'+status : 'moj-banner'"
   >
     <svg
@@ -18,15 +17,11 @@
 
     <div class="moj-banner__message">
       <span class="moj-banner__assistive">{{ status }}</span>
-      <span 
-        v-if="!link"
+      <span
         class="moj-banner__text"
-      >{{ message }}</span>
-      <a
-        v-else
-        :href="link"
-        class="govuk-link moj-banner__text "
-      >{{ message }}</a>
+      >
+        <slot />
+      </span>
     </div>
   </div>
 </template>
@@ -40,16 +35,6 @@ const icons = {
 
 export default {
   props: {
-    message: {
-      type: String,
-      default: null,
-      // @TODO add validator?
-    },
-    link: {
-      type: String,
-      default: null,
-      // @TODO add validator?
-    },
     status: {
       type: String,
       default: null,
