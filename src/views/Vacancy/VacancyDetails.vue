@@ -87,8 +87,6 @@
         details about what you’ll need to prepare for the day.
       </p> -->
 
-      <!-- {{ isVacancyOpen && vacancy.inviteOnly && !!user && invitations.some((invite) => invite.vacancy.id === vacancy.id) }} -->
-
       <RouterLink
         v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button"

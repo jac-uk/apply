@@ -10,6 +10,26 @@
       <div
         :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing'"
       >
+        <Banner
+          v-if="invitations.length"
+          status="information"
+        > 
+          <template>
+            <div
+              v-for="invite in invitations"
+              :key="invite.id"
+            >
+              <span>
+                You are invited to apply for 
+                <RouterLink
+                  :to="{ name: 'vacancy-details', params: { id: invite.vacancy.id } }"
+                >
+                  {{ invite.vacancy.name }}
+                </RouterLink>
+              </span>
+            </div>
+          </template>
+        </Banner>
         <RouterView />
       </div>
     </main>
@@ -23,17 +43,25 @@
 <script>
 import Header from '@/components/Page/Header';
 import Footer from '@/components/Page/Footer';
+import Banner from '@/components/Page/Banner';
 
 export default {
   name: 'App',
   components: {
     Header,
     Footer,
+    Banner,
   },
   computed: {
     fullPageMode() {
       return this.$route.meta.fullPageMode;
     },
+    invitations() {
+      return this.$store.getters['invitations/data']();
+    },
+  },
+  created(){
+    this.$store.dispatch('invitations/bind');
   },
 };
 </script>
