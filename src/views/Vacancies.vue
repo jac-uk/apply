@@ -46,6 +46,27 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
+        <Banner
+          v-if="invitations.length"
+          status="information"
+        > 
+          <template>
+            <div
+              v-for="invite in invitations"
+              :key="invite.id"
+            >
+              <span>
+                You are invited to apply for 
+                <RouterLink
+                  :to="{ name: 'vacancy-details', params: { id: invite.vacancy.id } }"
+                >
+                  {{ invite.vacancy.name }}
+                </RouterLink>
+              </span>
+            </div>
+          </template>
+        </Banner>
+
         <div class="openApplicationsList">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-6 govuk-!-margin-top-6">
             Open vacancies
@@ -277,8 +298,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import Banner from '@/components/Page/Banner';
 
 export default {
+  components: {
+    Banner,
+  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',
@@ -288,8 +313,12 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+    invitations() {
+      return this.$store.getters['invitations/data']();
+    },
   },
   created() {
+    this.$store.dispatch('invitations/bind');
     this.$store.dispatch('vacancies/bind');  
   },
   methods: {
