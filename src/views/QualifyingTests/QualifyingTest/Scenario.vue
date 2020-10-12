@@ -5,7 +5,7 @@
       class="js-enabled"
       @submit.prevent="save"
     >
-      <h1 
+      <h1
         class="govuk-heading-l"
       >
         {{ qualifyingTestResponse.qualifyingTest.title }}
@@ -13,7 +13,7 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
           <p>{{ qualifyingTestResponse.testQuestions.introduction }}</p>
-          <div 
+          <div
             class="govuk-character-count"
           >
             <TextareaInput
@@ -28,7 +28,7 @@
               <span>{{ wordsCounter }}</span>
               <span>/</span>
               <span>{{ question.wordLimit }}</span>
-              <span> words</span> 
+              <span> words</span>
               <div v-if="reachMaxWords">
                 You have reached the limit of <strong>{{ question.wordLimit }}</strong> words for this answer. Please remove some words.
               </div>
@@ -46,7 +46,7 @@
               </button>
               <button
                 class="moj-button-menu__item govuk-button"
-                :disabled="reachMaxWords"
+                :disabled="reachMaxWords || isEmpty"
               >
                 Save and continue
               </button>
@@ -57,17 +57,17 @@
         <div class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop">
           <div class="jac-scenario__additional">
             <dl ref="accordion">
-              <span 
+              <span
                 v-for="(document, index) of scenario.documents"
                 :key="index"
               >
-                <dt 
+                <dt
                   :class="`govuk-heading-m ${index === 0 ? 'open' : 'close'}`"
                   @click.prevent="clickAdditional(index)"
                 >
                   {{ document.title | showAlternative(`Additional Reading ${index}`) }}
                   <button>
-                    <img 
+                    <img
                       :src="icon(index)"
                     >
                   </button>
@@ -189,6 +189,9 @@ export default {
       const reachedMaxWords = this.wordsCounter > maxWords;
       return reachedMaxWords;
     },
+    isEmpty () {
+      return !this.response.text || this.response.text.trim().length === 0;
+    },
   },
   watch: {
     timeIsUp: function (newVal, oldVal) {
@@ -198,7 +201,7 @@ export default {
         }
       }
     },
-  },  
+  },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
@@ -239,24 +242,24 @@ export default {
         const image = item.querySelectorAll('button img')[0];
         if (index === i) {
           if (item.classList.contains('open')) {
-            item.classList.remove('open');   
+            item.classList.remove('open');
             item.classList.add('close');
             image.src = plusIcon;
           } else {
-            item.classList.remove('close');   
+            item.classList.remove('close');
             item.classList.add('open');
             image.src = minusIcon;
           }
         } else {
-          item.classList.remove('open');   
+          item.classList.remove('open');
           item.classList.add('close');
           image.src = plusIcon;
-        }        
+        }
       });
     },
     icon(index) {
       if (index === 0) {
-        return minusIcon; 
+        return minusIcon;
       } else {
         return plusIcon;
       }
