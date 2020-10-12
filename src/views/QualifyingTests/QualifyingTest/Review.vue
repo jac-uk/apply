@@ -179,6 +179,7 @@ export default {
   .govuk-tag {
     margin-top: 0;
     margin-bottom: 0;
+    white-space: nowrap;
   }
   .display-flex{
     display: flex;

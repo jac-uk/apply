@@ -34,6 +34,14 @@ export default {
       };
       await context.dispatch('save', data);
     },
+    outOfTime: async (context) => {
+      const data = {
+        status: QUALIFYING_TEST.STATUS.COMPLETED,
+        'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
+        'isOutOfTime': true,
+      };
+      await context.dispatch('save', data);
+    },
   },
   state: {
     record: null,
@@ -41,7 +49,6 @@ export default {
   getters: {
     id: (state) => {
       if (state.record === null) return null;
-
       return state.record.id;
     },
     data: (state) => () => {
@@ -57,7 +64,7 @@ export default {
     },
     timeLeft: (state) => {
       return helperTimeLeft(state.record);
-    }, 
+    },
     testInProgress: (state, getters) => {
       return state.record.status === QUALIFYING_TEST.STATUS.STARTED
         && getters.isOpen
