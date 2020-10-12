@@ -181,6 +181,7 @@ export default {
     handleCountdown(params) {
       if (params.action === 'ended') {
         this.timerEnded = true;
+        this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
       }
     },
