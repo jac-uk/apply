@@ -8,7 +8,7 @@
       role="main"
     >
       <div
-        :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing'"
+        :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
       >
         <Banner
           v-if="invitations.length"
@@ -67,9 +67,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .govuk-main-wrapper {
-    padding: 0px;
-  }
 
   .page-container {
     position: relative;
