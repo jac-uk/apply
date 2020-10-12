@@ -315,6 +315,9 @@ export default {
   padding: 20px;
   margin: 0;
   border-bottom: 1px solid silver;
+
+  height: 56vh;
+  overflow-y: scroll;
 }
 
 </style>
