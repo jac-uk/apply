@@ -216,8 +216,7 @@ export default {
   }
 
   .qt_page {
-    width: 100vw !important;
     padding-top: 60px;
   }
 
-</style>6
+</style>
