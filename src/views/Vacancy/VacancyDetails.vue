@@ -87,13 +87,24 @@
         details about what you’ll need to prepare for the day.
       </p> -->
 
+      <!-- {{ isVacancyOpen && vacancy.inviteOnly && !!user && invitations.some((invite) => invite.vacancy.id === vacancy.id) }} -->
+
       <RouterLink
-        v-if="isVacancyOpen"
+        v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >
-        Check if you're eligible and apply
+        Check if you're eligible and apply 
+      </RouterLink>
+
+      <RouterLink
+        v-else-if="userIsInvited"
+        class="govuk-button"
+        data-module="govuk-button"
+        :to="{ name: 'vacancy-message' }"
+      >
+        You've been invited to this exercise, click here to apply 
       </RouterLink>
 
       <p
@@ -230,9 +241,18 @@ export default {
     vacancy () {
       return this.$store.state.vacancy.record;
     },
+    user() {
+      return this.$store.state.auth.currentUser;
+    },
     timeline() {
       const timeline = exerciseTimeline(this.vacancy);
       return createTimeline(timeline);
+    },
+    invitations() {
+      return this.$store.getters['invitations/data']();
+    },
+    userIsInvited() {
+      return this.vacancy.inviteOnly && !!this.user && this.invitations.some((invite) => invite.vacancy.id === this.vacancy.id);
     },
     showSubscribeForAlerts() {
       if (this.vacancy.subscriberAlertsUrl) {

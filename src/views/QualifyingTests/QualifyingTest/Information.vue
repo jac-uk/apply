@@ -9,9 +9,12 @@
 
     <Banner
       v-if="hasCompleted"
-      message="You have already finished this test."
       status="information"
-    />
+    >
+      <template>
+        You have already finished this test.
+      </template>
+    </Banner>
 
     <template v-else>
       <ErrorSummary :errors="errors" />
@@ -65,9 +68,12 @@
       >
         <Banner
           v-if="qtNotActivatedYet"
-          message="This Qualifying Test is not open yet."
           status="information"
-        />
+        >
+          <template>
+            This Qualifying Test is not open yet.
+          </template>
+        </Banner>
 
         <fieldset
           v-else

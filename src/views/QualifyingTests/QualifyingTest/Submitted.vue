@@ -64,10 +64,17 @@
       v-else-if="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
     >
       <Banner
-        :link="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
-        message="Click here to fill out our feedback survey"
         status="information"
-      />
+      >
+        <template>
+          <a 
+            :href="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
+            class="govuk-link"
+          >
+            Click here to fill out our feedback survey
+          </a>
+        </template>
+      </Banner>
     </div>
   </div>
 </template>
