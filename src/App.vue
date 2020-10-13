@@ -13,14 +13,14 @@
         <Banner
           v-if="invitations && invitations.length"
           status="information"
-        > 
+        >
           <template>
             <div
               v-for="invite in invitations"
               :key="invite.id"
             >
               <span>
-                You are invited to apply for 
+                You are invited to apply for
                 <RouterLink
                   :to="{ name: 'vacancy-details', params: { id: invite.vacancy.id } }"
                 >
@@ -57,7 +57,7 @@ export default {
       return this.$route.meta.fullPageMode;
     },
     invitations() {
-      return this.$store.getters['invitations/data']();
+      return this.$store.state.invitations.records;
     },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
