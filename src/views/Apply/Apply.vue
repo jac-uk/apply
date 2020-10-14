@@ -30,8 +30,16 @@ export default {
     try {
       const today = Date.now();
       const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
+      let userInvitation = null;
 
-      if (vacancy === null) {
+      if (vacancy.inviteOnly) {
+        const invitations = await this.$store.dispatch('invitations/bind');
+        userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === this.vacancyId) : null;
+        if (userInvitation) {
+          await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
+        }
+      }
+      if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {
         this.redirectToErrorPage();
       } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
         this.redirectToVacancyDetails();
@@ -54,7 +62,7 @@ export default {
   },
   methods: {
     redirectToErrorPage() {
-      this.$router.replace({ name: 'exercise-not-found' });
+      this.$router.replace({ name: 'not-found' });
     },
     redirectToVacancyDetails() {
       this.$router.replace({
