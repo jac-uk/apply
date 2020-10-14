@@ -11,7 +11,7 @@
         :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
       >
         <Banner
-          v-if="invitations.length"
+          v-if="invitations && invitations.length"
           status="information"
         > 
           <template>
@@ -59,9 +59,18 @@ export default {
     invitations() {
       return this.$store.getters['invitations/data']();
     },
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
   },
-  created(){
-    this.$store.dispatch('invitations/bind');
+  watch: {
+    isSignedIn: function (val) { 
+      if (val) {
+        this.$store.dispatch('invitations/bind');
+      } else {
+        this.$store.dispatch('invitations/unbind');
+      }
+    },
   },
 };
 </script>
