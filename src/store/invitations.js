@@ -1,4 +1,4 @@
-// import firebase from '@firebase/app';
+import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -21,6 +21,13 @@ export default {
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('records');
     }),
+    acceptInvitation: async (context, id) => {
+      const ref = collection.doc(id);
+      const data = {
+        'statusLog.accepted': firebase.firestore.FieldValue.serverTimestamp(),
+      };
+      await ref.update(data);
+    },
   },
   getters: {
     data: (state) => () => {
