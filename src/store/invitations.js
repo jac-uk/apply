@@ -1,4 +1,3 @@
-// import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -16,6 +15,7 @@ export default {
         const firestoreRef = collection
           .where('candidate.email', '==', rootState.auth.currentUser.email)
           .where('status', 'in', ['created', 'invited']);
+
         return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       }
     }),
