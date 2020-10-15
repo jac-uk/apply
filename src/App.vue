@@ -95,9 +95,11 @@ export default {
       deep: true,
       handler(val) { 
         if (val && val.length) {
-          this.$store.dispatch('vacancies/bind');
+          // if (this.$store.state.vacancies.records.length) { 
+          this.$store.dispatch('vacancies/bind', { vacancyIds: this.invitations.map(invite => invite.vacancy.id) });
+          // }
         }
-      },
+      }, 
     },
   },
 };

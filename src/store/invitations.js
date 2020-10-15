@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import firebase from '@firebase/app';
-=======
->>>>>>> bb4d1a60d339725184013060fb443093161e8142
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
