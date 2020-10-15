@@ -31,9 +31,12 @@ export default {
       const today = Date.now();
       const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
       let userInvitation = null;
+      let invitations = this.$store.invitations;
 
       if (vacancy.inviteOnly) {
-        const invitations = await this.$store.dispatch('invitations/bind');
+        if (!this.$store.invitations) {
+          invitations = await this.$store.dispatch('invitations/bind');
+        }
         userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === this.vacancyId) : null;
       }
       if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {

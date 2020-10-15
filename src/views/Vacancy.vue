@@ -25,7 +25,11 @@ export default {
     const id = this.$route.params.id;
     try {
       const vacancy = await this.$store.dispatch('vacancy/bind', id);
-      const invitations = await this.$store.dispatch('invitations/bind');
+      let invitations = this.$store.invitations;
+      if (!this.$store.invitations) {
+        invitations = await this.$store.dispatch('invitations/bind');
+      }
+
       const userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
 
       // if (vacancy.inviteOnly) {
