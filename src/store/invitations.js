@@ -27,6 +27,7 @@ export default {
       const ref = collection.doc(id);
       const data = {
         'statusLog.accepted': firebase.firestore.FieldValue.serverTimestamp(),
+        'status': 'accepted',
       };
       await ref.update(data);
     },

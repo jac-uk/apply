@@ -25,15 +25,15 @@ export default {
     const id = this.$route.params.id;
     try {
       const vacancy = await this.$store.dispatch('vacancy/bind', id);
-      let userInvitation = null;
+      const invitations = await this.$store.dispatch('invitations/bind');
+      const userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
 
-      if (vacancy.inviteOnly) {
-        const invitations = await this.$store.dispatch('invitations/bind');
-        userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
-        if (userInvitation) {
-          await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
-        }
-      }
+      // if (vacancy.inviteOnly) {
+      //   userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
+      // if (userInvitation) {
+      //   await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
+      // }
+      // }
       if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {
         this.redirectToErrorPage();
       } else {

@@ -35,9 +35,6 @@ export default {
       if (vacancy.inviteOnly) {
         const invitations = await this.$store.dispatch('invitations/bind');
         userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === this.vacancyId) : null;
-        if (userInvitation) {
-          await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
-        }
       }
       if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {
         this.redirectToErrorPage();
@@ -47,6 +44,9 @@ export default {
         await this.$store.dispatch('candidate/bind');
         await this.$store.dispatch('application/bind');
         if (!this.$store.state.application.record) {
+          if (userInvitation) {
+            await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
+          }
           await this.$store.dispatch('application/save', {
             status: 'draft',
             progress: { started: true },
@@ -62,15 +62,15 @@ export default {
   },
   methods: {
     redirectToErrorPage() {
-      this.$router.replace({ name: 'not-found' });
+      // this.$router.replace({ name: 'not-found' });
     },
     redirectToVacancyDetails() {
-      this.$router.replace({
-        name: 'vacancy-details',
-        params: {
-          id: this.vacancyId,
-        },
-      });
+      // this.$router.replace({
+      //   name: 'vacancy-details',
+      //   params: {
+      //     id: this.vacancyId,
+      //   },
+      // });
     },
   },
 };

@@ -247,7 +247,7 @@ export default {
       return createTimeline(timeline);
     },
     invitations() {
-      return this.$store.getters['invitations/data']();
+      return this.$store.state.invitations.records;
     },
     userIsInvited() {
       return this.vacancy.inviteOnly && !!this.user && this.invitations.some((invite) => invite.vacancy.id === this.vacancy.id);
