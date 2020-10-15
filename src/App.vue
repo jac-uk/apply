@@ -67,7 +67,6 @@ export default {
           if (this.vacancies.some(vac => vac.id === invite.vacancy.id)) {
             const validInvite = {
               name: this.vacancies.find(vacancy => vacancy.id === invite.vacancy.id).name,
-              status: invite.status,
               vacancyId: invite.vacancy.id,
             };
             result.push(validInvite);
