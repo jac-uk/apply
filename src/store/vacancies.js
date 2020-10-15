@@ -1,4 +1,4 @@
-import { firebase, firestore } from '@/firebase';
+import firebase, { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { isDate, isDateInFuture, parseEstimatedDate } from '@/helpers/date';
@@ -9,8 +9,7 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef }, params ) => {
       let firestoreRef = firestore.collection('vacancies');
-      if (params.vacancyIds) {
-        console.log(params);
+      if (params.vacancyIds.length) {
         firestoreRef = firestoreRef.where(firebase.firestore.FieldPath.documentId(), 'in', params.vacancyIds);
       }
       firestoreRef = firestoreRef.orderBy('referenceNumber', 'desc');

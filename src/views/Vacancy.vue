@@ -32,12 +32,6 @@ export default {
 
       const userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
 
-      // if (vacancy.inviteOnly) {
-      //   userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
-      // if (userInvitation) {
-      //   await this.$store.dispatch('invitations/acceptInvitation', userInvitation.id);
-      // }
-      // }
       if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {
         this.redirectToErrorPage();
       } else {
