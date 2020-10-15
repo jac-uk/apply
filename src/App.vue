@@ -10,26 +10,24 @@
       <div
         :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
       >
-        <Banner
-          v-if="invitations && invitations.length"
-          status="information"
+        <div
+          v-if="validInvitations.length"
         >
-          <template>
-            <div
-              v-for="invite in invitations"
-              :key="invite.id"
-            >
-              <span>
-                You are invited to apply for
-                <RouterLink
-                  :to="{ name: 'vacancy-details', params: { id: invite.vacancy.id } }"
-                >
-                  {{ invite.vacancy.name }}
-                </RouterLink>
-              </span>
-            </div>
-          </template>
-        </Banner>
+          <Banner
+            v-for="invite in validInvitations"
+            :key="invite.id"
+            status="information"
+          >
+            <span>
+              You've been invited to apply for
+              <RouterLink
+                :to="{ name: 'vacancy-details', params: { id: invite.vacancyId } }"
+              >
+                {{ invite.name }}
+              </RouterLink>
+            </span>
+          </Banner>
+        </div>
         <RouterView />
       </div>
     </main>
@@ -59,17 +57,47 @@ export default {
     invitations() {
       return this.$store.state.invitations.records;
     },
+    vacancies() {
+      return this.$store.getters['vacancies/openVacancies'];
+    },
+    validInvitations() {
+      const result = [];
+      if (this.invitations.length && this.vacancies.length) {
+        this.invitations.forEach(invite => {
+          if (this.vacancies.some(vac => vac.id === invite.vacancy.id)) {
+            const validInvite = {
+              name: this.vacancies.find(vacancy => vacancy.id === invite.vacancy.id).name,
+              vacancyId: invite.vacancy.id,
+            };
+            result.push(validInvite);
+          }
+        });
+      }
+      return result;
+    },
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
   },
   watch: {
-    isSignedIn: function (val) { 
-      if (val) {
-        this.$store.dispatch('invitations/bind');
-      } else {
-        this.$store.dispatch('invitations/unbind');
-      }
+    isSignedIn: {
+      immediate: true,
+      handler(val) { 
+        if (val) {
+          this.$store.dispatch('invitations/bind');
+        } else {
+          this.$store.dispatch('invitations/unbind');
+        }
+      },
+    },
+    invitations: {
+      immediate: true,
+      deep: true,
+      handler(val) { 
+        if (val && val.length) {
+          this.$store.dispatch('vacancies/bind');
+        }
+      },
     },
   },
 };
