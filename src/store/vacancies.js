@@ -9,10 +9,11 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef }, params ) => {
       let firestoreRef = firestore.collection('vacancies');
-      if (params.vacancyIds.length) {
+      if (params && params.vacancyIds.length) {
         firestoreRef = firestoreRef.where(firebase.firestore.FieldPath.documentId(), 'in', params.vacancyIds);
+      } else {
+        firestoreRef = firestoreRef.orderBy('referenceNumber', 'desc');
       }
-      firestoreRef = firestoreRef.orderBy('referenceNumber', 'desc');
       return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
