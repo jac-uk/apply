@@ -12,6 +12,26 @@
           "source": "**",
           "destination": "/index.html"
         }
+      ],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=3600, s-maxage=86400, public"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(html|css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=300, s-maxage=3600, public"
+            }
+          ]
+        }
       ]
     },
     {
@@ -27,6 +47,26 @@
           "source": "**",
           "destination": "/index.html"
         }
+      ],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=3600, s-maxage=86400, public"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(html|css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=300, s-maxage=3600, public"
+            }
+          ]
+        }
       ]
     },
     {
@@ -41,6 +81,26 @@
         {
           "source": "**",
           "destination": "/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=3600, s-maxage=86400, public"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(html|css|js)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=300, s-maxage=3600, public"
+            }
+          ]
         }
       ]
     } 
