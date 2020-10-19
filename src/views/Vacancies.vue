@@ -48,7 +48,7 @@
       >
         <div class="openApplicationsList">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-6 govuk-!-margin-top-6">
-            Open vacancies
+            Open for applications
           </h1>
 
           <p
@@ -206,9 +206,9 @@
           </ul>
         </div>
 
-        <!-- <div class="inProgressApplicationsList">
+        <div class="inProgressApplicationsList">
           <h1 class="govuk-heading-xl govuk-!-margin-bottom-6">
-            Exercises in progress
+            Closed for applications
           </h1>
 
           <ul class="govuk-list">
@@ -271,7 +271,7 @@
               <hr class="govuk-section-break govuk-section-break--visible">
             </li>
           </ul>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
