@@ -47,6 +47,10 @@ const toYesNo = (value) => {
 
 const showAlternative = (value, optional) => value || optional;
 
+const showBreaks = (text) => {
+  return text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+};
+
 const lookup = (value) => {
   if (typeof value === 'string') {
     // @TODO: extract lookup values
@@ -243,5 +247,6 @@ export {
   formatEstimatedDate,
   toYesNo,
   lookup,
-  showAlternative
+  showAlternative,
+  showBreaks
 };

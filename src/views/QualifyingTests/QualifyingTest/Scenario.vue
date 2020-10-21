@@ -12,7 +12,9 @@
       </h1>
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
-          <p>{{ qualifyingTestResponse.testQuestions.introduction }}</p>
+          <!-- eslint-disable -->
+          <p v-html="$options.filters.showBreaks(qualifyingTestResponse.testQuestions.introduction)" />
+          <!-- eslint-enable --><!-- eslint-enable -->
           <div
             class="govuk-character-count"
           >
