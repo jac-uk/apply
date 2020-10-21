@@ -48,7 +48,11 @@ const toYesNo = (value) => {
 const showAlternative = (value, optional) => value || optional;
 
 const showHTMLBreaks = (text) => {
-  return text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  let returnText = '';
+  if (text) {
+    returnText = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  }
+  return returnText;
 };
 
 const lookup = (value) => {
