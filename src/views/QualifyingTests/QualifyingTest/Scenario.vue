@@ -22,7 +22,7 @@
               id="scenario-question"
               v-model="response.text"
               :label="`${questionNumber}. ${question.question}`"
-              hint="Answer below:"
+              :hint="$options.filters.showHTMLBreaks(question.hint) || 'Answer below:'"
               rows="10"
               required
             />
