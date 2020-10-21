@@ -67,74 +67,76 @@
               :key="vacancy.id"
               class="govuk-!-margin-top-4"
             >
-              <RouterLink
-                v-if="vacancy.aboutTheRole"
-                class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-                :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-              >
-                {{ vacancy.name }}
-              </RouterLink>
-
-              <a
-                v-else-if="vacancy.externalLink"
-                class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-                :href="vacancy.externalLink"
-                target="_blank"
-              >
-                {{ vacancy.name }}
-              </a>
-
-              <span
-                v-else
-                class="govuk-heading-m govuk-!-font-weight-bold"
-              >
-                {{ vacancy.name }}
-              </span>
-              <p>
-                <span
-                  class="govuk-body govuk-!-font-weight-bold"
+              <div v-if="!vacancy.inviteOnly">
+                <RouterLink
+                  v-if="vacancy.aboutTheRole"
+                  class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                  :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                 >
-                  <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-                </span>
-                <span
-                  v-if="vacancy.applicationOpenDate"
-                  class="govuk-body"
+                  {{ vacancy.name }}
+                </RouterLink>
+
+                <a
+                  v-else-if="vacancy.externalLink"
+                  class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                  :href="vacancy.externalLink"
+                  target="_blank"
                 >
-                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
-                </span>
+                  {{ vacancy.name }}
+                </a>
+
                 <span
                   v-else
-                  class="govuk-body"
+                  class="govuk-heading-m govuk-!-font-weight-bold"
                 >
-                  {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                  {{ vacancy.name }}
                 </span>
-              </p>
-              <p v-if="vacancy.applicationCloseDate">
-                <span
-                  class="govuk-body govuk-!-font-weight-bold"
+                <p>
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+                  </span>
+                  <span
+                    v-if="vacancy.applicationOpenDate"
+                    class="govuk-body"
+                  >
+                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                  </span>
+                  <span
+                    v-else
+                    class="govuk-body"
+                  >
+                    {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                  </span>
+                </p>
+                <p v-if="vacancy.applicationCloseDate">
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+                  </span>
+                  <span
+                    class="govuk-body"
+                  >
+                    {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                  </span>
+                </p>
+                <p v-if="vacancy.roleSummary">
+                  {{ vacancy.roleSummary }}
+                </p>
+                <p
+                  v-if="showSignUp(vacancy)"
+                  class="govuk-body govuk-!-margin-bottom-7"
                 >
-                  <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-                </span>
-                <span
-                  class="govuk-body"
-                >
-                  {{ vacancy.applicationCloseDate | formatDate }} - 13:00
-                </span>
-              </p>
-              <p v-if="vacancy.roleSummary">
-                {{ vacancy.roleSummary }}
-              </p>
-              <p
-                v-if="showSignUp(vacancy)"
-                class="govuk-body govuk-!-margin-bottom-7"
-              >
-                <a
-                  class="govuk-link govuk-body"
-                  :href="vacancy.subscriberAlertsUrl"
-                  target="_blank"
-                >Sign up</a> for an alert about this exercise
-              </p>
-              <hr>
+                  <a
+                    class="govuk-link govuk-body"
+                    :href="vacancy.subscriberAlertsUrl"
+                    target="_blank"
+                  >Sign up</a> for an alert about this exercise
+                </p>
+                <hr>
+              </div>
             </li>
           </ul>
         </div>
@@ -288,12 +290,8 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    invitations() {
-      return this.$store.getters['invitations/data']();
-    },
   },
   created() {
-    this.$store.dispatch('invitations/bind');
     this.$store.dispatch('vacancies/bind');  
   },
   methods: {

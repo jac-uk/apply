@@ -87,8 +87,6 @@
         details about what you’ll need to prepare for the day.
       </p> -->
 
-      <!-- {{ isVacancyOpen && vacancy.inviteOnly && !!user && invitations.some((invite) => invite.vacancy.id === vacancy.id) }} -->
-
       <RouterLink
         v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button"
@@ -249,7 +247,7 @@ export default {
       return createTimeline(timeline);
     },
     invitations() {
-      return this.$store.getters['invitations/data']();
+      return this.$store.state.invitations.records;
     },
     userIsInvited() {
       return this.vacancy.inviteOnly && !!this.user && this.invitations.some((invite) => invite.vacancy.id === this.vacancy.id);
