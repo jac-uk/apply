@@ -47,7 +47,7 @@ const toYesNo = (value) => {
 
 const showAlternative = (value, optional) => value || optional;
 
-const showBreaks = (text) => {
+const showHTMLBreaks = (text) => {
   return text.replace(/(?:\r\n|\r|\n)/g, '<br>');
 };
 
@@ -248,5 +248,5 @@ export {
   toYesNo,
   lookup,
   showAlternative,
-  showBreaks
+  showHTMLBreaks
 };

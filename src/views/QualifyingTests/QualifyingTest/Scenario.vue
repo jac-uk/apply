@@ -13,8 +13,8 @@
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
           <!-- eslint-disable -->
-          <p v-html="$options.filters.showBreaks(qualifyingTestResponse.testQuestions.introduction)" />
-          <!-- eslint-enable --><!-- eslint-enable -->
+          <p v-html="$options.filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
+          <!-- eslint-enable -->
           <div
             class="govuk-character-count"
           >
