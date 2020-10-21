@@ -27,7 +27,10 @@
         <li
           v-if="numberOfQuestions"
         >
-          This test contains <b>{{ numberOfQuestions }}.</b>
+          This test contains
+          <b style="white-space: pre;">
+            {{ numberOfQuestions }}
+          </b>
         </li>
         <li>
           You have <b>{{ qualifyingTestResponse.duration.testDurationAdjusted }} minutes</b> to complete this test.
@@ -143,16 +146,23 @@ export default {
       return this.qualifyingTestResponse.duration.testDurationAdjusted - this.qualifyingTestResponse.duration.testDuration;
     },
     numberOfQuestions() {
-      if (!this.qualifyingTestResponse.testQuestions.questions) {
-        return false;
-      }
-      const questionLength = this.qualifyingTestResponse.testQuestions.questions.length;
-      const plural = questionLength > 1 ? 's' : '';
-      if (this.qualifyingTestResponse.qualifyingTest.type === 'scenario') {
-        return `${questionLength} scenario${plural}, with several questions per scenario`;
+      const questions = this.qualifyingTestResponse.testQuestions.questions;
+      const plural = questions.length > 1 ? 's' : '';
+      let result;
+      if (!(this.qualifyingTestResponse.qualifyingTest.type === 'scenario')) {
+        result = `${questions.length} question${plural}`;
       } else {
-        return `${questionLength} question${plural}`;
+        result = `${questions.length} Scenario${plural}:\n`;
+        questions.forEach((question, index) => {
+          result += ` Scenario ${index + 1} with ${question.options.length} question${question.options.length > 1 ? 's' : ''}`;
+          if (!(index + 1 === questions.length)){
+            result += ',\n';
+          } else {
+            result += '.';
+          }
+        });
       }
+      return result;
     },
     additionalInstructions() {
       return this.qualifyingTestResponse.qualifyingTest.additionalInstructions;
