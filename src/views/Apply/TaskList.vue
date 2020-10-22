@@ -13,7 +13,7 @@
         :countdown-length="60"
       />
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
-        {{ vacancy.referenceNumber }} {{ vacancy.name }}
+        {{ vacancy.referenceNumber }} {{ vacancy.name }} 
       </span>
       <h1 class="govuk-heading-xl">
         Apply for the role
@@ -68,6 +68,36 @@
       >
         Review application
       </button>
+    </div>
+    <div
+      v-if="isClosed"
+      class="govuk-grid-column-one-third govuk-!-padding-bottom-8 container-border-bottom"
+    >
+      <aside
+        class="jac-related-items"
+        role="complementary"
+      >
+        <h2 class="govuk-heading-m">
+          Related content
+        </h2>
+        <nav
+          role="navigation"
+          aria-labelledby="subsection-title"
+        >
+          <ul
+            class="govuk-list govuk-!-font-size-16"
+          >
+            <li>
+              <RouterLink
+                class="govuk-link govuk-body-m"
+                :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+              >
+                View advert
+              </RouterLink>
+            </li>
+          </ul> 
+        </nav>
+      </aside>
     </div> 
   </div>
 </template>
@@ -105,6 +135,9 @@ export default {
     },
     isNonLegal() {
       return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise === 'leadership-non-legal';
+    },
+    isClosed(){
+      return this.$store.getters['vacancy/getCloseDate'] < Date.now();
     },
     applicationProgress() {
       if (this.application && this.application.progress) {

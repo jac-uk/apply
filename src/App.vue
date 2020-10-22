@@ -64,12 +64,14 @@ export default {
       const result = [];
       if (this.invitations.length && this.vacancies.length) {
         this.invitations.forEach(invite => {
-          if (this.vacancies.some(vac => vac.id === invite.vacancy.id)) {
-            const validInvite = {
-              name: this.vacancies.find(vacancy => vacancy.id === invite.vacancy.id).name,
-              vacancyId: invite.vacancy.id,
-            };
-            result.push(validInvite);
+          if (['created', 'invited'].includes(invite.status)) {
+            if (this.vacancies.some(vac => vac.id === invite.vacancy.id)) {
+              const validInvite = {
+                name: this.vacancies.find(vacancy => vacancy.id === invite.vacancy.id).name,
+                vacancyId: invite.vacancy.id,
+              };
+              result.push(validInvite);
+            }
           }
         });
       }
