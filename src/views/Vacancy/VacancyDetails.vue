@@ -97,7 +97,7 @@
       </RouterLink>
 
       <RouterLink
-        v-else-if="userIsInvited"
+        v-else-if="userIsInvited && hasOpenInvite"
         class="govuk-button"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
@@ -251,6 +251,9 @@ export default {
     },
     userIsInvited() {
       return this.vacancy.inviteOnly && !!this.user && this.invitations.some((invite) => invite.vacancy.id === this.vacancy.id);
+    },
+    hasOpenInvite() {
+      return this.invitations.some((invite) => ['created', 'invited'].indexOf(invite.status) !== -1);
     },
     showSubscribeForAlerts() {
       if (this.vacancy.subscriberAlertsUrl) {

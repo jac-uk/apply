@@ -76,6 +76,14 @@
                 >
                   View sent application
                 </RouterLink>
+                <RouterLink
+                  class="govuk-button govuk-button--secondary moj-button-menu__item"
+                  role="button"
+                  data-module="govuk-button"
+                  :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
+                >
+                  View advert
+                </RouterLink>
 
                 <RouterLink
                   v-if="application.characterChecks && application.characterChecks.declaration === true"

@@ -4,7 +4,7 @@
       ref="formRef"
       @submit.prevent="save"
     >
-      <div class="govuk-grid-column-full">
+      <div class="govuk-grid-column-two-thirds">
         <BackLink class="govuk-!-margin-top-0" />
 
         <Countdown
@@ -35,7 +35,7 @@
           ref="download-as-pdf-div"
         >
           <h1 class="govuk-heading-l">
-            {{ vacancy.name }}
+            {{ vacancy.name }} 
           </h1>
 
           <div class="govuk-!-margin-top-9">
