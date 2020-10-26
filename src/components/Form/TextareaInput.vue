@@ -12,8 +12,8 @@
     <span
       v-if="hint"
       class="govuk-hint"
+      v-html="hint"
     >
-      {{ hint }}
     </span>
     <FormFieldError
       :id="id"
