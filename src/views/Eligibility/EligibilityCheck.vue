@@ -108,7 +108,7 @@
         />
       </RadioGroup> -->
 
-      <button class="govuk-button info-btn--eligibility--continue">
+      <button class="govuk-button info-btn--eligibility-check--continue">
         Continue
       </button>
     </form>
