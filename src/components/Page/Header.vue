@@ -22,7 +22,7 @@
           <div class="govuk-grid-column-one-third organisation__margin-bottom">
             <button
               v-if="isSignedIn"
-              class="govuk-button govuk-!-margin-right-1"
+              class="govuk-button govuk-!-margin-right-1 info-btn--header--sign-out"
               data-module="govuk-button"
               @click="signOut"
             >
@@ -31,7 +31,7 @@
             <button
               v-else
               :disabled="isSignInPage"
-              class="govuk-button govuk-!-margin-right-1"
+              class="govuk-button govuk-!-margin-right-1 info-btn--header--sign-in"
               data-module="govuk-button"
               @click="signIn"
             >
@@ -39,7 +39,7 @@
             </button>
             <button
               :disabled="isVacanciesPage"
-              class="govuk-button"
+              class="govuk-button  info-btn--header--vacancies"
               data-module="govuk-button"
               @click="gotoVacancies"
             >
@@ -111,7 +111,7 @@
         <span class="govuk-phase-banner__text">
           This is a new service – your <a
             style="font-size: 16px"
-            class="govuk-link govuk-body"
+            class="govuk-link govuk-body info-link--header--feedback"
             href="https://docs.google.com/forms/d/e/1FAIpQLSexm0qgMV0tOQTFP4QUSegOOX89VeYhWwuofV---JZTOEXGIQ/viewform"
             target="_blank"
           >feedback</a> will help us improve it.

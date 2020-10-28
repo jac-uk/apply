@@ -68,7 +68,7 @@
       </RadioGroup>
 
       <button
-        class="govuk-button"
+        class="govuk-button info-btn--professional-bodies--save-and-continue"
       >
         Save and continue
       </button>

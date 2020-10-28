@@ -10,11 +10,11 @@
         class="moj-side-navigation__item"
       >
         <RouterLink 
-          class="nav-link"
+          class="nav-link "
           :to="{name: navItem.name}"
           :aria-current="isActive(navItem.name) ? 'moj-side-navigation__item--active' : false"
         >
-          {{ navItem.page }} 
+          {{ navItem.page }}
         </RouterLink>
       </li>
     </ul>

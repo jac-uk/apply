@@ -19,14 +19,14 @@
             v-show="cancelable"
           >
             <button
-              class="govuk-button govuk-button--secondary govuk-!-margin-right-3 deny"
+              class="govuk-button govuk-button--secondary govuk-!-margin-right-3 deny info-btn--modal--cancel"
               @click="closeModal"
             >
               Cancel
             </button>
           </span>
           <button
-            class="govuk-button govuk-button--success"
+            class="govuk-button govuk-button--success info-btn--modal--success"
             @click="confirmModal"
           >
             {{ buttonText }}

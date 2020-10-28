@@ -26,7 +26,7 @@
 
         <button
           :disabled="!application.jurisdictionPreferences || application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--jurisditional-pref--save-and-continue"
         >
           Save and continue
         </button>

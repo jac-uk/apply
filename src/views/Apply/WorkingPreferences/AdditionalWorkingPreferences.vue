@@ -34,7 +34,7 @@
 
         <button
           :disabled="!localAdditionalPreferences.length || application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--additional-work-experience--save-and-continue"
         >
           Save and continue
         </button>

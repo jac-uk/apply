@@ -13,7 +13,7 @@
           <ul class="moj-side-navigation__list">
             <li class="moj-side-navigation__item">
               <RouterLink
-                class="govuk-link"
+                class="govuk-link info-link--nav-qualifying-tests--vacancies"
                 :to="{ name: 'vacancies' }"
               >
                 Vacancies
@@ -21,7 +21,7 @@
             </li>
             <li class="moj-side-navigation__item">
               <RouterLink
-                class="govuk-link"
+                class="govuk-link info-link--nav-qualifying-tests--applications"
                 :to="{ name: 'applications' }"
               >
                 Applications
@@ -29,7 +29,7 @@
             </li>
             <li class="moj-side-navigation__item moj-side-navigation__item--active">
               <RouterLink
-                class="govuk-link"
+                class="govuk-link info-link--nav-qualifying-tests--qualifying-tests"
                 aria-current="page"
                 :to="{ name: 'qualifying-tests' }"
               >

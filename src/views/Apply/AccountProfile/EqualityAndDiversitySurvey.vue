@@ -683,7 +683,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--equality-and-diversity-survey--save-and-continue"
         >
           Save and continue
         </button>

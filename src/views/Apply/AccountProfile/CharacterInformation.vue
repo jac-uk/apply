@@ -247,7 +247,7 @@
         </RadioGroup>
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--character-information--save-and-continue"
         >
           Save and continue
         </button>

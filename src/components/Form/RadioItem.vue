@@ -5,7 +5,7 @@
         v-if="field"
         :id="inputId"
         v-model="$parent.inputValue[field]"
-        class="govuk-radios__input"
+        :class="`govuk-radios__input info-radio--${$options.filters.hyphenize(inputName[field])}--${$options.filters.hyphenize(value)}`"
         type="radio"
         :name="inputName[field]"
         :value="value"
@@ -15,7 +15,7 @@
         v-else
         :id="inputId"
         v-model="$parent.inputValue"
-        class="govuk-radios__input"
+        :class="`govuk-radios__input info-radio--${$options.filters.hyphenize(inputName)}--${$options.filters.hyphenize(value)}`"
         type="radio"
         :name="inputName"
         :value="value"

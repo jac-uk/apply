@@ -97,7 +97,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--assessor-details--save-and-continue"
         >
           Save and continue
         </button>

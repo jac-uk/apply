@@ -28,7 +28,7 @@
       >You have {{ charsRemaining }} characters remaining</span>
 
       <button
-        class="govuk-button"
+        class="govuk-button info-btn--more-details--save-and-continue"
       >
         Save and continue
       </button>

@@ -14,7 +14,7 @@
     </p>
 
     <RouterLink
-      class="govuk-button"
+      class="govuk-button info-link--eligibility-fail--back-to-jac-homepage"
       data-module="govuk-button"
       :to="'/'"
     >
@@ -23,7 +23,7 @@
 
     <p class="govuk-body-m">
       <RouterLink
-        class="govuk-link"
+        class="govuk-link info-link--eligibility-fail--continue-to-apply"
         data-module="govuk-button"
         :to="applyLink"
       >

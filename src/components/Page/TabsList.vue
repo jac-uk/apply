@@ -15,7 +15,7 @@
         >
           <a
             :href="`#${tab.ref}`"
-            class="govuk-tabs__tab"
+            :class="`govuk-tabs__tab info-btn--tab--${$options.filters.hyphenize(tab.title)}`"
             @click="showTab(tab)"
           >
             {{ tab.title }}
