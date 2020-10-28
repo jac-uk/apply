@@ -65,6 +65,7 @@
                 <RouterLink
                   v-if="activeTab === 'open'"
                   :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                  :class="`info-btn--qualifying-tests--to--${row.id}`"
                 >
                   {{ row.qualifyingTest.title }}
                 </RouterLink>
@@ -87,7 +88,7 @@
                 <a
                   v-if="row.qualifyingTest.feedbackSurvey"
                   :href="row.qualifyingTest.feedbackSurvey"
-                  class="govuk-link"
+                  :class="`govuk-link info-btn--qualifying-tests--feedback-${row.id}--click-here`"
                 >
                   Click here
                 </a>

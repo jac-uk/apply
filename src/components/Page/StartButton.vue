@@ -1,6 +1,6 @@
 <template>
   <button
-    class="govuk-button govuk-button--start"
+    class="govuk-button govuk-button--start info-btn--start-button--start-now-or-continue"
     data-module="govuk-button"
   >
     <slot>Start now</slot>
