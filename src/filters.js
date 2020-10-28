@@ -7,10 +7,9 @@ const capitalize = (value) => {
 };
 
 const hyphenize = (value) => {
-  console.log('hyphenize', value);
-  value = value.toString();
   let hyphenizeStr = '';
-  if (value) {
+  if (value && typeof value !== 'object') {
+    value = value.toString();
     hyphenizeStr = value.replace(/\s+/g, '-').toLowerCase();
   }
   return hyphenizeStr;

@@ -5,7 +5,7 @@
         v-if="field"
         :id="inputId"
         v-model="$parent.inputValue[field]"
-        :class="`govuk-radios__input info-radio--${$options.filters.hyphenize(inputName[field])}--${$options.filters.hyphenize(value)}`"
+        :class="`govuk-radios__input info-radio--${hyphenization(inputName[field])}--${hyphenization(value)}`"
         type="radio"
         :name="inputName[field]"
         :value="value"
@@ -15,7 +15,7 @@
         v-else
         :id="inputId"
         v-model="$parent.inputValue"
-        :class="`govuk-radios__input info-radio--${$options.filters.hyphenize(inputName)}--${$options.filters.hyphenize(value)}`"
+        :class="`govuk-radios__input info-radio--${hyphenization(inputName)}--${hyphenization(value)}`"
         type="radio"
         :name="inputName"
         :value="value"
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { hyphenize } from '@/filters';
+
 let index = 0;
 
 export default {
@@ -91,6 +93,11 @@ export default {
       throw new Error('RadioItem component can only be used inside a RadioGroup component');
     }
     index++;
+  },
+  methods: {
+    hyphenization(value) {
+      return hyphenize(value); 
+    },
   },
 };
 </script>

@@ -39,7 +39,7 @@
                   class="govuk-grid-column-three-quarters"
                 >
                   <RouterLink
-                    :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${$options.filters.hyphenize(task.title)}`"
+                    :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${hyphenization(task.title)}`"
                     :to="{name: task.id}"
                   >
                     {{ task.title }}
@@ -104,6 +104,7 @@
 
 <script>
 import Countdown from '@/components/Page/Countdown';
+import { hyphenize } from '@/filters';
 
 export default {
   components: {
@@ -389,6 +390,9 @@ export default {
   methods: {
     reviewApplication() {
       this.$router.push({ name: 'review' });
+    },
+    hyphenization(value) {
+      return hyphenize(value); 
     },
   },
 };
