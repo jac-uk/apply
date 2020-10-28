@@ -30,14 +30,14 @@
       <div class="moj-button-menu">
         <div class="moj-button-menu__wrapper">
           <button
-            class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+            :class="`moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2 info-btn--question-${$route.params.questionNumber}-${$route.params.qualifyingTestId}-skip`"
             type="button"
             @click="skip"
           >
             Skip
           </button>
           <button
-            class="moj-button-menu__item govuk-button"
+            :class="`moj-button-menu__item govuk-button info-btn--question-${$route.params.questionNumber}-${$route.params.qualifyingTestId}-save-and-continue`"
             :disabled="!canSaveAndContinue"
           >
             Save and continue
