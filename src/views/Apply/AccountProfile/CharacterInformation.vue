@@ -20,7 +20,7 @@
           You must tell us about any character issues that could affect your
           suitability for this role. Read the
           <a
-            class="govuk-link"
+            class="govuk-link info-link--character-information--character-guidance"
             href="https://www.judicialappointments.gov.uk/good-character"
             target="_blank"
           >

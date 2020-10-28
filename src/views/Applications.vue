@@ -60,7 +60,7 @@
               <div class="moj-button-menu__wrapper">
                 <RouterLink
                   v-if="application.status == 'draft'"
-                  class="govuk-button moj-button-menu__item"
+                  :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
                   :to="{ name: 'task-list', params: { id: application.exerciseId } }"
                   role="button"
                   data-module="govuk-button"
@@ -69,7 +69,7 @@
                 </RouterLink>
                 <RouterLink
                   v-else
-                  class="govuk-button govuk-button--secondary moj-button-menu__item"
+                  :class="`govuk-button govuk-button--secondary moj-button-menu__item  info-link--applications--view-sent-application-${application.exerciseId}`"
                   :to="{ name: 'review', params: { id: application.exerciseId } }"
                   role="button"
                   data-module="govuk-button"
@@ -77,7 +77,7 @@
                   View sent application
                 </RouterLink>
                 <RouterLink
-                  class="govuk-button govuk-button--secondary moj-button-menu__item"
+                  :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
                   role="button"
                   data-module="govuk-button"
                   :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
@@ -87,7 +87,7 @@
 
                 <RouterLink
                   v-if="application.characterChecks && application.characterChecks.declaration === true"
-                  class="govuk-button govuk-button--secondary moj-button-menu__item float-right"
+                  :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
                   :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
                   role="button"
                   data-module="govuk-button"
