@@ -39,7 +39,7 @@
                   class="govuk-grid-column-three-quarters"
                 >
                   <RouterLink
-                    class="govuk-link govuk-!-font-weight-bold"
+                    :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${hyphenization(task.title)}`"
                     :to="{name: task.id}"
                   >
                     {{ task.title }}
@@ -63,7 +63,7 @@
       </ol>
       <button
         :disabled="!canApply"
-        class="govuk-button"
+        class="govuk-button info-btn--task-list--review-application"
         @click="reviewApplication"
       >
         Review application
@@ -89,7 +89,7 @@
           >
             <li>
               <RouterLink
-                class="govuk-link govuk-body-m"
+                class="govuk-link govuk-body-m info-link--task-list--related-content--view-advert"
                 :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
               >
                 View advert
@@ -104,6 +104,7 @@
 
 <script>
 import Countdown from '@/components/Page/Countdown';
+import { hyphenize } from '@/filters';
 
 export default {
   components: {
@@ -389,6 +390,9 @@ export default {
   methods: {
     reviewApplication() {
       this.$router.push({ name: 'review' });
+    },
+    hyphenization(value) {
+      return hyphenize(value); 
     },
   },
 };

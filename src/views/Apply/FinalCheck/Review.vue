@@ -1478,7 +1478,7 @@
             </h2>
             <RouterLink
               v-if="isDraftApplication"
-              class="govuk-link govuk-body-m change-link"
+              class="govuk-link govuk-body-m change-link info-link--review-final-check--reasonable-length-of-service--change"
               style="display:inline-block;"
               :to="{name: 'reasonable-length-of-service'}"
             >

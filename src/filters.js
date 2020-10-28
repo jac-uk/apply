@@ -6,6 +6,15 @@ const capitalize = (value) => {
   return value.charAt(0).toUpperCase() + value.slice(1);
 };
 
+const hyphenize = (value) => {
+  let hyphenizeStr = '';
+  if (value && typeof value !== 'object') {
+    value = value.toString();
+    hyphenizeStr = value.replace(/\s+/g, '-').toLowerCase();
+  }
+  return hyphenizeStr;
+};
+
 const formatDate = (value, type) => {
   if (value) {
     const objDate = new Date(Date.parse(value));
@@ -252,5 +261,6 @@ export {
   toYesNo,
   lookup,
   showAlternative,
-  showHTMLBreaks
+  showHTMLBreaks,
+  hyphenize
 };

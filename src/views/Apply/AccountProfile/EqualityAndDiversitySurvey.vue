@@ -22,7 +22,7 @@
         </p>
         <p class="govuk-body-l">
           The JAC will use the information you provide in two ways: where the <a
-            class="govuk-link"
+            class="govuk-link info-link--equality-and-diversity--equal-merit-approach"
             href="https://www.judicialappointments.gov.uk/equal-merit"
             target="_blank"
           >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit, 
@@ -30,7 +30,7 @@
         </p>
         <p class="govuk-body-l">
           The JAC may also use the information you provided for the purpose of “<a
-            class="govuk-link"
+            class="govuk-link info-link--equality-and-diversity--outreach"
             href="https://www.judicialappointments.gov.uk/diversity-strategy"
             target="_blank"
           >Outreach</a>”, to support our statutory duty to encourage diversity in the pool of applicants for judicial appointment.
@@ -683,7 +683,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--equality-and-diversity-survey--save-and-continue"
         >
           Save and continue
         </button>

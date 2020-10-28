@@ -17,7 +17,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--relevant-experience--save-and-continue"
         >
           Save and continue
         </button>

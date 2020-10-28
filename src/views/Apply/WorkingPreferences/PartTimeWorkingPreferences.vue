@@ -55,7 +55,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--part-time-work-experience--save-and-continue"
         >
           Save and continue
         </button>

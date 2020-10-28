@@ -89,7 +89,7 @@
 
       <RouterLink
         v-if="isVacancyOpen && !vacancy.inviteOnly"
-        class="govuk-button"
+        class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >
@@ -98,7 +98,7 @@
 
       <RouterLink
         v-else-if="userIsInvited && hasOpenInvite"
-        class="govuk-button"
+        class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >

@@ -24,7 +24,7 @@
         <p class="govuk-body-l">
           You should read the
           <a
-            class="govuk-link"
+            class="govuk-link info-link--independend-assessor--guidance-on-choosing-independent-assessor"
             href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
             target="_blank"
           >
@@ -97,7 +97,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--assessor-details--save-and-continue"
         >
           Save and continue
         </button>

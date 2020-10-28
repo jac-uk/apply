@@ -28,7 +28,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--covering-letter--save-and-continue"
         >
           Save and continue
         </button>

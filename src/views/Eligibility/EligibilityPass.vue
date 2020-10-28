@@ -8,7 +8,7 @@
       Based on your answers, it looks like you can apply for this role.
     </p>
     <RouterLink
-      class="govuk-button"
+      class="govuk-button info-link--eligibility-pass--continue"
       data-module="govuk-button"
       :to="applyLink"
     >

@@ -1,8 +1,7 @@
 <template>
   <a
     v-if="linkHref"
-    class="govuk-link govuk-body-m"
-    :class="{'download-visited' : visited }"
+    :class="`govuk-link govuk-body-m ${visited ? 'download-visited' : ''} info-link--download-link--${$options.filters.hyphenize(linkText)}`"
     :download="fileName"
     :href="linkHref"
   >
