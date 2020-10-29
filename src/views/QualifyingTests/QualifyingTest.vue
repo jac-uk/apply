@@ -68,6 +68,7 @@
         <RouterView
           :key="$route.fullPath"
           :time-is-up="timerEnded"
+          :auto-save="autoSave"
         />
       </div>
     </template>
@@ -89,6 +90,7 @@ export default {
       loaded: false,
       loadFailed: false,
       timerEnded: false,
+      autoSave: false,
     };
   },
   computed: {
@@ -183,6 +185,13 @@ export default {
         this.timerEnded = true;
         this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
+      }
+      this.autoSave = false;
+      if (params.action === 'autoSave') {
+        this.autoSave = true;
+      }
+      if (params.action === 'cleanAutoSave') {
+        this.autoSave = false;
       }
     },
     openTimeElapsedModal(){

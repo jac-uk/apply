@@ -102,6 +102,8 @@ export default {
       minutes: '',
       seconds: '',
       bckClass: '',
+      saveCounter: 0,
+      saveSeconds: 5, 
     };
   },
   mounted() {
@@ -126,6 +128,7 @@ export default {
     this.tick(this.start, this.end);
 
     this.interval = setInterval(() => {
+      this.saveCounter += 1;
       this.tick(this.start, this.end);
     }, second);
   },
@@ -141,6 +144,14 @@ export default {
       const now = new Date().getTime();
 
       const timeRemaining = end - now;
+
+      if (this.saveCounter === this.saveSeconds) {
+        this.$emit('change', { action: 'autoSave' });
+        this.saveCounter = 0;
+      }
+      if (this.saveCounter === 2) { // clean the autoSaver 2s after it is set to true
+        this.$emit('change', { action: 'cleanAutoSave' });
+      }
 
       if (timeRemaining > 0) {
         this.calculateTimeLeft(timeRemaining);
