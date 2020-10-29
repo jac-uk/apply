@@ -26,7 +26,7 @@
           >
             <a
               href=""
-              class="govuk-link countdown-link"
+              :class="`govuk-link countdown-link info-btn--qualifying-tests--previous-question-${infoClass()}`"
               @click.prevent="btnPrevious"
             >
               ❮ {{ isMobile ? 'Previous' : 'Previous Question' }}
@@ -37,7 +37,7 @@
           v-slot:right-slot
         >
           <a
-            class="govuk-link countdown-link"
+            :class="`govuk-link countdown-link info-btn--qualifying-tests--exit-test-${$route.params.qualifyingTestId}`"
             href=""
             @click.prevent="openExitModal"
           >
@@ -199,6 +199,11 @@ export default {
       this.$nextTick(() => {  // ensures change is picked up before we leave this route
         this.$router.push({ name: 'qualifying-tests' });
       });
+    },
+    infoClass() {
+      const params = this.$route.params;
+      const hyphenated = `${params.qualifyingTestId}--scenario-${params.scenarioNumber}--from-${params.questionNumber}-to-${params.questionNumber - 1}`;
+      return hyphenated;
     },
   },
 };

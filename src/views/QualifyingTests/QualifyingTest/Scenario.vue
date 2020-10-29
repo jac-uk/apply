@@ -40,14 +40,14 @@
           <div class="moj-button-menu">
             <div class="moj-button-menu__wrapper">
               <button
-                class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+                :class="`moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2  info-btn--scenario--${infoClass()}--save-and-continue`"
                 type="button"
                 @click="skip"
               >
                 Skip
               </button>
               <button
-                class="moj-button-menu__item govuk-button"
+                :class="`moj-button-menu__item govuk-button info-btn--scenario--${infoClass()}--save-and-continue`"
                 :disabled="reachMaxWords || isEmpty"
               >
                 Save and continue
@@ -265,6 +265,11 @@ export default {
       } else {
         return plusIcon;
       }
+    },
+    infoClass() {
+      const params = this.$route.params;
+      const hyphenated = `${params.qualifyingTestId}-${params.scenarioNumber}-${params.questionNumber}`;
+      return hyphenated;
     },
   },
 };
