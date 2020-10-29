@@ -15,7 +15,7 @@ export default {
       if (rootState.auth.currentUser){
         const firestoreRef = collection
           .where('candidate.email', '==', rootState.auth.currentUser.email)
-          .where('status', 'in', ['created', 'invited']);
+          .where('status', 'in', ['created', 'invited', 'accepted']);
 
         return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       }

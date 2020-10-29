@@ -89,7 +89,7 @@
 
       <RouterLink
         v-if="isVacancyOpen && !vacancy.inviteOnly"
-        class="govuk-button"
+        class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >
@@ -97,8 +97,8 @@
       </RouterLink>
 
       <RouterLink
-        v-else-if="userIsInvited"
-        class="govuk-button"
+        v-else-if="userIsInvited && hasOpenInvite"
+        class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
         data-module="govuk-button"
         :to="{ name: 'vacancy-message' }"
       >
@@ -251,6 +251,9 @@ export default {
     },
     userIsInvited() {
       return this.vacancy.inviteOnly && !!this.user && this.invitations.some((invite) => invite.vacancy.id === this.vacancy.id);
+    },
+    hasOpenInvite() {
+      return this.invitations.some((invite) => ['created', 'invited'].indexOf(invite.status) !== -1);
     },
     showSubscribeForAlerts() {
       if (this.vacancy.subscriberAlertsUrl) {

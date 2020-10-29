@@ -1,7 +1,7 @@
 <template>
   <div />
-</template>  
- 
+</template>
+
 <script>
 export default {
   props: {
@@ -64,7 +64,7 @@ export default {
     hasError() {
       return this.errorMessage ? true :  false;
     },
-  }, 
+  },
   mounted: function () {
     this.$root.$on('validate', this.handleValidate);
   },
@@ -76,20 +76,20 @@ export default {
     setError(message) {
       this.errorMessage = message;
       this.$root.$emit('handle-error', { id: this.id, message: this.errorMessage });
-    },  
+    },
     handleValidate() {
       this.checkErrors = true;
       this.validate();
     },
     validate(event) {
       this.setError('');
-      
+
       if (this.checkErrors) {
         let value = this.value;
         if (event && event.target) {
           value = event.target.value;
         }
-        
+
         if (this.required && (value === null || value === undefined || value.length === 0)) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
@@ -99,6 +99,8 @@ export default {
         }
 
         if (this.type && this.type === 'email' && value) {
+          value = value.trim().toLowerCase();
+          this.text = value;
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
           }
@@ -128,7 +130,7 @@ export default {
           }
         }
       }
-    },  
+    },
   },
 };
 </script>

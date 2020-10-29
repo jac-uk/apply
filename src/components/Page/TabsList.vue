@@ -15,7 +15,7 @@
         >
           <a
             :href="`#${tab.ref}`"
-            class="govuk-tabs__tab"
+            :class="`govuk-tabs__tab info-btn--tab--${hyphenization(tab.title)}`"
             @click="showTab(tab)"
           >
             {{ tab.title }}
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import { hyphenize } from '@/filters';
+
 export default {
   props: {
     tabs: {
@@ -55,6 +57,9 @@ export default {
     },
     isActive(tab) {
       return this.activeTab === tab.ref;
+    },
+    hyphenization(value) {
+      return hyphenize(value); 
     },
   },
 };

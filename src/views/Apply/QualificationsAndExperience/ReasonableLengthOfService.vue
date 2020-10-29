@@ -41,7 +41,7 @@
           </RadioItem>
         </RadioGroup>
 
-        <button class="govuk-button">
+        <button class="govuk-button info-btn--reasonable-length-of-service--continue">
           Continue
         </button>
       </div>

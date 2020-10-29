@@ -52,7 +52,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--statement-of-eligibility--save-and-continue"
         >
           Save and continue
         </button>

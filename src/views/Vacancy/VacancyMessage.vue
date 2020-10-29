@@ -9,13 +9,14 @@
       <p>
         You can still 
         <a 
+          class="info-link--vacancy-message--sign-in-to-your-existing-account"
           href="https://www.judicialappointments.gov.uk/user"
           target="_blank"
         >sign in to your existing account</a>
         to access anything you need for this application, but you cannot apply there.
       </p>
       <RouterLink
-        class="govuk-button govuk-button--secondary"
+        class="govuk-button govuk-button--secondary info-link--vacancy-message--continue"
         data-module="govuk-button"
         :to="{ name: 'eligibility' }"
       >

@@ -147,7 +147,7 @@
         required
       />
 
-      <button class="govuk-button">
+      <button class="govuk-button info-btn--personal-information--save-and-continue">
         Save and continue
       </button>
     </div>

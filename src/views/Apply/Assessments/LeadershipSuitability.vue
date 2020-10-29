@@ -77,7 +77,7 @@
 
         <button
           :disabled="application.status != 'draft'"
-          class="govuk-button"
+          class="govuk-button info-btn--leadership-suitability--save-and-continue"
         >
           Save and continue
         </button>

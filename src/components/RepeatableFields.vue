@@ -28,7 +28,7 @@
     <button
       v-if="canAddRow"
       type="button"
-      class="govuk-button govuk-button--secondary govuk-!-margin-bottom-6"
+      :class="`govuk-button govuk-button--secondary govuk-!-margin-bottom-6 info-btn--${$route.name}--repeatable-field--add-another`"
       @click.prevent="addRow"
     >
       Add another

@@ -36,7 +36,7 @@
       </RadioGroup>
 
       <button
-        class="govuk-button"
+        class="govuk-button info-btn--hmrc--save-and-continue"
       >
         Save and continue
       </button>
