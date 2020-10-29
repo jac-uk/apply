@@ -12,69 +12,74 @@
           Qualifications
         </h1>
 
-        <RadioGroup
-          v-if="vacancy.schedule2Apply && vacancy.appliedSchedule == 'schedule-2-d'"
-          id="applying-under-schedule-2-d"
-          v-model="application.applyingUnderSchedule2d"
-          label="Are you applying under Schedule 2(d)?"
+        <div
+          v-if="vacancy.schedule2Apply"
         >
-          <span>
-            <a
-              class="govuk-link govuk-body"
-              href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
-              target="_blank"
-            >
-              http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
-            </a>
-          </span>
-
-          <RadioItem
-            :value="true"
-            label="Yes"
+          <RadioGroup
+            v-if="vacancy.appliedSchedule == 'schedule-2-d'"
+            :id="`applying-under-${vacancy.appliedSchedule}`"
+            v-model="application.applyingUnderSchedule2d"
+            :label="`Are you applying under ${appliedSchedule}?`"
           >
-            <TextareaInput
-              id="experience-under-schedule-2-d"
-              v-model="application.experienceUnderSchedule2D"
-              label="Explain how you've gained experience in law."
-            />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+            <span>
+              <a
+                class="govuk-link govuk-body"
+                href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
+                target="_blank"
+              >
+                http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
+              </a>
+            </span>
 
-        <RadioGroup
-          v-if="vacancy.schedule2Apply && vacancy.appliedSchedule == 'schedule-2-3'"
-          id="applying-under-schedule-2-3"
-          v-model="application.applyingUnderSchedule2Three"
-          label="Are you applying under Schedule 2(3)?"
-        >
-          <span>
-            <a
-              class="govuk-link govuk-body"
-              href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
-              target="_blank"
+            <RadioItem
+              :value="true"
+              label="Yes"
             >
-              http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
-            </a>
-          </span>
+              <TextareaInput
+                :id="`experience-under-${vacancy.appliedSchedule}`"
+                v-model="application.experienceUnderSchedule2D"
+                label="Explain how you've gained experience in law."
+              />
+            </RadioItem>
 
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <TextareaInput
-              id="experience-under-schedule-2-3"
-              v-model="application.experienceUnderSchedule2Three"
-              label="Explain how you've gained experience in law."
+            <RadioItem
+              :value="false"
+              label="No"
             />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+          </RadioGroup>
+          <RadioGroup
+            v-else-if="vacancy.appliedSchedule == 'schedule-2-3'"
+            :id="`applying-under-${vacancy.appliedSchedule}`"
+            v-model="application.applyingUnderSchedule2Three"
+            :label="`Are you applying under ${appliedSchedule}?`"
+          >
+            <span>
+              <a
+                class="govuk-link govuk-body"
+                href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
+                target="_blank"
+              >
+                http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
+              </a>
+            </span>
+
+            <RadioItem
+              :value="true"
+              label="Yes"
+            >
+              <TextareaInput
+                :id="`experience-under-${vacancy.appliedSchedule}`"
+                v-model="application.experienceUnderSchedule2Three"
+                label="Explain how you've gained experience in law."
+              />
+            </RadioItem>
+
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+          </RadioGroup>
+        </div>
 
         <RepeatableFields
           v-model="application.qualifications"
@@ -98,6 +103,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
+import * as filters from '@/filters';
 
 export default {
   components: {
@@ -127,6 +133,9 @@ export default {
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    appliedSchedule() {
+      return filters.lookup(this.vacancy.appliedSchedule);
     },
   },
   methods: {

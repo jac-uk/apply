@@ -228,7 +228,9 @@ const lookup = (value) => {
       'white-black-african': 'White and Black African',
       'white-black-caribbean': 'White and Black Caribbean',
       'write': 'Write',
-      // 'xxx': 'xxx',
+      'schedule-2-d': 'Schedule 2(d)',
+      'schedule-2-3': 'Schedule 2(3)',
+      // 'xxx': 'xxx',`
     };
 
     lookup[QUALIFYING_TEST.STATUS.CREATED] = 'Created';
