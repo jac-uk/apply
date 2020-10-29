@@ -102,6 +102,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    autoSave: {
+      type: Boolean,
+      default: false,
+    },
   },
   beforeRouteEnter (to, from, next) {
     next(vm => {
@@ -199,6 +203,13 @@ export default {
     timeIsUp: function (newVal, oldVal) {
       if (newVal !== oldVal) {
         if (this.timeIsUp) { // time is up therefore save form, if there are unsaved changes
+          this.saveResponse(false);
+        }
+      }
+    },
+    autoSave: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
           this.saveResponse(false);
         }
       }
