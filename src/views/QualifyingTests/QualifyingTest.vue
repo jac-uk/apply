@@ -26,7 +26,7 @@
           >
             <a
               href=""
-              class="govuk-link countdown-link"
+              :class="`govuk-link countdown-link info-btn--qualifying-tests--previous-question-${infoClass()}`"
               @click.prevent="btnPrevious"
             >
               ❮ {{ isMobile ? 'Previous' : 'Previous Question' }}
@@ -37,7 +37,7 @@
           v-slot:right-slot
         >
           <a
-            class="govuk-link countdown-link"
+            :class="`govuk-link countdown-link info-btn--qualifying-tests--exit-test-${$route.params.qualifyingTestId}`"
             href=""
             @click.prevent="openExitModal"
           >
@@ -68,6 +68,7 @@
         <RouterView
           :key="$route.fullPath"
           :time-is-up="timerEnded"
+          :auto-save="autoSave"
         />
       </div>
     </template>
@@ -89,6 +90,7 @@ export default {
       loaded: false,
       loadFailed: false,
       timerEnded: false,
+      autoSave: false,
     };
   },
   computed: {
@@ -184,6 +186,13 @@ export default {
         this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
       }
+      this.autoSave = false;
+      if (params.action === 'autoSave') {
+        this.autoSave = true;
+      }
+      if (params.action === 'cleanAutoSave') {
+        this.autoSave = false;
+      }
     },
     openTimeElapsedModal(){
       this.$refs.timeElapsedModalRef.openModal();
@@ -199,6 +208,11 @@ export default {
       this.$nextTick(() => {  // ensures change is picked up before we leave this route
         this.$router.push({ name: 'qualifying-tests' });
       });
+    },
+    infoClass() {
+      const params = this.$route.params;
+      const hyphenated = `${params.qualifyingTestId}--scenario-${params.scenarioNumber}--from-${params.questionNumber}-to-${params.questionNumber - 1}`;
+      return hyphenated;
     },
   },
 };

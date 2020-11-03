@@ -11,7 +11,7 @@
     
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="save(true)"
     >
       <component
         :is="questionType"
@@ -30,14 +30,14 @@
       <div class="moj-button-menu">
         <div class="moj-button-menu__wrapper">
           <button
-            class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+            :class="`moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2 info-btn--question-${$route.params.questionNumber}-${$route.params.qualifyingTestId}-skip`"
             type="button"
             @click="skip"
           >
             Skip
           </button>
           <button
-            class="moj-button-menu__item govuk-button"
+            :class="`moj-button-menu__item govuk-button info-btn--question-${$route.params.questionNumber}-${$route.params.qualifyingTestId}-save-and-continue`"
             :disabled="!canSaveAndContinue"
           >
             Save and continue
@@ -59,6 +59,12 @@ export default {
     CriticalAnalysis,
     SituationalJudgement,
     Banner,
+  },
+  props: {
+    autoSave: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     const questionNumber = this.$route.params.questionNumber;
@@ -146,6 +152,15 @@ export default {
       };
     },
   },
+  watch: {
+    autoSave: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
+          this.save(false);
+        }
+      }
+    },
+  },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
@@ -162,13 +177,17 @@ export default {
     async skip() {
       this.$router.push(this.nextPage);
     },
-    async save() {
-      this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+    async save(isCompleted) {
+      if (isCompleted) {
+        this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+      }
       const data = {
         responses: this.responses,
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
-      this.$router.push(this.nextPage);
+      if (isCompleted) {
+        this.$router.push(this.nextPage);
+      }
     },
   },
 };

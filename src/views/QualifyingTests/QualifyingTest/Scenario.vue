@@ -40,14 +40,14 @@
           <div class="moj-button-menu">
             <div class="moj-button-menu__wrapper">
               <button
-                class="moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2"
+                :class="`moj-button-menu__item govuk-button govuk-button--secondary govuk-!-margin-right-2  info-btn--scenario--${infoClass()}--save-and-continue`"
                 type="button"
                 @click="skip"
               >
                 Skip
               </button>
               <button
-                class="moj-button-menu__item govuk-button"
+                :class="`moj-button-menu__item govuk-button info-btn--scenario--${infoClass()}--save-and-continue`"
                 :disabled="reachMaxWords || isEmpty"
               >
                 Save and continue
@@ -99,6 +99,10 @@ export default {
   },
   props: {
     timeIsUp: {
+      type: Boolean,
+      default: false,
+    },
+    autoSave: {
       type: Boolean,
       default: false,
     },
@@ -203,6 +207,13 @@ export default {
         }
       }
     },
+    autoSave: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
+          this.saveResponse(false);
+        }
+      }
+    },
   },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
@@ -265,6 +276,11 @@ export default {
       } else {
         return plusIcon;
       }
+    },
+    infoClass() {
+      const params = this.$route.params;
+      const hyphenated = `${params.qualifyingTestId}-${params.scenarioNumber}-${params.questionNumber}`;
+      return hyphenated;
     },
   },
 };
