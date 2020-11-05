@@ -102,10 +102,10 @@ const helperTimeLeft = (obj) => {
         return duration * minute;
       }
       const endTime = new Date(startTime.getTime() + duration * minute);
-      if (endTime < Date.now()) {
+      if (endTime < Date.UTC()) {
         return 0;
       }
-      return (endTime - Date.now());
+      return (endTime - Date.UTC());
     }
   } else {
     return 0;
