@@ -1,40 +1,46 @@
 <template>
   <div class="page-container">
-    <Header v-if="!fullPageMode" />
+    <LoadingMessage
+      v-if="loaded === false"
+      :load-failed="loadFailed"
+    />
+    <template v-else>
+      <Header v-if="!fullPageMode" />
 
-    <main
-      id="main-content"
-      class="govuk-width-container"
-      role="main"
-    >
-      <div
-        :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
+      <main
+        id="main-content"
+        class="govuk-width-container"
+        role="main"
       >
         <div
-          v-if="validInvitations.length"
+          :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
         >
-          <Banner
-            v-for="invite in validInvitations"
-            :key="invite.id"
-            status="information"
+          <div
+            v-if="validInvitations.length"
           >
-            <span>
-              You've been invited to apply for
-              <RouterLink
-                :to="{ name: 'vacancy-details', params: { id: invite.vacancyId } }"
-              >
-                {{ invite.name }}
-              </RouterLink>
-            </span>
-          </Banner>
+            <Banner
+              v-for="invite in validInvitations"
+              :key="invite.id"
+              status="information"
+            >
+              <span>
+                You've been invited to apply for
+                <RouterLink
+                  :to="{ name: 'vacancy-details', params: { id: invite.vacancyId } }"
+                >
+                  {{ invite.name }}
+                </RouterLink>
+              </span>
+            </Banner>
+          </div>
+          <RouterView />
         </div>
-        <RouterView />
-      </div>
-    </main>
+      </main>
 
-    <Footer
-      v-if="!fullPageMode"
-    />
+      <Footer
+        v-if="!fullPageMode"
+      />
+    </template>
   </div>
 </template>
 
@@ -42,13 +48,21 @@
 import Header from '@/components/Page/Header';
 import Footer from '@/components/Page/Footer';
 import Banner from '@/components/Page/Banner';
+import LoadingMessage from '@/components/LoadingMessage';
 
 export default {
   name: 'App',
   components: {
+    LoadingMessage,
     Header,
     Footer,
     Banner,
+  },
+  data() {
+    return {
+      loaded: false,
+      loadFailed: false,
+    };
   },
   computed: {
     fullPageMode() {
@@ -84,7 +98,7 @@ export default {
   watch: {
     isSignedIn: {
       immediate: true,
-      handler(val) { 
+      handler(val) {
         if (val) {
           this.$store.dispatch('invitations/bind');
         } else {
@@ -95,14 +109,22 @@ export default {
     invitations: {
       immediate: true,
       deep: true,
-      handler(val) { 
+      handler(val) {
         if (val && val.length) {
-          // if (this.$store.state.vacancies.records.length) { 
+          // if (this.$store.state.vacancies.records.length) {
           this.$store.dispatch('vacancies/bind', { vacancyIds: this.invitations.map(invite => invite.vacancy.id) });
           // }
         }
-      }, 
+      },
     },
+  },
+  async mounted() {
+    try {
+      await this.$store.dispatch('session/load');
+      this.loaded = true;
+    } catch {
+      this.loadFailed = true;
+    }
   },
 };
 </script>
