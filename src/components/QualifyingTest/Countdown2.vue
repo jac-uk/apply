@@ -129,7 +129,6 @@ export default {
     this.start = start.getTime();
     this.end = end.getTime();
 
-    console.log('call first tick', this.serverTimeOffset);
     this.tick(this.start, this.end);
 
     this.interval = setInterval(() => {
