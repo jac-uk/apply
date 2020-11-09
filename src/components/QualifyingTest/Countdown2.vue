@@ -20,8 +20,8 @@
           <span style="margin-right: 5px;">
             {{ mobileView ? '' : 'Time Remaining:' }}
           </span>
-          <span 
-            v-if="hours" 
+          <span
+            v-if="hours"
           >
             {{ hours | zeroPad }}:
           </span>
@@ -73,6 +73,10 @@ export default {
       type: Date,
       default: null,
     },
+    serverTimeOffset: {
+      type: Number,
+      default: 0,
+    },
     mobileView: {
       type: Boolean,
       default: false,
@@ -103,7 +107,7 @@ export default {
       seconds: '',
       bckClass: '',
       saveCounter: 0,
-      saveSeconds: 5, 
+      saveSeconds: 5,
     };
   },
   mounted() {
@@ -115,7 +119,7 @@ export default {
     if (this.endTime !== null) {
       const absoluteEnd = new Date(this.endTime);
       const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
-    
+
       if (isAbsoluteEndBeforetheEnd) {
         end = absoluteEnd;
       }
@@ -133,7 +137,7 @@ export default {
     }, second);
   },
   methods: {
-    isMobile() {
+    isMobile() {  // @TODO this should be done via CSS instead of JS
       if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true;
       } else {
@@ -141,7 +145,7 @@ export default {
       }
     },
     tick(start, end) {
-      const now = new Date().getTime();
+      const now = new Date().getTime() + this.serverTimeOffset;
 
       const timeRemaining = end - now;
 
