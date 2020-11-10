@@ -6,7 +6,12 @@
       </h1>
 
       <p v-if="vacancy.immediateStart">
-        <span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span>
+        <span class="govuk-body govuk-!-font-weight-bold">
+          Number of vacancies:
+        </span>
+        <span class="govuk-body">
+          {{ vacancy.immediateStart }}
+        </span>
       </p>
       <p v-if="vacancy.location">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
