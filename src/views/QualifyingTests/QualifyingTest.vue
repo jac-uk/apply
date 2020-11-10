@@ -13,6 +13,7 @@
         :start-time="qualifyingTestResponse.statusLog.started"
         :end-time="qualifyingTestResponse.qualifyingTest.endDate"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
+        :server-time-offset="serverTimeOffset"
         :warning="5"
         :alert="1"
         :mobile-view="isMobile"
@@ -123,12 +124,15 @@ export default {
     isInformationPage() {
       return this.$route.name === 'qualifying-test-information';
     },
+    serverTimeOffset() {
+      return this.$store.state.session.serverTimeOffset;
+    },
   },
   watch: {
-    qualifyingTestResponse: function (newVal) {
+    qualifyingTestResponse: async function (newVal) {
       if (newVal) {
         if (this.testInProgress) {
-          this.$store.dispatch('connectionMonitor/start', `qualifyingTest/${this.qualifyingTestId}`);
+          await this.$store.dispatch('connectionMonitor/start', `qualifyingTest/${this.qualifyingTestId}`);
         } else {
           this.$store.dispatch('connectionMonitor/stop');
         }
@@ -137,6 +141,14 @@ export default {
     '$route.params.qualifyingTestId'() {
       this.loadQualifyingTestResponse();
     },
+    autoSave: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.autoSave) { // here we use autoSave event to refresh session.serverTimeOffset
+          this.$store.dispatch('session/load');
+        }
+      }
+    },
+
   },
   async mounted() {
     await this.loadQualifyingTestResponse();
