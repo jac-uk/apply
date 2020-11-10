@@ -40,7 +40,7 @@ export default {
     setStarted(state, started) {
       state.started = started;
     },
-  },  
+  },
   state: {
     started: false,
   },
