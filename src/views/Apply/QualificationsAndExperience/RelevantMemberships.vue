@@ -33,11 +33,13 @@
               v-model="application.charteredAssociationBuildingEngineersDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="chartered-association-of-building-engineers-number"
               v-model="application.charteredAssociationBuildingEngineersNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="chartered-association-of-building-engineers-information"
@@ -57,11 +59,13 @@
               v-model="application.charteredInstituteBuildingDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="chartered-institute-of-building-number"
               v-model="application.charteredInstituteBuildingNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="chartered-institute-of-building-information"
@@ -81,11 +85,13 @@
               v-model="application.charteredInstituteEnvironmentalHealthDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="chartered-institute-of-environmental-health-number"
               v-model="application.charteredInstituteEnvironmentalHealthNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="chartered-institute-of-environmental-health-information"
@@ -105,16 +111,19 @@
               v-model="application.generalMedicalCouncilDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="general-medical-council-number"
               v-model="application.generalMedicalCouncilNumber"
               label="Membership number?"
+              required
             />
             <RadioGroup
               id="general-medical-council-conditional-registration"
               v-model="application.generalMedicalCouncilConditional"
               label="Is your registration conditional?"
+              required
             >
               <RadioItem
                 :value="true"
@@ -161,11 +170,13 @@
               label="When did you become a member?"
               hint="If this was less than 3 years ago you may not be eligible for this post"
               type="month"
+              required
             />
             <TextField
               id="royal-college-of-psychiatrists-number"
               v-model="application.royalCollegeOfPsychiatristsNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="royal-college-of-psychiatrists-information"
@@ -185,11 +196,13 @@
               v-model="application.royalInstitutionCharteredSurveyorsDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="royal-institution-of-chartered-surveyors-number"
               v-model="application.royalInstitutionCharteredSurveyorsNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="royal-institution-of-chartered-surveyors-information"
@@ -209,11 +222,13 @@
               v-model="application.royalInstituteBritishArchitectsDate"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               id="royal-institute-of-british-architects-number"
               v-model="application.royalInstituteBritishArchitectsNumber"
               label="Membership number?"
+              required
             />
             <TextareaInput
               id="royal-institute-of-british-architects-information"
@@ -235,11 +250,13 @@
               v-model="application.memberships[membership.value].date"
               label="When did you become a member?"
               type="month"
+              required
             />
             <TextField
               :id="`${membership.value}-number`"
               v-model="application.memberships[membership.value].number"
               label="Membership number?"
+              required
             />
             <TextareaInput
               :id="`${membership.value}-information`"
