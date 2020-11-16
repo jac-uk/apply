@@ -104,6 +104,21 @@ export default {
         this.errors = [];
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
           .then((userCredential) => {
+
+            // LOG
+            const objToLog = {
+              type: 'login',
+              id: userCredential.user.uid,
+              data: {
+                uid: userCredential.user.uid,
+                email: userCredential.user.email,
+                displayname: userCredential.user.displayName,
+                meta: this.$browserDetect.meta,
+              },
+            };
+            this.$store.dispatch('logs/save', objToLog);
+            // LOG
+
             this.$store.dispatch('auth/setCurrentUser', userCredential.user);
             if (this.$store.getters['vacancy/id']) {
               this.$router.push({ path: `/apply/${this.$store.getters['vacancy/id']}` });
