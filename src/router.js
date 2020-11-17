@@ -13,7 +13,7 @@ import ResetPassword from '@/views/ResetPassword';
 import Vacancies from '@/views/Vacancies';
 import Vacancy from '@/views/Vacancy';
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
-import VacancyMessage from '@/views/Vacancy/VacancyMessage';
+// import VacancyMessage from '@/views/Vacancy/VacancyMessage';
 
 //Eligibility
 import Eligibility from '@/views/Eligibility/Eligibility';
@@ -139,14 +139,6 @@ const router = new Router({
           name: 'vacancy-details',
           meta: {
             title: 'Vacancy details',
-          },
-        },
-        {
-          path: 'message',
-          component: VacancyMessage,
-          name: 'vacancy-message',
-          meta: {
-            title: 'Vacancy message',
           },
         },
         {
