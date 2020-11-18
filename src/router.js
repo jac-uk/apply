@@ -13,7 +13,6 @@ import ResetPassword from '@/views/ResetPassword';
 import Vacancies from '@/views/Vacancies';
 import Vacancy from '@/views/Vacancy';
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
-// import VacancyMessage from '@/views/Vacancy/VacancyMessage';
 
 //Eligibility
 import Eligibility from '@/views/Eligibility/Eligibility';
