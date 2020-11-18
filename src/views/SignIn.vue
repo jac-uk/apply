@@ -111,8 +111,6 @@ export default {
               id: userCredential.user.uid,
               data: {
                 uid: userCredential.user.uid,
-                email: userCredential.user.email,
-                displayname: userCredential.user.displayName,
                 meta: this.$browserDetect.meta,
               },
             };
