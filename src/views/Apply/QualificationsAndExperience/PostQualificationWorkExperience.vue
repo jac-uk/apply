@@ -34,12 +34,14 @@
 import RepeatableFields from '@/components/RepeatableFields';
 import Experience from '@/components/RepeatableFields/Experience';
 import BackLink from '@/components/BackLink';
+import Form from '@/components/Form/Form';
 
 export default {
   components: {
     RepeatableFields,
     BackLink,
   },
+  extends: Form,
   data(){
     const defaults =  {
       experience: null,
@@ -56,11 +58,13 @@ export default {
   },
   methods: {
     async save() {
-      this.application.progress.postQualificationWorkExperience = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
+      this.validate();
+      if (this.isValid()) {
+        this.application.progress.postQualificationWorkExperience = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
     },
   },
-
 };
 </script>
