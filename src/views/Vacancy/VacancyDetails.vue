@@ -96,7 +96,7 @@
         v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
-        :to="{ name: 'vacancy-message' }"
+        :to="{ name: 'eligibility' }"
       >
         Check if you're eligible and apply 
       </RouterLink>
@@ -105,8 +105,8 @@
         v-else-if="userIsInvited && hasOpenInvite"
         class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
         data-module="govuk-button"
-        :to="{ name: 'vacancy-message' }"
-      >
+        :to="{ name: 'eligibility' }"
+        >
         You've been invited to this exercise, click here to apply 
       </RouterLink>
 
