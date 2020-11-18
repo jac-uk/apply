@@ -2017,16 +2017,37 @@ export default {
       }
     },
     downloadAsPdf() {
-      const pdf = new jsPDF();
-      pdf.fromHTML(
-        this.$refs['download-as-pdf-div'],
-        15,
-        15,
+      const pdf = new jsPDF({
+        orientation: 'p',
+        unit: 'px',
+        format: 'a4',
+        putOnlyUsedFonts: true,
+        floatPrecision: 1, // or "smart", default is 16
+      });
+      console.log('pdf', pdf);
+      // pdf.fromHTML(
+      //   this.$refs['download-as-pdf-div'],
+      //   15,
+      //   15,
+      //   {
+      //     width: 170,
+      //   }
+      // );
+      // pdf.save('judicial-appointments-application.pdf');
+      pdf.setFontSize(12);
+
+      pdf.html(
+        this.$refs['download-as-pdf-div'], 
         {
-          width: 170,
+          callback: function (pdf) {
+            pdf.save('judicial-appointments-application.pdf');
+          },
+          margin: [25, 25, 25, 25],
+          x: 25,
+          y: 25,
         }
       );
-      pdf.save('judicial-appointments-application.pdf');
+
     },
     checkIfCanApply() {
       return this.isDraftApplication
