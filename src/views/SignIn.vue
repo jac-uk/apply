@@ -104,6 +104,19 @@ export default {
         this.errors = [];
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
           .then((userCredential) => {
+
+            // LOG
+            const objToLog = {
+              type: 'login',
+              id: userCredential.user.uid,
+              data: {
+                uid: userCredential.user.uid,
+                meta: this.$browserDetect.meta,
+              },
+            };
+            this.$store.dispatch('logs/save', objToLog);
+            // LOG
+
             this.$store.dispatch('auth/setCurrentUser', userCredential.user);
             this.$router.push({ name: 'applications' });
           })
