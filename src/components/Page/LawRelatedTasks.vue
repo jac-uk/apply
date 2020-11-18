@@ -75,6 +75,7 @@ import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
+
 export default {
   name: 'LawRelatedTasks',
   components: {
