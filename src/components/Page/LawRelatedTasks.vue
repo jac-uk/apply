@@ -74,7 +74,7 @@ import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FormFieldError from '@/components/Form/FormFieldError';
-
+import FormField from '@/components/Form/FormField';
 export default {
   name: 'LawRelatedTasks',
   components: {
@@ -83,6 +83,7 @@ export default {
     TextareaInput,
     FormFieldError,
   },
+  extends: FormField,
   props: {
     required: {
       default: false,
@@ -103,15 +104,7 @@ export default {
       default: '',
     },
   },
-  data() {
-    return {
-      errorMessage: '',
-    };
-  },
   computed: {
-    hasError() {
-      return this.errorMessage ? true :  false;
-    },
     localTasks: {
       get() {
         return this.tasks;
@@ -129,18 +122,7 @@ export default {
       },
     },
   },
-  mounted: function () {
-    this.$root.$on('validate', this.validate);
-  },
-  beforeDestroy: function() {
-    this.setError('');
-    this.$root.$off('validate', this.validate);
-  },
   methods: {
-    setError(message) {
-      this.errorMessage = message;
-      this.$root.$emit('handle-error', { id: this.id, message: this.errorMessage });
-    },
     validate() {
       this.setError('');
       if (this.required && this.localTasks.length === 0) {
