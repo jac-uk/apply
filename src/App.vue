@@ -16,7 +16,7 @@
           :class="fullPageMode ? 'govuk-!-margin-0' : 'govuk-main-wrapper govuk-main-wrapper--auto-spacing govuk-!-padding-top-0'"
         >
           <div
-            v-if="validInvitations.length"
+            v-if="validInvitations.length && !fullPageMode"
           >
             <Banner
               v-for="invite in validInvitations"
