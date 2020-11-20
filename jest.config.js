@@ -18,14 +18,12 @@ module.exports = {
   },
   setupFilesAfterEnv: [
     'jest-extended',
-    'jest-canvas-mock',
   ],
   snapshotSerializers: [
     'jest-serializer-vue',
   ],
   testMatch: [
     '**/tests/unit/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
-    '**/tests/journeys/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
   ],
   testURL: 'http://localhost/',
   watchPlugins: [

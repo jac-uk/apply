@@ -1,14 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-
-const originalPush = Router.prototype.push;
-
-Router.prototype.push = function push(location) {
-  if (!(this.currentRoute.name === location.name)){
-    return originalPush.call(this, location).catch(err => { throw (err); } );
-  }
-};
-
 import store from '@/store';
 
 import SignIn from '@/views/SignIn';
