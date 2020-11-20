@@ -153,13 +153,14 @@ export default {
     },
   },
   watch: {
-    autoSave: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
-          this.save(false);
-        }
-      }
-    },
+    // #594 the autosave conflicts with amending previous questions
+    // autoSave: function (newVal, oldVal) {
+    //   if (newVal !== oldVal) {
+    //     if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
+    //       this.save(false);
+    //     }
+    //   }
+    // },
   },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
