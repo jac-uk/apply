@@ -137,6 +137,56 @@
                 </p>
                 <hr>
               </div>
+
+              <div v-if="vacancy.welshPosts">
+                <div v-if="!vacancy.inviteOnly">
+                  <p>
+                    <span
+                      class="govuk-body govuk-!-font-weight-bold"
+                    >
+                      <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
+                    </span>
+                    <span
+                      v-if="vacancy.applicationOpenDate"
+                      class="govuk-body"
+                    >
+                      {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                    </span>
+                    <span
+                      v-else
+                      class="govuk-body"
+                    >
+                      {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                    </span>
+                  </p>
+                  <p v-if="vacancy.applicationCloseDate">
+                    <span
+                      class="govuk-body govuk-!-font-weight-bold"
+                    >
+                      <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad cau: </span>
+                    </span>
+                    <span
+                      class="govuk-body"
+                    >
+                      {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                    </span>
+                  </p>
+                  <p v-if="vacancy.roleSummaryWelsh">
+                    {{ vacancy.roleSummaryWelsh }}
+                  </p>
+                  <p
+                    v-if="showSignUp(vacancy)"
+                    class="govuk-body govuk-!-margin-bottom-7"
+                  >
+                    <a
+                      class="govuk-link govuk-body"
+                      :href="vacancy.subscriberAlertsUrl"
+                      target="_blank"
+                    >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
+                  </p>
+                  <hr>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -202,6 +252,47 @@
                 >Find out more</a>
               </p>
               <hr>
+              <div v-if="vacancy.welshPosts">
+                <p>
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
+                  </span>
+                  <span
+                    v-if="vacancy.applicationOpenDate"
+                    class="govuk-body"
+                  >
+                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                  </span>
+                  <span
+                    v-else
+                    class="govuk-body"
+                  >
+                    {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                  </span>
+                </p>
+                <p v-if="vacancy.roleSummaryWelsh">
+                  {{ vacancy.roleSummaryWelsh }}
+                </p>
+                <p>
+                  <RouterLink
+                    v-if="vacancy.aboutTheRole"
+                    class="govuk-link govuk-body"
+                    :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+                  >
+                    I ddarganfod mwy
+                  </RouterLink>
+
+                  <a
+                    v-if="vacancy.externalLink"
+                    class="govuk-link govuk-body"
+                    :href="vacancy.externalLink"
+                    target="_blank"
+                  >I ddarganfod mwy</a>
+                </p>
+                <hr>
+              </div>
             </li>
           </ul>
         </div>
@@ -269,6 +360,60 @@
                 >Find out more</a>
               </p>
               <hr class="govuk-section-break govuk-section-break--visible">
+
+              <div v-if="vacancy.welshPosts">
+                <p>
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
+                  </span>
+                  <span
+                    v-if="vacancy.applicationOpenDate"
+                    class="govuk-body"
+                  >
+                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                  </span>
+                  <span
+                    v-else
+                    class="govuk-body"
+                  >
+                    {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                  </span>
+                </p>
+                <p v-if="vacancy.applicationCloseDate">
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad cau: </span>
+                  </span>
+                  <span
+                    class="govuk-body"
+                  >
+                    {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                  </span>
+                </p>
+                <p v-if="vacancy.roleSummaryWelsh">
+                  {{ vacancy.roleSummaryWelsh }}
+                </p>
+                <p>
+                  <RouterLink
+                    v-if="vacancy.aboutTheRole"
+                    class="govuk-link govuk-body"
+                    :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+                  >
+                    I ddarganfod mwy
+                  </RouterLink>
+
+                  <a
+                    v-if="vacancy.externalLink"
+                    class="govuk-link govuk-body"
+                    :href="vacancy.externalLink"
+                    target="_blank"
+                  >I ddarganfod mwy</a>
+                </p>
+                <hr class="govuk-section-break govuk-section-break--visible">
+              </div>
             </li>
           </ul>
         </div>
@@ -292,7 +437,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('vacancies/bind');  
+    this.$store.dispatch('vacancies/bind');
   },
   methods: {
     showSignUp(vacancy) {

@@ -13,11 +13,21 @@
         :countdown-length="60"
       />
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
-        {{ vacancy.referenceNumber }} {{ vacancy.name }} 
+        {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
       <h1 class="govuk-heading-xl">
         Apply for the role
       </h1>
+      <p
+        v-if="vacancy.welshPosts"
+        class="govuk-!-margin-bottom-8"
+      >
+        <span class="govuk-body">Os ydych am ffurflen gais yn y Gymraeg cysylltwch a </span>
+        <a
+          :href="`mailto:${welshPostsContactMailbox}?subject=Re:${welshPostsEmailSubject}`"
+          class="govuk-body govuk-link"
+        >{{ welshPostsContactMailbox }}</a>
+      </p>
       <ol class="govuk-list">
         <li
           v-for="(taskGroup, index) in taskGroups"
@@ -95,16 +105,17 @@
                 View advert
               </RouterLink>
             </li>
-          </ul> 
+          </ul>
         </nav>
       </aside>
-    </div> 
+    </div>
   </div>
 </template>
 
 <script>
 import Countdown from '@/components/Page/Countdown';
 import { hyphenize } from '@/filters';
+import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
 
 export default {
   components: {
@@ -113,6 +124,8 @@ export default {
   data() {
     return {
       unknownVariable: null,
+      welshPostsContactMailbox: WELSH_POSTS_CONTACT_MAILBOX,
+      welshPostsEmailSubject: WELSH_POSTS_EMAIL_SUBJECT,
     };
   },
   computed: {
@@ -198,13 +211,13 @@ export default {
             tasks: tasks,
           });
         }
-        
+
         if (this.isNonLegal) {
           const tasks = [];
           if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
-            }            
+            }
           }
           tasks.push({ title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience });
           tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
@@ -295,7 +308,7 @@ export default {
       default:
         return false;
       }
-    },  
+    },
     showCV() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
@@ -306,7 +319,7 @@ export default {
       default:
         return false;
       }
-    },  
+    },
     showStatementOfEligibility() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-eligibility':
@@ -361,7 +374,7 @@ export default {
           if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               if (!this.application.progress.relevantMemberships) { isComplete = false; }
-            }            
+            }
           }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
@@ -392,7 +405,7 @@ export default {
       this.$router.push({ name: 'review' });
     },
     hyphenization(value) {
-      return hyphenize(value); 
+      return hyphenize(value);
     },
   },
 };
