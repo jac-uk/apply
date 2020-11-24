@@ -16,8 +16,22 @@
       <p v-if="vacancy.location">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
       </p>
-      <p v-if="vacancy.salaryGrouping">
-        <span class="govuk-body govuk-!-font-weight-bold">Salary:</span> <span class="govuk-body"> {{ vacancy.salaryGrouping | lookup }}</span>
+      <p v-if="vacancy.appointmentType == 'salaried'">
+        <span class="govuk-body govuk-!-font-weight-bold">
+          Salary:
+        </span> 
+        <span 
+          v-if="vacancy.salaryGrouping" 
+          class="govuk-body"
+        >
+          {{ vacancy.salaryGrouping | lookup }} 
+        </span>
+        <span 
+          v-if="vacancy.salary" 
+          class="govuk-body"
+        >
+          {{ vacancy.salary | formatCurrency }}
+        </span>
       </p>
       <p
         v-if="vacancy.exerciseMailbox"
