@@ -282,6 +282,15 @@ export default {
           title: 'Assessments',
           tasks: assessmentOptions,
         });
+
+        data.push({
+          title: 'Additional Information',
+          tasks: [{
+            title: 'Additional Information',
+            id: 'additional-information',
+            done: this.applicationProgress.additionalInfo,
+          }],
+        });
       }
       return data;
     },
