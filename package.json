@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.27.1",
+  "version": "1.28.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode develop",
@@ -30,6 +30,7 @@
     "jspdf": "^1.5.3",
     "logrocket": "^1.0.10",
     "vue": "^2.6.11",
+    "vue-browser-detect-plugin": "^0.1.13",
     "vue-gtag": "^1.8.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.5.1",

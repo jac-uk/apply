@@ -6,7 +6,12 @@
       </h1>
 
       <p v-if="vacancy.immediateStart">
-        <span class="govuk-body govuk-!-font-weight-bold">Number of vacancies:</span> <span class="govuk-body"> {{ vacancy.immediateStart }} </span>
+        <span class="govuk-body govuk-!-font-weight-bold">
+          Number of vacancies:
+        </span>
+        <span class="govuk-body">
+          {{ vacancy.immediateStart }}
+        </span>
       </p>
       <p v-if="vacancy.location">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
@@ -91,7 +96,7 @@
         v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
-        :to="{ name: 'vacancy-message' }"
+        :to="{ name: 'eligibility' }"
       >
         Check if you're eligible and apply 
       </RouterLink>
@@ -100,8 +105,8 @@
         v-else-if="userIsInvited && hasOpenInvite"
         class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
         data-module="govuk-button"
-        :to="{ name: 'vacancy-message' }"
-      >
+        :to="{ name: 'eligibility' }"
+        >
         You've been invited to this exercise, click here to apply 
       </RouterLink>
 

@@ -13,6 +13,7 @@ import applications from '@/store/applications';
 import application from '@/store/application';
 import qualifyingTestResponse from '@/store/qualifyingTestResponse';
 import qualifyingTestResponses from '@/store/qualifyingTestResponses';
+import logs from '@/store/logs';
 import connectionMonitor from '@/store/connectionMonitor';
 import session from '@/store/session';
 
@@ -29,6 +30,7 @@ const store = new Vuex.Store({
     application,
     qualifyingTestResponse,
     qualifyingTestResponses,
+    logs,
     connectionMonitor,
     session,
   },

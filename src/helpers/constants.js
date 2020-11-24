@@ -39,9 +39,14 @@ const DEFAULT = {
   NO: 'No',
 };
 
+const WELSH_POSTS_CONTACT_MAILBOX = 'enquiries@judicialappointments.gov.uk';
+const WELSH_POSTS_EMAIL_SUBJECT = 'Welsh application form request';
+
 export {
   STATUS,
   QUALIFYING_TEST,
   QUALIFYING_TEST_RESPONSE,
-  DEFAULT
+  DEFAULT,
+  WELSH_POSTS_CONTACT_MAILBOX,
+  WELSH_POSTS_EMAIL_SUBJECT
 };

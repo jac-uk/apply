@@ -1,7 +1,7 @@
 <template>
   <div class="govuk-grid-column-two-thirds">
     <Banner
-      v-if="questionStartedOnPreviousTest"
+      v-if="previousTestQuestion"
       status="warning"
     >
       <template>
@@ -91,6 +91,7 @@ export default {
       response: responses[questionNumberIndex],
       responses,
       showDetails: true,
+      previousTestQuestion: false,
     };
   },
   computed: {
@@ -113,16 +114,8 @@ export default {
     isSituationalJudgment() {
       return this.questionType === QUALIFYING_TEST.TYPE.SITUATIONAL_JUDGEMENT;
     },
-    questionStartedOnPreviousTest() {
-      if (this.response.started && this.response.completed) {
-        if (this.response.started < this.qualifyingTestResponse.qualifyingTest.startDate) {
-          return true;
-        }
-      }
-      return false;
-    },
     canSaveAndContinue() {
-      if (this.questionStartedOnPreviousTest) {
+      if (this.previousTestQuestion) {
         return false;
       }
       switch (this.qualifyingTestResponse.qualifyingTest.type) {
@@ -153,13 +146,14 @@ export default {
     },
   },
   watch: {
-    autoSave: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
-          this.save(false);
-        }
-      }
-    },
+    // #594 the autosave conflicts with amending previous questions
+    // autoSave: function (newVal, oldVal) {
+    //   if (newVal !== oldVal) {
+    //     if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
+    //       this.save(false);
+    //     }
+    //   }
+    // },
   },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
@@ -172,6 +166,7 @@ export default {
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
+    this.questionStartedOnPreviousTest();
   },
   methods: {
     async skip() {
@@ -187,6 +182,13 @@ export default {
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       if (isCompleted) {
         this.$router.push(this.nextPage);
+      }
+    },
+    questionStartedOnPreviousTest() {
+      if (this.response.started && this.response.completed) {
+        if (this.response.started < this.qualifyingTestResponse.qualifyingTest.startDate) {
+          this.previousTestQuestion = true;
+        }
       }
     },
   },

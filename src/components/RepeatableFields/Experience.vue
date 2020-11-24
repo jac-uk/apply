@@ -4,12 +4,14 @@
       :id="experienceJobTitle"
       v-model="row.jobTitle"
       label="Job title"
+      required
     />
 
     <TextField
       :id="experienceOrgBusinessName"
       v-model="row.orgBusinessName"
       label="Organisation or business name"
+      required
     />
 
     <DateInput
@@ -17,6 +19,7 @@
       v-model="row.startDate"
       label="Start date"
       type="month"
+      required
     />
 
     <DateInput
@@ -31,6 +34,7 @@
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"
       :other-tasks.sync="row.otherTasks"
+      required
     />
 
     <slot name="removeButton" />
