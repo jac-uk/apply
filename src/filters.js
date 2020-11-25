@@ -46,6 +46,19 @@ const formatEstimatedDate = (value) => {
   return formatDate(value);
 };
 
+const formatCurrency = (value) => {
+  let amount = parseFloat(value);
+  if (isNaN(amount)) {
+    amount = 0;
+  }
+  if (typeof amount === 'number') {
+    amount = amount.toLocaleString('en-GB',
+      { style: 'currency', currency: 'GBP' }
+    );
+  }
+  return amount;
+};
+
 const toYesNo = (value) => {
   // Only convert booleans, not all falsy values mean "no"
   if (typeof value === 'boolean') {
@@ -267,6 +280,7 @@ export {
   capitalize,
   formatDate,
   formatEstimatedDate,
+  formatCurrency,
   toYesNo,
   lookup,
   showAlternative,
