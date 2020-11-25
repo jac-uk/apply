@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-grid-row">
-    <form 
+    <form
       ref="formRef"
       @submit.prevent="save"
     >
@@ -31,11 +31,11 @@
           </a>
         </div>
 
-        <div 
+        <div
           ref="download-as-pdf-div"
         >
           <h1 class="govuk-heading-l">
-            {{ vacancy.name }} 
+            {{ vacancy.name }}
           </h1>
 
           <div class="govuk-!-margin-top-9">
@@ -721,7 +721,7 @@
                   </p>
                 </dd>
               </div>
-            </dl>            
+            </dl>
           </div>
 
           <div
@@ -770,12 +770,12 @@
             >
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  {{ vacancy.additionalWorkingPreferences[index].question }} 
+                  {{ vacancy.additionalWorkingPreferences[index].question }}
                   <span class="govuk-body govuk-!-font-size-19">
                     ({{ vacancy.additionalWorkingPreferences[index].questionType | lookup }})
                   </span>
                 </dt>
-                <dd 
+                <dd
                   v-if="vacancy.additionalWorkingPreferences[index].questionType === 'single-choice'"
                   class="govuk-summary-list__value"
                 >
@@ -783,7 +783,7 @@
                     <li>{{ item.selection }}</li>
                   </ul>
                 </dd>
-                <dd 
+                <dd
                   v-if="vacancy.additionalWorkingPreferences[index].questionType === 'multiple-choice'"
                   class="govuk-summary-list__value"
                 >
@@ -808,7 +808,7 @@
                     </li>
                   </ul>
                 </dd>
-                <dd 
+                <dd
                   v-if="vacancy.additionalWorkingPreferences[index].questionType === 'ranked-choice'"
                   class="govuk-summary-list__value"
                 >
@@ -897,7 +897,7 @@
                 </dd>
               </div>
 
-              <div 
+              <div
                 v-if="item.qualificationNotComplete"
                 class="govuk-summary-list__row"
               >
@@ -912,7 +912,7 @@
                   </ul>
                 </dd>
               </div>
-              
+
               <div
                 v-if="item.qualificationNotComplete && item.details"
                 class="govuk-summary-list__row"
@@ -930,11 +930,11 @@
               </div>
             </dl>
 
-            <dl 
+            <dl
               v-if="vacancy.schedule2Apply"
               class="govuk-summary-list govuk-!-margin-bottom-8"
             >
-              <div 
+              <div
                 v-if="vacancy.appliedSchedule == 'schedule-2-3'"
                 class="govuk-summary-list__row"
               >
@@ -948,7 +948,7 @@
                 </dd>
               </div>
 
-              <div 
+              <div
                 v-if="vacancy.appliedSchedule == 'schedule-2-d'"
                 class="govuk-summary-list__row"
               >
@@ -964,8 +964,8 @@
 
               <div
                 v-if="
-                  (vacancy.appliedSchedule=='schedule-2-3' && application.applyingUnderSchedule2Three) 
-                    || (vacancy.appliedSchedule=='schedule-2-d' && application.applyingUnderSchedule2d)" 
+                  (vacancy.appliedSchedule=='schedule-2-3' && application.applyingUnderSchedule2Three)
+                    || (vacancy.appliedSchedule=='schedule-2-d' && application.applyingUnderSchedule2d)"
                 class="govuk-summary-list__row"
               >
                 <dt
@@ -1365,7 +1365,7 @@
               <div
                 class="govuk-summary-list__row"
               >
-                <dt 
+                <dt
                   v-if="vacancy.previousJudicialExperienceApply"
                   class="govuk-summary-list__key"
                 >
@@ -1630,6 +1630,54 @@
             </div>
           </dl>
 
+          <div v-if="application.additionalInfo">
+            <div
+              class="govuk-!-margin-top-9"
+            >
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Additional Information
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'additional-information'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+
+            <dl
+              class="govuk-summary-list govuk-!-margin-bottom-8"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  How did you hear about the vacancy?
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li
+                      v-for="(item, index) in application.additionalInfo.listedSources"
+                      :key="index"
+                    >
+                      <p
+                        v-if="item == 'other'"
+                        class="govuk-body govuk-!-margin-bottom-0"
+                      >
+                        <span class="govuk-caption-m">{{ item | lookup }}</span>
+                        {{ application.additionalInfo.otherSources }}
+                      </p>
+                      <span v-else>{{ item | lookup }}</span>
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div
             v-if="application.selectionCriteriaAnswers"
             class="govuk-!-margin-top-9"
@@ -1801,7 +1849,7 @@
         <button
           v-if="isDraftApplication"
           :disabled="!canApply"
-          class="govuk-button"
+          class="govuk-button govuk-!-margin-top-8"
         >
           Send application
         </button>
@@ -1877,7 +1925,7 @@ export default {
       default:
         return false;
       }
-    },  
+    },
     showCV() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
@@ -1888,7 +1936,7 @@ export default {
       default:
         return false;
       }
-    },  
+    },
     showStatementOfEligibility() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-eligibility':
@@ -1943,7 +1991,7 @@ export default {
           if (this.vacancy.memberships && this.vacancy.memberships.length) {
             if (this.vacancy.memberships.indexOf('none') === -1) {
               if (!this.application.progress.relevantMemberships) { isComplete = false; }
-            }            
+            }
           }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
           if (!this.application.progress.employmentGaps) { isComplete = false; }
