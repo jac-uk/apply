@@ -10,14 +10,19 @@
           Additional Information
         </h1>
 
+        <ErrorSummary :errors="errors" />
+
         <CheckboxGroup
           id="additionalInfoGroup"
-          v-model="application.additionalInfo"
-          required
+          v-model="application.additionalInfo.listedSources"
         >
           <p class="govuk-body-l">
             How did you hear about the vacancy?
           </p>
+
+          <div class="govuk-body govuk-!-margin-bottom-5">
+            Please tick whichever you feel is appropriate. You can tick more than one box.
+          </div>
 
           <CheckboxItem
             value="jac-website"
@@ -40,7 +45,7 @@
             label="Twitter"
           />
           <CheckboxItem
-            value="linked-in"
+            value="linkedIn"
             label="LinkedIn"
           />
           <CheckboxItem
@@ -48,14 +53,23 @@
             label="Word of mouth"
           />
           <CheckboxItem
-            value="prefer-not-to-answer"
+            value="prefer-not-to-say"
             label="I prefer not to answer this question"
           />
           <CheckboxItem
             value="other"
             label="Other form of communication (please specify)"
-          />
+          >
+            <TextareaInput
+              id="otherSources"
+              v-model="application.additionalInfo.otherSources"
+              label="Other form of communication"
+              rows="2"
+              required
+            />
+          </CheckboxItem>
         </CheckboxGroup>
+
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button info-btn--personal-details--save-and-continue"
@@ -72,17 +86,24 @@ import BackLink from '@/components/BackLink';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
+import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
   components: {
     BackLink,
     CheckboxGroup,
     CheckboxItem,
+    ErrorSummary,
+    TextareaInput,
   },
   extends: Form,
   data(){
     const defaults = {
-      additionalInfo: null,
+      additionalInfo: {
+        listedSources: null,
+        otherSources: null,
+      },
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
@@ -91,9 +112,20 @@ export default {
     };
   },
   methods: {
+    isFormValid() {
+      const listedSources = this.application.additionalInfo.listedSources;
+      if (!listedSources || listedSources.length === 0) {
+        this.errors.push({ id: 'error', message: 'Please select at least one option' });
+        return false;
+      }
+      if (!listedSources.includes('other')) {
+        this.application.additionalInfo.otherSources = null;
+      }
+      return true;
+    },
     async save() {
       this.validate();
-      if (this.isValid()) {
+      if (this.isValid() && this.isFormValid()) {
         this.application.progress.additionalInfo = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });

@@ -1651,7 +1651,6 @@
             </div>
 
             <dl
-              v-for="item in application.additionalInfo"
               class="govuk-summary-list govuk-!-margin-bottom-8"
             >
               <div class="govuk-summary-list__row">
@@ -1660,9 +1659,20 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
-                    {{ item | lookup }}
+                    <li
+                      v-for="(item, index) in application.additionalInfo.listedSources"
+                      :key="index"
+                    >
+                      <p
+                        v-if="item == 'other'"
+                        class="govuk-body govuk-!-margin-bottom-0"
+                      >
+                        <span class="govuk-caption-m">{{ item | lookup }}</span>
+                        {{ application.additionalInfo.otherSources }}
+                      </p>
+                      <span v-else>{{ item | lookup }}</span>
+                    </li>
                   </ul>
-
                 </dd>
               </div>
             </dl>

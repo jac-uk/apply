@@ -394,6 +394,7 @@ export default {
         if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
         if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
+        if (!this.application.progress.additionalInfo) { isComplete = false; }
       }
       return isComplete;
     },

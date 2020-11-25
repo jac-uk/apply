@@ -312,7 +312,7 @@ const router = new Router({
           name: 'additional-information',
           meta: {
             requiresAuth: true,
-            title: 'Give additional information',
+            title: 'Additional information',
           },
         },
         {

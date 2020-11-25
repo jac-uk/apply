@@ -31,9 +31,6 @@ export default {
       return unbindFirestoreRef('record');
     }),
     save: async ({ rootState, state, dispatch }, data) => {
-      console.log('in save');
-      console.log(state.record);
-      console.log(data);
       if (state.record) {
         const ref = collection.doc(state.record.id);
         await ref.set(data, { merge: true });
