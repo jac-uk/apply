@@ -1849,7 +1849,7 @@
         <button
           v-if="isDraftApplication"
           :disabled="!canApply"
-          class="govuk-button"
+          class="govuk-button govuk-!-margin-top-8"
         >
           Send application
         </button>

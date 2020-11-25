@@ -45,7 +45,7 @@
             label="Twitter"
           />
           <CheckboxItem
-            value="linkedIn"
+            value="linked-in"
             label="LinkedIn"
           />
           <CheckboxItem

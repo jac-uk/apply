@@ -144,7 +144,7 @@ const lookup = (value) => {
       'leadership-non-legal': 'Leadership - non legal',
       'leadership': 'Leadership',
       'legal': 'Legal',
-      'linkedIn': 'LinkedIn',
+      'linked-in': 'LinkedIn',
       'lord-chancellor': 'Lord Chancellor',
       'lord-chief-justice': 'Lord Chief Justice',
       'male': 'Male',
