@@ -93,7 +93,7 @@
               scope="row"
               class="govuk-table__header"
             >
-              Religious beliefs
+              Religion
             </th>
             <td class="govuk-table__cell">
               <a href="name">Change</a>
