@@ -33,7 +33,7 @@ export default {
     save: async ({ rootState, state, dispatch }, data) => {
       if (state.record) {
         const ref = collection.doc(state.record.id);
-        await ref.set(data, { merge: true });  
+        await ref.set(data, { merge: true });
       } else {
         const newDoc = data;
         newDoc.userId = rootState.auth.currentUser.uid;

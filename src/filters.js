@@ -46,6 +46,19 @@ const formatEstimatedDate = (value) => {
   return formatDate(value);
 };
 
+const formatCurrency = (value) => {
+  let amount = parseFloat(value);
+  if (isNaN(amount)) {
+    amount = 0;
+  }
+  if (typeof amount === 'number') {
+    amount = amount.toLocaleString('en-GB',
+      { style: 'currency', currency: 'GBP' }
+    );
+  }
+  return amount;
+};
+
 const toYesNo = (value) => {
   // Only convert booleans, not all falsy values mean "no"
   if (typeof value === 'boolean') {
@@ -136,12 +149,15 @@ const lookup = (value) => {
       'immigration-and-asylum-chamber': 'Immigration and Asylum Chamber',
       'indian': 'Indian',
       'irish': 'Irish',
+      'jac-website': 'JAC Website',
       'jewish': 'Jewish',
+      'judicial-office-extranet': 'Judicial Office Extranet',
       'judicial-functions': 'The carrying-out of judicial functions of any court or tribunal',
       'lands-chamber': 'Lands Chamber',
       'leadership-non-legal': 'Leadership - non legal',
       'leadership': 'Leadership',
       'legal': 'Legal',
+      'linked-in': 'LinkedIn',
       'lord-chancellor': 'Lord Chancellor',
       'lord-chief-justice': 'Lord Chief Justice',
       'male': 'Male',
@@ -175,6 +191,8 @@ const lookup = (value) => {
       'practice-or-employment-as-lawyer': 'Practice or employment as a lawyer',
       'pre-launch': 'Pre launch',
       'prefer-not-to-say': 'Prefer not to say',
+      'professional-body-website-or-email': 'Professional body website or email (eg The Law Society)',
+      'professional-body-magazine': 'Professional body magazine',
       'property-chamber': 'Property Chamber',
       'ranked-choice': 'Ranked choice',
       'read': 'Read',
@@ -211,6 +229,7 @@ const lookup = (value) => {
       'teaching-researching-law': 'Teaching or researching law',
       'telephone-assessment': 'Telephone assessment',
       'tribunal': 'Tribunal',
+      'twitter': 'Twitter',
       'uk': 'UK',
       'uk-ethnic': 'English, Welsh, Scottish, Northern Ireland, British',
       'uk-independent-fee': 'UK independent or fee-paying school',
@@ -224,6 +243,7 @@ const lookup = (value) => {
       'welsh-language': 'Welsh language',
       'welsh-reading-writing': 'Read and/or write Welsh',
       'welsh-speaking': 'Speak Welsh',
+      'word-of-mouth': 'Word of mouth',
       'white-asian': 'White and Asian',
       'white-black-african': 'White and Black African',
       'white-black-caribbean': 'White and Black Caribbean',
@@ -260,6 +280,7 @@ export {
   capitalize,
   formatDate,
   formatEstimatedDate,
+  formatCurrency,
   toYesNo,
   lookup,
   showAlternative,
