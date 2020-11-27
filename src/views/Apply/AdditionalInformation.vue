@@ -41,6 +41,10 @@
             label="Judicial Office Extranet"
           />
           <CheckboxItem
+            value="judging-your-future-newsletter"
+            label="Judging Your Future Newsletter"
+          />
+          <CheckboxItem
             value="twitter"
             label="Twitter"
           />
