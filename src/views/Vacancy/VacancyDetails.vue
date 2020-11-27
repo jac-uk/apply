@@ -120,7 +120,7 @@
         class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
         data-module="govuk-button"
         :to="{ name: 'eligibility' }"
-        >
+      >
         You've been invited to this exercise, click here to apply 
       </RouterLink>
 

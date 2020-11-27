@@ -421,7 +421,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Ethnic group
+                What is your ethnic group?
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
@@ -465,7 +465,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Gender
+                What is your sex?
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
@@ -481,7 +481,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Gender is the same as sex assigned at birth
+                Is the gender you identify with the same as your sex registered at birth?
               </dt>
               <dd class="govuk-summary-list__value">
                 {{ application.equalityAndDiversitySurvey.changedGender | lookup | toYesNo }}
@@ -522,7 +522,7 @@
 
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
-                Religion or faith
+                What is your religion?
               </dt>
               <dd class="govuk-summary-list__value">
                 <p
