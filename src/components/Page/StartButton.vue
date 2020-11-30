@@ -1,7 +1,8 @@
 <template>
   <button
-    class="govuk-button govuk-button--start info-btn--start-button--start-now-or-continue"
+    :class="buttonStyle"
     data-module="govuk-button"
+    @click="$emit('click', $event)"
   >
     <slot>Start now</slot>
     <svg
@@ -20,3 +21,19 @@
     </svg>
   </button>
 </template>
+
+<script>
+export default {
+  props: {
+    requiredStyle: {
+      type: String,
+      default: '',
+    },
+  },
+  computed: {
+    buttonStyle() {
+      return `govuk-button govuk-button--start info-btn--start-button--start-now-or-continue ${this.requiredStyle}`;
+    },
+  },
+};
+</script>
