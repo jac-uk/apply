@@ -275,69 +275,6 @@ const router = new Router({
                 title: 'Character information | Declaration',
               },
             },
-          //   {
-          //     path: 'criminal-offences',
-          //     component: CharacterInformationCriminalOffences,
-          //     name: 'character-information-criminal-offences',
-          //     meta: {
-          //       requiresAuth: true,
-          //       title: 'Character information | Criminal offences',
-          // },
-          //   },
-            // {
-            //   path: 'fixed-penalty-notices',
-            //   component: CharacterInformationFixedPenaltyNotices,
-            //   name: 'character-information-fixed-penalty-notices',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Fixed penalty notices',
-            //   },
-            // },
-            // {
-            //   path: 'motoring-offences',
-            //   component: CharacterInformationMotoringOffenses,
-            //   name: 'character-information-motoring-offenses',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Motoring offenses',
-            //   },
-            // },
-            // {
-            //   path: 'financial-matters',
-            //   component: CharacterInformationFinancialMatters,
-            //   name: 'character-information-financial-matters',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Financial matters',
-            //   },
-            // },
-            // {
-            //   path: 'professional-conduct',
-            //   component: CharacterInformationProfessionalConduct,
-            //   name: 'character-information-professional-conduct',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Professional conduct',
-            //   },
-            // },
-            // {
-            //   path: 'firther-information',
-            //   component: CharacterInformationFurtherInformation,
-            //   name: 'character-information-further-information',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Further information',
-            //   },
-            // },
-            // {
-            //   path: 'review',
-            //   component: CharacterInformationReview,
-            //   name: 'character-information-review',
-            //   meta: {
-            //     requiresAuth: true,
-            //     title: 'Character information | Review',
-            //   },
-            // },
           ],
         },
         {

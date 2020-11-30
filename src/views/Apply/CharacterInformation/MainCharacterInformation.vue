@@ -29,8 +29,10 @@ export default {
   async mounted() {
     try {
       const today = Date.now();
-      const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
-
+      let vacancy = this.$store.state.vacancy.record;
+      if (!vacancy || vacancy.id !== this.vacancyId) {
+        vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
+      }
       if (vacancy === null) {
         this.redirectToErrorPage();
       } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
