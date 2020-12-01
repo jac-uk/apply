@@ -153,6 +153,7 @@ const lookup = (value) => {
       'jewish': 'Jewish',
       'judicial-office-extranet': 'Judicial Office Extranet',
       'judicial-functions': 'The carrying-out of judicial functions of any court or tribunal',
+      'judging-your-future-newsletter': 'Judging Your Future Newsletter',
       'lands-chamber': 'Lands Chamber',
       'leadership-non-legal': 'Leadership - non legal',
       'leadership': 'Leadership',
