@@ -1,10 +1,10 @@
 import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 let today = new Date();
-let dateInTheFuture = new Date(today.setDate(today.getDate() + 7));
+const dateInTheFuture = new Date(today.setDate(today.getDate() + 7));
 today = new Date();
-let dateInThePast = new Date(today.setDate(today.getDate() - 7));
-let dateInThePastLong = new Date(today.setDate(today.getDate() - 30));
+const dateInThePast = new Date(today.setDate(today.getDate() - 7));
+const dateInThePastLong = new Date(today.setDate(today.getDate() - 30));
 
 // console.log('dateInTheFuture', dateInTheFuture);
 // console.log('dateInThePast', dateInThePast);
