@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-heading-xl govuk-body">
-    Oops, this page doesnt exist or you dont have access to it.
+    Oops, the page you requested does not exist or you no longer have access to it.
     <br>
     <router-link
       to="/"
