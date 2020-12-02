@@ -1,19 +1,20 @@
 <template>
-  <div>
-    <DateInput
-      :id="`offence_date_${index}`"
-      v-model="row.date"
-      label="Date of offence"
-    />
+  <div class="govuk-!-margin-top-6">
     <TextField
       :id="`offence_title_${index}`"
       v-model="row.title"
       label="Sentence, penalty or fine"
     />
+    <DateInput
+      :id="`offence_date_${index}`"
+      v-model="row.date"
+      label="Date of offence"
+    />
     <TextareaInput
       :id="`offence_details_${index}`"
       v-model="row.details"
       label="Details"
+      :hint="hint"
       rows="5"
     />
     <slot name="removeButton" />
@@ -40,6 +41,11 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+    hint: {
+      required: false,
+      type: String,
+      default: '',
     },
   },
 };
