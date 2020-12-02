@@ -31,7 +31,7 @@ import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
 import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
 import CharacterInformationDeclaration from '@/views/Apply/CharacterInformation/CharacterInformationDeclaration';
-import CharacterInformationCriminalOffences from '@/views/Apply/CharacterInformation/CharacterInformationCriminalOffences';
+import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
@@ -278,7 +278,7 @@ const router = new Router({
             },
             {
               path: 'criminal-offences',
-              component: CharacterInformationCriminalOffences,
+              component: CriminalOffences,
               name: 'character-information-criminal-offences',
               meta: {
                 requiresAuth: true,

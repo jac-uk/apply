@@ -92,7 +92,7 @@ export default {
     BackLink,
     //HeaderTitle,
   },
-  extends: CharacterInformationForm, // it's a way to keep track of progress for 'done' label on TaskList page.
+  extends: CharacterInformationForm,
   data() {
     const defaults = {
       criminalCautions: null,
