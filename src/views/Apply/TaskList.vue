@@ -133,7 +133,9 @@ export default {
       return this.$store.state.vacancy.record;
     },
     vacancyCloseTime() {
-      return this.$store.getters['vacancy/getCloseDate'];
+      const applicationCloseDate = this.$store.getters['vacancy/getCloseDate'];
+      const candidateDateExtension = this.application.dateExtension;
+      return candidateDateExtension ? candidateDateExtension : applicationCloseDate;
     },
     candidate() {
       return this.$store.state.candidate.record;
