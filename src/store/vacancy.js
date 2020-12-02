@@ -45,13 +45,16 @@ export default {
         0
       );
     },
-    getCloseDate: (state) => {
+    getCloseDate: (state, getters, rootState, rootGetters) => {
       if (state.record === null) return null;
-      if (state.record.applicationCloseDate === null) return null;
+      const extendedDate = rootGetters['application/getExtendedDate'];
+      const closeDate = extendedDate || state.record.applicationCloseDate;
+      if (closeDate === null) return null;
+      
       return new Date(
-        state.record.applicationCloseDate.getFullYear(),
-        state.record.applicationCloseDate.getMonth(),
-        state.record.applicationCloseDate.getDate(),
+        closeDate.getFullYear(),
+        closeDate.getMonth(),
+        closeDate.getDate(),
         13,
         0,
         0

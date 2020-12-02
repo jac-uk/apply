@@ -76,5 +76,10 @@ export default {
         return !isDateInFuture(closeDate);
       });
     },
+    getVacancy: (state, getters) => (vacancyId) => {
+      const vacancies = getters.vacancies;
+      const returnVacancies = vacancies.filter(vacancy => vacancy.id === vacancyId);
+      return returnVacancies.length == 1 ? returnVacancies[0] : {};
+    },
   },
 };
