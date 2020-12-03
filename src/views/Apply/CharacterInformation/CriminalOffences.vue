@@ -22,7 +22,7 @@
           id="criminal-offenses-cautions"
           v-model="characterInformation.criminalCautions"
           required
-          label="Have you ever been cautioned for a criminal offence?"
+          label="1. Have you ever been cautioned for a criminal offence?"
         >
           <RadioItem
             :value="true"
@@ -44,7 +44,7 @@
           id="criminal-offenses-convictions"
           v-model="characterInformation.criminalConvictions"
           required
-          label="Have you ever been convicted for a criminal offence?"
+          label="2. Have you ever been convicted for a criminal offence? This includes spent convictions."
         >
           <RadioItem
             :value="true"

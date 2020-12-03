@@ -5,7 +5,7 @@ export default {
   extends: CriminalOffenceDetails,
   props: {
     label: {
-      required: true,
+      required: false,
       type: String,
       default: 'Penalty or fine',
     },

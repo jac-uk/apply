@@ -5,14 +5,14 @@ export default {
   extends: CriminalOffenceDetails,
   props: {
     label: {
-      required: true,
+      required: false,
       type: String,
       default: 'Sentence, penalty or fine',
     },
     hint: {
       required: false,
       type: String,
-      default: 'Please add details of your caution here',
+      default: 'Please add details of your disqualification here',
     },
   },
 };

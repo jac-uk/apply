@@ -22,7 +22,7 @@
           id="driving-disqualifications"
           v-model="characterInformation.drivingDisqualifications"
           required
-          label="Have you ever been disqualified from driving?"
+          label="4. Have you ever been disqualified from driving?"
         >
           <RadioItem
             :value="true"
@@ -44,7 +44,7 @@
           id="driving-under-influence-convictions"
           v-model="characterInformation.drivingUnderInfluenceConvictions"
           required
-          label="Have you ever been convicted for driving under the influence of drink or drugs?"
+          label="5. Have you ever been convicted for driving under the influence of drink or drugs?"
         >
           <RadioItem
             :value="true"
@@ -65,7 +65,7 @@
         <RadioGroup
           id="driving-licence-endorsements"
           v-model="characterInformation.drivingLicenceEndorsements"
-          label="Do you have any endorsements on your licence?"
+          label="6. Do you have any endorsements on your licence?"
         >
           <RadioItem
             :value="true"
@@ -80,7 +80,7 @@
         <RadioGroup
           id="recent-driving-convictions"
           v-model="characterInformation.recentDrivingConvictions"
-          label="Were you convicted of any motoring offences in the past 4 years?"
+          label="7. Were you convicted of any motoring offences in the past 4 years?"
         >
           <RadioItem
             :value="true"
@@ -108,7 +108,8 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import FixedPenaltyDetails from '@/components/RepeatableFields/FixedPenaltyDetails';
+import DrivingDisqualificationDetails from '@/components/RepeatableFields/DrivingDisqualificationDetails';
+import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/DrivingUnderInfluenceConvictionDetails';
 import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
 import BackLink from '@/components/BackLink';
 import HeaderTitle from './HeaderTitle';
@@ -125,8 +126,12 @@ export default {
   extends: CharacterInformationForm,
   data() {
     const defaults = {
-      fixedPenalties: null,
-      fixedPenaltyDetails: null,
+      drivingDisqualifications: null,
+      drivingDisqualificationDetails: null,
+      drivingUnderInfluenceConvictions: null,
+      drivingUnderInfluenceConvictionDetails: null,
+      drivingLicenceEndorsements: null,
+      recentDrivingConvictions: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -135,7 +140,8 @@ export default {
       characterInformation: characterInformation,
       application: application,
       repeatableFields: {
-        FixedPenaltyDetails,
+        DrivingDisqualificationDetails,
+        DrivingUnderInfluenceConvictionDetails,
       },
     };
   },
@@ -144,13 +150,22 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.updateProgress();
-        if (this.characterInformation.fixedPenalties === false ) {
-          this.characterInformation.fixedPenaltyDetails = null;
+        if (this.characterInformation.drivingDisqualifications === false ) {
+          this.characterInformation.drivingDisqualificationDetails = null;
+        }
+        if (this.characterInformation.drivingUnderInfluenceConvictions === false ) {
+          this.characterInformation.drivingUnderInfluenceConvictionDetails = null;
+        }
+        if (this.characterInformation.drivingLicenceEndorsements === false ) {
+          this.characterInformation.drivingLicenceEndorsements = null;
+        }
+        if (this.characterInformation.recentDrivingConvictions === false ) {
+          this.characterInformation.recentDrivingConvictions = null;
         }
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-motoring-offences' });
+        this.$router.push({ name: 'character-information-financial-matters' });
       }
     },
   },
