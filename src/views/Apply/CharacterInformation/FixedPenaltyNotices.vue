@@ -8,7 +8,7 @@
         <BackLink />
 
         <HeaderTitle
-          title="Criminal offences"
+          title="Fixed Penalty Notices, (including motoring)"
           url-to-good-character-section="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
         />
 
@@ -19,41 +19,19 @@
         />
 
         <RadioGroup
-          id="criminal-offenses-cautions"
-          v-model="characterInformation.criminalCautions"
+          id="fixed-penalties"
+          v-model="characterInformation.fixedPenalties"
           required
-          label="Have you ever been cautioned for a criminal offence?"
+          label="Have you received a fixed penalty notice in the last 4 years?"
         >
           <RadioItem
             :value="true"
             label="Yes"
           >
             <RepeatableFields
-              v-model="characterInformation.criminalCautionDetails"
+              v-model="characterInformation.fixedPenaltyDetails"
               required
-              :component="repeatableFields.CriminalCautionDetails"
-            />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="criminal-offenses-convictions"
-          v-model="characterInformation.criminalConvictions"
-          required
-          label="Have you ever been convicted for a criminal offence?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.criminalConvictionDetails"
-              required
-              :component="repeatableFields.CriminalConvictionDetails"
+              :component="repeatableFields.FixedPenaltyDetails"
             />
           </RadioItem>
           <RadioItem
@@ -78,8 +56,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import CriminalCautionDetails from '@/components/RepeatableFields/CriminalCautionDetails';
-import CriminalConvictionDetails from '@/components/RepeatableFields/CriminalConvictionDetails';
+import FixedPenaltyDetails from '@/components/RepeatableFields/FixedPenaltyDetails';
 import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
 import BackLink from '@/components/BackLink';
 import HeaderTitle from './HeaderTitle';
@@ -96,10 +73,8 @@ export default {
   extends: CharacterInformationForm,
   data() {
     const defaults = {
-      criminalCautions: null,
-      criminalCautionDetails: null,
-      criminalConvictions: null,
-      criminalConvictionDetails: null,
+      fixedPenalties: null,
+      fixedPenaltyDetails: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -108,8 +83,7 @@ export default {
       characterInformation: characterInformation,
       application: application,
       repeatableFields: {
-        CriminalCautionDetails,
-        CriminalConvictionDetails,
+        FixedPenaltyDetails,
       },
     };
   },
@@ -118,16 +92,13 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.updateProgress();
-        if (this.characterInformation.criminalCautions === false ) {
-          this.characterInformation.criminalCautionDetails = null;
-        }
-        if (this.characterInformation.criminalConvictions === false ) {
-          this.characterInformation.criminalConvictionDetails = null;
+        if (this.characterInformation.fixedPenalties === false ) {
+          this.characterInformation.fixedPenaltyDetails = null;
         }
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-fixed-penalty-notices' });
+        this.$router.push({ name: 'character-information-motoring-offences' });
       }
     },
   },
