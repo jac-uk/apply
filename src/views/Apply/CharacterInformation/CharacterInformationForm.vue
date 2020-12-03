@@ -8,7 +8,8 @@ export default {
     updateProgress() {
       this.application.progress.characterInformation =
         this.characterInformation.criminalCautions !== undefined &&
-        this.characterInformation.criminalConvictions !== undefined;
+        this.characterInformation.criminalConvictions !== undefined &&
+        this.characterInformation.fixedPenalties !== undefined;
     },
   },
 };

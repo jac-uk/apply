@@ -1,20 +1,23 @@
 <template>
   <div>
-    <h1
-      style="display: inline-block"
-      class="govuk-heading-xl"
-    >
-      {{ title }}
-    </h1>
-
-    <img
-      class="float-right"
-      src="@/assets/info.svg"
-      alt="Good character guidance"
-      width="46"
-      height="46"
-      @click.prevent="openModal"
-    >
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-three-quarters">
+        <h1
+          class="govuk-heading-xl"
+        >
+          {{ title }}
+        </h1>
+      </div>
+      <div class="govuk-grid-column-one-quarter">
+        <img
+          src="@/assets/info.svg"
+          alt="Good character guidance"
+          width="46"
+          height="46"
+          @click.prevent="openModal"
+        >
+      </div>
+    </div>
     <InfoModal
       ref="openInfoModalRef"
       title="Guidance"

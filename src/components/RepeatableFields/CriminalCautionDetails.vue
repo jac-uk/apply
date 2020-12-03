@@ -1,10 +1,14 @@
 <script>
 import CriminalOffenceDetails from './CriminalOffenceDetails';
-
 export default {
   name: 'CriminalCautionDetailsVue',
   extends: CriminalOffenceDetails,
   props: {
+    label: {
+      required: true,
+      type: String,
+      default: 'Sentence, penalty or fine',
+    },
     hint: {
       required: false,
       type: String,
