@@ -3,7 +3,7 @@
     <TextField
       :id="`offence_title_${index}`"
       v-model="row.title"
-      label="Sentence, penalty or fine"
+      :label="label"
     />
     <DateInput
       :id="`offence_date_${index}`"
@@ -41,6 +41,11 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+    label: {
+      required: true,
+      type: String,
+      default: '',
     },
     hint: {
       required: false,
