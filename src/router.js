@@ -33,6 +33,8 @@ import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCha
 import CharacterInformationDeclaration from '@/views/Apply/CharacterInformation/CharacterInformationDeclaration';
 import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
 import FixedPenaltyNotices from '@/views/Apply/CharacterInformation/FixedPenaltyNotices';
+import MotoringOffences from '@/views/Apply/CharacterInformation/MotoringOffences';
+import FinancialMatters from '@/views/Apply/CharacterInformation/FinancialMatters';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
@@ -293,6 +295,24 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Fixed penalty notices',
+              },
+            },
+            {
+              path: 'motoring-offences',
+              component: MotoringOffences,
+              name: 'character-information-motoring-offences',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information | Motoring offences',
+              },
+            },
+            {
+              path: 'financial-matters',
+              component: FinancialMatters,
+              name: 'character-information-financial-matters',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information | Financial matters',
               },
             },
           ],

@@ -22,7 +22,7 @@
           id="fixed-penalties"
           v-model="characterInformation.fixedPenalties"
           required
-          label="Have you received a fixed penalty notice in the last 4 years?"
+          label="3. Have you received a fixed penalty notice in the last 4 years?"
         >
           <RadioItem
             :value="true"
