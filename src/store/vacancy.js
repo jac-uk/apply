@@ -36,29 +36,14 @@ export default {
     getOpenDate: (state) => {
       if (state.record === null) return null;
       if (state.record.applicationOpenDate === null) return null;
-      return new Date(
-        state.record.applicationOpenDate.getFullYear(),
-        state.record.applicationOpenDate.getMonth(),
-        state.record.applicationOpenDate.getDate(),
-        13,
-        0,
-        0
-      );
+      return new Date(state.record.applicationOpenDate);
     },
     getCloseDate: (state, getters, rootState, rootGetters) => {
       if (state.record === null) return null;
       const extendedDate = rootGetters['application/getExtendedDate'];
       const closeDate = extendedDate || state.record.applicationCloseDate;
       if (closeDate === null) return null;
-      
-      return new Date(
-        closeDate.getFullYear(),
-        closeDate.getMonth(),
-        closeDate.getDate(),
-        13,
-        0,
-        0
-      );
+      return new Date(closeDate);
     },
     isLegal: (state) => {
       return state.record.typeOfExercise === 'legal' || state.record.typeOfExercise === 'leadership';
