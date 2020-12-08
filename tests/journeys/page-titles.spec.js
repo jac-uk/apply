@@ -1,7 +1,3 @@
-// @FIXME@ *error-four* Quite a different test base, couldnt manage to successfully integrate helpers
-// couldnt tell how to add necessary logic to either 
-// this file or ../helpers.js
-
 import App from '@/App';
 // import Router from 'vue-router';
 // import Vuex from 'vuex';
@@ -28,7 +24,7 @@ const routes = [
   ['confirmation', 'Confirmation'],
 ];
 
-xdescribe('Page titles', () => {
+describe('Page titles', () => {
   let wrapper;
   beforeEach(() => {
     // const localVue = createLocalVue();

@@ -95,6 +95,13 @@ export default {
     data: (state) => () => {
       return clone(state.record);
     },
+    getExtendedDate(state) {
+      if (state.record && state.record.dateExtension) {
+        return state.record.dateExtension;
+      } else {
+        return;
+      }
+    },
   },
 };
 

@@ -286,7 +286,7 @@
           id="ethnic-group"
           v-model="equalityAndDiversitySurvey.ethnicGroup"
           required
-          label="What's your ethnic group?"
+          label="What is your ethnic group?"
         >
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Asian/Asian British
@@ -425,7 +425,7 @@
           id="gender"
           v-model="equalityAndDiversitySurvey.gender"
           required
-          label="What gender are you?"
+          label="What is your sex?"
         >
           <RadioItem
             value="female"
@@ -441,12 +441,12 @@
           />
           <RadioItem
             value="other-gender"
-            label="Other"
+            label="Other sex"
           >
             <TextField
               id="other-gender-details"
               v-model="equalityAndDiversitySurvey.otherGenderDetails"
-              label="Other gender"
+              label="Other sex"
               class="govuk-!-width-two-thirds"
             />
           </RadioItem>
@@ -460,7 +460,7 @@
           id="changed-gender"
           v-model="equalityAndDiversitySurvey.changedGender"
           required
-          label="Is your gender identity the same as the sex you were assigned at birth?"
+          label="Is the gender you identify with the same as your sex registered at birth?"
           hint="This is about gender re-assignment."
         >
           <RadioItem
@@ -470,7 +470,14 @@
           <RadioItem
             :value="false"
             label="No"
-          />
+          >
+            <TextField
+              id="gender-indentity-details"
+              v-model="equalityAndDiversitySurvey.genderIdentityDetails"
+              label="Please enter your gender identity"
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
           <RadioItem
             value="prefer-not-to-say"
             label="Prefer not to say"
@@ -557,7 +564,7 @@
           id="religion-faith"
           v-model="equalityAndDiversitySurvey.religionFaith"
           required
-          label="What religion or belief do you have?"
+          label="What is your religion?"
         >
           <RadioItem
             value="no-religion"
@@ -654,7 +661,7 @@
           id="has-taken-paje"
           v-model="equalityAndDiversitySurvey.hasTakenPAJE"
           required
-          label="Have you taken part in the Pre-Application Judicial Education programme (PAJE)?"
+          label="Have you taken part in the Pre-Application Judicial Education Programme (PAJE)?"
         >
           <p class="govuk-hint govuk-!-margin-top-0">
             The

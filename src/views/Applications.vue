@@ -59,7 +59,7 @@
             <div class="moj-button-menu">
               <div class="moj-button-menu__wrapper">
                 <RouterLink
-                  v-if="application.status == 'draft'"
+                  v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
                   :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
                   :to="{ name: 'task-list', params: { id: application.exerciseId } }"
                   role="button"
@@ -74,7 +74,8 @@
                   role="button"
                   data-module="govuk-button"
                 >
-                  View sent application
+                  <span v-if="application.status == 'draft'">View draft application</span>
+                  <span v-else>View sent application</span>
                 </RouterLink>
                 <RouterLink
                   :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
@@ -140,6 +141,7 @@
 import {
   mapState
 } from 'vuex';
+import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 export default {
   computed: {
@@ -149,6 +151,19 @@ export default {
   },
   created() {
     this.$store.dispatch('applications/bind');
+    this.$store.dispatch('vacancies/bind');
+  },
+  methods: {
+    isOpen(dateExtended, exerciseId) {
+      // const today = new Date();
+      const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
+      if (vacancy) {
+        return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, dateExtended);
+      } else {
+        return false;
+      }
+      
+    },
   },
 };
 </script>
