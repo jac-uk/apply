@@ -101,7 +101,7 @@
                     v-if="vacancy.applicationOpenDate"
                     class="govuk-body"
                   >
-                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                    {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                   </span>
                   <span
                     v-else
@@ -119,7 +119,7 @@
                   <span
                     class="govuk-body"
                   >
-                    {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                    {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
                 <p v-if="vacancy.roleSummary">
@@ -150,7 +150,7 @@
                       v-if="vacancy.applicationOpenDate"
                       class="govuk-body"
                     >
-                      {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                      {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                     </span>
                     <span
                       v-else
@@ -168,7 +168,7 @@
                     <span
                       class="govuk-body"
                     >
-                      {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                      {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                     </span>
                   </p>
                   <p v-if="vacancy.roleSummaryWelsh">
@@ -223,7 +223,7 @@
                   v-if="vacancy.applicationOpenDate"
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                  {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                 </span>
                 <span
                   v-else
@@ -263,7 +263,7 @@
                     v-if="vacancy.applicationOpenDate"
                     class="govuk-body"
                   >
-                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                    {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                   </span>
                   <span
                     v-else
@@ -319,7 +319,7 @@
                   v-if="vacancy.applicationOpenDate"
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                  {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                 </span>
                 <span
                   v-else
@@ -337,7 +337,7 @@
                 <span
                   class="govuk-body"
                 >
-                  {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                  {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                 </span>
               </p>
               <p v-if="vacancy.roleSummary">
@@ -372,7 +372,7 @@
                     v-if="vacancy.applicationOpenDate"
                     class="govuk-body"
                   >
-                    {{ vacancy.applicationOpenDate | formatDate }} - 13:00
+                    {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                   </span>
                   <span
                     v-else
@@ -390,7 +390,7 @@
                   <span
                     class="govuk-body"
                   >
-                    {{ vacancy.applicationCloseDate | formatDate }} - 13:00
+                    {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
                 <p v-if="vacancy.roleSummaryWelsh">
