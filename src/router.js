@@ -30,11 +30,14 @@ import DiversityInformation from '@/views/DiversityInformation';
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
 import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
-import CharacterInformationDeclaration from '@/views/Apply/CharacterInformation/CharacterInformationDeclaration';
+import Declaration from '@/views/Apply/CharacterInformation/Declaration';
 import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
 import FixedPenaltyNotices from '@/views/Apply/CharacterInformation/FixedPenaltyNotices';
 import MotoringOffences from '@/views/Apply/CharacterInformation/MotoringOffences';
 import FinancialMatters from '@/views/Apply/CharacterInformation/FinancialMatters';
+import ProfessionalConduct from '@/views/Apply/CharacterInformation/ProfessionalConduct';
+import FurtherInformation from '@/views/Apply/CharacterInformation/FurtherInformation';
+import InformationReview from '@/views/Apply/CharacterInformation/InformationReview';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
@@ -272,7 +275,7 @@ const router = new Router({
           children: [
             {
               path: 'declaration',
-              component: CharacterInformationDeclaration,
+              component: Declaration,
               name: 'character-information-declaration',
               meta: {
                 requiresAuth: true,
@@ -313,6 +316,33 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Financial matters',
+              },
+            },
+            {
+              path: 'professional-conduct',
+              component: ProfessionalConduct,
+              name: 'character-information-professional-conduct',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information | Professional conduct',
+              },
+            },
+            {
+              path: 'further-information',
+              component: FurtherInformation,
+              name: 'character-information-further-information',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information | Further information',
+              },
+            },
+            {
+              path: 'review',
+              component: InformationReview,
+              name: 'character-information-review',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information | Review',
               },
             },
           ],

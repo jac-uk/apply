@@ -14,6 +14,11 @@ export default {
       type: String,
       default: 'Please add details of your disqualification here',
     },
+    url: {
+      required: false,
+      type: String,
+      default: '',
+    },
   },
 };
 </script>

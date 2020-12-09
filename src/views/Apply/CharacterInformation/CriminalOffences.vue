@@ -7,61 +7,68 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
 
-        <HeaderTitle
-          title="Criminal offences"
-          url-to-good-character-section="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
-        />
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
+            <h2 class="govuk-heading-l">
+              Criminal Offences
+            </h2>
 
-        <ErrorSummary
-          :errors="errors"
-          :show-save-button="true"
-          @save="save"
-        />
-
-        <RadioGroup
-          id="criminal-offenses-cautions"
-          v-model="characterInformation.criminalCautions"
-          required
-          label="1. Have you ever been cautioned for a criminal offence?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.criminalCautionDetails"
-              required
-              :component="repeatableFields.CriminalCautionDetails"
+            <ErrorSummary
+              :errors="errors"
+              :show-save-button="true"
+              @save="save"
             />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
 
-        <RadioGroup
-          id="criminal-offenses-convictions"
-          v-model="characterInformation.criminalConvictions"
-          required
-          label="2. Have you ever been convicted for a criminal offence? This includes spent convictions."
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.criminalConvictionDetails"
+            <RadioGroup
+              id="criminal-offenses-cautions"
+              v-model="characterInformation.criminalCautions"
               required
-              :component="repeatableFields.CriminalConvictionDetails"
-            />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+              label="1. Have you ever been cautioned for a criminal offence?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.criminalCautionDetails"
+                  required
+                  :component="repeatableFields.CriminalCautionDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
 
+            <RadioGroup
+              id="criminal-offenses-convictions"
+              v-model="characterInformation.criminalConvictions"
+              required
+              label="2. Have you ever been convicted for a criminal offence? This includes spent convictions."
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.criminalConvictionDetails"
+                  required
+                  :component="repeatableFields.CriminalConvictionDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarter">
+            <InfoIcon
+              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+            />
+          </div>
+        </div>
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button info-btn--character-information--save-and-continue"
@@ -82,7 +89,7 @@ import CriminalCautionDetails from '@/components/RepeatableFields/CriminalCautio
 import CriminalConvictionDetails from '@/components/RepeatableFields/CriminalConvictionDetails';
 import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
 import BackLink from '@/components/BackLink';
-import HeaderTitle from './HeaderTitle';
+import InfoIcon from '@/components/ModalViews/InfoIcon';
 
 export default {
   components: {
@@ -91,7 +98,7 @@ export default {
     RadioItem,
     RepeatableFields,
     BackLink,
-    HeaderTitle,
+    InfoIcon,
   },
   extends: CharacterInformationForm,
   data() {

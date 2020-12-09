@@ -4,11 +4,13 @@
       :id="`offence_title_${index}`"
       v-model="row.title"
       :label="label"
+      required
     />
     <DateInput
       :id="`offence_date_${index}`"
       v-model="row.date"
       label="Date of offence"
+      required
     />
     <TextareaInput
       :id="`offence_details_${index}`"
@@ -16,6 +18,7 @@
       label="Details"
       :hint="hint"
       rows="5"
+      required
     />
     <slot name="removeButton" />
   </div>

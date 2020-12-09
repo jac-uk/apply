@@ -11,6 +11,7 @@
         :id="`${index}`"
         :row="row"
         :index="index"
+        :url="url"
       >
         <template v-slot:removeButton>
           <button
@@ -52,6 +53,11 @@ export default {
       required: false,
       default: false,
       type: [Number, Boolean],
+    },
+    url: {
+      required: false,
+      default: '',
+      type: String,
     },
   },
   data() {
