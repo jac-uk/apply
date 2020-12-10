@@ -14,6 +14,11 @@ export default {
       type: String,
       default: 'Please add details of your fixed penalty notice here',
     },
+    url: {
+      required: false,
+      type: String,
+      default: '',
+    },
   },
 };
 </script>

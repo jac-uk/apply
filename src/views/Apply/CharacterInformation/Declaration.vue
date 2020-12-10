@@ -43,7 +43,7 @@
         acceptability of your application when considered against this guidance.
       </p>
 
-      <p class="govuk-body-l">
+      <p class="govuk-body-l govuk-!-font-weight-bold">
         Warning: Failure to declare any matters that come to light from the Commission's check
         may prejudice the outcome of your application.
       </p>

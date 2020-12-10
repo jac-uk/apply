@@ -14,6 +14,11 @@ export default {
       type: String,
       default: 'Please add details of your conviction here',
     },
+    url: {
+      required: false,
+      type: String,
+      default: '',
+    },
   },
 };
 </script>

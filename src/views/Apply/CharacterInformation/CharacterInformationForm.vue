@@ -13,7 +13,12 @@ export default {
         this.characterInformation.drivingDisqualifications !== undefined &&
         this.characterInformation.drivingUnderInfluenceConvictions !== undefined &&
         this.characterInformation.drivingLicenceEndorsements !== undefined &&
-        this.characterInformation.recentDrivingConvictions !== undefined;
+        this.characterInformation.recentDrivingConvictions !== undefined &&
+        this.characterInformation.bankruptcies !== undefined &&
+        this.characterInformation.ivas !== undefined &&
+        this.characterInformation.lateTaxReturns !== undefined &&
+        this.characterInformation.lateVatReturns !== undefined &&
+        this.characterInformation.hmrcFines !== undefined;
     },
   },
 };

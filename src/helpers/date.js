@@ -6,7 +6,7 @@ const isDateInFuture = (date) => {
   } else if (!isDate(date)) {
     throw `Supplied date (${date}) must be a Date object`;
   }
-  
+
   const today = new Date();
 
   date = new Date(
@@ -68,10 +68,10 @@ const validateYear = (val) => {
 };
 
 const isToday = (val) => {
-  if (!isDate(val)){ 
+  if (!isDate(val)){
     return null;
   }
-  
+
   const today = new Date();
   return val.getDate() === today.getDate() &&
     val.getMonth() === today.getMonth() &&
@@ -112,6 +112,23 @@ const helperTimeLeft = (obj) => {
   }
 };
 
+const validateFinancialYear = (value) => {
+  const years = value.split('/');
+  if (years.length !== 2 || years[0].length !== 4 || years[1].length !== 4) {
+    return false;
+  }
+  const date1 = Array.from(String(years[0]), Number);
+  const date2 = Array.from(String(years[1]), Number);
+  if (date1.includes(NaN) || date2.includes(NaN)) {
+    return false;
+  } else {
+    if (years[0] === years[1] || years[0] > years[1]) {
+      return false;
+    }
+  }
+  return true;
+};
+
 export {
   isDate,
   isDateInFuture,
@@ -119,5 +136,6 @@ export {
   parseEstimatedDate,
   validateYear,
   isToday,
-  helperTimeLeft
+  helperTimeLeft,
+  validateFinancialYear
 };

@@ -7,91 +7,98 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
 
-        <HeaderTitle
-          title="Motoring Offences"
-          url-to-good-character-section="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
-        />
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
+            <h2 class="govuk-heading-l">
+              Motoring Offences
+            </h2>
 
-        <ErrorSummary
-          :errors="errors"
-          :show-save-button="true"
-          @save="save"
-        />
-
-        <RadioGroup
-          id="driving-disqualifications"
-          v-model="characterInformation.drivingDisqualifications"
-          required
-          label="4. Have you ever been disqualified from driving?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.drivingDisqualificationDetails"
-              required
-              :component="repeatableFields.DrivingDisqualificationDetails"
+            <ErrorSummary
+              :errors="errors"
+              :show-save-button="true"
+              @save="save"
             />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
 
-        <RadioGroup
-          id="driving-under-influence-convictions"
-          v-model="characterInformation.drivingUnderInfluenceConvictions"
-          required
-          label="5. Have you ever been convicted for driving under the influence of drink or drugs?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.drivingUnderInfluenceConvictionDetails"
+            <RadioGroup
+              id="driving-disqualifications"
+              v-model="characterInformation.drivingDisqualifications"
               required
-              :component="repeatableFields.DrivingUnderInfluenceConvictionDetails"
+              label="4. Have you ever been disqualified from driving?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.drivingDisqualificationDetails"
+                  required
+                  :component="repeatableFields.DrivingDisqualificationDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+
+            <RadioGroup
+              id="driving-under-influence-convictions"
+              v-model="characterInformation.drivingUnderInfluenceConvictions"
+              required
+              label="5. Have you ever been convicted for driving under the influence of drink or drugs?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.drivingUnderInfluenceConvictionDetails"
+                  required
+                  :component="repeatableFields.DrivingUnderInfluenceConvictionDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+
+            <RadioGroup
+              id="driving-licence-endorsements"
+              v-model="characterInformation.drivingLicenceEndorsements"
+              label="6. Do you have any endorsements on your licence?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              />
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+
+            <RadioGroup
+              id="recent-driving-convictions"
+              v-model="characterInformation.recentDrivingConvictions"
+              label="7. Were you convicted of any motoring offences in the past 4 years?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              />
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarter">
+            <InfoIcon
+              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
             />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="driving-licence-endorsements"
-          v-model="characterInformation.drivingLicenceEndorsements"
-          label="6. Do you have any endorsements on your licence?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
-        <RadioGroup
-          id="recent-driving-convictions"
-          v-model="characterInformation.recentDrivingConvictions"
-          label="7. Were you convicted of any motoring offences in the past 4 years?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-
+          </div>
+        </div>
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button info-btn--character-information--save-and-continue"
@@ -112,7 +119,7 @@ import DrivingDisqualificationDetails from '@/components/RepeatableFields/Drivin
 import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/DrivingUnderInfluenceConvictionDetails';
 import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
 import BackLink from '@/components/BackLink';
-import HeaderTitle from './HeaderTitle';
+import InfoIcon from '@/components/ModalViews/InfoIcon';
 
 export default {
   components: {
@@ -121,7 +128,7 @@ export default {
     RadioItem,
     RepeatableFields,
     BackLink,
-    HeaderTitle,
+    InfoIcon,
   },
   extends: CharacterInformationForm,
   data() {

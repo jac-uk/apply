@@ -7,39 +7,46 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
 
-        <HeaderTitle
-          title="Fixed Penalty Notices, (including motoring)"
-          url-to-good-character-section="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
-        />
+        <div class="govuk-grid-row">
+          <div class="govuk-grid-column-three-quarters">
+            <h2 class="govuk-heading-l">
+              Fixed Penalty Notices
+            </h2>
 
-        <ErrorSummary
-          :errors="errors"
-          :show-save-button="true"
-          @save="save"
-        />
-
-        <RadioGroup
-          id="fixed-penalties"
-          v-model="characterInformation.fixedPenalties"
-          required
-          label="3. Have you received a fixed penalty notice in the last 4 years?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <RepeatableFields
-              v-model="characterInformation.fixedPenaltyDetails"
-              required
-              :component="repeatableFields.FixedPenaltyDetails"
+            <ErrorSummary
+              :errors="errors"
+              :show-save-button="true"
+              @save="save"
             />
-          </RadioItem>
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
 
+            <RadioGroup
+              id="fixed-penalties"
+              v-model="characterInformation.fixedPenalties"
+              required
+              label="3. Have you received a fixed penalty notice in the last 4 years?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.fixedPenaltyDetails"
+                  required
+                  :component="repeatableFields.FixedPenaltyDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarter">
+            <InfoIcon
+              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+            />
+          </div>
+        </div>
         <button
           :disabled="application.status != 'draft'"
           class="govuk-button info-btn--character-information--save-and-continue"
@@ -59,7 +66,7 @@ import RepeatableFields from '@/components/RepeatableFields';
 import FixedPenaltyDetails from '@/components/RepeatableFields/FixedPenaltyDetails';
 import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
 import BackLink from '@/components/BackLink';
-import HeaderTitle from './HeaderTitle';
+import InfoIcon from '@/components/ModalViews/InfoIcon';
 
 export default {
   components: {
@@ -68,7 +75,7 @@ export default {
     RadioItem,
     RepeatableFields,
     BackLink,
-    HeaderTitle,
+    InfoIcon,
   },
   extends: CharacterInformationForm,
   data() {
