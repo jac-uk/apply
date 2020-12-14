@@ -98,6 +98,7 @@ export default {
   methods: {
     async save() {
       this.validate();
+
       if (this.isValid()) {
         this.updateProgress();
         if (this.characterInformation.furtherInformation === false ) {
