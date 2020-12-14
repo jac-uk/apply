@@ -21,7 +21,7 @@
 import InfoModal from '@/components/Page/InfoModal';
 
 export default {
-  name: 'HeaderTitle',
+  name: 'InfoIcon',
   components: {
     InfoModal,
   },

@@ -3,7 +3,7 @@
     <div class="govuk-grid-row">
       <div class="govuk-grid-column-three-quarters">
         <FinancialYear
-          :id="`financialMatter_financialYear_${index}`"
+          :id="`financialMatter_financialYear_${name}_${index}`"
           v-model="row.financialYear"
           :label="label1"
           :hint="hint1"
@@ -11,7 +11,7 @@
         />
 
         <DateInput
-          :id="`financialMatter_date_${index}`"
+          :id="`financialMatter_date_${name}_${index}`"
           v-model="row.date"
           :label="label2"
           required
@@ -22,7 +22,7 @@
       <div class="govuk-grid-row govuk-!-margin-top-6">
         <div class="govuk-grid-column-three-quarters">
           <TextareaInput
-            :id="`financialMatter_details_${index}`"
+            :id="`financialMatter_details_${name}_${index}`"
             v-model="row.details"
             label="Details"
             :hint="hint2"
@@ -83,6 +83,11 @@ export default {
       required: false,
       type: String,
       default: '',
+    },
+    name: {
+      required: false,
+      type: String,
+      default: 'financial-details',
     },
   },
 };
