@@ -337,7 +337,7 @@ const router = new Router({
               },
             },
             {
-              path: 'review',
+              path: 'information-review',
               component: InformationReview,
               name: 'character-information-review',
               meta: {

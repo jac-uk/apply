@@ -1,19 +1,19 @@
 <template>
   <div class="govuk-!-margin-top-6">
     <TextField
-      :id="`offence_title_${index}`"
+      :id="`offence_title_${name}_${index}`"
       v-model="row.title"
       :label="label"
       required
     />
     <DateInput
-      :id="`offence_date_${index}`"
+      :id="`offence_date_${name}_${index}`"
       v-model="row.date"
       label="Date of offence"
       required
     />
     <TextareaInput
-      :id="`offence_details_${index}`"
+      :id="`offence_details_${name}_${index}`"
       v-model="row.details"
       label="Details"
       :hint="hint"
@@ -54,6 +54,11 @@ export default {
       required: false,
       type: String,
       default: '',
+    },
+    name: {
+      required: false,
+      type: String,
+      default: 'criminal-offences',
     },
   },
 };
