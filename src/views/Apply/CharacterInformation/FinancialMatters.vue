@@ -19,7 +19,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#financial-matters"
             />
           </div>
         </div>
@@ -39,7 +39,7 @@
                 v-model="characterInformation.bankruptcyDetails"
                 required
                 :component="repeatableFields.BankruptcyDetails"
-                url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#bankruptcy-or-iva"
               />
             </RadioItem>
             <RadioItem
@@ -64,7 +64,7 @@
                 v-model="characterInformation.ivaDetails"
                 required
                 :component="repeatableFields.IvaDetails"
-                url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#bankruptcy-or-iva"
               />
             </RadioItem>
             <RadioItem
@@ -89,7 +89,7 @@
                 v-model="characterInformation.lateTaxReturnDetails"
                 required
                 :component="repeatableFields.LateTaxReturnDetails"
-                url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#late-tax-or-VAT-returns"
               />
             </RadioItem>
             <RadioItem
@@ -114,7 +114,7 @@
                 v-model="characterInformation.lateVatReturnDetails"
                 required
                 :component="repeatableFields.LateVatReturnDetails"
-                url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#late-tax-or-VAT-returns"
               />
             </RadioItem>
             <RadioItem
@@ -139,7 +139,7 @@
                 v-model="characterInformation.hmrcFineDetails"
                 required
                 :component="repeatableFields.HmrcFineDetails"
-                url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#hmrc-fines"
               />
             </RadioItem>
             <RadioItem
@@ -164,12 +164,12 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import BankruptcyDetails from '@/components/RepeatableFields/BankruptcyDetails';
-import IvaDetails from '@/components/RepeatableFields/IvaDetails';
-import LateTaxReturnDetails from '@/components/RepeatableFields/LateTaxReturnDetails';
-import LateVatReturnDetails from '@/components/RepeatableFields/LateVatReturnDetails';
-import HmrcFineDetails from '@/components/RepeatableFields/HmrcFineDetails';
-import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
+import BankruptcyDetails from '@/components/RepeatableFields/CharacterInformation/BankruptcyDetails';
+import IvaDetails from '@/components/RepeatableFields/CharacterInformation/IvaDetails';
+import LateTaxReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateTaxReturnDetails';
+import LateVatReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateVatReturnDetails';
+import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/HmrcFineDetails';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
 
@@ -182,7 +182,7 @@ export default {
     BackLink,
     InfoIcon,
   },
-  extends: CharacterInformationForm,
+  extends: CharacterInformationStatus,
   data() {
     const defaults = {
       bankruptcies: null,
@@ -236,7 +236,12 @@ export default {
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-professional-conduct' });
+
+        if (this.application.progress.characterInformation === true) {
+          this.$router.push({ name: 'character-information-review' });
+        } else {
+          this.$router.push({ name: 'character-information-professional-conduct' });
+        }
       }
     },
   },

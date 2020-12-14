@@ -55,7 +55,10 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.personalDetails" class="govuk-summary-list">
+          <dl
+            v-if="application.personalDetails"
+            class="govuk-summary-list"
+          >
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Full Name
@@ -149,7 +152,10 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.characterInformation" class="govuk-summary-list">
+          <dl
+            v-if="application.characterInformation"
+            class="govuk-summary-list"
+          >
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Have you ever been cautioned or convicted of a criminal offence?
@@ -297,7 +303,10 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.equalityAndDiversitySurvey" class="govuk-summary-list">
+          <dl
+            v-if="application.equalityAndDiversitySurvey"
+            class="govuk-summary-list"
+          >
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Sharing your data:
