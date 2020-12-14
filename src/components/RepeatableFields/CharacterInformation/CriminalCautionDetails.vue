@@ -1,7 +1,7 @@
 <script>
-import CriminalOffenceDetails from './CriminalOffenceDetails';
+import CriminalOffenceDetails from '../CriminalOffenceDetails';
 export default {
-  name: 'DrivingUnderInfluenceConvictionDetails',
+  name: 'CriminalCautionDetails',
   extends: CriminalOffenceDetails,
   props: {
     label: {
@@ -12,13 +12,19 @@ export default {
     hint: {
       required: false,
       type: String,
-      default: 'Please add details of your conviction here',
+      default: 'Please add details of your caution here',
     },
     url: {
       required: false,
       type: String,
       default: '',
     },
+    name: {
+      required: false,
+      type: String,
+      default: 'cautions',
+    },
   },
 };
 </script>
+

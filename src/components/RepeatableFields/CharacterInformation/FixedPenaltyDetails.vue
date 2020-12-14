@@ -1,5 +1,5 @@
 <script>
-import CriminalOffenceDetails from './CriminalOffenceDetails';
+import CriminalOffenceDetails from './CharacterInformation/CriminalOffenceDetails';
 export default {
   name: 'FixedPenaltyDetails',
   extends: CriminalOffenceDetails,
@@ -18,6 +18,11 @@ export default {
       required: false,
       type: String,
       default: '',
+    },
+    name: {
+      required: false,
+      type: String,
+      default: 'fixed-penalties',
     },
   },
 };

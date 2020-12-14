@@ -1,7 +1,7 @@
 <script>
-import CriminalOffenceDetails from '../CriminalOffenceDetails';
+import CriminalOffenceDetails from './CharacterInformation/CriminalOffenceDetails';
 export default {
-  name: 'CriminalConvictionDetails',
+  name: 'DrivingUnderInfluenceConvictionDetails',
   extends: CriminalOffenceDetails,
   props: {
     label: {

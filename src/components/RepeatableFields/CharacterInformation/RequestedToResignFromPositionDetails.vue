@@ -1,21 +1,18 @@
 <template>
-  <div>
-    <TextField
-      :id="`offence_title_${name}_${index}`"
-      v-model="row.title"
-      label="Sentence, penalty or fine"
-    />
+  <div class="govuk-!-margin-top-6">
     <DateInput
-      :id="`offence_date_${name}_${index}`"
+      :id="`offence_date_$name_${index}`"
       v-model="row.date"
-      label="Date of offence"
+      :label="label"
+      required
     />
     <TextareaInput
-      :id="`offence_details_${name}_${index}`"
+      :id="`offence_details_$name_${index}`"
       v-model="row.details"
       label="Details"
       :hint="hint"
       rows="5"
+      required
     />
     <slot name="removeButton" />
   </div>
@@ -23,14 +20,12 @@
 
 <script>
 import DateInput from '@/components/Form/DateInput';
-import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
-  name: 'CriminalOffenceDetails',
+  name: 'RequestedToResignFromPositionDetails',
   components: {
     DateInput,
-    TextField,
     TextareaInput,
   },
   props: {
@@ -42,6 +37,11 @@ export default {
       required: true,
       type: Number,
     },
+    label: {
+      required: true,
+      type: String,
+      default: '',
+    },
     hint: {
       required: false,
       type: String,
@@ -50,7 +50,7 @@ export default {
     name: {
       required: false,
       type: String,
-      default: 'criminal-offences',
+      default: 'requested-to-resign',
     },
   },
 };
