@@ -1,6 +1,6 @@
 import { createTestSubject } from '../../helpers';
 
-import CriminalOffenceDetails from '@/components/RepeatableFields/CriminalOffenceDetails';
+import CriminalOffenceDetails from '@/components/RepeatableFields/CharacterInformation/CriminalOffenceDetails';
 
 describe('@/components/RepeatableFields/CriminalOffenceDetails', () => {
   describe('name', () => {
