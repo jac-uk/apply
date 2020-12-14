@@ -1,7 +1,7 @@
 <script>
-import FinancialDetails from './FinancialDetails';
+import FinancialDetails from './CharacterInformation/FinancialDetails';
 export default {
-  name: 'BankruptcyDetails',
+  name: 'IvaDetails',
   extends: FinancialDetails,
   props: {
     label1: {
@@ -12,7 +12,7 @@ export default {
     label2: {
       required: false,
       type: String,
-      default: 'Date of declaration of bankruptcy',
+      default: 'Date of IVA',
     },
     hint1: {
       required: false,
@@ -22,12 +22,17 @@ export default {
     hint2: {
       required: false,
       type: String,
-      default: 'Please add details of your bankruptcy here',
+      default: 'Please add details of your IVA here',
     },
     url: {
       required: false,
       type: String,
       default: '',
+    },
+    name: {
+      required: false,
+      type: String,
+      default: 'ivas',
     },
   },
 };

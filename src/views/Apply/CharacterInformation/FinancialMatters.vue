@@ -97,7 +97,6 @@
               label="No"
             />
           </RadioGroup>
-
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
