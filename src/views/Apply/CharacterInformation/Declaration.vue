@@ -12,7 +12,7 @@
         suitability for this role. Read the
         <a
           class="govuk-link info-link--character-information--character-guidance"
-          href="https://www.judicialappointments.gov.uk/good-character"
+          href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#continuing-duty-to-disclose"
           target="_blank"
         >
           character guidance</a>

@@ -12,7 +12,7 @@ export default {
     label2: {
       required: false,
       type: String,
-      default: 'Date of the incident',
+      default: 'Date of incident',
     },
     hint1: {
       required: false,

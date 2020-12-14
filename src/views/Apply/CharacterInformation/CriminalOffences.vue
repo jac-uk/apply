@@ -20,7 +20,7 @@
             />
 
             <RadioGroup
-              id="criminal-offenses-cautions"
+              id="criminal-offences-cautions"
               v-model="characterInformation.criminalCautions"
               required
               label="1. Have you ever been cautioned for a criminal offence?"
@@ -42,7 +42,7 @@
             </RadioGroup>
 
             <RadioGroup
-              id="criminal-offenses-convictions"
+              id="criminal-offences-convictions"
               v-model="characterInformation.criminalConvictions"
               required
               label="2. Have you ever been convicted for a criminal offence? This includes spent convictions."
@@ -65,7 +65,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#criminal-offences"
             />
           </div>
         </div>
@@ -85,9 +85,9 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import CriminalCautionDetails from '@/components/RepeatableFields/CriminalCautionDetails';
-import CriminalConvictionDetails from '@/components/RepeatableFields/CriminalConvictionDetails';
-import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
+import CriminalCautionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalCautionDetails';
+import CriminalConvictionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalConvictionDetails';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
 
@@ -100,7 +100,7 @@ export default {
     BackLink,
     InfoIcon,
   },
-  extends: CharacterInformationForm,
+  extends: CharacterInformationStatus,
   data() {
     const defaults = {
       criminalCautions: null,
@@ -134,7 +134,12 @@ export default {
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-fixed-penalty-notices' });
+
+        if (this.application.progress.characterInformation === true) {
+          this.$router.push({ name: 'character-information-review' });
+        } else {
+          this.$router.push({ name: 'character-information-fixed-penalty-notices' });
+        }
       }
     },
   },
