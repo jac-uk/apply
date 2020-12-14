@@ -11,8 +11,8 @@
         :id="`investigation_ongoing_${name}_${index}`"
         v-model="row.investigations"
         required
-        @input="handleRadioGroupChange"
         label="Is the investigation ongoing?"
+        @input="handleRadioGroupChange"
       >
         <RadioItem
           :value="true"
@@ -32,9 +32,9 @@
       </RadioGroup>
     </div>
     <TextareaInput
-      class="govuk-!-margin-top-6"
       :id="`offence_details_${index}`"
       v-model="row.details"
+      class="govuk-!-margin-top-6"
       label="Details"
       :hint="hint"
       rows="5"
