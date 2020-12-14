@@ -262,7 +262,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import CriminalOffenceDetails from '@/components/RepeatableFields/CriminalOffenceDetails';
+import CriminalOffenceDetails from '@/components/RepeatableFields/CharacterInformation/CriminalOffenceDetails';
 import NonMotoringFixedPenaltyNoticesDetails from '@/components/RepeatableFields/NonMotoringFixedPenaltyNoticesDetails';
 import DrivingDisqualificationDrinkDrugsDetails from '@/components/RepeatableFields/DrivingDisqualificationDrinkDrugsDetails';
 import EndorsementsOrMotoringFixedPenaltiesDetails from '@/components/RepeatableFields/EndorsementsOrMotoringFixedPenaltiesDetails';

@@ -1,6 +1,6 @@
 <script>
 import TextField from '@/components/Form/TextField';
-import { validateFinancialYear } from '../../helpers/date';
+import { validateFinancialYear } from '../../../helpers/date';
 
 export default {
   name: 'FinancialYear',

@@ -7,7 +7,7 @@ export default {
     label: {
       required: false,
       type: String,
-      default: 'Sentence, penalty or fine',
+      default: 'Sentence, penalty, number of penalty points or fine',
     },
     hint: {
       required: false,

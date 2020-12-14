@@ -95,7 +95,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/wp-content/uploads/2020/10/good-character-guidance-jan2019.pdf"
+              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#motoring-offences"
             />
           </div>
         </div>
@@ -115,9 +115,9 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
-import DrivingDisqualificationDetails from '@/components/RepeatableFields/DrivingDisqualificationDetails';
-import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/DrivingUnderInfluenceConvictionDetails';
-import CharacterInformationForm from '@/views/Apply/CharacterInformation/CharacterInformationForm';
+import DrivingDisqualificationDetails from '@/components/RepeatableFields/CharacterInformation/DrivingDisqualificationDetails';
+import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/CharacterInformation/DrivingUnderInfluenceConvictionDetails';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
 
@@ -130,7 +130,7 @@ export default {
     BackLink,
     InfoIcon,
   },
-  extends: CharacterInformationForm,
+  extends: CharacterInformationStatus,
   data() {
     const defaults = {
       drivingDisqualifications: null,
@@ -157,22 +157,22 @@ export default {
       this.validate();
       if (this.isValid()) {
         this.updateProgress();
+
         if (this.characterInformation.drivingDisqualifications === false ) {
           this.characterInformation.drivingDisqualificationDetails = null;
         }
         if (this.characterInformation.drivingUnderInfluenceConvictions === false ) {
           this.characterInformation.drivingUnderInfluenceConvictionDetails = null;
         }
-        if (this.characterInformation.drivingLicenceEndorsements === false ) {
-          this.characterInformation.drivingLicenceEndorsements = null;
-        }
-        if (this.characterInformation.recentDrivingConvictions === false ) {
-          this.characterInformation.recentDrivingConvictions = null;
-        }
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-financial-matters' });
+
+        if (this.application.progress.characterInformation === true) {
+          this.$router.push({ name: 'character-information-review' });
+        } else {
+          this.$router.push({ name: 'character-information-financial-matters' });
+        }
       }
     },
   },
