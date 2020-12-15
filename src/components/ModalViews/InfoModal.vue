@@ -1,30 +1,39 @@
 <template>
-  <div>
-    <div class="modal__title govuk-!-padding-2 govuk-heading-m">
-      {{ title }}
-    </div>
-    <div class="modal__content govuk-!-padding-4">
-      <p class="modal__message govuk-body-l">
-        {{ message }}
-      </p>
+  <div
+    v-show="modalOpen"
+    class="modal-mask"
+  >
+    <div
+      class="modal"
+    >
+      <div class="container">
+        <div class="modal__title govuk-!-padding-2 govuk-heading-m">
+          {{ title }}
+        </div>
+        <div class="modal__content govuk-!-padding-4">
+          <p class="modal__message govuk-body-l">
+            {{ message }}
+          </p>
 
-      <div
-        v-if="urlProvided"
-        class="modal__message govuk-body-l"
-      >
-        <a
-          :href="`${url}`"
-          target="_blank"
-        >{{ url }}
-        </a>
+          <div
+            v-if="urlProvided"
+            class="modal__message govuk-body-l"
+          >
+            <a
+              :href="`${url}`"
+              target="_blank"
+            >{{ url }}
+            </a>
+          </div>
+          <button
+            type="button"
+            class="govuk-button govuk-button--success info-btn--modal--success"
+            @click="closeModal"
+          >
+            {{ buttonText }}
+          </button>
+        </div>
       </div>
-      <button
-        type="button"
-        class="govuk-button govuk-button--success info-btn--modal--success"
-        @click="closeModal"
-      >
-        {{ buttonText }}
-      </button>
     </div>
   </div>
 </template>
