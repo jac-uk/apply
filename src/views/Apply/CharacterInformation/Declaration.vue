@@ -66,6 +66,11 @@ export default {
     BackLink,
     StartButton,
   },
+  computed: {
+    application() {
+      return this.$store.getters['application/data']();
+    },
+  },
   methods: {
     start() {
       if (this.application.progress.characterInformation === true) {
