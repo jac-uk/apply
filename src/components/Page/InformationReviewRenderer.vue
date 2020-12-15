@@ -1,9 +1,5 @@
 <template>
   <div>
-    <div v-if="have">
-      {{ have | toYesNo }}
-    </div>
-
     <div
       v-if="data"
       class="govuk-body"
@@ -71,11 +67,6 @@ export default {
     isDraftApplication: {
       type: Boolean,
       required: true,
-      default: false,
-    },
-    have: {
-      type: Boolean,
-      required: false,
       default: false,
     },
   },

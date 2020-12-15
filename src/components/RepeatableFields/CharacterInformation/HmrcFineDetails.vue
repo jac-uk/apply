@@ -1,5 +1,5 @@
 <script>
-import FinancialDetails from './CharacterInformation/FinancialDetails';
+import FinancialDetails from '../FinancialDetails';
 export default {
   name: 'HmrcDetails',
   extends: FinancialDetails,

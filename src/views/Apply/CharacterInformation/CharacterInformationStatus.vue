@@ -32,7 +32,7 @@ export default {
     isCriminalOffencesSectionComplete() {
       if (this.application.characterInformation !== undefined &&
         this.application.characterInformation.criminalCautions !== undefined &&
-        this.application.characterInformation.criminalConvictions === true
+        this.application.characterInformation.criminalConvictions !== undefined
       ) {
         return true;
       }
@@ -40,7 +40,7 @@ export default {
     },
     isFixedPenaltiesSectionComplete() {
       if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.fixedPenalties === true
+        this.application.characterInformation.fixedPenalties !== undefined
       ) {
         return true;
       }
@@ -48,41 +48,41 @@ export default {
     },
     isMotoringOffencesSectionComplete() {
       if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.drivingDisqualifications === true &&
-        this.application.characterInformation.drivingUnderInfluenceConvictions === true &&
-        this.application.characterInformation.drivingLicenceEndorsements === true &&
-        this.application.characterInformation.recentDrivingConvictions === true) {
+        this.application.characterInformation.drivingDisqualifications !== undefined &&
+        this.application.characterInformation.drivingUnderInfluenceConvictions !== undefined &&
+        this.application.characterInformation.drivingLicenceEndorsements !== undefined &&
+        this.application.characterInformation.recentDrivingConvictions !== undefined) {
         return true;
       }
       return false;
     },
     isFinancialOffencesSectionComplete() {
       if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.bankruptcies === true &&
-        this.application.characterInformation.ivas === true &&
-        this.application.characterInformation.lateTaxReturns === true &&
-        this.application.characterInformation.lateVatReturns === true &&
-        this.application.characterInformation.hmrcFines === true) {
+        this.application.characterInformation.bankruptcies !== undefined &&
+        this.application.characterInformation.ivas !== undefined &&
+        this.application.characterInformation.lateTaxReturns !== undefined &&
+        this.application.characterInformation.lateVatReturns !== undefined &&
+        this.application.characterInformation.hmrcFines !== undefined) {
         return true;
       }
       return false;
     },
     isProfessionalConductSectionComplete() {
       if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconduct === true &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfNegligence === true &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissal === true &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceeding === true &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding === true &&
-        this.application.characterInformation.complaintOrDisciplinaryAction === true &&
-        this.application.characterInformation.requestedToResign === true){
+        this.application.characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconduct !== undefined &&
+        this.application.characterInformation.subjectOfAllegationOrClaimOfNegligence !== undefined &&
+        this.application.characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissal !== undefined &&
+        this.application.characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceeding !== undefined &&
+        this.application.characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding !== undefined &&
+        this.application.characterInformation.complaintOrDisciplinaryAction !== undefined &&
+        this.application.characterInformation.requestedToResign !== undefined){
         return true;
       }
       return false;
     },
     isFurtherInformationSectionComplete() {
       if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.furtherInformation === true) {
+        this.application.characterInformation.furtherInformation !== undefined) {
         return true;
       }
       return false;

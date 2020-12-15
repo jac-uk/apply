@@ -436,7 +436,7 @@ export default {
       if (this.application.progress.characterInformation === undefined) {
         return 'character-information-declaration';
       }
-      if (this.isCriminalOffencesSectionComplete() === false) {
+      if (!this.isCriminalOffencesSectionComplete()) {
         return 'character-information-criminal-offences';
       }
       if (!this.isFixedPenaltiesSectionComplete()) {

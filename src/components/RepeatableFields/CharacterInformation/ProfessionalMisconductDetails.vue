@@ -1,14 +1,9 @@
 <script>
 import ProfessionalMisconductFieldDetails from './ProfessionalMisconductFieldDetails';
 export default {
-  name: 'ProfessionalMisconductFieldDetails',
+  name: 'ProfessionalMisconductDetails',
   extends: ProfessionalMisconductFieldDetails,
   props: {
-    label: {
-      required: false,
-      type: String,
-      default: 'Date of offence',
-    },
     hint: {
       required: false,
       type: String,

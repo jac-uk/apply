@@ -54,8 +54,8 @@
           6. Do you have any endorsements on your licence?
         </dt>
         <dd class="govuk-summary-list__value">
-          <InformationReviewRenderer
-            :have="application.characterInformation.drivingLicenceEndorsements"
+          <InformationRadioButtonRenderer
+            :value="application.characterInformation.drivingLicenceEndorsements"
             :is-draft-application="true"
           />
         </dd>
@@ -78,8 +78,8 @@
           7. Were you convicted of any motoring offences in the past 4 years?
         </dt>
         <dd class="govuk-summary-list__value">
-          <InformationReviewRenderer
-            :have="application.characterInformation.recentDrivingConvictions"
+          <InformationRadioButtonRenderer
+            :value="application.characterInformation.recentDrivingConvictions"
             :is-draft-application="true"
           />
         </dd>
@@ -100,11 +100,13 @@
 
 <script>
 import InformationReviewRenderer from '@/components/Page/InformationReviewRenderer';
+import InformationRadioButtonRenderer from '@/components/Page/InformationRadioButtonRenderer';
 
 export default {
   name: 'MotoringOffencesSummary',
   components: {
     InformationReviewRenderer,
+    InformationRadioButtonRenderer,
   },
   props: {
     application: {

@@ -4,11 +4,6 @@ export default {
   name: 'HarassmentDetails',
   extends: ProfessionalMisconductFieldDetails,
   props: {
-    label: {
-      required: false,
-      type: String,
-      default: 'Date of offence',
-    },
     hint: {
       required: false,
       type: String,

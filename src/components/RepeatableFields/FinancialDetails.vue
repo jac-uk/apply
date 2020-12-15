@@ -44,7 +44,7 @@
 <script>
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
-import FinancialYear from './FinancialYear';
+import FinancialYear from './CharacterInformation/FinancialYear';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
 
 export default {

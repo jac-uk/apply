@@ -4,11 +4,6 @@ export default {
   name: 'WrongfulDismissalDetails',
   extends: ProfessionalMisconductFieldDetails,
   props: {
-    label: {
-      required: false,
-      type: String,
-      default: 'Date of offence',
-    },
     hint: {
       required: false,
       type: String,

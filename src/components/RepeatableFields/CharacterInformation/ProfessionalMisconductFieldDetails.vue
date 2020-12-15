@@ -67,11 +67,6 @@ export default {
       required: true,
       type: Number,
     },
-    label: {
-      required: true,
-      type: String,
-      default: '',
-    },
     hint: {
       required: false,
       type: String,

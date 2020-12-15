@@ -30,7 +30,7 @@
                 label="Yes"
               >
                 <RepeatableFields
-                  v-model="characterInformation.professionalMisconductDetails"
+                  v-model="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconductDetails"
                   required
                   :component="repeatableFields.ProfessionalMisconductDetails"
                 />
@@ -274,7 +274,7 @@ export default {
           this.characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissalDetails = null;
         }
         if (this.characterInformation.complaintOrDisciplinaryAction === false ) {
-          this.characterInformation.complaintsOrDisciplinaryActionDetails = null;
+          this.characterInformation.complaintOrDisciplinaryActionDetails = null;
         }
         if (this.characterInformation.requestedToResign === false ) {
           this.characterInformation.requestedToResignDetails = null;
@@ -283,7 +283,11 @@ export default {
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-further-information' });
+        if (this.application.progress.characterInformation === true) {
+          this.$router.push({ name: 'character-information-review' });
+        } else {
+          this.$router.push({ name: 'character-information-further-information' });
+        }
       }
     },
   },

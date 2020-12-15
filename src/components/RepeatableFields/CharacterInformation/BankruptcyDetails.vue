@@ -1,5 +1,5 @@
 <script>
-import FinancialDetails from './FinancialDetails';
+import FinancialDetails from '../FinancialDetails';
 export default {
   name: 'BankruptcyDetails',
   extends: FinancialDetails,

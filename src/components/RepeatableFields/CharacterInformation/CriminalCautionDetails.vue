@@ -1,5 +1,5 @@
 <script>
-import CriminalOffenceDetails from './CriminalOffenceDetails';
+import CriminalOffenceDetails from '../CriminalOffenceDetails';
 export default {
   name: 'CriminalCautionDetails',
   extends: CriminalOffenceDetails,

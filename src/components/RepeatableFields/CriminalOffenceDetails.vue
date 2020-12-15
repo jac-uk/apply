@@ -3,12 +3,14 @@
     <TextField
       :id="`offence_title_${name}_${index}`"
       v-model="row.title"
-      label="Sentence, penalty or fine"
+      :label="label"
+      required
     />
     <DateInput
       :id="`offence_date_${name}_${index}`"
       v-model="row.date"
       label="Date of offence"
+      required
     />
     <TextareaInput
       :id="`offence_details_${name}_${index}`"
@@ -16,6 +18,7 @@
       label="Details"
       :hint="hint"
       rows="5"
+      required
     />
     <slot name="removeButton" />
   </div>
@@ -41,6 +44,11 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+    label: {
+      required: true,
+      type: String,
+      default: '',
     },
     hint: {
       required: false,
