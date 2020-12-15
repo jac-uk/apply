@@ -68,7 +68,11 @@ export default {
   },
   methods: {
     start() {
-      this.$router.push({ name: 'character-information-criminal-offences' });
+      if (this.application.progress.characterInformation === true) {
+        this.$router.push({ name: 'character-information-review' });
+      } else {
+        this.$router.push({ name: 'character-information-criminal-offences' });
+      }
     },
   },
 };
