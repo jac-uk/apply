@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import InfoModal from '@/components/Page/InfoModal';
+import InfoModal from '@/components/ModalViews/InfoModal';
 
 export default {
   name: 'InfoIcon',
