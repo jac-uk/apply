@@ -46,7 +46,7 @@
               Personal details
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'apply-personal-details'}"
@@ -143,7 +143,7 @@
               Character information
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'apply-character-information'}"
@@ -294,7 +294,7 @@
               Equality and diversity information
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'equality-and-diversity-survey'}"
@@ -590,7 +590,7 @@
               Location preferences
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'location-preferences'}"
@@ -633,7 +633,7 @@
               Jurisdiction preferences
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit" 
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'jurisdiction-preferences'}"
@@ -676,7 +676,7 @@
                 Welsh posts
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'welsh-posts'}"
@@ -764,7 +764,7 @@
               Additional Preferences
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'additional-working-preferences'}"
@@ -847,7 +847,7 @@
                 Qualifications
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-qualifications'}"
@@ -1007,7 +1007,7 @@
                 Memberships
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-memberships'}"
@@ -1202,7 +1202,7 @@
                 Experience
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'relevant-experience'}"
@@ -1270,7 +1270,7 @@
                 Post-qualification experience
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'post-qualification-work-experience'}"
@@ -1359,7 +1359,7 @@
                 Judicial experience
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'judicial-experience'}"
@@ -1463,7 +1463,7 @@
               Gaps in employment
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'employment-gaps'}"
@@ -1542,7 +1542,7 @@
               Reasonable length of service
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link info-link--review-final-check--reasonable-length-of-service--change"
               style="display:inline-block;"
               :to="{name: 'reasonable-length-of-service'}"
@@ -1572,7 +1572,7 @@
               Independent assessors
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'assessors-details'}"
@@ -1650,7 +1650,7 @@
                 Additional Information
               </h2>
               <RouterLink
-                v-if="isDraftApplication"
+                v-if="isDraftApplication && canEdit"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
                 :to="{name: 'additional-information'}"
@@ -1727,7 +1727,7 @@
             </h2>
 
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'statement-of-suitability'}"
@@ -1760,7 +1760,7 @@
               Self assessment competencies
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'self-assessment-competencies'}"
@@ -1795,7 +1795,7 @@
               Curriculum vitae (CV)
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'cv'}"
@@ -1830,7 +1830,7 @@
               Covering Letter
             </h2>
             <RouterLink
-              v-if="isDraftApplication"
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'covering-letter'}"
@@ -1885,6 +1885,7 @@ export default {
     return {
       errors: [],
       canApply: false,
+      canEdit: true,
     };
   },
   computed: {
@@ -2046,6 +2047,7 @@ export default {
     // console.log(this.application.experienceUnderSchedule2Three);
 
     this.canApply = this.checkIfCanApply();
+    this.canEdit = this.checkIfCanEdit();
 
     if (this.$store.getters['vacancy/isOpen']()) {
       const self = this;
@@ -2089,6 +2091,10 @@ export default {
       return this.isDraftApplication
         && this.$store.getters['vacancy/isOpen']()
         && this.isApplicationComplete;
+    },
+    checkIfCanEdit() {
+      return this.isDraftApplication
+        && this.$store.getters['vacancy/isOpen']();
     },
   },
 };

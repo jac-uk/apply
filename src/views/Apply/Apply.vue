@@ -39,7 +39,7 @@ export default {
         }
         userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === this.vacancyId) : null;
       }
-
+      
       if (vacancy === null) {
         this.redirectToErrorPage();
       } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
@@ -63,7 +63,6 @@ export default {
           });
         }
         await this.$store.dispatch('applications/bind');
-
         this.loaded = true;
       }
     } catch (e) {
