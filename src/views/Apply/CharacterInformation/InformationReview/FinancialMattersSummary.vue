@@ -99,7 +99,7 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          12. Have you ever been filed by HMRC?
+          12. Have you ever been fined by HMRC?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
