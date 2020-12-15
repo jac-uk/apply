@@ -129,7 +129,7 @@
             id="hmrc-fines"
             v-model="characterInformation.hmrcFines"
             required
-            label="12. Have you ever been filed by HMRC?"
+            label="12. Have you ever been fined by HMRC?"
           >
             <RadioItem
               :value="true"
