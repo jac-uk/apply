@@ -5,6 +5,7 @@
       alt="Good character guidance"
       width="46"
       height="46"
+      style="cursor:pointer"
       @click.prevent="openModal"
     >
     <InfoModal
@@ -39,3 +40,4 @@ export default {
   },
 };
 </script>
+
