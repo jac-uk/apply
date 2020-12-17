@@ -2,8 +2,8 @@
   <div>
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          13. Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">13.</span> Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -11,7 +11,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -26,8 +29,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          14. Have you ever been, or are you currently, subject of an allegation or claim of negligence?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">14.</span> Have you ever been, or are you currently, subject of an allegation or claim of negligence?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -35,7 +38,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -50,8 +56,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          15. Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">15.</span> Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -59,7 +65,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -74,8 +83,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          16. Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">16.</span> Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -83,7 +92,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -98,8 +110,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          17. Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">17.</span> Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -107,7 +119,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -122,8 +137,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          18. Have you ever been, or are you currently, subject of complaints or disciplinary action?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">18.</span> Have you ever been, or are you currently, subject of complaints or disciplinary action?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -131,7 +146,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -146,8 +164,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          19. Have you ever been asked to resign from a position?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">19.</span> Have you ever been asked to resign from a position?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -155,7 +173,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -189,6 +210,17 @@ export default {
       required: true,
       default: true,
     },
+    displayChangeLink: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
 };
 </script>
+
+<style scoped>
+  .widerColumn {
+    width: 70%;
+  }
+</style>

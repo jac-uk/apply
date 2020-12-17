@@ -2,8 +2,8 @@
   <div>
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          8. Have you ever been declared bankrupt?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">8.</span> Have you ever been declared bankrupt?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -11,7 +11,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -26,8 +29,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          9. Have you ever entered into an Individual Voluntary Agreement (IVA)?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">9.</span> Have you ever entered into an Individual Voluntary Agreement (IVA)?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -35,7 +38,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -50,8 +56,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          10. Have you ever filed late tax returns?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">10.</span> Have you ever filed late tax returns?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -59,7 +65,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -74,8 +83,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          11. Have you ever filed late VAT returns?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">11.</span> Have you ever filed late VAT returns?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -83,7 +92,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -98,8 +110,8 @@
 
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          12. Have you ever been fined by HMRC?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">12.</span> Have you ever been fined by HMRC?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -107,7 +119,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -141,6 +156,17 @@ export default {
       required: true,
       default: true,
     },
+    displayChangeLink: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
 };
 </script>
+
+<style scoped>
+  .widerColumn {
+    width: 70%;
+  }
+</style>
