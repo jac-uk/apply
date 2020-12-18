@@ -25,6 +25,7 @@
             <CriminalOffencesSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
 
             <div class="govuk-!-margin-top-9">
@@ -39,6 +40,7 @@
             <FixedPenaltiesSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
 
             <div class="govuk-!-margin-top-9">
@@ -53,6 +55,7 @@
             <MotoringOffencesSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
 
             <div class="govuk-!-margin-top-9">
@@ -67,6 +70,7 @@
             <FinancialMattersSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
 
             <div class="govuk-!-margin-top-9">
@@ -81,6 +85,7 @@
             <ProfessionalConductSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
 
             <div class="govuk-!-margin-top-9">
@@ -95,13 +100,14 @@
             <FurtherInformationSummary
               :application="application"
               :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
             />
           </div>
 
-          <div class="govuk-grid-row govuk-!-margin-left-1">
+          <div class="govuk-grid-row">
             <div class="govuk-!-margin-top-9">
               <h2
-                class="govuk-heading-m"
+                class="govuk-heading-m govuk-!-margin-left-3"
                 style="display:inline-block;"
               >
                 Save character information declaration
@@ -116,9 +122,10 @@
                 id="declaration1"
                 v-model="characterInformation.declaration1"
                 multiline-label
-                class="govuk-!-margin-left-0 custom"
               >
-                <span> I understand that it is my continuing duty, throughout the time that my application is being considered, to inform the Selection Exercise Team of all relevant matters that might affect the acceptability of my application when considered against this guidance.</span>
+                <span>
+                  {{ declarationText1 }}
+                </span>
               </Checkbox>
             </div>
           </div>
@@ -129,9 +136,10 @@
                 id="declaration2"
                 v-model="characterInformation.declaration2"
                 multiline-label
-                class="govuk-!-margin-left-0"
               >
-                I understand that failure to declare on the application form relevant information which later comes to light is likely to rule out further consideration of my application.
+                <span>
+                  {{ declarationText2 }}
+                </span>
               </Checkbox>
             </div>
           </div>
@@ -142,27 +150,25 @@
                 id="declaration3"
                 v-model="characterInformation.declaration3"
                 multiline-label
-                class="govuk-!-margin-left-0"
               >
-                <span class="govuk-!-padding-top-0">I also understand that failure to disclose information additional to that included on my application for, upon the request of the JAC and to the timetable requested by the JAC, may also rule out further consideration of my application.
+                <span>
+                  {{ declarationText3 }}
                 </span>
               </Checkbox>
             </div>
-          </div>
 
-          <div class="govuk-grid-row govuk-!-margin-left-1">
-            <div class="govuk-body govuk-!-font-weight-bold">
+            <div class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-3">
               Please note that you can edit or update this character declaration information up until your final application submission.
             </div>
-          </div>
 
-          <StartButton
-            v-if="isDraftApplication"
-            class="govuk-!-margin-top-5 govuk-button--success"
-            @click="save"
-          >
-            Save and continue
-          </StartButton>
+            <StartButton
+              v-if="isDraftApplication"
+              class="govuk-!-margin-top-5 govuk-!-margin-left-3 govuk-button--success"
+              @click="save"
+            >
+              Save and continue
+            </StartButton>
+          </div>
         </div>
       </div>
     </form>
@@ -181,6 +187,7 @@ import FurtherInformationSummary from './InformationReview/FurtherInformationSum
 import StartButton from '@/components/Page/StartButton';
 import Checkbox from '../../../components/Form/Checkbox';
 import Form from '@/components/Form/Form';
+import { DECLARATION1, DECLARATION2, DECLARATION3 } from '@/helpers/constants';
 
 export default {
   components: {
@@ -208,11 +215,17 @@ export default {
     return {
       characterInformation: characterInformation,
       application: application,
+      declarationText1: DECLARATION1,
+      declarationText2: DECLARATION2,
+      declarationText3: DECLARATION3,
     };
   },
   computed: {
     isDraftApplication() {
       return this.application.status === 'draft';
+    },
+    isInformationReview() {
+      return this.$route.name === 'character-information-review';
     },
   },
   methods: {

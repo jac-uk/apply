@@ -2,8 +2,8 @@
   <div>
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          3. Have you received a fixed penalty notice in the last 4 years?
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">3.</span> Have you received a fixed penalty notice in the last 4 years?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -11,7 +11,10 @@
             :is-draft-application="true"
           />
         </dd>
-        <dd class="govuk-summary-list__actions">
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
           <RouterLink
             v-if="canEdit"
             class="govuk-link"
@@ -45,6 +48,17 @@ export default {
       required: true,
       default: true,
     },
+    displayChangeLink: {
+      type: Boolean,
+      required: true,
+      default: true,
+    },
   },
 };
 </script>
+
+<style scoped>
+  .widerColumn {
+    width: 70%;
+  }
+</style>
