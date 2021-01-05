@@ -38,7 +38,7 @@ auth().onAuthStateChanged( (user) => {
   if (store.getters['auth/isSignedIn']) {
     if (store.getters['vacancy/id']) {
       // TODO check that we're not already on this page!
-      router.push(`/apply/${store.getters['vacancy/id']}`);
+      router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
     } else {
       // router.push('applications');
     }
