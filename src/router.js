@@ -251,6 +251,7 @@ const router = new Router({
     {
       path: '/apply/:id',
       component: Apply,
+      name: 'apply',
       children: [
         {
           path: '',
