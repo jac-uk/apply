@@ -17,142 +17,168 @@
               @save="save"
             />
           </div>
-          <div class="govuk-grid-column-one-quarter">
+          <div class="govuk-grid-column-one-quarter govuk-!-padding-left-1">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#financial-matters"
+              :url="financialMatters"
             />
           </div>
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
-          <RadioGroup
-            id="bankruptcies"
-            v-model="characterInformation.bankruptcies"
-            required
-            label="8. Have you ever been declared bankrupt?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              id="bankruptcies"
+              v-model="characterInformation.bankruptcies"
+              required
+              label="8. Have you ever been declared bankrupt?"
             >
-              <RepeatableFields
-                v-model="characterInformation.bankruptcyDetails"
-                required
-                :component="repeatableFields.BankruptcyDetails"
-                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#bankruptcy-or-iva"
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.bankruptcyDetails"
+                  required
+                  :component="repeatableFields.BankruptcyDetails"
+                  :url="bankruptcyOrIva"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
               />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
-            />
-          </RadioGroup>
+            </RadioGroup>
+          </div>
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
-          <RadioGroup
-            id="ivas"
-            v-model="characterInformation.ivas"
-            required
-            label="9. Have you ever entered into an Individual Voluntary Agreement (IVA)?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              id="ivas"
+              v-model="characterInformation.ivas"
+              required
+              label="9. Have you ever entered into an Individual Voluntary Agreement (IVA)?"
             >
-              <RepeatableFields
-                v-model="characterInformation.ivaDetails"
-                required
-                :component="repeatableFields.IvaDetails"
-                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#bankruptcy-or-iva"
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.ivaDetails"
+                  required
+                  :component="repeatableFields.IvaDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
               />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarters">
+            <InfoIcon
+              :url="bankruptcyOrIva"
             />
-          </RadioGroup>
+          </div>
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
-          <RadioGroup
-            id="late-tax-returns"
-            v-model="characterInformation.lateTaxReturns"
-            required
-            label="10. Have you ever filed late tax returns?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              id="late-tax-returns"
+              v-model="characterInformation.lateTaxReturns"
+              required
+              label="10. Have you ever filed late tax returns?"
             >
-              <RepeatableFields
-                v-model="characterInformation.lateTaxReturnDetails"
-                required
-                :component="repeatableFields.LateTaxReturnDetails"
-                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#late-tax-or-VAT-returns"
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.lateTaxReturnDetails"
+                  required
+                  :component="repeatableFields.LateTaxReturnDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
               />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarters">
+            <InfoIcon
+              :url="lateTaxVatReturnsHmrc"
             />
-          </RadioGroup>
+          </div>
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
-          <RadioGroup
-            id="late-vat-returns"
-            v-model="characterInformation.lateVatReturns"
-            required
-            label="11. Have you ever filed late VAT returns?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              id="late-vat-returns"
+              v-model="characterInformation.lateVatReturns"
+              required
+              label="11. Have you ever filed late VAT returns?"
             >
-              <RepeatableFields
-                v-model="characterInformation.lateVatReturnDetails"
-                required
-                :component="repeatableFields.LateVatReturnDetails"
-                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#late-tax-or-VAT-returns"
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.lateVatReturnDetails"
+                  required
+                  :component="repeatableFields.LateVatReturnDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
               />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
+            </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarters">
+            <InfoIcon
+              :url="lateTaxVatReturnsHmrc"
             />
-          </RadioGroup>
+          </div>
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
-          <RadioGroup
-            id="hmrc-fines"
-            v-model="characterInformation.hmrcFines"
-            required
-            label="12. Have you ever been fined by HMRC?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              id="hmrc-fines"
+              v-model="characterInformation.hmrcFines"
+              required
+              label="12. Have you ever been fined by HMRC?"
             >
-              <RepeatableFields
-                v-model="characterInformation.hmrcFineDetails"
-                required
-                :component="repeatableFields.HmrcFineDetails"
-                url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#hmrc-fines"
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.hmrcFineDetails"
+                  required
+                  :component="repeatableFields.HmrcFineDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
               />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
+            </RadioGroup>
+            <button
+              :disabled="application.status != 'draft'"
+              class="govuk-button info-btn--character-information--save-and-continue"
+            >
+              Save and continue
+            </button>
+          </div>
+          <div class="govuk-grid-column-one-quarters">
+            <InfoIcon
+              :url="lateTaxVatReturnsHmrc"
             />
-          </RadioGroup>
-          <button
-            :disabled="application.status != 'draft'"
-            class="govuk-button info-btn--character-information--save-and-continue"
-          >
-            Save and continue
-          </button>
+          </div>
         </div>
       </div>
     </form>
@@ -172,6 +198,7 @@ import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
+import { FINANCIAL_MATTERS_URL, BANKRUPTCY_IVA_URL, LATE_TAX_VAT_RETURNS_HMRC_URL } from '../../../helpers/constants';
 
 export default {
   components: {
@@ -211,7 +238,21 @@ export default {
         LateVatReturnDetails,
         HmrcFineDetails,
       },
+      financialMattersUrl: FINANCIAL_MATTERS_URL,
+      bankruptcyOrIvaUrl: BANKRUPTCY_IVA_URL,
+      lateTaxVatReturnsHmrcUrl: LATE_TAX_VAT_RETURNS_HMRC_URL,
     };
+  },
+  computed: {
+    financialMatters() {
+      return this.financialMattersUrl;
+    },
+    bankruptcyOrIva() {
+      return this.bankruptcyOrIvaUrl;
+    },
+    lateTaxVatReturnsHmrc() {
+      return this.lateTaxVatReturnsHmrcUrl;
+    },
   },
   methods: {
     async save() {

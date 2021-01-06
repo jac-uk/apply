@@ -175,7 +175,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#professional-conduct"
+              :url="professionalConduct"
             />
           </div>
         </div>
@@ -205,6 +205,7 @@ import ComplaintOrDisciplinaryActionDetails from '@/components/RepeatableFields/
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
+import { PROFESSIONAL_CONDUCT_URL } from '../../../helpers/constants';
 
 export default {
   components: {
@@ -248,7 +249,13 @@ export default {
         ComplaintOrDisciplinaryActionDetails,
         RequestedToResignDetails,
       },
+      professionalConductUrl: PROFESSIONAL_CONDUCT_URL,
     };
+  },
+  computed: {
+    professionalConduct() {
+      return this.professionalConductUrl;
+    },
   },
   methods: {
     async save() {

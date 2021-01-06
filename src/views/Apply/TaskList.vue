@@ -167,7 +167,6 @@ export default {
     },
     taskGroups() {
       const data = [];
-
       if (this.applicationProgress) {
 
         const characterInformation = {
@@ -453,6 +452,9 @@ export default {
       }
       if (!this.isFurtherInformationSectionComplete()) {
         return 'character-information-further-information';
+      }
+      if (!this.isDeclarationCompleted()) {
+        return 'character-information-review';
       }
     },
   },

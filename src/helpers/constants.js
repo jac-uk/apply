@@ -53,6 +53,15 @@ const DECLARATION3 = `I also understand that failure to disclose information add
                       upon the request of the JAC and to the timetable requested by the JAC, may also rule out further consideration
                       of my application.`;
 
+const CRIMINAL_OFFENCES_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#criminal-offences';
+const FIXED_PENALTY_NOTICES_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#fixed-penalty-notices-including-motoring';
+const MOTORING_OFFENCES_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#motoring-offences';
+const FINANCIAL_MATTERS_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#financial-matters';
+const BANKRUPTCY_IVA_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#bankruptcy-or-iva';
+const LATE_TAX_VAT_RETURNS_HMRC_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#vat-tax-hmrc';
+const PROFESSIONAL_CONDUCT_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#professional-conduct';
+const FURTHER_INFORMATION_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#further-information-to-be-disclosed';
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -62,5 +71,13 @@ export {
   WELSH_POSTS_EMAIL_SUBJECT,
   DECLARATION1,
   DECLARATION2,
-  DECLARATION3
+  DECLARATION3,
+  CRIMINAL_OFFENCES_URL,
+  FIXED_PENALTY_NOTICES_URL,
+  MOTORING_OFFENCES_URL,
+  FINANCIAL_MATTERS_URL,
+  BANKRUPTCY_IVA_URL,
+  LATE_TAX_VAT_RETURNS_HMRC_URL,
+  PROFESSIONAL_CONDUCT_URL,
+  FURTHER_INFORMATION_URL
 };

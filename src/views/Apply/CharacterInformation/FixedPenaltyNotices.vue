@@ -43,7 +43,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#fixed-penalty-notices-including-motoring"
+              :url="fixedPenaltyNotices"
             />
           </div>
         </div>
@@ -67,6 +67,7 @@ import FixedPenaltyDetails from '@/components/RepeatableFields/CharacterInformat
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
+import { FIXED_PENALTY_NOTICES_URL } from '../../../helpers/constants';
 
 export default {
   components: {
@@ -92,7 +93,13 @@ export default {
       repeatableFields: {
         FixedPenaltyDetails,
       },
+      fixedPenaltyNoticesUrl: FIXED_PENALTY_NOTICES_URL,
     };
+  },
+  computed: {
+    fixedPenaltyNotices() {
+      return this.fixedPenaltyNoticesUrl;
+    },
   },
   methods: {
     async save() {

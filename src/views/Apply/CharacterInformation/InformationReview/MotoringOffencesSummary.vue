@@ -60,8 +60,8 @@
           <span v-if="displayChangeLink">6.</span> Do you have any endorsements on your licence?
         </dt>
         <dd class="govuk-summary-list__value">
-          <InformationRadioButtonRenderer
-            :value="application.characterInformation.drivingLicenceEndorsements"
+          <InformationReviewRenderer
+            :data="application.characterInformation.drivingLicenceEndorsementDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -87,8 +87,8 @@
           <span v-if="displayChangeLink">7.</span> Were you convicted of any motoring offences in the past 4 years?
         </dt>
         <dd class="govuk-summary-list__value">
-          <InformationRadioButtonRenderer
-            :value="application.characterInformation.recentDrivingConvictions"
+          <InformationReviewRenderer
+            :data="application.characterInformation.recentDrivingConvictionDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -112,13 +112,11 @@
 
 <script>
 import InformationReviewRenderer from '@/components/Page/InformationReviewRenderer';
-import InformationRadioButtonRenderer from '@/components/Page/InformationRadioButtonRenderer';
 
 export default {
   name: 'MotoringOffencesSummary',
   components: {
     InformationReviewRenderer,
-    InformationRadioButtonRenderer,
   },
   props: {
     application: {
