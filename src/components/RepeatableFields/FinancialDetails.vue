@@ -1,40 +1,30 @@
 <template>
   <div class="govuk-!-margin-top-6">
     <div class="govuk-grid-row">
-      <div class="govuk-grid-column-three-quarters">
-        <FinancialYear
-          :id="`financialMatter_financialYear_${name}_${index}`"
-          v-model="row.financialYear"
-          :label="label1"
-          :hint="hint1"
-          required
-        />
-
-        <DateInput
-          :id="`financialMatter_date_${name}_${index}`"
-          v-model="row.date"
-          :label="label2"
-          required
-        />
-      </div>
+      <FinancialYear
+        :id="`financialMatter_financialYear_${name}_${index}`"
+        v-model="row.financialYear"
+        :label="label1"
+        :hint="hint1"
+        required
+      />
+      <DateInput
+        :id="`financialMatter_date_${name}_${index}`"
+        v-model="row.date"
+        :label="label2"
+        required
+      />
     </div>
     <div>
       <div class="govuk-grid-row govuk-!-margin-top-6">
-        <div class="govuk-grid-column-three-quarters">
-          <TextareaInput
-            :id="`financialMatter_details_${name}_${index}`"
-            v-model="row.details"
-            label="Details"
-            :hint="hint2"
-            rows="5"
-            required
-          />
-        </div>
-        <div class="govuk-grid-column-one-quarters">
-          <InfoIcon
-            :url="url"
-          />
-        </div>
+        <TextareaInput
+          :id="`financialMatter_details_${name}_${index}`"
+          v-model="row.details"
+          label="Details"
+          :hint="hint2"
+          rows="5"
+          required
+        />
       </div>
     </div>
     <slot name="removeButton" />
@@ -45,12 +35,10 @@
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FinancialYear from './CharacterInformation/FinancialYear';
-import InfoIcon from '@/components/ModalViews/InfoIcon';
 
 export default {
   name: 'FinancialDetails',
   components: {
-    InfoIcon,
     FinancialYear,
     DateInput,
     TextareaInput,

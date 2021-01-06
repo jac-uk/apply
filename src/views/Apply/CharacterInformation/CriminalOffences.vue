@@ -65,7 +65,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#criminal-offences"
+              :url="criminalOffences"
             />
           </div>
         </div>
@@ -90,6 +90,7 @@ import CriminalConvictionDetails from '@/components/RepeatableFields/CharacterIn
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
+import { CRIMINAL_OFFENCES_URL } from '../../../helpers/constants';
 
 export default {
   components: {
@@ -118,7 +119,13 @@ export default {
         CriminalCautionDetails,
         CriminalConvictionDetails,
       },
+      criminalOffencesUrl: CRIMINAL_OFFENCES_URL,
     };
+  },
+  computed: {
+    criminalOffences() {
+      return this.criminalOffencesUrl;
+    },
   },
   methods: {
     async save() {

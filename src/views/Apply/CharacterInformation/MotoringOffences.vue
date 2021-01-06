@@ -67,11 +67,18 @@
               id="driving-licence-endorsements"
               v-model="characterInformation.drivingLicenceEndorsements"
               label="6. Do you have any endorsements on your licence?"
+              required
             >
               <RadioItem
                 :value="true"
                 label="Yes"
-              />
+              >
+                <RepeatableFields
+                  v-model="characterInformation.drivingLicenceEndorsementDetails"
+                  required
+                  :component="repeatableFields.DrivingLicenceEndorsementDetails"
+                />
+              </RadioItem>
               <RadioItem
                 :value="false"
                 label="No"
@@ -82,11 +89,18 @@
               id="recent-driving-convictions"
               v-model="characterInformation.recentDrivingConvictions"
               label="7. Were you convicted of any motoring offences in the past 4 years?"
+              required
             >
               <RadioItem
                 :value="true"
                 label="Yes"
-              />
+              >
+                <RepeatableFields
+                  v-model="characterInformation.recentDrivingConvictionDetails"
+                  required
+                  :component="repeatableFields.RecentDrivingConvictionDetails"
+                />
+              </RadioItem>
               <RadioItem
                 :value="false"
                 label="No"
@@ -95,7 +109,7 @@
           </div>
           <div class="govuk-grid-column-one-quarter">
             <InfoIcon
-              url="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#motoring-offences"
+              :url="motoringOffences"
             />
           </div>
         </div>
@@ -118,8 +132,11 @@ import RepeatableFields from '@/components/RepeatableFields';
 import DrivingDisqualificationDetails from '@/components/RepeatableFields/CharacterInformation/DrivingDisqualificationDetails';
 import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/CharacterInformation/DrivingUnderInfluenceConvictionDetails';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
+import DrivingLicenceEndorsementDetails from '@/components/RepeatableFields/CharacterInformation/DrivingLicenceEndorsementDetails';
+import RecentDrivingConvictionDetails from '@/components/RepeatableFields/CharacterInformation/RecentDrivingConvictionDetails';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
+import { MOTORING_OFFENCES_URL } from '../../../helpers/constants';
 
 export default {
   components: {
@@ -138,7 +155,9 @@ export default {
       drivingUnderInfluenceConvictions: null,
       drivingUnderInfluenceConvictionDetails: null,
       drivingLicenceEndorsements: null,
+      drivingLicenceEndorsementDetails: null,
       recentDrivingConvictions: null,
+      recentDrivingConvictionDetails: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -149,8 +168,16 @@ export default {
       repeatableFields: {
         DrivingDisqualificationDetails,
         DrivingUnderInfluenceConvictionDetails,
+        DrivingLicenceEndorsementDetails,
+        RecentDrivingConvictionDetails,
       },
+      motoringOffencesUrl: MOTORING_OFFENCES_URL,
     };
+  },
+  computed: {
+    motoringOffences() {
+      return this.motoringOffencesUrl;
+    },
   },
   methods: {
     async save() {
@@ -163,6 +190,12 @@ export default {
         }
         if (this.characterInformation.drivingUnderInfluenceConvictions === false ) {
           this.characterInformation.drivingUnderInfluenceConvictionDetails = null;
+        }
+        if (this.characterInformation.drivingLicenceEndorsements === false ) {
+          this.characterInformation.drivingLicenceEndorsementDetails = null;
+        }
+        if (this.characterInformation.recentDrivingConvictions === false ) {
+          this.characterInformation.recentDrivingConvictionDetails = null;
         }
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);

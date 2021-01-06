@@ -27,7 +27,10 @@ export default {
         this.characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding !== undefined &&
         this.characterInformation.complaintOrDisciplinaryAction !== undefined &&
         this.characterInformation.requestedToResign !== undefined &&
-        this.characterInformation.furtherInformation !== undefined;
+        this.characterInformation.furtherInformation !== undefined &&
+        this.characterInformation.declaration1 !== undefined &&
+        this.characterInformation.declaration2 !== undefined &&
+        this.characterInformation.declaration3 !== undefined;
     },
     isCriminalOffencesSectionComplete() {
       if (this.application.characterInformation !== undefined &&
@@ -83,6 +86,15 @@ export default {
     isFurtherInformationSectionComplete() {
       if (this.application.characterInformation !== undefined &&
         this.application.characterInformation.furtherInformation !== undefined) {
+        return true;
+      }
+      return false;
+    },
+    isDeclarationCompleted() {
+      if (this.application.characterInformation.declaration1 === true &&
+        this.application.characterInformation.declaration2 === true &&
+        this.application.characterInformation.declaration3 === true
+      ) {
         return true;
       }
       return false;

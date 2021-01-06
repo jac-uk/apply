@@ -186,7 +186,7 @@ import ProfessionalConductSummary from './InformationReview/ProfessionalConductS
 import FurtherInformationSummary from './InformationReview/FurtherInformationSummary';
 import StartButton from '@/components/Page/StartButton';
 import Checkbox from '../../../components/Form/Checkbox';
-import Form from '@/components/Form/Form';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import { DECLARATION1, DECLARATION2, DECLARATION3 } from '@/helpers/constants';
 
 export default {
@@ -202,7 +202,7 @@ export default {
     ErrorSummary,
     StartButton,
   },
-  extends: Form,
+  extends: CharacterInformationStatus,
   data() {
     const defaults = {
       declaration1: null,
@@ -241,6 +241,7 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
+        this.updateProgress();
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
