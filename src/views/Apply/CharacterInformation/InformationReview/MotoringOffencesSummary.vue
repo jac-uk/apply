@@ -7,7 +7,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.drivingDisqualificationDetails"
+            :data="characterInformation.drivingDisqualificationDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -34,7 +34,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.drivingUnderInfluenceConvictionDetails"
+            :data="characterInformation.drivingUnderInfluenceConvictionDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -61,7 +61,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.drivingLicenceEndorsementDetails"
+            :data="characterInformation.drivingLicenceEndorsementDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -88,7 +88,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.recentDrivingConvictionDetails"
+            :data="characterInformation.recentDrivingConvictionDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -119,7 +119,7 @@ export default {
     InformationReviewRenderer,
   },
   props: {
-    application: {
+    characterInformation: {
       type: Object,
       required: true,
       default: new Object(),

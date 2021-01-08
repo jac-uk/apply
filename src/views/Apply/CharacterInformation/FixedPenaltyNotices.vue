@@ -109,7 +109,7 @@ export default {
         if (this.characterInformation.fixedPenalties === false ) {
           this.characterInformation.fixedPenaltyDetails = null;
         }
-        this.application.characterInformation = this.characterInformation;
+        this.application.characterInformationV2 = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
 

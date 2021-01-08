@@ -6,7 +6,7 @@
           {{ declaration1 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.characterInformation.declaration1 | toYesNo }}
+          {{ characterInformation.declaration1 | toYesNo }}
         </dd>
       </div>
     </dl>
@@ -17,7 +17,7 @@
           {{ declaration2 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.characterInformation.declaration1 | toYesNo }}
+          {{ characterInformation.declaration1 | toYesNo }}
         </dd>
       </div>
     </dl>
@@ -28,7 +28,7 @@
           {{ declaration3 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.characterInformation.declaration1 | toYesNo }}
+          {{ characterInformation.declaration1 | toYesNo }}
         </dd>
       </div>
     </dl>
@@ -41,7 +41,7 @@ import { DECLARATION1, DECLARATION2, DECLARATION3 } from '@/helpers/constants';
 export default {
   name: 'CharacterDeclarationSummary',
   props: {
-    application: {
+    characterInformation: {
       type: Object,
       required: true,
       default: new Object(),

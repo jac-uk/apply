@@ -24,7 +24,7 @@
 
             <div v-if="isCriminalOffencesSectionComplete()">
               <CriminalOffencesSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -45,7 +45,7 @@
 
             <div v-if="isFixedPenaltiesSectionComplete()">
               <FixedPenaltiesSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -66,7 +66,7 @@
 
             <div v-if="isMotoringOffencesSectionComplete()">
               <MotoringOffencesSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -87,7 +87,7 @@
 
             <div v-if="isFinancialOffencesSectionComplete()">
               <FinancialMattersSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -108,7 +108,7 @@
 
             <div v-if="isProfessionalConductSectionComplete()">
               <ProfessionalConductSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -129,7 +129,7 @@
 
             <div v-if="isFurtherInformationSectionComplete()">
               <FurtherInformationSummary
-                :application="application"
+                :character-information="characterInformation"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -278,7 +278,7 @@ export default {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
         this.updateProgress();
-        this.application.characterInformation = this.characterInformation;
+        this.application.characterInformationV2 = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         this.$router.push({ name: 'task-list' });

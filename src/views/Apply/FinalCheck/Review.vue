@@ -152,7 +152,7 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.characterInformation">
+          <dl v-if="application.characterInformationV2">
             <CriminalOffencesSummary
               :application="application"
               :can-edit="isDraftApplication"
@@ -186,6 +186,9 @@
             <CharacterDeclarationSummary
               :application="application"
             />
+          </dl>
+          <dl v-else>
+            [OLD CHARACTER INFORMATION DISPLAYED HERE]
           </dl>
 
           <div class="govuk-!-margin-top-9">

@@ -7,7 +7,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.fixedPenaltyDetails"
+            :data="characterInformation.fixedPenaltyDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -38,7 +38,7 @@ export default {
     InformationReviewRenderer,
   },
   props: {
-    application: {
+    characterInformation: {
       type: Object,
       required: false,
       default: new Object(),

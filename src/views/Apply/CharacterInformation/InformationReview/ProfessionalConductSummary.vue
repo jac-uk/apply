@@ -7,7 +7,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconductDetails"
+            :data="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconductDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -34,7 +34,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.subjectOfAllegationOrClaimOfNegligenceDetails"
+            :data="characterInformation.subjectOfAllegationOrClaimOfNegligenceDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -61,7 +61,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissalDetails"
+            :data="characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissalDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -88,7 +88,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceedingDetails"
+            :data="characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceedingDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -115,7 +115,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.subjectOfAllegationOrClaimOfHarassmentProceedingDetails"
+            :data="characterInformation.subjectOfAllegationOrClaimOfHarassmentProceedingDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -142,7 +142,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.complaintOrDisciplinaryActionDetails"
+            :data="characterInformation.complaintOrDisciplinaryActionDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -169,7 +169,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.requestedToResignDetails"
+            :data="characterInformation.requestedToResignDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -200,7 +200,7 @@ export default {
     InformationReviewRenderer,
   },
   props: {
-    application: {
+    characterInformation: {
       type: Object,
       required: true,
       default: new Object(),

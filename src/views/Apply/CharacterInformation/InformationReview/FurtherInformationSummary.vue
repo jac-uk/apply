@@ -7,7 +7,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="application.characterInformation.furtherInformationDetails"
+            :data="characterInformation.furtherInformationDetails"
             :is-draft-application="true"
           />
         </dd>
@@ -38,7 +38,7 @@ export default {
     InformationReviewRenderer,
   },
   props: {
-    application: {
+    characterInformation: {
       type: Object,
       required: true,
       default: new Object(),

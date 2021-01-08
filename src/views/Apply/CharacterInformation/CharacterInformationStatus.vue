@@ -33,68 +33,68 @@ export default {
         this.characterInformation.declaration3 !== undefined;
     },
     isCriminalOffencesSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.criminalCautions !== undefined &&
-        this.application.characterInformation.criminalConvictions !== undefined
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.criminalCautions !== undefined &&
+        this.application.characterInformationV2.criminalConvictions !== undefined
       ) {
         return true;
       }
       return false;
     },
     isFixedPenaltiesSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.fixedPenalties !== undefined
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.fixedPenalties !== undefined
       ) {
         return true;
       }
       return false;
     },
     isMotoringOffencesSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.drivingDisqualifications !== undefined &&
-        this.application.characterInformation.drivingUnderInfluenceConvictions !== undefined &&
-        this.application.characterInformation.drivingLicenceEndorsements !== undefined &&
-        this.application.characterInformation.recentDrivingConvictions !== undefined) {
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.drivingDisqualifications !== undefined &&
+        this.application.characterInformationV2.drivingUnderInfluenceConvictions !== undefined &&
+        this.application.characterInformationV2.drivingLicenceEndorsements !== undefined &&
+        this.application.characterInformationV2.recentDrivingConvictions !== undefined) {
         return true;
       }
       return false;
     },
     isFinancialOffencesSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.bankruptcies !== undefined &&
-        this.application.characterInformation.ivas !== undefined &&
-        this.application.characterInformation.lateTaxReturns !== undefined &&
-        this.application.characterInformation.lateVatReturns !== undefined &&
-        this.application.characterInformation.hmrcFines !== undefined) {
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.bankruptcies !== undefined &&
+        this.application.characterInformationV2.ivas !== undefined &&
+        this.application.characterInformationV2.lateTaxReturns !== undefined &&
+        this.application.characterInformationV2.lateVatReturns !== undefined &&
+        this.application.characterInformationV2.hmrcFines !== undefined) {
         return true;
       }
       return false;
     },
     isProfessionalConductSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconduct !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfNegligence !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissal !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceeding !== undefined &&
-        this.application.characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding !== undefined &&
-        this.application.characterInformation.complaintOrDisciplinaryAction !== undefined &&
-        this.application.characterInformation.requestedToResign !== undefined){
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.subjectOfAllegationOrClaimOfProfessionalMisconduct !== undefined &&
+        this.application.characterInformationV2.subjectOfAllegationOrClaimOfNegligence !== undefined &&
+        this.application.characterInformationV2.subjectOfAllegationOrClaimOfWrongfulDismissal !== undefined &&
+        this.application.characterInformationV2.subjectOfAllegationOrClaimOfDiscriminationProceeding !== undefined &&
+        this.application.characterInformationV2.subjectOfAllegationOrClaimOfHarassmentProceeding !== undefined &&
+        this.application.characterInformationV2.complaintOrDisciplinaryAction !== undefined &&
+        this.application.characterInformationV2.requestedToResign !== undefined){
         return true;
       }
       return false;
     },
     isFurtherInformationSectionComplete() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.furtherInformation !== undefined) {
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.furtherInformation !== undefined) {
         return true;
       }
       return false;
     },
     isDeclarationCompleted() {
-      if (this.application.characterInformation !== undefined &&
-        this.application.characterInformation.declaration1 === true &&
-        this.application.characterInformation.declaration2 === true &&
-        this.application.characterInformation.declaration3 === true
+      if (this.application.characterInformationV2 !== undefined &&
+        this.application.characterInformationV2.declaration1 === true &&
+        this.application.characterInformationV2.declaration2 === true &&
+        this.application.characterInformationV2.declaration3 === true
       ) {
         return true;
       }
