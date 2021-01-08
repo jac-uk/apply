@@ -22,11 +22,14 @@
               </h2>
             </div>
 
-            <CriminalOffencesSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isCriminalOffencesSectionComplete()">
+              <CriminalOffencesSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -37,11 +40,14 @@
               </h2>
             </div>
 
-            <FixedPenaltiesSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isFixedPenaltiesSectionComplete()">
+              <FixedPenaltiesSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -52,11 +58,14 @@
               </h2>
             </div>
 
-            <MotoringOffencesSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isMotoringOffencesSectionComplete()">
+              <MotoringOffencesSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -67,11 +76,14 @@
               </h2>
             </div>
 
-            <FinancialMattersSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isFinancialOffencesSectionComplete()">
+              <FinancialMattersSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -82,11 +94,14 @@
               </h2>
             </div>
 
-            <ProfessionalConductSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isProfessionalConductSectionComplete()">
+              <ProfessionalConductSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -97,11 +112,14 @@
               </h2>
             </div>
 
-            <FurtherInformationSummary
-              :application="application"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
+            <div v-if="isFurtherInformationSectionComplete()">
+              <FurtherInformationSummary
+                :application="application"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <span v-else class="govuk-body">No information provided</span>
           </div>
 
           <div class="govuk-grid-row">
