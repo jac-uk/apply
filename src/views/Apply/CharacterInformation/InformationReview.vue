@@ -29,7 +29,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -47,7 +50,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -65,7 +71,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -83,7 +92,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -101,7 +113,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -119,7 +134,10 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span v-else class="govuk-body">No information provided</span>
+            <span
+              v-else
+              class="govuk-body"
+            >No information provided</span>
           </div>
 
           <div class="govuk-grid-row">
