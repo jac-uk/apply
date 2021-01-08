@@ -91,7 +91,8 @@ export default {
       return false;
     },
     isDeclarationCompleted() {
-      if (this.application.characterInformation.declaration1 === true &&
+      if (this.application.characterInformation !== undefined &&
+        this.application.characterInformation.declaration1 === true &&
         this.application.characterInformation.declaration2 === true &&
         this.application.characterInformation.declaration3 === true
       ) {
