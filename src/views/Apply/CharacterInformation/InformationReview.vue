@@ -13,7 +13,7 @@
           </h2>
 
           <div>
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -34,7 +34,7 @@
               class="govuk-body"
             >No information provided</span>
 
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -55,7 +55,7 @@
               class="govuk-body"
             >No information provided</span>
 
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -76,7 +76,7 @@
               class="govuk-body"
             >No information provided</span>
 
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -97,7 +97,7 @@
               class="govuk-body"
             >No information provided</span>
 
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -118,7 +118,7 @@
               class="govuk-body"
             >No information provided</span>
 
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
                 style="display:inline-block;"
@@ -141,7 +141,7 @@
           </div>
 
           <div class="govuk-grid-row">
-            <div>
+            <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m govuk-!-margin-left-3"
                 style="display:inline-block;"
