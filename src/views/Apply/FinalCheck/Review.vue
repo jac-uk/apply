@@ -146,7 +146,7 @@
               v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
-              :to="{name: 'character-information-review'}"
+              :to="{name: destinationUrl}"
             >
               Change
             </RouterLink>
@@ -154,41 +154,43 @@
 
           <dl v-if="application.characterInformationV2">
             <CriminalOffencesSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <FixedPenaltiesSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <MotoringOffencesSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <FinancialMattersSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <ProfessionalConductSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <FurtherInformationSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
               :display-change-link="isInformationReview"
             />
             <CharacterDeclarationSummary
-              :application="application"
+              :character-information="application.characterInformationV2"
             />
           </dl>
           <dl v-else>
-            [OLD CHARACTER INFORMATION DISPLAYED HERE]
+            <CharacterInformationSummaryV1
+              :character-information="application.characterInformation"
+            />
           </dl>
 
           <div class="govuk-!-margin-top-9">
@@ -1784,9 +1786,11 @@ import FinancialMattersSummary from '@/views/Apply/CharacterInformation/Informat
 import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary';
 import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary';
 import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary';
+import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1';
 
 export default {
   components: {
+    CharacterInformationSummaryV1,
     CharacterDeclarationSummary,
     CriminalOffencesSummary,
     FixedPenaltiesSummary,
@@ -1955,6 +1959,9 @@ export default {
     },
     isInformationReview() {
       return this.$route.name === 'character-information-review';
+    },
+    destinationUrl() {
+      return this.application.characterInformationV2 ? 'character-information-review' : 'apply-character-information';
     },
   },
   mounted() {

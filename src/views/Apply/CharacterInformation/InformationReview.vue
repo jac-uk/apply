@@ -223,7 +223,7 @@ import FurtherInformationSummary from './InformationReview/FurtherInformationSum
 import StartButton from '@/components/Page/StartButton';
 import Checkbox from '../../../components/Form/Checkbox';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import { DECLARATION1, DECLARATION2, DECLARATION3 } from '@/helpers/constants';
+import { DECLARATION1, DECLARATION2, DECLARATION3 } from './character-information-constants';
 
 export default {
   components: {

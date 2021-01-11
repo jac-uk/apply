@@ -67,7 +67,7 @@ import FixedPenaltyDetails from '@/components/RepeatableFields/CharacterInformat
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { FIXED_PENALTY_NOTICES_URL } from '../../../helpers/constants';
+import { FIXED_PENALTY_NOTICES_URL } from './character-information-constants';
 
 export default {
   components: {
