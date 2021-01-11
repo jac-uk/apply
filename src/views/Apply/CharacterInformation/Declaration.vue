@@ -66,18 +66,9 @@ export default {
     BackLink,
     StartButton,
   },
-  computed: {
-    application() {
-      return this.$store.getters['application/data']();
-    },
-  },
   methods: {
     start() {
-      if (this.application.progress.characterInformation === true) {
-        this.$router.push({ name: 'character-information-review' });
-      } else {
-        this.$router.push({ name: 'character-information-criminal-offences' });
-      }
+      this.$router.push({ name: 'character-information-criminal-offences' });
     },
   },
 };

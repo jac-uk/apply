@@ -67,7 +67,7 @@ import FurtherInformationDetails from '@/components/RepeatableFields/CharacterIn
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { FURTHER_INFORMATION_URL } from '../../../helpers/constants';
+import { FURTHER_INFORMATION_URL } from './character-information-constants';
 
 export default {
   components: {

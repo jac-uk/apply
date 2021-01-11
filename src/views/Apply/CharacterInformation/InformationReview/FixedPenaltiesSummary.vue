@@ -41,7 +41,7 @@ export default {
     characterInformation: {
       type: Object,
       required: false,
-      default: new Object(),
+      default: new Object({}),
     },
     canEdit: {
       type: Boolean,

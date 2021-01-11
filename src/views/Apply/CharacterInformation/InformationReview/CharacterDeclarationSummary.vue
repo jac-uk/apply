@@ -17,7 +17,7 @@
           {{ declaration2 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ characterInformation.declaration1 | toYesNo }}
+          {{ characterInformation.declaration2 | toYesNo }}
         </dd>
       </div>
     </dl>
@@ -28,7 +28,7 @@
           {{ declaration3 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ characterInformation.declaration1 | toYesNo }}
+          {{ characterInformation.declaration3 | toYesNo }}
         </dd>
       </div>
     </dl>
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { DECLARATION1, DECLARATION2, DECLARATION3 } from '@/helpers/constants';
+import { DECLARATION1, DECLARATION2, DECLARATION3 } from '../character-information-constants';
 
 export default {
   name: 'CharacterDeclarationSummary',
@@ -44,7 +44,7 @@ export default {
     characterInformation: {
       type: Object,
       required: true,
-      default: new Object(),
+      default: new Object({}),
     },
   },
   data() {

@@ -90,7 +90,7 @@ import CriminalConvictionDetails from '@/components/RepeatableFields/CharacterIn
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { CRIMINAL_OFFENCES_URL } from '../../../helpers/constants';
+import { CRIMINAL_OFFENCES_URL } from './character-information-constants';
 
 export default {
   components: {
