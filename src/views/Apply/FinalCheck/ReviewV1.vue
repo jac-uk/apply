@@ -132,6 +132,11 @@
       </dd>
     </div>
   </dl>
+  <span
+    v-else
+    class="govuk-body"
+  >No information provided
+  </span>
 </template>
 <script>
 import EventRenderer from '@/components/Page/EventRenderer';
