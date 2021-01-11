@@ -205,7 +205,7 @@ import ComplaintOrDisciplinaryActionDetails from '@/components/RepeatableFields/
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { PROFESSIONAL_CONDUCT_URL } from '../../../helpers/constants';
+import { PROFESSIONAL_CONDUCT_URL } from './character-information-constants';
 
 export default {
   components: {

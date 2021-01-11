@@ -136,7 +136,7 @@ import DrivingLicenceEndorsementDetails from '@/components/RepeatableFields/Char
 import RecentDrivingConvictionDetails from '@/components/RepeatableFields/CharacterInformation/RecentDrivingConvictionDetails';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { MOTORING_OFFENCES_URL } from '../../../helpers/constants';
+import { MOTORING_OFFENCES_URL } from './character-information-constants';
 
 export default {
   components: {

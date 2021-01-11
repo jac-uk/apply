@@ -424,6 +424,13 @@ export default {
         && this.isApplicationComplete;
     },
   },
+  async created() {
+    const characterInformation = this.$store.getters['candidate/characterInformation']();
+    if (characterInformation && !this.application.characterInformationV2) {
+      this.application.characterInformationV2 = characterInformation;
+      await this.$store.dispatch('application/save', this.application);
+    }
+  },
   methods: {
     reviewApplication() {
       this.$router.push({ name: 'review' });
@@ -432,7 +439,7 @@ export default {
       return hyphenize(value);
     },
     getCharacterInformationPageId() {
-      if (this.application.progress.characterInformation === undefined) {
+      if (!this.application.characterInformationV2) {
         return 'character-information-declaration';
       }
       if (!this.isCriminalOffencesSectionComplete()) {
@@ -453,9 +460,7 @@ export default {
       if (!this.isFurtherInformationSectionComplete()) {
         return 'character-information-further-information';
       }
-      if (!this.isDeclarationCompleted()) {
-        return 'character-information-review';
-      }
+      return 'character-information-review';
     },
   },
 };

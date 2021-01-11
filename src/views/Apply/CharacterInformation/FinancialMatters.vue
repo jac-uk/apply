@@ -198,7 +198,7 @@ import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
-import { FINANCIAL_MATTERS_URL, BANKRUPTCY_IVA_URL, LATE_TAX_VAT_RETURNS_HMRC_URL } from '../../../helpers/constants';
+import { FINANCIAL_MATTERS_URL, BANKRUPTCY_IVA_URL, LATE_TAX_VAT_RETURNS_HMRC_URL } from './character-information-constants';
 
 export default {
   components: {
