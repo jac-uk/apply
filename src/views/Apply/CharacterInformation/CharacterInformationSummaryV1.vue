@@ -141,7 +141,7 @@
 <script>
 import EventRenderer from '@/components/Page/EventRenderer';
 export default {
-  name: 'ReviewV1',
+  name: 'CharacterInformationSummaryV1',
   components: {
     EventRenderer,
   },

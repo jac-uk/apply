@@ -188,7 +188,7 @@
             />
           </dl>
           <dl v-else>
-            <ReviewV1
+            <CharacterInformationSummaryV1
               :character-information="application.characterInformation"
             />
           </dl>
@@ -1786,11 +1786,11 @@ import FinancialMattersSummary from '@/views/Apply/CharacterInformation/Informat
 import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary';
 import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary';
 import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary';
-import ReviewV1 from './ReviewV1';
+import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1';
 
 export default {
   components: {
-    ReviewV1,
+    CharacterInformationSummaryV1,
     CharacterDeclarationSummary,
     CriminalOffencesSummary,
     FixedPenaltiesSummary,
