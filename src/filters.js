@@ -40,10 +40,29 @@ const formatEstimatedDate = (value) => {
   }
 
   if (parts.length === 2) {
-    return formatDate(value, 'month');
+    return formatDate(validateDateParts(parts), 'month');
   }
 
-  return formatDate(value);
+  return formatDate(validateDateParts(parts));
+};
+
+const validateDateParts = (dateParts) => {
+    const month = dateParts[1];
+    if (month.length === 1) {
+      dateParts[1] = `0${  month}`;
+    }
+    if (dateParts.length === 2) {
+      dateParts.push('01');
+    } else {
+      if (dateParts.length === 3) {
+        const day = dateParts[2];
+        if (day.length === 1) {
+          dateParts[2] = `0${  day}`;
+        }
+      }
+    }
+
+  return `${dateParts[0]  }-${  dateParts[1]  }-${  dateParts[2]}`;
 };
 
 const formatCurrency = (value) => {

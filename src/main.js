@@ -38,7 +38,20 @@ auth().onAuthStateChanged( (user) => {
   if (store.getters['auth/isSignedIn']) {
     if (store.getters['vacancy/id']) {
       // TODO check that we're not already on this page!
-      router.push(`/apply/${store.getters['vacancy/id']}`);
+      const urlToGo = { 
+        name: 'apply',
+        params: { id: store.getters['vacancy/id'] }, 
+      };
+      const thePageIamIn = { 
+        name: router.currentRoute.name, 
+        params: router.currentRoute.params,
+      };
+      const isSamePage = urlToGo.name === thePageIamIn.name && urlToGo.params.id === thePageIamIn.params.id;
+      if (!isSamePage) {
+        router.push(urlToGo);
+      } else {
+        router.push('');
+      }
     } else {
       // router.push('applications');
     }
