@@ -9,6 +9,7 @@
     >
       contact us.
     </a>
+    <br>
     <router-link
       to="/"
       class="govuk-link govuk-body"
