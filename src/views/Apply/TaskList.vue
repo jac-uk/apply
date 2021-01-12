@@ -116,11 +116,13 @@
 import Countdown from '@/components/Page/Countdown';
 import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 
 export default {
   components: {
     Countdown,
   },
+  extends: CharacterInformationStatus,
   data() {
     return {
       unknownVariable: null,
@@ -166,14 +168,24 @@ export default {
     taskGroups() {
       const data = [];
       if (this.applicationProgress) {
+
+        const characterInformation = {
+          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
+        };
+
+        if (this.application.progress.characterInformation !== true) {
+          characterInformation.id = this.getCharacterInformationPageId();
+        }
+
         data.push({
           title: 'Account profile',
           tasks: [
             { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            { title: 'Character information', id: 'apply-character-information', done: this.applicationProgress.characterInformation },
+            characterInformation,
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
+
         const workingPreferencesTasklist = [];
         if (this.vacancy.isSPTWOffered) {
           workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
@@ -412,12 +424,43 @@ export default {
         && this.isApplicationComplete;
     },
   },
+  async created() {
+    const characterInformation = this.$store.getters['candidate/characterInformation']();
+    if (characterInformation && !this.application.characterInformationV2) {
+      this.application.characterInformationV2 = characterInformation;
+      await this.$store.dispatch('application/save', this.application);
+    }
+  },
   methods: {
     reviewApplication() {
       this.$router.push({ name: 'review' });
     },
     hyphenization(value) {
       return hyphenize(value);
+    },
+    getCharacterInformationPageId() {
+      if (!this.application.characterInformationV2) {
+        return 'character-information-declaration';
+      }
+      if (!this.isCriminalOffencesSectionComplete()) {
+        return 'character-information-criminal-offences';
+      }
+      if (!this.isFixedPenaltiesSectionComplete()) {
+        return 'character-information-fixed-penalty-notices';
+      }
+      if (!this.isMotoringOffencesSectionComplete()) {
+        return 'character-information-motoring-offences';
+      }
+      if (!this.isFinancialOffencesSectionComplete()) {
+        return 'character-information-financial-matters';
+      }
+      if (!this.isProfessionalConductSectionComplete()) {
+        return 'character-information-professional-conduct';
+      }
+      if (!this.isFurtherInformationSectionComplete()) {
+        return 'character-information-further-information';
+      }
+      return 'character-information-review';
     },
   },
 };
