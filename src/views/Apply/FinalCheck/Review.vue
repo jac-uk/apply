@@ -55,7 +55,10 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.personalDetails" class="govuk-summary-list">
+          <dl
+            v-if="application.personalDetails"
+            class="govuk-summary-list"
+          >
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Full Name
@@ -143,141 +146,51 @@
               v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
-              :to="{name: 'apply-character-information'}"
+              :to="{name: destinationUrl}"
             >
               Change
             </RouterLink>
           </div>
 
-          <dl v-if="application.characterInformation" class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever been cautioned or convicted of a criminal offence?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.criminalOffences | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.criminalOffences"
-                  :events="application.characterInformation.criminalOffenceDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you received a non-motoring penalty notice in the last 4 years?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.nonMotoringFixedPenaltyNotices | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.nonMotoringFixedPenaltyNotices"
-                  :events="application.characterInformation.nonMotoringFixedPenaltyNoticesDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever been disqualified from driving, or convicted for driving under the influence of drink or drugs?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.drivingDisqualificationDrinkDrugs | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.drivingDisqualificationDrinkDrugs"
-                  :events="application.characterInformation.drivingDisqualificationDrinkDrugsDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Do you have any endorsements on your licence, or received any motoring fixed-penalty notices in the last 4 years?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.endorsementsOrMotoringFixedPenalties | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.endorsementsOrMotoringFixedPenalties"
-                  :events="application.characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever been declared bankrupt or entered into an Individual Voluntary Agreement (IVA)?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.declaredBankruptOrIVA | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.declaredBankruptOrIVA"
-                  :events="application.characterInformation.declaredBankruptOrIVADetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever filed late tax returns or been fined by HMRC?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.lateTaxReturnOrFined | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.lateTaxReturnOrFined"
-                  :events="application.characterInformation.lateTaxReturnOrFinedDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever been, or are you currently, subject to professional misconduct, negligence, wrongful
-                dismissal, discrimination or harassment proceedings?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.involvedInProfessionalMisconduct | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.involvedInProfessionalMisconduct"
-                  :events="application.characterInformation.involvedInProfessionalMisconductDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Have you ever been subject to complaints or disciplinary action,
-                or been asked to resign from a position?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.diciplinaryActionOrAskedToResign | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.diciplinaryActionOrAskedToResign"
-                  :events="application.characterInformation.diciplinaryActionOrAskedToResignDetails"
-                />
-              </dd>
-            </div>
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Do you have any other issues that you think we should know about when considering your character?
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.characterInformation.otherCharacterIssues | toYesNo }}
-                <EventRenderer
-                  v-if="application.characterInformation.otherCharacterIssues"
-                  :events="application.characterInformation.otherCharacterIssuesDetails"
-                />
-              </dd>
-            </div>
+          <dl v-if="application.characterInformationV2">
+            <CriminalOffencesSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <FixedPenaltiesSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <MotoringOffencesSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <FinancialMattersSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <ProfessionalConductSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <FurtherInformationSummary
+              :character-information="application.characterInformationV2"
+              :can-edit="isDraftApplication"
+              :display-change-link="isInformationReview"
+            />
+            <CharacterDeclarationSummary
+              :character-information="application.characterInformationV2"
+            />
+          </dl>
+          <dl v-else>
+            <CharacterInformationSummaryV1
+              :character-information="application.characterInformation"
+            />
           </dl>
 
           <div class="govuk-!-margin-top-9">
@@ -297,7 +210,10 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.equalityAndDiversitySurvey" class="govuk-summary-list">
+          <dl
+            v-if="application.equalityAndDiversitySurvey"
+            class="govuk-summary-list"
+          >
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Sharing your data:
@@ -624,7 +540,7 @@
               Jurisdiction preferences
             </h2>
             <RouterLink
-              v-if="isDraftApplication && canEdit" 
+              v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
               style="display:inline-block;"
               :to="{name: 'jurisdiction-preferences'}"
@@ -1862,14 +1778,28 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
-import EventRenderer from '@/components/Page/EventRenderer';
 import Countdown from '@/components/Page/Countdown';
+import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
+import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
+import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary';
+import FinancialMattersSummary from '@/views/Apply/CharacterInformation/InformationReview/FinancialMattersSummary';
+import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary';
+import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary';
+import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary';
+import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1';
 
 export default {
   components: {
+    CharacterInformationSummaryV1,
+    CharacterDeclarationSummary,
+    CriminalOffencesSummary,
+    FixedPenaltiesSummary,
+    MotoringOffencesSummary,
+    FinancialMattersSummary,
+    ProfessionalConductSummary,
+    FurtherInformationSummary,
     BackLink,
     ErrorSummary,
-    EventRenderer,
     Countdown,
   },
   data() {
@@ -2026,6 +1956,12 @@ export default {
       }
 
       return selected;
+    },
+    isInformationReview() {
+      return this.$route.name === 'character-information-review';
+    },
+    destinationUrl() {
+      return this.application.characterInformationV2 ? 'character-information-review' : 'apply-character-information';
     },
   },
   mounted() {

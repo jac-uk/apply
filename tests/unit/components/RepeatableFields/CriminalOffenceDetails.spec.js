@@ -54,13 +54,13 @@ describe('@/components/RepeatableFields/CriminalOffenceDetails', () => {
     beforeEach(() => {
       wrapper.setProps({ index: 5, row: {} });
     });
-    
+
       describe('TextField', () => {
         it('renders TextField', () => {
           expect(wrapper.find('TextField-stub').exists()).toBe(true);
         });
         it('has id which reflects index', () => {
-          expect(wrapper.find('TextField-stub').attributes('id')).toBe('offence_title_5');
+          expect(wrapper.find('TextField-stub').attributes('id')).toBe('offence_title_criminal-offences_5');
         });
       });
 
@@ -69,12 +69,12 @@ describe('@/components/RepeatableFields/CriminalOffenceDetails', () => {
           expect(wrapper.find('TextareaInput-stub').exists()).toBe(true);
         });
         it('has id which reflects index', () => {
-          expect(wrapper.find('TextAreaInput-stub').attributes('id')).toBe('offence_details_5');
+          expect(wrapper.find('TextAreaInput-stub').attributes('id')).toBe('offence_details_criminal-offences_5');
         });
       });
-      
+
     });
-  
+
 });
 
 });
