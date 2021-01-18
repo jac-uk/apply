@@ -29,7 +29,8 @@ import DiversityInformation from '@/views/DiversityInformation';
 // Apply
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
-import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
+import ApplyCharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation'; // to be removed for epic 563 release
+// import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation'; // to be put back for epic 563
 import Declaration from '@/views/Apply/CharacterInformation/Declaration';
 import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
 import FixedPenaltyNotices from '@/views/Apply/CharacterInformation/FixedPenaltyNotices';
@@ -272,7 +273,13 @@ const router = new Router({
         },
         {
           path: 'character-information',
-          component: MainCharacterInformation,
+          component: ApplyCharacterInformation, // remove for epic 563 release
+          name: 'apply-character-information',
+          meta: {
+            requiresAuth: true,
+            title: 'Character information',
+          },
+          //component: MainCharacterInformation, // restore for epic 563 release
           children: [
             {
               path: 'declaration',
