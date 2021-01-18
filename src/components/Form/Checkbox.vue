@@ -29,7 +29,7 @@
           type="checkbox"
         >
         <label
-          class="govuk-label govuk-checkboxes__label"
+          :class="labelStyle"
           :for="id"
         >
           <slot />
@@ -57,6 +57,11 @@ export default {
       default: '',
       type: [String, Number, Boolean],
     },
+    multilineLabel: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
   },
   computed: {
     localValue: {
@@ -67,6 +72,18 @@ export default {
         this.$emit('input', val);
       },
     },
+    labelStyle() {
+      if (!this.multilineLabel) {
+        return 'govuk-label govuk-checkboxes__label';
+      }
+      return 'govuk-label govuk-checkboxes__label multilineLabel';
+    },
   },
 };
 </script>
+<style scoped>
+  .multilineLabel {
+    padding-top: 0;
+    padding-left: 25px;
+  }
+</style>
