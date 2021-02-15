@@ -3,12 +3,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">1.</span> Have you ever been cautioned for a criminal offence?
+          <span v-if="displayChangeLink">1.</span> Have you ever been convicted for a criminal offence?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="characterInformation.criminalCautionDetails"
+            :data="characterInformation.criminalConvictionDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -30,12 +31,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">2.</span> Have you ever been convicted for a criminal offence?
+          <span v-if="displayChangeLink">2.</span> Have you ever been cautioned for a criminal offence?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
-            :data="characterInformation.criminalConvictionDetails"
+            :data="characterInformation.criminalCautionDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd

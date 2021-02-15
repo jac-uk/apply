@@ -9,6 +9,7 @@
           <InformationReviewRenderer
             :data="characterInformation.drivingDisqualificationDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -30,66 +31,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">5.</span> Have you ever been convicted for driving under the influence of drink or drugs?
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <InformationReviewRenderer
-            :data="characterInformation.drivingUnderInfluenceConvictionDetails"
-            :is-draft-application="true"
-          />
-        </dd>
-        <dd
-          v-if="displayChangeLink"
-          class="govuk-summary-list__actions"
-        >
-          <RouterLink
-            v-if="canEdit"
-            class="govuk-link"
-            style="display:inline-block;"
-            :to="{name: 'character-information-motoring-offences'}"
-          >
-            Change
-          </RouterLink>
-        </dd>
-      </div>
-    </dl>
-
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">6.</span> Do you have any endorsements on your licence?
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <InformationReviewRenderer
-            :data="characterInformation.drivingLicenceEndorsementDetails"
-            :is-draft-application="true"
-          />
-        </dd>
-        <dd
-          v-if="displayChangeLink"
-          class="govuk-summary-list__actions"
-        >
-          <RouterLink
-            v-if="canEdit"
-            class="govuk-link"
-            style="display:inline-block;"
-            :to="{name: 'character-information-motoring-offences'}"
-          >
-            Change
-          </RouterLink>
-        </dd>
-      </div>
-    </dl>
-
-    <dl class="govuk-summary-list">
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">7.</span> Were you convicted of any motoring offences in the past 4 years?
+          <span v-if="displayChangeLink">5.</span> Were you convicted of any motoring offences in the past 4 years?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.recentDrivingConvictionDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd

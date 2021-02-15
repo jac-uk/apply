@@ -9,6 +9,7 @@
           <InformationReviewRenderer
             :data="characterInformation.fixedPenaltyDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd

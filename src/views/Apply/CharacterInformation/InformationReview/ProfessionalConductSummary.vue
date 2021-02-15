@@ -3,12 +3,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">13.</span> Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?
+          <span v-if="displayChangeLink">11.</span> Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconductDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -30,12 +31,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">14.</span> Have you ever been, or are you currently, subject of an allegation or claim of negligence?
+          <span v-if="displayChangeLink">12.</span> Have you ever been, or are you currently, subject of an allegation or claim of negligence?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.subjectOfAllegationOrClaimOfNegligenceDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -57,12 +59,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">15.</span> Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?
+          <span v-if="displayChangeLink">13.</span> Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissalDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -84,12 +87,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">16.</span> Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?
+          <span v-if="displayChangeLink">14.</span> Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceedingDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -111,12 +115,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">17.</span> Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?
+          <span v-if="displayChangeLink">15.</span> Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.subjectOfAllegationOrClaimOfHarassmentProceedingDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -138,12 +143,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">18.</span> Have you ever been, or are you currently, subject of complaints or disciplinary action?
+          <span v-if="displayChangeLink">16.</span> Have you ever been, or are you currently, subject of complaints or disciplinary action?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.complaintOrDisciplinaryActionDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd
@@ -165,12 +171,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">19.</span> Have you ever been asked to resign from a position?
+          <span v-if="displayChangeLink">17.</span> Have you ever been asked to resign from a position?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.requestedToResignDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd

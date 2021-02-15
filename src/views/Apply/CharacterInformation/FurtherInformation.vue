@@ -23,7 +23,7 @@
               id="criminal-offenses-cautions"
               v-model="characterInformation.furtherInformation"
               required
-              label="20. Do you have any other issues that you think we should know about when considering your character?"
+              label="18. Do you have any other issues that you think we should know about when considering your character?"
             >
               <RadioItem
                 :value="true"

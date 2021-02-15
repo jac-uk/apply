@@ -42,53 +42,9 @@
             </RadioGroup>
 
             <RadioGroup
-              id="driving-under-influence-convictions"
-              v-model="characterInformation.drivingUnderInfluenceConvictions"
-              required
-              label="5. Have you ever been convicted for driving under the influence of drink or drugs?"
-            >
-              <RadioItem
-                :value="true"
-                label="Yes"
-              >
-                <RepeatableFields
-                  v-model="characterInformation.drivingUnderInfluenceConvictionDetails"
-                  required
-                  :component="repeatableFields.DrivingUnderInfluenceConvictionDetails"
-                />
-              </RadioItem>
-              <RadioItem
-                :value="false"
-                label="No"
-              />
-            </RadioGroup>
-
-            <RadioGroup
-              id="driving-licence-endorsements"
-              v-model="characterInformation.drivingLicenceEndorsements"
-              label="6. Do you have any endorsements on your licence?"
-              required
-            >
-              <RadioItem
-                :value="true"
-                label="Yes"
-              >
-                <RepeatableFields
-                  v-model="characterInformation.drivingLicenceEndorsementDetails"
-                  required
-                  :component="repeatableFields.DrivingLicenceEndorsementDetails"
-                />
-              </RadioItem>
-              <RadioItem
-                :value="false"
-                label="No"
-              />
-            </RadioGroup>
-
-            <RadioGroup
               id="recent-driving-convictions"
               v-model="characterInformation.recentDrivingConvictions"
-              label="7. Were you convicted of any motoring offences in the past 4 years?"
+              label="5. Were you convicted of any motoring offences in the past 4 years?"
               required
             >
               <RadioItem
@@ -130,9 +86,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import RepeatableFields from '@/components/RepeatableFields';
 import DrivingDisqualificationDetails from '@/components/RepeatableFields/CharacterInformation/DrivingDisqualificationDetails';
-import DrivingUnderInfluenceConvictionDetails from '@/components/RepeatableFields/CharacterInformation/DrivingUnderInfluenceConvictionDetails';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import DrivingLicenceEndorsementDetails from '@/components/RepeatableFields/CharacterInformation/DrivingLicenceEndorsementDetails';
 import RecentDrivingConvictionDetails from '@/components/RepeatableFields/CharacterInformation/RecentDrivingConvictionDetails';
 import BackLink from '@/components/BackLink';
 import InfoIcon from '@/components/ModalViews/InfoIcon';
@@ -152,10 +106,6 @@ export default {
     const defaults = {
       drivingDisqualifications: null,
       drivingDisqualificationDetails: null,
-      drivingUnderInfluenceConvictions: null,
-      drivingUnderInfluenceConvictionDetails: null,
-      drivingLicenceEndorsements: null,
-      drivingLicenceEndorsementDetails: null,
       recentDrivingConvictions: null,
       recentDrivingConvictionDetails: null,
     };
@@ -167,8 +117,6 @@ export default {
       application: application,
       repeatableFields: {
         DrivingDisqualificationDetails,
-        DrivingUnderInfluenceConvictionDetails,
-        DrivingLicenceEndorsementDetails,
         RecentDrivingConvictionDetails,
       },
       motoringOffencesUrl: MOTORING_OFFENCES_URL,
@@ -187,12 +135,6 @@ export default {
 
         if (this.characterInformation.drivingDisqualifications === false ) {
           this.characterInformation.drivingDisqualificationDetails = null;
-        }
-        if (this.characterInformation.drivingUnderInfluenceConvictions === false ) {
-          this.characterInformation.drivingUnderInfluenceConvictionDetails = null;
-        }
-        if (this.characterInformation.drivingLicenceEndorsements === false ) {
-          this.characterInformation.drivingLicenceEndorsementDetails = null;
         }
         if (this.characterInformation.recentDrivingConvictions === false ) {
           this.characterInformation.recentDrivingConvictionDetails = null;
