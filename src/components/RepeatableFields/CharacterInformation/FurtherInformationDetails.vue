@@ -19,6 +19,11 @@ export default {
       type: String,
       default: '',
     },
+    name: {
+      required: false,
+      type: String,
+      default: 'further-info',
+    },
   },
 };
 </script>

@@ -7,7 +7,7 @@ export default {
     label: {
       required: false,
       type: String,
-      default: 'Date of request to resign',
+      default: 'Date',
     },
     hint: {
       required: false,

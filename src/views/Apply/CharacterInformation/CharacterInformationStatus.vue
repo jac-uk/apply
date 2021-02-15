@@ -12,8 +12,6 @@ export default {
         this.characterInformation.criminalConvictions !== undefined &&
         this.characterInformation.fixedPenalties !== undefined &&
         this.characterInformation.drivingDisqualifications !== undefined &&
-        this.characterInformation.drivingUnderInfluenceConvictions !== undefined &&
-        this.characterInformation.drivingLicenceEndorsements !== undefined &&
         this.characterInformation.recentDrivingConvictions !== undefined &&
         this.characterInformation.bankruptcies !== undefined &&
         this.characterInformation.ivas !== undefined &&
@@ -52,8 +50,6 @@ export default {
     isMotoringOffencesSectionComplete() {
       if (this.application.characterInformationV2 !== undefined &&
         this.application.characterInformationV2.drivingDisqualifications !== undefined &&
-        this.application.characterInformationV2.drivingUnderInfluenceConvictions !== undefined &&
-        this.application.characterInformationV2.drivingLicenceEndorsements !== undefined &&
         this.application.characterInformationV2.recentDrivingConvictions !== undefined) {
         return true;
       }

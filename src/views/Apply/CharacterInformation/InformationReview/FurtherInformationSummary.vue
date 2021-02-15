@@ -3,12 +3,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">20.</span> Do you have any other issues that you think we should know about when considering your character?
+          <span v-if="displayChangeLink">18.</span> Do you have any other issues that you think we should know about when considering your character?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.furtherInformationDetails"
             :is-draft-application="true"
+            :display-month-year-only="true"
           />
         </dd>
         <dd

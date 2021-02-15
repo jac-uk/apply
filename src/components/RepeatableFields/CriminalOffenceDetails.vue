@@ -46,7 +46,7 @@ export default {
       type: Number,
     },
     label: {
-      required: true, // need to change to true for epic 563 release
+      required: true,
       type: String,
       default: '',
     },

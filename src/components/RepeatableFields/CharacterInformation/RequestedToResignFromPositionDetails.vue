@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-!-margin-top-6">
-    <DateInput
+    <DateMonthYearInput
       :id="`offence_date_$name_${index}`"
       v-model="row.date"
       :label="label"
@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
+import DateMonthYearInput from '@/components/Form/DateMonthYearInput';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
   name: 'RequestedToResignFromPositionDetails',
   components: {
-    DateInput,
+    DateMonthYearInput,
     TextareaInput,
   },
   props: {
@@ -38,7 +38,7 @@ export default {
       type: Number,
     },
     label: {
-      required: true,
+      required: false,
       type: String,
       default: '',
     },

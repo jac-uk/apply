@@ -18,34 +18,11 @@
               :show-save-button="true"
               @save="save"
             />
-
-            <RadioGroup
-              id="criminal-offences-cautions"
-              v-model="characterInformation.criminalCautions"
-              required
-              label="1. Have you ever been cautioned for a criminal offence?"
-            >
-              <RadioItem
-                :value="true"
-                label="Yes"
-              >
-                <RepeatableFields
-                  v-model="characterInformation.criminalCautionDetails"
-                  required
-                  :component="repeatableFields.CriminalCautionDetails"
-                />
-              </RadioItem>
-              <RadioItem
-                :value="false"
-                label="No"
-              />
-            </RadioGroup>
-
             <RadioGroup
               id="criminal-offences-convictions"
               v-model="characterInformation.criminalConvictions"
               required
-              label="2. Have you ever been convicted for a criminal offence? This includes spent convictions."
+              label="1. Have you ever been convicted for a criminal offence? This includes spent convictions."
             >
               <RadioItem
                 :value="true"
@@ -55,6 +32,28 @@
                   v-model="characterInformation.criminalConvictionDetails"
                   required
                   :component="repeatableFields.CriminalConvictionDetails"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
+
+            <RadioGroup
+              id="criminal-offences-cautions"
+              v-model="characterInformation.criminalCautions"
+              required
+              label="2. Have you ever been cautioned for a criminal offence?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.criminalCautionDetails"
+                  required
+                  :component="repeatableFields.CriminalCautionDetails"
                 />
               </RadioItem>
               <RadioItem
