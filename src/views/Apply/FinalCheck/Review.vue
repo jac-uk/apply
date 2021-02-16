@@ -152,7 +152,7 @@
             </RouterLink>
           </div>
 
-          <dl v-if="application.characterInformationV2">
+          <dl v-if="isVersion2 && application.characterInformationV2">
             <CriminalOffencesSummary
               :character-information="application.characterInformationV2"
               :can-edit="isDraftApplication"
@@ -1813,6 +1813,12 @@ export default {
     vacancy () {
       return this.$store.state.vacancy.record;
     },
+    isVersion2 () {
+      if (this.vacancy._applicationVersion && this.vacancy._applicationVersion === 2) {
+        return true;
+      }
+      return false;
+    },
     vacancyCloseTime() {
       return this.$store.getters['vacancy/getCloseDate'];
     },
@@ -1961,7 +1967,7 @@ export default {
       return this.$route.name === 'character-information-review';
     },
     destinationUrl() {
-      return this.application.characterInformationV2 ? 'character-information-review' : 'apply-character-information';
+      return this.isVersion2 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
     },
   },
   mounted() {
