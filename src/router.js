@@ -29,6 +29,7 @@ import DiversityInformation from '@/views/DiversityInformation';
 // Apply
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
+import ApplyCharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
 import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
 import Declaration from '@/views/Apply/CharacterInformation/Declaration';
 import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
@@ -259,7 +260,6 @@ const router = new Router({
     {
       path: '/apply/:id',
       component: Apply,
-      name: 'apply',
       children: [
         {
           path: '',
@@ -279,6 +279,15 @@ const router = new Router({
           },
           component: MainCharacterInformation,
           children: [
+            {
+             path: 'form-v1',
+             component: ApplyCharacterInformation,
+             name: 'character-information-form-v1',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information',
+              },
+            },
             {
               path: 'declaration',
               component: Declaration,

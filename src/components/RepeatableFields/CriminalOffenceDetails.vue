@@ -46,7 +46,7 @@ export default {
       type: Number,
     },
     label: {
-      required: true,
+      required: false,
       type: String,
       default: '',
     },
