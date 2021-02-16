@@ -1,5 +1,10 @@
 # Release Notes #
 
+ 1.36.0
+ 2 issues / 5sp
+ #699 Enable new and old character forms to co-exist
+ #698 Amendments to Character Form Enhancement
+
  1.35.0
  13 issues / 25sp
  #564 Declaration page at start of character section of profile
