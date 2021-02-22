@@ -12,7 +12,7 @@ export default {
     hint: {
       required: false,
       type: String,
-      default: 'Please add details of your disqualification here',
+      default: 'Please add details of your disqualification here including the dates of your disqualification period',
     },
     url: {
       required: false,

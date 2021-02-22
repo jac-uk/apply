@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.35.0",
+  "version": "1.36.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode develop",
@@ -24,7 +24,7 @@
     "@sentry/browser": "^5.20.1",
     "@sentry/integrations": "^5.20.1",
     "core-js": "^2.6.11",
-    "firebase": "^7.22.0",
+    "firebase": "^8.0.1",
     "firebaseui": "^4.6.1",
     "govuk-frontend": "^3.8.0",
     "jspdf": "^1.5.3",

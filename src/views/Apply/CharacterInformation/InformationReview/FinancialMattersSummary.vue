@@ -3,12 +3,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">8.</span> Have you ever been declared bankrupt?
+          <span v-if="displayChangeLink">6.</span> Have you ever been declared bankrupt?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.bankruptcyDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -30,12 +31,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">9.</span> Have you ever entered into an Individual Voluntary Agreement (IVA)?
+          <span v-if="displayChangeLink">7.</span> Have you ever entered into an Individual Voluntary Agreement (IVA)?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.ivaDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -57,12 +59,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">10.</span> Have you ever filed late tax returns?
+          <span v-if="displayChangeLink">8.</span> Have you ever filed late tax returns?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.lateTaxReturnDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -84,12 +87,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">11.</span> Have you ever filed late VAT returns?
+          <span v-if="displayChangeLink">9.</span> Have you ever filed late VAT returns?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.lateVatReturnDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd
@@ -111,12 +115,13 @@
     <dl class="govuk-summary-list">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">12.</span> Have you ever been fined by HMRC?
+          <span v-if="displayChangeLink">10.</span> Have you ever been fined by HMRC?
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             :data="characterInformation.hmrcFineDetails"
             :is-draft-application="true"
+            :display-month-year-only="false"
           />
         </dd>
         <dd

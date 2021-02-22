@@ -23,7 +23,7 @@
               id="professional-conduct"
               v-model="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconduct"
               required
-              label="13. Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?"
+              label="11. Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?"
             >
               <RadioItem
                 :value="true"
@@ -45,7 +45,7 @@
               id="negligence-details"
               v-model="characterInformation.subjectOfAllegationOrClaimOfNegligence"
               required
-              label="14. Have you ever been, or are you currently, subject of an allegation or claim of negligence?"
+              label="12. Have you ever been, or are you currently, subject of an allegation or claim of negligence?"
             >
               <RadioItem
                 :value="true"
@@ -67,7 +67,7 @@
               id="wrongful-dismissal"
               v-model="characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissal"
               required
-              label="15. Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?"
+              label="13. Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?"
             >
               <RadioItem
                 :value="true"
@@ -89,7 +89,7 @@
               id="discrimination"
               v-model="characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceeding"
               required
-              label="16. Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?"
+              label="14. Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?"
             >
               <RadioItem
                 :value="true"
@@ -111,7 +111,7 @@
               id="harassment"
               v-model="characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding"
               required
-              label="17. Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?"
+              label="15. Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?"
             >
               <RadioItem
                 :value="true"
@@ -133,7 +133,7 @@
               id="complaint-or-disciplinary-actions"
               v-model="characterInformation.complaintOrDisciplinaryAction"
               required
-              label="18. Have you ever been, or are you currently, subject of complaints or disciplinary action?"
+              label="16. Have you ever been, or are you currently, subject of complaints or disciplinary action?"
             >
               <RadioItem
                 :value="true"
@@ -155,7 +155,7 @@
               id="request-to-resign"
               v-model="characterInformation.requestedToResign"
               required
-              label="19. Have you ever been asked to resign from a position?"
+              label="17. Have you ever been asked to resign from a position?"
             >
               <RadioItem
                 :value="true"

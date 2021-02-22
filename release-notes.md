@@ -1,5 +1,11 @@
 # Release Notes #
 
+ 1.36.0
+ 3 issues / 6sp
+ #699 Enable new and old character forms to co-exist
+ #698 Amendments to Character Form Enhancement
+ #702 BUGFIX: Apply app not loading
+
  1.35.0
  13 issues / 25sp
  #564 Declaration page at start of character section of profile
@@ -20,7 +26,7 @@
 2 issues / 4sp
  #556 Router issue: Error: Avoided redundant navigation
  #677 Vacancy Page Date Display Error when using Safari
- 
+
 1.33.0
 1 issue / 2sp
  #277 Get vacancy open and close time from database

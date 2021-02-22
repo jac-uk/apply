@@ -29,8 +29,8 @@ import DiversityInformation from '@/views/DiversityInformation';
 // Apply
 import Apply from '@/views/Apply/Apply';
 import TaskList from '@/views/Apply/TaskList';
-import ApplyCharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation'; // to be removed for epic 563 release
-// import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation'; // to be put back for epic 563
+import ApplyCharacterInformation from '@/views/Apply/AccountProfile/CharacterInformation';
+import MainCharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
 import Declaration from '@/views/Apply/CharacterInformation/Declaration';
 import CriminalOffences from '@/views/Apply/CharacterInformation/CriminalOffences';
 import FixedPenaltyNotices from '@/views/Apply/CharacterInformation/FixedPenaltyNotices';
@@ -260,7 +260,6 @@ const router = new Router({
     {
       path: '/apply/:id',
       component: Apply,
-      name: 'apply',
       children: [
         {
           path: '',
@@ -273,14 +272,22 @@ const router = new Router({
         },
         {
           path: 'character-information',
-          component: ApplyCharacterInformation, // remove for epic 563 release
           name: 'apply-character-information',
           meta: {
             requiresAuth: true,
             title: 'Character information',
           },
-          //component: MainCharacterInformation, // restore for epic 563 release
+          component: MainCharacterInformation,
           children: [
+            {
+             path: 'form-v1',
+             component: ApplyCharacterInformation,
+             name: 'character-information-form-v1',
+              meta: {
+                requiresAuth: true,
+                title: 'Character information',
+              },
+            },
             {
               path: 'declaration',
               component: Declaration,

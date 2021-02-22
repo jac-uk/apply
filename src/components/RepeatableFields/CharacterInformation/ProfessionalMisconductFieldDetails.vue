@@ -1,9 +1,9 @@
 <template>
   <div class="govuk-!-margin-top-6">
-    <DateInput
+    <DateMonthYearInput
       :id="`offence_date_${index}`"
       v-model="row.date"
-      label="Date of offence"
+      label="Date"
       required
     />
     <div class="govuk-grid-row govuk-!-margin-left-0">
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import DateMonthYearInput from '@/components/Form/DateMonthYearInput';
 import DateInput from '@/components/Form/DateInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -53,6 +54,7 @@ import RadioItem from '@/components/Form/RadioItem';
 export default {
   name: 'ProfessionalMisconductFieldDetails',
   components: {
+    DateMonthYearInput,
     DateInput,
     TextareaInput,
     RadioGroup,

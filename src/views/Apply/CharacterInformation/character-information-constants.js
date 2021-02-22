@@ -1,11 +1,11 @@
 const DECLARATION1 = `I understand that it is my continuing duty, throughout the time that my application is being considered,
-                      to inform the Selection Exercise Team of all relevant matters that might affect the acceptability of my
+                      to inform the Judicial Appointments Commission of all relevant matters that might affect the acceptability of my
                       application when considered against this guidance.`;
 
 const DECLARATION2 = `I understand that failure to declare on the application form relevant information which later comes
                       to light is likely to rule out further consideration of my application.`;
 
-const DECLARATION3 = `I also understand that failure to disclose information additional to that included on my application for,
+const DECLARATION3 = `I understand that failure to disclose information additional to that included on my application form,
                       upon the request of the JAC and to the timetable requested by the JAC, may also rule out further consideration
                       of my application.`;
 

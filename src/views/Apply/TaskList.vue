@@ -169,20 +169,17 @@ export default {
       const data = [];
       if (this.applicationProgress) {
 
-        // const characterInformation = { // restore for epic 563 release
-        //   title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
-        // };
-        //
-        // if (this.application.progress.characterInformation !== true) {
-        //   characterInformation.id = this.getCharacterInformationPageId();
-        // }
+        const characterInformation = {
+          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
+        };
+
+        characterInformation.id = this.getCharacterInformationPageId();
 
         data.push({
           title: 'Account profile',
           tasks: [
             { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            //characterInformation, // restore for epic 563 release
-            { title: 'Character information', id: 'apply-character-information', done: this.applicationProgress.characterInformation }, // remove for epic 563 release
+            characterInformation,
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
@@ -425,13 +422,13 @@ export default {
         && this.isApplicationComplete;
     },
   },
-  // async created() {    // to be restored for epic 563 release
-  //   const characterInformation = this.$store.getters['candidate/characterInformation']();
-  //   if (characterInformation && !this.application.characterInformationV2) {
-  //     this.application.characterInformationV2 = characterInformation;
-  //     await this.$store.dispatch('application/save', this.application);
-  //   }
-  // },
+  async created() {
+    const characterInformation = this.$store.getters['candidate/characterInformation']();
+    if (characterInformation && !this.application.characterInformationV2) {
+      this.application.characterInformationV2 = characterInformation;
+      await this.$store.dispatch('application/save', this.application);
+    }
+  },
   methods: {
     reviewApplication() {
       this.$router.push({ name: 'review' });
@@ -440,28 +437,35 @@ export default {
       return hyphenize(value);
     },
     getCharacterInformationPageId() {
-      if (!this.application.characterInformationV2) {
-        return 'character-information-declaration';
+      if (!this.vacancy._applicationVersion || this.vacancy._applicationVersion < 2) {
+        return 'character-information-form-v1';
+      } else {
+        if (!this.application.characterInformationV2) {
+          return 'character-information-declaration';
+        }
+        if (!this.isCriminalOffencesSectionComplete()) {
+          return 'character-information-criminal-offences';
+        }
+        if (!this.isFixedPenaltiesSectionComplete()) {
+          return 'character-information-fixed-penalty-notices';
+        }
+        if (!this.isMotoringOffencesSectionComplete()) {
+          return 'character-information-motoring-offences';
+        }
+        if (!this.isFinancialOffencesSectionComplete()) {
+          return 'character-information-financial-matters';
+        }
+        if (!this.isProfessionalConductSectionComplete()) {
+          return 'character-information-professional-conduct';
+        }
+        if (!this.isFurtherInformationSectionComplete()) {
+          return 'character-information-further-information';
+        }
+        if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
+          return 'character-information-review';
+        }
       }
-      if (!this.isCriminalOffencesSectionComplete()) {
-        return 'character-information-criminal-offences';
-      }
-      if (!this.isFixedPenaltiesSectionComplete()) {
-        return 'character-information-fixed-penalty-notices';
-      }
-      if (!this.isMotoringOffencesSectionComplete()) {
-        return 'character-information-motoring-offences';
-      }
-      if (!this.isFinancialOffencesSectionComplete()) {
-        return 'character-information-financial-matters';
-      }
-      if (!this.isProfessionalConductSectionComplete()) {
-        return 'character-information-professional-conduct';
-      }
-      if (!this.isFurtherInformationSectionComplete()) {
-        return 'character-information-further-information';
-      }
-      return 'character-information-review';
+
     },
   },
 };

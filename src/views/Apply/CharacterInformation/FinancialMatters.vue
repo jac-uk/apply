@@ -30,7 +30,7 @@
               id="bankruptcies"
               v-model="characterInformation.bankruptcies"
               required
-              label="8. Have you ever been declared bankrupt?"
+              label="6. Have you ever been declared bankrupt?"
             >
               <RadioItem
                 :value="true"
@@ -57,7 +57,7 @@
               id="ivas"
               v-model="characterInformation.ivas"
               required
-              label="9. Have you ever entered into an Individual Voluntary Agreement (IVA)?"
+              label="7. Have you ever entered into an Individual Voluntary Agreement (IVA)?"
             >
               <RadioItem
                 :value="true"
@@ -75,11 +75,7 @@
               />
             </RadioGroup>
           </div>
-          <div class="govuk-grid-column-one-quarters">
-            <InfoIcon
-              :url="bankruptcyOrIva"
-            />
-          </div>
+          <div class="govuk-grid-column-one-quarters" />
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
@@ -88,7 +84,7 @@
               id="late-tax-returns"
               v-model="characterInformation.lateTaxReturns"
               required
-              label="10. Have you ever filed late tax returns?"
+              label="8. Have you ever filed late tax returns?"
             >
               <RadioItem
                 :value="true"
@@ -106,11 +102,7 @@
               />
             </RadioGroup>
           </div>
-          <div class="govuk-grid-column-one-quarters">
-            <InfoIcon
-              :url="lateTaxVatReturnsHmrc"
-            />
-          </div>
+          <div class="govuk-grid-column-one-quarters" />
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
@@ -119,7 +111,7 @@
               id="late-vat-returns"
               v-model="characterInformation.lateVatReturns"
               required
-              label="11. Have you ever filed late VAT returns?"
+              label="9. Have you ever filed late VAT returns?"
             >
               <RadioItem
                 :value="true"
@@ -137,11 +129,7 @@
               />
             </RadioGroup>
           </div>
-          <div class="govuk-grid-column-one-quarters">
-            <InfoIcon
-              :url="lateTaxVatReturnsHmrc"
-            />
-          </div>
+          <div class="govuk-grid-column-one-quarters" />
         </div>
 
         <div class="govuk-grid-row govuk-!-margin-left-0">
@@ -150,7 +138,7 @@
               id="hmrc-fines"
               v-model="characterInformation.hmrcFines"
               required
-              label="12. Have you ever been fined by HMRC?"
+              label="10. Have you ever been fined by HMRC?"
             >
               <RadioItem
                 :value="true"
@@ -174,11 +162,7 @@
               Save and continue
             </button>
           </div>
-          <div class="govuk-grid-column-one-quarters">
-            <InfoIcon
-              :url="lateTaxVatReturnsHmrc"
-            />
-          </div>
+          <div class="govuk-grid-column-one-quarters" />
         </div>
       </div>
     </form>
