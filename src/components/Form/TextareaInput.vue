@@ -8,6 +8,7 @@
       class="govuk-heading-m govuk-!-margin-bottom-2"
     >
       {{ label }}
+      {{ wordLimit ? `In ${wordLimit} words, tell us how.` : null }}
     </label>
     <!-- eslint-disable -->
     <span
@@ -26,8 +27,13 @@
       v-model="text"
       class="govuk-textarea"
       :rows="rows"
+      @keydown="handleLimit($event)"
+      @keyup="handleLimit($event)"
       @change="validate"
     />
+    <span v-if="wordLimit">
+      {{ words.length }}/{{ wordLimit }}
+    </span>
   </div>
 </template>
 
@@ -49,9 +55,20 @@ export default {
       default: '5',
       type: String,
     },
+    wordLimit: {
+      required: false,
+      default: 0,
+      type: Number,
+    },
   },
 
   computed: {
+    words() {
+      return this.value
+        .replace(/-/g, '')
+        .split(/\s+/)
+        .filter(item => item !== '');
+    },
     text: {
       get() {
         return this.value;
@@ -60,7 +77,18 @@ export default {
         this.$emit('input', val);
       },
     },
+  },
 
+  methods: {
+    handleLimit(e){
+      if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
+
+        if (this.words.length > this.wordLimit) {
+          e.preventDefault();
+        }
+        this.handleValidate();
+      }
+    },
   },
 };
 </script>

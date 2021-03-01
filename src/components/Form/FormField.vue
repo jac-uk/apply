@@ -83,7 +83,6 @@ export default {
     },
     validate(event) {
       this.setError('');
-
       if (this.checkErrors) {
         let value = this.value;
         if (event && event.target) {
@@ -129,6 +128,19 @@ export default {
             this.setError(this.pattern.message);
           }
         }
+
+        if (this.wordLimit) {
+          const words = this.value
+            .replace(/-/g, '')
+            .split(/\s+/)
+            .filter(item => item !== '');
+          if (words.length > this.wordLimit) {
+            this.setError(`You have reached the limit of ${this.wordLimit} words`);
+          } else {
+            this.setError('');
+          }
+        }
+        
       }
     },
   },
