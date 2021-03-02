@@ -129,7 +129,7 @@ export default {
           }
         }
 
-        if (this.wordLimit) {
+        if (this.wordLimit && this.value) {
           const words = this.value
             .replace(/-/g, '')
             .split(/\s+/)

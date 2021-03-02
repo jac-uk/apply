@@ -64,7 +64,9 @@ export default {
 
   computed: {
     words() {
-      return this.value
+      const value = this.value;
+      const result = value ? value : '';
+      return result
         .replace(/-/g, '')
         .split(/\s+/)
         .filter(item => item !== '');
