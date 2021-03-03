@@ -67,8 +67,7 @@ export default {
       const value = this.value;
       const result = value ? value : '';
       return result
-        .replace(/-/g, '')
-        .split(/\s+/)
+        .split(/[^a-z]/i)
         .filter(item => item !== '');
     },
     text: {

@@ -131,8 +131,7 @@ export default {
 
         if (this.wordLimit && this.value) {
           const words = this.value
-            .replace(/-/g, '')
-            .split(/\s+/)
+            .split(/[^a-z]/i)
             .filter(item => item !== '');
           if (words.length > this.wordLimit) {
             this.setError(`You have reached the limit of ${this.wordLimit} words`);
