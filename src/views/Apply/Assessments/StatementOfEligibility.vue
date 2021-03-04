@@ -38,7 +38,7 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  label="In 250 words, tell us how."
+                  :word-limit="250"
                   required
                 />
               </RadioItem>
