@@ -17,10 +17,16 @@
         </p>
 
         <TextField
-          id="fullName"
-          v-model="personalDetails.fullName"
-          label="Full name"
-          hint="You do not need to include any titles."
+          id="firstName"
+          v-model="firstName"
+          label="First name"
+          required
+        />
+
+        <TextField
+          id="lastName"
+          v-model="lastName"
+          label="Last name"
           required
         />
 
@@ -135,6 +141,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
+import  { splitFullName } from '@/helpers/splitFullName';
 
 export default {
   components: {
@@ -164,10 +171,36 @@ export default {
     return {
       personalDetails: personalDetails,
       application: application,
+      firstName: null,
+      lastName: null,
     };
+  },
+  created() {
+    if (!this.personalDetails) {
+      this.firstName = '';
+      this.lastName = '';
+      return;
+    }
+
+    const { firstName, lastName } = this.personalDetails;
+
+    if (!firstName && !lastName) {
+      if (this.personalDetails.fullName) {
+        const result = splitFullName(this.personalDetails.fullName);
+        this.firstName = result[0];
+        this.lastName = result[1];
+      } else {
+        this.firstName = '';
+        this.lastName = '';
+      }
+    } else {
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
   },
   methods: {
     async save() {
+      this.makeFullName();
       this.validate();
       if (this.isValid()) {
         this.application.progress.personalDetails = true;
@@ -176,6 +209,11 @@ export default {
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'task-list' });
       }
+    },
+    makeFullName() {
+      this.personalDetails.fullName = `${this.firstName} ${this.lastName}`;
+      this.personalDetails.firstName = this.firstName;
+      this.personalDetails.lastName = this.lastName;
     },
   },
 };
