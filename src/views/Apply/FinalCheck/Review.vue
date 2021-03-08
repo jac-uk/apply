@@ -85,7 +85,8 @@
 
             <div
               v-if="!application.personalDetails.firstName && !application.personalDetails.lastName"
-              class="govuk-summary-list__row">
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Full Name
               </dt>
