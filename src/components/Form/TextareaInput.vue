@@ -44,7 +44,7 @@
         v-else-if="Math.floor(wordLimit * 0.20) > Math.abs(wordsTooMany)"
         class="govuk-hint govuk-character-count__message"
       >
-        You have {{ Math.abs(wordsTooMany) }} words remaining
+        {{ `You have ${Math.abs(wordsTooMany)} word${Math.abs(wordsTooMany) > 1 ? 's' : ''} remaining` }}
       </span>
       <span
         v-else
@@ -82,12 +82,12 @@ export default {
       const value = this.value;
       const result = value ? value : '';
       return result
-        .split(/[^a-z'-]/i)
-        .filter(item => item != '')
-        .filter(item => item != '-')
-        .map((item, i) => {
-          if (i, item.replace(/[^-]/g, '').length >= 4) {
-            item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);
+        .split(/[^a-z'-]/i) //split into array at every occurance of a character which is NOT: a-z or ' or -
+        .filter(item => item != '') // remove any empty items from array
+        .filter(item => item != '-') // remove any items which are just a hyphen
+        .map((item, i) => {                                           // with the above array 
+          if (i, item.replace(/[^-]/g, '').length >= 4) {             // find any items containing more than or equal to 4 hyphens (4 allows for a trailing hyphen which is not counted in next set)
+            item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);  // if an 'offending' item occurs, group every 4 words, ignoring the hyphen between groups [ie. 'one-one-one-one-two-two-two-two' (eight words, seven hyphens) 'one-one-one-one-' 'two-two-two-two']
           }
           return item;
         }).flat();
@@ -108,9 +108,6 @@ export default {
   methods: {
     handleLimit(e){
       if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
-        // if (this.words.length > this.wordLimit) {
-        // e.preventDefault();
-        // }
         this.handleValidate();
       }
     },
