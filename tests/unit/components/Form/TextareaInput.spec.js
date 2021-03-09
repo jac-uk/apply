@@ -131,7 +131,7 @@ describe('components/Form/TextareaInput', () => {
       });
     });
 
-    xdescribe('word-count', () => {
+    describe('word-count', () => {
 
       beforeEach(() => {
         wrapper.setProps({
