@@ -129,6 +129,25 @@ export default {
             this.setError(this.pattern.message);
           }
         }
+
+        if (this.wordLimit && this.value) {
+          const words = this.value
+            .split(/[^a-z'-]/i)
+            .filter(item => item != '')
+            .filter(item => item != '-')
+            .map((item, i) => {
+              if (i, item.replace(/[^-]/g, '').length >= 4) {
+                item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);
+              }
+              return item;
+            }).flat();
+          if (words.length > this.wordLimit) {
+            this.setError(`Answer must be ${this.wordLimit} words or fewer`);
+          } else {
+            this.setError('');
+          }
+        }
+        
       }
     },
   },
