@@ -131,10 +131,17 @@ export default {
 
         if (this.wordLimit && this.value) {
           const words = this.value
-            .split(/[^a-z]/i)
-            .filter(item => item !== '');
+            .split(/[^a-z'-]/i)
+            .filter(item => item != '')
+            .filter(item => item != '-')
+            .map((item, i) => {
+              if (i, item.replace(/[^-]/g, '').length >= 4) {
+                item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);
+              }
+              return item;
+            }).flat();
           if (words.length > this.wordLimit) {
-            this.setError(`You have reached the limit of ${this.wordLimit} words`);
+            this.setError(`Answer must be ${this.wordLimit} words or fewer`);
           } else {
             this.setError('');
           }
