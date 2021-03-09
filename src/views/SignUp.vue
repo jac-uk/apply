@@ -36,11 +36,16 @@
           <ErrorSummary :errors="errors" />
 
           <TextField
-            id="fullName"
-            v-model="formData.fullName"
-            label="Full name"
-            hint="You do not need to include any titles."
-            type="text"
+            id="firstName"
+            v-model="formData.firstName"
+            label="First name"
+            required
+          />
+
+          <TextField
+            id="lastName"
+            v-model="formData.lastName"
+            label="Last name"
             required
           />
 
@@ -154,7 +159,8 @@ export default {
         created: firebase.firestore.FieldValue.serverTimestamp(),
       });
       const personalDetails = {
-        fullName: this.formData.fullName,
+        firstName: this.formData.firstName,
+        lastName: this.formData.lastName,
         email: this.formData.email,
         dateOfBirth: this.formData.dateOfBirth,
         nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
