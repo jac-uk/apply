@@ -100,7 +100,6 @@
           label="Upload finished self assessment"
           required
         />
-
         <button
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
