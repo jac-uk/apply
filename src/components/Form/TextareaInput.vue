@@ -38,24 +38,10 @@
       class="govuk-hint govuk-character-count__message"
     >
       <span
-        v-if="words.length > wordLimit" 
-        class="govuk-character-count__message govuk-error-message"
+        :class="wordsTooMany > 0 ? 'govuk-error-message' : ''"
       >
-        {{ `You have ${wordsTooMany} word${wordsTooMany > 1 ? 's' : ''} too many` }}
+        {{ wordLimitCount }}
       </span>
-      <span
-        v-else-if="Math.floor(wordLimit * 0.20) > Math.abs(wordsTooMany)"
-        class="govuk-hint govuk-character-count__message"
-      >
-        {{ `You have ${Math.abs(wordsTooMany)} word${Math.abs(wordsTooMany) > 1 ? 's' : ''} remaining` }}
-      </span>
-      <span
-        v-else
-        class="govuk-hint govuk-character-count__message"
-      >
-        {{ `${words.length}/${wordLimit}` }}
-      </span>
-      <!-- {{ words }} -->
     </div>
   </div>
 </template>
@@ -97,11 +83,26 @@ export default {
           if (i, item.replace(/[^-]/g, '').length >= 4) {             // find any items containing more than or equal to 4 hyphens (4 allows for a trailing hyphen which is not counted in next set)
             item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);  // if an 'offending' item occurs, group every 4 words, ignoring the hyphen between groups [ie. 'one-one-one-one-two-two-two-two' (eight words, seven hyphens) 'one-one-one-one-' 'two-two-two-two']
           }
-          return item;
-        }).flat();
+          return item; // add array in position of word
+        }).flat(); // flatten array 
     },
     wordsTooMany() {
       return this.words.length - this.wordLimit;
+    },
+    wordLimitCount() {
+      let result;
+      const plural = Math.abs(this.wordsTooMany) > 1 ? 's' : '';
+      if (this.words.length > this.wordLimit) {
+        result = `You have ${this.wordsTooMany} word${plural} too many`;
+      } else if (Math.floor(this.wordLimit * 0.20) > Math.abs(this.wordsTooMany)) {
+        result = `You have ${Math.abs(this.wordsTooMany)} word${plural} remaining`;
+      } else {
+        result = `${this.words.length}/${this.wordLimit}`;
+      }
+      if (this.wordsTooMany == 0) {
+        result = 'You have no words remaining';
+      } 
+      return result;
     },
     text: {
       get() {
