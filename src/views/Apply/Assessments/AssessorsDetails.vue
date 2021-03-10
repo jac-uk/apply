@@ -4,7 +4,61 @@
       ref="formRef"
       @submit.prevent="save"
     >
-      <div class="govuk-grid-column-two-thirds">
+
+      <div
+        v-if="isLeadershipJudgeRequired"
+        class="govuk-grid-column-two-thirds"
+      >
+        <BackLink />
+        <h1 class="govuk-heading-xl">
+          Leadership Judge details
+        </h1>
+
+        <ErrorSummary :errors="errors" />
+
+        <p class="govuk-body-l">
+          HINT DETAILS
+        </p>
+
+        <TextField
+          id="leadership-judge-full-name"
+          v-model="application.firstAssessorFullName"
+          label="Full name"
+          required
+        />
+        <TextField
+          id="leadership-judge-title"
+          v-model="application.firstAssessorTitle"
+          label="Title or position"
+          required
+        />
+        <TextField
+          id="leadership-judge-email"
+          v-model="application.firstAssessorEmail"
+          label="Email"
+          type="email"
+          required
+        />
+        <TextField
+          id="leadership-judge-Phone"
+          v-model="application.firstAssessorPhone"
+          label="Phone"
+          type="tel"
+          required
+        />
+
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button info-btn--assessor-details--save-and-continue"
+        >
+          Save and continue
+        </button>
+      </div>
+
+      <div
+        v-else
+        class="govuk-grid-column-two-thirds"
+      >
         <BackLink />
         <h1 class="govuk-heading-xl">
           Independent assessors
@@ -136,6 +190,11 @@ export default {
       application: application,
     };
 
+  },
+  computed: {
+    isLeadershipJudgeRequired() {
+      return this.application.exerciseId === '5S9fRWlCDr5m9AZmETFa';
+    },
   },
   methods: {
     async save() {
