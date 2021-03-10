@@ -22,26 +22,26 @@
 
         <TextField
           id="leadership-judge-full-name"
-          v-model="application.firstAssessorFullName"
+          v-model="application.leadershipJudgeFullName"
           label="Full name"
           required
         />
         <TextField
           id="leadership-judge-title"
-          v-model="application.firstAssessorTitle"
+          v-model="application.leadershipJudgeTitle"
           label="Title or position"
           required
         />
         <TextField
           id="leadership-judge-email"
-          v-model="application.firstAssessorEmail"
+          v-model="application.leadershipJudgeEmail"
           label="Email"
           type="email"
           required
         />
         <TextField
           id="leadership-judge-Phone"
-          v-model="application.firstAssessorPhone"
+          v-model="application.leadershipJudgePhone"
           label="Phone"
           type="tel"
           required
