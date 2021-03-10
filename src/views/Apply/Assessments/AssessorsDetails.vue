@@ -1,6 +1,102 @@
 <template>
   <div class="govuk-grid-row">
     <form
+      v-if="application.exerciseId === 'z0Zi4ZFTADk2wQeGpIax'"
+      ref="formRef"
+      @submit.prevent="save"
+    >
+      <div class="govuk-grid-column-two-thirds">
+        <BackLink />
+        <h1 class="govuk-heading-xl">
+          Special title
+        </h1>
+
+        <ErrorSummary :errors="errors" />
+        
+        <p class="govuk-body-l">
+          special text
+        </p>
+
+        <p class="govuk-body-l">
+          special text
+        </p>
+
+        <p class="govuk-body-l">
+          special text
+        </p>
+
+        <h2 class="govuk-heading-l">
+          Special assessor
+        </h2>
+
+        <TextField
+          id="first-assessor-full-name"
+          v-model="application.firstAssessorFullName"
+          label="Full name"
+          required
+        />
+        <TextField
+          id="first-assessor-title"
+          v-model="application.firstAssessorTitle"
+          label="Title or position"
+          required
+        />
+        <TextField
+          id="first-assessor-email"
+          v-model="application.firstAssessorEmail"
+          label="Email"
+          type="email"
+          required
+        />
+        <TextField
+          id="first-assessor-Phone"
+          v-model="application.firstAssessorPhone"
+          label="Phone"
+          type="tel"
+          required
+        />
+
+        <!-- <h2 class="govuk-heading-l">
+          Second independent assessor
+        </h2>
+
+        <TextField
+          id="second-assessor-full-name"
+          v-model="application.secondAssessorFullName"
+          label="Full name"
+          required
+        />
+        <TextField
+          id="second-assessor-title"
+          v-model="application.secondAssessorTitle"
+          label="Title or position"
+          required
+        />
+        <TextField
+          id="second-assessor-email"
+          v-model="application.secondAssessorEmail"
+          label="Email"
+          type="email"
+          required
+        />
+        <TextField
+          id="second-assessor-Phone"
+          v-model="application.secondAssessorPhone"
+          label="Phone"
+          type="tel"
+          required
+        /> -->
+
+        <button
+          :disabled="application.status != 'draft'"
+          class="govuk-button info-btn--assessor-details--save-and-continue"
+        >
+          Save and continue
+        </button>
+      </div>
+    </form>
+    <form
+      v-else
       ref="formRef"
       @submit.prevent="save"
     >

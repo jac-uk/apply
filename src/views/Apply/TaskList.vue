@@ -241,8 +241,15 @@ export default {
             });
           }
         }
-
-        const assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
+        // Edit (one time solution)
+        let assessmentOptions;
+        if (this.application.exerciseId === 'z0Zi4ZFTADk2wQeGpIax'){
+          assessmentOptions = [{ title: 'Special assessor details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
+        } else {
+          assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
+        }
+        // old (revert to this) VV
+        // const assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
         switch (this.vacancy.assessmentOptions) {
         case 'self-assessment-with-competencies':
           assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });

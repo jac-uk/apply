@@ -1471,7 +1471,61 @@
             </div>
           </dl>
 
-          <div class="govuk-!-margin-top-9">
+          <div 
+            v-if="application.exerciseId === 'z0Zi4ZFTADk2wQeGpIax'"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Special Title
+            </h2>
+            <RouterLink
+              v-if="isDraftApplication && canEdit"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'assessors-details'}"
+            >
+              Change
+            </RouterLink>
+
+            <dl
+              class="govuk-summary-list"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorFullName }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorTitle }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorEmail }}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div
+            v-else
+            class="govuk-!-margin-top-9"
+          >
             <h2
               class="govuk-heading-l"
               style="display:inline-block;"
@@ -1486,65 +1540,65 @@
             >
               Change
             </RouterLink>
+
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorFullName }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorTitle }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorEmail }}
+                </dd>
+              </div>
+
+              <hr class="govuk-section-break govuk-section-break--xl">
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorFullName }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorTitle }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorEmail }}
+                </dd>
+              </div>
+            </dl>
           </div>
-
-          <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Full name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorFullName }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Title or position
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorTitle }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Email
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorEmail }}
-              </dd>
-            </div>
-
-            <hr class="govuk-section-break govuk-section-break--xl">
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Full name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorFullName }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Title or position
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorTitle }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Email
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorEmail }}
-              </dd>
-            </div>
-          </dl>
 
           <div v-if="application.additionalInfo">
             <div
