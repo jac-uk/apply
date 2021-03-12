@@ -27,7 +27,7 @@
     "firebase": "^8.0.1",
     "firebaseui": "^4.6.1",
     "govuk-frontend": "^3.8.0",
-    "jspdf": "^1.5.3",
+    "jspdf": "^2.3.1",
     "logrocket": "^1.0.10",
     "vue": "^2.6.11",
     "vue-browser-detect-plugin": "^0.1.13",
