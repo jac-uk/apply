@@ -1,11 +1,11 @@
 <template>
   <div
     v-if="showCountdown"
-    class="countdown govuk-!-padding-2"
+    class="countdown"
     :class="bckClass"
   >
-    <div class="govuk-!-margin-bottom-1 govuk-width-container">
-      <div class="text-left govuk-grid-column-one-third">
+    <div class="govuk-!-padding-2 govuk-width-container">
+      <div class="text-left">
         <div
           class="header-background clearfix"
           style="display: flex;"
@@ -15,7 +15,7 @@
           />
         </div>
       </div>
-      <div class="text-center govuk-grid-column-one-third">
+      <div class="text-center">
         <span>
           <span style="margin-right: 5px;">
             {{ mobileView ? '' : 'Time Remaining:' }}
@@ -42,7 +42,7 @@
           </svg>
         </span>
       </div>
-      <div class="text-right govuk-grid-column-one-third">
+      <div class="text-right">
         <slot
           name="right-slot"
         />
@@ -194,7 +194,7 @@ export default {
     color: white;
     text-align: center;
     font-weight: bold;
-    padding-bottom: 10px;
+    // padding-bottom: 10px;
     position: fixed;
     width: 100%;
     top: 0;
@@ -213,17 +213,22 @@ export default {
 
   .text-right {
     text-align: right !important;
+    display: inline;
     min-height: 1px;
+    float: right;
   }
 
   .text-center {
     text-align: center !important;
+    display: inline-block;
     min-height: 1px;
   }
 
   .text-left {
     text-align: left !important;
+    display: inline;
     min-height: 1px;
+    float: left;
   }
 
 </style>
