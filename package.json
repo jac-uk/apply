@@ -31,7 +31,7 @@
     "logrocket": "^1.0.10",
     "vue": "^2.6.11",
     "vue-browser-detect-plugin": "^0.1.13",
-    "vue-gtag": "^1.8.0",
+    "vue-gtag": "^1.11.0",
     "vue-router": "^3.3.4",
     "vuex": "^3.5.1",
     "vuexfire": "^3.2.3"
