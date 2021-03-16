@@ -18,14 +18,14 @@
 
         <TextField
           id="firstName"
-          v-model="firstName"
+          v-model="personalDetails.firstName"
           label="First name"
           required
         />
 
         <TextField
           id="lastName"
-          v-model="lastName"
+          v-model="personalDetails.lastName"
           label="Last name"
           required
         />
@@ -156,6 +156,8 @@ export default {
   extends: Form,
   data(){
     const defaults = {
+      firstName: null,
+      lastName: null,
       fullName: null,
       email: null,
       phone: null,
@@ -171,31 +173,23 @@ export default {
     return {
       personalDetails: personalDetails,
       application: application,
-      firstName: null,
-      lastName: null,
     };
   },
   created() {
-    if (!this.personalDetails) {
-      this.firstName = '';
-      this.lastName = '';
-      return;
-    }
-
-    const { firstName, lastName } = this.personalDetails;
+    const { firstName, lastName, fullName } = this.personalDetails;
 
     if (!firstName && !lastName) {
-      if (this.personalDetails.fullName) {
-        const result = splitFullName(this.personalDetails.fullName);
-        this.firstName = result[0];
-        this.lastName = result[1];
+      if (fullName) {
+        const result = splitFullName(fullName);
+        this.personalDetails.firstName = result[0];
+        this.personalDetails.lastName = result[1];
       } else {
-        this.firstName = '';
-        this.lastName = '';
+        this.personalDetails.firstName = '';
+        this.personalDetails.lastName = '';
       }
     } else {
-      this.firstName = firstName;
-      this.lastName = lastName;
+      this.personalDetails.firstName = firstName;
+      this.personalDetails.lastName = lastName;
     }
   },
   methods: {
@@ -211,9 +205,7 @@ export default {
       }
     },
     makeFullName() {
-      this.personalDetails.fullName = `${this.firstName} ${this.lastName}`;
-      this.personalDetails.firstName = this.firstName;
-      this.personalDetails.lastName = this.lastName;
+      this.personalDetails.fullName = `${this.personalDetails.firstName} ${this.personalDetails.lastName}`;
     },
   },
 };

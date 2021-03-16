@@ -179,9 +179,10 @@ describe('views/SignUp', () => {
 
       it('saves formdata to candidate personal details', async () => {
         const mockFormData = {
-          firstName: 'mock first name',
-          lastName: 'mock last name',
-          email: 'mock email',
+          firstName: 'Tom',
+          lastName: 'Smith',
+          fullName: 'Tom Smith',
+          email: 'tom-smith@testing.com',
           dateOfBirth: new Date(),
           nationalInsuranceNumber: 'mock NIN',
         };
