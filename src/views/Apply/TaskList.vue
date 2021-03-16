@@ -242,7 +242,13 @@ export default {
           }
         }
 
-        const assessmentOptions = [{ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails }];
+        const assessmentOptions = [];
+        if (this.showAssessorsDetails) {
+          assessmentOptions.push({ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails });
+        }
+        if (this.showLeadershipJudgeDetails) {
+          assessmentOptions.push({ title: 'Leadership Judge details', id: 'leadership-judge-details', done: this.applicationProgress.leadershipJudgeDetails });
+        }
         switch (this.vacancy.assessmentOptions) {
         case 'self-assessment-with-competencies':
           assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
@@ -307,6 +313,13 @@ export default {
       return data;
     },
     // @todo the following are copied from Review.vue. Look to share them. Maybe use vuex.
+    showAssessorsDetails() {
+      // show IAs unless it has been turned off
+      return !(this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.independentAssessments === false);
+    },
+    showLeadershipJudgeDetails() {
+      return this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.leadershipJudgeAssessment;
+    },
     showStatementOfSuitability() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-competencies':
@@ -367,7 +380,6 @@ export default {
         if (!this.application.progress.personalDetails) { isComplete = false; }
         if (!this.application.progress.characterInformation) { isComplete = false; }
         if (!this.application.progress.equalityAndDiversitySurvey) { isComplete = false; }
-        if (!this.application.progress.assessorsDetails) { isComplete = false; }
         if (this.vacancy.isSPTWOffered) {
           if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
         }
@@ -401,6 +413,9 @@ export default {
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
+
+        if (this.showAssessorsDetails && !this.application.progress.assessorsDetails) { isComplete = false; }
+        if (this.showLeadershipJudgeDetails && !this.application.progress.leadershipJudgeDetails) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
         if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
