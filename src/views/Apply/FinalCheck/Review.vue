@@ -1498,80 +1498,140 @@
             </div>
           </dl>
 
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Independent assessors
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'assessors-details'}"
-            >
-              Change
-            </RouterLink>
+          <div v-if="showAssessorsDetails">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Independent assessors
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'assessors-details'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl class="govuk-summary-list">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorFullName }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorTitle }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorEmail }}
+                </dd>
+              </div>
+
+              <hr class="govuk-section-break govuk-section-break--xl">
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorFullName }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorTitle }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorEmail }}
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          <dl class="govuk-summary-list">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Full name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorFullName }}
-              </dd>
+          <div v-if="showLeadershipJudgeDetails">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Leadership Judge details
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'leadership-judge-details'}"
+              >
+                Change
+              </RouterLink>
             </div>
+            <dl
+              v-if="application.leadershipJudgeDetails"
+              class="govuk-summary-list"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Full name
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.leadershipJudgeDetails.fullName }}
+                </dd>
+              </div>
 
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Title or position
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorTitle }}
-              </dd>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Title or position
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.leadershipJudgeDetails.title }}
+                </dd>
+              </div>
 
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Email
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.firstAssessorEmail }}
-              </dd>
-            </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Email
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.leadershipJudgeDetails.email }}
+                </dd>
+              </div>
 
-            <hr class="govuk-section-break govuk-section-break--xl">
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Full name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorFullName }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Title or position
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorTitle }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Email
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.secondAssessorEmail }}
-              </dd>
-            </div>
-          </dl>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Telephone
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.leadershipJudgeDetails.phone }}
+                </dd>
+              </div>
+            </dl>
+          </div>
 
           <div v-if="application.additionalInfo">
             <div
@@ -1867,6 +1927,14 @@ export default {
     showMemberships() {
       return this.vacancy.memberships && this.vacancy.memberships.indexOf('none') === -1;
     },
+    // @todo the following are also used in TaskList.vue. Look to share them.
+    showAssessorsDetails() {
+      // show IAs unless it has been turned off
+      return !(this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.independentAssessments === false);
+    },
+    showLeadershipJudgeDetails() {
+      return this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.leadershipJudgeAssessment;
+    },
     showStatementOfSuitability() {
       switch (this.vacancy.assessmentOptions) {
       case 'statement-of-suitability-with-competencies':
@@ -1927,7 +1995,6 @@ export default {
         if (!this.application.progress.personalDetails) { isComplete = false; }
         if (!this.application.progress.characterInformation) { isComplete = false; }
         if (!this.application.progress.equalityAndDiversitySurvey) { isComplete = false; }
-        if (!this.application.progress.assessorsDetails) { isComplete = false; }
         if (this.vacancy.isSPTWOffered) {
           if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
         }
@@ -1961,11 +2028,15 @@ export default {
           if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
+
+        if (this.showAssessorsDetails && !this.application.progress.assessorsDetails) { isComplete = false; }
+        if (this.showLeadershipJudgeDetails && !this.application.progress.leadershipJudgeDetails) { isComplete = false; }
         if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
         if (this.showCV && !this.application.progress.cv) { isComplete = false; }
         if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
         if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
         if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
+        if (!this.application.progress.additionalInfo) { isComplete = false; }
       }
       return isComplete;
     },
@@ -1998,17 +2069,8 @@ export default {
     },
   },
   mounted() {
-
-    // console.log(this.vacancy.schedule2Apply);
-    // console.log(this.vacancy.appliedSchedule);
-    // console.log(this.application.applyingUnderSchedule2Three);
-    // console.log(this.application);
-    // console.log(this.application.applyingUnderSchedule2Three);
-    // console.log(this.application.experienceUnderSchedule2Three);
-
     this.canApply = this.checkIfCanApply();
     this.canEdit = this.checkIfCanEdit();
-
     if (this.$store.getters['vacancy/isOpen']()) {
       const self = this;
       setInterval(() => {
