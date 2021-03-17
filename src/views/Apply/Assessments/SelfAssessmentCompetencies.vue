@@ -97,9 +97,8 @@
           label="Upload finished self assessment"
           required
         />
-
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="(application.status != 'draft')||(errors.length > 0)"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
         >
           Save and continue
