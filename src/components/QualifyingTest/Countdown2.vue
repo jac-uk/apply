@@ -16,19 +16,9 @@
         </div>
       </div>
       <div class="text-center">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <span
           id="time-remaining"
         >
-=======
-=======
->>>>>>> 753ab3c3b255f4ef609a1580b336418f520af823
-        <span>
-          <span style="margin-right: 5px;">
-            {{ mobileView ? '' : 'Time Remaining:' }}
-          </span>
->>>>>>> 753ab3c3b255f4ef609a1580b336418f520af823
           <span
             style="margin-right: 5px;"  
           >
@@ -46,6 +36,7 @@
               d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
             />
           </svg>
+        </span>
         </span>
       </div>
       <div class="text-right">
