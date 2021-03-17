@@ -16,17 +16,13 @@
         </div>
       </div>
       <div class="text-center">
-        <span>
-          <span style="margin-right: 5px;">
-            {{ mobileView ? '' : 'Time Remaining:' }}
-          </span>
+        <span
+          id="time-remaining"
+        >
           <span
-            v-if="hours"
+            style="margin-right: 5px;"  
           >
-            {{ hours | zeroPad }}:
-          </span>
-          <span>
-            {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+            {{ hours ? (hours | zeroPad + ':') : '' }}{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
           </span>
           <svg
             v-if="bckClass"
@@ -76,10 +72,6 @@ export default {
     serverTimeOffset: {
       type: Number,
       default: 0,
-    },
-    mobileView: {
-      type: Boolean,
-      default: false,
     },
     duration: {
       type: Number,
@@ -137,13 +129,6 @@ export default {
     }, second);
   },
   methods: {
-    isMobile() {  // @TODO this should be done via CSS instead of JS
-      if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true;
-      } else {
-        return false;
-      }
-    },
     tick(start, end) {
       const now = new Date().getTime() + this.serverTimeOffset;
 
@@ -183,6 +168,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  @mixin mobile-view {
+    @media (max-width: 599px) { @content; }
+  }
+
+  #time-remaining:before {
+    content: 'Time remaining: ';
+  }
+
+  @include mobile-view { 
+    #time-remaining:before {
+      content: '';
+    }
+  }
 
   span {
     vertical-align: middle;
