@@ -37,7 +37,6 @@
             />
           </svg>
         </span>
-        </span>
       </div>
       <div class="text-right">
         <slot
