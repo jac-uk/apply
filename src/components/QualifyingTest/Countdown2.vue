@@ -16,9 +16,16 @@
         </div>
       </div>
       <div class="text-center">
+<<<<<<< HEAD
         <span
           id="time-remaining"
         >
+=======
+        <span>
+          <span style="margin-right: 5px;">
+            {{ mobileView ? '' : 'Time Remaining:' }}
+          </span>
+>>>>>>> 753ab3c3b255f4ef609a1580b336418f520af823
           <span
             style="margin-right: 5px;"  
           >
