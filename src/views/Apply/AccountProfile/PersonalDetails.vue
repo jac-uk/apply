@@ -17,6 +17,13 @@
         </p>
 
         <TextField
+          id="title"
+          v-model="personalDetails.title"
+          label="Title"
+          required
+        />
+
+        <TextField
           id="fullName"
           v-model="personalDetails.fullName"
           label="Full name"
@@ -149,6 +156,7 @@ export default {
   extends: Form,
   data(){
     const defaults = {
+      title: null,
       fullName: null,
       email: null,
       phone: null,
@@ -165,6 +173,11 @@ export default {
       personalDetails: personalDetails,
       application: application,
     };
+  },
+  created() {
+    if (!this.personalDetails.title) {
+      this.personalDetails.title = '';
+    }
   },
   methods: {
     async save() {

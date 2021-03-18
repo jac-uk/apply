@@ -59,6 +59,18 @@
             v-if="application.personalDetails"
             class="govuk-summary-list"
           >
+            <div
+              v-if="application.personalDetails.title"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Title
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.title }}
+              </dd>
+            </div>
+
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                 Full Name
