@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list smallerMargin">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           {{ declaration1 }}
@@ -11,7 +11,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list smallerMargin">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           {{ declaration2 }}
@@ -22,7 +22,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list smallerMargin">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           {{ declaration3 }}
@@ -60,6 +60,9 @@ export default {
 <style scoped>
   .widerColumn {
     width: 70%;
+  }
+  .smallerMargin {
+    margin-bottom: 0;
   }
 </style>
 
