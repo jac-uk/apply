@@ -20,9 +20,14 @@
           id="time-remaining"
         >
           <span
+            v-if="hours"
+          >
+            {{ hours | zeroPad }}:
+          </span>
+          <span
             style="margin-right: 5px;"  
           >
-            {{ hours ? (hours | zeroPad + ':') : '' }}{{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+            {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
           </span>
           <svg
             v-if="bckClass"
