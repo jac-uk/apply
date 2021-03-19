@@ -90,9 +90,9 @@ const helperTimeLeft = (obj) => {
     }
   */
   if (obj) {
-    if (obj.statusLog && obj.statusLog.completed) {
-      return 0;
-    }
+    // if (obj.statusLog && obj.statusLog.completed) {
+    //   return 0;
+    // }
     if (obj.duration) {
       const minute = 60 * 1000;
       const duration = obj.duration.testDurationAdjusted;
