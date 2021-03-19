@@ -141,7 +141,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
-import  { splitFullName } from '@/helpers/splitFullName';
+import  { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
   components: {
