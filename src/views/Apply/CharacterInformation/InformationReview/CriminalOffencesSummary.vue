@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dl class="govuk-summary-list smallerMargin">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">1.</span> Have you ever been convicted for a criminal offence?
@@ -28,7 +28,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list smallerMargin">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">2.</span> Have you ever been cautioned for a criminal offence?
@@ -89,9 +89,6 @@ export default {
 <style scoped>
   .widerColumn {
     width: 70%;
-  }
-  .smallerMargin {
-    margin-bottom: 0;
   }
 </style>
 
