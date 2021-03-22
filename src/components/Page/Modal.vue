@@ -87,13 +87,6 @@ export default {
     @media (max-width: 599px) { @content; }
   }
 
-  @include mobile-view { 
-    .modal {
-      min-width: 100%;
-      min-height: 100%;
-    }
-  }
-
   .modal {
     position: fixed;
     top: 50%;
@@ -102,7 +95,12 @@ export default {
     transform: translate(-50%, -50%);
     border: solid 2px #b1b4b6;
     background-color: #ffffff;
+    @include mobile-view { 
+      width: 100%;
+      min-height: 100%;
+    }
   }
+
   .modal__title {
     text-align: center;
     vertical-align: middle;
