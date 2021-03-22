@@ -87,26 +87,22 @@ const helperTimeLeft = (obj) => {
       statusLog {
         completed: timestamp,
         started: timestamp,
+        reset: timestamp,
     }
   */
-  if (obj) {
-    // if (obj.statusLog && obj.statusLog.completed) {
-    //   return 0;
-    // }
-    if (obj.duration) {
-      const minute = 60 * 1000;
-      const duration = obj.duration.testDurationAdjusted;
-      const startTime = obj.statusLog && obj.statusLog.started;
+  if (obj && obj.duration) {
+    const minute = 60 * 1000;
+    const duration = obj.duration.testDurationAdjusted;
+    const startTime = obj.statusLog && obj.statusLog.started;
 
-      if (startTime === null || startTime === undefined) {
-        return duration * minute;
-      }
-      const endTime = new Date(startTime.getTime() + duration * minute);
-      if (endTime < Date.now()) {
-        return 0;
-      }
-      return (endTime - Date.now());
+    if ((startTime === null || startTime === undefined) || obj.statusLog.reset) {
+      return duration * minute;
     }
+    const endTime = new Date(startTime.getTime() + duration * minute);
+    if (endTime < Date.now()) {
+      return 0;
+    }
+    return (endTime - Date.now());
   } else {
     return 0;
   }
