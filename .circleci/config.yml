@@ -18,7 +18,9 @@ jobs:
       - checkout
       - run:
           name: 'Setup'
-          command: npm ci
+          command: |
+            echo "//npm.pkg.github.com/:_authToken=${GITHUB_PACKAGES_TOKEN}" > ~/.npmrc
+            npm ci
       - persist_to_workspace:
           root: .
           paths:
@@ -117,6 +119,6 @@ workflows:
             - test
           filters:
             branches:
-              only: 
+              only:
                 - master
                 - /hotfix/.*/
