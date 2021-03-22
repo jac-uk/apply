@@ -156,7 +156,7 @@ export default {
   extends: Form,
   data(){
     const defaults = {
-      title: null,
+      title: '',
       fullName: null,
       email: null,
       phone: null,
@@ -173,11 +173,6 @@ export default {
       personalDetails: personalDetails,
       application: application,
     };
-  },
-  created() {
-    if (!this.personalDetails.title) {
-      this.personalDetails.title = '';
-    }
   },
   methods: {
     async save() {
