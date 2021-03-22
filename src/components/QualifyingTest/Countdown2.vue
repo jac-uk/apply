@@ -174,16 +174,9 @@ export default {
 
 <style lang="scss" scoped>
 
-  @mixin mobile-view {
-    @media (max-width: 599px) { @content; }
-  }
-
   #time-remaining:before {
     content: 'Time remaining: ';
-  }
-
-  @include mobile-view { 
-    #time-remaining:before {
+    @media (max-width: 599px) {
       content: '';
     }
   }
