@@ -43,6 +43,7 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 import PAJE from '@/views/Apply/AccountProfile/PAJE';
 import ApplyPersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
 import AssessorsDetails from '@/views/Apply/Assessments/AssessorsDetails';
+import LeadershipJudgeDetails from '@/views/Apply/Assessments/LeadershipJudgeDetails';
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
@@ -396,6 +397,15 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Give independent assessors details',
+          },
+        },
+        {
+          path: 'leadership-judge-details',
+          component: LeadershipJudgeDetails,
+          name: 'leadership-judge-details',
+          meta: {
+            requiresAuth: true,
+            title: 'Give Leadership Judge details',
           },
         },
         {
