@@ -368,5 +368,34 @@
     
     });
 
+    describe('email address regex', () => {
+      // RFC 5322 email address compliant regex
+      let data;
+      beforeEach(() => {
+        data = wrapper.vm.$data;
+      });    
+
+      const validTypes = [
+        'simple@example.com',
+        'very.common@example.com',
+        'disposable.style.email.with+symbol@example.com',
+        'other.email-with-hyphen@example.com',
+        'fully-qualified-domain@example.com',
+        'user.name+tag+sorting@example.com',
+        'x@example.com',
+        'example-indeed@strange-example.com',
+        'example@s.example',
+        '"john..doe"@example.org',
+        'mailhost!username@example.org',
+        'user%example.com@example.org',
+        'user-@example.org',
+      ];
+
+      it.each(validTypes)('can be %s', (value) => {
+        expect(value).toMatch(data.regex.email);
+      });
+
+    });
+
   });
 });
