@@ -152,9 +152,10 @@ import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 export default {
   computed: {
-    ...mapState('applications', [
-      'records',
-    ]),
+    ...mapState('applications', ['records']),
+    vacancies() {
+      return this.$store.getters['vacancies/vacancies'];
+    },
   },
   created() {
     this.$store.dispatch('applications/bind');
@@ -171,10 +172,7 @@ export default {
       }
     },
     vacancyExists(exerciseId) {
-      const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
-      if (vacancy) {
-        return Object.keys(vacancy).length > 0;
-      }
+      return this.vacancies.find(vacancy => vacancy.id === exerciseId) !== undefined;
     },
   },
 };
