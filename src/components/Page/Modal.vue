@@ -82,39 +82,48 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  min-width: 30%;
-  transform: translate(-50%, -50%);
-  border: solid 2px #b1b4b6;
-  background-color: #ffffff;
-}
-.modal__title {
-  text-align: center;
-  vertical-align: middle;
-  border: solid 2px #1d70b8;
-  background-color: #1d70b8;
-  color: white;
-}
-.modal__message {
-  vertical-align: middle;
-}
-.deny {
-  background-color: #f3f2f1;
-}
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
-  overflow: hidden;
-}
+<style lang="scss" scoped>
+  @mixin mobile-view {
+    @media (max-width: 599px) { @content; }
+  }
+
+  .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 30%;
+    transform: translate(-50%, -50%);
+    border: solid 2px #b1b4b6;
+    background-color: #ffffff;
+    @include mobile-view { 
+      width: 100%;
+      min-height: 100%;
+    }
+  }
+
+  .modal__title {
+    text-align: center;
+    vertical-align: middle;
+    border: solid 2px #1d70b8;
+    background-color: #1d70b8;
+    color: white;
+  }
+  .modal__message {
+    vertical-align: middle;
+  }
+  .deny {
+    background-color: #f3f2f1;
+  }
+  .modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+    overflow: hidden;
+  }
 </style>
