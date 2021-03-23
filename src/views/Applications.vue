@@ -58,43 +58,50 @@
 
             <div class="moj-button-menu">
               <div class="moj-button-menu__wrapper">
-                <RouterLink
-                  v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
-                  :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
-                  :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
+                <div
+                  v-if="!vacancyExists(application.exerciseId)"
+                  class="govuk-body govuk-!-margin-top-3 govuk-!-margin-bottom-0"
                 >
-                  Continue with application
-                </RouterLink>
-                <RouterLink
-                  v-else
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item  info-link--applications--view-sent-application-${application.exerciseId}`"
-                  :to="{ name: 'review', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
-                >
-                  <span v-if="application.status == 'draft'">View draft application</span>
-                  <span v-else>View sent application</span>
-                </RouterLink>
-                <RouterLink
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
-                  role="button"
-                  data-module="govuk-button"
-                  :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
-                >
-                  View advert
-                </RouterLink>
-
-                <RouterLink
-                  v-if="application.characterChecks && application.characterChecks.declaration === true"
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                  :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
-                >
-                  View good character checks consent
-                </RouterLink>
+                  Data is temporarily unavailable.
+                </div>
+                <div v-else>
+                  <RouterLink
+                    v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
+                    :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
+                    :to="{ name: 'task-list', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Continue with application
+                  </RouterLink>
+                  <RouterLink
+                    v-else
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item  info-link--applications--view-sent-application-${application.exerciseId}`"
+                    :to="{ name: 'review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    <span v-if="application.status == 'draft'">View draft application</span>
+                    <span v-else>View sent application</span>
+                  </RouterLink>
+                  <RouterLink
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
+                    role="button"
+                    data-module="govuk-button"
+                    :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
+                  >
+                    View advert
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.characterChecks && application.characterChecks.declaration === true"
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    View good character checks consent
+                  </RouterLink>
+                </div>
               </div>
             </div>
           </li>
@@ -162,7 +169,12 @@ export default {
       } else {
         return false;
       }
-      
+    },
+    vacancyExists(exerciseId) {
+      const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
+      if (vacancy) {
+        return Object.keys(vacancy).length > 0;
+      }
     },
   },
 };
