@@ -42,7 +42,8 @@ describe('views/SignUp', () => {
 
     it('contains expected fields', () => {
       expect(wrapper.find('#title').exists()).toBe(true);
-      expect(wrapper.find('#fullName').exists()).toBe(true);
+      expect(wrapper.find('#firstName').exists()).toBe(true);
+      expect(wrapper.find('#lastName').exists()).toBe(true);
       expect(wrapper.find('#email').exists()).toBe(true);
       expect(wrapper.find('#password').exists()).toBe(true);
       expect(wrapper.find('#date-of-birth').exists()).toBe(true);
@@ -180,7 +181,9 @@ describe('views/SignUp', () => {
       it('saves formdata to candidate personal details', async () => {
         const mockFormData = {
           title: 'Mr',
-          fullName: 'mock name',
+          firstName: 'Tom',
+          lastName: 'Smith',
+          fullName: 'Tom Smith',
           email: 'mock email',
           dateOfBirth: new Date(),
           nationalInsuranceNumber: 'mock NIN',

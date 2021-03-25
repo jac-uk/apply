@@ -44,9 +44,17 @@
           />
 
           <TextField
-            id="fullName"
-            v-model="formData.fullName"
-            label="Full name"
+            id="firstName"
+            v-model="formData.firstName"
+            label="First name"
+            type="text"
+            required
+          />
+
+          <TextField
+            id="lastName"
+            v-model="formData.lastName"
+            label="Last name"
             type="text"
             required
           />
@@ -117,6 +125,7 @@ export default {
   data () {
     return {
       formData: {},
+      fullName: null,
     };
   },
   computed: {
@@ -155,14 +164,20 @@ export default {
         }
       }
     },
+    makeFullName() {
+      this.fullName = `${this.formData.firstName} ${this.formData.lastName}`;
+    },
     async createCandidate(userCredential) {
       await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
       await this.$store.dispatch('candidate/create', {
         created: firebase.firestore.FieldValue.serverTimestamp(),
       });
+      this.makeFullName();
       const personalDetails = {
         title: this.formData.title,
-        fullName: this.formData.fullName,
+        firstName: this.formData.firstName,
+        lastName: this.formData.lastName,
+        fullName: this.fullName,
         email: this.formData.email,
         dateOfBirth: this.formData.dateOfBirth,
         nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
