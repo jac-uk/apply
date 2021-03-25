@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">3.</span> Have you received a fixed penalty notice in the last 4 years?

@@ -228,7 +228,7 @@
           </dl>
           <dl v-else>
             <CharacterInformationSummaryV1
-              :character-information="application.characterInformation"
+              :character-information="application.characterInformation || {}"
             />
           </dl>
 
