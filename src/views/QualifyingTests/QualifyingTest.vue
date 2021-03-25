@@ -16,21 +16,20 @@
         :server-time-offset="serverTimeOffset"
         :warning="5"
         :alert="1"
-        :mobile-view="isMobile"
         @change="handleCountdown"
       >
         <template
           v-slot:left-slot
         >
-          <span
-            v-if="showPrevious"
-          >
+          <span>
             <a
+              v-if="showPrevious"
+              id="previous-link"
               href=""
               :class="`govuk-link countdown-link info-btn--qualifying-tests--previous-question-${infoClass()}`"
               @click.prevent="btnPrevious"
             >
-              ❮ {{ isMobile ? 'Previous' : 'Previous Question' }}
+              ❮ Previous
             </a>
           </span>
         </template>
@@ -95,9 +94,6 @@ export default {
     };
   },
   computed: {
-    isMobile() {  // TODO really this should be a CSS-only solution
-      return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) ? true : false;
-    },
     showPrevious() {
       return this.$route.params.questionNumber > 1;
     },
@@ -231,6 +227,20 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  @mixin mobile-view {
+    @media (max-width: 599px) { @content; }
+  }
+
+  #previous-link::after{
+    content: 'Question';
+  }
+
+  @include mobile-view { 
+    #previous-link::after{
+      content: '';
+    }
+  }
 
   .govuk-width-container{
     width: 100%;
