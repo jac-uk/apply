@@ -184,7 +184,7 @@ describe('views/SignUp', () => {
           firstName: 'Tom',
           lastName: 'Smith',
           fullName: 'Tom Smith',
-          email: 'mock email',
+          email: 'tom-smith@testing.com',
           dateOfBirth: new Date(),
           nationalInsuranceNumber: 'mock NIN',
         };
