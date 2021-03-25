@@ -54,7 +54,7 @@
       v-if="row.type === 'barrister'"
     >
       <Checkbox
-        :id="qualificationNotComplete" 
+        :id="qualificationNotComplete"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
       />
@@ -107,6 +107,9 @@ export default {
       return `qualification_date_${this.index}`;
     },
     qualificationDetails() {
+      return `qualification_details_${this.index}`;
+    },
+    qualificationNotComplete() {
       return `qualification_details_${this.index}`;
     },
   },
