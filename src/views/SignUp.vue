@@ -36,9 +36,18 @@
           <ErrorSummary :errors="errors" />
 
           <TextField
+            id="title"
+            v-model="formData.title"
+            label="Title"
+            type="text"
+            required
+          />
+
+          <TextField
             id="firstName"
             v-model="formData.firstName"
             label="First name"
+            type="text"
             required
           />
 
@@ -46,6 +55,7 @@
             id="lastName"
             v-model="formData.lastName"
             label="Last name"
+            type="text"
             required
           />
 
@@ -164,6 +174,7 @@ export default {
       });
       this.makeFullName();
       const personalDetails = {
+        title: this.formData.title,
         firstName: this.formData.firstName,
         lastName: this.formData.lastName,
         fullName: this.fullName,
