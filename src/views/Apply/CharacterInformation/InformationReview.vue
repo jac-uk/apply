@@ -279,6 +279,7 @@ export default {
       if (this.isValid() && this.validateDeclaration()) {
         this.updateProgress();
         this.application.characterInformationV2 = this.characterInformation;
+        this.characterInformation._versionNumber = 2;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         this.$router.push({ name: 'task-list' });
