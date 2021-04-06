@@ -38,7 +38,7 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  :word-limit="250"
+                  label="In 250 words, tell us how."
                   required
                 />
               </RadioItem>
@@ -61,7 +61,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
@@ -122,4 +122,4 @@ export default {
     },
   },
 };
-</script>
+  </script>

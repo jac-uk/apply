@@ -38,7 +38,7 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  :word-limit="250"
+                  label="In 250 words, tell us how."
                 />
               </RadioItem>
               <RadioItem
@@ -97,8 +97,9 @@
           label="Upload finished self assessment"
           required
         />
+
         <button
-          :disabled="(application.status != 'draft')||(errors.length > 0)"
+          :disabled="application.status != 'draft'"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
         >
           Save and continue
@@ -108,7 +109,7 @@
   </div>
 </template>
 
-<script>
+  <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
@@ -188,4 +189,4 @@ export default {
     },
   },
 };
-</script>
+  </script>

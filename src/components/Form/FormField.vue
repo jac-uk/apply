@@ -2,7 +2,7 @@
   <div />
 </template>
 
-<script>
+  <script>
 export default {
   props: {
     id: {
@@ -55,7 +55,7 @@ export default {
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
-        email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+          email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
         tel: /^\+?[\d() -]+/,
       },
     };
@@ -83,6 +83,7 @@ export default {
     },
     validate(event) {
       this.setError('');
+
       if (this.checkErrors) {
         let value = this.value;
         if (event && event.target) {
@@ -128,27 +129,8 @@ export default {
             this.setError(this.pattern.message);
           }
         }
-
-        if (this.wordLimit && this.value) {
-          const words = this.value
-            .split(/[^a-z'-]/i) //split into array at every occurance of a character which is NOT: a-z or ' or -
-            .filter(item => item != '') // remove any empty items from array
-            .filter(item => item != '-') // remove any items which are just a hyphen
-            .map((item, i) => { // with the above array 
-              if (i, item.replace(/[^-]/g, '').length >= 4) { // find any items containing more than or equal to 4 hyphens (4 allows for a trailing hyphen which is not counted in next set)
-                item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g); // if an 'offending' item occurs, group every 4 words, ignoring the hyphen between groups [ie. 'one-one-one-one-two-two-two-two' (eight words, seven hyphens) 'one-one-one-one-' 'two-two-two-two']
-              }
-              return item; // add array in position of word
-            }).flat(); // flatten array 
-          if (words.length > this.wordLimit) {
-            this.setError(`Answer must be ${this.wordLimit} words or fewer`);
-          } else {
-            this.setError('');
-          }
-        }
-        
       }
     },
   },
 };
-</script>
+  </script>
