@@ -152,17 +152,17 @@ import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 export default {
   data() {
-    const data = this.$store.getters['vacancies/vacancies'];
+    const vacancies = this.$store.getters['vacancies/vacancies'];
     return {
-      vacancies: data,
+      vacancies: vacancies,
     };
   },
   computed: {
     ...mapState('applications', ['records']),
   },
-  async created() {
-    await this.$store.dispatch('applications/bind');
-    await this.$store.dispatch('vacancies/bind');
+  created() {
+    this.$store.dispatch('applications/bind');
+    this.$store.dispatch('vacancies/bind');
   },
   methods: {
     isOpen(dateExtended, exerciseId) {
