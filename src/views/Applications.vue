@@ -151,11 +151,14 @@ import {
 import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 export default {
+  data() {
+    const vacancies = this.$store.getters['vacancies/vacancies'];
+    return {
+      vacancies: vacancies,
+    };
+  },
   computed: {
     ...mapState('applications', ['records']),
-    vacancies() {
-      return this.$store.getters['vacancies/vacancies'];
-    },
   },
   created() {
     this.$store.dispatch('applications/bind');
