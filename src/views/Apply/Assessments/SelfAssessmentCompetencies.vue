@@ -109,7 +109,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
@@ -189,4 +189,4 @@ export default {
     },
   },
 };
-  </script>
+</script>

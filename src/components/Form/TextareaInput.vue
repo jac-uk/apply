@@ -10,12 +10,12 @@
       {{ label }}
     </label>
     <!-- eslint-disable -->
-      <span
-        v-if="hint"
-        class="govuk-hint"
-        v-html="hint"
-      >
-        <!-- eslint-enable -->
+    <span
+      v-if="hint"
+      class="govuk-hint"
+      v-html="hint"
+    >
+      <!-- eslint-enable -->
     </span>
     <FormFieldError
       :id="id"
@@ -31,7 +31,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
 
@@ -62,4 +62,4 @@ export default {
     },
   },
 };
-  </script>
+</script>

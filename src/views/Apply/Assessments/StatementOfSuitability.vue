@@ -106,7 +106,7 @@
   </div>
 </template>
 
-  <script>
+<script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
@@ -190,4 +190,4 @@ export default {
     },
   },
 };
-  </script>
+</script>

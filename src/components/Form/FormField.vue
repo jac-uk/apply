@@ -2,7 +2,7 @@
   <div />
 </template>
 
-  <script>
+<script>
 export default {
   props: {
     id: {
@@ -55,7 +55,7 @@ export default {
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
-          email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+        email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
         tel: /^\+?[\d() -]+/,
       },
     };
@@ -133,4 +133,4 @@ export default {
     },
   },
 };
-  </script>
+</script>
