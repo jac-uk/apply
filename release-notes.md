@@ -1,5 +1,13 @@
 # Release Notes #
 
+1.36.2
+1 issue / 1sp
+ admin#1243 added skillsAndAbilitiesCriteria to related content downloads
+
+1.36.1
+1 issue / 2sp
+ #1212 Enable leadership judge assessment
+
  1.36.0
  3 issues / 6sp
  #699 Enable new and old character forms to co-exist
