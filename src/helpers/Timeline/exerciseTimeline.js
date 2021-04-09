@@ -175,24 +175,26 @@ const exerciseTimeline = (data) => {
     );
   }
 
-  if (data.contactIndependentAssessors) {
-    timeline.push(
-      {
-        entry: 'JAC Contacts Independent Assessors',
-        date: data.contactIndependentAssessors,
-        dateString: isDate(data.contactIndependentAssessors) ? formatDate(data.contactIndependentAssessors) : null,
-      },
-    );
-  }
+  if (!(data.assessmentMethods && data.assessmentMethods.independentAssessments === false)) {
+    if (data.contactIndependentAssessors) {
+      timeline.push(
+        {
+          entry: 'JAC Contacts Independent Assessors',
+          date: data.contactIndependentAssessors,
+          dateString: isDate(data.contactIndependentAssessors) ? formatDate(data.contactIndependentAssessors) : null,
+        },
+      );
+    }
 
-  if (data.independentAssessmentsReturnDate) {
-    timeline.push(
-      {
-        entry: 'Return date for independent assessments',
-        date: data.independentAssessmentsReturnDate,
-        dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate) : null,
-      },
-    );
+    if (data.independentAssessmentsReturnDate) {
+      timeline.push(
+        {
+          entry: 'Return date for independent assessments',
+          date: data.independentAssessmentsReturnDate,
+          dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate) : null,
+        },
+      );
+    }
   }
 
   if (data.eligibilitySCCDate) {

@@ -202,6 +202,16 @@
                 :title="file.title"
               />
             </li>
+            <li
+              v-for="file in vacancy.downloads.skillsAndAbilitiesCriteria"
+              :key="file.file"
+            >
+              <DownloadLink
+                :file-name="file.file"
+                :exercise-id="vacancy.id"
+                :title="file.title"
+              />
+            </li>
           </ul>
           <!-- <ul class="govuk-list govuk-!-font-size-16">
             <li>
