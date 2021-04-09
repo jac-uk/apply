@@ -59,8 +59,8 @@
         label="I did not complete pupillage"
       />
       <TextareaInput
-        v-if="row.qualificationDetails"
-        :id="qualificationDetails"
+        v-if="row.qualificationNotComplete"
+        :id="details"
         v-model="row.details"
         hint="Please provide some additional information"
       />
@@ -106,11 +106,11 @@ export default {
     qualificationDate() {
       return `qualification_date_${this.index}`;
     },
-    qualificationDetails() {
+    details() {
       return `qualification_details_${this.index}`;
     },
     qualificationNotComplete() {
-      return `qualification_details_${this.index}`;
+      return `qualification_qualificationNotComplete_${this.index}`;
     },
   },
 };
