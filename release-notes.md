@@ -9,7 +9,6 @@
  #723 Fullscreen modal box on mobile
  #727 Include jac-kit into Apply
 
-
 1.36.2
 1 issue / 1sp
  admin#1243 added skillsAndAbilitiesCriteria to related content downloads
