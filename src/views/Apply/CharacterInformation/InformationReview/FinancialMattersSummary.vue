@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">6.</span> Have you ever been declared bankrupt?
@@ -28,7 +28,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">7.</span> Have you ever entered into an Individual Voluntary Agreement (IVA)?
@@ -56,7 +56,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">8.</span> Have you ever filed late tax returns?
@@ -84,7 +84,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">9.</span> Have you ever filed late VAT returns?
@@ -112,7 +112,7 @@
       </div>
     </dl>
 
-    <dl class="govuk-summary-list">
+    <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
           <span v-if="displayChangeLink">10.</span> Have you ever been fined by HMRC?

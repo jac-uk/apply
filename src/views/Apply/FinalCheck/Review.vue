@@ -59,7 +59,46 @@
             v-if="application.personalDetails"
             class="govuk-summary-list"
           >
-            <div class="govuk-summary-list__row">
+            <div
+              v-if="application.personalDetails.title"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Title
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.title }}
+              </dd>
+            </div>
+
+            <div
+              v-if="application.personalDetails.firstName && application.personalDetails.lastName"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                First name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.firstName }}
+              </dd>
+            </div>
+
+            <div
+              v-if="application.personalDetails.firstName && application.personalDetails.lastName"
+              class="govuk-summary-list__row"
+            >
+              <dt class="govuk-summary-list__key">
+                Last name
+              </dt>
+              <dd class="govuk-summary-list__value">
+                {{ application.personalDetails.lastName }}
+              </dd>
+            </div>
+
+            <div
+              v-if="!application.personalDetails.firstName && !application.personalDetails.lastName"
+              class="govuk-summary-list__row"
+            >
               <dt class="govuk-summary-list__key">
                 Full Name
               </dt>
@@ -189,7 +228,7 @@
           </dl>
           <dl v-else>
             <CharacterInformationSummaryV1
-              :character-information="application.characterInformation"
+              :character-information="application.characterInformation || {}"
             />
           </dl>
 
