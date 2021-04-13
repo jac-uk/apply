@@ -1,5 +1,11 @@
 # Release Notes #
 
+1.38.0
+3 issues
+ #745 Resolve QT autosave issue
+ #589 Fix: Able to navigate to non-existant scenario question
+ #746 Collect client browser platform data
+
 1.37.0
 6 issues
  #615 Add title field to application form
