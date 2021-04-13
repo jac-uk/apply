@@ -27,10 +27,24 @@ export default {
       return false;
     },
     startTest: async (context) => {
+      // collect browser info
+      const client = {};
+      try {
+        client.userAgent = navigator.userAgent;
+        client.platform = navigator.platform;
+        client.cookieEnabled = navigator.cookieEnabled;
+        client.deviceMemory = navigator.deviceMemory;
+        client.timestamp = Date.now();
+        client.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        client.utcOffset = new Date().getTimezoneOffset();
+      } catch {
+        client.noData = true;
+      }
       const data = {
         status: QUALIFYING_TEST.STATUS.STARTED,
         'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
         'candidate.id': firebase.auth().currentUser.uid,
+        client: client,
       };
       await context.dispatch('save', data);
     },
