@@ -10,7 +10,10 @@
       >
         {{ qualifyingTestResponse.qualifyingTest.title }}
       </h1>
-      <div class="govuk-grid-row">
+      <div 
+        v-if="enableScenario" 
+        class="govuk-grid-row"
+      >
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
           <!-- eslint-disable -->
           <p v-html="$options.filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
@@ -19,6 +22,7 @@
             class="govuk-character-count"
           >
             <TextareaInput
+              v-if="response"
               id="scenario-question"
               v-model="response.text"
               :label="`${questionNumber}. ${question.question}`"
@@ -56,7 +60,10 @@
           </div>
         </div>
 
-        <div class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop">
+        <div 
+          v-if="enableScenario" 
+          class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop"
+        >
           <div class="jac-scenario__additional">
             <dl ref="accordion">
               <span
@@ -137,7 +144,7 @@ export default {
         });
     }
 
-    const response = responses[scenarioNumber - 1].responsesForScenario[questionNumber - 1];
+    const response = responses[scenarioNumber - 1] ? responses[scenarioNumber - 1].responsesForScenario[questionNumber - 1] : {};
 
     return {
       qualifyingTestResponse,
@@ -145,6 +152,7 @@ export default {
       response,
       responses,
       showDetails: true,
+      enableScenario: true,
     };
   },
   computed: {
@@ -164,7 +172,13 @@ export default {
       return this.qualifyingTestResponse.qualifyingTest.questions.introduction;
     },
     question() {
-      return this.scenario.options[this.questionNumber - 1];
+      const questionNumber  = this.questionNumber - 1;
+      if (this.scenario && this.scenario.options && this.scenario.options[questionNumber]) {
+        return this.scenario.options[questionNumber];
+      } else {
+        this.redirectToList();
+        return {};
+      }
     },
     nextPage() {
       if ((this.isLastScenario && this.isLastQuestion) || this.isComingFromReview) {
@@ -182,12 +196,15 @@ export default {
       };
     },
     wordsCounter() {
-      let content = this.response.text;
+      let content = this.response ? this.response.text : '';
+      let words = '';
       if (content === '' || content === null) {
         return 0;
       }
-      content = content.trim().split(/[\s]+/);
-      const words = content.length;
+      if (content) {
+        content = content.trim().split(/[\s]+/);
+        words = content.length;
+      }
       return words;
     },
     reachMaxWords () {
@@ -196,7 +213,7 @@ export default {
       return reachedMaxWords;
     },
     isEmpty () {
-      return !this.response.text || this.response.text.trim().length === 0;
+      return (this.response && !this.response.text) || (this.response && this.response.text && this.response.text.trim().length === 0);
     },
   },
   watch: {
@@ -219,7 +236,7 @@ export default {
     if (this.qualifyingTestResponse.qualifyingTest.type !== QUALIFYING_TEST.TYPE.SCENARIO) {
       return this.$router.replace({ name: 'qualifying-tests' });
     }
-    if (!this.response.started) {
+    if (this.response && !this.response.started) {
       this.response.started = firebase.firestore.Timestamp.fromDate(new Date());
       const data = {
         responses: this.responses,
@@ -281,6 +298,10 @@ export default {
       const params = this.$route.params;
       const hyphenated = `${params.qualifyingTestId}-${params.scenarioNumber}-${params.questionNumber}`;
       return hyphenated;
+    },
+    redirectToList() {
+      this.enableScenario = false;
+      this.$router.push({ name: 'qualifying-tests' });
     },
   },
 };
