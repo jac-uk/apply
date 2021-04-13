@@ -11,7 +11,7 @@
         :key="index"
       >
         <h3 class="govuk-heading-s govuk-!-margin-top-4 govuk-!-margin-bottom-2">
-          {{ item.answer }} 
+          {{ item.answer }}
         </h3>
         <p>
           <RadioItem
@@ -68,11 +68,13 @@ export default {
       if (value === this.localValue.mostAppropriate) {
         this.localValue.mostAppropriate = null;
       }
+      this.$emit('answered');
     },
     'localValue.mostAppropriate': function (value) {
       if (value === this.localValue.leastAppropriate) {
         this.localValue.leastAppropriate = null;
       }
+      this.$emit('answered');
     },
   },
 };
