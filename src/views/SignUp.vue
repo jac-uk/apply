@@ -97,7 +97,7 @@
             type="submit"
             class="govuk-button"
           >
-            Continue
+            Create Account
           </button>
         </div>
       </form>
@@ -139,14 +139,17 @@ export default {
       this.$el.scrollIntoView();
     },
     async onSubmit() {
-      this.validate();
+      await this.validate();
       if (this.isValid()) {
         try {
           await this.signUp();
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
-        }
+        } 
+      }
+      else {
+        this.scrollToTop();
       }
     },
     async signUp() {
