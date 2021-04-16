@@ -90,16 +90,16 @@ const exerciseTimeline = (data) => {
     //     createShortlistingMethod('Sift', data.siftStartDate, data.siftEndDate)
     //   );
     // }
-
-    if (data.shortlistingMethods.includes('name-blind-paper-sift')) {
-      timeline.push(
-        createShortlistingMethod('Name-blind sift', data.nameBlindSiftStartDate, data.nameBlindSiftEndDate)
-      );
-    }
-
-    if (data.shortlistingMethods.includes('telephone-assessment')) {
-      timeline.push(createShortlistingMethod('Telephone assessment', data.telephoneAssessmentStartDate, data.telephoneAssessmentEndDate));
-    }
+    // 
+    // if (data.shortlistingMethods.includes('name-blind-paper-sift')) {
+    //   timeline.push(
+    //     createShortlistingMethod('Name-blind sift', data.nameBlindSiftStartDate, data.nameBlindSiftEndDate)
+    //   );
+    // }
+    // 
+    // if (data.shortlistingMethods.includes('telephone-assessment')) {
+    //   timeline.push(createShortlistingMethod('Telephone assessment', data.telephoneAssessmentStartDate, data.telephoneAssessmentEndDate));
+    // }
 
     if (data.shortlistingMethods.includes('situational-judgement-qualifying-test')) {
       if (data.situationalJudgementTestDate) {
