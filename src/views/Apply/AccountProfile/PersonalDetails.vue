@@ -17,10 +17,23 @@
         </p>
 
         <TextField
-          id="fullName"
-          v-model="personalDetails.fullName"
-          label="Full name"
-          hint="You do not need to include any titles."
+          id="title"
+          v-model="personalDetails.title"
+          label="Title"
+          required
+        />
+
+        <TextField
+          id="firstName"
+          v-model="personalDetails.firstName"
+          label="First name"
+          required
+        />
+
+        <TextField
+          id="lastName"
+          v-model="personalDetails.lastName"
+          label="Last name"
           required
         />
 
@@ -135,6 +148,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
+import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
   components: {
@@ -149,6 +163,9 @@ export default {
   extends: Form,
   data(){
     const defaults = {
+      title: '',
+      firstName: null,
+      lastName: null,
       fullName: null,
       email: null,
       phone: null,
@@ -166,8 +183,26 @@ export default {
       application: application,
     };
   },
+  created() {
+    const { firstName, lastName, fullName } = this.personalDetails;
+
+    if (!firstName && !lastName) {
+      if (fullName) {
+        const result = splitFullName(fullName);
+        this.personalDetails.firstName = result[0];
+        this.personalDetails.lastName = result[1];
+      } else {
+        this.personalDetails.firstName = '';
+        this.personalDetails.lastName = '';
+      }
+    } else {
+      this.personalDetails.firstName = firstName;
+      this.personalDetails.lastName = lastName;
+    }
+  },
   methods: {
     async save() {
+      this.makeFullName();
       this.validate();
       if (this.isValid()) {
         this.application.progress.personalDetails = true;
@@ -176,6 +211,9 @@ export default {
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'task-list' });
       }
+    },
+    makeFullName() {
+      this.personalDetails.fullName = `${this.personalDetails.firstName} ${this.personalDetails.lastName}`;
     },
   },
 };

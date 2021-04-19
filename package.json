@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.36.0",
+  "version": "1.38.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode develop",
@@ -20,7 +20,7 @@
     "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "dependencies": {
-    "@jac-uk/jac-kit": "0.0.31",
+    "@jac-uk/jac-kit": "0.0.34",
     "@ministryofjustice/frontend": "0.0.19-alpha",
     "@sentry/browser": "^5.20.1",
     "@sentry/integrations": "^5.20.1",

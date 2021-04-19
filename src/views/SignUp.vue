@@ -36,10 +36,25 @@
           <ErrorSummary :errors="errors" />
 
           <TextField
-            id="fullName"
-            v-model="formData.fullName"
-            label="Full name"
-            hint="You do not need to include any titles."
+            id="title"
+            v-model="formData.title"
+            label="Title"
+            type="text"
+            required
+          />
+
+          <TextField
+            id="firstName"
+            v-model="formData.firstName"
+            label="First name"
+            type="text"
+            required
+          />
+
+          <TextField
+            id="lastName"
+            v-model="formData.lastName"
+            label="Last name"
             type="text"
             required
           />
@@ -110,6 +125,7 @@ export default {
   data () {
     return {
       formData: {},
+      fullName: null,
     };
   },
   computed: {
@@ -148,13 +164,20 @@ export default {
         }
       }
     },
+    makeFullName() {
+      this.fullName = `${this.formData.firstName} ${this.formData.lastName}`;
+    },
     async createCandidate(userCredential) {
       await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
       await this.$store.dispatch('candidate/create', {
         created: firebase.firestore.FieldValue.serverTimestamp(),
       });
+      this.makeFullName();
       const personalDetails = {
-        fullName: this.formData.fullName,
+        title: this.formData.title,
+        firstName: this.formData.firstName,
+        lastName: this.formData.lastName,
+        fullName: this.fullName,
         email: this.formData.email,
         dateOfBirth: this.formData.dateOfBirth,
         nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
