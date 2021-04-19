@@ -29,7 +29,7 @@
                 class="govuk-link info-link--nav-applications--qualifying-tests"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -162,7 +162,7 @@ export default {
       } else {
         return false;
       }
-      
+
     },
   },
 };

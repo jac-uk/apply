@@ -33,7 +33,7 @@
                 aria-current="page"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>

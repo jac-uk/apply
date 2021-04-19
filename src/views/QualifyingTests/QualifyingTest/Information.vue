@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     v-if="qualifyingTestResponse"
     class="govuk-grid-column-two-thirds"
   >
@@ -74,7 +74,7 @@
           status="information"
         >
           <template>
-            This Qualifying Test is not open yet.
+            This online test is not open yet.
           </template>
         </Banner>
 

@@ -35,7 +35,7 @@
                 class="govuk-link info-link--nav-vacancies--qualifying-tests"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
