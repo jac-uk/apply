@@ -18,6 +18,7 @@
         v-model="response.selection"
         :question="`${questionNumber}. ${question.details}`"
         :options="question.options"
+        @answered="questionAnswered"
       />
 
       <p 
@@ -183,6 +184,9 @@ export default {
       if (isCompleted) {
         this.$router.push(this.nextPage);
       }
+    },
+    questionAnswered() {
+      this.save(false);
     },
     questionStartedOnPreviousTest() {
       if (this.response.started && this.response.completed) {
