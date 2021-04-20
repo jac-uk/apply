@@ -1,5 +1,9 @@
 # Release Notes #
 
+1.38.1
+1 issue
+ #1240 Fix issue starting test in firefox
+
 1.38.0
 3 issues
  #745 Resolve QT autosave issue
