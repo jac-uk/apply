@@ -12,7 +12,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <FileUpload 
+        <FileUpload
           id="cv-upload"
           ref="cv"
           v-model="application.uploadedCV"
@@ -37,7 +37,7 @@
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
-import FileUpload from '@/components/Form/FileUpload';
+import FileUpload from '@jac-uk/jac-kit/draftComponents/Form/FileUpload';
 
 export default {
   components: {

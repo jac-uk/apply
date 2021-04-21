@@ -85,7 +85,7 @@
           />
         </div>
 
-        <FileUpload 
+        <FileUpload
           id="suitability-statement-file"
           ref="suitability-statement"
           v-model="application.uploadedSuitabilityStatement"
@@ -112,7 +112,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
-import FileUpload from '@/components/Form/FileUpload';
+import FileUpload from '@jac-uk/jac-kit/draftComponents/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 

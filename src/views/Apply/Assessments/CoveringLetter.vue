@@ -16,7 +16,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <FileUpload 
+        <FileUpload
           id="covering-letter-upload"
           ref="covering-letter"
           v-model="application.uploadedCoveringLetter"
@@ -41,7 +41,7 @@
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
-import FileUpload from '@/components/Form/FileUpload';
+import FileUpload from '@jac-uk/jac-kit/draftComponents/Form/FileUpload';
 
 export default {
   components: {
