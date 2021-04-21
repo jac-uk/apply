@@ -55,6 +55,7 @@
           <h2 class="govuk-heading-m">
             Upload leadership suitability assessment
           </h2>
+          <!-- TODO - Use FileUpload component instead of raw HTML file inputs -->
           <input
             id="leadership-suitability-assessment-file"
             class="govuk-file-upload"
@@ -67,6 +68,7 @@
           <h2 class="govuk-heading-m">
             Upload CV
           </h2>
+          <!-- TODO - Use FileUpload component instead of raw HTML file inputs -->
           <input
             id="cv-file"
             class="govuk-file-upload"
@@ -90,8 +92,8 @@
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
-// should the fileUpload component be used here?
-// import FileUpload from '@/components/Form/FileUpload';
+// TODO - Use Fileupload instead of raw HTML file inputs
+//import FileUpload from '@jac-uk/jac-kit/draftComponents/Form/FileUpload';
 
 export default {
   components: {
@@ -112,7 +114,7 @@ export default {
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
-  },   
+  },
   methods: {
     async save() {
       // loop through this.files and upload them
