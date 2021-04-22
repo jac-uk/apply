@@ -29,12 +29,12 @@
       </RadioGroup>
       <Checkbox
         id="eligibilityDeclaration"
-        v-model="eligibility.eligibilityDeclaration"
+        v-model="eligibility.declaration"
         label="Eligibility declaration"
         required
       >
         <span>
-          {{ eligibilityDeclaration }}
+          {{ eligibilityDeclarationText }}
         </span>
       </Checkbox>
       <!--
@@ -141,13 +141,13 @@ export default {
   extends: Form,
   data(){
     return {
-      eligibilityDeclaration: 'I confirm I meet the eligibility requirements for this post',
+      eligibilityDeclarationText: 'I confirm I meet the eligibility requirements for this post',
       eligibility: {
         citizenship: booleanOrNull(null),
         character: booleanOrNull(null),
         reasonableLOS: booleanOrNull(null),
         qualificationsExperience: booleanOrNull(null),
-        eligibilityDeclaration: booleanOrNull(null),
+        declaration: booleanOrNull(null),
       },
     };
   },
@@ -210,7 +210,7 @@ export default {
       if (this.isValid()) {
         let isOkay = true;
         if (this.eligibility.citizenship !== true ) { isOkay = false; }
-        if (this.eligibility.eligibilityDeclaration !== true ) { isOkay = false; }
+        if (this.eligibility.declaration !== true ) { isOkay = false; }
         // if (this.eligibility.character !== true) { isOkay = false; }
         // if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
         // if (this.isLegal && this.eligibility.qualificationsExperience !== true) { isOkay = false; }
