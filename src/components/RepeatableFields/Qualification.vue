@@ -1,7 +1,7 @@
 <template>
   <div>
     <RadioGroup
-      :id="qualificationType"
+      :id="`qualification_type_${index}`"
       v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
@@ -25,7 +25,7 @@
     </RadioGroup>
 
     <RadioGroup
-      :id="qualificationLocation"
+      :id="`qualification_location_${index}`"
       v-model="row.location"
       label="Where are you qualified?"
       hint="Choose 1 option."
@@ -43,24 +43,50 @@
         label="Scotland"
       />
     </RadioGroup>
+
     <DateInput
+      v-if="row.type !== 'barrister'"
       :id="qualificationDate"
       v-model="row.date"
-      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
+      label="When did you qualify?"
       type="month"
     />
 
     <div
       v-if="row.type === 'barrister'"
     >
+      <DateInput
+        v-if="!row.qualificationNotComplete"
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you complete pupillage?"
+        type="month"
+      />   
+
       <Checkbox
-        :id="qualificationNotComplete"
+        :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
       />
+
+      <DateInput
+        v-if="row.qualificationNotComplete && !row.notCalledToBar"
+        :id="`called_to_bar_date_${index}`"
+        v-model="row.calledToBardate"
+        label="When were you called to the bar?"
+        type="month"
+      />
+
+      <Checkbox
+        v-if="row.qualificationNotComplete"
+        :id="`called_to_bar_${index}`"
+        v-model="row.notCalledToBar"
+        label="I was not called to the bar"
+      />
+
       <TextareaInput
         v-if="row.qualificationNotComplete"
-        :id="details"
+        :id="`qualification_details_${index}`"
         v-model="row.details"
         hint="Please provide some additional information"
       />
@@ -97,20 +123,8 @@ export default {
     },
   },
   computed: {
-    qualificationType() {
-      return `qualification_type_${this.index}`;
-    },
-    qualificationLocation() {
-      return `qualification_location_${this.index}`;
-    },
     qualificationDate() {
       return `qualification_date_${this.index}`;
-    },
-    details() {
-      return `qualification_details_${this.index}`;
-    },
-    qualificationNotComplete() {
-      return `qualification_qualificationNotComplete_${this.index}`;
     },
   },
 };
