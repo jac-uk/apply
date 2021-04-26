@@ -67,12 +67,13 @@
         :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
+        @input="clearDate('date')"
       />
 
       <DateInput
         v-if="row.qualificationNotComplete && !row.notCalledToBar"
         :id="`called_to_bar_date_${index}`"
-        v-model="row.calledToBardate"
+        v-model="row.calledToBarDate"
         label="When were you called to the bar?"
         type="month"
       />
@@ -82,6 +83,7 @@
         :id="`called_to_bar_${index}`"
         v-model="row.notCalledToBar"
         label="I was not called to the bar"
+        @input="clearDate('calledToBarDate')"
       />
 
       <TextareaInput
@@ -125,6 +127,11 @@ export default {
   computed: {
     qualificationDate() {
       return `qualification_date_${this.index}`;
+    },
+  },
+  methods: {
+    clearDate() {
+      // console.log(row['date remove');
     },
   },
 };

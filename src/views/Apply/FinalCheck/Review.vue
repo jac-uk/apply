@@ -830,7 +830,7 @@
               </div>
 
               <div
-                v-if="item.date"
+                v-if="item.date && !item.qualificationNotComplete"
                 class="govuk-summary-list__row"
               >
                 <dt
@@ -852,37 +852,73 @@
                 </dd>
               </div>
 
-              <div
-                v-if="item.qualificationNotComplete"
-                class="govuk-summary-list__row"
+              <template
+                v-if="item.type === 'barrister'"
               >
-                <dt class="govuk-summary-list__key">
-                  Completed pupillage
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>
-                      No
-                    </li>
-                  </ul>
-                </dd>
-              </div>
+                <div
+                  v-if="item.qualificationNotComplete"
+                  class="govuk-summary-list__row"
+                >
+                  <dt class="govuk-summary-list__key">
+                    Completed pupillage
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <ul class="govuk-list">
+                      <li>
+                        No
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
 
-              <div
-                v-if="item.qualificationNotComplete && item.details"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Did not complete pupillage notes
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>
-                      {{ item.details }}
-                    </li>
-                  </ul>
-                </dd>
-              </div>
+                <div
+                  v-if="item.notCalledToBar === false"
+                  class="govuk-summary-list__row"
+                >
+                  <dt
+                    class="govuk-summary-list__key"
+                  >
+                    Date called to bar
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <ul class="govuk-list">
+                      <li> {{ item.calledToBarDate | formatDate }}</li>
+                    </ul>
+                  </dd>
+                </div>
+
+                <div
+                  v-if="item.notCalledToBar === true"
+                  class="govuk-summary-list__row"
+                >
+                  <dt class="govuk-summary-list__key">
+                    Called to bar
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <ul class="govuk-list">
+                      <li>
+                        No
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+
+                <div
+                  v-if="item.qualificationNotComplete"
+                  class="govuk-summary-list__row"
+                >
+                  <dt class="govuk-summary-list__key">
+                    Did not complete pupillage notes
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <ul class="govuk-list">
+                      <li>
+                        {{ item.details | showAlternative('None provided') }}
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+              </template>
             </dl>
 
             <dl
