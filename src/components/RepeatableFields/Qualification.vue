@@ -67,7 +67,6 @@
         :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
-        @input="clearDate('date')"
       />
 
       <DateInput
