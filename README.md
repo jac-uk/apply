@@ -1,4 +1,4 @@
-## Apply 
+## Apply
 
 [![CircleCI](https://circleci.com/gh/jac-uk/apply.svg?style=svg)](https://circleci.com/gh/jac-uk/apply)
 
@@ -7,7 +7,6 @@ This is the Vue SPA for candidate applications.
 We have 2 Firebase projects:
 - [Staging](https://console.firebase.google.com/project/digital-platform-staging/settings/general/web:Y2VjMDAyZjktNTIzOS00MWY2LWJiOWMtMmJiNjQ3YjJlMjVl)
 - [Production](https://console.firebase.google.com/project/platform-production-9207d/settings/general/web:MmE0ODEzYjgtNzg3Mi00ZGYyLTg0Y2QtZTZiNTZkYzc3ZWUx)
-
 
 ## Clone repository onto local machine
 ```
@@ -81,7 +80,7 @@ Merging to `master` automatically triggers a deploy to `production`.
 Merging to `staging` automatically triggers a deploy to `staging`.
 
 
-### CircleCI configuration 
+### CircleCI configuration
 
 The CircleCI instance has to have a `FIREBASE_DEPLOY_TOKEN` set.  This is tied to a specific firebase user.  If that user leaves
 the organisation, the token will need to be reset.  To do so run `firebase login:ci` and follow the instructions there and then on
