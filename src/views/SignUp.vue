@@ -97,7 +97,7 @@
             type="submit"
             class="govuk-button"
           >
-            Continue
+            Create Account
           </button>
         </div>
       </form>
@@ -139,39 +139,40 @@ export default {
       this.$el.scrollIntoView();
     },
     async onSubmit() {
-      this.validate();
+      await this.validate();
       if (this.isValid()) {
         try {
           await this.signUp();
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
-        }
+        } 
+      }
+      else {
+        this.scrollToTop();
       }
     },
     async signUp() {
-      const userCredential = await auth().createUserWithEmailAndPassword(this.formData.email, this.formData.password);
-
-      if (userCredential) {
-        const candidate = await this.createCandidate(userCredential);
-
-        if (candidate) {
-          if (this.$store.getters['vacancy/id']) {
-            this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
-          } else {
-            this.$router.push({ name: 'applications' });
+      await auth()
+        .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
+        .then((result)=>{
+          const candidate = this.createCandidate(result);
+          if (candidate) {
+            if (this.$store.getters['vacancy/id']) {
+              this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
+            } else {
+              this.$router.push({ name: 'applications' });
+            }
           }
-        }
-      }
+        })
+        .catch((error) => {
+          this.errors.push({ ref: 'email', message: error.message });
+        });
     },
     makeFullName() {
       this.fullName = `${this.formData.firstName} ${this.formData.lastName}`;
     },
     async createCandidate(userCredential) {
-      await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-      await this.$store.dispatch('candidate/create', {
-        created: firebase.firestore.FieldValue.serverTimestamp(),
-      });
       this.makeFullName();
       const personalDetails = {
         title: this.formData.title,
@@ -182,6 +183,10 @@ export default {
         dateOfBirth: this.formData.dateOfBirth,
         nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
       };
+      await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
+      await this.$store.dispatch('candidate/create', {
+        created: firebase.firestore.FieldValue.serverTimestamp(),
+      });
       await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
     },
   },
