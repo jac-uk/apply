@@ -50,19 +50,6 @@ describe('component methods', () => {
     expect(wrapper.exists()).toBe(true);
   });
   describe('computed properties', () => {
-    describe('qualificationType', () => {
-      it('returns the value that is created using index', () => {
-        wrapper.setProps({ index: 4 });
-        expect(wrapper.vm.qualificationType).toBe('qualification_type_4');
-      });
-    });
-    
-    describe('qualificationLocation', () => {
-      it('returns the value that is created using index', () => {
-        wrapper.setProps({ index: 5 });
-        expect(wrapper.vm.qualificationLocation).toBe('qualification_location_5');
-      });
-    });
     
     describe('qualificationDate', () => {
       it('returns the value that is created using index', () => {
