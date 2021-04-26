@@ -53,7 +53,7 @@ describe('views/SignUp', () => {
     it('contains a "Continue" submit button', () => {
       const button = wrapper.find('form button');
       expect(button.element.type).toBe('submit');
-      expect(button.text()).toBe('Continue');
+      expect(button.text()).toBe('Create Account');
     });
   });
 
@@ -86,11 +86,11 @@ describe('views/SignUp', () => {
         expect(wrapper.vm.validate).toHaveBeenCalled();
       });
 
-      it('if validate() passed, calls signUp()', () => {
+      it('if isValid() returns true, calls signUp()', async () => {
         wrapper.vm.isValid = jest.fn().mockReturnValue(true);
         wrapper.vm.signUp = jest.fn();
 
-        wrapper.vm.onSubmit();
+        await wrapper.vm.onSubmit();
         expect(wrapper.vm.signUp).toHaveBeenCalled();
 
       });
