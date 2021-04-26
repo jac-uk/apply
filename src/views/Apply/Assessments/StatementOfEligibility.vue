@@ -25,7 +25,7 @@
             <!-- eslint-disable -->
             <div 
               class="govuk-body" 
-              v-html="item.text"
+              v-html="vacancy.selectionCriteria[index].text"
             />
             <!-- eslint-enable -->
 
