@@ -83,7 +83,6 @@
         :id="`called_to_bar_${index}`"
         v-model="row.notCalledToBar"
         label="I was not called to the bar"
-        @input="clearDate('calledToBarDate')"
       />
 
       <TextareaInput
@@ -127,11 +126,6 @@ export default {
   computed: {
     qualificationDate() {
       return `qualification_date_${this.index}`;
-    },
-  },
-  methods: {
-    clearDate() {
-      // console.log(row['date remove');
     },
   },
 };
