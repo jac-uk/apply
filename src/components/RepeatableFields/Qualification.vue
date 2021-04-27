@@ -1,10 +1,14 @@
 <template>
-  <div>
+  <form
+    ref="formRef"
+    @submit.prevent="save"
+  >
     <RadioGroup
       :id="`qualification_type_${index}`"
       v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
+      required
     >
       <RadioItem
         value="advocate-scotland"
@@ -50,6 +54,7 @@
       v-model="row.date"
       label="When did you qualify?"
       type="month"
+      required
     />
 
     <div
@@ -61,12 +66,14 @@
         v-model="row.date"
         label="When did you complete pupillage?"
         type="month"
+        required
       />   
 
       <Checkbox
         :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
+        @input="clearData(row, 'date')"
       />
 
       <DateInput
@@ -75,6 +82,7 @@
         v-model="row.calledToBarDate"
         label="When were you called to the bar?"
         type="month"
+        required
       />
 
       <Checkbox
@@ -82,6 +90,7 @@
         :id="`called_to_bar_${index}`"
         v-model="row.notCalledToBar"
         label="I was not called to the bar"
+        @input="clearData(row, 'calledToBarDate')"
       />
 
       <TextareaInput
@@ -93,7 +102,7 @@
     </div>
 
     <slot name="removeButton" />
-  </div>
+  </form>
 </template>
 
 <script>
@@ -102,6 +111,7 @@ import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
+import Form from '@/components/Form/Form';
 
 export default {
   name: 'Qualification',
@@ -112,6 +122,7 @@ export default {
     DateInput,
     TextareaInput,
   },
+  extends: Form,
   props: {
     row: {
       required: true,
@@ -125,6 +136,11 @@ export default {
   computed: {
     qualificationDate() {
       return `qualification_date_${this.index}`;
+    },
+  },
+  methods: {
+    async clearData(target, key) {
+      await delete target[key]; 
     },
   },
 };

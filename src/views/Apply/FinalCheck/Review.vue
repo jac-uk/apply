@@ -847,7 +847,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
-                    <li> {{ item.date | formatDate }}</li>
+                    <li> {{ item.date | formatDate('month') }}</li>
                   </ul>
                 </dd>
               </div>
@@ -872,7 +872,7 @@
                 </div>
 
                 <div
-                  v-if="item.notCalledToBar === false"
+                  v-if="item.notCalledToBar === false && item.qualificationNotComplete"
                   class="govuk-summary-list__row"
                 >
                   <dt
@@ -888,7 +888,7 @@
                 </div>
 
                 <div
-                  v-if="item.notCalledToBar === true"
+                  v-if="item.notCalledToBar === true && item.qualificationNotComplete"
                   class="govuk-summary-list__row"
                 >
                   <dt class="govuk-summary-list__key">
