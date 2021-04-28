@@ -220,11 +220,10 @@ describe('components/Form/Password', () => {
         wrapper.vm.validatePassword = jest.fn().mockName('validatePassword');
       });
 
-      it('should do nothing if error already exists', () => {
+      it('should call validatePassword even if error already exists', () => {
         wrapper.setData({ errorMessage: 'mock error' });
-
         wrapper.vm.handleValidatePassword();
-        expect(wrapper.vm.validatePassword).not.toHaveBeenCalled();
+        expect(wrapper.vm.validatePassword).toHaveBeenCalled();
       });
 
       it('should call validatePassword() with value if no errors yet', () => {
@@ -234,6 +233,7 @@ describe('components/Form/Password', () => {
         wrapper.vm.handleValidatePassword();
         expect(wrapper.vm.validatePassword).toHaveBeenCalledWith(wrapper.vm.value);
       });
+
       it('should call validatePassword() with value if no errors yet and called with event', () => {
         const mockEvent = {
           target: {
@@ -282,6 +282,17 @@ describe('components/Form/Password', () => {
         it('should not set error if argument contain at least one', () => {
           wrapper.vm.validatePassword('p@ssword');
           expect(wrapper.vm.setError).not.toHaveBeenCalledWith(`${mockProps.label} must include at least one special character - for example £, #, @, !, %, -, &, *.`);
+        });
+      });
+      
+      describe('length', () => {
+        it('should set error if argument is not long enough', () => {
+          wrapper.vm.validatePassword('p@sswor');
+          expect(wrapper.vm.setError).toHaveBeenCalledWith(`${mockProps.label} should be 8 or more characters long`);
+        });
+        it('should not set error if argument is long enough', () => {
+          wrapper.vm.validatePassword('p@ssword');
+          expect(wrapper.vm.setError).not.toHaveBeenCalledWith(`${mockProps.label} should be 8 or more characters long`);
         });
       });
 

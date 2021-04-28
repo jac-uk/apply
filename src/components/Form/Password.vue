@@ -27,6 +27,7 @@
       :class="[inputClass, 'govuk-input', 'govuk-!-width-three-quarters', {'govuk-input--error': hasError}]"
       :type="fieldType"
       :autocomplete="type"
+      @input="handleValidatePassword"
     >
 
     <button
@@ -108,16 +109,22 @@ export default {
     },
     handleValidatePassword(event) {
       // don't bother checking if generic validation failed
-      if (!this.hasError) {
-        let value = this.value;
-        if (event && event.target) {
-          value = event.target.value;
-        }
-
-        this.validatePassword(value);
+      // if (!this.hasError) {
+      let value = this.value;
+      if (event && event.target) {
+        value = event.target.value;
       }
+
+      this.setError('');
+      this.validatePassword(value);
+      // }
     },
     validatePassword(password) {
+
+      if (password.length < 8) {
+        this.setError(`${this.label} should be 8 or more characters long`);
+      }
+
       if (!this.regex.containsCapitalLetters.test(password)) {
         this.setError(`${this.label} must include at least one capital letter.`);
       }
