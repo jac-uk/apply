@@ -195,7 +195,7 @@ const router = new Router({
       },
     },
     {
-      path: '/qualifying-tests',
+      path: '/online-tests',
       component: QualifyingTests,
       name: 'qualifying-tests',
       meta: {
@@ -204,7 +204,7 @@ const router = new Router({
       },
     },
     {
-      path: '/qualifying-tests/:qualifyingTestId',
+      path: '/online-tests/:qualifyingTestId',
       component: QualifyingTest,
       children: [
         {
