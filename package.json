@@ -17,7 +17,12 @@
     "lint-ci": "vue-cli-service lint --no-fix",
     "test": "TZ='Europe/London' vue-cli-service test:unit",
     "test:coverage": "TZ='Europe/London' vue-cli-service test:unit --coverage",
-    "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
+    "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand",
+    "cy:open": "cypress open -C cypress.env.develop.local.json",
+    "cy:run": "cypress run -C cypress.env.develop.local.json",
+    "cy:run:develop": "cypress run -C cypress.env.develop.json",
+    "cy:run:staging": "cypress run -C cypress.env.staging.json",
+    "cy:run:production": "cypress run -C cypress.env.production.json"
   },
   "dependencies": {
     "@jac-uk/jac-kit": "0.0.34",
@@ -25,7 +30,10 @@
     "@sentry/browser": "^5.20.1",
     "@sentry/integrations": "^5.20.1",
     "core-js": "^2.6.11",
+    "cypress": "^7.2.0",
+    "cypress-firebase": "^1.8.0",
     "firebase": "^8.0.1",
+    "firebase-admin": "^9.7.0",
     "firebaseui": "^4.6.1",
     "govuk-frontend": "^3.8.0",
     "jspdf": "^1.5.3",
@@ -48,6 +56,7 @@
     "babel-jest": "^25.5.1",
     "clone": "^2.1.2",
     "eslint": "^5.16.0",
+    "eslint-plugin-cypress": "^2.11.2",
     "eslint-plugin-jest": "^22.21.0",
     "eslint-plugin-vue": "^5.0.0",
     "firebase-mock": "^2.3.2",
