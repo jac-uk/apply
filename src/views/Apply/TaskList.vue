@@ -123,7 +123,6 @@ export default {
   mixins: [ApplyMixIn],
   data() {
     return {
-      unknownVariable: null,
       welshPostsContactMailbox: WELSH_POSTS_CONTACT_MAILBOX,
       welshPostsEmailSubject: WELSH_POSTS_EMAIL_SUBJECT,
     };
