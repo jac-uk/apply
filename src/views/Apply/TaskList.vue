@@ -289,33 +289,31 @@ export default {
     getCharacterInformationPageId() {
       if (!this.vacancy._applicationVersion || this.vacancy._applicationVersion < 2) {
         return 'character-information-form-v1';
-      } else {
-        if (!this.application.characterInformationV2) {
-          return 'character-information-declaration';
-        }
-        if (!this.isCriminalOffencesSectionComplete()) {
-          return 'character-information-criminal-offences';
-        }
-        if (!this.isFixedPenaltiesSectionComplete()) {
-          return 'character-information-fixed-penalty-notices';
-        }
-        if (!this.isMotoringOffencesSectionComplete()) {
-          return 'character-information-motoring-offences';
-        }
-        if (!this.isFinancialOffencesSectionComplete()) {
-          return 'character-information-financial-matters';
-        }
-        if (!this.isProfessionalConductSectionComplete()) {
-          return 'character-information-professional-conduct';
-        }
-        if (!this.isFurtherInformationSectionComplete()) {
-          return 'character-information-further-information';
-        }
-        if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
-          return 'character-information-review';
-        }
       }
-
+      if (!this.application.characterInformationV2) {
+        return 'character-information-declaration';
+      }
+      if (!this.isCriminalOffencesSectionComplete()) {
+        return 'character-information-criminal-offences';
+      }
+      if (!this.isFixedPenaltiesSectionComplete()) {
+        return 'character-information-fixed-penalty-notices';
+      }
+      if (!this.isMotoringOffencesSectionComplete()) {
+        return 'character-information-motoring-offences';
+      }
+      if (!this.isFinancialOffencesSectionComplete()) {
+        return 'character-information-financial-matters';
+      }
+      if (!this.isProfessionalConductSectionComplete()) {
+        return 'character-information-professional-conduct';
+      }
+      if (!this.isFurtherInformationSectionComplete()) {
+        return 'character-information-further-information';
+      }
+      if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
+        return 'character-information-review';
+      }
     },
   },
 };
