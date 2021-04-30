@@ -1877,7 +1877,6 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
-import Countdown from '@/components/Page/Countdown';
 import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
 import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
 import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary';
@@ -1900,7 +1899,6 @@ export default {
     FurtherInformationSummary,
     BackLink,
     ErrorSummary,
-    Countdown,
   },
   mixins: [ApplyMixIn],
   data() {

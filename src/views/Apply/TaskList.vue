@@ -113,16 +113,12 @@
 </template>
 
 <script>
-import Countdown from '@/components/Page/Countdown';
 import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import ApplyMixIn from './ApplyMixIn';
 
 export default {
-  components: {
-    Countdown,
-  },
   extends: CharacterInformationStatus,
   mixins: [ApplyMixIn],
   data() {

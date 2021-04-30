@@ -1,7 +1,13 @@
 /*
 The purpose of this Mix-in is to share code between TaskList.vue and Review.vue
 */
+
+import Countdown from '@/components/Page/Countdown';
+
 export default {
+  components: {
+    Countdown,
+  },
   data() {
     return {
       isVacancyOpen: false, // see mounted() for more info
