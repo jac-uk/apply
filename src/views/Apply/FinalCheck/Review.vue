@@ -55,124 +55,9 @@
             </RouterLink>
           </div>
 
-          <dl
-            v-if="application.personalDetails"
-            class="govuk-summary-list"
-          >
-            <div
-              v-if="application.personalDetails.title"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Title
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.title }}
-              </dd>
-            </div>
-
-            <div
-              v-if="application.personalDetails.firstName && application.personalDetails.lastName"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                First name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.firstName }}
-              </dd>
-            </div>
-
-            <div
-              v-if="application.personalDetails.firstName && application.personalDetails.lastName"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Last name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.lastName }}
-              </dd>
-            </div>
-
-            <div
-              v-if="!application.personalDetails.firstName && !application.personalDetails.lastName"
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Full Name
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.fullName }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Email address
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.email }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Phone number
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.phone }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Date of birth
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <p v-if="application.personalDetails.dateOfBirth">
-                  {{ application.personalDetails.dateOfBirth | formatDate }}
-                </p>
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                NI Number
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.nationalInsuranceNumber }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Citizenship
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.personalDetails.citizenship | lookup }}
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Reasonable adjustments
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.personalDetails.reasonableAdjustments | toYesNo }}
-                <ul
-                  v-if="application.personalDetails.reasonableAdjustmentsDetails"
-                  class="govuk-!-margin-top-1"
-                >
-                  <li>
-                    {{ application.personalDetails.reasonableAdjustmentsDetails }}
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
+          <PersonalDetails
+            :application="application"
+          />
 
           <div class="govuk-!-margin-top-9">
             <h2
@@ -1877,6 +1762,7 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
+import PersonalDetails from './PersonalDetails';
 import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
 import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
 import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary';
@@ -1889,6 +1775,9 @@ import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   components: {
+    BackLink,
+    ErrorSummary,
+    PersonalDetails,
     CharacterInformationSummaryV1,
     CharacterDeclarationSummary,
     CriminalOffencesSummary,
@@ -1897,8 +1786,6 @@ export default {
     FinancialMattersSummary,
     ProfessionalConductSummary,
     FurtherInformationSummary,
-    BackLink,
-    ErrorSummary,
   },
   mixins: [ApplyMixIn],
   data() {
