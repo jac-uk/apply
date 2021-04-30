@@ -169,17 +169,11 @@ export default {
       const data = [];
       if (this.applicationProgress) {
 
-        const characterInformation = {
-          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
-        };
-
-        characterInformation.id = this.getCharacterInformationPageId();
-
         data.push({
           title: 'Account profile',
           tasks: [
             { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            characterInformation,
+            { title: 'Character information', id: this.getCharacterInformationPageId(), done: this.applicationProgress.characterInformation },
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
@@ -194,19 +188,14 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
         }
-        if (this.vacancy.additionalWorkingPreferences) {
-          if (this.vacancy.additionalWorkingPreferences.length) {
-            workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
-          }
+        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
+          workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
         }
         if (this.vacancy.welshRequirement) {
           workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
         }
         if (workingPreferencesTasklist.length > 0) {
-          data.push({
-            title: 'Working preferences',
-            tasks: workingPreferencesTasklist,
-          });
+          data.push({ title: 'Working preferences', tasks: workingPreferencesTasklist });
         }
 
         if (this.isLegal) {
@@ -218,10 +207,7 @@ export default {
           }
           tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
           tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
-          data.push({
-            title: 'Qualifications and experience',
-            tasks: tasks,
-          });
+          data.push({ title: 'Qualifications and experience', tasks: tasks });
         }
 
         if (this.isNonLegal) {
@@ -235,10 +221,7 @@ export default {
           tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
           tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
           if (tasks.length) {
-            data.push({
-              title: 'Memberships and Experience',
-              tasks: tasks,
-            });
+            data.push({ title: 'Memberships and Experience', tasks: tasks });
           }
         }
 
@@ -296,20 +279,16 @@ export default {
           break;
         default:
         }
-        data.push({
-          title: 'Assessments',
-          tasks: assessmentOptions,
-        });
+        data.push({ title: 'Assessments', tasks: assessmentOptions });
 
         data.push({
           title: 'Additional Information',
-          tasks: [{
-            title: 'Additional Information',
-            id: 'additional-information',
-            done: this.applicationProgress.additionalInfo,
-          }],
+          tasks: [
+            { title: 'Additional Information', id: 'additional-information', done: this.applicationProgress.additionalInfo },
+          ],
         });
       }
+
       return data;
     },
     // @todo the following are copied from Review.vue. Look to share them. Maybe use vuex.
