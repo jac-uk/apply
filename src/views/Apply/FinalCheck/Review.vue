@@ -313,145 +313,13 @@
                 Change
               </RouterLink>
             </div>
-
-            <dl
-              v-for="item in application.qualifications"
-              :key="item.name"
-              class="govuk-summary-list govuk-!-margin-bottom-0"
-            >
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Qualification
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>{{ item.type | lookup }}</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  Location
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>{{ item.location | lookup }}</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div
-                v-if="item.date"
-                class="govuk-summary-list__row"
-              >
-                <dt
-                  v-if="item.type === 'barrister'"
-                  class="govuk-summary-list__key"
-                >
-                  Date completed pupillage
-                </dt>
-                <dt
-                  v-else
-                  class="govuk-summary-list__key"
-                >
-                  Date qualified
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li> {{ item.date | formatDate }}</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div
-                v-if="item.qualificationNotComplete"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Completed pupillage
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>
-                      No
-                    </li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div
-                v-if="item.qualificationNotComplete && item.details"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Did not complete pupillage notes
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li>
-                      {{ item.details }}
-                    </li>
-                  </ul>
-                </dd>
-              </div>
-            </dl>
-
-            <dl
-              v-if="vacancy.schedule2Apply"
-              class="govuk-summary-list govuk-!-margin-bottom-8"
-            >
-              <div
-                v-if="vacancy.appliedSchedule == 'schedule-2-3'"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Are you applying under Schedule 2(3)?
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li> {{ application.applyingUnderSchedule2Three | toYesNo }}</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div
-                v-if="vacancy.appliedSchedule == 'schedule-2-d'"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  Are you applying under Schedule 2(d)?
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li> {{ application.applyingUnderSchedule2d | toYesNo }}</li>
-                  </ul>
-                </dd>
-              </div>
-
-              <div
-                v-if="
-                  (vacancy.appliedSchedule=='schedule-2-3' && application.applyingUnderSchedule2Three)
-                    || (vacancy.appliedSchedule=='schedule-2-d' && application.applyingUnderSchedule2d)"
-                class="govuk-summary-list__row"
-              >
-                <dt
-                  class="govuk-summary-list__key"
-                >
-                  Explain how you've gained experience in law.
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
-                    <li v-if="vacancy.appliedSchedule=='schedule-2-3'">
-                      {{ application.experienceUnderSchedule2Three }}
-                    </li>
-                    <li v-if="vacancy.appliedSchedule=='schedule-2-d'">
-                      {{ application.experienceUnderSchedule2D }}
-                    </li>
-                  </ul>
-                </dd>
-              </div>
-            </dl>
+            <Qualifications
+              :application="application"
+            />
+            <Schedule2
+              :application="application"
+              :vacancy="vacancy"
+            />
           </div>
 
           <div v-if="showMemberships">
@@ -1402,6 +1270,8 @@ import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/Ch
 import Diversity from './Diversity';
 import WelshRequirement from './WelshRequirement';
 import AdditionalWorkingPreferences from './AdditionalWorkingPreferences';
+import Qualifications from './Qualifications.vue';
+import Schedule2 from './Schedule2.vue';
 
 export default {
   components: {
@@ -1419,6 +1289,8 @@ export default {
     Diversity,
     WelshRequirement,
     AdditionalWorkingPreferences,
+    Qualifications,
+    Schedule2,
   },
   mixins: [ApplyMixIn],
   data() {
