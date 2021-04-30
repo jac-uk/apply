@@ -283,6 +283,10 @@ export default {
       type: Object,
       required: true,
     },
+    isLegal: {
+      type: Boolean,
+      required: true,
+    },
   },
 };
 </script>

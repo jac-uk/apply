@@ -136,6 +136,7 @@
 
           <Diversity
             :application="application"
+            :is-legal="isLegal"
           />
 
           <div
