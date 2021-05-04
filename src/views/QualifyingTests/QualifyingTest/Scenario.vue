@@ -243,12 +243,14 @@ export default {
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
+    this.questionSessionStart = firebase.firestore.Timestamp.now();
   },
   methods: {
     toggleAccordion() {
       this.showDetails = !this.showDetails;
     },
     async skip() {
+      this.saveHistoryAndSession({ action: 'skip', txt: 'Skip' });
       this.$router.push(this.nextPage);
     },
     async save() {
@@ -257,13 +259,21 @@ export default {
     },
     async saveResponse(markAsCompleted) {
       // TODO only save if there are un-saved changes
+      let data = {};
       if (markAsCompleted) {
         this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+        const historyToSave = this.prepareSaveHistory({ action: 'saved' });
+        const sessionToSave = this.prepareSaveQuestionSession();
+        data = {
+          ...historyToSave,
+          ...sessionToSave,
+          responses: this.responses,
+        };  
+      } else {
+        data = {
+          responses: this.responses,
+        };
       }
-      // testQuestions: this.qualifyingTestResponse.testQuestions,
-      const data = {
-        responses: this.responses,
-      };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     },
     clickAdditional(index) {
@@ -302,6 +312,48 @@ export default {
     redirectToList() {
       this.enableScenario = false;
       this.$router.push({ name: 'qualifying-tests' });
+    },
+    async saveQuestionSession() {
+      const objToSave = this.prepareSaveQuestionSession({});
+      await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
+    },
+    async saveHistoryAndSession(data) {
+      const historyToSave = this.prepareSaveHistory(data);
+      const sessionToSave = this.prepareSaveQuestionSession();
+      const objToSave = {
+        ...historyToSave,
+        ...sessionToSave,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
+    },
+    prepareSaveHistory(data) {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        history: firebase.firestore.FieldValue.arrayUnion({
+          ...data, 
+          question: this.questionNumber - 1,
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
+    },
+    prepareSaveQuestionSession() {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        questionSession: firebase.firestore.FieldValue.arrayUnion({
+          start: this.questionSessionStart,
+          end: firebase.firestore.Timestamp.fromDate(date),
+          question: this.questionNumber - 1,
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
     },
   },
 };
