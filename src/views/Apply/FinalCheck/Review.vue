@@ -486,6 +486,7 @@
 
           <GapsInEmployment
             :application="application"
+            :is-legal="isLegal"
           />
 
           <div class="govuk-!-margin-top-9">
