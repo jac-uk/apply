@@ -39,7 +39,7 @@
                   {{ option.answer }}
                 </span>
                 <span
-                  v-if="count+1!==vacancy.additionalWorkingPreferences[index].answers.length"
+                  v-if="count + 1 !== vacancy.additionalWorkingPreferences[index].answers.length"
                 >,</span>
               </span>
             </li>
@@ -55,7 +55,7 @@
                 v-for="(choice, count) in item.selection"
                 :key="count"
               >
-                <strong>{{ count+1 }}.</strong> {{ choice }}
+                <strong>{{ count + 1 }}.</strong> {{ choice }}
               </span>
             </li>
           </ul>
@@ -79,3 +79,16 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+  .govuk-summary-list__value,
+  .govuk-summary-list__value:last-child,
+  .govuk-summary-list__key {
+    @include govuk-media-query($from: tablet) {
+      width: auto;
+    }
+  }
+  .change-link {
+    float: right;
+  }
+</style>
