@@ -12,46 +12,24 @@
 
       <ErrorSummary :errors="errors" />
 
-      <RadioGroup
+      <TextField
         id="title"
         v-model="personalDetails.title"
-        required
         label="Title"
-      >
-        <RadioItem
-          value="Mr"
-          label="Mr"
-        />
-        <RadioItem
-          value="Ms"
-          label="Ms"
-        />
-        <RadioItem
-          value="Mrs"
-          label="Mrs"
-        />
-        <RadioItem
-          value="Miss"
-          label="Miss"
-        />
-        <RadioItem
-          value="Other"
-          label="Other"
-        >
-          <TextField
-            id="otherTitleDetails"
-            v-model="personalDetails.otherTitleDetails"
-            label="Title"
-            hint=""
-          />
-        </RadioItem>
-      </RadioGroup>
+        required
+      />
 
       <TextField
-        id="fullName"
-        v-model="personalDetails.fullName"
-        label="Full name"
-        hint="You do not need to include any titles."
+        id="firstName"
+        v-model="personalDetails.firstName"
+        label="First name"
+        required
+      />
+
+      <TextField
+        id="lastName"
+        v-model="personalDetails.lastName"
+        label="Last name"
         required
       />
 
@@ -181,7 +159,8 @@ export default {
   data() {
     const defaults = {
       title: null,
-      otherTitleDetails: null,
+      firstName: null,
+      lastName: null,
       otherNames: null,
       suffix: null,
       placeOfBirth: null,
@@ -214,5 +193,5 @@ export default {
     },
   },
 };
-    
+
 </script>
