@@ -58,6 +58,22 @@
         v-model="row.qualificationNotComplete"
         label="I did not complete pupillage"
       />
+
+      <DateInput
+        v-if="row.qualificationNotComplete && !row.notCalledToBar"
+        :id="`called_to_bar_date_${index}`"
+        v-model="row.calledToBarDate"
+        label="When were you called to the bar?"
+        type="month"
+      />
+
+      <Checkbox
+        v-if="row.qualificationNotComplete"
+        :id="`called_to_bar_${index}`"
+        v-model="row.notCalledToBar"
+        label="I was not called to the bar"
+      />
+
       <TextareaInput
         v-if="row.qualificationNotComplete"
         :id="details"

@@ -19,13 +19,15 @@
         <SelectionInput
           id="location-preferences"
           v-model="application.locationPreferences"
+          :label="`'${vacancy.locationQuestion}'`"
           :title="vacancy.locationQuestion"
           :answers="vacancy.locationQuestionAnswers"
           :type="vacancy.locationQuestionType"
+          required
         /> 
 
         <button
-          :disabled="!application.locationPreferences || application.status != 'draft'"
+          :disabled="application.status != 'draft'"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -69,7 +71,7 @@ export default {
       if (this.isValid()) {
         this.application.progress.locationPreferences = true;
         await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
+        // this.$router.push({ name: 'task-list' });
       }
     },
   },
