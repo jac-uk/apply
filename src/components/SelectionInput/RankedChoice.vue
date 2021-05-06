@@ -1,41 +1,42 @@
 <template>
-  <div class="govuk-checkboxes">
-    <div
-      v-for="(answer, index) in answers"
-      :key="index"
-      class="govuk-checkboxes__item"
-    >
-      <input
-        :id="`${id}-answer-${index}`"
-        v-model="selected"
-        :name="`${id}-answer-${index}`"
-        :value="answer.answer"
-        type="checkbox"
-        class="govuk-checkboxes__input"
-        @change="update"
+  <!-- <table class="govuk-table"> -->
+  <table>
+    <tbody class="govuk-table__body">
+      <tr 
+        v-for="(answer, i) in answers"
+        :key="i"
+        class="govuk-table__row"
       >
-      <label
-        :for="`${id}-answer-${index}`"
-        class="govuk-label govuk-checkboxes__label"
-      >
-        {{ answer.answer }}
-      </label>
-      <select 
-        v-if="selected.indexOf(answer.answer) >= 0"
-        v-model="ranking[answer.answer]"
-        class="govuk-select"
-        @change="update($event, answer.answer)"
-      >
-        <option
-          v-for="score in selected.length"
-          :key="score"
-          :value="score"
+        <th
+          class="govuk-table__cell govuk-!-padding-top-0"
         >
-          {{ score }}
-        </option>
-      </select>      
-    </div>
-  </div>
+          <div class="govuk-checkboxes__item">
+            <input
+              v-model="selected"
+              :name="`${id}-answer-${i}`"
+              :value="answer.answer"
+              type="checkbox"
+              class="govuk-checkboxes__input"
+              @change="update"
+            >
+            <label
+              class="govuk-label govuk-checkboxes__label"
+              :for="`${id}-answer-${i}`"
+            >
+              {{ answer.answer }}  
+            </label>
+          </div>
+        </th>
+        <td class="govuk-table__cell">
+          <label
+            class="govuk-label govuk-checkboxes__label"
+          >
+            {{ selected.some(item => item === answer.answer) ? selected.findIndex(item => item === answer.answer) + 1 : '' }} 
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>   
 </template>
 
 <script>
@@ -72,45 +73,9 @@ export default {
       }
     }
   },
-  updated() {
-    // console.log(this.ranking);
-  },
   methods: {
-    update(event, answer) {
-      const sortRanking = {};
-      if (this.selected.length > 1) {
-        this.selected.forEach((selection, i) => {
-          sortRanking[selection] = i + 1;
-        });
-      } else { 
-        this.ranking = {
-          [`${this.selected[0]}`]: 1,
-        };
-      }
-
-      // choice swap
-      const targetValue = parseInt(event.target.value);
-      if (!isNaN(targetValue)) {
-          
-        const indexOfDuplicate = Object.values(sortRanking).findIndex((element) => element === targetValue);
-        const duplicateItem = Object.keys(sortRanking)[indexOfDuplicate];
-
-        sortRanking[duplicateItem] = sortRanking[answer];
-        sortRanking[answer] = targetValue;
-
-        this.ranking = sortRanking;
-        const rankedOrder = [];
-
-        for (const [item, rank] of Object.entries(this.ranking)) {
-          // console.log(item, rank);
-          rankedOrder[parseInt(rank) - 1] = item;
-        }
-
-        this.selected = rankedOrder;
-
-        this.$emit('input', this.selected);
-      }
-
+    update() {
+      this.$emit('input', this.selected);
     },
   },  
 };

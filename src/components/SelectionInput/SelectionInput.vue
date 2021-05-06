@@ -87,7 +87,7 @@ export default {
     typeHint(){
       return this.type === 'single-choice' ? 'Select one answer' : 
         this.type === 'multiple-choice' ? 'Select all that apply' :
-        this.type === 'ranked-choice' ? 'Select and rank all that apply. With 1 being your top choice' :
+        this.type === 'ranked-choice' ? 'Select in your order of preference' :
         '';
     },
     isSingleChoice() {
