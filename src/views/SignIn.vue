@@ -77,6 +77,7 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
+import { get } from 'lodash';
 
 export default {
   components: {
@@ -125,7 +126,14 @@ export default {
             }
           })
           .catch((error) => {
-            this.errors.push({ id: 'email', message: error.message });
+            switch (get(error, 'code', '')) {
+            case 'auth/user-not-found':
+            case 'auth/wrong-password':
+              this.errors.push({ id: 'email', message: 'The email address and/or password did not match our records. Please double-check and try again.' });
+              break;
+            default:
+              this.errors.push({ id: 'email', message: error.message });
+            }
           });
       }    
     },
