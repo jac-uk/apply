@@ -22,25 +22,25 @@
   "dependencies": {
     "@jac-uk/jac-kit": "0.0.34",
     "@ministryofjustice/frontend": "0.0.19-alpha",
-    "@sentry/browser": "^5.20.1",
-    "@sentry/integrations": "^5.20.1",
-    "core-js": "^2.6.11",
-    "firebase": "^8.0.1",
-    "firebaseui": "^4.6.1",
-    "govuk-frontend": "^3.8.0",
+    "@sentry/browser": "^5.30.0",
+    "@sentry/integrations": "^5.30.0",
+    "core-js": "^2.6.12",
+    "firebase": "^8.5.0",
+    "firebaseui": "^4.8.0",
+    "govuk-frontend": "^3.11.0",
     "jspdf": "^1.5.3",
-    "logrocket": "^1.0.10",
-    "vue": "^2.6.11",
+    "logrocket": "^1.1.0",
+    "vue": "^2.6.12",
     "vue-browser-detect-plugin": "^0.1.13",
-    "vue-gtag": "^1.11.0",
-    "vue-router": "^3.3.4",
-    "vuex": "^3.5.1",
-    "vuexfire": "^3.2.3"
+    "vue-gtag": "^1.16.1",
+    "vue-router": "^3.5.1",
+    "vuex": "^3.6.2",
+    "vuexfire": "^3.2.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.12.1",
     "@vue/cli-plugin-eslint": "^3.12.1",
-    "@vue/cli-plugin-unit-jest": "^4.4.6",
+    "@vue/cli-plugin-unit-jest": "^4.5.13",
     "@vue/cli-service": "^4.4.6",
     "@vue/test-utils": "1.0.0-beta.29",
     "babel-core": "7.0.0-bridge.0",
@@ -51,10 +51,10 @@
     "eslint-plugin-jest": "^22.21.0",
     "eslint-plugin-vue": "^5.0.0",
     "firebase-mock": "^2.3.2",
-    "firebase-tools": "^8.12.0",
+    "firebase-tools": "^8.20.0",
     "jest-extended": "^0.11.5",
-    "sass": "^1.26.10",
+    "sass": "^1.32.12",
     "sass-loader": "^7.3.1",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.12"
   }
 }
