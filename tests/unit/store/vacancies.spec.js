@@ -37,6 +37,7 @@ describe('store/vacancies', () => {
   beforeEach(() => {
     state = {
       records: [],
+      allRecords: [],
     };
   });
 
@@ -52,7 +53,7 @@ describe('store/vacancies', () => {
     describe('openVacancies', () => {
       it('returns only open vacancies', () => {
         getStaticVacancies.mockReturnValue([]);
-        const openVacancies = getters.openVacancies(state, { vacancies: mockVacancies });
+        const openVacancies = getters.openVacancies(state, { allVacancies: mockVacancies });
 
         expect(openVacancies.length).toEqual(1);
         expect(openVacancies[0].name).toEqual('OPEN VACANCY');
@@ -67,7 +68,7 @@ describe('store/vacancies', () => {
           applicationCloseDate: futureDate,
         };
 
-        const openVacancies = getters.openVacancies(state, { vacancies: [mockOpenVacancy, ...mockVacancies] });
+        const openVacancies = getters.openVacancies(state, { allVacancies: [mockOpenVacancy, ...mockVacancies] });
 
         expect(openVacancies.length).toEqual(2);
         expect(openVacancies[0].name).toEqual(mockName);
@@ -81,7 +82,7 @@ describe('store/vacancies', () => {
           applicationOpenDate: pastDate,
         };
 
-        const openVacancies = getters.openVacancies(state, { vacancies: [mockOpenVacancy, ...mockVacancies] });
+        const openVacancies = getters.openVacancies(state, { allVacancies: [mockOpenVacancy, ...mockVacancies] });
 
         expect(openVacancies.length).toEqual(2);
         expect(openVacancies[0].name).toEqual(mockName);
@@ -91,7 +92,7 @@ describe('store/vacancies', () => {
       it('returns only future vacancies', () => {
         getStaticVacancies.mockReturnValue([]);
 
-        const futureVacancies = getters.futureVacancies(state, { vacancies: mockVacancies });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: mockVacancies });
 
         expect(futureVacancies.length).toEqual(1);
         expect(futureVacancies[0].name).toEqual('FUTURE VACANCY');
@@ -105,7 +106,7 @@ describe('store/vacancies', () => {
           estimatedLaunchDate: futureDate,
         };
 
-        const futureVacancies = getters.futureVacancies(state, { vacancies: [mockFutureVacancy, ...mockVacancies] });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: [mockFutureVacancy, ...mockVacancies] });
 
         expect(futureVacancies.length).toEqual(2);
         expect(futureVacancies[0].name).toEqual(mockName);
@@ -118,7 +119,7 @@ describe('store/vacancies', () => {
           applicationOpenDate: futureDate,
         };
 
-        const futureVacancies = getters.futureVacancies(state, { vacancies: [mockFutureVacancy, ...mockVacancies] });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: [mockFutureVacancy, ...mockVacancies] });
 
         expect(futureVacancies.length).toEqual(2);
         expect(futureVacancies[0].name).toEqual(mockName);
@@ -129,7 +130,7 @@ describe('store/vacancies', () => {
       it('returns only exercises in progress', () => {
         getStaticVacancies.mockReturnValue([]);
 
-        const inProgressVacancies = getters.inProgressVacancies(state, { vacancies: mockVacancies });
+        const inProgressVacancies = getters.inProgressVacancies(state, { allVacancies: mockVacancies });
 
         expect(inProgressVacancies.length).toEqual(1);
         expect(inProgressVacancies[0].name).toEqual('PROGRESS VACANCY');
@@ -143,7 +144,7 @@ describe('store/vacancies', () => {
             applicationOpenDate: pastDate,
         };
 
-        const inProgressVacancies = getters.inProgressVacancies(state, { vacancies: [mockInProgressVacancy, ...mockVacancies] });
+        const inProgressVacancies = getters.inProgressVacancies(state, { allVacancies: [mockInProgressVacancy, ...mockVacancies] });
 
         expect(inProgressVacancies.length).toEqual(1);
         expect(inProgressVacancies[0].name).toEqual('PROGRESS VACANCY');
