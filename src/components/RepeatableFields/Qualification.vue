@@ -60,21 +60,58 @@
     <div
       v-if="row.type === 'barrister'"
     >
+      <!-- <Checkbox
+        :id="`qualification_not_complete_${index}`"
+        v-model="row.qualificationNotComplete"
+        label="Have you completed pupilage?"
+        @input="clearData(row, 'date')"
+      /> -->
+
+      <RadioGroup
+        :id="`qualification_not_complete_${index}`"
+        v-model="row.qualificationNotComplete"
+        label="Have you completed pupilage?"
+        required
+        @input="clearData(row, 'date')"
+      >
+        <RadioItem
+          :value="true"
+          label="No"
+        />
+        <!-- These feilds have to be Boolean'd this way due 
+        to the double negative in the datamodel [qualificationNotComplete] -->
+        <RadioItem
+          :value="false"
+          label="Yes"
+        />
+      </RadioGroup>
+
+      <RadioGroup
+        v-if="row.qualificationNotComplete"
+        :id="`called_to_bar_${index}`"
+        v-model="row.notCalledToBar"
+        label="Have you been called to the bar?"
+        @input="clearData(row, 'calledToBarDate')"
+      >
+        <RadioItem
+          :value="true"
+          label="No"
+        />
+        <!-- These feilds have to be Boolean'd this way due 
+        to the double negative in the datamodel [notCalledToBar] -->
+        <RadioItem
+          :value="false"
+          label="Yes"
+        />
+      </RadioGroup>
+
       <DateInput
         v-if="!row.qualificationNotComplete"
         :id="qualificationDate"
         v-model="row.date"
         label="When did you complete pupillage?"
         type="month"
-        required
-      />   
-
-      <Checkbox
-        :id="`qualification_not_complete_${index}`"
-        v-model="row.qualificationNotComplete"
-        label="I did not complete pupillage"
-        @input="clearData(row, 'date')"
-      />
+      />  
 
       <DateInput
         v-if="row.qualificationNotComplete && !row.notCalledToBar"
@@ -83,14 +120,6 @@
         label="When were you called to the bar?"
         type="month"
         required
-      />
-
-      <Checkbox
-        v-if="row.qualificationNotComplete"
-        :id="`called_to_bar_${index}`"
-        v-model="row.notCalledToBar"
-        label="I was not called to the bar"
-        @input="clearData(row, 'calledToBarDate')"
       />
 
       <TextareaInput
@@ -107,7 +136,7 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-import Checkbox from '@/components/Form/Checkbox';
+// import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -117,7 +146,7 @@ export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    Checkbox,
+    // Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
