@@ -27,8 +27,7 @@
               </RouterLink> with your new password.
             </h2>
           </div>
-          <div v-if="!resetSuccessful">
-
+          <div v-if="!resetSuccessful && validResetCode">
             <Password
               id="password"
               v-model="formData.password"
@@ -38,7 +37,6 @@
               :min-length="8"
               required
             />
-
             <button
               type="submit"
               class="govuk-button"
@@ -67,10 +65,12 @@ export default {
       formData: {},
       errors: [],
       resetCode: null,
+      validResetCode: false,
     };
   },
   mounted() {
     this.getResetCodeFromUrl();
+    this.ensureValidActionCode();
   },
   methods: {
     async onSubmit() {
@@ -92,6 +92,15 @@ export default {
         return;
       }
       this.resetCode = params.get('oobCode');
+    },
+    ensureValidActionCode() {
+      auth().checkActionCode(this.resetCode)
+        .then(() => {
+          this.validResetCode = true;
+        })
+        .catch(() => {
+          this.$router.push({ name: 'not-found' });
+        });
     },
   },
 };
