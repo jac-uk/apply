@@ -27,7 +27,7 @@
         /> 
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!application.locationPreferences || application.status != 'draft'"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
