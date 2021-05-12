@@ -25,7 +25,85 @@
       <CheckboxItem
         value="judicial-functions"
         label="The carrying-out of judicial functions of any court or tribunal"
-      />
+      >
+        <TextField
+          :id="`${id}_legal_experience`"
+          v-model="judicialFunctions.legalExperience"
+          label="Legal Experience:"
+        />
+
+        <DateInput
+          :id="`${id}_date`"
+          v-model="judicialFunctions.date"
+          label="Date:"
+        />
+
+        <TextField
+          :id="`${id}_category_of_law`"
+          v-model="judicialFunctions.categoryOfLaw"
+          label="Category of Law:"
+        />
+
+        <DateInput
+          :id="`${id}_time_engaged_start`"
+          v-model="judicialFunctions.timeEngagedStart"
+          label="Time engaged in this activity:"
+          hint="Start date"
+        />
+
+        <DateInput
+          :id="`${id}_time_engaged_end`"
+          v-model="judicialFunctions.timeEngagedEnd"
+          hint="End date"
+        />
+
+        <Checkbox
+          :id="`${id}_judicial_office`"
+          v-model="judicialFunctions.judicialOffice"
+          label="Judicial Office:"
+        >
+          <div
+            v-if="judicialFunctions.judicialOffice"
+          >
+            <TextField
+              :id="`${id}_office_type`"
+              v-model="judicialFunctions.judicialOfficeType"
+              label="Previous Judicial Office Type:"
+            />
+
+            <DateInput
+              :id="`${id}_judicial_appointment_date`"
+              v-model="judicialFunctions.judicialOfficeType"
+              label="Judicial Appointment:"
+            />
+
+            <TextField
+              :id="`${id}_nature_of_appointment`"
+              v-model="judicialFunctions.natureOfAppointment"
+              label="Nature of Appointment:"
+              hint="eg. 'fee-paid tribunal judge'"
+            />
+
+            <TextField
+              :id="`${id}_circuit_or_region`"
+              v-model="judicialFunctions.circuitOrRegion"
+              label="Circuit or Region:"
+            />
+
+            <TextField
+              :id="`${id}_juristictions`"
+              v-model="judicialFunctions.jurisdictions"
+              label="Jurisdiction:"
+            />
+
+            <TextField
+              :id="`${id}_tribunal`"
+              v-model="judicialFunctions.tribunal"
+              label="Tribunal:"
+            />
+          </div>
+        </Checkbox>
+      </CheckboxItem>
       <CheckboxItem
         value="acting-arbitrator"
         label="Acting as an arbitrator"
@@ -72,7 +150,10 @@
 <script>
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
+import Checkbox from '@/components/Form/Checkbox';
+import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
+import DateInput from '@/components/Form/DateInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
 
@@ -81,7 +162,10 @@ export default {
   components: {
     CheckboxItem,
     CheckboxGroup,
+    Checkbox,
+    TextField,
     TextareaInput,
+    DateInput,
     FormFieldError,
   },
   extends: FormField,
@@ -104,6 +188,11 @@ export default {
       type: String,
       default: '',
     },
+  },
+  data(){
+    return {
+      judicialFunctions: {},
+    };
   },
   computed: {
     localTasks: {
