@@ -143,6 +143,7 @@ import DateInput from '@/components/Form/DateInput';
 import RepeatableFields from '@/components/RepeatableFields';
 import Addresses from '@/components/RepeatableFields/Addresses';
 import Address from '@/components/Form/Address';
+import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
   components: {
@@ -181,15 +182,39 @@ export default {
       },
     };
   },
+  created() {
+    const { firstName, lastName, fullName } = this.personalDetails;
+
+    if (!firstName && !lastName) {
+      if (fullName) {
+        const result = splitFullName(fullName);
+        this.personalDetails.firstName = result[0];
+        this.personalDetails.lastName = result[1];
+      } else {
+        this.personalDetails.firstName = '';
+        this.personalDetails.lastName = '';
+      }
+    } else {
+      this.personalDetails.firstName = firstName;
+      this.personalDetails.lastName = lastName;
+    }
+  },
   methods: {
     async save() {
+      this.makeFullName();
       this.validate();
       if (this.isValid()) {
+        if (this.personalDetails.address.currentMoreThan5Years === true) {
+          this.personalDetails.address.previous = null;
+        }
         this.application.personalDetails = this.personalDetails;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'character-checks-professional-bodies' });
       }
+    },
+    makeFullName() {
+      this.personalDetails.fullName = `${this.personalDetails.firstName} ${this.personalDetails.lastName}`;
     },
   },
 };

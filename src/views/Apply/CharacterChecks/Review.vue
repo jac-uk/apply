@@ -36,18 +36,38 @@
           Title
         </dt>
         <dd class="govuk-summary-list__value">
-          <template
-            v-if="application.personalDetails.title === 'other'"
-          >
-            {{ application.personalDetails.otherTitleDetails }}
-          </template>
-          <template v-else>
-            {{ application.personalDetails.title }}
-          </template>
+          {{ application.personalDetails.title }}
         </dd>
       </div>
 
-      <div class="govuk-summary-list__row">
+      <div
+        v-if="application.personalDetails.firstName && application.personalDetails.lastName"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          First name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.personalDetails.firstName }}
+        </dd>
+      </div>
+
+      <div
+        v-if="application.personalDetails.firstName && application.personalDetails.lastName"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Last name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.personalDetails.lastName }}
+        </dd>
+      </div>
+
+      <div
+        v-if="!application.personalDetails.firstName && !application.personalDetails.lastName"
+        class="govuk-summary-list__row"
+      >
         <dt class="govuk-summary-list__key">
           Full Name
         </dt>
@@ -352,8 +372,7 @@ export default {
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
     canEdit() {
-      // TODO: Should check applicationRecord.characterChecks.status once we have it
-      return !(this.application.characterChecks && this.application.characterChecks.declaration);
+      return !(this.application.characterChecks && this.application.characterChecks.declaration && this.application.characterChecks.status === 'submitted');
     },
   },
   methods: {

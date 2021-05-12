@@ -31,7 +31,8 @@
       <RadioGroup
         id="magistrate"
         v-model="application.magistrate"
-        label="Have you been a magistrate? (TBC)"
+        label="Have you been a magistrate?"
+        required
         hint=""
       >
         <RadioItem
@@ -49,7 +50,6 @@
             <DateInput
               id="magistrateEndDate"
               v-model="application.magistrateEndDate"
-              :required="application.magistrate"
               label="Until date"
               hint="For example, 11 6 2020. Leave blank if this is your present role."
             />
@@ -126,6 +126,11 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
+        if (this.application.magistrate === false) {
+          this.application.magistrateStartDate = null;
+          this.application.magistrateEndDate = null;
+          this.application.magistrateLocation = null;
+        }
         await this.$store.dispatch('application/save', this.application);
 
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {

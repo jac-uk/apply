@@ -17,6 +17,7 @@
       v-model="row.endDate"
       label="End date"
       type="month"
+      class="govuk-!-margin-bottom-5"
     />
 
     <slot name="removeButton" />

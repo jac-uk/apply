@@ -78,6 +78,7 @@ export default {
   data() {
     const defaults = {
       declaration: null,
+      status: null,
     };
     const application = this.$store.getters['application/data']();
     application.characterChecks = { ...defaults, ...application.characterChecks };
@@ -89,6 +90,9 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
+        if (this.application.characterChecks.declaration === true) {
+          this.application.characterChecks.status = 'submitted';
+        }
         await this.$store.dispatch('application/save', this.application);
 
         this.$router.push({ name: 'character-checks-form-submitted' });
@@ -96,5 +100,5 @@ export default {
     },
   },
 };
-    
+
 </script>
