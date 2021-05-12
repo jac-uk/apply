@@ -27,7 +27,7 @@
             </label>
           </div>
         </th>
-        <td class="govuk-table__cell">
+        <td class="govuk-table__cell  govuk-!-padding-top-0">
           <label
             class="govuk-label govuk-checkboxes__label"
           >
