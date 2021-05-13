@@ -60,13 +60,6 @@
     <div
       v-if="row.type === 'barrister'"
     >
-      <!-- <Checkbox
-        :id="`qualification_not_complete_${index}`"
-        v-model="row.qualificationNotComplete"
-        label="Have you completed pupilage?"
-        @input="clearData(row, 'date')"
-      /> -->
-
       <RadioGroup
         :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
@@ -74,15 +67,15 @@
         required
         @input="clearData(row, 'date')"
       >
-        <RadioItem
-          :value="true"
-          label="No"
-        />
         <!-- These feilds have to be Boolean'd this way due 
         to the double negative in the datamodel [qualificationNotComplete] -->
         <RadioItem
           :value="false"
           label="Yes"
+        />
+        <RadioItem
+          :value="true"
+          label="No"
         />
       </RadioGroup>
 
@@ -93,28 +86,29 @@
         label="Have you been called to the bar?"
         @input="clearData(row, 'calledToBarDate')"
       >
-        <RadioItem
-          :value="true"
-          label="No"
-        />
         <!-- These feilds have to be Boolean'd this way due 
         to the double negative in the datamodel [notCalledToBar] -->
         <RadioItem
           :value="false"
           label="Yes"
         />
+        <RadioItem
+          :value="true"
+          label="No"
+        />
       </RadioGroup>
 
       <DateInput
-        v-if="!row.qualificationNotComplete"
+        v-if="row.qualificationNotComplete != true"
         :id="qualificationDate"
         v-model="row.date"
         label="When did you complete pupillage?"
         type="month"
+        required
       />  
 
       <DateInput
-        v-if="row.qualificationNotComplete && !row.notCalledToBar"
+        v-if="row.qualificationNotComplete && row.notCalledToBar != true"
         :id="`called_to_bar_date_${index}`"
         v-model="row.calledToBarDate"
         label="When were you called to the bar?"
