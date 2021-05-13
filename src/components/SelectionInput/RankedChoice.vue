@@ -27,9 +27,9 @@
             </label>
           </div>
         </th>
-        <td class="govuk-table__cell  govuk-!-padding-top-0">
+        <td class="govuk-table__cell">
           <label
-            class="govuk-label govuk-checkboxes__label"
+            class="govuk-heading-s govuk-!-margin-bottom-0"
           >
             {{ selected.some(item => item === answer.answer) ? selected.findIndex(item => item === answer.answer) + 1 : '' }} 
           </label>
