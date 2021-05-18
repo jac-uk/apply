@@ -29,10 +29,12 @@
       hint="Leave this blank if you're currently in this role."
       type="month"
     />
+
     <LawRelatedTasks
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"
       :other-tasks.sync="row.otherTasks"
+      :judicial-functions.sync="row.judicialFunctions"
       required
     />
 
