@@ -37,6 +37,7 @@
         id="otherNames"
         v-model="personalDetails.otherNames"
         label="Other names (optional)"
+        hint="Other names or professional name or maiden name."
       />
 
       <TextField
@@ -44,6 +45,41 @@
         v-model="personalDetails.suffix"
         label="Suffix (optional)"
       />
+
+      <RadioGroup
+        id="gender"
+        v-model="equalityAndDiversitySurvey.gender"
+        required
+        label="What is your sex?"
+      >
+        <RadioItem
+          value="female"
+          label="Female"
+        />
+        <RadioItem
+          value="male"
+          label="Male"
+        />
+        <RadioItem
+          value="gender-neutral"
+          label="Gender neutral"
+        />
+        <RadioItem
+          value="other-gender"
+          label="Other sex"
+        >
+          <TextField
+            id="other-gender-details"
+            v-model="equalityAndDiversitySurvey.otherGenderDetails"
+            label="Other sex"
+            class="govuk-!-width-two-thirds"
+          />
+        </RadioItem>
+        <RadioItem
+          value="prefer-not-to-say"
+          label="Prefer not to say"
+        />
+      </RadioGroup>
 
       <DateInput
         id="dateOfBirth"
@@ -164,18 +200,25 @@ export default {
       lastName: null,
       otherNames: null,
       suffix: null,
+      gender: null,
+      otherGenderDetails: null,
+      changedGender: null,
       placeOfBirth: null,
+      nationalInsuranceNumber: null,
       address: {
         current: {},
         previous: [],
         currentMoreThan5Years: null,
       },
     };
-    const data = this.$store.getters['candidate/personalDetails']();
-    const personalDetails = { ...defaults, ...data };
+    const data1 = this.$store.getters['candidate/personalDetails']();
+    const data2 = this.$store.getters['candidate/equalityAndDiversitySurvey']();
+    const personalDetails = { ...defaults, ...data1 };
+    const equalityAndDiversitySurvey = { ...defaults, ...data2 };
     const application = this.$store.getters['application/data']();
     return {
       personalDetails,
+      equalityAndDiversitySurvey,
       application,
       repeatableFields: {
         Addresses,
@@ -208,8 +251,10 @@ export default {
           this.personalDetails.address.previous = null;
         }
         this.application.personalDetails = this.personalDetails;
+        this.application.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
         this.$router.push({ name: 'character-checks-professional-bodies' });
       }
     },

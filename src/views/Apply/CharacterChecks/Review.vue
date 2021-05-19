@@ -102,6 +102,22 @@
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
+          What is your sex?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <p
+            v-if="application.equalityAndDiversitySurvey.gender == 'other-gender'"
+            class="govuk-body govuk-!-margin-bottom-0"
+          >
+            <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+            {{ application.equalityAndDiversitySurvey.otherGenderDetails }}
+          </p>
+          <span v-else>{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
           Date of birth
         </dt>
         <dd class="govuk-summary-list__value">
@@ -122,7 +138,7 @@
 
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          NI Number
+          National Insurance Number
         </dt>
         <dd class="govuk-summary-list__value">
           {{ application.personalDetails.nationalInsuranceNumber }}
@@ -211,17 +227,6 @@
           </ol>
         </dd>
       </div>
-
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          National Insurance number
-        </dt>
-        <dd
-          class="govuk-summary-list__value"
-        >
-          {{ application.personalDetails.nationalInsuranceNumber }}
-        </dd>
-      </div>
     </dl>
 
     <div class="govuk-!-margin-top-9">
@@ -258,6 +263,27 @@
           </p>
           <p class="govuk-body">
             {{ qualification.membershipNumber }}
+          </p>
+        </dd>
+      </div>
+    </dl>
+
+    <dl class="govuk-summary-list">
+      <div
+        v-if="application.magistrate"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Magistrate
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+        >
+          <p class="govuk-body">
+            {{ application.magistrateStartDate | formatDate }} - {{ application.magistrateEndDate | formatDate }}
+          </p>
+          <p class="govuk-body">
+            {{ application.magistrateLocation}}
           </p>
         </dd>
       </div>
