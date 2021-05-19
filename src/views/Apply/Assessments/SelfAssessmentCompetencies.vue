@@ -117,7 +117,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import DownloadLink from '@/components/DownloadLink';
-import FileUpload from '@/components/Form/FileUpload';
+import FileUpload from '@jac-uk/jac-kit/draftComponents/Form/FileUpload';
 
 export default {
   components: {
@@ -149,7 +149,7 @@ export default {
           });
         }
       }
-    }    
+    }
     return {
       application: application,
     };
