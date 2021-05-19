@@ -143,6 +143,17 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
+        this.application.qualifications.forEach(q => {
+          if (q.notCalledToBar && q.calledToBarDate) {
+            q.calledToBarDate = null;
+          }
+          if (q.qualificationNotComplete && q.date) {
+            q.date = null;
+          }
+          if ((q.notCalledToBar === false || q.qualificationNotComplete === false) && q.details) {
+            q.details = null;
+          }
+        });
         this.application.progress.relevantQualifications = true;
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'task-list' });

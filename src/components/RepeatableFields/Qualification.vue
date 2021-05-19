@@ -8,6 +8,7 @@
       v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
+      class="govuk-!-margin-top-4"
       required
     >
       <RadioItem
@@ -50,7 +51,7 @@
 
     <DateInput
       v-if="row.type !== 'barrister'"
-      :id="qualificationDate"
+      :id="`qualification_date_${index}`"
       v-model="row.date"
       label="When did you qualify?"
       type="month"
@@ -65,14 +66,22 @@
         v-model="row.qualificationNotComplete"
         label="Have you completed pupilage?"
         required
-        @input="clearData(row, 'date')"
       >
-        <!-- These feilds have to be Boolean'd this way due 
+        <!-- These feilds have to be Boolean'd this way due
         to the double negative in the datamodel [qualificationNotComplete] -->
         <RadioItem
           :value="false"
           label="Yes"
-        />
+        >
+          <DateInput
+            :id="`qualification_date_${index}`"
+            v-model="row.date"
+            label="When did you complete pupillage?"
+            type="month"
+            required
+          />
+        </RadioItem>
+
         <RadioItem
           :value="true"
           label="No"
@@ -84,43 +93,35 @@
         :id="`called_to_bar_${index}`"
         v-model="row.notCalledToBar"
         label="Have you been called to the bar?"
-        @input="clearData(row, 'calledToBarDate')"
+        required
       >
-        <!-- These feilds have to be Boolean'd this way due 
+        <!-- These feilds have to be Boolean'd this way due
         to the double negative in the datamodel [notCalledToBar] -->
         <RadioItem
           :value="false"
           label="Yes"
-        />
+        >
+          <DateInput
+            :id="`called_to_bar_date_${index}`"
+            v-model="row.calledToBarDate"
+            label="When were you called to the bar?"
+            type="month"
+            required
+          />
+        </RadioItem>
+
         <RadioItem
           :value="true"
           label="No"
         />
       </RadioGroup>
 
-      <DateInput
-        v-if="row.qualificationNotComplete != true"
-        :id="qualificationDate"
-        v-model="row.date"
-        label="When did you complete pupillage?"
-        type="month"
-        required
-      />  
-
-      <DateInput
-        v-if="row.qualificationNotComplete && row.notCalledToBar != true"
-        :id="`called_to_bar_date_${index}`"
-        v-model="row.calledToBarDate"
-        label="When were you called to the bar?"
-        type="month"
-        required
-      />
-
       <TextareaInput
-        v-if="row.qualificationNotComplete"
+        v-if="row.qualificationNotComplete && row.notCalledToBar === true"
         :id="`qualification_details_${index}`"
         v-model="row.details"
-        hint="Please provide some additional information"
+        label="Please provide some additional information"
+        required
       />
     </div>
 
@@ -130,7 +131,6 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-// import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -140,7 +140,6 @@ export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    // Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
@@ -154,16 +153,6 @@ export default {
     index: {
       required: true,
       type: Number,
-    },
-  },
-  computed: {
-    qualificationDate() {
-      return `qualification_date_${this.index}`;
-    },
-  },
-  methods: {
-    async clearData(target, key) {
-      await delete target[key]; 
     },
   },
 };
