@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.38.0",
+  "version": "1.39.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode develop",
@@ -29,6 +29,7 @@
     "firebaseui": "^4.6.1",
     "govuk-frontend": "^3.8.0",
     "jspdf": "^1.5.3",
+    "lodash": "^4.17.21",
     "logrocket": "^1.0.10",
     "vue": "^2.6.11",
     "vue-browser-detect-plugin": "^0.1.13",
