@@ -23,7 +23,7 @@
     "@jac-uk/jac-kit": "0.0.34",
     "@ministryofjustice/frontend": "0.0.19-alpha",
     "@sentry/browser": "^5.20.1",
-    "@sentry/integrations": "^5.20.1",
+    "@sentry/integrations": "^5.30.0",
     "core-js": "^2.6.11",
     "firebase": "^8.0.1",
     "firebaseui": "^4.6.1",
