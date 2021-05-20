@@ -202,6 +202,9 @@ export default {
         return this.tasks;
       },
       set(val) {
+        if (val.some(item => item !== 'judicial-functions')) {
+          this.$emit('update:judicialFunctions', {});
+        }
         this.$emit('update:tasks', val);
       },
     },
