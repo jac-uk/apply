@@ -383,26 +383,28 @@
 
 <script>
 import BackLink from '@/components/BackLink';
+import { functions } from '@/firebase';
 
 export default {
   components: {
     BackLink,
   },
-
   computed: {
     application() {
-      return this.$store.getters['application/data']();
+      return this.$store.state.application.record;
     },
     hasHMRCCheck() {
       const vacancy = this.$store.state.vacancy.record;
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
     canEdit() {
-      return !(this.application.characterChecks && this.application.characterChecks.declaration && this.application.characterChecks.status === 'submitted');
+      return !(this.application.characterChecks && this.application.characterChecks.declaration
+        && this.application.characterChecks.status === 'submitted');
     },
   },
   methods: {
-    next () {
+    async next () {
+      await functions.httpsCallable('updateCharacterChecksStatus')({ applicationId: this.application.id, exerciseId: this.exerciseId, status: 'submitted' });
       this.$router.push({ name: 'character-checks-declaration' });
     },
   },

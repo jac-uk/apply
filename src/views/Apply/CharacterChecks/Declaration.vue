@@ -94,11 +94,9 @@ export default {
           this.application.characterChecks.status = 'submitted';
         }
         await this.$store.dispatch('application/save', this.application);
-
         this.$router.push({ name: 'character-checks-form-submitted' });
       }
     },
   },
 };
-
 </script>
