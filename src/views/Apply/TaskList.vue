@@ -52,7 +52,7 @@
                     :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${hyphenization(task.title)}`"
                     :to="{name: task.id}"
                   >
-                    {{ task.title }}
+                    {{ task.title }} {{ task.visible }}
                   </RouterLink>
                 </div>
                 <div class="govuk-grid-column-one-quarter">
@@ -166,11 +166,13 @@ export default {
       }
     },
     taskGroups() {
-      const data = [];
+      let data = [];
       if (this.applicationProgress) {
 
+        const taskGroupSelected = this.vacancy.configuration.taskGroupSelected;
+
         const characterInformation = {
-          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
+          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation, visible: taskGroupSelected.indexOf('character-information-review') !== -1,
         };
 
         characterInformation.id = this.getCharacterInformationPageId();
@@ -178,9 +180,9 @@ export default {
         data.push({
           title: 'Account profile',
           tasks: [
-            { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
+            { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails, visible: taskGroupSelected.indexOf('apply-personal-details') !== -1 },
             characterInformation,
-            { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
+            { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey, visible: taskGroupSelected.indexOf('apply-personal-detailsequality-and-diversity-survey') !== -1 },
           ],
         });
 
@@ -310,6 +312,16 @@ export default {
           }],
         });
       }
+      data = data.filter(group => {
+        const myTasks = group.tasks.filter(task => {
+          const toShow = task.visible;
+          console.log('toShow', task.id,  toShow, typeof toShow);
+          return toShow;
+        });
+        return myTasks.length > 0;
+      });
+      // eslint-disable-next-line no-console
+      console.log('data to return', data);
       return data;
     },
     // @todo the following are copied from Review.vue. Look to share them. Maybe use vuex.
@@ -443,6 +455,8 @@ export default {
       this.application.characterInformationV2 = characterInformation;
       await this.$store.dispatch('application/save', this.application);
     }
+    // eslint-disable-next-line no-console
+    console.log('vacancy', this.vacancy);
   },
   methods: {
     reviewApplication() {
