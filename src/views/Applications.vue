@@ -93,13 +93,22 @@
                     View advert
                   </RouterLink>
                   <RouterLink
-                    v-if="application.characterChecks && application.characterChecks.declaration === true"
+                    v-if="application.characterChecks && application.characterChecks.status === 'requested'"
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-declaration', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Continue with character checks consent form
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.characterChecks && application.characterChecks.status === 'completed'"
                     :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
                     :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
                     role="button"
                     data-module="govuk-button"
                   >
-                    View good character checks consent
+                    View sent character checks consent form
                   </RouterLink>
                 </div>
               </div>
@@ -108,37 +117,6 @@
         </ul>
 
         <hr class="govuk-section-break govuk-section-break--xl">
-
-        <!--
-         <h2 class="govuk-heading-m">
-          Previous applications
-        </h2>
-        <table class="govuk-table">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Circuit judge</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 17 February 2018
-            </td>
-            <td class="govuk-table__cell">
-              Selected
-            </td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Recorder</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 12 April 2017
-            </td>
-            <td class="govuk-table__cell">
-              Not selected
-            </td>
-          </tr>
-        </table> -->
       </div>
     </div>
   </div>
@@ -163,7 +141,6 @@ export default {
   },
   methods: {
     isOpen(dateExtended, exerciseId) {
-      // const today = new Date();
       const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
       if (vacancy) {
         return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, dateExtended);
