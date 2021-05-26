@@ -88,14 +88,14 @@
                 <RouterLink
                   v-if="application.characterChecks && application.characterChecks.status === 'requested'"
                   :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                  :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                  :to="{ name: 'character-checks-intro', params: { id: application.exerciseId } }"
                   role="button"
                   data-module="govuk-button"
                 >
                   Continue with character checks consent form
                 </RouterLink>
                 <RouterLink
-                  v-if="application.characterChecks && application.characterChecks.status === 'submitted'"
+                  v-if="application.characterChecks && application.characterChecks.status === 'completed'"
                   :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
                   :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
                   role="button"

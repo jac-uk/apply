@@ -67,6 +67,7 @@ import BackLink from '@/components/BackLink';
 import Form from '@/components/Form/Form';
 import Checkbox from '@/components/Form/Checkbox';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import { functions } from '@/firebase';
 
 export default {
   components: {
@@ -86,13 +87,19 @@ export default {
       application,
     };
   },
+  computed: {
+    applicationRecord() {
+      return this.$store.state.application.record;
+    },
+  },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
         if (this.application.characterChecks.declaration === true) {
-          this.application.characterChecks.status = 'submitted';
+          this.application.characterChecks.status = 'completed';
         }
+        await functions.httpsCallable('updateCharacterChecksStatus')({ applicationId: this.applicationRecord.id, exerciseId: this.applicationRecord.exerciseId, status: 'completed' });
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'character-checks-form-submitted' });
       }
