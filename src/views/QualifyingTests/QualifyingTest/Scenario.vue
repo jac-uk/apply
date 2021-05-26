@@ -10,8 +10,8 @@
       >
         {{ qualifyingTestResponse.qualifyingTest.title }}
       </h1>
-      <div 
-        v-if="enableScenario" 
+      <div
+        v-if="enableScenario"
         class="govuk-grid-row"
       >
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
@@ -60,8 +60,8 @@
           </div>
         </div>
 
-        <div 
-          v-if="enableScenario" 
+        <div
+          v-if="enableScenario"
           class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop"
         >
           <div class="jac-scenario__additional">

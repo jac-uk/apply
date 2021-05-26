@@ -11,26 +11,32 @@ export default {
       let firestoreRef = firestore.collection('vacancies');
       if (params && params.vacancyIds.length) {
         firestoreRef = firestoreRef.where(firebase.firestore.FieldPath.documentId(), 'in', params.vacancyIds);
+        return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       } else {
         firestoreRef = firestoreRef.orderBy('referenceNumber', 'desc');
+        return bindFirestoreRef('allRecords', firestoreRef, { serialize: vuexfireSerialize });
       }
-      return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
-      return unbindFirestoreRef('records');
+      unbindFirestoreRef('records');
+      unbindFirestoreRef('allRecords');
+      return true;
     }),
   },
   state: {
     records: [],
-  },
+    allRecords: [],
+    },
 
   getters: {
     vacancies: state => {
       return state.records;
     },
+    allVacancies: state => {
+      return state.allRecords;
+    },
     openVacancies: (state, getters) => {
-      const vacancies = getters.vacancies.concat(getStaticVacancies());
-
+      const vacancies = getters.allVacancies.concat(getStaticVacancies());
       return vacancies.filter(vacancy => {
 
           const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
@@ -38,17 +44,16 @@ export default {
           const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
 
           if (!isDate(openDate)) return false;
-          
+
           // FIXME: workaround for hardcoded times
           openDate.setHours(13);
           closeDate.setHours(13);
-          
+
           return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates;
       });
     },
     futureVacancies: (state, getters) => {
-      const vacancies = getters.vacancies.concat(getStaticVacancies());
-
+      const vacancies = getters.allVacancies.concat(getStaticVacancies());
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
@@ -62,8 +67,7 @@ export default {
       });
     },
     inProgressVacancies: (state, getters) => {
-      const vacancies = getters.vacancies.concat(getStaticVacancies());
-
+      const vacancies = getters.allVacancies.concat(getStaticVacancies());
       return vacancies.filter(vacancy => {
         if (!vacancy.applicationCloseDate) {
           return false;
@@ -77,7 +81,7 @@ export default {
       });
     },
     getVacancy: (state, getters) => (vacancyId) => {
-      const vacancies = getters.vacancies;
+      const vacancies = getters.allVacancies;
       const returnVacancies = vacancies.filter(vacancy => vacancy.id === vacancyId);
       return returnVacancies.length == 1 ? returnVacancies[0] : {};
     },

@@ -58,57 +58,87 @@
 
             <div class="moj-button-menu">
               <div class="moj-button-menu__wrapper">
-                <RouterLink
-                  v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
-                  :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
-                  :to="{ name: 'task-list', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
+                <div
+                  v-if="!vacancyExists(application.exerciseId)"
+                  class="govuk-body govuk-!-margin-top-3 govuk-!-margin-bottom-0"
                 >
-                  Continue with application
-                </RouterLink>
-                <RouterLink
-                  v-else
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item  info-link--applications--view-sent-application-${application.exerciseId}`"
-                  :to="{ name: 'review', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
-                >
-                  <span v-if="application.status == 'draft'">View draft application</span>
-                  <span v-else>View sent application</span>
-                </RouterLink>
-                <RouterLink
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
-                  role="button"
-                  data-module="govuk-button"
-                  :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
-                >
-                  View advert
-                </RouterLink>
-                <RouterLink
-                  v-if="application.characterChecks && application.characterChecks.status === 'requested'"
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                  :to="{ name: 'character-checks-intro', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
-                >
-                  Continue with character checks consent form
-                </RouterLink>
-                <RouterLink
-                  v-if="application.characterChecks && application.characterChecks.status === 'completed'"
-                  :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                  :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
-                  role="button"
-                  data-module="govuk-button"
-                >
-                  View sent character checks consent form
-                </RouterLink>
+                  Data is temporarily unavailable.
+                </div>
+                <div v-else>
+                  <RouterLink
+                    v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
+                    :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
+                    :to="{ name: 'task-list', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Continue with application
+                  </RouterLink>
+                  <RouterLink
+                    v-else
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item  info-link--applications--view-sent-application-${application.exerciseId}`"
+                    :to="{ name: 'review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    <span v-if="application.status == 'draft'">View draft application</span>
+                    <span v-else>View sent application</span>
+                  </RouterLink>
+                  <RouterLink
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-advert-${application.exerciseId}`"
+                    role="button"
+                    data-module="govuk-button"
+                    :to="{ name: 'vacancy-details', params: { id: application.exerciseId } }"
+                  >
+                    View advert
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.characterChecks && application.characterChecks.declaration === true"
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    View good character checks consent
+                  </RouterLink>
+                </div>
               </div>
             </div>
           </li>
         </ul>
 
         <hr class="govuk-section-break govuk-section-break--xl">
+
+        <!--
+         <h2 class="govuk-heading-m">
+          Previous applications
+        </h2>
+        <table class="govuk-table">
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
+                Circuit judge</a>
+            </td>
+            <td class="govuk-table__cell">
+              Closed 17 February 2018
+            </td>
+            <td class="govuk-table__cell">
+              Selected
+            </td>
+          </tr>
+          <tr class="govuk-table__row">
+            <td class="govuk-table__cell">
+              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
+                Recorder</a>
+            </td>
+            <td class="govuk-table__cell">
+              Closed 12 April 2017
+            </td>
+            <td class="govuk-table__cell">
+              Not selected
+            </td>
+          </tr>
+        </table> -->
       </div>
     </div>
   </div>
@@ -122,9 +152,10 @@ import isVacancyOpen from '@/helpers/isVacancyOpen';
 
 export default {
   computed: {
-    ...mapState('applications', [
-      'records',
-    ]),
+    ...mapState('applications', ['records']),
+    allVacancies() {
+      return this.$store.getters['vacancies/allVacancies'];
+    },
   },
   created() {
     this.$store.dispatch('applications/bind');
@@ -132,13 +163,19 @@ export default {
   },
   methods: {
     isOpen(dateExtended, exerciseId) {
+      // const today = new Date();
       const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
       if (vacancy) {
         return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, dateExtended);
       } else {
         return false;
       }
-
+    },
+    vacancyExists(exerciseId) {
+      if (!this.allVacancies) {
+        return false;
+      }
+      return this.allVacancies.find(vacancy => vacancy.id === exerciseId) !== undefined;
     },
   },
 };
