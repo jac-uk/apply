@@ -433,6 +433,45 @@
       </div>
     </dl>
 
+    <div class="govuk-!-margin-top-9">
+      <h2
+        class="govuk-heading-l"
+        style="display:inline-block;"
+      >
+        Declaration
+      </h2>
+      <RouterLink
+        v-if="canEdit"
+        class="govuk-link govuk-body-m change-link"
+        style="display:inline-block;"
+        :to="{name: 'character-checks-declaration'}"
+      >
+        Change
+      </RouterLink>
+    </div>
+
+    <dl class="govuk-summary-list">
+      <div
+        v-if="application.characterChecks.declaration"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Signed declaration
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+        >
+          {{ application.characterChecks.declaration | toYesNo }}
+        </dd>
+      </div>
+      <div
+        v-else
+        class="govuk-body"
+      >
+        No information provided
+      </div>
+    </dl>
+
     <button
       v-if="canEdit"
       class="govuk-button"
