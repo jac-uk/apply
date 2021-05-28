@@ -85,7 +85,7 @@
           />
         </div>
 
-        <FileUpload 
+        <FileUpload
           id="suitability-statement-file"
           ref="suitability-statement"
           v-model="application.uploadedSuitabilityStatement"
@@ -115,6 +115,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -152,6 +153,9 @@ export default {
     };
   },
   computed: {
+    applicationId() {
+      return this.$route.params.applicationId;
+    },
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
@@ -185,6 +189,13 @@ export default {
       if (this.isValid()) {
         this.application.progress.statementOfSuitability = true;
         await this.$store.dispatch('application/save', this.application);
+
+        logEvent('info', 'Statement of Suitability uploaded', {
+          applicationId: this.applicationId,
+          candidateName: this.application.personalDetails.fullName,
+          exerciseRef: this.application.exerciseRef,
+        });
+
         this.$router.push({ name: 'task-list' });
       }
     },

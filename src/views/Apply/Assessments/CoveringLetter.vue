@@ -16,7 +16,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <FileUpload 
+        <FileUpload
           id="covering-letter-upload"
           ref="covering-letter"
           v-model="application.uploadedCoveringLetter"
@@ -42,6 +42,7 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import FileUpload from '@/components/Form/FileUpload';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -61,6 +62,9 @@ export default {
     };
   },
   computed: {
+    applicationId() {
+      return this.$route.params.applicationId;
+    },
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
@@ -74,10 +78,16 @@ export default {
   methods: {
     async save() {
       this.validate();
-
       if (this.isValid()) {
         this.application.progress.coveringLetter = true;
         await this.$store.dispatch('application/save', this.application);
+
+        logEvent('info', 'Covering Letter uploaded', {
+          applicationId: this.applicationId,
+          candidateName: this.application.personalDetails.fullName,
+          exerciseRef: this.application.exerciseRef,
+        });
+
         this.$router.push({ name: 'task-list' });
       }
     },
