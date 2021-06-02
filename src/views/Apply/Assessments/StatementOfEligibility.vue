@@ -14,7 +14,7 @@
 
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
-            v-for="(item, index) in application.selectionCriteriaAnswers"
+            v-for="(item, index) in vacancy.selectionCriteria"
             :key="index"
           >
             <p
@@ -31,7 +31,7 @@
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
-              v-model="item.answer"
+              v-model="application.selectionCriteriaAnswers[index].answer"
               label="Do you meet this requirement?"
             >
               <RadioItem
@@ -40,7 +40,7 @@
               >
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
-                  v-model="item.answerDetails"
+                  v-model="application.selectionCriteriaAnswers[index].answerDetails"
                   label="In 250 words, tell us how."
                   required
                 />
@@ -87,17 +87,15 @@ export default {
     };
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
-    if (application.selectionCriteriaAnswers.length === 0) {
-      const vacancy = this.$store.state.vacancy.record;
-      if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
-        for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          application.selectionCriteriaAnswers.push({
-            title: vacancy.selectionCriteria[i].title,
-            text: vacancy.selectionCriteria[i].text,
-            answer: null,
-            answerDetails: null,
-          });
-        }
+    const vacancy = this.$store.state.vacancy.record;
+    if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
+      const aSCArray = [];
+      for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+        aSCArray.push({
+          answer: null,
+          answerDetails: null,
+        });
+        application.selectionCriteriaAnswers = aSCArray;
       }
     }
     return {

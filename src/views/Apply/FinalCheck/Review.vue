@@ -1708,12 +1708,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  {{ item.title }}
-                  <!-- eslint-disable -->
-                  <!-- <p
-                    v-html="exercise.selectionCriteria[index].text"
-                  /> -->
-                  <!-- eslint-enable -->
+                  {{ vacancy.selectionCriteria[index].title }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="item.answer">
