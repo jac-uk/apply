@@ -64,7 +64,7 @@
       <RadioGroup
         :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
-        label="Have you completed pupilage?"
+        label="Have you completed pupillage?"
         required
       >
         <!-- These feilds have to be Boolean'd this way due
@@ -76,7 +76,7 @@
           <DateInput
             :id="`qualification_date_${index}`"
             v-model="row.date"
-            label="When did you complete pupilage?"
+            label="When did you complete pupillage?"
             type="month"
             required
           />

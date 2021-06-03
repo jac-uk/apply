@@ -837,7 +837,7 @@
                   v-if="item.type === 'barrister'"
                   class="govuk-summary-list__key"
                 >
-                  Date completed pupilage
+                  Date completed pupillage
                 </dt>
                 <dt
                   v-else
@@ -860,7 +860,7 @@
                   class="govuk-summary-list__row"
                 >
                   <dt class="govuk-summary-list__key">
-                    Completed pupilage
+                    Completed pupillage
                   </dt>
                   <dd class="govuk-summary-list__value">
                     <ul class="govuk-list">
@@ -908,7 +908,7 @@
                   class="govuk-summary-list__row"
                 >
                   <dt class="govuk-summary-list__key">
-                    Did not complete pupilage notes
+                    Did not complete pupillage notes
                   </dt>
                   <dd class="govuk-summary-list__value">
                     <ul class="govuk-list">
