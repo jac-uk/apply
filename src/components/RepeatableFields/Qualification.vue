@@ -76,7 +76,7 @@
           <DateInput
             :id="`qualification_date_${index}`"
             v-model="row.date"
-            label="When did you complete pupillage?"
+            label="When did you complete pupilage?"
             type="month"
             required
           />
