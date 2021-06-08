@@ -40,6 +40,7 @@ export default {
         newDoc.exerciseId = rootState.vacancy.record.id;
         newDoc.exerciseName = rootState.vacancy.record.name;
         newDoc.exerciseRef = rootState.vacancy.record.referenceNumber;
+        newDoc.createdAt = firebase.firestore.FieldValue.serverTimestamp();
         const ref = await collection.add(newDoc);
         dispatch('bind', ref.id);
       }

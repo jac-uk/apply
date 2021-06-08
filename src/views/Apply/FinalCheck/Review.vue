@@ -38,125 +38,127 @@
             {{ vacancy.name }}
           </h1>
 
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Personal details
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'apply-personal-details'}"
-            >
-              Change
-            </RouterLink>
+          <div v-if="applicationParts.personalDetails">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Personal details
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'apply-personal-details'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <PersonalDetails
+              :application="application"
+            />
           </div>
 
-          <PersonalDetails
-            :application="application"
-          />
-
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Character information
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: destinationUrl}"
-            >
-              Change
-            </RouterLink>
+          <div v-if="applicationParts.characterInformation">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Character information
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: destinationUrl}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl v-if="isVersion2 && application.characterInformationV2">
+              <CriminalOffencesSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <FixedPenaltiesSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <MotoringOffencesSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <FinancialMattersSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <ProfessionalConductSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <FurtherInformationSummary
+                :character-information="application.characterInformationV2"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <CharacterDeclarationSummary
+                :character-information="application.characterInformationV2"
+              />
+            </dl>
+            <dl v-else>
+              <CharacterInformationSummaryV1
+                :character-information="application.characterInformation || {}"
+              />
+            </dl>
           </div>
 
-          <dl v-if="isVersion2 && application.characterInformationV2">
-            <CriminalOffencesSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
+          <div v-if="applicationParts.equalityAndDiversitySurvey">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Equality and diversity information
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'equality-and-diversity-survey'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <Diversity
+              :application="application"
+              :is-legal="isLegal"
             />
-            <FixedPenaltiesSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
-            <MotoringOffencesSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
-            <FinancialMattersSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
-            <ProfessionalConductSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
-            <FurtherInformationSummary
-              :character-information="application.characterInformationV2"
-              :can-edit="isDraftApplication"
-              :display-change-link="isInformationReview"
-            />
-            <CharacterDeclarationSummary
-              :character-information="application.characterInformationV2"
-            />
-          </dl>
-          <dl v-else>
-            <CharacterInformationSummaryV1
-              :character-information="application.characterInformation || {}"
-            />
-          </dl>
-
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Equality and diversity information
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'equality-and-diversity-survey'}"
-            >
-              Change
-            </RouterLink>
           </div>
 
-          <Diversity
-            :application="application"
-            :is-legal="isLegal"
-          />
-
-          <div
-            v-if="vacancy.locationQuestion"
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Location preferences
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'location-preferences'}"
-            >
-              Change
-            </RouterLink>
+          <div v-if="applicationParts.locationPreferences">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Location preferences
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'location-preferences'}"
+              >
+                Change
+              </RouterLink>
+            </div>
             <dl class="govuk-summary-list">
               <dt class="govuk-summary-list__key">
                 {{ vacancy.locationQuestion }}
@@ -182,24 +184,23 @@
             </dl>
           </div>
 
-          <div
-            v-if="vacancy.jurisdictionQuestion"
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Jurisdiction preferences
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'jurisdiction-preferences'}"
-            >
-              Change
-            </RouterLink>
+          <div v-if="applicationParts.jurisdictionPreferences">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Jurisdiction preferences
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'jurisdiction-preferences'}"
+              >
+                Change
+              </RouterLink>
+            </div>
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -227,7 +228,7 @@
             </dl>
           </div>
 
-          <div v-if="vacancy.welshRequirement">
+          <div v-if="applicationParts.welshPosts">
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-l"
@@ -250,52 +251,49 @@
             />
           </div>
 
-          <div
-            v-if="vacancy.yesSalaryDetails"
-            class="govuk-!-margin-top-9"
-          >
-            <h2 class="govuk-heading-l">
-              Part Time Working Preferences
-            </h2>
+          <div v-if="applicationParts.partTimeWorkingPreferences && vacancy.yesSalaryDetails">
+            <div class="govuk-!-margin-top-9">
+              <h2 class="govuk-heading-l">
+                Part Time Working Preferences
+              </h2>
 
-            <dl class="govuk-summary-list">
-              <dt class="govuk-summary-list__key">
-                {{ vacancy.yesSalaryDetails }}
-              </dt>
-              <dd
-                class="govuk-summary-list__value"
-              >
-                {{ application.partTimeWorkingPreferencesDetails }}
-              </dd>
-            </dl>
+              <dl class="govuk-summary-list">
+                <dt class="govuk-summary-list__key">
+                  {{ vacancy.yesSalaryDetails }}
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                >
+                  {{ application.partTimeWorkingPreferencesDetails }}
+                </dd>
+              </dl>
+            </div>
           </div>
 
-          <div
-            v-if="application.additionalWorkingPreferences"
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Additional Preferences
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'additional-working-preferences'}"
-            >
-              Change
-            </RouterLink>
-
+          <div v-if="applicationParts.additionalWorkingPreferences">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Additional Preferences
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'additional-working-preferences'}"
+              >
+                Change
+              </RouterLink>
+            </div>
             <AdditionalWorkingPreferences
               :application="application"
               :vacancy="vacancy"
             />
           </div>
 
-          <div v-if="isLegal">
+          <div v-if="applicationParts.relevantQualifications">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -323,7 +321,7 @@
             />
           </div>
 
-          <div v-if="showMemberships">
+          <div v-if="applicationParts.relevantMemberships">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -348,7 +346,7 @@
             />
           </div>
 
-          <div v-if="isNonLegal">
+          <div v-if="applicationParts.relevantExperience">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -416,7 +414,7 @@
             </dl>
           </div>
 
-          <div v-if="isLegal">
+          <div v-if="applicationParts.postQualificationWorkExperience">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -441,7 +439,7 @@
             />
           </div>
 
-          <div v-if="isLegal && vacancy.previousJudicialExperienceApply">
+          <div v-if="applicationParts.judicialExperience">
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-l"
@@ -465,61 +463,64 @@
             />
           </div>
 
-          <div
-            class="govuk-!-margin-top-9"
-          >
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
+          <div v-if="applicationParts.employmentGaps">
+            <div
+              class="govuk-!-margin-top-9"
             >
-              Gaps in employment
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link"
-              style="display:inline-block;"
-              :to="{name: 'employment-gaps'}"
-            >
-              Change
-            </RouterLink>
-          </div>
-
-          <GapsInEmployment
-            :application="application"
-            :is-legal="isLegal"
-          />
-
-          <div class="govuk-!-margin-top-9">
-            <h2
-              class="govuk-heading-l"
-              style="display:inline-block;"
-            >
-              Reasonable length of service
-            </h2>
-            <RouterLink
-              v-if="isDraftApplication && canEdit"
-              class="govuk-link govuk-body-m change-link info-link--review-final-check--reasonable-length-of-service--change"
-              style="display:inline-block;"
-              :to="{name: 'reasonable-length-of-service'}"
-            >
-              Change
-            </RouterLink>
-          </div>
-          <dl class="govuk-summary-list govuk-!-margin-bottom-8">
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Can work a resonable length of service
-              </dt>
-              <dd class="govuk-summary-list__value">
-                {{ application.canGiveReasonableLOS | toYesNo }}
-                <p v-if="application.canGiveReasonableLOS == false">
-                  {{ application.cantGiveReasonableLOSDetails }}
-                </p>
-              </dd>
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Gaps in employment
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'employment-gaps'}"
+              >
+                Change
+              </RouterLink>
             </div>
-          </dl>
+            <GapsInEmployment
+              :application="application"
+              :is-legal="isLegal"
+            />
+          </div>
 
-          <div v-if="showAssessorsDetails">
+          <div v-if="applicationParts.reasonableLengthOfService">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Reasonable length of service
+              </h2>
+              <RouterLink
+                v-if="isDraftApplication && canEdit"
+                class="govuk-link govuk-body-m change-link info-link--review-final-check--reasonable-length-of-service--change"
+                style="display:inline-block;"
+                :to="{name: 'reasonable-length-of-service'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl class="govuk-summary-list govuk-!-margin-bottom-8">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Can work a resonable length of service
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.canGiveReasonableLOS | toYesNo }}
+                  <p v-if="application.canGiveReasonableLOS == false">
+                    {{ application.cantGiveReasonableLOSDetails }}
+                  </p>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div v-if="applicationParts.assessorsDetails">
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-l"
@@ -595,7 +596,7 @@
             </dl>
           </div>
 
-          <div v-if="showLeadershipJudgeDetails">
+          <div v-if="applicationParts.leadershipJudgeDetails">
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-l"
@@ -654,7 +655,7 @@
             </dl>
           </div>
 
-          <div v-if="application.additionalInfo">
+          <div v-if="applicationParts.additionalInfo">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -730,7 +731,7 @@
           </div>
 
           <div
-            v-if="showStatementOfSuitability"
+            v-if="applicationParts.statementOfSuitability"
             id="assessments-heading"
             class="govuk-!-margin-top-9"
           >
@@ -764,7 +765,7 @@
           </div>
 
           <div
-            v-if="showSelfAssessment"
+            v-if="applicationParts.selfAssessment"
             id="self-assessment-heading"
             class="govuk-!-margin-top-9"
           >
@@ -799,7 +800,7 @@
           </div>
 
           <div
-            v-if="showCV"
+            v-if="applicationParts.cv"
             id="cv-heading"
             class="govuk-!-margin-top-9"
           >
@@ -834,7 +835,7 @@
           </div>
 
           <div
-            v-if="showCoveringLetter"
+            v-if="applicationParts.coveringLetter"
             id="covering-letter-heading"
             class="govuk-!-margin-top-9"
           >

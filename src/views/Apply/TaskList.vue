@@ -148,136 +148,129 @@ export default {
     taskGroups() {
       const data = [];
       if (this.applicationProgress) {
-
-        data.push({
-          title: 'Account profile',
-          tasks: [
-            { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            { title: 'Character information', id: this.getCharacterInformationPageId(), done: this.applicationProgress.characterInformation },
-            { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
-          ],
-        });
+        const accoutProfileTaskList = [];
+        if (this.hasApplicationPart('personalDetails')) {
+          accoutProfileTaskList.push({ title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails });
+        }
+        if (this.hasApplicationPart('characterInformation')) {
+          accoutProfileTaskList.push({ title: 'Character information', id: this.getCharacterInformationPageId(), done: this.applicationProgress.characterInformation });
+        }
+        if (this.hasApplicationPart('equalityAndDiversitySurvey')) {
+          accoutProfileTaskList.push({ title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey });
+        }
+        if (accoutProfileTaskList.length) {
+          data.push({
+            title: 'Account profile',
+            tasks: accoutProfileTaskList,
+          });
+        }
 
         const workingPreferencesTasklist = [];
-        if (this.vacancy.isSPTWOffered) {
+        if (this.hasApplicationPart('partTimeWorkingPreferences')) {
           workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
         }
-        if (this.vacancy.locationQuestion) {
+        if (this.hasApplicationPart('locationPreferences')) {
           workingPreferencesTasklist.push({ title: 'Location preferences', id: 'location-preferences', done: this.applicationProgress.locationPreferences });
         }
-        if (this.vacancy.jurisdictionQuestion) {
+        if (this.hasApplicationPart('jurisdictionPreferences')) {
           workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
         }
-        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
+        if (this.hasApplicationPart('additionalWorkingPreferences')) {
           workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
         }
-        if (this.vacancy.welshRequirement) {
+        if (this.hasApplicationPart('welshPosts')) {
           workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
         }
-        if (workingPreferencesTasklist.length > 0) {
+        if (workingPreferencesTasklist.length) {
           data.push({ title: 'Working preferences', tasks: workingPreferencesTasklist });
         }
 
         if (this.isLegal) {
           const tasks = [];
-          tasks.push({ title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications });
-          tasks.push({ title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience });
-          if (this.vacancy.previousJudicialExperienceApply) {
+          if (this.hasApplicationPart('relevantQualifications')) {
+            tasks.push({ title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications });
+          }
+          if (this.hasApplicationPart('postQualificationWorkExperience')) {
+            tasks.push({ title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience });
+          }
+          if (this.hasApplicationPart('judicialExperience')) {
             tasks.push({ title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience });
           }
-          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
-          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
-          data.push({ title: 'Qualifications and experience', tasks: tasks });
+          if (this.hasApplicationPart('employmentGaps')) {
+            tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
+          }
+          if (this.hasApplicationPart('reasonableLengthOfService')) {
+            tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
+          }
+          if (tasks.length) {
+            data.push({ title: 'Qualifications and experience', tasks: tasks });
+          }
         }
 
         if (this.isNonLegal) {
           const tasks = [];
-          if (this.vacancy.memberships && this.vacancy.memberships.length) {
-            if (this.vacancy.memberships.indexOf('none') === -1) {
-              tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
-            }
+          if (this.hasApplicationPart('relevantMemberships')) {
+            tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
           }
-          tasks.push({ title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience });
-          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
-          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
+          if (this.hasApplicationPart('relevantExperience')) {
+            tasks.push({ title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience });
+          }
+          if (this.hasApplicationPart('employmentGaps')) {
+            tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
+          }
+          if (this.hasApplicationPart('reasonableLengthOfService')) {
+            tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
+          }
           if (tasks.length) {
             data.push({ title: 'Memberships and Experience', tasks: tasks });
           }
         }
 
         const assessmentOptions = [];
-        if (this.showAssessorsDetails) {
+        if (this.hasApplicationPart('assessorsDetails')) {
           assessmentOptions.push({ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails });
         }
-        if (this.showLeadershipJudgeDetails) {
+        if (this.hasApplicationPart('leadershipJudgeDetails')) {
           assessmentOptions.push({ title: 'Leadership Judge details', id: 'leadership-judge-details', done: this.applicationProgress.leadershipJudgeDetails });
         }
-        switch (this.vacancy.assessmentOptions) {
-        case 'self-assessment-with-competencies':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          break;
-        case 'self-assessment-with-competencies-and-cv':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'self-assessment-with-competencies-and-covering-letter':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'self-assessment-with-competencies-and-cv-and-covering-letter':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'statement-of-suitability-with-competencies':
-          // @todo what happens to leadership version?
+        if (this.hasApplicationPart('statementOfSuitability')) {
           assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          // assessmentOptions.push({ title: 'Statement of suitability', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-cv':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'statement-of-eligibility':
-          if (this.vacancy.aSCApply && this.vacancy.selectionCriteria && this.vacancy.selectionCriteria.length) {
-            assessmentOptions.push({ title: 'Statement of eligibility', id: 'statement-of-eligibility', done: this.applicationProgress.statementOfEligibility });
-          }
-          break;
-        case 'none':
-          break;
-        default:
         }
-        data.push({ title: 'Assessments', tasks: assessmentOptions });
+        if (this.hasApplicationPart('coveringLetter')) {
+          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
+        }
+        if (this.hasApplicationPart('cv')) {
+          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
+        }
+        if (this.hasApplicationPart('statementOfEligibility')) {
+          assessmentOptions.push({ title: 'Statement of eligibility', id: 'statement-of-eligibility', done: this.applicationProgress.statementOfEligibility });
+        }
+        if (this.hasApplicationPart('selfAssessment')) {
+          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
+        }
+        if (assessmentOptions.length) {
+          data.push({ title: 'Assessments', tasks: assessmentOptions });
+        }
 
-        data.push({
-          title: 'Additional Information',
-          tasks: [
-            { title: 'Additional Information', id: 'additional-information', done: this.applicationProgress.additionalInfo },
-          ],
-        });
+        if (this.hasApplicationPart('additionalInfo')) {
+          data.push({
+            title: 'Additional Information',
+            tasks: [
+              { title: 'Additional Information', id: 'additional-information', done: this.applicationProgress.additionalInfo },
+            ],
+          });
+        }
       }
-
       return data;
     },
   },
   async created() {
-    const characterInformation = this.$store.getters['candidate/characterInformation']();
-    if (characterInformation && !this.application.characterInformationV2) {
-      this.application.characterInformationV2 = characterInformation;
-      await this.$store.dispatch('application/save', this.application);
-    }
+    // TODO check why we were doing the following?
+    // const characterInformation = this.$store.getters['candidate/characterInformation']();
+    // if (characterInformation && !this.application.characterInformationV2) {
+    //   this.application.characterInformationV2 = characterInformation;
+    //   await this.$store.dispatch('application/save', this.application);
+    // }
   },
   methods: {
     reviewApplication() {
@@ -314,6 +307,12 @@ export default {
       if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
         return 'character-information-review';
       }
+    },
+    hasApplicationPart(part) {
+      if (this.applicationParts) {
+        return this.applicationParts[part];
+      }
+      return true;  // default is to show all parts
     },
   },
 };
