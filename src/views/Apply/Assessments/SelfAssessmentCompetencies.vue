@@ -118,6 +118,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import DownloadLink from '@/components/DownloadLink';
 import FileUpload from '@/components/Form/FileUpload';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -149,12 +150,15 @@ export default {
           });
         }
       }
-    }    
+    }
     return {
       application: application,
     };
   },
   computed: {
+    applicationId() {
+      return this.$route.params.applicationId;
+    },
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
@@ -184,6 +188,13 @@ export default {
       if (this.isValid()) {
         this.application.progress.selfAssessmentCompetencies = true;
         await this.$store.dispatch('application/save', this.application);
+
+        logEvent('info', 'Self-assessment & Competencies uploaded', {
+          applicationId: this.applicationId,
+          candidateName: this.application.personalDetails.fullName,
+          exerciseRef: this.application.exerciseRef,
+        });
+
         this.$router.push({ name: 'task-list' });
       }
     },
