@@ -26,83 +26,87 @@
         value="judicial-functions"
         label="The carrying-out of judicial functions of any court or tribunal"
       >
-        <TextField
-          :id="`${id}_legal_experience`"
-          v-model="localJudicialFunctions.legalExperience"
-          label="Legal Experience:"
-        />
-
-        <DateInput
-          :id="`${id}_date`"
-          v-model="localJudicialFunctions.date"
-          label="Date:"
-        />
-
-        <TextField
-          :id="`${id}_category_of_law`"
-          v-model="localJudicialFunctions.categoryOfLaw"
-          label="Category of Law:"
-        />
-
-        <DateInput
-          :id="`${id}_time_engaged_start`"
-          v-model="localJudicialFunctions.timeEngagedStart"
-          label="Time engaged in this activity:"
-          hint="Start date"
-        />
-
-        <DateInput
-          :id="`${id}_time_engaged_end`"
-          v-model="localJudicialFunctions.timeEngagedEnd"
-          hint="End date"
-        />
-
-        <Checkbox
-          :id="`${id}_judicial_office`"
-          v-model="localJudicialFunctions.judicialOffice"
-          label="Judicial Office:"
+        <div
+          v-if="judicialFunctions"
         >
-          <div
-            v-if="localJudicialFunctions.judicialOffice"
+          <TextField
+            :id="`${id}_legal_experience`"
+            v-model="localJudicialFunctions.legalExperience"
+            label="Legal Experience:"
+          />
+
+          <DateInput
+            :id="`${id}_date`"
+            v-model="localJudicialFunctions.date"
+            label="Date:"
+          />
+
+          <TextField
+            :id="`${id}_category_of_law`"
+            v-model="localJudicialFunctions.categoryOfLaw"
+            label="Category of Law:"
+          />
+
+          <DateInput
+            :id="`${id}_time_engaged_start`"
+            v-model="localJudicialFunctions.timeEngagedStart"
+            label="Time engaged in this activity:"
+            hint="Start date"
+          />
+
+          <DateInput
+            :id="`${id}_time_engaged_end`"
+            v-model="localJudicialFunctions.timeEngagedEnd"
+            hint="End date"
+          />
+
+          <Checkbox
+            :id="`${id}_judicial_office`"
+            v-model="localJudicialFunctions.judicialOffice"
+            label="Judicial Office:"
           >
-            <TextField
-              :id="`${id}_office_type`"
-              v-model="localJudicialFunctions.judicialOfficeType"
-              label="Previous Judicial Office Type:"
-            />
+            <div
+              v-if="localJudicialFunctions.judicialOffice"
+            >
+              <TextField
+                :id="`${id}_office_type`"
+                v-model="localJudicialFunctions.judicialOfficeType"
+                label="Previous Judicial Office Type:"
+              />
 
-            <DateInput
-              :id="`${id}_judicial_appointment_date`"
-              v-model="localJudicialFunctions.judicialAppointmentDate"
-              label="Judicial Appointment date:"
-            />
+              <DateInput
+                :id="`${id}_judicial_appointment_date`"
+                v-model="localJudicialFunctions.judicialAppointmentDate"
+                label="Judicial Appointment date:"
+              />
 
-            <TextField
-              :id="`${id}_nature_of_appointment`"
-              v-model="localJudicialFunctions.natureOfAppointment"
-              label="Nature of Appointment:"
-              hint="eg. 'fee-paid tribunal judge'"
-            />
+              <TextField
+                :id="`${id}_nature_of_appointment`"
+                v-model="localJudicialFunctions.natureOfAppointment"
+                label="Nature of Appointment:"
+                hint="eg. 'fee-paid tribunal judge'"
+              />
 
-            <TextField
-              :id="`${id}_circuit_or_region`"
-              v-model="localJudicialFunctions.circuitOrRegion"
-              label="Circuit or Region:"
-            />
+              <TextField
+                :id="`${id}_circuit_or_region`"
+                v-model="localJudicialFunctions.circuitOrRegion"
+                label="Circuit or Region:"
+              />
 
-            <TextField
-              :id="`${id}_juristiction`"
-              v-model="localJudicialFunctions.jurisdiction"
-              label="Jurisdiction:"
-            />
+              <TextField
+                :id="`${id}_juristiction`"
+                v-model="localJudicialFunctions.jurisdiction"
+                label="Jurisdiction:"
+              />
 
-            <TextField
-              :id="`${id}_tribunal`"
-              v-model="localJudicialFunctions.tribunal"
-              label="Tribunal:"
-            />
-          </div>
-        </Checkbox>
+              <TextField
+                :id="`${id}_tribunal`"
+                v-model="localJudicialFunctions.tribunal"
+                label="Tribunal:"
+              />
+            </div>
+          </Checkbox>
+        </div>
       </CheckboxItem>
       <CheckboxItem
         value="acting-arbitrator"
@@ -190,10 +194,8 @@ export default {
     },
     judicialFunctions: {
       type: Object,
-      default: () => {
-        return {};
-      },
-      required: true,
+      default: () => null,
+      required: false,
     },
   },
   computed: {
@@ -202,9 +204,6 @@ export default {
         return this.tasks;
       },
       set(val) {
-        if (val.some(item => item !== 'judicial-functions')) {
-          this.$emit('update:judicialFunctions', {});
-        }
         this.$emit('update:tasks', val);
       },
     },
@@ -220,14 +219,6 @@ export default {
       get() {
         return this.judicialFunctions;
       },
-    },
-  },
-  watch: {
-    localJudicialFunctions: {
-      handler(val){
-        this.$emit('update:judicialFunctions', val);
-      },
-      deep: true,
     },
   },
   methods: {

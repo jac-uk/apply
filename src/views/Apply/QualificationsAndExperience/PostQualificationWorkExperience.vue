@@ -59,5 +59,20 @@ export default {
       },
     };
   },
+  methods: {
+    async save() {
+      this.validate();
+      this.application.experience.forEach((item, index)=> {
+        if (!(item.tasks.some(task => task === 'judicial-functions'))) {
+          this.application.experience[index].judicialFunctions = {};
+        }
+      });
+      if (this.isValid()) {
+        this.application.progress.postQualificationWorkExperience = true;
+        await this.$store.dispatch('application/save', this.application);
+        this.$router.push({ name: 'task-list' });
+      }
+    },
+  },
 };
 </script>
