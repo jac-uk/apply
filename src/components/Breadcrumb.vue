@@ -1,7 +1,10 @@
 <template>
-  <div class="breadcrumb">
-    <span><router-link to="/">Home</router-link></span> >
-    <span
+  <div class="breadcrumb govuk-breadcrumbs">
+    <ol class="govuk-breadcrumbs__list">
+        <li class="govuk-breadcrumbs__list-item">
+            <span><router-link to="/" class="govuk-breadcrumbs__link">Home</router-link></span>
+        </li>
+    <li class="govuk-breadcrumbs__list-item"
       v-for="item in breadcrumbs"
       :key="item.href"
     >
@@ -9,9 +12,10 @@
         {{ item.title }}
       </span>
       <span v-else>
-        <router-link :to="item.href">{{ item.title }}</router-link> >
+        <router-link :to="item.href" class="govuk-breadcrumbs__link">{{ item.title }}</router-link>
       </span>
-    </span>
+    </li>
+    </ol>
   </div>
 </template>
 
@@ -60,5 +64,8 @@ export default {
 <style scoped>
   .breadcrumb {
     margin: 15px 0;
+  }
+  .govuk-breadcrumbs__link:hover {
+    text-decoration-thickness: max(3px, .1875rem, .12em);
   }
 </style>
