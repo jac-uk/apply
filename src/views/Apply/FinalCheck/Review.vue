@@ -163,7 +163,7 @@
               >
                 {{ application.personalDetails.reasonableAdjustments | toYesNo }}
                 <ul
-                  v-if="application.personalDetails.reasonableAdjustmentsDetails"
+                  v-if="!!application.personalDetails.reasonableAdjustments && application.personalDetails.reasonableAdjustmentsDetails"
                   class="govuk-!-margin-top-1"
                 >
                   <li>
