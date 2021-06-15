@@ -27,14 +27,13 @@
         label="The carrying-out of judicial functions of any court or tribunal"
       >
         <div
-          v-if="judicialFunctions"
+          v-if="showJudicialFunctions"
         >
           <TextField
             :id="`${id}_legal_experience`"
             v-model="localJudicialFunctions.legalExperience"
             label="Legal Experience:"
           />
-
           <DateInput
             :id="`${id}_date`"
             v-model="localJudicialFunctions.date"
@@ -152,9 +151,9 @@
 </template>
 
 <script>
+import Checkbox from '@/components/Form/Checkbox';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import Checkbox from '@/components/Form/Checkbox';
 import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 import DateInput from '@/components/Form/DateInput';
@@ -164,9 +163,9 @@ import FormField from '@/components/Form/FormField';
 export default {
   name: 'LawRelatedTasks',
   components: {
+    Checkbox,
     CheckboxItem,
     CheckboxGroup,
-    Checkbox,
     TextField,
     TextareaInput,
     DateInput,
@@ -187,6 +186,11 @@ export default {
       type: String,
       default: null,
     },
+    showJudicialFunctions: {
+      required: false,
+      type: Boolean,
+      default: () => false,
+    },
     otherTasks: {
       type: String,
       default: '',
@@ -194,9 +198,29 @@ export default {
     },
     judicialFunctions: {
       type: Object,
-      default: () => null,
+      default: () => {},
       required: false,
     },
+  },
+  data() {
+    const defaults = {
+      legalExperience: null,
+      date: null,
+      categoryOfLaw: null,
+      timeEngagedStart: null,
+      timeEngagedEnd: null,
+      judicialOffice: null,
+      judicialOfficeType: null,
+      judicialAppointmentDate: null,
+      natureOfAppointment: null,
+      circuitOrRegion: null,
+      jurisdiction: null,
+      tribunal: null,
+    };
+    const functions = { ...defaults, ...this.judicialFunctions };
+    return {
+      localJudicialFunctions: functions,
+    };
   },
   computed: {
     localTasks: {
@@ -213,11 +237,6 @@ export default {
       },
       set(val) {
         this.$emit('update:otherTasks', val);
-      },
-    },
-    localJudicialFunctions: {
-      get() {
-        return this.judicialFunctions;
       },
     },
   },
