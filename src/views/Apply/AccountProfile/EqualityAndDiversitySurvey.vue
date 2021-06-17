@@ -17,7 +17,7 @@
         />
 
         <p class="govuk-body-l">
-          The JAC is committed to equality and diversity and monitors selection processes to ensure that they are fair. 
+          The JAC is committed to equality and diversity and monitors selection processes to ensure that they are fair.
           If you do not want to disclose your diversity data in any given area, please select ‘Prefer not to say’ for the relevant question.
         </p>
         <p class="govuk-body-l">
@@ -25,7 +25,7 @@
             class="govuk-link info-link--equality-and-diversity--equal-merit-approach"
             href="https://www.judicialappointments.gov.uk/equal-merit"
             target="_blank"
-          >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit, 
+          >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit,
           your diversity monitoring information will not play any part in the selection process.
         </p>
         <p class="govuk-body-l">
@@ -36,7 +36,7 @@
           >Outreach</a>”, to support our statutory duty to encourage diversity in the pool of applicants for judicial appointment.
         </p>
         <p class="govuk-body-l">
-          If you are recommended for an appointment we will also share your information with the Ministry of Justice, 
+          If you are recommended for an appointment we will also share your information with the Ministry of Justice,
           Judicial Office and Her Majesty's Courts and Tribunal Service.
         </p>
 

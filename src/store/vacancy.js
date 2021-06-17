@@ -45,27 +45,6 @@ export default {
       if (closeDate === null) return null;
       return new Date(closeDate);
     },
-    isLegal: (state) => {
-      return state.record.typeOfExercise === 'legal' || state.record.typeOfExercise === 'leadership';
-    },
-    isNonLegal: (state) => {
-      return state.record.typeOfExercise === 'non-legal' || state.record.typeOfExercise === 'leadership-non-legal';
-    },
-    applicationParts: (state) => {
-      if (state.record === null) return null;
-      if (state.record.applicationContent && state.record.applicationContent.registration) {
-        return state.record.applicationContent.registration;
-      }
-      return {};
-    },
-    isApplicationComplete: (state, getters, rootState) => {
-      const application = rootState.application.record;
-      if (!(application && application.progress)) return false;
-      const applicationParts = getters.applicationParts;
-      if (!applicationParts) return false;
-      const partsToComplete = Object.keys(applicationParts).filter(part => applicationParts[part] === true);
-      const incompleteParts = partsToComplete.filter(part => application.progress[part] !== true);
-      return incompleteParts.length === 0;
-    },
+
   },
 };
