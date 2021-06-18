@@ -48,6 +48,8 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.3",
+    "bufferutil": "^4.0.1",
+    "canvas": "^2.5.0",
     "clone": "^2.1.2",
     "eslint": "^5.16.0",
     "eslint-plugin-jest": "^22.21.0",
@@ -59,9 +61,6 @@
     "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1"
-  },
-  "peerDependencies": {
-    "postcss": "8.2.15"
   },
   "resolutions": {
     "lodash.merge": "4.6.2",
