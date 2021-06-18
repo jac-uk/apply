@@ -332,9 +332,9 @@ function configuredApplicationParts(data) {
 
 // application parts up to and including current stage
 function applicationParts(data) {
+  const applicationParts = {};
   if (data.applicationContent) {
     const applicationContent = applicationContentList(data);
-    const applicationParts = {};
     const state = currentState(data);
     let stateFound = false;
     for (let i = applicationContent.length - 1; i >= 0; --i) {
@@ -343,16 +343,18 @@ function applicationParts(data) {
         applicationContent[i].parts.forEach(part => applicationParts[part] = true);
       }
     }
-    return applicationParts;
+  } else {
+    exerciseApplicationParts(data).forEach(part => applicationParts[part] = true);
   }
-  return {};
+  return applicationParts;
 }
 // application parts in current stage (n.b. returns registration by default)
 function currentApplicationParts(data) {
   if (data.applicationContent && data.state) {
     return data.applicationContent[currentState(data)];
+  } else {
+    return applicationParts(data);
   }
-  return [];
 }
 // are there application parts in current stage (not registration)
 function isMoreInformationNeeded(data) {
