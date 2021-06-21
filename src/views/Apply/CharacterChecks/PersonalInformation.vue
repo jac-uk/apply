@@ -36,7 +36,7 @@
       <TextField
         id="otherNames"
         v-model="personalDetails.otherNames"
-        label="Other names (optional)"
+        label="Other names (Known As)"
         hint="Other names or professional name or maiden name."
       />
 
