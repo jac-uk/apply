@@ -146,7 +146,7 @@ export default {
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
-        } 
+        }
       }
       else {
         this.scrollToTop();
@@ -159,7 +159,7 @@ export default {
           const candidate = this.createCandidate(result);
           if (candidate) {
             if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
+              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
             } else {
               this.$router.push({ name: 'applications' });
             }
