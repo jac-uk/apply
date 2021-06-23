@@ -200,7 +200,6 @@
             <StartButton
               v-if="isDraftApplication"
               class="govuk-!-margin-top-5 govuk-!-margin-left-3 govuk-button--success"
-              @click="save"
             >
               Save and continue
             </StartButton>
