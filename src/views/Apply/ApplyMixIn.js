@@ -24,6 +24,9 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+    application() {
+      return this.$store.state.application.record;
+    },
     isLegal() {
       return isLegal(this.vacancy);
     },
@@ -37,13 +40,10 @@ export default {
       return currentApplicationParts(this.vacancy);
     },
     isMoreInformationNeeded() {
-      return isMoreInformationNeeded(this.vacancy);
+      return isMoreInformationNeeded(this.vacancy, this.application);
     },
     isApplicationComplete() {
-      return isApplicationComplete(this.vacancy);
-    },
-    application () {
-      return this.$store.state.application.record;
+      return isApplicationComplete(this.vacancy, this.application);
     },
     vacancyCloseTime() {  // TODO check how this differs from simply calling getCloseDate
       const applicationCloseDate = this.$store.getters['vacancy/getCloseDate'];
@@ -54,7 +54,13 @@ export default {
       return this.application.status === 'draft';
     },
     canApply () {
-      return this.isDraftApplication && this.isVacancyOpen && this.isApplicationComplete;
+      if (this.isDraftApplication && this.isVacancyOpen && this.isApplicationComplete) {
+        return true;
+      } else if (this.isMoreInformationNeeded && this.isApplicationComplete) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
   mounted() {
@@ -66,5 +72,24 @@ export default {
         self.isVacancyOpen = self.$store.getters['vacancy/isOpen']();
       }, 60 * 1000);
     }
+  },
+  methods: {
+    canSave(formId) {
+      if (this.isDraftApplication && this.isVacancyOpen) {  // vacancy is draft & open
+        return true;
+      } else if (this.isMoreInformationNeeded && this.currentApplicationParts[formId]) { // vacancy needs more info and current form is part of that info
+        return true;
+      } else {
+        return false;
+      }
+    },
+    async save() {
+      this.validate();
+      if (this.isValid() && this.formId) {
+        this.formData.progress[this.formId] = true;
+        await this.$store.dispatch('application/save', this.formData);
+        this.$router.push({ name: 'task-list' });
+      }
+    },
   },
 };

@@ -93,8 +93,18 @@ export default {
     record: null,
   },
   getters: {
-    data: (state) => () => {
-      return clone(state.record);
+    data: (state) => (objectToPopulate) => {
+      const data = clone(state.record);
+      if (objectToPopulate) {
+        Object.keys(objectToPopulate).forEach(key => {
+          if (data[key] !== undefined) {
+            objectToPopulate[key] = data[key];
+          }
+        });
+        return objectToPopulate;
+      } else {
+        return data;
+      }
     },
     getExtendedDate(state) {
       if (state.record && state.record.dateExtension) {

@@ -178,7 +178,7 @@ export default {
         return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, application.dateExtension);
       case 'applied':
         // check whether extra info is needed
-        return isMoreInformationNeeded(vacancy);
+        return isMoreInformationNeeded(vacancy, application);
       default:
         return false;
       }

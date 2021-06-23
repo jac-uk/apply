@@ -16,7 +16,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <FileUpload 
+        <FileUpload
           id="covering-letter-upload"
           ref="covering-letter"
           v-model="application.uploadedCoveringLetter"

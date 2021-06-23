@@ -497,7 +497,7 @@
                 Reasonable length of service
               </h2>
               <RouterLink
-                v-if="isDraftApplication && canEdit && currentApplicationParts.reasonableLengthOfService"
+                v-if="canEdit && currentApplicationParts.reasonableLengthOfService"
                 class="govuk-link govuk-body-m change-link info-link--review-final-check--reasonable-length-of-service--change"
                 style="display:inline-block;"
                 :to="{name: 'reasonable-length-of-service'}"
@@ -872,7 +872,6 @@
         <!-- END download-as-pdf-div -->
 
         <button
-          v-if="isDraftApplication"
           :disabled="!canApply"
           class="govuk-button govuk-!-margin-top-8"
         >
@@ -956,7 +955,12 @@ export default {
       return this.isVersion2 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
     },
     canEdit () {
-      return this.isDraftApplication && this.isVacancyOpen;
+      if (this.isDraftApplication && this.isVacancyOpen) {
+        return true;
+      } else if (this.isMoreInformationNeeded) {
+        return true;
+      }
+      return false;
     },
   },
   methods: {

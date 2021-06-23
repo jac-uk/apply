@@ -22,7 +22,8 @@
 
         <RadioGroup
           id="can-give-reasonable-los"
-          v-model="application.canGiveReasonableLOS"
+          v-model="formData.canGiveReasonableLOS"
+          required
         >
           <RadioItem
             :value="true"
@@ -34,14 +35,17 @@
           >
             <TextareaInput
               id="cant-give-reasonable-los-details"
-              v-model="application.cantGiveReasonableLOSDetails"
+              v-model="formData.cantGiveReasonableLOSDetails"
               label="You can set out here why you think you should still be considered for this role.
               The JAC will consider it when assessing your eligibility for this role."
             />
           </RadioItem>
         </RadioGroup>
 
-        <button class="govuk-button info-btn--reasonable-length-of-service--continue">
+        <button
+          :disabled="!canSave(formId)"
+          class="govuk-button info-btn--reasonable-length-of-service--continue"
+        >
           Continue
         </button>
       </div>
@@ -56,6 +60,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
+import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   components: {
@@ -66,21 +71,21 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults =  {
       canGiveReasonableLOS: null,
       cantGiveReasonableLOSDetails: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'reasonableLengthOfService',
+      formData: formData,
     };
   },
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
     lengthOfService() {
       if (this.vacancy.reasonableLengthService === 'other') {
         return this.vacancy.otherLOS;
@@ -94,18 +99,7 @@ export default {
       } else {
         return this.vacancy.retirementAge;
       }
-    },    
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.reasonableLengthOfService = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
     },
   },
-
 };
 </script>
