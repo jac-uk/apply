@@ -439,7 +439,6 @@ function isApplicationComplete(vacancy, application) {
   if (!requiredParts) return false;
   const partsToComplete = Object.keys(requiredParts).filter(part => requiredParts[part] === true);
   const incompleteParts = partsToComplete.filter(part => application.progress[part] !== true);
-  // console.log('incompleteParts', incompleteParts);
   return incompleteParts.length === 0;
 }
 

@@ -8,9 +8,13 @@
         <BackLink class="govuk-!-margin-top-0" />
 
         <Countdown
+          v-if="isVacancyOpen"
           :close-time="vacancyCloseTime"
           :countdown-length="60"
         />
+        <Warning v-if="isVacancyClosed">
+          This vacancy is now closed.
+        </Warning>
 
         <ErrorSummary :errors="errors" />
 
@@ -872,6 +876,7 @@
         <!-- END download-as-pdf-div -->
 
         <button
+          v-if="!isVacancyClosed"
           :disabled="!canApply"
           class="govuk-button govuk-!-margin-top-8"
         >
@@ -887,6 +892,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
 import ApplyMixIn from '../ApplyMixIn';
+import Warning from '@/components/Page/Warning';
 import PersonalDetails from './PersonalDetails';
 import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
 import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
@@ -910,6 +916,7 @@ export default {
   components: {
     BackLink,
     ErrorSummary,
+    Warning,
     PersonalDetails,
     CharacterInformationSummaryV1,
     CharacterDeclarationSummary,

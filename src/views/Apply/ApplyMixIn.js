@@ -4,7 +4,7 @@ The purpose of this Mix-in is to share code between TaskList.vue and Review.vue
 
 import Countdown from '@/components/Page/Countdown';
 import { mapGetters } from 'vuex';
-import { isLegal, isNonLegal, applicationParts, currentApplicationParts, isMoreInformationNeeded, isApplicationComplete } from '@/helpers/exerciseHelper';
+import { isLegal, isNonLegal, applicationParts, currentApplicationParts, isMoreInformationNeeded, isApplicationComplete, hasApplicationProcess } from '@/helpers/exerciseHelper';
 
 export default {
   components: {
@@ -41,6 +41,12 @@ export default {
     },
     isMoreInformationNeeded() {
       return isMoreInformationNeeded(this.vacancy, this.application);
+    },
+    isVacancyClosed() {
+      if (!hasApplicationProcess(this.vacancy) && !this.isVacancyOpen) {
+        return true;
+      }
+      return false;
     },
     isApplicationComplete() {
       return isApplicationComplete(this.vacancy, this.application);

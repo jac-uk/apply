@@ -9,9 +9,14 @@
         Applications
       </RouterLink>
       <Countdown
+        v-if="isVacancyOpen"
         :close-time="vacancyCloseTime"
         :countdown-length="60"
       />
+      <Warning v-if="isVacancyClosed">
+        This vacancy is now closed.
+      </Warning>
+
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
@@ -271,6 +276,7 @@ import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import ApplyMixIn from './ApplyMixIn';
+import Warning from '@/components/Page/Warning';
 import Banner from '@/components/Page/Banner';
 import TaskList from '@/components/Page/TaskList/TaskList';
 import TaskGroup from '@/components/Page/TaskList/TaskGroup';
@@ -278,6 +284,7 @@ import Task from '@/components/Page/TaskList/Task';
 
 export default {
   components: {
+    Warning,
     Banner,
     TaskList,
     TaskGroup,
