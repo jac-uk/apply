@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-grid-row">
-    <form 
+    <form
       ref="formRef"
       @submit.prevent="save"
     >
@@ -21,13 +21,13 @@
         </p>
 
         <RepeatableFields
-          v-model="application.employmentGaps"
+          v-model="formData.employmentGaps"
           required
           :component="repeatableFields.EmploymentGaps"
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--employment-gaps--save-and-continue"
         >
           Save and continue
@@ -40,6 +40,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RepeatableFields from '@/components/RepeatableFields';
 import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
 import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploymentGaps';
@@ -52,38 +53,31 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults =  {
       employmentGaps: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     if (this.$store.getters['vacancy/isLegal']) {
       return {
-        application: application,
+        formId: 'employmentGaps',
+        formData: formData,
         repeatableFields: {
           EmploymentGaps: EmploymentGaps,
         },
       };
     } else {
       return {
-        application: application,
+        formId: 'employmentGaps',
+        formData: formData,
         repeatableFields: {
           EmploymentGaps: NonLegalEmploymentGaps,
         },
       };
     }
   },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.employmentGaps = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
-  },
-
 };
 </script>
