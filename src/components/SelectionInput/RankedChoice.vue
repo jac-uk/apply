@@ -1,46 +1,48 @@
 <template>
-  <div class="govuk-checkboxes">
-    <div
-      v-for="(answer, index) in answers"
-      :key="index"
-      class="govuk-checkboxes__item"
-    >
-      <input
-        :id="`${id}-answer-${index}`"
-        v-model="selected"
-        :name="`${id}-answer-${index}`"
-        :value="answer.answer"
-        type="checkbox"
-        class="govuk-checkboxes__input"
-        @change="update"
+  <!-- <table class="govuk-table"> -->
+  <table>
+    <tbody class="govuk-table__body">
+      <tr 
+        v-for="(answer, i) in answers"
+        :key="i"
+        class="govuk-table__row"
       >
-      <label
-        :for="`${id}-answer-${index}`"
-        class="govuk-label govuk-checkboxes__label"
-      >
-        {{ answer.answer }}
-      </label>
-      <select 
-        v-if="selected.indexOf(answer.answer) >= 0"
-        v-model="ranking[answer.answer]"
-        class="govuk-select"
-        @change="update"
-      >
-        <option
-          v-for="score in answers.length"
-          :key="score"
-          :value="score"
+        <th
+          class="govuk-table__cell govuk-!-padding-top-0"
         >
-          {{ score }}
-        </option>
-      </select>      
-    </div>
-  </div>
+          <div class="govuk-checkboxes__item">
+            <input
+              v-model="selected"
+              :name="`${id}-answer-${i}`"
+              :value="answer.answer"
+              type="checkbox"
+              class="govuk-checkboxes__input"
+              @change="update"
+            >
+            <label
+              class="govuk-label govuk-checkboxes__label"
+              :for="`${id}-answer-${i}`"
+            >
+              {{ answer.answer }}  
+            </label>
+          </div>
+        </th>
+        <td class="govuk-table__cell">
+          <label
+            class="govuk-heading-s govuk-!-margin-bottom-0"
+          >
+            {{ selected.some(item => item === answer.answer) ? selected.findIndex(item => item === answer.answer) + 1 : '' }} 
+          </label>
+        </td>
+      </tr>
+    </tbody>
+  </table>   
 </template>
 
 <script>
 
 export default {
+  name: 'RankedChoice',
   props: {
     id: {
       type: String,
@@ -73,25 +75,6 @@ export default {
   },
   methods: {
     update() {
-      const rankedSelection = [];
-      const cleanedRanking = {};
-      for (let i = 0, len = this.selected.length; i < len; ++i) {
-        if (!this.ranking[this.selected[i]]) { this.ranking[this.selected[i]] = this.selected.length; }
-        rankedSelection.push({ answer: this.selected[i], rank: this.ranking[this.selected[i]] });
-        cleanedRanking[this.selected[i]] = this.ranking[this.selected[i]];
-      }
-      this.ranking = cleanedRanking;
-      this.selected = rankedSelection.sort(( item1, item2 ) => {
-        if (item1.rank < item2.rank) {
-          return -1;
-        } else if (item1.rank > item2.rank) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }).map((item) => {
-        return item.answer;
-      });
       this.$emit('input', this.selected);
     },
   },  
