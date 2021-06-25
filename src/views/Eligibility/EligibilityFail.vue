@@ -1,16 +1,12 @@
 <template>
   <div>
     <h1 class="govuk-heading-xl">
-      You might not be eligible
+      You might not meet the nationality requirement
     </h1>
 
-    <p class="govuk-body-m">
-      Based on your answers, it looks like you do not meet
-      all the eligibility requirements for this role.
-    </p>
-
     <p class="govuk-body">
-      You can continue to apply, but it might be unlikely that you'll be offered a position.
+      Based on your answer, it looks like you do not meet the nationality requirement for the
+      role. You can continue to apply, but it might be unlikely that you will be offered a position.
     </p>
 
     <RouterLink
