@@ -3,6 +3,7 @@
     class="govuk-form-group"
     :class="{'govuk-form-group--error': hasError}"
   >
+    <!-- {{ words }} -->
     <label
       :for="id"
       class="govuk-heading-m govuk-!-margin-bottom-2"
@@ -70,6 +71,7 @@ export default {
       return result
         .split(/[^a-z'-]/i) //split into array at every occurance of a character which is NOT: a-z or ' or -
         .filter(item => item != '') // remove any empty items from array
+        .filter(item => item != '\'') // remove any items which are just a apostrophe
         .filter(item => item != '-') // remove any items which are just a hyphen
         .map((item, i) => {                                           // with the above array 
           if (i, item.replace(/[^-]/g, '').length >= 4) {             // find any items containing more than or equal to 4 hyphens (4 allows for a trailing hyphen which is not counted in next set)
