@@ -4,7 +4,19 @@ The purpose of this Mix-in is to share code between TaskList.vue and Review.vue
 
 import Countdown from '@/components/Page/Countdown';
 import { mapGetters } from 'vuex';
-import { isLegal, isNonLegal, applicationParts, currentApplicationParts, isMoreInformationNeeded, isApplicationComplete, hasApplicationProcess } from '@/helpers/exerciseHelper';
+import {
+  isLegal,
+  isNonLegal,
+  isWelshAdministrationRequired,
+  isSpeakWelshRequired,
+  isReadWriteWelshRequired,
+  isApplyingForWelshPost,
+  applicationParts,
+  currentApplicationParts,
+  isMoreInformationNeeded,
+  isApplicationComplete,
+  hasApplicationProcess
+} from '@/helpers/exerciseHelper';
 
 export default {
   components: {
@@ -27,11 +39,29 @@ export default {
     application() {
       return this.$store.state.application.record;
     },
+    userId() {
+      return this.$store.state.auth.currentUser.uid;
+    },
+    uploadPath() {
+      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
+    },
     isLegal() {
       return isLegal(this.vacancy);
     },
     isNonLegal() {
       return isNonLegal(this.vacancy);
+    },
+    isWelshAdministrationRequired() {
+      return isWelshAdministrationRequired(this.vacancy);
+    },
+    isSpeakWelshRequired() {
+      return isSpeakWelshRequired(this.vacancy);
+    },
+    isReadWriteWelshRequired() {
+      return isReadWriteWelshRequired(this.vacancy);
+    },
+    isApplyingForWelshPost() {
+      return isApplyingForWelshPost(this.vacancy, this.application);
     },
     applicationParts() {
       return applicationParts(this.vacancy);

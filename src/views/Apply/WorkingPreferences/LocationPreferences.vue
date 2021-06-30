@@ -18,14 +18,14 @@
 
         <SelectionInput
           id="location-preferences"
-          v-model="application.locationPreferences"
+          v-model="formData.locationPreferences"
           :title="vacancy.locationQuestion"
           :answers="vacancy.locationQuestionAnswers"
           :type="vacancy.locationQuestionType"
-        /> 
+        />
 
         <button
-          :disabled="!application.locationPreferences || application.status != 'draft'"
+          :disabled="!canSave(formId) || !!!formData.locationPreferences"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -38,6 +38,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput';
 import BackLink from '@/components/BackLink';
 
@@ -48,30 +49,18 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       locationPreferences: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'locationPreferences',
+      formData: formData,
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.locationPreferences = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>

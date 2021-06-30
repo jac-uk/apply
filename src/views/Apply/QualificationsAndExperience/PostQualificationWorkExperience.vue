@@ -15,12 +15,12 @@
         </p>
 
         <RepeatableFields
-          v-model="application.experience"
+          v-model="formData.experience"
           :component="repeatableFields.Experience"
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button  info-btn--post-qualification-work-experience--save-and-continue"
         >
           Save and continue
@@ -31,10 +31,11 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ApplyMixIn from '../ApplyMixIn';
 import RepeatableFields from '@/components/RepeatableFields';
 import Experience from '@/components/RepeatableFields/Experience';
 import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
 
 export default {
   components: {
@@ -42,29 +43,21 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults =  {
       experience: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
-
+      formId: 'postQualificationWorkExperience',
+      formData: formData,
       repeatableFields: {
         Experience,
       },
     };
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.postQualificationWorkExperience = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>

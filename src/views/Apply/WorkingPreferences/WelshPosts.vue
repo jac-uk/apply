@@ -19,7 +19,7 @@
         <RadioGroup
           v-if="isWelshAdministrationRequired"
           id="applying-for-welsh-post"
-          v-model="application.applyingForWelshPost"
+          v-model="formData.applyingForWelshPost"
           required
           label="Are you applying for a post in Wales?"
         >
@@ -36,7 +36,7 @@
         <RadioGroup
           v-if="isSpeakWelshRequired"
           id="speak-welsh"
-          v-model="application.canSpeakWelsh"
+          v-model="formData.canSpeakWelsh"
           required
           label="Can you speak Welsh?"
           hint="You will be tested on this later in the process."
@@ -54,7 +54,7 @@
         <RadioGroup
           v-if="isReadWriteWelshRequired"
           id="read-and-write-welsh"
-          v-model="application.canReadAndWriteWelsh"
+          v-model="formData.canReadAndWriteWelsh"
           required
           label="Can you read and write in Welsh?"
           hint="You will be tested on this later in the process."
@@ -78,7 +78,7 @@
         </RadioGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--welsh-post--save-and-continue"
         >
           Save and continue
@@ -91,6 +91,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
@@ -103,44 +104,20 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       applyingForWelshPost: null,
       canSpeakWelsh: null,
       canReadAndWriteWelsh: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'welshPosts',
+      formData: formData,
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    isWelshAdministrationRequired() {
-      return this.vacancy.welshRequirementType.includes('welsh-administration-questions');
-    },
-    isSpeakWelshRequired() {
-      return this.vacancy.welshRequirementType.includes('welsh-speaking');
-    },
-    isReadWriteWelshRequired() {
-      return this.vacancy.welshRequirementType.includes('welsh-reading-writing');
-    },
-    isApplyingForWelshPost () {
-      return this.vacancy.welshRequirement && this.application.applyingForWelshPost;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.welshPosts = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>

@@ -209,11 +209,11 @@
             :locked="!currentApplicationParts.statementOfEligibility"
           />
           <Task
-            v-if="applicationParts.selfAssessment"
+            v-if="applicationParts.selfAssessmentCompetencies"
             id="self-assessment-competencies"
             title="Self assessment with competencies"
-            :done="applicationProgress.selfAssessment"
-            :locked="!currentApplicationParts.selfAssessment"
+            :done="applicationProgress.selfAssessmentCompetencies"
+            :locked="!currentApplicationParts.selfAssessmentCompetencies"
           />
         </TaskGroup>
 
