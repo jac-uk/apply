@@ -163,7 +163,7 @@
               >
                 {{ application.personalDetails.reasonableAdjustments | toYesNo }}
                 <ul
-                  v-if="application.personalDetails.reasonableAdjustmentsDetails"
+                  v-if="!!application.personalDetails.reasonableAdjustments && application.personalDetails.reasonableAdjustmentsDetails"
                   class="govuk-!-margin-top-1"
                 >
                   <li>
@@ -558,11 +558,14 @@
                 class="govuk-summary-list__value"
               >
                 <p
-                  v-for="item in application.locationPreferences"
+                  v-for="(item, index) in application.locationPreferences"
                   :key="item.name"
                   class="govuk-body"
                 >
-                  {{ item }}
+                  <strong>
+                    {{ `${index + 1}:` }}
+                  </strong>
+                  {{ `${item}` }}
                 </p>
               </dd>
             </dl>
@@ -1400,6 +1403,7 @@
           </div>
 
           <div
+            v-if="!isNonLegal"
             class="govuk-!-margin-top-9"
           >
             <h2
@@ -1408,6 +1412,7 @@
             >
               Gaps in employment
             </h2>
+
             <RouterLink
               v-if="isDraftApplication && canEdit"
               class="govuk-link govuk-body-m change-link"
@@ -1416,69 +1421,77 @@
             >
               Change
             </RouterLink>
-          </div>
 
-          <dl
-            v-for="item in application.employmentGaps"
-            :key="item.name"
-            class="govuk-summary-list govuk-!-margin-bottom-8"
-          >
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Date of gap
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul
-                  v-if="item.startDate"
-                  class="govuk-list"
-                >
-                  <li v-if="item.endDate">
-                    {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
-                  </li>
-                  <li v-else>
-                    {{ item.startDate | formatDate }} — current
-                  </li>
-                </ul>
-              </dd>
-            </div>
-
-            <div class="govuk-summary-list__row">
-              <dt class="govuk-summary-list__key">
-                Details
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li>{{ item.details }}</li>
-                </ul>
-              </dd>
-            </div>
-
-            <div
-              v-if="isLegal"
-              class="govuk-summary-list__row"
+            <p
+              v-if="!hasEmploymentGaps"
+              class="govuk-body"
             >
-              <dt class="govuk-summary-list__key">
-                Law-related tasks
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <ul class="govuk-list">
-                  <li
-                    v-for="task in item.tasks"
-                    :key="task.name"
+              No employment gaps declared.
+            </p>
+
+            <dl
+              v-for="item in application.employmentGaps"
+              v-else
+              :key="item.name"
+              class="govuk-summary-list govuk-!-margin-bottom-8"
+            >
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Date of gap
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul
+                    v-if="item.startDate"
+                    class="govuk-list"
                   >
-                    <p
-                      v-if="task == 'other'"
-                      class="govuk-body govuk-!-margin-bottom-0"
+                    <li v-if="item.endDate">
+                      {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                    </li>
+                    <li v-else>
+                      {{ item.startDate | formatDate }} — current
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Details
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li>{{ item.details }}</li>
+                  </ul>
+                </dd>
+              </div>
+
+              <div
+                v-if="isLegal"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Law-related tasks
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <ul class="govuk-list">
+                    <li
+                      v-for="task in item.tasks"
+                      :key="task.name"
                     >
-                      <span class="govuk-caption-m">{{ task | lookup }}</span>
-                      {{ item.otherTasks }}
-                    </p>
-                    <span v-else>{{ task | lookup }}</span>
-                  </li>
-                </ul>
-              </dd>
-            </div>
-          </dl>
+                      <p
+                        v-if="task == 'other'"
+                        class="govuk-body govuk-!-margin-bottom-0"
+                      >
+                        <span class="govuk-caption-m">{{ task | lookup }}</span>
+                        {{ item.otherTasks }}
+                      </p>
+                      <span v-else>{{ task | lookup }}</span>
+                    </li>
+                  </ul>
+                </dd>
+              </div>
+            </dl>
+          </div>
 
           <div class="govuk-!-margin-top-9">
             <h2
@@ -1708,7 +1721,7 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  {{ item.title }}
+                  {{ vacancy.selectionCriteria[index].title }}
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="item.answer">
@@ -1741,17 +1754,18 @@
               Change
             </RouterLink>
 
-            <div
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Uploaded statement of suitability
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
-                <span v-else>Not yet received</span>
-              </dd>
-            </div>
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Uploaded statement of suitability
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span> {{ application.uploadedSuitabilityStatement ? "Your file has been received" : "Not yet received" }} </span>
+                </dd>
+              </div>
+            </dl>
           </div>
 
           <div
@@ -2037,7 +2051,7 @@ export default {
             }
           }
           if (!this.application.progress.relevantExperience) { isComplete = false; }
-          if (!this.application.progress.employmentGaps) { isComplete = false; }
+          // if (!this.application.progress.employmentGaps) { isComplete = false; }
         }
         if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
 
@@ -2054,6 +2068,22 @@ export default {
     },
     isDraftApplication() {
       return this.application.status === 'draft';
+    },
+    hasEmploymentGaps() {
+      if (Array.isArray(this.application.employmentGaps)) {
+        if (!this.application.employmentGaps.length) {
+          return false;
+        }
+        if (this.application.employmentGaps.length > 1) {
+          return true;
+        } else {
+          const gap = this.application.employmentGaps[0];
+          if (gap.startDate || gap.endDate) {
+            return true;
+          }
+        }
+      }
+      return false;
     },
     otherMemberships() {
       // @NOTE this is a bit ugly as we can't just lookup label
