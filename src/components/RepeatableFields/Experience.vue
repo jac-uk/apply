@@ -30,6 +30,8 @@
       type="month"
     />
 
+    {{ row }} bbb
+
     <LawRelatedTasks
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"

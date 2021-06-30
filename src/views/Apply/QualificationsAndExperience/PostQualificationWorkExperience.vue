@@ -70,7 +70,8 @@ export default {
       if (this.isValid()) {
         this.application.progress.postQualificationWorkExperience = true;
         await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
+        console.log(this.application.experience);
+        // this.$router.push({ name: 'task-list' });
       }
     },
   },
