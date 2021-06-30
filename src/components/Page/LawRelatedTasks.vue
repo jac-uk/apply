@@ -2,10 +2,6 @@
   <div
     :class="{'govuk-form-group--error': hasError}"
   >
-    <!-- {{ localJudicialFunctions }} -->
-    <hr>
-    {{ judicialFunctions }}
-
     <CheckboxGroup
       :id="id"
       v-model="localTasks"
@@ -37,47 +33,46 @@
             :id="`${id}_legal_experience`"
             v-model="localJudicialFunctions.legalExperience"
             label="Legal Experience:"
+            required
           />
-          <!-- required -->
 
           <DateInput
             :id="`${id}_date`"
             v-model="localJudicialFunctions.date"
             label="Date:"
+            required
           />
-          <!-- required -->
 
           <TextField
             :id="`${id}_category_of_law`"
             v-model="localJudicialFunctions.categoryOfLaw"
             label="Category of Law:"
+            required
           />
-          <!-- required -->
 
           <DateInput
             :id="`${id}_time_engaged_start`"
             v-model="localJudicialFunctions.timeEngagedStart"
             label="Dates Engaged In This Activity:"
             hint="Start date"
+            required
           />
-          <!-- required -->
 
           <DateInput
             :id="`${id}_time_engaged_end`"
             v-model="localJudicialFunctions.timeEngagedEnd"
             hint="End date"
+            required
           /> 
-          <!-- required -->
 
           <Select
             :id="`${id}_working_basis`"
             v-model="localJudicialFunctions.workingBasis"
             :value="localJudicialFunctions.workingBasis"
             label="Working Basis"
-            placeholder="Working Basis"
             hint="Number of days a month"
+            required
           >
-            <!-- required -->
             <option
               v-for="option in ['Full Time', 'Part Time', 'Other']"
               :key="option"
@@ -93,7 +88,6 @@
             hint="Please Indicate Your Engagement In Days per Month"
             type="number"
           />
-          <!-- required -->
 
           <Checkbox
             :id="`${id}_judicial_office`"
@@ -107,46 +101,46 @@
                 :id="`${id}_office_type`"
                 v-model="localJudicialFunctions.judicialOfficeType"
                 label="Previous Judicial Office Type:"
+                required
               />
-              <!-- required -->
 
               <DateInput
                 :id="`${id}_judicial_appointment_date`"
                 v-model="localJudicialFunctions.judicialAppointmentDate"
                 label="Judicial Appointment date:"
+                required
               />
-              <!-- required -->
 
               <TextField
                 :id="`${id}_nature_of_appointment`"
                 v-model="localJudicialFunctions.natureOfAppointment"
                 label="Nature of Appointment:"
                 hint="eg. 'fee-paid tribunal judge'"
+                required
               />
-              <!-- required -->
 
               <TextField
                 :id="`${id}_circuit_or_region`"
                 v-model="localJudicialFunctions.circuitOrRegion"
                 label="Circuit or Region:"
+                required
               />
-              <!-- required -->
 
               <TextField
                 :id="`${id}_juristiction`"
                 v-model="localJudicialFunctions.jurisdiction"
                 label="Jurisdiction:"
+                required
               />
-              <!-- required -->
 
               <TextField
                 :id="`${id}_tribunal`"
                 v-model="localJudicialFunctions.tribunal"
                 label="Tribunal:"
+                required
               />
-              <!-- required -->
             </div>
-          </Checkbox>
+          </Checkbox> 
         </div>
       </CheckboxItem>
       <CheckboxItem
@@ -190,15 +184,13 @@
       </CheckboxItem>
 
       <div
-        v-if="!showJudicialFunctions"
+        v-if="!showJudicialFunctions && localTasks.length"
       >
         <Select
           :id="`${id}_working_basis`"
           v-model="localTasks.workingBasis"
           :value="localTasks.workingBasis"
-          label="Working Basis"
-          placeholder="Working Basis"
-          hint="Number of days a month"
+          label="Engagement basis "
           required
         >
           <option
@@ -225,11 +217,11 @@
 
 <script>
 import Checkbox from '@/components/Form/Checkbox';
+import DateInput from '@/components/Form/DateInput';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
-import DateInput from '@/components/Form/DateInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
 import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
@@ -238,11 +230,11 @@ export default {
   name: 'LawRelatedTasks',
   components: {
     Checkbox,
+    DateInput,
     CheckboxItem,
     CheckboxGroup,
     TextField,
     TextareaInput,
-    DateInput,
     FormFieldError,
     Select,
   },
@@ -277,36 +269,12 @@ export default {
       required: false,
     },
   },
-  // data() {
-  //   const defaults = {
-  //     legalExperience: null,
-  //     date: null,
-  //     categoryOfLaw: null,
-  //     timeEngagedStart: null,
-  //     timeEngagedEnd: null,
-  //     judicialOffice: null,
-  //     judicialOfficeType: null,
-  //     judicialAppointmentDate: null,
-  //     natureOfAppointment: null,
-  //     circuitOrRegion: null,
-  //     jurisdiction: null,
-  //     tribunal: null,
-  //     workingBasis: null,
-  //     workingBasisDays: null,
-  //   };
-  //   const functions = { ...defaults, ...this.judicialFunctions };
-  //   return {
-  //     localJudicialFunctions: functions,
-  //   };
-  // },
   computed: {
     localTasks: {
       get() {
         return this.tasks;
       },
       set(val) {
-        console.log('gg');
-        console.log(val);
         this.$emit('update:tasks', val);
       },
     },
@@ -315,47 +283,23 @@ export default {
         return this.otherTasks;
       },
       set(val) {
-        console.log('bb');
-        console.log(val);
         this.$emit('update:otherTasks', val);
       },
     },
     localJudicialFunctions: {
       get() {
-        const defaults = {
-          legalExperience: null,
-          date: null,
-          categoryOfLaw: null,
-          timeEngagedStart: null,
-          timeEngagedEnd: null,
-          judicialOffice: null,
-          judicialOfficeType: null,
-          judicialAppointmentDate: null,
-          natureOfAppointment: null,
-          circuitOrRegion: null,
-          jurisdiction: null,
-          tribunal: null,
-          workingBasis: null,
-          workingBasisDays: null,
-        };
-        const functions = { ...defaults, ...this.judicialFunctions };
-        return {
-          localJudicialFunctions: functions,
-        };
-      },
-      set(val) {
-        console.log('bb');
-        console.log(val);
-        this.$emit('update:judicialFunctions', val);
+        return this.judicialFunctions;
       },
     },
   },
-  // watch: {
-  //   localJudicialFunctions(value) {
-  //     console.log('bbb');
-  //     console.log('input', value);
-  //   },
-  // },
+  watch: {
+    localJudicialFunctions: {
+      handler(val){
+        this.$emit('update:judicialFunctions', val);
+      },
+      deep: true,
+    },
+  },
   methods: {
     validate() {
       this.setError('');

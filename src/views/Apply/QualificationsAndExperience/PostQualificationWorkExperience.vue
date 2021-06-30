@@ -61,7 +61,7 @@ export default {
   },
   methods: {
     async save() {
-      this.validate();
+      await this.validate();
       this.application.experience.forEach((item, index)=> {
         if (!(item.tasks.some(task => task === 'judicial-functions'))) {
           this.application.experience[index].judicialFunctions = {};
@@ -70,8 +70,7 @@ export default {
       if (this.isValid()) {
         this.application.progress.postQualificationWorkExperience = true;
         await this.$store.dispatch('application/save', this.application);
-        console.log(this.application.experience);
-        // this.$router.push({ name: 'task-list' });
+        this.$router.push({ name: 'task-list' });
       }
     },
   },
