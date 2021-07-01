@@ -5,7 +5,7 @@
       @submit.prevent="save"
     >
       <h1 class="govuk-heading-xl">
-        Check if you're eligible
+        Check if you meet the nationality requirement
       </h1>
 
       <RadioGroup
@@ -15,54 +15,14 @@
         required
       >
         <p class="govuk-body-m">
-          Are you a citizen of the UK, the Republic of Ireland or another Commonwealth country?
+          In order to apply you need to be a citizen of the UK,
+          Republic of Ireland or another Commonwealth country.
         </p>
-
-        <RadioItem
-          :value="true"
-          label="Yes"
-        />
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup>
-      <!--
-      <RadioGroup
-        id="character"
-        v-model="eligibility.character"
-        label="Character"
-      >
-        <p class="govuk-body-m govuk-!-margin-top-0">
-          You're confident there are no issues about your
-          <a
-            class="govuk-link"
-            href="https://www.judicialappointments.gov.uk/good-character"
-            target="_blank"
-          >
-            character
-          </a>
-          that could affect your suitability for this role.
-        </p>
-
-        <RadioItem
-          :value="true"
-          label="Yes"
-        />
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup>
-
-      <RadioGroup
-        id="reasonable-length-of-service"
-        v-model="eligibility.reasonableLOS"
-        label="Reasonable length of service"
-      >
         <p class="govuk-body-m">
-          You can work for at least {{ lengthOfService }} years before reaching the retirement age of {{ retirementAge }}.
+          Are you a citizen of the UK, the Republic of Ireland
+          or another Commonwealth country?
         </p>
+
         <RadioItem
           :value="true"
           label="Yes"
@@ -72,41 +32,6 @@
           label="No"
         />
       </RadioGroup>
-
-      <RadioGroup
-        v-if="isLegal"
-        id="qualifications-and-experience"
-        v-model="eligibility.qualificationsExperience"
-        label="Qualifications and experience"
-      >
-        <p class="govuk-body-m govuk-!-margin-top-0">
-          You're qualified in England or Wales as a {{ qualifications }} and have at least {{ postQualificationExperience }} years of
-          <a
-            class="govuk-link"
-            href="https://www.judicialappointments.gov.uk/eligibility-tribunals"
-            target="_blank"
-          >post-qualification law-related work experience</a>.
-        </p>
-
-        <p class="govuk-body-m govuk-!-margin-top-0">
-          You have experience of criminal law and procedure
-          in the Crown Court and/or the Court of Appeal, Criminal Division and <a
-            class="govuk-link"
-            href="https://applicant-prototype.herokuapp.com/check-eligibility/v1-7-court/judicial-experience-content"
-            target="_blank"
-          >sufficient
-            directly relevant previous judicial experience</a>.
-        </p>
-
-        <RadioItem
-          :value="true"
-          label="Yes"
-        />
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup> -->
 
       <button class="govuk-button info-btn--eligibility-check--continue">
         Continue
@@ -196,9 +121,6 @@ export default {
       if (this.isValid()) {
         let isOkay = true;
         if (this.eligibility.citizenship !== true ) { isOkay = false; }
-        // if (this.eligibility.character !== true) { isOkay = false; }
-        // if (this.eligibility.reasonableLOS !== true) { isOkay = false; }
-        // if (this.isLegal && this.eligibility.qualificationsExperience !== true) { isOkay = false; }
         if (isOkay) {
           this.$router.push({ name: 'eligibility-pass' });
         } else {
