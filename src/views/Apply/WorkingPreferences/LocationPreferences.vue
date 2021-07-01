@@ -19,11 +19,9 @@
         <SelectionInput
           id="location-preferences"
           v-model="application.locationPreferences"
-          :label="`'${vacancy.locationQuestion}'`"
           :title="vacancy.locationQuestion"
           :answers="vacancy.locationQuestionAnswers"
           :type="vacancy.locationQuestionType"
-          required
         /> 
 
         <button

@@ -236,7 +236,7 @@ export default {
     content: 'Question';
   }
 
-  @include mobile-view {
+  @include mobile-view { 
     #previous-link::after{
       content: '';
     }
