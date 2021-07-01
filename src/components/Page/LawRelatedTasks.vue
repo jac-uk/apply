@@ -186,7 +186,7 @@
       <div
         v-if="!showJudicialFunctions && localTasks.length"
       >
-        <Select
+        <select
           :id="`${id}_working_basis`"
           v-model="localTasks.workingBasis"
           :value="localTasks.workingBasis"
@@ -200,7 +200,7 @@
           >
             {{ option }}
           </option>
-        </Select>
+        </select>
 
         <TextField
           v-if="['Other', 'Part Time'].some((element) => element === localTasks.workingBasis)"
@@ -224,7 +224,7 @@ import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
+// import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
 
 export default {
   name: 'LawRelatedTasks',
@@ -236,7 +236,7 @@ export default {
     TextField,
     TextareaInput,
     FormFieldError,
-    Select,
+    // Select,
   },
   extends: FormField,
   props: {
