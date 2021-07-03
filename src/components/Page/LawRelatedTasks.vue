@@ -30,16 +30,17 @@
           v-if="showJudicialFunctions"
         >
           <TextField
-            :id="`${id}_legal_experience`"
-            v-model="localJudicialFunctions.legalExperience"
-            label="Legal Experience:"
+            :id="`${id}_nature_of_appointment`"
+            v-model="localJudicialFunctions.natureOfAppointment"
+            label="Nature of Appointment:"
+            hint="eg. 'fee-paid tribunal judge'"
             required
           />
 
-          <DateInput
-            :id="`${id}_date`"
-            v-model="localJudicialFunctions.date"
-            label="Date:"
+          <TextField
+            :id="`${id}_legal_experience`"
+            v-model="localJudicialFunctions.legalExperience"
+            label="Legal Experience:"
             required
           />
 
@@ -47,6 +48,58 @@
             :id="`${id}_category_of_law`"
             v-model="localJudicialFunctions.categoryOfLaw"
             label="Category of Law:"
+            required
+          />
+
+          <TextField
+            :id="`${id}_office_type`"
+            v-model="localJudicialFunctions.judicialOfficeType"
+            label="Previous Judicial Office Type:"
+            required
+          />
+
+          <TextField
+            :id="`${id}_circuit_or_region`"
+            v-model="localJudicialFunctions.circuitOrRegion"
+            label="Circuit or Region:"
+            required
+          />
+
+          <TextField
+            :id="`${id}_juristiction`"
+            v-model="localJudicialFunctions.jurisdiction"
+            label="Jurisdiction:"
+            required
+          />
+
+          <TextField
+            :id="`${id}_tribunal`"
+            v-model="localJudicialFunctions.tribunal"
+            label="Tribunal:"
+            required
+          />
+          <Select
+            :id="`${id}_working_basis`"
+            v-model="localJudicialFunctions.workingBasis"
+            :value="localJudicialFunctions.workingBasis"
+            label="Working Basis"
+            required
+          >
+            <option
+              v-for="option in ['Full Time', 'Part Time', 'Other']"
+              :key="option"
+              :value="option"
+            >
+              {{ option }}
+            </option>
+          </Select>
+          <TextField
+            :id="`${id}_working_basis_days`"
+            v-model="localJudicialFunctions.workingBasisDays"
+            input-class="govuk-input govuk-input--width-2"
+            label="Average Engagement In Days per Month"
+            type="number"
+            :num-max="28"
             required
           />
 
@@ -61,86 +114,18 @@
           <DateInput
             :id="`${id}_time_engaged_end`"
             v-model="localJudicialFunctions.timeEngagedEnd"
+            :label-hidden="true"
+            label="End date"
             hint="End date"
             required
           /> 
 
-          <Select
-            :id="`${id}_working_basis`"
-            v-model="localJudicialFunctions.workingBasis"
-            :value="localJudicialFunctions.workingBasis"
-            label="Working Basis"
-            hint="Number of days a month"
+          <DateInput
+            :id="`${id}_judicial_appointment_date`"
+            v-model="localJudicialFunctions.judicialAppointmentDate"
+            label="Judicial Appointment date:"
             required
-          >
-            <option
-              v-for="option in ['Full Time', 'Part Time', 'Other']"
-              :key="option"
-              :value="option"
-            >
-              {{ option }}
-            </option>
-          </Select>
-          <TextField
-            v-if="['Other', 'Part Time'].some((element) => element === localJudicialFunctions.workingBasis)"
-            :id="`${id}_working_basis_days`"
-            v-model="localJudicialFunctions.workingBasisDays"
-            hint="Please Indicate Your Engagement In Days per Month"
-            type="number"
           />
-
-          <Checkbox
-            :id="`${id}_judicial_office`"
-            v-model="localJudicialFunctions.judicialOffice"
-            label="Judicial Office:"
-          >
-            <div
-              v-if="localJudicialFunctions.judicialOffice"
-            >
-              <TextField
-                :id="`${id}_office_type`"
-                v-model="localJudicialFunctions.judicialOfficeType"
-                label="Previous Judicial Office Type:"
-                required
-              />
-
-              <DateInput
-                :id="`${id}_judicial_appointment_date`"
-                v-model="localJudicialFunctions.judicialAppointmentDate"
-                label="Judicial Appointment date:"
-                required
-              />
-
-              <TextField
-                :id="`${id}_nature_of_appointment`"
-                v-model="localJudicialFunctions.natureOfAppointment"
-                label="Nature of Appointment:"
-                hint="eg. 'fee-paid tribunal judge'"
-                required
-              />
-
-              <TextField
-                :id="`${id}_circuit_or_region`"
-                v-model="localJudicialFunctions.circuitOrRegion"
-                label="Circuit or Region:"
-                required
-              />
-
-              <TextField
-                :id="`${id}_juristiction`"
-                v-model="localJudicialFunctions.jurisdiction"
-                label="Jurisdiction:"
-                required
-              />
-
-              <TextField
-                :id="`${id}_tribunal`"
-                v-model="localJudicialFunctions.tribunal"
-                label="Tribunal:"
-                required
-              />
-            </div>
-          </Checkbox> 
         </div>
       </CheckboxItem>
       <CheckboxItem
@@ -206,7 +191,9 @@
           v-if="['Other', 'Part Time'].some((element) => element === localTasks.workingBasis)"
           :id="`${id}_working_basis_days`"
           v-model="localTasks.workingBasisDays"
-          hint="Please Indicate Your Engagement In Days per Month"
+          class="govuk-input govuk-date-input__input govuk-input--width-2"
+          hint="Please Indicate Your Average Engagement In Days per Month"
+          :num-max="31"
           type="number"
           required
         />
@@ -216,7 +203,6 @@
 </template>
 
 <script>
-import Checkbox from '@/components/Form/Checkbox';
 import DateInput from '@/components/Form/DateInput';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
@@ -229,7 +215,6 @@ import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
 export default {
   name: 'LawRelatedTasks',
   components: {
-    Checkbox,
     DateInput,
     CheckboxItem,
     CheckboxGroup,

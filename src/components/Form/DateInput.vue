@@ -8,12 +8,20 @@
       :aria-describedby="hint ? `${id}-hint` : false"
       role="group"
     >
-      <legend
-        v-if="label"
-        class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-2"
+      <label
+        :for="id"
+        class="govuk-heading-m govuk-!-margin-bottom-2"
       >
-        {{ label }}
-      </legend>
+        <span
+          v-if="labelHidden"
+          class="govuk-visually-hidden"
+        >
+          {{ label }}
+        </span>
+        <template v-else>
+          {{ label }}
+        </template>
+      </label>
       <span
         v-if="hint"
         :id="`${id}-hint`"
@@ -108,6 +116,10 @@ export default {
     value: {
       required: true,
       validator: (value) => (value instanceof Date || value === null || value === undefined),
+    },
+    labelHidden: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {
