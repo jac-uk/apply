@@ -8,9 +8,9 @@
       :aria-describedby="hint ? `${id}-hint` : false"
       role="group"
     >
-      <label
-        :for="id"
-        class="govuk-heading-m govuk-!-margin-bottom-2"
+      <legend
+        v-if="label"
+        class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-2"
       >
         <span
           v-if="labelHidden"
@@ -21,7 +21,7 @@
         <template v-else>
           {{ label }}
         </template>
-      </label>
+      </legend>
       <span
         v-if="hint"
         :id="`${id}-hint`"
