@@ -4,7 +4,7 @@
     :class="{'govuk-form-group--error': hasError}"
   >
     <fieldset
-      class="govuk-fieldset"
+      class="govuk-fieldset govuk-fieldset__legend"
       :aria-describedby="hint ? `${id}-hint` : false"
       role="group"
     >
