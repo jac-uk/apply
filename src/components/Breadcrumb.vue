@@ -5,8 +5,8 @@
             <span><router-link to="/" class="govuk-breadcrumbs__link">Home</router-link></span>
         </li>
     <li class="govuk-breadcrumbs__list-item"
-      v-for="item in breadcrumbs"
-      :key="item.href"
+      v-for="(item, index) in breadcrumbs"
+      :key="index"
     >
       <span v-if="item.isLastItem">
         {{ item.title }}
@@ -46,6 +46,14 @@ export default {
         if (this.$route.path === combinedPath && index === this.$route.matched.length - 1 || index === this.$route.matched.length - 1) {
           isLastItem = true;
         }
+        // set breadcrumbRoute within router.js to override the matched route
+        if (item.meta.breadcrumbRoute) {
+          combinedPath = this.$router.resolve({
+            name: item.meta.breadcrumbRoute,
+            params: this.$route.params,
+          }).href;
+        }
+
         items.push({
           href: combinedPath,
           title: item.meta.title ? item.meta.title : breadcrumbName,

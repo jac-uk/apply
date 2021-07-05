@@ -278,6 +278,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Character information',
+            breadcrumbRoute: 'character-information-review',
           },
           component: MainCharacterInformation,
           children: [
