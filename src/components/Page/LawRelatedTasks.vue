@@ -117,7 +117,6 @@
             :label-hidden="true"
             label="End date"
             hint="End date"
-            required
           /> 
 
           <DateInput
