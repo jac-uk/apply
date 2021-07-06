@@ -272,7 +272,7 @@ export default {
     },
     localJudicialFunctions: {
       get() {
-        return this.judicialFunctions;
+        return { ...this.judicialFunctions };
       },
     },
   },
