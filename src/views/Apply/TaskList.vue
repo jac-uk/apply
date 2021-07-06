@@ -113,46 +113,26 @@
 </template>
 
 <script>
-import Countdown from '@/components/Page/Countdown';
 import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
+import ApplyMixIn from './ApplyMixIn';
 
 export default {
-  components: {
-    Countdown,
-  },
   extends: CharacterInformationStatus,
+  mixins: [ApplyMixIn],
   data() {
     return {
-      unknownVariable: null,
       welshPostsContactMailbox: WELSH_POSTS_CONTACT_MAILBOX,
       welshPostsEmailSubject: WELSH_POSTS_EMAIL_SUBJECT,
     };
   },
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    vacancyCloseTime() {
-      const applicationCloseDate = this.$store.getters['vacancy/getCloseDate'];
-      const candidateDateExtension = this.application.dateExtension;
-      return candidateDateExtension ? candidateDateExtension : applicationCloseDate;
-    },
     candidate() {
       return this.$store.state.candidate.record;
     },
-    application() {
-      return this.$store.state.application.record;
-    },
     applications() {
       return this.$store.state.applications.records;
-    },
-    isLegal() {
-      return this.vacancy.typeOfExercise === 'legal' || this.vacancy.typeOfExercise === 'leadership';
-    },
-    isNonLegal() {
-      return this.vacancy.typeOfExercise === 'non-legal' || this.vacancy.typeOfExercise === 'leadership-non-legal';
     },
     isClosed(){
       return this.$store.getters['vacancy/getCloseDate'] < Date.now();
@@ -169,17 +149,11 @@ export default {
       const data = [];
       if (this.applicationProgress) {
 
-        const characterInformation = {
-          title: 'Character information', id: 'character-information-review', done: this.applicationProgress.characterInformation,
-        };
-
-        characterInformation.id = this.getCharacterInformationPageId();
-
         data.push({
           title: 'Account profile',
           tasks: [
             { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            characterInformation,
+            { title: 'Character information', id: this.getCharacterInformationPageId(), done: this.applicationProgress.characterInformation },
             { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
           ],
         });
@@ -194,19 +168,14 @@ export default {
         if (this.vacancy.jurisdictionQuestion) {
           workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
         }
-        if (this.vacancy.additionalWorkingPreferences) {
-          if (this.vacancy.additionalWorkingPreferences.length) {
-            workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
-          }
+        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
+          workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
         }
         if (this.vacancy.welshRequirement) {
           workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
         }
         if (workingPreferencesTasklist.length > 0) {
-          data.push({
-            title: 'Working preferences',
-            tasks: workingPreferencesTasklist,
-          });
+          data.push({ title: 'Working preferences', tasks: workingPreferencesTasklist });
         }
 
         if (this.isLegal) {
@@ -218,10 +187,7 @@ export default {
           }
           tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
           tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
-          data.push({
-            title: 'Qualifications and experience',
-            tasks: tasks,
-          });
+          data.push({ title: 'Qualifications and experience', tasks: tasks });
         }
 
         if (this.isNonLegal) {
@@ -235,10 +201,7 @@ export default {
           tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
           tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
           if (tasks.length) {
-            data.push({
-              title: 'Memberships and Experience',
-              tasks: tasks,
-            });
+            data.push({ title: 'Memberships and Experience', tasks: tasks });
           }
         }
 
@@ -296,145 +259,17 @@ export default {
           break;
         default:
         }
-        data.push({
-          title: 'Assessments',
-          tasks: assessmentOptions,
-        });
+        data.push({ title: 'Assessments', tasks: assessmentOptions });
 
         data.push({
           title: 'Additional Information',
-          tasks: [{
-            title: 'Additional Information',
-            id: 'additional-information',
-            done: this.applicationProgress.additionalInfo,
-          }],
+          tasks: [
+            { title: 'Additional Information', id: 'additional-information', done: this.applicationProgress.additionalInfo },
+          ],
         });
       }
-      return data;
-    },
-    // @todo the following are copied from Review.vue. Look to share them. Maybe use vuex.
-    showAssessorsDetails() {
-      // show IAs unless it has been turned off
-      return !(this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.independentAssessments === false);
-    },
-    showLeadershipJudgeDetails() {
-      return this.vacancy.assessmentMethods && this.vacancy.assessmentMethods.leadershipJudgeAssessment;
-    },
-    showStatementOfSuitability() {
-      switch (this.vacancy.assessmentOptions) {
-      case 'statement-of-suitability-with-competencies':
-      case 'statement-of-suitability-with-skills-and-abilities':
-      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
-      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
-      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-        return true;
-      default:
-        return false;
-      }
-    },
-    showCoveringLetter() {
-      switch (this.vacancy.assessmentOptions) {
-      case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
-      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-      case 'self-assessment-with-competencies-and-covering-letter':
-      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
-        return true;
-      default:
-        return false;
-      }
-    },
-    showCV() {
-      switch (this.vacancy.assessmentOptions) {
-      case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-      case 'self-assessment-with-competencies-and-cv':
-      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
-      case 'statement-of-suitability-with-skills-and-abilities-and-cv':
-        return true;
-      default:
-        return false;
-      }
-    },
-    showStatementOfEligibility() {
-      switch (this.vacancy.assessmentOptions) {
-      case 'statement-of-eligibility':
-        return true;
-      default:
-        return false;
-      }
-    },
-    showSelfAssessment() {
-      switch (this.vacancy.assessmentOptions) {
-      case 'self-assessment-with-competencies':
-      case 'self-assessment-with-competencies-and-cv':
-      case 'self-assessment-with-competencies-and-covering-letter':
-      case 'self-assessment-with-competencies-and-cv-and-covering-letter':
-        return true;
-      default:
-        return false;
-      }
-    },
-    isApplicationComplete() {
-      let isComplete = false;
-      if (this.application && this.application.progress) {
-        isComplete = true;
-        if (!this.application.progress.personalDetails) { isComplete = false; }
-        if (!this.application.progress.characterInformation) { isComplete = false; }
-        if (!this.application.progress.equalityAndDiversitySurvey) { isComplete = false; }
-        if (this.vacancy.isSPTWOffered) {
-          if (!this.application.progress.partTimeWorkingPreferences) { isComplete = false; }
-        }
-        if (this.vacancy.locationQuestion) {
-          if (!this.application.progress.locationPreferences) { isComplete = false; }
-        }
-        if (this.vacancy.jurisdictionQuestion) {
-          if (!this.application.progress.jurisdictionPreferences) { isComplete = false; }
-        }
-        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
-          if (!this.application.progress.additionalWorkingPreferences) { isComplete = false; }
-        }
-        if (this.vacancy.welshRequirement) {
-          if (!this.application.progress.welshPosts) { isComplete = false; }
-        }
-        if (this.isLegal) {
-          if (!this.application.progress.relevantQualifications) { isComplete = false; }
-          if (!this.application.progress.postQualificationWorkExperience) { isComplete = false; }
-          if (this.vacancy.previousJudicialExperienceApply) {
-            if (!this.application.progress.judicialExperience) { isComplete = false; }
-          }
-          if (!this.application.progress.employmentGaps) { isComplete = false; }
-        }
-        if (this.isNonLegal) {
-          if (this.vacancy.memberships && this.vacancy.memberships.length) {
-            if (this.vacancy.memberships.indexOf('none') === -1) {
-              if (!this.application.progress.relevantMemberships) { isComplete = false; }
-            }
-          }
-          if (!this.application.progress.relevantExperience) { isComplete = false; }
-          if (!this.application.progress.employmentGaps) { isComplete = false; }
-        }
-        if (!this.application.progress.reasonableLengthOfService) { isComplete = false; }
 
-        if (this.showAssessorsDetails && !this.application.progress.assessorsDetails) { isComplete = false; }
-        if (this.showLeadershipJudgeDetails && !this.application.progress.leadershipJudgeDetails) { isComplete = false; }
-        if (this.showStatementOfSuitability && !this.application.progress.statementOfSuitability) { isComplete = false; }
-        if (this.showCV && !this.application.progress.cv) { isComplete = false; }
-        if (this.showCoveringLetter && !this.application.progress.coveringLetter) { isComplete = false; }
-        if (this.showStatementOfEligibility && !this.application.progress.statementOfEligibility) { isComplete = false; }
-        if (this.showSelfAssessment && !this.application.progress.selfAssessmentCompetencies) { isComplete = false; }
-        if (!this.application.progress.additionalInfo) { isComplete = false; }
-      }
-      return isComplete;
-    },
-    isDraftApplication() {
-      return this.application.status === 'draft';
-    },
-    isVacancyOpen() {
-      return this.$store.getters['vacancy/isOpen']();
-    },
-    canApply () {
-      return this.isDraftApplication
-        && this.isVacancyOpen
-        && this.isApplicationComplete;
+      return data;
     },
   },
   async created() {
@@ -454,33 +289,31 @@ export default {
     getCharacterInformationPageId() {
       if (!this.vacancy._applicationVersion || this.vacancy._applicationVersion < 2) {
         return 'character-information-form-v1';
-      } else {
-        if (!this.application.characterInformationV2) {
-          return 'character-information-declaration';
-        }
-        if (!this.isCriminalOffencesSectionComplete()) {
-          return 'character-information-criminal-offences';
-        }
-        if (!this.isFixedPenaltiesSectionComplete()) {
-          return 'character-information-fixed-penalty-notices';
-        }
-        if (!this.isMotoringOffencesSectionComplete()) {
-          return 'character-information-motoring-offences';
-        }
-        if (!this.isFinancialOffencesSectionComplete()) {
-          return 'character-information-financial-matters';
-        }
-        if (!this.isProfessionalConductSectionComplete()) {
-          return 'character-information-professional-conduct';
-        }
-        if (!this.isFurtherInformationSectionComplete()) {
-          return 'character-information-further-information';
-        }
-        if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
-          return 'character-information-review';
-        }
       }
-
+      if (!this.application.characterInformationV2) {
+        return 'character-information-declaration';
+      }
+      if (!this.isCriminalOffencesSectionComplete()) {
+        return 'character-information-criminal-offences';
+      }
+      if (!this.isFixedPenaltiesSectionComplete()) {
+        return 'character-information-fixed-penalty-notices';
+      }
+      if (!this.isMotoringOffencesSectionComplete()) {
+        return 'character-information-motoring-offences';
+      }
+      if (!this.isFinancialOffencesSectionComplete()) {
+        return 'character-information-financial-matters';
+      }
+      if (!this.isProfessionalConductSectionComplete()) {
+        return 'character-information-professional-conduct';
+      }
+      if (!this.isFurtherInformationSectionComplete()) {
+        return 'character-information-further-information';
+      }
+      if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
+        return 'character-information-review';
+      }
     },
   },
 };

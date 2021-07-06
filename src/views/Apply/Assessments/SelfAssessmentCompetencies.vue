@@ -22,9 +22,12 @@
             >
               {{ item.title }}
             </p>
-            <p class="govuk-body">
-              {{ item.text }}
-            </p>
+            <!-- eslint-disable -->
+            <div 
+              class="govuk-body" 
+              v-html="item.text"
+            />
+            <!-- eslint-enable -->
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
