@@ -3,12 +3,13 @@
     class="govuk-form-group"
     :class="{'govuk-form-group--error': hasError}"
   >
-    <!-- {{ words }} -->
+    {{ words }}
     <label
       :for="id"
       class="govuk-heading-m govuk-!-margin-bottom-2"
     >
       {{ label }}
+      {{ wordLimit ? `In ${wordLimit} words, tell us how.` : null }}
     </label>
     <!-- eslint-disable -->
     <span
@@ -29,6 +30,8 @@
       name="word-count"
       aria-describedby="word-count-info"
       :rows="rows"
+      @keydown="handleLimit($event)"
+      @keyup="handleLimit($event)"
       @change="validate"
     />
     <div
@@ -61,6 +64,11 @@ export default {
     rows: {
       default: '5',
       type: String,
+    },
+    wordLimit: {
+      required: false,
+      default: 0,
+      type: Number,
     },
   },
 
