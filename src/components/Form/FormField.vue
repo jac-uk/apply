@@ -83,7 +83,6 @@ export default {
     },
     validate(event) {
       this.setError('');
-
       if (this.checkErrors) {
         let value = this.value;
         if (event && event.target) {
