@@ -17,7 +17,7 @@
         />
 
         <p class="govuk-body-l">
-          The JAC is committed to equality and diversity and monitors selection processes to ensure that they are fair. 
+          The JAC is committed to equality and diversity and monitors selection processes to ensure that they are fair.
           If you do not want to disclose your diversity data in any given area, please select ‘Prefer not to say’ for the relevant question.
         </p>
         <p class="govuk-body-l">
@@ -25,7 +25,7 @@
             class="govuk-link info-link--equality-and-diversity--equal-merit-approach"
             href="https://www.judicialappointments.gov.uk/equal-merit"
             target="_blank"
-          >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit, 
+          >Equal Merit approach</a> applies, and to monitor the selection process. Other than for the purposes of Equal Merit,
           your diversity monitoring information will not play any part in the selection process.
         </p>
         <p class="govuk-body-l">
@@ -36,7 +36,7 @@
           >Outreach</a>”, to support our statutory duty to encourage diversity in the pool of applicants for judicial appointment.
         </p>
         <p class="govuk-body-l">
-          If you are recommended for an appointment we will also share your information with the Ministry of Justice, 
+          If you are recommended for an appointment we will also share your information with the Ministry of Justice,
           Judicial Office and Her Majesty's Courts and Tribunal Service.
         </p>
 
@@ -689,7 +689,7 @@
         </RadioGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--equality-and-diversity-survey--save-and-continue"
         >
           Save and continue
@@ -702,6 +702,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextField from '@/components/Form/TextField';
@@ -722,6 +723,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       shareData: null,
@@ -757,27 +759,21 @@ export default {
     };
     const data = this.$store.getters['candidate/equalityAndDiversitySurvey']();
     const equalityAndDiversitySurvey = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       equalityAndDiversitySurvey: equalityAndDiversitySurvey,
-      application: application,
+      formId: 'equalityAndDiversitySurvey',
+      formData: {
+        progress: {},
+      },
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    isLegal() {
-      return this.vacancy.typeOfExercise === 'legal' || this.vacancy.typeOfExercise === 'leadership';
-    },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.equalityAndDiversitySurvey = true;
-        this.application.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
-        await this.$store.dispatch('application/save', this.application);
+        this.formData.progress[this.formId] = true;
+        this.formData.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
+        await this.$store.dispatch('application/save', this.formData);
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
         this.$router.push({ name: 'task-list' });
       }

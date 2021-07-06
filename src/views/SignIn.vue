@@ -11,14 +11,14 @@
           </h1>
 
           <p class="govuk-body-l">
-            Or 
+            Or
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
               :to="{ name: 'sign-up' }"
             >
               create an account
-            </RouterLink>  
+            </RouterLink>
             if you do not have one.
           </p>
 
@@ -28,13 +28,13 @@
               class="govuk-button button-image"
               @click="loginWithGoogle"
             >
-              <img 
+              <img
                 alt="Sign in with Google"
                 src="@/assets/btn_google_signin_light_normal_web@2x.png"
                 width="191"
-              >              
+              >
             </button>
-          </p> -->          
+          </p> -->
 
           <ErrorSummary :errors="errors" />
 
@@ -119,7 +119,7 @@ export default {
 
             this.$store.dispatch('auth/setCurrentUser', userCredential.user);
             if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
+              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
             } else {
               this.$router.push({ name: 'applications' });
             }
@@ -127,7 +127,7 @@ export default {
           .catch((error) => {
             this.errors.push({ id: 'email', message: error.message });
           });
-      }    
+      }
     },
   },
 };

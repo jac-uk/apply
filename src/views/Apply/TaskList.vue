@@ -9,15 +9,28 @@
         Applications
       </RouterLink>
       <Countdown
+        v-if="isVacancyOpen"
         :close-time="vacancyCloseTime"
         :countdown-length="60"
       />
+      <Warning v-if="isVacancyClosed">
+        This vacancy is now closed.
+      </Warning>
+
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
       <h1 class="govuk-heading-xl">
         Apply for the role
       </h1>
+
+      <Banner
+        v-if="isMoreInformationNeeded"
+        status="information"
+      >
+        We need more information from you. Please update your application.
+      </Banner>
+
       <p
         v-if="vacancy.welshPosts"
         class="govuk-!-margin-bottom-8"
@@ -28,49 +41,195 @@
           class="govuk-body govuk-link"
         >{{ welshPostsContactMailbox }}</a>
       </p>
-      <ol class="govuk-list">
-        <li
-          v-for="(taskGroup, index) in taskGroups"
-          :key="index"
+
+      <TaskList>
+        <TaskGroup
+          title="Account profile"
         >
-          <h2 class="govuk-heading-m">
-            {{ index + 1 }}. {{ taskGroup.title }}
-          </h2>
-          <ul class="govuk-list govuk-!-margin-bottom-9">
-            <li
-              v-for="(task, taskIndex) in taskGroup.tasks"
-              :key="task.id"
-              class="govuk-!-margin-bottom-0 govuk-!-padding-top-2 govuk-!-padding-bottom-2 container-border-bottom "
-              :class="{'container-border-top' : taskIndex === 0 }"
-            >
-              <div class="govuk-grid-row">
-                <div
-                  :aria-describedby="`${task.id}-completed`"
-                  class="govuk-grid-column-three-quarters"
-                >
-                  <RouterLink
-                    :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${hyphenization(task.title)}`"
-                    :to="{name: task.id}"
-                  >
-                    {{ task.title }}
-                  </RouterLink>
-                </div>
-                <div class="govuk-grid-column-one-quarter">
-                  <strong
-                    v-if="task.done"
-                    :id="`${task.id}-completed`"
-                    class="govuk-tag"
-                  >Done</strong>
-                  <span
-                    v-else
-                    :id="`${task.id}-completed`"
-                  />
-                </div>
-              </div>
-            </li>
-          </ul>
-        </li>
-      </ol>
+          <Task
+            v-if="applicationParts.personalDetails"
+            id="apply-personal-details"
+            title="Personal details"
+            :done="applicationProgress.personalDetails"
+            :locked="!currentApplicationParts.personalDetails"
+          />
+          <Task
+            v-if="applicationParts.characterInformation"
+            :id="getCharacterInformationPageId()"
+            title="Character information"
+            :done="applicationProgress.characterInformation"
+            :locked="!currentApplicationParts.characterInformation"
+          />
+          <Task
+            v-if="applicationParts.equalityAndDiversitySurvey"
+            id="equality-and-diversity-survey"
+            title="Equality and diversity"
+            :done="applicationProgress.equalityAndDiversitySurvey"
+            :locked="!currentApplicationParts.equalityAndDiversitySurvey"
+          />
+        </TaskGroup>
+
+        <TaskGroup
+          title="Working preferences"
+        >
+          <Task
+            v-if="applicationParts.partTimeWorkingPreferences"
+            id="part-time-working-preferences"
+            title="Set part-time working preferences"
+            :done="applicationProgress.partTimeWorkingPreferences"
+            :locked="!currentApplicationParts.partTimeWorkingPreferences"
+          />
+          <Task
+            v-if="applicationParts.locationPreferences"
+            id="location-preferences"
+            title="Location preferences"
+            :done="applicationProgress.locationPreferences"
+            :locked="!currentApplicationParts.locationPreferences"
+          />
+          <Task
+            v-if="applicationParts.jurisdictionPreferences"
+            id="jurisdiction-preferences"
+            title="Jurisdiction preferences"
+            :done="applicationProgress.jurisdictionPreferences"
+            :locked="!currentApplicationParts.jurisdictionPreferences"
+          />
+          <Task
+            v-if="applicationParts.additionalWorkingPreferences"
+            id="additional-working-preferences"
+            title="Additional preferences"
+            :done="applicationProgress.additionalWorkingPreferences"
+            :locked="!currentApplicationParts.additionalWorkingPreferences"
+          />
+          <Task
+            v-if="applicationParts.welshPosts"
+            id="welsh-posts"
+            title="Welsh posts"
+            :done="applicationProgress.welshPosts"
+            :locked="!currentApplicationParts.welshPosts"
+          />
+        </TaskGroup>
+
+        <TaskGroup
+          :title="experienceTitle"
+        >
+          <Task
+            v-if="applicationParts.relevantQualifications"
+            id="relevant-qualifications"
+            title="Relevant qualifications"
+            :done="applicationProgress.relevantQualifications"
+            :locked="!currentApplicationParts.relevantQualifications"
+          />
+          <Task
+            v-if="applicationParts.postQualificationWorkExperience"
+            id="post-qualification-work-experience"
+            title="Post-qualification work experience"
+            :done="applicationProgress.postQualificationWorkExperience"
+            :locked="!currentApplicationParts.postQualificationWorkExperience"
+          />
+          <Task
+            v-if="applicationParts.judicialExperience"
+            id="judicial-experience"
+            title="Judicial experience"
+            :done="applicationProgress.judicialExperience"
+            :locked="!currentApplicationParts.judicialExperience"
+          />
+          <Task
+            v-if="applicationParts.relevantMemberships"
+            id="relevant-memberships"
+            title="Relevant memberships"
+            :done="applicationProgress.relevantMemberships"
+            :locked="!currentApplicationParts.relevantMemberships"
+          />
+          <Task
+            v-if="applicationParts.relevantExperience"
+            id="relevant-experience"
+            title="Relevant experience"
+            :done="applicationProgress.relevantExperience"
+            :locked="!currentApplicationParts.relevantExperience"
+          />
+          <Task
+            v-if="applicationParts.employmentGaps"
+            id="employment-gaps"
+            title="Gaps in employment"
+            :done="applicationProgress.employmentGaps"
+            :locked="!currentApplicationParts.employmentGaps"
+          />
+          <Task
+            v-if="applicationParts.reasonableLengthOfService"
+            id="reasonable-length-of-service"
+            title="Reasonable length of service"
+            :done="applicationProgress.reasonableLengthOfService"
+            :locked="!currentApplicationParts.reasonableLengthOfService"
+          />
+        </TaskGroup>
+
+        <TaskGroup
+          title="Assessments"
+        >
+          <Task
+            v-if="applicationParts.assessorsDetails"
+            id="assessors-details"
+            title="Independent assessors' details"
+            :done="applicationProgress.assessorsDetails"
+            :locked="!currentApplicationParts.assessorsDetails"
+          />
+          <Task
+            v-if="applicationParts.leadershipJudgeDetails"
+            id="leadership-judge-details"
+            title="Leadership Judge details"
+            :done="applicationProgress.leadershipJudgeDetails"
+            :locked="!currentApplicationParts.leadershipJudgeDetails"
+          />
+          <Task
+            v-if="applicationParts.statementOfSuitability"
+            id="statement-of-suitability"
+            title="Statement of suitability"
+            :done="applicationProgress.statementOfSuitability"
+            :locked="!currentApplicationParts.statementOfSuitability"
+          />
+          <Task
+            v-if="applicationParts.coveringLetter"
+            id="covering-letter"
+            title="Covering letter"
+            :done="applicationProgress.coveringLetter"
+            :locked="!currentApplicationParts.coveringLetter"
+          />
+          <Task
+            v-if="applicationParts.cv"
+            id="cv"
+            title="Curriculum vitae (CV)"
+            :done="applicationProgress.cv"
+            :locked="!currentApplicationParts.cv"
+          />
+          <Task
+            v-if="applicationParts.statementOfEligibility"
+            id="statement-of-eligibility"
+            title="Statement of eligibility"
+            :done="applicationProgress.statementOfEligibility"
+            :locked="!currentApplicationParts.statementOfEligibility"
+          />
+          <Task
+            v-if="applicationParts.selfAssessmentCompetencies"
+            id="self-assessment-competencies"
+            title="Self assessment with competencies"
+            :done="applicationProgress.selfAssessmentCompetencies"
+            :locked="!currentApplicationParts.selfAssessmentCompetencies"
+          />
+        </TaskGroup>
+
+        <TaskGroup
+          title="Additional Information"
+        >
+          <Task
+            v-if="applicationParts.additionalInfo"
+            id="additional-information"
+            title="Additional Information"
+            :done="applicationProgress.additionalInfo"
+            :locked="!currentApplicationParts.additionalInfo"
+          />
+        </TaskGroup>
+      </TaskList>
+
       <button
         :disabled="!canApply"
         class="govuk-button info-btn--task-list--review-application"
@@ -117,8 +276,20 @@ import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import ApplyMixIn from './ApplyMixIn';
+import Warning from '@/components/Page/Warning';
+import Banner from '@/components/Page/Banner';
+import TaskList from '@/components/Page/TaskList/TaskList';
+import TaskGroup from '@/components/Page/TaskList/TaskGroup';
+import Task from '@/components/Page/TaskList/Task';
 
 export default {
+  components: {
+    Warning,
+    Banner,
+    TaskList,
+    TaskGroup,
+    Task,
+  },
   extends: CharacterInformationStatus,
   mixins: [ApplyMixIn],
   data() {
@@ -145,139 +316,29 @@ export default {
         return {};
       }
     },
-    taskGroups() {
-      const data = [];
-      if (this.applicationProgress) {
-
-        data.push({
-          title: 'Account profile',
-          tasks: [
-            { title: 'Personal details', id: 'apply-personal-details', done: this.applicationProgress.personalDetails },
-            { title: 'Character information', id: this.getCharacterInformationPageId(), done: this.applicationProgress.characterInformation },
-            { title: 'Equality and diversity', id: 'equality-and-diversity-survey', done: this.applicationProgress.equalityAndDiversitySurvey },
-          ],
-        });
-
-        const workingPreferencesTasklist = [];
-        if (this.vacancy.isSPTWOffered) {
-          workingPreferencesTasklist.push({ title: 'Set part-time working preferences', id: 'part-time-working-preferences', done: this.applicationProgress.partTimeWorkingPreferences });
-        }
-        if (this.vacancy.locationQuestion) {
-          workingPreferencesTasklist.push({ title: 'Location preferences', id: 'location-preferences', done: this.applicationProgress.locationPreferences });
-        }
-        if (this.vacancy.jurisdictionQuestion) {
-          workingPreferencesTasklist.push({ title: 'Jurisdiction preferences', id: 'jurisdiction-preferences', done: this.applicationProgress.jurisdictionPreferences });
-        }
-        if (this.vacancy.additionalWorkingPreferences && this.vacancy.additionalWorkingPreferences.length) {
-          workingPreferencesTasklist.push({ title: 'Additional preferences', id: 'additional-working-preferences', done: this.applicationProgress.additionalWorkingPreferences });
-        }
-        if (this.vacancy.welshRequirement) {
-          workingPreferencesTasklist.push({ title: 'Welsh posts', id: 'welsh-posts', done: this.applicationProgress.welshPosts });
-        }
-        if (workingPreferencesTasklist.length > 0) {
-          data.push({ title: 'Working preferences', tasks: workingPreferencesTasklist });
-        }
-
-        if (this.isLegal) {
-          const tasks = [];
-          tasks.push({ title: 'Relevant qualifications', id: 'relevant-qualifications', done: this.applicationProgress.relevantQualifications });
-          tasks.push({ title: 'Post-qualification work experience', id: 'post-qualification-work-experience', done: this.applicationProgress.postQualificationWorkExperience });
-          if (this.vacancy.previousJudicialExperienceApply) {
-            tasks.push({ title: 'Judicial experience', id: 'judicial-experience', done: this.applicationProgress.judicialExperience });
-          }
-          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
-          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
-          data.push({ title: 'Qualifications and experience', tasks: tasks });
-        }
-
-        if (this.isNonLegal) {
-          const tasks = [];
-          if (this.vacancy.memberships && this.vacancy.memberships.length) {
-            if (this.vacancy.memberships.indexOf('none') === -1) {
-              tasks.push({ title: 'Relevant memberships', id: 'relevant-memberships', done: this.applicationProgress.relevantMemberships });
-            }
-          }
-          tasks.push({ title: 'Relevant experience', id: 'relevant-experience', done: this.applicationProgress.relevantExperience });
-          tasks.push({ title: 'Gaps in employment', id: 'employment-gaps', done: this.applicationProgress.employmentGaps });
-          tasks.push({ title: 'Reasonable length of service', id: 'reasonable-length-of-service', done: this.applicationProgress.reasonableLengthOfService });
-          if (tasks.length) {
-            data.push({ title: 'Memberships and Experience', tasks: tasks });
-          }
-        }
-
-        const assessmentOptions = [];
-        if (this.showAssessorsDetails) {
-          assessmentOptions.push({ title: 'Independent assessors\' details', id: 'assessors-details', done: this.applicationProgress.assessorsDetails });
-        }
-        if (this.showLeadershipJudgeDetails) {
-          assessmentOptions.push({ title: 'Leadership Judge details', id: 'leadership-judge-details', done: this.applicationProgress.leadershipJudgeDetails });
-        }
-        switch (this.vacancy.assessmentOptions) {
-        case 'self-assessment-with-competencies':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          break;
-        case 'self-assessment-with-competencies-and-cv':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'self-assessment-with-competencies-and-covering-letter':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'self-assessment-with-competencies-and-cv-and-covering-letter':
-          assessmentOptions.push({ title: 'Self assessment with competencies', id: 'self-assessment-competencies', done: this.applicationProgress.selfAssessmentCompetencies });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'statement-of-suitability-with-competencies':
-          // @todo what happens to leadership version?
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          // assessmentOptions.push({ title: 'Statement of suitability', id: 'leadership-statement-of-suitability', done: this.applicationProgress.leadershipSuitability });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-cv':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-covering-letter':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'statement-of-suitability-with-skills-and-abilities-and-cv-and-covering-letter':
-          assessmentOptions.push({ title: 'Statement of suitability', id: 'statement-of-suitability', done: this.applicationProgress.statementOfSuitability });
-          assessmentOptions.push({ title: 'Curriculum vitae (CV)', id: 'cv', done: this.applicationProgress.cv });
-          assessmentOptions.push({ title: 'Covering letter', id: 'covering-letter', done: this.applicationProgress.coveringLetter });
-          break;
-        case 'statement-of-eligibility':
-          if (this.vacancy.aSCApply && this.vacancy.selectionCriteria && this.vacancy.selectionCriteria.length) {
-            assessmentOptions.push({ title: 'Statement of eligibility', id: 'statement-of-eligibility', done: this.applicationProgress.statementOfEligibility });
-          }
-          break;
-        case 'none':
-          break;
-        default:
-        }
-        data.push({ title: 'Assessments', tasks: assessmentOptions });
-
-        data.push({
-          title: 'Additional Information',
-          tasks: [
-            { title: 'Additional Information', id: 'additional-information', done: this.applicationProgress.additionalInfo },
-          ],
-        });
+    experienceTitle() {
+      const titleParts = [];
+      if (this.hasApplicationPart('relevantQualifications')) {
+        titleParts.push('Qualifications');
       }
-
-      return data;
+      if (this.hasApplicationPart('relevantMemberships')) {
+        titleParts.push('Memberships');
+      }
+      titleParts.push('Experience');
+      if (titleParts.length === 3) {
+        return `${titleParts[0]}, ${titleParts[1]} and ${titleParts[2]}`;
+      } else {
+        return titleParts.join(' and ');
+      }
     },
   },
   async created() {
-    const characterInformation = this.$store.getters['candidate/characterInformation']();
-    if (characterInformation && !this.application.characterInformationV2) {
-      this.application.characterInformationV2 = characterInformation;
-      await this.$store.dispatch('application/save', this.application);
-    }
+    // TODO check why we were doing the following?
+    // const characterInformation = this.$store.getters['candidate/characterInformation']();
+    // if (characterInformation && !this.application.characterInformationV2) {
+    //   this.application.characterInformationV2 = characterInformation;
+    //   await this.$store.dispatch('application/save', this.application);
+    // }
   },
   methods: {
     reviewApplication() {
@@ -315,14 +376,17 @@ export default {
         return 'character-information-review';
       }
     },
+    hasApplicationPart(part) {
+      if (this.applicationParts) {
+        return this.applicationParts[part];
+      }
+      return true;  // default is to show all parts
+    },
   },
 };
+
 </script>
 <style scoped>
-
-.status {
-  float: right;
-}
 
 .container-border-top {
   border-top: 1px solid #b1b4b6
