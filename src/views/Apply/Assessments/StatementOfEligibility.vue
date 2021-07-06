@@ -22,13 +22,16 @@
             >
               {{ item.title }}
             </p>
-            <p class="govuk-body">
-              {{ item.text }}
-            </p>
+            <!-- eslint-disable -->
+            <div
+              class="govuk-body"
+              v-html="item.text"
+            />
+            <!-- eslint-enable -->
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
-              v-model="item.answer"
+              v-model="application.selectionCriteriaAnswers[index].answer"
               label="Do you meet this requirement?"
             >
               <RadioItem
@@ -37,7 +40,7 @@
               >
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
-                  v-model="item.answerDetails"
+                  v-model="application.selectionCriteriaAnswers[index].answerDetails"
                   label="In 250 words, tell us how."
                   required
                 />
