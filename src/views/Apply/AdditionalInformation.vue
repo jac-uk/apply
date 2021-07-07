@@ -14,7 +14,7 @@
 
         <CheckboxGroup
           id="additionalInfoGroup"
-          v-model="application.additionalInfo.listedSources"
+          v-model="formData.additionalInfo.listedSources"
         >
           <p class="govuk-body-l">
             How did you hear about the vacancy?
@@ -66,7 +66,7 @@
           >
             <TextareaInput
               id="otherSources"
-              v-model="application.additionalInfo.otherSources"
+              v-model="formData.additionalInfo.otherSources"
               label="Other form of communication"
               rows="2"
               required
@@ -75,7 +75,7 @@
         </CheckboxGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--personal-details--save-and-continue"
         >
           Save and continue
@@ -86,11 +86,12 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from './ApplyMixIn';
 import BackLink from '@/components/BackLink';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
@@ -102,36 +103,39 @@ export default {
     TextareaInput,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       additionalInfo: {
         listedSources: null,
         otherSources: null,
       },
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'additionalInfo',
+      formData: formData,
     };
   },
   methods: {
     isFormValid() {
-      const listedSources = this.application.additionalInfo.listedSources;
+      const listedSources = this.formData.additionalInfo.listedSources;
       if (!listedSources || listedSources.length === 0) {
         this.errors.push({ id: 'error', message: 'Please select at least one option' });
         return false;
       }
       if (!listedSources.includes('other')) {
-        this.application.additionalInfo.otherSources = null;
+        this.formData.additionalInfo.otherSources = null;
       }
       return true;
     },
     async save() {
       this.validate();
       if (this.isValid() && this.isFormValid()) {
-        this.application.progress.additionalInfo = true;
-        await this.$store.dispatch('application/save', this.application);
+        this.formData.progress[this.formId] = true;
+        await this.$store.dispatch('application/save', this.formData);
         this.$router.push({ name: 'task-list' });
       }
     },

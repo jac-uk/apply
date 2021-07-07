@@ -11,28 +11,48 @@
         Qualifications
       </h1>
 
-      <div
-        v-if="vacancy.schedule2Apply"
-      >
-        <RadioGroup
-          v-if="vacancy.appliedSchedule == 'schedule-2-d'"
-          :id="`applying-under-${vacancy.appliedSchedule}`"
-          v-model="application.applyingUnderSchedule2d"
-          :label="`Are you applying under ${appliedSchedule}?`"
-        >
-          <span>
-            <a
-              class="govuk-link govuk-body"
-              href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
-              target="_blank"
-            >
-              http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
-            </a>
-          </span>
+        <ErrorSummary :errors="errors" />
 
-          <RadioItem
-            :value="true"
-            label="Yes"
+        <div
+          v-if="vacancy.schedule2Apply"
+        >
+          <RadioGroup
+            v-if="vacancy.appliedSchedule == 'schedule-2-d'"
+            :id="`applying-under-${vacancy.appliedSchedule}`"
+            v-model="formData.applyingUnderSchedule2d"
+            :label="`Are you applying under ${appliedSchedule}?`"
+          >
+            <span>
+              <a
+                class="govuk-link govuk-body"
+                href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
+                target="_blank"
+              >
+                http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
+              </a>
+            </span>
+
+            <RadioItem
+              :value="true"
+              label="Yes"
+            >
+              <TextareaInput
+                :id="`experience-under-${vacancy.appliedSchedule}`"
+                v-model="formData.experienceUnderSchedule2D"
+                label="Explain how you've gained experience in law."
+              />
+            </RadioItem>
+
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+          </RadioGroup>
+          <RadioGroup
+            v-else-if="vacancy.appliedSchedule == 'schedule-2-3'"
+            :id="`applying-under-${vacancy.appliedSchedule}`"
+            v-model="formData.applyingUnderSchedule2Three"
+            :label="`Are you applying under ${appliedSchedule}?`"
           >
             <TextareaInput
               :id="`experience-under-${vacancy.appliedSchedule}`"
@@ -58,9 +78,12 @@
               href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
               target="_blank"
             >
-              http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
-            </a>
-          </span>
+              <TextareaInput
+                :id="`experience-under-${vacancy.appliedSchedule}`"
+                v-model="formData.experienceUnderSchedule2Three"
+                label="Explain how you've gained experience in law."
+              />
+            </RadioItem>
 
           <RadioItem
             :value="true"
@@ -96,6 +119,9 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RepeatableFields from '@/components/RepeatableFields';
 import Qualification from '@/components/RepeatableFields/Qualification';
 import RadioItem from '@/components/Form/RadioItem';
@@ -107,6 +133,7 @@ import * as filters from '@/filters';
 
 export default {
   components: {
+    ErrorSummary,
     RepeatableFields,
     RadioItem,
     RadioGroup,
@@ -114,6 +141,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       qualifications: null,
@@ -121,20 +149,19 @@ export default {
       experienceUnderSchedule2D: null,
       applyingUnderSchedule2Three: null,
       experienceUnderSchedule2Three: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'relevantQualifications',
+      formData: formData,
       repeatableFields: {
         Qualification,
       },
     };
   },
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
     appliedSchedule() {
       return filters.lookup(this.vacancy.appliedSchedule);
     },

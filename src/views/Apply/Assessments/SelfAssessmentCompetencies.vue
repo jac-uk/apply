@@ -14,7 +14,7 @@
 
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
-            v-for="(item, index) in application.selectionCriteriaAnswers"
+            v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
           >
             <p
@@ -94,7 +94,7 @@
         <FileUpload
           id="self-assessment-upload"
           ref="self-assessment"
-          v-model="application.uploadedSelfAssessment"
+          v-model="formData.uploadedSelfAssessment"
           name="self-assessment"
           :path="uploadPath"
           label="Upload finished self assessment"
@@ -102,7 +102,7 @@
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
         >
           Save and continue
@@ -115,6 +115,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import BackLink from '@/components/BackLink';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
@@ -133,18 +134,20 @@ export default {
     FileUpload,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       uploadedSelfAssessment: null,
       selectionCriteriaAnswers: [],
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
-    if (application.selectionCriteriaAnswers.length === 0) {
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
+    if (formData.selectionCriteriaAnswers.length === 0) {
       const vacancy = this.$store.state.vacancy.record;
       if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
         for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          application.selectionCriteriaAnswers.push({
+          formData.selectionCriteriaAnswers.push({
             title: vacancy.selectionCriteria[i].title,
             text: vacancy.selectionCriteria[i].text,
             answer: null,
@@ -152,21 +155,13 @@ export default {
           });
         }
       }
-    }    
+    }
     return {
-      application: application,
+      formId: 'selfAssessmentCompetencies',
+      formData: formData,
     };
   },
   computed: {
-    userId() {
-      return this.$store.state.auth.currentUser.uid;
-    },
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    uploadPath() {
-      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
-    },
     downloadNameGenerator() {
       let outcome = null;
       if (
@@ -179,16 +174,6 @@ export default {
         }
       }
       return outcome;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.selfAssessmentCompetencies = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
     },
   },
 };

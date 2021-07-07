@@ -15,7 +15,7 @@ const mocks = {
     dispatch: jest.fn(),
     state: {
       vacancy: {
-        record: { 
+        record: {
           typeOfExercise: null,
           referenceNumber: null,
           welshRequirement: null,
@@ -74,6 +74,7 @@ const mocks = {
       'vacancy/getCloseDate': new Date(),
       'vacancy/isOpen': jest.fn(),
       'vacancy/id': jest.fn(),
+      'vacancy/applicationParts': jest.fn(),
       'application/data': () => jest.fn(),
       // 'vacancies/bind': () => jest.fn(), //see views/vacancies.spec.js
       'candidate/characterInformation': () => jest.fn(),

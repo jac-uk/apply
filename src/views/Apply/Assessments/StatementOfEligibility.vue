@@ -14,7 +14,7 @@
 
         <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
           <div
-            v-for="(item, index) in vacancy.selectionCriteria"
+            v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
           >
             <p
@@ -23,8 +23,8 @@
               {{ item.title }}
             </p>
             <!-- eslint-disable -->
-            <div 
-              class="govuk-body" 
+            <div
+              class="govuk-body"
               v-html="item.text"
             />
             <!-- eslint-enable -->
@@ -54,7 +54,7 @@
         </div>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--statement-of-eligibility--save-and-continue"
         >
           Save and continue
@@ -67,6 +67,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -81,46 +82,31 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       selectionCriteriaAnswers: [],
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
-    const vacancy = this.$store.state.vacancy.record;
-    if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
-      const aSCArray = [];
-      for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-        aSCArray.push({
-          answer: null,
-          answerDetails: null,
-        });
-        application.selectionCriteriaAnswers = aSCArray;
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
+    if (formData.selectionCriteriaAnswers.length === 0) {
+      const vacancy = this.$store.state.vacancy.record;
+      if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
+        for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+          formData.selectionCriteriaAnswers.push({
+            title: vacancy.selectionCriteria[i].title,
+            text: vacancy.selectionCriteria[i].text,
+            answer: null,
+            answerDetails: null,
+          });
+        }
       }
     }
     return {
-      application: application,
-      files: {},
+      formId: 'statementOfEligibility',
+      formData: formData,
     };
-  },
-  computed: {
-    userId() {
-      return this.$store.state.auth.currentUser.uid;
-    },
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-
-      if (this.isValid()) {
-        this.application.progress.statementOfEligibility = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>
