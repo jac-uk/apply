@@ -13,22 +13,22 @@ describe('components/Form/TextareaInput', () => {
       it('must be a String', () => {
         expect(prop.type()).toBeString();
       });
-
+      
       it('defaults as \'5\'', () => {
         expect(prop.default).toBe('5');
       });
-
+      
     });
-
+    
     describe('value', () => {
       beforeEach(() => {
         prop = TextareaInput.props.value;
       });
-
+      
       it('type is String', () => {
         expect(prop.type()).toBeString();
       });
-
+      
       it('defaults as \'\'', () => {
         expect(prop.default).toBe('');
       });
