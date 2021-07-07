@@ -1,15 +1,16 @@
 <template>
-  <form
-    ref="formRef"
-    @submit.prevent="save"
-  >
-    <div class="govuk-grid-column-two-thirds">
-      <BackLink />
-      <h1
-        class="govuk-heading-xl"
-      >
-        Qualifications
-      </h1>
+  <div class="govuk-grid-row">
+    <form
+      ref="formRef"
+      @submit.prevent="save"
+    >
+      <div class="govuk-grid-column-two-thirds">
+        <BackLink />
+        <h1
+          class="govuk-heading-xl"
+        >
+          Qualifications
+        </h1>
 
         <ErrorSummary :errors="errors" />
 
@@ -54,29 +55,19 @@
             v-model="formData.applyingUnderSchedule2Three"
             :label="`Are you applying under ${appliedSchedule}?`"
           >
-            <TextareaInput
-              :id="`experience-under-${vacancy.appliedSchedule}`"
-              v-model="application.experienceUnderSchedule2D"
-              label="Explain how you've gained experience in law."
-            />
-          </RadioItem>
+            <span>
+              <a
+                class="govuk-link govuk-body"
+                href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
+                target="_blank"
+              >
+                http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
+              </a>
+            </span>
 
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
-        <RadioGroup
-          v-else-if="vacancy.appliedSchedule == 'schedule-2-3'"
-          :id="`applying-under-${vacancy.appliedSchedule}`"
-          v-model="application.applyingUnderSchedule2Three"
-          :label="`Are you applying under ${appliedSchedule}?`"
-        >
-          <span>
-            <a
-              class="govuk-link govuk-body"
-              href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
-              target="_blank"
+            <RadioItem
+              :value="true"
+              label="Yes"
             >
               <TextareaInput
                 :id="`experience-under-${vacancy.appliedSchedule}`"
@@ -85,37 +76,26 @@
               />
             </RadioItem>
 
-          <RadioItem
-            :value="true"
-            label="Yes"
-          >
-            <TextareaInput
-              :id="`experience-under-${vacancy.appliedSchedule}`"
-              v-model="application.experienceUnderSchedule2Three"
-              label="Explain how you've gained experience in law."
+            <RadioItem
+              :value="false"
+              label="No"
             />
-          </RadioItem>
+          </RadioGroup>
+        </div>
 
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+        <RepeatableFields
+          v-model="formData.qualifications"
+          :component="repeatableFields.Qualification"
+        />
+        <button
+          :disabled="!canSave(formId)"
+          class="govuk-button info-btn--relevant-qualifications--save-and-continue"
+        >
+          Save and continue
+        </button>
       </div>
-
-      <RepeatableFields
-        v-model="application.qualifications"
-        required
-        :component="repeatableFields.Qualification"
-      />
-      <button
-        :disabled="application.status != 'draft'"
-        class="govuk-button info-btn--relevant-qualifications--save-and-continue"
-      >
-        Save and continue
-      </button>
-    </div>
-  </form>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -128,7 +108,6 @@ import RadioItem from '@/components/Form/RadioItem';
 import RadioGroup from '@/components/Form/RadioGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
 import * as filters from '@/filters';
 
 export default {
@@ -164,27 +143,6 @@ export default {
   computed: {
     appliedSchedule() {
       return filters.lookup(this.vacancy.appliedSchedule);
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.qualifications.forEach(q => {
-          if (q.notCalledToBar && q.calledToBarDate) {
-            q.calledToBarDate = null;
-          }
-          if (q.qualificationNotComplete && q.date) {
-            q.date = null;
-          }
-          if ((q.notCalledToBar === false || q.qualificationNotComplete === false) && q.details) {
-            q.details = null;
-          }
-        });
-        this.application.progress.relevantQualifications = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
     },
   },
 };
