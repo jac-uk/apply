@@ -425,14 +425,14 @@ function applicationParts(data) {
     }
     return applicationParts;
   }
-  return {};
+  return applicationPartsMap(data); // default to all relevant parts
 }
 // application parts in current stage (n.b. returns registration by default)
 function currentApplicationParts(data) {
   if (data._applicationContent) {
     return data._applicationContent[currentState(data)];
   }
-  return [];
+  return applicationPartsMap(data); // default to all relevant parts
 }
 // are there application parts in current stage (not registration)
 function isMoreInformationNeeded(exercise, application) {
