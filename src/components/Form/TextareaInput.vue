@@ -3,7 +3,6 @@
     class="govuk-form-group"
     :class="{'govuk-form-group--error': hasError}"
   >
-    {{ words }}
     <label
       :for="id"
       class="govuk-heading-m govuk-!-margin-bottom-2"
