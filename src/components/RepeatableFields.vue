@@ -4,7 +4,7 @@
       v-for="(row, index) in rows"
       :key="index"
       ref="repeatableField"
-      class="repeatableField"
+      class="repeatableField govuk-grid-row"
     >
       <component
         :is="component"
@@ -18,18 +18,19 @@
             v-if="rows.length > 1"
             ref="removeFieldButton"
             type="button"
-            class="govuk-button govuk-button--warning govuk-!-margin-bottom-2"
+            class="govuk-button float-right govuk-button--warning govuk-!-padding-top-2"
             @click.prevent="removeRow(index)"
           >
             Remove
           </button>
+          <hr>
         </template>
       </component>
     </div>
     <button
       v-if="canAddRow"
       type="button"
-      :class="`govuk-button govuk-button--secondary govuk-!-margin-bottom-6 info-btn--${$route.name}--repeatable-field--add-another`"
+      :class="`govuk-grid-row govuk-button govuk-button--secondary float-right govuk-!-margin-bottom-6 info-btn--${$route.name}--repeatable-field--add-another`"
       @click.prevent="addRow"
     >
       Add another

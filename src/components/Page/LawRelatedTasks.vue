@@ -2,6 +2,7 @@
   <div
     :class="{'govuk-form-group--error': hasError}"
   >
+    vbbb
     <CheckboxGroup
       :id="id"
       v-model="localTasks"
@@ -127,6 +128,7 @@
           />
         </div>
       </CheckboxItem>
+
       <CheckboxItem
         value="acting-arbitrator"
         label="Acting as an arbitrator"
@@ -253,6 +255,11 @@ export default {
       required: false,
     },
   },
+  data() {
+    return {
+      localJudicialFunctions: { ...this.judicialFunctions },
+    };
+  },
   computed: {
     localTasks: {
       get() {
@@ -270,16 +277,23 @@ export default {
         this.$emit('update:otherTasks', val);
       },
     },
-    localJudicialFunctions: {
-      get() {
-        return { ...this.judicialFunctions };
-      },
-    },
+    // localJudicialFunctions: {
+    //   get() {
+    //     // const defaults = {
+    //     //   natureOfAppointment: '',
+    //     // };
+    //     return this.judicialFunctions;
+    //   },
+    //   set(val) {
+    //     // console.log('set:localjudicialFunctions: ', val);
+    //     this.$emit('update:judicialFunctions', val);
+    //   },
+    // },
   },
   watch: {
     localJudicialFunctions: {
-      handler(val){
-        this.$emit('update:judicialFunctions', val);
+      handler: function(after) {
+        this.$emit('update:judicialFunctions', after);
       },
       deep: true,
     },
