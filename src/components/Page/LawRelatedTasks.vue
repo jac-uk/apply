@@ -2,7 +2,6 @@
   <div
     :class="{'govuk-form-group--error': hasError}"
   >
-    vbbb
     <CheckboxGroup
       :id="id"
       v-model="localTasks"
@@ -189,10 +188,9 @@
         </Select>
 
         <TextField
-          v-if="['Other', 'Part Time'].some((element) => element === localTasks.workingBasis)"
           :id="`${id}_working_basis_days`"
           v-model="localTasks.workingBasisDays"
-          class="govuk-input govuk-date-input__input govuk-input--width-2"
+          input-class="govuk-input govuk-date-input__input govuk-input--width-2"
           hint="Please Indicate Your Average Engagement In Days per Month"
           :num-max="31"
           type="number"
@@ -277,18 +275,6 @@ export default {
         this.$emit('update:otherTasks', val);
       },
     },
-    // localJudicialFunctions: {
-    //   get() {
-    //     // const defaults = {
-    //     //   natureOfAppointment: '',
-    //     // };
-    //     return this.judicialFunctions;
-    //   },
-    //   set(val) {
-    //     // console.log('set:localjudicialFunctions: ', val);
-    //     this.$emit('update:judicialFunctions', val);
-    //   },
-    // },
   },
   watch: {
     localJudicialFunctions: {
