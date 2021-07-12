@@ -1,5 +1,5 @@
 import QualifyingTests from '@/views/QualifyingTests/QualifyingTests.vue';
-import { createTestSubject } from '../helpers';
+import { createTestSubject } from '../../helpers';
 
 // jest.mock('vuex', () => {
 //   return {
