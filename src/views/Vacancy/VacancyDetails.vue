@@ -14,11 +14,16 @@
         </span>
       </p>
       <p v-if="vacancy.location">
-        <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
-      </p>
-      <p v-if="vacancy.appointmentType == 'salaried'">
         <span class="govuk-body govuk-!-font-weight-bold">
-          Salary:
+          Location:
+        </span>
+        <span class="govuk-body">
+          {{ vacancy.location }}
+        </span>
+      </p>
+      <p v-if="['salaried', 'fee-paid'].some((type) => type == vacancy.appointmentType)">
+        <span class="govuk-body govuk-!-font-weight-bold">
+          {{ vacancy.appointmentType == 'salaried' ? 'Salary: ' : 'Fee-Paid: ' }}
         </span>
         <span
           v-if="vacancy.salaryGrouping"
