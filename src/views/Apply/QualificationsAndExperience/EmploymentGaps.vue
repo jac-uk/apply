@@ -19,11 +19,11 @@
         <p class="govuk-body-l">
           Add dates and details of any gaps in employment you may have
         </p>
-
+        
         <RepeatableFields
           v-model="formData.employmentGaps"
           required
-          :component="repeatableFields.EmploymentGaps"
+          :component="isLegal ? repeatableFields.EmploymentGaps : repeatableFields.NonLegalEmploymentGaps"
         />
 
         <button
@@ -61,23 +61,14 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
-    if (this.$store.getters['vacancy/isLegal']) {
-      return {
-        formId: 'employmentGaps',
-        formData: formData,
-        repeatableFields: {
-          EmploymentGaps: EmploymentGaps,
-        },
-      };
-    } else {
-      return {
-        formId: 'employmentGaps',
-        formData: formData,
-        repeatableFields: {
-          EmploymentGaps: NonLegalEmploymentGaps,
-        },
-      };
-    }
+    return {
+      formId: 'employmentGaps',
+      formData: formData,
+      repeatableFields: {
+        NonLegalEmploymentGaps,
+        EmploymentGaps,
+      },
+    };
   },
 };
 </script>
