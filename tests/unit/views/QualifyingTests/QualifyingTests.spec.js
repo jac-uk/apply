@@ -7,7 +7,7 @@ import { createTestSubject } from '../helpers';
 //   };
 // });
 
-describe('views/Applications', () => {  
+xdescribe('views/Applications', () => {  
     let wrapper;
 
     beforeEach(()=>{
