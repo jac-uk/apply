@@ -1,9 +1,8 @@
 import { createTestSubject } from '../../helpers';
 
-// import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
-const EmploymentGaps = 'bb'; 
+import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
 
-xdescribe('components/RepeatableFields/EmploymentGaps', () => {
+describe('components/RepeatableFields/EmploymentGaps', () => {
 
   describe('props', () => {
 

@@ -1,8 +1,7 @@
 import { createTestSubject } from '../../helpers';
-// import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
-const LawRelatedTasks = 'b';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
 
-xdescribe('components/Form/LawRelatedTasks', () => {
+describe('components/Form/LawRelatedTasks', () => {
     describe('props', () => {
         describe('tasks', () => {
             let prop;

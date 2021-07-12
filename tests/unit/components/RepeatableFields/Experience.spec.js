@@ -1,9 +1,8 @@
 import { createTestSubject } from '../../helpers';
 
-// import Experience from '@/components/RepeatableFields/Experience';
-const Experience = 'remove me';
+import Experience from '@/components/RepeatableFields/Experience';
 
-xdescribe('@/components/RepeatableFields/Experience', () => {
+describe('@/components/RepeatableFields/Experience', () => {
 
   describe('props', () => {
 

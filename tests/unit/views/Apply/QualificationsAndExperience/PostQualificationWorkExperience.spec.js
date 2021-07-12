@@ -1,9 +1,8 @@
 import { createTestSubject } from '../../../helpers';
 
-const PostQualificationWorkExperience = 'remove me';
-// import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
+import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 
-xdescribe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
+describe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(PostQualificationWorkExperience, {

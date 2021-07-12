@@ -1,8 +1,7 @@
 import { createTestSubject } from '../../../helpers';
-// import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
-const EmploymentGaps = 'remove';
+import EmploymentGaps from '@/views/Apply/QualificationsAndExperience/EmploymentGaps';
 
-xdescribe('@/views/Apply/QualificationsAndExperience/EmploymentGaps', () => {
+describe('@/views/Apply/QualificationsAndExperience/EmploymentGaps', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = createTestSubject(EmploymentGaps, {
@@ -13,7 +12,7 @@ xdescribe('@/views/Apply/QualificationsAndExperience/EmploymentGaps', () => {
     });
     
     describe('template', () => {
-        it('renders', () => {
+        it.only('renders', () => {
             expect(wrapper.exists()).toBe(true);
         });
     });
