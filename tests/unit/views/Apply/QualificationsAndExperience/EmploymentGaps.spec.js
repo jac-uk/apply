@@ -12,7 +12,7 @@ describe('@/views/Apply/QualificationsAndExperience/EmploymentGaps', () => {
     });
     
     describe('template', () => {
-        it.only('renders', () => {
+        it('renders', () => {
             expect(wrapper.exists()).toBe(true);
         });
     });

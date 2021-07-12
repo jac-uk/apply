@@ -1,5 +1,4 @@
 import { createTestSubject } from '../../../helpers';
-
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience';
 
 describe('@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience', () => {
