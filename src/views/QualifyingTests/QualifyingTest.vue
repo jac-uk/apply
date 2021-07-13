@@ -115,7 +115,12 @@ export default {
       return amountTimeLeft > 0;
     },
     isNotCompleted() {
-      return this.qualifyingTestResponse.statusLog.completed === null || this.qualifyingTestResponse.statusLog.completed === undefined;
+      return this.qualifyingTestResponse.statusLog.completed === null ||
+        this.qualifyingTestResponse.statusLog.completed === undefined;
+    },
+    isNotReset() {
+      return this.qualifyingTestResponse.statusLog.reset === null ||
+        this.qualifyingTestResponse.statusLog.reset === undefined;
     },
     isInformationPage() {
       return this.$route.name === 'qualifying-test-information';
@@ -171,8 +176,9 @@ export default {
         // noTimeLeft > redirect
         const noTimeLeft = !this.isTimeLeft;
         const isCompleted = !this.isNotCompleted;
+        const notReset = this.isNotReset;
 
-        if (noTimeLeft || isCompleted) {
+        if ((noTimeLeft) || (isCompleted && notReset)) {
           return this.redirectToList();
         }
 
