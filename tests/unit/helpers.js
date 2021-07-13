@@ -69,6 +69,10 @@ const mocks = {
       applications: {
         records: [],
       },
+      qualifyingTestResponses: {
+        dryRuns: [],
+        records: [],
+      },
     },
     getters: {
       'vacancy/getCloseDate': new Date(),

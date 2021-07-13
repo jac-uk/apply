@@ -53,7 +53,9 @@
           class="govuk-tabs__panel"
           role="tabpanel"
         >
-          <h1>{{ activeTab | capitalize }}</h1>
+          <h1 class="govuk-heading-l">
+            {{ activeTab }}
+          </h1>
 
           <Table
             data-key="id"
@@ -147,29 +149,36 @@ export default {
       return this.closedTests.some((element) => element.qualifyingTest.feedbackSurvey);
     },
     qualifyingTestResponses() {
-      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
+      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns)
+        .filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
     openTests(){
-      return this.qualifyingTestResponses.filter(qt => {
+      const result = this.qualifyingTestResponses.filter(qt => {
         const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
         const startEndNotInFuture = !isDateInFuture(qt.qualifyingTest.startDate) && isDateInFuture(qt.qualifyingTest.endDate);
         const activatedOrStarted = qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED;
+        console.log(!isDateInFuture(qt.qualifyingTest.startDate), isDateInFuture(qt.qualifyingTest.endDate));
         return startEndNotInFuture && activatedOrStarted && !timeout;
       });
+      // console.log(result);
+      return result;
     },
     futureTests(){
-      return this.qualifyingTestResponses.filter(qt => (
+      const result = this.qualifyingTestResponses.filter(qt => (
         (isDateInFuture(qt.qualifyingTest.startDate) || (
           isDateInFuture(qt.qualifyingTest.endDate) && qt.status === QUALIFYING_TEST.STATUS.CREATED
         ))
       ));
+      return result;
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => {
+      const result = this.qualifyingTestResponses.filter(qt => {
         const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
         const pastDateAndCompleted = (!isDateInFuture(qt.qualifyingTest.endDate) || qt.status == QUALIFYING_TEST.STATUS.COMPLETED);
         return timeout || pastDateAndCompleted;
       });
+      // console.log('closedTest', result);
+      return result;
     },
   },
   async mounted() {

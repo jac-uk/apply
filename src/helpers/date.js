@@ -1,6 +1,7 @@
 const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
+  console.log(date);
   if (date == null){
     return false;
   } else if (!isDate(date)) {
@@ -17,6 +18,9 @@ const isDateInFuture = (date) => {
     date.getMinutes(),
     date.getSeconds(),
   );
+  // console.log(today);
+  // console.log(date);
+  // console.log(date > today);
 
   return date > today;
 };
