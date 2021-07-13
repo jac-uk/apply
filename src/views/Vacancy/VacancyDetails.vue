@@ -14,11 +14,21 @@
         </span>
       </p>
       <p v-if="vacancy.location">
-        <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
-      </p>
-      <p v-if="vacancy.appointmentType == 'salaried'">
         <span class="govuk-body govuk-!-font-weight-bold">
-          Salary:
+          Location:
+        </span>
+        <span class="govuk-body">
+          {{ vacancy.location }}
+        </span>
+      </p>
+      <p
+        v-if="isPaidRole"
+      >
+        <span
+          v-if="isPaidRole"
+          class="govuk-body govuk-!-font-weight-bold"
+        >
+          {{ vacancy.appointmentType == 'salaried' ? 'Salary: ' : 'Fee-Paid: ' }}
         </span>
         <span
           v-if="vacancy.salaryGrouping"
@@ -32,6 +42,12 @@
         >
           {{ vacancy.salary | formatCurrency }}
         </span>
+        <span
+          v-else
+          class="govuk-body"
+        >
+          {{ false | showAlternative('TBC') }}
+        </span>
       </p>
       <p
         v-if="vacancy.exerciseMailbox"
@@ -41,7 +57,9 @@
         <a
           :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
           class="govuk-body govuk-link"
-        >{{ vacancy.exerciseMailbox }}</a>
+        >
+          {{ vacancy.exerciseMailbox }}
+        </a>
       </p>
 
       <div
@@ -194,6 +212,9 @@ export default {
     };
   },
   computed: {
+    isPaidRole () {
+      return ['salaried', 'fee-paid'].some((type) => type == this.vacancy.appointmentType);
+    },
     vacancy () {
       return this.$store.state.vacancy.record;
     },
