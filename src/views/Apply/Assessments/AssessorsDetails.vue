@@ -25,7 +25,7 @@
           You should read the
           <a
             class="govuk-link info-link--independend-assessor--guidance-on-choosing-independent-assessor"
-            href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
+            href="https://judicialappointments.gov.uk/independent-assessments"
             target="_blank"
           >
             guidance on choosing independent assessors
