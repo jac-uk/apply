@@ -37,10 +37,10 @@
             class="govuk-list"
           >
             <li v-if="item.endDate">
-              {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+              {{ item.startDate | formatDate('month') }} to {{ item.endDate | formatDate('month') }}
             </li>
             <li v-else>
-              {{ item.startDate | formatDate }} — current
+              {{ item.startDate | formatDate('month') }} — current
             </li>
           </ul>
         </dd>
@@ -59,7 +59,6 @@
               v-for="task in item.tasks"
               :key="task.name"
             >
-              {{ task.name }}
               <p class="govuk-body govuk-!-margin-bottom-0">
                 {{ task | lookup }}
               </p>
@@ -69,11 +68,21 @@
               >
                 {{ item.otherTasks }}
               </p>
+              <!-- {{ item.judicialFunctions }} -->
               <div
                 v-if="task == 'judicial-functions' 
                   && item.judicialFunctions"
                 class="govuk-body govuk-!-margin-bottom-0"
               >
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Nature of Appointment:
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ item.judicialFunctions.natureOfAppointment }}
+                  </dd>
+                </div>
+
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
                     Legal Experience:
@@ -84,47 +93,13 @@
                 </div>
                 <div class="govuk-summary-list__row">
                   <dt class="govuk-summary-list__key">
-                    Date:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.date | formatDate }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
                     Category of Law:
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ item.judicialFunctions.categoryOfLaw }}
                   </dd>
                 </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Time engaged in this activity:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    <ul
-                      class="govuk-list"
-                    >
-                      <li v-if="item.judicialFunctions.timeEngagedEnd">
-                        {{ item.judicialFunctions.timeEngagedStart | formatDate }} to {{ item.judicialFunctions.timeEngagedEnd | formatDate }}
-                      </li>
-                      <li v-else>
-                        {{ item.judicialFunctions.timeEngagedStart | formatDate }} — current
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Judicial Office:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.judicialOffice | toYesNo }}
-                  </dd>
-                </div>
                 <div 
-                  v-if="item.judicialFunctions.judicialOffice"
                   class="govuk-summary-list__row"
                 >
                   <dt class="govuk-summary-list__key">
@@ -132,22 +107,6 @@
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ item.judicialFunctions.judicialOfficeType }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Judicial Appointment Date:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.judicialAppointmentDate | formatDate }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Nature of Appointment:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.natureOfAppointment }}
                   </dd>
                 </div>
                 <div class="govuk-summary-list__row">
@@ -172,6 +131,47 @@
                   </dt>
                   <dd class="govuk-summary-list__value">
                     {{ item.judicialFunctions.tribunal }}
+                  </dd>
+                </div> 
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Working Basis:
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ item.judicialFunctions.workingBasis }}
+                  </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Average days per month:
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ item.judicialFunctions.workingBasisDays }}
+                  </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Dates engaged in this activity:
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    <ul
+                      class="govuk-list"
+                    >
+                      <li v-if="item.judicialFunctions.timeEngagedEnd">
+                        {{ item.judicialFunctions.timeEngagedStart | formatDate('month') }} to {{ item.judicialFunctions.timeEngagedEnd | formatDate('month') }}
+                      </li>
+                      <li v-else>
+                        {{ item.judicialFunctions.timeEngagedStart | formatDate('month') }} — current
+                      </li>
+                    </ul>
+                  </dd>
+                </div>
+                <div class="govuk-summary-list__row">
+                  <dt class="govuk-summary-list__key">
+                    Judicial Appointment Date:
+                  </dt>
+                  <dd class="govuk-summary-list__value">
+                    {{ item.judicialFunctions.judicialAppointmentDate | formatDate }}
                   </dd>
                 </div>
               </div>

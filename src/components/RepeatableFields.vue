@@ -23,18 +23,22 @@
           >
             Remove
           </button>
-          <hr>
+          <hr class="govuk-!-margin-bottom-0">
         </template>
       </component>
+      <div
+        class="govuk-grid-row"
+      >
+        <button
+          v-if="canAddRow"
+          type="button"
+          :class="`govuk-button govuk-button--secondary float-left`" 
+          @click.prevent="addRow"
+        >
+          Add another
+        </button>
+      </div>
     </div>
-    <button
-      v-if="canAddRow"
-      type="button"
-      :class="`govuk-button govuk-button--secondary float-right govuk-!-margin-bottom-6 info-btn--${$route.name}--repeatable-field--add-another`"
-      @click.prevent="addRow"
-    >
-      Add another
-    </button>
   </div>
 </template>
 

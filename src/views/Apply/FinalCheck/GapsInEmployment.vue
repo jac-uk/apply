@@ -42,7 +42,10 @@
         <dt class="govuk-summary-list__key">
           Law-related tasks
         </dt>
-        <dd class="govuk-summary-list__value">
+        <dd 
+          v-if="item.tasks && item.tasks.length"
+          class="govuk-summary-list__value"
+        >
           <ul class="govuk-list">
             <li
               v-for="task in item.tasks"
@@ -52,12 +55,20 @@
                 v-if="task == 'other'"
                 class="govuk-body govuk-!-margin-bottom-0"
               >
-                <span class="govuk-caption-m">{{ task | lookup }}</span>
+                <span class="govuk-caption-m">
+                  {{ task | lookup }}
+                </span>
                 {{ item.otherTasks }}
               </p>
               <span v-else>{{ task | lookup }}</span>
             </li>
           </ul>
+        </dd>
+        <dd 
+          v-else
+          class="govuk-summary-list__value"
+        >
+          No Law-related tasks provided
         </dd>
       </div>
     </dl>

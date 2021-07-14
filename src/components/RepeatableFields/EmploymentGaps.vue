@@ -5,6 +5,7 @@
       v-model="row.startDate"
       label="Start date"
       type="month"
+      :required="hasEnteredData"
     />
     <DateInput
       :id="`end_date_${index}`"
@@ -17,6 +18,7 @@
       v-model="row.details"
       label="Details"
       rows="2"
+      :required="hasEnteredData"
     />
     <LawRelatedTasks
       :id="`tasks_${index}`"
@@ -48,6 +50,33 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+  },
+  data() {
+    let hasRowData;
+    Object.keys(this.row).forEach((key) => {
+      hasRowData = !!this.row[key];
+    });
+    if (!hasRowData) {
+      hasRowData = !!(this.row.otherTasks || this.row.tasks.length);
+    }
+    return {
+      hasEnteredData: hasRowData,
+    };
+  },
+  watch: {
+    row: {
+      handler: function() {
+        let result;
+        Object.keys(this.row).forEach((key) => {
+          result = !!this.row[key];
+        });
+        if (!result) {
+          result = !!(this.row.otherTasks || this.row.tasks.length);
+        }
+        this.hasEnteredData = result;
+      },
+      deep: true,
     },
   },
 };

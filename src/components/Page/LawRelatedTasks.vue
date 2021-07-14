@@ -108,6 +108,7 @@
             v-model="localJudicialFunctions.timeEngagedStart"
             label="Dates Engaged In This Activity:"
             hint="Start date"
+            type="month"
             required
           />
 
@@ -117,6 +118,7 @@
             :label-hidden="true"
             label="End date"
             hint="End date"
+            type="month"
           /> 
 
           <DateInput
