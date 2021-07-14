@@ -33,6 +33,7 @@
               </span>
             </Banner>
           </div>
+          <Breadcrumb />
           <RouterView />
         </div>
       </main>
@@ -49,6 +50,7 @@ import Header from '@/components/Page/Header';
 import Footer from '@/components/Page/Footer';
 import Banner from '@/components/Page/Banner';
 import LoadingMessage from '@/components/LoadingMessage';
+import Breadcrumb from '@/components/Breadcrumb.vue';
 
 export default {
   name: 'App',
@@ -57,6 +59,7 @@ export default {
     Header,
     Footer,
     Banner,
+    Breadcrumb,
   },
   data() {
     return {

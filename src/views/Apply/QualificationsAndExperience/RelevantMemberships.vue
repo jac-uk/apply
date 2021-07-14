@@ -11,15 +11,11 @@
           Memberships
         </h1>
 
-        <ErrorSummary
-          :errors="errors"
-          :show-save-button="true"
-          @save="save"
-        />
+        <ErrorSummary :errors="errors" />
 
         <CheckboxGroup
           id="professional-memberships"
-          v-model="application.professionalMemberships"
+          v-model="formData.professionalMemberships"
           label="What professional memberships do you have?"
         >
           <CheckboxItem
@@ -30,20 +26,20 @@
           >
             <DateInput
               id="chartered-association-of-building-engineers-date"
-              v-model="application.charteredAssociationBuildingEngineersDate"
+              v-model="formData.charteredAssociationBuildingEngineersDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="chartered-association-of-building-engineers-number"
-              v-model="application.charteredAssociationBuildingEngineersNumber"
+              v-model="formData.charteredAssociationBuildingEngineersNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="chartered-association-of-building-engineers-information"
-              v-model="application.charteredAssociationBuildingEngineersInformation"
+              v-model="formData.charteredAssociationBuildingEngineersInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -56,20 +52,20 @@
           >
             <DateInput
               id="chartered-institute-of-building-date"
-              v-model="application.charteredInstituteBuildingDate"
+              v-model="formData.charteredInstituteBuildingDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="chartered-institute-of-building-number"
-              v-model="application.charteredInstituteBuildingNumber"
+              v-model="formData.charteredInstituteBuildingNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="chartered-institute-of-building-information"
-              v-model="application.charteredInstituteBuildingInformation"
+              v-model="formData.charteredInstituteBuildingInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -82,20 +78,20 @@
           >
             <DateInput
               id="chartered-institute-of-environmental-health-date"
-              v-model="application.charteredInstituteEnvironmentalHealthDate"
+              v-model="formData.charteredInstituteEnvironmentalHealthDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="chartered-institute-of-environmental-health-number"
-              v-model="application.charteredInstituteEnvironmentalHealthNumber"
+              v-model="formData.charteredInstituteEnvironmentalHealthNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="chartered-institute-of-environmental-health-information"
-              v-model="application.charteredInstituteEnvironmentalHealthInformation"
+              v-model="formData.charteredInstituteEnvironmentalHealthInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -108,20 +104,20 @@
           >
             <DateInput
               id="general-medical-council-date"
-              v-model="application.generalMedicalCouncilDate"
+              v-model="formData.generalMedicalCouncilDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="general-medical-council-number"
-              v-model="application.generalMedicalCouncilNumber"
+              v-model="formData.generalMedicalCouncilNumber"
               label="Membership number?"
               required
             />
             <RadioGroup
               id="general-medical-council-conditional-registration"
-              v-model="application.generalMedicalCouncilConditional"
+              v-model="formData.generalMedicalCouncilConditional"
               label="Is your registration conditional?"
               required
             >
@@ -131,17 +127,17 @@
               >
                 <DateInput
                   id="general-medical-council-conditional-registration-start-date"
-                  v-model="application.generalMedicalCouncilConditionalStartDate"
+                  v-model="formData.generalMedicalCouncilConditionalStartDate"
                   label="Start date"
                 />
                 <DateInput
                   id="general-medical-council-conditional-registration-end-date"
-                  v-model="application.generalMedicalCouncilConditionalEndDate"
+                  v-model="formData.generalMedicalCouncilConditionalEndDate"
                   label="End date"
                 />
                 <TextareaInput
                   id="general-medical-council-conditional-registration-details"
-                  v-model="application.generalMedicalCouncilConditionalDetails"
+                  v-model="formData.generalMedicalCouncilConditionalDetails"
                   label="Give details of the conditions"
                   rows="2"
                 />
@@ -153,7 +149,7 @@
             </RadioGroup>
             <TextareaInput
               id="general-medical-council-information"
-              v-model="application.generalMedicalCouncilInformation"
+              v-model="formData.generalMedicalCouncilInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -166,7 +162,7 @@
           >
             <DateInput
               id="royal-college-of-psychiatrists-date"
-              v-model="application.royalCollegeOfPsychiatristsDate"
+              v-model="formData.royalCollegeOfPsychiatristsDate"
               label="When did you become a member?"
               hint="If this was less than 3 years ago you may not be eligible for this post"
               type="month"
@@ -174,13 +170,13 @@
             />
             <TextField
               id="royal-college-of-psychiatrists-number"
-              v-model="application.royalCollegeOfPsychiatristsNumber"
+              v-model="formData.royalCollegeOfPsychiatristsNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="royal-college-of-psychiatrists-information"
-              v-model="application.royalCollegeOfPsychiatristsInformation"
+              v-model="formData.royalCollegeOfPsychiatristsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -193,20 +189,20 @@
           >
             <DateInput
               id="royal-institution-of-chartered-surveyors-date"
-              v-model="application.royalInstitutionCharteredSurveyorsDate"
+              v-model="formData.royalInstitutionCharteredSurveyorsDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="royal-institution-of-chartered-surveyors-number"
-              v-model="application.royalInstitutionCharteredSurveyorsNumber"
+              v-model="formData.royalInstitutionCharteredSurveyorsNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="royal-institution-of-chartered-surveyors-information"
-              v-model="application.royalInstitutionCharteredSurveyorsInformation"
+              v-model="formData.royalInstitutionCharteredSurveyorsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -219,20 +215,20 @@
           >
             <DateInput
               id="royal-institute-of-british-architects-date"
-              v-model="application.royalInstituteBritishArchitectsDate"
+              v-model="formData.royalInstituteBritishArchitectsDate"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               id="royal-institute-of-british-architects-number"
-              v-model="application.royalInstituteBritishArchitectsNumber"
+              v-model="formData.royalInstituteBritishArchitectsNumber"
               label="Membership number?"
               required
             />
             <TextareaInput
               id="royal-institute-of-british-architects-information"
-              v-model="application.royalInstituteBritishArchitectsInformation"
+              v-model="formData.royalInstituteBritishArchitectsInformation"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -247,20 +243,20 @@
           >
             <DateInput
               :id="`${membership.value}-date`"
-              v-model="application.memberships[membership.value].date"
+              v-model="formData.memberships[membership.value].date"
               label="When did you become a member?"
               type="month"
               required
             />
             <TextField
               :id="`${membership.value}-number`"
-              v-model="application.memberships[membership.value].number"
+              v-model="formData.memberships[membership.value].number"
               label="Membership number?"
               required
             />
             <TextareaInput
               :id="`${membership.value}-information`"
-              v-model="application.memberships[membership.value].information"
+              v-model="formData.memberships[membership.value].information"
               label="Any information about your membership we need to be aware of?"
               rows="2"
             />
@@ -268,7 +264,7 @@
         </CheckboxGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--relevant-membership--save-and-continue"
         >
           Save and continue
@@ -281,6 +277,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import RadioGroup from '@/components/Form/RadioGroup';
@@ -303,6 +300,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data() {
     const defaults = {
       charteredAssociationBuildingEngineersDate: null,
@@ -336,6 +334,7 @@ export default {
       royalInstitutionCharteredSurveyorsInformation: null,
       royalInstitutionCharteredSurveyorsNumber: null,
       memberships: {},
+      progress: {},
     };
 
     // @NOTE fields for custom memberships
@@ -352,16 +351,14 @@ export default {
       });
     }
 
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'relevantMemberships',
+      formData: formData,
     };
   },
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
     otherMemberships() {
       if (Array.isArray(this.vacancy.otherMemberships)) {
         return this.vacancy.otherMemberships.filter(membership => this.vacancy.memberships.includes(membership.value));
@@ -372,14 +369,6 @@ export default {
   methods: {
     showMembershipOption(ref) {
       return this.vacancy.memberships.indexOf(ref) >= 0;
-    },
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.relevantMemberships = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
     },
   },
 };

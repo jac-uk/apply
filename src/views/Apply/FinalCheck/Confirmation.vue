@@ -31,6 +31,33 @@
           please contact the selection exercise team.
         </p>
       </div>
+      <div v-else-if="hasApplicationProcess">
+        <h2 class="govuk-heading-m">
+          What happens next?
+        </h2>
+        <p class="govuk-body">
+          We have received your submission for this stage of the application process.
+        </p>
+        <p class="govuk-body">
+          Please refer to the
+          <RouterLink
+            class="govuk-link"
+            :to="{ name: 'vacancy-details', params: { id: vacancy.id} }"
+          >
+            exercise information page
+          </RouterLink>
+          for details of the exercise timeline.
+        </p>
+        <p class="govuk-body">
+          Should you need to contact the selection team, details of the exercise mailbox can be found on the
+          <RouterLink
+            class="govuk-link"
+            :to="{ name: 'vacancy-details', params: { id: vacancy.id} }"
+          >
+            information page
+          </RouterLink>
+        </p>
+      </div>
       <div v-else>
         <h2 class="govuk-heading-m">
           What happens next?
@@ -57,6 +84,7 @@
 </template>
 
 <script>
+import { hasApplicationProcess } from '@/helpers/exerciseHelper';
 export default {
   computed: {
     vacancy () {
@@ -64,6 +92,9 @@ export default {
     },
     application () {
       return this.$store.state.application.record;
+    },
+    hasApplicationProcess() {
+      return hasApplicationProcess(this.vacancy);
     },
   },
 };

@@ -10,13 +10,19 @@
           Relevant experience
         </h1>
 
+        <ErrorSummary
+          :errors="errors"
+          :show-save-button="true"
+          @save="save"
+        />
+
         <RepeatableFields
-          v-model="application.experience"
+          v-model="formData.experience"
           :component="repeatableFields.NonLegalExperience"
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--relevant-experience--save-and-continue"
         >
           Save and continue
@@ -27,35 +33,35 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form';
+import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RepeatableFields from '@/components/RepeatableFields';
 import NonLegalExperience from '@/components/RepeatableFields/NonLegalExperience';
 import BackLink from '@/components/BackLink';
 
 export default {
   components: {
+    ErrorSummary,
     RepeatableFields,
     BackLink,
   },
+  extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults =  {
       experience: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'relevantExperience',
+      formData: formData,
       repeatableFields: {
         NonLegalExperience,
       },
     };
   },
-  methods: {
-    async save() {
-      this.application.progress.relevantExperience = true;
-      await this.$store.dispatch('application/save', this.application);
-      this.$router.push({ name: 'task-list' });
-    },
-  },
-
 };
 </script>

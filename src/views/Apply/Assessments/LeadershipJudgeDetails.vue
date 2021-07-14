@@ -16,7 +16,7 @@
           Please read the
           <RouterLink
             class="govuk-link"
-            :to="{ name: 'vacancy-details', params: { id: vacancyId } }"
+            :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
             target="_blank"
           >
             <span>Information Page</span>
@@ -26,7 +26,7 @@
           Do not nominate the Lead Judge, the Master of the Rolls, a Head of Division, the Statutory Consultees or the Appropriate Authorities whose names can be found in the
           <RouterLink
             class="govuk-link"
-            :to="{ name: 'vacancy-details', params: { id: vacancyId } }"
+            :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
             target="_blank"
           >
             <span>Information Page</span>
@@ -36,33 +36,33 @@
 
         <TextField
           id="full-name"
-          v-model="application.leadershipJudgeDetails.fullName"
+          v-model="formData.leadershipJudgeDetails.fullName"
           label="Full name"
           required
         />
         <TextField
           id="title"
-          v-model="application.leadershipJudgeDetails.title"
+          v-model="formData.leadershipJudgeDetails.title"
           label="Title or position"
           required
         />
         <TextField
           id="email"
-          v-model="application.leadershipJudgeDetails.email"
+          v-model="formData.leadershipJudgeDetails.email"
           label="Email"
           type="email"
           required
         />
         <TextField
           id="phone"
-          v-model="application.leadershipJudgeDetails.phone"
+          v-model="formData.leadershipJudgeDetails.phone"
           label="Phone"
           type="tel"
           required
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--assessor-details--save-and-continue"
         >
           Save and continue
@@ -75,6 +75,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
 
@@ -85,6 +86,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       leadershipJudgeDetails: {
@@ -93,28 +95,14 @@ export default {
         phone: null,
         title: null,
       },
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'leadershipJudgeDetails',
+      formData: formData,
     };
-
-  },
-  computed: {
-    vacancyId() {
-      return this.$route.params.id;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.leadershipJudgeDetails = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>

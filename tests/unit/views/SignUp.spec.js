@@ -151,7 +151,7 @@ describe('views/SignUp', () => {
 
         await wrapper.vm.signUp();
 
-        expect(wrapper.vm.$router.push).toHaveBeenCalledWith( { name: 'apply', params: { id: mockVacancyId } });
+        expect(wrapper.vm.$router.push).toHaveBeenCalledWith({ name: 'task-list', params: { id: mockVacancyId } });
       });
     });
 

@@ -1,10 +1,15 @@
 <template>
-  <div>
+  <form
+    ref="formRef"
+    @submit.prevent="save"
+  >
     <RadioGroup
-      :id="qualificationType"
+      :id="`qualification_type_${index}`"
       v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
+      class="govuk-!-margin-top-4"
+      required
     >
       <RadioItem
         value="advocate-scotland"
@@ -25,7 +30,7 @@
     </RadioGroup>
 
     <RadioGroup
-      :id="qualificationLocation"
+      :id="`qualification_location_${index}`"
       v-model="row.location"
       label="Where are you qualified?"
       hint="Choose 1 option."
@@ -43,49 +48,103 @@
         label="Scotland"
       />
     </RadioGroup>
+
     <DateInput
-      :id="qualificationDate"
+      v-if="row.type !== 'barrister'"
+      :id="`qualification_date_${index}`"
       v-model="row.date"
-      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
+      label="When did you qualify?"
       type="month"
+      required
     />
 
     <div
       v-if="row.type === 'barrister'"
     >
-      <Checkbox
-        :id="qualificationNotComplete"
+      <RadioGroup
+        :id="`qualification_not_complete_${index}`"
         v-model="row.qualificationNotComplete"
-        label="I did not complete pupillage"
-      />
-      <TextareaInput
+        label="Have you completed pupillage?"
+        required
+      >
+        <!-- These feilds have to be Boolean'd this way due
+        to the double negative in the datamodel [qualificationNotComplete] -->
+        <RadioItem
+          :value="false"
+          label="Yes"
+        >
+          <DateInput
+            :id="`qualification_date_${index}`"
+            v-model="row.date"
+            label="When did you complete pupillage?"
+            type="month"
+            required
+          />
+        </RadioItem>
+
+        <RadioItem
+          :value="true"
+          label="No"
+        />
+      </RadioGroup>
+
+      <RadioGroup
         v-if="row.qualificationNotComplete"
-        :id="details"
+        :id="`called_to_bar_${index}`"
+        v-model="row.notCalledToBar"
+        label="Have you been called to the bar?"
+        required
+      >
+        <!-- These feilds have to be Boolean'd this way due
+        to the double negative in the datamodel [notCalledToBar] -->
+        <RadioItem
+          :value="false"
+          label="Yes"
+        >
+          <DateInput
+            :id="`called_to_bar_date_${index}`"
+            v-model="row.calledToBarDate"
+            label="When were you called to the bar?"
+            type="month"
+            required
+          />
+        </RadioItem>
+
+        <RadioItem
+          :value="true"
+          label="No"
+        />
+      </RadioGroup>
+
+      <TextareaInput
+        v-if="row.qualificationNotComplete && row.notCalledToBar === true"
+        :id="`qualification_details_${index}`"
         v-model="row.details"
-        hint="Please provide some additional information"
+        label="Please provide some additional information"
+        required
       />
     </div>
 
     <slot name="removeButton" />
-  </div>
+  </form>
 </template>
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
+import Form from '@/components/Form/Form';
 
 export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
   },
+  extends: Form,
   props: {
     row: {
       required: true,
@@ -94,23 +153,6 @@ export default {
     index: {
       required: true,
       type: Number,
-    },
-  },
-  computed: {
-    qualificationType() {
-      return `qualification_type_${this.index}`;
-    },
-    qualificationLocation() {
-      return `qualification_location_${this.index}`;
-    },
-    qualificationDate() {
-      return `qualification_date_${this.index}`;
-    },
-    details() {
-      return `qualification_details_${this.index}`;
-    },
-    qualificationNotComplete() {
-      return `qualification_qualificationNotComplete_${this.index}`;
     },
   },
 };

@@ -33,7 +33,7 @@
         </div>
 
         <button
-          :disabled="!localAdditionalPreferences.length || application.status != 'draft'"
+          :disabled="!canSave(formId) || !!!localAdditionalPreferences.length"
           class="govuk-button info-btn--additional-work-experience--save-and-continue"
         >
           Save and continue
@@ -46,6 +46,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput';
 import BackLink from '@/components/BackLink';
 
@@ -56,37 +57,35 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       additionalWorkingPreferences: [],
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     const localAdditionalPreferences = [];
-    if (application.additionalWorkingPreferences && application.additionalWorkingPreferences.length) {
-      application.additionalWorkingPreferences.forEach(item => {
+    if (formData.additionalWorkingPreferences && formData.additionalWorkingPreferences.length) {
+      formData.additionalWorkingPreferences.forEach(item => {
         localAdditionalPreferences.push(item.selection);
       });
     }
     return {
-      application: application,
+      formId: 'additionalWorkingPreferences',
+      formData: formData,
       localAdditionalPreferences: localAdditionalPreferences,
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.additionalWorkingPreferences = true;
-        this.application.additionalWorkingPreferences = this.localAdditionalPreferences.map(item => {
+        this.formData.progress[this.formId] = true;
+        this.formData.additionalWorkingPreferences = this.localAdditionalPreferences.map(item => {
           return { selection: item };
         });
-        await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('application/save', this.formData);
         this.$router.push({ name: 'task-list' });
       }
     },
