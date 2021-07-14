@@ -99,7 +99,7 @@ export default {
         if (this.application.characterChecks.declaration === true) {
           this.application.characterChecks.status = 'completed';
         }
-        await functions.httpsCallable('updateCharacterChecksStatus')({ applicationId: this.applicationRecord.id, exerciseId: this.applicationRecord.exerciseId, status: 'completed' });
+        await functions.httpsCallable('updateCharacterChecksStatus')({ applicationRecordId: this.applicationRecord.id, exerciseId: this.applicationRecord.exerciseId });
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'character-checks-form-submitted' });
       }
