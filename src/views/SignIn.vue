@@ -11,14 +11,14 @@
           </h1>
 
           <p class="govuk-body-l">
-            Or 
+            Or
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
               :to="{ name: 'sign-up' }"
             >
               create an account
-            </RouterLink>  
+            </RouterLink>
             if you do not have one.
           </p>
 
@@ -28,13 +28,13 @@
               class="govuk-button button-image"
               @click="loginWithGoogle"
             >
-              <img 
+              <img
                 alt="Sign in with Google"
                 src="@/assets/btn_google_signin_light_normal_web@2x.png"
                 width="191"
-              >              
+              >
             </button>
-          </p> -->          
+          </p> -->
 
           <ErrorSummary :errors="errors" />
 
@@ -77,7 +77,6 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
-import { get } from 'lodash';
 
 export default {
   components: {
@@ -120,22 +119,15 @@ export default {
 
             this.$store.dispatch('auth/setCurrentUser', userCredential.user);
             if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
+              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
             } else {
               this.$router.push({ name: 'applications' });
             }
           })
           .catch((error) => {
-            switch (get(error, 'code', '')) {
-            case 'auth/user-not-found':
-            case 'auth/wrong-password':
-              this.errors.push({ id: 'email', message: 'The email address and/or password did not match our records. Please double-check and try again.' });
-              break;
-            default:
-              this.errors.push({ id: 'email', message: error.message });
-            }
+            this.errors.push({ id: 'email', message: error.message });
           });
-      }    
+      }
     },
   },
 };

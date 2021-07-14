@@ -155,11 +155,11 @@ export default {
     async signUp() {
       await auth()
         .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
-        .then(async (result)=>{
-          const candidate = await this.createCandidate(result);
+        .then((result)=>{
+          const candidate = this.createCandidate(result);
           if (candidate) {
             if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'apply', params: { id: `${this.$store.getters['vacancy/id']}` } });
+              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
             } else {
               this.$router.push({ name: 'applications' });
             }

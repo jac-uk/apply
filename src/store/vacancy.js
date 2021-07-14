@@ -45,8 +45,6 @@ export default {
       if (closeDate === null) return null;
       return new Date(closeDate);
     },
-    isLegal: (state) => {
-      return state.record.typeOfExercise === 'legal' || state.record.typeOfExercise === 'leadership';
-    },
+
   },
 };

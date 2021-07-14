@@ -31,6 +31,28 @@ describe('helpers/Form/exerciseTimeline', () => {
             ]);
         });
     });
+    describe('shortlistingMethods', () => {
+        it('formats and returns', () => {
+            timelineArray = { 
+                shortlistingMethods: [
+                    'name-blind-paper-sift',
+                    'telephone-assessment',
+                ],
+            };
+            expect(exerciseTimeline(timelineArray)).toEqual([
+                {
+                    'date': undefined,
+                    'dateString': '',
+                    'entry': 'Name-blind sift',
+                },
+                {
+                    'date': undefined,
+                    'dateString': '',
+                    'entry': 'Telephone assessment',
+                },
+            ]);
+        });
+    });
     describe('shortlistingOutcomeDate', () => {
         it('formats and returns', () => {
             timelineArray = { 
