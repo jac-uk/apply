@@ -34,6 +34,8 @@
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"
       :other-tasks.sync="row.otherTasks"
+      :judicial-functions.sync="row.judicialFunctions"
+      :show-judicial-functions="true"
       required
     />
 

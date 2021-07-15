@@ -33,6 +33,7 @@
       class="govuk-input"
       :class="[inputClass, {'govuk-input--error': hasError}]"
       :type="fieldType"
+      :max="numMax"
       :autocomplete="autocomplete"
       @change="validate"
     >
@@ -52,6 +53,10 @@ export default {
     inputClass: {
       default: '',
       type: String,
+    },
+    numMax: {
+      default: null,
+      type: Number,
     },
     labelHidden: {
       default: false,

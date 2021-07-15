@@ -94,7 +94,7 @@ describe('components/DateInput', () => {
       it('sets legend', () => {
         const label = 'Launch date and time';
         wrapper.setProps({ label });
-        expect(wrapper.find('.govuk-fieldset__legend').text()).toBe(label);
+        expect(wrapper.find('legend.govuk-fieldset__legend--m').text()).toBe(label);
         });
     });
 

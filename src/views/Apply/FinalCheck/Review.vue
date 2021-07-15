@@ -184,9 +184,9 @@
                 >
                   {{ item }}
                   <strong>
-                    {{ `${index + 1}:` }}
+                    {{ index + 1 }}
                   </strong>
-                  {{ `${item}` }}
+                  {{ item }}
                 </p>
               </dd>
             </dl>
