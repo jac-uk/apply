@@ -41,7 +41,7 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  label="In 250 words, tell us how."
+                  :word-limit="250"
                 />
               </RadioItem>
               <RadioItem
@@ -100,7 +100,6 @@
           label="Upload finished self assessment"
           required
         />
-
         <button
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
