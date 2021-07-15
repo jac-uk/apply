@@ -31,7 +31,7 @@
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
-              v-model="application.selectionCriteriaAnswers[index].answer"
+              v-model="item.answer"
               label="Do you meet this requirement?"
             >
               <RadioItem
@@ -40,7 +40,7 @@
               >
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
-                  v-model="application.selectionCriteriaAnswers[index].answerDetails"
+                  v-model="item.answerDetails"
                   :word-limit="250"
                   required
                 />
