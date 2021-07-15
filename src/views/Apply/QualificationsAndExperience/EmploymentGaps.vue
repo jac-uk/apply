@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="checkAndSave"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -69,6 +69,25 @@ export default {
         EmploymentGaps,
       },
     };
+  },
+  methods: {
+    checkAndSave() {
+      if (this.formData.employmentGaps.length){
+        const hasEnteredData = Object.values(this.formData.employmentGaps[0]).some((val) => {
+          if (val instanceof Date) {
+            return true;
+          } else if (val instanceof Array) {
+            return val.length;
+          } else {
+            return !!val;
+          }
+        });
+        if (!hasEnteredData) {
+          this.formData.employmentGaps = [];
+        }
+      } 
+      this.save();
+    },
   },
 };
 </script>

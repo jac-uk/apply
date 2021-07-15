@@ -98,6 +98,8 @@
             v-model="localJudicialFunctions.workingBasisDays"
             input-class="govuk-input govuk-input--width-2"
             label="Average Engagement In Days per Month"
+            :label-hidden="true"
+            hint="Average Engagement In Days per Month"
             type="number"
             :num-max="28"
             required
@@ -171,33 +173,37 @@
       </CheckboxItem>
 
       <div
-        v-if="!showJudicialFunctions && localTasks.length"
+        v-if="localTasks"
       >
-        <Select
-          :id="`${id}_working_basis`"
-          v-model="localTasks.workingBasis"
-          :value="localTasks.workingBasis"
-          label="Engagement basis "
-          required
+        <div
+          v-if="!showJudicialFunctions && localTasks.length"
         >
-          <option
-            v-for="option in ['Full Time', 'Part Time', 'Other']"
-            :key="option"
-            :value="option"
+          <Select
+            :id="`${id}_working_basis`"
+            v-model="localTasks.workingBasis"
+            :value="localTasks.workingBasis"
+            label="Engagement basis "
+            required
           >
-            {{ option }}
-          </option>
-        </Select>
+            <option
+              v-for="option in ['Full Time', 'Part Time', 'Other']"
+              :key="option"
+              :value="option"
+            >
+              {{ option }}
+            </option>
+          </Select>
 
-        <TextField
-          :id="`${id}_working_basis_days`"
-          v-model="localTasks.workingBasisDays"
-          input-class="govuk-input govuk-date-input__input govuk-input--width-2"
-          hint="Please Indicate Your Average Engagement In Days per Month"
-          :num-max="31"
-          type="number"
-          required
-        />
+          <TextField
+            :id="`${id}_working_basis_days`"
+            v-model="localTasks.workingBasisDays"
+            input-class="govuk-input govuk-date-input__input govuk-input--width-2"
+            hint="Please Indicate Your Average Engagement In Days per Month"
+            :num-max="31"
+            type="number"
+            required
+          />
+        </div>
       </div>
     </CheckboxGroup>
   </div>
@@ -289,8 +295,10 @@ export default {
   methods: {
     validate() {
       this.setError('');
-      if (this.required && this.localTasks.length === 0) {
-        this.setError('Select at least one task you do in this role');
+      if (this.localTasks) {
+        if (this.required && this.localTasks.length === 0) {
+          this.setError('Select at least one task you do in this role');
+        }
       }
     },
   },

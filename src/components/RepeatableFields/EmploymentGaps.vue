@@ -54,11 +54,16 @@ export default {
   },
   data() {
     let hasRowData;
-    Object.keys(this.row).forEach((key) => {
-      hasRowData = !!this.row[key];
-    });
-    if (!hasRowData) {
-      hasRowData = !!(this.row.otherTasks || this.row.tasks.length);
+    if (this.row) {
+      hasRowData = Object.values(this.row).some((val) => {
+        if (val instanceof Date) {
+          return true;
+        } else if (val instanceof Array) {
+          return val.length;
+        } else {
+          return !!val;
+        }
+      });
     }
     return {
       hasEnteredData: hasRowData,
@@ -67,14 +72,17 @@ export default {
   watch: {
     row: {
       handler: function() {
-        let result;
-        Object.keys(this.row).forEach((key) => {
-          result = !!this.row[key];
-        });
-        if (!result) {
-          result = !!(this.row.otherTasks || this.row.tasks.length);
+        if (this.row) {
+          this.hasEnteredData = Object.values(this.row).some((val) => {
+            if (val instanceof Date) {
+              return true;
+            } else if (val instanceof Array) {
+              return val.length;
+            } else {
+              return !!val;
+            }
+          });
         }
-        this.hasEnteredData = result;
       },
       deep: true,
     },
