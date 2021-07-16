@@ -177,6 +177,7 @@ export default {
       reasonableAdjustments: null,
       reasonableAdjustmentsDetails: null,
     };
+
     const data = this.$store.getters['candidate/personalDetails']();
     const personalDetails = { ...defaults, ...data };
     return {
@@ -211,6 +212,7 @@ export default {
       if (this.isValid()) {
         this.formData.progress[this.formId] = true;
         this.formData.personalDetails = this.personalDetails;
+        this.formData.characterChecks = { status: 'not requested' };
         await this.$store.dispatch('application/save', this.formData);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'task-list' });

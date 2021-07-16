@@ -21,7 +21,7 @@
     </p>
     <p class="govuk-body">
       If your circumstances change after completing this form that might impact your ability to meet the good character requirements please notify the <a
-        href="#"
+        :href="`mailto:${vacancy.exerciseMailbox}?subject=Re: ${vacancy.referenceNumber}`"
         class="govuk-link"
       >Selection Exercise Team</a>. You have a continuing duty, throughout the time that your application is being considered, to inform the Judicial Appointments Commission (JAC) of any matters that might affect the acceptability of your application when considered against this guidance.
     </p>
@@ -34,7 +34,7 @@
     </div>
     <p class="govuk-body">
       Any personal data collected and processed is in accordance with the <a
-        href="https://www.judicialappointments.gov.uk/accessing-your-information"
+        href="https://judicialappointments.gov.uk/data-protection-freedom-of-information-and-making-requests-for-your-data/"
         class="govuk-link"
         target="_blank"
       >JAC's privacy standards</a>.
@@ -63,6 +63,11 @@ import BackLink from '@/components/BackLink';
 export default {
   components: {
     BackLink,
+  },
+  computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
   },
   methods: {
     next () {

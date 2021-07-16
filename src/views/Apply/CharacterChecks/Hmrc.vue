@@ -82,6 +82,9 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
+        if (this.personalDetails.hasVATNumbers === false) {
+          this.personalDetails.VATNumbers = null;
+        }
         this.application.personalDetails = this.personalDetails;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
@@ -90,5 +93,5 @@ export default {
     },
   },
 };
-    
+
 </script>
