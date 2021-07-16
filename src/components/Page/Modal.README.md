@@ -1,17 +1,17 @@
 example usage:
 <template>
   <div>
-    <button 
+    <button
       @click="openModal"
     >
       openModal
     </button>
 
-    <Modal 
+    <Modal
       ref="modalRef"
       button-text="Start Now"
       :cancelable="false"
-      :message="'Are you sure you want to start your qualifying test? The timer will begin if you do:'"
+      :message="'Are you sure you want to start your online test? The timer will begin if you do:'"
       @confirmed="btnConfirmed"
       @closed="btnClosed"
     />
@@ -35,25 +35,25 @@ export default {
 </script>
 
 #Props
-  cancelable: 
+  cancelable:
   A boolean for showing or hiding a secondary button to dismiss the modal, intended to allow using the modal both in circumstances where the user will be forced to progress and times when the modal can be used as a confirmation and the user can revert/cancel the action which triggered the modal. (eg. countdown at 0).
   true by default so cancel button will appear.
 
-  title: 
+  title:
   String for modal title
   'Are you sure?' by default.
 
-  buttonText: 
-  String for confirmation button text as this changes from 'start test' to 'confirm' in various uses. 
+  buttonText:
+  String for confirmation button text as this changes from 'start test' to 'confirm' in various uses.
   'Accept' by default.
 
-  message: 
-  String for modal message content text as this changes in each use. 
+  message:
+  String for modal message content text as this changes in each use.
   'Please confirm' by default.
 
   #data
   modalOpen:
-  Boolean flag for toggling modal state, open or closed. 
+  Boolean flag for toggling modal state, open or closed.
 
   #methods
   openModal:
@@ -68,4 +68,3 @@ export default {
     Clears CSS blockers.
 
     @TODO Various styling updates needed
-

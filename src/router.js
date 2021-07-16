@@ -77,7 +77,7 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
-// Qualifying Tests
+// Online Tests
 import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
@@ -195,16 +195,16 @@ const router = new Router({
       },
     },
     {
-      path: '/qualifying-tests',
+      path: '/online-tests',
       component: QualifyingTests,
       name: 'qualifying-tests',
       meta: {
         requiresAuth: true,
-        title: 'Qualifying Tests | List',
+        title: 'Online Tests | List',
       },
     },
     {
-      path: '/qualifying-tests/:qualifyingTestId',
+      path: '/online-tests/:qualifyingTestId',
       component: QualifyingTest,
       children: [
         {
@@ -213,7 +213,7 @@ const router = new Router({
           name: 'qualifying-test-information',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Information',
+            title: 'Online Test | Information',
           },
         },
         {
@@ -222,7 +222,7 @@ const router = new Router({
           name: 'qualifying-test-question',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Question',
+            title: 'Online Test | Question',
             fullPageMode: true,
           },
         },
@@ -232,7 +232,7 @@ const router = new Router({
           name: 'qualifying-test-scenario',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Scenario',
+            title: 'Online Test | Scenario',
             fullPageMode: true,
           },
         },
@@ -242,7 +242,7 @@ const router = new Router({
           name: 'qualifying-test-review',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Review',
+            title: 'Online Test | Review',
             fullPageMode: true,
           },
         },
@@ -252,7 +252,7 @@ const router = new Router({
           name: 'qualifying-test-submitted',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Submitted',
+            title: 'Online Test | Submitted',
           },
         },
       ],
