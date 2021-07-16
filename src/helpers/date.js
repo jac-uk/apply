@@ -1,14 +1,14 @@
 const isDate = (date) => date instanceof Date;
 
 const isDateInFuture = (date) => {
-  console.log(date);
   if (date == null){
     return false;
   } else if (!isDate(date)) {
-    throw `Supplied date (${date}) must be a Date object`;
+    throw 'bbbbb';
+    // throw `Supplied date (${date}) must be a Date object`;
   }
-
-  const today = new Date();
+  
+  const today = Date.now();
 
   date = new Date(
     date.getFullYear(),
@@ -18,9 +18,10 @@ const isDateInFuture = (date) => {
     date.getMinutes(),
     date.getSeconds(),
   );
-  // console.log(today);
-  // console.log(date);
-  // console.log(date > today);
+
+  // console.log('today', today);
+  // console.log('date', formatDate(date, 'time'));
+  // // console.log(date > today);
 
   return date > today;
 };

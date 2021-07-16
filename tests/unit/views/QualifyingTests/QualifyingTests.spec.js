@@ -6,8 +6,8 @@ const mockQT = {
   statusLog: {
     created: new Date('Dec 31 2019 00:00:00 GMT+0000'),
     activated: new Date('Jan 01 2020 09:00:00 GMT+0000'),
-    // started: new Date('Oct 28 2020 13:43:37 GMT+0000'),
-    // completed: new Date('Oct 28 2020 15:28:50 GMT+0000'),
+    // started: new Date('Jan 01 2020 13:43:37 GMT+0000'),
+    // completed: new Date('Jan 01 2020 15:28:50 GMT+0000'),
   },
   qualifyingTest: {
     startDate: new Date('Jan 01 2020 00:00:00 GMT+0000'),
@@ -20,9 +20,9 @@ const mockQT = {
   },
 };
 
-const dateInTest = new Date('Jan 01 2020 09:15:00 GMT+0000');
-const dateInPast = new Date('Jan 01 2019 00:00:00 GMT+0000');
-const dateInFuture = new Date('Jan 01 2021 00:00:00 GMT+0000');
+const dateInTest = 1577870100000;
+// const dateInPast = 1546334100000;
+// const dateInFuture = 1609492500000;
 
 describe('views/QualifyingTests/QualifyingTests', () => {  
   let wrapper;
@@ -40,94 +40,130 @@ describe('views/QualifyingTests/QualifyingTests', () => {
     expect(wrapper.exists()).toBe(true);
   });
   
-  describe('Open tab', () => { 
-    Date.now = jest.fn(() => dateInTest);
-    describe('Open tab, test not started', () => { 
-      it('renders open tab by default', () => {
-        expect(wrapper.find('h1.govuk-heading-l').text()).toBe('open');
-      });
-      it('status not started', () => {
-        expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
-      });
-      it.only('lists open test as open', () => {
-        expect(wrapper.vm.openTests.length).toBe(1);
-      });
-    });
-    describe('Open tab, test started', () => { 
+  describe('tabs', () => { 
+    describe('Open tab', () => { 
+      // let dateNowMock;
       beforeEach(()=>{
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog.started = new Date('Oct 28 2020 09:30:00 GMT+0000');
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'started';
+        jest.useFakeTimers('modern');
+        jest.setSystemTime(dateInTest);
+        // dateNowMock = jest.fn(() => dateInTest);
+        // Date.now = dateNowMock;
+        console.log(Date.now());
       });
-      it('lists open tests', () => {
-        expect(wrapper.vm.openTests.length).toBe(1);
+      // afterEach(()=>{
+      //   dateNowMock.mockRestore();
+      // });
+      describe('Open tab, test not started', () => { 
+        it('renders open tab by default', () => {
+          expect(wrapper.find('h1.govuk-heading-l').text()).toBe('open');
+        });
+        it('status not started', () => {
+          expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
+        });
+        it.only('lists open test as open', () => {
+          console.log('test ', Date.now());
+          expect(wrapper.vm.openTests.length).toBe(1);
+        });
       });
-      it('status started', () => {
-        expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('started');
+      describe('Open tab, test started', () => { 
+        beforeEach(()=>{
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog.started = new Date('Jan 01 2020 09:30:00 GMT+0000');
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'started';
+        });
+        it('lists open tests', () => {
+          expect(wrapper.vm.openTests.length).toBe(1);
+        });
+        it('status started', () => {
+          expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('started');
+        });
+      });
+      describe('Open tab, test reset, not restarted', () => { 
+        beforeEach(()=>{
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog = {
+            created: new Date('Jan 01 2020 00:00:00 GMT+0000'),
+            activated: new Date('Jan 01 2020 09:00:00 GMT+0000'),
+            started: new Date('Jan 01 2020 09:30:00 GMT+0000'),
+            completed: new Date('Jan 01 2020 10:00:00 GMT+0000'),
+            reset: new Date('Jan 01 2020 10:30:00 GMT+0000'),
+          };
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'activated';
+        });
+        it('lists open tests', () => {
+          expect(wrapper.vm.openTests.length).toBe(1);
+        });
+        it('status started', () => {
+          expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
+        });
+      });
+      describe('Open tab, test reset, restarted', () => { 
+        beforeEach(()=>{
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog = {
+            created: new Date('Jan 01 2020 00:00:00 GMT+0000'),
+            activated: new Date('Jan 01 2020 09:00:00 GMT+0000'),
+            started: new Date('Jan 01 2020 09:30:00 GMT+0000'),
+            completed: new Date('Jan 01 2020 10:00:00 GMT+0000'),
+            reset: new Date('Jan 01 2020 10:30:00 GMT+0000'),
+          };
+          wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'started';
+        });
+        it('lists open tests', () => {
+          expect(wrapper.vm.openTests.length).toBe(1);
+        });
+        it('status started', () => {
+          expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('started');
+        });
       });
     });
-    describe('Open tab, test reset, not restarted', () => { 
-      beforeEach(()=>{
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog = {
-          created: new Date('Oct 27 2020 00:00:00 GMT+0000'),
-          activated: new Date('Oct 27 2020 09:00:00 GMT+0000'),
-          started: new Date('Oct 27 2020 09:30:00 GMT+0000'),
-          completed: new Date('Oct 27 2020 10:00:00 GMT+0000'),
-          reset: new Date('Oct 27 2020 10:30:00 GMT+0000'),
-        };
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'activated';
-      });
-      it('lists open tests', () => {
-        expect(wrapper.vm.openTests.length).toBe(1);
-      });
-      it('status started', () => {
-        expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
-      });
-    });
-    describe('Open tab, test reset, restarted', () => { 
-      beforeEach(()=>{
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].statusLog = {
-          created: new Date('Oct 27 2020 00:00:00 GMT+0000'),
-          activated: new Date('Oct 27 2020 09:00:00 GMT+0000'),
-          started: new Date('Oct 27 2020 09:30:00 GMT+0000'),
-          completed: new Date('Oct 27 2020 10:00:00 GMT+0000'),
-          reset: new Date('Oct 27 2020 10:30:00 GMT+0000'),
-        };
-        wrapper.vm.$store.state.qualifyingTestResponses.records[0].status = 'started';
-      });
-      it('lists open tests', () => {
-        expect(wrapper.vm.openTests.length).toBe(1);
-      });
-      it('status started', () => {
-        expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('started');
-      });
-    });
-  });
 
-  describe('future tab', () => {
-  Date.now = jest.fn(() => dateInPast);
-    beforeEach(()=>{
-      wrapper.setData({
-        activeTab: 'future',
-      });
-    });
-    it('future tab open', () => {
-      expect(wrapper.find('h1.govuk-heading-l').text()).toBe('future');
-    });
-    it('lists open tests', () => {
-      expect(wrapper.vm.futureTests.length).toBe(1);
-    });
-  });
+    // describe('future tab', () => {
+    //   let dateNowMock;
+    //   beforeEach(()=>{
+    //     dateNowMock = jest.fn(() => dateInPast);
+    //     Date.now = dateNowMock;
+    //   });
+    //   afterEach(()=>{
+    //     dateNowMock.mockRestore();
+    //   });
+    //   beforeEach(()=>{
+    //     wrapper.setData({
+    //       activeTab: 'future',
+    //     });
+    //   });
+    //   it('future tab open', () => {
+    //     expect(wrapper.find('h1.govuk-heading-l').text()).toBe('future');
+    //   });
+    //   it('lists open tests', () => {
+    //     expect(wrapper.vm.futureTests.length).toBe(1);
+    //   });
+    //   xit('status', () => {
+    //     expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
+    //   });
+    // });
+
+    // describe('past tab', () => {
+    //   let dateNowMock;
+    //   beforeEach(()=>{
+    //     dateNowMock = jest.fn(() => dateInFuture);
+    //     Date.now = dateNowMock;
+    //   });
+    //   afterEach(()=>{
+    //     dateNowMock.mockRestore();
+    //   });
+    //   beforeEach(()=>{
+    //     wrapper.setData({
+    //       activeTab: 'past',
+    //     });
+    //   });
+    //   it('past tab open', () => {
+    //     expect(wrapper.find('h1.govuk-heading-l').text()).toBe('past');
+    //   });
+    //   it('lists open tests', () => {
+    //     expect(wrapper.vm.closedTests.length).toBe(1);
+    //   });
+    //   xit('status', () => {
+    //     expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
+    //   });
+    // });
   
-  describe('past tab', () => {
-    Date.now = jest.fn(() => dateInFuture);
-    beforeEach(()=>{
-      wrapper.setData({
-        activeTab: 'past',
-      });
-    });
-    it('renders the component', () => {
-      expect(wrapper.find('h1.govuk-heading-l').text()).toBe('past');
-    });
-  });
-  
+  }); 
 }); 

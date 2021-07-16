@@ -157,10 +157,14 @@ export default {
         const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
         const startEndNotInFuture = !isDateInFuture(qt.qualifyingTest.startDate) && isDateInFuture(qt.qualifyingTest.endDate);
         const activatedOrStarted = qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED;
-        console.log(!isDateInFuture(qt.qualifyingTest.startDate), isDateInFuture(qt.qualifyingTest.endDate));
+        console.log('open tests ', Date.now());
+        // console.log(Date.now());
+        // console.log(qt.qualifyingTest.startDate);
+        // console.log(qt.qualifyingTest.endDate);
+        // console.log(formatDate(new Date(qt.qualifyingTest.startDate.getTime()), 'time'));
+        // console.log(formatDate(new Date(qt.qualifyingTest.endDate.getTime()), 'time'));
         return startEndNotInFuture && activatedOrStarted && !timeout;
       });
-      // console.log(result);
       return result;
     },
     futureTests(){
