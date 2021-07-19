@@ -175,7 +175,6 @@ export default {
         const pastDateAndCompleted = (!isDateInFuture(qt.qualifyingTest.endDate) || qt.status == QUALIFYING_TEST.STATUS.COMPLETED);
         return timeout || pastDateAndCompleted;
       });
-      // console.log('closedTest', result);
       return result;
     },
   },
