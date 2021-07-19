@@ -8,7 +8,7 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <Countdown2
+      <Countdown
         v-if="testInProgress && !isInformationPage"
         :start-time="qualifyingTestResponse.statusLog.started"
         :end-time="qualifyingTestResponse.qualifyingTest.endDate"
@@ -44,7 +44,7 @@
             Exit Test
           </a>
         </template>
-      </Countdown2>
+      </Countdown>
       <Modal
         ref="timeElapsedModalRef"
         title="Time has expired"
@@ -77,13 +77,13 @@
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
-import Countdown2 from '@/components/QualifyingTest/Countdown2';
+import Countdown from '@/components/QualifyingTest/Countdown';
 
 export default {
   components: {
     LoadingMessage,
     Modal,
-    Countdown2,
+    Countdown,
   },
   data() {
     return {

@@ -1,6 +1,8 @@
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 const capitalize = (value) => {
+  if (!value) return '';
+  value = value.toString();
   return value ? value.charAt(0).toUpperCase() + value.slice(1) : '';
 };
 
