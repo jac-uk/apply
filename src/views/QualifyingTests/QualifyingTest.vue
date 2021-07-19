@@ -75,6 +75,7 @@
   </div>
 </template>
 <script>
+import firebase from '@/firebase';
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
 import Countdown2 from '@/components/QualifyingTest/Countdown2';
@@ -206,12 +207,26 @@ export default {
       this.$refs.timeElapsedModalRef.openModal();
     },
     openExitModal(){
+      const historyToSave = this.prepareSaveHistory({
+        action: 'exit',
+        txt: 'Exit Test',
+        location: 'timer bar',
+        question: this.$route.params.questionNumber - 1,
+      });
+      this.$store.dispatch('qualifyingTestResponse/save', historyToSave);
       this.$refs.exitModalRef.openModal();
     },
     btnModalConfirmed() {
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     btnExitModalConfirmed() {
+      const historyToSave = this.prepareSaveHistory({
+        action: 'exit',
+        txt: `Exit Test question ${this.$route.params.questionNumber}`,
+        location: 'modal',
+        question: this.$route.params.questionNumber - 1,
+      });
+      this.$store.dispatch('qualifyingTestResponse/save', historyToSave);
       this.timerEnded = true;
       this.$nextTick(() => {  // ensures change is picked up before we leave this route
         this.$router.push({ name: 'qualifying-tests' });
@@ -221,6 +236,19 @@ export default {
       const params = this.$route.params;
       const hyphenated = `${params.qualifyingTestId}--scenario-${params.scenarioNumber}--from-${params.questionNumber}-to-${params.questionNumber - 1}`;
       return hyphenated;
+    },
+    prepareSaveHistory(data) {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        history: firebase.firestore.FieldValue.arrayUnion({
+          ...data, 
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
     },
   },
 };

@@ -68,13 +68,13 @@ export default {
       if (value === this.localValue.mostAppropriate) {
         this.localValue.mostAppropriate = null;
       }
-      this.$emit('answered');
+      this.$emit('answered', { value, type: 'leastAppropriate' });
     },
     'localValue.mostAppropriate': function (value) {
       if (value === this.localValue.leastAppropriate) {
         this.localValue.leastAppropriate = null;
       }
-      this.$emit('answered');
+      this.$emit('answered', { value, type: 'mostAppropriate' });
     },
   },
 };

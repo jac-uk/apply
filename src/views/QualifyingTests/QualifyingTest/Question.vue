@@ -11,7 +11,7 @@
     
     <form
       ref="formRef"
-      @submit.prevent="save(true)"
+      @submit.prevent="save(true, {})"
     >
       <component
         :is="questionType"
@@ -168,25 +168,38 @@ export default {
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
     this.questionStartedOnPreviousTest();
+    this.questionSessionStart = firebase.firestore.Timestamp.now();
   },
   methods: {
     async skip() {
+      this.saveHistoryAndSession({ action: 'skip', txt: 'Skip' }, true);
       this.$router.push(this.nextPage);
     },
-    async save(isCompleted) {
+    async save(isCompleted, history) {
+      let data = {};
       if (isCompleted) {
+        const historyToSave = this.prepareSaveHistory({ action: 'save', txt: 'Save and continue' });
+        const sessionToSave = this.prepareSaveQuestionSession();
         this.response.completed = firebase.firestore.Timestamp.fromDate(new Date());
+        data = {
+          ...historyToSave,
+          ...sessionToSave,
+          responses: this.responses,
+        };
+      } else {
+        const historyToSave = this.prepareSaveHistory(history);
+        data = {
+          ...historyToSave,
+          responses: this.responses,
+        };
       }
-      const data = {
-        responses: this.responses,
-      };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       if (isCompleted) {
         this.$router.push(this.nextPage);
       }
     },
-    questionAnswered() {
-      this.save(false);
+    questionAnswered(val) {
+      this.save(false, { action: 'changed', answer: { value: val.value, type: val.type } });
     },
     questionStartedOnPreviousTest() {
       if (this.response.started && this.response.completed) {
@@ -194,6 +207,45 @@ export default {
           this.previousTestQuestion = true;
         }
       }
+    },
+    async saveHistoryAndSession(data) {
+      const historyToSave = this.prepareSaveHistory(data);
+      const sessionToSave = this.prepareSaveQuestionSession();
+      const objToSave = {
+        ...historyToSave,
+        ...sessionToSave,
+      };
+      await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
+    },
+    prepareSaveHistory(data) {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        history: firebase.firestore.FieldValue.arrayUnion({
+          ...data, 
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          location: `question ${this.questionNumber}`, 
+          question: this.questionNumber - 1,
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
+    },
+    prepareSaveQuestionSession() {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        questionSession: firebase.firestore.FieldValue.arrayUnion({
+          start: this.questionSessionStart,
+          end: firebase.firestore.Timestamp.fromDate(date),
+          question: this.questionNumber - 1,
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
     },
   },
 };

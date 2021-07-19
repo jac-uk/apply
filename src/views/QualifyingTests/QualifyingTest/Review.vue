@@ -19,6 +19,7 @@
               v-for="(question, questionIndex) in questions"
               :key="questionIndex"
               class="moj-task-list__item display-flex"
+              @click="saveHistory({ action: 'review', question: questionIndex, txt: question.details });"
             >
               <RouterLink
                 :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
@@ -68,6 +69,7 @@
               v-for="(question, questionIndex) in scenario.options"
               :key="questionIndex"
               class="moj-task-list__item display-flex"
+              @click="saveHistory({ action: 'review', question: questionIndex, scenario: index, txt: question.question });"
             >
               <RouterLink
                 :to="{ name: `qualifying-test-scenario`, params: { scenarioNumber: index + 1, questionNumber: questionIndex + 1 } }"
@@ -147,6 +149,7 @@ export default {
   },
   methods: {
     openModal(){
+      this.saveHistory({ action: 'submit', txt: 'Submit answers' });
       this.$refs.modalRef.openModal();
     },
     async modalConfirmed(){
@@ -156,10 +159,31 @@ export default {
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
       await this.$store.dispatch('connectionMonitor/stop');
+      this.saveHistory({ action: 'modal', txt: 'Submit answers' });
       this.$router.push({ name: 'qualifying-test-submitted' });
     },
     modalClosed(){
-      //pass
+      this.saveHistory({ action: 'modal', txt: 'Cancel' });
+    },
+    async saveHistory(data) {
+      const objToSave = this.prepareSaveHistory({
+        ...data,
+        location: 'review answers', 
+      });
+      await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
+    },
+    prepareSaveHistory(data) {
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const date = new Date();
+      const objToSave = {
+        history: firebase.firestore.FieldValue.arrayUnion({
+          ...data, 
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+          utcOffset: date.getTimezoneOffset(),
+        }),
+        lastUpdated: timeNow,
+      };
+      return objToSave;
     },
   },
 };
