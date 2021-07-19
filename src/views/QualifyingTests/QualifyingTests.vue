@@ -54,7 +54,7 @@
           role="tabpanel"
         >
           <h1 class="govuk-heading-l">
-            {{ activeTab }}
+            {{ activeTab | capitalize }}
           </h1>
 
           <Table
