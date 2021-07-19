@@ -4,8 +4,7 @@ const isDateInFuture = (date) => {
   if (date == null){
     return false;
   } else if (!isDate(date)) {
-    throw 'bbbbb';
-    // throw `Supplied date (${date}) must be a Date object`;
+    throw `Supplied date (${date}) must be a Date object`;
   }
   
   const today = Date.now();
@@ -18,10 +17,6 @@ const isDateInFuture = (date) => {
     date.getMinutes(),
     date.getSeconds(),
   );
-
-  // console.log('today', today);
-  // console.log('date', formatDate(date, 'time'));
-  // // console.log(date > today);
 
   return date > today;
 };
