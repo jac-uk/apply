@@ -1,20 +1,27 @@
 <template>
   <div class="breadcrumb govuk-breadcrumbs">
     <ol class="govuk-breadcrumbs__list">
-        <li class="govuk-breadcrumbs__list-item">
-            <span><router-link to="/" class="govuk-breadcrumbs__link">Home</router-link></span>
-        </li>
-    <li class="govuk-breadcrumbs__list-item"
-      v-for="(item, index) in breadcrumbs"
-      :key="index"
-    >
-      <span v-if="item.isLastItem">
-        {{ item.title }}
-      </span>
-      <span v-else>
-        <router-link :to="item.href" class="govuk-breadcrumbs__link">{{ item.title }}</router-link>
-      </span>
-    </li>
+      <li class="govuk-breadcrumbs__list-item">
+        <span><router-link
+          to="/"
+          class="govuk-breadcrumbs__link"
+        >Home</router-link></span>
+      </li>
+      <li
+        v-for="(item, index) in breadcrumbs"
+        :key="index"
+        class="govuk-breadcrumbs__list-item"
+      >
+        <span v-if="item.isLastItem">
+          {{ item.title }}
+        </span>
+        <span v-else>
+          <router-link
+            :to="item.href"
+            class="govuk-breadcrumbs__link"
+          >{{ item.title }}</router-link>
+        </span>
+      </li>
     </ol>
   </div>
 </template>
