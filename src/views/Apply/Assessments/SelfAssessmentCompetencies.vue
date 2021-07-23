@@ -12,7 +12,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
+        <div v-if="formData && vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
@@ -42,6 +42,10 @@
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
                   :word-limit="250"
+                  hint="in 250 words tell us how."
+                  :label-hidden="true"
+                  :label="item.title"
+                  required
                 />
               </RadioItem>
               <RadioItem
@@ -135,29 +139,9 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
-    const defaults = {
-      uploadedSelfAssessment: null,
-      selectionCriteriaAnswers: [],
-      progress: {},
-    };
-    const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
-    if (formData.selectionCriteriaAnswers.length === 0) {
-      const vacancy = this.$store.state.vacancy.record;
-      if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
-        for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          formData.selectionCriteriaAnswers.push({
-            title: vacancy.selectionCriteria[i].title,
-            text: vacancy.selectionCriteria[i].text,
-            answer: null,
-            answerDetails: null,
-          });
-        }
-      }
-    }
     return {
       formId: 'selfAssessmentCompetencies',
-      formData: formData,
+      formData: null,
     };
   },
   computed: {
@@ -174,6 +158,29 @@ export default {
       }
       return outcome;
     },
+  },
+  async beforeMount() {
+    const defaults = {
+      uploadedSelfAssessment: null,
+      selectionCriteriaAnswers: [],
+      progress: {},
+    };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
+    const vacancy = this.$store.state.vacancy.record;
+    if (formData.selectionCriteriaAnswers.length === 0) {
+      if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
+        for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
+          formData.selectionCriteriaAnswers[i] = {
+            title: vacancy.selectionCriteria[i].title,
+            text: vacancy.selectionCriteria[i].text,
+            answer: null,
+            answerDetails: null,
+          };
+        }
+      }
+    }
+    this.formData = formData;
   },
 };
 </script>

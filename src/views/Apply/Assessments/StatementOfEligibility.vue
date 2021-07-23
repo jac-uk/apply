@@ -12,7 +12,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
+        <div v-if="formData && vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
@@ -42,6 +42,9 @@
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
                   :word-limit="250"
+                  hint="in 250 words tell us how."
+                  :label-hidden="true"
+                  :label="vacancy.selectionCriteria[index].title"
                   required
                 />
               </RadioItem>
@@ -84,29 +87,32 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
+    return {
+      formId: 'statementOfEligibility',
+      formData: {},
+    };
+  },
+  async beforeMount() {
     const defaults = {
       selectionCriteriaAnswers: [],
       progress: {},
     };
-    const data = this.$store.getters['application/data'](defaults);
+    const data = await this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
+    const vacancy = this.$store.state.vacancy.record;
     if (formData.selectionCriteriaAnswers.length === 0) {
-      const vacancy = this.$store.state.vacancy.record;
       if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
         for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          formData.selectionCriteriaAnswers.push({
+          formData.selectionCriteriaAnswers[i] = {
             title: vacancy.selectionCriteria[i].title,
             text: vacancy.selectionCriteria[i].text,
             answer: null,
             answerDetails: null,
-          });
+          };
         }
       }
     }
-    return {
-      formId: 'statementOfEligibility',
-      formData: formData,
-    };
+    this.formData = formData;
   },
 };
 </script>

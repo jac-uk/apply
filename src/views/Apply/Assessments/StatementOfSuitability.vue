@@ -42,6 +42,10 @@
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
                   :word-limit="250"
+                  hint="in 250 words tell us how."
+                  :label-hidden="true"
+                  :label="item.title"
+                  required
                 />
               </RadioItem>
               <RadioItem
