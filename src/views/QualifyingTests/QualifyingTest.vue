@@ -8,7 +8,7 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <Countdown2
+      <Countdown
         v-if="testInProgress && !isInformationPage"
         :start-time="qualifyingTestResponse.statusLog.started"
         :end-time="qualifyingTestResponse.qualifyingTest.endDate"
@@ -44,7 +44,7 @@
             Exit Test
           </a>
         </template>
-      </Countdown2>
+      </Countdown>
       <Modal
         ref="timeElapsedModalRef"
         title="Time has expired"
@@ -77,13 +77,13 @@
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
-import Countdown2 from '@/components/QualifyingTest/Countdown2';
+import Countdown from '@/components/QualifyingTest/Countdown';
 
 export default {
   components: {
     LoadingMessage,
     Modal,
-    Countdown2,
+    Countdown,
   },
   data() {
     return {
@@ -115,7 +115,12 @@ export default {
       return amountTimeLeft > 0;
     },
     isNotCompleted() {
-      return this.qualifyingTestResponse.statusLog.completed === null || this.qualifyingTestResponse.statusLog.completed === undefined;
+      return this.qualifyingTestResponse.statusLog.completed === null ||
+        this.qualifyingTestResponse.statusLog.completed === undefined;
+    },
+    isNotReset() {
+      return this.qualifyingTestResponse.statusLog.reset === null ||
+        this.qualifyingTestResponse.statusLog.reset === undefined;
     },
     isInformationPage() {
       return this.$route.name === 'qualifying-test-information';
@@ -171,8 +176,9 @@ export default {
         // noTimeLeft > redirect
         const noTimeLeft = !this.isTimeLeft;
         const isCompleted = !this.isNotCompleted;
+        const notReset = this.isNotReset;
 
-        if (noTimeLeft || isCompleted) {
+        if ((noTimeLeft) || (isCompleted && notReset)) {
           return this.redirectToList();
         }
 

@@ -1,36 +1,87 @@
 <template>
   <div
-    class="countdown govuk-!-margin-bottom-4"
+    v-if="showCountdown"
+    class="countdown"
     :class="bckClass"
   >
-    Time remaining: <span>{{ formattedTimeLeft }}</span>
+    <div class="govuk-!-padding-2 govuk-width-container">
+      <div class="text-left">
+        <div
+          class="header-background clearfix"
+          style="display: flex;"
+        >
+          <slot
+            name="left-slot"
+          />
+        </div>
+      </div>
+      <div class="text-center">
+        <span
+          id="time-remaining"
+        >
+          <span
+            v-if="hours"
+          >
+            {{ hours | zeroPad }}:
+          </span>
+          <span
+            style="margin-right: 5px;"  
+          >
+            {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+          </span>
+          <svg
+            v-if="bckClass"
+            class="moj-banner__icon"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            height="25"
+            width="25"
+          >
+            <path
+              d="M13.7,18.5h-2.4v-2.4h2.4V18.5z M12.5,13.7c-0.7,0-1.2-0.5-1.2-1.2V7.7c0-0.7,0.5-1.2,1.2-1.2s1.2,0.5,1.2,1.2v4.8 C13.7,13.2,13.2,13.7,12.5,13.7z M12.5,0.5c-6.6,0-12,5.4-12,12s5.4,12,12,12s12-5.4,12-12S19.1,0.5,12.5,0.5z"
+            />
+          </svg>
+        </span>
+      </div>
+      <div class="text-right">
+        <slot
+          name="right-slot"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-/* ****************************
- COUNTDOWN COMPONENT
-
- <Countdown
- :duration="1"
- :warning="0.5"
- :alert="0.25"
- @change="countChange"
- />
-
- countChange(obj) {
- // eslint-disable-next-line no-console
- console.log('countChange', obj);
- }
- ***************************** */
-
-import { firestore } from '@/firebase';
+const second = 1000;
+const minute = 60 * second;
 
 export default {
+  filters: {
+    zeroPad(value) {
+      if (typeof value === 'number') {
+        return value.toString().padStart(2, '0');
+      }
+      return value;
+    },
+  },
   props: {
+    startTime: {
+      type: Date,
+      required: true,
+    },
+    endTime: {
+      type: Date,
+      default: null,
+    },
+    serverTimeOffset: {
+      type: Number,
+      default: 0,
+    },
     duration: {
       type: Number,
-      required: true,
+      required: false,
+      default: 15,
     },
     warning: {
       type: Number,
@@ -41,119 +92,140 @@ export default {
       default: 1,
     },
   },
-  data() {
+  data: function() {
     return {
-      timestampStart: null,
-      timestampNow: null,
-      timePassed: 0,
-      timeLeft: 0,
+      showCountdown: true,
+      start: '',
+      end: '',
+      interval: '',
+      //days: '',
+      hours: '',
+      minutes: '',
+      seconds: '',
       bckClass: '',
-      timerInterval: null,
+      saveCounter: 0,
+      saveSeconds: 5,
     };
   },
-  computed: {
-    formattedTimeLeft() {
-      const timeLeft = this.timeLeft;
-      // The largest round integer less than or equal to the result of time divided being by 60.
-      const minutes = Math.floor(timeLeft / 60);
-      // Seconds are the remainder of the time divided by 60 (modulus operator)
-      let seconds = timeLeft % 60;
-      // If the value of seconds is less than 10, then display seconds with a leading zero
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-      // The output in MM:SS format
-      return `${minutes}:${seconds}`;
-    },
-    doTimerObject() {
-      return {
-        duration: {
-          s: this.duration * 60,
-          m: this.duration,
-        },
-        timePassed: {
-          s: this.timePassed,
-          m: this.timePassed / 60,
-        },
-        timeLeft: {
-          s: this.timeLeft,
-          m: this.timeLeft / 60,
-        },
-      };
-    },
-  },
   mounted() {
-    this.timestampStart = firestore.timestamp;
-    this.startTimer();
-  },
-  beforeDestroy() {
-    this.endTimer();
-    this.$emit('change', { ...this.doTimerObject, action: 'destroy' });
+    const start = new Date(this.startTime);
+    let end = new Date(this.startTime);
+    end.setMinutes(end.getMinutes() + this.duration);
+
+    // #495 Absolute End
+    if (this.endTime !== null) {
+      const absoluteEnd = new Date(this.endTime);
+      const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
+
+      if (isAbsoluteEndBeforetheEnd) {
+        end = absoluteEnd;
+      }
+    }
+    // END #495 Absolute End
+
+    this.start = start.getTime();
+    this.end = end.getTime();
+
+    this.tick(this.start, this.end);
+
+    this.interval = setInterval(() => {
+      this.saveCounter += 1;
+      this.tick(this.start, this.end);
+    }, second);
   },
   methods: {
-    startTimer() {
-      if (this.duration > 0) {
-        this.timerInterval = setInterval(this.doSetInterval, 1000);
-      }
-    },
-    endTimer() {
-      clearInterval(this.timerInterval);
-    },
-    doSetInterval() {
-      this.timestampNow = firestore.Timestamp;
-      this.timePassed += 1;
-      this.doTimeLeft();
+    tick(start, end) {
+      const now = new Date().getTime() + this.serverTimeOffset;
 
-      // end of countdown
-      if (this.timeLeft === 0) {
-        this.endTimer();
-        this.bckClass = 'alert';
-        this.$emit('change', { ...this.doTimerObject, action: 'endTimer' });
+      const timeRemaining = end - now;
+
+      if (this.saveCounter === this.saveSeconds) {
+        this.$emit('change', { action: 'autoSave' });
+        this.saveCounter = 0;
+      }
+      if (this.saveCounter === 2) { // clean the autoSaver 2s after it is set to true
+        this.$emit('change', { action: 'cleanAutoSave' });
       }
 
-      // warning
-      if (this.timeLeft === this.warning * 60) {
-        this.$emit('change', { ...this.doTimerObject, action: 'warning' });
-      }
-      if (this.timeLeft <= this.warning * 60) {
-        this.bckClass = 'warning';
-      }
-
-      // alert
-      if (this.timeLeft === this.alert * 60) {
-        this.$emit('change', { ...this.doTimerObject, action: 'alert' });
-      }
-      if (this.timeLeft <= this.alert * 60) {
-        this.bckClass = 'alert';
+      if (timeRemaining > 0) {
+        this.calculateTimeLeft(timeRemaining);
+        if (this.hours < 1) {
+          if (this.minutes < this.warning) {
+            this.bckClass = 'warning';
+          }
+          if (this.minutes < this.alert) {
+            this.bckClass = 'alert';
+          }
+        }
+      } else {
+        clearInterval(this.interval);
+        this.showCountdown = false;
+        this.$emit('change', { action: 'ended' });
       }
     },
-    doTimeLeft() {
-      const durationInSeconds = (this.duration * 60).toFixed(0);
-      this.timeLeft = durationInSeconds - this.timePassed;
+    calculateTimeLeft(timeRemaining) {
+      this.hours = Math.floor((timeRemaining % (24 * 60 * minute)) / (60 * minute));
+      this.minutes = Math.floor((timeRemaining % (60 * minute)) / (minute));
+      this.seconds = Math.floor((timeRemaining % (minute)) / 1000);
     },
   },
 };
 </script>
 
-<style type="text/css" rel="stylesheet/scss" lang="scss" scoped>
-.countdown {
-  background-color: green;
-  color: white;
-  text-align: center;
-  font-weight: bold;
-  padding: 10px;
+<style lang="scss" scoped>
+
+  #time-remaining:before {
+    content: 'Time remaining: ';
+    @media (max-width: 599px) {
+      content: '';
+    }
+  }
 
   span {
-    font-weight: bold;
+    vertical-align: middle;
     display: inline-block;
   }
 
-  &.warning {
-    background-color: yellow;
-    color: black;
+  .countdown {
+    background-color: green;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    // padding-bottom: 10px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 9;
+    left: 0;
+
+    &.alert {
+      background-color: red;
+    }
+
+    div {
+      text-align: center;
+    }
+
   }
-  &.alert {
-    background-color: red;
+
+  .text-right {
+    text-align: right !important;
+    display: inline;
+    min-height: 1px;
+    float: right;
   }
-}
+
+  .text-center {
+    text-align: center !important;
+    display: inline-block;
+    min-height: 1px;
+  }
+
+  .text-left {
+    text-align: left !important;
+    display: inline;
+    min-height: 1px;
+    float: left;
+  }
+
 </style>
