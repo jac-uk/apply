@@ -68,119 +68,47 @@
               >
                 {{ item.otherTasks }}
               </p>
-              <!-- {{ item.judicialFunctions }} -->
-              <div
-                v-if="task == 'judicial-functions' 
-                  && item.judicialFunctions"
-                class="govuk-body govuk-!-margin-bottom-0"
-              >
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Nature of Appointment:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.natureOfAppointment }}
-                  </dd>
-                </div>
-
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Legal Experience:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.legalExperience }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Category of Law:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.categoryOfLaw }}
-                  </dd>
-                </div>
-                <div 
-                  class="govuk-summary-list__row"
-                >
-                  <dt class="govuk-summary-list__key">
-                    Previous Judicial Office Type:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.judicialOfficeType }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Circuit or Region:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.circuitOrRegion }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Jurisdiction:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.jurisdiction }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Tribunal:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.tribunal }}
-                  </dd>
-                </div> 
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Working Basis:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.workingBasis }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Average days per month:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.workingBasisDays }}
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Dates engaged in this activity:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    <ul
-                      class="govuk-list"
-                    >
-                      <li v-if="item.judicialFunctions.timeEngagedEnd">
-                        {{ item.judicialFunctions.timeEngagedStart | formatDate('month') }} to {{ item.judicialFunctions.timeEngagedEnd | formatDate('month') }}
-                      </li>
-                      <li v-else>
-                        {{ item.judicialFunctions.timeEngagedStart | formatDate('month') }} — current
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
-                <div class="govuk-summary-list__row">
-                  <dt class="govuk-summary-list__key">
-                    Judicial Appointment Date:
-                  </dt>
-                  <dd class="govuk-summary-list__value">
-                    {{ item.judicialFunctions.judicialAppointmentDate | formatDate }}
-                  </dd>
-                </div>
-              </div>
               <hr>
             </li>
           </ul>
           <div v-else>
             No Answers provided
           </div>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Base location and/or region where you predominately operate/d
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.location }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Jurisdiction/area of law
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.jurisdiction }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Working Basis
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.workingBasis }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Total number of days engaged in this role
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.totalDaysInRole }}
         </dd>
       </div>
     </dl>

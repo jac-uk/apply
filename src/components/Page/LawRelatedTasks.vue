@@ -25,112 +25,7 @@
       <CheckboxItem
         value="judicial-functions"
         label="The carrying-out of judicial functions of any court or tribunal"
-      >
-        <div
-          v-if="showJudicialFunctions"
-        >
-          <TextField
-            :id="`${id}_nature_of_appointment`"
-            v-model="localJudicialFunctions.natureOfAppointment"
-            label="Nature of Appointment:"
-            hint="eg. 'fee-paid tribunal judge'"
-            required
-          />
-
-          <TextField
-            :id="`${id}_legal_experience`"
-            v-model="localJudicialFunctions.legalExperience"
-            label="Legal Experience:"
-            required
-          />
-
-          <TextField
-            :id="`${id}_category_of_law`"
-            v-model="localJudicialFunctions.categoryOfLaw"
-            label="Category of Law:"
-            required
-          />
-
-          <TextField
-            :id="`${id}_office_type`"
-            v-model="localJudicialFunctions.judicialOfficeType"
-            label="Previous Judicial Office Type:"
-            required
-          />
-
-          <TextField
-            :id="`${id}_circuit_or_region`"
-            v-model="localJudicialFunctions.circuitOrRegion"
-            label="Circuit or Region:"
-            required
-          />
-
-          <TextField
-            :id="`${id}_juristiction`"
-            v-model="localJudicialFunctions.jurisdiction"
-            label="Jurisdiction:"
-            required
-          />
-
-          <TextField
-            :id="`${id}_tribunal`"
-            v-model="localJudicialFunctions.tribunal"
-            label="Tribunal:"
-            required
-          />
-          <Select
-            :id="`${id}_working_basis`"
-            v-model="localJudicialFunctions.workingBasis"
-            :value="localJudicialFunctions.workingBasis"
-            label="Working Basis"
-            required
-          >
-            <option
-              v-for="option in ['Full Time', 'Part Time', 'Other']"
-              :key="option"
-              :value="option"
-            >
-              {{ option }}
-            </option>
-          </Select>
-          <TextField
-            :id="`${id}_working_basis_days`"
-            v-model="localJudicialFunctions.workingBasisDays"
-            input-class="govuk-input govuk-input--width-2"
-            label="Average Engagement In Days per Month"
-            :label-hidden="true"
-            hint="Average Engagement In Days per Month"
-            type="number"
-            :num-max="28"
-            required
-          />
-
-          <DateInput
-            :id="`${id}_time_engaged_start`"
-            v-model="localJudicialFunctions.timeEngagedStart"
-            label="Dates Engaged In This Activity:"
-            hint="Start date"
-            type="month"
-            required
-          />
-
-          <DateInput
-            :id="`${id}_time_engaged_end`"
-            v-model="localJudicialFunctions.timeEngagedEnd"
-            :label-hidden="true"
-            label="End date"
-            hint="End date"
-            type="month"
-          /> 
-
-          <DateInput
-            :id="`${id}_judicial_appointment_date`"
-            v-model="localJudicialFunctions.judicialAppointmentDate"
-            label="Judicial Appointment date:"
-            required
-          />
-        </div>
-      </CheckboxItem>
+      />
 
       <CheckboxItem
         value="acting-arbitrator"
@@ -171,64 +66,24 @@
           rows="2"
         />
       </CheckboxItem>
-
-      <div
-        v-if="localTasks"
-      >
-        <div
-          v-if="!showJudicialFunctions && localTasks.length"
-        >
-          <Select
-            :id="`${id}_working_basis`"
-            v-model="localTasks.workingBasis"
-            :value="localTasks.workingBasis"
-            label="Engagement basis "
-            required
-          >
-            <option
-              v-for="option in ['Full Time', 'Part Time', 'Other']"
-              :key="option"
-              :value="option"
-            >
-              {{ option }}
-            </option>
-          </Select>
-
-          <TextField
-            :id="`${id}_working_basis_days`"
-            v-model="localTasks.workingBasisDays"
-            input-class="govuk-input govuk-date-input__input govuk-input--width-2"
-            hint="Please Indicate Your Average Engagement In Days per Month"
-            :num-max="31"
-            type="number"
-            required
-          />
-        </div>
-      </div>
     </CheckboxGroup>
   </div>
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import TextField from '@/components/Form/TextField';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
 
 export default {
   name: 'LawRelatedTasks',
   components: {
-    DateInput,
     CheckboxItem,
     CheckboxGroup,
-    TextField,
     TextareaInput,
     FormFieldError,
-    Select,
   },
   extends: FormField,
   props: {
@@ -245,7 +100,7 @@ export default {
       type: String,
       default: null,
     },
-    showJudicialFunctions: {
+    showtaskDetails: {
       required: false,
       type: Boolean,
       default: () => false,
@@ -255,7 +110,7 @@ export default {
       default: '',
       required: true,
     },
-    judicialFunctions: {
+    taskDetails: {
       type: Object,
       default: () => {},
       required: false,
@@ -263,7 +118,7 @@ export default {
   },
   data() {
     return {
-      localJudicialFunctions: { ...this.judicialFunctions },
+      localTaskDetails: { ...this.taskDetails },
     };
   },
   computed: {
@@ -285,9 +140,9 @@ export default {
     },
   },
   watch: {
-    localJudicialFunctions: {
+    localTaskDetails: {
       handler: function(after) {
-        this.$emit('update:judicialFunctions', after);
+        this.$emit('update:taskDetails', after);
       },
       deep: true,
     },
