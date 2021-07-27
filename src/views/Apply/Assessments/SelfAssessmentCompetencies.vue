@@ -43,8 +43,8 @@
                   v-model="item.answerDetails"
                   :word-limit="250"
                   hint="in 250 words tell us how."
-                  :label-hidden="true"
                   :label="item.title"
+                  label-hidden
                   required
                 />
               </RadioItem>
@@ -161,7 +161,7 @@ export default {
     }
     return {
       formId: 'selfAssessmentCompetencies',
-      formData: null,
+      formData: formData,
     };
   },
   computed: {
