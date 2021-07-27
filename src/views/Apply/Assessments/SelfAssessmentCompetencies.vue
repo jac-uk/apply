@@ -139,27 +139,6 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
-    return {
-      formId: 'selfAssessmentCompetencies',
-      formData: null,
-    };
-  },
-  computed: {
-    downloadNameGenerator() {
-      let outcome = null;
-      if (
-        this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
-        this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
-      ) {
-        const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
-        if (fileName) {
-          outcome = `self-assessment-with-competencies.${  fileName.split('.').pop()}`;
-        }
-      }
-      return outcome;
-    },
-  },
-  async beforeMount() {
     const defaults = {
       uploadedSelfAssessment: null,
       selectionCriteriaAnswers: [],
@@ -180,7 +159,25 @@ export default {
         }
       }
     }
-    this.formData = formData;
+    return {
+      formId: 'selfAssessmentCompetencies',
+      formData: null,
+    };
+  },
+  computed: {
+    downloadNameGenerator() {
+      let outcome = null;
+      if (
+        this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
+        this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
+      ) {
+        const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
+        if (fileName) {
+          outcome = `self-assessment-with-competencies.${  fileName.split('.').pop()}`;
+        }
+      }
+      return outcome;
+    },
   },
 };
 </script>

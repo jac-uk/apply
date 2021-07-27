@@ -43,8 +43,8 @@
                   v-model="item.answerDetails"
                   :word-limit="250"
                   hint="in 250 words tell us how."
-                  :label-hidden="true"
-                  :label="vacancy.selectionCriteria[index].title"
+                  :label="item.title"
+                  label-hidden
                   required
                 />
               </RadioItem>
@@ -87,32 +87,29 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
-    return {
-      formId: 'statementOfEligibility',
-      formData: {},
-    };
-  },
-  async beforeMount() {
     const defaults = {
       selectionCriteriaAnswers: [],
       progress: {},
     };
-    const data = await this.$store.getters['application/data'](defaults);
+    const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
-    const vacancy = this.$store.state.vacancy.record;
     if (formData.selectionCriteriaAnswers.length === 0) {
+      const vacancy = this.$store.state.vacancy.record;
       if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
         for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          formData.selectionCriteriaAnswers[i] = {
+          formData.selectionCriteriaAnswers.push({
             title: vacancy.selectionCriteria[i].title,
             text: vacancy.selectionCriteria[i].text,
             answer: null,
             answerDetails: null,
-          };
+          });
         }
       }
     }
-    this.formData = formData;
+    return {
+      formId: 'statementOfEligibility',
+      formData: formData,
+    };
   },
 };
 </script>
