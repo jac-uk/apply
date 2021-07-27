@@ -22,7 +22,6 @@
         
         <RepeatableFields
           v-model="formData.employmentGaps"
-          required
           :component="isLegal ? repeatableFields.EmploymentGaps : repeatableFields.NonLegalEmploymentGaps"
         />
 
