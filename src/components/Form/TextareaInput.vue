@@ -26,7 +26,6 @@
       v-model="text"
       class="govuk-textarea"
       name="word-count"
-      aria-describedby="word-count-info"
       :rows="rows"
       @keydown="handleLimit($event)"
       @keyup="handleLimit($event)"
