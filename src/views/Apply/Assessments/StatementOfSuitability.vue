@@ -144,8 +144,8 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
-    const vacancy = this.$store.state.vacancy.record;
     if (formData.selectionCriteriaAnswers.length === 0) {
+      const vacancy = this.$store.state.vacancy.record;
       if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
         for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
           formData.selectionCriteriaAnswers.push({
