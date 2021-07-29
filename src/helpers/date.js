@@ -6,7 +6,6 @@ const isDateInFuture = (date) => {
   } else if (!isDate(date)) {
     throw `Supplied date (${date}) must be a Date object`;
   }
-
   const today = Date.now();
 
   date = new Date(

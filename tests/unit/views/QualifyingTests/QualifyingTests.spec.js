@@ -181,7 +181,6 @@ describe('views/QualifyingTests/QualifyingTests', () => {
       it('lists open tests', () => {
         expect(wrapper.vm.futureTests.length).toBe(1);
       });
-
       xit('status', () => {
         expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
       });
@@ -210,7 +209,6 @@ describe('views/QualifyingTests/QualifyingTests', () => {
       it('lists open tests', () => {
         expect(wrapper.vm.closedTests.length).toBe(1);
       });
-
       xit('status', () => {
         expect(wrapper.vm.status(wrapper.vm.$store.state.qualifyingTestResponses.records[0])).toBe('not-started');
       });

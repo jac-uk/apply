@@ -125,16 +125,6 @@
                 <p v-if="vacancy.roleSummary">
                   {{ vacancy.roleSummary }}
                 </p>
-                <p
-                  v-if="showSignUp(vacancy)"
-                  class="govuk-body govuk-!-margin-bottom-7"
-                >
-                  <a
-                    class="govuk-link govuk-body"
-                    :href="vacancy.subscriberAlertsUrl"
-                    target="_blank"
-                  >Sign up</a> for an alert about this exercise
-                </p>
                 <hr>
               </div>
 
@@ -173,16 +163,6 @@
                   </p>
                   <p v-if="vacancy.roleSummaryWelsh">
                     {{ vacancy.roleSummaryWelsh }}
-                  </p>
-                  <p
-                    v-if="showSignUp(vacancy)"
-                    class="govuk-body govuk-!-margin-bottom-7"
-                  >
-                    <a
-                      class="govuk-link govuk-body"
-                      :href="vacancy.subscriberAlertsUrl"
-                      target="_blank"
-                    >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
                   </p>
                   <hr>
                 </div>
@@ -235,6 +215,16 @@
               <p v-if="vacancy.roleSummary">
                 {{ vacancy.roleSummary }}
               </p>
+              <p
+                v-if="vacancy.subscriberAlertsUrl"
+                class="govuk-body govuk-!-margin-bottom-5"
+              >
+                <a
+                  class="govuk-link govuk-body"
+                  :href="vacancy.subscriberAlertsUrl"
+                  target="_blank"
+                >Sign up</a> for an alert about this exercise
+              </p>
               <p>
                 <RouterLink
                   v-if="vacancy.aboutTheRole"
@@ -274,6 +264,16 @@
                 </p>
                 <p v-if="vacancy.roleSummaryWelsh">
                   {{ vacancy.roleSummaryWelsh }}
+                </p>
+                <p
+                  v-if="vacancy.subscriberAlertsUrl"
+                  class="govuk-body govuk-!-margin-bottom-5"
+                >
+                  <a
+                    class="govuk-link govuk-body"
+                    :href="vacancy.subscriberAlertsUrl"
+                    target="_blank"
+                  >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
                 </p>
                 <p>
                   <RouterLink
@@ -438,19 +438,6 @@ export default {
   },
   created() {
     this.$store.dispatch('vacancies/bind');
-  },
-  methods: {
-    showSignUp(vacancy) {
-      if (vacancy.subscriberAlertsUrl) {
-        const openDate = this.$store.getters['vacancy/getOpenDate'];
-        if (openDate) {
-          const today = new Date();
-          return openDate > today;
-        }
-        return true;
-      }
-      return false;
-    },
   },
 };
 </script>
