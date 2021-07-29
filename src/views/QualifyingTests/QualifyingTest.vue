@@ -53,7 +53,14 @@
         message="Your time to complete this test has expired, we will submit the answers you have completed so far."
         @confirmed="btnModalConfirmed"
       />
-
+      <Modal
+        ref="clockChangedModalRef"
+        title="Oops something went wrong"
+        button-text="I understand"
+        :cancelable="false"
+        message="Please try starting this test again."
+        @confirmed="btnClockChangedModalConfirmed"
+      />
       <Modal
         ref="exitModalRef"
         title="Are you sure?"
@@ -126,7 +133,11 @@ export default {
       return this.$route.name === 'qualifying-test-information';
     },
     serverTimeOffset() {
-      return this.$store.state.session.serverTimeOffset;
+      if (this.qualifyingTestResponse && this.qualifyingTestResponse.lastUpdated && this.qualifyingTestResponse.lastUpdatedClientTime) {
+        return this.qualifyingTestResponse.lastUpdated.getTime() - this.qualifyingTestResponse.lastUpdatedClientTime.getTime();
+      } else {
+        return 0;
+      }
     },
   },
   watch: {
@@ -142,14 +153,6 @@ export default {
     '$route.params.qualifyingTestId'() {
       this.loadQualifyingTestResponse();
     },
-    autoSave: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        if (this.autoSave) { // here we use autoSave event to refresh session.serverTimeOffset
-          this.$store.dispatch('session/load');
-        }
-      }
-    },
-
   },
   async mounted() {
     await this.loadQualifyingTestResponse();
@@ -195,17 +198,22 @@ export default {
       this.$router.replace({ name: 'qualifying-tests' });
     },
     handleCountdown(params) {
-      if (params.action === 'ended') {
+      switch (params.action) {
+      case 'clockChanged':
+        this.$refs.clockChangedModalRef.openModal();
+        break;
+      case 'ended':
+        this.autoSave = false;
         this.timerEnded = true;
         this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
-      }
-      this.autoSave = false;
-      if (params.action === 'autoSave') {
+        break;
+      case 'autoSave':
         this.autoSave = true;
-      }
-      if (params.action === 'cleanAutoSave') {
+        break;
+      case 'cleanAutoSave':
         this.autoSave = false;
+        break;
       }
     },
     openTimeElapsedModal(){
@@ -216,6 +224,9 @@ export default {
     },
     btnModalConfirmed() {
       this.$router.push({ name: 'qualifying-test-submitted' });
+    },
+    btnClockChangedModalConfirmed() {
+      this.$router.push({ name: 'qualifying-tests' });
     },
     btnExitModalConfirmed() {
       this.timerEnded = true;
@@ -242,7 +253,7 @@ export default {
     content: 'Question';
   }
 
-  @include mobile-view { 
+  @include mobile-view {
     #previous-link::after{
       content: '';
     }

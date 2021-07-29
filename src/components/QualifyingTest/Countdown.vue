@@ -25,7 +25,7 @@
             {{ hours | zeroPad }}:
           </span>
           <span
-            style="margin-right: 5px;"  
+            style="margin-right: 5px;"
           >
             {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
           </span>
@@ -105,7 +105,16 @@ export default {
       bckClass: '',
       saveCounter: 0,
       saveSeconds: 5,
+      localTime: new Date().getTime(),
     };
+  },
+  watch: {
+    serverTimeOffset(newVal, oldVal) {
+      if (newVal !== oldVal && newVal > 0) {
+        this.endCountdown();
+        this.startCountdown();
+      }
+    },
   },
   mounted() {
     const start = new Date(this.startTime);
@@ -125,18 +134,34 @@ export default {
 
     this.start = start.getTime();
     this.end = end.getTime();
-
-    this.tick(this.start, this.end);
-
-    this.interval = setInterval(() => {
-      this.saveCounter += 1;
-      this.tick(this.start, this.end);
-    }, second);
+    this.startCountdown();
+  },
+  destroyed() {
+    this.endCountdown();
   },
   methods: {
+    startCountdown() {
+      this.tick(this.start, this.end);
+      this.interval = setInterval(() => {
+        this.saveCounter += 1;
+        this.tick(this.start, this.end);
+      }, second);
+    },
+    endCountdown() {
+      clearInterval(this.interval);
+    },
     tick(start, end) {
-      const now = new Date().getTime() + this.serverTimeOffset;
+      // check for clock change
+      const currentLocalTime = new Date().getTime();
+      if (Math.abs(currentLocalTime - this.localTime) > 2000) { // the local time has changed by more than 2 seconds. indicates the clock has been changed!
+        this.endCountdown();
+        this.showCountdown = false;
+        this.$emit('change', { action: 'clockChanged' });
+        return false;
+      }
+      this.localTime = currentLocalTime;
 
+      const now = this.localTime + this.serverTimeOffset;
       const timeRemaining = end - now;
 
       if (this.saveCounter === this.saveSeconds) {
@@ -150,6 +175,7 @@ export default {
       if (timeRemaining > 0) {
         this.calculateTimeLeft(timeRemaining);
         if (this.hours < 1) {
+          this.bckClass = '';
           if (this.minutes < this.warning) {
             this.bckClass = 'warning';
           }
@@ -158,7 +184,7 @@ export default {
           }
         }
       } else {
-        clearInterval(this.interval);
+        this.endCountdown();
         this.showCountdown = false;
         this.$emit('change', { action: 'ended' });
       }

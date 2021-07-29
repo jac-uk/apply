@@ -8,7 +8,7 @@
         You cannot amend your answer for this question as it was started on a previous test
       </template>
     </Banner>
-    
+
     <form
       ref="formRef"
       @submit.prevent="save(true)"
@@ -21,8 +21,8 @@
         @answered="questionAnswered"
       />
 
-      <p 
-        v-if="!canSaveAndContinue && isSituationalJudgment" 
+      <p
+        v-if="!canSaveAndContinue && isSituationalJudgment"
         class="govuk-hint"
       >
         Please select one option 'Most appropriate' and one 'Least appropriate' before clicking on 'Save and continue'.
@@ -145,16 +145,6 @@ export default {
         },
       };
     },
-  },
-  watch: {
-    // #594 the autosave conflicts with amending previous questions
-    // autoSave: function (newVal, oldVal) {
-    //   if (newVal !== oldVal) {
-    //     if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
-    //       this.save(false);
-    //     }
-    //   }
-    // },
   },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {

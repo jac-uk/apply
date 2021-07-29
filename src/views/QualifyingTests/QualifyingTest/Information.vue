@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     v-if="qualifyingTestResponse"
     class="govuk-grid-column-two-thirds"
   >
@@ -209,7 +209,10 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (!this.hasStarted) {
+          if (this.hasStarted) {
+            await this.$store.dispatch('qualifyingTestResponse/save', {});
+            // ensures we refresh lastUpdated timestamps so we have a current `serverOffset`
+          } else {
             if (!this.confirmationChecked) {
               throw new Error('You must agree to keep this test confidential.');
             }

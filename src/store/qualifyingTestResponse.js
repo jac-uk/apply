@@ -22,6 +22,7 @@ export default {
       // @TODO make sure QT is still open
       if (!state.record.statusLog.started || getters.timeLeft) {
         data.lastUpdated = firebase.firestore.FieldValue.serverTimestamp();
+        data.lastUpdatedClientTime = firebase.firestore.Timestamp.now();
         return await collection.doc(state.record.id).update(data);
       }
       return false;
