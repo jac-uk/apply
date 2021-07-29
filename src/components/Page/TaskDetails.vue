@@ -27,15 +27,16 @@
         required
       >
         <option
-          v-for="option in ['Full-time', 'Salaried part-time', 'Fee-paid', 'Voluntary']"
+          v-for="option in ['full-time', 'salaried-part-time', 'fee-paid', 'voluntary']"
           :key="option"
-          :value="option"
+          :value="option | filter"
         >
-          {{ option }}
+          {{ option | filter }}
         </option>
       </Select>
 
       <TextField
+        v-if="['voluntary', 'fee-paid'].some(item => item === localTaskDetails.workingBasis)"
         :id="`${id}_working_basis_days`"
         v-model="localTaskDetails.totalDaysInRole"
         input-class="govuk-input govuk-input--width-2"

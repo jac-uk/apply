@@ -94,7 +94,9 @@
         </dd>
       </div>
 
-      <div class="govuk-summary-list__row">
+      <div
+        class="govuk-summary-list__row"
+      >
         <dt class="govuk-summary-list__key">
           Working Basis
         </dt>
@@ -103,7 +105,9 @@
         </dd>
       </div>
 
-      <div class="govuk-summary-list__row">
+      <div
+        v-if="item.taskDetails.totalDaysInRole"
+        class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           Total number of days engaged in this role
         </dt>
