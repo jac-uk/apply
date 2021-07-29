@@ -3,7 +3,7 @@ import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
-import { QUALIFYING_TEST } from '@/helpers/constants';
+import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 import { helperTimeLeft } from '@/helpers/date';
 
 const collection = firestore.collection('qualifyingTestResponses');
@@ -20,7 +20,10 @@ export default {
     }),
     save: async ({ state, getters }, data) => {
       // @TODO make sure QT is still open
-      if (!state.record.statusLog.started || getters.timeLeft) {
+      if (
+        state.record.status === QUALIFYING_TEST_RESPONSE.STATUS.ACTIVATED
+        || (state.record.status === QUALIFYING_TEST_RESPONSE.STATUS.STARTED && getters.timeLeft)
+      ) {
         data.lastUpdated = firebase.firestore.FieldValue.serverTimestamp();
         data.lastUpdatedClientTime = firebase.firestore.Timestamp.now();
         return await collection.doc(state.record.id).update(data);
@@ -42,7 +45,7 @@ export default {
         client.noData = true;
       }
       const data = {
-        status: QUALIFYING_TEST.STATUS.STARTED,
+        status: QUALIFYING_TEST_RESPONSE.STATUS.STARTED,
         'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
         'candidate.id': firebase.auth().currentUser.uid,
         client: client,
@@ -51,7 +54,7 @@ export default {
     },
     outOfTime: async (context) => {
       const data = {
-        status: QUALIFYING_TEST.STATUS.COMPLETED,
+        status: QUALIFYING_TEST_RESPONSE.STATUS.COMPLETED,
         'statusLog.completed': firebase.firestore.FieldValue.serverTimestamp(),
         'isOutOfTime': true,
       };
@@ -81,7 +84,7 @@ export default {
       return helperTimeLeft(state.record);
     },
     testInProgress: (state, getters) => {
-      return state.record.status === QUALIFYING_TEST.STATUS.STARTED
+      return state.record.status === QUALIFYING_TEST_RESPONSE.STATUS.STARTED
         && getters.isOpen
         && getters.timeLeft;
     },
