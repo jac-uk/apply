@@ -9,7 +9,7 @@
     />
     <template v-else>
       <Countdown
-        v-if="testInProgress && !isInformationPage"
+        v-if="testInProgress && !isSupportingPage"
         :start-time="qualifyingTestResponse.statusLog.started"
         :end-time="qualifyingTestResponse.qualifyingTest.endDate"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
@@ -73,6 +73,7 @@
         class="govuk-!-margin-left-5 govuk-!-margin-right-5"
       >
         <RouterView
+          v-if="isSupportingPage || testInProgress"
           :key="$route.fullPath"
           :time-is-up="timerEnded"
           :auto-save="autoSave"
@@ -85,6 +86,7 @@
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
 import Countdown from '@/components/QualifyingTest/Countdown';
+import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 
 export default {
   components: {
@@ -121,16 +123,23 @@ export default {
       const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
       return amountTimeLeft > 0;
     },
-    isNotCompleted() {
-      return this.qualifyingTestResponse.statusLog.completed === null ||
-        this.qualifyingTestResponse.statusLog.completed === undefined;
+    isCompleted() {
+      if (this.qualifyingTestResponse.status === QUALIFYING_TEST_RESPONSE.STATUS.COMPLETED) return true;
+      if (!this.qualifyingTestResponse.statusLog.completed) return false;
+      if (
+        this.qualifyingTestResponse.statusLog.reset
+        && this.qualifyingTestResponse.statusLog.reset > this.qualifyingTestResponse.statusLog.completed
+      ) {
+        return false;
+      }
+      return true;
     },
     isNotReset() {
       return this.qualifyingTestResponse.statusLog.reset === null ||
         this.qualifyingTestResponse.statusLog.reset === undefined;
     },
-    isInformationPage() {
-      return this.$route.name === 'qualifying-test-information';
+    isSupportingPage() {
+      return ['qualifying-test-information', 'qualifying-test-submitted'].indexOf(this.$route.name) >= 0;
     },
     serverTimeOffset() {
       if (this.qualifyingTestResponse && this.qualifyingTestResponse.lastUpdated && this.qualifyingTestResponse.lastUpdatedClientTime) {
@@ -175,13 +184,11 @@ export default {
           return this.redirectToList();
         }
 
-        // isCompleted > redirect
-        // noTimeLeft > redirect
-        const noTimeLeft = !this.isTimeLeft;
-        const isCompleted = !this.isNotCompleted;
-        const notReset = this.isNotReset;
+        if (!this.isTimeLeft) {
+          return this.redirectToList();
+        }
 
-        if ((noTimeLeft) || (isCompleted && notReset)) {
+        if (this.isCompleted) {
           return this.redirectToList();
         }
 
