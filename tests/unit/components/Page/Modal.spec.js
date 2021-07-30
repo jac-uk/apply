@@ -6,7 +6,7 @@ describe('components/Form/Modal', () => {
     describe('cancelable', () => {
       let prop;
         beforeEach(() => {
-          prop = Modal.props.cancelable;   
+          prop = Modal.props.cancelable;
         });
         it('is Boolean', () => {
             expect(prop.type()).toBeBoolean();
@@ -18,7 +18,7 @@ describe('components/Form/Modal', () => {
     describe('buttonText', () => {
       let prop;
       beforeEach(() => {
-        prop = Modal.props.buttonText;   
+        prop = Modal.props.buttonText;
       });
       it('default is \'Accept\'', () => {
         expect(prop.default).toBe('Accept');
@@ -30,7 +30,7 @@ describe('components/Form/Modal', () => {
     describe('message', () => {
       let prop;
       beforeEach(() => {
-        prop = Modal.props.message;   
+        prop = Modal.props.message;
       });
       it('default is \'Accept\'', () => {
         expect(prop.default).toBe('Please Confirm');
@@ -47,7 +47,7 @@ describe('components/Form/Modal', () => {
         propsData: {
           buttonText: 'Start Now',
           cancelable: true,
-          message: 'Are you sure you want to start your qualifying test? The timer will begin if you do:',
+          message: 'Are you sure you want to start your online test? The timer will begin if you do:',
         },
         stubs: [],
       });
