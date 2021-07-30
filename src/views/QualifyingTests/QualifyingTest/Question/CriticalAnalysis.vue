@@ -46,7 +46,9 @@ export default {
       set(val) {
         this.$emit('input', val);
         // this.$emit('answered');
-        this.$emit('answered', { value: val });
+        if (val !== this.value && this.value !== null && this.value !== undefined) {
+          this.$emit('answered', { value: val });
+        }
       },
     },
   },
