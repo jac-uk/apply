@@ -55,10 +55,10 @@
       />
       <Modal
         ref="clockChangedModalRef"
-        title="Oops something went wrong"
+        title="Something went wrong"
         button-text="I understand"
         :cancelable="false"
-        message="Please try starting this test again."
+        message="There is an issue with the test timer. Please try starting this test again."
         @confirmed="btnClockChangedModalConfirmed"
       />
       <Modal
