@@ -74,7 +74,7 @@
           status="information"
         >
           <template>
-            This Qualifying Test is not open yet.
+            This online test is not open yet.
           </template>
         </Banner>
 

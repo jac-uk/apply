@@ -12,7 +12,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
+        <div v-if="formData && vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
@@ -41,7 +41,10 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  label="In 250 words, tell us how."
+                  :word-limit="250"
+                  hint="in 250 words tell us how."
+                  :label="item.title"
+                  label-hidden
                   required
                 />
               </RadioItem>
