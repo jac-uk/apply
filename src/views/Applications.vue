@@ -29,7 +29,7 @@
                 class="govuk-link info-link--nav-applications--qualifying-tests"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -66,7 +66,7 @@
                 </div>
                 <div v-else>
                   <RouterLink
-                    v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
+                    v-if="canContinueWithApplication(application)"
                     :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
                     :to="{ name: 'task-list', params: { id: application.exerciseId } }"
                     role="button"
@@ -149,6 +149,7 @@ import {
   mapState
 } from 'vuex';
 import isVacancyOpen from '@/helpers/isVacancyOpen';
+import { isMoreInformationNeeded } from '@/helpers/exerciseHelper';
 
 export default {
   computed: {
@@ -162,21 +163,27 @@ export default {
     this.$store.dispatch('vacancies/bind');
   },
   methods: {
-    isOpen(dateExtended, exerciseId) {
-      // const today = new Date();
-      const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
-      if (vacancy) {
-        return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, dateExtended);
-      } else {
-        return false;
-      }
-    },
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {
         return false;
       }
       return this.allVacancies.find(vacancy => vacancy.id === exerciseId) !== undefined;
     },
+    canContinueWithApplication(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      switch (application.status) {
+      case 'draft':
+        return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, application.dateExtension);
+      case 'applied':
+        // check whether extra info is needed
+        return isMoreInformationNeeded(vacancy, application);
+      default:
+        return false;
+      }
+    },
+
   },
 };
 </script>

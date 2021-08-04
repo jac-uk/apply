@@ -25,7 +25,7 @@
           You should read the
           <a
             class="govuk-link info-link--independend-assessor--guidance-on-choosing-independent-assessor"
-            href="https://www.judicialappointments.gov.uk/references-guidance-candidates"
+            href="https://judicialappointments.gov.uk/independent-assessments"
             target="_blank"
           >
             guidance on choosing independent assessors
@@ -39,26 +39,26 @@
 
         <TextField
           id="first-assessor-full-name"
-          v-model="application.firstAssessorFullName"
+          v-model="formData.firstAssessorFullName"
           label="Full name"
           required
         />
         <TextField
           id="first-assessor-title"
-          v-model="application.firstAssessorTitle"
+          v-model="formData.firstAssessorTitle"
           label="Title or position"
           required
         />
         <TextField
           id="first-assessor-email"
-          v-model="application.firstAssessorEmail"
+          v-model="formData.firstAssessorEmail"
           label="Email"
           type="email"
           required
         />
         <TextField
           id="first-assessor-Phone"
-          v-model="application.firstAssessorPhone"
+          v-model="formData.firstAssessorPhone"
           label="Phone"
           type="tel"
           required
@@ -70,33 +70,33 @@
 
         <TextField
           id="second-assessor-full-name"
-          v-model="application.secondAssessorFullName"
+          v-model="formData.secondAssessorFullName"
           label="Full name"
           required
         />
         <TextField
           id="second-assessor-title"
-          v-model="application.secondAssessorTitle"
+          v-model="formData.secondAssessorTitle"
           label="Title or position"
           required
         />
         <TextField
           id="second-assessor-email"
-          v-model="application.secondAssessorEmail"
+          v-model="formData.secondAssessorEmail"
           label="Email"
           type="email"
           required
         />
         <TextField
           id="second-assessor-Phone"
-          v-model="application.secondAssessorPhone"
+          v-model="formData.secondAssessorPhone"
           label="Phone"
           type="tel"
           required
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--assessor-details--save-and-continue"
         >
           Save and continue
@@ -109,6 +109,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
 
@@ -119,6 +120,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       firstAssessorFullName: null,
@@ -129,23 +131,14 @@ export default {
       secondAssessorTitle: null,
       secondAssessorEmail: null,
       secondAssessorPhone: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'assessorsDetails',
+      formData: formData,
     };
-
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.assessorsDetails = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>

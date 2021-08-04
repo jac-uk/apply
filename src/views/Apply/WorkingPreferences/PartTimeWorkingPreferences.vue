@@ -15,7 +15,7 @@
           :show-save-button="true"
           @save="save"
         />
-        
+
         <div v-if="vacancy.referenceNumber == 'JAC00006'">
           <p class="govuk-body-l">
             Part-time working is available for this role, it can only be
@@ -31,7 +31,7 @@
 
         <RadioGroup
           id="part-time-working-preferences"
-          v-model="application.interestedInPartTime"
+          v-model="formData.interestedInPartTime"
           required
           label="Are you interested in part-time working?"
         >
@@ -42,7 +42,7 @@
             <TextareaInput
               v-if="vacancy.referenceNumber !== 'JAC00006'"
               id="part-time-working-preference-details"
-              v-model="application.partTimeWorkingPreferencesDetails"
+              v-model="formData.partTimeWorkingPreferencesDetails"
               label="With reference to the working patterns for this role, provide details of those you want to work."
               required
             />
@@ -54,7 +54,7 @@
         </RadioGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--part-time-work-experience--save-and-continue"
         >
           Save and continue
@@ -67,6 +67,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -81,31 +82,19 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       interestedInPartTime: null,
       partTimeWorkingPreferencesDetails: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'partTimeWorkingPreferences',
+      formData: formData,
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.partTimeWorkingPreferences = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>
