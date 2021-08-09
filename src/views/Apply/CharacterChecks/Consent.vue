@@ -7,7 +7,7 @@
       <BackLink />
 
       <h1 class="govuk-heading-xl">
-        Declaration
+        Consent
       </h1>
 
       <ErrorSummary :errors="errors" />
@@ -23,19 +23,24 @@
         <li>the disclosure of the details of any outstanding complaints that have not yet been determined or resolved relating to professional misconduct or inadequate professional service</li>
       </ul>
 
-      <h2 class="govuk-heading-l">
-        HMRC
-      </h2>
-      <p class="govuk-body">
-        I consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act as a director, trustee or personal representative:
-      </p>
-      <ul class="govuk-list govuk-list--bullet">
-        <li>disclosing details of any outstanding, or late submitted, personal returns of tax or duties and penalties or surcharges raised thereon</li>
-        <li>disclosing details of any  outstanding debts of personal tax or duties and time to pay arrangements</li>
-        <li>disclosing details of any on-going enquiry into my personal returns of tax or duties</li>
-        <li>where I am a partner, disclosing whether there is any on going enquiry into a partnership return of tax or duties</li>
-        <li>disclosing details of any record relating to HMRC Border controls in regard to departure and arrivals in the UK, for example, excise, prohibitions and restrictions</li>
-      </ul>
+      <div
+        v-if="hasHMRCCheck"
+        class="govuk-!-margin-top-6 govuk-!-margin-bottom-6"
+      >
+        <h2 class="govuk-heading-l">
+          HMRC
+        </h2>
+        <p class="govuk-body">
+          I consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act as a director, trustee or personal representative:
+        </p>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>disclosing details of any outstanding, or late submitted, personal returns of tax or duties and penalties or surcharges raised thereon</li>
+          <li>disclosing details of any  outstanding debts of personal tax or duties and time to pay arrangements</li>
+          <li>disclosing details of any on-going enquiry into my personal returns of tax or duties</li>
+          <li>where I am a partner, disclosing whether there is any on going enquiry into a partnership return of tax or duties</li>
+          <li>disclosing details of any record relating to HMRC Border controls in regard to departure and arrivals in the UK, for example, excise, prohibitions and restrictions</li>
+        </ul>
+      </div>
 
       <h2 class="govuk-heading-l">
         Criminal checks
@@ -47,15 +52,15 @@
       <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-9">
 
       <Checkbox
-        id="declaration"
-        v-model="application.characterChecks.declaration"
+        id="consent"
+        v-model="application.characterChecks.consent"
       >
-        Yes, I understand and agree
+        Yes, I understand and consent to character checks being undertaken
       </Checkbox>
 
       <button
         class="govuk-button"
-        :disabled="!application.characterChecks.declaration"
+        :disabled="!application.characterChecks.consent"
       >
         Submit
       </button>
@@ -77,7 +82,7 @@ export default {
   extends: Form,
   data() {
     const defaults = {
-      declaration: null,
+      consent: null,
       status: null,
     };
     const application = this.$store.getters['application/data']();
@@ -90,12 +95,16 @@ export default {
     applicationRecord() {
       return this.$store.state.application.record;
     },
+    hasHMRCCheck() {
+      const vacancy = this.$store.state.vacancy.record;
+      return vacancy.characterChecks && vacancy.characterChecks.HMRC;
+    },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        if (this.application.characterChecks.declaration === true) {
+        if (this.application.characterChecks.consent === true) {
           this.application.characterChecks.status = 'completed';
         }
         await this.$store.dispatch('application/save', this.application);

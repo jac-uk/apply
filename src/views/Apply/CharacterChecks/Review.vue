@@ -266,19 +266,19 @@
         class="govuk-heading-l"
         style="display:inline-block;"
       >
-        Professional bodies
+        Professional details
       </h2>
       <RouterLink
         v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
-        :to="{name: 'character-checks-professional-bodies'}"
+        :to="{name: 'character-checks-professional-details'}"
       >
         Change
       </RouterLink>
     </div>
 
-    <div v-if="application.qualifications || application.magistrate">
+    <div>
       <dl
         v-if="application.qualifications"
         class="govuk-summary-list"
@@ -305,172 +305,145 @@
       </dl>
 
       <dl
-        v-if="application.magistrate"
+        v-if="application.magistrate === true || application.magistrate === false"
         class="govuk-summary-list"
       >
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
-            Magistrate
+            Have you been a magistrate?
           </dt>
           <dd
             class="govuk-summary-list__value"
           >
             <p class="govuk-body">
-              {{ application.magistrateStartDate | formatDate }} - {{ application.magistrateEndDate | formatDate }}
+              {{ application.magistrate | toYesNo }}
             </p>
-            <p class="govuk-body">
+            <p
+              v-if="application.magistrateStartDate"
+              class="govuk-body"
+            >
+              {{ application.magistrateStartDate | formatDate }} - {{ application.magistrateEndDate ? formatDate(application.magistrateEndDate) : 'present' }}
+            </p>
+            <p
+              v-if="application.magistrateLocation"
+              class="govuk-body"
+            >
               {{ application.magistrateLocation }}
             </p>
           </dd>
         </div>
       </dl>
-    </div>
-    <div
-      v-else
-      class="govuk-body"
-    >
-      No information provided
+      <div
+        v-else
+        class="govuk-body"
+      >
+        No information provided
+      </div>
     </div>
 
     <div
       v-if="hasHMRCCheck"
+    >
+      <div class="govuk-!-margin-top-9">
+        <h2
+          class="govuk-heading-l"
+          style="display:inline-block;"
+        >
+          HMRC Check
+        </h2>
+        <RouterLink
+          v-if="canEdit"
+          class="govuk-link govuk-body-m change-link"
+          style="display:inline-block;"
+          :to="{name: 'character-checks-HMRC'}"
+        >
+          Change
+        </RouterLink>
+      </div>
+
+      <dl class="govuk-summary-list">
+        <div
+          v-if="application.personalDetails.hasVATNumbers"
+          class="govuk-summary-list__row"
+        >
+          <dt class="govuk-summary-list__key">
+            Do you have a VAT registration number?
+          </dt>
+          <dd
+            class="govuk-summary-list__value"
+          >
+            {{ application.personalDetails.hasVATNumbers | toYesNo }}
+          </dd>
+        </div>
+        <div
+          v-else
+          class="govuk-body"
+        >
+          No information provided
+        </div>
+
+        <div
+          v-if="application.personalDetails.VATNumbers"
+          class="govuk-summary-list__row"
+        >
+          <dt class="govuk-summary-list__key">
+            VAT numbers
+          </dt>
+          <dd
+            class="govuk-summary-list__value"
+          >
+            <p
+              v-for="(item, index) in application.personalDetails.VATNumbers"
+              :key="index"
+              class="govuk-body"
+            >
+              {{ item.VATNumber }}
+            </p>
+          </dd>
+        </div>
+      </dl>
+    </div>
+
+    <OtherProfessionalBodiesReview
+      :application="application"
+      :vacancy="vacancy"
+      :can-edit="canEdit"
+    />
+
+    <div
+      v-if="application.characterChecks.consent"
       class="govuk-!-margin-top-9"
     >
       <h2
         class="govuk-heading-l"
         style="display:inline-block;"
       >
-        HMRC Check
+        Consent
       </h2>
       <RouterLink
         v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
-        :to="{name: 'character-checks-HMRC'}"
+        :to="{name: 'character-checks-consent'}"
       >
         Change
       </RouterLink>
-    </div>
 
-    <dl class="govuk-summary-list">
-      <div
-        v-if="application.personalDetails.hasVATNumbers"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Do you have a VAT registration number?
-        </dt>
-        <dd
-          class="govuk-summary-list__value"
+      <dl class="govuk-summary-list">
+        <div
+          class="govuk-summary-list__row"
         >
-          {{ application.personalDetails.hasVATNumbers | toYesNo }}
-        </dd>
-      </div>
-      <div
-        v-else
-        class="govuk-body"
-      >
-        No information provided
-      </div>
-
-      <div
-        v-if="application.personalDetails.VATNumbers"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          VAT numbers
-        </dt>
-        <dd
-          class="govuk-summary-list__value"
-        >
-          <p
-            v-for="(item, index) in application.personalDetails.VATNumbers"
-            :key="index"
-            class="govuk-body"
+          <dt class="govuk-summary-list__key">
+            I understand and consent to character checks being undertaken
+          </dt>
+          <dd
+            class="govuk-summary-list__value"
           >
-            {{ item.VATNumber }}
-          </p>
-        </dd>
-      </div>
-    </dl>
-
-    <div class="govuk-!-margin-top-9">
-      <h2
-        class="govuk-heading-l"
-        style="display:inline-block;"
-      >
-        Further information to disclose
-      </h2>
-      <RouterLink
-        v-if="canEdit"
-        class="govuk-link govuk-body-m change-link"
-        style="display:inline-block;"
-        :to="{name: 'character-checks-more-details'}"
-      >
-        Change
-      </RouterLink>
+            {{ application.characterChecks.consent | toYesNo }}
+          </dd>
+        </div>
+      </dl>
     </div>
-
-    <dl class="govuk-summary-list">
-      <div
-        v-if="application.characterChecks.furtherInformation"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Details
-        </dt>
-        <dd
-          class="govuk-summary-list__value"
-        >
-          {{ application.characterChecks.furtherInformation }}
-        </dd>
-      </div>
-      <div
-        v-else
-        class="govuk-body"
-      >
-        No information provided
-      </div>
-    </dl>
-
-    <div class="govuk-!-margin-top-9">
-      <h2
-        class="govuk-heading-l"
-        style="display:inline-block;"
-      >
-        Declaration
-      </h2>
-      <RouterLink
-        v-if="canEdit"
-        class="govuk-link govuk-body-m change-link"
-        style="display:inline-block;"
-        :to="{name: 'character-checks-declaration'}"
-      >
-        Change
-      </RouterLink>
-    </div>
-
-    <dl class="govuk-summary-list">
-      <div
-        v-if="application.characterChecks.declaration"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Signed declaration
-        </dt>
-        <dd
-          class="govuk-summary-list__value"
-        >
-          {{ application.characterChecks.declaration | toYesNo }}
-        </dd>
-      </div>
-      <div
-        v-else
-        class="govuk-body"
-      >
-        No information provided
-      </div>
-    </dl>
 
     <button
       v-if="canEdit"
@@ -484,12 +457,17 @@
 
 <script>
 import BackLink from '@/components/BackLink';
+import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview';
 
 export default {
   components: {
     BackLink,
+    OtherProfessionalBodiesReview,
   },
   computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
     application() {
       return this.$store.state.application.record;
     },
@@ -504,7 +482,7 @@ export default {
   },
   methods: {
     next () {
-      this.$router.push({ name: 'character-checks-declaration' });
+      this.$router.push({ name: 'character-checks-consent' });
     },
   },
 };

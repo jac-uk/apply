@@ -7,7 +7,7 @@
       <BackLink />
 
       <h1 class="govuk-heading-xl">
-        Professional bodies
+        Professional details
       </h1>
 
       <ErrorSummary :errors="errors" />
@@ -136,7 +136,7 @@ export default {
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
           this.$router.push({ name: 'character-checks-HMRC' });
         } else {
-          this.$router.push({ name: 'character-checks-more-details' });
+          this.$router.push({ name: 'character-checks-other-professional-bodies' });
         }
       }
     },

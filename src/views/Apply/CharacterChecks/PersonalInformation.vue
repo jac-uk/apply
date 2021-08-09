@@ -23,6 +23,7 @@
         id="firstName"
         v-model="personalDetails.firstName"
         label="First name"
+        hint="Enter your first name as it's written on an official document like your driving licence."
         required
       />
 
@@ -30,6 +31,7 @@
         id="lastName"
         v-model="personalDetails.lastName"
         label="Last name"
+        hint="Enter your last name as it's written on an official document like your driving licence."
         required
       />
 
@@ -255,7 +257,7 @@ export default {
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
-        this.$router.push({ name: 'character-checks-professional-bodies' });
+        this.$router.push({ name: 'character-checks-professional-details' });
       }
     },
     makeFullName() {

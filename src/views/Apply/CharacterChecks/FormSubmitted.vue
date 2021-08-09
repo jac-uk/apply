@@ -21,7 +21,6 @@
           :href="`mailto:${vacancy.exerciseMailbox}?subject=Re: ${vacancy.referenceNumber}`"
           class="govuk-link"
         >Selection Exercise Team</a>.
-        You have a continuing duty, throughout the time that your application is being considered, to inform the Judicial Appointments Commission (JAC) of any matters that might affect the acceptability of your application when considered against this guidance. Disclosing all matters will allow for any mitigation to be taken into account.
       </p>
       <p class="govuk-body">
         Any personal data collected and processed is in accordance with the <a
