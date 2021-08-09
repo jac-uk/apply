@@ -31,7 +31,7 @@
           HMRC
         </h2>
         <p class="govuk-body">
-          I consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act as a director, trustee or personal representative:
+          I consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act, or have acted, as a director, trustee or personal representative:
         </p>
         <ul class="govuk-list govuk-list--bullet">
           <li>disclosing details of any outstanding, or late submitted, personal returns of tax or duties and penalties or surcharges raised thereon</li>

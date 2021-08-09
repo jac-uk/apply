@@ -136,7 +136,11 @@ export default {
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
           this.$router.push({ name: 'character-checks-HMRC' });
         } else {
-          this.$router.push({ name: 'character-checks-other-professional-bodies' });
+          if ((this.vacancy.memberships && this.vacancy.memberships.length) || this.vacancy.otherMemberships && this.vacancy.otherMemberships.length) {
+            this.$router.push({ name: 'character-checks-other-professional-bodies' });
+          } else {
+            this.$router.push({ name: 'character-checks-review' });
+          }
         }
       }
     },

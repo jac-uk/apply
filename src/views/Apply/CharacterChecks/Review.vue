@@ -322,7 +322,7 @@
               v-if="application.magistrateStartDate"
               class="govuk-body"
             >
-              {{ application.magistrateStartDate | formatDate }} - {{ application.magistrateEndDate ? formatDate(application.magistrateEndDate) : 'present' }}
+              {{ application.magistrateStartDate | formatDate }} - {{ getDate(application.magistrateEndDate) || 'present' }}
             </p>
             <p
               v-if="application.magistrateLocation"
@@ -404,11 +404,13 @@
       </dl>
     </div>
 
-    <OtherProfessionalBodiesReview
-      :application="application"
-      :vacancy="vacancy"
-      :can-edit="canEdit"
-    />
+    <div v-if="application.professionalMemberships && application.professionalMemberships.length">
+      <OtherProfessionalBodiesReview
+        :application="application"
+        :vacancy="vacancy"
+        :can-edit="canEdit"
+      />
+    </div>
 
     <div
       v-if="application.characterChecks.consent"
@@ -458,6 +460,7 @@
 <script>
 import BackLink from '@/components/BackLink';
 import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview';
+import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 export default {
   components: {
@@ -476,13 +479,16 @@ export default {
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
     canEdit() {
-      return !(this.application.characterChecks && this.application.characterChecks.declaration
+      return !(this.application.characterChecks && this.application.characterChecks.consent
         && this.application.characterChecks.status === 'completed');
     },
   },
   methods: {
     next () {
       this.$router.push({ name: 'character-checks-consent' });
+    },
+    getDate(value) {
+      return formatDate(value);
     },
   },
 };

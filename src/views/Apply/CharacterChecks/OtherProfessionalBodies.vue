@@ -15,7 +15,7 @@
       <p class="govuk-body govuk-!-margin-bottom-6">
         For some applications, you will need to provide details of other professional bodies where you hold
         membership/s. Please use this section to provide details of these organisations and your membership,
-        as as a registration number and status, e.g. associate, fellow etc.
+        such as a registration number and status, e.g. associate, fellow etc.
       </p>
 
       <CheckboxGroup
