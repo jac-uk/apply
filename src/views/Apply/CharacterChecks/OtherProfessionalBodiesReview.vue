@@ -43,7 +43,7 @@
           v-if="showMembershipOption('chartered-institute-of-building')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Chartered Institute of Building
           </dt>
           <dd class="govuk-summary-list__value">
@@ -59,7 +59,7 @@
           v-if="showMembershipOption('chartered-institute-of-environmental-health')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Chartered Institute of Environmental Health
           </dt>
           <dd class="govuk-summary-list__value">
@@ -75,7 +75,7 @@
           v-if="showMembershipOption('general-medical-council')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             General Medical Council
           </dt>
           <dd class="govuk-summary-list__value">
@@ -91,7 +91,7 @@
           v-if="showMembershipOption('royal-college-of-psychiatrists')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Royal College of Psychiatrists
           </dt>
           <dd class="govuk-summary-list__value">
@@ -107,7 +107,7 @@
           v-if="showMembershipOption('royal-institution-of-chartered-surveyors')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Royal Institution of Chartered Surveyors
           </dt>
           <dd class="govuk-summary-list__value">
@@ -123,7 +123,7 @@
           v-if="showMembershipOption('royal-institute-of-british-architects')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Royal Institute of British Architects
           </dt>
           <dd class="govuk-summary-list__value">
@@ -139,7 +139,7 @@
           v-if="showMembershipOption('other')"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             Other membership
           </dt>
           <dd class="govuk-summary-list__value">
@@ -156,7 +156,7 @@
           :key="key"
           class="govuk-summary-list__row"
         >
-          <dt class="govuk-summary-list__key">
+          <dt class="govuk-summary-list__key widerColumn">
             {{ membership.label }}
           </dt>
           <dd class="govuk-summary-list__value">
