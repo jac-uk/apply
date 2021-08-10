@@ -17,7 +17,7 @@
         :key="index"
       >
         <div class="govuk-inset-text govuk-!-margin-top-0">
-          You stated on your application that you have been a {{ qualification.type | lookup }} since {{ qualification.date | formatDate }}.
+          You stated on your application that you have been a {{ qualification.type | lookup }}{{ getDate(qualification) }}
         </div>
         <TextField
           id="barMembershipNum"
@@ -84,6 +84,7 @@ import TextField from '@/components/Form/TextField';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
+import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 const membershipNumbers = {
   barrister: 'Bar membership number',
@@ -120,6 +121,15 @@ export default {
     },
   },
   methods: {
+    getDate(value) {
+      if (value.date) {
+        return ` since ${formatDate(value.date)}.`;
+      }
+      if (value.calledToBarDate) {
+        return ` since ${formatDate(value.calledToBarDate)}.`;
+      }
+      return '.';
+    },
     membershipNumberLabel(type) {
       return membershipNumbers[type] || membershipNumbers.default;
     },
