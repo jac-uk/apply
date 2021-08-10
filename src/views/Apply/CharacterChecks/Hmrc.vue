@@ -93,7 +93,7 @@ export default {
         this.application.personalDetails = this.personalDetails;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        if ((this.vacancy.memberships && this.vacancy.memberships.length) || (this.vacancy.otherMemberships && this.vacancy.otherMemberships.length)) {
+        if ((this.vacancy.memberships && this.vacancy.memberships.length)) {
           this.$router.push({ name: 'character-checks-other-professional-bodies' });
         } else {
           this.$router.push({ name: 'character-checks-review' });
