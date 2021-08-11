@@ -68,6 +68,7 @@
   </form>
 </template>
 <script>
+import firebase from '@/firebase';
 import BackLink from '@/components/BackLink';
 import Form from '@/components/Form/Form';
 import Checkbox from '@/components/Form/Checkbox';
@@ -106,6 +107,7 @@ export default {
       if (this.isValid()) {
         if (this.application.characterChecks.consent === true) {
           this.application.characterChecks.status = 'completed';
+          this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
         }
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'character-checks-form-submitted' });

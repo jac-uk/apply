@@ -146,7 +146,7 @@ export default {
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
           this.$router.push({ name: 'character-checks-HMRC' });
         } else {
-          if ((this.vacancy.memberships && this.vacancy.memberships.length) || this.vacancy.otherMemberships && this.vacancy.otherMemberships.length) {
+          if ((this.vacancy.memberships && this.vacancy.memberships.length) && !this.vacancy.memberships.includes('none')) {
             this.$router.push({ name: 'character-checks-other-professional-bodies' });
           } else {
             this.$router.push({ name: 'character-checks-review' });
