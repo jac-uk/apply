@@ -47,7 +47,7 @@ export default {
         this.$emit('input', val);
         // this.$emit('answered');
         if (val !== this.value && this.value !== null && this.value !== undefined) {
-          this.$emit('answered', { value: val });
+          this.$emit('answered', { value: val, type: '' });
         }
       },
     },

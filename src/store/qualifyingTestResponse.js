@@ -30,12 +30,14 @@ export default {
       // collect browser info
       const client = {};
       try {
-        client.userAgent = navigator.userAgent;
-        client.platform = navigator.platform;
-        client.cookieEnabled = navigator.cookieEnabled;
-        client.deviceMemory = navigator.deviceMemory;
+        if (navigator) {
+          client.userAgent = 'userAgent' in navigator ? navigator.userAgent : '';
+          client.platform = 'platform' in navigator ? navigator.platform : '';
+          client.cookieEnabled = 'cookieEnabled' in navigator ? navigator.cookieEnabled : '';
+          client.deviceMemory = 'deviceMemory' in navigator ? navigator.deviceMemory : '';
+        }
         client.timestamp = Date.now();
-        client.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        client.timezone = Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : '';
         client.utcOffset = new Date().getTimezoneOffset();
       } catch {
         client.noData = true;
