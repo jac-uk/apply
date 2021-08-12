@@ -8,7 +8,7 @@
         You cannot amend your answer for this question as it was started on a previous test
       </template>
     </Banner>
-    
+
     <form
       ref="formRef"
       @submit.prevent="save(true, {})"
@@ -21,8 +21,8 @@
         @answered="questionAnswered"
       />
 
-      <p 
-        v-if="!canSaveAndContinue && isSituationalJudgment" 
+      <p
+        v-if="!canSaveAndContinue && isSituationalJudgment"
         class="govuk-hint"
       >
         Please select one option 'Most appropriate' and one 'Least appropriate' before clicking on 'Save and continue'.
@@ -63,6 +63,10 @@ export default {
   },
   props: {
     autoSave: {
+      type: Boolean,
+      default: false,
+    },
+    exitTest: {
       type: Boolean,
       default: false,
     },
@@ -147,14 +151,18 @@ export default {
     },
   },
   watch: {
-    // #594 the autosave conflicts with amending previous questions
-    // autoSave: function (newVal, oldVal) {
-    //   if (newVal !== oldVal) {
-    //     if (this.autoSave) { // autoSave therefore save form, if there are unsaved changes
-    //       this.save(false);
-    //     }
-    //   }
-    // },
+    exitTest: function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        if (this.exitTest) { // exitTest therefore update history and session
+          this.saveHistoryAndSession({
+            action: 'exit',
+            txt: `Exit Test question ${this.questionNumber}`,
+            location: 'modal',
+            question: this.questionNumber - 1,
+          });
+        }
+      }
+    },
   },
   async created() {
     if (this.qualifyingTestResponse.qualifyingTest.type === QUALIFYING_TEST.TYPE.SCENARIO) {
@@ -218,22 +226,18 @@ export default {
       await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
     },
     prepareSaveHistory(data) {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
       const date = new Date();
       const objToSave = {
         history: firebase.firestore.FieldValue.arrayUnion({
-          ...data, 
+          ...data,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
-          location: `question ${this.questionNumber}`, 
+          location: `question ${this.questionNumber}`,
           question: this.questionNumber - 1,
-          utcOffset: date.getTimezoneOffset(),
         }),
-        lastUpdated: timeNow,
       };
       return objToSave;
     },
     prepareSaveQuestionSession() {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
       const date = new Date();
       const objToSave = {
         questionSession: firebase.firestore.FieldValue.arrayUnion({
@@ -241,9 +245,7 @@ export default {
           end: firebase.firestore.Timestamp.fromDate(date),
           question: this.questionNumber - 1,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
-          utcOffset: date.getTimezoneOffset(),
         }),
-        lastUpdated: timeNow,
       };
       return objToSave;
     },

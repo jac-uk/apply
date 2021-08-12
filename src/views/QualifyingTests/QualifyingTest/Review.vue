@@ -14,21 +14,22 @@
             Questions
           </h2>
 
-          <ul class="moj-task-list__items">
+          <ul class="moj-task-list__items govuk-!-padding-left-0">
             <li
               v-for="(question, questionIndex) in questions"
               :key="questionIndex"
               class="moj-task-list__item display-flex"
               @click="saveHistory({ action: 'review', question: questionIndex, txt: question.details });"
             >
-              <RouterLink
-                :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }"
-                class="moj-task-list__task-name truncated-container"
-              >
+              <span class="truncated-container moj-task-list__task-name">
                 <span class="truncated">
-                  {{ question.details }}
+                  <span>{{ questionIndex + 1 }}. </span>
+                  <RouterLink :to="{ name: `qualifying-test-question`, params: { questionNumber: questionIndex + 1 } }">
+                    {{ question.details }}
+                  </RouterLink>
                 </span>
-              </RouterLink>
+              </span>
+
               <strong
                 v-if="!responses[questionIndex]"
                 class="govuk-tag govuk-tag--grey"
@@ -102,7 +103,7 @@
           </ul>
         </li>
       </ol>
-      
+
       <button
         class="govuk-button govuk-button--success"
         @click="openModal"
@@ -110,7 +111,7 @@
         Submit answers
       </button>
 
-      <Modal 
+      <Modal
         ref="modalRef"
         button-text="Submit answers"
         :cancelable="true"
@@ -168,16 +169,16 @@ export default {
     async saveHistory(data) {
       const objToSave = this.prepareSaveHistory({
         ...data,
-        location: 'review answers', 
+        location: 'review answers',
       });
       await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
     },
     prepareSaveHistory(data) {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp();
       const date = new Date();
       const objToSave = {
         history: firebase.firestore.FieldValue.arrayUnion({
-          ...data, 
+          ...data,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
           utcOffset: date.getTimezoneOffset(),
         }),
