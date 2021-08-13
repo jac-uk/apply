@@ -77,12 +77,14 @@
           :key="$route.fullPath"
           :time-is-up="timerEnded"
           :auto-save="autoSave"
+          :exit-test="exitTest"
         />
       </div>
     </template>
   </div>
 </template>
 <script>
+import firebase from '@/firebase';
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
 import Countdown from '@/components/QualifyingTest/Countdown';
@@ -100,6 +102,7 @@ export default {
       loadFailed: false,
       timerEnded: false,
       autoSave: false,
+      exitTest: false,
     };
   },
   computed: {
@@ -227,6 +230,13 @@ export default {
       this.$refs.timeElapsedModalRef.openModal();
     },
     openExitModal(){
+      const historyToSave = this.prepareSaveHistory({
+        action: 'exit',
+        txt: 'Exit Test',
+        location: 'timer bar',
+        question: this.$route.params.questionNumber - 1,
+      });
+      this.$store.dispatch('qualifyingTestResponse/save', historyToSave);
       this.$refs.exitModalRef.openModal();
     },
     btnModalConfirmed() {
@@ -236,6 +246,17 @@ export default {
       this.$router.push({ name: 'qualifying-tests' });
     },
     btnExitModalConfirmed() {
+      if (this.$route.params.questionNumber) {
+        this.exitTest = true; // question view will exit test
+      } else {
+        const dataToSave = this.prepareSaveHistory({
+          action: 'exit',
+          txt: 'Exit Test',
+          location: 'modal',
+          question: null,
+        });
+        this.$store.dispatch('qualifyingTestResponse/save', dataToSave);
+      }
       this.timerEnded = true;
       this.$nextTick(() => {  // ensures change is picked up before we leave this route
         this.$router.push({ name: 'qualifying-tests' });
@@ -245,6 +266,16 @@ export default {
       const params = this.$route.params;
       const hyphenated = `${params.qualifyingTestId}--scenario-${params.scenarioNumber}--from-${params.questionNumber}-to-${params.questionNumber - 1}`;
       return hyphenated;
+    },
+    prepareSaveHistory(data) {
+      const date = new Date();
+      const objToSave = {
+        history: firebase.firestore.FieldValue.arrayUnion({
+          ...data,
+          timestamp: firebase.firestore.Timestamp.fromDate(date),
+        }),
+      };
+      return objToSave;
     },
   },
 };
