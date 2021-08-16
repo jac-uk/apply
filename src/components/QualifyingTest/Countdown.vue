@@ -105,50 +105,66 @@ export default {
       bckClass: '',
       saveCounter: 0,
       saveSeconds: 5,
+      ticksPerSecond: 2,
       localTime: new Date().getTime(),
     };
   },
   watch: {
     serverTimeOffset(newVal, oldVal) {
-      if (newVal !== oldVal && newVal > 0) {
+      if (newVal !== oldVal) {
         this.endCountdown();
         this.startCountdown();
       }
     },
   },
-  mounted() {
+  created() {
+    window.addEventListener('blur', this.onBlur);
+    window.addEventListener('focus', this.onFocus);
+
     const start = new Date(this.startTime);
     let end = new Date(this.startTime);
     end.setMinutes(end.getMinutes() + this.duration);
 
-    // #495 Absolute End
+    // if we are provided an endTime and it is sooner than expected end then use it instead
     if (this.endTime !== null) {
       const absoluteEnd = new Date(this.endTime);
       const isAbsoluteEndBeforetheEnd = absoluteEnd < end;
-
       if (isAbsoluteEndBeforetheEnd) {
         end = absoluteEnd;
       }
     }
-    // END #495 Absolute End
 
     this.start = start.getTime();
     this.end = end.getTime();
     this.startCountdown();
   },
   destroyed() {
+    window.removeEventListener('blur', this.onBlur);
+    window.removeEventListener('focus', this.onFocus);
     this.endCountdown();
   },
   methods: {
+    onFocus() {
+      this.refreshCountdown();
+    },
+    onBlur() {
+      this.endCountdown();
+    },
     startCountdown() {
       this.tick(this.start, this.end);
       this.interval = setInterval(() => {
         this.saveCounter += 1;
         this.tick(this.start, this.end);
-      }, second);
+      }, second / this.ticksPerSecond);
     },
     endCountdown() {
       clearInterval(this.interval);
+    },
+    refreshCountdown() {
+      this.endCountdown();
+      this.localTime = new Date().getTime();
+      this.$emit('change', { action: 'refresh' });
+      this.startCountdown();
     },
     tick(start, end) {
       // check for clock change
@@ -164,11 +180,11 @@ export default {
       const now = this.localTime + this.serverTimeOffset;
       const timeRemaining = end - now;
 
-      if (this.saveCounter === this.saveSeconds) {
+      if (this.saveCounter === this.saveSeconds * this.ticksPerSecond) {
         this.$emit('change', { action: 'autoSave' });
         this.saveCounter = 0;
       }
-      if (this.saveCounter === 2) { // clean the autoSaver 2s after it is set to true
+      if (this.saveCounter === 2 * this.ticksPerSecond) { // clean the autoSaver 2s after it is set to true
         this.$emit('change', { action: 'cleanAutoSave' });
       }
 
