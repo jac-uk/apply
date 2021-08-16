@@ -82,13 +82,26 @@ export default {
       }
       return false;
     },
+    isCompleted: (state) => {
+      if (state.record.status === QUALIFYING_TEST_RESPONSE.STATUS.COMPLETED) return true;
+      if (!state.record.statusLog.completed) return false;
+      if (
+        state.record.statusLog.reset
+        && state.record.statusLog.reset > state.record.statusLog.completed
+      ) {
+        return false;
+      }
+      return true;
+    },
     timeLeft: (state) => {
       return helperTimeLeft(state.record);
     },
     testInProgress: (state, getters) => {
       return state.record.status === QUALIFYING_TEST_RESPONSE.STATUS.STARTED
-        && getters.isOpen
-        && getters.timeLeft;
+        && state.record.statusLog
+        && state.record.statusLog.started
+        && getters.isOpen === true
+        && getters.timeLeft > 0;
     },
   },
 };

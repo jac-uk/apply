@@ -88,7 +88,6 @@ import firebase from '@/firebase';
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
 import Countdown from '@/components/QualifyingTest/Countdown';
-import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 
 export default {
   components: {
@@ -103,6 +102,8 @@ export default {
       timerEnded: false,
       autoSave: false,
       exitTest: false,
+      serverTimeOffset: 0,
+      testInProgress: false,
     };
   },
   computed: {
@@ -115,46 +116,17 @@ export default {
     qualifyingTestId() {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
-    testInProgress() {
-      const result = this.qualifyingTestResponse
-        && this.qualifyingTestResponse.statusLog
-        && this.qualifyingTestResponse.statusLog.started
-        && this.$store.getters['qualifyingTestResponse/testInProgress'];
-      return result;
-    },
-    isTimeLeft() {
-      const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
-      return amountTimeLeft > 0;
-    },
-    isCompleted() {
-      if (this.qualifyingTestResponse.status === QUALIFYING_TEST_RESPONSE.STATUS.COMPLETED) return true;
-      if (!this.qualifyingTestResponse.statusLog.completed) return false;
-      if (
-        this.qualifyingTestResponse.statusLog.reset
-        && this.qualifyingTestResponse.statusLog.reset > this.qualifyingTestResponse.statusLog.completed
-      ) {
-        return false;
-      }
-      return true;
-    },
-    isNotReset() {
-      return this.qualifyingTestResponse.statusLog.reset === null ||
-        this.qualifyingTestResponse.statusLog.reset === undefined;
-    },
     isSupportingPage() {
       return ['qualifying-test-information', 'qualifying-test-submitted'].indexOf(this.$route.name) >= 0;
-    },
-    serverTimeOffset() {
-      if (this.qualifyingTestResponse && this.qualifyingTestResponse.lastUpdated && this.qualifyingTestResponse.lastUpdatedClientTime) {
-        return this.qualifyingTestResponse.lastUpdated.getTime() - this.qualifyingTestResponse.lastUpdatedClientTime.getTime();
-      } else {
-        return 0;
-      }
     },
   },
   watch: {
     qualifyingTestResponse: async function (newVal) {
       if (newVal) {
+        if (this.qualifyingTestResponse && this.qualifyingTestResponse.lastUpdated && this.qualifyingTestResponse.lastUpdatedClientTime) {
+          this.serverTimeOffset = this.qualifyingTestResponse.lastUpdated.getTime() - this.qualifyingTestResponse.lastUpdatedClientTime.getTime();
+          this.testInProgress = this.$store.getters['qualifyingTestResponse/testInProgress'];
+        }
         if (this.testInProgress) {
           await this.$store.dispatch('connectionMonitor/start', `qualifyingTest/${this.qualifyingTestId}`);
         } else {
@@ -166,11 +138,10 @@ export default {
       this.loadQualifyingTestResponse();
     },
   },
-  async mounted() {
+  async created() {
     await this.loadQualifyingTestResponse();
   },
   destroyed() {
-    this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
@@ -180,21 +151,15 @@ export default {
         if (qualifyingTestResponse === null) {
           return this.redirectToList();
         }
-
-        const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
-
-        if (!isQTOpen) {
+        if (!this.$store.getters['qualifyingTestResponse/isOpen']) {
           return this.redirectToList();
         }
-
-        if (!this.isTimeLeft) {
+        if (!(this.$store.getters['qualifyingTestResponse/timeLeft'] > 0)) {
           return this.redirectToList();
         }
-
-        if (this.isCompleted) {
+        if (this.$store.getters['qualifyingTestResponse/isCompleted']) {
           return this.redirectToList();
         }
-
         this.loaded = true;
       } catch (e) {
         this.loadFailed = true;
@@ -211,6 +176,9 @@ export default {
       switch (params.action) {
       case 'clockChanged':
         this.$refs.clockChangedModalRef.openModal();
+        break;
+      case 'refresh':
+        this.$store.dispatch('qualifyingTestResponse/save', {});
         break;
       case 'ended':
         this.autoSave = false;
