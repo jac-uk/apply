@@ -54,14 +54,6 @@
         @confirmed="btnModalConfirmed"
       />
       <Modal
-        ref="clockChangedModalRef"
-        title="Something went wrong"
-        button-text="I understand"
-        :cancelable="false"
-        message="There is an issue with the test timer. Please try starting this test again."
-        @confirmed="btnClockChangedModalConfirmed"
-      />
-      <Modal
         ref="exitModalRef"
         title="Are you sure?"
         button-text="Exit test"
@@ -174,9 +166,6 @@ export default {
     },
     handleCountdown(params) {
       switch (params.action) {
-      case 'clockChanged':
-        this.$refs.clockChangedModalRef.openModal();
-        break;
       case 'refresh':
         this.$store.dispatch('qualifyingTestResponse/save', {});
         break;

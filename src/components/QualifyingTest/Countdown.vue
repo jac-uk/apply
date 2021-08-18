@@ -106,7 +106,6 @@ export default {
       saveCounter: 0,
       saveSeconds: 5,
       ticksPerSecond: 2,
-      localTime: new Date().getTime(),
     };
   },
   watch: {
@@ -162,29 +161,20 @@ export default {
     },
     refreshCountdown() {
       this.endCountdown();
-      this.localTime = new Date().getTime();
       this.$emit('change', { action: 'refresh' });
       this.startCountdown();
     },
     tick(start, end) {
       // check for clock change
       const currentLocalTime = new Date().getTime();
-      if (Math.abs(currentLocalTime - this.localTime) > 2000) { // the local time has changed by more than 2 seconds. indicates the clock has been changed!
-        this.endCountdown();
-        this.showCountdown = false;
-        this.$emit('change', { action: 'clockChanged' });
-        return false;
-      }
-      this.localTime = currentLocalTime;
-
-      const now = this.localTime + this.serverTimeOffset;
+      const now = currentLocalTime + this.serverTimeOffset;
       const timeRemaining = end - now;
 
       if (this.saveCounter === this.saveSeconds * this.ticksPerSecond) {
         this.$emit('change', { action: 'autoSave' });
         this.saveCounter = 0;
       }
-      if (this.saveCounter === 2 * this.ticksPerSecond) { // clean the autoSaver 2s after it is set to true
+      if (this.saveCounter === (2 * this.ticksPerSecond)) { // clean the autoSaver 2s after it is set to true
         this.$emit('change', { action: 'cleanAutoSave' });
       }
 

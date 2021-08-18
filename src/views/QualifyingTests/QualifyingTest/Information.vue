@@ -218,7 +218,7 @@ export default {
               throw new Error('You must agree to keep this test confidential.');
             }
             await this.$store.dispatch('qualifyingTestResponse/startTest');
-            
+
           }
           this.$router.push(this.nextPage);
         } catch (error) {
@@ -230,11 +230,11 @@ export default {
       }
     },
     prepareSaveHistory(data) {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp();
       const date = new Date();
       const objToSave = {
         history: firebase.firestore.FieldValue.arrayUnion({
-          ...data, 
+          ...data,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
           utcOffset: date.getTimezoneOffset(),
         }),

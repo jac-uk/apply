@@ -40,7 +40,7 @@ export default {
           client.cookieEnabled = 'cookieEnabled' in navigator ? navigator.cookieEnabled : '';
           client.deviceMemory = 'deviceMemory' in navigator ? navigator.deviceMemory : '';
         }
-        client.timestamp = Date.now();
+        client.timestamp = firebase.firestore.Timestamp.now();
         client.timezone = Intl ? Intl.DateTimeFormat().resolvedOptions().timeZone : '';
         client.utcOffset = new Date().getTimezoneOffset();
       } catch {
