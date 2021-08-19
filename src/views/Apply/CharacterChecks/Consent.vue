@@ -23,6 +23,13 @@
         <li>the disclosure of the details of any outstanding complaints that have not yet been determined or resolved relating to professional misconduct or inadequate professional service</li>
       </ul>
 
+      <h2 class="govuk-heading-l">
+        Criminal checks
+      </h2>
+      <p class="govuk-body">
+        I consent that the Association of Chief Police Officers Criminal Records Office (ACRO) may, in strict confidence, disclose to the JAC any offence of which I have been convicted in relation to a criminal matter or infringement of the law and any caution administered to me at any time, whether spent or unspent, including any impending prosecutions.
+      </p>
+
       <div
         v-if="hasHMRCCheck"
         class="govuk-!-margin-top-6 govuk-!-margin-bottom-6"
@@ -31,7 +38,7 @@
           HMRC
         </h2>
         <p class="govuk-body">
-          I consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act, or have acted, as a director, trustee or personal representative:
+          I further consent to HM Revenue and Customs (HMRC) disclosing to the Judicial Appointments Commission (JAC) in strict confidence, any information regarding the following, whether or not held on a computer system, and including where I act, or have acted, as a director, trustee or personal representative:
         </p>
         <ul class="govuk-list govuk-list--bullet">
           <li>disclosing details of any outstanding, or late submitted, personal returns of tax or duties and penalties or surcharges raised thereon</li>
@@ -41,13 +48,6 @@
           <li>disclosing details of any record relating to HMRC Border controls in regard to departure and arrivals in the UK, for example, excise, prohibitions and restrictions</li>
         </ul>
       </div>
-
-      <h2 class="govuk-heading-l">
-        Criminal checks
-      </h2>
-      <p class="govuk-body">
-        I further consent that the Association of Chief Police Officers Criminal Records Office (ACRO) may, in strict confidence, disclose to the JAC any offence of which I have been convicted in relation to a criminal matter or infringement of the law and any caution administered to me at any time, whether spent or unspent, including any impending prosecutions.
-      </p>
 
       <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible govuk-!-margin-top-9">
 
