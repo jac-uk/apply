@@ -105,14 +105,15 @@ export default {
       bckClass: '',
       saveCounter: 0,
       saveSeconds: 5,
-      ticksPerSecond: 2,
+      ticksPerSecond: 1,
+      started: false,
+      paused: false,
     };
   },
   watch: {
     serverTimeOffset(newVal, oldVal) {
       if (newVal !== oldVal) {
-        this.endCountdown();
-        this.startCountdown();
+        this.resumeCountdown();
       }
     },
   },
@@ -144,61 +145,79 @@ export default {
   },
   methods: {
     onFocus() {
-      this.refreshCountdown();
+      this.$emit('change', { action: 'refresh' });
+      this.resumeCountdown();
     },
     onBlur() {
-      this.endCountdown();
+      this.pauseCountdown();
     },
     startCountdown() {
-      this.tick(this.start, this.end);
-      this.interval = setInterval(() => {
-        this.saveCounter += 1;
-        this.tick(this.start, this.end);
-      }, second / this.ticksPerSecond);
+      if (!this.started) {
+        this.started = true;
+        this.updateClock();
+        this.tick();
+      }
     },
     endCountdown() {
-      clearInterval(this.interval);
+      this.started = false;
+      this.showCountdown = false;
     },
-    refreshCountdown() {
-      this.endCountdown();
-      this.$emit('change', { action: 'refresh' });
-      this.startCountdown();
+    pauseCountdown() {
+      this.paused = true;
     },
-    tick(start, end) {
-      // check for clock change
-      const currentLocalTime = new Date().getTime();
-      const now = currentLocalTime + this.serverTimeOffset;
-      const timeRemaining = end - now;
-
-      if (this.saveCounter === this.saveSeconds * this.ticksPerSecond) {
-        this.$emit('change', { action: 'autoSave' });
-        this.saveCounter = 0;
+    resumeCountdown() {  // turns the pause off after short delay. Gives refresh action a chance to happen.
+      setTimeout(
+        () => {
+          this.paused = false;
+        },
+        (second / this.ticksPerSecond)
+      );
+    },
+    tick() {
+      if (this.started) {
+        setTimeout(
+          () => {
+            this.updateClock();
+            this.tick();
+          },
+          (second / this.ticksPerSecond)
+        );
       }
-      if (this.saveCounter === (2 * this.ticksPerSecond)) { // clean the autoSaver 2s after it is set to true
-        this.$emit('change', { action: 'cleanAutoSave' });
-      }
-
-      if (timeRemaining > 0) {
-        this.calculateTimeLeft(timeRemaining);
-        if (this.hours < 1) {
-          this.bckClass = '';
-          if (this.minutes < this.warning) {
-            this.bckClass = 'warning';
-          }
-          if (this.minutes < this.alert) {
-            this.bckClass = 'alert';
-          }
+    },
+    updateClock() {
+      if (this.started) {
+        this.saveCounter++;
+        if (this.saveCounter === this.saveSeconds * this.ticksPerSecond) {
+          this.$emit('change', { action: 'autoSave' });
+          this.saveCounter = 0;
         }
-      } else {
-        this.endCountdown();
-        this.showCountdown = false;
-        this.$emit('change', { action: 'ended' });
+        if (this.saveCounter === (2 * this.ticksPerSecond)) { // clean the autoSaver 2s after it is set to true
+          this.$emit('change', { action: 'cleanAutoSave' });
+        }
+
+        const currentLocalTime = new Date().getTime();
+        const now = currentLocalTime + this.serverTimeOffset;
+        const timeRemaining = this.end - now;
+        if (timeRemaining > 0) {
+          if (!this.paused) {
+            this.hours = Math.floor((timeRemaining % (24 * 60 * minute)) / (60 * minute));
+            this.minutes = Math.floor((timeRemaining % (60 * minute)) / (minute));
+            this.seconds = Math.floor((timeRemaining % (minute)) / 1000);
+            if (this.hours < 1) {
+              this.bckClass = '';
+              if (this.minutes < this.warning) {
+                this.bckClass = 'warning';
+              }
+              if (this.minutes < this.alert) {
+                this.bckClass = 'alert';
+              }
+            }
+          }
+        } else {
+          this.$emit('change', { action: 'ended' });
+          this.endCountdown();
+        }
       }
-    },
-    calculateTimeLeft(timeRemaining) {
-      this.hours = Math.floor((timeRemaining % (24 * 60 * minute)) / (60 * minute));
-      this.minutes = Math.floor((timeRemaining % (60 * minute)) / (minute));
-      this.seconds = Math.floor((timeRemaining % (minute)) / 1000);
     },
   },
 };
