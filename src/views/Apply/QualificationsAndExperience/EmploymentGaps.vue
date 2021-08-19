@@ -70,23 +70,23 @@ export default {
     };
   },
   methods: {
-    // checkAndSave() {
-    //   if (this.formData.employmentGaps.length){
-    //     const hasEnteredData = Object.values(this.formData.employmentGaps[0]).some((val) => {
-    //       if (val instanceof Date) {
-    //         return true;
-    //       } else if (val instanceof Array) {
-    //         return val.length;
-    //       } else {
-    //         return !!val;
-    //       }
-    //     });
-    //     if (!hasEnteredData) {
-    //       this.formData.employmentGaps = [];
-    //     }
-    //   } 
-    //   this.save();
-    // },
+    checkAndSave() {
+      if (this.formData.employmentGaps.length){
+        const hasEnteredData = Object.values(this.formData.employmentGaps[0]).some((val) => {
+          if (val instanceof Date) {
+            return true;
+          } else if (val instanceof Array) {
+            return val.length;
+          } else {
+            return !!val;
+          }
+        });
+        if (!hasEnteredData) {
+          this.formData.employmentGaps = [];
+        }
+      } 
+      this.save();
+    },
   },
 };
 </script>
