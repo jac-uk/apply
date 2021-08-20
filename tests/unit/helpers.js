@@ -1,4 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
+import * as filters from '@/filters';
 
 const mocks = {
   route: {
@@ -87,6 +88,12 @@ const mocks = {
 };
 
 const localVue = createLocalVue();
+
+// Register global filters
+Object.keys(filters)
+  .forEach((filterName) => {
+    localVue.filter(filterName, filters[filterName]);
+  });
 
 const createTestSubject = (component, customMountOptions = {
   mocks: {},

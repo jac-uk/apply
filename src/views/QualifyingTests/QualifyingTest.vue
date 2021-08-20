@@ -9,7 +9,7 @@
     />
     <template v-else>
       <Countdown
-        v-if="testInProgress && !isInformationPage"
+        v-if="testInProgress && !isSupportingPage"
         :start-time="qualifyingTestResponse.statusLog.started"
         :end-time="qualifyingTestResponse.qualifyingTest.endDate"
         :duration="qualifyingTestResponse.duration.testDurationAdjusted"
@@ -53,7 +53,6 @@
         message="Your time to complete this test has expired, we will submit the answers you have completed so far."
         @confirmed="btnModalConfirmed"
       />
-
       <Modal
         ref="exitModalRef"
         title="Are you sure?"
@@ -66,6 +65,7 @@
         class="govuk-!-margin-left-5 govuk-!-margin-right-5"
       >
         <RouterView
+          v-if="isSupportingPage || testInProgress"
           :key="$route.fullPath"
           :time-is-up="timerEnded"
           :auto-save="autoSave"
@@ -94,6 +94,8 @@ export default {
       timerEnded: false,
       autoSave: false,
       exitTest: false,
+      serverTimeOffset: 0,
+      testInProgress: false,
     };
   },
   computed: {
@@ -106,35 +108,17 @@ export default {
     qualifyingTestId() {
       return this.qualifyingTestResponse.qualifyingTest.id;
     },
-    testInProgress() {
-      const result = this.qualifyingTestResponse
-        && this.qualifyingTestResponse.statusLog
-        && this.qualifyingTestResponse.statusLog.started
-        && this.$store.getters['qualifyingTestResponse/testInProgress'];
-      return result;
-    },
-    isTimeLeft() {
-      const amountTimeLeft = this.$store.getters['qualifyingTestResponse/timeLeft'];
-      return amountTimeLeft > 0;
-    },
-    isNotCompleted() {
-      return this.qualifyingTestResponse.statusLog.completed === null ||
-        this.qualifyingTestResponse.statusLog.completed === undefined;
-    },
-    isNotReset() {
-      return this.qualifyingTestResponse.statusLog.reset === null ||
-        this.qualifyingTestResponse.statusLog.reset === undefined;
-    },
-    isInformationPage() {
-      return this.$route.name === 'qualifying-test-information';
-    },
-    serverTimeOffset() {
-      return this.$store.state.session.serverTimeOffset;
+    isSupportingPage() {
+      return ['qualifying-test-information', 'qualifying-test-submitted'].indexOf(this.$route.name) >= 0;
     },
   },
   watch: {
     qualifyingTestResponse: async function (newVal) {
       if (newVal) {
+        if (this.qualifyingTestResponse && this.qualifyingTestResponse.lastUpdated && this.qualifyingTestResponse.lastUpdatedClientTime) {
+          this.serverTimeOffset = this.qualifyingTestResponse.lastUpdated.getTime() - this.qualifyingTestResponse.lastUpdatedClientTime.getTime();
+          this.testInProgress = this.$store.getters['qualifyingTestResponse/testInProgress'];
+        }
         if (this.testInProgress) {
           await this.$store.dispatch('connectionMonitor/start', `qualifyingTest/${this.qualifyingTestId}`);
         } else {
@@ -145,20 +129,11 @@ export default {
     '$route.params.qualifyingTestId'() {
       this.loadQualifyingTestResponse();
     },
-    autoSave: function (newVal, oldVal) {
-      if (newVal !== oldVal) {
-        if (this.autoSave) { // here we use autoSave event to refresh session.serverTimeOffset
-          this.$store.dispatch('session/load');
-        }
-      }
-    },
-
   },
-  async mounted() {
+  async created() {
     await this.loadQualifyingTestResponse();
   },
   destroyed() {
-    this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {
@@ -168,23 +143,15 @@ export default {
         if (qualifyingTestResponse === null) {
           return this.redirectToList();
         }
-
-        const isQTOpen = this.$store.getters['qualifyingTestResponse/isOpen'];
-
-        if (!isQTOpen) {
+        if (!this.$store.getters['qualifyingTestResponse/isOpen']) {
           return this.redirectToList();
         }
-
-        // isCompleted > redirect
-        // noTimeLeft > redirect
-        const noTimeLeft = !this.isTimeLeft;
-        const isCompleted = !this.isNotCompleted;
-        const notReset = this.isNotReset;
-
-        if ((noTimeLeft) || (isCompleted && notReset)) {
+        if (!(this.$store.getters['qualifyingTestResponse/timeLeft'] > 0)) {
           return this.redirectToList();
         }
-
+        if (this.$store.getters['qualifyingTestResponse/isCompleted']) {
+          return this.redirectToList();
+        }
         this.loaded = true;
       } catch (e) {
         this.loadFailed = true;
@@ -198,17 +165,22 @@ export default {
       this.$router.replace({ name: 'qualifying-tests' });
     },
     handleCountdown(params) {
-      if (params.action === 'ended') {
+      switch (params.action) {
+      case 'refresh':
+        this.$store.dispatch('qualifyingTestResponse/save', {});
+        break;
+      case 'ended':
+        this.autoSave = false;
         this.timerEnded = true;
         this.$store.dispatch('qualifyingTestResponse/outOfTime');
         this.openTimeElapsedModal();
-      }
-      this.autoSave = false;
-      if (params.action === 'autoSave') {
+        break;
+      case 'autoSave':
         this.autoSave = true;
-      }
-      if (params.action === 'cleanAutoSave') {
+        break;
+      case 'cleanAutoSave':
         this.autoSave = false;
+        break;
       }
     },
     openTimeElapsedModal(){
@@ -226,6 +198,9 @@ export default {
     },
     btnModalConfirmed() {
       this.$router.push({ name: 'qualifying-test-submitted' });
+    },
+    btnClockChangedModalConfirmed() {
+      this.$router.push({ name: 'qualifying-tests' });
     },
     btnExitModalConfirmed() {
       if (this.$route.params.questionNumber) {
