@@ -14,7 +14,7 @@
 
         <div v-if="formData && vacancy.aSCApply && vacancy.selectionCriteria">
           <div
-            v-for="(item, index) in formData.selectionCriteriaAnswers"
+            v-for="(item, index) in vacancy.selectionCriteria"
             :key="index"
           >
             <p
@@ -31,7 +31,7 @@
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
-              v-model="item.answer"
+              v-model="formData.selectionCriteriaAnswers[index].answer"
               label="Do you meet this requirement?"
             >
               <RadioItem
@@ -40,9 +40,9 @@
               >
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
-                  v-model="item.answerDetails"
-                  :word-limit="250"
-                  hint="in 250 words tell us how."
+                  v-model="formData.selectionCriteriaAnswers[index].answerDetails"
+                  :word-limit="item.wordLimit || 250"
+                  :hint="`in ${item.wordLimit || 250} words tell us how.`"
                   :label="item.title"
                   label-hidden
                   required
