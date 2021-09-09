@@ -17,7 +17,7 @@
         v-model="personalDetails.hasVATNumbers"
         required
         label="Do you have a VAT registration number?"
-        hint="All partnership, company and sole trader VAT registered number(s) that you have a personal responsibility for, whether they relate to the practice of law or not, will be required."
+        hint="All personal, partnership, company and sole trader VAT registered number(s) that you have a personal responsibility for, whether they relate to the practice of law or not, will be required."
       >
         <RadioItem
           :value="true"
@@ -78,17 +78,29 @@ export default {
       },
     };
   },
+  computed: {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
+  },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
+        if (this.personalDetails.hasVATNumbers === false) {
+          this.personalDetails.VATNumbers = null;
+        }
         this.application.personalDetails = this.personalDetails;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        this.$router.push({ name: 'character-checks-more-details' });
+        if ((this.vacancy.memberships && this.vacancy.memberships.length && !this.vacancy.memberships.includes('none'))) {
+          this.$router.push({ name: 'character-checks-other-professional-bodies' });
+        } else {
+          this.$router.push({ name: 'character-checks-review' });
+        }
       }
     },
   },
 };
-    
+
 </script>

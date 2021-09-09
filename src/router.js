@@ -70,11 +70,11 @@ import AdditionalInformation from '@/views/Apply/AdditionalInformation';
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
-import CharacterChecksProfessionalBodies from '@/views/Apply/CharacterChecks/ProfessionalBodies';
+import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
-import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
+import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterChecks/OtherProfessionalBodies';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
-import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
+import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
 // Online Tests
@@ -621,12 +621,12 @@ const router = new Router({
               },
             },
             {
-              path: 'professional-bodies',
-              component: CharacterChecksProfessionalBodies,
-              name: 'character-checks-professional-bodies',
+              path: 'professional-details',
+              component: CharacterChecksProfessionalDetails,
+              name: 'character-checks-professional-details',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Professional bodies',
+                title: 'Consent to character checks | Professional details',
               },
             },
             {
@@ -639,12 +639,12 @@ const router = new Router({
               },
             },
             {
-              path: 'more-details',
-              component: CharacterChecksMoreDetails,
-              name: 'character-checks-more-details',
+              path: 'other-professional-bodies',
+              component: CharacterChecksOtherProfessionalBodies,
+              name: 'character-checks-other-professional-bodies',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | More details',
+                title: 'Consent to character checks | Other professional bodies',
               },
             },
             {
@@ -657,12 +657,12 @@ const router = new Router({
               },
             },
             {
-              path: 'declaration',
-              component: CharacterChecksDeclaration,
-              name: 'character-checks-declaration',
+              path: 'consent',
+              component: CharacterChecksConsent,
+              name: 'character-checks-consent',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Declaration',
+                title: 'Consent to character checks | Consent',
               },
             },
             {
