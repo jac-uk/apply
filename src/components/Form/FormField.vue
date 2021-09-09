@@ -126,6 +126,12 @@ export default {
           }
         }
 
+        if (this.type && this.type === 'number' && value && this.numMax) {
+          if (value > this.numMax) {
+            this.setError(`Please enter a number lower than ${this.numMax}`);
+          }
+        }
+
         if (this.minLength && value) {
           if (value.length + 1 <= this.minLength) {
             this.setError(`${this.label} should have ${this.minLength} or more characters`);

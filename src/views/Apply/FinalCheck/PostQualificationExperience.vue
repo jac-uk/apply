@@ -37,10 +37,10 @@
             class="govuk-list"
           >
             <li v-if="item.endDate">
-              {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+              {{ item.startDate | formatDate('month') }} to {{ item.endDate | formatDate('month') }}
             </li>
             <li v-else>
-              {{ item.startDate | formatDate }} — current
+              {{ item.startDate | formatDate('month') }} — current
             </li>
           </ul>
         </dd>
@@ -51,21 +51,68 @@
           Law-related tasks
         </dt>
         <dd class="govuk-summary-list__value">
-          <ul class="govuk-list">
+          <ul
+            v-if="item.tasks && item.tasks.length"
+            class="govuk-list"
+          >
             <li
               v-for="task in item.tasks"
               :key="task.name"
             >
+              <p class="govuk-body govuk-!-margin-bottom-0">
+                {{ task | lookup }}
+              </p>
               <p
                 v-if="task == 'other'"
                 class="govuk-body govuk-!-margin-bottom-0"
               >
-                <span class="govuk-caption-m">{{ task | lookup }}</span>
                 {{ item.otherTasks }}
               </p>
-              <span v-else>{{ task | lookup }}</span>
+              <hr>
             </li>
           </ul>
+          <div v-else>
+            No Answers provided
+          </div>
+        </dd>
+      </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Base location and/or region where you predominately operate/d
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.location }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Jurisdiction/area of law
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.jurisdiction }}
+        </dd>
+      </div>
+
+      <div
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Working Basis
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.workingBasis }}
+        </dd>
+      </div>
+
+      <div
+        v-if="item.taskDetails.totalDaysInRole"
+        class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Total number of days engaged in this role
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ item.taskDetails.totalDaysInRole }}
         </dd>
       </div>
     </dl>

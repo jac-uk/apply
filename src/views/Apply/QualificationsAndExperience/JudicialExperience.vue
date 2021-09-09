@@ -48,7 +48,7 @@
               id="fee-or-salaried-sitting-days-details"
               v-model="formData.feePaidOrSalariedSittingDaysDetails"
               label="Enter the number of sitting days for each judicial
-              appointments you have declared on this formData."
+              appointment you have declared on this form."
             />
           </RadioItem>
           <RadioItem
