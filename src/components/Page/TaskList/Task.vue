@@ -5,7 +5,9 @@
         :aria-describedby="`${id}-status`"
         class="govuk-grid-column-three-quarters"
       >
-        <span v-if="locked">{{ title }}</span>
+        <span v-if="locked">
+          {{ title }}
+        </span>
         <RouterLink
           v-else
           :class="`govuk-link govuk-!-font-weight-bold info-link--task-list--${id}`"
@@ -19,7 +21,9 @@
           v-if="done"
           :id="`${id}-status`"
           class="govuk-tag"
-        >DONE</strong>
+        >
+          DONE
+        </strong>
         <span
           v-else
           :id="`${id}-status`"
