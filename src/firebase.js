@@ -2,6 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/functions';
+import 'firebase/app-check';
 
 // Configure and initialise Firebase
 // Config variables are pulled from the environment at build time
@@ -18,6 +19,10 @@ const functions = firebase.initializeApp(config).functions('europe-west2');
 
 // Initialise Firestore
 const firestore = firebase.firestore();
+
+// App check
+const appCheck = firebase.appCheck();
+appCheck.activate(process.env.VUE_APP_RECAPTCHA_TOKEN);
 
 // Other firebase exports
 const auth = firebase.auth;
