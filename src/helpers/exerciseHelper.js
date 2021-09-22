@@ -99,6 +99,7 @@ const APPLICATION_PARTS = [
   'statementOfEligibility',
   'selfAssessmentCompetencies',
   'additionalInfo',
+  'roles',
 ];
 
 // application helpers

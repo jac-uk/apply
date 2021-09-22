@@ -876,6 +876,43 @@
               </div>
             </dl>
           </div>
+
+          <div
+            v-if="applicationParts.roles"
+            id="roles"
+            class="govuk-!-margin-top-9"
+          >
+            <h2
+              class="govuk-heading-l"
+              style="display:inline-block;"
+            >
+              Roles
+            </h2>
+            <RouterLink
+              v-if="canEdit"
+              class="govuk-link govuk-body-m change-link"
+              style="display:inline-block;"
+              :to="{name: 'roles'}"
+            >
+              Change
+            </RouterLink>
+
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Role(s) you are applying for
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span
+                    v-for="(role,roleIndex) in application.roles"
+                    :key="roleIndex"
+                  >{{ vacancy.roles[role] }}<br></span>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </div>
         <!-- END download-as-pdf-div -->
 

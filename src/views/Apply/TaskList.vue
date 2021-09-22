@@ -80,6 +80,13 @@
             :locked="!currentApplicationParts.partTimeWorkingPreferences"
           />
           <Task
+            v-if="applicationParts.partTimeWorkingPreferences"
+            id="part-time-working-preferences"
+            title="Set part-time working preferences"
+            :done="applicationProgress.partTimeWorkingPreferences"
+            :locked="!currentApplicationParts.partTimeWorkingPreferences"
+          />
+          <Task
             v-if="applicationParts.locationPreferences"
             id="location-preferences"
             title="Location preferences"
@@ -226,6 +233,18 @@
             title="Additional Information"
             :done="applicationProgress.additionalInfo"
             :locked="!currentApplicationParts.additionalInfo"
+          />
+        </TaskGroup>
+
+        <TaskGroup
+          v-if="vacancy.roles && vacancy.roles.length > 1"
+          title="Roles"
+        >
+          <Task
+            id="roles"
+            title="Select roles you wish to apply for"
+            :done="applicationProgress.roles"
+            :locked="!currentApplicationParts.roles"
           />
         </TaskGroup>
       </TaskList>

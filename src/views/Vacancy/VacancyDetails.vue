@@ -64,6 +64,21 @@
       />
       <!-- eslint-enable -->
 
+      <div v-if="vacancy.roles && vacancy.roles.length > 1">
+        <h2 class="govuk-heading-l">
+          Positions available
+        </h2>
+        <ul class="govuk-list">
+          <li
+            v-for="(role, roleIndex) in vacancy.roles"
+            :key="roleIndex"
+            class="govuk-list-item"
+          >
+            {{ role }}
+          </li>
+        </ul>
+      </div>
+
       <RouterLink
         v-if="isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
