@@ -33,7 +33,7 @@
                 aria-current="page"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -66,7 +66,7 @@
               <TableCell>
                 <RouterLink
                   v-if="activeTab === 'open'"
-                  :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                  :to="{ path: `/online-tests/${row.id}/information` }"
                   :class="`info-btn--qualifying-tests--to--${row.id}`"
                 >
                   {{ row.qualifyingTest.title }}

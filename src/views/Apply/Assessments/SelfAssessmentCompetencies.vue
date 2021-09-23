@@ -12,7 +12,7 @@
 
         <ErrorSummary :errors="errors" />
 
-        <div v-if="vacancy.aSCApply && vacancy.selectionCriteria">
+        <div v-if="formData && vacancy.aSCApply && vacancy.selectionCriteria">
           <div
             v-for="(item, index) in formData.selectionCriteriaAnswers"
             :key="index"
@@ -41,7 +41,11 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="item.answerDetails"
-                  label="In 250 words, tell us how."
+                  :word-limit="250"
+                  hint="in 250 words tell us how."
+                  :label="item.title"
+                  label-hidden
+                  required
                 />
               </RadioItem>
               <RadioItem
@@ -100,7 +104,6 @@
           label="Upload finished self assessment"
           required
         />
-
         <button
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
@@ -147,12 +150,12 @@ export default {
       const vacancy = this.$store.state.vacancy.record;
       if (vacancy && vacancy.aSCApply && vacancy.selectionCriteria) {
         for (let i = 0, len = vacancy.selectionCriteria.length; i < len; ++i) {
-          formData.selectionCriteriaAnswers.push({
+          formData.selectionCriteriaAnswers[i] = {
             title: vacancy.selectionCriteria[i].title,
             text: vacancy.selectionCriteria[i].text,
             answer: null,
             answerDetails: null,
-          });
+          };
         }
       }
     }
