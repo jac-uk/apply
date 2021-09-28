@@ -32,7 +32,7 @@ export default {
 
       const userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === id) : null;
 
-      if (vacancy === null || (vacancy.inviteOnly && !userInvitation)) {
+      if (vacancy === null || (vacancy && vacancy.inviteOnly && !userInvitation)) {
         this.redirectToErrorPage();
       } else {
         this.loaded = true;

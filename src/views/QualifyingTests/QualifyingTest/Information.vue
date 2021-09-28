@@ -210,12 +210,15 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (!this.hasStarted) {
+          if (this.hasStarted) {
+            await this.$store.dispatch('qualifyingTestResponse/save', {});
+            // ensures we refresh lastUpdated timestamps so we have a current `serverOffset`
+          } else {
             if (!this.confirmationChecked) {
               throw new Error('You must agree to keep this test confidential.');
             }
             await this.$store.dispatch('qualifyingTestResponse/startTest');
-            
+
           }
           this.$router.push(this.nextPage);
         } catch (error) {
@@ -227,11 +230,11 @@ export default {
       }
     },
     prepareSaveHistory(data) {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp();
       const date = new Date();
       const objToSave = {
         history: firebase.firestore.FieldValue.arrayUnion({
-          ...data, 
+          ...data,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
           utcOffset: date.getTimezoneOffset(),
         }),

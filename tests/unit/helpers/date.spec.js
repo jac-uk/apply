@@ -107,3 +107,144 @@ describe('helpers/date/isToday', () => {
     expect(dateHelper.isToday(new Date(2040, 1, 1))).toBeFalsy();
   });
 });
+
+describe('helpers/date/helperTimeLeft', () => {
+  const minutesAgo = (minutes) => new Date(Date.now() - (minutes * 60 * 1000));
+  beforeAll(() => {
+    jest.spyOn(Date, 'now').mockImplementation(() => (new Date(2021, 4, 4)).getTime()); // mock Date.now()
+  });
+  afterAll(() => {
+    jest.restoreAllMocks();
+  });
+
+  it('returns 0 if value is empty', () => {
+    expect(dateHelper.helperTimeLeft()).toBe(0);
+  });
+
+  it('returns 0 if value is null', () => {
+    expect(dateHelper.helperTimeLeft()).toBe(0);
+  });
+
+  it('returns 0 if value is object without duration', () => {
+    expect(dateHelper.helperTimeLeft({ something: 'goes here' })).toBe(0);
+  });
+
+  it('returns time remaining in milliseconds', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+    })).toBe(30 * 60 * 1000);
+  });
+
+  it('returns time remaining since test was started', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(20),
+      },
+    })).toBe(10 * 60 * 1000);
+  });
+
+  it('is not effected by zero client time difference', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(20),
+      },
+      lastUpdated: minutesAgo(5),
+      lastUpdatedClientTime: minutesAgo(5),
+    })).toBe(10 * 60 * 1000);
+  });
+
+  it('correctly adjusts time remaining when client time is ahead of server', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(20),
+      },
+      lastUpdated: minutesAgo(10),
+      lastUpdatedClientTime: minutesAgo(5),  // => client time is 5 minutes ahead of server
+    })).toBe(15 * 60 * 1000);
+  });
+
+  it('correctly adjusts time remaining when client time is behind server', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(20),
+      },
+      lastUpdated: minutesAgo(5),
+      lastUpdatedClientTime: minutesAgo(10),  // => client time is 5 minutes behind server
+    })).toBe(5 * 60 * 1000);
+  });
+
+  it('returns zero if a test is just out of time', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(30),
+      },
+    })).toBe(0);
+  });
+
+  it('returns zero if a test is way out of time', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(60),
+      },
+    })).toBe(0);
+  });
+
+  it('returns zero if a test is just out of time (with zero client time difference)', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(30),
+      },
+      lastUpdated: minutesAgo(5),
+      lastUpdatedClientTime: minutesAgo(5),
+    })).toBe(0);
+  });
+
+  it('returns zero if a test is just out of time (with client time ahead of server)', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(35),
+      },
+      lastUpdated: minutesAgo(10),
+      lastUpdatedClientTime: minutesAgo(5),  // => client is 5 minutes ahead of server
+    })).toBe(0);
+  });
+
+  it('returns zero if a test is just out of time (with client time behind server)', () => {
+    expect(dateHelper.helperTimeLeft({
+      duration: {
+        testDurationAdjusted: 30,
+      },
+      statusLog: {
+        started: minutesAgo(25),
+      },
+      lastUpdated: minutesAgo(5),
+      lastUpdatedClientTime: minutesAgo(10),  // => client is 5 minutes behind server
+    })).toBe(0);
+  });
+});
