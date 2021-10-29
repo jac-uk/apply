@@ -34,12 +34,22 @@ const store = new Vuex.Store({
     connectionMonitor,
     session,
   },
-  state: {},
+  state: {
+    packageVersion: process.env.PACKAGE_VERSION || '0',
+    env: process.env.NODE_ENV,
+  },
   mutations: {
     ...vuexfireMutations,
   },
   actions: {},
-  getters: {},
+  getters: {
+    appVersion: (state) => {
+      return state.packageVersion;
+    },
+    whichEnv: (state) => {
+      return state.env;
+    },
+  },
 });
 
 export default store;
