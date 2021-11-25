@@ -61,6 +61,7 @@
 
           <TextField
             id="email"
+            ref="emailInputRef"
             v-model="formData.email"
             label="Email address"
             type="email"
@@ -131,6 +132,16 @@ export default {
   computed: {
     exerciseId () {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
+    },
+  },
+  watch: {
+    formData: {
+      deep: true,
+      handler(val) {
+        if (/@judicialappointments.gov.uk\s*$/.test(val.email)){
+          this.$refs.emailInputRef.setError('Please do not sign up as a candidate using your \'@judicialappointments.gov.uk\' email address.');
+        }
+      },
     },
   },
   methods: {
