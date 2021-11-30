@@ -24,7 +24,7 @@
 
             <div v-if="isCriminalOffencesSectionComplete()">
               <CriminalOffencesSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -45,7 +45,7 @@
 
             <div v-if="isFixedPenaltiesSectionComplete()">
               <FixedPenaltiesSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -66,7 +66,7 @@
 
             <div v-if="isMotoringOffencesSectionComplete()">
               <MotoringOffencesSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -87,7 +87,7 @@
 
             <div v-if="isFinancialOffencesSectionComplete()">
               <FinancialMattersSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -108,7 +108,7 @@
 
             <div v-if="isProfessionalConductSectionComplete()">
               <ProfessionalConductSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -129,7 +129,7 @@
 
             <div v-if="isFurtherInformationSectionComplete()">
               <FurtherInformationSummary
-                :character-information="characterInformation"
+                :character-information="formData"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
@@ -156,7 +156,7 @@
             <div class="govuk-grid-column-full">
               <Checkbox
                 id="declaration1"
-                v-model="characterInformation.declaration1"
+                v-model="formData.declaration1"
                 multiline-label
               >
                 <span>
@@ -170,7 +170,7 @@
             <div class="govuk-grid-column-full">
               <Checkbox
                 id="declaration2"
-                v-model="characterInformation.declaration2"
+                v-model="formData.declaration2"
                 multiline-label
               >
                 <span>
@@ -184,7 +184,7 @@
             <div class="govuk-grid-column-full">
               <Checkbox
                 id="declaration3"
-                v-model="characterInformation.declaration3"
+                v-model="formData.declaration3"
                 multiline-label
               >
                 <span>
@@ -197,13 +197,12 @@
               Please note that you can edit or update this character declaration information up until your final application submission.
             </div>
 
-            <StartButton
-              v-if="isDraftApplication"
-              class="govuk-!-margin-top-5 govuk-!-margin-left-3 govuk-button--success"
-              @click="save"
+            <button
+              :disabled="!canSave(formId)"
+              class="govuk-button info-btn--personal-details--save-and-continue"
             >
               Save and continue
-            </StartButton>
+            </button>
           </div>
         </div>
       </div>
@@ -220,10 +219,11 @@ import MotoringOffencesSummary from './InformationReview/MotoringOffencesSummary
 import FinancialMattersSummary from './InformationReview/FinancialMattersSummary';
 import ProfessionalConductSummary from './InformationReview/ProfessionalConductSummary';
 import FurtherInformationSummary from './InformationReview/FurtherInformationSummary';
-import StartButton from '@/components/Page/StartButton';
 import Checkbox from '../../../components/Form/Checkbox';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import { DECLARATION1, DECLARATION2, DECLARATION3 } from './character-information-constants';
+import Form from '@/components/Form/Form';
+import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   components: {
@@ -236,9 +236,9 @@ export default {
     CriminalOffencesSummary,
     BackLink,
     ErrorSummary,
-    StartButton,
   },
-  extends: CharacterInformationStatus,
+  extends: Form, 
+  mixins: [ApplyMixIn, CharacterInformationStatus],
   data() {
     const defaults = {
       declaration1: null,
@@ -246,11 +246,9 @@ export default {
       declaration3: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
-    const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
-      characterInformation: characterInformation,
-      application: application,
+      formData: { ...defaults, ...data },
+      formId: 'characterInformation',
       declarationText1: DECLARATION1,
       declarationText2: DECLARATION2,
       declarationText3: DECLARATION3,
@@ -266,9 +264,9 @@ export default {
   },
   methods: {
     validateDeclaration() {
-      if (this.characterInformation.declaration1 !== true ||
-        this.characterInformation.declaration2 !== true ||
-        this.characterInformation.declaration3 !== true) {
+      if (this.formData.declaration1 !== true ||
+        this.formData.declaration2 !== true ||
+        this.formData.declaration3 !== true) {
         this.errors.push({ id: 'error', message: 'Please check all boxes to continue' });
         return false;
       }
@@ -277,11 +275,11 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
-        this.updateProgress();
-        this.application.characterInformationV2 = this.characterInformation;
-        this.characterInformation._versionNumber = 2;
-        await this.$store.dispatch('application/save', this.application);
-        await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
+        this.application.progress[this.formId] = true;
+        this.formData._versionNumber = 2;
+        const formattedData = { ...this.application, ...{ characterInformationV2: this.formData } };
+        await this.$store.dispatch('application/save', formattedData);
+        await this.$store.dispatch('candidate/saveCharacterInformation', this.formData);
         this.$router.push({ name: 'task-list' });
       }
     },
