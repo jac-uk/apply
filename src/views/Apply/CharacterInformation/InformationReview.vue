@@ -25,7 +25,7 @@
             <div v-if="isCriminalOffencesSectionComplete()">
               <CriminalOffencesSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -46,7 +46,7 @@
             <div v-if="isFixedPenaltiesSectionComplete()">
               <FixedPenaltiesSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -67,7 +67,7 @@
             <div v-if="isMotoringOffencesSectionComplete()">
               <MotoringOffencesSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -88,7 +88,7 @@
             <div v-if="isFinancialOffencesSectionComplete()">
               <FinancialMattersSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -109,7 +109,7 @@
             <div v-if="isProfessionalConductSectionComplete()">
               <ProfessionalConductSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -130,7 +130,7 @@
             <div v-if="isFurtherInformationSectionComplete()">
               <FurtherInformationSummary
                 :character-information="formData"
-                :can-edit="isDraftApplication"
+                :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
             </div>
@@ -255,9 +255,6 @@ export default {
     };
   },
   computed: {
-    isDraftApplication() {
-      return this.application.status === 'draft';
-    },
     isInformationReview() {
       return this.$route.name === 'character-information-review';
     },

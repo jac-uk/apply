@@ -1,10 +1,12 @@
 <script>
 import Form from '@/components/Form/Form';
+import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   name: 'CharacterInformationStatus',
 
   extends: Form,
+  mixins: [ApplyMixIn],
   methods: {
     updateProgress() {
       this.application.progress.characterInformation =

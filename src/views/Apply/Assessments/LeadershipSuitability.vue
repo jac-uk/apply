@@ -76,7 +76,7 @@
         </div>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--leadership-suitability--save-and-continue"
         >
           Save and continue
@@ -104,6 +104,7 @@ export default {
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
+      formId: 'characterInformation',
       application: application,
       files: {},
     };

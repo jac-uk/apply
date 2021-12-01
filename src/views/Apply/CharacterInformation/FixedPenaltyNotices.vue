@@ -48,7 +48,7 @@
           </div>
         </div>
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--character-information--save-and-continue"
         >
           Save and continue
@@ -90,6 +90,7 @@ export default {
     return {
       characterInformation: characterInformation,
       application: application,
+      formId: 'characterInformation',
       repeatableFields: {
         FixedPenaltyDetails,
       },
