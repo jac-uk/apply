@@ -161,7 +161,7 @@
             :done="applicationProgress.reasonableLengthOfService"
             :locked="!currentApplicationParts.reasonableLengthOfService"
           />
-        </TaskGroup> 
+        </TaskGroup>
 
         <TaskGroup
           title="Assessments"
