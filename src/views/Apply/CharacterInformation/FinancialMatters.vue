@@ -215,6 +215,7 @@ export default {
     return {
       characterInformation: characterInformation,
       application: application,
+      formId: 'characterInformation',
       repeatableFields: {
         BankruptcyDetails,
         IvaDetails,
