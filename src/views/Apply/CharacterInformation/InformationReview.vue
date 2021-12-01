@@ -222,8 +222,6 @@ import FurtherInformationSummary from './InformationReview/FurtherInformationSum
 import Checkbox from '../../../components/Form/Checkbox';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
 import { DECLARATION1, DECLARATION2, DECLARATION3 } from './character-information-constants';
-import Form from '@/components/Form/Form';
-import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   components: {
@@ -237,8 +235,7 @@ export default {
     BackLink,
     ErrorSummary,
   },
-  extends: Form, 
-  mixins: [ApplyMixIn, CharacterInformationStatus],
+  extends: CharacterInformationStatus,
   data() {
     const defaults = {
       declaration1: null,

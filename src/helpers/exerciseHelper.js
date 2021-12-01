@@ -448,7 +448,8 @@ function isMoreInformationNeeded(exercise, application) {
       return true;
     }
   }
-  return false;
+  // return false;
+  return true;
 }
 function isApplicationComplete(vacancy, application) {
   if (!(application && application.progress)) return false;

@@ -69,7 +69,7 @@
           </div>
         </div>
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave('characterInformation')"
           class="govuk-button info-btn--character-information--save-and-continue"
         >
           Save and continue
@@ -110,10 +110,8 @@ export default {
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       characterInformation: characterInformation,
-      application: application,
       repeatableFields: {
         CriminalCautionDetails,
         CriminalConvictionDetails,
