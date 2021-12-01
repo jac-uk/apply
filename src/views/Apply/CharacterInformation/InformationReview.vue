@@ -199,7 +199,7 @@
 
             <button
               :disabled="!canSave(formId)"
-              class="govuk-!-margin-top-5 govuk-!-margin-left-3 govuk-button--success"
+              class="govuk-button info-btn--personal-details--save-and-continue"
             >
               Save and continue
             </button>
