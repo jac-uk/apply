@@ -715,7 +715,7 @@
           </div>
 
           <div
-            v-if="application.selectionCriteriaAnswers"
+            v-if="hasStatementOfEligibility"
             class="govuk-!-margin-top-9"
           >
             <h2 class="govuk-heading-l">

@@ -15,7 +15,8 @@ import {
   currentApplicationParts,
   isMoreInformationNeeded,
   isApplicationComplete,
-  hasApplicationProcess
+  hasApplicationProcess,
+  hasStatementOfEligibility
 } from '@/helpers/exerciseHelper';
 
 export default {
@@ -79,7 +80,7 @@ export default {
       return false;
     },
     hasStatementOfEligibility() {
-      return this.hasStatementOfEligibility(this.vacancy);
+      return hasStatementOfEligibility(this.vacancy);
     },
     isApplicationComplete() {
       return isApplicationComplete(this.vacancy, this.application);
