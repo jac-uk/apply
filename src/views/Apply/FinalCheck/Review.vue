@@ -34,7 +34,6 @@
             Download As PDF
           </a>
         </div>
-
         <div
           ref="download-as-pdf-div"
         >
@@ -184,9 +183,9 @@
                 >
                   {{ item }}
                   <strong>
-                    {{ `${index + 1}:` }}
+                    {{ index + 1 }}
                   </strong>
-                  {{ `${item}` }}
+                  {{ item }}
                 </p>
               </dd>
             </dl>
@@ -381,7 +380,7 @@
             >
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Organisation or business
+                  Organization or business
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
@@ -516,7 +515,7 @@
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Can work a resonable length of service
+                  Can work a reasonable length of service
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ application.canGiveReasonableLOS | toYesNo }}
@@ -691,7 +690,10 @@
                   How did you hear about the vacancy?
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
+                  <ul
+                    v-if="application.additionalInfo && application.additionalInfo.listedSources"
+                    class="govuk-list"
+                  >
                     <li
                       v-for="(item, index) in application.additionalInfo.listedSources"
                       :key="index"
@@ -706,13 +708,22 @@
                       <span v-else>{{ item | lookup }}</span>
                     </li>
                   </ul>
+                  <div
+                    v-else
+                  >
+                    <span
+                      class="govuk-body"
+                    >
+                      No information provided
+                    </span>
+                  </div>
                 </dd>
               </div>
             </dl>
           </div>
 
           <div
-            v-if="application.selectionCriteriaAnswers"
+            v-if="hasStatementOfEligibility"
             class="govuk-!-margin-top-9"
           >
             <h2 class="govuk-heading-l">

@@ -156,7 +156,7 @@
               />
             </RadioGroup>
             <button
-              :disabled="application.status != 'draft'"
+              :disabled="!canSave(formId)"
               class="govuk-button info-btn--character-information--save-and-continue"
             >
               Save and continue
@@ -210,11 +210,10 @@ export default {
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
 
     return {
       characterInformation: characterInformation,
-      application: application,
+      formId: 'characterInformation',
       repeatableFields: {
         BankruptcyDetails,
         IvaDetails,
@@ -259,8 +258,7 @@ export default {
           this.characterInformation.hmrcFineDetails = null;
         }
 
-        this.application.characterInformationV2 = this.characterInformation;
-        await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
 
         if (this.application.progress.characterInformation === true) {
