@@ -104,13 +104,16 @@ export default {
   methods: {
     async save() {
       this.validate();
-
       if (this.isValid()) {
-        this.updateProgress();
         if (this.characterInformation.furtherInformation === false ) {
           this.characterInformation.furtherInformationDetails = null;
         }
-        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
+        const data = {
+          progress: {},
+          characterInformationV2: this.characterInformation,
+        };
+        data.progress[this.formId] = this.isCharacterInformationComplete(this.characterInformation);
+        await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         this.$router.push({ name: 'character-information-review' });
       }

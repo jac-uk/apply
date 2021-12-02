@@ -130,15 +130,18 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.updateProgress();
-
         if (this.characterInformation.drivingDisqualifications === false ) {
           this.characterInformation.drivingDisqualificationDetails = null;
         }
         if (this.characterInformation.recentDrivingConvictions === false ) {
           this.characterInformation.recentDrivingConvictionDetails = null;
         }
-        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
+        const data = {
+          progress: {},
+          characterInformationV2: this.characterInformation,
+        };
+        data.progress[this.formId] = this.isCharacterInformationComplete(this.characterInformation);
+        await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
 
         if (this.application.progress.characterInformation === true) {

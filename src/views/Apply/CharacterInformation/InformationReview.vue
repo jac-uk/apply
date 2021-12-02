@@ -321,7 +321,7 @@ export default {
     BackLink,
     ErrorSummary,
   },
-  extends: Form, 
+  extends: Form,
   mixins: [ApplyMixIn, CharacterInformationStatus],
   data() {
     const defaults = {
@@ -356,9 +356,13 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
-        this.application.progress[this.formId] = true;
-        this.formData._versionNumber = 2;
-        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.formData } });
+        this.formData._versionNumber = 2; // @TODO check we need to include this and that here is the best place to do it
+        const data = {
+          progress: {},
+          characterInformationV2: this.formData,
+        };
+        data.progress[this.formId] = this.isCharacterInformationComplete(this.formData);
+        await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.formData);
         this.$router.push({ name: 'task-list' });
       }
