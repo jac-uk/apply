@@ -380,7 +380,7 @@
             >
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Organisation or business
+                  Organization or business
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <ul class="govuk-list">
@@ -515,7 +515,7 @@
             <dl class="govuk-summary-list govuk-!-margin-bottom-8">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
-                  Can work a resonable length of service
+                  Can work a reasonable length of service
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ application.canGiveReasonableLOS | toYesNo }}
@@ -690,7 +690,7 @@
                   How did you hear about the vacancy?
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul 
+                  <ul
                     v-if="application.additionalInfo && application.additionalInfo.listedSources"
                     class="govuk-list"
                   >

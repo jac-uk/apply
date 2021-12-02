@@ -135,6 +135,10 @@ export default {
         if (this.characterInformation.criminalConvictions === false ) {
           this.characterInformation.criminalConvictionDetails = null;
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> character-check-bugfix
         await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
 
