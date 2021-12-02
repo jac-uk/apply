@@ -29,8 +29,7 @@
               href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
               rel="license"
             >
-              <!-- I am making this change to check the hotfix deployment, please overwrite immeadiately -->
-              Open Governmen Licence v3.0
+              Open Government Licence v3.0
             </a>
             , except where otherwise stated</span>
         </div>

@@ -451,9 +451,13 @@ function isMoreInformationNeeded(exercise, application) {
   return false;
 }
 function isApplicationComplete(vacancy, application) {
-  if (!(application && application.progress)) return false;
+  if (!(application && application.progress)) {
+    return false;
+  }
   const requiredParts = applicationParts(vacancy);
-  if (!requiredParts) return false;
+  if (!requiredParts) {
+    return false;
+  }
   const partsToComplete = Object.keys(requiredParts).filter(part => requiredParts[part] === true);
   const incompleteParts = partsToComplete.filter(part => application.progress[part] !== true);
   return incompleteParts.length === 0;
