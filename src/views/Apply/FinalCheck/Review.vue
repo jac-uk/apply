@@ -691,7 +691,10 @@
                   How did you hear about the vacancy?
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <ul class="govuk-list">
+                  <ul
+                    v-if="application.additionalInfo && application.additionalInfo.listedSources"
+                    class="govuk-list"
+                  >
                     <li
                       v-for="(item, index) in application.additionalInfo.listedSources"
                       :key="index"

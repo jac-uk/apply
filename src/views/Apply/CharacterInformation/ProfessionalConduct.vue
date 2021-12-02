@@ -236,10 +236,8 @@ export default {
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       characterInformation: characterInformation,
-      application: application,
       formId: 'characterInformation',
       repeatableFields: {
         ProfessionalMisconductDetails,
@@ -288,8 +286,7 @@ export default {
           this.characterInformation.requestedToResignDetails = null;
         }
 
-        this.application.characterInformationV2 = this.characterInformation;
-        await this.$store.dispatch('application/save', this.application);
+        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         if (this.application.progress.characterInformation === true) {
           this.$router.push({ name: 'character-information-review' });

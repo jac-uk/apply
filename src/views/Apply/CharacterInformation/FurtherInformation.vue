@@ -87,11 +87,9 @@ export default {
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       formId: 'characterInformation',
       characterInformation: characterInformation,
-      application: application,
       repeatableFields: {
         FurtherInformationDetails,
       },

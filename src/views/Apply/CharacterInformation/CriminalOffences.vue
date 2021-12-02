@@ -135,8 +135,8 @@ export default {
         if (this.characterInformation.criminalConvictions === false ) {
           this.characterInformation.criminalConvictionDetails = null;
         }
-        this.application.characterInformationV2 = this.characterInformation;
-        await this.$store.dispatch('application/save', this.application);
+        
+        await this.$store.dispatch('application/save', { ...this.application, ...{ characterInformationV2: this.characterInformation } });
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
 
         if (this.application.progress.characterInformation === true) {

@@ -78,6 +78,9 @@ export default {
       }
       return false;
     },
+    hasStatementOfEligibility() {
+      return this.hasStatementOfEligibility(this.vacancy);
+    },
     isApplicationComplete() {
       return isApplicationComplete(this.vacancy, this.application);
     },
