@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
-    "serve": "vue-cli-service serve --mode develop",
+    "serve": "vue-cli-service serve --mode production",
     "build": "vue-cli-service build  --mode develop",
     "deploy": "vue-cli-service build --mode develop; firebase deploy --only hosting:develop-candidate-app -P develop",
     "production:serve": "vue-cli-service serve --mode production",
