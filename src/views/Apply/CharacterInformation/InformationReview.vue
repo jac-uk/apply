@@ -29,10 +29,24 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
+            >
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-criminal-offences'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -50,10 +64,24 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
+            >
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-fixed-penalty-notices'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -71,10 +99,24 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
+            >
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-motoring-offences'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -92,10 +134,24 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
+            >
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-financial-matters'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -113,10 +169,24 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
+            >
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-professional-conduct'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <div class="govuk-!-margin-top-9">
               <h2
@@ -134,75 +204,89 @@
                 :display-change-link="isInformationReview"
               />
             </div>
-            <span
+            <div
               v-else
-              class="govuk-body"
-            >No information provided</span>
-          </div>
-
-          <div class="govuk-grid-row">
-            <div class="govuk-!-margin-top-9">
-              <h2
-                class="govuk-heading-m govuk-!-margin-left-3"
-                style="display:inline-block;"
-              >
-                Save character information declaration
-              </h2>
-            </div>
-            <ErrorSummary :errors="errors" />
-          </div>
-
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <Checkbox
-                id="declaration1"
-                v-model="formData.declaration1"
-                multiline-label
-              >
-                <span>
-                  {{ declarationText1 }}
-                </span>
-              </Checkbox>
-            </div>
-          </div>
-
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <Checkbox
-                id="declaration2"
-                v-model="formData.declaration2"
-                multiline-label
-              >
-                <span>
-                  {{ declarationText2 }}
-                </span>
-              </Checkbox>
-            </div>
-          </div>
-
-          <div class="govuk-grid-row">
-            <div class="govuk-grid-column-full">
-              <Checkbox
-                id="declaration3"
-                v-model="formData.declaration3"
-                multiline-label
-              >
-                <span>
-                  {{ declarationText3 }}
-                </span>
-              </Checkbox>
-            </div>
-
-            <div class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-3">
-              Please note that you can edit or update this character declaration information up until your final application submission.
-            </div>
-
-            <button
-              :disabled="!canSave(formId)"
-              class="govuk-button info-btn--personal-details--save-and-continue"
             >
-              Save and continue
-            </button>
+              <span
+                class="govuk-body"
+              >
+                No information provided
+              </span>
+
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-professional-conduct'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-!-margin-top-9">
+                <h2
+                  class="govuk-heading-m govuk-!-margin-left-3"
+                  style="display:inline-block;"
+                >
+                  Save character information declaration
+                </h2>
+              </div>
+              <ErrorSummary :errors="errors" />
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  id="declaration1"
+                  v-model="formData.declaration1"
+                  multiline-label
+                >
+                  <span>
+                    {{ declarationText1 }}
+                  </span>
+                </Checkbox>
+              </div>
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  id="declaration2"
+                  v-model="formData.declaration2"
+                  multiline-label
+                >
+                  <span>
+                    {{ declarationText2 }}
+                  </span>
+                </Checkbox>
+              </div>
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  id="declaration3"
+                  v-model="formData.declaration3"
+                  multiline-label
+                >
+                  <span>
+                    {{ declarationText3 }}
+                  </span>
+                </Checkbox>
+              </div>
+
+              <div class="govuk-body govuk-!-font-weight-bold govuk-!-margin-left-3">
+                Please note that you can edit or update this character declaration information up until your final application submission.
+              </div>
+
+              <button
+                :disabled="!canSave(formId)"
+                class="govuk-button info-btn--personal-details--save-and-continue"
+              >
+                Save and continue
+              </button>
+            </div>
           </div>
         </div>
       </div>
