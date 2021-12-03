@@ -53,7 +53,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload leadersip suitability assessment
+            Upload leadership suitability assessment
           </h2>
           <input
             id="leadership-suitability-assessment-file"
