@@ -11,14 +11,12 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/',
+    '/node_modules/(?!@jac-uk)',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  setupFilesAfterEnv: [
-    'jest-extended',
-  ],
+  setupFilesAfterEnv: ['jest-extended'],
   snapshotSerializers: [
     'jest-serializer-vue',
   ],
@@ -30,5 +28,4 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
-  coverageReporters: ['text-summary'],
 };

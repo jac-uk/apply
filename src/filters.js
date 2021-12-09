@@ -270,6 +270,9 @@ const lookup = (value) => {
       'write': 'Write',
       'schedule-2-d': 'Schedule 2(d)',
       'schedule-2-3': 'Schedule 2(3)',
+      'full-time': 'Full-time',
+      'salaried-part-time': 'Salaried part-time',
+      'voluntary': 'Voluntary',
       // 'xxx': 'xxx',`
     };
 

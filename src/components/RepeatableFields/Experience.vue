@@ -34,7 +34,13 @@
       :id="`tasks_${index}`"
       :tasks.sync="row.tasks"
       :other-tasks.sync="row.otherTasks"
+      :show-judicial-functions="true"
       required
+    />
+
+    <TaskDetails
+      :id="`tasks_${index}`"
+      :task-details.sync="row.taskDetails"
     />
 
     <slot name="removeButton" />
@@ -45,6 +51,7 @@
 import DateInput from '@/components/Form/DateInput';
 import TextField from '@/components/Form/TextField';
 import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
+import TaskDetails from '@/components/Page/TaskDetails';
 
 export default {
   name: 'Experience',
@@ -52,6 +59,7 @@ export default {
     DateInput,
     TextField,
     LawRelatedTasks,
+    TaskDetails,
   },
   props: {
     row: {
