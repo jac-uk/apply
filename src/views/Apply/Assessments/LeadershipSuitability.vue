@@ -53,7 +53,7 @@
 
         <div class="govuk-form-group">
           <h2 class="govuk-heading-m">
-            Upload leadersip suitability assessment
+            Upload leadership suitability assessment
           </h2>
           <input
             id="leadership-suitability-assessment-file"
@@ -76,7 +76,7 @@
         </div>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--leadership-suitability--save-and-continue"
         >
           Save and continue
@@ -104,6 +104,7 @@ export default {
     const data = this.$store.getters['application/data']();
     const application = { ...defaults, ...data };
     return {
+      formId: 'leadershipSuitability',
       application: application,
       files: {},
     };
@@ -112,7 +113,7 @@ export default {
     userId() {
       return this.$store.state.auth.currentUser.uid;
     },
-  },   
+  },
   methods: {
     async save() {
       // loop through this.files and upload them
