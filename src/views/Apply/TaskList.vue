@@ -25,7 +25,7 @@
       </h1>
 
       <Banner
-        v-if="isMoreInformationNeeded"
+        v-if="isMoreInformationNeeded && !isApplicationComplete"
         status="information"
       >
         We need more information from you. Please update your application.
