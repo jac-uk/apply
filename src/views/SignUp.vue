@@ -139,7 +139,7 @@ export default {
       deep: true,
       handler(val) {
         if (/@judicialappointments.gov.uk\s*$/.test(val.email)){
-          this.$refs.emailInputRef.setError('Please do not sign up as a candidate using your \'@judicialappointments.gov.uk\' email address.');
+          this.validate();
         }
       },
     },

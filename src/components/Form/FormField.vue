@@ -56,6 +56,7 @@ export default {
       regex: {
         // eslint-disable-next-line
         email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+        JacEmail: /@judicialappointments.gov.uk\s*$/,
         tel: /^\+?[\d() -]+/,
       },
     };
@@ -100,6 +101,7 @@ export default {
       this.setError('');
       if (this.checkErrors) {
         let value = this.value;
+
         if (event && event.target) {
           value = event.target.value;
         }
@@ -117,6 +119,9 @@ export default {
           this.text = value;
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
+          }
+          if (!this.regex.JacEmail.test(value)) {
+            this.setError('Please do not sign up as a candidate using your \'@judicialappointments.gov.uk\' email address.');
           }
         }
 
