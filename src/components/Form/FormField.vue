@@ -120,9 +120,6 @@ export default {
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
           }
-          if (!this.regex.JacEmail.test(value)) {
-            this.setError('Please do not sign up as a candidate using your \'@judicialappointments.gov.uk\' email address.');
-          }
         }
 
         if (this.type && this.type === 'tel' && value) {
