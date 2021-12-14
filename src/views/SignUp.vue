@@ -134,16 +134,6 @@ export default {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
   },
-  watch: {
-    formData: {
-      deep: true,
-      handler(val) {
-        if (/@judicialappointments.gov.uk\s*$/.test(val.email)){
-          this.validate();
-        }
-      },
-    },
-  },
   methods: {
     // @TODO: this should be handled by form
     scrollToTop () {
