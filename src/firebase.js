@@ -22,7 +22,9 @@ const firestore = firebase.firestore();
 
 // App check
 const appCheck = firebase.appCheck();
-appCheck.activate(process.env.VUE_APP_RECAPTCHA_TOKEN);
+if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
+  appCheck.activate(process.env.VUE_APP_RECAPTCHA_TOKEN);
+}
 
 // Other firebase exports
 const auth = firebase.auth;
