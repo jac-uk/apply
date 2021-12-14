@@ -116,7 +116,7 @@ export default {
 
         if (this.type && this.type === 'email' && value) {
           if (this.$route.name === 'sign-up') {
-            if (/@judicialappointments.gov.uk\s*$/.test(value)){
+            if (this.JacEmail.test(value)){
               this.setError('You cannot sign up as a candidate using a @judicialappointments.gov.uk email address');
             }
           }
