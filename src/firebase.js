@@ -19,6 +19,9 @@ const functions = firebase.initializeApp(config).functions('europe-west2');
 
 // Initialise Firestore
 const firestore = firebase.firestore();
+firestore.settings({
+  experimentalForceLongPolling: true,
+});
 
 // App check
 const appCheck = firebase.appCheck();
