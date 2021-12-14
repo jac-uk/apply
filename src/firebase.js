@@ -17,6 +17,10 @@ const config = {
 };
 firebase.initializeApp(config);
 
+if (process.env.VUE_APP_USE_FUNCTIONS_EMULATOR === 'true') {
+  functions.useEmulator('http://localhost', '5001');
+}
+
 // Initialise Firestore
 const firestore = firebase.firestore();
 
