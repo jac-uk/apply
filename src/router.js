@@ -5,6 +5,7 @@ import store from '@/store';
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
 import ResetPassword from '@/views/ResetPassword';
+import ConfirmResetPassword from '@/views/ConfirmResetPassword';
 
 // Vacancies
 // import Website from '@/Website/Home';
@@ -700,6 +701,14 @@ const router = new Router({
       component: ResetPassword,
       meta: {
         title: 'Reset your password',
+      },
+    },
+    {
+      path: '/confirm-reset-password',
+      name: 'confirm-reset-password',
+      component: ConfirmResetPassword,
+      meta: {
+        title: 'Confirm your password reset',
       },
     },
   ],
