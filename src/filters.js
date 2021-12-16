@@ -91,7 +91,10 @@ const showAlternative = (value, optional) => value || optional;
 const showHTMLBreaks = (text) => {
   let returnText = '';
   if (text) {
-    returnText = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    returnText = text;
+    returnText = returnText.replace(/</g, '&lt;');
+    returnText = returnText.replace(/>/g, '&gt;');
+    returnText = returnText.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   return returnText;
 };
