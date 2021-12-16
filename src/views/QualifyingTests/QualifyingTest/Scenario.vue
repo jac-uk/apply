@@ -10,8 +10,8 @@
       >
         {{ qualifyingTestResponse.qualifyingTest.title }}
       </h1>
-      <div 
-        v-if="enableScenario" 
+      <div
+        v-if="enableScenario"
         class="govuk-grid-row"
       >
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
@@ -60,8 +60,8 @@
           </div>
         </div>
 
-        <div 
-          v-if="enableScenario" 
+        <div
+          v-if="enableScenario"
           class="govuk-grid-column-one-half govuk-grid-column-one-third-from-desktop"
         >
           <div class="jac-scenario__additional">
@@ -268,7 +268,7 @@ export default {
           ...historyToSave,
           ...sessionToSave,
           responses: this.responses,
-        };  
+        };
       } else {
         data = {
           responses: this.responses,
@@ -327,11 +327,11 @@ export default {
       await this.$store.dispatch('qualifyingTestResponse/save', objToSave);
     },
     prepareSaveHistory(data) {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp();
       const date = new Date();
       const objToSave = {
         history: firebase.firestore.FieldValue.arrayUnion({
-          ...data, 
+          ...data,
           question: this.questionNumber - 1,
           timestamp: firebase.firestore.Timestamp.fromDate(date),
           utcOffset: date.getTimezoneOffset(),
@@ -341,7 +341,7 @@ export default {
       return objToSave;
     },
     prepareSaveQuestionSession() {
-      const timeNow = firebase.firestore.FieldValue.serverTimestamp(); 
+      const timeNow = firebase.firestore.FieldValue.serverTimestamp();
       const date = new Date();
       const objToSave = {
         questionSession: firebase.firestore.FieldValue.arrayUnion({
