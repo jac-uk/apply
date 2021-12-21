@@ -6,8 +6,7 @@ const isDateInFuture = (date) => {
   } else if (!isDate(date)) {
     throw `Supplied date (${date}) must be a Date object`;
   }
-
-  const today = new Date();
+  const today = Date.now();
 
   date = new Date(
     date.getFullYear(),
@@ -79,6 +78,7 @@ const isToday = (val) => {
 };
 
 const helperTimeLeft = (obj) => {
+  // TODO this helper is specific to QTs, consider moving to a different helper library
   /*
     obj: {
       duration: {
@@ -87,26 +87,30 @@ const helperTimeLeft = (obj) => {
       statusLog {
         completed: timestamp,
         started: timestamp,
+        reset: timestamp,
+      },
+      lastUpdated: timestamp,
+      lastUpdatedClientTime: timestamp (from local time)
     }
   */
-  if (obj) {
-    if (obj.statusLog && obj.statusLog.completed) {
-      return 0;
-    }
-    if (obj.duration) {
-      const minute = 60 * 1000;
-      const duration = obj.duration.testDurationAdjusted;
-      const startTime = obj.statusLog && obj.statusLog.started;
+  if (obj && obj.duration) {
+    const minute = 60 * 1000;
+    const duration = obj.duration.testDurationAdjusted;
+    const startTime = obj.statusLog && obj.statusLog.started;
 
-      if (startTime === null || startTime === undefined) {
-        return duration * minute;
-      }
-      const endTime = new Date(startTime.getTime() + duration * minute);
-      if (endTime < Date.now()) {
-        return 0;
-      }
-      return (endTime - Date.now());
+    if ((startTime === null || startTime === undefined) || (obj.statusLog.reset > obj.statusLog.started)) {
+      return duration * minute;
     }
+
+    let serverOffset = 0;
+    if (obj.lastUpdated && obj.lastUpdatedClientTime) {
+      serverOffset = obj.lastUpdated.getTime() - obj.lastUpdatedClientTime.getTime();
+    }
+
+    const endTime = new Date(startTime.getTime() + (duration * minute)).getTime();
+    const now = new Date(Date.now() + serverOffset).getTime();
+    const timeRemaining = endTime - now;
+    return timeRemaining > 0 ? timeRemaining : 0;
   } else {
     return 0;
   }

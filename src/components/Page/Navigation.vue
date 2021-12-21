@@ -9,7 +9,7 @@
         :key="navItem.name"
         class="moj-side-navigation__item"
       >
-        <RouterLink 
+        <RouterLink
           class="nav-link "
           :to="{name: navItem.name}"
           :aria-current="isActive(navItem.name) ? 'moj-side-navigation__item--active' : false"

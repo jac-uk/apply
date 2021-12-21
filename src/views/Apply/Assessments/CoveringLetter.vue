@@ -19,7 +19,7 @@
         <FileUpload
           id="covering-letter-upload"
           ref="covering-letter"
-          v-model="application.uploadedCoveringLetter"
+          v-model="formData.uploadedCoveringLetter"
           name="covering-letter"
           :path="uploadPath"
           label="Upload Covering letter"
@@ -27,7 +27,7 @@
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--covering-letter--save-and-continue"
         >
           Save and continue
@@ -40,6 +40,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import BackLink from '@/components/BackLink';
 import FileUpload from '@/components/Form/FileUpload';
 import { logEvent } from '@/helpers/logEvent';
@@ -51,45 +52,26 @@ export default {
     FileUpload,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       uploadedCoveringLetter: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'coveringLetter',
+      formData: formData,
     };
-  },
-  computed: {
-    applicationId() {
-      return this.$route.params.applicationId;
-    },
-    userId() {
-      return this.$store.state.auth.currentUser.uid;
-    },
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    uploadPath() {
-      return `/exercise/${this.vacancy.id}/user/${this.userId}`;
-    },
   },
   methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.coveringLetter = true;
-        await this.$store.dispatch('application/save', this.application);
-
-        logEvent('info', 'Covering Letter uploaded', {
-          applicationId: this.applicationId,
-          candidateName: this.application.personalDetails.fullName,
-          exerciseRef: this.application.exerciseRef,
-        });
-
-        this.$router.push({ name: 'task-list' });
-      }
+    logEventAfterSave() {
+      logEvent('info', 'Covering letter uploaded', {
+        applicationId: this.applicationId,
+        candidateName: this.application.personalDetails.fullName,
+        exerciseRef: this.application.exerciseRef,
+      });
     },
   },
 };

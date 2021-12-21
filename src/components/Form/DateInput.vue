@@ -4,7 +4,7 @@
     :class="{'govuk-form-group--error': hasError}"
   >
     <fieldset
-      class="govuk-fieldset"
+      class="govuk-fieldset govuk-fieldset__legend"
       :aria-describedby="hint ? `${id}-hint` : false"
       role="group"
     >
@@ -12,7 +12,15 @@
         v-if="label"
         class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-2"
       >
-        {{ label }}
+        <span
+          v-if="labelHidden"
+          class="govuk-visually-hidden"
+        >
+          {{ label }}
+        </span>
+        <template v-else>
+          {{ label }}
+        </template>
       </legend>
       <span
         v-if="hint"
@@ -108,6 +116,10 @@ export default {
     value: {
       required: true,
       validator: (value) => (value instanceof Date || value === null || value === undefined),
+    },
+    labelHidden: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {

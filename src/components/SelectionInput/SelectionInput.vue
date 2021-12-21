@@ -11,7 +11,7 @@
         :id="`${id}-hint`"
         class="govuk-hint"
       >
-        {{ typeHint }}
+        {{ hint }}
       </span>
 
       <SingleChoice
@@ -42,16 +42,13 @@
 import SingleChoice from '@/components/SelectionInput/SingleChoice';
 import MultipleChoice from '@/components/SelectionInput/MultipleChoice';
 import RankedChoice from '@/components/SelectionInput/RankedChoice';
-import FormField from '@/components/Form/FormField';
 
 export default {
-  name: 'SelectionInput',
   components: {
     SingleChoice,
     MultipleChoice,
     RankedChoice,
   },  
-  extends: FormField,
   props: {
     id: {
       type: String,
@@ -84,11 +81,17 @@ export default {
         this.$emit('input', val);
       },
     },
-    typeHint(){
-      return this.type === 'single-choice' ? 'Select one answer' : 
-        this.type === 'multiple-choice' ? 'Select all that apply' :
-        this.type === 'ranked-choice' ? 'Select in your order of preference' :
-        '';
+    hint() {
+      switch (this.type) {
+      case 'single-choice':
+        return 'Select one answer';
+      case 'multiple-choice':
+        return 'Select all that apply';
+      case 'ranked-choice':
+        return 'Select and rank all that apply. With 1 being your top choice';
+      default:
+        return '';
+      }
     },
     isSingleChoice() {
       return this.type === 'single-choice';

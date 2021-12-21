@@ -33,7 +33,7 @@
                 aria-current="page"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -53,7 +53,9 @@
           class="govuk-tabs__panel"
           role="tabpanel"
         >
-          <h1>{{ activeTab | capitalize }}</h1>
+          <h1 class="govuk-heading-l">
+            {{ activeTab | capitalize }}
+          </h1>
 
           <Table
             data-key="id"
@@ -64,7 +66,7 @@
               <TableCell>
                 <RouterLink
                   v-if="activeTab === 'open'"
-                  :to="{ path: `/qualifying-tests/${row.id}/information` }"
+                  :to="{ path: `/online-tests/${row.id}/information` }"
                   :class="`info-btn--qualifying-tests--to--${row.id}`"
                 >
                   {{ row.qualifyingTest.title }}
@@ -147,29 +149,57 @@ export default {
       return this.closedTests.some((element) => element.qualifyingTest.feedbackSurvey);
     },
     qualifyingTestResponses() {
-      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns).filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
+      return this.$store.state.qualifyingTestResponses.records.concat(this.$store.state.qualifyingTestResponses.dryRuns)
+        .filter((qt, index, qts) => qts.findIndex(i => i.id === qt.id) === index);
     },
     openTests(){
-      return this.qualifyingTestResponses.filter(qt => {
-        const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
-        const startEndNotInFuture = !isDateInFuture(qt.qualifyingTest.startDate) && isDateInFuture(qt.qualifyingTest.endDate);
-        const activatedOrStarted = qt.status === QUALIFYING_TEST.STATUS.ACTIVATED || qt.status === QUALIFYING_TEST.STATUS.STARTED;
-        return startEndNotInFuture && activatedOrStarted && !timeout;
+      const result = this.qualifyingTestResponses.filter(qt => {
+        // status must be activated or started
+        if ([QUALIFYING_TEST.STATUS.ACTIVATED, QUALIFYING_TEST.STATUS.STARTED].indexOf(qt.status) < 0) { return false; }
+
+        // startDate must be earlier than now (TODO take account of serverTimeOffset)
+        if (!(qt.qualifyingTest.startDate && qt.qualifyingTest.startDate.getTime() < Date.now())) { return false; }
+
+        // endDate must be later than now
+        if (!(qt.qualifyingTest.endDate && qt.qualifyingTest.endDate.getTime() > Date.now())) { return false; }
+
+        // if test has started then it must have time left
+        if (qt.status === QUALIFYING_TEST.STATUS.STARTED) {
+          if (!this.isTimeLeft(qt)) { return false; }
+        }
+
+        // all ok
+        return true;
       });
+      return result;
     },
     futureTests(){
-      return this.qualifyingTestResponses.filter(qt => (
+      const result = this.qualifyingTestResponses.filter(qt => (
         (isDateInFuture(qt.qualifyingTest.startDate) || (
           isDateInFuture(qt.qualifyingTest.endDate) && qt.status === QUALIFYING_TEST.STATUS.CREATED
         ))
       ));
+      return result;
     },
     closedTests(){
-      return this.qualifyingTestResponses.filter(qt => {
-        const timeout = this.isTimeOut(qt.status, qt.statusLog.completed, this.isTimeLeft(qt));
-        const pastDateAndCompleted = (!isDateInFuture(qt.qualifyingTest.endDate) || qt.status == QUALIFYING_TEST.STATUS.COMPLETED);
-        return timeout || pastDateAndCompleted;
+      const result = this.qualifyingTestResponses.filter(qt => {
+        // startDate must be earlier than now
+        if (!(qt.qualifyingTest.startDate && qt.qualifyingTest.startDate.getTime() < Date.now())) { return false; }
+
+        // if test has not been started or completed then end date must be earlier than now
+        if ([QUALIFYING_TEST.STATUS.STARTED, QUALIFYING_TEST.STATUS.COMPLETED].indexOf(qt.status) < 0) {
+          if (!(qt.qualifyingTest.endDate && qt.qualifyingTest.endDate.getTime() < Date.now())) { return false; }
+        }
+
+        // if test has started then it has run out of time
+        if (qt.status === QUALIFYING_TEST.STATUS.STARTED) {
+          if (this.isTimeLeft(qt)) { return false; }
+        }
+
+        // otherwise all ok
+        return true;
       });
+      return result;
     },
   },
   async mounted() {
@@ -189,17 +219,15 @@ export default {
   },
   methods: {
     status(obj) {
+      // TODO this needs re-coding against requirements
       const startedOrCompleted = obj.status === QUALIFYING_TEST.STATUS.STARTED || obj.status === QUALIFYING_TEST.STATUS.COMPLETED;
       const timeout = this.isTimeOut(obj.status, obj.statusLog.completed, this.isTimeLeft(obj));
-
       if (timeout) {
         return 'Completed - Out of time';
       }
-
       if (startedOrCompleted) {
         return obj.status;
       }
-
       return QUALIFYING_TEST.STATUS.NOT_STARTED;
     },
     prettyDate(date) {

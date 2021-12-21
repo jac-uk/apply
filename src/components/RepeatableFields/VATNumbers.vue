@@ -6,6 +6,7 @@
       required
       label="VAT registration number"
       hint="For example, ‘123456789’."
+      class="govuk-!-margin-bottom-5"
     />
 
     <slot name="removeButton" />

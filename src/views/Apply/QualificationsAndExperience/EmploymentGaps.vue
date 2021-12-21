@@ -1,8 +1,8 @@
 <template>
   <div class="govuk-grid-row">
-    <form 
+    <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="checkAndSave"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -19,15 +19,14 @@
         <p class="govuk-body-l">
           Add dates and details of any gaps in employment you may have
         </p>
-
+        
         <RepeatableFields
-          v-model="application.employmentGaps"
-          required
-          :component="repeatableFields.EmploymentGaps"
+          v-model="formData.employmentGaps"
+          :component="isLegal ? repeatableFields.EmploymentGaps : repeatableFields.NonLegalEmploymentGaps"
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--employment-gaps--save-and-continue"
         >
           Save and continue
@@ -40,6 +39,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RepeatableFields from '@/components/RepeatableFields';
 import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
 import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploymentGaps';
@@ -52,38 +52,41 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults =  {
       employmentGaps: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
-    if (this.$store.getters['vacancy/isLegal']) {
-      return {
-        application: application,
-        repeatableFields: {
-          EmploymentGaps: EmploymentGaps,
-        },
-      };
-    } else {
-      return {
-        application: application,
-        repeatableFields: {
-          EmploymentGaps: NonLegalEmploymentGaps,
-        },
-      };
-    }
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
+    return {
+      formId: 'employmentGaps',
+      formData: formData,
+      repeatableFields: {
+        NonLegalEmploymentGaps,
+        EmploymentGaps,
+      },
+    };
   },
   methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.employmentGaps = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
+    checkAndSave() {
+      if (this.formData.employmentGaps.length){
+        const hasEnteredData = Object.values(this.formData.employmentGaps[0]).some((val) => {
+          if (val instanceof Date) {
+            return true;
+          } else if (val instanceof Array) {
+            return val.length;
+          } else {
+            return !!val;
+          }
+        });
+        if (!hasEnteredData) {
+          this.formData.employmentGaps = [];
+        }
+      } 
+      this.save();
     },
   },
-
 };
 </script>

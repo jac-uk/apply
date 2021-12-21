@@ -31,15 +31,15 @@ export default {
       const today = Date.now();
       const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
       let userInvitation = null;
-      let invitations = this.$store.state.invitations.records;
+      let invitations = this.$store.state.invitations && this.$store.state.invitations.records;
 
-      if (vacancy.inviteOnly) {
+      if (vacancy && vacancy.inviteOnly) {
         if (!invitations.length) {
           invitations = await this.$store.dispatch('invitations/bind');
         }
         userInvitation = invitations ? invitations.find((invite) => invite.vacancy.id === this.vacancyId) : null;
       }
-      
+
       if (vacancy === null) {
         this.redirectToErrorPage();
       } else if (this.$store.getters['vacancy/getOpenDate'] > today) {

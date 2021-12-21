@@ -91,7 +91,10 @@ const showAlternative = (value, optional) => value || optional;
 const showHTMLBreaks = (text) => {
   let returnText = '';
   if (text) {
-    returnText = text.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    returnText = text;
+    returnText = returnText.replace(/</g, '&lt;');
+    returnText = returnText.replace(/>/g, '&gt;');
+    returnText = returnText.replace(/(?:\r\n|\r|\n)/g, '<br>');
   }
   return returnText;
 };
@@ -270,6 +273,9 @@ const lookup = (value) => {
       'write': 'Write',
       'schedule-2-d': 'Schedule 2(d)',
       'schedule-2-3': 'Schedule 2(3)',
+      'full-time': 'Full-time',
+      'salaried-part-time': 'Salaried part-time',
+      'voluntary': 'Voluntary',
       // 'xxx': 'xxx',`
     };
 

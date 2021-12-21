@@ -129,7 +129,7 @@
         </RadioGroup>
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--personal-details--save-and-continue"
         >
           Save and continue
@@ -142,6 +142,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -161,6 +162,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       title: '',
@@ -175,12 +177,15 @@ export default {
       reasonableAdjustments: null,
       reasonableAdjustmentsDetails: null,
     };
+
     const data = this.$store.getters['candidate/personalDetails']();
     const personalDetails = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       personalDetails: personalDetails,
-      application: application,
+      formId: 'personalDetails',
+      formData: {
+        progress: {},
+      },
     };
   },
   created() {
@@ -205,9 +210,10 @@ export default {
       this.makeFullName();
       this.validate();
       if (this.isValid()) {
-        this.application.progress.personalDetails = true;
-        this.application.personalDetails = this.personalDetails;
-        await this.$store.dispatch('application/save', this.application);
+        this.formData.progress[this.formId] = true;
+        this.formData.personalDetails = this.personalDetails;
+        this.formData.characterChecks = { status: 'not requested' };
+        await this.$store.dispatch('application/save', this.formData);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'task-list' });
       }

@@ -11,8 +11,8 @@
       Next Steps
 
       <p class="govuk-body-m govuk-!-margin-top-0">
-        You will be informed of the outcome of your qualifying test, as indicated on the 
-        <router-link 
+        You will be informed of the outcome of your test, as indicated on the
+        <router-link
           v-if="qualifyingTestResponse.vacancy"
           class="govuk-link"
           :to="`/vacancy/${qualifyingTestResponse.vacancy.id}`"
@@ -21,7 +21,7 @@
         </router-link>
         <span v-else>vacancy timeline</span>.
         <br>
-        You may now close this page, return to the 
+        You may now close this page, return to the
         <router-link
           class="govuk-link"
           to="/"
@@ -33,7 +33,7 @@
           class="govuk-link"
           :to="{ name: 'qualifying-tests' }"
         >
-          your qualifying tests.
+          your online tests.
         </router-link>
       </p>
     </div>
@@ -42,7 +42,7 @@
       class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-6"
     >
       <p class="govuk-body">
-        You have another Qualifying Test to complete:
+        You have another online test to complete:
       </p>
 
       <div class="govuk-inset-text">
@@ -67,7 +67,7 @@
         status="information"
       >
         <template>
-          <a 
+          <a
             :href="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
             class="govuk-link info-link--submitted--banner--click-here-to-fill-out-our-feedback-survey"
           >
@@ -94,7 +94,7 @@ export default {
     qualifyingTestResponses() {
       return this.$store.state.qualifyingTestResponses.records;
     },
-    upcomingTest() { 
+    upcomingTest() {
       return this.qualifyingTestResponses.find((qt) => {
         if (
           this.notThisTest(qt) &&

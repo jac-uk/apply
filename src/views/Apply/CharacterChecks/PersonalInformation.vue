@@ -12,53 +12,34 @@
 
       <ErrorSummary :errors="errors" />
 
-      <RadioGroup
+      <TextField
         id="title"
         v-model="personalDetails.title"
-        required
         label="Title"
-      >
-        <RadioItem
-          value="Mr"
-          label="Mr"
-        />
-        <RadioItem
-          value="Ms"
-          label="Ms"
-        />
-        <RadioItem
-          value="Mrs"
-          label="Mrs"
-        />
-        <RadioItem
-          value="Miss"
-          label="Miss"
-        />
-        <RadioItem
-          value="Other"
-          label="Other"
-        >
-          <TextField
-            id="otherTitleDetails"
-            v-model="personalDetails.otherTitleDetails"
-            label="Title"
-            hint=""
-          />
-        </RadioItem>
-      </RadioGroup>
+        required
+      />
 
       <TextField
-        id="fullName"
-        v-model="personalDetails.fullName"
-        label="Full name"
-        hint="You do not need to include any titles."
+        id="firstName"
+        v-model="personalDetails.firstName"
+        label="First name"
+        hint="Enter your first name as it's written on an official document like your driving licence."
+        required
+      />
+
+      <TextField
+        id="lastName"
+        v-model="personalDetails.lastName"
+        label="Last name"
+        hint="Enter your last name as it's written on an official document like your driving licence."
         required
       />
 
       <TextField
         id="otherNames"
         v-model="personalDetails.otherNames"
-        label="Other names (optional)"
+        label="Other names (Known As)"
+        hint="Other names or professional name or maiden name."
       />
 
       <TextField
@@ -66,6 +47,41 @@
         v-model="personalDetails.suffix"
         label="Suffix (optional)"
       />
+
+      <RadioGroup
+        id="gender"
+        v-model="equalityAndDiversitySurvey.gender"
+        required
+        label="What is your sex?"
+      >
+        <RadioItem
+          value="female"
+          label="Female"
+        />
+        <RadioItem
+          value="male"
+          label="Male"
+        />
+        <RadioItem
+          value="gender-neutral"
+          label="Gender neutral"
+        />
+        <RadioItem
+          value="other-gender"
+          label="Other sex"
+        >
+          <TextField
+            id="other-gender-details"
+            v-model="equalityAndDiversitySurvey.otherGenderDetails"
+            label="Other sex"
+            class="govuk-!-width-two-thirds"
+          />
+        </RadioItem>
+        <RadioItem
+          value="prefer-not-to-say"
+          label="Prefer not to say"
+        />
+      </RadioGroup>
 
       <DateInput
         id="dateOfBirth"
@@ -165,6 +181,7 @@ import DateInput from '@/components/Form/DateInput';
 import RepeatableFields from '@/components/RepeatableFields';
 import Addresses from '@/components/RepeatableFields/Addresses';
 import Address from '@/components/Form/Address';
+import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
   components: {
@@ -181,38 +198,72 @@ export default {
   data() {
     const defaults = {
       title: null,
-      otherTitleDetails: null,
+      firstName: null,
+      lastName: null,
       otherNames: null,
       suffix: null,
+      gender: null,
+      otherGenderDetails: null,
+      changedGender: null,
       placeOfBirth: null,
+      nationalInsuranceNumber: null,
       address: {
         current: {},
         previous: [],
         currentMoreThan5Years: null,
       },
     };
-    const data = this.$store.getters['candidate/personalDetails']();
-    const personalDetails = { ...defaults, ...data };
+    const data1 = this.$store.getters['candidate/personalDetails']();
+    const data2 = this.$store.getters['candidate/equalityAndDiversitySurvey']();
+    const personalDetails = { ...defaults, ...data1 };
+    const equalityAndDiversitySurvey = { ...defaults, ...data2 };
     const application = this.$store.getters['application/data']();
     return {
       personalDetails,
+      equalityAndDiversitySurvey,
       application,
       repeatableFields: {
         Addresses,
       },
     };
   },
+  created() {
+    const { firstName, lastName, fullName } = this.personalDetails;
+
+    if (!firstName && !lastName) {
+      if (fullName) {
+        const result = splitFullName(fullName);
+        this.personalDetails.firstName = result[0];
+        this.personalDetails.lastName = result[1];
+      } else {
+        this.personalDetails.firstName = '';
+        this.personalDetails.lastName = '';
+      }
+    } else {
+      this.personalDetails.firstName = firstName;
+      this.personalDetails.lastName = lastName;
+    }
+  },
   methods: {
     async save() {
+      this.makeFullName();
       this.validate();
       if (this.isValid()) {
+        if (this.personalDetails.address.currentMoreThan5Years === true) {
+          this.personalDetails.address.previous = null;
+        }
         this.application.personalDetails = this.personalDetails;
+        this.application.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        this.$router.push({ name: 'character-checks-professional-bodies' });
+        await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
+        this.$router.push({ name: 'character-checks-professional-details' });
       }
+    },
+    makeFullName() {
+      this.personalDetails.fullName = `${this.personalDetails.firstName} ${this.personalDetails.lastName}`;
     },
   },
 };
-    
+
 </script>

@@ -7,7 +7,7 @@
       <BackLink />
 
       <h1 class="govuk-heading-xl">
-        Professional bodies
+        Professional details
       </h1>
 
       <ErrorSummary :errors="errors" />
@@ -17,7 +17,7 @@
         :key="index"
       >
         <div class="govuk-inset-text govuk-!-margin-top-0">
-          You stated on your application that you have been a {{ qualification.type | lookup }} since {{ qualification.date | formatDate }}.
+          You stated on your application that you have been a {{ qualification.type | lookup }}{{ getDate(qualification) }}
         </div>
         <TextField
           id="barMembershipNum"
@@ -31,7 +31,8 @@
       <RadioGroup
         id="magistrate"
         v-model="application.magistrate"
-        label="Have you been a magistrate? (TBC)"
+        label="Have you been a magistrate?"
+        required
         hint=""
       >
         <RadioItem
@@ -49,7 +50,6 @@
             <DateInput
               id="magistrateEndDate"
               v-model="application.magistrateEndDate"
-              :required="application.magistrate"
               label="Until date"
               hint="For example, 11 6 2020. Leave blank if this is your present role."
             />
@@ -84,6 +84,7 @@ import TextField from '@/components/Form/TextField';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
+import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 const membershipNumbers = {
   barrister: 'Bar membership number',
@@ -120,18 +121,36 @@ export default {
     },
   },
   methods: {
+    getDate(value) {
+      if (value.date) {
+        return ` since ${formatDate(value.date)}.`;
+      }
+      if (value.calledToBarDate) {
+        return ` since ${formatDate(value.calledToBarDate)}.`;
+      }
+      return '.';
+    },
     membershipNumberLabel(type) {
       return membershipNumbers[type] || membershipNumbers.default;
     },
     async save() {
       this.validate();
       if (this.isValid()) {
+        if (this.application.magistrate === false) {
+          this.application.magistrateStartDate = null;
+          this.application.magistrateEndDate = null;
+          this.application.magistrateLocation = null;
+        }
         await this.$store.dispatch('application/save', this.application);
 
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
           this.$router.push({ name: 'character-checks-HMRC' });
         } else {
-          this.$router.push({ name: 'character-checks-more-details' });
+          if ((this.vacancy.memberships && this.vacancy.memberships.length) && !this.vacancy.memberships.includes('none')) {
+            this.$router.push({ name: 'character-checks-other-professional-bodies' });
+          } else {
+            this.$router.push({ name: 'character-checks-review' });
+          }
         }
       }
     },

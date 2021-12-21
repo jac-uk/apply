@@ -71,14 +71,14 @@ import AdditionalInformation from '@/views/Apply/AdditionalInformation';
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
-import CharacterChecksProfessionalBodies from '@/views/Apply/CharacterChecks/ProfessionalBodies';
+import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
-import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
+import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterChecks/OtherProfessionalBodies';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
-import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
+import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
-// Qualifying Tests
+// Online Tests
 import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
 import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
@@ -196,16 +196,16 @@ const router = new Router({
       },
     },
     {
-      path: '/qualifying-tests',
+      path: '/online-tests',
       component: QualifyingTests,
       name: 'qualifying-tests',
       meta: {
         requiresAuth: true,
-        title: 'Qualifying Tests | List',
+        title: 'Online Tests | List',
       },
     },
     {
-      path: '/qualifying-tests/:qualifyingTestId',
+      path: '/online-tests/:qualifyingTestId',
       component: QualifyingTest,
       children: [
         {
@@ -214,7 +214,7 @@ const router = new Router({
           name: 'qualifying-test-information',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Information',
+            title: 'Online Test | Information',
           },
         },
         {
@@ -223,7 +223,7 @@ const router = new Router({
           name: 'qualifying-test-question',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Question',
+            title: 'Online Test | Question',
             fullPageMode: true,
           },
         },
@@ -233,7 +233,7 @@ const router = new Router({
           name: 'qualifying-test-scenario',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Scenario',
+            title: 'Online Test | Scenario',
             fullPageMode: true,
           },
         },
@@ -243,7 +243,7 @@ const router = new Router({
           name: 'qualifying-test-review',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Review',
+            title: 'Online Test | Review',
             fullPageMode: true,
           },
         },
@@ -253,7 +253,7 @@ const router = new Router({
           name: 'qualifying-test-submitted',
           meta: {
             requiresAuth: true,
-            title: 'Qualifying Test | Submitted',
+            title: 'Online Test | Submitted',
           },
         },
       ],
@@ -278,6 +278,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Character information',
+            breadcrumbRoute: 'character-information-review',
           },
           component: MainCharacterInformation,
           children: [
@@ -621,12 +622,12 @@ const router = new Router({
               },
             },
             {
-              path: 'professional-bodies',
-              component: CharacterChecksProfessionalBodies,
-              name: 'character-checks-professional-bodies',
+              path: 'professional-details',
+              component: CharacterChecksProfessionalDetails,
+              name: 'character-checks-professional-details',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Professional bodies',
+                title: 'Consent to character checks | Professional details',
               },
             },
             {
@@ -639,12 +640,12 @@ const router = new Router({
               },
             },
             {
-              path: 'more-details',
-              component: CharacterChecksMoreDetails,
-              name: 'character-checks-more-details',
+              path: 'other-professional-bodies',
+              component: CharacterChecksOtherProfessionalBodies,
+              name: 'character-checks-other-professional-bodies',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | More details',
+                title: 'Consent to character checks | Other professional bodies',
               },
             },
             {
@@ -657,12 +658,12 @@ const router = new Router({
               },
             },
             {
-              path: 'declaration',
-              component: CharacterChecksDeclaration,
-              name: 'character-checks-declaration',
+              path: 'consent',
+              component: CharacterChecksConsent,
+              name: 'character-checks-consent',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Declaration',
+                title: 'Consent to character checks | Consent',
               },
             },
             {

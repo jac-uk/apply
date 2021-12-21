@@ -29,7 +29,7 @@
                 class="govuk-link info-link--nav-applications--qualifying-tests"
                 :to="{ name: 'qualifying-tests' }"
               >
-                Qualifying Tests
+                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -66,7 +66,7 @@
                 </div>
                 <div v-else>
                   <RouterLink
-                    v-if="isOpen(application.dateExtension, application.exerciseId) && application.status == 'draft'"
+                    v-if="canContinueWithApplication(application)"
                     :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
                     :to="{ name: 'task-list', params: { id: application.exerciseId } }"
                     role="button"
@@ -93,13 +93,22 @@
                     View advert
                   </RouterLink>
                   <RouterLink
-                    v-if="application.characterChecks && application.characterChecks.declaration === true"
+                    v-if="application.characterChecks && application.characterChecks.status === 'requested'"
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-intro', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Complete character checks consent form
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.characterChecks && application.characterChecks.status === 'completed'"
                     :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
                     :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
                     role="button"
                     data-module="govuk-button"
                   >
-                    View good character checks consent
+                    View sent character checks consent form
                   </RouterLink>
                 </div>
               </div>
@@ -108,37 +117,6 @@
         </ul>
 
         <hr class="govuk-section-break govuk-section-break--xl">
-
-        <!--
-         <h2 class="govuk-heading-m">
-          Previous applications
-        </h2>
-        <table class="govuk-table">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Circuit judge</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 17 February 2018
-            </td>
-            <td class="govuk-table__cell">
-              Selected
-            </td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Recorder</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 12 April 2017
-            </td>
-            <td class="govuk-table__cell">
-              Not selected
-            </td>
-          </tr>
-        </table> -->
       </div>
     </div>
   </div>
@@ -149,6 +127,7 @@ import {
   mapState
 } from 'vuex';
 import isVacancyOpen from '@/helpers/isVacancyOpen';
+import { isMoreInformationNeeded } from '@/helpers/exerciseHelper';
 
 export default {
   computed: {
@@ -162,21 +141,27 @@ export default {
     this.$store.dispatch('vacancies/bind');
   },
   methods: {
-    isOpen(dateExtended, exerciseId) {
-      // const today = new Date();
-      const vacancy = this.$store.getters['vacancies/getVacancy'](exerciseId);
-      if (vacancy) {
-        return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, dateExtended);
-      } else {
-        return false;
-      }
-    },
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {
         return false;
       }
       return this.allVacancies.find(vacancy => vacancy.id === exerciseId) !== undefined;
     },
+    canContinueWithApplication(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      switch (application.status) {
+      case 'draft':
+        return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, application.dateExtension);
+      case 'applied':
+        // check whether extra info is needed
+        return isMoreInformationNeeded(vacancy, application);
+      default:
+        return false;
+      }
+    },
+
   },
 };
 </script>

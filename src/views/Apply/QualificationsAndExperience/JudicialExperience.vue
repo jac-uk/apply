@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-grid-row">
-    <form 
+    <form
       ref="formRef"
       @submit.prevent="save"
     >
@@ -16,15 +16,11 @@
           you've provided about your career.
         </p>
 
-        <ErrorSummary
-          :errors="errors"
-          :show-save-button="true"
-          @save="save"
-        />
+        <ErrorSummary :errors="errors" />
 
         <RadioGroup
           id="fee-or-salaried-judge"
-          v-model="application.feePaidOrSalariedJudge"
+          v-model="formData.feePaidOrSalariedJudge"
           required
           label="Are you a fee-paid or salaried judge?"
         >
@@ -39,9 +35,9 @@
         </RadioGroup>
 
         <RadioGroup
-          v-if="application.feePaidOrSalariedJudge === true"
+          v-if="formData.feePaidOrSalariedJudge === true"
           id="fee-or-salaried-sat-thirty-days"
-          v-model="application.feePaidOrSalariedSatForThirtyDays"
+          v-model="formData.feePaidOrSalariedSatForThirtyDays"
           :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
         >
           <RadioItem
@@ -50,9 +46,9 @@
           >
             <TextareaInput
               id="fee-or-salaried-sitting-days-details"
-              v-model="application.feePaidOrSalariedSittingDaysDetails"
+              v-model="formData.feePaidOrSalariedSittingDaysDetails"
               label="Enter the number of sitting days for each judicial
-              appointments you have declared on this application."
+              appointment you have declared on this form."
             />
           </RadioItem>
           <RadioItem
@@ -62,9 +58,9 @@
         </RadioGroup>
 
         <RadioGroup
-          v-if="application.feePaidOrSalariedSatForThirtyDays == false || application.feePaidOrSalariedJudge == false"
+          v-if="formData.feePaidOrSalariedSatForThirtyDays == false || formData.feePaidOrSalariedJudge == false"
           id="appointment-in-quasi-judicial-body"
-          v-model="application.declaredAppointmentInQuasiJudicialBody"
+          v-model="formData.declaredAppointmentInQuasiJudicialBody"
           required
           label="Have you declared an appointment or appointments in a quasi-judicial body in this application?"
         >
@@ -108,9 +104,9 @@
         </RadioGroup>
 
         <RadioGroup
-          v-if="application.declaredAppointmentInQuasiJudicialBody === true"
+          v-if="formData.declaredAppointmentInQuasiJudicialBody === true"
           id="quasi-judicial-sat-thirty-days"
-          v-model="application.quasiJudicialSatForThirtyDays"
+          v-model="formData.quasiJudicialSatForThirtyDays"
           :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days in one or all of these appointments?`"
         >
           <RadioItem
@@ -119,7 +115,7 @@
           >
             <TextareaInput
               id="quasi-judicial-sitting-days-details"
-              v-model="application.quasiJudicialSittingDaysDetails"
+              v-model="formData.quasiJudicialSittingDaysDetails"
               label="Enter the number of sitting days for each of the
               appointments you have declared on this application, and powers and
               procedures in the office you hold. Include any further details of whether
@@ -133,16 +129,16 @@
         </RadioGroup>
 
         <TextareaInput
-          v-if="application.declaredAppointmentInQuasiJudicialBody == false ||
-            application.quasiJudicialSatForThirtyDays == false"
+          v-if="formData.declaredAppointmentInQuasiJudicialBody == false ||
+            formData.quasiJudicialSatForThirtyDays == false"
           id="gained-experience"
-          v-model="application.skillsAquisitionDetails"
+          v-model="formData.skillsAquisitionDetails"
           label="Provide details of how you have acquired the necessary
           skills for this role in some other significant way."
         />
 
         <button
-          :disabled="application.status != 'draft'"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--judicial-experience--save-and-continue"
         >
           Save and continue
@@ -155,6 +151,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -169,6 +166,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data(){
     const defaults = {
       feePaidOrSalariedJudge: null,
@@ -177,27 +175,14 @@ export default {
       declaredAppointmentInQuasiJudicialBody: null,
       quasiJudicialSatForThirtyDays: null,
       quasiJudicialSittingDaysDetails: null,
+      progress: {},
     };
-    const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      application: application,
+      formId: 'judicialExperience',
+      formData: formData,
     };
-  },
-  computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-  },
-  methods: {
-    async save() {
-      this.validate();
-      if (this.isValid()) {
-        this.application.progress.judicialExperience = true;
-        await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'task-list' });
-      }
-    },
   },
 };
 </script>
