@@ -61,7 +61,6 @@
 
           <TextField
             id="email"
-            ref="emailInputRef"
             v-model="formData.email"
             label="Email address"
             type="email"
