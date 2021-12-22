@@ -272,6 +272,7 @@ import InvolvedInProfessionalMisconductDetails from '@/components/RepeatableFiel
 import DiciplinaryActionOrAskedToResignDetails from '@/components/RepeatableFields/DiciplinaryActionOrAskedToResignDetails';
 import OtherCharacterIssuesDetails from '@/components/RepeatableFields/OtherCharacterIssuesDetails';
 import BackLink from '@/components/BackLink';
+import ApplyMixIn from '../ApplyMixIn';
 
 export default {
   components: {
@@ -282,6 +283,7 @@ export default {
     BackLink,
   },
   extends: Form,
+  mixins: [ApplyMixIn],
   data() {
     const defaults = {
       criminalOffences: null,
@@ -305,10 +307,8 @@ export default {
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
-    const application = this.$store.getters['application/data']();
     return {
       characterInformation: characterInformation,
-      application: application,
       formId: 'characterInformation',
       repeatableFields: {
         CriminalOffenceDetails,

@@ -80,39 +80,39 @@
                 Change
               </RouterLink>
             </div>
-            <dl v-if="isVersion2 && application.characterInformationV2">
+            <dl v-if="isVersion2">
               <CriminalOffencesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FixedPenaltiesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <MotoringOffencesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FinancialMattersSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <ProfessionalConductSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FurtherInformationSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <CharacterDeclarationSummary
-                :character-information="application.characterInformationV2"
+                :character-information="application.characterInformationV2 || {}"
               />
             </dl>
             <dl v-else>
@@ -908,7 +908,7 @@ import BackLink from '@/components/BackLink';
 import jsPDF from 'jspdf';
 import ApplyMixIn from '../ApplyMixIn';
 import Warning from '@/components/Page/Warning';
-import PersonalDetails from './PersonalDetails';
+// import PersonalDetails from './PersonalDetails';
 import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
 import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
 import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary';
@@ -932,7 +932,7 @@ export default {
     BackLink,
     ErrorSummary,
     Warning,
-    PersonalDetails,
+    // PersonalDetails,
     CharacterInformationSummaryV1,
     CharacterDeclarationSummary,
     CriminalOffencesSummary,
@@ -959,7 +959,8 @@ export default {
   },
   computed: {
     isVersion2 () {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 2;
+      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 2 ||
+        (this.application.hasOwnProperty('characterInformationV2'));
     },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';
