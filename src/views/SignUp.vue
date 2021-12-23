@@ -111,7 +111,7 @@
 
 <script>
 import firebase from '@firebase/app';
-// import { auth } from '@/firebase';
+import { auth } from '@/firebase';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
@@ -157,21 +157,21 @@ export default {
       }
     },
     async signUp() {
-      // await auth()
-      //   .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
-      //   .then((result)=>{
-      //     const candidate = this.createCandidate(result);
-      //     if (candidate) {
-      //       if (this.$store.getters['vacancy/id']) {
-      //         this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
-      //       } else {
-      //         this.$router.push({ name: 'applications' });
-      //       }
-      //     }
-      //   })
-      //   .catch((error) => {
-      //     this.errors.push({ ref: 'email', message: error.message });
-      //   });
+      await auth()
+        .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
+        .then((result)=>{
+          const candidate = this.createCandidate(result);
+          if (candidate) {
+            if (this.$store.getters['vacancy/id']) {
+              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
+            } else {
+              this.$router.push({ name: 'applications' });
+            }
+          }
+        })
+        .catch((error) => {
+          this.errors.push({ ref: 'email', message: error.message });
+        });
     },
     makeFullName() {
       this.fullName = `${this.formData.firstName} ${this.formData.lastName}`;

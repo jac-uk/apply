@@ -106,7 +106,7 @@ describe('views/SignUp', () => {
       });
     });
 
-    xdescribe('signUp()', () => {
+    describe('signUp()', () => {
       const mockFormData = {
         email: 'mockemail@mock.com',
         password: 'mock password',
