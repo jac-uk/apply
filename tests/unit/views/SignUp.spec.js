@@ -108,7 +108,7 @@ describe('views/SignUp', () => {
 
     describe('signUp()', () => {
       const mockFormData = {
-        email: 'mock email',
+        email: 'mockemail@mock.com',
         password: 'mock password',
       };
 
