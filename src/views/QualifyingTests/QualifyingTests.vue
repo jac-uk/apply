@@ -27,7 +27,7 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item moj-side-navigation__item--active">
+            <!-- <li class="moj-side-navigation__item moj-side-navigation__item--active">
               <RouterLink
                 class="govuk-link info-link--nav-qualifying-tests--qualifying-tests"
                 aria-current="page"
@@ -35,7 +35,7 @@
               >
                 Online tests
               </RouterLink>
-            </li>
+            </li> -->
           </ul>
         </nav>
       </div>
