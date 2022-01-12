@@ -30,13 +30,14 @@
                 Applications
               </RouterLink>
             </li>
+
             <li class="moj-side-navigation__item">
-              <RouterLink
+              <a
                 class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
+                :href="onlineTestsURL"
               >
                 Online tests
-              </RouterLink>
+              </a>
             </li>
           </ul>
         </nav>
@@ -434,6 +435,9 @@ export default {
     ]),
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
+    },
+    onlineTestsURL() {
+      return process.env.VUE_APP_ONLINE_TESTS_URL;
     },
   },
   created() {
