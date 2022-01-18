@@ -15,6 +15,7 @@
               <RouterLink
                 class="govuk-link info-link--nav-qualifying-tests--vacancies"
                 :to="{ name: 'vacancies' }"
+                data-cy="vacancies-link"
               >
                 Vacancies
               </RouterLink>
@@ -23,6 +24,7 @@
               <RouterLink
                 class="govuk-link info-link--nav-qualifying-tests--applications"
                 :to="{ name: 'applications' }"
+                data-cy="applications-link"
               >
                 Applications
               </RouterLink>
@@ -32,6 +34,7 @@
                 class="govuk-link info-link--nav-qualifying-tests--qualifying-tests"
                 aria-current="page"
                 :to="{ name: 'qualifying-tests' }"
+                data-cy="online-tests-link"
               >
                 Online tests
               </RouterLink>

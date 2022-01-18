@@ -18,6 +18,7 @@
                 class="govuk-link info-link--nav-vacancies--vacancies"
                 :aria-current="this.$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
+                data-cy="vacancies-link"
               >
                 Vacancies
               </RouterLink>
@@ -26,6 +27,7 @@
               <RouterLink
                 class="govuk-link info-link--nav-vacancies--applications"
                 :to="{ name: 'applications' }"
+                data-cy="applications-link"
               >
                 Applications
               </RouterLink>
@@ -35,6 +37,7 @@
               <a
                 class="govuk-link info-link--nav-vacancies--qualifying-tests"
                 :href="onlineTestsURL"
+                data-cy="online-tests-link"
               >
                 Online tests
               </a>
