@@ -194,6 +194,8 @@ const lookup = (value) => {
       'non-uk-educated': 'I did not go to school in the UK',
       'non-university-educated': 'I did not go to university',
       'northern-ireland': 'Northern Ireland',
+      'online-and-judge-led': 'Yes - online resources and judge-led discussion group course',
+      'online-only': 'Yes - online resources only',
       'open': 'Open',
       'other': 'Other',
       'other-asian': 'Any other Asian background',

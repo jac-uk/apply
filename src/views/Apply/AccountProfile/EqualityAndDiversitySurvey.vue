@@ -675,8 +675,12 @@
             helps under-represented groups develop their understanding of the role and skills of judges.
           </p>
           <RadioItem
-            :value="true"
-            label="Yes"
+            value="online-and-judge-led"
+            :label="'online-and-judge-led' | lookup"
+          />
+          <RadioItem
+            value="online-only"
+            :label="'online-only' | lookup"
           />
           <RadioItem
             :value="false"
