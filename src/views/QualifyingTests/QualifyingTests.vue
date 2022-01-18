@@ -223,7 +223,7 @@ export default {
       const startedOrCompleted = obj.status === QUALIFYING_TEST.STATUS.STARTED || obj.status === QUALIFYING_TEST.STATUS.COMPLETED;
       const timeout = this.isTimeOut(obj.status, obj.statusLog.completed, this.isTimeLeft(obj));
       if (timeout) {
-        return 'Completed - Out of time';
+        return 'Completed (auto-submitted)';
       }
       if (startedOrCompleted) {
         return obj.status;
