@@ -26,15 +26,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <a
-                class="govuk-link info-link--nav-applications--qualifying-tests"
-                :href="onlineTestsURL"
-                data-cy="online-tests-link"
-              >
-                Online tests
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
@@ -137,9 +128,6 @@ export default {
     ...mapState('applications', ['records']),
     allVacancies() {
       return this.$store.getters['vacancies/allVacancies'];
-    },
-    onlineTestsURL() {
-      return process.env.VUE_APP_ONLINE_TESTS_URL;
     },
   },
   created() {

@@ -32,16 +32,6 @@
                 Applications
               </RouterLink>
             </li>
-
-            <li class="moj-side-navigation__item">
-              <a
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :href="onlineTestsURL"
-                data-cy="online-tests-link"
-              >
-                Online tests
-              </a>
-            </li>
           </ul>
         </nav>
       </div>
@@ -438,9 +428,6 @@ export default {
     ]),
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
-    },
-    onlineTestsURL() {
-      return process.env.VUE_APP_ONLINE_TESTS_URL;
     },
   },
   created() {
