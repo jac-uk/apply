@@ -64,6 +64,10 @@
             v-model="formData.email"
             label="Email address"
             type="email"
+            :pattern="{
+              match: /^((?!@judicialappointments.gov.uk\s*$).)*$/,
+              message: 'You cannot sign up as a candidate using a @judicialappointments.gov.uk email address',
+            }"
             required
           />
 
