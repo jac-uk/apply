@@ -43,7 +43,13 @@
           Make sure you've got a stable internet connection before you start.
         </li>
         <li>
+          Once you have started the test, do not open the test on a second device.
+        </li>
+        <li>
           Your answers will be saved as you go through the test, but you can still edit them at the end before you submit your test.
+        </li>
+        <li>
+          If you experience any technical issues please contact the helpdesk.
         </li>
         <li>
           If you run out of time, we will submit whatever answers you have completed up until that point.
