@@ -29,9 +29,9 @@
         <option
           v-for="option in ['full-time', 'salaried-part-time', 'fee-paid', 'voluntary']"
           :key="option"
-          :value="option | filter"
+          :value="option | lookup"
         >
-          {{ option | filter }}
+          {{ option | lookup }}
         </option>
       </Select>
 
