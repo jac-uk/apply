@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.53.0",
+  "version": "1.53.1",
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
