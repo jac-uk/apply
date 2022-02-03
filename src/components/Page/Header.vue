@@ -18,7 +18,7 @@
               </a>
             </div>
           </div>
-          
+
           <div class="govuk-grid-column-one-third organisation__margin-bottom">
             <button
               v-if="isSignedIn"
@@ -73,13 +73,28 @@
           >feedback</a> will help us improve it.
         </span>
       </p>
+      <Banner
+        class="govuk-!-margin-top-4"
+        status="information"
+      >
+        <span>
+          Our website for qualifying tests has moved to
+          <a
+            :href="onlineTestsURL"
+          >{{ onlineTestsURL }}</a>.
+        </span>
+      </Banner>
     </div>
   </div>
 </template>
 <script>
 import { auth } from '@/firebase';
+import Banner from '@/components/Page/Banner';
 export default {
   name: 'Header',
+  components: {
+    Banner,
+  },
   data(){
     return {
       dropDownExpanded: false,
@@ -97,6 +112,9 @@ export default {
     },
     userName() {
       return this.$store.state.auth.currentUser.displayName ? this.$store.state.auth.currentUser.displayName : this.$store.state.auth.currentUser.email;
+    },
+    onlineTestsURL() {
+      return process.env.VUE_APP_ONLINE_TESTS_URL;
     },
   },
   methods: {
