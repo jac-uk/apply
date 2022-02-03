@@ -468,7 +468,7 @@ function hasApplicationProcess(exercise) {
 }
 
 function informationDeadline(exercise) {
-  if (!exercise) { return false; }
+  if (!exercise) { return null; }
   if (hasApplicationProcess(exercise)) {
     if (exercise._applicationContent && exercise._applicationContent._currentStep && exercise._applicationContent._currentStep.end) {
       return exercise._applicationContent._currentStep.end;
