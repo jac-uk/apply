@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.50.0",
+  "version": "1.54.0",
   "private": true,
   "scripts": {
     "preinstall": "npx npm-force-resolutions",
@@ -29,7 +29,8 @@
     "firebase": "^8.6.0",
     "firebaseui": "^4.6.1",
     "govuk-frontend": "^3.8.0",
-    "jspdf": "^2.3.1",
+    "html2canvas": "^1.0.0-rc.7",
+    "jspdf": "^1.5.3",
     "logrocket": "^1.0.10",
     "vue": "^2.6.12",
     "vue-browser-detect-plugin": "^0.1.13",

@@ -5,6 +5,7 @@ import store from '@/store';
 import SignIn from '@/views/SignIn';
 import SignUp from '@/views/SignUp';
 import ResetPassword from '@/views/ResetPassword';
+import ConfirmResetPassword from '@/views/ConfirmResetPassword';
 
 // Vacancies
 // import Website from '@/Website/Home';
@@ -70,21 +71,12 @@ import AdditionalInformation from '@/views/Apply/AdditionalInformation';
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
-import CharacterChecksProfessionalBodies from '@/views/Apply/CharacterChecks/ProfessionalBodies';
+import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
-import CharacterChecksMoreDetails from '@/views/Apply/CharacterChecks/MoreDetails';
+import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterChecks/OtherProfessionalBodies';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
-import CharacterChecksDeclaration from '@/views/Apply/CharacterChecks/Declaration';
+import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
-
-// Online Tests
-import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
-import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
-import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
-import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
-import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scenario';
-import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
-import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
 
 // Error pages
 import NotFound from '@/views/NotFound.vue';
@@ -193,69 +185,6 @@ const router = new Router({
       meta: {
         title: 'Applications',
       },
-    },
-    {
-      path: '/online-tests',
-      component: QualifyingTests,
-      name: 'qualifying-tests',
-      meta: {
-        requiresAuth: true,
-        title: 'Online Tests | List',
-      },
-    },
-    {
-      path: '/online-tests/:qualifyingTestId',
-      component: QualifyingTest,
-      children: [
-        {
-          path: 'information',
-          component: QualifyingTestInformation,
-          name: 'qualifying-test-information',
-          meta: {
-            requiresAuth: true,
-            title: 'Online Test | Information',
-          },
-        },
-        {
-          path: 'question/:questionNumber',
-          component: QualifyingTestQuestion,
-          name: 'qualifying-test-question',
-          meta: {
-            requiresAuth: true,
-            title: 'Online Test | Question',
-            fullPageMode: true,
-          },
-        },
-        {
-          path: 'scenario/:scenarioNumber/:questionNumber',
-          component: QualifyingTestScenario,
-          name: 'qualifying-test-scenario',
-          meta: {
-            requiresAuth: true,
-            title: 'Online Test | Scenario',
-            fullPageMode: true,
-          },
-        },
-        {
-          path: 'review',
-          component: QualifyingTestReview,
-          name: 'qualifying-test-review',
-          meta: {
-            requiresAuth: true,
-            title: 'Online Test | Review',
-            fullPageMode: true,
-          },
-        },
-        {
-          path: 'submitted',
-          component: QualifyingTestSubmitted,
-          name: 'qualifying-test-submitted',
-          meta: {
-            requiresAuth: true,
-            title: 'Online Test | Submitted',
-          },
-        },
-      ],
     },
     // Apply for a role
     {
@@ -621,12 +550,12 @@ const router = new Router({
               },
             },
             {
-              path: 'professional-bodies',
-              component: CharacterChecksProfessionalBodies,
-              name: 'character-checks-professional-bodies',
+              path: 'professional-details',
+              component: CharacterChecksProfessionalDetails,
+              name: 'character-checks-professional-details',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Professional bodies',
+                title: 'Consent to character checks | Professional details',
               },
             },
             {
@@ -639,12 +568,12 @@ const router = new Router({
               },
             },
             {
-              path: 'more-details',
-              component: CharacterChecksMoreDetails,
-              name: 'character-checks-more-details',
+              path: 'other-professional-bodies',
+              component: CharacterChecksOtherProfessionalBodies,
+              name: 'character-checks-other-professional-bodies',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | More details',
+                title: 'Consent to character checks | Other professional bodies',
               },
             },
             {
@@ -657,12 +586,12 @@ const router = new Router({
               },
             },
             {
-              path: 'declaration',
-              component: CharacterChecksDeclaration,
-              name: 'character-checks-declaration',
+              path: 'consent',
+              component: CharacterChecksConsent,
+              name: 'character-checks-consent',
               meta: {
                 requiresAuth: true,
-                title: 'Consent to character checks | Declaration',
+                title: 'Consent to character checks | Consent',
               },
             },
             {
@@ -700,6 +629,14 @@ const router = new Router({
       component: ResetPassword,
       meta: {
         title: 'Reset your password',
+      },
+    },
+    {
+      path: '/confirm-reset-password',
+      name: 'confirm-reset-password',
+      component: ConfirmResetPassword,
+      meta: {
+        title: 'Confirm your password reset',
       },
     },
   ],

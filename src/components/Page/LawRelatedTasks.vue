@@ -26,6 +26,7 @@
         value="judicial-functions"
         label="The carrying-out of judicial functions of any court or tribunal"
       />
+
       <CheckboxItem
         value="acting-arbitrator"
         label="Acting as an arbitrator"
@@ -99,11 +100,26 @@ export default {
       type: String,
       default: null,
     },
+    showtaskDetails: {
+      required: false,
+      type: Boolean,
+      default: () => false,
+    },
     otherTasks: {
-      required: true,
       type: String,
       default: '',
+      required: true,
     },
+    taskDetails: {
+      type: Object,
+      default: () => {},
+      required: false,
+    },
+  },
+  data() {
+    return {
+      localTaskDetails: { ...this.taskDetails },
+    };
   },
   computed: {
     localTasks: {
@@ -123,11 +139,21 @@ export default {
       },
     },
   },
+  watch: {
+    localTaskDetails: {
+      handler: function(after) {
+        this.$emit('update:taskDetails', after);
+      },
+      deep: true,
+    },
+  },
   methods: {
     validate() {
       this.setError('');
-      if (this.required && this.localTasks.length === 0) {
-        this.setError('Select at least one task you do in this role');
+      if (this.localTasks) {
+        if (this.required && this.localTasks.length === 0) {
+          this.setError('Select at least one task you do in this role');
+        }
       }
     },
   },

@@ -11,8 +11,6 @@ import candidate from '@/store/candidate';
 import invitations from '@/store/invitations';
 import applications from '@/store/applications';
 import application from '@/store/application';
-import qualifyingTestResponse from '@/store/qualifyingTestResponse';
-import qualifyingTestResponses from '@/store/qualifyingTestResponses';
 import logs from '@/store/logs';
 import connectionMonitor from '@/store/connectionMonitor';
 import session from '@/store/session';
@@ -28,18 +26,26 @@ const store = new Vuex.Store({
     invitations,
     applications,
     application,
-    qualifyingTestResponse,
-    qualifyingTestResponses,
     logs,
     connectionMonitor,
     session,
   },
-  state: {},
+  state: {
+    packageVersion: process.env.PACKAGE_VERSION || '0',
+    env: process.env.NODE_ENV,
+  },
   mutations: {
     ...vuexfireMutations,
   },
   actions: {},
-  getters: {},
+  getters: {
+    appVersion: (state) => {
+      return state.packageVersion;
+    },
+    whichEnv: (state) => {
+      return state.env;
+    },
+  },
 });
 
 export default store;

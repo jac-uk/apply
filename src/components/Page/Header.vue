@@ -18,7 +18,7 @@
               </a>
             </div>
           </div>
-          
+
           <div class="govuk-grid-column-one-third organisation__margin-bottom">
             <button
               v-if="isSignedIn"
@@ -54,50 +54,6 @@
               <b>You are now signed in as {{ userName }}</b>
             </span>
           </div>
-          
-          <!-- <div class="govuk-grid-column-one-third organisation__margin-bottom">
-            <div 
-              v-if="isSignedIn"
-              class="moj-button-menu float-right"
-            >
-              <button
-                ref="dropDownRef"
-                class="govuk-button drop-down-button moj-button-menu__toggle-button govuk-button--secondary moj-button-menu__toggle-button--secondary govuk-!-margin-bottom-0"
-                type="button"
-                aria-haspopup="true"
-                :aria-expanded="dropDownExpanded.toString()"
-                @click="toggleExpand"
-              >
-                Account
-              </button>
-              <div
-                class="moj-button-menu__wrapper float-left"
-                role="menu"
-              >
-                <button
-                  class="drop-down-button govuk-!-margin-right-1"
-                  style="pointer-events: none; word-break: break-word;"
-                >
-                  Signed in as {{ userName }}
-                </button>
-                <button
-                  class="govuk-button govuk-button--secondary drop-down-button govuk-!-margin-right-1"
-                  @click="signOut"
-                >
-                  Sign Out
-                </button>
-              </div>
-            </div>
-            <div v-else>
-              <button
-                :disabled="isSignInPage"
-                class="govuk-button govuk-button--secondary float-right"
-                @click="signIn"
-              >
-                Sign In
-              </button>
-            </div>
-          </div> -->
         </div>
       </div>
     </header>
@@ -117,19 +73,28 @@
           >feedback</a> will help us improve it.
         </span>
       </p>
+      <Banner
+        class="govuk-!-margin-top-4"
+        status="information"
+      >
+        <span>
+          Our website for qualifying tests has moved to
+          <a
+            :href="onlineTestsURL"
+          >{{ onlineTestsURL }}</a>.
+        </span>
+      </Banner>
     </div>
   </div>
-  <!-- <button
-    :disabled="isVacanciesPage"
-    class="govuk-button"
-    @click="gotoVacancies"
-  >
-    Vacancies
-  </button> -->
 </template>
 <script>
 import { auth } from '@/firebase';
+import Banner from '@/components/Page/Banner';
 export default {
+  name: 'Header',
+  components: {
+    Banner,
+  },
   data(){
     return {
       dropDownExpanded: false,
@@ -147,6 +112,9 @@ export default {
     },
     userName() {
       return this.$store.state.auth.currentUser.displayName ? this.$store.state.auth.currentUser.displayName : this.$store.state.auth.currentUser.email;
+    },
+    onlineTestsURL() {
+      return process.env.VUE_APP_ONLINE_TESTS_URL;
     },
   },
   methods: {
@@ -168,29 +136,13 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
   .govuk-header {
-      // background-color: #753880 !important;
       background-color: #fafafa !important;
       border-bottom: 1px solid #b1b4b6 !important;
-      // padding: 1.25em 0.625em 0 0.625em;
-      // margin: 0 !important;
-      // width: 99%;
       overflow: hidden;
-      // max-width: $max-width !important;
     .govuk-header__container{
       border-bottom: 0 !important;
     }
-    img {
-      // filter: brightness(0) saturate(1) invert(1);
-    }
   };
-  .moj-button-menu{
-    // width:37px;
-  }
-  @media screen and (min-width: 1200px) {
-    .moj-button-menu {
-      // width:375px;
-    }
-  }
 </style>

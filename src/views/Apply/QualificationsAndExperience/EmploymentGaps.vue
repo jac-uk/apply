@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="checkAndSave"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -19,11 +19,10 @@
         <p class="govuk-body-l">
           Add dates and details of any gaps in employment you may have
         </p>
-
+        
         <RepeatableFields
           v-model="formData.employmentGaps"
-          required
-          :component="repeatableFields.EmploymentGaps"
+          :component="isLegal ? repeatableFields.EmploymentGaps : repeatableFields.NonLegalEmploymentGaps"
         />
 
         <button
@@ -61,23 +60,33 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
-    if (this.$store.getters['vacancy/isLegal']) {
-      return {
-        formId: 'employmentGaps',
-        formData: formData,
-        repeatableFields: {
-          EmploymentGaps: EmploymentGaps,
-        },
-      };
-    } else {
-      return {
-        formId: 'employmentGaps',
-        formData: formData,
-        repeatableFields: {
-          EmploymentGaps: NonLegalEmploymentGaps,
-        },
-      };
-    }
+    return {
+      formId: 'employmentGaps',
+      formData: formData,
+      repeatableFields: {
+        NonLegalEmploymentGaps,
+        EmploymentGaps,
+      },
+    };
+  },
+  methods: {
+    checkAndSave() {
+      if (this.formData.employmentGaps.length){
+        const hasEnteredData = Object.values(this.formData.employmentGaps[0]).some((val) => {
+          if (val instanceof Date) {
+            return true;
+          } else if (val instanceof Array) {
+            return val.length;
+          } else {
+            return !!val;
+          }
+        });
+        if (!hasEnteredData) {
+          this.formData.employmentGaps = [];
+        }
+      } 
+      this.save();
+    },
   },
 };
 </script>

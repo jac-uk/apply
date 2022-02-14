@@ -11,6 +11,7 @@
               <RouterLink
                 class="govuk-link info-link--nav-applications--vacancies"
                 :to="{ name: 'vacancies' }"
+                data-cy="vacancies-link"
               >
                 Vacancies
               </RouterLink>
@@ -20,16 +21,9 @@
                 class="govuk-link info-link--nav-applications--applications"
                 aria-current="page"
                 :to="{ name: 'applications' }"
+                data-cy="applications-link"
               >
                 Applications
-              </RouterLink>
-            </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-applications--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
               </RouterLink>
             </li>
           </ul>
@@ -65,6 +59,14 @@
                   Data is temporarily unavailable.
                 </div>
                 <div v-else>
+                  <div v-if="canContinueWithApplication(application)">
+                    <div
+                      v-if="hasCompletedMoreInformation(application)"
+                      class="govuk-body-s govuk-!-margin-top-0 govuk-!-margin-bottom-1"
+                    >
+                      Your application is complete and <strong>has been received</strong>. However you can continue to make changes until 13:00 on {{ informationDeadline(application) | formatDate }}.
+                    </div>
+                  </div>
                   <RouterLink
                     v-if="canContinueWithApplication(application)"
                     :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
@@ -72,7 +74,8 @@
                     role="button"
                     data-module="govuk-button"
                   >
-                    Continue with application
+                    <span v-if="hasCompletedMoreInformation(application)">Amend application</span>
+                    <span v-else>Continue with application</span>
                   </RouterLink>
                   <RouterLink
                     v-else
@@ -93,13 +96,22 @@
                     View advert
                   </RouterLink>
                   <RouterLink
-                    v-if="application.characterChecks && application.characterChecks.declaration === true"
+                    v-if="application.characterChecks && application.characterChecks.status === 'requested'"
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-intro', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Complete character checks consent form
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.characterChecks && application.characterChecks.status === 'completed'"
                     :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
                     :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
                     role="button"
                     data-module="govuk-button"
                   >
-                    View good character checks consent
+                    View sent character checks consent form
                   </RouterLink>
                 </div>
               </div>
@@ -108,37 +120,6 @@
         </ul>
 
         <hr class="govuk-section-break govuk-section-break--xl">
-
-        <!--
-         <h2 class="govuk-heading-m">
-          Previous applications
-        </h2>
-        <table class="govuk-table">
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Circuit judge</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 17 February 2018
-            </td>
-            <td class="govuk-table__cell">
-              Selected
-            </td>
-          </tr>
-          <tr class="govuk-table__row">
-            <td class="govuk-table__cell">
-              <a href="../../apply-pre-shortlisting//v1-2-court/form-personal.html">086
-                Recorder</a>
-            </td>
-            <td class="govuk-table__cell">
-              Closed 12 April 2017
-            </td>
-            <td class="govuk-table__cell">
-              Not selected
-            </td>
-          </tr>
-        </table> -->
       </div>
     </div>
   </div>
@@ -149,7 +130,7 @@ import {
   mapState
 } from 'vuex';
 import isVacancyOpen from '@/helpers/isVacancyOpen';
-import { isMoreInformationNeeded } from '@/helpers/exerciseHelper';
+import { isMoreInformationNeeded, isApplicationComplete, informationDeadline } from '@/helpers/exerciseHelper';
 
 export default {
   computed: {
@@ -177,13 +158,30 @@ export default {
       case 'draft':
         return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, application.dateExtension);
       case 'applied':
-        // check whether extra info is needed
         return isMoreInformationNeeded(vacancy, application);
       default:
         return false;
       }
     },
-
+    hasCompletedMoreInformation(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      if (isMoreInformationNeeded(vacancy, application)) {
+        if (isApplicationComplete(vacancy, application)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    informationDeadline(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      if (isMoreInformationNeeded(vacancy, application)) {
+        return informationDeadline(vacancy);
+      }
+    },
   },
 };
 </script>

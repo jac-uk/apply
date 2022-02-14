@@ -15,7 +15,7 @@ const config = {
   messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.VUE_APP_FIREBASE_APP_ID,
 };
-firebase.initializeApp(config);
+const functions = firebase.initializeApp(config).functions('europe-west2');
 
 if (process.env.VUE_APP_USE_FUNCTIONS_EMULATOR === 'true') {
   functions.useEmulator('http://localhost', '5001');
@@ -32,7 +32,6 @@ if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
 
 // Other firebase exports
 const auth = firebase.auth;
-const functions = firebase.functions;
 const Timestamp = firebase.firestore.Timestamp;
 
 export { firestore, auth, functions, Timestamp };
