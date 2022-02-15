@@ -78,6 +78,15 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
+// Online Tests
+import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
+import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
+import QualifyingTestInformation from '@/views/QualifyingTests/QualifyingTest/Information';
+import QualifyingTestQuestion from '@/views/QualifyingTests/QualifyingTest/Question';
+import QualifyingTestScenario from '@/views/QualifyingTests/QualifyingTest/Scenario';
+import QualifyingTestReview from '@/views/QualifyingTests/QualifyingTest/Review';
+import QualifyingTestSubmitted from '@/views/QualifyingTests/QualifyingTest/Submitted';
+
 // Error pages
 import NotFound from '@/views/NotFound.vue';
 
@@ -185,6 +194,69 @@ const router = new Router({
       meta: {
         title: 'Applications',
       },
+    },
+    {
+      path: '/online-tests',
+      component: QualifyingTests,
+      name: 'qualifying-tests',
+      meta: {
+        requiresAuth: true,
+        title: 'Online Tests | List',
+      },
+    },
+    {
+      path: '/online-tests/:qualifyingTestId',
+      component: QualifyingTest,
+      children: [
+        {
+          path: 'information',
+          component: QualifyingTestInformation,
+          name: 'qualifying-test-information',
+          meta: {
+            requiresAuth: true,
+            title: 'Online Test | Information',
+          },
+        },
+        {
+          path: 'question/:questionNumber',
+          component: QualifyingTestQuestion,
+          name: 'qualifying-test-question',
+          meta: {
+            requiresAuth: true,
+            title: 'Online Test | Question',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'scenario/:scenarioNumber/:questionNumber',
+          component: QualifyingTestScenario,
+          name: 'qualifying-test-scenario',
+          meta: {
+            requiresAuth: true,
+            title: 'Online Test | Scenario',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'review',
+          component: QualifyingTestReview,
+          name: 'qualifying-test-review',
+          meta: {
+            requiresAuth: true,
+            title: 'Online Test | Review',
+            fullPageMode: true,
+          },
+        },
+        {
+          path: 'submitted',
+          component: QualifyingTestSubmitted,
+          name: 'qualifying-test-submitted',
+          meta: {
+            requiresAuth: true,
+            title: 'Online Test | Submitted',
+          },
+        },
+      ],
     },
     // Apply for a role
     {

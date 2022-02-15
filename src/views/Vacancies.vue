@@ -18,7 +18,6 @@
                 class="govuk-link info-link--nav-vacancies--vacancies"
                 :aria-current="this.$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
-                data-cy="vacancies-link"
               >
                 Vacancies
               </RouterLink>
@@ -27,9 +26,16 @@
               <RouterLink
                 class="govuk-link info-link--nav-vacancies--applications"
                 :to="{ name: 'applications' }"
-                data-cy="applications-link"
               >
                 Applications
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
+                class="govuk-link info-link--nav-vacancies--qualifying-tests"
+                :to="{ name: 'qualifying-tests' }"
+              >
+                Online tests
               </RouterLink>
             </li>
           </ul>
