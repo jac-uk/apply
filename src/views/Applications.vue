@@ -65,6 +65,14 @@
                   Data is temporarily unavailable.
                 </div>
                 <div v-else>
+                  <div v-if="canContinueWithApplication(application)">
+                    <div
+                      v-if="hasCompletedMoreInformation(application)"
+                      class="govuk-body-s govuk-!-margin-top-0 govuk-!-margin-bottom-1"
+                    >
+                      Your application is complete and <strong>has been received</strong>. However you can continue to make changes until 13:00 on {{ informationDeadline(application) | formatDate }}.
+                    </div>
+                  </div>
                   <RouterLink
                     v-if="canContinueWithApplication(application)"
                     :class="`govuk-button moj-button-menu__item info-link--applications--continue-with-application-${application.exerciseId}`"
@@ -72,7 +80,8 @@
                     role="button"
                     data-module="govuk-button"
                   >
-                    Continue with application
+                    <span v-if="hasCompletedMoreInformation(application)">Amend application</span>
+                    <span v-else>Continue with application</span>
                   </RouterLink>
                   <RouterLink
                     v-else
@@ -127,7 +136,7 @@ import {
   mapState
 } from 'vuex';
 import isVacancyOpen from '@/helpers/isVacancyOpen';
-import { isMoreInformationNeeded } from '@/helpers/exerciseHelper';
+import { isMoreInformationNeeded, isApplicationComplete, informationDeadline } from '@/helpers/exerciseHelper';
 
 export default {
   computed: {
@@ -155,13 +164,30 @@ export default {
       case 'draft':
         return isVacancyOpen(vacancy.applicationOpenDate, vacancy.applicationCloseDate, application.dateExtension);
       case 'applied':
-        // check whether extra info is needed
         return isMoreInformationNeeded(vacancy, application);
       default:
         return false;
       }
     },
-
+    hasCompletedMoreInformation(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      if (isMoreInformationNeeded(vacancy, application)) {
+        if (isApplicationComplete(vacancy, application)) {
+          return true;
+        }
+      }
+      return false;
+    },
+    informationDeadline(application) {
+      if (!application) return false;
+      const vacancy = this.$store.getters['vacancies/getVacancy'](application.exerciseId);
+      if (!vacancy) return false;
+      if (isMoreInformationNeeded(vacancy, application)) {
+        return informationDeadline(vacancy);
+      }
+    },
   },
 };
 </script>
