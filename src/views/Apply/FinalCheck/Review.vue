@@ -905,7 +905,7 @@
 <script>
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
-import JsPDF from 'jspdf';
+import jsPDF from 'jspdf';
 import ApplyMixIn from '../ApplyMixIn';
 import Warning from '@/components/Page/Warning';
 import PersonalDetails from './PersonalDetails';
@@ -1001,14 +1001,16 @@ export default {
       }
     },
     downloadAsPdf() {
-      const pdf = new JsPDF('portrait', 'pt', 'a4');
-      pdf.setFontSize(14);
-      pdf.html(
+      const pdf = new jsPDF();
+      pdf.fromHTML(
         this.$refs['download-as-pdf-div'],
-        { x: 15, y: 15, width: 210, html2canvas: { scale: 0.70 } }
-      ).then(() => {
-        pdf.save('judicial-appointments-application.pdf');
-      });
+        15,
+        15,
+        {
+          width: 170,
+        }
+      );
+      pdf.save('judicial-appointments-application.pdf');
     },
   },
 };
