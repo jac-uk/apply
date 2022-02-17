@@ -23,8 +23,8 @@
               {{ item.title }}
             </p>
             <!-- eslint-disable -->
-            <div 
-              class="govuk-body" 
+            <div
+              class="govuk-body"
               v-html="item.text"
             />
             <!-- eslint-enable -->
@@ -123,6 +123,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -178,6 +179,15 @@ export default {
         outcome = `${outcome  }.${  fileName.split('.').pop()}`;
       }
       return outcome;
+    },
+  },
+  methods: {
+    logEventAfterSave() {
+      logEvent('info', 'Statement of suitability uploaded', {
+        applicationId: this.applicationId,
+        candidateName: this.application.personalDetails.fullName,
+        exerciseRef: this.application.exerciseRef,
+      });
     },
   },
 };
