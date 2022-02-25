@@ -24,8 +24,8 @@
     "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "engines": { 
-    "node": "^16",
-    "npm": "^7"
+    "node": "16.5.0",
+    "npm": "7.19.1"
   },
   "dependencies": {
     "@jac-uk/jac-kit": "0.0.37",
