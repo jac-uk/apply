@@ -64,7 +64,12 @@
     "sass": "^1.32.13",
     "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.12",
-    "webpack": "^4.44.1"
+    "webpack": "^4.44.1",
+    "highlight.js": ">=10.4.1",
+    "node-fetch": ">=2.6.7",
+    "glob-parent": ">=5.1.2",
+    "is-svg": ">=4.3.0",
+    "y18n": ">=4.0.1"
   },
   "resolutions": {
     "lodash.merge": "4.6.2",
