@@ -29,9 +29,9 @@
             href="#"
             class="govuk-link govuk-body-m change-link"
             style="display:inline-block;"
-            @click="downloadAsPdf"
+            @click="downloadHTML"
           >
-            Download As PDF
+            Print or Download this page
           </a>
         </div>
         <div
@@ -905,7 +905,6 @@
 <script>
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import BackLink from '@/components/BackLink';
-import jsPDF from 'jspdf';
 import ApplyMixIn from '../ApplyMixIn';
 import Warning from '@/components/Page/Warning';
 import PersonalDetails from './PersonalDetails';
@@ -1000,17 +999,8 @@ export default {
         this.scrollToTop();
       }
     },
-    downloadAsPdf() {
-      const pdf = new jsPDF();
-      pdf.fromHTML(
-        this.$refs['download-as-pdf-div'],
-        15,
-        15,
-        {
-          width: 170,
-        }
-      );
-      pdf.save('judicial-appointments-application.pdf');
+    downloadHTML() {
+      window.print();
     },
   },
 };

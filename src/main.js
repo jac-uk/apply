@@ -7,7 +7,6 @@ import { auth } from '@/firebase';
 import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import VueGtag from 'vue-gtag';
-import LogRocket from 'logrocket';
 import browserDetect from 'vue-browser-detect-plugin';
 
 if (process.env.NODE_ENV !== 'development') {
@@ -15,7 +14,6 @@ if (process.env.NODE_ENV !== 'development') {
     dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
     integrations: [new Integrations.Vue({ Vue, attachProps: true })],
   });
-  LogRocket.init('vpm4kc/jac');
 
   Vue.use(VueGtag, {
     config: { id: 'UA-153516887-1' },
