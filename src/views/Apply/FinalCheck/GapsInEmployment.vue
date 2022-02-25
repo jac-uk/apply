@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="application.employmentGaps.length"
+      v-if="application.employmentGaps && application.employmentGaps.length"
     >
       <dl
         v-for="item in application.employmentGaps"
