@@ -37,6 +37,9 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+    applicationId() {
+      return this.$route.params.applicationId;
+    },
     application() {
       return this.$store.state.application.record;
     },
@@ -128,8 +131,12 @@ export default {
       if (this.isValid() && this.formId) {
         this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
+        this.logEventAfterSave();
         this.$router.push({ name: 'task-list' });
       }
+    },
+    logEventAfterSave() {
+      // do nothing - can be overriden in parent class
     },
   },
 };
