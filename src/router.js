@@ -21,6 +21,10 @@ import EligibilityCheck from '@/views/Eligibility/EligibilityCheck';
 import EligibilityPass from '@/views/Eligibility/EligibilityPass';
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
+//GDPR
+import GDPR from '@/views/GDPR/GDPR';
+import GDPRCheck from '@/views/GDPR/GDPRCheck';
+
 // Applications
 import Applications from '@/views/Applications';
 import PersonalDetails from '@/views/PersonalDetails';
@@ -181,6 +185,23 @@ const router = new Router({
               name: 'eligibility-fail',
               meta: {
                 title: 'Eligibility Fail',
+              },
+            },
+          ],
+        },
+        {
+          path: 'GDPR',
+          component: GDPR,
+          meta: {
+            title: 'GDPR Checker',
+          },
+          children: [
+            {
+              path: '',
+              component: GDPRCheck,
+              name: 'GDPR',
+              meta: {
+                title: 'GDPR Check',
               },
             },
           ],

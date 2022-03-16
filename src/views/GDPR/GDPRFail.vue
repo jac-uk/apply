@@ -16,16 +16,6 @@
     >
       Back to JAC homepage
     </RouterLink>
-
-    <p class="govuk-body-m">
-      <RouterLink
-        class="govuk-link info-link--eligibility-fail--continue-to-apply"
-        data-module="govuk-button"
-        :to="GDPRLink"
-      >
-        Continue to apply
-      </RouterLink>
-    </p>
   </div>
 </template>
 
@@ -39,8 +29,8 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    GDPRLink() {
-      return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
+    applyLink() {
+      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
     },
   },
 };
