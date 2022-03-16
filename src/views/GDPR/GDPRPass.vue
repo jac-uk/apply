@@ -12,7 +12,7 @@
     <RouterLink
       class="govuk-button info-link--eligibility-pass--continue"
       data-module="govuk-button"
-      :to="GDPRLink"
+      :to="applyLink"
     >
       Continue
     </RouterLink>
@@ -29,8 +29,8 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    GDPRLink() {
-      return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
+    applyLink() {
+      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
     },
   },
 };
