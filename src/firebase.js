@@ -22,11 +22,13 @@ const firestore = firebase.firestore();
 
 // App check
 const appCheck = firebase.appCheck();
-appCheck.activate(process.env.VUE_APP_RECAPTCHA_TOKEN);
+if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
+  appCheck.activate(process.env.VUE_APP_RECAPTCHA_TOKEN);
+}
 
 // Other firebase exports
 const auth = firebase.auth;
 const Timestamp = firebase.firestore.Timestamp;
 
-export { firestore, auth, functions, Timestamp };
+export { firestore, auth, functions, appCheck, Timestamp };
 export default firebase;
