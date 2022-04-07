@@ -36,6 +36,7 @@
         </div>
         <div
           ref="download-as-pdf-div"
+          style="letter-spacing: 0.01px;"
         >
           <h1 class="govuk-heading-l">
             {{ vacancy.name }}
