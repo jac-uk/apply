@@ -23,8 +23,8 @@
               {{ item.title }}
             </p>
             <!-- eslint-disable -->
-            <div 
-              class="govuk-body" 
+            <div
+              class="govuk-body"
               v-html="item.text"
             />
             <!-- eslint-enable -->
@@ -125,6 +125,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import DownloadLink from '@/components/DownloadLink';
 import FileUpload from '@/components/Form/FileUpload';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -177,6 +178,15 @@ export default {
         }
       }
       return outcome;
+    },
+  },
+  methods: {
+    logEventAfterSave() {
+      logEvent('info', 'Self-assessment & competencies uploaded', {
+        applicationId: this.applicationId,
+        candidateName: this.application.personalDetails.fullName,
+        exerciseRef: this.application.exerciseRef,
+      });
     },
   },
 };

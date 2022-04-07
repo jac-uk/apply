@@ -43,6 +43,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import ApplyMixIn from '../ApplyMixIn';
 import BackLink from '@/components/BackLink';
 import FileUpload from '@/components/Form/FileUpload';
+import { logEvent } from '@/helpers/logEvent';
 
 export default {
   components: {
@@ -63,6 +64,15 @@ export default {
       formId: 'coveringLetter',
       formData: formData,
     };
+  },
+  methods: {
+    logEventAfterSave() {
+      logEvent('info', 'Covering letter uploaded', {
+        applicationId: this.applicationId,
+        candidateName: this.application.personalDetails.fullName,
+        exerciseRef: this.application.exerciseRef,
+      });
+    },
   },
 };
 </script>
