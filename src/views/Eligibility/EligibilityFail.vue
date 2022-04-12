@@ -21,7 +21,7 @@
       <RouterLink
         class="govuk-link info-link--eligibility-fail--continue-to-apply"
         data-module="govuk-button"
-        :to="GDPRLink"
+        :to="ContinueLink"
       >
         Continue to apply
       </RouterLink>
@@ -39,7 +39,7 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    GDPRLink() {
+    ContinueLink() {
       return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
     },
   },
