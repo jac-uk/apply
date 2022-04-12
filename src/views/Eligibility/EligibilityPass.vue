@@ -12,7 +12,7 @@
     <RouterLink
       class="govuk-button info-link--eligibility-pass--continue"
       data-module="govuk-button"
-      :to="GDPRLink"
+      :to="ContinueLink"
     >
       Continue
     </RouterLink>
@@ -29,7 +29,7 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    GDPRLink() {
+    ContinueLink() {
       return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
     },
   },
