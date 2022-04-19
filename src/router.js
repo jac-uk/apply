@@ -304,9 +304,9 @@ const router = new Router({
           component: MainCharacterInformation,
           children: [
             {
-             path: 'form-v1',
-             component: ApplyCharacterInformation,
-             name: 'character-information-form-v1',
+              path: 'form-v1',
+              component: ApplyCharacterInformation,
+              name: 'character-information-form-v1',
               meta: {
                 requiresAuth: true,
                 title: 'Character information',

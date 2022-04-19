@@ -23,14 +23,8 @@
 
 export default {
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    isSignedIn() {
-      return this.$store.getters['auth/isSignedIn'];
-    },
     ContinueLink() {
-      return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
+      return { name: 'GDPR' };
     },
   },
 };

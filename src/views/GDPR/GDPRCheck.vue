@@ -58,15 +58,22 @@ export default {
     };
   },
   computed: {
-    vacancy () {
+    vacancy() {
       return this.$store.state.vacancy.record;
+    },
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
+    ContinueLink() {
+      return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
     },
   },
   methods: {
     save () {
       this.validate();
       if (this.isValid()) {
-        this.$router.push(`/apply/${this.vacancy.id}`);
+        this.$router.push(`/apply/${this.vacancy.id}`)
+          .catch(() => {}); //capture error for redirect to sign-in
       }
     },
   },

@@ -17,22 +17,5 @@ export default {
       return this.$store.state.vacancy.record;
     },
   },
-  mounted() {
-    const today = Date.now();
-
-    if (this.$store.getters['vacancy/getOpenDate'] > today) {
-      this.redirectToVacancyDetails();
-    }
-  },
-  methods: {
-    redirectToVacancyDetails() {
-      this.$router.replace({
-        name: 'vacancy-details',
-        params: {
-          id: this.vacancy.id,
-        },
-      });
-    },
-  },
 };
 </script>
