@@ -40,7 +40,7 @@ export default {
       return this.$store.getters['auth/isSignedIn'];
     },
     ContinueLink() {
-      return this.isSignedIn ? { name: 'GDPR' } : { name: 'sign-in' };
+      return { name: 'GDPR' };
     },
   },
 };
