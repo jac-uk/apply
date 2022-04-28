@@ -14,15 +14,32 @@
         We sometimes need to share the personal information we process with the individual themselves and also with other organizations. Where this is necessary we will comply with all aspects of the data protection laws. <br>
         <br>
         The organizations we share some aspects of your personal information with may include: <br>
-        <br>
-        - The judiciary (for statutory consultation) <br>
-        - Independent assessors (the individuals nominated by you) <br>
-        - HMRC (for tax and financial information) <br>
-        - ACRO Criminal Records Office (for criminal record checks) <br>
-        - Professional bodies (including any relevant regulatory bodies) (for conduct verification) <br>
-        - Judicial Office, HMCTS, the Ministry of Justice and Judicial College (for purposes relating to the appointment of judges) <br>
-        - Welsh Government (for devolved appointments) <br>
-        - Judicial Appointments and Conduct Ombudsman (only if you make a complaint to them)<br>
+        <ul class="govuk-list govuk-list--bullet">
+          <li>
+            The judiciary (for statutory consultation) <br>
+          </li>
+          <li>
+            Independent assessors (the individuals nominated by you) <br>
+          </li>
+          <li>
+            HMRC (for tax and financial information) <br>
+          </li>
+          <li>
+            ACRO Criminal Records Office (for criminal record checks) <br>
+          </li>
+          <li>
+            Professional bodies (including any relevant regulatory bodies) (for conduct verification) <br>
+          </li>
+          <li>
+            Judicial Office, HMCTS, the Ministry of Justice and Judicial College (for purposes relating to the appointment of judges) <br>
+          </li>
+          <li>
+            Welsh Government (for devolved appointments) <br>
+          </li>
+          <li>
+            Judicial Appointments and Conduct Ombudsman (only if you make a complaint to them)<br>
+          </li>
+        </ul>
       </p>
 
       <Checkbox

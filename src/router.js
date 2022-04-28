@@ -192,9 +192,6 @@ const router = new Router({
         {
           path: 'GDPR',
           component: GDPR,
-          meta: {
-            title: 'GDPR Checker',
-          },
           children: [
             {
               path: '',
