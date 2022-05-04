@@ -12,7 +12,7 @@
     <RouterLink
       class="govuk-button info-link--eligibility-pass--continue"
       data-module="govuk-button"
-      :to="applyLink"
+      :to="ContinueLink"
     >
       Continue
     </RouterLink>
@@ -23,14 +23,8 @@
 
 export default {
   computed: {
-    vacancy() {
-      return this.$store.state.vacancy.record;
-    },
-    isSignedIn() {
-      return this.$store.getters['auth/isSignedIn'];
-    },
-    applyLink() {
-      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
+    ContinueLink() {
+      return { name: 'GDPR' };
     },
   },
 };

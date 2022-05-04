@@ -21,7 +21,7 @@
       <RouterLink
         class="govuk-link info-link--eligibility-fail--continue-to-apply"
         data-module="govuk-button"
-        :to="applyLink"
+        :to="ContinueLink"
       >
         Continue to apply
       </RouterLink>
@@ -39,8 +39,8 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-    applyLink() {
-      return this.isSignedIn ? `/apply/${this.vacancy.id}` : { name: 'sign-in' };
+    ContinueLink() {
+      return { name: 'GDPR' };
     },
   },
 };

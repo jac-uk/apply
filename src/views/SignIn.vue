@@ -119,7 +119,7 @@ export default {
 
             this.$store.dispatch('auth/setCurrentUser', userCredential.user);
             if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
+              this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
             } else {
               this.$router.push({ name: 'applications' });
             }

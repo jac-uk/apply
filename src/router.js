@@ -21,6 +21,10 @@ import EligibilityCheck from '@/views/Eligibility/EligibilityCheck';
 import EligibilityPass from '@/views/Eligibility/EligibilityPass';
 import EligibilityFail from '@/views/Eligibility/EligibilityFail';
 
+//GDPR
+import GDPR from '@/views/GDPR/GDPR';
+import GDPRCheck from '@/views/GDPR/GDPRCheck';
+
 // Applications
 import Applications from '@/views/Applications';
 import PersonalDetails from '@/views/PersonalDetails';
@@ -185,6 +189,20 @@ const router = new Router({
             },
           ],
         },
+        {
+          path: 'GDPR',
+          component: GDPR,
+          children: [
+            {
+              path: '',
+              component: GDPRCheck,
+              name: 'GDPR',
+              meta: {
+                title: 'GDPR Check',
+              },
+            },
+          ],
+        },
       ],
     },
     {
@@ -283,9 +301,9 @@ const router = new Router({
           component: MainCharacterInformation,
           children: [
             {
-             path: 'form-v1',
-             component: ApplyCharacterInformation,
-             name: 'character-information-form-v1',
+              path: 'form-v1',
+              component: ApplyCharacterInformation,
+              name: 'character-information-form-v1',
               meta: {
                 requiresAuth: true,
                 title: 'Character information',
