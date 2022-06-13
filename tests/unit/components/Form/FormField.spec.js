@@ -205,13 +205,21 @@
 
       describe('regex', () => {
           it('has email and telephone patterns', () => {
-            expect(data.regex).toContainAllKeys(['email', 'tel']);
+            expect(data.regex).toContainKeys(['email', 'tel']);
           });
           it('email matches pattern', () => {
             expect('test@test.com').toMatch(data.regex.email);
           });
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
+          });
+          it('has nino pattern', () => {
+            expect(data.regex).toContainKeys(['nino']);
+          });
+          it('nino matches pattern', () => {
+            expect('AB123456E').not.toMatch(data.regex.nino);
+            expect('AB123456D').toMatch(data.regex.nino);
+            expect('AB 12 34 56 D').toMatch(data.regex.nino);
           });
       });
     });
