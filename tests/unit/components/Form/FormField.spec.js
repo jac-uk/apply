@@ -205,13 +205,21 @@
 
       describe('regex', () => {
           it('has email and telephone patterns', () => {
-            expect(data.regex).toContainAllKeys(['email', 'tel']);
+            expect(data.regex).toContainKeys(['email', 'tel']);
           });
           it('email matches pattern', () => {
             expect('test@test.com').toMatch(data.regex.email);
           });
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
+          });
+          it('has postcode pattern', () => {
+            expect(data.regex).toContainKeys(['postcode']);
+          });
+          it('postcode matches pattern', () => {
+            expect('181RJ').not.toMatch(data.regex.postcode);
+            expect('MK181RJ').toMatch(data.regex.postcode);
+            expect('MK18 1RJ').toMatch(data.regex.postcode);
           });
       });
     });
