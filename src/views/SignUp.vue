@@ -94,6 +94,7 @@
             v-model="formData.nationalInsuranceNumber"
             label="National Insurance number"
             hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
+            type="nino"
             required
           />
 

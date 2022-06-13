@@ -57,6 +57,7 @@ export default {
         // eslint-disable-next-line
         email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
         tel: /^\+?[\d() -]+/,
+        nino: /^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](?:\s?\d){6}\s?[A-D]$/i,
       },
     };
   },
@@ -129,6 +130,14 @@ export default {
         if (this.type && this.type === 'number' && value && this.numMax) {
           if (value > this.numMax) {
             this.setError(`Please enter a number lower than ${this.numMax}`);
+          }
+        }
+
+        if (this.type && this.type === 'nino' && value) {
+          value = value.trim().replace(/ /g, '').toUpperCase();
+          this.text = value;
+          if (!this.regex.nino.test(value)) {
+            this.setError(`Enter a valid value for ${this.label}`);
           }
         }
 
