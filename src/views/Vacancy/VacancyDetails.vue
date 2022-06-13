@@ -2,10 +2,10 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
-        {{ vacancy.name }}
+        {{ vacancy.name }} {{ advertType }}
       </h1>
 
-      <p v-if="vacancy.immediateStart">
+      <p v-if="vacancy.immediateStart && listShowNumberOfVacancies">
         <span class="govuk-body govuk-!-font-weight-bold">
           Number of vacancies:
         </span>
@@ -13,10 +13,10 @@
           {{ vacancy.immediateStart }}
         </span>
       </p>
-      <p v-if="vacancy.location">
+      <p v-if="vacancy.location && listShowLocation">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
       </p>
-      <p v-if="vacancy.appointmentType == 'salaried'">
+      <p v-if="vacancy.appointmentType == 'salaried' && listShowAppointmentType">
         <span class="govuk-body govuk-!-font-weight-bold">
           Salary:
         </span>
@@ -45,7 +45,7 @@
       </p>
 
       <div
-        v-if="timeline.length"
+        v-if="timeline.length && advertTypeFull"
       >
         <h2 class="govuk-heading-l">
           Timeline
@@ -65,7 +65,7 @@
       <!-- eslint-enable -->
 
       <RouterLink
-        v-if="isVacancyOpen && !vacancy.inviteOnly"
+        v-if="listShowApplyButton && isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
         :to="{ name: 'eligibility' }"
@@ -182,6 +182,7 @@ import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink';
+import { ADVERT_TYPES } from '@/helpers/constants';
 
 export default {
   components: {
@@ -223,6 +224,24 @@ export default {
         return true;
       }
       return false;
+    },
+    advertType() {
+      return this.vacancy.advertType ? this.vacancy.advertType : ADVERT_TYPES.FULL;
+    },
+    advertTypeFull() {
+      return this.advertType === ADVERT_TYPES.FULL;
+    },
+    listShowApplyButton() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
+    },
+    listShowAppointmentType() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
+    },
+    listShowNumberOfVacancies() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
+    },
+    listShowLocation() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
   },
   mounted() {

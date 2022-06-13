@@ -34,6 +34,13 @@ const QUALIFYING_TEST_RESPONSE = {
   },
 };
 
+const ADVERT_TYPES = {
+  LISTING: 'listing',
+  BASIC: 'basic',
+  FULL: 'full',
+  EXTERNAL: 'external',
+};
+
 const DEFAULT = {
   YES: 'Yes',
   NO: 'No',
@@ -46,6 +53,7 @@ export {
   STATUS,
   QUALIFYING_TEST,
   QUALIFYING_TEST_RESPONSE,
+  ADVERT_TYPES,
   DEFAULT,
   WELSH_POSTS_CONTACT_MAILBOX,
   WELSH_POSTS_EMAIL_SUBJECT
