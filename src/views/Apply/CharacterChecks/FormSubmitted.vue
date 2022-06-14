@@ -10,7 +10,7 @@
         What happens next
       </h2>
       <p class="govuk-body">
-        This information will be used by the Commission to undertake character checks.
+        This information will be used by the Judicial Appointments Commission to undertake character checks.
       </p>
       <p class="govuk-body">
         We may get in touch to ask for more information. In the meantime refer to the timeline, given in your exercise to understand the next steps ahead.
