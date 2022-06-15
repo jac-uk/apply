@@ -68,7 +68,8 @@
   </form>
 </template>
 <script>
-import firebase from '@/firebase';
+import firebase, { functions } from '@/firebase';
+import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 import BackLink from '@/components/BackLink';
 import Form from '@/components/Form/Form';
 import Checkbox from '@/components/Form/Checkbox';
@@ -101,6 +102,9 @@ export default {
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
   },
+  destroyed() {
+    this.$store.dispatch('exercise/unbind');
+  },
   methods: {
     async save() {
       this.validate();
@@ -109,8 +113,26 @@ export default {
           this.application.characterChecks.status = 'completed';
           this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
         }
+        
+        await this.sendEmail();
+
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'character-checks-form-submitted' });
+      }
+    },
+    async sendEmail() {
+      const exercise = await this.$store.dispatch('exercise/bind', this.application.exerciseId);
+      if (exercise) {
+        const applicationId = this.$store.state.application.record.id;
+        const record = this.$store.state.exercise.record;
+        const date = record.characterChecksReturnDate;
+        await functions.httpsCallable('sendCharacterCheckRequests')({
+          items: [applicationId],
+          type: 'submit',
+          exerciseMailbox: record.exerciseMailbox,
+          exerciseManagerName: record.emailSignatureName,
+          dueDate: formatDate(date),
+        });
       }
     },
   },

@@ -16,6 +16,7 @@ import qualifyingTestResponses from '@/store/qualifyingTestResponses';
 import logs from '@/store/logs';
 import connectionMonitor from '@/store/connectionMonitor';
 import session from '@/store/session';
+import exercise from '@/store/exercise';
 
 const store = new Vuex.Store({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
@@ -33,6 +34,7 @@ const store = new Vuex.Store({
     logs,
     connectionMonitor,
     session,
+    exercise,
   },
   state: {
     packageVersion: process.env.PACKAGE_VERSION || '0',
