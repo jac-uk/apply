@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
       <h1 class="govuk-heading-xl">
-        {{ vacancy.name }} {{ advertType }}
+        {{ vacancy.name }}
       </h1>
 
       <p v-if="vacancy.immediateStart && listShowNumberOfVacancies">
@@ -51,6 +51,40 @@
           Timeline
         </h2>
         <Timeline :data="timeline" />
+      </div>
+
+      <div v-if="!advertTypeFull">
+        <p>
+          <span
+            class="govuk-body govuk-!-font-weight-bold"
+          >
+            <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+          </span>
+          <span
+            v-if="vacancy.applicationOpenDate"
+            class="govuk-body"
+          >
+            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+          </span>
+          <span
+            v-else
+            class="govuk-body"
+          >
+            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+          </span>
+        </p>
+        <p v-if="vacancy.applicationCloseDate">
+          <span
+            class="govuk-body govuk-!-font-weight-bold"
+          >
+            <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+          </span>
+          <span
+            class="govuk-body"
+          >
+            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+          </span>
+        </p>
       </div>
 
       <h2 class="govuk-heading-l">
