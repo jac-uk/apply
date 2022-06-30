@@ -5,7 +5,7 @@
         {{ vacancy.name }}
       </h1>
 
-      <p v-if="vacancy.immediateStart && listShowNumberOfVacancies">
+      <p v-if="vacancy.immediateStart && showNumberOfVacancies">
         <span class="govuk-body govuk-!-font-weight-bold">
           Number of vacancies:
         </span>
@@ -13,10 +13,10 @@
           {{ vacancy.immediateStart }}
         </span>
       </p>
-      <p v-if="vacancy.location && listShowLocation">
+      <p v-if="vacancy.location && showLocation">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
       </p>
-      <p v-if="vacancy.appointmentType == 'salaried' && listShowAppointmentType">
+      <p v-if="vacancy.appointmentType == 'salaried' && showAppointmentType">
         <span class="govuk-body govuk-!-font-weight-bold">
           Salary:
         </span>
@@ -99,7 +99,7 @@
       <!-- eslint-enable -->
 
       <RouterLink
-        v-if="listShowApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+        v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
         :to="{ name: 'eligibility' }"
@@ -265,16 +265,16 @@ export default {
     advertTypeFull() {
       return this.advertType === ADVERT_TYPES.FULL;
     },
-    listShowApplyButton() {
+    showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
     },
-    listShowAppointmentType() {
+    showAppointmentType() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
-    listShowNumberOfVacancies() {
+    showNumberOfVacancies() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
-    listShowLocation() {
+    showLocation() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
   },
