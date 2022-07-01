@@ -5,7 +5,7 @@
         {{ vacancy.name }}
       </h1>
 
-      <p v-if="vacancy.immediateStart">
+      <p v-if="vacancy.immediateStart && showNumberOfVacancies">
         <span class="govuk-body govuk-!-font-weight-bold">
           Number of vacancies:
         </span>
@@ -13,10 +13,10 @@
           {{ vacancy.immediateStart }}
         </span>
       </p>
-      <p v-if="vacancy.location">
+      <p v-if="vacancy.location && showLocation">
         <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
       </p>
-      <p v-if="vacancy.appointmentType == 'salaried'">
+      <p v-if="vacancy.appointmentType == 'salaried' && showAppointmentType">
         <span class="govuk-body govuk-!-font-weight-bold">
           Salary:
         </span>
@@ -45,12 +45,46 @@
       </p>
 
       <div
-        v-if="timeline.length"
+        v-if="timeline.length && advertTypeFull"
       >
         <h2 class="govuk-heading-l">
           Timeline
         </h2>
         <Timeline :data="timeline" />
+      </div>
+
+      <div v-if="!advertTypeFull">
+        <p>
+          <span
+            class="govuk-body govuk-!-font-weight-bold"
+          >
+            <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
+          </span>
+          <span
+            v-if="vacancy.applicationOpenDate"
+            class="govuk-body"
+          >
+            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+          </span>
+          <span
+            v-else
+            class="govuk-body"
+          >
+            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+          </span>
+        </p>
+        <p v-if="vacancy.applicationCloseDate">
+          <span
+            class="govuk-body govuk-!-font-weight-bold"
+          >
+            <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+          </span>
+          <span
+            class="govuk-body"
+          >
+            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+          </span>
+        </p>
       </div>
 
       <h2 class="govuk-heading-l">
@@ -65,7 +99,7 @@
       <!-- eslint-enable -->
 
       <RouterLink
-        v-if="isVacancyOpen && !vacancy.inviteOnly"
+        v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
         :to="{ name: 'eligibility' }"
@@ -182,6 +216,7 @@ import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink';
+import { ADVERT_TYPES } from '@/helpers/constants';
 
 export default {
   components: {
@@ -223,6 +258,24 @@ export default {
         return true;
       }
       return false;
+    },
+    advertType() {
+      return this.vacancy.advertType ? this.vacancy.advertType : ADVERT_TYPES.FULL;
+    },
+    advertTypeFull() {
+      return this.advertType === ADVERT_TYPES.FULL;
+    },
+    showApplyButton() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
+    },
+    showAppointmentType() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
+    },
+    showNumberOfVacancies() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
+    },
+    showLocation() {
+      return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
   },
   mounted() {
