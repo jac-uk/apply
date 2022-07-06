@@ -20,18 +20,7 @@
         {{ application.personalDetails.email }}
       </p> -->
 
-      <div v-if="vacancy.referenceNumber === 'JAC00014'">
-        <h2 class="govuk-heading-m">
-          What happens next?
-        </h2>
-
-        <p class="govuk-body">
-          We’ll contact you by 9 March 2020 to advise whether an online qualifying
-          test will be taking place. If you’ve not heard from us by this date,
-          please contact the selection exercise team.
-        </p>
-      </div>
-      <div v-else-if="hasApplicationProcess">
+      <div v-if="hasApplicationProcess">
         <h2 class="govuk-heading-m">
           What happens next?
         </h2>
@@ -62,11 +51,16 @@
         <h2 class="govuk-heading-m">
           What happens next?
         </h2>
-        <p class="govuk-body">
+        <!-- <p class="govuk-body">
           We'll now decide if you should be shortlisted for this role.
         </p>
         <p class="govuk-body">
           We'll email you in {{ vacancy.shortlistingOutcomeDate | formatDate('month') }} to let you know either way.
+        </p> -->
+        <p class="govuk-body">
+          Thank you for your application.
+          We will be in touch in due course.
+          Please refer to the website for details of this selection exercise and dates of the next stage in the process.
         </p>
       </div>
 
