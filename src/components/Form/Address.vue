@@ -44,6 +44,7 @@
       v-model="value.postcode"
       required
       label="Postcode"
+      type="postcode"
     />
   </div>
 </template>
