@@ -221,6 +221,14 @@
             expect('MK181RJ').toMatch(data.regex.postcode);
             expect('MK18 1RJ').toMatch(data.regex.postcode);
           });
+          it('has nino pattern', () => {
+            expect(data.regex).toContainKeys(['nino']);
+          });
+          it('nino matches pattern', () => {
+            expect('AB123456E').not.toMatch(data.regex.nino);
+            expect('AB123456D').toMatch(data.regex.nino);
+            expect('AB 12 34 56 D').toMatch(data.regex.nino);
+          });
       });
     });
 
