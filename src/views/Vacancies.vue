@@ -69,7 +69,7 @@
             >
               <div v-if="!vacancy.inviteOnly">
                 <RouterLink
-                  v-if="vacancy.aboutTheRole"
+                  v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
                   class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
                   :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                 >
@@ -424,6 +424,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { ADVERT_TYPES } from '@/helpers/constants';
 
 export default {
   computed: {
@@ -438,6 +439,12 @@ export default {
   },
   created() {
     this.$store.dispatch('vacancies/bind');
+  },
+  methods: {
+    isAdvertTypeListing(value) {
+      const returnValue = value && value === ADVERT_TYPES.LISTING;
+      return returnValue;
+    },
   },
 };
 </script>

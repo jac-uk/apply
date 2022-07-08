@@ -1,12 +1,4 @@
 import vacancies from '@/store/vacancies';
-import getStaticVacancies from '@/helpers/getStaticVacancies';
-
-jest.mock(
-  '@/helpers/getStaticVacancies',
-  () => jest.fn()
-    .mockName('getStaticVacancies')
-    .mockImplementation(() => {})
-);
 
 describe('store/vacancies', () => {
   const getters = vacancies.getters;
@@ -52,7 +44,6 @@ describe('store/vacancies', () => {
 
     describe('openVacancies', () => {
       it('returns only open vacancies', () => {
-        getStaticVacancies.mockReturnValue([]);
         const openVacancies = getters.openVacancies(state, { allVacancies: mockVacancies });
 
         expect(openVacancies.length).toEqual(1);
@@ -60,7 +51,6 @@ describe('store/vacancies', () => {
       });
 
       it('checks estimatedLaunchDate if applicationStartDate not supplied', () => {
-        getStaticVacancies.mockReturnValue([]);
         const mockName = 'OPEN VACANCY WITHOUT START DATE';
         const mockOpenVacancy = {
           name: mockName,
@@ -75,7 +65,6 @@ describe('store/vacancies', () => {
       });
 
       it('includes vacancies without set close date', () => {
-        getStaticVacancies.mockReturnValue([]);
         const mockName = 'OPEN VACANCY WITHOUT CLOSE DATE';
         const mockOpenVacancy = {
           name: mockName,
@@ -90,7 +79,6 @@ describe('store/vacancies', () => {
     });
     describe('futureVacancies', () => {
       it('returns only future vacancies', () => {
-        getStaticVacancies.mockReturnValue([]);
 
         const futureVacancies = getters.futureVacancies(state, { allVacancies: mockVacancies });
 
@@ -99,7 +87,6 @@ describe('store/vacancies', () => {
       });
 
       it('checks estimatedLaunchDate if applicationStartDate not supplied', () => {
-        getStaticVacancies.mockReturnValue([]);
         const mockName = 'FUTURE VACANCY WITHOUT START DATE';
         const mockFutureVacancy = {
           name: mockName,
@@ -112,7 +99,6 @@ describe('store/vacancies', () => {
         expect(futureVacancies[0].name).toEqual(mockName);
       });
       it('includes vacancies without set close date', () => {
-        getStaticVacancies.mockReturnValue([]);
         const mockName = 'FUTURE VACANCY WITHOUT CLOSE DATE';
         const mockFutureVacancy = {
           name: mockName,
@@ -128,7 +114,6 @@ describe('store/vacancies', () => {
 
     describe('inProgressVacancies', () => {
       it('returns only exercises in progress', () => {
-        getStaticVacancies.mockReturnValue([]);
 
         const inProgressVacancies = getters.inProgressVacancies(state, { allVacancies: mockVacancies });
 
@@ -137,7 +122,6 @@ describe('store/vacancies', () => {
       });
 
       it('excludes vacancies without set close date', () => {
-        getStaticVacancies.mockReturnValue([]);
         const mockName = 'PROGRESS VACANCY WITHOUT CLOSE DATE';
         const mockInProgressVacancy = {
           name: mockName,

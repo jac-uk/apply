@@ -213,6 +213,14 @@
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
           });
+          it('has postcode pattern', () => {
+            expect(data.regex).toContainKeys(['postcode']);
+          });
+          it('postcode matches pattern', () => {
+            expect('181RJ').not.toMatch(data.regex.postcode);
+            expect('MK181RJ').toMatch(data.regex.postcode);
+            expect('MK18 1RJ').toMatch(data.regex.postcode);
+          });
           it('has nino pattern', () => {
             expect(data.regex).toContainKeys(['nino']);
           });

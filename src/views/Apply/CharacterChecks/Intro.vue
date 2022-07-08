@@ -7,7 +7,7 @@
     </h1>
 
     <p class="govuk-body">
-      You must grant consent for the Commission to undertake character checks before you can be considered for an appointment.
+      You must grant consent for the Judicial Appointments Commission (JAC) to undertake character checks before you can be considered for an appointment.
     </p>
     <p class="govuk-body">
       These checks may be undertaken with HMRC, ACRO Criminal Records Office and the relevant professional bodies.
