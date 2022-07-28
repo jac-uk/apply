@@ -122,9 +122,11 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummary">
-                  {{ vacancy.roleSummary }}
-                </p>
+                <p
+                  v-if="vacancy.roleSummary"
+                  class="custom-ordered-list"
+                  v-html="vacancy.roleSummary"
+                />
                 <hr>
               </div>
 
@@ -161,9 +163,11 @@
                       {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                     </span>
                   </p>
-                  <p v-if="vacancy.roleSummaryWelsh">
-                    {{ vacancy.roleSummaryWelsh }}
-                  </p>
+                  <p
+                    v-if="vacancy.roleSummaryWelsh"
+                    class="custom-ordered-list"
+                    v-html="vacancy.roleSummaryWelsh"
+                  />
                   <hr>
                 </div>
               </div>
@@ -212,9 +216,11 @@
                   {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
-              <p v-if="vacancy.roleSummary">
-                {{ vacancy.roleSummary }}
-              </p>
+              <p
+                v-if="vacancy.roleSummary"
+                class="custom-ordered-list"
+                v-html="vacancy.roleSummary"
+              />
               <p
                 v-if="vacancy.subscriberAlertsUrl"
                 class="govuk-body govuk-!-margin-bottom-5"
@@ -262,9 +268,11 @@
                     {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummaryWelsh">
-                  {{ vacancy.roleSummaryWelsh }}
-                </p>
+                <p
+                  v-if="vacancy.roleSummaryWelsh"
+                  class="custom-ordered-list"
+                  v-html="vacancy.roleSummaryWelsh"
+                />
                 <p
                   v-if="vacancy.subscriberAlertsUrl"
                   class="govuk-body govuk-!-margin-bottom-5"
@@ -340,9 +348,11 @@
                   {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                 </span>
               </p>
-              <p v-if="vacancy.roleSummary">
-                {{ vacancy.roleSummary }}
-              </p>
+              <p
+                v-if="vacancy.roleSummary"
+                class="custom-ordered-list"
+                v-html="vacancy.roleSummary"
+              />
               <p>
                 <RouterLink
                   v-if="vacancy.aboutTheRole"
@@ -393,9 +403,11 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummaryWelsh">
-                  {{ vacancy.roleSummaryWelsh }}
-                </p>
+                <p
+                  v-if="vacancy.roleSummaryWelsh"
+                  class="custom-ordered-list"
+                  v-html="vacancy.roleSummaryWelsh"
+                />
                 <p>
                   <RouterLink
                     v-if="vacancy.aboutTheRole"
