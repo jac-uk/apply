@@ -122,10 +122,9 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p
+                <CustomHTML
                   v-if="vacancy.roleSummary"
-                  class="custom-ordered-list"
-                  v-html="vacancy.roleSummary"
+                  :value="vacancy.roleSummary"
                 />
                 <hr>
               </div>
@@ -163,10 +162,9 @@
                       {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                     </span>
                   </p>
-                  <p
+                  <CustomHTML
                     v-if="vacancy.roleSummaryWelsh"
-                    class="custom-ordered-list"
-                    v-html="vacancy.roleSummaryWelsh"
+                    :value="vacancy.roleSummaryWelsh"
                   />
                   <hr>
                 </div>
@@ -216,10 +214,9 @@
                   {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
-              <p
+              <CustomHTML
                 v-if="vacancy.roleSummary"
-                class="custom-ordered-list"
-                v-html="vacancy.roleSummary"
+                :value="vacancy.roleSummary"
               />
               <p
                 v-if="vacancy.subscriberAlertsUrl"
@@ -268,10 +265,9 @@
                     {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                   </span>
                 </p>
-                <p
+                <CustomHTML
                   v-if="vacancy.roleSummaryWelsh"
-                  class="custom-ordered-list"
-                  v-html="vacancy.roleSummaryWelsh"
+                  :value="vacancy.roleSummaryWelsh"
                 />
                 <p
                   v-if="vacancy.subscriberAlertsUrl"
@@ -348,10 +344,9 @@
                   {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                 </span>
               </p>
-              <p
+              <CustomHTML
                 v-if="vacancy.roleSummary"
-                class="custom-ordered-list"
-                v-html="vacancy.roleSummary"
+                :value="vacancy.roleSummary"
               />
               <p>
                 <RouterLink
@@ -403,10 +398,10 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p
+
+                <CustomHTML
                   v-if="vacancy.roleSummaryWelsh"
-                  class="custom-ordered-list"
-                  v-html="vacancy.roleSummaryWelsh"
+                  :value="vacancy.roleSummaryWelsh"
                 />
                 <p>
                   <RouterLink
@@ -437,8 +432,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  components: {
+    CustomHTML,
+  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',
