@@ -12,6 +12,7 @@ import browserDetect from 'vue-browser-detect-plugin';
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
     dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
+    environment: store.getters.appEnvironment.toLowerCase(),
     integrations: [new Integrations.Vue({ Vue, attachProps: true })],
   });
 
