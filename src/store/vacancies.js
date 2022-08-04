@@ -37,7 +37,9 @@ export default {
     openVacancies: (state, getters) => {
       const vacancies = getters.allVacancies;
       return vacancies.filter(vacancy => {
-
+        
+          // console.log(vacancy.state);
+          const isArchived = vacancy.state === 'archived';
           const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
           const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
           const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
@@ -48,7 +50,7 @@ export default {
           openDate.setHours(13);
           closeDate.setHours(13);
 
-          return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates;
+          return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates && !isArchived;
       });
     },
     futureVacancies: (state, getters) => {
