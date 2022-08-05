@@ -122,9 +122,10 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummary">
-                  {{ vacancy.roleSummary }}
-                </p>
+                <CustomHTML
+                  v-if="vacancy.roleSummary"
+                  :value="vacancy.roleSummary"
+                />
                 <hr>
               </div>
 
@@ -161,9 +162,10 @@
                       {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                     </span>
                   </p>
-                  <p v-if="vacancy.roleSummaryWelsh">
-                    {{ vacancy.roleSummaryWelsh }}
-                  </p>
+                  <CustomHTML
+                    v-if="vacancy.roleSummaryWelsh"
+                    :value="vacancy.roleSummaryWelsh"
+                  />
                   <hr>
                 </div>
               </div>
@@ -212,9 +214,10 @@
                   {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                 </span>
               </p>
-              <p v-if="vacancy.roleSummary">
-                {{ vacancy.roleSummary }}
-              </p>
+              <CustomHTML
+                v-if="vacancy.roleSummary"
+                :value="vacancy.roleSummary"
+              />
               <p
                 v-if="vacancy.subscriberAlertsUrl"
                 class="govuk-body govuk-!-margin-bottom-5"
@@ -262,9 +265,10 @@
                     {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummaryWelsh">
-                  {{ vacancy.roleSummaryWelsh }}
-                </p>
+                <CustomHTML
+                  v-if="vacancy.roleSummaryWelsh"
+                  :value="vacancy.roleSummaryWelsh"
+                />
                 <p
                   v-if="vacancy.subscriberAlertsUrl"
                   class="govuk-body govuk-!-margin-bottom-5"
@@ -340,9 +344,10 @@
                   {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                 </span>
               </p>
-              <p v-if="vacancy.roleSummary">
-                {{ vacancy.roleSummary }}
-              </p>
+              <CustomHTML
+                v-if="vacancy.roleSummary"
+                :value="vacancy.roleSummary"
+              />
               <p>
                 <RouterLink
                   v-if="vacancy.aboutTheRole"
@@ -393,9 +398,11 @@
                     {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                   </span>
                 </p>
-                <p v-if="vacancy.roleSummaryWelsh">
-                  {{ vacancy.roleSummaryWelsh }}
-                </p>
+
+                <CustomHTML
+                  v-if="vacancy.roleSummaryWelsh"
+                  :value="vacancy.roleSummaryWelsh"
+                />
                 <p>
                   <RouterLink
                     v-if="vacancy.aboutTheRole"
@@ -425,8 +432,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  components: {
+    CustomHTML,
+  },
   computed: {
     ...mapGetters('vacancies', [
       'openVacancies',
