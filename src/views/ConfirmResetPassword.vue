@@ -32,9 +32,9 @@
               id="password"
               v-model="formData.password"
               label="Password"
-              hint="For security reasons it should be 8 or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *)."
+              :hint="`For security reasons it should be ${minPasswordLength} or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *).`"
               type="new-password"
-              :min-length="8"
+              :min-length="minPasswordLength"
               required
             />
             <button
@@ -61,6 +61,7 @@ export default {
   extends: Form,
   data() {
     return {
+      minPasswordLength: 12,
       resetSuccessful: false,
       formData: {},
       errors: [],
