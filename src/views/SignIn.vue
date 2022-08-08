@@ -125,7 +125,13 @@ export default {
             }
           })
           .catch((error) => {
-            this.errors.push({ id: 'email', message: error.message });
+            let message = error.message;
+            if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
+              message = 'Sorry, sign in with the details provided was unsuccessful';
+            }
+            this.errors.push(
+
+              { id: 'email', message: message });
           });
       }
     },
