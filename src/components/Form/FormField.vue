@@ -56,7 +56,7 @@ export default {
       regex: {
         // eslint-disable-next-line
         email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
-        tel: /^\+?[\d() -]+/,
+        tel: /^(07\d{8,12}|\+?[1-9]\d{1,14})$/, // match phone number starting with 07- and E.164 format
         nino: /^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](?:\s?\d){6}\s?[A-D]$/i,
         postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i,
       },

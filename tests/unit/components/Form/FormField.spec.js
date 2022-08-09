@@ -212,6 +212,14 @@
           });
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
+            expect('7123456789').toMatch(data.regex.tel);
+            // E.164 format with or without plus
+            expect('447123456789').toMatch(data.regex.tel);
+            expect('+447123456789').toMatch(data.regex.tel);
+
+            expect('0 7123456789').not.toMatch(data.regex.tel);
+            expect('+44 7123456789').not.toMatch(data.regex.tel);
+            expect('(+44)7123456789').not.toMatch(data.regex.tel);
           });
           it('has postcode pattern', () => {
             expect(data.regex).toContainKeys(['postcode']);
