@@ -3,7 +3,7 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="login"
+        @submit.prevent="submit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -106,42 +106,45 @@ export default {
     //   const provider = new auth.GoogleAuthProvider();
     //   auth().signInWithPopup(provider);
     // },
+    async submit() {
+      if (this.disabled) return;
+
+      const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
+      const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
+        token,
+        score: RECAPTCHA_ACTIONS.LOGIN.score,
+      });
+      if (!isVerified) return;
+
+      this.login();
+    },
     async login() {
-      if (!this.disabled) {
-        const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
-        const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
-          token,
-          score: RECAPTCHA_ACTIONS.LOGIN.score,
+      this.errors = [];
+      auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+        .then((userCredential) => {
+
+          // LOG
+          const objToLog = {
+            type: 'login',
+            id: userCredential.user.uid,
+            data: {
+              uid: userCredential.user.uid,
+              meta: this.$browserDetect.meta,
+            },
+          };
+          this.$store.dispatch('logs/save', objToLog);
+          // LOG
+
+          this.$store.dispatch('auth/setCurrentUser', userCredential.user);
+          if (this.$store.getters['vacancy/id']) {
+            this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
+          } else {
+            this.$router.push({ name: 'applications' });
+          }
+        })
+        .catch((error) => {
+          this.errors.push({ id: 'email', message: error.message });
         });
-        if (!isVerified) return;
-
-        this.errors = [];
-        auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
-          .then((userCredential) => {
-
-            // LOG
-            const objToLog = {
-              type: 'login',
-              id: userCredential.user.uid,
-              data: {
-                uid: userCredential.user.uid,
-                meta: this.$browserDetect.meta,
-              },
-            };
-            this.$store.dispatch('logs/save', objToLog);
-            // LOG
-
-            this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-            if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
-            } else {
-              this.$router.push({ name: 'applications' });
-            }
-          })
-          .catch((error) => {
-            this.errors.push({ id: 'email', message: error.message });
-          });
-      }
     },
   },
 };

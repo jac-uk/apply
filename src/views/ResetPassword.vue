@@ -3,7 +3,7 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="resetPassword"
+        @submit.prevent="submit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -66,17 +66,20 @@ export default {
     };
   },
   methods: {
+    async submit() {
+      if (!this.formData.email) return;
+      const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
+      const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
+        token,
+        score: RECAPTCHA_ACTIONS.LOGIN.score,
+      });
+      if (!isVerified) return;
+
+      this.resetPassword();
+    },
     async resetPassword() {
-      const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
-
       if (this.formData.email) {
-        const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
-        const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
-          token,
-          score: RECAPTCHA_ACTIONS.LOGIN.score,
-        });
-        if (!isVerified) return;
-
+        const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
         this.errors = [];
         auth().sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,
