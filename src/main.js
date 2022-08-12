@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/browser';
 import * as Integrations from '@sentry/integrations';
 import VueGtag from 'vue-gtag';
 import browserDetect from 'vue-browser-detect-plugin';
+import { VueReCaptcha } from 'vue-recaptcha-v3';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -64,3 +65,9 @@ auth().onAuthStateChanged( (user) => {
     });
   }
 });
+
+if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
+  Vue.use(VueReCaptcha, {
+    siteKey: process.env.VUE_APP_RECAPTCHA_TOKEN,
+  });
+}

@@ -52,7 +52,10 @@
             type="password"
           />
 
-          <button class="govuk-button">
+          <button
+            class="govuk-button"
+            :disabled="disabled"
+          >
             Continue
           </button>
 
@@ -77,6 +80,7 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
+import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
   components: {
@@ -90,6 +94,9 @@ export default {
     };
   },
   computed: {
+    disabled() {
+      return !this.formData.email || !this.formData.password;
+    },
     exerciseId () {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
@@ -99,8 +106,15 @@ export default {
     //   const provider = new auth.GoogleAuthProvider();
     //   auth().signInWithPopup(provider);
     // },
-    login() {
-      if (this.formData.email && this.formData.password) {
+    async login() {
+      if (!this.disabled) {
+        const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
+        const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
+          token,
+          score: RECAPTCHA_ACTIONS.LOGIN.score,
+        });
+        if (!isVerified) return;
+
         this.errors = [];
         auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
           .then((userCredential) => {

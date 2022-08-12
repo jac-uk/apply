@@ -1,3 +1,5 @@
+import { functions } from '@/firebase';
+
 const module = {
   namespaced: true,
   state: {
@@ -19,6 +21,19 @@ const module = {
           emailVerified: user.emailVerified,
           displayName: user.displayName,
         });
+      }
+    },
+    // eslint-disable-next-line no-empty-pattern
+    async verifyRecaptcha({}, { token, score }) {
+      try {
+        const res = await functions.httpsCallable('verfiyRecaptcha')({ token });
+        if (res.data && res.data.success) {
+          return res.data.score && res.data.score > score;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        return false;
       }
     },
   },
