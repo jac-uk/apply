@@ -26,7 +26,7 @@ const module = {
     // eslint-disable-next-line no-empty-pattern
     async verifyRecaptcha({}, { token, score }) {
       try {
-        const res = await functions.httpsCallable('verfiyRecaptcha')({ token });
+        const res = await functions.httpsCallable('verifyRecaptcha')({ token });
         if (res.data && res.data.success) {
           return res.data.score && res.data.score > score;
         } else {
