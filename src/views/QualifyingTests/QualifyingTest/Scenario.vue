@@ -15,9 +15,7 @@
         class="govuk-grid-row"
       >
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
-          <!-- eslint-disable -->
-          <p v-html="$options.filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
-          <!-- eslint-enable -->
+          <CustomHTML :value="$options.filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
           <div
             class="govuk-character-count"
           >
@@ -81,9 +79,9 @@
                     >
                   </button>
                 </dt>
-                <!-- eslint-disable -->
-                <dd v-html="document.content" />
-                <!-- eslint-enable -->
+                <dd>
+                  <CustomHTML :value="document.content" />
+                </dd>
               </span>
             </dl>
           </div>
@@ -99,10 +97,12 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
 import minusIcon from '@/assets/minus.png';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
     TextareaInput,
+    CustomHTML,
   },
   props: {
     timeIsUp: {

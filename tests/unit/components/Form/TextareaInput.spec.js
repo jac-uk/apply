@@ -76,7 +76,8 @@ describe('components/Form/TextareaInput', () => {
             expect(hint.exists()).toBe(true);
           });
           it('sets the hint to the value of the `hint` prop', () => {
-            expect(hint.text()).toBe('my_hint');
+            expect(wrapper.find('customhtml-stub').exists()).toBe(true);
+            expect(wrapper.find('customhtml-stub').attributes('value')).toBe('my_hint');
           });
         });
 

@@ -9,14 +9,11 @@
     >
       {{ label }}
     </label>
-    <!-- eslint-disable -->
-    <span
+    <CustomHTML
       v-if="hint"
+      :value="hint"
       class="govuk-hint"
-      v-html="hint"
-    >
-      <!-- eslint-enable -->
-    </span>
+    />
     <FormFieldError
       :id="id"
       :error-message="errorMessage"
@@ -47,10 +44,12 @@
 <script>
 import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
     FormFieldError,
+    CustomHTML,
   },
   extends: FormField,
   props: {
