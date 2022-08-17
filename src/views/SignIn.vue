@@ -126,11 +126,10 @@ export default {
           })
           .catch((error) => {
             let message = error.message;
-            if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
-              message = 'Sorry, sign in with the details provided was unsuccessful';
-            }
+            // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
+            message = 'Either the email address and/or password you have entered is incorrect';
+            // }
             this.errors.push(
-
               { id: 'email', message: message });
           });
       }
