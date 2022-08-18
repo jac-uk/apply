@@ -57,6 +57,8 @@
           id="date-of-birth"
           v-model="personalDetails.dateOfBirth"
           required
+          :min-date="new Date('1/01/1900')"
+          :max-date="new Date()"
           label="Date of birth"
           hint="For example, 27 3 1964"
         />
@@ -214,9 +216,9 @@ export default {
         this.formData.progress[this.formId] = true;
         this.formData.personalDetails = this.personalDetails;
         this.formData.characterChecks = { status: 'not requested' };
-        await this.$store.dispatch('application/save', this.formData);
-        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        this.$router.push({ name: 'task-list' });
+        // await this.$store.dispatch('application/save', this.formData);
+        // await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        // this.$router.push({ name: 'task-list' });
       }
     },
     makeFullName() {
