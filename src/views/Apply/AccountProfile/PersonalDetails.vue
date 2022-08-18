@@ -216,9 +216,9 @@ export default {
         this.formData.progress[this.formId] = true;
         this.formData.personalDetails = this.personalDetails;
         this.formData.characterChecks = { status: 'not requested' };
-        // await this.$store.dispatch('application/save', this.formData);
-        // await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        // this.$router.push({ name: 'task-list' });
+        await this.$store.dispatch('application/save', this.formData);
+        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        this.$router.push({ name: 'task-list' });
       }
     },
     makeFullName() {
