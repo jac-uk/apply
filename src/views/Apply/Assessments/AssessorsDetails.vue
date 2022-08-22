@@ -37,6 +37,21 @@
           First independent assessor
         </h2>
 
+        <Select
+          id="first-assessor-type"
+          v-model="formData.firstAssessorType"
+          :value="formData.firstAssessorType"
+          label="Assessor type"
+          required
+        >
+          <option
+            v-for="option in assessorTypes"
+            :key="option"
+            :value="option"
+          >
+            {{ option | lookup }}
+          </option>
+        </Select>
         <TextField
           id="first-assessor-full-name"
           v-model="formData.firstAssessorFullName"
@@ -68,6 +83,21 @@
           Second independent assessor
         </h2>
 
+        <Select
+          id="second-assessor-type"
+          v-model="formData.secondAssessorType"
+          :value="formData.secondAssessorType"
+          label="Assessor type"
+          required
+        >
+          <option
+            v-for="option in assessorTypes"
+            :key="option"
+            :value="option"
+          >
+            {{ option | lookup }}
+          </option>
+        </Select>
         <TextField
           id="second-assessor-full-name"
           v-model="formData.secondAssessorFullName"
@@ -112,12 +142,15 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
+import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
+import { ASSESSOR_TYPES } from '@/helpers/constants';
 
 export default {
   components: {
     ErrorSummary,
     TextField,
     BackLink,
+    Select,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -136,9 +169,16 @@ export default {
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
     return {
+      assessorTypes: Object.values(ASSESSOR_TYPES),
       formId: 'assessorsDetails',
       formData: formData,
     };
   },
 };
 </script>
+
+<style>
+#first-assessor-type, #second-assessor-type {
+  width: 100%;
+}
+</style>
