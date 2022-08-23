@@ -547,6 +547,14 @@
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
+                  Assessor Type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.firstAssessorType | lookup }}
+                </dd>
+              </div>
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
                   Full name
                 </dt>
                 <dd class="govuk-summary-list__value">
@@ -574,6 +582,14 @@
 
               <hr class="govuk-section-break govuk-section-break--xl">
 
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Assessor Type
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ application.secondAssessorType | lookup }}
+                </dd>
+              </div>
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                   Full name

@@ -33,6 +33,57 @@
           before making your nominations.
         </p>
 
+        <details class="govuk-body-l">
+          <summary>Who to choose?</summary>
+          <div
+            class="govuk-body"
+            style="margin-top: 8px;"
+          >
+            <p>It is important that you choose the right assessor.</p>
+            <ul>
+              <li>if you are a salaried judicial office holder, you need 2 judicial assessors</li>
+              <li>if you are a professional with one or more fee-paid judicial roles, you need one professional and one judicial assessor; the judicial assessor should be the judge who can provide examples most relevant to the role for which you are applying</li>
+              <li>if you do not hold judicial office and you are employed, you will usually need 2 professional assessors, or for some exercises you can provide one professional and one personal assessor</li>
+            </ul>
+
+            <p>For <strong>judicial roles</strong> ideally you should choose someone from your current employment or who has knowledge of your work in a judicial or professional capacity. If you work or practice independently, you may wish to choose someone (such as a judge) who has seen you practice and can provide good examples of your skills in relation to the required competencies.</p>
+
+            <p>A <u>professional assessor</u> could be:</p>
+            <ul>
+              <li>a senior partner or head of chambers</li>
+              <li>a judicial office holder who can give examples of your professional work</li>
+              <li>a client (including a local authority official) or a magistrate</li>
+              <li>a line manager if you are from a non-legal background; if there is no line manager, then a current or former colleague or client</li>
+            </ul>
+
+            <p>A <u>judicial assessor</u> could be:</p>
+            <ul>
+              <li>the senior judge of the court, jurisdiction or circuit where you sit most often</li>
+              <li>the Senior President or Lord President (Scotland) if you are a Chamber/Tribunal President</li>
+              <li>the Lord Justice Clerk or Sheriff Principal if you are a Sheriff (Scotland only)</li>
+              <li>your appraising judge if you sit on a tribunal</li>
+            </ul>
+
+            <p>If you are unable to provide one of the above, consider another judge who has first-hand knowledge of your work. If you are unable to provide any judicial assessor, please contact us giving your reasons writing.</p>
+            <p>If you are applying for a <strong>non-legal role</strong> you should choose assessors who know you well and who can give clear examples of your abilities.</p>
+            
+            <p>A <u>personal assessor</u> could be:</p>
+            <ul>
+              <li>a former colleague, manager or client who is familiar with the way you work</li>
+              <li>someone for whom you do voluntary work</li>
+            </ul>
+        
+            <p>If you have been on maternity leave or a career break, there is no time limit on how recently you have worked with your assessor, although where possible within the last 2 years is recommended so they can provide recent examples.</p>
+            
+            <p>Do not nominate:</p>
+            <ul>
+              <li>another individual who is applying for a role in the same exercise</li>
+              <li>a JAC commissioner</li>
+              <li>a relative (even if you work or have worked with them in a professional capacity)</li>
+            </ul>
+          </div>
+        </details>
+
         <h2 class="govuk-heading-l">
           First independent assessor
         </h2>
