@@ -34,7 +34,9 @@
         </p>
 
         <details class="govuk-body-l">
-          <summary>Who to choose?</summary>
+          <summary style="cursor: pointer;">
+            Who to choose?
+          </summary>
           <div
             class="govuk-body"
             style="margin-top: 8px;"
