@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { formatDate } from '@/helpers/date';
+
 export default {
   props: {
     id: {
@@ -119,6 +121,15 @@ export default {
           this.text = value;
           if (!this.regex.email.test(value)) {
             this.setError(`Enter a valid email address for ${this.label}`);
+          }
+        }
+
+        if (this.type && this.type === 'date' && value) {
+          if (this.maxDate && (value > (this.maxDate))) {
+            this.setError(`Enter a date before ${formatDate(this.maxDate)} for ${this.label}`);
+          }
+          if (this.minDate && (value < (this.minDate))) {
+            this.setError(`Enter a date after ${formatDate(this.minDate)} for ${this.label}`);
           }
         }
 

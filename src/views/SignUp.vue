@@ -84,6 +84,8 @@
           <DateInput
             id="date-of-birth"
             v-model="formData.dateOfBirth"
+            :min-date="new Date('1/01/1900')"
+            :max-date="new Date()"
             label="Date of birth"
             hint="For example, 27 3 1964."
             required
