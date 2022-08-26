@@ -57,7 +57,7 @@ export default {
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
-        email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, // ref: https://emailregex.com/
         tel: /^\+?[\d() -]+/,
         nino: /^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](?:\s?\d){6}\s?[A-D]$/i,
         postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i,

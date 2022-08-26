@@ -209,6 +209,51 @@
           });
           it('email matches pattern', () => {
             expect('test@test.com').toMatch(data.regex.email);
+            expect("test'test@test.com").toMatch(data.regex.email);
+
+            // test cases from https://en.wikipedia.org/wiki/Email_address
+            const validEmails = [
+              'simple@example.com',
+              'very.common@example.com',
+              'disposable.style.email.with+symbol@example.com',
+              'other.email-with-hyphen@example.com',
+              'fully-qualified-domain@example.com',
+              'user.name+tag+sorting@example.com',
+              'x@example.com',
+              'example-indeed@strange-example.com',
+              'test/test@test.com',
+              // 'admin@mailserver1',
+              'example@s.example',
+              '" "@example.org',
+              '"john..doe"@example.org',
+              'mailhost!username@example.org',
+              // eslint-disable-next-line no-useless-escape
+              '"very.(),:;<>[]\".VERY.\"very@\\ \"very\".unusual"@strange.example.com',
+              'user%example.com@example.org',
+              'user-@example.org',
+              'postmaster@[123.123.123.123]',
+              // 'postmaster@[IPv6:2001:0db8:85a3:0000:0000:8a2e:0370:7334]',
+            ];
+            const invalidEmails = [
+              'Abc.example.com',
+              'A@b@c@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'a"b(c)d,e:f;g<h>i[j\k]l@example.com',
+              'just"not"right@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'this is"not\allowed@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'this\ still\"not\\allowed@example.com',
+              // '1234567890123456789012345678901234567890123456789012345678901234+x@example.com',
+              'i_like_underscore@but_its_not_allowed_in_this_part.example.com',
+              'QA[icon]CHOCOLATE[icon]@test.com',
+            ];
+            validEmails.forEach(email => {
+              expect(email).toMatch(data.regex.email);
+            });
+            invalidEmails.forEach(email => {
+              expect(email).not.toMatch(data.regex.email);
+            });
           });
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
