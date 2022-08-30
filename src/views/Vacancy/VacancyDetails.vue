@@ -91,12 +91,10 @@
         Overview of the role
       </h2>
 
-      <!-- eslint-disable -->
-      <div
+      <CustomHTML
+        :value="vacancy.aboutTheRole"
         class="govuk-body"
-        v-html="vacancy.aboutTheRole"
       />
-      <!-- eslint-enable -->
 
       <RouterLink
         v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
@@ -217,11 +215,13 @@ import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink';
 import { ADVERT_TYPES } from '@/helpers/constants';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
     Timeline,
     DownloadLink,
+    CustomHTML,
   },
   data() {
     return {
