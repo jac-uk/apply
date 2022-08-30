@@ -20,6 +20,18 @@
             {
               "key": "Cache-Control",
               "value": "max-age=300, s-maxage=3600, public"
+            },
+            {
+              "key": "Strict-Transport-Security",
+              "value": "max-age=31536000; includeSubDomains"
+            },
+            {
+              "key": "X-Content-Type-Options",
+              "value": "nosniff"
+            },
+            {
+              "key": "X-Frame-Options",
+              "value": "DENY"
             }
           ]
         },
