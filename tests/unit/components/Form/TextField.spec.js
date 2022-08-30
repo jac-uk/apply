@@ -19,7 +19,7 @@ describe('components/Form/TextField', () => {
       });
 
     });
-    
+
     describe('value', () => {
       beforeEach(() => {
         prop = TextField.props.value;
@@ -71,8 +71,8 @@ describe('components/Form/TextField', () => {
 
     describe('template', () => {
       describe('label', () => {
-        it('sets the label to the value of the `label` prop', () => {
-          wrapper.setProps({ label: 'My Form Label' });
+        it('sets the label to the value of the `label` prop', async () => {
+          await wrapper.setProps({ label: 'My Form Label' });
           expect(wrapper.find('label').text()).toBe('My Form Label');
         });
       });
@@ -80,8 +80,8 @@ describe('components/Form/TextField', () => {
       describe('hint', () => {
         let hint;
         describe('when the prop is set', () => {
-          beforeEach(() => {
-            wrapper.setProps({ hint: 'my_hint' });
+          beforeEach(async () => {
+            await wrapper.setProps({ hint: 'my_hint' });
             hint = wrapper.find('.govuk-hint');
           });
 
@@ -105,13 +105,13 @@ describe('components/Form/TextField', () => {
       });
 
       describe('id', () => {
-        it('sets <label> `for` attribute', () => {
-          wrapper.setProps({ id: 'my_unique_key' });
+        it('sets <label> `for` attribute', async () => {
+          await wrapper.setProps({ id: 'my_unique_key' });
           expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
         });
 
-        it('sets <input> `id` attribute', () => {
-          wrapper.setProps({ id: 'my_unique_key' });
+        it('sets <input> `id` attribute', async () => {
+          await wrapper.setProps({ id: 'my_unique_key' });
           expect(wrapper.find('input').attributes().id).toBe('my_unique_key');
         });
       });
@@ -123,8 +123,8 @@ describe('components/Form/TextField', () => {
         });
 
         describe('when the prop is set', () => {
-          beforeEach(() => {
-            wrapper.setProps({ inputClass: 'my_styling' });
+          beforeEach(async () => {
+            await wrapper.setProps({ inputClass: 'my_styling' });
           });
 
           it('includes the added value in the <input> `class` attribute', () => {
@@ -145,8 +145,8 @@ describe('components/Form/TextField', () => {
 
       describe('type', () => {
         describe('when the prop is set', () => {
-          it('includes the added value in the <input> `type` attribute', () => {
-            wrapper.setProps({ type: 'my_type' });
+          it('includes the added value in the <input> `type` attribute', async() => {
+            await wrapper.setProps({ type: 'my_type' });
             expect(wrapper.find('input').attributes('type')).toBe('my_type');
           });
         });
@@ -159,22 +159,22 @@ describe('components/Form/TextField', () => {
       });
 
       describe('autocomplete', () => {
-        it('sets autocomplete for email', () => {
+        it('sets autocomplete for email', async () => {
           const type = 'email';
-          wrapper.setProps({ type });
+          await wrapper.setProps({ type });
 
           expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
         });
 
-        it('sets autocomplete for phone number', () => {
+        it('sets autocomplete for phone number', async () => {
           const type = 'tel';
-          wrapper.setProps({ type });
+          await wrapper.setProps({ type });
 
           expect(wrapper.find('input').attributes('autocomplete')).toBe(type);
         });
 
-        it('doesn\'t set autocomplete for other types', () => {
-          wrapper.setProps({ type: 'text' });
+        it('doesn\'t set autocomplete for other types', async () => {
+          await wrapper.setProps({ type: 'text' });
 
           expect(wrapper.find('input').attributes('autocomplete')).toBeFalsy();
         });
@@ -183,15 +183,15 @@ describe('components/Form/TextField', () => {
 
     describe('`v-model` interface', () => {
       describe('when text changes', () => {
-        it('emits an input event with the new value', () => {
-          wrapper.setData({ text: 'new-value' });
+        it('emits an input event with the new value', async () => {
+          await wrapper.setData({ text: 'new-value' });
           expect(wrapper.emitted().input).toEqual([['new-value']]);
         });
       });
 
       describe('when value prop changes', () => {
-        it('updates the `text` computed property', () => {
-          wrapper.setProps({ value: 'my_value' });
+        it('updates the `text` computed property', async () => {
+          await wrapper.setProps({ value: 'my_value' });
           expect(wrapper.vm.text).toEqual('my_value');
         });
       });
