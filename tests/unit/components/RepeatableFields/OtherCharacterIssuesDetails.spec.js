@@ -51,21 +51,21 @@ describe('component methods', () => {
   });
   describe('computed properties', () => {
     describe('Date-Input', () => {
-      it('has id which reflects index', () => {
-        wrapper.setProps({ index: 5 });
+      it('has id which reflects index', async () => {
+        await wrapper.setProps({ index: 5 });
         expect(wrapper.find('TextAreaInput-stub').attributes('id')).toBe('other_issues_details_5');
       });
     });
 
     describe('Text-area input', () => {
-      it('has id which reflects index', () => {
-        wrapper.setProps({ index: 5 });
+      it('has id which reflects index', async () => {
+        await wrapper.setProps({ index: 5 });
         expect(wrapper.find('DateInput-stub').attributes('id')).toBe('other_issues_date_5');
       });
     });
-    
+
   });
-  
+
   describe('template', () => {
     beforeEach(() => {
       wrapper.setProps({ index: 1, row: {} });

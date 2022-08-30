@@ -16,6 +16,7 @@ module.exports = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
+  setupFiles: ['<rootDir>/tests/unit/setup.js'],
   setupFilesAfterEnv: ['jest-extended'],
   snapshotSerializers: [
     'jest-serializer-vue',
@@ -28,4 +29,5 @@ module.exports = {
     'jest-watch-typeahead/filename',
     'jest-watch-typeahead/testname',
   ],
+  preset: '@vue/cli-plugin-unit-jest/presets/no-babel',
 };

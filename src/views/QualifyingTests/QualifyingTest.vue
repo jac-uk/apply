@@ -19,7 +19,7 @@
         @change="handleCountdown"
       >
         <template
-          v-slot:left-slot
+          #left-slot
         >
           <span>
             <a
@@ -34,7 +34,7 @@
           </span>
         </template>
         <template
-          v-slot:right-slot
+          #right-slot
         >
           <a
             :class="`govuk-link countdown-link info-btn--qualifying-tests--exit-test-${$route.params.qualifyingTestId}`"

@@ -12,11 +12,11 @@
           <ul class="moj-side-navigation__list">
             <li
               class="moj-side-navigation__item"
-              :class="this.$route.name === 'vacancies' ? 'moj-side-navigation__item--active' : null"
+              :class="$route.name === 'vacancies' ? 'moj-side-navigation__item--active' : null"
             >
               <RouterLink
                 class="govuk-link info-link--nav-vacancies--vacancies"
-                :aria-current="this.$route.name === 'vacancies' ? 'active' : null"
+                :aria-current="$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
               >
                 Vacancies
