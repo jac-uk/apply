@@ -22,12 +22,10 @@
             >
               {{ item.title }}
             </p>
-            <!-- eslint-disable -->
-            <div
+            <CustomHTML
+              :value="item.text"
               class="govuk-body"
-              v-html="item.text"
             />
-            <!-- eslint-enable -->
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
@@ -124,6 +122,7 @@ import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
@@ -134,6 +133,7 @@ export default {
     FileUpload,
     BackLink,
     DownloadLink,
+    CustomHTML,
   },
   extends: Form,
   mixins: [ApplyMixIn],

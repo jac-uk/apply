@@ -109,6 +109,14 @@ export default {
   },
   extends: FormField,
   props: {
+    minDate: {
+      default: null,
+      type: Date,
+    },
+    maxDate: {
+      default: null,
+      type: Date,
+    },
     type: {
       default: 'date',
       validator: (value) => (['date', 'month'].indexOf(value) !== -1),
