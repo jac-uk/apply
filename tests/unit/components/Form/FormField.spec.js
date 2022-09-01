@@ -276,6 +276,9 @@
 
             // invalid format
             expect('020 000 00000').not.toMatch(data.regex.tel);
+            expect('abc02000000000').not.toMatch(data.regex.tel);
+            expect('02000abc000000').not.toMatch(data.regex.tel);
+            expect('02000000000abc').not.toMatch(data.regex.tel);
           });
           it('has postcode pattern', () => {
             expect(data.regex).toContainKeys(['postcode']);
