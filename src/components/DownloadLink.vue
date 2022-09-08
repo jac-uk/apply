@@ -1,7 +1,8 @@
 <template>
   <a
-    v-if="linkHref"
-    :class="`govuk-link govuk-body-m ${visited ? 'download-visited' : ''} info-link--download-link--${$options.filters.hyphenize(linkText)}`"
+    v-if="fileName && linkHref"
+    class="govuk-link govuk-body-m"
+    :class="{'download-visited' : visited, 'govuk-button govuk-button--secondary': type === 'button' }"
     :download="fileName"
     :href="linkHref"
   >
@@ -9,18 +10,25 @@
   </a>
   <span
     v-else
+    class="govuk-body"
   >
-    {{ linkText }}
+    File not available
   </span>
 </template>
 
 <script>
 import firebase from '@firebase/app';
 import '@firebase/storage';
+
 export default {
   props: {
     fileName: {
       required: true,
+      type: String,
+      default: '',
+    },
+    filePath: {
+      required: false,
       type: String,
       default: '',
     },
@@ -29,10 +37,30 @@ export default {
       type: String,
       default: '',
     },
+    applicationId: {
+      required: false,
+      type: String,
+      default: '',
+    },
+    userId: {
+      required: false,
+      type: String,
+      default: null,
+    },
+    assessorId: {
+      required: false,
+      type: String,
+      default: '',
+    },
     title: {
       required: false,
       type: String,
       default: '',
+    },
+    type: {
+      required: false,
+      type: String,
+      default: 'link',
     },
   },
   data () {
@@ -45,6 +73,20 @@ export default {
     linkText() {
       return this.title ? this.title : this.fileName;
     },
+    savePath() {
+      let savePath = `exercise/${this.exerciseId}/`;
+      if (this.applicationId) {
+        savePath += `application/${this.applicationId}/`;
+      }
+      if (this.userId) {
+        savePath += `user/${this.userId}/`;
+      }
+      if (this.assessorId) {
+        savePath += `assessor/${this.assessorId}/`;
+      }
+
+      return savePath;
+    },
   },
   async mounted() {
     const downloadUrl = await this.getDownloadURL();
@@ -55,7 +97,8 @@ export default {
   },
   methods: {
     async getDownloadURL() {
-      const fileRef = firebase.storage().ref(`exercise/${this.exerciseId}/${this.fileName}`);
+      const urlString = this.filePath ? this.filePath : this.savePath + this.fileName;
+      const fileRef = firebase.storage().ref(urlString);
 
       try {
         const downloadUrl = await fileRef.getDownloadURL();
@@ -73,7 +116,7 @@ export default {
 </script>
 
 <style scoped>
-  .download-visited {
-    color: #4c2c92;
-  }
+.download-visited {
+  color: #4c2c92;
+}
 </style>

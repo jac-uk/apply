@@ -603,6 +603,36 @@
             </dl>
           </div>
 
+          <div v-if="applicationParts.selfAssessmentCompetencies">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Self assessment with competencies
+              </h2>
+              <RouterLink
+                v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'self-assessment-competencies'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl class="govuk-summary-list">
+              <div v-if="application.uploadedSelfAssessment">
+                <DownloadLink
+                  :file-name="application.uploadedSelfAssessment"
+                  :exercise-id="vacancy.id"
+                  :user-id="application.userId"
+                  :title="application.uploadedSelfAssessment"
+                />
+              </div>
+              <span v-else>Not yet received</span>
+            </dl>
+          </div>
+
           <div v-if="applicationParts.leadershipJudgeDetails">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -925,6 +955,7 @@ import Memberships from './Memberships.vue';
 import PostQualificationExperience from './PostQualificationExperience.vue';
 import JudicialExperience from './JudicialExperience.vue';
 import GapsInEmployment from './GapsInEmployment';
+import DownloadLink from '@/components/DownloadLink';
 
 export default {
   components: {
@@ -949,6 +980,7 @@ export default {
     PostQualificationExperience,
     JudicialExperience,
     GapsInEmployment,
+    DownloadLink,
   },
   mixins: [ApplyMixIn],
   data() {
