@@ -35,6 +35,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 
 export default {
+  name: '',
   components: {
     RadioGroup,
     RadioItem,

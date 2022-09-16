@@ -135,6 +135,7 @@ import {
 } from 'vuex';
 
 export default {
+  name: 'DiversityInformation',
   computed: {
     ...mapState('applications', [
       'records',

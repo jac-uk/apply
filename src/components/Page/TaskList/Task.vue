@@ -35,6 +35,7 @@
 
 <script>
 export default {
+  name: 'Task',
   props: {
     id: {
       type: String,

@@ -155,6 +155,7 @@ import BackLink from '@/components/BackLink';
 import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
+  name: '',
   components: {
     ErrorSummary,
     TextField,

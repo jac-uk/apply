@@ -33,6 +33,7 @@
 import { hyphenize } from '@/filters';
 
 export default {
+  name: 'TabsList',
   props: {
     tabs: {
       type: Array,

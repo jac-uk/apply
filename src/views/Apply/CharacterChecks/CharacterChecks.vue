@@ -12,6 +12,7 @@
 import LoadingMessage from '@/components/LoadingMessage';
 
 export default {
+  name: '',
   components: {
     LoadingMessage,
   },

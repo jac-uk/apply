@@ -80,6 +80,7 @@
 <script>
 import { hasApplicationProcess } from '@/helpers/exerciseHelper';
 export default {
+  name: '',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;

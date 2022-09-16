@@ -42,6 +42,7 @@
 
 <script>
 export default {
+  name: '',
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;

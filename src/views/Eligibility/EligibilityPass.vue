@@ -22,6 +22,7 @@
 <script>
 
 export default {
+  name: '',
   computed: {
     ContinueLink() {
       return { name: 'GDPR' };

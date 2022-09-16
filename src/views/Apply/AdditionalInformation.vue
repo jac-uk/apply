@@ -95,6 +95,7 @@ import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
+  name: 'AdditionalInformation',
   components: {
     BackLink,
     CheckboxGroup,

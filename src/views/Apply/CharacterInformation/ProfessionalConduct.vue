@@ -208,6 +208,7 @@ import InfoIcon from '@/components/ModalViews/InfoIcon';
 import { PROFESSIONAL_CONDUCT_URL } from './character-information-constants';
 
 export default {
+  name: '',
   components: {
     ErrorSummary,
     RadioGroup,

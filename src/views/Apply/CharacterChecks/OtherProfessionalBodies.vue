@@ -263,6 +263,7 @@ import CheckboxItem from '@/components/Form/CheckboxItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
+  name: '',
   components: {
     BackLink,
     ErrorSummary,

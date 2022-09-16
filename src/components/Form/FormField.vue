@@ -6,6 +6,7 @@
 import { formatDate } from '@/helpers/date';
 
 export default {
+  name: 'FormField',
   props: {
     id: {
       required: true,

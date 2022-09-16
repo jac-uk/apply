@@ -76,6 +76,7 @@ import BackLink from '@/components/BackLink';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  name: '',
   components: {
     ErrorSummary,
     RadioGroup,

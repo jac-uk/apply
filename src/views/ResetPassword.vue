@@ -52,6 +52,7 @@ import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 
 export default {
+  name: 'ResetPassword',
   components: {
     TextField,
   },

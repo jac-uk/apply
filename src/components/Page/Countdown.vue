@@ -26,6 +26,7 @@ const second = 1000;
 const minute = 60 * second;
 
 export default {
+  name: 'Countdown',
   filters: {
     zeroPad(value) {
       if (typeof value === 'number') {

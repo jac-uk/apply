@@ -94,6 +94,7 @@ import BackLink from '@/components/BackLink';
 // import FileUpload from '@/components/Form/FileUpload';
 
 export default {
+  name: '',
   components: {
     RadioGroup,
     RadioItem,

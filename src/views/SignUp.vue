@@ -122,6 +122,7 @@ import Password from '@/components/Form/Password';
 import DateInput from '@/components/Form/DateInput';
 
 export default {
+  name: 'SignUp',
   components: {
     ErrorSummary,
     TextField,

@@ -129,6 +129,7 @@ import Modal from '@/components/Page/Modal';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
+  name: '',
   components: {
     Modal,
   },

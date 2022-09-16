@@ -288,6 +288,7 @@ import DateInput from '@/components/Form/DateInput';
 import BackLink from '@/components/BackLink';
 
 export default {
+  name: '',
   components: {
     ErrorSummary,
     CheckboxGroup,

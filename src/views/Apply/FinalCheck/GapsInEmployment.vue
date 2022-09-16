@@ -86,6 +86,7 @@
 
 <script>
 export default {
+  name: '',
   props: {
     application: {
       type: Object,
