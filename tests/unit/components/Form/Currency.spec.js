@@ -36,7 +36,7 @@ describe('components/Form/Currency', () => {
         stubs: ['FormFieldError'],
       });
     });
-    
+
     it('renders the component', () => {
       expect(wrapper.exists()).toBe(true);
     });
@@ -45,22 +45,22 @@ describe('components/Form/Currency', () => {
 
       describe('containing div', () => {
         describe('with errorMessage', () => {
-          it('has gov-uk-form-group--error class', () => {
-            wrapper.setData({ errorMessage: mockProps.errorMessage });
+          it('has gov-uk-form-group--error class', async () => {
+            await wrapper.setData({ errorMessage: mockProps.errorMessage });
             expect(wrapper.find('div').attributes('class')).toContain('govuk-form-group--error');
           });
         });
         describe('without errorMessage', () => {
-          it('doesn\'t have gov-uk-form-group--error class', () => {
-            wrapper.setData({ errorMessage: null });
+          it('doesn\'t have gov-uk-form-group--error class', async () => {
+            await wrapper.setData({ errorMessage: null });
             expect(wrapper.find('div').attributes('class')).not.toContain('govuk-form-group--error');
           });
         });
       });
 
       describe('label', () => {
-          it('sets the label to the value of the `label` prop', () => {
-            wrapper.setProps({ label: mockProps.label });
+          it('sets the label to the value of the `label` prop', async () => {
+            await wrapper.setProps({ label: mockProps.label });
             expect(wrapper.find('label').text()).toBe(mockProps.label);
           });
           it('id sets `for` attribute', () => {
@@ -86,8 +86,8 @@ describe('components/Form/Currency', () => {
           });
         });
         describe('when the prop is not set', () => {
-          beforeEach(() => {
-            wrapper.setProps({ hint: null });
+          beforeEach(async () => {
+            await wrapper.setProps({ hint: null });
             hint = wrapper.find('.govuk-hint');
           });
           it('does not show hint', () => {
@@ -101,8 +101,8 @@ describe('components/Form/Currency', () => {
           expect(wrapper.find('formfielderror-stub').attributes().id).toBe(mockProps.id);
         });
 
-        it('errorMessage sets `error-message` attribute', () => {
-          wrapper.setData({ errorMessage: mockProps.errorMessage });
+        it('errorMessage sets `error-message` attribute', async () => {
+          await wrapper.setData({ errorMessage: mockProps.errorMessage });
           expect(wrapper.find('formfielderror-stub').attributes().errormessage).toBe(mockProps.errorMessage);
         });
       });
@@ -127,22 +127,22 @@ describe('components/Form/Currency', () => {
         });
       });
     });
-    
+
     describe('computed', () => {
       describe('currencyInput', () => {
-        beforeEach(() => {
-          wrapper.setProps({ value: 'test123' });
+        beforeEach(async () => {
+          await wrapper.setProps({ value: 'test123' });
         });
-        
+
         it('returns value prop', () => {
           expect(wrapper.vm.currencyInput).toBe(wrapper.vm.value);
         });
-        
-        it('emits value (set) on change', () => {
-          wrapper.setData({ currencyInput: mockProps.currencyInput });
+
+        it('emits value (set) on change', async () => {
+          await wrapper.setData({ currencyInput: mockProps.currencyInput });
           expect(wrapper.emitted().input[0][0]).toBe(mockProps.currencyInput);
         });
       });
-    });    
+    });
   });
 });

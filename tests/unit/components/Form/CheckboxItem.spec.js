@@ -14,7 +14,7 @@ describe('components/Form/CheckboxItem', () => {
     expect(CheckboxItem.name).toBe('CheckboxItem');
   });
 
-  describe('props', () => { 
+  describe('props', () => {
     let prop;
     describe('label', () => {
       beforeEach(() => {
@@ -84,7 +84,7 @@ describe('components/Form/CheckboxItem', () => {
       },
     };
     let wrapper;
-  
+
     beforeEach(() => {
       wrapper = createTestSubject(CheckboxItem,{
         propsData: mockProps,
@@ -93,7 +93,7 @@ describe('components/Form/CheckboxItem', () => {
         parent: CheckboxGroup,
       });
     });
-    
+
     it('throws an error if the parent component is not "CheckboxGroup"', () => {
       const consoleError = jest.spyOn(console, 'error').mockImplementation(() => {});
       const BadParent = () => {
@@ -106,18 +106,18 @@ describe('components/Form/CheckboxItem', () => {
       expect(consoleError).toHaveBeenCalled();
       consoleError.mockRestore();
     });
-  
+
     it('renders the component', () => {
       expect(wrapper.exists()).toBeTrue();
       expect(wrapper.vm.$parent.$options.name).toEqual(CheckboxGroup.name);
     });
-    
+
     describe('data', () => {
       describe('hasConditionalContent', () => {
         it('is true when slot content was supplied', () => {
           expect(wrapper.vm.hasConditionalContent).toBe(true);
         });
-        
+
         it('is false when slot content was not supplied', () => {
           wrapper = createTestSubject(CheckboxItem,{
             propsData: mockProps,
@@ -181,15 +181,15 @@ describe('components/Form/CheckboxItem', () => {
           beforeEach(() => {
             hint = wrapper.find('.govuk-checkboxes__hint');
           });
-          
+
           it('renders a `.govuk-checkboxes__hint` element', () => {
             expect(hint.exists()).toBe(true);
           });
-          
+
           it('contains the hint text', () => {
             expect(hint.text()).toBe(mockProps.hint);
           });
-          
+
           it('sets attribute `aria-describedby` on the input to reference the hint element', () => {
             const input = wrapper.find('input[type=checkbox]');
             expect(input.attributes('aria-describedby')).toBe(hint.attributes('id'));
@@ -197,8 +197,8 @@ describe('components/Form/CheckboxItem', () => {
         });
 
         describe('when the `hint` prop is not set', () => {
-          beforeEach(() => {
-            wrapper.setProps({ hint: null });
+          beforeEach(async () => {
+            await wrapper.setProps({ hint: null });
             hint = wrapper.find('.govuk-checkboxes__hint');
           });
 
