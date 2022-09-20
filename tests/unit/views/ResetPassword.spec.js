@@ -37,11 +37,11 @@ describe('views/ResetPassword', () => {
     });
 
     it('contains a <form>', () => {
-      expect(wrapper.find('form').exists()).toBe(true);
+      expect(wrapper.findComponent('form').exists()).toBe(true);
     });
 
     it('contains an email address field', () => {
-      expect(wrapper.find(TextField).exists()).toBe(true);
+      expect(wrapper.findComponent(TextField).exists()).toBe(true);
     });
 
     it('contains a "Save and continue" submit button', () => {

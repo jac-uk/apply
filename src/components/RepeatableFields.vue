@@ -13,7 +13,7 @@
         :index="index"
         :url="url"
       >
-        <template v-slot:removeButton>
+        <template #removeButton>
           <button
             v-if="rows.length > 1"
             ref="removeFieldButton"

@@ -2,7 +2,7 @@
 
   import FormField from '@/components/Form/FormField';
 
-  const $root = { 
+  const $root = {
     $emit: jest.fn(),
   };
 
@@ -32,7 +32,7 @@
           expect(prop.default).toBe('');
         });
       });
-      
+
       describe('type', () => {
         beforeEach(() => {
           prop = FormField.props.type;
@@ -137,7 +137,7 @@
             expect(prop.default).toBe(0);
           });
       });
-      
+
       describe('pattern', () => {
         beforeEach(() => {
           prop = FormField.props.pattern;
@@ -149,7 +149,7 @@
           expect(prop.default()).toEqual({ 'match': /^/, 'message': '' });
         });
       });
-      
+
     });
 
   describe('component instance', () => {
@@ -173,8 +173,8 @@
 
       beforeEach(() => {
         data = wrapper.vm.$data;
-      });    
-      
+      });
+
       it('has errorMessage', () => {
         expect(data).toContainKeys(['errorMessage']);
       });
@@ -209,6 +209,51 @@
           });
           it('email matches pattern', () => {
             expect('test@test.com').toMatch(data.regex.email);
+            expect("test'test@test.com").toMatch(data.regex.email);
+
+            // test cases from https://en.wikipedia.org/wiki/Email_address
+            const validEmails = [
+              'simple@example.com',
+              'very.common@example.com',
+              'disposable.style.email.with+symbol@example.com',
+              'other.email-with-hyphen@example.com',
+              'fully-qualified-domain@example.com',
+              'user.name+tag+sorting@example.com',
+              'x@example.com',
+              'example-indeed@strange-example.com',
+              'test/test@test.com',
+              // 'admin@mailserver1',
+              'example@s.example',
+              '" "@example.org',
+              '"john..doe"@example.org',
+              'mailhost!username@example.org',
+              // eslint-disable-next-line no-useless-escape
+              '"very.(),:;<>[]\".VERY.\"very@\\ \"very\".unusual"@strange.example.com',
+              'user%example.com@example.org',
+              'user-@example.org',
+              'postmaster@[123.123.123.123]',
+              // 'postmaster@[IPv6:2001:0db8:85a3:0000:0000:8a2e:0370:7334]',
+            ];
+            const invalidEmails = [
+              'Abc.example.com',
+              'A@b@c@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'a"b(c)d,e:f;g<h>i[j\k]l@example.com',
+              'just"not"right@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'this is"not\allowed@example.com',
+              // eslint-disable-next-line no-useless-escape
+              'this\ still\"not\\allowed@example.com',
+              // '1234567890123456789012345678901234567890123456789012345678901234+x@example.com',
+              'i_like_underscore@but_its_not_allowed_in_this_part.example.com',
+              'QA[icon]CHOCOLATE[icon]@test.com',
+            ];
+            validEmails.forEach(email => {
+              expect(email).toMatch(data.regex.email);
+            });
+            invalidEmails.forEach(email => {
+              expect(email).not.toMatch(data.regex.email);
+            });
           });
           it('tel matches pattern', () => {
             expect('07123456789').toMatch(data.regex.tel);
@@ -255,7 +300,7 @@
           expect(wrapper.vm.$data.errorMessage).toBe('testError');
         });
 
-        it('emits $root event', () => {      
+        it('emits $root event', () => {
           wrapper.vm.setError('testError');
           expect($root.$emit).toHaveBeenCalled();
         });
@@ -274,21 +319,22 @@
 
       describe('validate', () => {
         describe('when checkErrors is true', () => {
-          beforeEach(() => {
-            wrapper.setData({ checkErrors: true });
+          beforeEach( async () => {
+            await wrapper.setData({ checkErrors: true });
           });
 
           describe('field required errors', () => {
-            beforeEach(() => {
-              wrapper.setProps({ required: true });
+            beforeEach(async () => {
+              await wrapper.setProps({ required: true });
             });
             describe('when given required messages, but no value', () => {
-              it('returns message required value', () => {
-                wrapper.setProps({ messages: { required: mockProps.requiredMessage } });
-              wrapper.vm.validate();
-              expect(wrapper.vm.$data.errorMessage).toBe(mockProps.requiredMessage);
+              it('returns message required value', async () => {
+                await wrapper.setProps({ messages: { required: mockProps.requiredMessage } });
+                wrapper.vm.validate();
+                expect(wrapper.vm.$data.errorMessage).toBe(mockProps.requiredMessage);
+              });
             });
-            
+
             describe('when given no value', () => {
               it('asks for value for empty field', () => {
                 wrapper.vm.validate();
@@ -296,10 +342,10 @@
               });
             });
           });
-          
+
           describe('email errors', () =>{
             beforeEach(()=>{
-              wrapper.setProps({ 
+              wrapper.setProps({
                 type: 'email',
               });
             });
@@ -315,7 +361,7 @@
 
           describe('tel errors', () =>{
             beforeEach(()=>{
-              wrapper.setProps({ 
+              wrapper.setProps({
                 type: 'tel',
               });
             });
@@ -359,7 +405,7 @@
           });
 
           // describe('pattern errors', () =>{
-            
+
           // });
 
           });
@@ -377,12 +423,11 @@
         });
   });
 
-    /* 
+    /*
     * @TODO check responds to 'validate' event
     * @TODO check cleans up after itself (i.e. removes event listener for 'validate')
     */
-    
+
     });
 
   });
-});

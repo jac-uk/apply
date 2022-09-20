@@ -22,12 +22,10 @@
             >
               {{ item.title }}
             </p>
-            <!-- eslint-disable -->
-            <div
+            <CustomHTML
+              :value="item.text"
               class="govuk-body"
-              v-html="item.text"
             />
-            <!-- eslint-enable -->
 
             <RadioGroup
               :id="`meet_requirements_${index}`"
@@ -75,6 +73,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
+import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
@@ -83,6 +82,7 @@ export default {
     RadioItem,
     TextareaInput,
     BackLink,
+    CustomHTML,
   },
   extends: Form,
   mixins: [ApplyMixIn],
