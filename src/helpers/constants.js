@@ -49,6 +49,12 @@ const DEFAULT = {
 const WELSH_POSTS_CONTACT_MAILBOX = 'enquiries@judicialappointments.gov.uk';
 const WELSH_POSTS_EMAIL_SUBJECT = 'Welsh application form request';
 
+const ASSESSOR_TYPES = {
+  PROFESSIONAL: 'professional',
+  JUDICIAL: 'judicial',
+  PERSONAL: 'personal',
+};
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -56,5 +62,6 @@ export {
   ADVERT_TYPES,
   DEFAULT,
   WELSH_POSTS_CONTACT_MAILBOX,
-  WELSH_POSTS_EMAIL_SUBJECT
+  WELSH_POSTS_EMAIL_SUBJECT,
+  ASSESSOR_TYPES
 };

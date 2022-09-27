@@ -21,11 +21,11 @@ describe('components/Form/RadioGroup', () => {
             beforeEach(() => {
                 prop = RadioGroup.props.value;
             });
-                
+
             it('is required', () => {
                 expect(prop.required).toBe(true);
             });
-            
+
             const validTypes = [
                 ['null', null],
                 ['undefined', undefined],
@@ -38,7 +38,7 @@ describe('components/Form/RadioGroup', () => {
                 ['Boolean true', true],
                 ['Boolean false', false],
             ];
-            
+
             it.each(validTypes)('can be %s', (label, value) => {
                 const valid = prop.validator(value);
                 expect(valid).toBe(true);
@@ -58,9 +58,9 @@ describe('components/Form/RadioGroup', () => {
         });
         describe('`v-model` interface', () => {
             describe('when the `value` property changes', () => {
-                it('updates computed property `inputValue`', () => {
+                it('updates computed property `inputValue`', async () => {
                     expect(wrapper.vm.inputValue).toBe(mockProps.value);
-                    wrapper.setProps({
+                    await wrapper.setProps({
                         value: 'some-other-value',
                     });
                     expect(wrapper.vm.inputValue).toBe('some-other-value');
@@ -69,8 +69,8 @@ describe('components/Form/RadioGroup', () => {
 
         describe('when computed property `inputValue` changes', () => {
             const updatedVal = 'some-new-value';
-            it('emits an `input` event', () => {
-                wrapper.setData({
+            it('emits an `input` event', async () => {
+                await wrapper.setData({
                     inputValue: updatedVal,
                 });
 
@@ -98,8 +98,8 @@ describe('components/Form/RadioGroup', () => {
             });
 
             describe('when the `label` prop is empty', () => {
-                it('does not render a <legend>', () => {
-                    wrapper.setProps({ label: null });
+                it('does not render a <legend>', async () => {
+                    await wrapper.setProps({ label: null });
                     const legend = wrapper.find('legend');
                     expect(legend.exists()).toBe(false);
                 });
@@ -109,7 +109,7 @@ describe('components/Form/RadioGroup', () => {
                 const fieldset = wrapper.find('fieldset');
                 expect(fieldset.contains('legend')).toBeTrue();
             });
-        }); 
+        });
 
         describe('hint text', () => {
             describe('when the `hint` prop is set', () => {
@@ -135,8 +135,8 @@ describe('components/Form/RadioGroup', () => {
 
             describe('when the `hint` prop is not set', () => {
                 let hint;
-                beforeEach(() => {
-                    wrapper.setProps({ hint: null });
+                beforeEach(async () => {
+                    await wrapper.setProps({ hint: null });
                     hint = wrapper.find('span.govuk-hint');
                 });
 
@@ -166,5 +166,5 @@ describe('components/Form/RadioGroup', () => {
                 });
             });
         });
-    });     
+    });
 });

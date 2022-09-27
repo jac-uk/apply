@@ -32,22 +32,22 @@ npm run serve
 
 ### Compiles and minifies for staging
 ```
-npm run build-staging
+npm run staging:build
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build-production
+npm run production:build
 ```
 
 ### Compiles and minifies for staging and deploys to Firebase project `Platform - Staging`
 ```
-npm run deploy-staging
+npm run staging:deploy
 ```
 
 ### Compiles and minifies for production and deploys to Firebase project `Platform - Production`
 ```
-npm run deploy-production
+npm run production:deploy
 ```
 
 ### Run your tests
@@ -64,14 +64,14 @@ npm run lint
 
 ```
 firebase use staging
-npm run deploy-staging
+npm run staging:deploy
 ```
 
 ### Manually deploy to production
 
 ```
 firebase use production
-npm run deploy-production
+npm run production:deploy
 ```
 
 ### Continuous deployment

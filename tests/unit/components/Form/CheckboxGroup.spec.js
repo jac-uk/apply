@@ -14,17 +14,17 @@ describe('components/Form/CheckboxGroup', () => {
             beforeEach(() => {
                 prop = CheckboxGroup.props.value;
             });
-                
+
             it('is required', () => {
                 expect(prop.required).toBe(true);
             });
-            
+
             const validTypes = [
                 ['null', null],
                 ['undefined', undefined],
                 ['an Array', ['one', 2]],
             ];
-            
+
             it.each(validTypes)('can be %s', (label, value) => {
                 const valid = prop.validator(value);
                 expect(valid).toBe(true);
@@ -54,10 +54,10 @@ describe('components/Form/CheckboxGroup', () => {
 
         describe('`v-model` interface', () => {
             describe('when the `value` property changes', () => {
-                it('updates computed property `inputValue`', () => {
+                it('updates computed property `inputValue`', async () => {
                     const updateVal = ['some-other-value'];
                     expect(wrapper.vm.inputValue[0]).toBe(mockProps.value[0]);
-                    wrapper.setProps({
+                    await wrapper.setProps({
                         value: updateVal,
                     });
                     expect(wrapper.vm.inputValue).toEqual(updateVal);
@@ -66,9 +66,9 @@ describe('components/Form/CheckboxGroup', () => {
 
             describe('when computed property `inputValue` changes', () => {
                 const updateVal = ['some-new-value'];
-                
-                it('emits an `input` event', () => {
-                    wrapper.setData({
+
+                it('emits an `input` event', async () => {
+                    await wrapper.setData({
                         inputValue: updateVal,
                     });
                     const emitted = wrapper.emitted().input;
@@ -86,8 +86,8 @@ describe('components/Form/CheckboxGroup', () => {
             describe('<legend> element', () => {
                 describe('when the `label` prop is set', () => {
                     const mockLabel = { label: 'my_label' };
-                    it('displays the label in a <legend> element', () => {
-                        wrapper.setProps(mockLabel);
+                    it('displays the label in a <legend> element', async () => {
+                        await wrapper.setProps(mockLabel);
                         const legend = wrapper.find('legend');
                         expect(legend.exists()).toBe(true);
                         expect(legend.text()).toBe(mockLabel.label);
@@ -96,8 +96,8 @@ describe('components/Form/CheckboxGroup', () => {
                 });
 
                 describe('when the `label` prop is empty', () => {
-                    it('does not render a <legend>', () => {
-                        wrapper.setProps({ label: '' });
+                    it('does not render a <legend>', async () => {
+                        await wrapper.setProps({ label: '' });
                         const legend = wrapper.find('legend');
                         expect(legend.exists()).toBe(false);
                     });
@@ -119,8 +119,8 @@ describe('components/Form/CheckboxGroup', () => {
                         value: ['new-value'],
                     };
 
-                    beforeEach(() => {
-                        wrapper.setProps({
+                    beforeEach(async () => {
+                        await wrapper.setProps({
                             mockProps,
                         });
                         hint = wrapper.find('span.govuk-hint');
@@ -182,5 +182,5 @@ describe('components/Form/CheckboxGroup', () => {
                 });
             });
         });
-    });     
+    });
 });
