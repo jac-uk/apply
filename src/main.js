@@ -10,8 +10,7 @@ import VueGtag from 'vue-gtag';
 import browserDetect from 'vue-browser-detect-plugin';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
-// eslint-disable-next-line no-constant-condition
-if (true) {
+if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
     Vue,
     dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',

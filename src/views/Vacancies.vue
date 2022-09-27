@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="govuk-grid-row">
-      <button @click="throwError">Throw error</button>
       <div
         v-if="isSignedIn"
         class="govuk-grid-column-one-quarter"
@@ -456,9 +455,6 @@ export default {
     isAdvertTypeListing(value) {
       const returnValue = value && value === ADVERT_TYPES.LISTING;
       return returnValue;
-    },
-    throwError() {
-      throw new Error('Sentry Error');
     },
   },
 };
