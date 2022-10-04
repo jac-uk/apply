@@ -28,7 +28,37 @@
       </div>
 
       <div
-        v-if="item.date"
+        v-if="item.type === 'barrister' && item.calledToTheBarDate"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Date called to the Bar 
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <ul class="govuk-list">
+            <li> {{ item.calledToTheBarDate | formatDate }}</li>
+          </ul>
+        </dd>
+      </div>
+
+      <div
+        v-if="item.qualificationNotComplete"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Completed pupillage
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <ul class="govuk-list">
+            <li>
+              No
+            </li>
+          </ul>
+        </dd>
+      </div>
+
+      <div
+        v-if="!item.qualificationNotComplete && item.date"
         class="govuk-summary-list__row"
       >
         <dt
@@ -51,22 +81,6 @@
       </div>
 
       <div
-        v-if="item.qualificationNotComplete"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Completed pupillage
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <ul class="govuk-list">
-            <li>
-              No
-            </li>
-          </ul>
-        </dd>
-      </div>
-
-      <div
         v-if="item.qualificationNotComplete && item.details"
         class="govuk-summary-list__row"
       >
@@ -76,7 +90,9 @@
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
             <li>
-              {{ item.details }}
+              {{
+                item.qualificationNotCompleteReason === 'Other' ? item.details : item.qualificationNotCompleteReason
+              }}
             </li>
           </ul>
         </dd>

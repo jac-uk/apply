@@ -43,26 +43,79 @@
         label="Scotland"
       />
     </RadioGroup>
-    <DateInput
-      :id="qualificationDate"
-      v-model="row.date"
-      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
-      type="month"
-    />
 
     <div
       v-if="row.type === 'barrister'"
     >
-      <Checkbox
+      <DateInput
+        :id="calledToTheBarDate"
+        v-model="row.calledToTheBarDate"
+        label="When were you called to the Bar?"
+        type="month"
+        required
+      />
+
+      <RadioGroup
         :id="qualificationNotComplete"
         v-model="row.qualificationNotComplete"
-        label="I did not complete pupillage"
+        label="Have you completed pupillage?"
+        required
+      >
+        <RadioItem
+          :value="false"
+          label="Yes"
+        />
+        <RadioItem
+          :value="true"
+          label="No"
+        />
+      </RadioGroup>
+
+      <DateInput
+        v-if="row.qualificationNotComplete === false"
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you complete pupillage?"
+        type="month"
+        required
       />
-      <TextareaInput
-        v-if="row.qualificationNotComplete"
-        :id="details"
-        v-model="row.details"
-        hint="Please provide some additional information"
+      <div v-else-if="row.qualificationNotComplete === true">
+        <RadioGroup
+          :id="qualificationNotCompleteReason"
+          v-model="row.qualificationNotCompleteReason"
+          label="Why you were exempt from pupillage (we may ask for a copy of your exemption or practicing certificate)?"
+          required
+        >
+          <RadioItem
+            value="Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar"
+            label="Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar"
+          />
+          <RadioItem
+            value="Called to the Bar prior to 1 January 2002"
+            label="Called to the Bar prior to 1 January 2002"
+          />
+          <RadioItem
+            value="Other"
+            label="Other - Please detail why you were exempt from undertaking pupillage by the Bar Standards Board"
+          />
+        </RadioGroup>
+
+        <TextareaInput
+          v-if="row.qualificationNotCompleteReason === 'Other'"
+          :id="details"
+          v-model="row.details"
+          hint="Please provide details how you satisfy the ‘judicial-appointment eligibility condition’, set out in section 50 of the Tribunals, Courts and Enforcement Act 2007"
+          required
+        />
+      </div>
+    </div>
+    
+    <div v-else>
+      <DateInput
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you qualify?"
+        type="month"
       />
     </div>
 
@@ -72,7 +125,6 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
@@ -81,7 +133,6 @@ export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
@@ -103,6 +154,9 @@ export default {
     qualificationLocation() {
       return `qualification_location_${this.index}`;
     },
+    calledToTheBarDate() {
+      return `qualification_calledToTheBar_date_${this.index}`;
+    },
     qualificationDate() {
       return `qualification_date_${this.index}`;
     },
@@ -111,6 +165,9 @@ export default {
     },
     qualificationNotComplete() {
       return `qualification_qualificationNotComplete_${this.index}`;
+    },
+    qualificationNotCompleteReason() {
+      return `qualification_not_complete_reason_${this.index}`;
     },
   },
 };
