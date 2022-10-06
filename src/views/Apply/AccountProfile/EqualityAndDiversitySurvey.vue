@@ -37,7 +37,7 @@
         </p>
         <p class="govuk-body-l">
           If you are recommended for an appointment we will also share your information with the Ministry of Justice,
-          Judicial Office and Her Majesty's Courts and Tribunal Service.
+          Judicial Office and His Majesty's Courts and Tribunal Service.
         </p>
 
         <RadioGroup
