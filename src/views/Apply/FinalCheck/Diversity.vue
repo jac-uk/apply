@@ -278,7 +278,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'Diversity',
   props: {
     application: {
       type: Object,

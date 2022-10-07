@@ -42,7 +42,7 @@ import FileUpload from '@/components/Form/FileUpload';
 import { logEvent } from '@/helpers/logEvent';
 
 export default {
-  name: '',
+  name: 'CV',
   components: {
     ErrorSummary,
     BackLink,

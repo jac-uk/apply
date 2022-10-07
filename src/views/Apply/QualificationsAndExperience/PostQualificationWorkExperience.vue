@@ -38,7 +38,7 @@ import Experience from '@/components/RepeatableFields/Experience';
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'PostQualificationWorkExperience',
   components: {
     RepeatableFields,
     BackLink,

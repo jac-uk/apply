@@ -82,7 +82,7 @@ import Modal from '@/components/Page/Modal';
 import Countdown from '@/components/QualifyingTest/Countdown';
 
 export default {
-  name: '',
+  name: 'QualifyingTest',
   components: {
     LoadingMessage,
     Modal,

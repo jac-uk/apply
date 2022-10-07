@@ -54,7 +54,7 @@ import RepeatableFields from '@/components/RepeatableFields';
 import VATNumbers from '@/components/RepeatableFields/VATNumbers';
 
 export default {
-  name: '',
+  name: 'Hmrc',
   components: {
     BackLink,
     ErrorSummary,

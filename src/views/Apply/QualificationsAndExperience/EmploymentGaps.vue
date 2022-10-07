@@ -46,7 +46,7 @@ import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploy
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'EmploymentGaps',
   components: {
     ErrorSummary,
     RepeatableFields,

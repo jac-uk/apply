@@ -47,7 +47,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import booleanOrNull from '@/helpers/booleanOrNull';
 
 export default {
-  name: '',
+  name: 'EligibilityCheck',
   components: {
     RadioGroup,
     RadioItem,

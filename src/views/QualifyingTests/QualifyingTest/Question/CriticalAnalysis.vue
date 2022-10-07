@@ -20,7 +20,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 
 export default {
-  name: '',
+  name: 'CriticalAnalysis',
   components: {
     RadioGroup,
     RadioItem,

@@ -86,7 +86,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'GapsInEmployment',
   props: {
     application: {
       type: Object,

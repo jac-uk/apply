@@ -125,7 +125,7 @@ import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
-  name: '',
+  name: 'Information',
   components: {
     ErrorSummary,
     Checkbox,

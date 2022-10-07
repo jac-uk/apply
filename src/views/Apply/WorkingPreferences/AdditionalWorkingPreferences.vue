@@ -51,7 +51,7 @@ import SelectionInput from '@/components/SelectionInput/SelectionInput';
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'AdditionalWorkingPreferences',
   components: {
     ErrorSummary,
     SelectionInput,

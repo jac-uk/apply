@@ -176,7 +176,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'Memberships',
   props: {
     application: {
       type: Object,

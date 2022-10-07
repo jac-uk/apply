@@ -60,7 +60,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'Schedule2',
   props: {
     application: {
       type: Object,

@@ -117,7 +117,7 @@ import { isToday, isDateInFuture, formatDate, helperTimeLeft } from '@/helpers/d
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {
-  name: '',
+  name: 'QualifyingTests',
   components: {
     TabsList,
     Table,

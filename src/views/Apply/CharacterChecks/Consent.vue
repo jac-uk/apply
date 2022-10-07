@@ -75,7 +75,7 @@ import Checkbox from '@/components/Form/Checkbox';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 
 export default {
-  name: '',
+  name: 'Consent',
   components: {
     BackLink,
     ErrorSummary,

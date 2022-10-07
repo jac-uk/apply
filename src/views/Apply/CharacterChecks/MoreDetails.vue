@@ -43,7 +43,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
-  name: '',
+  name: 'MoreDetails',
   components: {
     BackLink,
     ErrorSummary,

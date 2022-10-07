@@ -97,7 +97,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'WelshPosts',
   components: {
     ErrorSummary,
     RadioGroup,

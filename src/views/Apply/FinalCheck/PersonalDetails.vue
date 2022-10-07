@@ -121,7 +121,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'PersonalDetails',
   props: {
     application: {
       type: Object,

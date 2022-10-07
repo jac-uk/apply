@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: '',
+  name: 'WelshRequirement',
   props: {
     application: {
       type: Object,

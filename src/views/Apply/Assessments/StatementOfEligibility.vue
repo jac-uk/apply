@@ -76,7 +76,7 @@ import BackLink from '@/components/BackLink';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
-  name: '',
+  name: 'StatementOfEligibility',
   components: {
     ErrorSummary,
     RadioGroup,

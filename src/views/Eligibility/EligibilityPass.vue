@@ -22,7 +22,7 @@
 <script>
 
 export default {
-  name: '',
+  name: 'EligibilityPass',
   computed: {
     ContinueLink() {
       return { name: 'GDPR' };

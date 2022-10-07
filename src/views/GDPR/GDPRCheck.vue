@@ -65,7 +65,7 @@ import Form from '@/components/Form/Form';
 import Checkbox from '@/components/Form/Checkbox';
 
 export default {
-  name: '',
+  name: 'GDPRCheck',
   components: {
     Checkbox,
   },

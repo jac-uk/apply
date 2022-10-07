@@ -158,7 +158,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'JudicialExperience',
   components: {
     ErrorSummary,
     RadioGroup,

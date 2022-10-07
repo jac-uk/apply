@@ -44,7 +44,7 @@
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'Intro',
   components: {
     BackLink,
   },

@@ -263,7 +263,7 @@ import CheckboxItem from '@/components/Form/CheckboxItem';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
-  name: '',
+  name: 'OtherProfessionalBodies',
   components: {
     BackLink,
     ErrorSummary,

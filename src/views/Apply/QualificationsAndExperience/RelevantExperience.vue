@@ -41,7 +41,7 @@ import NonLegalExperience from '@/components/RepeatableFields/NonLegalExperience
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'RelevantExperience',
   components: {
     ErrorSummary,
     RepeatableFields,

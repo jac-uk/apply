@@ -70,7 +70,7 @@ import InfoIcon from '@/components/ModalViews/InfoIcon';
 import { FIXED_PENALTY_NOTICES_URL } from './character-information-constants';
 
 export default {
-  name: '',
+  name: 'FixedPenaltyNotices',
   components: {
     ErrorSummary,
     RadioGroup,

@@ -70,7 +70,7 @@ import InfoIcon from '@/components/ModalViews/InfoIcon';
 import { FURTHER_INFORMATION_URL } from './character-information-constants';
 
 export default {
-  name: '',
+  name: 'FurtherInformation',
   components: {
     ErrorSummary,
     RadioGroup,

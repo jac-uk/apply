@@ -114,7 +114,7 @@ import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
 
 export default {
-  name: '',
+  name: 'AssessorsDetails',
   components: {
     ErrorSummary,
     TextField,

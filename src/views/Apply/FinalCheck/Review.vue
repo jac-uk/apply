@@ -927,7 +927,7 @@ import JudicialExperience from './JudicialExperience.vue';
 import GapsInEmployment from './GapsInEmployment';
 
 export default {
-  name: '',
+  name: 'Review',
   components: {
     BackLink,
     ErrorSummary,

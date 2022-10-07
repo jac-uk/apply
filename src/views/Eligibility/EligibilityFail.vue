@@ -32,7 +32,7 @@
 <script>
 
 export default {
-  name: '',
+  name: 'EligibilityFail',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;
