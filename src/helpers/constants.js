@@ -55,6 +55,12 @@ const ASSESSOR_TYPES = {
   PERSONAL: 'personal',
 };
 
+const NOT_COMPLETE_PUPILLAGE_REASONS = {
+  OPTION_1: 'reason-not-completed-pupillage-1',
+  OPTION_2: 'reason-not-completed-pupillage-2',
+  OTHER: 'reason-not-completed-pupillage-other',
+};
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -63,5 +69,6 @@ export {
   DEFAULT,
   WELSH_POSTS_CONTACT_MAILBOX,
   WELSH_POSTS_EMAIL_SUBJECT,
-  ASSESSOR_TYPES
+  ASSESSOR_TYPES,
+  NOT_COMPLETE_PUPILLAGE_REASONS
 };

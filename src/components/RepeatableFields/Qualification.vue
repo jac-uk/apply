@@ -87,21 +87,15 @@
           required
         >
           <RadioItem
-            value="Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar"
-            label="Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar"
-          />
-          <RadioItem
-            value="Called to the Bar prior to 1 January 2002"
-            label="Called to the Bar prior to 1 January 2002"
-          />
-          <RadioItem
-            value="Other"
-            label="Other - Please detail why you were exempt from undertaking pupillage by the Bar Standards Board"
+            v-for="option in NOT_COMPLETE_PUPILLAGE_REASONS"
+            :key="option"
+            :value="option"
+            :label="option | lookup"
           />
         </RadioGroup>
 
         <TextareaInput
-          v-if="row.qualificationNotCompleteReason === 'Other'"
+          v-if="row.qualificationNotCompleteReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER"
           :id="details"
           v-model="row.details"
           hint="Please provide details how you satisfy the ‘judicial-appointment eligibility condition’, set out in section 50 of the Tribunals, Courts and Enforcement Act 2007"
@@ -128,6 +122,7 @@ import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
+import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
 
 export default {
   name: 'Qualification',
@@ -146,6 +141,11 @@ export default {
       required: true,
       type: Number,
     },
+  },
+  data() {
+    return {
+      NOT_COMPLETE_PUPILLAGE_REASONS,
+    };
   },
   computed: {
     qualificationType() {
