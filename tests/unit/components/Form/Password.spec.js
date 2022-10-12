@@ -62,7 +62,7 @@ describe('components/Form/Password', () => {
       stubs: [],
       propsData: mockProps,
     });
-  }); 
+  });
 
   it('renders the component', () => {
     expect(wrapper.exists()).toBeTrue();
@@ -70,8 +70,8 @@ describe('components/Form/Password', () => {
 
   describe('template', () => {
     describe('label', () => {
-      it('sets the label to the value of the `label` prop', () => {
-        wrapper.setProps({ label: 'My Form Label' });
+      it('sets the label to the value of the `label` prop', async () => {
+        await wrapper.setProps({ label: 'My Form Label' });
         expect(wrapper.find('label').text()).toBe('My Form Label');
       });
     });
@@ -79,8 +79,8 @@ describe('components/Form/Password', () => {
     describe('hint', () => {
       let hint;
       describe('when the prop is set', () => {
-        beforeEach(() => {
-          wrapper.setProps({ hint: 'my_hint' });
+        beforeEach( async () => {
+          await wrapper.setProps({ hint: 'my_hint' });
           hint = wrapper.find('.govuk-hint');
         });
 
@@ -104,13 +104,13 @@ describe('components/Form/Password', () => {
     });
 
     describe('id', () => {
-      it('sets <label> `for` attribute', () => {
-        wrapper.setProps({ id: 'my_unique_key' });
+      it('sets <label> `for` attribute', async () => {
+        await wrapper.setProps({ id: 'my_unique_key' });
         expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
       });
 
-      it('sets <input> `id` attribute', () => {
-        wrapper.setProps({ id: 'my_unique_key' });
+      it('sets <input> `id` attribute', async () => {
+        await wrapper.setProps({ id: 'my_unique_key' });
         expect(wrapper.find('input').attributes().id).toBe('my_unique_key');
       });
     });
@@ -144,8 +144,8 @@ describe('components/Form/Password', () => {
 
     describe('type', () => {
       describe('when the prop is set', () => {
-        it('sets `autocomplete` to provided type', () => {
-          wrapper.setProps({ type: 'my_type' });
+        it('sets `autocomplete` to provided type', async () => {
+          await wrapper.setProps({ type: 'my_type' });
           expect(wrapper.find('input').attributes('autocomplete')).toBe('my_type');
         });
       });
@@ -167,8 +167,8 @@ describe('components/Form/Password', () => {
           expect(wrapper.find('input').attributes().type).toEqual('password');
         });
 
-        it('has type "text" if `showPassword` is true', () => {
-          wrapper.setData({ showPassword: true });
+        it('has type "text" if `showPassword` is true', async () => {
+          await wrapper.setData({ showPassword: true });
           expect(wrapper.find('input').attributes().type).toEqual('text');
         });
       });
@@ -181,8 +181,8 @@ describe('components/Form/Password', () => {
           expect(wrapper.find('button').text()).toEqual('Show');
         });
 
-        it('label is set to "Hide" if `showPassword` is true', () => {
-          wrapper.setData({ showPassword: true });
+        it('label is set to "Hide" if `showPassword` is true', async () => {
+          await wrapper.setData({ showPassword: true });
           expect(wrapper.find('button').text()).toEqual('Hide');
         });
       });
@@ -199,8 +199,8 @@ describe('components/Form/Password', () => {
     });
 
     describe('when value prop changes', () => {
-      it('updates the `text` computed property', () => {
-        wrapper.setProps({ value: 'my_value' });
+      it('updates the `text` computed property', async () => {
+        await wrapper.setProps({ value: 'my_value' });
         expect(wrapper.vm.text).toEqual('my_value');
       });
     });
@@ -226,9 +226,9 @@ describe('components/Form/Password', () => {
         expect(wrapper.vm.validatePassword).toHaveBeenCalled();
       });
 
-      it('should call validatePassword() with value if no errors yet', () => {
-        wrapper.setData({ errorMessage: null });
-        wrapper.setProps({ value: 'mock value' });
+      it('should call validatePassword() with value if no errors yet', async () => {
+        await wrapper.setData({ errorMessage: null });
+        await wrapper.setProps({ value: 'mock value' });
 
         wrapper.vm.handleValidatePassword();
         expect(wrapper.vm.validatePassword).toHaveBeenCalledWith(wrapper.vm.value);
@@ -284,7 +284,7 @@ describe('components/Form/Password', () => {
           expect(wrapper.vm.setError).not.toHaveBeenCalledWith(`${mockProps.label} must include at least one special character - for example £, #, @, !, %, -, &, *.`);
         });
       });
-      
+
       describe('length', () => {
         it('should set error if argument is not long enough', () => {
           wrapper.vm.validatePassword('p@sswor');

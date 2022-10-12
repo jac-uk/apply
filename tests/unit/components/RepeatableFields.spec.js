@@ -144,7 +144,7 @@ describe('components/RepeatableFields', () => {
             stubs: [],
             propsData: {
               value: array,
-              max: 5, 
+              max: 5,
               component: TextField,
             },
           });
@@ -159,7 +159,7 @@ describe('components/RepeatableFields', () => {
             stubs: [],
             propsData: {
               value: array,
-              max: 2, 
+              max: 2,
               component: TextField,
             },
           });
@@ -174,7 +174,7 @@ describe('components/RepeatableFields', () => {
             stubs: [],
             propsData: {
               value: array,
-              max: 3, 
+              max: 3,
               component: TextField,
             },
           });
@@ -182,7 +182,7 @@ describe('components/RepeatableFields', () => {
       });
     });
   });
-  
+
   describe('created hook', () => {
     describe('if value is an array', () => {
       it('updates the value of rows and does not call emit', ()=> {
@@ -191,7 +191,7 @@ describe('components/RepeatableFields', () => {
           stubs: [],
           propsData: {
             value: array,
-            max: 3, 
+            max: 3,
             component: TextField,
           },
         });
@@ -201,15 +201,15 @@ describe('components/RepeatableFields', () => {
     });
 
     describe('if value is not an array', () => {
-      it('emits the initial rows value', ()=> {
-        wrapper.setProps({ value: undefined });
+      it('emits the initial rows value', async ()=> {
+        await wrapper.setProps({ value: undefined });
         expect(wrapper.emitted().input).toBeTruthy();
       });
     });
 
     describe('if rows array is empty', () => {
-      it('pushes an object to rows', ()=> {
-        wrapper.setProps({ value: undefined });
+      it('pushes an object to rows', async ()=> {
+        await wrapper.setProps({ value: undefined });
         expect(wrapper.vm.rows).toContainEqual({});
       });
     });
@@ -229,7 +229,7 @@ describe('components/RepeatableFields', () => {
         });
 
         expect(wrapper.vm.rows.length).toBe(3);
-        
+
         wrapper.vm.addRow();
         expect(wrapper.vm.rows.length).toBe(4);
       });

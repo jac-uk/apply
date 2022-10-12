@@ -52,22 +52,22 @@ describe('component methods', () => {
 
   describe('computed properties', () => {
     describe('qualificationType', () => {
-      it('returns the value that is created using index', () => {
-        wrapper.setProps({ index: 4 });
+      it('returns the value that is created using index', async () => {
+        await wrapper.setProps({ index: 4 });
         expect(wrapper.vm.qualificationType).toBe('qualification_type_4');
       });
     });
 
     describe('qualificationLocation', () => {
-      it('returns the value that is created using index', () => {
-        wrapper.setProps({ index: 5 });
+      it('returns the value that is created using index', async () => {
+        await wrapper.setProps({ index: 5 });
         expect(wrapper.vm.qualificationLocation).toBe('qualification_location_5');
       });
     });
 
     describe('qualificationDate', () => {
-      it('returns the value that is created using index', () => {
-        wrapper.setProps({ index: 5, row: {} });
+      it('returns the value that is created using index', async () => {
+        await wrapper.setProps({ index: 5, row: {} });
         expect(wrapper.vm.qualificationDate).toBe('qualification_date_5');
       });
     });

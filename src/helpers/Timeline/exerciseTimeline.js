@@ -64,7 +64,7 @@ const exerciseTimeline = (data) => {
         entry: 'Open for applications',
         date: data.applicationOpenDate,
         dateString: isDate(data.applicationOpenDate) ? formatDate(data.applicationOpenDate) : null,
-      },
+      }
     );
   }
 
@@ -108,7 +108,7 @@ const exerciseTimeline = (data) => {
             entry: 'Situational judgement qualifying test (QT)',
             date: getDateAndTime(data.situationalJudgementTestDate, data.situationalJudgementTestStartTime),
             dateString: getDateAndTimeString(data.situationalJudgementTestDate, data.situationalJudgementTestStartTime, data.situationalJudgementTestEndTime),
-          },
+          }
         );
       }
       if (data.situationalJudgementTestOutcome) {
@@ -117,7 +117,7 @@ const exerciseTimeline = (data) => {
             entry: 'Situational judgement QT outcome to candidates',
             date: data.situationalJudgementTestOutcome,
             dateString: isDate(data.situationalJudgementTestOutcome) ? formatDate(data.situationalJudgementTestOutcome) : null,
-          },
+          }
         );
       }
     }
@@ -129,7 +129,7 @@ const exerciseTimeline = (data) => {
             entry: 'Critical analysis qualifying test (QT)',
             date: getDateAndTime(data.criticalAnalysisTestDate, data.criticalAnalysisTestStartTime),
             dateString: getDateAndTimeString(data.criticalAnalysisTestDate, data.criticalAnalysisTestStartTime, data.criticalAnalysisTestEndTime),
-          },
+          }
         );
       }
       if (data.criticalAnalysisTestOutcome) {
@@ -138,7 +138,7 @@ const exerciseTimeline = (data) => {
             entry: 'Critical analysis QT outcome to candidates',
             date: data.criticalAnalysisTestOutcome,
             dateString: isDate(data.criticalAnalysisTestOutcome) ? formatDate(data.criticalAnalysisTestOutcome) : null,
-          },
+          }
         );
       }
     }
@@ -150,7 +150,7 @@ const exerciseTimeline = (data) => {
             entry: 'Scenario test',
             date: getDateAndTime(data.scenarioTestDate, data.scenarioTestStartTime),
             dateString: getDateAndTimeString(data.scenarioTestDate, data.scenarioTestStartTime, data.scenarioTestEndTime),
-          },
+          }
         );
       }
       if (data.scenarioTestOutcome) {
@@ -159,7 +159,7 @@ const exerciseTimeline = (data) => {
             entry: 'Scenario test outcome to candidates',
             date: data.scenarioTestOutcome,
             dateString: isDate(data.scenarioTestOutcome) ? formatDate(data.scenarioTestOutcome) : null,
-          },
+          }
         );
       }
     }
@@ -171,7 +171,7 @@ const exerciseTimeline = (data) => {
         entry: 'Shortlisting outcome',
         date: data.shortlistingOutcomeDate,
         dateString: isDate(data.shortlistingOutcomeDate) ? formatDate(data.shortlistingOutcomeDate, 'month') : null,
-      },
+      }
     );
   }
 
@@ -182,7 +182,7 @@ const exerciseTimeline = (data) => {
           entry: 'JAC Contacts Independent Assessors',
           date: data.contactIndependentAssessors,
           dateString: isDate(data.contactIndependentAssessors) ? formatDate(data.contactIndependentAssessors) : null,
-        },
+        }
       );
     }
 
@@ -192,7 +192,7 @@ const exerciseTimeline = (data) => {
           entry: 'Return date for independent assessments',
           date: data.independentAssessmentsReturnDate,
           dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate) : null,
-        },
+        }
       );
     }
   }
@@ -203,7 +203,7 @@ const exerciseTimeline = (data) => {
         entry: 'Eligibility SCC',
         date: data.eligibilitySCCDate,
         dateString: isDate(data.eligibilitySCCDate) ? formatDate(data.eligibilitySCCDate) : null,
-      },
+      }
     );
   }
   if (data.selectionDays && data.selectionDays.length > 0) {
@@ -220,7 +220,7 @@ const exerciseTimeline = (data) => {
         entry: 'Character checks',
         date: data.characterChecksDate,
         dateString: isDate(data.characterChecksDate) ? formatDate(data.characterChecksDate) : null,
-      },
+      }
     );
   }
 
@@ -230,7 +230,7 @@ const exerciseTimeline = (data) => {
         entry: 'Statutory consultation',
         date: data.statutoryConsultationDate,
         dateString: isDate(data.statutoryConsultationDate) ? formatDate(data.statutoryConsultationDate) : null,
-      },
+      }
     );
   }
 
@@ -240,7 +240,7 @@ const exerciseTimeline = (data) => {
         entry: 'Character and Selection SCC',
         date: data.characterAndSCCDate,
         dateString: isDate(data.characterAndSCCDate) ? formatDate(data.characterAndSCCDate) : null,
-      },
+      }
     );
   }
 

@@ -13,26 +13,26 @@ describe('components/Form/TextareaInput', () => {
       it('must be a String', () => {
         expect(prop.type()).toBeString();
       });
-      
+
       it('defaults as \'5\'', () => {
         expect(prop.default).toBe('5');
       });
-      
+
     });
-    
+
     describe('value', () => {
       beforeEach(() => {
         prop = TextareaInput.props.value;
       });
-      
+
       it('type is String', () => {
         expect(prop.type()).toBeString();
       });
-      
+
       it('defaults as \'\'', () => {
         expect(prop.default).toBe('');
       });
-      
+
     });
 
   });
@@ -58,8 +58,8 @@ describe('components/Form/TextareaInput', () => {
 
     describe('template', () => {
       describe('label', () => {
-        it('sets the label to the value of the `label` prop', () => {
-          wrapper.setProps({ label: 'My Form Label' });
+        it('sets the label to the value of the `label` prop', async () => {
+          await wrapper.setProps({ label: 'My Form Label' });
           expect(wrapper.find('label').text()).toBe('My Form Label');
         });
       });
@@ -67,8 +67,8 @@ describe('components/Form/TextareaInput', () => {
       describe('hint', () => {
         let hint;
         describe('when the prop is set', () => {
-          beforeEach(() => {
-            wrapper.setProps({ hint: 'my_hint' });
+          beforeEach(async () => {
+            await wrapper.setProps({ hint: 'my_hint' });
             hint = wrapper.find('.govuk-hint');
           });
 
@@ -93,13 +93,13 @@ describe('components/Form/TextareaInput', () => {
       });
 
       describe('id', () => {
-        it('sets <label> `for` attribute', () => {
-          wrapper.setProps({ id: 'my_unique_key' });
+        it('sets <label> `for` attribute', async () => {
+          await wrapper.setProps({ id: 'my_unique_key' });
           expect(wrapper.find('label').attributes().for).toBe('my_unique_key');
         });
 
-        it('sets <textarea> `id` attribute', () => {
-          wrapper.setProps({ id: 'my_unique_key' });
+        it('sets <textarea> `id` attribute', async () => {
+          await wrapper.setProps({ id: 'my_unique_key' });
           expect(wrapper.find('textarea').attributes().id).toBe('my_unique_key');
         });
       });
@@ -109,8 +109,8 @@ describe('components/Form/TextareaInput', () => {
           expect(wrapper.find('textarea').attributes().rows).toBe('5');
         });
 
-        it('sets the rows to the value of the `rows` prop', () => {
-          wrapper.setProps({ rows: '2' });
+        it('sets the rows to the value of the `rows` prop', async () => {
+          await wrapper.setProps({ rows: '2' });
           expect(wrapper.find('textarea').attributes().rows).toBe('2');
         });
       });
@@ -118,15 +118,15 @@ describe('components/Form/TextareaInput', () => {
 
     describe('`v-model` interface', () => {
       describe('when text changes', () => {
-        it('emits an input event with the new value', () => {
-          wrapper.setData({ text: 'new-value' });
+        it('emits an input event with the new value', async () => {
+          await wrapper.setData({ text: 'new-value' });
           expect(wrapper.emitted().input).toEqual([['new-value']]);
         });
       });
 
       describe('when value prop changes', () => {
-        it('updates the `text` computed property', () => {
-          wrapper.setProps({ value: 'my_value' });
+        it('updates the `text` computed property', async () => {
+          await wrapper.setProps({ value: 'my_value' });
           expect(wrapper.vm.text).toEqual('my_value');
         });
       });
@@ -134,8 +134,8 @@ describe('components/Form/TextareaInput', () => {
 
     describe('word-count', () => {
 
-      beforeEach(() => {
-        wrapper.setProps({
+      beforeEach(async () => {
+        await wrapper.setProps({
           label: '',
           id: 'mockId',
           wordLimit: 10,
@@ -146,15 +146,15 @@ describe('components/Form/TextareaInput', () => {
       });
       describe('counting words', () => {
         it('splits words by any non alphabetical', async () => {
-          wrapper.setProps({ value: 'one two\nthree+four0five_six!seven&eight' });
+          await wrapper.setProps({ value: 'one two\nthree+four0five_six!seven&eight' });
           expect(wrapper.vm.words).toEqual(['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight']);
         });
         it('allows three hyphens per word counted', async () => {
-          wrapper.setProps({ value: 'one-one-one-one-two-two-two-two-three-three-three-three' });
+          await wrapper.setProps({ value: 'one-one-one-one-two-two-two-two-three-three-three-three' });
           expect(wrapper.vm.words).toEqual(['one-one-one-one-','two-two-two-two-','three-three-three-three']);
         });
         it('allows for hyphens used like bullet points (not counted when on their own)', async () => {
-          wrapper.setProps({ value: '- one-one-one-one\n- two-two-two-two\n- three-three-three-three\n' });
+          await wrapper.setProps({ value: '- one-one-one-one\n- two-two-two-two\n- three-three-three-three\n' });
           expect(wrapper.vm.words).toEqual(['one-one-one-one','two-two-two-two','three-three-three-three']);
         });
       });

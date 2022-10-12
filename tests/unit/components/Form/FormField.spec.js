@@ -2,7 +2,7 @@
 
   import FormField from '@/components/Form/FormField';
 
-  const $root = { 
+  const $root = {
     $emit: jest.fn(),
   };
 
@@ -32,7 +32,7 @@
           expect(prop.default).toBe('');
         });
       });
-      
+
       describe('type', () => {
         beforeEach(() => {
           prop = FormField.props.type;
@@ -137,7 +137,7 @@
             expect(prop.default).toBe(0);
           });
       });
-      
+
       describe('pattern', () => {
         beforeEach(() => {
           prop = FormField.props.pattern;
@@ -149,7 +149,7 @@
           expect(prop.default()).toEqual({ 'match': /^/, 'message': '' });
         });
       });
-      
+
     });
 
   describe('component instance', () => {
@@ -173,8 +173,8 @@
 
       beforeEach(() => {
         data = wrapper.vm.$data;
-      });    
-      
+      });
+
       it('has errorMessage', () => {
         expect(data).toContainKeys(['errorMessage']);
       });
@@ -322,7 +322,7 @@
           expect(wrapper.vm.$data.errorMessage).toBe('testError');
         });
 
-        it('emits $root event', () => {      
+        it('emits $root event', () => {
           wrapper.vm.setError('testError');
           expect($root.$emit).toHaveBeenCalled();
         });
@@ -341,21 +341,22 @@
 
       describe('validate', () => {
         describe('when checkErrors is true', () => {
-          beforeEach(() => {
-            wrapper.setData({ checkErrors: true });
+          beforeEach( async () => {
+            await wrapper.setData({ checkErrors: true });
           });
 
           describe('field required errors', () => {
-            beforeEach(() => {
-              wrapper.setProps({ required: true });
+            beforeEach(async () => {
+              await wrapper.setProps({ required: true });
             });
             describe('when given required messages, but no value', () => {
-              it('returns message required value', () => {
-                wrapper.setProps({ messages: { required: mockProps.requiredMessage } });
-              wrapper.vm.validate();
-              expect(wrapper.vm.$data.errorMessage).toBe(mockProps.requiredMessage);
+              it('returns message required value', async () => {
+                await wrapper.setProps({ messages: { required: mockProps.requiredMessage } });
+                wrapper.vm.validate();
+                expect(wrapper.vm.$data.errorMessage).toBe(mockProps.requiredMessage);
+              });
             });
-            
+
             describe('when given no value', () => {
               it('asks for value for empty field', () => {
                 wrapper.vm.validate();
@@ -363,10 +364,10 @@
               });
             });
           });
-          
+
           describe('email errors', () =>{
             beforeEach(()=>{
-              wrapper.setProps({ 
+              wrapper.setProps({
                 type: 'email',
               });
             });
@@ -382,7 +383,7 @@
 
           describe('tel errors', () =>{
             beforeEach(()=>{
-              wrapper.setProps({ 
+              wrapper.setProps({
                 type: 'tel',
               });
             });
@@ -426,7 +427,7 @@
           });
 
           // describe('pattern errors', () =>{
-            
+
           // });
 
           });
@@ -444,12 +445,11 @@
         });
   });
 
-    /* 
+    /*
     * @TODO check responds to 'validate' event
     * @TODO check cleans up after itself (i.e. removes event listener for 'validate')
     */
-    
+
     });
 
   });
-});
