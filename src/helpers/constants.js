@@ -56,6 +56,12 @@ const RECAPTCHA_ACTIONS = {
   },
 };
 
+const ASSESSOR_TYPES = {
+  PROFESSIONAL: 'professional',
+  JUDICIAL: 'judicial',
+  PERSONAL: 'personal',
+};
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -64,5 +70,6 @@ export {
   DEFAULT,
   WELSH_POSTS_CONTACT_MAILBOX,
   WELSH_POSTS_EMAIL_SUBJECT,
-  RECAPTCHA_ACTIONS
+  RECAPTCHA_ACTIONS,
+  ASSESSOR_TYPES
 };

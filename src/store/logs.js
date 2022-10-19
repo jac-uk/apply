@@ -14,7 +14,7 @@ export default {
             data: obj.data,
             type: obj.type,
             date: firebase.firestore.FieldValue.serverTimestamp(),
-          },
+          }
       );
     },
   },

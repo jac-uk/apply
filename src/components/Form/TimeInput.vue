@@ -42,7 +42,7 @@
               ref="hourInput"
               v-model.lazy="hourInput"
               class="govuk-input govuk-date-input__input govuk-input--width-2"
-              type="tel"
+              type="number"
             >
           </div>
         </div>
@@ -59,7 +59,7 @@
               ref="minuteInput"
               v-model.lazy="minuteInput"
               class="govuk-input govuk-date-input__input govuk-input--width-2"
-              type="tel"
+              type="number"
             >
           </div>
         </div>

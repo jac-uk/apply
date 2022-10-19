@@ -9,6 +9,7 @@ import * as Integrations from '@sentry/integrations';
 import VueGtag from 'vue-gtag';
 import browserDetect from 'vue-browser-detect-plugin';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
+import VueDOMPurifyHTML from 'vue-dompurify-html';
 
 if (process.env.NODE_ENV !== 'development') {
   Sentry.init({
@@ -25,6 +26,7 @@ if (process.env.NODE_ENV !== 'development') {
 Vue.config.productionTip = false;
 
 Vue.use(browserDetect);
+Vue.use(VueDOMPurifyHTML);
 
 // Register global filters
 Object.keys(filters)

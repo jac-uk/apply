@@ -61,6 +61,10 @@ export default {
       default: 'current-password',
       type: String,
     },
+    minLength: {
+      default: 8,
+      type: Number,
+    },
   },
   data() {
     return {
@@ -121,8 +125,8 @@ export default {
     },
     validatePassword(password) {
 
-      if (password.length < 8) {
-        this.setError(`${this.label} should be 8 or more characters long`);
+      if (password.length < this.minLength) {
+        this.setError(`${this.label} should be ${this.minLength} or more characters long`);
       }
 
       if (!this.regex.containsCapitalLetters.test(password)) {

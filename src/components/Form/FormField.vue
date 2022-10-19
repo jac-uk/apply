@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { formatDate } from '@/helpers/date';
+
 export default {
   props: {
     id: {
@@ -55,8 +57,9 @@ export default {
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
-        email: /^\w+([\.\+-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,20})+$/,
-        tel: /^\+?[\d() -]+/,
+        email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, // ref: https://emailregex.com/
+        // match UK numbers and E.164 format (ref: https://regexpattern.com/phone-number/#uk)
+        tel: /(^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?#(\d{4}|\d{3}))?$)|(^\+?[1-9]\d{1,14}$)/,
         nino: /^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](?:\s?\d){6}\s?[A-D]$/i,
         postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i,
       },
@@ -122,7 +125,17 @@ export default {
           }
         }
 
+        if (this.type && this.type === 'date' && value) {
+          if (this.maxDate && (value > (this.maxDate))) {
+            this.setError(`Enter a date before ${formatDate(this.maxDate)} for ${this.label}`);
+          }
+          if (this.minDate && (value < (this.minDate))) {
+            this.setError(`Enter a date after ${formatDate(this.minDate)} for ${this.label}`);
+          }
+        }
+
         if (this.type && this.type === 'tel' && value) {
+          // remove plus, hyphen, and space before regex validation
           if (!this.regex.tel.test(value)) {
             this.setError(`Enter a valid phone number for ${this.label}`);
           }

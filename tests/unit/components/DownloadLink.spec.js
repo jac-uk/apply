@@ -115,8 +115,8 @@ describe('components/DownloadLink', () => {
         const mockFileName = 'mock file name';
         const mockHref = 'mock href';
 
-        beforeEach(() => {
-          wrapper.setProps({
+        beforeEach(async () => {
+          await wrapper.setProps({
             fileName: mockFileName,
           });
         });

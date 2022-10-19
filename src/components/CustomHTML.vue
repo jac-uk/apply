@@ -1,7 +1,7 @@
 <template>
   <div
+    v-dompurify-html="value"
     class="custom-html"
-    v-html="value"
   />
 </template>
 

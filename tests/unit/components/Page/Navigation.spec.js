@@ -61,13 +61,13 @@ describe('components/Page/Navigation', () => {
         expect(wrapper.findAll('li').length).toBe(2);
       });
 
-      it('does not render if items array is empty', () => {
-        wrapper.setProps({ items: [] });
+      it('does not render if items array is empty', async () => {
+        await wrapper.setProps({ items: [] });
         expect(wrapper.findAll('li').length).toBe(0);
       });
 
-      it('sets aria-label with label prop', () => {
-        wrapper.setProps({ label: 'MyTestLabel' });
+      it('sets aria-label with label prop', async () => {
+        await wrapper.setProps({ label: 'MyTestLabel' });
         expect(wrapper.find('nav').attributes('aria-label')).toBe('Side navigation');
       });
 

@@ -50,13 +50,15 @@
           v-model="personalDetails.phone"
           label="Phone number"
           type="tel"
-          hint="Optional. For international numbers include the country code."
+          hint="Optional. For international numbers include the country code. For example, ‘+447123456789’."
         />
 
         <DateInput
           id="date-of-birth"
           v-model="personalDetails.dateOfBirth"
           required
+          :min-date="new Date('1/01/1900')"
+          :max-date="new Date()"
           label="Date of birth"
           hint="For example, 27 3 1964"
         />
