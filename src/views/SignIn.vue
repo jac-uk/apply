@@ -3,7 +3,7 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="login"
+        @submit.prevent="submit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -52,7 +52,10 @@
             type="password"
           />
 
-          <button class="govuk-button">
+          <button
+            class="govuk-button"
+            :disabled="disabled"
+          >
             Continue
           </button>
 
@@ -77,6 +80,7 @@
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
+import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
   components: {
@@ -90,6 +94,9 @@ export default {
     };
   },
   computed: {
+    disabled() {
+      return !this.formData.email || !this.formData.password;
+    },
     exerciseId () {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
@@ -99,40 +106,50 @@ export default {
     //   const provider = new auth.GoogleAuthProvider();
     //   auth().signInWithPopup(provider);
     // },
-    login() {
-      if (this.formData.email && this.formData.password) {
-        this.errors = [];
-        auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
-          .then((userCredential) => {
+    async submit() {
+      if (this.disabled) return;
 
-            // LOG
-            const objToLog = {
-              type: 'login',
-              id: userCredential.user.uid,
-              data: {
-                uid: userCredential.user.uid,
-                meta: this.$browserDetect.meta,
-              },
-            };
-            this.$store.dispatch('logs/save', objToLog);
-            // LOG
+      const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
+      const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
+        token,
+        score: RECAPTCHA_ACTIONS.LOGIN.score,
+      });
+      if (!isVerified) return;
 
-            this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-            if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
-            } else {
-              this.$router.push({ name: 'applications' });
-            }
-          })
-          .catch((error) => {
-            let message = error.message;
-            // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
-            message = 'Either the email address and/or password you have entered is incorrect';
-            // }
-            this.errors.push(
-              { id: 'email', message: message });
-          });
-      }
+      this.login();
+    },
+    async login() {
+      this.errors = [];
+      auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+        .then((userCredential) => {
+
+          // LOG
+          const objToLog = {
+            type: 'login',
+            id: userCredential.user.uid,
+            data: {
+              uid: userCredential.user.uid,
+              meta: this.$browserDetect.meta,
+            },
+          };
+          this.$store.dispatch('logs/save', objToLog);
+          // LOG
+
+          this.$store.dispatch('auth/setCurrentUser', userCredential.user);
+          if (this.$store.getters['vacancy/id']) {
+            this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
+          } else {
+            this.$router.push({ name: 'applications' });
+          }
+        })
+        .catch((error) => {
+          let message = error.message;
+          // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
+          message = 'Either the email address and/or password you have entered is incorrect';
+          // }
+          this.errors.push(
+            { id: 'email', message: message });
+        });
     },
   },
 };
