@@ -191,7 +191,7 @@ const exerciseTimeline = (data) => {
         {
           entry: 'Return date for independent assessments',
           date: data.independentAssessmentsReturnDate,
-          dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate) : null,
+          dateString: isDate(data.independentAssessmentsReturnDate) ? formatDate(data.independentAssessmentsReturnDate, 'hour') : null,
         }
       );
     }
