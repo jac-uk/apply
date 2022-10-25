@@ -46,6 +46,11 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
+        <Search
+          placeholder="Search vacancies"
+          @search="useSearch" 
+        />
+
         <TabsList
           :tabs="tabs"
           :active-tab.sync="activeTab"
@@ -60,13 +65,18 @@
             >
               No open vacancies at the moment.
             </p>
-
+            <p
+              v-else-if="!filteredOpenVacancies.length"
+              class="govuk-body govuk-!-margin-bottom-6"
+            >
+              No matching vacancies.
+            </p>
             <ul
               v-else
               class="govuk-list"
             >
               <li
-                v-for="vacancy in openVacancies"
+                v-for="vacancy in filteredOpenVacancies"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -212,13 +222,18 @@
             >
               No future vacancies at the moment.
             </p>
-
+            <p
+              v-else-if="!filteredFutureVacancies.length"
+              class="govuk-body govuk-!-margin-bottom-6"
+            >
+              No matching vacancies.
+            </p>
             <ul
               v-else
               class="govuk-list"
             >
               <li
-                v-for="vacancy in futureVacancies"
+                v-for="vacancy in filteredFutureVacancies"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -315,9 +330,24 @@
             v-if="activeTab === 'close'"
             class="govuk-tabs__panel"
           >
-            <ul class="govuk-list">
+            <p
+              v-if="!inProgressVacancies.length"
+              class="govuk-body govuk-!-margin-bottom-6"
+            >
+              No closed vacancies at the moment.
+            </p>
+            <p
+              v-else-if="!filteredInProgressVacancies.length"
+              class="govuk-body govuk-!-margin-bottom-6"
+            >
+              No matching vacancies.
+            </p>
+            <ul
+              v-else
+              class="govuk-list"
+            >
               <li
-                v-for="vacancy in inProgressVacancies"
+                v-for="vacancy in filteredInProgressVacancies"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -420,12 +450,14 @@
 </template>
 
 <script>
+import Search from '@/components/Search';
 import TabsList from '@/components/Page/TabsList';
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
 
 export default {
   components: {
+    Search,
     TabsList,
   },
   data() {
@@ -445,6 +477,7 @@ export default {
           title: 'Close for applications',
         },
       ],
+      searchTerm: '',
     };
   },
   computed: {
@@ -455,6 +488,27 @@ export default {
     ]),
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
+    },
+    filteredOpenVacancies() {
+      if (this.isEmptyString(this.searchTerm)) {
+        return this.openVacancies;
+      } else {
+        return this.openVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+    },
+    filteredInProgressVacancies() {
+      if (this.isEmptyString(this.searchTerm)) {
+        return this.inProgressVacancies;
+      } else {
+        return this.inProgressVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+    },
+    filteredFutureVacancies() {
+      if (this.isEmptyString(this.searchTerm)) {
+        return this.futureVacancies;
+      } else {
+        return this.futureVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
     },
   },
   created() {
@@ -470,6 +524,12 @@ export default {
     },
     isAdvertTypeFull(type) {
       return type && type === ADVERT_TYPES.FULL;
+    },
+    isEmptyString(value) {
+      return value && value.replace(/\s/g, '') === '';
+    },
+    useSearch(searchTerm) {
+      this.searchTerm = searchTerm;
     },
   },
 };
