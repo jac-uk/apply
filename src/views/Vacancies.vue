@@ -642,6 +642,7 @@ export default {
       this.showSidePanel = false;
     },
     btnCancelFilters() {
+      this.filter = this.appliedFilter;
       this.showSidePanel = false;
     },
     filterVacancies(vacancies) {
