@@ -46,11 +46,27 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
-        <Search
-          placeholder="Search vacancies"
-          @search="useSearch" 
-        />
+        <div>
+          <Search
+            placeholder="Search vacancies"
+            @search="useSearch" 
+          />
 
+          <CheckboxGroup
+            id="type-of-exercise"
+            v-model="filter"
+            label="Type of Exercise"
+            hint="Select all that apply."
+          >
+            <CheckboxItem
+              v-for="(option, i) in typeOfExerciseOptions"
+              :key="i"
+              :value="option"
+              :label="option.toString() | lookup"
+            />
+          </CheckboxGroup>
+        </div>
+        
         <TabsList
           :tabs="tabs"
           :active-tab.sync="activeTab"
@@ -66,7 +82,7 @@
               No open vacancies at the moment.
             </p>
             <p
-              v-else-if="!filteredOpenVacancies.length"
+              v-else-if="!filterVacancies(openVacancies).length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
               No vacancies found.
@@ -76,7 +92,7 @@
               class="govuk-list"
             >
               <li
-                v-for="vacancy in filteredOpenVacancies"
+                v-for="vacancy in filterVacancies(openVacancies)"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -103,6 +119,18 @@
                     {{ vacancy.name }}
                   </span>
 
+                  <p v-if="vacancy.typeOfExercise">
+                    <span
+                      class="govuk-body govuk-!-font-weight-bold"
+                    >
+                      <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
+                    </span>
+                    <span
+                      class="govuk-body"
+                    >
+                      {{ vacancy.typeOfExercise | lookup }}
+                    </span>
+                  </p>
                   <p>
                     <span
                       class="govuk-body govuk-!-font-weight-bold"
@@ -223,7 +251,7 @@
               No future vacancies at the moment.
             </p>
             <p
-              v-else-if="!filteredFutureVacancies.length"
+              v-else-if="!filterVacancies(futureVacancies).length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
               No vacancies found.
@@ -233,7 +261,7 @@
               class="govuk-list"
             >
               <li
-                v-for="vacancy in filteredFutureVacancies"
+                v-for="vacancy in filterVacancies(futureVacancies)"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -259,6 +287,18 @@
                   {{ vacancy.name }}
                 </span>
 
+                <p v-if="vacancy.typeOfExercise">
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
+                  </span>
+                  <span
+                    class="govuk-body"
+                  >
+                    {{ vacancy.typeOfExercise | lookup }}
+                  </span>
+                </p>
                 <p>
                   <span
                     class="govuk-body govuk-!-font-weight-bold"
@@ -337,7 +377,7 @@
               No closed vacancies at the moment.
             </p>
             <p
-              v-else-if="!filteredInProgressVacancies.length"
+              v-else-if="!filterVacancies(inProgressVacancies).length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
               No vacancies found.
@@ -347,7 +387,7 @@
               class="govuk-list"
             >
               <li
-                v-for="vacancy in filteredInProgressVacancies"
+                v-for="vacancy in filterVacancies(inProgressVacancies)"
                 :key="vacancy.id"
                 class="govuk-!-margin-top-4"
               >
@@ -373,6 +413,18 @@
                   {{ vacancy.name }}
                 </span>
 
+                <p v-if="vacancy.typeOfExercise">
+                  <span
+                    class="govuk-body govuk-!-font-weight-bold"
+                  >
+                    <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
+                  </span>
+                  <span
+                    class="govuk-body"
+                  >
+                    {{ vacancy.typeOfExercise | lookup }}
+                  </span>
+                </p>
                 <p>
                   <span
                     class="govuk-body govuk-!-font-weight-bold"
@@ -451,6 +503,8 @@
 
 <script>
 import Search from '@/components/Search';
+import CheckboxGroup from '@/components/Form/CheckboxGroup';
+import CheckboxItem from '@/components/Form/CheckboxItem';
 import TabsList from '@/components/Page/TabsList';
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
@@ -458,6 +512,8 @@ import { ADVERT_TYPES } from '@/helpers/constants';
 export default {
   components: {
     Search,
+    CheckboxGroup,
+    CheckboxItem,
     TabsList,
   },
   data() {
@@ -478,6 +534,8 @@ export default {
         },
       ],
       searchTerm: '',
+      typeOfExerciseOptions: ['legal', 'non-legal', 'leadership', 'leadership-non-legal'],
+      filter: [],
     };
   },
   computed: {
@@ -488,27 +546,6 @@ export default {
     ]),
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
-    },
-    filteredOpenVacancies() {
-      if (this.isEmptyString(this.searchTerm)) {
-        return this.openVacancies;
-      } else {
-        return this.openVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
-      }
-    },
-    filteredInProgressVacancies() {
-      if (this.isEmptyString(this.searchTerm)) {
-        return this.inProgressVacancies;
-      } else {
-        return this.inProgressVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
-      }
-    },
-    filteredFutureVacancies() {
-      if (this.isEmptyString(this.searchTerm)) {
-        return this.futureVacancies;
-      } else {
-        return this.futureVacancies.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
-      }
     },
   },
   created() {
@@ -527,6 +564,18 @@ export default {
     },
     isEmptyString(value) {
       return value && value.replace(/\s/g, '') === '';
+    },
+    filterVacancies(vacancies) {
+      let result = vacancies || [];
+      if (!result || !result.length) return [];
+
+      if (!this.isEmptyString(this.searchTerm)) {
+        result = result.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+      if (this.filter && this.filter.length) {
+        result = result.filter(vacancy => vacancy.typeOfExercise && this.filter.includes(vacancy.typeOfExercise));
+      }
+      return result;
     },
     useSearch(searchTerm) {
       this.searchTerm = searchTerm;
