@@ -56,7 +56,6 @@
             id="type-of-exercise"
             v-model="filter"
             label="Type of Exercise"
-            hint="Select all that apply."
           >
             <CheckboxItem
               v-for="(option, i) in typeOfExerciseOptions"
