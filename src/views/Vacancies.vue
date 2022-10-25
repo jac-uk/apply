@@ -69,7 +69,7 @@
               v-else-if="!filteredOpenVacancies.length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
-              No matching vacancies.
+              No vacancies found.
             </p>
             <ul
               v-else
@@ -226,7 +226,7 @@
               v-else-if="!filteredFutureVacancies.length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
-              No matching vacancies.
+              No vacancies found.
             </p>
             <ul
               v-else
@@ -340,7 +340,7 @@
               v-else-if="!filteredInProgressVacancies.length"
               class="govuk-body govuk-!-margin-bottom-6"
             >
-              No matching vacancies.
+              No vacancies found.
             </p>
             <ul
               v-else
