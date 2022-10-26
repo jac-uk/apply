@@ -248,13 +248,6 @@
                           {{ vacancy.salary | formatCurrency }}
                         </span>
                       </p>
-                      <RouterLink
-                        v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                        class="govuk-button"
-                        :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-                      >
-                        Vacancy details
-                      </RouterLink>
                       <hr>
                     </div>
 
