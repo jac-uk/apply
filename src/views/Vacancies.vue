@@ -46,7 +46,7 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
-        <div class="govuk-grid-row">
+        <div class="govuk-grid-row govuk-!-margin-bottom-8">
           <div class="govuk-grid-column-one-half">
             <Search
               placeholder="Search vacancies"
@@ -172,6 +172,11 @@
                         {{ vacancy.name }}
                       </span>
 
+                      <CustomHTML
+                        v-if="vacancy.roleSummary"
+                        :value="vacancy.roleSummary"
+                      />
+
                       <p v-if="vacancy.typeOfExercise">
                         <span
                           class="govuk-body govuk-!-font-weight-bold"
@@ -255,6 +260,10 @@
 
                     <div v-if="vacancy.welshPosts">
                       <div v-if="!vacancy.inviteOnly">
+                        <CustomHTML
+                          v-if="vacancy.roleSummaryWelsh"
+                          :value="vacancy.roleSummaryWelsh"
+                        />
                         <p>
                           <span
                             class="govuk-body govuk-!-font-weight-bold"
@@ -563,6 +572,7 @@ import Badge from '@/components/Badge';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import TabsList from '@/components/Page/TabsList';
+import CustomHTML from '@/components/CustomHTML';
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
 
@@ -573,6 +583,7 @@ export default {
     Badge,
     CheckboxGroup,
     CheckboxItem,
+    CustomHTML,
     TabsList,
   },
   data() {
