@@ -50,7 +50,7 @@
           v-model="personalDetails.phone"
           label="Phone number"
           type="tel"
-          hint="Optional. For international numbers include the country code."
+          hint="Optional. For international numbers include the country code. For example, ‘+447123456789’."
         />
 
         <DateInput

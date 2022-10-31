@@ -175,6 +175,7 @@ export default {
       declaredAppointmentInQuasiJudicialBody: null,
       quasiJudicialSatForThirtyDays: null,
       quasiJudicialSittingDaysDetails: null,
+      skillsAquisitionDetails: null,
       progress: {},
     };
     const data = this.$store.getters['application/data'](defaults);

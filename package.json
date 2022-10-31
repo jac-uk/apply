@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.57.0",
+  "version": "1.58.0",
   "private": true,
   "scripts": {
     "develop:serve": "vue-cli-service serve --mode develop",
@@ -34,6 +34,7 @@
     "vue-browser-detect-plugin": "^0.1.13",
     "vue-dompurify-html": "^2.6.0",
     "vue-gtag": "^1.11.0",
+    "vue-recaptcha-v3": "^1.9.0",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuexfire": "^3.2.5"

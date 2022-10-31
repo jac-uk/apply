@@ -256,7 +256,29 @@
             });
           });
           it('tel matches pattern', () => {
-            expect('07123456789').toMatch(data.regex.tel);
+            // UK landline numbers
+            const landlineNumbers = [
+              '(020)00000000', '02000000000', '020 0000 0000',
+              '(0131)0000000', '01310000000', '013 1000 0000',
+              '(01865)000000', '01865000000', '018 6500 0000',
+            ];
+            // UK phone numbers
+            const mobileNumbers = [
+              '07123456789', '7123456789', 
+            ];
+            // E.164 format with or without plus
+            const e164Numbers = [
+              '447123456789', '+447123456789', '+44 7123456789',
+            ];
+            [...mobileNumbers, ...landlineNumbers, ...e164Numbers].forEach(number =>  {
+              expect(number).toMatch(data.regex.tel);
+            });
+
+            // invalid format
+            expect('020 000 00000').not.toMatch(data.regex.tel);
+            expect('abc02000000000').not.toMatch(data.regex.tel);
+            expect('02000abc000000').not.toMatch(data.regex.tel);
+            expect('02000000000abc').not.toMatch(data.regex.tel);
           });
           it('has postcode pattern', () => {
             expect(data.regex).toContainKeys(['postcode']);
