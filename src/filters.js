@@ -299,8 +299,8 @@ const lookup = (value) => {
     lookup[ASSESSOR_TYPES.JUDICIAL] = 'Judicial assessor';
     lookup[ASSESSOR_TYPES.PERSONAL] = 'Personal assessor';
 
-    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.OPTION_1] = 'Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar';
-    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.OPTION_2] = 'Called to the Bar prior to 1 January 2002';
+    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.TRANSFERRED] = 'Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar';
+    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.CALLED_PRE_2002] = 'Called to the Bar prior to 1 January 2002';
     lookup[NOT_COMPLETE_PUPILLAGE_REASONS.OTHER] = 'Other - Please detail why you were exempt from undertaking pupillage by the Bar Standards Board';
 
     return lookup[value] || value;
