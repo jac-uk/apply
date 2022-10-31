@@ -209,10 +209,12 @@ export default {
   mixins: [ApplyMixIn],
   data(){
     const defaults = {
+      firstAssessorType: null,
       firstAssessorFullName: null,
       firstAssessorTitle: null,
       firstAssessorEmail: null,
       firstAssessorPhone: null,
+      secondAssessorType: null,
       secondAssessorFullName: null,
       secondAssessorTitle: null,
       secondAssessorEmail: null,
