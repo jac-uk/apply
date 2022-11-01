@@ -56,6 +56,18 @@
       </div>
 
       <div
+        v-if="application.personalDetails.middleName"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Middle name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.personalDetails.middleName }}
+        </dd>
+      </div>
+
+      <div
         v-if="application.personalDetails.firstName && application.personalDetails.lastName"
         class="govuk-summary-list__row"
       >
@@ -100,6 +112,30 @@
         </dt>
         <dd class="govuk-summary-list__value">
           {{ application.personalDetails.suffix }}
+        </dd>
+      </div>
+
+      <div
+        v-if="application.personalDetails.maidenName"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Maiden name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.personalDetails.maidenName }}
+        </dd>
+      </div>
+
+      <div
+        v-if="application.personalDetails.professionalName"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Professional name
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.personalDetails.professionalName }}
         </dd>
       </div>
 

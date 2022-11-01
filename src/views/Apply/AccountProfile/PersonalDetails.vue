@@ -31,10 +31,34 @@
         />
 
         <TextField
+          id="middleName"
+          v-model="personalDetails.middleName"
+          label="Middle name"
+        />
+
+        <TextField
           id="lastName"
           v-model="personalDetails.lastName"
           label="Last name"
           required
+        />
+
+        <TextField
+          id="suffix"
+          v-model="personalDetails.suffix"
+          label="Suffix"
+        />
+
+        <TextField
+          id="maidenName"
+          v-model="personalDetails.maidenName"
+          label="Maiden name"
+        />
+
+        <TextField
+          id="professionalName"
+          v-model="personalDetails.professionalName"
+          label="Professional name"
         />
 
         <TextField

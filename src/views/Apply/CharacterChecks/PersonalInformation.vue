@@ -28,6 +28,12 @@
       />
 
       <TextField
+        id="middleName"
+        v-model="personalDetails.middleName"
+        label="Middle name (optional)"
+      />
+
+      <TextField
         id="lastName"
         v-model="personalDetails.lastName"
         label="Last name"
@@ -46,6 +52,18 @@
         id="suffix"
         v-model="personalDetails.suffix"
         label="Suffix (optional)"
+      />
+
+      <TextField
+        id="maidenName"
+        v-model="personalDetails.maidenName"
+        label="Maiden name (optional)"
+      />
+
+      <TextField
+        id="professionalName"
+        v-model="personalDetails.professionalName"
+        label="ProfessionalName (optional)"
       />
 
       <RadioGroup
