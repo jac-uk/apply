@@ -80,10 +80,6 @@ export default {
       default: 'text',
       type: String,
     },
-    required: {
-      default: false,
-      type: Boolean,
-    },
   },
   computed: {
     text: {
