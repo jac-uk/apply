@@ -28,14 +28,14 @@
     </div>
 
     <div
-      v-if="application.personalDetails.middleName"
+      v-if="application.personalDetails.middleNames"
       class="govuk-summary-list__row"
     >
       <dt class="govuk-summary-list__key">
-        Middle name
+        Middle name(s)
       </dt>
       <dd class="govuk-summary-list__value">
-        {{ application.personalDetails.middleName }}
+        {{ application.personalDetails.middleNames }}
       </dd>
     </div>
 
@@ -64,14 +64,14 @@
     </div>
 
     <div
-      v-if="application.personalDetails.maidenName"
+      v-if="application.personalDetails.previousNames"
       class="govuk-summary-list__row"
     >
       <dt class="govuk-summary-list__key">
-        Maiden name
+        Previous known name(s)
       </dt>
       <dd class="govuk-summary-list__value">
-        {{ application.personalDetails.maidenName }}
+        {{ application.personalDetails.previousNames }}
       </dd>
     </div>
 

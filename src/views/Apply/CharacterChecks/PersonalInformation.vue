@@ -28,9 +28,9 @@
       />
 
       <TextField
-        id="middleName"
-        v-model="personalDetails.middleName"
-        label="Middle name (optional)"
+        id="middleNames"
+        v-model="personalDetails.middleNames"
+        label="Middle name(s)"
       />
 
       <TextField
@@ -42,28 +42,21 @@
       />
 
       <TextField
-        id="otherNames"
-        v-model="personalDetails.otherNames"
-        label="Other names (Known As)"
-        hint="Other names or professional name or maiden name."
-      />
-
-      <TextField
         id="suffix"
         v-model="personalDetails.suffix"
-        label="Suffix (optional)"
+        label="Suffix"
       />
 
       <TextField
-        id="maidenName"
-        v-model="personalDetails.maidenName"
-        label="Maiden name (optional)"
+        id="previousNames"
+        v-model="personalDetails.previousNames"
+        label="Previous known name(s)"
       />
 
       <TextField
         id="professionalName"
         v-model="personalDetails.professionalName"
-        label="ProfessionalName (optional)"
+        label="ProfessionalName"
       />
 
       <RadioGroup

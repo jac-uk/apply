@@ -31,9 +31,9 @@
         />
 
         <TextField
-          id="middleName"
-          v-model="personalDetails.middleName"
-          label="Middle name"
+          id="middleNames"
+          v-model="personalDetails.middleNames"
+          label="Middle name(s)"
         />
 
         <TextField
@@ -50,9 +50,9 @@
         />
 
         <TextField
-          id="maidenName"
-          v-model="personalDetails.maidenName"
-          label="Maiden name"
+          id="previousNames"
+          v-model="personalDetails.previousNames"
+          label="Previous known name(s)"
         />
 
         <TextField
@@ -74,7 +74,7 @@
           v-model="personalDetails.phone"
           label="Phone number"
           type="tel"
-          hint="Optional. For international numbers include the country code. For example, ‘+447123456789’."
+          hint="For international numbers include the country code. For example, ‘+447123456789’."
         />
 
         <DateInput
