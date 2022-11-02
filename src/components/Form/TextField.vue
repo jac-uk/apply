@@ -13,9 +13,19 @@
       >
         {{ label }}
       </span>
-      <template v-else>
+      <div
+        v-else
+        :style="!required ? { display: 'flex', 'align-items': 'center', gap: '12px' } : null"
+      >
         {{ label }}
-      </template>
+        <span
+          v-if="!required"
+          class="govuk-hint"
+          style="margin-bottom: 0;"
+        >
+          (Optional)
+        </span>
+      </div>
     </label>
     <span
       v-if="hint"
@@ -69,6 +79,10 @@ export default {
     type: {
       default: 'text',
       type: String,
+    },
+    required: {
+      default: false,
+      type: Boolean,
     },
   },
   computed: {
