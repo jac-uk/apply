@@ -52,7 +52,7 @@
         <TextField
           id="previousNames"
           v-model="personalDetails.previousNames"
-          label="Previous known name(s)"
+          label="Previously known name(s)"
         />
 
         <TextField
