@@ -92,18 +92,6 @@
       </div>
 
       <div
-        v-if="application.personalDetails.otherNames"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Other names
-        </dt>
-        <dd class="govuk-summary-list__value">
-          {{ application.personalDetails.otherNames }}
-        </dd>
-      </div>
-
-      <div
         v-if="application.personalDetails.suffix"
         class="govuk-summary-list__row"
       >

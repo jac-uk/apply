@@ -212,7 +212,6 @@ export default {
       title: null,
       firstName: null,
       lastName: null,
-      otherNames: null,
       suffix: null,
       gender: null,
       otherGenderDetails: null,
