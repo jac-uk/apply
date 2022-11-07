@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.57.2",
+  "version": "1.58.0",
   "private": true,
   "scripts": {
     "develop:serve": "vue-cli-service serve --mode develop",
@@ -24,8 +24,8 @@
   "dependencies": {
     "@jac-uk/jac-kit": "0.0.49",
     "@ministryofjustice/frontend": "0.2.4",
-    "@sentry/browser": "^6.4.1",
-    "@sentry/integrations": "^6.4.1",
+    "@sentry/tracing": "^7.13.0",
+    "@sentry/vue": "^7.13.0",
     "core-js": "^3.23.2",
     "firebase": "^8.10.1",
     "firebaseui": "^4.8.0",
@@ -34,6 +34,7 @@
     "vue-browser-detect-plugin": "^0.1.13",
     "vue-dompurify-html": "^2.6.0",
     "vue-gtag": "^1.11.0",
+    "vue-recaptcha-v3": "^1.9.0",
     "vue-router": "^3.5.1",
     "vuex": "^3.6.2",
     "vuexfire": "^3.2.5"
@@ -56,16 +57,16 @@
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^7.20.0",
     "firebase-mock": "^2.3.2",
+    "glob-parent": ">=5.1.2",
+    "highlight.js": ">=10.4.1",
+    "is-svg": ">=4.3.0",
     "jest-extended": "^0.11.5",
+    "node-fetch": ">=2.6.7",
     "postcss": "8.2.15",
     "sass": "^1.32.13",
     "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.12",
     "webpack": "^4.44.1",
-    "highlight.js": ">=10.4.1",
-    "node-fetch": ">=2.6.7",
-    "glob-parent": ">=5.1.2",
-    "is-svg": ">=4.3.0",
     "y18n": ">=4.0.1"
   },
   "engines": {
