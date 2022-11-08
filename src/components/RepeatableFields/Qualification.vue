@@ -48,8 +48,8 @@
       v-if="row.type === 'barrister'"
     >
       <DateInput
-        :id="calledToTheBarDate"
-        v-model="row.calledToTheBarDate"
+        :id="calledToBarDate"
+        v-model="row.calledToBarDate"
         label="When were you called to the Bar?"
         type="month"
         required
@@ -154,8 +154,8 @@ export default {
     qualificationLocation() {
       return `qualification_location_${this.index}`;
     },
-    calledToTheBarDate() {
-      return `qualification_calledToTheBar_date_${this.index}`;
+    calledToBarDate() {
+      return `qualification_calledToBar_date_${this.index}`;
     },
     qualificationDate() {
       return `qualification_date_${this.index}`;

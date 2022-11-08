@@ -28,7 +28,7 @@
       </div>
 
       <div
-        v-if="item.type === 'barrister' && item.calledToTheBarDate"
+        v-if="item.type === 'barrister' && item.calledToBarDate"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -36,7 +36,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ item.calledToTheBarDate | formatDate }}</li>
+            <li> {{ item.calledToBarDate | formatDate }}</li>
           </ul>
         </dd>
       </div>
