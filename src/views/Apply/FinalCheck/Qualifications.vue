@@ -42,7 +42,6 @@
       </div>
 
       <div
-        v-if="item.qualificationNotComplete"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -51,14 +50,14 @@
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
             <li>
-              No
+              {{ item.qualificationComplete | toYesNo }}
             </li>
           </ul>
         </dd>
       </div>
 
       <div
-        v-if="!item.qualificationNotComplete && item.date"
+        v-if="item.qualificationComplete && item.date"
         class="govuk-summary-list__row"
       >
         <dt
@@ -81,7 +80,7 @@
       </div>
 
       <div
-        v-if="item.qualificationNotComplete && item.details"
+        v-if="!item.qualificationComplete && item.details"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -89,10 +88,11 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>
-              {{
-                item.qualificationNotCompleteReason === 'Other' ? item.details : item.qualificationNotCompleteReason
-              }}
+            <li v-if="item.qualificationNotCompleteReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
+              {{ item.details }}
+            </li>
+            <li v-else>
+              {{ item.qualificationNotCompleteReason | lookup }}
             </li>
           </ul>
         </dd>
@@ -102,12 +102,19 @@
 </template>
 
 <script>
+import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
+
 export default {
   props: {
     application: {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      NOT_COMPLETE_PUPILLAGE_REASONS,
+    };
   },
 };
 </script>
