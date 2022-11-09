@@ -212,6 +212,16 @@
                 :title="file.title"
               />
             </li>
+            <li
+              v-for="file in vacancy.downloads.otherDownloads"
+              :key="file.file"
+            >
+              <DownloadLink
+                :file-name="file.file"
+                :exercise-id="vacancy.id"
+                :title="file.title"
+              />
+            </li>
           </ul>
         </nav>
       </aside>
