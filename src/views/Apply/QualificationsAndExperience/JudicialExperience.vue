@@ -49,6 +49,7 @@
               v-model="formData.feePaidOrSalariedSittingDaysDetails"
               label="Enter the number of sitting days for each judicial
               appointment you have declared on this form."
+              required
             />
           </RadioItem>
           <RadioItem
@@ -116,6 +117,7 @@
             <TextareaInput
               id="quasi-judicial-sitting-days-details"
               v-model="formData.quasiJudicialSittingDaysDetails"
+              required
               label="Enter the number of sitting days for each of the
               appointments you have declared on this application, and powers and
               procedures in the office you hold. Include any further details of whether
