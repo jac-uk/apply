@@ -57,9 +57,15 @@ export default {
               this.redirectToErrorPage();
             }
           }
+    
+          const personalDetails = this.$store.getters['candidate/personalDetails']();
           await this.$store.dispatch('application/save', {
             status: 'draft',
             progress: { started: true },
+            personalDetails: {
+              fullName: personalDetails.fullName ? personalDetails.fullName : null,
+              email: personalDetails.email ? personalDetails.email : null,
+            },
           });
         }
         await this.$store.dispatch('applications/bind');
