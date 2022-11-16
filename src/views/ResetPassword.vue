@@ -3,7 +3,7 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="resetPassword"
+        @submit.prevent="submit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -37,7 +37,10 @@
               type="email"
             />
 
-            <button class="govuk-button">
+            <button
+              class="govuk-button"
+              :disabled="!formData.email"
+            >
               Send the link
             </button>
           </div>
@@ -50,6 +53,7 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
+import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
   components: {
@@ -62,10 +66,20 @@ export default {
     };
   },
   methods: {
-    resetPassword() {
-      const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
+    async submit() {
+      if (!this.formData.email) return;
+      const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
+      const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
+        token,
+        score: RECAPTCHA_ACTIONS.LOGIN.score,
+      });
+      if (!isVerified) return;
 
+      this.resetPassword();
+    },
+    async resetPassword() {
       if (this.formData.email) {
+        const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
         this.errors = [];
         auth().sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,

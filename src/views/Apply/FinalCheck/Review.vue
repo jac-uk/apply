@@ -619,6 +619,45 @@
             </dl>
           </div>
 
+          <div v-if="applicationParts.selfAssessmentCompetencies">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Self assessment with competencies
+              </h2>
+              <RouterLink
+                v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'self-assessment-competencies'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Uploaded self assessment with competencies
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <div v-if="application.uploadedSelfAssessment">
+                    <DownloadLink
+                      :file-name="application.uploadedSelfAssessment"
+                      :exercise-id="vacancy.id"
+                      :user-id="application.userId"
+                      :title="application.uploadedSelfAssessment"
+                    />
+                  </div>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div v-if="applicationParts.leadershipJudgeDetails">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -786,17 +825,26 @@
               Change
             </RouterLink>
 
-            <div
-              class="govuk-summary-list__row"
-            >
-              <dt class="govuk-summary-list__key">
-                Uploaded statement of suitability
-              </dt>
-              <dd class="govuk-summary-list__value">
-                <span v-if="application.uploadedSuitabilityStatement">Your file has been received</span>
-                <span v-else>Not yet received</span>
-              </dd>
-            </div>
+            <dl class="govuk-summary-list">
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Uploaded statement of suitability
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <div v-if="application.uploadedSuitabilityStatement">
+                    <DownloadLink
+                      :file-name="application.uploadedSuitabilityStatement"
+                      :exercise-id="vacancy.id"
+                      :user-id="application.userId"
+                      :title="application.uploadedSuitabilityStatement"
+                    />
+                  </div>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
+            </dl>
           </div>
 
           <div
@@ -827,7 +875,14 @@
                   Uploaded finished self assessment
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <span v-if="application.uploadedSelfAssessment">Your file has been received</span>
+                  <div v-if="application.uploadedSelfAssessment">
+                    <DownloadLink
+                      :file-name="application.uploadedSelfAssessment"
+                      :exercise-id="vacancy.id"
+                      :user-id="application.userId"
+                      :title="application.uploadedSelfAssessment"
+                    />
+                  </div>
                   <span v-else>Not yet received</span>
                 </dd>
               </div>
@@ -862,7 +917,14 @@
                   Uploaded CV
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <span v-if="application.uploadedCV">Your file has been received</span>
+                  <div v-if="application.uploadedCV">
+                    <DownloadLink
+                      :file-name="application.uploadedCV"
+                      :exercise-id="vacancy.id"
+                      :user-id="application.userId"
+                      :title="application.uploadedCV"
+                    />
+                  </div>
                   <span v-else>Not yet received</span>
                 </dd>
               </div>
@@ -897,7 +959,14 @@
                   Uploaded Covering Letter
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <span v-if="application.uploadedCoveringLetter">Your file has been received</span>
+                  <div v-if="application.uploadedCoveringLetter">
+                    <DownloadLink
+                      :file-name="application.uploadedCoveringLetter"
+                      :exercise-id="vacancy.id"
+                      :user-id="application.userId"
+                      :title="application.uploadedCoveringLetter"
+                    />
+                  </div>
                   <span v-else>Not yet received</span>
                 </dd>
               </div>
@@ -941,6 +1010,7 @@ import Memberships from './Memberships.vue';
 import PostQualificationExperience from './PostQualificationExperience.vue';
 import JudicialExperience from './JudicialExperience.vue';
 import GapsInEmployment from './GapsInEmployment';
+import DownloadLink from '@/components/DownloadLink';
 
 export default {
   components: {
@@ -965,6 +1035,7 @@ export default {
     PostQualificationExperience,
     JudicialExperience,
     GapsInEmployment,
+    DownloadLink,
   },
   mixins: [ApplyMixIn],
   data() {

@@ -46,7 +46,7 @@
               ref="monthInput"
               v-model.lazy="monthInput"
               class="govuk-input govuk-date-input__input govuk-input--width-2"
-              type="tel"
+              type="number"
             >
           </div>
         </div>
@@ -63,7 +63,7 @@
               ref="yearInput"
               v-model.lazy="yearInput"
               class="govuk-input govuk-date-input__input govuk-input--width-4"
-              type="tel"
+              type="number"
             >
           </div>
         </div>

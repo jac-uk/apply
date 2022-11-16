@@ -28,6 +28,12 @@
       />
 
       <TextField
+        id="middleNames"
+        v-model="personalDetails.middleNames"
+        label="Middle name(s)"
+      />
+
+      <TextField
         id="lastName"
         v-model="personalDetails.lastName"
         label="Last name"
@@ -36,16 +42,21 @@
       />
 
       <TextField
-        id="otherNames"
-        v-model="personalDetails.otherNames"
-        label="Other names (Known As)"
-        hint="Other names or professional name or maiden name."
+        id="suffix"
+        v-model="personalDetails.suffix"
+        label="Suffix"
       />
 
       <TextField
-        id="suffix"
-        v-model="personalDetails.suffix"
-        label="Suffix (optional)"
+        id="previousNames"
+        v-model="personalDetails.previousNames"
+        label="Previously known name(s)"
+      />
+
+      <TextField
+        id="professionalName"
+        v-model="personalDetails.professionalName"
+        label="ProfessionalName"
       />
 
       <RadioGroup
@@ -201,7 +212,6 @@ export default {
       title: null,
       firstName: null,
       lastName: null,
-      otherNames: null,
       suffix: null,
       gender: null,
       otherGenderDetails: null,

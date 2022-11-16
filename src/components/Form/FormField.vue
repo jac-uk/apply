@@ -58,7 +58,8 @@ export default {
       regex: {
         // eslint-disable-next-line
         email: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, // ref: https://emailregex.com/
-        tel: /^\+?[\d() -]+/,
+        // match UK numbers and E.164 format (ref: https://regexpattern.com/phone-number/#uk)
+        tel: /(^(((\+44\s?\d{4}|\(?0\d{4}\)?)\s?\d{3}\s?\d{3})|((\+44\s?\d{3}|\(?0\d{3}\)?)\s?\d{3}\s?\d{4})|((\+44\s?\d{2}|\(?0\d{2}\)?)\s?\d{4}\s?\d{4}))(\s?#(\d{4}|\d{3}))?$)|(^\+?[1-9]\d{1,14}$)/,
         nino: /^(?!BG|GB|NK|KN|TN|NT|ZZ)[A-CEGHJ-PR-TW-Z][A-CEGHJ-NPR-TW-Z](?:\s?\d){6}\s?[A-D]$/i,
         postcode: /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i,
       },
@@ -76,12 +77,12 @@ export default {
         .filter(item => item != '') // remove any empty items from array
         .filter(item => item != '\'') // remove any items which are just a apostrophe
         .filter(item => item != '-') // remove any items which are just a hyphen
-        .map((item, i) => {                                           // with the above array 
+        .map((item, i) => {                                           // with the above array
           if (i, item.replace(/[^-]/g, '').length >= 4) {             // find any items containing more than or equal to 4 hyphens (4 allows for a trailing hyphen which is not counted in next set)
             item = item.match(/((?:[^-]*?-){3}[^-]*?)-|([\S\s]+)/g);  // if an 'offending' item occurs, group every 4 words, ignoring the hyphen between groups [ie. 'one-one-one-one-two-two-two-two' (eight words, seven hyphens) 'one-one-one-one-' 'two-two-two-two']
           }
           return item; // add array in position of word
-        })); // flatten array 
+        })); // flatten array
     },
   },
   mounted: function () {
@@ -108,7 +109,7 @@ export default {
           value = event.target.value;
         }
 
-        if (this.required && (value === null || value === undefined || value.length === 0)) {
+        if (this.required && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
           } else {
@@ -134,6 +135,7 @@ export default {
         }
 
         if (this.type && this.type === 'tel' && value) {
+          // remove plus, hyphen, and space before regex validation
           if (!this.regex.tel.test(value)) {
             this.setError(`Enter a valid phone number for ${this.label}`);
           }
@@ -186,7 +188,7 @@ export default {
             this.setError('');
           }
         }
-        
+
       }
     },
   },
