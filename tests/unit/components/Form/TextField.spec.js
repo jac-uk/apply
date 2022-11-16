@@ -72,7 +72,7 @@ describe('components/Form/TextField', () => {
     describe('template', () => {
       describe('label', () => {
         it('sets the label to the value of the `label` prop', async () => {
-          await wrapper.setProps({ label: 'My Form Label' });
+          await wrapper.setProps({ required: true, label: 'My Form Label' });
           expect(wrapper.find('label').text()).toBe('My Form Label');
         });
       });
@@ -81,7 +81,7 @@ describe('components/Form/TextField', () => {
         let hint;
         describe('when the prop is set', () => {
           beforeEach(async () => {
-            await wrapper.setProps({ hint: 'my_hint' });
+            await wrapper.setProps({ required: true, hint: 'my_hint' });
             hint = wrapper.find('.govuk-hint');
           });
 
@@ -94,7 +94,8 @@ describe('components/Form/TextField', () => {
         });
 
         describe('when the prop is not set', () => {
-          beforeEach(() => {
+          beforeEach(async () => {
+            await wrapper.setProps({ required: true });
             hint = wrapper.find('.govuk-hint');
           });
 
