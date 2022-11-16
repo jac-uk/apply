@@ -43,6 +43,7 @@
             v-model="formData.email"
             label="Email address"
             type="email"
+            required
           />
 
           <TextField
@@ -50,6 +51,7 @@
             v-model="formData.password"
             label="Password"
             type="password"
+            required
           />
 
           <button
