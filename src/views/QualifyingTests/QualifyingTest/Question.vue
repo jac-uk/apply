@@ -175,7 +175,9 @@ export default {
       };
       await this.$store.dispatch('qualifyingTestResponse/save', data);
     }
-    this.questionStartedOnPreviousTest();
+    if (this.qualifyingTestResponse._unlockPreviousAnswers !== true) {
+      this.questionStartedOnPreviousTest();
+    }
     this.questionSessionStart = firebase.firestore.Timestamp.now();
   },
   methods: {
