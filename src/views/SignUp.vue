@@ -161,18 +161,16 @@ export default {
       }
     },
     async signUp() {
-      await auth()
-        .createUserWithEmailAndPassword(this.formData.email, this.formData.password)
-        .then((result)=>{
-          const candidate = this.createCandidate(result);
-          if (candidate) {
-            if (this.$store.getters['vacancy/id']) {
-              this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
-            } else {
-              this.$router.push({ name: 'applications' });
-            }
+      await auth.createUserWithEmailAndPassword(this.formData.email, this.formData.password).then((result)=>{
+        const candidate = this.createCandidate(result);
+        if (candidate) {
+          if (this.$store.getters['vacancy/id']) {
+            this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
+          } else {
+            this.$router.push({ name: 'applications' });
           }
-        })
+        }
+      })
         .catch((error) => {
           this.errors.push({ ref: 'email', message: error.message });
         });
