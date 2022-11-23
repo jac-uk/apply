@@ -10,7 +10,7 @@
             Forgotten password
           </h1>
 
-          <div 
+          <div
             v-if="resetSent"
             class="govuk-panel govuk-panel--confirmation"
           >
@@ -81,7 +81,7 @@ export default {
       if (this.formData.email) {
         const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
         this.errors = [];
-        auth().sendPasswordResetEmail(this.formData.email, {
+        auth.sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,
         })
           .then(() => {

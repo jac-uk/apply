@@ -3,6 +3,7 @@
   "version": "1.60.0",
   "private": true,
   "scripts": {
+    "serve": "vue-cli-service serve --mode develop",
     "develop:serve": "vue-cli-service serve --mode develop",
     "staging:serve": "vue-cli-service serve --mode staging",
     "production:serve": "vue-cli-service serve --mode production",

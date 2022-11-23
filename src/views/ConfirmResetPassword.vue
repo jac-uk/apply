@@ -78,7 +78,7 @@ export default {
       await this.validate();
       if (this.isValid()) {
         try {
-          await auth().confirmPasswordReset(this.resetCode, this.formData.password);
+          await auth.confirmPasswordReset(this.resetCode, this.formData.password);
           this.resetSuccessful = true;
         } catch (error) {
           this.errors.push({ message: error.message });
@@ -95,7 +95,7 @@ export default {
       this.resetCode = params.get('oobCode');
     },
     ensureValidActionCode() {
-      auth().checkActionCode(this.resetCode)
+      auth.checkActionCode(this.resetCode)
         .then(() => {
           this.validResetCode = true;
         })

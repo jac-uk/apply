@@ -59,15 +59,15 @@ describe('views/ResetPassword', () => {
 
       it('returns if no email provided', () => {
         wrapper.vm.resetPassword();
-        expect(auth().sendPasswordResetEmail).not.toHaveBeenCalled();
+        expect(auth.sendPasswordResetEmail).not.toHaveBeenCalled();
       });
 
-      it('calls auth().sendPasswordResetEmail with provided email', () => {
+      it('calls auth.sendPasswordResetEmail with provided email', () => {
         const email = 'stuff';
         wrapper.vm.formData = { email };
 
         wrapper.vm.resetPassword();
-        expect(auth().sendPasswordResetEmail).toHaveBeenCalledWith(
+        expect(auth.sendPasswordResetEmail).toHaveBeenCalledWith(
           email,
           expect.anything()
         );

@@ -116,7 +116,7 @@ describe('views/SignUp', () => {
         expect(typeof wrapper.vm.signUp).toBe('function');
       });
 
-      it('calls auth().createUserWithEmailAndPassword with formData', () => {
+      it('calls auth.createUserWithEmailAndPassword with formData', () => {
         wrapper.setData({
           formData: mockFormData,
         });

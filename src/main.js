@@ -41,7 +41,7 @@ Object.keys(filters)
   });
 
 let vueInstance = false;
-auth().onAuthStateChanged( (user) => {
+auth.onAuthStateChanged( (user) => {
   store.dispatch('auth/setCurrentUser', user);
   if (store.getters['auth/isSignedIn']) {
     if (store.getters['vacancy/id']) {

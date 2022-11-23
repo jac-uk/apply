@@ -1,5 +1,5 @@
 import firebase from '@firebase/app';
-import { firestore } from '@/firebase';
+import { firestore, auth } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -49,7 +49,7 @@ export default {
       const data = {
         status: QUALIFYING_TEST_RESPONSE.STATUS.STARTED,
         'statusLog.started': firebase.firestore.FieldValue.serverTimestamp(),
-        'candidate.id': firebase.auth().currentUser.uid,
+        'candidate.id': auth.currentUser.uid,
         client: client,
       };
       await context.dispatch('save', data);
