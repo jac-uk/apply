@@ -46,7 +46,7 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
-        <div class="govuk-grid-row govuk-!-margin-bottom-8">
+        <div class="govuk-grid-row">
           <div class="govuk-grid-column-one-half">
             <Search
               placeholder="Search vacancies"
@@ -147,19 +147,18 @@
                   <li
                     v-for="vacancy in filterVacancies(openVacancies)"
                     :key="vacancy.id"
-                    class="govuk-!-margin-top-4"
                   >
                     <div v-if="!vacancy.inviteOnly">
                       <RouterLink
                         v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
-                        class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                        class="govuk-link govuk-!-font-weight-bold"
                         :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                       >
                         {{ vacancy.name }}
                       </RouterLink>
                       <a
                         v-else-if="vacancy.externalLink"
-                        class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                        class="govuk-link govuk-!-font-weight-bold"
                         :href="vacancy.externalLink"
                         target="_blank"
                       >
@@ -172,24 +171,74 @@
                         {{ vacancy.name }}
                       </span>
 
+                      <div style="display: flex; align-items: center; margin-top: 10px;">
+                        <img
+                          src="@/assets/location.svg"
+                          alt="Location"
+                          width="24"
+                          height="24"
+                        >
+                        <span
+                          v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        >
+                          {{ vacancy.location }}
+                        </span>
+                      </div>
+
+                      <div style="display: flex; gap: 10px; margin-top: 10px;">
+                        <div
+                          v-if="vacancy.typeOfExercise"
+                          class="tag"
+                        >
+                          <span
+                            class="govuk-!-font-weight-bold"
+                            style="letter-spacing: 1px; text-transform: uppercase;"
+                          >
+                            TYPE: {{ vacancy.typeOfExercise | lookup }}
+                          </span>
+                        </div>
+
+                        <div
+                          v-if="vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                          class="tag"
+                        >
+                          <span
+                            class="govuk-!-font-weight-bold"
+                            style="letter-spacing: 1px; text-transform: uppercase;"
+                          >
+                            SALARY:&nbsp;
+                          </span>
+                          <span
+                            v-if="vacancy.salaryGrouping"
+                            class="govuk-!-font-weight-bold"
+                          >
+                            {{ vacancy.salaryGrouping | lookup }}
+                          </span>
+                          <span
+                            v-if="vacancy.salary"
+                            class="govuk-!-font-weight-bold"
+                          >
+                            {{ vacancy.salary | formatCurrency }}
+                          </span>
+                        </div>
+
+                        <div
+                          v-if="vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                          class="tag"
+                        >
+                          <span class="govuk-!-font-weight-bold">
+                            VACANCIES: {{ vacancy.immediateStart }}
+                          </span>
+                        </div>
+                      </div>
+
                       <CustomHTML
                         v-if="vacancy.roleSummary"
                         :value="vacancy.roleSummary"
+                        style="margin-top: 20px"
                       />
 
-                      <p v-if="vacancy.typeOfExercise">
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
-                        >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
-                        </span>
-                        <span
-                          class="govuk-body"
-                        >
-                          {{ vacancy.typeOfExercise | lookup }}
-                        </span>
-                      </p>
-                      <p>
+                      <p style="margin-top: 20px;">
                         <span
                           class="govuk-body govuk-!-font-weight-bold"
                         >
@@ -220,34 +269,14 @@
                           {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                         </span>
                       </p>
-                      <p v-if="vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))">
-                        <span class="govuk-body govuk-!-font-weight-bold">
-                          Number of vacancies:
-                        </span>
-                        <span class="govuk-body">
-                          {{ vacancy.immediateStart }}
-                        </span>
-                      </p>
-                      <p v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))">
-                        <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
-                      </p>
-                      <p v-if="vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))">
-                        <span class="govuk-body govuk-!-font-weight-bold">
-                          Salary:
-                        </span>
-                        <span
-                          v-if="vacancy.salaryGrouping"
-                          class="govuk-body"
-                        >
-                          {{ vacancy.salaryGrouping | lookup }}
-                        </span>
-                        <span
-                          v-if="vacancy.salary"
-                          class="govuk-body"
-                        >
-                          {{ vacancy.salary | formatCurrency }}
-                        </span>
-                      </p>
+
+                      <RouterLink
+                        v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        class="govuk-button"
+                        :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+                      >
+                        Vacancy details
+                      </RouterLink>
                       <hr>
                     </div>
 
@@ -318,7 +347,6 @@
                   <li
                     v-for="vacancy in filterVacancies(futureVacancies)"
                     :key="vacancy.id"
-                    class="govuk-!-margin-top-4"
                   >
                     <RouterLink
                       v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
@@ -444,7 +472,6 @@
                   <li
                     v-for="vacancy in filterVacancies(inProgressVacancies)"
                     :key="vacancy.id"
-                    class="govuk-!-margin-top-4"
                   >
                     <RouterLink
                       v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
@@ -551,6 +578,18 @@
                 </ul>
               </div>
             </TabsList>
+
+            <div style="margin-top: 64px;">
+              <RouterLink
+                class="govuk-link"
+                :to="{ name: 'sign-up' }"
+              >
+                Sign up
+              </RouterLink>
+              <span>
+                for our monthly e-newsletter and keep updated about open and forthcoming exercises.
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -667,3 +706,13 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.tag {
+  display: flex;
+  align-items: center;
+  padding: 5px 8px 4px;
+  background: #EEEFEF;
+  color: #383F43;
+}
+</style>
