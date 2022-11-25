@@ -49,6 +49,10 @@ $max-width: 1200px;
 }
 
 // JAC bespoke css can go here
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   padding: 0;
