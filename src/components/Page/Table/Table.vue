@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Search 
-      v-if="search.length" 
-      @search="useSearch" 
+    <Search
+      v-if="search.length"
+      @search="useSearch"
     />
     <table class="govuk-table">
       <thead class="govuk-table__head">
@@ -26,12 +26,12 @@
                 />
               </div>
             </div>
-          </th>        
+          </th>
           <th
             v-for="(column, index) in columns"
             :key="index"
             scope="col"
-            :class="[ 'govuk-table__header', ...column.class ]"
+            :class="[ 'govuk-table__header', column.class ]"
             :aria-sort="columnSortState(column)"
             @click="sortBy(column)"
           >
@@ -54,7 +54,7 @@
           :key="row[dataKey]"
           class="govuk-table__row"
         >
-          <td 
+          <td
             v-if="multiSelect"
             class="govuk-table__cell govuk-!-padding-top-0"
           >
@@ -73,9 +73,9 @@
                 />
               </div>
             </div>
-          </td>      
-          <slot 
-            name="row" 
+          </td>
+          <slot
+            name="row"
             :row="row"
           />
         </tr>
@@ -103,7 +103,7 @@
           >Previous<span class="govuk-visually-hidden"> set of pages</span></a>
         </li>
 
-        <li 
+        <li
           v-if="showNext"
           class="moj-pagination__item  moj-pagination__item--next"
         >
@@ -217,7 +217,7 @@ export default {
       set(value) {
         this.$emit('update:selection', value);
       },
-    },    
+    },
   },
   created() {
     if (this.defaultState.orderBy) {
@@ -225,7 +225,7 @@ export default {
       this.direction = this.defaultState.direction;
     }
     this.$emit('change', this.currentState);
-  },  
+  },
   methods: {
     btnPrev() {
       if (this.page > 0) {

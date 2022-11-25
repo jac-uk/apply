@@ -89,7 +89,7 @@ describe('helpers/Form/exerciseTimeline', () => {
             expect(exerciseTimeline(timelineArray)).toEqual([
                 {
                     'date': new Date('1999'),
-                    'dateString': '1 January 1999',
+                    'dateString': '0 am on 1 January 1999',
                     'entry': 'Return date for independent assessments',
                 },
             ]);

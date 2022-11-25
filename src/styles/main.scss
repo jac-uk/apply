@@ -123,3 +123,10 @@ body {
 .govuk-input:disabled {
   background-color: #ccc;
 }
+
+@media (min-width: 1020px) and (max-width: 1260px) {
+  .govuk-width-container {
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+}

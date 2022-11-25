@@ -31,10 +31,34 @@
         />
 
         <TextField
+          id="middleNames"
+          v-model="personalDetails.middleNames"
+          label="Middle name(s)"
+        />
+
+        <TextField
           id="lastName"
           v-model="personalDetails.lastName"
           label="Last name"
           required
+        />
+
+        <TextField
+          id="suffix"
+          v-model="personalDetails.suffix"
+          label="Suffix"
+        />
+
+        <TextField
+          id="previousNames"
+          v-model="personalDetails.previousNames"
+          label="Previously known name(s)"
+        />
+
+        <TextField
+          id="professionalName"
+          v-model="personalDetails.professionalName"
+          label="Professional name"
         />
 
         <TextField
@@ -50,7 +74,7 @@
           v-model="personalDetails.phone"
           label="Phone number"
           type="tel"
-          hint="Optional. For international numbers include the country code. For example, ‘+447123456789’."
+          hint="For international numbers include the country code. For example, ‘+447123456789’."
         />
 
         <DateInput

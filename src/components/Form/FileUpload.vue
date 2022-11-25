@@ -24,11 +24,20 @@
       class="govuk-body-m"
     >
       Your file has been received.
+      <button
+        class="govuk-file-upload govuk-!-margin-left-2"
+        @click="replaceFile"
+      >
+        Replace
+      </button>
       <a
-        href="javascript:void(0)"
-        class="govuk-link"
-        @click.prevent="replaceFile"
-      >Replace</a>
+        v-if="fileName && downloadUrl"
+        class="govuk-link govuk-!-margin-left-2"
+        :download="fileName"
+        :href="downloadUrl"
+      >
+        {{ fileName }}
+      </a>
     </p>
     <p v-else-if="isUploading">
       Uploading...
@@ -86,6 +95,7 @@ export default {
       isReplacing: false,
       isUploading: false,
       acceptableExtensions: ['docx', 'doc', 'odt', 'txt', 'fodt'],
+      downloadUrl: null,
     };
   },
   computed: {
@@ -173,6 +183,8 @@ export default {
         if (fileUploaded && fileUploaded.state === 'success') {
           this.isReplacing = false;
           this.fileName = fileName;
+          const downloadUrl = await uploadRef.getDownloadURL();
+          this.downloadUrl = downloadUrl;
 
           return true;
         } else {
@@ -199,6 +211,7 @@ export default {
         const downloadUrl = await fileRef.getDownloadURL();
 
         if (typeof downloadUrl === 'string' && downloadUrl.length) {
+          this.downloadUrl = downloadUrl;
           return true;
         }
         return false;
