@@ -46,11 +46,19 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
+        <h3
+          class="govuk-heading-m"
+          style="margin-bottom: 32px;"
+        >
+          Vacancies
+        </h3>
+
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-one-half">
             <Search
               placeholder="Search vacancies"
-              @search="useSearch" 
+              style="margin-bottom: 32px;"
+              @search="useSearch"
             />
           </div>
           <div class="govuk-grid-column-one-quarter">
@@ -145,10 +153,13 @@
                   class="govuk-list"
                 >
                   <li
-                    v-for="vacancy in filterVacancies(openVacancies)"
+                    v-for="(vacancy, index) in filterVacancies(openVacancies)"
                     :key="vacancy.id"
                   >
-                    <div v-if="!vacancy.inviteOnly">
+                    <div
+                      v-if="!vacancy.inviteOnly"
+                      :style="{ 'margin-top': index !== 0 ? '30px' : '0' }"
+                    >
                       <RouterLink
                         v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
                         class="govuk-link govuk-!-font-weight-bold"
@@ -171,7 +182,10 @@
                         {{ vacancy.name }}
                       </span>
 
-                      <div style="display: flex; align-items: center; margin-top: 10px;">
+                      <div 
+                        v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        style="display: flex; align-items: center; margin-top: 10px;"
+                      >
                         <img
                           src="@/assets/location.svg"
                           alt="Location"
@@ -179,7 +193,8 @@
                           height="24"
                         >
                         <span
-                          v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                          class="govuk-!-font-size-16"
+                          style="margin-left: 4px;"
                         >
                           {{ vacancy.location }}
                         </span>
@@ -191,8 +206,7 @@
                           class="tag"
                         >
                           <span
-                            class="govuk-!-font-weight-bold"
-                            style="letter-spacing: 1px; text-transform: uppercase;"
+                            class="govuk-!-font-weight-bold tag-text"
                           >
                             TYPE: {{ vacancy.typeOfExercise | lookup }}
                           </span>
@@ -203,20 +217,19 @@
                           class="tag"
                         >
                           <span
-                            class="govuk-!-font-weight-bold"
-                            style="letter-spacing: 1px; text-transform: uppercase;"
+                            class="govuk-!-font-weight-bold tag-text"
                           >
                             SALARY:&nbsp;
                           </span>
                           <span
                             v-if="vacancy.salaryGrouping"
-                            class="govuk-!-font-weight-bold"
+                            class="govuk-!-font-weight-bold tag-text"
                           >
                             {{ vacancy.salaryGrouping | lookup }}
                           </span>
                           <span
                             v-if="vacancy.salary"
-                            class="govuk-!-font-weight-bold"
+                            class="govuk-!-font-weight-bold tag-text"
                           >
                             {{ vacancy.salary | formatCurrency }}
                           </span>
@@ -226,7 +239,7 @@
                           v-if="vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
                           class="tag"
                         >
-                          <span class="govuk-!-font-weight-bold">
+                          <span class="govuk-!-font-weight-bold tag-text">
                             VACANCIES: {{ vacancy.immediateStart }}
                           </span>
                         </div>
@@ -238,46 +251,47 @@
                         style="margin-top: 20px"
                       />
 
-                      <p style="margin-top: 20px;">
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
+                      <div style="margin-top: 20px;">
+                        <p style="margin: 0; line-height: 28px;">
+                          <span class="govuk-!-font-size-16 govuk-!-font-weight-bold">
+                            Launch Date:
+                          </span>
+                          <span
+                            v-if="vacancy.applicationOpenDate"
+                            class="govuk-!-font-size-16"
+                          >
+                            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+                          </span>
+                          <span
+                            v-else
+                            class="govuk-!-font-size-16"
+                          >
+                            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                          </span>
+                        </p>
+                        <p
+                          v-if="vacancy.applicationCloseDate"
+                          style="margin: 0; line-height: 28px;"
                         >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-                        </span>
-                        <span
-                          v-if="vacancy.applicationOpenDate"
-                          class="govuk-body"
-                        >
-                          {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                        </span>
-                        <span
-                          v-else
-                          class="govuk-body"
-                        >
-                          {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                        </span>
-                      </p>
-                      <p v-if="vacancy.applicationCloseDate">
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
-                        >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-                        </span>
-                        <span
-                          class="govuk-body"
-                        >
-                          {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-                        </span>
-                      </p>
+                          <span class="govuk-!-font-size-16 govuk-!-font-weight-bold">
+                            Closing Date:
+                          </span>
+                          <span class="govuk-!-font-size-16">
+                            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+                          </span>
+                        </p>
+                      </div>
 
                       <RouterLink
                         v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
                         class="govuk-button"
+                        style="margin: 30px 0;"
                         :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                       >
                         Vacancy details
                       </RouterLink>
-                      <hr>
+
+                      <hr v-if="index !== filterVacancies(openVacancies).length - 1">
                     </div>
 
                     <div v-if="vacancy.welshPosts">
@@ -290,7 +304,7 @@
                           <span
                             class="govuk-body govuk-!-font-weight-bold"
                           >
-                            <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
+                            Dyddiad lansio:
                           </span>
                           <span
                             v-if="vacancy.applicationOpenDate"
@@ -309,14 +323,13 @@
                           <span
                             class="govuk-body govuk-!-font-weight-bold"
                           >
-                            <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad cau: </span>
+                            Dyddiad cau:
                           </span>
-                          <span
-                            class="govuk-body"
-                          >
+                          <span class="govuk-body">
                             {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                           </span>
                         </p>
+
                         <hr>
                       </div>
                     </div>
@@ -579,15 +592,15 @@
               </div>
             </TabsList>
 
-            <div style="margin-top: 64px;">
+            <div style="margin: 64px 0;">
               <RouterLink
-                class="govuk-link"
+                class="govuk-link govuk-body-l"
                 :to="{ name: 'sign-up' }"
               >
                 Sign up
               </RouterLink>
-              <span>
-                for our monthly e-newsletter and keep updated about open and forthcoming exercises.
+              <span class="govuk-body-l">
+                &nbsp;for our monthly e-newsletter and keep updated about open and forthcoming exercises.
               </span>
             </div>
           </div>
@@ -714,5 +727,11 @@ export default {
   padding: 5px 8px 4px;
   background: #EEEFEF;
   color: #383F43;
+}
+.tag-text {
+  font-size: 16px;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 </style>
