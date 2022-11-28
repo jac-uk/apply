@@ -61,7 +61,7 @@
             {{ vacancy.applicationOpenDate | formatDate('datetime') }}
           </span>
           <span
-            v-else
+            v-else-if="vacancy.estimatedLaunchDate"
             class="govuk-body"
           >
             {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
