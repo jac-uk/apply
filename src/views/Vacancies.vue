@@ -46,10 +46,7 @@
         class="govuk-!-padding-top-4"
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
-        <h3
-          class="govuk-heading-m"
-          style="margin-bottom: 32px;"
-        >
+        <h3 class="govuk-heading-l">
           Vacancies
         </h3>
 
@@ -57,14 +54,13 @@
           <div class="govuk-grid-column-one-half">
             <Search
               placeholder="Search vacancies"
-              style="margin-bottom: 32px;"
               @search="useSearch"
             />
           </div>
           <div class="govuk-grid-column-one-quarter">
             <button
               type="button"
-              class="btn-filter govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+              class="btn-filter govuk-button govuk-button--secondary"
               @click="btnToggleSidePanel"
             >
               {{ showSidePanel ? "Hide filters" : "Show filters" }}
@@ -184,7 +180,7 @@
 
                       <div 
                         v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                        style="display: flex; align-items: center; margin-top: 10px;"
+                        style="display: flex; align-items: flex-start; margin-top: 10px;"
                       >
                         <img
                           src="@/assets/location.svg"
@@ -193,14 +189,14 @@
                           height="24"
                         >
                         <span
-                          class="govuk-!-font-size-16"
+                          class="govuk-body"
                           style="margin-left: 4px;"
                         >
                           {{ vacancy.location }}
                         </span>
                       </div>
 
-                      <div style="display: flex; gap: 10px; margin-top: 10px;">
+                      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
                         <div
                           v-if="vacancy.typeOfExercise"
                           class="tag"
@@ -248,23 +244,22 @@
                       <CustomHTML
                         v-if="vacancy.roleSummary"
                         :value="vacancy.roleSummary"
-                        style="margin-top: 20px"
                       />
 
-                      <div style="margin-top: 20px;">
-                        <p style="margin: 0; line-height: 28px;">
-                          <span class="govuk-!-font-size-16 govuk-!-font-weight-bold">
+                      <div>
+                        <p>
+                          <span class="govuk-body govuk-!-font-weight-bold">
                             Launch Date:
                           </span>
                           <span
                             v-if="vacancy.applicationOpenDate"
-                            class="govuk-!-font-size-16"
+                            class="govuk-body"
                           >
                             {{ vacancy.applicationOpenDate | formatDate('datetime') }}
                           </span>
                           <span
                             v-else
-                            class="govuk-!-font-size-16"
+                            class="govuk-body"
                           >
                             {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
                           </span>
@@ -273,10 +268,10 @@
                           v-if="vacancy.applicationCloseDate"
                           style="margin: 0; line-height: 28px;"
                         >
-                          <span class="govuk-!-font-size-16 govuk-!-font-weight-bold">
+                          <span class="govuk-body govuk-!-font-weight-bold">
                             Closing Date:
                           </span>
-                          <span class="govuk-!-font-size-16">
+                          <span class="govuk-body">
                             {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                           </span>
                         </p>
@@ -592,15 +587,19 @@
               </div>
             </TabsList>
 
-            <div style="margin: 64px 0;">
+            <div
+              v-if="!isSignedIn"
+              style="margin: 64px 0 44px 0;"
+            >
               <RouterLink
                 class="govuk-link govuk-body-l"
+                style="display: inline-block;"
                 :to="{ name: 'sign-up' }"
               >
                 Sign up
               </RouterLink>
               <span class="govuk-body-l">
-                &nbsp;for our monthly e-newsletter and keep updated about open and forthcoming exercises.
+                for our monthly e-newsletter and keep updated about open and forthcoming exercises.
               </span>
             </div>
           </div>

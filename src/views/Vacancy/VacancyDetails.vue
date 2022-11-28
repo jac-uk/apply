@@ -46,8 +46,8 @@
         </h2>
 
         <CustomHTML
-          :value="vacancy.aboutTheRole"
-          class="govuk-body"
+          :value="vacancy.roleSummary"
+          class="govuk-body govuk-!-font-weight-bold"
         />
 
         <p>
@@ -288,6 +288,16 @@
         </h2>
         <Timeline :data="timeline" />
       </div>
+
+      <div id="description">
+        <h2 class="govuk-heading-l">
+          Description
+        </h2>
+        <CustomHTML
+          :value="vacancy.aboutTheRole"
+          class="govuk-body"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -323,6 +333,10 @@ export default {
         {
           title: 'Timeline',
           hash: '#timeline',
+        },
+        {
+          title: 'Description',
+          hash: '#description',
         },
       ];
     },
