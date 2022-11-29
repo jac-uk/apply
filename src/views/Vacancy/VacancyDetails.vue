@@ -3,13 +3,13 @@
     class="govuk-grid-row"
     style="margin: 0;"
   >
-    <div style="display: flex; margin: 20px 0 64px 0;">
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 44px; margin: 20px 0 64px 0;">
       <div>
         <BackLink style="margin: 0;" />
       </div>
       <h1
         class="govuk-heading-xl"
-        style="margin: 0 0 0 44px;"
+        style="margin: 0"
       >
         {{ vacancy.name }}
       </h1>
@@ -23,10 +23,10 @@
       >
         <ul class="moj-side-navigation__list">
           <li
-            v-for="item in sideNavigation"
+            v-for="(item, index) in sideNavigation"
             :key="item.hash"
             class="moj-side-navigation__item"
-            :class="$route.hash === item.hash ? 'moj-side-navigation__item--active' : null"
+            :class="isSideNavigationActive(item, index) ? 'moj-side-navigation__item--active' : null"
           >
             <a
               class="govuk-link"
@@ -141,7 +141,7 @@
           </p>
         </div>
 
-        <div style="display: flex; gap: 20px;">
+        <div class="btn-group">
           <RouterLink
             v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
@@ -162,14 +162,14 @@
           </RouterLink>
 
           <button
-            class="govuk-button--outline"
+            class="btn-outline"
             data-module="govuk-button"
           >
             Expand all information
           </button>
 
           <button
-            class="govuk-button--outline"
+            class="btn-outline"
             data-module="govuk-button"
           >
             Print all information
@@ -399,5 +399,31 @@ export default {
       }, 60 * 1000);
     }
   },
+  methods: {
+    isSideNavigationActive(item, index) {
+      return (!this.$route.hash && index === 0) || (this.$route.hash === item.hash);
+    },
+  },
 };
 </script>
+
+<style scoped>
+.btn-group {
+  display: flex;
+  gap: 20px;
+}
+
+.btn-outline {
+  height: 40px;
+  color: #753880;
+  background-color: white;
+  border: 1px solid #753880;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 640px) {
+  .btn-group {
+    flex-direction: column;
+  }
+}
+</style>
