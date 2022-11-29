@@ -55,8 +55,7 @@
 </template>
 
 <script>
-import firebase from '@firebase/app';
-import '@firebase/storage';
+import { storage } from '@/firebase';
 import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
 
@@ -164,7 +163,7 @@ export default {
       if (!file) {
         this.setError('File upload failed, please try again');
         return false;
-      } 
+      }
       if (!this.validFileExtension(file.name)) {
         this.setError(`Invalid file type. Choose from: ${this.acceptableExtensions}`);
         return false;
@@ -176,7 +175,7 @@ export default {
 
       this.isUploading = true;
       const fileName = this.generateFileName(file.name);
-      const uploadRef = firebase.storage().ref(`${this.path}/${fileName}`);
+      const uploadRef = storage.ref(`${this.path}/${fileName}`);
 
       try {
         const fileUploaded = await uploadRef.put(file);
@@ -204,7 +203,7 @@ export default {
       if (!fileName) {
         return false;
       }
-      const fileRef = firebase.storage().ref(`${this.path}/${fileName}`);
+      const fileRef = storage.ref(`${this.path}/${fileName}`);
 
       // Check if file exists in storage
       try {
