@@ -5,7 +5,13 @@
   >
     <div style="display: flex; flex-wrap: wrap; gap: 20px 44px; margin: 20px 0 64px 0;">
       <div>
-        <BackLink style="margin: 0;" />
+        <a
+          class="govuk-back-link"
+          style="margin: 0; cursor: pointer;"
+          @click="$router.push('/vacancies')"
+        >
+          Back
+        </a>
       </div>
       <h1
         class="govuk-heading-xl"
@@ -303,7 +309,6 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
 import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
@@ -313,7 +318,6 @@ import CustomHTML from '@/components/CustomHTML';
 
 export default {
   components: {
-    BackLink,
     Timeline,
     DownloadLink,
     CustomHTML,
