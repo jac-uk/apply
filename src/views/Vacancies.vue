@@ -173,7 +173,7 @@
                       </a>
                       <span
                         v-else
-                        class="govuk-heading-m govuk-!-font-weight-bold"
+                        class="govuk-!-font-weight-bold"
                       >
                         {{ vacancy.name }}
                       </span>
@@ -190,13 +190,13 @@
                         >
                         <span
                           class="govuk-body"
-                          style="margin-left: 4px;"
+                          style="margin: 0 0 0 4px;"
                         >
                           {{ vacancy.location }}
                         </span>
                       </div>
 
-                      <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
                         <div
                           v-if="vacancy.typeOfExercise"
                           class="tag"
@@ -244,9 +244,10 @@
                       <CustomHTML
                         v-if="vacancy.roleSummary"
                         :value="vacancy.roleSummary"
+                        style="margin-top: 20px;"
                       />
 
-                      <div>
+                      <div style="margin-top: 20px;">
                         <p>
                           <span class="govuk-body govuk-!-font-weight-bold">
                             Launch Date:
@@ -353,19 +354,20 @@
                   class="govuk-list"
                 >
                   <li
-                    v-for="vacancy in filterVacancies(futureVacancies)"
+                    v-for="(vacancy, index) in filterVacancies(futureVacancies)"
                     :key="vacancy.id"
+                    :style="{ 'margin-top': index !== 0 ? '30px' : '0' }"
                   >
                     <RouterLink
                       v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
-                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                      class="govuk-link govuk-!-font-weight-bold"
                       :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                     >
                       {{ vacancy.name }}
                     </RouterLink>
                     <a
                       v-else-if="vacancy.externalLink"
-                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
+                      class="govuk-link govuk-!-font-weight-bold"
                       :href="vacancy.externalLink"
                       target="_blank"
                     >
@@ -373,42 +375,87 @@
                     </a>
                     <span
                       v-else
-                      class="govuk-heading-m govuk-!-font-weight-bold"
+                      class="govuk-!-font-weight-bold"
                     >
                       {{ vacancy.name }}
                     </span>
 
-                    <p v-if="vacancy.typeOfExercise">
-                      <span
-                        class="govuk-body govuk-!-font-weight-bold"
+                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                      <div
+                        v-if="vacancy.typeOfExercise"
+                        class="tag"
                       >
-                        <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
-                      </span>
-                      <span
-                        class="govuk-body"
+                        <span
+                          class="govuk-!-font-weight-bold tag-text"
+                        >
+                          TYPE: {{ vacancy.typeOfExercise | lookup }}
+                        </span>
+                      </div>
+
+                      <div
+                        v-if="vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        class="tag"
                       >
-                        {{ vacancy.typeOfExercise | lookup }}
-                      </span>
-                    </p>
-                    <p>
-                      <span
-                        class="govuk-body govuk-!-font-weight-bold"
+                        <span
+                          class="govuk-!-font-weight-bold tag-text"
+                        >
+                          SALARY:&nbsp;
+                        </span>
+                        <span
+                          v-if="vacancy.salaryGrouping"
+                          class="govuk-!-font-weight-bold tag-text"
+                        >
+                          {{ vacancy.salaryGrouping | lookup }}
+                        </span>
+                        <span
+                          v-if="vacancy.salary"
+                          class="govuk-!-font-weight-bold tag-text"
+                        >
+                          {{ vacancy.salary | formatCurrency }}
+                        </span>
+                      </div>
+
+                      <div
+                        v-if="vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        class="tag"
                       >
-                        <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-                      </span>
-                      <span
-                        v-if="vacancy.applicationOpenDate"
-                        class="govuk-body"
+                        <span class="govuk-!-font-weight-bold tag-text">
+                          VACANCIES: {{ vacancy.immediateStart }}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                      <p>
+                        <span class="govuk-body govuk-!-font-weight-bold">
+                          Launch Date:
+                        </span>
+                        <span
+                          v-if="vacancy.applicationOpenDate"
+                          class="govuk-body"
+                        >
+                          {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+                        </span>
+                        <span
+                          v-else
+                          class="govuk-body"
+                        >
+                          {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                        </span>
+                      </p>
+                      <p
+                        v-if="vacancy.applicationCloseDate"
+                        style="margin: 0; line-height: 28px;"
                       >
-                        {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                      </span>
-                      <span
-                        v-else
-                        class="govuk-body"
-                      >
-                        {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                      </span>
-                    </p>
+                        <span class="govuk-body govuk-!-font-weight-bold">
+                          Closing Date:
+                        </span>
+                        <span class="govuk-body">
+                          {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+                        </span>
+                      </p>
+                    </div>
+
                     <p
                       v-if="vacancy.subscriberAlertsUrl"
                       class="govuk-body govuk-!-margin-bottom-5"
@@ -419,7 +466,7 @@
                         target="_blank"
                       >Sign up</a> for an alert about this exercise
                     </p>
-                    <hr>
+                    <hr v-if="index !== filterVacancies(futureVacancies).length - 1">
 
                     <div v-if="vacancy.welshPosts">
                       <p>
@@ -667,8 +714,19 @@ export default {
   },
   created() {
     this.$store.dispatch('vacancies/bind');
+    this.initActiveTab();
   },
   methods: {
+    initActiveTab() {
+      const hash = this.$route.hash;
+      if (hash.includes('open')) {
+        this.activeTab = 'open';
+      } else if (hash.includes('future')) {
+        this.activeTab = 'future';
+      } else if (hash.includes('close')) {
+        this.activeTab = 'close';
+      }
+    },
     isAdvertTypeListing(value) {
       const returnValue = value && value === ADVERT_TYPES.LISTING;
       return returnValue;
