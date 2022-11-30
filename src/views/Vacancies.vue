@@ -293,7 +293,7 @@
                     </p>
 
                     <div v-if="vacancy.welshPosts">
-                      <hr style="display: inline-block; width: 25%; height: 0.5px; border: 0; background: #b1b4b6; margin: 0;">
+                      <hr style="height: 0.5px; border: 0; background: #b1b4b6; margin: 0;">
                       <CustomHTML
                         v-if="vacancy.roleSummaryWelsh"
                         :value="vacancy.roleSummaryWelsh"
