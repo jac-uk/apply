@@ -44,6 +44,7 @@ import MultipleChoice from '@/components/SelectionInput/MultipleChoice';
 import RankedChoice from '@/components/SelectionInput/RankedChoice';
 
 export default {
+  name: 'SelectionInput',
   components: {
     SingleChoice,
     MultipleChoice,

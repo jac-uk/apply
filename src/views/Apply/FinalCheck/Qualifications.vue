@@ -87,6 +87,7 @@
 
 <script>
 export default {
+  name: 'Qualifications',
   props: {
     application: {
       type: Object,

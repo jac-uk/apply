@@ -496,6 +496,7 @@ import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 export default {
+  name: 'Review',
   components: {
     BackLink,
     OtherProfessionalBodiesReview,

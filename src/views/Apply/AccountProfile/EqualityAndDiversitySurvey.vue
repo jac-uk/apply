@@ -716,6 +716,7 @@ import CheckboxItem from '@/components/Form/CheckboxItem';
 import BackLink from '@/components/BackLink';
 
 export default {
+  name: 'EqualityAndDiversitySurvey',
   components: {
     ErrorSummary,
     RadioGroup,

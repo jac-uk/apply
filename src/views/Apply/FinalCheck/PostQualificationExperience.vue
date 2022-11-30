@@ -124,6 +124,7 @@
 
 <script>
 export default {
+  name: 'PostQualificationExperience',
   props: {
     application: {
       type: Object,

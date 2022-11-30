@@ -274,6 +274,7 @@ import OtherCharacterIssuesDetails from '@/components/RepeatableFields/OtherChar
 import BackLink from '@/components/BackLink';
 
 export default {
+  name: 'CharacterInformation',
   components: {
     ErrorSummary,
     RadioGroup,

@@ -83,6 +83,7 @@ import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
+  name: 'SignIn',
   components: {
     ErrorSummary,
     TextField,

@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'Navigation',
   props: {
     items: {
       required: true,

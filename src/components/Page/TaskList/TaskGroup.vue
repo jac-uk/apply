@@ -14,6 +14,7 @@
 
 <script>
 export default {
+  name: 'TaskGroup',
   props: {
     title: {
       type: String,

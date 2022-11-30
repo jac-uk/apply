@@ -111,6 +111,7 @@ import BackLink from '@/components/BackLink';
 import * as filters from '@/filters';
 
 export default {
+  name: 'RelevantQualifications',
   components: {
     ErrorSummary,
     RepeatableFields,

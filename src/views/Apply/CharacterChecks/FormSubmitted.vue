@@ -40,6 +40,7 @@
 
 <script>
 export default {
+  name: 'FormSubmitted',
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;

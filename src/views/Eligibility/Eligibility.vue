@@ -12,6 +12,7 @@
 
 <script>
 export default {
+  name: 'Eligibility',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;

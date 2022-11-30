@@ -124,6 +124,7 @@ import {
 } from 'vuex';
 
 export default {
+  name: 'CharacterInformation',
   computed: {
     ...mapState('applications', [
       'records',

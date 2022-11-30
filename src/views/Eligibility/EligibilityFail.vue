@@ -32,6 +32,7 @@
 <script>
 
 export default {
+  name: 'EligibilityFail',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;
