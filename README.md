@@ -95,7 +95,7 @@ CircleCI environment variables are defined here:
 
 https://circleci.com/gh/jac-uk/apply/edit#env-vars
 
-Firebase environment variables bound to the CircleCI environment variables defined here:
+Firebase environment variables bound to the CircleCI environment variables are defined here:
 
 https://console.firebase.google.com/project/platform-production-9207d/settings/general/web:OTI4N2U1OGEtY2RkMi00ZTdjLWJiOWEtYWEyNjM1ZjhkNjJk
 
