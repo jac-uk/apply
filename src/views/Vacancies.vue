@@ -293,7 +293,7 @@
                     </p>
 
                     <div v-if="vacancy.welshPosts">
-                      <hr>
+                      <hr style="display: inline-block; width: 25%; height: 0.5px; border: 0; background: #b1b4b6; margin: 0;">
                       <CustomHTML
                         v-if="vacancy.roleSummaryWelsh"
                         :value="vacancy.roleSummaryWelsh"
@@ -350,7 +350,10 @@
                       Vacancy details
                     </RouterLink>
 
-                    <hr v-if="index !== filterVacancies.length - 1">
+                    <hr
+                      v-if="index !== filterVacancies.length - 1"
+                      style="height: 1px; border: 0; background: #b1b4b6;"
+                    >
                   </li>
                 </ul>
               </div>
@@ -412,8 +415,8 @@ export default {
           title: 'Future applications',
         },
         {
-          ref: 'close',
-          title: 'Close for applications',
+          ref: 'closed',
+          title: 'Closed for applications',
         },
       ],
       searchTerm: '',
@@ -439,7 +442,7 @@ export default {
         result = this.openVacancies;
       } else if (this.activeTab === 'future') {
         result = this.futureVacancies;
-      } else if (this.activeTab === 'close') {
+      } else if (this.activeTab === 'closed') {
         result = this.inProgressVacancies;
       }
       return result;
@@ -473,8 +476,8 @@ export default {
         this.activeTab = 'open';
       } else if (hash.includes('future')) {
         this.activeTab = 'future';
-      } else if (hash.includes('close')) {
-        this.activeTab = 'close';
+      } else if (hash.includes('closed')) {
+        this.activeTab = 'closed';
       }
     },
     isAdvertTypeListing(value) {
