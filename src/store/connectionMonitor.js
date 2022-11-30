@@ -2,8 +2,7 @@
  * Here we use Realtime Database to monitor user's connection
  */
 import firebase from '@firebase/app';
-import { auth } from '@/firebase';
-import 'firebase/database';
+import { auth, database } from '@/firebase';
 
 let lastSessionPath = '';
 
@@ -16,8 +15,8 @@ export default {
       }
       const userId = auth.currentUser.uid;
       const userStatusPath = `/${ref}/userStatus/${userId}`;
-      const userStatusDatabaseRef = firebase.database().ref(userStatusPath);
-      await firebase.database().ref('.info/connected').on('value', (snapshot) => {
+      const userStatusDatabaseRef = database.ref(userStatusPath);
+      await database.ref('.info/connected').on('value', (snapshot) => {
         if (snapshot.val() == false) {
           return;
         }
@@ -32,9 +31,9 @@ export default {
     stop: async (context) => {
       context.commit('setStarted', false);
       if (lastSessionPath) {
-        firebase.database().ref(lastSessionPath).child('offline').set(firebase.database.ServerValue.TIMESTAMP);
+        database.ref(lastSessionPath).child('offline').set(firebase.database.ServerValue.TIMESTAMP);
       }
-      firebase.database().ref('.info/connected').off();
+      database.ref('.info/connected').off();
     },
   },
   mutations: {

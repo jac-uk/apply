@@ -76,7 +76,7 @@
   </div>
 </template>
 <script>
-import firebase from '@/firebase';
+import firebase from '@firebase/app';
 import LoadingMessage from '@/components/LoadingMessage';
 import Modal from '@/components/Page/Modal';
 import Countdown from '@/components/QualifyingTest/Countdown';

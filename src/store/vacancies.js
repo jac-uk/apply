@@ -37,7 +37,7 @@ export default {
     openVacancies: (state, getters) => {
       const vacancies = getters.allVacancies;
       return vacancies.filter(vacancy => {
-        
+
           // console.log(vacancy.state);
           const isArchived = vacancy.state === 'archived';
           const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);

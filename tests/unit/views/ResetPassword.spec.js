@@ -13,9 +13,11 @@ const mockRouter = {
 };
 
 jest.mock('@/firebase', () => {
-  const sendPasswordResetEmail = jest.fn(() => Promise.resolve());
-  const auth = () => ({ sendPasswordResetEmail });
-  return { auth };
+  return {
+    auth: {
+      sendPasswordResetEmail: jest.fn(() => Promise.resolve()),
+    },
+  };
 });
 
 describe('views/ResetPassword', () => {

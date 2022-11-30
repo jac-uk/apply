@@ -13,4 +13,3 @@ xdescribe('views/QualifyingTests/QualifyingTest/Scenario', () => {
     expect(wrapper.exists()).toBe(true);
   });
 });
-
