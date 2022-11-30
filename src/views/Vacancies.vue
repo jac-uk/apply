@@ -129,17 +129,16 @@
               :active-tab.sync="activeTab"
             >
               <div
-                v-if="activeTab === 'open'"
                 class="govuk-tabs__panel"
               >
                 <p
-                  v-if="!openVacancies.length"
+                  v-if="!vacancies.length"
                   class="govuk-body govuk-!-margin-bottom-6"
                 >
-                  No open vacancies at the moment.
+                  No vacancies at the moment.
                 </p>
                 <p
-                  v-else-if="!filterVacancies(openVacancies).length"
+                  v-else-if="!filterVacancies.length"
                   class="govuk-body govuk-!-margin-bottom-6"
                 >
                   No vacancies found.
@@ -149,212 +148,7 @@
                   class="govuk-list"
                 >
                   <li
-                    v-for="(vacancy, index) in filterVacancies(openVacancies)"
-                    :key="vacancy.id"
-                  >
-                    <div
-                      v-if="!vacancy.inviteOnly"
-                      :style="{ 'margin-top': index !== 0 ? '30px' : '0' }"
-                    >
-                      <RouterLink
-                        v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
-                        class="govuk-link govuk-!-font-weight-bold"
-                        :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-                      >
-                        {{ vacancy.name }}
-                      </RouterLink>
-                      <a
-                        v-else-if="vacancy.externalLink"
-                        class="govuk-link govuk-!-font-weight-bold"
-                        :href="vacancy.externalLink"
-                        target="_blank"
-                      >
-                        {{ vacancy.name }}
-                      </a>
-                      <span
-                        v-else
-                        class="govuk-!-font-weight-bold"
-                      >
-                        {{ vacancy.name }}
-                      </span>
-
-                      <div 
-                        v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                        style="display: flex; align-items: flex-start; margin-top: 10px;"
-                      >
-                        <img
-                          src="@/assets/location.svg"
-                          alt="Location"
-                          width="24"
-                          height="24"
-                        >
-                        <span
-                          class="govuk-body"
-                          style="margin: 0 0 0 4px;"
-                        >
-                          {{ vacancy.location }}
-                        </span>
-                      </div>
-
-                      <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
-                        <div
-                          v-if="vacancy.typeOfExercise"
-                          class="tag"
-                        >
-                          <span
-                            class="govuk-!-font-weight-bold tag-text"
-                          >
-                            TYPE: {{ vacancy.typeOfExercise | lookup }}
-                          </span>
-                        </div>
-
-                        <div
-                          v-if="vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                          class="tag"
-                        >
-                          <span
-                            class="govuk-!-font-weight-bold tag-text"
-                          >
-                            SALARY:&nbsp;
-                          </span>
-                          <span
-                            v-if="vacancy.salaryGrouping"
-                            class="govuk-!-font-weight-bold tag-text"
-                          >
-                            {{ vacancy.salaryGrouping | lookup }}
-                          </span>
-                          <span
-                            v-if="vacancy.salary"
-                            class="govuk-!-font-weight-bold tag-text"
-                          >
-                            {{ vacancy.salary | formatCurrency }}
-                          </span>
-                        </div>
-
-                        <div
-                          v-if="vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                          class="tag"
-                        >
-                          <span class="govuk-!-font-weight-bold tag-text">
-                            VACANCIES: {{ vacancy.immediateStart }}
-                          </span>
-                        </div>
-                      </div>
-
-                      <CustomHTML
-                        v-if="vacancy.roleSummary"
-                        :value="vacancy.roleSummary"
-                        style="margin-top: 20px;"
-                      />
-
-                      <div style="margin-top: 20px;">
-                        <p>
-                          <span class="govuk-body govuk-!-font-weight-bold">
-                            Launch Date:
-                          </span>
-                          <span
-                            v-if="vacancy.applicationOpenDate"
-                            class="govuk-body"
-                          >
-                            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                          </span>
-                          <span
-                            v-else
-                            class="govuk-body"
-                          >
-                            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                          </span>
-                        </p>
-                        <p
-                          v-if="vacancy.applicationCloseDate"
-                          style="margin: 0; line-height: 28px;"
-                        >
-                          <span class="govuk-body govuk-!-font-weight-bold">
-                            Closing Date:
-                          </span>
-                          <span class="govuk-body">
-                            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-                          </span>
-                        </p>
-                      </div>
-
-                      <RouterLink
-                        v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
-                        class="govuk-button"
-                        style="margin: 30px 0;"
-                        :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-                      >
-                        Vacancy details
-                      </RouterLink>
-
-                      <hr v-if="index !== filterVacancies(openVacancies).length - 1">
-                    </div>
-
-                    <div v-if="vacancy.welshPosts">
-                      <div v-if="!vacancy.inviteOnly">
-                        <CustomHTML
-                          v-if="vacancy.roleSummaryWelsh"
-                          :value="vacancy.roleSummaryWelsh"
-                        />
-                        <p>
-                          <span
-                            class="govuk-body govuk-!-font-weight-bold"
-                          >
-                            Dyddiad lansio:
-                          </span>
-                          <span
-                            v-if="vacancy.applicationOpenDate"
-                            class="govuk-body"
-                          >
-                            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                          </span>
-                          <span
-                            v-else
-                            class="govuk-body"
-                          >
-                            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                          </span>
-                        </p>
-                        <p v-if="vacancy.applicationCloseDate">
-                          <span
-                            class="govuk-body govuk-!-font-weight-bold"
-                          >
-                            Dyddiad cau:
-                          </span>
-                          <span class="govuk-body">
-                            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-                          </span>
-                        </p>
-
-                        <hr>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div
-                v-if="activeTab === 'future'"
-                class="govuk-tabs__panel"
-              >
-                <p
-                  v-if="!futureVacancies.length"
-                  class="govuk-body govuk-!-margin-bottom-6"
-                >
-                  No future vacancies at the moment.
-                </p>
-                <p
-                  v-else-if="!filterVacancies(futureVacancies).length"
-                  class="govuk-body govuk-!-margin-bottom-6"
-                >
-                  No vacancies found.
-                </p>
-                <ul
-                  v-else
-                  class="govuk-list"
-                >
-                  <li
-                    v-for="(vacancy, index) in filterVacancies(futureVacancies)"
+                    v-for="(vacancy, index) in filterVacancies"
                     :key="vacancy.id"
                     :style="{ 'margin-top': index !== 0 ? '30px' : '0' }"
                   >
@@ -380,7 +174,32 @@
                       {{ vacancy.name }}
                     </span>
 
-                    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                    <div 
+                      v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                      style="display: flex; align-items: flex-start; margin-top: 10px;"
+                    >
+                      <img
+                        src="@/assets/location.svg"
+                        alt="Location"
+                        width="24"
+                        height="24"
+                      >
+                      <span
+                        class="govuk-body"
+                        style="margin: 0 0 0 4px;"
+                      >
+                        {{ vacancy.location }}
+                      </span>
+                    </div>
+
+                    <div
+                      v-if="
+                        vacancy.typeOfExercise
+                          || (vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType)))
+                          || (vacancy.immediateStart && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType)))
+                      "
+                      style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;"
+                    >
                       <div
                         v-if="vacancy.typeOfExercise"
                         class="tag"
@@ -425,8 +244,14 @@
                       </div>
                     </div>
 
+                    <CustomHTML
+                      v-if="vacancy.roleSummary"
+                      :value="vacancy.roleSummary"
+                      style="margin-top: 20px;"
+                    />
+
                     <div style="margin-top: 20px;">
-                      <p>
+                      <p style="margin: 0; line-height: 28px;">
                         <span class="govuk-body govuk-!-font-weight-bold">
                           Launch Date:
                         </span>
@@ -457,8 +282,8 @@
                     </div>
 
                     <p
-                      v-if="vacancy.subscriberAlertsUrl"
-                      class="govuk-body govuk-!-margin-bottom-5"
+                      v-if="activeTab === 'future' && vacancy.subscriberAlertsUrl"
+                      class="govuk-body govuk-!-margin-top-4"
                     >
                       <a
                         class="govuk-link govuk-body"
@@ -466,141 +291,19 @@
                         target="_blank"
                       >Sign up</a> for an alert about this exercise
                     </p>
-                    <hr v-if="index !== filterVacancies(futureVacancies).length - 1">
 
                     <div v-if="vacancy.welshPosts">
-                      <p>
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
-                        >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
-                        </span>
-                        <span
-                          v-if="vacancy.applicationOpenDate"
-                          class="govuk-body"
-                        >
-                          {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                        </span>
-                        <span
-                          v-else
-                          class="govuk-body"
-                        >
-                          {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                        </span>
-                      </p>
-                      <p
-                        v-if="vacancy.subscriberAlertsUrl"
-                        class="govuk-body govuk-!-margin-bottom-5"
-                      >
-                        <a
-                          class="govuk-link govuk-body"
-                          :href="vacancy.subscriberAlertsUrl"
-                          target="_blank"
-                        >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
-                      </p>
                       <hr>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <div
-                v-if="activeTab === 'close'"
-                class="govuk-tabs__panel"
-              >
-                <p
-                  v-if="!inProgressVacancies.length"
-                  class="govuk-body govuk-!-margin-bottom-6"
-                >
-                  No closed vacancies at the moment.
-                </p>
-                <p
-                  v-else-if="!filterVacancies(inProgressVacancies).length"
-                  class="govuk-body govuk-!-margin-bottom-6"
-                >
-                  No vacancies found.
-                </p>
-                <ul
-                  v-else
-                  class="govuk-list"
-                >
-                  <li
-                    v-for="vacancy in filterVacancies(inProgressVacancies)"
-                    :key="vacancy.id"
-                  >
-                    <RouterLink
-                      v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
-                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-                      :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
-                    >
-                      {{ vacancy.name }}
-                    </RouterLink>
-                    <a
-                      v-else-if="vacancy.externalLink"
-                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
-                      :href="vacancy.externalLink"
-                      target="_blank"
-                    >
-                      {{ vacancy.name }}
-                    </a>
-                    <span
-                      v-else
-                      class="govuk-heading-m govuk-!-font-weight-bold"
-                    >
-                      {{ vacancy.name }}
-                    </span>
-
-                    <p v-if="vacancy.typeOfExercise">
-                      <span
-                        class="govuk-body govuk-!-font-weight-bold"
-                      >
-                        <span class="govuk-body govuk-!-font-weight-bold"> Type: </span>
-                      </span>
-                      <span
-                        class="govuk-body"
-                      >
-                        {{ vacancy.typeOfExercise | lookup }}
-                      </span>
-                    </p>
-                    <p>
-                      <span
-                        class="govuk-body govuk-!-font-weight-bold"
-                      >
-                        <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-                      </span>
-                      <span
-                        v-if="vacancy.applicationOpenDate"
-                        class="govuk-body"
-                      >
-                        {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                      </span>
-                      <span
-                        v-else
-                        class="govuk-body"
-                      >
-                        {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                      </span>
-                    </p>
-                    <p v-if="vacancy.applicationCloseDate">
-                      <span
-                        class="govuk-body govuk-!-font-weight-bold"
-                      >
-                        <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-                      </span>
-                      <span
-                        class="govuk-body"
-                      >
-                        {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-                      </span>
-                    </p>
-                    <hr class="govuk-section-break govuk-section-break--visible">
-
-                    <div v-if="vacancy.welshPosts">
+                      <CustomHTML
+                        v-if="vacancy.roleSummaryWelsh"
+                        :value="vacancy.roleSummaryWelsh"
+                        style="margin-top: 20px;"
+                      />
                       <p>
                         <span
                           class="govuk-body govuk-!-font-weight-bold"
                         >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad lansio: </span>
+                          Dyddiad lansio:
                         </span>
                         <span
                           v-if="vacancy.applicationOpenDate"
@@ -619,16 +322,35 @@
                         <span
                           class="govuk-body govuk-!-font-weight-bold"
                         >
-                          <span class="govuk-body govuk-!-font-weight-bold"> Dyddiad cau: </span>
+                          Dyddiad cau:
                         </span>
-                        <span
-                          class="govuk-body"
-                        >
+                        <span class="govuk-body">
                           {{ vacancy.applicationCloseDate | formatDate('datetime') }}
                         </span>
                       </p>
-                      <hr class="govuk-section-break govuk-section-break--visible">
+                      <p
+                        v-if="activeTab === 'future' && vacancy.subscriberAlertsUrl"
+                        class="govuk-body govuk-!-margin-top-4"
+                        style="margin: 0;"
+                      >
+                        <a
+                          class="govuk-link govuk-body"
+                          :href="vacancy.subscriberAlertsUrl"
+                          target="_blank"
+                        >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
+                      </p>
                     </div>
+
+                    <RouterLink
+                      v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                      class="govuk-button"
+                      style="margin: 30px 0;"
+                      :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
+                    >
+                      Vacancy details
+                    </RouterLink>
+
+                    <hr v-if="index !== filterVacancies.length - 1">
                   </li>
                 </ul>
               </div>
@@ -711,6 +433,34 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+    vacancies() {
+      let result = [];
+      if (this.activeTab === 'open') {
+        result = this.openVacancies;
+      } else if (this.activeTab === 'future') {
+        result = this.futureVacancies;
+      } else if (this.activeTab === 'close') {
+        result = this.inProgressVacancies;
+      }
+      return result;
+    },
+    filterVacancies() {
+      let result = this.vacancies;
+      if (!result || !result.length) return [];
+
+      // do not show the invite-only vacancies
+      if (this.activeTab === 'open') {
+        result = result.filter(vacancy => !vacancy.inviteOnly);
+      }
+
+      if (!this.isEmptyString(this.searchTerm)) {
+        result = result.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
+      }
+      if (this.appliedFilter && this.appliedFilter.length) {
+        result = result.filter(vacancy => vacancy.typeOfExercise && this.appliedFilter.includes(vacancy.typeOfExercise));
+      }
+      return result;
+    },
   },
   created() {
     this.$store.dispatch('vacancies/bind');
@@ -757,18 +507,6 @@ export default {
     btnCancelFilters() {
       this.filter = this.appliedFilter;
       this.showSidePanel = false;
-    },
-    filterVacancies(vacancies) {
-      let result = vacancies || [];
-      if (!result || !result.length) return [];
-
-      if (!this.isEmptyString(this.searchTerm)) {
-        result = result.filter(vacancy => vacancy.name.toLowerCase().includes(this.searchTerm.toLowerCase()));
-      }
-      if (this.appliedFilter && this.appliedFilter.length) {
-        result = result.filter(vacancy => vacancy.typeOfExercise && this.appliedFilter.includes(vacancy.typeOfExercise));
-      }
-      return result;
     },
     useSearch(searchTerm) {
       this.searchTerm = searchTerm;
