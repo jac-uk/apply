@@ -199,6 +199,7 @@ import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
 import { ASSESSOR_TYPES } from '@/helpers/constants';
 
 export default {
+  name: 'AssessorsDetails',
   components: {
     ErrorSummary,
     TextField,

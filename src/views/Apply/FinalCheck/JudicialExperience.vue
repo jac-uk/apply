@@ -86,6 +86,7 @@
 
 <script>
 export default {
+  name: 'JudicialExperience',
   props: {
     application: {
       type: Object,

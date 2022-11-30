@@ -92,6 +92,7 @@ import InfoIcon from '@/components/ModalViews/InfoIcon';
 import { CRIMINAL_OFFENCES_URL } from './character-information-constants';
 
 export default {
+  name: 'CriminalOffences',
   components: {
     ErrorSummary,
     RadioGroup,

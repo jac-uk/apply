@@ -60,6 +60,7 @@
 import { formatDate } from '@/helpers/date';
 
 export default {
+  name: 'InformationReviewRenderer',
   props: {
     data: {
       type: Array,

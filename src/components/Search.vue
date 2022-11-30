@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: 'Search',
   props: {
     placeholder: {
       type: String,

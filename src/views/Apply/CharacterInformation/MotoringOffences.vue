@@ -93,6 +93,7 @@ import InfoIcon from '@/components/ModalViews/InfoIcon';
 import { MOTORING_OFFENCES_URL } from './character-information-constants';
 
 export default {
+  name: 'MotoringOffences',
   components: {
     ErrorSummary,
     RadioGroup,

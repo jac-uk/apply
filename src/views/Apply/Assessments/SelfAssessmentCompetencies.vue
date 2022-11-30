@@ -127,6 +127,7 @@ import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  name: 'SelfAssessmentCompetencies',
   components: {
     ErrorSummary,
     BackLink,

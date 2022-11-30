@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'Timeline',
   props: {
     data: {
       required: true,

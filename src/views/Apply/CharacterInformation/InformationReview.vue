@@ -310,6 +310,7 @@ import Form from '@/components/Form/Form';
 import ApplyMixIn from '../ApplyMixIn';
 
 export default {
+  name: 'InformationReview',
   components: {
     Checkbox,
     FurtherInformationSummary,

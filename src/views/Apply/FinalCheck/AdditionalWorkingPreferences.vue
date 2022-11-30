@@ -67,6 +67,7 @@
 
 <script>
 export default {
+  name: 'AdditionalWorkingPreferences',
   props: {
     application: {
       type: Object,

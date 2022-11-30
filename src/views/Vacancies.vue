@@ -393,6 +393,7 @@ import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
 
 export default {
+  name: 'Vacancies',
   components: {
     Search,
     SidePanel,

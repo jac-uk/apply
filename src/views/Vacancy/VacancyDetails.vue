@@ -317,6 +317,7 @@ import { ADVERT_TYPES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  name: 'VacancyDetails',
   components: {
     Timeline,
     DownloadLink,
