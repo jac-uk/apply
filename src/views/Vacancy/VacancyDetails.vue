@@ -168,15 +168,19 @@
           </RouterLink>
 
           <button
-            class="btn-outline"
+            class="govuk-button govuk-button--secondary"
             data-module="govuk-button"
+            style="margin-bottom: 0;"
+            @click="toggleExpandAllInformation(true)"
           >
             Expand all information
           </button>
 
           <button
-            class="btn-outline"
+            class="govuk-button govuk-button--secondary"
             data-module="govuk-button"
+            style="margin-bottom: 0;"
+            @click="print"
           >
             Print all information
           </button>
@@ -293,9 +297,19 @@
           Timeline
         </h2>
         <Timeline :data="timeline" />
+        <a
+          href="#" 
+          class="govuk-link"
+          @click.prevent="toggleExpandTimeline"
+        >
+          View more...
+        </a>
       </div>
 
-      <div id="description">
+      <div
+        id="description"
+        class="govuk-!-margin-top-9"
+      >
         <h2 class="govuk-heading-l">
           Description
         </h2>
@@ -326,6 +340,12 @@ export default {
   data() {
     return {
       isVacancyOpen: false,
+      sections: {
+        isExpandTimeline: false,
+        isExpandDescription: false,
+      },
+      isExpandAllInformation: true,
+      isExpandTimeline: false,
     };
   },
   computed: {
@@ -353,7 +373,8 @@ export default {
     },
     timeline() {
       const timeline = exerciseTimeline(this.vacancy);
-      return createTimeline(timeline);
+      const timelines = createTimeline(timeline);
+      return this.isExpandTimeline ? timelines : timelines.slice(0, 2);
     },
     invitations() {
       return this.$store.state.invitations.records;
@@ -407,6 +428,21 @@ export default {
   methods: {
     isSideNavigationActive(item, index) {
       return (!this.$route.hash && index === 0) || (this.$route.hash === item.hash);
+    },
+    toggleExpandAllInformation(isExpand) {
+      Object.keys(this.sections).forEach(key => {
+        this.sections[key] = isExpand;
+      });
+      this.isExpandAllInformation = !this.isExpandAllInformation;
+    },
+    toggleExpandTimeline() {
+      this.sections.isExpandTimeline = !this.sections.isExpandTimeline;
+    },
+    toggleExpandDescription() {
+      this.sections.isExpandDescription = !this.sections.isExpandDescription;
+    },
+    print() {
+      window.print();
     },
   },
 };
