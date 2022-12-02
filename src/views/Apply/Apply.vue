@@ -12,7 +12,7 @@
 import LoadingMessage from '@/components/LoadingMessage';
 
 export default {
-  name: 'Apply',
+  name: 'ApplyView',
   components: {
     LoadingMessage,
   },

@@ -12,3 +12,10 @@
     </strong>
   </div>
 </template>
+
+<script>
+
+export default {
+  name: 'WarningComponent',
+};
+</script>

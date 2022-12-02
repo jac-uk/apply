@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Address
+    <AddressComponent
       id="previousAddress"
       v-model="row"
       label="Previous address"
@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import Address from '@/components/Form/Address';
+import AddressComponent from '@/components/Form/Address';
 import DateInput from '@/components/Form/DateInput';
 
 export default {
-  name: 'Addresses',
+  name: 'AddressesComponent',
   components: {
-    Address,
+    AddressComponent,
     DateInput,
   },
   props: {

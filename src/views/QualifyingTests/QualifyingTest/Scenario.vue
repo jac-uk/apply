@@ -100,7 +100,7 @@ import minusIcon from '@/assets/minus.png';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
-  name: 'Scenario',
+  name: 'ScenarioView',
   components: {
     TextareaInput,
     CustomHTML,

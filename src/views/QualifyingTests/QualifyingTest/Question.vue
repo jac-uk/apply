@@ -56,7 +56,7 @@ import { QUALIFYING_TEST } from '@/helpers/constants';
 import Banner from '@/components/Page/Banner';
 
 export default {
-  name: 'Question',
+  name: 'QuestionView',
   components: {
     CriticalAnalysis,
     SituationalJudgement,

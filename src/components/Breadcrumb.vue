@@ -30,7 +30,7 @@
 import { capitalize } from '@/filters';
 
 export default {
-  name: 'Breadcrumb',
+  name: 'BreadcrumbComponent',
   computed: {
     breadcrumbs: function () {
       const items = [];

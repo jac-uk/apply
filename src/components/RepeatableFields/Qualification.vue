@@ -78,7 +78,7 @@ import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
 
 export default {
-  name: 'Qualification',
+  name: 'QualificationComponent',
   components: {
     RadioGroup,
     Checkbox,

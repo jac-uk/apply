@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'Form',
+  name: 'FormComponent',
   data() {
     return {
       errorObject: {},

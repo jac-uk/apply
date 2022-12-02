@@ -36,7 +36,7 @@ import DateInput from '@/components/Form/DateInput';
 import TextField from '@/components/Form/TextField';
 
 export default {
-  name: 'Experience',
+  name: 'ExperienceComponent',
   components: {
     DateInput,
     TextField,

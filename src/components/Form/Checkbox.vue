@@ -44,7 +44,7 @@ import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
 
 export default {
-  name: 'Checkbox',
+  name: 'CheckboxComponent',
   components: {
     FormFieldError,
   },

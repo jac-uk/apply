@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  name: 'Task',
+  name: 'TaskComponent',
   props: {
     id: {
       type: String,

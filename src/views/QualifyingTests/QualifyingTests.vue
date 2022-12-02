@@ -57,7 +57,7 @@
             {{ activeTab | capitalize }}
           </h1>
 
-          <Table
+          <JACTable
             data-key="id"
             :data="getSelectedTableData()"
             :columns="getSelectedTableColumns()"
@@ -101,7 +101,7 @@
                 </span>
               </TableCell>
             </template>
-          </Table>
+          </JACTable>
         </div>
       </div>
     </template>
@@ -110,7 +110,7 @@
 
 <script>
 import TabsList from '@/components/Page/TabsList';
-import Table from '@/components/Page/Table/Table';
+import JACTable from '@/components/Page/Table/Table';
 import TableCell from '@/components/Page/Table/TableCell';
 import LoadingMessage from '@/components/LoadingMessage';
 import { isToday, isDateInFuture, formatDate, helperTimeLeft } from '@/helpers/date';
@@ -120,7 +120,7 @@ export default {
   name: 'QualifyingTests',
   components: {
     TabsList,
-    Table,
+    JACTable,
     TableCell,
     LoadingMessage,
   },

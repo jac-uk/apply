@@ -53,7 +53,7 @@ import FormField from '@/components/Form/FormField';
 import TextField from '@/components/Form/TextField';
 
 export default {
-  name: 'Address',
+  name: 'AddressComponent',
   components: {
     TextField,
   },

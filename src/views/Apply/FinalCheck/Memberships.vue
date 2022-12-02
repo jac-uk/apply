@@ -176,7 +176,7 @@
 
 <script>
 export default {
-  name: 'Memberships',
+  name: 'MembershipsView',
   props: {
     application: {
       type: Object,

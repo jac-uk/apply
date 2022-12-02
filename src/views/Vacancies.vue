@@ -435,7 +435,7 @@ import { ADVERT_TYPES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
-  name: 'Vacancies',
+  name: 'VacanciesView',
   components: {
     CustomHTML,
   },

@@ -135,7 +135,7 @@
         />
       </RadioGroup>
 
-      <Address
+      <AddressComponent
         id="currentAddress"
         v-model="personalDetails.address.current"
         required
@@ -192,7 +192,7 @@ import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
 import RepeatableFields from '@/components/RepeatableFields';
 import Addresses from '@/components/RepeatableFields/Addresses';
-import Address from '@/components/Form/Address';
+import AddressComponent from '@/components/Form/Address';
 import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
@@ -204,7 +204,7 @@ export default {
     RadioGroup,
     TextField,
     DateInput,
-    Address,
+    AddressComponent,
     RepeatableFields,
   },
   extends: Form,

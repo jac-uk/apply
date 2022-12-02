@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header class="govuk-header govuk-!-padding-2">
+    <div class="govuk-header govuk-!-padding-2">
       <div class="govuk-header__container govuk-!-margin-bottom-1 govuk-width-container">
         <div
           class="header-background clearfix"
@@ -18,7 +18,7 @@
               </a>
             </div>
           </div>
-          
+
           <div class="govuk-grid-column-one-third organisation__margin-bottom">
             <button
               v-if="isSignedIn"
@@ -56,7 +56,7 @@
           </div>
         </div>
       </div>
-    </header>
+    </div>
     <div
       class="govuk-phase-banner govuk-!-margin-bottom-4 print-none govuk-width-container"
     >
@@ -79,7 +79,7 @@
 <script>
 import { auth } from '@/firebase';
 export default {
-  name: 'Header',
+  name: 'HeaderComponent',
   data(){
     return {
       dropDownExpanded: false,

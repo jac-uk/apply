@@ -68,15 +68,15 @@
 
             <p>If you are unable to provide one of the above, consider another judge who has first-hand knowledge of your work. If you are unable to provide any judicial assessor, please contact us giving your reasons writing.</p>
             <p>If you are applying for a <strong>non-legal role</strong> you should choose assessors who know you well and who can give clear examples of your abilities.</p>
-            
+
             <p>A <u>personal assessor</u> could be:</p>
             <ul>
               <li>a former colleague, manager or client who is familiar with the way you work</li>
               <li>someone for whom you do voluntary work</li>
             </ul>
-        
+
             <p>If you have been on maternity leave or a career break, there is no time limit on how recently you have worked with your assessor, although where possible within the last 2 years is recommended so they can provide recent examples.</p>
-            
+
             <p>Do not nominate:</p>
             <ul>
               <li>another individual who is applying for a role in the same exercise</li>
@@ -90,7 +90,7 @@
           First independent assessor
         </h2>
 
-        <Select
+        <JACSelect
           id="first-assessor-type"
           v-model="formData.firstAssessorType"
           :value="formData.firstAssessorType"
@@ -104,7 +104,7 @@
           >
             {{ option | lookup }}
           </option>
-        </Select>
+        </JACSelect>
         <TextField
           id="first-assessor-full-name"
           v-model="formData.firstAssessorFullName"
@@ -136,7 +136,7 @@
           Second independent assessor
         </h2>
 
-        <Select
+        <JACSelect
           id="second-assessor-type"
           v-model="formData.secondAssessorType"
           :value="formData.secondAssessorType"
@@ -150,7 +150,7 @@
           >
             {{ option | lookup }}
           </option>
-        </Select>
+        </JACSelect>
         <TextField
           id="second-assessor-full-name"
           v-model="formData.secondAssessorFullName"
@@ -195,7 +195,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
+import JACSelect from '@jac-uk/jac-kit/draftComponents/Form/Select';
 import { ASSESSOR_TYPES } from '@/helpers/constants';
 
 export default {
@@ -204,7 +204,7 @@ export default {
     ErrorSummary,
     TextField,
     BackLink,
-    Select,
+    JACSelect,
   },
   extends: Form,
   mixins: [ApplyMixIn],

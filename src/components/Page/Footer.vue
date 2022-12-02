@@ -1,9 +1,9 @@
 <template>
-  <footer
+  <div
     class="govuk-footer"
     role="contentinfo"
   >
-    <div 
+    <div
       class="govuk-width-container"
     >
       <div class="govuk-footer__meta">
@@ -28,7 +28,7 @@
           <span class="govuk-footer__version-number float-right">
             v.{{ $store.getters.appVersion }}
           </span>
-          <span class="govuk-footer__licence-description">All content is available under the 
+          <span class="govuk-footer__licence-description">All content is available under the
             <a
               class="govuk-footer__link"
               href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
@@ -42,11 +42,11 @@
         </div>
       </div>
     </div>
-  </footer>
+  </div>
 </template>
 <script>
 export default {
-  name: 'Footer',
+  name: 'FooterComponent',
 };
 </script>
 <style lang="scss">

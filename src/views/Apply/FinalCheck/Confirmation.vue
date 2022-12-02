@@ -80,7 +80,7 @@
 <script>
 import { hasApplicationProcess } from '@/helpers/exerciseHelper';
 export default {
-  name: 'Confirmation',
+  name: 'ConfirmationView',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;

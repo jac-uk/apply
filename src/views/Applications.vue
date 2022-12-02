@@ -139,7 +139,7 @@ import isVacancyOpen from '@/helpers/isVacancyOpen';
 import { isMoreInformationNeeded, isApplicationComplete, informationDeadline } from '@/helpers/exerciseHelper';
 
 export default {
-  name: 'Applications',
+  name: 'ApplicationsView',
   computed: {
     ...mapState('applications', ['records']),
     allVacancies() {

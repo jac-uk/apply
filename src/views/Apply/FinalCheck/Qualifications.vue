@@ -87,7 +87,7 @@
 
 <script>
 export default {
-  name: 'Qualifications',
+  name: 'QualificationsView',
   props: {
     application: {
       type: Object,

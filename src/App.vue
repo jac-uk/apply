@@ -5,7 +5,7 @@
       :load-failed="loadFailed"
     />
     <template v-else>
-      <Header v-if="!fullPageMode" />
+      <PageHeader v-if="!fullPageMode" />
 
       <main
         id="main-content"
@@ -38,7 +38,7 @@
         </div>
       </main>
 
-      <Footer
+      <PageFooter
         v-if="!fullPageMode"
       />
     </template>
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import Header from '@/components/Page/Header';
-import Footer from '@/components/Page/Footer';
+import PageHeader from '@/components/Page/Header';
+import PageFooter from '@/components/Page/Footer';
 import Banner from '@/components/Page/Banner';
 import LoadingMessage from '@/components/LoadingMessage';
 import Breadcrumb from '@/components/Breadcrumb.vue';
@@ -56,8 +56,8 @@ export default {
   name: 'App',
   components: {
     LoadingMessage,
-    Header,
-    Footer,
+    PageHeader,
+    PageFooter,
     Banner,
     Breadcrumb,
   },

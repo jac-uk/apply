@@ -4,7 +4,7 @@
       <span class="govuk-caption-xl govuk-!-padding-bottom-5 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
-      
+
       <RouterView />
     </div>
   </div>
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'Eligibility',
+  name: 'EligiblityView',
   computed: {
     vacancy () {
       return this.$store.state.vacancy.record;

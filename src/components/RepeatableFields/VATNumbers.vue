@@ -17,7 +17,7 @@
 import TextField from '@/components/Form/TextField';
 
 export default {
-  name: 'Addresses',
+  name: 'VATNumbers',
   components: {
     TextField,
   },

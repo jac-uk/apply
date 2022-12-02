@@ -44,7 +44,7 @@ import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
 
 export default {
-  name: 'Password',
+  name: 'PasswordComponent',
   components: {
     FormFieldError,
   },

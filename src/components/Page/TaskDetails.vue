@@ -19,7 +19,7 @@
         required
       />
 
-      <Select
+      <JACSelect
         :id="`${id}_working_basis`"
         v-model="localTaskDetails.workingBasis"
         :value="localTaskDetails.workingBasis"
@@ -33,7 +33,7 @@
         >
           {{ option | lookup }}
         </option>
-      </Select>
+      </JACSelect>
 
       <TextField
         v-if="['voluntary', 'fee-paid'].some(item => item === localTaskDetails.workingBasis)"
@@ -52,13 +52,13 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import FormField from '@/components/Form/FormField';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
+import JACSelect from '@jac-uk/jac-kit/draftComponents/Form/Select';
 
 export default {
   name: 'TaskDetails',
   components: {
     TextField,
-    Select,
+    JACSelect,
   },
   extends: FormField,
   props: {
@@ -104,7 +104,7 @@ export default {
       this.setError('');
       if (this.localTasks) {
         if (this.required && this.localTasks.length === 0) {
-          this.setError('Select at least one task you do in this role');
+          this.setError('JACSelect at least one task you do in this role');
         }
       }
     },

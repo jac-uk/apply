@@ -122,7 +122,7 @@
 import Search from '@/components/Search';
 
 export default {
-  name: 'Table',
+  name: 'TableComponent',
   components: {
     Search,
   },

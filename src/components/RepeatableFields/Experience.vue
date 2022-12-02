@@ -54,7 +54,7 @@ import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
 import TaskDetails from '@/components/Page/TaskDetails';
 
 export default {
-  name: 'Experience',
+  name: 'ExperienceComponent',
   components: {
     DateInput,
     TextField,
