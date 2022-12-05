@@ -81,8 +81,8 @@
       />
       <div v-else-if="row.completedPupillage === false">
         <RadioGroup
-          :id="qualificationNotCompleteReason"
-          v-model="row.qualificationNotCompleteReason"
+          :id="notCompletePupillageReason"
+          v-model="row.notCompletePupillageReason"
           label="Why you were exempt from pupillage (we may ask for a copy of your exemption or practicing certificate)?"
           required
         >
@@ -95,7 +95,7 @@
         </RadioGroup>
 
         <TextareaInput
-          v-if="row.qualificationNotCompleteReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER"
+          v-if="row.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER"
           :id="details"
           v-model="row.details"
           hint="Please provide details how you satisfy the ‘judicial-appointment eligibility condition’, set out in section 50 of the Tribunals, Courts and Enforcement Act 2007"
@@ -166,8 +166,8 @@ export default {
     completedPupillage() {
       return `qualification_completedPupillage_${this.index}`;
     },
-    qualificationNotCompleteReason() {
-      return `qualification_not_complete_reason_${this.index}`;
+    notCompletePupillageReason() {
+      return `qualification_not_complete_pupillage_reason_${this.index}`;
     },
   },
 };

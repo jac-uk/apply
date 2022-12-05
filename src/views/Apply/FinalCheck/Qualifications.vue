@@ -88,11 +88,11 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li v-if="item.qualificationNotCompleteReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
+            <li v-if="item.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
               {{ item.details }}
             </li>
             <li v-else>
-              {{ item.qualificationNotCompleteReason | lookup }}
+              {{ item.notCompletePupillageReason | lookup }}
             </li>
           </ul>
         </dd>
