@@ -56,8 +56,8 @@
       />
 
       <RadioGroup
-        :id="qualificationComplete"
-        v-model="row.qualificationComplete"
+        :id="completedPupillage"
+        v-model="row.completedPupillage"
         label="Have you completed pupillage?"
         required
       >
@@ -72,14 +72,14 @@
       </RadioGroup>
 
       <DateInput
-        v-if="row.qualificationComplete === true"
+        v-if="row.completedPupillage === true"
         :id="qualificationDate"
         v-model="row.date"
         label="When did you complete pupillage?"
         type="month"
         required
       />
-      <div v-else-if="row.qualificationComplete === false">
+      <div v-else-if="row.completedPupillage === false">
         <RadioGroup
           :id="qualificationNotCompleteReason"
           v-model="row.qualificationNotCompleteReason"
@@ -163,8 +163,8 @@ export default {
     details() {
       return `qualification_details_${this.index}`;
     },
-    qualificationComplete() {
-      return `qualification_qualificationComplete_${this.index}`;
+    completedPupillage() {
+      return `qualification_completedPupillage_${this.index}`;
     },
     qualificationNotCompleteReason() {
       return `qualification_not_complete_reason_${this.index}`;

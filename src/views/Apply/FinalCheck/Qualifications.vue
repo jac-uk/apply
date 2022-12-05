@@ -50,14 +50,14 @@
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
             <li>
-              {{ item.qualificationComplete | toYesNo }}
+              {{ item.completedPupillage | toYesNo }}
             </li>
           </ul>
         </dd>
       </div>
 
       <div
-        v-if="item.qualificationComplete && item.date"
+        v-if="item.completedPupillage && item.date"
         class="govuk-summary-list__row"
       >
         <dt
@@ -80,7 +80,7 @@
       </div>
 
       <div
-        v-if="!item.qualificationComplete && item.details"
+        v-if="!item.completedPupillage && item.details"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
