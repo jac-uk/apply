@@ -35,7 +35,7 @@ import FormField from '@/components/Form/FormField';
 import FormFieldError from '@/components/Form/FormFieldError';
 
 export default {
-  name: 'Currency',
+  name: 'CurrencyComponent',
   components: {
     FormFieldError,
   },
