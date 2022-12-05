@@ -58,15 +58,19 @@ export default {
             }
           }
     
-          const personalDetails = this.$store.getters['candidate/personalDetails']();
-          await this.$store.dispatch('application/save', {
+          const data = {
             status: 'draft',
             progress: { started: true },
-            personalDetails: {
+          };
+
+          const personalDetails = this.$store.getters['candidate/personalDetails']();
+          if (personalDetails) {
+            data.personalDetails = {
               fullName: personalDetails.fullName ? personalDetails.fullName : null,
               email: personalDetails.email ? personalDetails.email : null,
-            },
-          });
+            };
+          }
+          await this.$store.dispatch('application/save', data);
         }
         await this.$store.dispatch('applications/bind');
         this.loaded = true;
