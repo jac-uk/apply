@@ -3,7 +3,7 @@
     class="govuk-grid-row"
     style="margin: 0;"
   >
-    <div style="display: flex; flex-wrap: wrap; gap: 20px 44px; margin: 20px 0 64px 0;">
+    <div style="display: flex; flex-wrap: wrap; gap: 20px 44px; margin: 20px 0 60px 0;">
       <div>
         <a
           class="govuk-back-link"
@@ -45,7 +45,7 @@
       </nav>
     </div>
 
-    <div class="govuk-grid-column-two-thirds">
+    <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-9">
       <div id="overview">
         <h2 class="govuk-heading-l">
           Overview of the role
@@ -103,7 +103,7 @@
         </p>
         <p
           v-if="vacancy.exerciseMailbox"
-          class="govuk-!-margin-bottom-8"
+          class="govuk-!-margin-bottom-6"
         >
           <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
           <a
@@ -197,9 +197,9 @@
         </p>
 
         <div
-          class="jac-related-items"
+          class="jac-related-items govuk-!-margin-top-9"
           role="complementary"
-          style="margin-top: 64px; padding: 32px 20px; background-color: #F3F2EE;"
+          style="padding: 30px 20px; background-color: #F3F2EE;"
         >
           <h2 class="govuk-heading-m">
             Relevant information (downloads):
@@ -210,7 +210,7 @@
           >
             <ul
               v-if="vacancy.downloads"
-              class="govuk-list govuk-!-font-size-16"
+              class="govuk-list govuk-!-font-size-16 govuk-!-margin-bottom-0"
             >
               <li
                 v-for="file in vacancy.downloads.jobDescriptions"
@@ -290,7 +290,7 @@
       <div
         v-if="timeline.length && advertTypeFull"
         id="timeline"
-        style="margin-top: 64px;"
+        class="govuk-!-margin-top-9"
       >
         <h2 class="govuk-heading-l">
           Timeline

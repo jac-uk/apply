@@ -292,53 +292,57 @@
                       >Sign up</a> for an alert about this exercise
                     </p>
 
-                    <div v-if="vacancy.welshPosts">
+                    <div
+                      v-if="vacancy.welshPosts"
+                      class="govuk-!-margin-top-4"
+                    >
                       <hr style="height: 0.5px; border: 0; background: #b1b4b6; margin: 0;">
                       <CustomHTML
                         v-if="vacancy.roleSummaryWelsh"
                         :value="vacancy.roleSummaryWelsh"
                         style="margin-top: 20px;"
                       />
-                      <p>
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
+                      <div style="margin-top: 20px;">
+                        <p style="margin: 0; line-height: 28px;">
+                          <span class="govuk-body govuk-!-font-weight-bold">
+                            Dyddiad lansio:
+                          </span>
+                          <span
+                            v-if="vacancy.applicationOpenDate"
+                            class="govuk-body"
+                          >
+                            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+                          </span>
+                          <span
+                            v-else
+                            class="govuk-body"
+                          >
+                            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                          </span>
+                        </p>
+                        <p
+                          v-if="vacancy.applicationCloseDate"
+                          style="margin: 0; line-height: 28px;"
                         >
-                          Dyddiad lansio:
-                        </span>
-                        <span
-                          v-if="vacancy.applicationOpenDate"
-                          class="govuk-body"
+                          <span class="govuk-body govuk-!-font-weight-bold">
+                            Dyddiad cau:
+                          </span>
+                          <span class="govuk-body">
+                            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+                          </span>
+                        </p>
+                        <p
+                          v-if="activeTab === 'future' && vacancy.subscriberAlertsUrl"
+                          class="govuk-body govuk-!-margin-top-4"
+                          style="margin: 0;"
                         >
-                          {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-                        </span>
-                        <span
-                          v-else
-                          class="govuk-body"
-                        >
-                          {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-                        </span>
-                      </p>
-                      <p v-if="vacancy.applicationCloseDate">
-                        <span
-                          class="govuk-body govuk-!-font-weight-bold"
-                        >
-                          Dyddiad cau:
-                        </span>
-                        <span class="govuk-body">
-                          {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-                        </span>
-                      </p>
-                      <p
-                        v-if="activeTab === 'future' && vacancy.subscriberAlertsUrl"
-                        class="govuk-body govuk-!-margin-top-4"
-                        style="margin: 0;"
-                      >
-                        <a
-                          class="govuk-link govuk-body"
-                          :href="vacancy.subscriberAlertsUrl"
-                          target="_blank"
-                        >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
-                      </p>
+                          <a
+                            class="govuk-link govuk-body"
+                            :href="vacancy.subscriberAlertsUrl"
+                            target="_blank"
+                          >Ymunwch</a> os ydych am gael rhybudd am y swyddi uchod
+                        </p>
+                      </div>
                     </div>
 
                     <RouterLink
