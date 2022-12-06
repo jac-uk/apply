@@ -66,12 +66,35 @@ export default {
           title: item.meta.title ? item.meta.title : breadcrumbName,
           isLastItem: isLastItem,
         });
+
+        const hash = this.$route.hash;
+        if (combinedPath === '/vacancies' && hash) {
+          items.push({
+            href: `${combinedPath}#${hash}`,
+            title: this.getVacanciesTitle(hash),
+            isLastItem: true,
+          });
+        }
       });
       return items;
     },
   },
   methods: {
     capitalize,
+    getVacanciesTitle(hash) {
+      let title = '';
+      switch (hash) {
+      case '#future':
+        title = 'Future applications';
+        break;
+      case '#closed':
+        title = 'Closed for applications';
+        break;
+      default:
+        title = 'Open for applications';
+      }
+      return title;
+    },
   },
 };
 </script>
