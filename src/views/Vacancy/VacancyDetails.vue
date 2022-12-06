@@ -170,9 +170,9 @@
             class="govuk-button govuk-button--secondary"
             data-module="govuk-button"
             style="margin-bottom: 0;"
-            @click="toggleExpandAllInformation(true)"
+            @click="toggleExpandAllInformation()"
           >
-            Expand all information
+            {{ isExpandAllInformation ? 'Collapse the information' : 'Expand all information' }}
           </button>
 
           <button
@@ -297,12 +297,11 @@
         </h2>
         <Timeline :data="timeline" />
         <a
-          v-if="!sections.isExpandTimeline"
           href="#" 
           class="govuk-link"
           @click.prevent="toggleExpandTimeline"
         >
-          View more...
+          {{ sections.isExpandTimeline ? 'View less' : 'View more...' }}
         </a>
       </div>
 
@@ -319,12 +318,11 @@
           :class="{ 'line-clamp': !sections.isExpandDescription }"
         />
         <a
-          v-if="!sections.isExpandDescription"
           href="#" 
           class="govuk-link"
           @click.prevent="toggleExpandDescription"
         >
-          View more...
+          {{ sections.isExpandDescription ? 'View less' : 'View more...' }}
         </a>
       </div>
     </div>
@@ -349,6 +347,7 @@ export default {
   data() {
     return {
       isVacancyOpen: false,
+      isExpandAllInformation: false,
       sections: {
         isExpandTimeline: false,
         isExpandDescription: false,
@@ -436,11 +435,11 @@ export default {
     isSideNavigationActive(item, index) {
       return (!this.$route.hash && index === 0) || (this.$route.hash === item.hash);
     },
-    toggleExpandAllInformation(isExpand) {
-      Object.keys(this.sections).forEach(key => {
-        this.sections[key] = isExpand;
-      });
+    toggleExpandAllInformation() {
       this.isExpandAllInformation = !this.isExpandAllInformation;
+      Object.keys(this.sections).forEach(key => {
+        this.sections[key] = this.isExpandAllInformation;
+      });
     },
     toggleExpandTimeline() {
       this.sections.isExpandTimeline = !this.sections.isExpandTimeline;
