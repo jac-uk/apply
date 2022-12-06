@@ -106,7 +106,6 @@
           class="govuk-!-margin-bottom-8"
         >
           <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
-          <br>
           <a
             :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
             class="govuk-body govuk-link"
@@ -298,6 +297,7 @@
         </h2>
         <Timeline :data="timeline" />
         <a
+          v-if="!sections.isExpandTimeline"
           href="#" 
           class="govuk-link"
           @click.prevent="toggleExpandTimeline"
@@ -316,7 +316,16 @@
         <CustomHTML
           :value="vacancy.aboutTheRole"
           class="govuk-body"
+          :class="{ 'line-clamp': !sections.isExpandDescription }"
         />
+        <a
+          v-if="!sections.isExpandDescription"
+          href="#" 
+          class="govuk-link"
+          @click.prevent="toggleExpandDescription"
+        >
+          View more...
+        </a>
       </div>
     </div>
   </div>
@@ -344,8 +353,6 @@ export default {
         isExpandTimeline: false,
         isExpandDescription: false,
       },
-      isExpandAllInformation: true,
-      isExpandTimeline: false,
     };
   },
   computed: {
@@ -374,7 +381,7 @@ export default {
     timeline() {
       const timeline = exerciseTimeline(this.vacancy);
       const timelines = createTimeline(timeline);
-      return this.isExpandTimeline ? timelines : timelines.slice(0, 2);
+      return this.sections.isExpandTimeline ? timelines : timelines.slice(0, 2);
     },
     invitations() {
       return this.$store.state.invitations.records;
@@ -466,5 +473,12 @@ export default {
   .btn-group {
     flex-direction: column;
   }
+}
+
+.line-clamp {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;  
+  overflow: hidden;
 }
 </style>
