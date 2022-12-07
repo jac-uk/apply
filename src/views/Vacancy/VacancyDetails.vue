@@ -4,7 +4,7 @@
     style="margin: 0;"
   >
     <div style="display: flex; flex-wrap: wrap; gap: 20px 44px; margin: 20px 0 60px 0;">
-      <div>
+      <div class="print-none">
         <a
           class="govuk-back-link"
           style="margin: 0; cursor: pointer;"
@@ -21,7 +21,7 @@
       </h1>
     </div>
 
-    <div class="govuk-grid-column-one-third">
+    <div class="govuk-grid-column-one-third print-none">
       <nav
         class="moj-side-navigation"
         aria-label="Side navigation"
@@ -187,7 +187,7 @@
 
         <p
           v-if="showSubscribeForAlerts"
-          class="govuk-body"
+          class="govuk-body print-none"
         >
           <a
             class="govuk-link"
@@ -298,7 +298,7 @@
         <Timeline :data="timeline" />
         <a
           href="#" 
-          class="govuk-link"
+          class="govuk-link print-none"
           @click.prevent="toggleExpandTimeline"
         >
           {{ sections.isExpandTimeline ? 'View less' : 'View more' }}
@@ -319,7 +319,7 @@
         />
         <a
           href="#" 
-          class="govuk-link"
+          class="govuk-link print-none"
           @click.prevent="toggleExpandDescription"
         >
           {{ sections.isExpandDescription ? 'View less' : 'View more' }}
@@ -448,6 +448,9 @@ export default {
       this.sections.isExpandDescription = !this.sections.isExpandDescription;
     },
     print() {
+      if (!this.isExpandAllInformation) {
+        this.toggleExpandAllInformation();
+      }
       window.print();
     },
   },
@@ -457,7 +460,9 @@ export default {
 <style scoped>
 .btn-group {
   display: flex;
-  gap: 20px;
+}
+.btn-group > *:not(:first-child) {
+  margin-left: 20px;
 }
 
 .btn-outline {
@@ -471,6 +476,10 @@ export default {
 @media only screen and (max-width: 640px) {
   .btn-group {
     flex-direction: column;
+  }
+  .btn-group > *:not(:first-child) {
+    margin-left: 0;
+    margin-top: 20px;
   }
 }
 

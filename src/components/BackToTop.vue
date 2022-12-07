@@ -1,5 +1,5 @@
 <template>
-  <div class="back-to-top-wrapper">
+  <div class="back-to-top-wrapper print-none">
     <button
       class="btn-back-to-top"
       @click="backToTop"
