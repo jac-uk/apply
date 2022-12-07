@@ -53,7 +53,7 @@
 
         <CustomHTML
           :value="vacancy.roleSummary"
-          class="govuk-body govuk-!-font-weight-bold"
+          class="govuk-body"
         />
 
         <p>
@@ -165,15 +165,6 @@
           >
             You've been invited to this exercise, click here to apply
           </RouterLink>
-
-          <button
-            class="govuk-button govuk-button--secondary"
-            data-module="govuk-button"
-            style="margin-bottom: 0;"
-            @click="toggleExpandAllInformation()"
-          >
-            {{ isExpandAllInformation ? 'Collapse all information' : 'Expand all information' }}
-          </button>
 
           <button
             class="govuk-button govuk-button--secondary"
@@ -301,29 +292,33 @@
           class="govuk-link print-none"
           @click.prevent="toggleExpandTimeline"
         >
-          {{ sections.isExpandTimeline ? 'View less' : 'View more' }}
+          {{ isExpandTimeline ? 'View less' : 'View more' }}
         </a>
       </div>
 
       <div
-        id="description"
+        id="about-the-role"
         class="govuk-!-margin-top-9"
       >
         <h2 class="govuk-heading-l">
-          Description
+          About the role
         </h2>
         <CustomHTML
           :value="vacancy.aboutTheRole"
           class="govuk-body"
-          :class="{ 'line-clamp': !sections.isExpandDescription }"
         />
-        <a
-          href="#" 
-          class="govuk-link print-none"
-          @click.prevent="toggleExpandDescription"
+      </div>
+
+      <div class="btn-group govuk-!-margin-top-9">
+        <RouterLink
+          v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+          class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
+          style="margin-bottom: 0;"
+          data-module="govuk-button"
+          :to="{ name: 'eligibility' }"
         >
-          {{ sections.isExpandDescription ? 'View less' : 'View more' }}
-        </a>
+          Apply
+        </RouterLink>
       </div>
     </div>
   </div>
@@ -347,11 +342,7 @@ export default {
   data() {
     return {
       isVacancyOpen: false,
-      isExpandAllInformation: false,
-      sections: {
-        isExpandTimeline: false,
-        isExpandDescription: false,
-      },
+      isExpandTimeline: false,
     };
   },
   computed: {
@@ -371,8 +362,8 @@ export default {
       }
       
       list.push({
-        title: 'Description',
-        hash: '#description',
+        title: 'About the role',
+        hash: '#about-the-role',
       });
       return list;
     },
@@ -385,7 +376,7 @@ export default {
     timeline() {
       const timeline = exerciseTimeline(this.vacancy);
       const timelines = createTimeline(timeline);
-      return this.sections.isExpandTimeline ? timelines : timelines.slice(0, 2);
+      return this.isExpandTimeline ? timelines : timelines.slice(0, 2);
     },
     invitations() {
       return this.$store.state.invitations.records;
@@ -440,21 +431,12 @@ export default {
     isSideNavigationActive(item, index) {
       return (!this.$route.hash && index === 0) || (this.$route.hash === item.hash);
     },
-    toggleExpandAllInformation() {
-      this.isExpandAllInformation = !this.isExpandAllInformation;
-      Object.keys(this.sections).forEach(key => {
-        this.sections[key] = this.isExpandAllInformation;
-      });
-    },
     toggleExpandTimeline() {
-      this.sections.isExpandTimeline = !this.sections.isExpandTimeline;
-    },
-    toggleExpandDescription() {
-      this.sections.isExpandDescription = !this.sections.isExpandDescription;
+      this.isExpandTimeline = !this.isExpandTimeline;
     },
     print() {
-      if (!this.isExpandAllInformation) {
-        this.toggleExpandAllInformation();
+      if (!this.isExpandTimeline) {
+        this.toggleExpandTimeline();
       }
       window.print();
     },

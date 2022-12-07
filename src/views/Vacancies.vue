@@ -527,7 +527,7 @@ export default {
 .tag {
   display: flex;
   align-items: center;
-  padding: 5px 8px 4px;
+  padding: 5px 8px 0;
   background: #EEEFEF;
   color: #383F43;
 }
