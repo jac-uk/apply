@@ -181,8 +181,8 @@
                       <img
                         src="@/assets/location.svg"
                         alt="Location"
-                        width="24"
-                        height="24"
+                        width="18"
+                        height="18"
                       >
                       <span
                         class="govuk-body"
@@ -354,10 +354,7 @@
                       Vacancy details
                     </RouterLink>
 
-                    <hr
-                      v-if="index !== filterVacancies.length - 1"
-                      style="height: 1px; border: 0; background: #b1b4b6;"
-                    >
+                    <hr style="height: 1px; border: 0; background: #b1b4b6;">
                   </li>
                 </ul>
               </div>
