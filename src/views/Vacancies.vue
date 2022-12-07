@@ -154,14 +154,14 @@
                   >
                     <RouterLink
                       v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
-                      class="govuk-link govuk-!-font-weight-bold"
+                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
                       :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
                     >
                       {{ vacancy.name }}
                     </RouterLink>
                     <a
                       v-else-if="vacancy.externalLink"
-                      class="govuk-link govuk-!-font-weight-bold"
+                      class="govuk-link govuk-heading-m govuk-!-font-weight-bold"
                       :href="vacancy.externalLink"
                       target="_blank"
                     >
@@ -169,7 +169,7 @@
                     </a>
                     <span
                       v-else
-                      class="govuk-!-font-weight-bold"
+                      class="govuk-heading-m govuk-!-font-weight-bold"
                     >
                       {{ vacancy.name }}
                     </span>
