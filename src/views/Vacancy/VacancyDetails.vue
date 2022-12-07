@@ -172,7 +172,7 @@
             style="margin-bottom: 0;"
             @click="toggleExpandAllInformation()"
           >
-            {{ isExpandAllInformation ? 'Collapse the information' : 'Expand all information' }}
+            {{ isExpandAllInformation ? 'Collapse all information' : 'Expand all information' }}
           </button>
 
           <button
@@ -301,7 +301,7 @@
           class="govuk-link"
           @click.prevent="toggleExpandTimeline"
         >
-          {{ sections.isExpandTimeline ? 'View less' : 'View more...' }}
+          {{ sections.isExpandTimeline ? 'View less' : 'View more' }}
         </a>
       </div>
 
@@ -322,7 +322,7 @@
           class="govuk-link"
           @click.prevent="toggleExpandDescription"
         >
-          {{ sections.isExpandDescription ? 'View less' : 'View more...' }}
+          {{ sections.isExpandDescription ? 'View less' : 'View more' }}
         </a>
       </div>
     </div>
