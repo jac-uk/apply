@@ -356,20 +356,25 @@ export default {
   },
   computed: {
     sideNavigation() {
-      return [
+      const list = [
         {
           title: 'Overview of the role',
           hash: '#overview',
         },
-        {
+      ];
+
+      if (this.timeline.length && this.advertTypeFull) {
+        list.push({
           title: 'Timeline',
           hash: '#timeline',
-        },
-        {
-          title: 'Description',
-          hash: '#description',
-        },
-      ];
+        });
+      }
+      
+      list.push({
+        title: 'Description',
+        hash: '#description',
+      });
+      return list;
     },
     vacancy () {
       return this.$store.state.vacancy.record;
