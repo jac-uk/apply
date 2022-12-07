@@ -489,4 +489,11 @@ export default {
   -webkit-box-orient: vertical;  
   overflow: hidden;
 }
+
+@media print {
+  a[href]::after {
+    display: none;
+    visibility: hidden;
+  }
+}
 </style>
