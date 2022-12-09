@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      v-if="application.employmentGaps.length"
+      v-if="hasEmploymentGaps"
     >
       <dl
         v-for="item in application.employmentGaps"
@@ -45,7 +45,7 @@
           <dt class="govuk-summary-list__key">
             Law-related tasks
           </dt>
-          <dd 
+          <dd
             v-if="item.tasks && item.tasks.length"
             class="govuk-summary-list__value"
           >
@@ -67,7 +67,7 @@
               </li>
             </ul>
           </dd>
-          <dd 
+          <dd
             v-else
             class="govuk-summary-list__value"
           >
@@ -95,6 +95,11 @@ export default {
     isLegal: {
       type: Boolean,
       required: true,
+    },
+  },
+  computed: {
+    hasEmploymentGaps() {
+      return this.application.employmentGaps && this.application.employmentGaps.length;
     },
   },
 };
