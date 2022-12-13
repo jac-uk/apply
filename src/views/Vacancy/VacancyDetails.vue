@@ -37,7 +37,7 @@
             <a
               class="govuk-link"
               href="#"
-              @click.prevent="e => onSideNavLinkClick(e, item.id)"
+              @click.prevent="onSideNavLinkClick(item.id)"
             >
               {{ item.title }}
             </a>
@@ -430,13 +430,12 @@ export default {
     }
   },
   methods: {
-    onSideNavLinkClick(e, id) {
+    onSideNavLinkClick(id) {
       if (this.$refs[id]) {
         this.$refs[id].scrollIntoView({
           behavior: 'smooth',
         });
         this.activeSideNavLink = id;
-        e.target.blur();
       }
     },
     isSideNavigationActive(item, index) {
