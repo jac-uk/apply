@@ -30,13 +30,14 @@
         <ul class="moj-side-navigation__list">
           <li
             v-for="(item, index) in sideNavigation"
-            :key="item.hash"
+            :key="item.id"
             class="moj-side-navigation__item"
             :class="isSideNavigationActive(item, index) ? 'moj-side-navigation__item--active' : null"
           >
             <a
               class="govuk-link"
-              :href="`${$route.path}${item.hash}`"
+              href="#"
+              @click.prevent="onSideNavLinkClick(item.id)"
             >
               {{ item.title }}
             </a>
@@ -46,7 +47,7 @@
     </div>
 
     <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-9">
-      <div id="overview">
+      <div ref="overview">
         <h2 class="govuk-heading-l">
           Overview of the role
         </h2>
@@ -280,7 +281,7 @@
 
       <div
         v-if="timeline.length && advertTypeFull"
-        id="timeline"
+        ref="timeline"
         class="govuk-!-margin-top-9"
       >
         <h2 class="govuk-heading-l">
@@ -297,7 +298,7 @@
       </div>
 
       <div
-        id="about-the-role"
+        ref="about-the-role"
         class="govuk-!-margin-top-9"
       >
         <h2 class="govuk-heading-l">
@@ -341,6 +342,7 @@ export default {
   },
   data() {
     return {
+      activeSideNavLink: 'overview',
       isVacancyOpen: false,
       isExpandTimeline: false,
     };
@@ -349,21 +351,21 @@ export default {
     sideNavigation() {
       const list = [
         {
+          id: 'overview',
           title: 'Overview of the role',
-          hash: '#overview',
         },
       ];
 
       if (this.timeline.length && this.advertTypeFull) {
         list.push({
+          id: 'timeline',
           title: 'Timeline',
-          hash: '#timeline',
         });
       }
       
       list.push({
+        id: 'about-the-role',
         title: 'About the role',
-        hash: '#about-the-role',
       });
       return list;
     },
@@ -428,8 +430,16 @@ export default {
     }
   },
   methods: {
+    onSideNavLinkClick(id) {
+      if (this.$refs[id]) {
+        this.$refs[id].scrollIntoView({
+          behavior: 'smooth',
+        });
+        this.activeSideNavLink = id;
+      }
+    },
     isSideNavigationActive(item, index) {
-      return (!this.$route.hash && index === 0) || (this.$route.hash === item.hash);
+      return (!this.activeSideNavLink && index === 0) || (this.activeSideNavLink === item.id);
     },
     toggleExpandTimeline() {
       this.isExpandTimeline = !this.isExpandTimeline;
