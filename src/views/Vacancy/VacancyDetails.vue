@@ -178,7 +178,7 @@
 
         <p
           v-if="showSubscribeForAlerts"
-          class="govuk-body print-none"
+          class="govuk-body govuk-!-margin-top-6 print-none"
         >
           <a
             class="govuk-link"
