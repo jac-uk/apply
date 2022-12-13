@@ -346,7 +346,6 @@
                     </div>
 
                     <RouterLink
-                      v-if="vacancy.aboutTheRole && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
                       class="govuk-button"
                       style="margin: 30px 0;"
                       :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
@@ -364,13 +363,15 @@
               v-if="!isSignedIn"
               style="margin: 64px 0 44px 0;"
             >
-              <RouterLink
+              <a
+                rel="noopener noreferrer"
                 class="govuk-link govuk-body-l"
                 style="display: inline-block;"
-                :to="{ name: 'sign-up' }"
+                href="https://judicialappointments.gov.uk/sign-up-for-judging-your-future-newsletter/"
+                target="_blank"
               >
                 Sign up
-              </RouterLink>
+              </a>
               <span class="govuk-body-l">
                 for our monthly e-newsletter and keep updated about open and forthcoming exercises.
               </span>
