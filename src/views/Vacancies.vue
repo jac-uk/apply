@@ -259,7 +259,7 @@
                           v-if="vacancy.applicationOpenDate"
                           class="govuk-body"
                         >
-                          {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+                          {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
                         </span>
                         <span
                           v-else
@@ -276,7 +276,7 @@
                           Closing Date:
                         </span>
                         <span class="govuk-body">
-                          {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+                          {{ vacancy.applicationCloseDate | formatDate('datetime-without-second') }}
                         </span>
                       </p>
                     </div>

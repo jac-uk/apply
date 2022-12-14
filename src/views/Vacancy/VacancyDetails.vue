@@ -65,7 +65,7 @@
             v-if="vacancy.applicationOpenDate"
             class="govuk-body"
           >
-            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+            {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
           </span>
           <span
             v-else-if="vacancy.estimatedLaunchDate"
