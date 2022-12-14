@@ -43,26 +43,73 @@
         label="Scotland"
       />
     </RadioGroup>
-    <DateInput
-      :id="qualificationDate"
-      v-model="row.date"
-      :label="row.type==='barrister'?'When did you complete pupillage?':'When did you qualify?'"
-      type="month"
-    />
 
     <div
       v-if="row.type === 'barrister'"
     >
-      <Checkbox
-        :id="qualificationNotComplete"
-        v-model="row.qualificationNotComplete"
-        label="I did not complete pupillage"
+      <DateInput
+        :id="calledToBarDate"
+        v-model="row.calledToBarDate"
+        label="When were you called to the Bar?"
+        type="month"
+        required
       />
-      <TextareaInput
-        v-if="row.qualificationNotComplete"
-        :id="details"
-        v-model="row.details"
-        hint="Please provide some additional information"
+
+      <RadioGroup
+        :id="completedPupillage"
+        v-model="row.completedPupillage"
+        label="Have you completed pupillage?"
+        required
+      >
+        <RadioItem
+          :value="true"
+          label="Yes"
+        />
+        <RadioItem
+          :value="false"
+          label="No"
+        />
+      </RadioGroup>
+
+      <DateInput
+        v-if="row.completedPupillage === true"
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you complete pupillage?"
+        type="month"
+        required
+      />
+      <div v-else-if="row.completedPupillage === false">
+        <RadioGroup
+          :id="notCompletePupillageReason"
+          v-model="row.notCompletePupillageReason"
+          label="Why you were exempt from pupillage (we may ask for a copy of your exemption or practicing certificate)?"
+          required
+        >
+          <RadioItem
+            v-for="option in NOT_COMPLETE_PUPILLAGE_REASONS"
+            :key="option"
+            :value="option"
+            :label="option | lookup"
+          />
+        </RadioGroup>
+
+        <TextareaInput
+          v-if="row.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER"
+          :id="details"
+          v-model="row.details"
+          hint="Please provide details how you satisfy the ‘judicial-appointment eligibility condition’, set out in section 50 of the Tribunals, Courts and Enforcement Act 2007"
+          required
+        />
+      </div>
+    </div>
+    
+    <div v-else>
+      <DateInput
+        :id="qualificationDate"
+        v-model="row.date"
+        label="When did you qualify?"
+        type="month"
       />
     </div>
 
@@ -72,16 +119,15 @@
 
 <script>
 import RadioGroup from '@/components/Form/RadioGroup';
-import Checkbox from '@/components/Form/Checkbox';
 import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
+import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
 
 export default {
   name: 'Qualification',
   components: {
     RadioGroup,
-    Checkbox,
     RadioItem,
     DateInput,
     TextareaInput,
@@ -96,6 +142,11 @@ export default {
       type: Number,
     },
   },
+  data() {
+    return {
+      NOT_COMPLETE_PUPILLAGE_REASONS,
+    };
+  },
   computed: {
     qualificationType() {
       return `qualification_type_${this.index}`;
@@ -103,14 +154,20 @@ export default {
     qualificationLocation() {
       return `qualification_location_${this.index}`;
     },
+    calledToBarDate() {
+      return `qualification_calledToBar_date_${this.index}`;
+    },
     qualificationDate() {
       return `qualification_date_${this.index}`;
     },
     details() {
       return `qualification_details_${this.index}`;
     },
-    qualificationNotComplete() {
-      return `qualification_qualificationNotComplete_${this.index}`;
+    completedPupillage() {
+      return `qualification_completedPupillage_${this.index}`;
+    },
+    notCompletePupillageReason() {
+      return `qualification_not_complete_pupillage_reason_${this.index}`;
     },
   },
 };
