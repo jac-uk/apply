@@ -62,6 +62,11 @@ const ASSESSOR_TYPES = {
   PERSONAL: 'personal',
 };
 
+const LANGUAGES = {
+  ENGLISH: 'eng',
+  WELSH: 'cym',
+};
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -71,5 +76,6 @@ export {
   WELSH_POSTS_CONTACT_MAILBOX,
   WELSH_POSTS_EMAIL_SUBJECT,
   RECAPTCHA_ACTIONS,
-  ASSESSOR_TYPES
+  ASSESSOR_TYPES,
+  LANGUAGES
 };

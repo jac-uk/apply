@@ -34,6 +34,27 @@
             </Banner>
           </div>
           <Breadcrumb />
+
+          <div
+            v-if="$route.meta.isMultilanguage && isWelshPosts"
+            style="display: flex; justify-content: flex-end; gap: 10px;"
+          >
+            <button
+              class="govuk-button govuk-button--secondary"
+              :class="{ 'govuk-button--success': language === LANGUAGES.ENGLISH }"
+              @click="setLanguage(LANGUAGES.ENGLISH)"
+            >
+              {{ LANGUAGES.ENGLISH | lookup }}
+            </button>
+            <button
+              class="govuk-button govuk-button--secondary"
+              :class="{ 'govuk-button--success': language === LANGUAGES.WELSH }"
+              @click="setLanguage(LANGUAGES.WELSH)"
+            >
+              {{ LANGUAGES.WELSH | lookup }}
+            </button>
+          </div>
+
           <RouterView />
         </div>
       </main>
@@ -51,6 +72,8 @@ import Footer from '@/components/Page/Footer';
 import Banner from '@/components/Page/Banner';
 import LoadingMessage from '@/components/LoadingMessage';
 import Breadcrumb from '@/components/Breadcrumb.vue';
+import { updateLangToTextNode } from '@/helpers/language';
+import { LANGUAGES } from '@/helpers/constants';
 
 export default {
   name: 'App',
@@ -65,9 +88,13 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      LANGUAGES,
     };
   },
   computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
     fullPageMode() {
       return this.$route.meta.fullPageMode;
     },
@@ -76,6 +103,9 @@ export default {
     },
     vacancies() {
       return this.$store.getters['vacancies/openVacancies'];
+    },
+    isWelshPosts() {
+      return this.$store.getters['vacancy/isWelshPosts'];
     },
     validInvitations() {
       const result = [];
@@ -128,6 +158,19 @@ export default {
     } catch {
       this.loadFailed = true;
     }
+  },
+  updated: async function() {
+    if (this.$route.meta.isMultilanguage) {
+      setTimeout(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      }, 0);
+    }
+  },
+  methods: {
+    setLanguage(lang) {
+      this.$store.dispatch('application/setLanguage', lang);
+      updateLangToTextNode(document.querySelector('#main-content'), lang);
+    },
   },
 };
 </script>

@@ -10,6 +10,7 @@
 
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
+import { LANGUAGES } from '@/helpers/constants';
 
 export default {
   name: 'Apply',
@@ -25,6 +26,9 @@ export default {
   computed: {
     vacancyId() {
       return this.$route.params.id;
+    },
+    language() {
+      return this.$store.state.application.language;
     },
   },
   async mounted() {
@@ -63,6 +67,10 @@ export default {
             status: 'draft',
             progress: { started: true },
           };
+
+          if (this.language === LANGUAGES.WELSH) {
+            data['_language'] = LANGUAGES.WELSH;
+          }
 
           const personalDetails = this.$store.getters['candidate/personalDetails']();
           if (personalDetails) {

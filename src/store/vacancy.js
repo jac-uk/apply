@@ -45,6 +45,8 @@ export default {
       if (closeDate === null) return null;
       return new Date(closeDate);
     },
-
+    isWelshPosts: (state) => {
+      return state.record ? state.record.welshPosts : false;
+    },
   },
 };

@@ -1,4 +1,4 @@
-import { QUALIFYING_TEST, ASSESSOR_TYPES } from '@/helpers/constants';
+import { QUALIFYING_TEST, ASSESSOR_TYPES, LANGUAGES } from '@/helpers/constants';
 
 const capitalize = (value) => {
   if (!value) return '';
@@ -298,6 +298,9 @@ const lookup = (value) => {
     lookup[ASSESSOR_TYPES.PROFESSIONAL] = 'Professional assessor';
     lookup[ASSESSOR_TYPES.JUDICIAL] = 'Judicial assessor';
     lookup[ASSESSOR_TYPES.PERSONAL] = 'Personal assessor';
+
+    lookup[LANGUAGES.ENGLISH] = 'English';
+    lookup[LANGUAGES.WELSH] = 'Cymraeg';
 
     return lookup[value] || value;
   }

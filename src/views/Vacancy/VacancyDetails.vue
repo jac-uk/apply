@@ -104,6 +104,14 @@
       >
         Apply
       </RouterLink>
+      <a
+        v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+        class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
+        data-module="govuk-button"
+        @click.prevent="applyInWelsh"
+      >
+        Apply in Welsh
+      </a>
 
       <RouterLink
         v-else-if="userIsInvited && hasOpenInvite"
@@ -224,7 +232,7 @@ import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink';
-import { ADVERT_TYPES } from '@/helpers/constants';
+import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
@@ -298,6 +306,12 @@ export default {
         self.isVacancyOpen = self.$store.getters['vacancy/isOpen']();
       }, 60 * 1000);
     }
+  },
+  methods: {
+    applyInWelsh() {
+      this.$store.dispatch('application/setLanguage', LANGUAGES.WELSH);
+      this.$router.push({ name: 'eligibility' });
+    },
   },
 };
 </script>

@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { updateLangToTextNode } from '@/helpers/language';
+
 export default {
   name: 'Form',
   data() {
@@ -10,6 +12,11 @@ export default {
       errorObject: {},
       errors: [],
     };
+  },
+  computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
   },
   mounted: function () {
     this.$root.$on('handle-error', this.handleError);
@@ -32,6 +39,12 @@ export default {
         if (this.errorObject[item]) {
           this.errors.push({ id: item, message: this.errorObject[item] });
         }
+      }
+      
+      if (!this.isValid()) {
+        setTimeout(() => {
+          updateLangToTextNode(document.querySelector('#main-content'), this.language);
+        }, 0);
       }
     },
     isValid() {

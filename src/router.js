@@ -169,6 +169,7 @@ const router = new Router({
               name: 'eligibility',
               meta: {
                 title: 'Eligibility Check',
+                isMultilanguage: true,
               },
             },
             {
@@ -177,6 +178,7 @@ const router = new Router({
               name: 'eligibility-pass',
               meta: {
                 title: 'Eligibility Pass',
+                isMultilanguage: true,
               },
             },
             {
@@ -185,6 +187,7 @@ const router = new Router({
               name: 'eligibility-fail',
               meta: {
                 title: 'Eligibility Fail',
+                isMultilanguage: true,
               },
             },
           ],
@@ -199,6 +202,7 @@ const router = new Router({
               name: 'GDPR',
               meta: {
                 title: 'GDPR Check',
+                isMultilanguage: true,
               },
             },
           ],
@@ -288,6 +292,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Apply for a role task list',
+            isMultilanguage: true,
           },
         },
         {
@@ -297,6 +302,7 @@ const router = new Router({
             requiresAuth: true,
             title: 'Character information',
             breadcrumbRoute: 'character-information-review',
+            isMultilanguage: true,
           },
           component: MainCharacterInformation,
           children: [
@@ -307,6 +313,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information',
+                isMultilanguage: true,
               },
             },
             {
@@ -316,6 +323,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Declaration',
+                isMultilanguage: true,
               },
             },
             {
@@ -325,6 +333,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Criminal offences',
+                isMultilanguage: true,
               },
             },
             {
@@ -334,6 +343,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Fixed penalty notices',
+                isMultilanguage: true,
               },
             },
             {
@@ -343,6 +353,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Motoring offences',
+                isMultilanguage: true,
               },
             },
             {
@@ -352,6 +363,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Financial matters',
+                isMultilanguage: true,
               },
             },
             {
@@ -361,6 +373,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Professional conduct',
+                isMultilanguage: true,
               },
             },
             {
@@ -370,6 +383,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Further information',
+                isMultilanguage: true,
               },
             },
             {
@@ -379,6 +393,7 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Character information | Review',
+                isMultilanguage: true,
               },
             },
           ],
@@ -390,6 +405,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Take the equality and diversity survey',
+            isMultilanguage: true,
           },
         },
         {
@@ -399,6 +415,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Pre-application judicial education',
+            isMultilanguage: true,
           },
         },
         {
@@ -408,6 +425,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Personal details',
+            isMultilanguage: true,
           },
         },
         {
@@ -417,6 +435,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Give independent assessors details',
+            isMultilanguage: true,
           },
         },
         {
@@ -426,6 +445,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Give Leadership Judge details',
+            isMultilanguage: true,
           },
         },
         {
@@ -435,6 +455,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Additional information',
+            isMultilanguage: true,
           },
         },
         {
@@ -444,6 +465,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Self-assessment competencies',
+            isMultilanguage: true,
           },
         },
         {
@@ -453,6 +475,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Review application',
+            isMultilanguage: true,
           },
         },
         {
@@ -462,6 +485,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Judicial experience',
+            isMultilanguage: true,
           },
         },
         {
@@ -471,6 +495,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Post-qualification work experience',
+            isMultilanguage: true,
           },
         },
         {
@@ -480,6 +505,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Relevant qualifications',
+            isMultilanguage: true,
           },
         },
         {
@@ -489,6 +515,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Relevant memberships',
+            isMultilanguage: true,
           },
         },
         {
@@ -498,6 +525,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Relevant experience',
+            isMultilanguage: true,
           },
         },
         {
@@ -507,6 +535,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Employment gaps',
+            isMultilanguage: true,
           },
         },
         {
@@ -516,6 +545,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Reasonable length of service',
+            isMultilanguage: true,
           },
         },
         {
@@ -525,6 +555,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Part-time working preferences',
+            isMultilanguage: true,
           },
         },
         {
@@ -534,6 +565,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Location preferences',
+            isMultilanguage: true,
           },
         },
         {
@@ -543,6 +575,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Jurisdiction preferences',
+            isMultilanguage: true,
           },
         },
         {
@@ -552,6 +585,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Additional working preferences',
+            isMultilanguage: true,
           },
         },
         {
@@ -561,6 +595,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Welsh posts',
+            isMultilanguage: true,
           },
         },
         {
@@ -570,6 +605,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Statement of suitability',
+            isMultilanguage: true,
           },
         },
         {
@@ -579,6 +615,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Statement of suitability',
+            isMultilanguage: true,
           },
         },
         {
@@ -588,6 +625,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Statement of eligibility',
+            isMultilanguage: true,
           },
         },
         {
@@ -597,6 +635,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Curriculum vitae (CV)',
+            isMultilanguage: true,
           },
         },
         {
@@ -606,6 +645,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Covering Letter',
+            isMultilanguage: true,
           },
         },
         {
@@ -615,6 +655,7 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Confirmation',
+            isMultilanguage: true,
           },
         },
         {
