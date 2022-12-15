@@ -28,7 +28,36 @@
       </div>
 
       <div
-        v-if="item.date"
+        v-if="item.type === 'barrister' && item.calledToBarDate"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Date called to the Bar 
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <ul class="govuk-list">
+            <li> {{ item.calledToBarDate | formatDate }}</li>
+          </ul>
+        </dd>
+      </div>
+
+      <div
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Completed pupillage
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <ul class="govuk-list">
+            <li>
+              {{ item.completedPupillage | toYesNo }}
+            </li>
+          </ul>
+        </dd>
+      </div>
+
+      <div
+        v-if="item.completedPupillage && item.date"
         class="govuk-summary-list__row"
       >
         <dt
@@ -51,23 +80,7 @@
       </div>
 
       <div
-        v-if="item.qualificationNotComplete"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          Completed pupillage
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <ul class="govuk-list">
-            <li>
-              No
-            </li>
-          </ul>
-        </dd>
-      </div>
-
-      <div
-        v-if="item.qualificationNotComplete && item.details"
+        v-if="!item.completedPupillage && item.details"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -75,8 +88,11 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>
+            <li v-if="item.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
               {{ item.details }}
+            </li>
+            <li v-else>
+              {{ item.notCompletePupillageReason | lookup }}
             </li>
           </ul>
         </dd>
@@ -86,6 +102,8 @@
 </template>
 
 <script>
+import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
+
 export default {
   name: 'Qualifications',
   props: {
@@ -93,6 +111,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      NOT_COMPLETE_PUPILLAGE_REASONS,
+    };
   },
 };
 </script>

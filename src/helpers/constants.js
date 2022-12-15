@@ -62,6 +62,12 @@ const ASSESSOR_TYPES = {
   PERSONAL: 'personal',
 };
 
+const NOT_COMPLETE_PUPILLAGE_REASONS = {
+  TRANSFERRED: 'transferred ',
+  CALLED_PRE_2002: 'called-pre-2002',
+  OTHER: 'other',
+};
+
 const LANGUAGES = {
   ENGLISH: 'eng',
   WELSH: 'cym',
@@ -77,5 +83,6 @@ export {
   WELSH_POSTS_EMAIL_SUBJECT,
   RECAPTCHA_ACTIONS,
   ASSESSOR_TYPES,
+  NOT_COMPLETE_PUPILLAGE_REASONS,
   LANGUAGES
 };
