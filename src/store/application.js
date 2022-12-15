@@ -56,6 +56,12 @@ export default {
             status: 'applied',
             appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
           };
+
+          // check if application was made in Welsh
+          if (state.language) {
+            data['_language'] = state.language;
+          }
+
           await dispatch('save', data);
           return;
         }
