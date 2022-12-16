@@ -96,19 +96,19 @@
         class="govuk-body"
       />
 
-      <RouterLink
+      <a
         v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
         data-module="govuk-button"
-        :to="{ name: 'eligibility' }"
+        @click.prevent="apply(LANGUAGES.ENGLISH)"
       >
         Apply
-      </RouterLink>
+      </a>
       <a
         v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
         class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
         data-module="govuk-button"
-        @click.prevent="applyInWelsh"
+        @click.prevent="apply(LANGUAGES.WELSH)"
       >
         Apply in Welsh
       </a>
@@ -245,6 +245,7 @@ export default {
   data() {
     return {
       isVacancyOpen: false,
+      LANGUAGES,
     };
   },
   computed: {
@@ -308,8 +309,8 @@ export default {
     }
   },
   methods: {
-    applyInWelsh() {
-      this.$store.dispatch('application/setLanguage', LANGUAGES.WELSH);
+    apply(lang) {
+      this.$store.dispatch('application/setLanguage', lang);
       this.$router.push({ name: 'eligibility' });
     },
   },

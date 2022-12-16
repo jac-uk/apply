@@ -28,6 +28,7 @@
 
 <script>
 import { capitalize } from '@/filters';
+import { updateLangToTextNode } from '@/helpers/language';
 
 export default {
   name: 'Breadcrumb',
@@ -69,6 +70,11 @@ export default {
       });
       return items;
     },
+  },
+  updated: async function() {
+    setTimeout(() => {
+      updateLangToTextNode(document.querySelector('#main-content'), this.language);
+    }, 0);
   },
   methods: {
     capitalize,

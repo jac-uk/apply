@@ -10,6 +10,7 @@
 
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
+import { updateLangToTextNode } from '@/helpers/language';
 
 export default {
   name: 'Apply',
@@ -95,6 +96,11 @@ export default {
       this.loadFailed = true;
       throw e;
     }
+  },
+  updated: async function() {
+    setTimeout(() => {
+      updateLangToTextNode(document.querySelector('#main-content'), this.language);
+    }, 100);
   },
   methods: {
     redirectToErrorPage() {

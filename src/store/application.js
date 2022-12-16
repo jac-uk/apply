@@ -105,7 +105,7 @@ export default {
     },
   },
   state: {
-    language: LANGUAGES.ENGLIISH,
+    language: LANGUAGES.ENGLISH,
     record: null,
   },
   getters: {
