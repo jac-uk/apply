@@ -72,9 +72,11 @@ export default {
     },
   },
   updated: async function() {
-    setTimeout(() => {
-      updateLangToTextNode(document.querySelector('#main-content'), this.language);
-    }, 0);
+    if (this.$route.meta.isMultilanguage) {
+      setTimeout(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      }, 0);
+    }
   },
   methods: {
     capitalize,

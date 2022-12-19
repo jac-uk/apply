@@ -40,15 +40,15 @@
             style="display: flex; justify-content: flex-end; gap: 10px;"
           >
             <button
-              class="govuk-button govuk-button--secondary"
-              :class="{ 'govuk-button--success': language === LANGUAGES.ENGLISH }"
+              v-if="language === LANGUAGES.WELSH"
+              class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.ENGLISH)"
             >
               {{ LANGUAGES.ENGLISH | lookup }}
             </button>
             <button
-              class="govuk-button govuk-button--secondary"
-              :class="{ 'govuk-button--success': language === LANGUAGES.WELSH }"
+              v-else-if="language === LANGUAGES.ENGLISH"
+              class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.WELSH)"
             >
               {{ LANGUAGES.WELSH | lookup }}
