@@ -4,7 +4,7 @@ import welshData from '@/assets/welsh.json';
 const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
   const textNodes = [];
   const pushTextNode = (node) => {
-    if (node.nodeName === '#text') {
+    if (node.nodeName === '#text' && !node.classList.includes('govuk-summary-list__value')) {
       const nodeVal = node.nodeValue.trim();
       if (!nodeVal) return;
 
