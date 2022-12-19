@@ -29,6 +29,7 @@
 <script>
 import { capitalize } from '@/filters';
 import { updateLangToTextNode } from '@/helpers/language';
+import { LANGUAGES } from '@/helpers/constants';
 
 export default {
   name: 'Breadcrumb',
@@ -72,11 +73,12 @@ export default {
     },
   },
   updated: async function() {
-    if (this.$route.meta.isMultilanguage) {
-      setTimeout(() => {
-        updateLangToTextNode(document.querySelector('#main-content'), this.language);
-      }, 0);
-    }
+    setTimeout(() => {
+      // switch back to English if current route does not support multilanguage
+      const lang = this.$route.meta.isMultilanguage ? this.language : LANGUAGES.ENGLISH;
+      updateLangToTextNode(document.querySelector('#main-content'), lang);
+    }, 0);
+    
   },
   methods: {
     capitalize,
