@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import firebase from '@/firebase';
+import firebase from '@firebase/app';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';

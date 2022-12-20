@@ -1,41 +1,17 @@
 import { createTestSubject } from '../../helpers';
+import { storage } from '@/firebase';
 import FileUpload from '@/components/Form/FileUpload';
 
-const mockPut = jest.fn()
-.mockName('put');
-
-const mockGetDownloadURL = jest.fn()
-.mockName('getDownloadURL');
-
-const mockRef = jest.fn()
-.mockName('ref')
-.mockReturnValue({
-  put: mockPut,
-  getDownloadURL: mockGetDownloadURL,
+jest.mock('@/firebase', () => {
+  return {
+    storage: {
+      ref: jest.fn().mockName('ref').mockReturnValue({
+        getDownloadURL: jest.fn().mockName('getDownloadURL'),
+        put: jest.fn().mockName('put'),
+      }),
+    },
+  };
 });
-
-jest.mock('@firebase/app', () => ({
-  __esModule: true,
-  default: {
-    apps: [],
-    initializeApp: () => {},
-    auth: jest.fn(),
-    storage: jest.fn()
-    .mockImplementation(() => ({
-      ref: mockRef,
-    })),
-  },
-}));
-
-jest.mock('@firebase/storage', () => ({
-  __esModule: true,
-  default: {
-    registerService: jest.fn(), // required by firebase/app
-  },
-}));
-
-import '@firebase/app';
-import '@firebase/storage';
 
 describe('components/Form/FileUpload', () => {
 
@@ -352,7 +328,7 @@ describe('components/Form/FileUpload', () => {
     describe('upload()', () => {
       beforeEach(() => {
           wrapper.vm.setError = jest.fn();
-          mockPut.mockReset();
+          storage.ref().put.mockReset();
         });
 
           it('sets error and returns false if called without file', async () => {
@@ -377,7 +353,7 @@ describe('components/Form/FileUpload', () => {
 
             await wrapper.vm.upload(mockFile);
 
-            expect(mockRef).toHaveBeenCalled();
+            expect(storage.ref).toHaveBeenCalled();
           });
 
           it('calls uploadRef.put() with file', async() => {
@@ -385,7 +361,7 @@ describe('components/Form/FileUpload', () => {
 
             await wrapper.vm.upload(mockFile);
 
-            expect(mockPut).toHaveBeenCalledWith(mockFile);
+            expect(storage.ref().put).toHaveBeenCalledWith(mockFile);
           });
 
           describe('put() failed', () => {
@@ -393,7 +369,7 @@ describe('components/Form/FileUpload', () => {
               expect.assertions(2);
 
               wrapper.vm.setError = jest.fn();
-              mockPut.mockReturnValue(false);
+              storage.ref().put.mockReturnValue(false);
 
               const result = await wrapper.vm.upload(mockFile);
 
@@ -405,7 +381,7 @@ describe('components/Form/FileUpload', () => {
               expect.assertions(2);
 
               wrapper.vm.setError = jest.fn();
-              mockPut.mockImplementation(() => {
+              storage.ref().put.mockImplementation(() => {
                 throw new Error('Error');
               });
 
@@ -418,7 +394,7 @@ describe('components/Form/FileUpload', () => {
 
           describe('put() returned a valid response', () => {
             beforeEach(() => {
-              mockPut.mockReturnValue({
+              storage.ref().put.mockReturnValue({
                 state: 'success',
               });
             });
@@ -473,7 +449,7 @@ describe('components/Form/FileUpload', () => {
 
               await wrapper.vm.verifyFile(mockFile.name);
 
-              expect(mockRef).toHaveBeenCalled();
+              expect(storage.ref).toHaveBeenCalled();
             });
 
             it('calls fileRef.getDownloadURL()', async () => {
@@ -481,13 +457,13 @@ describe('components/Form/FileUpload', () => {
 
               await wrapper.vm.verifyFile(mockFile.name);
 
-              expect(mockGetDownloadURL).toHaveBeenCalled();
+              expect(storage.ref().getDownloadURL).toHaveBeenCalled();
             });
 
             it('returns true if fileRef.getDownloadURL() returned a valid response', async () => {
               expect.assertions(1);
 
-              mockGetDownloadURL.mockReturnValue('link_to_file');
+              storage.ref().getDownloadURL.mockReturnValue('link_to_file');
 
               const result = await wrapper.vm.verifyFile(mockFile.name);
 
@@ -497,7 +473,7 @@ describe('components/Form/FileUpload', () => {
             it('returns false if fileRef.getDownloadURL() returned invalid response', async () => {
               expect.assertions(1);
 
-              mockGetDownloadURL.mockReturnValue(null);
+              storage.ref().getDownloadURL.mockReturnValue(null);
 
               const result = await wrapper.vm.verifyFile(mockFile.name);
 
@@ -507,7 +483,7 @@ describe('components/Form/FileUpload', () => {
       it('returns false if fileRef.getDownloadURL() threw', async () => {
         expect.assertions(1);
 
-        mockGetDownloadURL.mockImplementation(() => {
+        storage.ref().getDownloadURL.mockImplementation(() => {
                 throw new Error('Error');
               });
 

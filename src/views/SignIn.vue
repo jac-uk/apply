@@ -105,7 +105,7 @@ export default {
   methods: {
     // loginWithGoogle() {
     //   const provider = new auth.GoogleAuthProvider();
-    //   auth().signInWithPopup(provider);
+    //   auth.signInWithPopup(provider);
     // },
     async submit() {
       if (this.disabled) return;
@@ -121,7 +121,7 @@ export default {
     },
     async login() {
       this.errors = [];
-      auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+      auth.signInWithEmailAndPassword(this.formData.email, this.formData.password)
         .then((userCredential) => {
 
           // LOG

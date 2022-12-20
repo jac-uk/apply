@@ -3,26 +3,24 @@ import FirebaseUI from '@/components/FirebaseUI';
 import firebaseui from 'firebaseui';
 import { auth } from '@/firebase';
 
-const mockFirebaseAuth = jest.fn();
 const mockUiInstance = {
   start: jest.fn(),
   delete: jest.fn(),
 };
 
-// Can these mocks be moved to helpers? 
+// Can these mocks be moved to helpers?
 // if so how do we move them over, if not
 // when should logic be added to helpers?
-
 jest.mock('@/firebase', () => {
-  const mock = {
-    auth: jest.fn(() => (mockFirebaseAuth)),
+  return {
+    auth: {
+      EmailAuthProvider: {
+        PROVIDER_ID: 'email',
+        EMAIL_LINK_SIGN_IN_METHOD: true,
+        requireDisplayName: true,
+      },
+    },
   };
-  mock.auth.EmailAuthProvider = {
-    PROVIDER_ID: 'email',
-    EMAIL_LINK_SIGN_IN_METHOD: true,
-    requireDisplayName: true,
-  };
-  return mock;
 });
 
 jest.mock('firebaseui', () => (
@@ -46,13 +44,13 @@ describe('FirebaseUI component', () => {
   it('renders the component', () => {
     expect(wrapper.exists()).toBe(true);
   });
-  
+
   it('renders a firebaseui-auth-container element in DOM', () => {
     expect(wrapper.find('#firebaseui-auth-container').exists()).toBe(true);
   });
 
   it('creates a FirebaseUI instance bound to the Firebase Auth instance', () => {
-    expect(firebaseui.auth.AuthUI).toHaveBeenCalledWith(mockFirebaseAuth);
+    expect(firebaseui.auth.AuthUI).toHaveBeenCalledWith(auth);
     expect(wrapper.vm.ui).toBe(mockUiInstance);
   });
 

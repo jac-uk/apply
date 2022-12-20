@@ -1,15 +1,14 @@
 import { createTestSubject, mocks } from '../helpers';
 import SignUp from '@/views/SignUp';
 
-import '@/firebase';
+import { auth } from '@/firebase';
 import firebase from '@firebase/app';
 
-const mockCreateUserWithEmailAndPassword = jest.fn();
 jest.mock('@/firebase', () => {
   return {
-    auth: () => ({
-      createUserWithEmailAndPassword: mockCreateUserWithEmailAndPassword,
-    }),
+    auth: {
+      createUserWithEmailAndPassword: jest.fn(),
+    },
   };
 });
 
@@ -116,17 +115,17 @@ describe('views/SignUp', () => {
         expect(typeof wrapper.vm.signUp).toBe('function');
       });
 
-      it('calls auth().createUserWithEmailAndPassword with formData', () => {
+      it('calls auth.createUserWithEmailAndPassword with formData', () => {
         wrapper.setData({
           formData: mockFormData,
         });
         wrapper.vm.signUp();
-        expect(mockCreateUserWithEmailAndPassword).toHaveBeenCalledWith(mockFormData.email, mockFormData.password);
+        expect(auth.createUserWithEmailAndPassword).toHaveBeenCalledWith(mockFormData.email, mockFormData.password);
       });
 
       it('calls createCandidate() if createUserWithEmailAndPassword succeeded', async () => {
         const mockUserCredentials = 'mock user credentials';
-        mockCreateUserWithEmailAndPassword.mockResolvedValue(mockUserCredentials);
+        auth.createUserWithEmailAndPassword.mockResolvedValue(mockUserCredentials);
         wrapper.vm.createCandidate = jest.fn();
 
         await wrapper.vm.signUp();
