@@ -18,6 +18,7 @@ import {
   hasApplicationProcess,
   hasStatementOfEligibility
 } from '@/helpers/exerciseHelper';
+import { updateLangToTextNode } from '@/helpers/language';
 
 export default {
   components: {
@@ -34,6 +35,9 @@ export default {
       'getCloseDate',
       'isOpen',
     ]),
+    language() {
+      return this.$store.state.application.language;
+    },
     vacancy() {
       return this.$store.state.vacancy.record;
     },
@@ -114,6 +118,13 @@ export default {
       setInterval(() => {
         self.isVacancyOpen = self.$store.getters['vacancy/isOpen']();
       }, 60 * 1000);
+    }
+  },
+  updated: async function() {
+    if (this.$route.meta.isMultilanguage) {
+      this.$nextTick(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      });
     }
   },
   methods: {
