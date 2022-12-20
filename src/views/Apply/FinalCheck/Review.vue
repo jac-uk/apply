@@ -1013,6 +1013,7 @@ import GapsInEmployment from './GapsInEmployment';
 import DownloadLink from '@/components/DownloadLink';
 
 export default {
+  name: 'Review',
   components: {
     BackLink,
     ErrorSummary,

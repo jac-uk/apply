@@ -10,6 +10,7 @@
 
 <script>
 export default {
+  name: 'FormFieldError',
   props: {
     id: {
       type: String,

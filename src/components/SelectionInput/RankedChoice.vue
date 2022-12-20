@@ -41,6 +41,7 @@
 <script>
 
 export default {
+  name: 'RankedChoice',
   props: {
     id: {
       type: String,

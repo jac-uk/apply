@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'StartButton',
   props: {
     requiredStyle: {
       type: String,

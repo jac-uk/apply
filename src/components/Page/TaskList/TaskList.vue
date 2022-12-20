@@ -4,6 +4,12 @@
   </ol>
 </template>
 
+<script>
+export default {
+  name: 'TaskList',
+};
+</script>
+
 <style>
 .tasklist {
   list-style-type: auto;

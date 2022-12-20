@@ -132,7 +132,7 @@
             With reference to our
             <a
               class="govuk-link"
-              href="https://www.judicialappointments.gov.uk/reasonable-adjustments-policy"
+              href="https://judicialappointments.gov.uk/equality-and-diversity/diversity-and-equality-measures/reasonable-adjustments/"
               target="_blank"
             >
               reasonable adjustments policy
@@ -179,6 +179,7 @@ import BackLink from '@/components/BackLink';
 import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
+  name: 'PersonalDetails',
   components: {
     ErrorSummary,
     TextField,

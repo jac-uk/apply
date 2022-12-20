@@ -92,6 +92,7 @@ const membershipNumbers = {
   default: 'Membership number',
 };
 export default {
+  name: 'ProfessionalDetails',
   components: {
     BackLink,
     ErrorSummary,

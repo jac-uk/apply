@@ -34,6 +34,7 @@ const icons = {
 };
 
 export default {
+  name: 'Banner',
   props: {
     status: {
       type: String,

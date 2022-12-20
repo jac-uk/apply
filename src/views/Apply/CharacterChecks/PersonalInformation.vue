@@ -196,6 +196,7 @@ import Address from '@/components/Form/Address';
 import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
+  name: 'PersonalInformation',
   components: {
     BackLink,
     ErrorSummary,

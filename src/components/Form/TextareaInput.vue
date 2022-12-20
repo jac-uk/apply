@@ -47,6 +47,7 @@ import FormFieldError from '@/components/Form/FormFieldError';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  name: 'TextareaInput',
   components: {
     FormFieldError,
     CustomHTML,

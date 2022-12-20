@@ -26,6 +26,7 @@
 <script>
 
 export default {
+  name: 'MultipleChoice',
   props: {
     id: {
       type: String,

@@ -20,6 +20,7 @@
 import { storage } from '@/firebase';
 
 export default {
+  name: 'DownloadLink',
   props: {
     fileName: {
       required: true,

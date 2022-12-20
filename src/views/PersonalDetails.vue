@@ -125,6 +125,7 @@ import {
 } from 'vuex';
 
 export default {
+  name: 'PersonalDetails',
   computed: {
     ...mapState('applications', [
       'records',

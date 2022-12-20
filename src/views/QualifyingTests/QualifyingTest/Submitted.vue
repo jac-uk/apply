@@ -84,6 +84,7 @@ import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 
 export default {
+  name: 'Submitted',
   components: {
     Banner,
   },

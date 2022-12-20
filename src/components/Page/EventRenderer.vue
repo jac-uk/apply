@@ -17,6 +17,7 @@
 
 <script>
 export default {
+  name: 'EventRenderer',
   props: {
     events: {
       type: Array,

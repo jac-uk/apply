@@ -80,6 +80,7 @@ import TextField from '@/components/Form/TextField';
 import BackLink from '@/components/BackLink';
 
 export default {
+  name: 'LeadershipJudgeDetails',
   components: {
     ErrorSummary,
     TextField,

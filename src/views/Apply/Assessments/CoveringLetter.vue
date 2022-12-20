@@ -46,6 +46,7 @@ import FileUpload from '@/components/Form/FileUpload';
 import { logEvent } from '@/helpers/logEvent';
 
 export default {
+  name: 'CoveringLetter',
   components: {
     ErrorSummary,
     BackLink,

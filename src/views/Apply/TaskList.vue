@@ -283,6 +283,7 @@ import TaskGroup from '@/components/Page/TaskList/TaskGroup';
 import Task from '@/components/Page/TaskList/Task';
 
 export default {
+  name: 'TaskListComponent',
   components: {
     Warning,
     Banner,

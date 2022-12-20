@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  name: 'ErrorSummary',
   props: {
     errors: {
       type: Array,

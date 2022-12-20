@@ -55,7 +55,7 @@ import FormField from '@/components/Form/FormField';
 import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
 
 export default {
-  name: 'LawRelatedTasks',
+  name: 'TaskDetails',
   components: {
     TextField,
     Select,

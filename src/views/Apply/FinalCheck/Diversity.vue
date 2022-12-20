@@ -278,6 +278,7 @@
 
 <script>
 export default {
+  name: 'Diversity',
   props: {
     application: {
       type: Object,
