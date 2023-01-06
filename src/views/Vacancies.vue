@@ -346,6 +346,7 @@
                     </div>
 
                     <RouterLink
+                      v-if="vacancy.aboutTheRole && !isAdvertTypeListing(vacancy.advertType)"
                       class="govuk-button"
                       style="margin: 30px 0;"
                       :to="{ name: 'vacancy-details', params: { id: vacancy.id } }"
