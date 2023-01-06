@@ -57,23 +57,38 @@
           class="govuk-body"
         />
 
-        <p>
-          <span class="govuk-body govuk-!-font-weight-bold">
-            Launch Date:
-          </span>
-          <span
-            v-if="vacancy.applicationOpenDate"
-            class="govuk-body"
-          >
-            {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
-          </span>
-          <span
-            v-else-if="vacancy.estimatedLaunchDate"
-            class="govuk-body"
-          >
-            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-          </span>
-        </p>
+        <div v-if="!advertTypeFull">
+          <p>
+            <span class="govuk-body govuk-!-font-weight-bold">
+              Launch Date:
+            </span>
+            <span
+              v-if="vacancy.applicationOpenDate"
+              class="govuk-body"
+            >
+              {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
+            </span>
+            <span
+              v-else
+              class="govuk-body"
+            >
+              {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+            </span>
+          </p>
+          <p v-if="vacancy.applicationCloseDate">
+            <span
+              class="govuk-body govuk-!-font-weight-bold"
+            >
+              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+            </span>
+            <span
+              class="govuk-body"
+            >
+              {{ vacancy.applicationCloseDate | formatDate('datetime-without-second') }}
+            </span>
+          </p>
+        </div>
+
         <p v-if="vacancy.immediateStart && showNumberOfVacancies">
           <span class="govuk-body govuk-!-font-weight-bold">
             Number of vacancies:
@@ -112,40 +127,6 @@
             class="govuk-body govuk-link"
           >{{ vacancy.exerciseMailbox }}</a>
         </p>
-
-        <div v-if="!advertTypeFull">
-          <p>
-            <span
-              class="govuk-body govuk-!-font-weight-bold"
-            >
-              <span class="govuk-body govuk-!-font-weight-bold"> Launch Date: </span>
-            </span>
-            <span
-              v-if="vacancy.applicationOpenDate"
-              class="govuk-body"
-            >
-              {{ vacancy.applicationOpenDate | formatDate('datetime') }}
-            </span>
-            <span
-              v-else
-              class="govuk-body"
-            >
-              {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
-            </span>
-          </p>
-          <p v-if="vacancy.applicationCloseDate">
-            <span
-              class="govuk-body govuk-!-font-weight-bold"
-            >
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
-            </span>
-            <span
-              class="govuk-body"
-            >
-              {{ vacancy.applicationCloseDate | formatDate('datetime') }}
-            </span>
-          </p>
-        </div>
 
         <div class="btn-group">
           <RouterLink
