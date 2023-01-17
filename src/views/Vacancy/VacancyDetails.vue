@@ -170,6 +170,7 @@
         </p>
 
         <div
+          v-if="showDownload"
           class="jac-related-items govuk-!-margin-top-9"
           role="complementary"
           style="padding: 30px 20px; background-color: #F3F2EE;"
@@ -386,6 +387,9 @@ export default {
     },
     advertTypeFull() {
       return this.advertType === ADVERT_TYPES.FULL;
+    },
+    showDownload() {
+      return this.advertType !== ADVERT_TYPES.BASIC;
     },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
