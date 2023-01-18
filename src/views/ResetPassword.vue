@@ -43,6 +43,17 @@
             >
               Send the link
             </button>
+            <br>
+            <br>
+            <p class="govuk-body">
+              If you wish to update and or change your sign in email address please contact us at:
+              <a
+                class="govuk-link"
+                href="mailto:enquiries@judicialappointments.gov.uk"
+              >
+                enquiries@judicialappointments.gov.uk
+              </a>
+            </p>
           </div>
         </div>
       </form>
