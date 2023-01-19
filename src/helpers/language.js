@@ -14,13 +14,13 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
       if (lang === LANGUAGES.ENGLISH) {
         for (const [key, value] of Object.entries(welshData)) {
           if (value === nodeVal) {
-            node.nodeValue = key;
+            node.nodeValue = ` ${key} `; // add white space back to deal with the text concatenation
             textNodes.push(nodeVal);
           }
         }
       } else if (lang === LANGUAGES.WELSH) {
         if (welshData[nodeVal]) {
-          node.nodeValue = welshData[nodeVal];
+          node.nodeValue = ` ${welshData[nodeVal]} `; // add white space back to deal with the text concatenation
           textNodes.push(nodeVal);
         }
       }
