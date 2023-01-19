@@ -8,7 +8,7 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
     if (node.classList && node.classList.contains('govuk-summary-list__value')) return;
 
     if (node.nodeName === '#text') {
-      const nodeVal = node.nodeValue.trim();
+      const nodeVal = node.nodeValue.trim().replace(/(\r\n|\n|\r)/gm, '').replace(/  +/g, ' '); // remove line breaks and replace multiple spaces with a single space
       if (!nodeVal) return;
 
       if (lang === LANGUAGES.ENGLISH) {
