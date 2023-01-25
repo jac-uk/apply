@@ -82,6 +82,15 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
 import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted';
 
+// Handover Checks
+import HandoverChecks from '@/views/Apply/HandoverChecks/HandoverChecks';
+import HandoverChecksIntro from '@/views/Apply/HandoverChecks/Intro';
+import HandoverChecksPersonalInformation from '@/views/Apply/HandoverChecks/PersonalInformation';
+import HandoverChecksProfessionalDetails from '@/views/Apply/HandoverChecks/ProfessionalDetails';
+import HandoverChecksReview from '@/views/Apply/HandoverChecks/Review';
+import HandoverChecksConsent from '@/views/Apply/HandoverChecks/Consent';
+import HandoverChecksFormSubmitted from '@/views/Apply/HandoverChecks/FormSubmitted';
+
 // Online Tests
 import QualifyingTests from '@/views/QualifyingTests/QualifyingTests';
 import QualifyingTest from '@/views/QualifyingTests/QualifyingTest';
@@ -691,6 +700,66 @@ const router = new Router({
               meta: {
                 requiresAuth: true,
                 title: 'Consent to character checks | Form Submitted',
+              },
+            },
+          ],
+        },
+        {
+          path: 'handover-checks',
+          component: HandoverChecks,
+          children: [
+            {
+              path: '',
+              component: HandoverChecksIntro,
+              name: 'handover-checks-intro',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks',
+              },
+            },
+            {
+              path: 'personal-information',
+              component: HandoverChecksPersonalInformation,
+              name: 'handover-checks-personal-information',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks | Personal information',
+              },
+            },
+            {
+              path: 'professional-details',
+              component: HandoverChecksProfessionalDetails,
+              name: 'handover-checks-professional-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks | Professional details',
+              },
+            },
+            {
+              path: 'review',
+              component: HandoverChecksReview,
+              name: 'handover-checks-review',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks | Review',
+              },
+            },
+            {
+              path: 'consent',
+              component: HandoverChecksConsent,
+              name: 'handover-checks-consent',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks | Consent',
+              },
+            },
+            {
+              path: 'form-submitted',
+              component: HandoverChecksFormSubmitted,
+              name: 'handover-checks-form-submitted',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to handover checks | Form Submitted',
               },
             },
           ],

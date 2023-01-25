@@ -119,6 +119,24 @@
                   >
                     View sent character checks consent form
                   </RouterLink>
+                  <RouterLink
+                    v-if="application.handoverChecks && application.handoverChecks.status === 'requested'"
+                    class="govuk-button govuk-button--secondary moj-button-menu__item float-right"
+                    :to="{ name: 'handover-checks-intro', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Complete handover checks consent form
+                  </RouterLink>
+                  <RouterLink
+                    v-if="application.handoverChecks && application.handoverChecks.status === 'completed'"
+                    class="govuk-button govuk-button--secondary moj-button-menu__item float-right"
+                    :to="{ name: 'handover-checks-review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    View sent handover checks consent form
+                  </RouterLink>
                 </div>
               </div>
             </div>
