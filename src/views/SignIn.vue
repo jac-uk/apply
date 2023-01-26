@@ -68,8 +68,8 @@
             >
               Reset your password
             </RouterLink>
-            here.
           </p>
+          <ChangeEmailMessage />
         </div>
       </form>
     </div>
@@ -78,6 +78,7 @@
 
 <script>
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
@@ -87,6 +88,7 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    ChangeEmailMessage,
   },
   data () {
     return {

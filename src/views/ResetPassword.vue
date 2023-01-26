@@ -43,6 +43,7 @@
             >
               Send the link
             </button>
+            <ChangeEmailMessage />
           </div>
         </div>
       </form>
@@ -52,6 +53,7 @@
 
 <script>
 import TextField from '@/components/Form/TextField';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
@@ -59,6 +61,7 @@ export default {
   name: 'ResetPassword',
   components: {
     TextField,
+    ChangeEmailMessage,
   },
   data () {
     return {
