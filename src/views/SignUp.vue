@@ -106,17 +106,7 @@
           >
             Create Account
           </button>
-          <br>
-          <br>
-          <p class="govuk-body">
-            If you wish to update and or change your sign in email address please contact us at:
-            <a
-              class="govuk-link"
-              href="mailto:enquiries@judicialappointments.gov.uk"
-            >
-              enquiries@judicialappointments.gov.uk
-            </a>
-          </p>
+          <ChangeEmailMessage />
         </div>
       </form>
     </div>
@@ -131,6 +121,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import Password from '@/components/Form/Password';
 import DateInput from '@/components/Form/DateInput';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 
 export default {
   name: 'SignUp',
@@ -139,6 +130,7 @@ export default {
     TextField,
     Password,
     DateInput,
+    ChangeEmailMessage,
   },
   extends: Form,
   data () {

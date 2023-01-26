@@ -68,16 +68,8 @@
             >
               Reset your password
             </RouterLink>
-            <br>
-            <br>
-            If you wish to update and or change your sign in email address please contact us at:
-            <a
-              class="govuk-link"
-              href="mailto:enquiries@judicialappointments.gov.uk"
-            >
-              enquiries@judicialappointments.gov.uk
-            </a>
           </p>
+          <ChangeEmailMessage />
         </div>
       </form>
     </div>
@@ -86,6 +78,7 @@
 
 <script>
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
@@ -95,6 +88,7 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    ChangeEmailMessage,
   },
   data () {
     return {
