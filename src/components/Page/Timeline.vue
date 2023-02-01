@@ -3,7 +3,7 @@
     <li 
       v-for="(item, index) in data"
       :key="index"
-      class="dwp-timeline__entry govuk-!-margin-top-0 govuk-!-margin-bottom-8" 
+      class="dwp-timeline__entry govuk-!-margin-top-0 govuk-!-margin-bottom-8"
     >
       <h3 class="govuk-heading-s govuk-!-margin-bottom-1">
         {{ item.entry }}

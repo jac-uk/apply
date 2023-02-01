@@ -11,8 +11,7 @@
           name="search" 
           type="search" 
           aria-describedby="search-hint"
-          placeholder="Search candidate names"
-          @keyup="startSearch"
+          :placeholder="placeholder"
         >
       </div>
     </form>
@@ -22,10 +21,21 @@
 <script>
 export default {
   name: 'Search',
+  props: {
+    placeholder: {
+      type: String,
+      default: 'Search candidate names',
+    },
+  },
   data() {
     return {
       search: '',
     };
+  },
+  watch: {
+    search() {
+      this.startSearch();
+    },
   },
   methods: {
     startSearch() {

@@ -18,6 +18,9 @@ export default {
 </script>
 
 <style>
+.custom-html {
+  word-break: break-word; /* prevent overflow due to too long word */
+}
 /* customize nested ordered list (1.1, 1.2) */
 .custom-html ol {
   counter-reset: item;
