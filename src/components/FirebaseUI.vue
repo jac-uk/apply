@@ -25,7 +25,7 @@ export default {
     };
   },
   mounted() {
-    this.ui = new firebaseui.auth.AuthUI(auth());
+    this.ui = new firebaseui.auth.AuthUI(auth);
     this.ui.start('#firebaseui-auth-container', this.uiConfig);
   },
   destroyed() {

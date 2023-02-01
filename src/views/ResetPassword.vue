@@ -10,7 +10,7 @@
             Forgotten password
           </h1>
 
-          <div 
+          <div
             v-if="resetSent"
             class="govuk-panel govuk-panel--confirmation"
           >
@@ -43,6 +43,7 @@
             >
               Send the link
             </button>
+            <ChangeEmailMessage />
           </div>
         </div>
       </form>
@@ -52,6 +53,7 @@
 
 <script>
 import TextField from '@/components/Form/TextField';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
@@ -59,6 +61,7 @@ export default {
   name: 'ResetPassword',
   components: {
     TextField,
+    ChangeEmailMessage,
   },
   data () {
     return {
@@ -82,7 +85,7 @@ export default {
       if (this.formData.email) {
         const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
         this.errors = [];
-        auth().sendPasswordResetEmail(this.formData.email, {
+        auth.sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,
         })
           .then(() => {

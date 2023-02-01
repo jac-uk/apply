@@ -1,39 +1,19 @@
 import { createTestSubject } from '../helpers';
-
-const mockGetDownloadURL = jest.fn()
-  .mockName('getDownloadURL');
-
-const mockRef = jest.fn()
-  .mockName('ref')
-  .mockReturnValue({
-    getDownloadURL: mockGetDownloadURL,
-  });
-
-jest.mock('@firebase/app', () => ({
-    __esModule: true,
-    default: {
-      apps: [],
-      initializeApp: () => {},
-      auth: jest.fn(),
-      storage: jest.fn()
-        .mockImplementation(() => ({
-          ref: mockRef,
-        })),
-    },
-  })
-);
-
-jest.mock('@firebase/storage', () => ({
-  __esModule: true,
-  default: {
-    registerService: jest.fn(), // required by firebase/app
-  },
-}));
-
-import '@firebase/app';
-import '@firebase/storage';
-
+import { storage } from '@/firebase';
 import DownloadLink from '@/components/DownloadLink';
+
+jest.mock('@/firebase', () => {
+  return {
+    storage: {
+      ref: jest.fn()
+      .mockName('ref')
+      .mockReturnValue({
+        getDownloadURL: jest.fn()
+        .mockName('getDownloadURL'),
+      }),
+    },
+  };
+});
 
 describe('components/DownloadLink', () => {
   let wrapper;
@@ -46,7 +26,7 @@ describe('components/DownloadLink', () => {
   beforeEach(() => {
     wrapper = createTestSubject(DownloadLink, {
       mocks: {
-        getDownloadURL: mockGetDownloadURL,
+        getDownloadURL: storage.ref().getDownloadURL,
       },
       stubs: [],
       propsData: mockProps,
@@ -63,7 +43,7 @@ describe('components/DownloadLink', () => {
       const mockHref = 'mock href';
 
       it('should call .getDownloadURL()', () => {
-        expect(mockGetDownloadURL).toHaveBeenCalled();
+        expect(storage.ref().getDownloadURL).toHaveBeenCalled();
       });
 
       it('should set linkHref if .getDownloadURL() returned download url', async () => {
@@ -71,8 +51,7 @@ describe('components/DownloadLink', () => {
 
         const wrapper = createTestSubject(DownloadLink, {
           mocks: {
-            getDownloadURL: mockGetDownloadURL
-            .mockReturnValue(mockHref),
+            getDownloadURL: storage.ref().getDownloadURL.mockReturnValue(mockHref),
           },
           stubs: [],
           propsData: mockProps,
@@ -87,8 +66,7 @@ describe('components/DownloadLink', () => {
 
         const wrapper = createTestSubject(DownloadLink, {
           mocks: {
-            getDownloadURL: mockGetDownloadURL
-            .mockReturnValue(false),
+            getDownloadURL: storage.ref().getDownloadURL.mockReturnValue(false),
           },
           stubs: [],
           propsData: mockProps,
@@ -126,7 +104,7 @@ describe('components/DownloadLink', () => {
 
           await wrapper.vm.getDownloadURL();
 
-          expect(mockRef).toHaveBeenCalled();
+          expect(storage.ref).toHaveBeenCalled();
         });
 
         it('calls fileRef.getDownloadURL()', async () => {
@@ -134,13 +112,13 @@ describe('components/DownloadLink', () => {
 
           await wrapper.vm.getDownloadURL();
 
-          expect(mockGetDownloadURL).toHaveBeenCalled();
+          expect(storage.ref().getDownloadURL).toHaveBeenCalled();
         });
 
         it('returns download url if fileRef.getDownloadURL() returned a valid response', async () => {
           expect.assertions(1);
 
-          mockGetDownloadURL.mockReturnValue(mockHref);
+          storage.ref().getDownloadURL.mockReturnValue(mockHref);
 
           const result = await wrapper.vm.getDownloadURL();
 
@@ -150,7 +128,7 @@ describe('components/DownloadLink', () => {
         it('returns false if fileRef.getDownloadURL() returned invalid response', async () => {
           expect.assertions(1);
 
-          mockGetDownloadURL.mockReturnValue(null);
+          storage.ref().getDownloadURL.mockReturnValue(null);
 
           const result = await wrapper.vm.getDownloadURL();
 
@@ -160,7 +138,7 @@ describe('components/DownloadLink', () => {
         it('returns false if fileRef.getDownloadURL() threw', async () => {
           expect.assertions(1);
 
-          mockGetDownloadURL.mockImplementation(() => {
+          storage.ref().getDownloadURL.mockImplementation(() => {
             throw new Error('Error');
           });
 
