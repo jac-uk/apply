@@ -51,6 +51,7 @@
         id="previousNames"
         v-model="personalDetails.previousNames"
         label="Previously known name(s)"
+        hint="Have you ever been known by any other name? For example, life events which may have changed your name such as marriages, divorces, hyphenated names."
       />
 
       <TextField
