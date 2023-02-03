@@ -42,15 +42,28 @@
     <p v-else-if="isUploading">
       Uploading...
     </p>
-    <input
+    <div
       v-else
-      :id="id"
-      ref="file"
-      type="file"
-      class="govuk-file-upload"
       :class="{'govuk-input--error': hasError}"
-      @change="fileSelected"
     >
+      <button
+        class="govuk-file-upload"
+        style="margin-left: 0;"
+        @click="handleUpload"
+      >
+        Choose file
+      </button>
+      No file chosen
+      <input
+        :id="id"
+        ref="file"
+        type="file"
+        class="govuk-file-upload"
+        :class="{'govuk-input--error': hasError}"
+        style="display: none;"
+        @change="fileSelected"
+      >
+    </div>
   </div>
 </template>
 
@@ -123,6 +136,10 @@ export default {
     }
   },
   methods: {
+    handleUpload(e) {
+      e.preventDefault();
+      this.$refs.file.click();
+    },
     replaceFile() {
       this.isReplacing = true;
     },
