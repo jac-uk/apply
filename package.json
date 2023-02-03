@@ -1,8 +1,9 @@
 {
   "name": "application-form",
-  "version": "1.61.0",
+  "version": "1.62.0",
   "private": true,
   "scripts": {
+    "serve": "vue-cli-service serve --mode develop",
     "develop:serve": "vue-cli-service serve --mode develop",
     "staging:serve": "vue-cli-service serve --mode staging",
     "production:serve": "vue-cli-service serve --mode production",

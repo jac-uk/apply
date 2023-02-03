@@ -49,7 +49,7 @@
   </div>
 </template>
 <script>
-import firebase from '@/firebase';
+import firebase from '@firebase/app';
 import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
 import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
 import { QUALIFYING_TEST } from '@/helpers/constants';

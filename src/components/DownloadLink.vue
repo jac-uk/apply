@@ -17,8 +17,7 @@
 </template>
 
 <script>
-import firebase from '@firebase/app';
-import '@firebase/storage';
+import { storage } from '@/firebase';
 
 export default {
   name: 'DownloadLink',
@@ -99,7 +98,7 @@ export default {
   methods: {
     async getDownloadURL() {
       const urlString = this.filePath ? this.filePath : this.savePath + this.fileName;
-      const fileRef = firebase.storage().ref(urlString);
+      const fileRef = storage.ref(urlString);
 
       try {
         const downloadUrl = await fileRef.getDownloadURL();

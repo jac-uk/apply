@@ -68,7 +68,7 @@
   </form>
 </template>
 <script>
-import firebase from '@/firebase';
+import firebase from '@firebase/app';
 import BackLink from '@/components/BackLink';
 import Form from '@/components/Form/Form';
 import Checkbox from '@/components/Form/Checkbox';

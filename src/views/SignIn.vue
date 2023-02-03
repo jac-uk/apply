@@ -68,8 +68,8 @@
             >
               Reset your password
             </RouterLink>
-            here.
           </p>
+          <ChangeEmailMessage />
         </div>
       </form>
     </div>
@@ -78,6 +78,7 @@
 
 <script>
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
@@ -87,6 +88,7 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    ChangeEmailMessage,
   },
   data () {
     return {
@@ -105,7 +107,7 @@ export default {
   methods: {
     // loginWithGoogle() {
     //   const provider = new auth.GoogleAuthProvider();
-    //   auth().signInWithPopup(provider);
+    //   auth.signInWithPopup(provider);
     // },
     async submit() {
       if (this.disabled) return;
@@ -121,7 +123,7 @@ export default {
     },
     async login() {
       this.errors = [];
-      auth().signInWithEmailAndPassword(this.formData.email, this.formData.password)
+      auth.signInWithEmailAndPassword(this.formData.email, this.formData.password)
         .then((userCredential) => {
 
           // LOG

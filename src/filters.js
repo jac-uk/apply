@@ -23,6 +23,8 @@ const formatDate = (value, type) => {
       return `${objDate.toLocaleString('en-GB', { month: 'long' })} ${objDate.getUTCFullYear()}`;
     case 'datetime':
       return objDate.toLocaleString('en-GB');
+    case 'datetime-without-second':
+      return objDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
     default:
       return objDate.toLocaleDateString('en-GB');
     }

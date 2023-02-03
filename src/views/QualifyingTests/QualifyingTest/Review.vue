@@ -124,7 +124,7 @@
 </template>
 
 <script>
-import firebase from '@/firebase';
+import firebase from '@firebase/app';
 import Modal from '@/components/Page/Modal';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 

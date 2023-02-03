@@ -59,6 +59,7 @@
         </div>
       </main>
 
+      <BackToTop />
       <Footer
         v-if="!fullPageMode"
       />
@@ -72,6 +73,7 @@ import Footer from '@/components/Page/Footer';
 import Banner from '@/components/Page/Banner';
 import LoadingMessage from '@/components/LoadingMessage';
 import Breadcrumb from '@/components/Breadcrumb.vue';
+import BackToTop from '@/components/BackToTop';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
 
@@ -83,6 +85,7 @@ export default {
     Footer,
     Banner,
     Breadcrumb,
+    BackToTop,
   },
   data() {
     return {
