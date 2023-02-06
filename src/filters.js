@@ -303,7 +303,6 @@ const lookup = (value) => {
 
     lookup[NOT_COMPLETE_PUPILLAGE_REASONS.TRANSFERRED] = 'Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar';
     lookup[NOT_COMPLETE_PUPILLAGE_REASONS.CALLED_PRE_2002] = 'Called to the Bar prior to 1 January 2002';
-    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.OTHER] = 'Other - Please detail why you were exempt from undertaking pupillage by the Bar Standards Board';
 
     lookup[LANGUAGES.ENGLISH] = 'English';
     lookup[LANGUAGES.WELSH] = 'Cymraeg';
