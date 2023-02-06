@@ -312,15 +312,24 @@
       </div>
 
       <div class="btn-group govuk-!-margin-top-9">
-        <RouterLink
+        <a
           v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
           class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
-          style="margin-bottom: 0;"
           data-module="govuk-button"
-          :to="{ name: 'eligibility' }"
+          style="margin-bottom: 0;"
+          @click.prevent="apply(LANGUAGES.ENGLISH)"
         >
           Apply
-        </RouterLink>
+        </a>
+        <a
+          v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+          class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
+          data-module="govuk-button"
+          style="margin-bottom: 0;"
+          @click.prevent="apply(LANGUAGES.WELSH)"
+        >
+          Apply in Welsh
+        </a>
       </div>
     </div>
   </div>
