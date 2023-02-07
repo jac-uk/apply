@@ -137,7 +137,7 @@ export default {
 
         if (this.type && this.type === 'tel' && value) {
           // remove plus, hyphen, and space before regex validation
-          if (!this.regex.tel.test(value)) {
+          if (!this.regex.tel.test(value.replace(/ /g,''))) {
             this.setError(`Enter a valid phone number for ${this.label}`);
           }
         }
