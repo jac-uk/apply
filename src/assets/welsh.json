@@ -534,6 +534,7 @@
   "Do not nominate the Lead Judge, the Master of the Rolls, a Head of Division, the Statutory Consultees or the Appropriate Authorities whose names can be found in the": "Peidiwch ag enwebu’r Prif Farnwr, Meistr y Rholiau, Pennaeth Adran, yr Ymgyngoreion Statudol na’r Awdurdodau Priodol y gellir dod o hyd i’w henwau yn y",
   "for this exercise.": "ar gyfer yr ymarfer hwn.",
   "Additional preferences": "Dewisiadau ychwanegol",
+  "Additional Preferences": "Dewisiadau Ychwanegol",
   "Additional working preferences": "Dewisiadau gweithio ychwanegol",
   "Location preferences - Social Entitlement Chamber": "Y lleoliad fyddai orau gennych – Siambr Hawliau Cymdeithasol",
   "Please rank your preference of location for the Social Entitlement Chamber": "Rhestrwch y lleoliadau fyddai orau gennych mewn trefn ar gyfer y Siambr Hawliau Cymdeithasol",
@@ -565,6 +566,7 @@
   "Leicester": "Caerlŷr",
   "Darlington": "Darlington",
   "Health, Education and Social Care Chamber - Specialist Post": "Siambr Iechyd, Addysg a Gofal Cymdeithasol - Swydd arbenigol",
+  "Health, Education and Social Care Chamber": "Siambr Iechyd, Addysg a Gofal Cymdeithasol",
   "There are seven specialist vacancies in the Health, Education and Social Care jurisdiction in the Health, Education, and Social Care Chamber. Do you wish to be considered for one of these posts?": "Mae saith swydd wag arbenigol yn yr awdurdodaeth Iechyd, Addysg a Gofal Cymdeithasol yn y Siambr Iechyd, Addysg, a Gofal Cymdeithasol. Ydych chi'n dymuno cael eich ystyried ar gyfer un o'r swyddi hyn?",
   "Property Chamber - Specialist post": "Siambr Eiddo - Swydd Arbenigol",
   "There are seven specialist vacancies in the Property Chamber. Do you wish to be considered for one of these posts?": "Mae saith swydd wag arbenigol yn y Siambr Eiddo. Ydych chi'n dymuno cael eich ystyried ar gyfer un o'r swyddi hyn?",
@@ -585,4 +587,4 @@
   "Can you work for at least 5 years before reaching the retirement age of 75?": "Allwch chi weithio am o leiaf 5 mlynedd cyn cyrraedd oed ymddeol, sef 75?",
   "Choose file": "Dewis ffeil",
   "No file chosen": "Dim ffeil wedi'i ddewis"
- }
+}
