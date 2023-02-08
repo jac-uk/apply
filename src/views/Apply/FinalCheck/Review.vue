@@ -261,7 +261,7 @@
           <div v-if="applicationParts.partTimeWorkingPreferences && vacancy.yesSalaryDetails">
             <div class="govuk-!-margin-top-9">
               <h2 class="govuk-heading-l">
-                Part Time Working Preferences
+                Part-time working preferences
               </h2>
 
               <dl class="govuk-summary-list">
