@@ -410,10 +410,10 @@
                     class="govuk-list"
                   >
                     <li v-if="item.endDate">
-                      {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                      <span>{{ item.startDate | formatDate }}</span> to <span>{{ item.endDate | formatDate }}</span>
                     </li>
                     <li v-else>
-                      {{ item.startDate | formatDate }} — current
+                      <span>{{ item.startDate | formatDate }}</span> — <span>current</span>
                     </li>
                   </ul>
                 </dd>

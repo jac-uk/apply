@@ -596,5 +596,17 @@
   "(Single choice)": "(Un dewis)",
   "Answer not supplied": "Ateb heb ei ddarparu",
   "Are you applying for a Welsh Post?": "Ydych chi'n ymgeisio am swydd Gymraeg?",
-  "No Law-related tasks provided": "Dim tasgau sy'n gysylltiedig â'r Gyfraith wedi cael eu darparu"
+  "No Law-related tasks provided": "Dim tasgau sy'n gysylltiedig â'r Gyfraith wedi cael eu darparu",
+  "January": "Ionawr",
+  "February": "Chwefror",
+  "March": "Mawrth",
+  "April": "Ebrill",
+  "May": "Mai",
+  "June": "Mehefin",
+  "July": "Gorffennaf",
+  "August": "Awst",
+  "September": "Medi",
+  "October": "Hydref",
+  "November": "Tachwedd",
+  "December": "Rhagfyr"
 }
