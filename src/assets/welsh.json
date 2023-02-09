@@ -586,5 +586,15 @@
   "Have you sat for at least 30 days in one or all of these appointments?": "Ydych chi wedi eistedd am o leiaf 30 diwrnod mewn un o’r swyddi hyn neu’r cwbl ohonynt?",
   "Can you work for at least 5 years before reaching the retirement age of 75?": "Allwch chi weithio am o leiaf 5 mlynedd cyn cyrraedd oed ymddeol, sef 75?",
   "Choose file": "Dewis ffeil",
-  "No file chosen": "Dim ffeil wedi'i ddewis"
+  "No file chosen": "Dim ffeil wedi'i ddewis",
+  "Other professional background": "Cefndir proffesiynol arall",
+  "Please rank your choice of chambers. As business requirements may change throughout the exercise for appointment in the First-tier Tribunal, you are required to rank all chambers in order of preference on your application; one being your most preferred choice and four being your least preferred.": "Rhowch eich dewis o siambrau yn ôl trefn. Gan y gall gofynion busnes newid drwy gydol yr ymarfer ar gyfer penodiad yn y Tribiwnlys Haen Gyntaf, mae'n ofynnol i chi osod pob siambr yn nhrefn eich dewis ar eich cais; un yw'r dewis sydd orau gennych a phedwar yw’r un lleiaf ffafriol gennych.",
+  "All posts are suitable for SPTW at a minimum of 50%. Job share: An example of this role being shared by two persons could be a 50% split.  The exact working pattern will be agreed between the senior judiciary and the successful candidate at the time of appointment.": "Mae pob swydd yn addas ar gyfer SPTW ar o leiaf 50%. Rhannu swydd: Enghraifft o'r rôl hon yn cael ei rhannu gan ddau unigolyn fyddai 50% yr un. Cytunir ar yr union batrwm gwaith rhwng yr uwch farnwriaeth a'r ymgeisydd llwyddiannus ar yr adeg penodi.",
+  "Ranked choice": "Dewis cyntaf",
+  "(Ranked choice)": "(Dewis cyntaf)",
+  "Single choice": "Un dewis",
+  "(Single choice)": "(Un dewis)",
+  "Answer not supplied": "Ateb heb ei ddarparu",
+  "Are you applying for a Welsh Post?": "Ydych chi'n ymgeisio am swydd Gymraeg?",
+  "No Law-related tasks provided": "Dim tasgau sy'n gysylltiedig â'r Gyfraith wedi cael eu darparu"
 }
