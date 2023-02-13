@@ -24,6 +24,14 @@
             </li>
             <li class="moj-side-navigation__item">
               <RouterLink
+                class="govuk-link"
+                :to="{ name: 'profile' }"
+              >
+                Your profile
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
                 class="govuk-link info-link--nav-vacancies--applications"
                 :to="{ name: 'applications' }"
               >
@@ -47,7 +55,7 @@
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
         <h3 class="govuk-heading-l">
-          Vacancies
+          Your Profile
         </h3>
 
         <div class="govuk-grid-row">
