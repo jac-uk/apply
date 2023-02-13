@@ -536,6 +536,7 @@
   "Additional preferences": "Dewisiadau ychwanegol",
   "Additional Preferences": "Dewisiadau Ychwanegol",
   "Additional working preferences": "Dewisiadau gweithio ychwanegol",
+  "Social Entitlement Chamber": "Siambr Hawliadau Cymdeithasol",
   "Location preferences - Social Entitlement Chamber": "Y lleoliad fyddai orau gennych – Siambr Hawliau Cymdeithasol",
   "Please rank your preference of location for the Social Entitlement Chamber": "Rhestrwch y lleoliadau fyddai orau gennych mewn trefn ar gyfer y Siambr Hawliau Cymdeithasol",
   "Midlands": "Canolbarth Lloegr",
@@ -544,6 +545,7 @@
   "South East": "De Ddwyrain Lloegr",
   "London": "Llundain",
   "Wales and South West": "Cymru a De-orllewin Lloegr",
+  "Immigration and Asylum Chamber": "Siambr Mewnfudo a Lloches",
   "Location preferences - Immigration and Asylum Chamber": "Y lleoliad fyddai orau gennych - Siambr Mewnfudo a Lloches",
   "Please rank your preference of location for the Immigration and Asylum Chamber": "Rhestrwch y lleoliadau fyddai orau gennych mewn trefn ar gyfer y Siambr Mewnfudo a Lloches",
   "London - Taylor House, Hatton Cross": "Llundain - Taylor House, Hatton Cross",
@@ -569,6 +571,7 @@
   "Health, Education and Social Care Chamber": "Siambr Iechyd, Addysg a Gofal Cymdeithasol",
   "There are seven specialist vacancies in the Health, Education and Social Care jurisdiction in the Health, Education, and Social Care Chamber. Do you wish to be considered for one of these posts?": "Mae saith swydd wag arbenigol yn yr awdurdodaeth Iechyd, Addysg a Gofal Cymdeithasol yn y Siambr Iechyd, Addysg, a Gofal Cymdeithasol. Ydych chi'n dymuno cael eich ystyried ar gyfer un o'r swyddi hyn?",
   "Property Chamber - Specialist post": "Siambr Eiddo - Swydd Arbenigol",
+  "Property Chamber": "Siambr Eiddo",
   "There are seven specialist vacancies in the Property Chamber. Do you wish to be considered for one of these posts?": "Mae saith swydd wag arbenigol yn y Siambr Eiddo. Ydych chi'n dymuno cael eich ystyried ar gyfer un o'r swyddi hyn?",
   "Welsh posts": "Swyddi yng Nghymru",
   "Are you applying for a post in Wales?": "Ydych chi'n gwneud cais am swydd yng Nghymru?",
@@ -588,7 +591,7 @@
   "Choose file": "Dewis ffeil",
   "No file chosen": "Dim ffeil wedi'i ddewis",
   "Other professional background": "Cefndir proffesiynol arall",
-  "Please rank your choice of chambers. As business requirements may change throughout the exercise for appointment in the First-tier Tribunal, you are required to rank all chambers in order of preference on your application; one being your most preferred choice and four being your least preferred.": "Rhowch eich dewis o siambrau yn ôl trefn. Gan y gall gofynion busnes newid drwy gydol yr ymarfer ar gyfer penodiad yn y Tribiwnlys Haen Gyntaf, mae'n ofynnol i chi osod pob siambr yn nhrefn eich dewis ar eich cais; un yw'r dewis sydd orau gennych a phedwar yw’r un lleiaf ffafriol gennych.",
+  "Please rank your choice of chambers. As business requirements may change throughout the exercise for appointment in the First-tier Tribunal, you are required to rank all chambers in order of preference on your application; one being your most preferred choice and four being your least preferred.": "Rhowch eich dewis o siambrau mewn trefn. Gan y gall gofynion busnes newid drwy gydol yr ymarfer i benodi yn y Tribiwnlys Haen Gyntaf, mae'n ofynnol i chi osod pob siambr yn nhrefn eich dewis ar eich cais; un yw’r dewis sydd orau gennych a phedwar yw eich dewis lleiaf ffafriol.",
   "All posts are suitable for SPTW at a minimum of 50%. Job share: An example of this role being shared by two persons could be a 50% split.  The exact working pattern will be agreed between the senior judiciary and the successful candidate at the time of appointment.": "Mae pob swydd yn addas ar gyfer SPTW ar o leiaf 50%. Rhannu swydd: Enghraifft o'r rôl hon yn cael ei rhannu gan ddau unigolyn fyddai 50% yr un. Cytunir ar yr union batrwm gwaith rhwng yr uwch farnwriaeth a'r ymgeisydd llwyddiannus ar yr adeg penodi.",
   "Ranked choice": "Dewis cyntaf",
   "(Ranked choice)": "(Dewis cyntaf)",
@@ -609,5 +612,7 @@
   "October": "Hydref",
   "November": "Tachwedd",
   "December": "Rhagfyr",
-  "to": "i"
+  "to": "i",
+  "Please add details of your fixed penalty notice here": "Ychwanegwch fanylion eich hysbysiad cosb benodedig yma",
+  "Other Black/African/Caribbean background": "Cefndir Du/Affricanaidd/Caribïaidd arall"
 }
