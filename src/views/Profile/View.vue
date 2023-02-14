@@ -190,7 +190,7 @@
         button-text="Sign out"
         :cancelable="false"
         title="Action"
-        message="Please re-sign in due to the update of your email."
+        message="Please sign in due to the update of your email."
         content-style="text-align: center;"
         @confirmed="signOut"
       />
