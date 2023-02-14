@@ -10,7 +10,10 @@
         <div class="modal__title govuk-!-padding-2 govuk-heading-m">
           {{ title }}
         </div>
-        <div class="modal__content govuk-!-padding-4">
+        <div
+          class="modal__content govuk-!-padding-4"
+          :style="contentStyle"
+        >
           <p class="modal__message govuk-body-l">
             {{ message }}
           </p>
@@ -56,6 +59,10 @@ export default {
     message: {
       type: String,
       default: 'Please Confirm',
+    },
+    contentStyle: {
+      type: String,
+      default: '',
     },
   },
   data(){

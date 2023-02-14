@@ -184,14 +184,29 @@
           </div>
         </div>
       </div>
+
+      <Modal
+        ref="modalRef"
+        button-text="Sign out"
+        :cancelable="false"
+        title="Action"
+        message="Please re-sign in due to the update of your email."
+        content-style="text-align: center;"
+        @confirmed="signOut"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { auth } from '@/firebase';
+import Modal from '@/components/Page/Modal';
+
 export default {
   name: 'Profile',
-  components: {},
+  components: {
+    Modal,
+  },
   data() {
     return {
     };
@@ -203,8 +218,20 @@ export default {
   },
   async mounted() {
     await this.$store.dispatch('candidate/bind');
+
+    // need to sign out if email has been updated
+    if (this.personalDetails.email !== this.$store.state.auth.currentUser.email) {
+      this.openModal();
+    }
   },
   methods: {
+    openModal(){
+      this.$refs.modalRef.openModal();
+    },
+    signOut() {
+      auth.signOut();
+      this.$router.push({ name: 'sign-in' });
+    },
   },
 };
 </script>
