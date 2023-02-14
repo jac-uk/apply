@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="govuk-grid-row">
-      <div
-        v-if="isSignedIn"
-        class="govuk-grid-column-one-quarter"
-      >
+      <div class="govuk-grid-column-one-quarter">
         <nav
           class="moj-side-navigation"
           aria-label="Side navigation"
@@ -50,24 +47,19 @@
         </nav>
       </div>
 
-      <div
-        class="govuk-!-padding-top-4"
-        :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
-      >
+      <div class="govuk-!-padding-top-4 govuk-grid-column-three-quarters">
         <div
           v-if="personalDetails"
           class="govuk-grid-row"
         >
           <div class="govuk-grid-column-three-quarters">
-            <div>
-              <h3
-                class="govuk-heading-l"
-                style="display:inline-block;"
-              >
-                Your profile
-              </h3>
+            <h3 class="govuk-heading-l">
+              Your profile
+            </h3>
+
+            <div class="text-right">
               <RouterLink
-                class="govuk-link govuk-body-m change-link"
+                class="govuk-link govuk-body-m"
                 style="display:inline-block;"
                 :to="{ name: 'profile-edit' }"
               >
@@ -158,9 +150,7 @@
                   {{ personalDetails.nationalInsuranceNumber }}
                 </dd>
               </div>
-            </dl>
 
-            <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                   Email
@@ -169,7 +159,19 @@
                   {{ personalDetails.email }}
                 </dd>
               </div>
+            </dl>
 
+            <div class="text-right">
+              <RouterLink
+                class="govuk-link govuk-body-m"
+                style="display:inline-block;"
+                :to="{ name: 'profile-password-edit' }"
+              >
+                Edit
+              </RouterLink>
+            </div>
+
+            <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
                   Password
@@ -195,9 +197,6 @@ export default {
     };
   },
   computed: {
-    isSignedIn() {
-      return this.$store.getters['auth/isSignedIn'];
-    },
     personalDetails() {
       return this.$store.getters['candidate/personalDetails']();
     },

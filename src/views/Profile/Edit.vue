@@ -1,10 +1,7 @@
 <template>
   <div>
     <div class="govuk-grid-row">
-      <div
-        v-if="isSignedIn"
-        class="govuk-grid-column-one-quarter"
-      >
+      <div class="govuk-grid-column-one-quarter">
         <nav
           class="moj-side-navigation"
           aria-label="Side navigation"
@@ -50,25 +47,19 @@
         </nav>
       </div>
 
-      <div
-        class="govuk-!-padding-top-4"
-        :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
-      >
+      <div class="govuk-!-padding-top-4 govuk-grid-column-three-quarters">
         <div
           v-if="personalDetails"
           class="govuk-grid-row"
         >
           <div class="govuk-grid-column-three-quarters">
-            <div>
-              <h3
-                class="govuk-heading-l"
-                style="display:inline-block;"
-              >
-                Your profile
-              </h3>
+            <h3 class="govuk-heading-l">
+              Your profile
+            </h3>
+            <div class="text-right govuk-!-margin-bottom-4">
               <a
-                class="govuk-link govuk-body-m change-link"
-                style="display:inline-block; cursor: pointer;"
+                class="govuk-link govuk-body-m"
+                style="cursor: pointer;"
                 @click.prevent="save"
               >
                 Save
@@ -149,16 +140,6 @@
               type="email"
               required
             />
-
-            <Password
-              id="password"
-              v-model="password"
-              label="Password"
-              :hint="`For security reasons it should be ${minPasswordLength} or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *).`"
-              type="new-password"
-              :min-length="minPasswordLength"
-              required
-            />
           </div>
         </div>
       </div>
@@ -167,11 +148,11 @@
 </template>
 
 <script>
+import { functions } from '@/firebase';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
-import Password from '@/components/Form/Password';
 
 export default {
   name: 'ProfileEdit',
@@ -179,7 +160,6 @@ export default {
     ErrorSummary,
     TextField,
     DateInput,
-    Password,
   },
   extends: Form,
   data() {
@@ -188,11 +168,6 @@ export default {
       minPasswordLength: 12,
       password: '',
     };
-  },
-  computed: {
-    isSignedIn() {
-      return this.$store.getters['auth/isSignedIn'];
-    },
   },
   async mounted() {
     if (!this.$store.getters['candidate/personalDetails']()) {
@@ -215,11 +190,44 @@ export default {
   methods: {
     async save() {
       this.validate();
-      if (this.isValid()) {
-        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        // TODO: update email password
-        this.$router.push({ name: 'profile' });
+      if (this.isValid()) {        
+        const data = this.$store.getters['candidate/personalDetails']();
+        let isSuccess = true;
+        if (this.personalDetails.email !== data.email) {
+          // update email in authentication database
+          isSuccess = await this.updateEmail(data.email, this.personalDetails.email);
+        }
+
+        if (isSuccess) {
+          await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+          this.$router.push({ name: 'profile' });
+        }
       }
+    },
+    async updateEmail(currentEmailAddress, newEmailAddress) {
+      let isSuccess = false;
+      try {
+        const res = await functions.httpsCallable('updateEmailAddress')({
+          currentEmailAddress,
+          newEmailAddress,
+        });
+        const result = res.data;
+        if (result.status === 'success') {
+          isSuccess = true;
+        } else {
+          if (result.data.code === 'auth/email-already-exists') {
+            this.errors = [{ id: 'email', message: 'An account already exists with this email address.' }];
+          } else if (result.data.code === 'auth/invalid-email') {
+            this.errors = [{ id: 'email', message: result.data.message }];
+          } else {
+            this.errors = [{ id: 'email', message: 'Failed to update email address.' }];
+          }
+        }
+      } catch (error) {
+        this.errors = [{ id: 'email', message: 'Failed to perform action.' }];
+      }
+
+      return isSuccess;
     },
   },
 };
