@@ -45,8 +45,9 @@ export default {
       if (closeDate === null) return null;
       return new Date(closeDate);
     },
-    isWelshPosts: (state) => {
-      return state.record ? state.record.welshPosts : false;
+    enableApplyInWelsh: (state) => {
+      // exclude exercise 155 on production
+      return state.record ? state.record.welshPosts && state.record.referenceNumber !== 'JAC00155' : false;
     },
   },
 };

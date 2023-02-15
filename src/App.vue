@@ -36,7 +36,7 @@
           <Breadcrumb />
 
           <div
-            v-if="$route.meta.isMultilanguage && isWelshPosts"
+            v-if="$route.meta.isMultilanguage && enableApplyInWelsh"
             style="display: flex; justify-content: flex-end; gap: 10px;"
           >
             <button
@@ -107,8 +107,8 @@ export default {
     vacancies() {
       return this.$store.getters['vacancies/openVacancies'];
     },
-    isWelshPosts() {
-      return this.$store.getters['vacancy/isWelshPosts'];
+    enableApplyInWelsh() {
+      return this.$store.getters['vacancy/enableApplyInWelsh'];
     },
     validInvitations() {
       const result = [];

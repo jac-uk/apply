@@ -139,7 +139,7 @@
             Apply
           </a>
           <a
-            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -322,7 +322,7 @@
           Apply
         </a>
         <a
-          v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+          v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
           class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
           data-module="govuk-button"
           style="margin-bottom: 0;"
@@ -431,6 +431,9 @@ export default {
     },
     showLocation() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
+    },
+    enableApplyInWelsh() {
+      return this.$store.getters['vacancy/enableApplyInWelsh'];
     },
   },
   mounted() {
