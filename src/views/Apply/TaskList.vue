@@ -31,17 +31,6 @@
         We need more information from you. Please update your application.
       </Banner>
 
-      <p
-        v-if="vacancy.welshPosts"
-        class="govuk-!-margin-bottom-8"
-      >
-        <span class="govuk-body">Os ydych am ffurflen gais yn y Gymraeg cysylltwch a </span>
-        <a
-          :href="`mailto:${welshPostsContactMailbox}?subject=Re:${welshPostsEmailSubject}`"
-          class="govuk-body govuk-link"
-        >{{ welshPostsContactMailbox }}</a>
-      </p>
-
       <TaskList>
         <TaskGroup
           title="Account profile"

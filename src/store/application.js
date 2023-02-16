@@ -3,6 +3,7 @@ import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
+import { LANGUAGES } from '@/helpers/constants';
 
 const collection = firestore.collection('applications');
 
@@ -30,6 +31,9 @@ export default {
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('record');
     }),
+    setLanguage: ({ commit }, language) => {
+      commit('setLanguage', language);
+    },
     save: async ({ rootState, state, dispatch }, data) => {
       if (state.record) {
         const ref = collection.doc(state.record.id);
@@ -52,6 +56,12 @@ export default {
             status: 'applied',
             appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
           };
+
+          // check if application was made in Welsh
+          if (state.language) {
+            data['_language'] = state.language;
+          }
+
           await dispatch('save', data);
           return;
         }
@@ -89,7 +99,13 @@ export default {
       }
     },
   },
+  mutations: {
+    setLanguage(state, language) {
+      state.language = language;
+    },
+  },
   state: {
+    language: LANGUAGES.ENGLISH,
     record: null,
   },
   getters: {

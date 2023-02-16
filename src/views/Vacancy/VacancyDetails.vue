@@ -129,20 +129,29 @@
         </p>
 
         <div class="btn-group">
-          <RouterLink
+          <a
             v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
-            style="margin-bottom: 0;"
             data-module="govuk-button"
-            :to="{ name: 'eligibility' }"
+            style="margin-bottom: 0;"
+            @click.prevent="apply(LANGUAGES.ENGLISH)"
           >
             Apply
-          </RouterLink>
+          </a>
+          <a
+            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
+            class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
+            data-module="govuk-button"
+            style="margin-bottom: 0;"
+            @click.prevent="apply(LANGUAGES.WELSH)"
+          >
+            Apply in Welsh
+          </a>
           <RouterLink
             v-else-if="userIsInvited && hasOpenInvite"
             class="govuk-button info-link--vacancy-details--you-been-invited-to-this-exercise"
-            style="margin-bottom: 0;"
             data-module="govuk-button"
+            style="margin-bottom: 0;"
             :to="{ name: 'eligibility' }"
           >
             You've been invited to this exercise, click here to apply
@@ -303,15 +312,24 @@
       </div>
 
       <div class="btn-group govuk-!-margin-top-9">
-        <RouterLink
+        <a
           v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
           class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
-          style="margin-bottom: 0;"
           data-module="govuk-button"
-          :to="{ name: 'eligibility' }"
+          style="margin-bottom: 0;"
+          @click.prevent="apply(LANGUAGES.ENGLISH)"
         >
           Apply
-        </RouterLink>
+        </a>
+        <a
+          v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
+          class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
+          data-module="govuk-button"
+          style="margin-bottom: 0;"
+          @click.prevent="apply(LANGUAGES.WELSH)"
+        >
+          Apply in Welsh
+        </a>
       </div>
     </div>
   </div>
@@ -322,7 +340,7 @@ import Timeline from '@/components/Page/Timeline';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink';
-import { ADVERT_TYPES } from '@/helpers/constants';
+import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
@@ -336,6 +354,7 @@ export default {
     return {
       activeSideNavLink: 'overview',
       isVacancyOpen: false,
+      LANGUAGES,
       isExpandTimeline: false,
     };
   },
@@ -413,6 +432,9 @@ export default {
     showLocation() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC ? true : false;
     },
+    enableApplyInWelsh() {
+      return this.$store.getters['vacancy/enableApplyInWelsh'];
+    },
   },
   mounted() {
     this.isVacancyOpen = this.$store.getters['vacancy/isOpen']();
@@ -425,6 +447,10 @@ export default {
     }
   },
   methods: {
+    apply(lang) {
+      this.$store.dispatch('application/setLanguage', lang);
+      this.$router.push({ name: 'eligibility' });
+    },
     onSideNavLinkClick(id) {
       if (this.$refs[id]) {
         this.$refs[id].scrollIntoView({

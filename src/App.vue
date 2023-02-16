@@ -34,6 +34,27 @@
             </Banner>
           </div>
           <Breadcrumb />
+
+          <div
+            v-if="$route.meta.isMultilanguage && enableApplyInWelsh"
+            style="display: flex; justify-content: flex-end; gap: 10px;"
+          >
+            <button
+              v-if="language === LANGUAGES.WELSH"
+              class="govuk-button govuk-button--success"
+              @click="setLanguage(LANGUAGES.ENGLISH)"
+            >
+              {{ LANGUAGES.ENGLISH | lookup }}
+            </button>
+            <button
+              v-else-if="language === LANGUAGES.ENGLISH"
+              class="govuk-button govuk-button--success"
+              @click="setLanguage(LANGUAGES.WELSH)"
+            >
+              {{ LANGUAGES.WELSH | lookup }}
+            </button>
+          </div>
+
           <RouterView />
         </div>
       </main>
@@ -53,6 +74,8 @@ import Banner from '@/components/Page/Banner';
 import LoadingMessage from '@/components/LoadingMessage';
 import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop';
+import { updateLangToTextNode } from '@/helpers/language';
+import { LANGUAGES } from '@/helpers/constants';
 
 export default {
   name: 'App',
@@ -68,9 +91,13 @@ export default {
     return {
       loaded: false,
       loadFailed: false,
+      LANGUAGES,
     };
   },
   computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
     fullPageMode() {
       return this.$route.meta.fullPageMode;
     },
@@ -79,6 +106,9 @@ export default {
     },
     vacancies() {
       return this.$store.getters['vacancies/openVacancies'];
+    },
+    enableApplyInWelsh() {
+      return this.$store.getters['vacancy/enableApplyInWelsh'];
     },
     validInvitations() {
       const result = [];
@@ -131,6 +161,19 @@ export default {
     } catch {
       this.loadFailed = true;
     }
+  },
+  updated: async function() {
+    if (this.$route.meta.isMultilanguage) {
+      setTimeout(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      }, 0);
+    }
+  },
+  methods: {
+    setLanguage(lang) {
+      this.$store.dispatch('application/setLanguage', lang);
+      updateLangToTextNode(document.querySelector('#main-content'), lang);
+    },
   },
 };
 </script>
