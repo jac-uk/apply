@@ -106,9 +106,6 @@ export default {
       this.validate();
       if (this.isValid()) {
         try {
-          if (this.password !== '1qazXSW@3edc') {
-            this.password = '';
-          }
           await auth.currentUser.updatePassword(this.password);
           this.$router.push({ name: 'profile' });
         } catch (error) {
