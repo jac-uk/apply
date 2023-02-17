@@ -100,22 +100,32 @@
         <p v-if="vacancy.location && showLocation">
           <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
         </p>
-        <p v-if="vacancy.appointmentType == 'salaried' && showAppointmentType">
+        <p v-if="showAppointmentType">
           <span class="govuk-body govuk-!-font-weight-bold">
             Salary/Fee:
           </span>
-          <span
-            v-if="vacancy.salaryGrouping"
-            class="govuk-body"
-          >
-            {{ vacancy.salaryGrouping | lookup }}
-          </span>
-          <span
-            v-if="vacancy.salary"
-            class="govuk-body"
-          >
-            {{ vacancy.salary | formatCurrency }}
-          </span>
+          <template v-if="vacancy.appointmentType == 'salaried'">
+            <span
+              v-if="vacancy.salaryGrouping"
+              class="govuk-body"
+            >
+              {{ vacancy.salaryGrouping | lookup }}
+            </span>
+            <span
+              v-if="vacancy.salary"
+              class="govuk-body"
+            >
+              {{ vacancy.salary | formatCurrency }}
+            </span>
+          </template>
+          <template v-else-if="vacancy.appointmentType == 'fee-paid'">
+            <span
+              v-if="vacancy.feePaidFee"
+              class="govuk-body"
+            >
+              {{ vacancy.feePaidFee | formatCurrency }}
+            </span>
+          </template>
         </p>
         <p
           v-if="vacancy.exerciseMailbox"
