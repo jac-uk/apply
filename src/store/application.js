@@ -1,6 +1,7 @@
 import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
+import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
 import { LANGUAGES } from '@/helpers/constants';
@@ -61,6 +62,13 @@ export default {
           if (state.language) {
             data['_language'] = state.language;
           }
+
+          // update browser info
+          const browserInfo = getBrowserInfo();
+          data.client = {
+            ip: await getIPAddress(),
+            ...browserInfo,
+          };
 
           await dispatch('save', data);
           return;
