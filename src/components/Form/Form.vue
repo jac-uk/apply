@@ -40,10 +40,8 @@ export default {
           this.errors.push({ id: item, message: this.errorObject[item] });
         }
       }
-      if (this.errors.length) {
-        this.scrollToErrorSummary();
-      } 
       if (!this.isValid()) {
+        this.scrollToErrorSummary();
         setTimeout(() => {
           updateLangToTextNode(document.querySelector('#main-content'), this.language);
         }, 0);
@@ -52,7 +50,6 @@ export default {
     scrollToErrorSummary(){
       //This is just scrolling to top of page
       this.$root.$el.scrollIntoView();
-    },
     },
     isValid() {
       return this.errors.length === 0;
