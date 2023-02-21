@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { updateLangToTextNode } from '@/helpers/language';
+
 export default {
   name: 'Form',
   data() {
@@ -10,6 +12,11 @@ export default {
       errorObject: {},
       errors: [],
     };
+  },
+  computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
   },
   mounted: function () {
     this.$root.$on('handle-error', this.handleError);
@@ -35,11 +42,17 @@ export default {
       }
       if (this.errors.length) {
         this.scrollToErrorSummary();
+      } 
+      if (!this.isValid()) {
+        setTimeout(() => {
+          updateLangToTextNode(document.querySelector('#main-content'), this.language);
+        }, 0);
       }
     },
     scrollToErrorSummary(){
       //This is just scrolling to top of page
       this.$root.$el.scrollIntoView();
+    },
     },
     isValid() {
       return this.errors.length === 0;

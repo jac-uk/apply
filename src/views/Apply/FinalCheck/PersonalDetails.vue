@@ -68,7 +68,7 @@
       class="govuk-summary-list__row"
     >
       <dt class="govuk-summary-list__key">
-        Previously known name(s)
+        Previous known name(s)
       </dt>
       <dd class="govuk-summary-list__value">
         {{ application.personalDetails.previousNames }}

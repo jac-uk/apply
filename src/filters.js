@@ -1,4 +1,4 @@
-import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
+import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES } from '@/helpers/constants';
 
 const capitalize = (value) => {
   if (!value) return '';
@@ -23,6 +23,8 @@ const formatDate = (value, type) => {
       return `${objDate.toLocaleString('en-GB', { month: 'long' })} ${objDate.getUTCFullYear()}`;
     case 'datetime':
       return objDate.toLocaleString('en-GB');
+    case 'datetime-without-second':
+      return objDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
     default:
       return objDate.toLocaleDateString('en-GB');
     }
@@ -301,7 +303,9 @@ const lookup = (value) => {
 
     lookup[NOT_COMPLETE_PUPILLAGE_REASONS.TRANSFERRED] = 'Qualified solicitor, qualified lawyer from another jurisdiction, or a legal academic transferred to the Bar';
     lookup[NOT_COMPLETE_PUPILLAGE_REASONS.CALLED_PRE_2002] = 'Called to the Bar prior to 1 January 2002';
-    lookup[NOT_COMPLETE_PUPILLAGE_REASONS.OTHER] = 'Other - Please detail why you were exempt from undertaking pupillage by the Bar Standards Board';
+
+    lookup[LANGUAGES.ENGLISH] = 'English';
+    lookup[LANGUAGES.WELSH] = 'Cymraeg';
 
     return lookup[value] || value;
   }

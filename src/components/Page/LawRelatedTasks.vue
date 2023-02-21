@@ -76,6 +76,7 @@ import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
 import FormFieldError from '@/components/Form/FormFieldError';
 import FormField from '@/components/Form/FormField';
+import { updateLangToTextNode } from '@/helpers/language';
 
 export default {
   name: 'LawRelatedTasks',
@@ -138,6 +139,9 @@ export default {
         this.$emit('update:otherTasks', val);
       },
     },
+    language() {
+      return this.$store.state.application.language;
+    },
   },
   watch: {
     localTaskDetails: {
@@ -146,6 +150,11 @@ export default {
       },
       deep: true,
     },
+  },
+  updated: async function() {
+    setTimeout(() => {
+      updateLangToTextNode(document.querySelector('#main-content'), this.language);
+    }, 100);
   },
   methods: {
     validate() {

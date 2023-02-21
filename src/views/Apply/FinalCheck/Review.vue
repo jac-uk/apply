@@ -261,7 +261,7 @@
           <div v-if="applicationParts.partTimeWorkingPreferences && vacancy.yesSalaryDetails">
             <div class="govuk-!-margin-top-9">
               <h2 class="govuk-heading-l">
-                Part Time Working Preferences
+                Part-time working preferences
               </h2>
 
               <dl class="govuk-summary-list">
@@ -410,10 +410,10 @@
                     class="govuk-list"
                   >
                     <li v-if="item.endDate">
-                      {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                      <span>{{ item.startDate | formatDate }}</span> to <span>{{ item.endDate | formatDate }}</span>
                     </li>
                     <li v-else>
-                      {{ item.startDate | formatDate }} — current
+                      <span>{{ item.startDate | formatDate }}</span> — <span>current</span>
                     </li>
                   </ul>
                 </dd>

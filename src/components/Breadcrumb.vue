@@ -28,6 +28,8 @@
 
 <script>
 import { capitalize } from '@/filters';
+import { updateLangToTextNode } from '@/helpers/language';
+import { LANGUAGES } from '@/helpers/constants';
 
 export default {
   name: 'Breadcrumb',
@@ -66,12 +68,43 @@ export default {
           title: item.meta.title ? item.meta.title : breadcrumbName,
           isLastItem: isLastItem,
         });
+
+        const hash = this.$route.hash;
+        if (combinedPath === '/vacancies' && hash) {
+          items.push({
+            href: `${combinedPath}#${hash}`,
+            title: this.getVacanciesTitle(hash),
+            isLastItem: true,
+          });
+        }
       });
       return items;
     },
   },
+  updated: async function() {
+    setTimeout(() => {
+      // switch back to English if current route does not support multilanguage
+      const lang = this.$route.meta.isMultilanguage ? this.language : LANGUAGES.ENGLISH;
+      updateLangToTextNode(document.querySelector('#main-content'), lang);
+    }, 0);
+    
+  },
   methods: {
     capitalize,
+    getVacanciesTitle(hash) {
+      let title = '';
+      switch (hash) {
+      case '#future':
+        title = 'Future applications';
+        break;
+      case '#closed':
+        title = 'Closed for applications';
+        break;
+      default:
+        title = 'Open for applications';
+      }
+      return title;
+    },
   },
 };
 </script>
