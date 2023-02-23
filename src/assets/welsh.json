@@ -62,6 +62,8 @@
   "Title": "Teitl",
   "First name": "Enw cyntaf",
   "Last name": "Cyfenw",
+  "Previous known name(s)": "Enw(au) a ddefnyddiwyd yn flaenorol",
+  "Have you ever been known by any other name? For example, life events which may have changed your name such as marriages, divorces, hyphenated names.": "A ydych wedi cael eich adnabod erioed wrth enw arall? Er enghraifft, gallech fod wedi newid eich enw ar ôl priodi, ysgaru, neu gymryd enw â chyplysnod.",
   "Professional name": "Enw proffesiynol",
   "Email address": "Cyfeiriad e-bost",
   "Phone number": "Rhif ffôn",

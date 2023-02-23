@@ -59,12 +59,25 @@
 <script>
 import BackLink from '@/components/BackLink';
 import StartButton from '@/components/Page/StartButton';
+import { updateLangToTextNode } from '@/helpers/language';
 
 export default {
   name: 'CharacterInformationDeclaration',
   components: {
     BackLink,
     StartButton,
+  },
+  computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
+  },
+  mounted() {
+    if (this.$route.meta.isMultilanguage) {
+      setTimeout(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      }, 0);
+    }
   },
   methods: {
     start() {
