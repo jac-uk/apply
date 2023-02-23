@@ -220,7 +220,7 @@ export default {
     await this.$store.dispatch('candidate/bind');
 
     // need to sign out if email has been updated
-    if (this.personalDetails.email !== this.$store.state.auth.currentUser.email) {
+    if (this.personalDetails.email && this.personalDetails.email !== this.$store.state.auth.currentUser.email) {
       this.openModal();
     }
   },
