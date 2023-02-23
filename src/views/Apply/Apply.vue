@@ -11,6 +11,7 @@
 <script>
 import LoadingMessage from '@/components/LoadingMessage';
 import { updateLangToTextNode } from '@/helpers/language';
+import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
 
 export default {
   name: 'Apply',
@@ -74,6 +75,13 @@ export default {
           if (this.language) {
             data['_language'] = this.language;
           }
+
+          // get browser info
+          const browserInfo = getBrowserInfo();
+          data.client = {
+            ip: await getIPAddress(),
+            ...browserInfo,
+          };
 
           const personalDetails = this.$store.getters['candidate/personalDetails']();
           if (personalDetails) {
