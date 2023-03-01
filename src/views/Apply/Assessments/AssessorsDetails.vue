@@ -18,10 +18,6 @@
         </p>
 
         <p class="govuk-body-l">
-          We'll only contact them if you pass the first round of shortlisting.
-        </p>
-
-        <p class="govuk-body-l">
           You should read the
           <a
             class="govuk-link info-link--independend-assessor--guidance-on-choosing-independent-assessor"
@@ -68,15 +64,15 @@
 
             <p>If you are unable to provide one of the above, consider another judge who has first-hand knowledge of your work. If you are unable to provide any judicial assessor, please contact us giving your reasons writing.</p>
             <p>If you are applying for a <strong>non-legal role</strong> you should choose assessors who know you well and who can give clear examples of your abilities.</p>
-            
+
             <p>A <u>personal assessor</u> could be:</p>
             <ul>
               <li>a former colleague, manager or client who is familiar with the way you work</li>
               <li>someone for whom you do voluntary work</li>
             </ul>
-        
+
             <p>If you have been on maternity leave or a career break, there is no time limit on how recently you have worked with your assessor, although where possible within the last 2 years is recommended so they can provide recent examples.</p>
-            
+
             <p>Do not nominate:</p>
             <ul>
               <li>another individual who is applying for a role in the same exercise</li>
