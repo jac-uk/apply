@@ -1003,8 +1003,6 @@
       </button>
     </form>
   </div>
-  </form>
-  </div>
 </template>
 
 <script>
