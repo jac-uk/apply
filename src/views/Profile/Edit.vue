@@ -140,6 +140,16 @@
               type="email"
               required
             />
+
+            <div class="text-right govuk-!-margin-top-8 govuk-!-margin-bottom-4">
+              <a
+                class="govuk-link govuk-body-m"
+                style="cursor: pointer;"
+                @click.prevent="save"
+              >
+                Save
+              </a>
+            </div>
           </div>
         </div>
       </div>
