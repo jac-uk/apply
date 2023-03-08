@@ -55,7 +55,7 @@
         :class="{ 'govuk-grid-column-three-quarters': isSignedIn, 'govuk-grid-column-full': !isSignedIn }"
       >
         <h3 class="govuk-heading-l">
-          Your Profile
+          Vacancies
         </h3>
 
         <div class="govuk-grid-row">
