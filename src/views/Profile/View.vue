@@ -187,9 +187,9 @@
 
       <Modal
         ref="modalRef"
-        button-text="Sign out"
+        button-text="OK"
         :cancelable="false"
-        title="Action"
+        title="Change of email address"
         message="Your email address has been changed. Please sign in again using your new email address."
         @confirmed="signOut"
       />
