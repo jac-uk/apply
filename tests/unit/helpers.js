@@ -29,6 +29,8 @@ const mocks = {
           jurisdictionQuestionType: '',
           shortlistingOutcomeDate: '',
           additionalWorkingPreferences: [],
+          qualifications: [],
+          otherQualifications: '',
         },
       },
       candidate: {
