@@ -24,6 +24,14 @@
             </li>
             <li class="moj-side-navigation__item">
               <RouterLink
+                class="govuk-link"
+                :to="{ name: 'profile' }"
+              >
+                Your profile
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
                 class="govuk-link info-link--nav-vacancies--applications"
                 :to="{ name: 'applications' }"
               >
