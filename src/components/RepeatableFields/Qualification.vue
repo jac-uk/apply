@@ -178,8 +178,5 @@ export default {
       return `qualification_not_complete_pupillage_reason_${this.index}`;
     },
   },
-  created() {
-    console.log(this.vacancy);
-  },
 };
 </script>
