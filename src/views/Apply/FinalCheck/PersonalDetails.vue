@@ -153,7 +153,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ application.personalDetails.reasonableAdjustments | toYesNo }}
+        <span for="reasonable-adjustments">{{ application.personalDetails.reasonableAdjustments | toYesNo }}</span>
         <ul
           v-if="application.personalDetails.reasonableAdjustmentsDetails"
           class="govuk-!-margin-top-1"

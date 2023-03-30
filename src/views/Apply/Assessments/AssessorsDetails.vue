@@ -63,7 +63,7 @@
             </ul>
 
             <p>If you are unable to provide one of the above, consider another judge who has first-hand knowledge of your work. If you are unable to provide any judicial assessor, please contact us giving your reasons writing.</p>
-            <p>If you are applying for a <strong>non-legal role</strong> you should choose assessors who know you well and who can give clear examples of your abilities.</p>
+            <p><span>If you are applying for a non-legal role</span> you should choose assessors who know you well and who can give clear examples of your abilities.</p>
 
             <p>A <u>personal assessor</u> could be:</p>
             <ul>
