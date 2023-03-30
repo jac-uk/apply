@@ -46,8 +46,9 @@ export default {
       return new Date(closeDate);
     },
     enableApplyInWelsh: (state) => {
-      // exclude exercise 155 on production
-      return state.record ? state.record.welshPosts && state.record.referenceNumber !== 'JAC00155' : false;
+      // exclude some exercises on production
+      const exclusiveReferenceNumbers = ['JAC00155', 'JAC00149'];
+      return state.record ? state.record.welshPosts && !exclusiveReferenceNumbers.includes(state.record.referenceNumber) : false;
     },
   },
 };
