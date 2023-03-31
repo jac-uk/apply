@@ -7,6 +7,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
+            id="other-character-issues"
             :data="characterInformation.furtherInformationDetails"
             :is-draft-application="true"
             :display-month-year-only="true"

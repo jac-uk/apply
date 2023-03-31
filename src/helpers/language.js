@@ -3,57 +3,69 @@ import welshData from '@/assets/welsh.json';
 
 const yesWelshList = [
   {
-    class: ['reasonable-adjustments', 'request-to-resign', 'criminal-offenses-cautions', 'disability', 'part-time-working-preferences'],
+    ids: ['reasonable-adjustments', 'request-to-resign', 'other-character-issues'],
+    welsh: 'Oes',
+  },
+  {
+    ids: ['disability', 'part-time-working-preferences'],
     welsh: 'OES',
   },
   {
-    class: ['first-generation-student'],
+    ids: ['first-generation-student'],
     welsh: 'IE',
   },
   {
-    class: ['changed-gender'],
+    ids: ['changed-gender'],
     welsh: 'YDY',
   },
   {
-    class: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'participated-in-judicial-workshadowing-scheme'],
+    ids: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'has-taken-paje'],
     welsh: 'DO',
   },
   {
-    class: ['applying-for-welsh-post', 'speak-welsh', 'applying-under-schedule-2-d'],
+    ids: ['applying-for-welsh-post'],
+    welsh: 'YDW YF',
+  },
+  {
+    ids: ['speak-welsh', 'applying-under-schedule-2-d'],
     welsh: 'YDWYF',
   },
   {
-    class: ['can-give-reasonable-los'],
+    ids: ['can-give-reasonable-los'],
     welsh: 'GALLAF',
   },
 ];
 const noWelshList = [
   {
-    class: ['reasonable-adjustments', 'request-to-resign', 'criminal-offenses-cautions', 'disability', 'part-time-working-preferences'],
+    ids: ['reasonable-adjustments', 'request-to-resign', 'other-character-issues'],
+    welsh: 'Nac Oes',
+  },
+  {
+    ids: ['disability', 'part-time-working-preferences'],
     welsh: 'NAC OES',
   },
   {
-    class: ['first-generation-student', 'read-and-write-welsh'],
+    ids: ['first-generation-student', 'read-and-write-welsh'],
     welsh: 'NA',
   },
   {
-    class: ['changed-gender'],
+    ids: ['changed-gender'],
     welsh: 'NAC YDY',
   },
   {
-    class: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'participated-in-judicial-workshadowing-scheme', 'has-taken-paje'],
+    ids: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'has-taken-paje'],
     welsh: 'NADDO',
   },
   {
-    class: ['applying-for-welsh-post'],
+    ids: ['applying-for-welsh-post'],
     welsh: 'NAC YF',
   },
   {
-    class: ['speak-welsh', 'applying-under-schedule-2-d'],
+    ids: ['speak-welsh', 'applying-under-schedule-2-d'],
     welsh: 'NAC YDWYF',
   },
   {
-    class: ['can-give-reasonable-los'],
+    ids: ['can-give-reasonable-los'],
     welsh: 'NA ALLAF',
   },
 ];
@@ -111,9 +123,9 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
       } else if (lang === LANGUAGES.WELSH) {
         if (nodeVal === 'Yes') {
           const match = yesWelshList.find(item => {
-            const name = node.parentNode.getAttribute('for');
+            const name = node.parentNode.getAttribute('data-welsh');
             if (!name) return false;
-            return item.class.some(c => name.includes(c));
+            return item.ids.some(c => name.includes(c));
           });
           if (match) {
             node.nodeValue = ` ${match.welsh} `;
@@ -123,9 +135,9 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
         }
         if (nodeVal === 'No') {
           const match = noWelshList.find(item => {
-            const name = node.parentNode.getAttribute('for');
+            const name = node.parentNode.getAttribute('data-welsh');
             if (!name) return false;
-            return item.class.some(c => name.includes(c));
+            return item.ids.some(c => name.includes(c));
           });
           if (match) {
             node.nodeValue = ` ${match.welsh} `;

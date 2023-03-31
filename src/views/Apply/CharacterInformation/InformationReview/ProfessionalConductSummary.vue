@@ -175,6 +175,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
+            id="request-to-resign"
             :data="characterInformation.requestedToResignDetails"
             :is-draft-application="true"
             :display-month-year-only="true"

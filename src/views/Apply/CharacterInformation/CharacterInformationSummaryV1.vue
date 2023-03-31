@@ -123,6 +123,7 @@
       </dt>
       <dd
         class="govuk-summary-list__value"
+        data-welsh="other-character-issues"
       >
         {{ characterInformation.otherCharacterIssues | toYesNo }}
         <EventRenderer

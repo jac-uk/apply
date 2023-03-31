@@ -517,7 +517,10 @@
                 <dt class="govuk-summary-list__key">
                   Can work a reasonable length of service
                 </dt>
-                <dd class="govuk-summary-list__value">
+                <dd
+                  class="govuk-summary-list__value"
+                  data-welsh="can-give-reasonable-los"
+                >
                   {{ application.canGiveReasonableLOS | toYesNo }}
                   <p v-if="application.canGiveReasonableLOS == false">
                     {{ application.cantGiveReasonableLOSDetails }}

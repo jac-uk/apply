@@ -152,8 +152,9 @@
       </dt>
       <dd
         class="govuk-summary-list__value"
+        data-welsh="reasonable-adjustments"
       >
-        <span for="reasonable-adjustments">{{ application.personalDetails.reasonableAdjustments | toYesNo }}</span>
+        {{ application.personalDetails.reasonableAdjustments | toYesNo }}
         <ul
           v-if="application.personalDetails.reasonableAdjustmentsDetails"
           class="govuk-!-margin-top-1"
