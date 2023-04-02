@@ -206,81 +206,201 @@
           />
         </RadioGroup>
 
-        <RadioGroup
-          id="state-or-fee-school"
-          v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
-          required
-          label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
-        >
-          <RadioItem
-            value="uk-state-selective"
-            label="UK state school - selective"
-          />
-          <RadioItem
-            value="uk-state-non-selective"
-            label="UK state school - non-selective"
-          />
-          <RadioItem
-            value="uk-independent-fee"
-            label="UK independent or fee-paying school"
-          />
-          <RadioItem
-            value="uk-independent-fee-with-bursary"
-            label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
-          />
-          <RadioItem
-            value="non-uk-educated"
-            label="I did not go to school in the UK"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
+        <!-- START: OLD SOCIAL MOBILITY QUESTIONS -->
+        <div v-if="['JAC00149', 'JAC00132', 'JAC00117', 'JAC00133', 'JAC00134', 'JAC00122', 'JAC00129', 'JAC00155', 'JAC00152'].indexOf(vacancy.referenceNumber) >= 0">
+          <RadioGroup
+            id="state-or-fee-school"
+            v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
+            required
+            label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
+          >
+            <RadioItem
+              value="uk-state-selective"
+              label="UK state school - selective"
+            />
+            <RadioItem
+              value="uk-state-non-selective"
+              label="UK state school - non-selective"
+            />
+            <RadioItem
+              value="uk-independent-fee"
+              label="UK independent or fee-paying school"
+            />
+            <RadioItem
+              value="uk-independent-fee-with-bursary"
+              label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
+            />
+            <RadioItem
+              value="non-uk-educated"
+              label="I did not go to school in the UK"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
 
-        <RadioGroup
-          id="oxbridge-universities"
-          v-model="equalityAndDiversitySurvey.oxbridgeUni"
-          required
-          label="Did you go to either Oxford or Cambridge universities?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
+          <RadioGroup
+            id="oxbridge-universities"
+            v-model="equalityAndDiversitySurvey.oxbridgeUni"
+            required
+            label="Did you go to either Oxford or Cambridge universities?"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
 
-        <RadioGroup
-          id="first-generation-student"
-          v-model="equalityAndDiversitySurvey.firstGenerationStudent"
-          required
-          label="Were you the first generation in your family to go to university?"
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-          <RadioItem
-            value="non-university-educated"
-            label="I did not go to university"
-          />
-          <RadioItem
-            value="prefer-not-to-say"
-            label="Prefer not to say"
-          />
-        </RadioGroup>
+          <RadioGroup
+            id="first-generation-student"
+            v-model="equalityAndDiversitySurvey.firstGenerationStudent"
+            required
+            label="Were you the first generation in your family to go to university?"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+            <RadioItem
+              value="non-university-educated"
+              label="I did not go to university"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
+        </div>
+        <!-- END: OLD SOCIAL MOBILITY QUESTIONS -->
+
+        <!-- START: NEW SOCIAL MOBILITY QUESTIONS -->
+        <div v-else>
+          <RadioGroup
+            id="occupation-of-childhood-earner"
+            v-model="equalityAndDiversitySurvey.occupationOfChildhoodEarner"
+            required
+            label="What was the occupation of your main household earner when you were about aged 14?"
+          >
+            <RadioItem
+              value="professional"
+              label="Modern professional & traditional professional occupations such as: teacher, nurse, physiotherapist, social worker, musician, police officer (sergeant or above), software designer, accountant, solicitor, medical practitioner, scientist, civil / mechanical engineer."
+            />
+
+            <RadioItem
+              value="manager"
+              label="Senior, middle or junior managers or administrators such as: finance manager, chief executive, large business owner, office manager, retail manager, bank manager, restaurant manager, warehouse manager."
+            />
+
+            <RadioItem
+              value="clerical"
+              label="Clerical and intermediate occupations such as: secretary, personal assistant, call centre agent, clerical worker, nursery nurse."
+            />
+
+            <RadioItem
+              value="technical"
+              label="Technical and craft occupations such as: motor mechanic, plumber, printer, electrician, gardener, train driver."
+            />
+
+            <RadioItem
+              value="manual"
+              label="Routine, semi-routine manual and service occupations such as: postal worker, machine operative, security guard, caretaker, farm worker, catering assistant, sales assistant, HGV driver, cleaner, porter, packer, labourer, waiter/waitress, bar staff."
+            />
+
+            <RadioItem
+              value="unemployed"
+              label="Long-term unemployed (claimed Jobseeker’s Allowance or earlier unemployment benefit for more than a year)."
+            />
+
+            <RadioItem
+              value="small-business-owner"
+              label="Small business owners who employed less than 25 people such as: corner shop owners, small plumbing companies, retail shop owner, single restaurant or cafe owner, taxi owner, garage owner."
+            />
+
+            <RadioItem
+              value="other"
+              label="Other such as: retired, this question does not apply to me, I don’t know."
+            />
+
+            <RadioItem
+              value="prefer-not-to-say"
+              label="I prefer not to say."
+            />
+          </RadioGroup>
+
+          <RadioGroup
+            id="state-or-fee-school"
+            v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
+            required
+            label="Which type of school did you attend for the most time between the ages of 11 and 16?"
+          >
+            <RadioItem
+              value="uk-state-non-selective"
+              label="A state-run or state-funded school – non-selective"
+            />
+            <RadioItem
+              value="uk-state-selective"
+              label="A state-run or state-funded school – selective"
+            />
+            <RadioItem
+              value="uk-independent-fee"
+              label="Independent or fee-paying school"
+            />
+            <RadioItem
+              value="uk-independent-fee-with-bursary"
+              label="Independent or fee-paying school, where I received a bursary covering 90% or more of my tuition"
+            />
+            <RadioItem
+              value="non-uk-educated"
+              label="Attended school outside the UK"
+            />
+            <RadioItem
+              value="do-not-know"
+              label="I don't know"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
+
+          <RadioGroup
+            id="parents-attended-university"
+            v-model="equalityAndDiversitySurvey.parentsAttendedUniversity"
+            required
+            label="Did either of your parents attend university and gain a degree (e.g. BA/BSc or equivalent) by the time you were 18?"
+          >
+            <RadioItem
+              :value="false"
+              label="No, neither of my parents attended university"
+            />
+            <RadioItem
+              :value="true"
+              label="Yes, one or both of my parents attended university"
+            />
+            <RadioItem
+              value="do-not-know"
+              label="Do not know / not sure"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="I prefer not to say"
+            />
+          </RadioGroup>
+        </div>
+        <!-- END: NEW SOCIAL MOBILITY QUESTIONS -->
 
         <RadioGroup
           id="ethnic-group"
@@ -740,9 +860,11 @@ export default {
       otherCurrentLegalRoleDetails: null,
       feePaidJudicialRole: null,
       otherFeePaidJudicialRoleDetails: null,
+      occupationOfChildhoodEarner: null,
+      parentsAttendedUniversity: null,
       stateOrFeeSchool: null,
-      oxbridgeUni: null,
-      firstGenerationStudent: null,
+      oxbridgeUni: null,  // TODO remove this field when old social mobility questions are removed
+      firstGenerationStudent: null,  // TODO remove this field when old social mobility questions are removed
       ethnicGroup: null,
       otherEthnicGroupAsianDetails: null,
       otherEthnicGroupBlackDetails: null,
