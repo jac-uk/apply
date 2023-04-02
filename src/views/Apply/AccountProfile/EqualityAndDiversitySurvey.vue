@@ -206,88 +206,8 @@
           />
         </RadioGroup>
 
-        <!-- START: OLD SOCIAL MOBILITY QUESTIONS -->
-        <div v-if="['JAC00149', 'JAC00132', 'JAC00117', 'JAC00133', 'JAC00134', 'JAC00122', 'JAC00129', 'JAC00155', 'JAC00152'].indexOf(vacancy.referenceNumber) >= 0">
-          <RadioGroup
-            id="state-or-fee-school"
-            v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
-            required
-            label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
-          >
-            <RadioItem
-              value="uk-state-selective"
-              label="UK state school - selective"
-            />
-            <RadioItem
-              value="uk-state-non-selective"
-              label="UK state school - non-selective"
-            />
-            <RadioItem
-              value="uk-independent-fee"
-              label="UK independent or fee-paying school"
-            />
-            <RadioItem
-              value="uk-independent-fee-with-bursary"
-              label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
-            />
-            <RadioItem
-              value="non-uk-educated"
-              label="I did not go to school in the UK"
-            />
-            <RadioItem
-              value="prefer-not-to-say"
-              label="Prefer not to say"
-            />
-          </RadioGroup>
-
-          <RadioGroup
-            id="oxbridge-universities"
-            v-model="equalityAndDiversitySurvey.oxbridgeUni"
-            required
-            label="Did you go to either Oxford or Cambridge universities?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
-            />
-            <RadioItem
-              :value="false"
-              label="No"
-            />
-            <RadioItem
-              value="prefer-not-to-say"
-              label="Prefer not to say"
-            />
-          </RadioGroup>
-
-          <RadioGroup
-            id="first-generation-student"
-            v-model="equalityAndDiversitySurvey.firstGenerationStudent"
-            required
-            label="Were you the first generation in your family to go to university?"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
-            />
-            <RadioItem
-              :value="false"
-              label="No"
-            />
-            <RadioItem
-              value="non-university-educated"
-              label="I did not go to university"
-            />
-            <RadioItem
-              value="prefer-not-to-say"
-              label="Prefer not to say"
-            />
-          </RadioGroup>
-        </div>
-        <!-- END: OLD SOCIAL MOBILITY QUESTIONS -->
-
         <!-- START: NEW SOCIAL MOBILITY QUESTIONS -->
-        <div v-else>
+        <div v-if="vacancy.applicationOpenDate > new Date('2023-04-01')">
           <RadioGroup
             id="occupation-of-childhood-earner"
             v-model="equalityAndDiversitySurvey.occupationOfChildhoodEarner"
@@ -401,6 +321,86 @@
           </RadioGroup>
         </div>
         <!-- END: NEW SOCIAL MOBILITY QUESTIONS -->
+
+        <!-- START: OLD SOCIAL MOBILITY QUESTIONS -->
+        <div v-else>
+          <RadioGroup
+            id="state-or-fee-school"
+            v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
+            required
+            label="Between the ages 11 to 18, did you mainly go to a state or fee-paying school?"
+          >
+            <RadioItem
+              value="uk-state-selective"
+              label="UK state school - selective"
+            />
+            <RadioItem
+              value="uk-state-non-selective"
+              label="UK state school - non-selective"
+            />
+            <RadioItem
+              value="uk-independent-fee"
+              label="UK independent or fee-paying school"
+            />
+            <RadioItem
+              value="uk-independent-fee-with-bursary"
+              label="UK independent or fee-paying school with financial assistance (bursary or means-tested scholarship)"
+            />
+            <RadioItem
+              value="non-uk-educated"
+              label="I did not go to school in the UK"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
+
+          <RadioGroup
+            id="oxbridge-universities"
+            v-model="equalityAndDiversitySurvey.oxbridgeUni"
+            required
+            label="Did you go to either Oxford or Cambridge universities?"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
+
+          <RadioGroup
+            id="first-generation-student"
+            v-model="equalityAndDiversitySurvey.firstGenerationStudent"
+            required
+            label="Were you the first generation in your family to go to university?"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+            <RadioItem
+              value="non-university-educated"
+              label="I did not go to university"
+            />
+            <RadioItem
+              value="prefer-not-to-say"
+              label="Prefer not to say"
+            />
+          </RadioGroup>
+        </div>
+        <!-- END: OLD SOCIAL MOBILITY QUESTIONS -->
 
         <RadioGroup
           id="ethnic-group"
