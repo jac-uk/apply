@@ -1,3 +1,4 @@
+import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from 'vuexfire';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -8,7 +9,18 @@ const collection = firestore.collection('candidates');
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(async ({ bindFirestoreRef, rootState }) => {
+    bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
+      const doc = await collection.doc(rootState.auth.currentUser.uid).get();
+      // if candidate document has not been created correctly
+      if (!doc.exists) {
+        dispatch('create', {
+          created: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        dispatch('savePersonalDetails', {
+          email: rootState.auth.currentUser.email,
+        });
+      }
+
       await bindFirestoreRef('personalDetails', collection.doc(`${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('characterInformation', collection.doc(`${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('equalityAndDiversitySurvey', collection.doc(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });

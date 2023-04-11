@@ -22,6 +22,12 @@
         value="solicitor"
         label="Solicitor"
       />
+
+      <RadioItem
+        v-if="vacancy.qualifications.includes('other') && vacancy.otherQualifications"
+        :value="vacancy.otherQualifications"
+        :label="vacancy.otherQualifications"
+      />
     </RadioGroup>
 
     <RadioGroup
@@ -103,7 +109,7 @@
         />
       </div>
     </div>
-    
+
     <div v-else>
       <DateInput
         :id="qualificationDate"
@@ -123,6 +129,7 @@ import RadioItem from '@/components/Form/RadioItem';
 import DateInput from '@/components/Form/DateInput';
 import TextareaInput from '@/components/Form/TextareaInput';
 import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
+import ApplyMixIn from '@/views/Apply/ApplyMixIn';
 
 export default {
   name: 'Qualification',
@@ -132,6 +139,7 @@ export default {
     DateInput,
     TextareaInput,
   },
+  mixins: [ApplyMixIn],
   props: {
     row: {
       required: true,

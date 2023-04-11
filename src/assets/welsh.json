@@ -62,6 +62,8 @@
   "Title": "Teitl",
   "First name": "Enw cyntaf",
   "Last name": "Cyfenw",
+  "Previous known name(s)": "Enw(au) a ddefnyddiwyd yn flaenorol",
+  "Have you ever been known by any other name? For example, life events which may have changed your name such as marriages, divorces, hyphenated names.": "A ydych wedi cael eich adnabod erioed wrth enw arall? Er enghraifft, gallech fod wedi newid eich enw ar ôl priodi, ysgaru, neu gymryd enw â chyplysnod.",
   "Professional name": "Enw proffesiynol",
   "Email address": "Cyfeiriad e-bost",
   "Phone number": "Rhif ffôn",
@@ -415,7 +417,6 @@
   "You can set out here why you think you should still be considered for this role. The JAC will consider it when assessing your eligibility for this role.": "Nodwch yma pam rydych chi’n meddwl y dylech chi gael eich ystyried ar gyfer y swydd hon beth bynnag. Bydd y Comisiwn Penodiadau Barnwrol yn ei ystyried wrth asesu eich cymhwysedd ar gyfer y swydd hon.",
   "Give independent assessors details": "Nodwch fanylion yr aseswyr annibynnol",
   "Sometimes called 'referees', your independent assessors will give us their opinion on your suitability for this role.": "A hwythau'n cael eu galw'n ‘ganolwyr’ weithiau, bydd eich aseswyr annibynnol yn rhoi eu barn i ni am eich addasrwydd ar gyfer y rôl hon.",
-  "We'll only contact them if you pass the first round of shortlisting.": "Dim ond os byddwch yn pasio rhan gyntaf y broses llunio rhestr fer y byddwn yn cysylltu â nhw.",
   "You should read the": "Dylech ddarllen y",
   "guidance on choosing independent assessors": "canllawiau ar ddewis aseswyr annibynnol",
   "before making your nominations.": "cyn gwneud eich enwebiadau.",
@@ -615,5 +616,11 @@
   "to": "i",
   "Please add details of your fixed penalty notice here": "Ychwanegwch fanylion eich hysbysiad cosb benodedig yma",
   "Other Black\/African\/Caribbean background": "Cefndir Du\/Affricanaidd\/Caribïaidd arall",
-  "current": "presennol"
+  "current": "presennol",
+  "Are you interested in posts in Wales?": "A oes gennych chi ddiddordeb mewn swyddi yng Nghymru?",
+  "Can you work for at least 4 years before reaching the retirement age of 75?": "Allwch chi weithio am o leiaf 4 blynedd cyn cyrraedd yr oed ymddeol o 75?",
+  "Additional Selection Criteria": "Meini Prawf Dethol Ychwanegol",
+  "Candidates must be able to demonstrate substantial knowledge and experience of criminal law & procedure. It is expected that candidates’ evidence of knowledge and experience of criminal law & procedure will be within the last 5 years.": "Rhaid i ymgeiswyr allu dangos gwybodaeth a phrofiad sylweddol o’r gyfraith droseddol a gweithdrefnau. Disgwylir y bydd tystiolaeth yr ymgeiswyr o’u gwybodaeth a’u profiad o’r gyfraith droseddol a gweithdrefnau yn perthyn i’r 5 mlynedd diwethaf.",
+  "Do you meet this requirement?": "Ydych chi’n bodloni’r gofyniad hwn?",
+  "in 250 words tell us how.": "Mewn 250 gair, dywedwch sut."
 }

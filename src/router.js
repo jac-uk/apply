@@ -15,6 +15,11 @@ import Vacancies from '@/views/Vacancies';
 import Vacancy from '@/views/Vacancy';
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
 
+// Profile
+import ProfileView from '@/views/Profile/View';
+import ProfileEdit from '@/views/Profile/Edit';
+import ProfilePasswordEdit from '@/views/Profile/PasswordEdit';
+
 //Eligibility
 import Eligibility from '@/views/Eligibility/Eligibility';
 import EligibilityCheck from '@/views/Eligibility/EligibilityCheck';
@@ -208,6 +213,33 @@ const router = new Router({
           ],
         },
       ],
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
+    },
+    {
+      path: '/profile-edit',
+      name: 'profile-edit',
+      component: ProfileEdit,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
+    },
+    {
+      path: '/profile-password-edit',
+      name: 'profile-password-edit',
+      component: ProfilePasswordEdit,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
     },
     {
       path: '/applications',

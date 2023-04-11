@@ -24,6 +24,14 @@
             </li>
             <li class="moj-side-navigation__item">
               <RouterLink
+                class="govuk-link"
+                :to="{ name: 'profile' }"
+              >
+                Your profile
+              </RouterLink>
+            </li>
+            <li class="moj-side-navigation__item">
+              <RouterLink
                 class="govuk-link info-link--nav-vacancies--applications"
                 :to="{ name: 'applications' }"
               >
@@ -212,26 +220,37 @@
                       </div>
 
                       <div
-                        v-if="vacancy.appointmentType == 'salaried' && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                        v-if="(isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
                         class="tag"
                       >
-                        <span
-                          class="govuk-!-font-weight-bold tag-text"
-                        >
-                          SALARY:&nbsp;
-                        </span>
-                        <span
-                          v-if="vacancy.salaryGrouping"
-                          class="govuk-!-font-weight-bold tag-text"
-                        >
-                          {{ vacancy.salaryGrouping | lookup }}
-                        </span>
-                        <span
-                          v-if="vacancy.salary"
-                          class="govuk-!-font-weight-bold tag-text"
-                        >
-                          {{ vacancy.salary | formatCurrency }}
-                        </span>
+                        <template v-if="vacancy.appointmentType == 'salaried'">
+                          <span class="govuk-!-font-weight-bold tag-text">
+                            SALARY:&nbsp;
+                          </span>
+                          <span
+                            v-if="vacancy.salaryGrouping"
+                            class="govuk-!-font-weight-bold tag-text"
+                          >
+                            {{ vacancy.salaryGrouping | lookup }}
+                          </span>
+                          <span
+                            v-if="vacancy.salary"
+                            class="govuk-!-font-weight-bold tag-text"
+                          >
+                            {{ vacancy.salary | formatCurrency }}
+                          </span>
+                        </template>
+                        <template v-else-if="vacancy.appointmentType == 'fee-paid'">
+                          <span class="govuk-!-font-weight-bold tag-text">
+                            FEE PAID:&nbsp;
+                          </span>
+                          <span
+                            v-if="vacancy.feePaidFee"
+                            class="govuk-!-font-weight-bold tag-text"
+                          >
+                            {{ vacancy.feePaidFee | formatCurrency }}
+                          </span>
+                        </template>
                       </div>
 
                       <div
@@ -524,8 +543,6 @@ export default {
 
 <style scoped>
 .tag {
-  display: flex;
-  align-items: center;
   padding: 5px 8px 0;
   background: #EEEFEF;
   color: #383F43;
