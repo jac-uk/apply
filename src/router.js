@@ -81,6 +81,7 @@ import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
 import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
+import CharacterChecksProfessionalDetailsMagistrate from '@/views/Apply/CharacterChecks/ProfessionalDetailsMagistrate';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
 import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterChecks/OtherProfessionalBodies';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
@@ -716,6 +717,15 @@ const router = new Router({
               path: 'professional-details',
               component: CharacterChecksProfessionalDetails,
               name: 'character-checks-professional-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Professional details',
+              },
+            },
+            {
+              path: 'professional-details-magistrate',
+              component: CharacterChecksProfessionalDetailsMagistrate,
+              name: 'character-checks-professional-details-magistrate',
               meta: {
                 requiresAuth: true,
                 title: 'Consent to character checks | Professional details',
