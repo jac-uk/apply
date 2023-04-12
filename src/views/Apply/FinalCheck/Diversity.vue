@@ -97,7 +97,7 @@
       </dd>
     </div>
 
-    <template v-if="vacancyOpenDatePost0104">
+    <template v-if="vacancyOpenDatePost01042023">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           Occupation of main household earner
@@ -325,7 +325,7 @@ export default {
     ...mapGetters('vacancy', [
       'getOpenDate',
     ]),
-    vacancyOpenDatePost0104() {
+    vacancyOpenDatePost01042023() {
       return this.getOpenDate > new Date('2023-04-01');
     },
   },
