@@ -97,32 +97,63 @@
       </dd>
     </div>
 
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Attended state or fee-paying school
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ application.equalityAndDiversitySurvey.stateOrFeeSchool | lookup }}
-      </dd>
-    </div>
+    <template v-if="vacancyOpenDatePost0104">
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Occupation of main household earner
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.occupationOfChildhoodEarner | lookup }}
+        </dd>
+      </div>
 
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        Attended Oxbridge universities
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup | toYesNo }}
-      </dd>
-    </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Type of school attended
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.stateOrFeeSchool | lookup }}
+        </dd>
+      </div>
 
-    <div class="govuk-summary-list__row">
-      <dt class="govuk-summary-list__key">
-        First generation to go to university
-      </dt>
-      <dd class="govuk-summary-list__value">
-        {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup | toYesNo }}
-      </dd>
-    </div>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Either parent attended university to gain a degree
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.parentsAttendedUniversity | lookup | toYesNo }}
+        </dd>
+      </div>
+    </template>
+
+    <template v-else>
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Attended state or fee-paying school
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.stateOrFeeSchool | lookup }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Attended Oxbridge universities
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup | toYesNo }}
+        </dd>
+      </div>
+
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          First generation to go to university
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup | toYesNo }}
+        </dd>
+      </div>
+    </template>
 
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
@@ -277,6 +308,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
   name: 'Diversity',
   props: {
@@ -287,6 +319,14 @@ export default {
     isLegal: {
       type: Boolean,
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters('vacancy', [
+      'getOpenDate',
+    ]),
+    vacancyOpenDatePost0104() {
+      return this.getOpenDate > new Date('2023-04-01');
     },
   },
 };
