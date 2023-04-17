@@ -262,7 +262,7 @@
 
           <RadioGroup
             id="state-or-fee-school"
-            v-model="equalityAndDiversitySurvey.stateOrFeeSchool"
+            v-model="equalityAndDiversitySurvey.stateOrFeeSchool16"
             required
             label="Which type of school did you attend for the most time between the ages of 11 and 16?"
           >
@@ -862,6 +862,7 @@ export default {
       otherFeePaidJudicialRoleDetails: null,
       occupationOfChildhoodEarner: null,
       parentsAttendedUniversity: null,
+      stateOrFeeSchool16: null,
       stateOrFeeSchool: null,
       oxbridgeUni: null,  // TODO remove this field when old social mobility questions are removed
       firstGenerationStudent: null,  // TODO remove this field when old social mobility questions are removed
