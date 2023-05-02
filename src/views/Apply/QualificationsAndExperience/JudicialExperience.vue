@@ -19,8 +19,58 @@
         <ErrorSummary :errors="errors" />
 
         <div
-          v-if="vacancy.id !== 'LjElx4vSQmDNzkoxbXeG'"
+          v-if="isJAC00164"
         >
+          <RadioGroup
+            id="fee-or-salaried-judge"
+            v-model="formData.feePaidOrSalariedJudge"
+            required
+            label="Are you a fee-paid or salaried medical member"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+          </RadioGroup>
+
+          <RadioGroup
+            v-if="formData.feePaidOrSalariedJudge === true"
+            id="fee-or-salaried-sat-thirty-days"
+            v-model="formData.feePaidOrSalariedSatForThirtyDays"
+            :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            >
+              <TextareaInput
+                id="fee-or-salaried-sitting-days-details"
+                v-model="formData.feePaidOrSalariedSittingDaysDetails"
+                label="Enter the number of sitting days for each
+              appointment you have declared on this form."
+                required
+              />
+            </RadioItem>
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+          </RadioGroup>
+
+          <TextareaInput
+            v-if="formData.feePaidOrSalariedSatForThirtyDays == false"
+            id="gained-experience"
+            v-model="formData.skillsAquisitionDetails"
+            :word-limit="250"
+            label="If you do not have previous experience as a Fee-paid Medical Member in the Social Entitlement Chamber, please tell us what equivalent experience and skills you have in the box below"
+          />
+        </div>
+
+        <div v-else>
           <RadioGroup
             id="fee-or-salaried-judge"
             v-model="formData.feePaidOrSalariedJudge"
@@ -138,56 +188,6 @@
               formData.quasiJudicialSatForThirtyDays == false"
             id="gained-experience"
             v-model="formData.skillsAquisitionDetails"
-            label="Provide details of how you have acquired the necessary
-          skills for this role in some other significant way."
-          />
-        </div>
-        <div v-else>
-          <RadioGroup
-            id="fee-or-salaried-judge"
-            v-model="formData.feePaidOrSalariedJudge"
-            required
-            label="Are you a fee-paid or salaried medical member"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
-            />
-            <RadioItem
-              :value="false"
-              label="No"
-            />
-          </RadioGroup>
-
-          <RadioGroup
-            v-if="formData.feePaidOrSalariedJudge === true"
-            id="fee-or-salaried-sat-thirty-days"
-            v-model="formData.feePaidOrSalariedSatForThirtyDays"
-            :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
-          >
-            <RadioItem
-              :value="true"
-              label="Yes"
-            >
-              <TextareaInput
-                id="fee-or-salaried-sitting-days-details"
-                v-model="formData.feePaidOrSalariedSittingDaysDetails"
-                label="Enter the number of sitting days for each
-              appointment you have declared on this form."
-                required
-              />
-            </RadioItem>
-            <RadioItem
-              :value="false"
-              label="No"
-            />
-          </RadioGroup>
-
-          <TextareaInput
-            v-if="formData.feePaidOrSalariedSatForThirtyDays == false"
-            id="gained-experience"
-            v-model="formData.skillsAquisitionDetails"
-            :word-limit="250"
             label="Provide details of how you have acquired the necessary
           skills for this role in some other significant way."
           />
