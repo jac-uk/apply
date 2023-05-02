@@ -55,6 +55,7 @@
             id="fee-or-salaried-sat-thirty-days"
             v-model="formData.feePaidOrSalariedSatForThirtyDays"
             :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
+            required
           >
             <RadioItem
               :value="true"
@@ -75,11 +76,12 @@
           </RadioGroup>
 
           <TextareaInput
-            v-if="!formData.feePaidOrSalariedJudge || !formData.feePaidOrSalariedSatForThirtyDays"
+            v-if="formData.feePaidOrSalariedJudge === false || (formData.feePaidOrSalariedJudge === true && formData.feePaidOrSalariedSatForThirtyDays === false)"
             id="gained-experience"
             v-model="formData.skillsAquisitionDetails"
             :word-limit="250"
             label="If you do not have previous experience as a Fee-paid Medical Member in the Social Entitlement Chamber, please tell us what equivalent experience and skills you have in the box below"
+            required
           />
         </div>
 
