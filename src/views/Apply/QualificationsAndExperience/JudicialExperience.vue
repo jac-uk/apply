@@ -62,7 +62,7 @@
           </RadioGroup>
 
           <TextareaInput
-            v-if="formData.feePaidOrSalariedSatForThirtyDays == false"
+            v-if="!formData.feePaidOrSalariedJudge || !formData.feePaidOrSalariedSatForThirtyDays"
             id="gained-experience"
             v-model="formData.skillsAquisitionDetails"
             :word-limit="250"
