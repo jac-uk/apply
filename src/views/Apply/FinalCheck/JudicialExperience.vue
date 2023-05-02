@@ -1,5 +1,67 @@
 <template>
   <dl
+    v-if="isJAC00164"
+  >
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        v-if="vacancy.previousJudicialExperienceApply"
+        class="govuk-summary-list__key"
+      >
+        Are you a fee-paid or salaried medical member?
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ application.feePaidOrSalariedJudge | toYesNo }}
+      </dd>
+    </div>
+    <div
+      class="govuk-summary-list__row"
+    >
+      <dt
+        v-if="vacancy.previousJudicialExperienceApply"
+        class="govuk-summary-list__key"
+      >
+        Are you a fee-paid or salaried medical member?
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ application.feePaidOrSalariedJudge | toYesNo }}
+      </dd>
+    </div>
+    <div
+      v-if="application.feePaidOrSalariedJudge === true"
+      class="govuk-summary-list__row"
+    >
+      <dt class="govuk-summary-list__key">
+        {{ `Have you sat for at least ${vacancy.pjeDays || 30 } days?` }}
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <p class="govuk-body">
+          {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
+        </p>
+        <p
+          v-if="application.feePaidOrSalariedSittingDaysDetails"
+          class="govuk-body"
+        >
+          {{ application.feePaidOrSalariedSittingDaysDetails }}
+        </p>
+      </dd>
+    </div>
+    <div
+      v-if="application.declaredAppointmentInQuasiJudicialBody == false ||
+        application.quasiJudicialSatForThirtyDays == false"
+      class="govuk-summary-list__row"
+    >
+      <dt class="govuk-summary-list__key">
+        If you do not have previous experience as a Fee-paid Medical Member in the Social Entitlement Chamber, please tell us what equivalent experience and skills you have in the box below
+      </dt>
+      <dd class="govuk-summary-list__value">
+        {{ application.skillsAquisitionDetails }}
+      </dd>
+    </div>
+  </dl>
+  <dl
+    v-else
     class="govuk-summary-list govuk-!-margin-bottom-8"
   >
     <div

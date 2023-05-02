@@ -7,11 +7,11 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Judicial experience
+          {{ isJAC00164 ? 'E' : 'Judicial e' }}xperience
         </h1>
 
         <p class="govuk-body-l">
-          We need to understand how you have gained your judicial experience and
+          We need to understand how you have gained your {{ isJAC00164 ? '' : 'judicial' }} experience and
           how many sitting days you have. Expand on the information
           you've provided about your career.
         </p>
@@ -25,7 +25,7 @@
             id="fee-or-salaried-judge"
             v-model="formData.feePaidOrSalariedJudge"
             required
-            label="Are you a fee-paid or salaried medical member"
+            label="Are you a fee-paid or salaried medical member?"
           >
             <RadioItem
               :value="true"
