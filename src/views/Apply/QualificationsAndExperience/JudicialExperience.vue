@@ -10,16 +10,26 @@
           {{ isJAC00164 ? 'E' : 'Judicial e' }}xperience
         </h1>
 
-        <p
+        <div
           v-if="isJAC00164"
-          class="govuk-body-l"
         >
-          We need to understand how you have gained your experience and how many sitting days you have. The Lord Chancellor expects that candidates for salaried posts will have sufficient directly relevant previous judicial experience.
-          The meaning of “directly relevant experience” is sitting as a fee-paid medical member of the First-tier Tribunal, Social Security and Child Support Tribunal (SSCS).
-          For fee-paid members this should be for a period of at least two years or 30 sitting days since appointment.
-          Only in exceptional cases and if the candidate in question has demonstrated the necessary skills in some other significant way should an exception be made.
-          This would likely include demonstrating excellence in relation to clinical knowledge, supervision, management, appraisal, mentoring and training, together with a clear understanding and ability to apply the boundaries and responsibilities inherent in the judicial role.
-        </p>
+          <p
+            class="govuk-body-l"
+          >
+            We need to understand how you have gained your experience and how many sitting days you have.
+          </p>
+          <p
+            class="govuk-body-m"
+          >
+            The Lord Chancellor expects that candidates for salaried posts will have sufficient directly relevant previous judicial experience.
+            The meaning of “directly relevant experience” is sitting as a fee-paid medical member of the First-tier Tribunal, Social Security and Child Support Tribunal (SSCS).
+            For fee-paid members this should be for a period of at least two years or 30 sitting days since appointment.
+            <br>
+            <br>
+            Only in exceptional cases and if the candidate in question has demonstrated the necessary skills in some other significant way should an exception be made.
+            This would likely include demonstrating excellence in relation to clinical knowledge, supervision, management, appraisal, mentoring and training, together with a clear understanding and ability to apply the boundaries and responsibilities inherent in the judicial role.
+          </p>
+        </div>
         <p
           v-else
           class="govuk-body-l"
