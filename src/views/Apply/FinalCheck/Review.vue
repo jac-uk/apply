@@ -452,7 +452,7 @@
                 class="govuk-heading-l"
                 style="display:inline-block;"
               >
-                Judicial experience
+                {{ isJAC00164 ? 'E' : 'Judicial e' }}xperience
               </h2>
               <RouterLink
                 v-if="canEdit && currentApplicationParts.judicialExperience"

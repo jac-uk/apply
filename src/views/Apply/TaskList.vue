@@ -118,7 +118,7 @@
           <Task
             v-if="applicationParts.judicialExperience"
             id="judicial-experience"
-            title="Judicial experience"
+            :title="isJAC00164 ? 'Experience' : 'Judicial experience'"
             :done="applicationProgress.judicialExperience"
             :locked="!currentApplicationParts.judicialExperience"
           />
