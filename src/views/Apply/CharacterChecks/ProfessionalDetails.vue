@@ -28,45 +28,6 @@
         />
       </div>
 
-      <RadioGroup
-        id="magistrate"
-        v-model="application.magistrate"
-        label="Have you been a magistrate?"
-        required
-        hint=""
-      >
-        <RadioItem
-          :value="true"
-          label="Yes"
-        >
-          <div class="govuk-form-group">
-            <DateInput
-              id="magistrateStartDate"
-              v-model="application.magistrateStartDate"
-              :required="application.magistrate"
-              label="From date"
-              hint="For example, 12 11 2007"
-            />
-            <DateInput
-              id="magistrateEndDate"
-              v-model="application.magistrateEndDate"
-              label="Until date"
-              hint="For example, 11 6 2020. Leave blank if this is your present role."
-            />
-            <TextField
-              id="magistrateLocation"
-              v-model="application.magistrateLocation"
-              :required="application.magistrate"
-              label="Location"
-            />
-          </div>
-        </RadioItem>
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup>
-
       <button
         class="govuk-button info-btn--professional-bodies--save-and-continue"
       >
@@ -81,9 +42,6 @@ import BackLink from '@/components/BackLink';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import DateInput from '@/components/Form/DateInput';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 const membershipNumbers = {
@@ -97,20 +55,11 @@ export default {
     BackLink,
     ErrorSummary,
     TextField,
-    RadioGroup,
-    RadioItem,
-    DateInput,
   },
   extends: Form,
   data() {
-    const defaults = {
-      magistrate: null,
-      magistrateStartDate: null,
-      magistrateEndDate: null,
-      magistrateLocation: null,
-    };
     const data = this.$store.getters['application/data']();
-    const application = { ...defaults, ...data };
+    const application = { ...data };
     return {
       membershipNumbers,
       application,
@@ -137,22 +86,8 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        if (this.application.magistrate === false) {
-          this.application.magistrateStartDate = null;
-          this.application.magistrateEndDate = null;
-          this.application.magistrateLocation = null;
-        }
         await this.$store.dispatch('application/save', this.application);
-
-        if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
-          this.$router.push({ name: 'character-checks-HMRC' });
-        } else {
-          if ((this.vacancy.memberships && this.vacancy.memberships.length) && !this.vacancy.memberships.includes('none')) {
-            this.$router.push({ name: 'character-checks-other-professional-bodies' });
-          } else {
-            this.$router.push({ name: 'character-checks-review' });
-          }
-        }
+        this.$router.push({ name: 'character-checks-professional-details-magistrate' });
       }
     },
   },

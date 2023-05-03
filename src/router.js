@@ -15,6 +15,11 @@ import Vacancies from '@/views/Vacancies';
 import Vacancy from '@/views/Vacancy';
 import VacancyDetails from '@/views/Vacancy/VacancyDetails';
 
+// Profile
+import ProfileView from '@/views/Profile/View';
+import ProfileEdit from '@/views/Profile/Edit';
+import ProfilePasswordEdit from '@/views/Profile/PasswordEdit';
+
 //Eligibility
 import Eligibility from '@/views/Eligibility/Eligibility';
 import EligibilityCheck from '@/views/Eligibility/EligibilityCheck';
@@ -76,6 +81,7 @@ import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
 import CharacterChecksIntro from '@/views/Apply/CharacterChecks/Intro';
 import CharacterChecksPersonalInformation from '@/views/Apply/CharacterChecks/PersonalInformation';
 import CharacterChecksProfessionalDetails from '@/views/Apply/CharacterChecks/ProfessionalDetails';
+import CharacterChecksProfessionalDetailsMagistrate from '@/views/Apply/CharacterChecks/ProfessionalDetailsMagistrate';
 import CharacterChecksHMRC from '@/views/Apply/CharacterChecks/Hmrc';
 import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterChecks/OtherProfessionalBodies';
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review';
@@ -208,6 +214,33 @@ const router = new Router({
           ],
         },
       ],
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ProfileView,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
+    },
+    {
+      path: '/profile-edit',
+      name: 'profile-edit',
+      component: ProfileEdit,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
+    },
+    {
+      path: '/profile-password-edit',
+      name: 'profile-password-edit',
+      component: ProfilePasswordEdit,
+      meta: {
+        requiresAuth: true,
+        title: 'Your Profile',
+      },
     },
     {
       path: '/applications',
@@ -684,6 +717,15 @@ const router = new Router({
               path: 'professional-details',
               component: CharacterChecksProfessionalDetails,
               name: 'character-checks-professional-details',
+              meta: {
+                requiresAuth: true,
+                title: 'Consent to character checks | Professional details',
+              },
+            },
+            {
+              path: 'professional-details-magistrate',
+              component: CharacterChecksProfessionalDetailsMagistrate,
+              name: 'character-checks-professional-details-magistrate',
               meta: {
                 requiresAuth: true,
                 title: 'Consent to character checks | Professional details',

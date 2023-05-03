@@ -26,7 +26,7 @@
             Find out more about how we
             <a
               class="govuk-link"
-              href="https://www.judicialappointments.gov.uk/accessing-your-information"
+              href="https://judicialappointments.gov.uk/data-protection-freedom-of-information-and-making-requests-for-your-data/"
               target="_blank"
             >
               process your data.
