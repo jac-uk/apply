@@ -24,6 +24,7 @@
       <label
         class="govuk-label govuk-radios__label"
         :for="inputId"
+        :data-welsh="inputId"
       >
         {{ label }}
       </label>

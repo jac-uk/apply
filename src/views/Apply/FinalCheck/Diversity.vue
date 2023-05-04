@@ -140,7 +140,10 @@
         <dt class="govuk-summary-list__key">
           Attended Oxbridge universities
         </dt>
-        <dd class="govuk-summary-list__value">
+        <dd
+          class="govuk-summary-list__value"
+          data-welsh="oxbridge-universities"
+        >
           {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup | toYesNo }}
         </dd>
       </div>
@@ -149,7 +152,10 @@
         <dt class="govuk-summary-list__key">
           First generation to go to university
         </dt>
-        <dd class="govuk-summary-list__value">
+        <dd
+          class="govuk-summary-list__value"
+          data-welsh="first-generation-student"
+        >
           {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup | toYesNo }}
         </dd>
       </div>
@@ -219,7 +225,10 @@
       <dt class="govuk-summary-list__key">
         Is the gender you identify with the same as your sex registered at birth?
       </dt>
-      <dd class="govuk-summary-list__value">
+      <dd
+        class="govuk-summary-list__value"
+        data-welsh="changed-gender"
+      >
         {{ application.equalityAndDiversitySurvey.changedGender | lookup | toYesNo }}
       </dd>
     </div>
@@ -249,10 +258,20 @@
           v-if="application.equalityAndDiversitySurvey.disability === true"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.disability | toYesNo }}</span>
+          <span
+            class="govuk-caption-m"
+            data-welsh="disability"
+          >
+            {{ application.equalityAndDiversitySurvey.disability | toYesNo }}
+          </span>
           {{ application.equalityAndDiversitySurvey.disabilityDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.disability | lookup | toYesNo }}</span>
+        <span
+          v-else
+          data-welsh="disability"
+        >
+          {{ application.equalityAndDiversitySurvey.disability | lookup | toYesNo }}
+        </span>
       </dd>
     </div>
 
@@ -276,7 +295,10 @@
       <dt class="govuk-summary-list__key">
         Attended Outreach events
       </dt>
-      <dd class="govuk-summary-list__value">
+      <dd
+        class="govuk-summary-list__value"
+        data-welsh="atttended-outreach-events"
+      >
         {{ application.equalityAndDiversitySurvey.attendedOutreachEvents | lookup | toYesNo }}
       </dd>
     </div>
@@ -288,7 +310,10 @@
       <dt class="govuk-summary-list__key">
         Participated in a Judicial Workshadowing Scheme
       </dt>
-      <dd class="govuk-summary-list__value">
+      <dd
+        class="govuk-summary-list__value"
+        data-welsh="participated-in-judicial-workshadowing-scheme"
+      >
         {{ application.equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme | lookup | toYesNo }}
       </dd>
     </div>
@@ -300,7 +325,10 @@
       <dt class="govuk-summary-list__key">
         Participated in Pre-application judicial education
       </dt>
-      <dd class="govuk-summary-list__value">
+      <dd
+        class="govuk-summary-list__value"
+        data-welsh="has-taken-paje"
+      >
         {{ application.equalityAndDiversitySurvey.hasTakenPAJE | lookup | toYesNo }}
       </dd>
     </div>

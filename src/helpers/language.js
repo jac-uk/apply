@@ -1,6 +1,75 @@
 import { LANGUAGES } from '@/helpers/constants';
 import welshData from '@/assets/welsh.json';
 
+const yesWelshList = [
+  {
+    ids: ['reasonable-adjustments', 'request-to-resign', 'other-character-issues'],
+    welsh: 'Oes',
+  },
+  {
+    ids: ['disability', 'part-time-working-preferences'],
+    welsh: 'OES',
+  },
+  {
+    ids: ['first-generation-student'],
+    welsh: 'IE',
+  },
+  {
+    ids: ['changed-gender'],
+    welsh: 'YDY',
+  },
+  {
+    ids: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'has-taken-paje'],
+    welsh: 'DO',
+  },
+  {
+    ids: ['applying-for-welsh-post'],
+    welsh: 'YDW YF',
+  },
+  {
+    ids: ['speak-welsh', 'applying-under-schedule-2-d'],
+    welsh: 'YDWYF',
+  },
+  {
+    ids: ['can-give-reasonable-los'],
+    welsh: 'GALLAF',
+  },
+];
+const noWelshList = [
+  {
+    ids: ['reasonable-adjustments', 'request-to-resign', 'other-character-issues'],
+    welsh: 'Nac Oes',
+  },
+  {
+    ids: ['disability', 'part-time-working-preferences'],
+    welsh: 'NAC OES',
+  },
+  {
+    ids: ['first-generation-student', 'read-and-write-welsh'],
+    welsh: 'NA',
+  },
+  {
+    ids: ['changed-gender'],
+    welsh: 'NAC YDY',
+  },
+  {
+    ids: ['participated-in-judicial-workshadowing-scheme', 'oxbridge-universities', 'atttended-outreach-events', 'has-taken-paje'],
+    welsh: 'NADDO',
+  },
+  {
+    ids: ['applying-for-welsh-post'],
+    welsh: 'NAC YF',
+  },
+  {
+    ids: ['speak-welsh', 'applying-under-schedule-2-d'],
+    welsh: 'NAC YDWYF',
+  },
+  {
+    ids: ['can-give-reasonable-los'],
+    welsh: 'NA ALLAF',
+  },
+];
+
 const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
   const textNodes = [];
   const pushTextNode = (node) => {
@@ -9,6 +78,17 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
       if (!nodeVal) return;
 
       if (lang === LANGUAGES.ENGLISH) {
+        if (yesWelshList.find(item => item.welsh === nodeVal)) {
+          node.nodeValue = 'Yes ';
+          textNodes.push(nodeVal);
+          return;
+        }
+        if (noWelshList.find(item => item.welsh === nodeVal)) {
+          node.nodeValue = 'No ';
+          textNodes.push(nodeVal);
+          return;
+        }
+
         let hasMatch = false;
         for (const [key, value] of Object.entries(welshData)) {
           if (value === nodeVal) {
@@ -41,6 +121,31 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
           }
         }
       } else if (lang === LANGUAGES.WELSH) {
+        if (nodeVal === 'Yes') {
+          const match = yesWelshList.find(item => {
+            const name = node.parentNode.getAttribute('data-welsh');
+            if (!name) return false;
+            return item.ids.some(c => name.includes(c));
+          });
+          if (match) {
+            node.nodeValue = ` ${match.welsh} `;
+            textNodes.push(nodeVal);
+            return;
+          }
+        }
+        if (nodeVal === 'No') {
+          const match = noWelshList.find(item => {
+            const name = node.parentNode.getAttribute('data-welsh');
+            if (!name) return false;
+            return item.ids.some(c => name.includes(c));
+          });
+          if (match) {
+            node.nodeValue = ` ${match.welsh} `;
+            textNodes.push(nodeVal);
+            return;
+          }
+        }
+
         if (welshData[nodeVal]) {
           node.nodeValue = ` ${welshData[nodeVal]} `; // add white space back to deal with the text concatenation
           textNodes.push(nodeVal);

@@ -9,6 +9,7 @@
       </dt>
       <dd
         class="govuk-summary-list__value"
+        data-welsh="applying-for-welsh-post"
       >
         {{ application.applyingForWelshPost | toYesNo }}
       </dd>
@@ -22,6 +23,7 @@
       </dt>
       <dd
         class="govuk-summary-list__value"
+        data-welsh="speak-welsh"
       >
         {{ application.canSpeakWelsh | toYesNo }}
       </dd>
@@ -38,11 +40,13 @@
       >
         <p
           v-if="application.canReadAndWriteWelsh == false"
+          data-welsh="read-and-write-welsh"
         >
           {{ application.canReadAndWriteWelsh | toYesNo }}
         </p>
         <p
           v-if="application.canReadAndWriteWelsh"
+          data-welsh="read-and-write-welsh"
         >
           {{ application.canReadAndWriteWelsh | lookup }}
         </p>
