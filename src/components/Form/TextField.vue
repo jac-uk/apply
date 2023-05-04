@@ -78,6 +78,7 @@ export default {
         return this.value;
       },
       set(val) {
+        val = val.trim();
         this.$emit('input', val);
       },
     },

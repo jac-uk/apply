@@ -95,7 +95,6 @@
           hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
           class="govuk-!-width-one-half"
           type="nino"
-          required
         />
 
         <RadioGroup
