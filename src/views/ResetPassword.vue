@@ -85,7 +85,10 @@ export default {
       });
       if (!isVerified) return;
 
-      this.resetPassword();
+      this.isEnabled = await this.checkEnabledUserByEmail(this.formData.email);
+      if (this.isEnabled) {
+        this.resetPassword();
+      }
     },
     async checkEnabledUserByEmail(email) {
       try {
@@ -97,21 +100,18 @@ export default {
     },
     async resetPassword() {
       if (this.formData.email) {
-        this.isEnabled = await this.checkEnabledUserByEmail(this.formData.email);
-        if (this.isEnabled) {
-          const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
-          this.errors = [];
-          auth.sendPasswordResetEmail(this.formData.email, {
-            url: returnUrl,
+        const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
+        this.errors = [];
+        auth.sendPasswordResetEmail(this.formData.email, {
+          url: returnUrl,
+        })
+          .then(() => {
+            this.resetSent = true;
           })
-            .then(() => {
-              this.resetSent = true;
-            })
-            .catch(() => {
-              // Handled in the same way as success to prevent account enumeration attacks
-              this.resetSent = true;
-            });
-        }
+          .catch(() => {
+            // Handled in the same way as success to prevent account enumeration attacks
+            this.resetSent = true;
+          });
       }
     },
   },
