@@ -54,6 +54,7 @@
               v-model.lazy="dayInput"
               class="govuk-input govuk-date-input__input govuk-input--width-2"
               type="number"
+              @input="changeDay"
             >
           </div>
         </div>
@@ -71,6 +72,7 @@
               v-model.lazy="monthInput"
               class="govuk-input govuk-date-input__input govuk-input--width-2"
               type="number"
+              @input="changeMonth"
             >
           </div>
         </div>
@@ -211,6 +213,18 @@ export default {
         date2 instanceof Date &&
         date1.getTime() === date2.getTime()
       );
+    },
+    changeDay(e) {
+      const value = e.target.value;
+      if (value.length === 2) {
+        this.$refs.monthInput.select();
+      }
+    },
+    changeMonth(e) {
+      const value = e.target.value;
+      if (value.length === 2) {
+        this.$refs.yearInput.select();
+      }
     },
   },
 };
