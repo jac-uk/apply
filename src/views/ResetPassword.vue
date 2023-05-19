@@ -43,6 +43,11 @@
             >
               Send the link
             </button>
+
+            <div v-if="!isEnabled">
+              Your email is disabled.
+            </div>
+
             <ChangeEmailMessage />
           </div>
         </div>
@@ -54,7 +59,7 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage';
-import { auth } from '@/firebase';
+import { auth, functions } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
@@ -66,6 +71,7 @@ export default {
   data () {
     return {
       formData: {},
+      isEnabled: true,
       resetSent: false,
     };
   },
@@ -81,20 +87,31 @@ export default {
 
       this.resetPassword();
     },
+    async checkEnabledUserByEmail(email) {
+      try {
+        const res = await functions.httpsCallable('checkEnabledUserByEmail')({ email });
+        return res.data;
+      } catch (error) {
+        return false;
+      }
+    },
     async resetPassword() {
       if (this.formData.email) {
-        const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
-        this.errors = [];
-        auth.sendPasswordResetEmail(this.formData.email, {
-          url: returnUrl,
-        })
-          .then(() => {
-            this.resetSent = true;
+        this.isEnabled = await this.checkEnabledUserByEmail(this.formData.email);
+        if (this.isEnabled) {
+          const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
+          this.errors = [];
+          auth.sendPasswordResetEmail(this.formData.email, {
+            url: returnUrl,
           })
-          .catch(() => {
-            // Handled in the same way as success to prevent account enumeration attacks
-            this.resetSent = true;
-          });
+            .then(() => {
+              this.resetSent = true;
+            })
+            .catch(() => {
+              // Handled in the same way as success to prevent account enumeration attacks
+              this.resetSent = true;
+            });
+        }
       }
     },
   },
