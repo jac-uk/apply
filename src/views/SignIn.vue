@@ -45,11 +45,11 @@
             type="email"
           />
 
-          <TextField
+          <Password
             id="password"
             v-model="formData.password"
             label="Password"
-            type="password"
+            :is-new-pwd="false"
           />
 
           <button
@@ -82,13 +82,14 @@ import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
-
+import Password from '@/components/Form/Password';
 export default {
   name: 'SignIn',
   components: {
     ErrorSummary,
     TextField,
     ChangeEmailMessage,
+    Password,
   },
   data () {
     return {

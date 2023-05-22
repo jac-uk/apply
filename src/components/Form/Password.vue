@@ -26,9 +26,9 @@
       v-model="text"
       :class="[inputClass, 'govuk-input', 'govuk-!-width-three-quarters', {'govuk-input--error': hasError}]"
       :type="fieldType"
-      :autocomplete="type"
+      spellcheck="false"
       @input="handleValidatePassword"
-    >
+    />
 
     <button
       class="govuk-button govuk-button--secondary govuk-!-margin-left-1 info-btn--sign-up--password--show-hide"
@@ -58,13 +58,13 @@ export default {
       default: '',
       type: String,
     },
-    type: {
-      default: 'current-password',
-      type: String,
-    },
     minLength: {
       default: 8,
       type: Number,
+    },
+    isNewPwd: { // Validates the pwd for strength
+      default: false,
+      type: Boolean,
     },
   },
   data() {
@@ -102,17 +102,24 @@ export default {
     },
   },
   mounted() {
-    this.$root.$on('validate', this.handleValidatePassword);
+    if (this.isNewPwd) {
+      this.$root.$on('validate', this.handleValidatePassword);
+    }
   },
   beforeDestroy: function() {
     this.setError('');
-    this.$root.$off('validate', this.handleValidatePassword);
+    if (this.isNewPwd) {
+      this.$root.$off('validate', this.handleValidatePassword);
+    }
   },
   methods: {
     toggleVisibility() {
       this.showPassword = !this.showPassword;
     },
     handleValidatePassword(event) {
+      if (!this.isNewPwd) {
+        return;
+      }
       // don't bother checking if generic validation failed
       // if (!this.hasError) {
       let value = this.value;
