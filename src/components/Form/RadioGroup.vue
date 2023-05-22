@@ -11,8 +11,16 @@
       <legend
         v-if="label"
         class="govuk-fieldset__legend govuk-fieldset__legend--m govuk-!-margin-bottom-2"
+        :style="!required ? { display: 'flex', 'align-items': 'center', gap: '12px' } : null"
       >
         {{ label }}
+        <span
+          v-if="!required"
+          class="govuk-label"
+          style="margin-bottom: 0;"
+        >
+          (optional)
+        </span>
       </legend>
       <span
         v-if="hint"
