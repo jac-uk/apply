@@ -7,6 +7,7 @@ const mockProps = {
     id: 'myID',
     value: 'selected-radio-value',
     hint: 'myHint',
+    required: true,
 };
 
 describe('components/Form/RadioGroup', () => {
