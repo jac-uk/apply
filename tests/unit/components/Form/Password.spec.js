@@ -220,21 +220,43 @@ describe('components/Form/Password', () => {
         wrapper.vm.validatePassword = jest.fn().mockName('validatePassword');
       });
 
-      it('should call validatePassword even if error already exists', () => {
+      it('should not call validatePassword even if error already exists', () => {
         wrapper.setData({ errorMessage: 'mock error' });
         wrapper.vm.handleValidatePassword();
-        expect(wrapper.vm.validatePassword).toHaveBeenCalled();
+        expect(wrapper.vm.validatePassword).not.toHaveBeenCalled();
       });
 
-      it('should call validatePassword() with value if no errors yet', async () => {
+      it('should not call validatePassword() with value if no errors yet and called with event', () => {
+        const mockEvent = {
+          target: {
+            value: 'mock event value',
+          },
+        };
+        wrapper.setData({ errorMessage: null });
+
+        wrapper.vm.handleValidatePassword(mockEvent);
+        expect(wrapper.vm.validatePassword).not.toHaveBeenCalledWith(mockEvent.target.value);
+      });
+
+      it('should call validatePassword() with value if no errors yet and isNewPwd prop set', async () => {
         await wrapper.setData({ errorMessage: null });
-        await wrapper.setProps({ value: 'mock value' });
+        await wrapper.setProps({ isNewPwd: true });
 
         wrapper.vm.handleValidatePassword();
         expect(wrapper.vm.validatePassword).toHaveBeenCalledWith(wrapper.vm.value);
       });
 
-      it('should call validatePassword() with value if no errors yet and called with event', () => {
+      it('should call validatePassword() with value if no errors yet and isNewPwd prop set', async () => {
+        await wrapper.setData({ errorMessage: null });
+        await wrapper.setProps({ value: 'mock value' });
+        await wrapper.setProps({ isNewPwd: true });
+
+        wrapper.vm.handleValidatePassword();
+        expect(wrapper.vm.validatePassword).toHaveBeenCalledWith(wrapper.vm.value);
+      });
+
+      it('should call validatePassword() with value if no errors yet and called with event and isNewPwd prop set', async () => {
+        await wrapper.setProps({ isNewPwd: true });
         const mockEvent = {
           target: {
             value: 'mock event value',

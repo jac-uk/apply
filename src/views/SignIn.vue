@@ -49,7 +49,7 @@
             id="password"
             v-model="formData.password"
             label="Password"
-            :is-new-pwd="false"
+            required
           />
 
           <button

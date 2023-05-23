@@ -26,7 +26,7 @@
       v-model="text"
       :class="[inputClass, 'govuk-input', 'govuk-!-width-three-quarters', {'govuk-input--error': hasError}]"
       :type="fieldType"
-      spellcheck="false"
+      :autocomplete="type"
       @input="handleValidatePassword"
     />
 
@@ -56,6 +56,10 @@ export default {
     },
     value: {
       default: '',
+      type: String,
+    },
+    type: {
+      default: 'current-password',
       type: String,
     },
     minLength: {
