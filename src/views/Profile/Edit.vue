@@ -58,7 +58,7 @@
             </h3>
             <div class="text-right govuk-!-margin-bottom-4">
               <a
-                class="govuk-link govuk-body-m"
+                class="govuk-button info-btn--character-information--save-and-continue"
                 style="cursor: pointer;"
                 @click.prevent="save"
               >
@@ -143,7 +143,7 @@
 
             <div class="text-right govuk-!-margin-top-8 govuk-!-margin-bottom-4">
               <a
-                class="govuk-link govuk-body-m"
+                class="govuk-button info-btn--character-information--save-and-continue"
                 style="cursor: pointer;"
                 @click.prevent="save"
               >
@@ -200,7 +200,7 @@ export default {
   methods: {
     async save() {
       this.validate();
-      if (this.isValid()) {        
+      if (this.isValid()) {
         const data = this.$store.getters['candidate/personalDetails']();
         let isSuccess = true;
         if (this.personalDetails.email !== data.email) {
