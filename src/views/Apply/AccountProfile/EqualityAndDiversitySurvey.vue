@@ -906,7 +906,11 @@ export default {
   },
   methods: {
     checkEqualityAndDiversitySurvey(newValue, oldValue, field) {
-      if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+      if (
+        Array.isArray(newValue) && 
+        Array.isArray(oldValue) &&
+        JSON.stringify(newValue) !== JSON.stringify(oldValue)
+      ) {
         if (newValue.length > oldValue.length) {
           const newSelectedItems = difference(newValue, oldValue);
           if (newSelectedItems.includes('prefer-not-to-say')) {
