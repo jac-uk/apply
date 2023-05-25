@@ -834,6 +834,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import BackLink from '@/components/BackLink';
+import { difference } from '@/helpers/array';
 
 export default {
   name: 'EqualityAndDiversitySurvey',
@@ -904,15 +905,11 @@ export default {
     },
   },
   methods: {
-    difference(arr1, arr2) {
-      return arr1.filter(item => !arr2.includes(item));
-    },
     checkEqualityAndDiversitySurvey(newValue, oldValue, field) {
       if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
         if (newValue.length > oldValue.length) {
-          // new selected items
-          const difference = this.difference(newValue, oldValue);
-          if (difference.includes('prefer-not-to-say')) {
+          const newSelectedItems = difference(newValue, oldValue);
+          if (newSelectedItems.includes('prefer-not-to-say')) {
             this.equalityAndDiversitySurvey[field] = ['prefer-not-to-say'];
           } else {
             this.equalityAndDiversitySurvey[field] = newValue.filter(x => x !== 'prefer-not-to-say');

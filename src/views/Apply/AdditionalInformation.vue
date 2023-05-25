@@ -93,6 +93,7 @@ import BackLink from '@/components/BackLink';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
+import { difference } from '@/helpers/array';
 
 export default {
   name: 'AdditionalInformation',
@@ -120,6 +121,11 @@ export default {
       formData: formData,
     };
   },
+  watch: {
+    'formData.additionalInfo.listedSources'(newValue, oldValue) {
+      this.checkAdditionalInfo(newValue, oldValue, 'listedSources');
+    },
+  },
   methods: {
     isFormValid() {
       const listedSources = this.formData.additionalInfo.listedSources;
@@ -131,6 +137,18 @@ export default {
         this.formData.additionalInfo.otherSources = null;
       }
       return true;
+    },
+    checkAdditionalInfo(newValue, oldValue, field) {
+      if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+        if (newValue.length > oldValue.length) {
+          const newSelectedItems = difference(newValue, oldValue);
+          if (newSelectedItems.includes('prefer-not-to-say')) {
+            this.formData.additionalInfo[field] = ['prefer-not-to-say'];
+          } else {
+            this.formData.additionalInfo[field] = newValue.filter(x => x !== 'prefer-not-to-say');
+          }
+        }
+      }
     },
     async save() {
       this.validate();
