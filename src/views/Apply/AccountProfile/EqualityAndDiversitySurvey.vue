@@ -895,7 +895,31 @@ export default {
       },
     };
   },
+  watch: {
+    'equalityAndDiversitySurvey.professionalBackground'(newValue, oldValue) {
+      this.checkEqualityAndDiversitySurvey(newValue, oldValue, 'professionalBackground');
+    },
+    'equalityAndDiversitySurvey.currentLegalRole'(newValue, oldValue) {
+      this.checkEqualityAndDiversitySurvey(newValue, oldValue, 'currentLegalRole');
+    },
+  },
   methods: {
+    difference(arr1, arr2) {
+      return arr1.filter(item => !arr2.includes(item));
+    },
+    checkEqualityAndDiversitySurvey(newValue, oldValue, field) {
+      if (JSON.stringify(newValue) !== JSON.stringify(oldValue)) {
+        if (newValue.length > oldValue.length) {
+          // new selected items
+          const difference = this.difference(newValue, oldValue);
+          if (difference.includes('prefer-not-to-say')) {
+            this.equalityAndDiversitySurvey[field] = ['prefer-not-to-say'];
+          } else {
+            this.equalityAndDiversitySurvey[field] = newValue.filter(x => x !== 'prefer-not-to-say');
+          }
+        }
+      }
+    },
     async save() {
       this.validate();
       if (this.isValid()) {
