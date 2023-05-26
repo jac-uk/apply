@@ -47,27 +47,32 @@
         </nav>
       </div>
 
+      <BackLink />
+
       <div class="govuk-!-padding-top-4 govuk-grid-column-three-quarters">
         <div
           v-if="personalDetails"
           class="govuk-grid-row"
         >
           <div class="govuk-grid-column-three-quarters">
-            <h3 class="govuk-heading-l">
+            <ErrorSummary :errors="errors" />
+            <h3 class="govuk-heading-l float-left">
               Your profile
             </h3>
-            <div class="text-right govuk-!-margin-bottom-4">
+            <!--
+              <div class="text-right govuk-!-margin-bottom-4">
               <a
-                class="govuk-button info-btn--character-information--save-and-continue"
+                class="govuk-button"
                 style="cursor: pointer;"
                 @click.prevent="save"
               >
                 Save
               </a>
             </div>
+            -->
+          </div>
 
-            <ErrorSummary :errors="errors" />
-
+          <div class="govuk-grid-column-three-quarters">
             <TextField
               id="title"
               v-model="personalDetails.title"
@@ -147,7 +152,7 @@
                 style="cursor: pointer;"
                 @click.prevent="save"
               >
-                Save
+                Save and Continue
               </a>
             </div>
           </div>
@@ -163,6 +168,7 @@ import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextField from '@/components/Form/TextField';
 import DateInput from '@/components/Form/DateInput';
+import BackLink from '@/components/BackLink';
 
 export default {
   name: 'ProfileEdit',
@@ -170,6 +176,7 @@ export default {
     ErrorSummary,
     TextField,
     DateInput,
+    BackLink,
   },
   extends: Form,
   data() {

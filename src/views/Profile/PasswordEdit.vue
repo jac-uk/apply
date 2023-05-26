@@ -47,25 +47,29 @@
         </nav>
       </div>
 
+      <BackLink />
+
       <div class="govuk-!-padding-top-4 govuk-grid-column-three-quarters">
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
-            <h3 class="govuk-heading-l">
+            <ErrorSummary :errors="errors" />
+            <h3 class="govuk-heading-l float-left">
               Your profile
             </h3>
-
-            <div class="text-right govuk-!-margin-bottom-4">
+            <!--
+              <div class="float-right">
               <a
-                class="govuk-link govuk-body-m"
+                class="govuk-button"
                 style="cursor: pointer;"
                 @click.prevent="save"
               >
-                Save
+                Save and continue
               </a>
-            </div>
+              </div>
+          -->
+          </div>
 
-            <ErrorSummary :errors="errors" />
-
+          <div class="govuk-grid-column-three-quarters">
             <Password
               id="password"
               v-model="password"
@@ -75,6 +79,13 @@
               :min-length="minPasswordLength"
               required
             />
+            <a
+              class="govuk-button float-right"
+              style="cursor: pointer;"
+              @click.prevent="save"
+            >
+              Save and continue
+            </a>
           </div>
         </div>
       </div>
@@ -87,11 +98,13 @@ import { auth } from '@/firebase';
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import Password from '@/components/Form/Password';
+import BackLink from '@/components/BackLink';
 
 export default {
   name: 'ProfileEdit',
   components: {
     ErrorSummary,
+    BackLink,
     Password,
   },
   extends: Form,
