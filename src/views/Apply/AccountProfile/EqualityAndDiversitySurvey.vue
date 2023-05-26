@@ -834,7 +834,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import BackLink from '@/components/BackLink';
-import { difference } from '@/helpers/array';
+import { transformOnSelection } from '@/helpers/array';
 
 export default {
   name: 'EqualityAndDiversitySurvey',
@@ -898,29 +898,13 @@ export default {
   },
   watch: {
     'equalityAndDiversitySurvey.professionalBackground'(newValue, oldValue) {
-      this.checkEqualityAndDiversitySurvey(newValue, oldValue, 'professionalBackground');
+      this.equalityAndDiversitySurvey.professionalBackground = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
     },
     'equalityAndDiversitySurvey.currentLegalRole'(newValue, oldValue) {
-      this.checkEqualityAndDiversitySurvey(newValue, oldValue, 'currentLegalRole');
+      this.equalityAndDiversitySurvey.currentLegalRole = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
     },
   },
   methods: {
-    checkEqualityAndDiversitySurvey(newValue, oldValue, field) {
-      if (
-        Array.isArray(newValue) && 
-        Array.isArray(oldValue) &&
-        JSON.stringify(newValue) !== JSON.stringify(oldValue)
-      ) {
-        if (newValue.length > oldValue.length) {
-          const newSelectedItems = difference(newValue, oldValue);
-          if (newSelectedItems.includes('prefer-not-to-say')) {
-            this.equalityAndDiversitySurvey[field] = ['prefer-not-to-say'];
-          } else {
-            this.equalityAndDiversitySurvey[field] = newValue.filter(x => x !== 'prefer-not-to-say');
-          }
-        }
-      }
-    },
     async save() {
       this.validate();
       if (this.isValid()) {
