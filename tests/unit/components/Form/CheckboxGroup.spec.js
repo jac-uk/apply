@@ -85,7 +85,7 @@ describe('components/Form/CheckboxGroup', () => {
 
             describe('<legend> element', () => {
                 describe('when the `label` prop is set', () => {
-                    const mockLabel = { label: 'my_label' };
+                    const mockLabel = { label: 'my_label', required: true };
                     it('displays the label in a <legend> element', async () => {
                         await wrapper.setProps(mockLabel);
                         const legend = wrapper.find('legend');
