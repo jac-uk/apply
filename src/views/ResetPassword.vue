@@ -35,6 +35,7 @@
               v-model="formData.email"
               label="Email address"
               type="email"
+              required
             />
 
             <button
@@ -43,6 +44,11 @@
             >
               Send the link
             </button>
+
+            <div v-if="!isEnabled">
+              Your email is disabled.
+            </div>
+
             <ChangeEmailMessage />
           </div>
         </div>
@@ -54,7 +60,7 @@
 <script>
 import TextField from '@/components/Form/TextField';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage';
-import { auth } from '@/firebase';
+import { auth, functions } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
@@ -66,6 +72,7 @@ export default {
   data () {
     return {
       formData: {},
+      isEnabled: true,
       resetSent: false,
     };
   },
@@ -79,7 +86,18 @@ export default {
       });
       if (!isVerified) return;
 
-      this.resetPassword();
+      this.isEnabled = await this.checkEnabledUserByEmail(this.formData.email);
+      if (this.isEnabled) {
+        this.resetPassword();
+      }
+    },
+    async checkEnabledUserByEmail(email) {
+      try {
+        const res = await functions.httpsCallable('checkEnabledUserByEmail')({ email });
+        return res.data;
+      } catch (error) {
+        return false;
+      }
     },
     async resetPassword() {
       if (this.formData.email) {

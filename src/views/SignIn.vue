@@ -43,6 +43,7 @@
             v-model="formData.email"
             label="Email address"
             type="email"
+            required
           />
 
           <Password

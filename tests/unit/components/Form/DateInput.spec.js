@@ -93,7 +93,7 @@ describe('components/DateInput', () => {
     describe('label', () => {
       it('sets legend', async () => {
         const label = 'Launch date and time';
-        await wrapper.setProps({ label });
+        await wrapper.setProps({ label, required: true });
         expect(wrapper.find('legend.govuk-fieldset__legend--m').text()).toBe(label);
         });
     });
