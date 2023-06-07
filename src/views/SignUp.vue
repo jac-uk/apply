@@ -78,6 +78,7 @@
             :hint="`For security reasons it should be ${minPasswordLength} or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *).`"
             type="new-password"
             :min-length="minPasswordLength"
+            :is-new-pwd="true"
             required
           />
 

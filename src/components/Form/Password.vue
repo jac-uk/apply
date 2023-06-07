@@ -66,6 +66,10 @@ export default {
       default: 8,
       type: Number,
     },
+    isNewPwd: { // Validates the pwd for strength
+      default: false,
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -102,17 +106,24 @@ export default {
     },
   },
   mounted() {
-    this.$root.$on('validate', this.handleValidatePassword);
+    if (this.isNewPwd) {
+      this.$root.$on('validate', this.handleValidatePassword);
+    }
   },
   beforeDestroy: function() {
     this.setError('');
-    this.$root.$off('validate', this.handleValidatePassword);
+    if (this.isNewPwd) {
+      this.$root.$off('validate', this.handleValidatePassword);
+    }
   },
   methods: {
     toggleVisibility() {
       this.showPassword = !this.showPassword;
     },
     handleValidatePassword(event) {
+      if (!this.isNewPwd) {
+        return;
+      }
       // don't bother checking if generic validation failed
       // if (!this.hasError) {
       let value = this.value;
