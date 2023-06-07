@@ -28,7 +28,7 @@
       :type="fieldType"
       :autocomplete="type"
       @input="handleValidatePassword"
-    />
+    >
 
     <button
       class="govuk-button govuk-button--secondary govuk-!-margin-left-1 info-btn--sign-up--password--show-hide"

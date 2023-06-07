@@ -46,7 +46,7 @@
       :max="numMax"
       :autocomplete="autocomplete"
       @change="validate"
-    />
+    >
   </div>
 </template>
 
