@@ -1,6 +1,5 @@
 <template>
   <div
-    v-show="isBackToTopVisisble"
     class="back-to-top-wrapper govuk-width-container print-none"
   >
     <a
@@ -30,25 +29,7 @@
 <script>
 export default {
   name: 'BackToTop',
-  data() {
-    return {
-      isBackToTopVisisble: false,
-    };
-  },
-  mounted() {
-    window.addEventListener('scroll', this.onScroll);
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.onScroll);
-  },
   methods: {
-    onScroll() {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        this.isBackToTopVisisble = true;
-      } else {
-        this.isBackToTopVisisble = false;
-      }
-    },
     backToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
