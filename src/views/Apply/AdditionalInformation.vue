@@ -93,6 +93,7 @@ import BackLink from '@/components/BackLink';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import TextareaInput from '@/components/Form/TextareaInput';
+import { transformOnSelection } from '@/helpers/array';
 
 export default {
   name: 'AdditionalInformation',
@@ -119,6 +120,11 @@ export default {
       formId: 'additionalInfo',
       formData: formData,
     };
+  },
+  watch: {
+    'formData.additionalInfo.listedSources'(newValue, oldValue) {
+      this.formData.additionalInfo.listedSources = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
+    },
   },
   methods: {
     isFormValid() {

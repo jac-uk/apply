@@ -834,6 +834,7 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import CheckboxGroup from '@/components/Form/CheckboxGroup';
 import CheckboxItem from '@/components/Form/CheckboxItem';
 import BackLink from '@/components/BackLink';
+import { transformOnSelection } from '@/helpers/array';
 
 export default {
   name: 'EqualityAndDiversitySurvey',
@@ -894,6 +895,14 @@ export default {
         progress: {},
       },
     };
+  },
+  watch: {
+    'equalityAndDiversitySurvey.professionalBackground'(newValue, oldValue) {
+      this.equalityAndDiversitySurvey.professionalBackground = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
+    },
+    'equalityAndDiversitySurvey.currentLegalRole'(newValue, oldValue) {
+      this.equalityAndDiversitySurvey.currentLegalRole = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
+    },
   },
   methods: {
     async save() {
