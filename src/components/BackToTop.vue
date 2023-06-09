@@ -1,34 +1,54 @@
 <template>
-  <div class="back-to-top-wrapper print-none">
-    <button
-      class="btn-back-to-top"
-      @click="backToTop"
+  <div
+    v-show="isBackToTopVisisble"
+    class="back-to-top-wrapper govuk-width-container print-none"
+  >
+    <a
+      class="govuk-link back-to-top-link"
+      href="#"
+      @click.prevent="backToTop"
     >
       <svg
-        class="svg-icon th-fill-current"
-        width="24"
-        height="24"
-        aria-hidden="true"
-        role="img"
+        role="presentation"
         focusable="false"
+        class="back-to-top-icon"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        width="13"
+        height="17"
+        viewBox="0 0 13 17"
       >
-        <polyline points="18 15 12 9 6 15" />
+        <path
+          fill="currentColor"
+          d="M6.5 0L0 6.5 1.4 8l4-4v12.7h2V4l4.3 4L13 6.4z"
+        />
       </svg>
-    </button>
+      Back to top
+    </a>
   </div>
 </template>
 
 <script>
 export default {
   name: 'BackToTop',
+  data() {
+    return {
+      isBackToTopVisisble: false,
+    };
+  },
+  mounted() {
+    window.addEventListener('scroll', this.onScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.onScroll);
+  },
   methods: {
+    onScroll() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        this.isBackToTopVisisble = true;
+      } else {
+        this.isBackToTopVisisble = false;
+      }
+    },
     backToTop() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     },
@@ -38,23 +58,15 @@ export default {
 
 <style scoped>
 .back-to-top-wrapper {
-  display: flex;
-  justify-content: center;
-  border-top: 5px solid #5c2b59;
-  position: relative;
+  margin-bottom: 15px;
 }
-.btn-back-to-top {
-  position: absolute;
-  bottom: 100%;
-  height: 25px;
-  width: 40px;
-  color: white;
-  background-color: #5c2b59;
-  border: none;
-  border-radius: 2px 2px 0 0;
-}
-.btn-back-to-top:hover {
-  cursor: pointer;
-  background-color: #262727;
+
+.back-to-top-icon {
+  display: inline-block;
+  width: .8em;
+  height: 1em;
+  margin-top: -5px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 </style>
