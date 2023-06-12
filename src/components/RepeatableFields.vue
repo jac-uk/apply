@@ -28,8 +28,8 @@
       </component>
     </div>
     <div
-        class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-4"
-      >
+      class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-4"
+    >
       <button
         v-if="canAddRow"
         type="button"
