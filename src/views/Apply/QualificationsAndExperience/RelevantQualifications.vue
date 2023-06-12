@@ -12,6 +12,10 @@
           Qualifications
         </h1>
 
+        <p class="govuk-body-l">
+          Please enter at least one qualification.
+        </p>
+
         <ErrorSummary :errors="errors" />
 
         <div

@@ -18,7 +18,7 @@
             v-if="rows.length > 1"
             ref="removeFieldButton"
             type="button"
-            class="govuk-button float-right govuk-button--warning govuk-!-padding-top-2"
+            class="govuk-button govuk-button--warning govuk-!-padding-top-2"
             @click.prevent="removeRow(index)"
           >
             Remove
@@ -26,18 +26,18 @@
           <hr class="govuk-!-margin-bottom-0">
         </template>
       </component>
-      <div
-        class="govuk-grid-row"
+    </div>
+    <div
+        class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-4"
       >
-        <button
-          v-if="canAddRow"
-          type="button"
-          :class="`govuk-button govuk-button--secondary float-left`" 
-          @click.prevent="addRow"
-        >
-          Add another
-        </button>
-      </div>
+      <button
+        v-if="canAddRow"
+        type="button"
+        :class="`govuk-button govuk-button--secondary float-left`"
+        @click.prevent="addRow"
+      >
+        Add another
+      </button>
     </div>
   </div>
 </template>

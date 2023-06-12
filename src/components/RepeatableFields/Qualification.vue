@@ -5,6 +5,7 @@
       v-model="row.type"
       label="What are you qualified as?"
       hint="Choose 1 option."
+      required
     >
       <RadioItem
         value="advocate-scotland"
@@ -35,6 +36,7 @@
       v-model="row.location"
       label="Where are you qualified?"
       hint="Choose 1 option."
+      required
     >
       <RadioItem
         value="england-wales"
