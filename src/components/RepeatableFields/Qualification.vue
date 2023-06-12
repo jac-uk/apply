@@ -118,6 +118,7 @@
         v-model="row.date"
         label="When did you qualify?"
         type="month"
+        required
       />
     </div>
 
