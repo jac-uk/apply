@@ -141,6 +141,7 @@ import BackLink from '@/components/BackLink';
 import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload';
 import FormFieldError from '@/components/Form/FormFieldError';
+import _has from 'lodash/has';
 
 export default {
   name: 'RelevantQualifications',
@@ -183,8 +184,11 @@ export default {
       return filters.lookup(this.vacancy.appliedSchedule);
     },
     notCompletedPupillage() {
-      const matches = this.formData.qualifications.filter(o => 'completedPupillage' in o && o.completedPupillage === false);
-      return matches.length > 0;
+      if (_has(this.formData, 'qualifications') && Array.isArray(this.formData.qualifications)) {
+        const matches = this.formData.qualifications.filter(o => 'completedPupillage' in o && o.completedPupillage === false);
+        return matches.length > 0;
+      }
+      return null;
     },
   },
   methods: {
