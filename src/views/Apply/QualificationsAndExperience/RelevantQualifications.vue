@@ -185,7 +185,11 @@ export default {
     },
     notCompletedPupillage() {
       if (_has(this.formData, 'qualifications') && Array.isArray(this.formData.qualifications)) {
-        const matches = this.formData.qualifications.filter(o => 'completedPupillage' in o && o.completedPupillage === false);
+        const matches = this.formData.qualifications.filter(qualification => {
+          return qualification.type === 'barrister'
+            && 'completedPupillage' in qualification
+            && qualification.completedPupillage === false;
+        });
         return matches.length > 0;
       }
       return null;
