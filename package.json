@@ -23,7 +23,7 @@
     "test-ci": "TZ='Europe/London' vue-cli-service test:unit --ci --runInBand"
   },
   "dependencies": {
-    "@jac-uk/jac-kit": "0.0.49",
+    "@jac-uk/jac-kit": "^0.1.24",
     "@ministryofjustice/frontend": "0.2.4",
     "@sentry/tracing": "^7.13.0",
     "@sentry/vue": "^7.13.0",
