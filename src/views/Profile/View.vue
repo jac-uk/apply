@@ -53,14 +53,14 @@
           class="govuk-grid-row"
         >
           <div class="govuk-grid-column-three-quarters">
-            <h3 class="govuk-heading-l">
+            <h3 class="float-left govuk-heading-l">
               Your profile
             </h3>
 
-            <div class="text-right">
+            <!-- style="display:inline-block;" -->
+            <div class="float-right">
               <RouterLink
                 class="govuk-link govuk-body-m"
-                style="display:inline-block;"
                 :to="{ name: 'profile-edit' }"
               >
                 Edit
@@ -161,16 +161,6 @@
               </div>
             </dl>
 
-            <div class="text-right">
-              <RouterLink
-                class="govuk-link govuk-body-m"
-                style="display:inline-block;"
-                :to="{ name: 'profile-password-edit' }"
-              >
-                Edit
-              </RouterLink>
-            </div>
-
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -178,22 +168,29 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   ********
+                  <RouterLink
+                    class="govuk-link govuk-body-m float-right"
+                    style="display:inline-block;"
+                    :to="{ name: 'profile-password-edit' }"
+                  >
+                    Edit
+                  </RouterLink>
                 </dd>
               </div>
             </dl>
           </div>
         </div>
       </div>
-
-      <Modal
-        ref="modalRef"
-        button-text="OK"
-        :cancelable="false"
-        title="Change of email address"
-        message="Your email address has been changed. Please sign in again using your new email address."
-        @confirmed="signOut"
-      />
     </div>
+
+    <Modal
+      ref="modalRef"
+      button-text="OK"
+      :cancelable="false"
+      title="Change of email address"
+      message="Your email address has been changed. Please sign in again using your new email address."
+      @confirmed="signOut"
+    />
   </div>
 </template>
 
