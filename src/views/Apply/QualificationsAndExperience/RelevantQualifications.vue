@@ -89,7 +89,7 @@
         />
 
         <template v-if="notCompletedPupillage">
-          <h2>As you did not complete pupilage, please provide a copy of your exemption and or practicing certificate</h2>
+          <h2>As you did not complete pupillage, please provide a copy of your exemption and or practicing certificate</h2>
 
           <FileUpload
             id="exemption-certificate-upload"
