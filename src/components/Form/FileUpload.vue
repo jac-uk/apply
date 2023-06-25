@@ -63,6 +63,7 @@
         style="display: none;"
         @change="fileSelected"
       >
+      <p>Acceptable file types: {{ acceptableExtensions.join(', ') }}</p>
     </div>
   </div>
 </template>
