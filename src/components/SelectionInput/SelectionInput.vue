@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-form-group">
-    <fieldset 
+    <fieldset
       class="govuk-fieldset"
       :aria-describedby="`${id}-hint`"
     >
@@ -35,7 +35,7 @@
         :answers="answers"
       />
     </fieldset>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -49,7 +49,7 @@ export default {
     SingleChoice,
     MultipleChoice,
     RankedChoice,
-  },  
+  },
   props: {
     id: {
       type: String,
@@ -89,7 +89,7 @@ export default {
       case 'multiple-choice':
         return 'Select all that apply';
       case 'ranked-choice':
-        return 'Select and rank all that apply. With 1 being your top choice';
+        return 'Select all that apply in order of preference. With 1 being your top choice';
       default:
         return '';
       }

@@ -1,39 +1,37 @@
 <template>
-  <div class="govuk-checkboxes">
+  <div>
     <div
       v-for="(answer, index) in answers"
       :key="index"
-      class="govuk-checkboxes__item"
+      class="govuk-grid-row govuk-!-margin-left-2"
     >
-      <input
-        :id="`${id}-answer-${index}`"
-        v-model="selected"
-        :name="`${id}-answer-${index}`"
-        :value="answer.answer"
-        type="checkbox"
-        class="govuk-checkboxes__input"
-        @change="update"
+      <div
+        class="govuk-checkboxes__item govuk-grid-column-one-third govuk-!-margin-bottom-0"
       >
-      <label
-        :for="`${id}-answer-${index}`"
-        class="govuk-label govuk-checkboxes__label"
-      >
-        {{ answer.answer }}
-      </label>
-      <select 
-        v-if="selected.indexOf(answer.answer) >= 0"
-        v-model="ranking[answer.answer]"
-        class="govuk-select"
-        @change="update"
-      >
-        <option
-          v-for="score in answers.length"
-          :key="score"
-          :value="score"
+        <input
+          :id="`${id}-answer-${index}`"
+          v-model="selected"
+          :name="`${id}-answer-${index}`"
+          :value="answer.answer"
+          type="checkbox"
+          class="govuk-checkboxes__input"
+          @change="update"
         >
-          {{ score }}
-        </option>
-      </select>      
+        <label
+          :for="`${id}-answer-${index}`"
+          class="govuk-label govuk-checkboxes__label"
+        >
+          {{ answer.answer }}
+        </label>
+      </div>
+      <div
+        v-if="selected.indexOf(answer.answer) >= 0"
+        class="govuk-grid-column-one-third"
+      >
+        <div class="govuk-heading-l govuk-!-margin-bottom-0">
+          {{ selected.indexOf(answer.answer) + 1 }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -53,8 +51,8 @@ export default {
     },
     value: {
       type: Array,
-      default: function () { 
-        return new Array(); 
+      default: function () {
+        return new Array();
       },
     },
   },
@@ -74,28 +72,9 @@ export default {
   },
   methods: {
     update() {
-      const rankedSelection = [];
-      const cleanedRanking = {};
-      for (let i = 0, len = this.selected.length; i < len; ++i) {
-        if (!this.ranking[this.selected[i]]) { this.ranking[this.selected[i]] = this.selected.length; }
-        rankedSelection.push({ answer: this.selected[i], rank: this.ranking[this.selected[i]] });
-        cleanedRanking[this.selected[i]] = this.ranking[this.selected[i]];
-      }
-      this.ranking = cleanedRanking;
-      this.selected = rankedSelection.sort(( item1, item2 ) => {
-        if (item1.rank < item2.rank) {
-          return -1;
-        } else if (item1.rank > item2.rank) {
-          return 1;
-        } else {
-          return 0;
-        }
-      }).map((item) => {
-        return item.answer;
-      });
       this.$emit('input', this.selected);
     },
-  },  
+  },
 };
 
 </script>
