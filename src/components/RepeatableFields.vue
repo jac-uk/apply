@@ -18,12 +18,15 @@
             v-if="rows.length > 1"
             ref="removeFieldButton"
             type="button"
-            class="govuk-button govuk-button--warning govuk-!-padding-top-2"
+            class="govuk-button govuk-button--warning float-right"
             @click.prevent="removeRow(index)"
           >
             Remove
           </button>
-          <hr class="govuk-!-margin-bottom-0">
+          <hr
+            class="govuk-!-margin-bottom-4"
+            style="clear: both;"
+          >
         </template>
       </component>
     </div>
