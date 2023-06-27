@@ -256,7 +256,7 @@
 
             <RadioItem
               value="prefer-not-to-say"
-              label="I prefer not to say."
+              label="I prefer not to say"
             />
           </RadioGroup>
 
