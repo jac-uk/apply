@@ -163,7 +163,11 @@ export default {
       return `qualification_type_${this.index}`;
     },
     otherQualificationsRequired() {
-      return this.vacancy.qualifications && this.vacancy.qualifications.includes('other') && this.vacancy.otherQualifications;
+      if (this.vacancy.qualifications) {
+        return this.vacancy.qualifications.includes('other') && this.vacancy.otherQualifications;
+      } else {
+        return false;
+      }
     },
     qualificationLocation() {
       return `qualification_location_${this.index}`;
