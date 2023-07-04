@@ -75,6 +75,7 @@ import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter';
 import Review from '@/views/Apply/FinalCheck/Review';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
 import AdditionalInformation from '@/views/Apply/AdditionalInformation';
+import SandBox from '@/views/SandBox';
 
 // Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks';
@@ -116,6 +117,14 @@ const router = new Router({
       name: 'not-found',
       meta: {
         title: 'Error',
+      },
+    },
+    {
+      path: '/sandbox',
+      name: 'sandbox',
+      component: SandBox,
+      meta: {
+        title: 'Sandbox',
       },
     },
     {
