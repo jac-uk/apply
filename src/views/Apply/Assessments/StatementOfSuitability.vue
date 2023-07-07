@@ -90,13 +90,20 @@
           />
         </div>
 
-        <FileUpload
-          id="suitability-statement-file"
-          ref="suitability-statement"
-          v-model="formData.uploadedSuitabilityStatement"
-          name="suitability-statement"
-          :path="uploadPath"
-          label="Upload Statement of Suitability"
+        <input
+          id="upload"
+          ref="file"
+          type="file"
+          accept=".docx"
+          class="govuk-file-upload govuk-!-margin-bottom-2"
+          @change="handleFileUpload"
+        >
+        <br>
+
+        <TextareaInput
+          v-if="parsedContent.length"
+          id="suitability-statement-text"
+          v-model="parsedContent"
           required
         />
 
@@ -118,11 +125,11 @@ import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
-import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
+import mammoth from 'mammoth';
 
 export default {
   name: 'StatementOfSuitability',
@@ -131,7 +138,6 @@ export default {
     RadioGroup,
     RadioItem,
     TextareaInput,
-    FileUpload,
     BackLink,
     DownloadLink,
     CustomHTML,
@@ -162,6 +168,7 @@ export default {
     return {
       formId: 'statementOfSuitability',
       formData: formData,
+      parsedContent: '',
     };
   },
   computed: {
@@ -189,6 +196,44 @@ export default {
         candidateName: this.application.personalDetails.fullName,
         exerciseRef: this.application.exerciseRef,
       });
+    },
+    handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+
+        reader.onerror = (error) => {
+          // Handle file read error
+          console.error('Error occurred while reading the file:', error);
+        };
+
+        reader.onload = () => {
+          try {
+            this.parseDocument(reader.result);
+          } catch (error) {
+            // Handle document parsing error
+            console.error('Error occurred while parsing the document:', error);
+          }
+        };
+
+        reader.readAsArrayBuffer(file);
+      } else {
+        console.error('No file selected.');
+      }
+    }
+    ,
+    parseDocument(fileData) {
+      const options = {
+        arrayBuffer: fileData,
+      };
+
+      mammoth.extractRawText(options)
+        .then((result) => {
+          this.parsedContent = result.value;
+        })
+        .catch((error) => {
+          console.error('Error occurred while parsing the document:', error);
+        });
     },
   },
 };
