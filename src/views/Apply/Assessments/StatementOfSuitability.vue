@@ -57,8 +57,9 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
         <p class="govuk-body-l">
-          Below is a blank template for the statement of suitability. Please save this document, fill it in,
-          then re-upload it to this page.
+          Below is a blank template for the statement of suitability.
+          <br>
+          Please save this document, fill it in, re-upload it to this page, check the content and submit.
         </p>
 
         <div class="govuk-form-group">
@@ -96,19 +97,20 @@
           type="file"
           accept=".docx"
           class="govuk-file-upload govuk-!-margin-bottom-2"
+          required
           @change="handleFileUpload"
         >
         <br>
 
         <TextareaInput
-          v-if="parsedContent.length"
           id="suitability-statement-text"
           v-model="parsedContent"
-          required
+          label="Suitability content"
+          :disabled="!parsedContent.length"
         />
 
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) && !parsedContent.length"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
