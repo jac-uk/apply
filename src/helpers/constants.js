@@ -73,6 +73,18 @@ const LANGUAGES = {
   WELSH: 'cym',
 };
 
+const ASSESSMENT_METHOD = {
+  SELF_ASSESSMENT_WITH_COMPETENCIES: 'selfAssessmentWithCompetencies',
+  COVERING_LETTER: 'coveringLetter',
+  CV: 'cv',
+  STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES: 'statementOfSuitabilityWithCompetencies',
+  STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES: 'statementOfSuitabilityWithSkillsAndAbilities',
+  STATEMENT_OF_ELIGIBILITY: 'statementOfEligibility',
+  NONE: 'none',
+  INDEPENDENT_ASSESSMENTS: 'independentAssessments',
+  LEADERSHIP_JUDGE_ASSESSMENT: 'leadershipJudgeAssessment',
+};
+
 export {
   STATUS,
   QUALIFYING_TEST,
@@ -84,5 +96,6 @@ export {
   RECAPTCHA_ACTIONS,
   ASSESSOR_TYPES,
   NOT_COMPLETE_PUPILLAGE_REASONS,
-  LANGUAGES
+  LANGUAGES,
+  ASSESSMENT_METHOD
 };

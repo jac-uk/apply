@@ -123,6 +123,7 @@ import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
+import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
   name: 'StatementOfSuitability',
@@ -167,12 +168,9 @@ export default {
   computed: {
     downloadNameGenerator() {
       let outcome = null;
-      if (this.vacancy.assessmentOptions == 'statement-of-suitability-with-competencies') {
+      if (this.vacancy.assessmentMethods === ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES) {
         outcome = 'statement-of-suitability-with-competencies';
-      } else if (
-        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities' ||
-        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'
-      ) {
+      } else if (this.vacancy.assessmentMethods === ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES) {
         outcome = 'statement-of-suitability-with-skills-and-abilities';
       }
       const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
