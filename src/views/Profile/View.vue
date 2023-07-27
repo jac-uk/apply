@@ -67,6 +67,11 @@
               </RouterLink>
             </div>
 
+            <div class="govuk-header-l">
+              {{ personalDetails.email }}
+              {{ $store.state.auth.currentUser.email }}
+            </div>
+
             <dl class="govuk-summary-list">
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
@@ -183,25 +188,25 @@
       </div>
     </div>
 
-    <Modal
+    <!-- <Modal
       ref="modalRef"
       button-text="OK"
       :cancelable="false"
       title="Change of email address"
       message="Your email address has been changed. Please sign in again using your new email address."
       @confirmed="signOut"
-    />
+    /> -->
   </div>
 </template>
 
 <script>
 import { auth } from '@/firebase';
-import Modal from '@/components/Page/Modal';
+// import Modal from '@/components/Page/Modal';
 
 export default {
   name: 'Profile',
   components: {
-    Modal,
+    // Modal,
   },
   data() {
     return {

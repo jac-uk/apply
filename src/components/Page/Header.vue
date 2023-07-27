@@ -54,6 +54,20 @@
               <b>You are now signed in as {{ userName }}</b>
             </span>
           </div>
+          <div
+            class="govuk-phase-banner govuk-!-margin-bottom-4 print-none govuk-width-container"
+          >
+            <p class="govuk-phase-banner__content">
+              <span class="govuk-phase-banner__text">
+                This is a new service – your <a
+                  style="font-size: 16px"
+                  class="govuk-link govuk-body info-link--header--feedback"
+                  href="https://docs.google.com/forms/d/e/1FAIpQLSdS7FDTzrwokQwiRriCzA45q2eiZT5xUX1dl9WfkJUYZAKiBQ/viewform"
+                  target="_blank"
+                >feedback</a> will help us improve it.
+              </span>
+            </p>
+          </div>
         </div>
       </div>
     </header>
