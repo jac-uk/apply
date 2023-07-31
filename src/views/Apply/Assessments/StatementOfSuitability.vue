@@ -168,9 +168,9 @@ export default {
   computed: {
     downloadNameGenerator() {
       let outcome = null;
-      if (this.vacancy.assessmentMethods === ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES) {
+      if (this.vacancy.assessmentMethods[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES]) {
         outcome = 'statement-of-suitability-with-competencies';
-      } else if (this.vacancy.assessmentMethods === ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES) {
+      } else if (this.vacancy.assessmentMethods[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES]) {
         outcome = 'statement-of-suitability-with-skills-and-abilities';
       }
       const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
