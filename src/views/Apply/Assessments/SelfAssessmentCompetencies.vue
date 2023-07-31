@@ -170,7 +170,7 @@ export default {
   computed: {
     downloadNameGenerator() {
       let outcome = null;
-      if (this.vacancy.assessmentMethods[ASSESSMENT_METHOD.SELF_ASSESSMENT_WITH_COMPETENCIES]) {
+      if (this.vacancy.assessmentMethods && this.vacancy.assessmentMethods[ASSESSMENT_METHOD.SELF_ASSESSMENT_WITH_COMPETENCIES]) {
         const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
         if (fileName) {
           outcome = `self-assessment-with-competencies.${  fileName.split('.').pop()}`;
