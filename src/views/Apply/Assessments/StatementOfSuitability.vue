@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="triggerExtraction"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -57,9 +57,8 @@
         <hr class="govuk-section-break govuk-section-break--l govuk-section-break--visible">
 
         <p class="govuk-body-l">
-          Below is a blank template for the statement of suitability.
-          <br>
-          Please save this document, fill it in, re-upload it to this page, check the content and submit.
+          Below is a blank template for the statement of suitability. Please save this document, fill it in,
+          then re-upload it to this page.
         </p>
 
         <div class="govuk-form-group">
@@ -91,26 +90,18 @@
           />
         </div>
 
-        <input
-          id="upload"
-          ref="file"
-          type="file"
-          accept=".docx"
-          class="govuk-file-upload govuk-!-margin-bottom-2"
+        <FileUpload
+          id="suitability-statement-file"
+          ref="suitability-statement"
+          v-model="formData.uploadedSuitabilityStatement"
+          name="suitability-statement"
+          :path="uploadPath"
+          label="Upload Statement of Suitability"
           required
-          @change="handleFileUpload"
-        >
-        <br>
-
-        <TextareaInput
-          id="suitability-statement-text"
-          v-model="parsedContent"
-          label="Suitability content"
-          :disabled="!parsedContent.length"
         />
 
         <button
-          :disabled="!canSave(formId) && !parsedContent.length"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
@@ -127,11 +118,11 @@ import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
 import TextareaInput from '@/components/Form/TextareaInput';
+import FileUpload from '@/components/Form/FileUpload';
 import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
-import mammoth from 'mammoth';
 
 export default {
   name: 'StatementOfSuitability',
@@ -140,6 +131,7 @@ export default {
     RadioGroup,
     RadioItem,
     TextareaInput,
+    FileUpload,
     BackLink,
     DownloadLink,
     CustomHTML,
@@ -170,7 +162,6 @@ export default {
     return {
       formId: 'statementOfSuitability',
       formData: formData,
-      parsedContent: '',
     };
   },
   computed: {
@@ -192,50 +183,15 @@ export default {
     },
   },
   methods: {
+    triggerExtraction() {
+      //callable goes here
+    },
     logEventAfterSave() {
       logEvent('info', 'Statement of suitability uploaded', {
         applicationId: this.applicationId,
         candidateName: this.application.personalDetails.fullName,
         exerciseRef: this.application.exerciseRef,
       });
-    },
-    handleFileUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-
-        reader.onerror = (error) => {
-          // Handle file read error
-          console.error('Error occurred while reading the file:', error);
-        };
-
-        reader.onload = () => {
-          try {
-            this.parseDocument(reader.result);
-          } catch (error) {
-            // Handle document parsing error
-            console.error('Error occurred while parsing the document:', error);
-          }
-        };
-
-        reader.readAsArrayBuffer(file);
-      } else {
-        console.error('No file selected.');
-      }
-    }
-    ,
-    parseDocument(fileData) {
-      const options = {
-        arrayBuffer: fileData,
-      };
-
-      mammoth.extractRawText(options)
-        .then((result) => {
-          this.parsedContent = result.value;
-        })
-        .catch((error) => {
-          console.error('Error occurred while parsing the document:', error);
-        });
     },
   },
 };
