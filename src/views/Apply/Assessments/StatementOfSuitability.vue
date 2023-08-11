@@ -90,6 +90,9 @@
           />
         </div>
 
+        {{ uploadPath }}
+        {{ vacancy.downloads.candidateAssessementForms }}
+
         <FileUpload
           id="suitability-statement-file"
           ref="suitability-statement"
@@ -123,6 +126,7 @@ import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
+import { functions } from '@/firebase';
 
 export default {
   name: 'StatementOfSuitability',
@@ -183,8 +187,8 @@ export default {
     },
   },
   methods: {
-    triggerExtraction() {
-      //callable goes here
+    async triggerExtraction() {
+      return await functions.httpsCallable('extractDocumentContent')();
     },
     logEventAfterSave() {
       logEvent('info', 'Statement of suitability uploaded', {

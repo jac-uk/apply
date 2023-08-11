@@ -70,6 +70,7 @@ import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability';
 import StatementOfEligibility from '@/views/Apply/Assessments/StatementOfEligibility';
+import DataConfirmation from '@/views/Apply/Assessments/DataConfirmation';
 import CV from '@/views/Apply/Assessments/CV';
 import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter';
 import Review from '@/views/Apply/FinalCheck/Review';
@@ -667,6 +668,16 @@ const router = new Router({
           meta: {
             requiresAuth: true,
             title: 'Statement of eligibility',
+            isMultilanguage: true,
+          },
+        },
+        {
+          path: 'data-confirmation',
+          component: DataConfirmation,
+          name: 'data-confirmation',
+          meta: {
+            requiresAuth: true,
+            title: 'Confirm your data',
             isMultilanguage: true,
           },
         },
