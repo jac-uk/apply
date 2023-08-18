@@ -158,17 +158,6 @@
           >{{ vacancy.exerciseMailbox }}</a>
         </p>
 
-        <div class="govuk-warning-text">
-          <span
-            class="govuk-warning-text__icon"
-            aria-hidden="true"
-          >!</span>
-          <strong class="govuk-warning-text__text">
-            <span class="govuk-warning-text__assistive">Warning</span>
-            By clicking the apply button you are agreeing that you have read all the information on the exercise information page and any guidance referred to.
-          </strong>
-        </div>
-
         <div class="btn-group">
           <a
             v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
@@ -331,7 +320,7 @@
         </h2>
         <Timeline :data="timeline" />
         <a
-          href="#"
+          href="#" 
           class="govuk-link print-none"
           @click.prevent="toggleExpandTimeline"
         >
@@ -415,7 +404,7 @@ export default {
           title: 'Timeline',
         });
       }
-
+      
       list.push({
         id: 'about-the-role',
         title: 'About the role',
