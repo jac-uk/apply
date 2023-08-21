@@ -1,18 +1,36 @@
-const fs = require('fs');
-const packageJson = fs.readFileSync('./package.json');
-const version = JSON.parse(packageJson).version || 0;
-const webpack = require('webpack');
+// const fs = require('fs');
+// const packageJson = fs.readFileSync('./package.json');
+// const path = require('path');
+// const version = JSON.parse(packageJson).version || 0;
+// const webpack = require('webpack');
 
 module.exports = {
-  configureWebpack: {
-    plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          PACKAGE_VERSION: `"${version}"`,
-        },
-      }),
-    ],
+  chainWebpack: (config) => {
+    config.resolve.alias.set('vue', '@vue/compat');
+
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => {
+        return {
+          ...options,
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2,
+            },
+          },
+        };
+      });
   },
+  // configureWebpack: {
+  //   plugins: [
+  //     new webpack.DefinePlugin({
+  //       'process.env': {
+  //         PACKAGE_VERSION: `"${version}"`,
+  //       },
+  //     }),
+  //   ],
+  // },
   devServer: {
     port: 8181,
   },
