@@ -134,7 +134,7 @@ export default {
   async created() {
     await this.loadQualifyingTestResponse();
   },
-  destroyed() {
+  unmounted() {
     this.$store.dispatch('qualifyingTestResponse/unbind');
   },
   methods: {

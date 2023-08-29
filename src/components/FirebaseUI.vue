@@ -28,7 +28,7 @@ export default {
     this.ui = new firebaseui.auth.AuthUI(auth);
     this.ui.start('#firebaseui-auth-container', this.uiConfig);
   },
-  destroyed() {
+  unmounted() {
     this.ui.delete();
   },
   methods: {

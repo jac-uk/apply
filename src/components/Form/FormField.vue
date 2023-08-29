@@ -89,7 +89,7 @@ export default {
   mounted: function () {
     this.$root.$on('validate', this.handleValidate);
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     this.setError('');
     this.$root.$off('validate', this.handleValidate);
   },

@@ -110,7 +110,7 @@ export default {
       this.$root.$on('validate', this.handleValidatePassword);
     }
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     this.setError('');
     if (this.isNewPwd) {
       this.$root.$off('validate', this.handleValidatePassword);

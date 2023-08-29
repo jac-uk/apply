@@ -25,7 +25,7 @@ export default {
       this.$refs.formRef.setAttribute('novalidate', true);
     }
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     this.$root.$off('handle-error', this.handleError);
   },
   methods: {
