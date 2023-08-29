@@ -103,7 +103,7 @@ export default {
         if (this.vacancy.qualifications[i] === 'other') {
           qualifications += this.vacancy.otherQualifications;
         } else {
-          qualifications += this.$options.filters.lookup(this.vacancy.qualifications[i]);
+          qualifications += this.$filters.lookup(this.vacancy.qualifications[i]);
         }
       }
       return qualifications;

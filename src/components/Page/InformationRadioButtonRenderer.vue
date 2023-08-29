@@ -3,7 +3,7 @@
     <div
       class="govuk-body"
     >
-      {{ value | toYesNo }}
+      {{ $filters.toYesNo(value) }}
     </div>
   </div>
 </template>

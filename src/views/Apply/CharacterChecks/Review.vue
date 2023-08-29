@@ -139,10 +139,10 @@
             v-if="application.equalityAndDiversitySurvey.gender == 'other-gender'"
             class="govuk-body govuk-!-margin-bottom-0"
           >
-            <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+            <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.gender) }}</span>
             {{ application.equalityAndDiversitySurvey.otherGenderDetails }}
           </p>
-          <span v-else>{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+          <span v-else>{{ $filters.lookup(application.equalityAndDiversitySurvey.gender) }}</span>
         </dd>
       </div>
 
@@ -155,7 +155,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <p v-if="application.personalDetails.dateOfBirth">
-            {{ application.personalDetails.dateOfBirth | formatDate }}
+            {{ $filters.formatDate(application.personalDetails.dateOfBirth) }}
           </p>
         </dd>
       </div>
@@ -192,7 +192,7 @@
           Citizenship
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.personalDetails.citizenship | lookup }}
+          {{ $filters.lookup(application.personalDetails.citizenship) }}
         </dd>
       </div>
 
@@ -236,7 +236,7 @@
         <dd
           class="govuk-summary-list__value"
         >
-          {{ application.personalDetails.address.currentMoreThan5Years | toYesNo }}
+          {{ $filters.toYesNo(application.personalDetails.address.currentMoreThan5Years) }}
         </dd>
       </div>
 
@@ -256,7 +256,7 @@
               :key="index"
             >
               <p class="govuk-body">
-                {{ address.startDate | formatDate }} - {{ address.endDate | formatDate }}
+                {{ $filters.formatDate(address.startDate) }} - {{ $filters.formatDate(address.endDate) }}
               </p>
               <p class="govuk-body">
                 {{ address.street }}
@@ -313,7 +313,7 @@
           class="govuk-summary-list__row"
         >
           <dt class="govuk-summary-list__key">
-            {{ qualification.type | lookup }}
+            {{ $filters.lookup(qualification.type) }}
           </dt>
           <dd
             class="govuk-summary-list__value"
@@ -322,13 +322,13 @@
               v-if="qualification.date"
               class="govuk-body"
             >
-              {{ qualification.date | formatDate }}
+              {{ $filters.formatDate(qualification.date) }}
             </p>
             <p
               v-if="qualification.calledToBarDate"
               class="govuk-body"
             >
-              {{ qualification.calledToBarDate | formatDate }}
+              {{ $filters.formatDate(qualification.calledToBarDate) }}
             </p>
             <p class="govuk-body">
               {{ qualification.membershipNumber }}
@@ -349,13 +349,13 @@
             class="govuk-summary-list__value"
           >
             <p class="govuk-body">
-              {{ application.magistrate | toYesNo }}
+              {{ $filters.toYesNo(application.magistrate) }}
             </p>
             <p
               v-if="application.magistrateStartDate"
               class="govuk-body"
             >
-              {{ application.magistrateStartDate | formatDate }} - {{ getDate(application.magistrateEndDate) || 'present' }}
+              {{ $filters.formatDate(application.magistrateStartDate) }} - {{ getDate(application.magistrateEndDate) || 'present' }}
             </p>
             <p
               v-if="application.magistrateLocation"
@@ -405,7 +405,7 @@
           <dd
             class="govuk-summary-list__value"
           >
-            {{ application.personalDetails.hasVATNumbers | toYesNo }}
+            {{ $filters.toYesNo(application.personalDetails.hasVATNumbers) }}
           </dd>
         </div>
         <div
@@ -474,7 +474,7 @@
           <dd
             class="govuk-summary-list__value"
           >
-            {{ application.characterChecks.consent | toYesNo }}
+            {{ $filters.toYesNo(application.characterChecks.consent) }}
           </dd>
         </div>
       </dl>

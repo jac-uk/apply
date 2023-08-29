@@ -54,15 +54,15 @@
         </h1>
 
         <TabsList
+          v-model:active-tab="activeTab"
           :tabs="tabs"
-          :active-tab.sync="activeTab"
         />
         <div
           class="govuk-tabs__panel"
           role="tabpanel"
         >
           <h1 class="govuk-heading-l">
-            {{ activeTab | capitalize }}
+            {{ $filters.capitalize(activeTab) }}
           </h1>
 
           <Table
@@ -83,7 +83,7 @@
                   {{ row.qualifyingTest.title }}
                 </template>
               </TableCell>
-              <TableCell>{{ status(row) | lookup }}</TableCell>
+              <TableCell>{{ $filters.lookup(status(row)) }}</TableCell>
               <TableCell>
                 <template v-if="activeTab === 'future'">
                   {{ prettyDate(row.qualifyingTest.startDate) }}
@@ -222,7 +222,7 @@ export default {
       throw e;
     }
   },
-  destroyed() {
+  unmounted() {
     this.$store.dispatch('qualifyingTestResponses/unbind');
     this.$store.dispatch('qualifyingTestResponses/unbindDryRuns');
   },

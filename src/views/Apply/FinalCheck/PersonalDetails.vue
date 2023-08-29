@@ -123,7 +123,7 @@
       </dt>
       <dd class="govuk-summary-list__value">
         <p v-if="application.personalDetails.dateOfBirth">
-          {{ application.personalDetails.dateOfBirth | formatDate }}
+          {{ $filters.formatDate(application.personalDetails.dateOfBirth) }}
         </p>
       </dd>
     </div>
@@ -142,7 +142,7 @@
         Citizenship
       </dt>
       <dd class="govuk-summary-list__value">
-        {{ application.personalDetails.citizenship | lookup }}
+        {{ $filters.lookup(application.personalDetails.citizenship) }}
       </dd>
     </div>
 
@@ -154,7 +154,7 @@
         class="govuk-summary-list__value"
         data-welsh="reasonable-adjustments"
       >
-        {{ application.personalDetails.reasonableAdjustments | toYesNo }}
+        {{ $filters.toYesNo(application.personalDetails.reasonableAdjustments) }}
         <ul
           v-if="application.personalDetails.reasonableAdjustmentsDetails"
           class="govuk-!-margin-top-1"

@@ -98,7 +98,7 @@
             :key="option"
             :value="option"
           >
-            {{ option | lookup }}
+            {{ $filters.lookup(option) }}
           </option>
         </Select>
         <TextField
@@ -144,7 +144,7 @@
             :key="option"
             :value="option"
           >
-            {{ option | lookup }}
+            {{ $filters.lookup(option) }}
           </option>
         </Select>
         <TextField

@@ -44,14 +44,14 @@
               class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.ENGLISH)"
             >
-              {{ LANGUAGES.ENGLISH | lookup }}
+              {{ $filters.lookup(LANGUAGES.ENGLISH) }}
             </button>
             <button
               v-else-if="language === LANGUAGES.ENGLISH"
               class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.WELSH)"
             >
-              {{ LANGUAGES.WELSH | lookup }}
+              {{ $filters.lookup(LANGUAGES.WELSH) }}
             </button>
           </div>
 

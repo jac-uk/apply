@@ -98,7 +98,7 @@
             v-for="option in NOT_COMPLETE_PUPILLAGE_REASONS"
             :key="option"
             :value="option"
-            :label="option | lookup"
+            :label="$filters.lookup(option)"
           />
         </RadioGroup>
 

@@ -9,7 +9,7 @@
         <dt class="govuk-summary-list__key">
           {{ vacancy.additionalWorkingPreferences[index].question }}
           <span class="govuk-body govuk-!-font-size-19">
-            ({{ vacancy.additionalWorkingPreferences[index].questionType | lookup }})
+            ({{ $filters.lookup(vacancy.additionalWorkingPreferences[index].questionType) }})
           </span>
         </dt>
         <dd

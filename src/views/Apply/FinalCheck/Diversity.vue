@@ -8,7 +8,7 @@
         Sharing your data:
       </dt>
       <dd class="govuk-summary-list__value">
-        {{ application.equalityAndDiversitySurvey.shareData | toYesNo }}
+        {{ $filters.toYesNo(application.equalityAndDiversitySurvey.shareData) }}
       </dd>
     </div>
 
@@ -28,10 +28,10 @@
               v-if="item == 'other-professional-background'"
               class="govuk-body govuk-!-margin-bottom-0"
             >
-              <span class="govuk-caption-m">{{ item | lookup }}</span>
+              <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
               {{ application.equalityAndDiversitySurvey.otherProfessionalBackgroundDetails }}
             </p>
-            <span v-else>{{ item | lookup }}</span>
+            <span v-else>{{ $filters.lookup(item) }}</span>
           </li>
         </ul>
       </dd>
@@ -56,7 +56,7 @@
               v-if="item == 'other-fee-paid-judicial-office-holder'"
               class="govuk-body govuk-!-margin-bottom-0"
             >
-              <span class="govuk-caption-m">{{ item | lookup }}</span>
+              <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
               {{ application.equalityAndDiversitySurvey.otherCurrentFeePaidJudicialOfficeHolderDetails }}
             </p>
 
@@ -64,7 +64,7 @@
               v-else-if="item == 'other-salaried-judicial-office-holder'"
               class="govuk-body govuk-!-margin-bottom-0"
             >
-              <span class="govuk-caption-m">{{ item | lookup }}</span>
+              <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
               {{ application.equalityAndDiversitySurvey.otherCurrentSalariedJudicialOfficeHolderDetails }}
             </p>
 
@@ -72,10 +72,10 @@
               v-else-if="item == 'other-current-legal-role'"
               class="govuk-body govuk-!-margin-bottom-0"
             >
-              <span class="govuk-caption-m">{{ item | lookup }}</span>
+              <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
               {{ application.equalityAndDiversitySurvey.otherCurrentLegalRoleDetails }}
             </p>
-            <span v-else>{{ item | lookup }}</span>
+            <span v-else>{{ $filters.lookup(item) }}</span>
           </li>
         </ul>
       </dd>
@@ -90,10 +90,10 @@
           v-if="application.equalityAndDiversitySurvey.feePaidJudicialRole == 'other-fee-paid-judicial-office'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.feePaidJudicialRole) }}</span>
           {{ application.equalityAndDiversitySurvey.otherFeePaidJudicialRoleDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.feePaidJudicialRole | lookup | toYesNo }}</span>
+        <span v-else>{{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.feePaidJudicialRole)) }}</span>
       </dd>
     </div>
 
@@ -103,7 +103,7 @@
           Occupation of main household earner
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.equalityAndDiversitySurvey.occupationOfChildhoodEarner | lookup }}
+          {{ $filters.lookup(application.equalityAndDiversitySurvey.occupationOfChildhoodEarner) }}
         </dd>
       </div>
 
@@ -112,7 +112,7 @@
           Type of school attended
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.equalityAndDiversitySurvey.stateOrFeeSchool16 | lookup }}
+          {{ $filters.lookup(application.equalityAndDiversitySurvey.stateOrFeeSchool16) }}
         </dd>
       </div>
 
@@ -121,7 +121,7 @@
           Either parent attended university to gain a degree
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.equalityAndDiversitySurvey.parentsAttendedUniversity | lookup | toYesNo }}
+          {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.parentsAttendedUniversity)) }}
         </dd>
       </div>
     </template>
@@ -132,7 +132,7 @@
           Attended state or fee-paying school
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ application.equalityAndDiversitySurvey.stateOrFeeSchool | lookup }}
+          {{ $filters.lookup(application.equalityAndDiversitySurvey.stateOrFeeSchool) }}
         </dd>
       </div>
 
@@ -144,7 +144,7 @@
           class="govuk-summary-list__value"
           data-welsh="oxbridge-universities"
         >
-          {{ application.equalityAndDiversitySurvey.oxbridgeUni | lookup | toYesNo }}
+          {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.oxbridgeUni)) }}
         </dd>
       </div>
 
@@ -156,7 +156,7 @@
           class="govuk-summary-list__value"
           data-welsh="first-generation-student"
         >
-          {{ application.equalityAndDiversitySurvey.firstGenerationStudent | lookup | toYesNo }}
+          {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.firstGenerationStudent)) }}
         </dd>
       </div>
     </template>
@@ -170,38 +170,38 @@
           v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-asian'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
           {{ application.equalityAndDiversitySurvey.otherEthnicGroupAsianDetails }}
         </p>
         <p
           v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-white'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
           {{ application.equalityAndDiversitySurvey.otherEthnicGroupWhiteDetails }}
         </p>
         <p
           v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-black'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
           {{ application.equalityAndDiversitySurvey.otherEthnicGroupBlackDetails }}
         </p>
         <p
           v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-mixed'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
           {{ application.equalityAndDiversitySurvey.otherEthnicGroupMixedDetails }}
         </p>
         <p
           v-if="application.equalityAndDiversitySurvey.ethnicGroup == 'other-ethnic-group'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
           {{ application.equalityAndDiversitySurvey.otherEthnicGroupDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.ethnicGroup | lookup }}</span>
+        <span v-else>{{ $filters.lookup(application.equalityAndDiversitySurvey.ethnicGroup) }}</span>
       </dd>
     </div>
 
@@ -214,10 +214,10 @@
           v-if="application.equalityAndDiversitySurvey.gender == 'other-gender'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.gender) }}</span>
           {{ application.equalityAndDiversitySurvey.otherGenderDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.gender | lookup }}</span>
+        <span v-else>{{ $filters.lookup(application.equalityAndDiversitySurvey.gender) }}</span>
       </dd>
     </div>
 
@@ -229,7 +229,7 @@
         class="govuk-summary-list__value"
         data-welsh="changed-gender"
       >
-        {{ application.equalityAndDiversitySurvey.changedGender | lookup | toYesNo }}
+        {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.changedGender)) }}
       </dd>
     </div>
 
@@ -242,10 +242,10 @@
           v-if="application.equalityAndDiversitySurvey.sexualOrientation == 'other-sexual-orientation'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.sexualOrientation) }}</span>
           {{ application.equalityAndDiversitySurvey.otherSexualOrientationDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.sexualOrientation | lookup }}</span>
+        <span v-else>{{ $filters.lookup(application.equalityAndDiversitySurvey.sexualOrientation) }}</span>
       </dd>
     </div>
 
@@ -262,7 +262,7 @@
             class="govuk-caption-m"
             data-welsh="disability"
           >
-            {{ application.equalityAndDiversitySurvey.disability | toYesNo }}
+            {{ $filters.toYesNo(application.equalityAndDiversitySurvey.disability) }}
           </span>
           {{ application.equalityAndDiversitySurvey.disabilityDetails }}
         </p>
@@ -270,7 +270,7 @@
           v-else
           data-welsh="disability"
         >
-          {{ application.equalityAndDiversitySurvey.disability | lookup | toYesNo }}
+          {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.disability)) }}
         </span>
       </dd>
     </div>
@@ -284,10 +284,10 @@
           v-if="application.equalityAndDiversitySurvey.religionFaith == 'other-religion'"
           class="govuk-body govuk-!-margin-bottom-0"
         >
-          <span class="govuk-caption-m">{{ application.equalityAndDiversitySurvey.religionFaith | lookup }}</span>
+          <span class="govuk-caption-m">{{ $filters.lookup(application.equalityAndDiversitySurvey.religionFaith) }}</span>
           {{ application.equalityAndDiversitySurvey.otherReligionDetails }}
         </p>
-        <span v-else>{{ application.equalityAndDiversitySurvey.religionFaith | lookup }}</span>
+        <span v-else>{{ $filters.lookup(application.equalityAndDiversitySurvey.religionFaith) }}</span>
       </dd>
     </div>
 
@@ -299,7 +299,7 @@
         class="govuk-summary-list__value"
         data-welsh="atttended-outreach-events"
       >
-        {{ application.equalityAndDiversitySurvey.attendedOutreachEvents | lookup | toYesNo }}
+        {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.attendedOutreachEvents)) }}
       </dd>
     </div>
 
@@ -314,7 +314,7 @@
         class="govuk-summary-list__value"
         data-welsh="participated-in-judicial-workshadowing-scheme"
       >
-        {{ application.equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme | lookup | toYesNo }}
+        {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.participatedInJudicialWorkshadowingScheme)) }}
       </dd>
     </div>
 
@@ -329,7 +329,7 @@
         class="govuk-summary-list__value"
         data-welsh="has-taken-paje"
       >
-        {{ application.equalityAndDiversitySurvey.hasTakenPAJE | lookup | toYesNo }}
+        {{ $filters.toYesNo($filters.lookup(application.equalityAndDiversitySurvey.hasTakenPAJE)) }}
       </dd>
     </div>
   </dl>

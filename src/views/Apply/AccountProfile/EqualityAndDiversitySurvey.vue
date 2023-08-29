@@ -796,11 +796,11 @@
           </p>
           <RadioItem
             value="online-and-judge-led"
-            :label="'online-and-judge-led' | lookup"
+            :label="$filters.lookup('online-and-judge-led')"
           />
           <RadioItem
             value="online-only"
-            :label="'online-only' | lookup"
+            :label="$filters.lookup('online-only')"
           />
           <RadioItem
             :value="false"

@@ -22,12 +22,12 @@
           <span
             v-if="hours"
           >
-            {{ hours | zeroPad }}:
+            {{ $filters.zeroPad(hours) }}:
           </span>
           <span
             style="margin-right: 5px;"
           >
-            {{ minutes | zeroPad }}:{{ seconds | zeroPad }}
+            {{ $filters.zeroPad(minutes) }}:{{ $filters.zeroPad(seconds) }}
           </span>
           <svg
             v-if="bckClass"
@@ -139,7 +139,7 @@ export default {
     this.end = end.getTime();
     this.startCountdown();
   },
-  destroyed() {
+  unmounted() {
     window.removeEventListener('blur', this.onBlur);
     window.removeEventListener('focus', this.onFocus);
     this.endCountdown();

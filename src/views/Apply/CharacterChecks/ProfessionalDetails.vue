@@ -17,7 +17,7 @@
         :key="index"
       >
         <div class="govuk-inset-text govuk-!-margin-top-0">
-          You stated on your application that you have been a {{ qualification.type | lookup }}{{ getDate(qualification) }}
+          You stated on your application that you have been a {{ $filters.lookup(qualification.type) }}{{ getDate(qualification) }}
         </div>
         <TextField
           id="barMembershipNum"

@@ -15,7 +15,7 @@
       <span
         v-if="status === 'open'"
       >
-        Time left: {{ minutes | zeroPad }}:{{ seconds | zeroPad }}.
+        Time left: {{ $filters.zeroPad(minutes) }}:{{ $filters.zeroPad(seconds) }}.
       </span>
     </strong>
   </div>

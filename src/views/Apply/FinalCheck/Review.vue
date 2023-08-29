@@ -410,10 +410,10 @@
                     class="govuk-list"
                   >
                     <li v-if="item.endDate">
-                      <span>{{ item.startDate | formatDate }}</span> to <span>{{ item.endDate | formatDate }}</span>
+                      <span>{{ $filters.formatDate(item.startDate) }}</span> to <span>{{ $filters.formatDate(item.endDate) }}</span>
                     </li>
                     <li v-else>
-                      <span>{{ item.startDate | formatDate }}</span> — <span>current</span>
+                      <span>{{ $filters.formatDate(item.startDate) }}</span> — <span>current</span>
                     </li>
                   </ul>
                 </dd>
@@ -521,7 +521,7 @@
                   class="govuk-summary-list__value"
                   data-welsh="can-give-reasonable-los"
                 >
-                  {{ application.canGiveReasonableLOS | toYesNo }}
+                  {{ $filters.toYesNo(application.canGiveReasonableLOS) }}
                   <p v-if="application.canGiveReasonableLOS == false">
                     {{ application.cantGiveReasonableLOSDetails }}
                   </p>
@@ -553,7 +553,7 @@
                   Assessor Type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ application.firstAssessorType | lookup }}
+                  {{ $filters.lookup(application.firstAssessorType) }}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -599,7 +599,7 @@
                   Assessor Type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ application.secondAssessorType | lookup }}
+                  {{ $filters.lookup(application.secondAssessorType) }}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -778,10 +778,10 @@
                         v-if="item == 'other'"
                         class="govuk-body govuk-!-margin-bottom-0"
                       >
-                        <span class="govuk-caption-m">{{ item | lookup }}</span>
+                        <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
                         {{ application.additionalInfo.otherSources }}
                       </p>
-                      <span v-else>{{ item | lookup }}</span>
+                      <span v-else>{{ $filters.lookup(item) }}</span>
                     </li>
                   </ul>
                   <div

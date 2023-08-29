@@ -137,7 +137,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="personalDetails.dateOfBirth">
-                    {{ personalDetails.dateOfBirth | formatDate }}
+                    {{ $filters.formatDate(personalDetails.dateOfBirth) }}
                   </span>
                 </dd>
               </div>
