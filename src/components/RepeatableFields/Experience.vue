@@ -32,15 +32,15 @@
 
     <LawRelatedTasks
       :id="`tasks_${index}`"
-      :tasks.sync="row.tasks"
-      :other-tasks.sync="row.otherTasks"
+      v-model:tasks="row.tasks"
+      v-model:other-tasks="row.otherTasks"
       :show-judicial-functions="true"
       required
     />
 
     <TaskDetails
       :id="`tasks_${index}`"
-      :task-details.sync="row.taskDetails"
+      v-model:details="row.taskDetails"
     />
 
     <slot name="removeButton" />

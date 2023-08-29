@@ -73,7 +73,7 @@ export default {
       default: false,
       type: Boolean,
     },
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -82,14 +82,15 @@ export default {
       type: String,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
         val = val.trim();
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     autocomplete() {

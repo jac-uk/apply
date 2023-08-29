@@ -26,7 +26,7 @@ export default {
     RadioItem,
   },
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: (value) => (value >= 0 || value === null || value === undefined),
     },
@@ -39,15 +39,16 @@ export default {
       required: true,
     },
   },
+  emits: ['update:modelValue', 'answered'],
   computed: {
     localValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
         // this.$emit('answered');
-        if (val !== this.value && this.value !== null && this.value !== undefined) {
+        if (val !== this.modelValue && this.modelValue !== null && this.modelValue !== undefined) {
           this.$emit('answered', { value: val, type: '' });
         }
       },

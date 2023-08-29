@@ -36,20 +36,21 @@ export default {
       type: Array,
       required: true,
     },
-    value: {
+    modelValue: {
       type: Array,
       default: function () { 
         return new Array(); 
       },
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     selected: {
       get() {
-        return this.value ? this.value : [];
+        return this.modelValue ? this.modelValue : [];
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
   },

@@ -117,6 +117,7 @@ export default {
       required: false,
     },
   },
+  emits: ['update:tasks', 'update:otherTasks', 'update:taskDetails'],
   data() {
     return {
       localTaskDetails: { ...this.taskDetails },

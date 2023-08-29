@@ -54,7 +54,7 @@ export default {
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -72,7 +72,7 @@ export default {
       type: Boolean,
     },
   },
-
+  emits: ['update:modelValue'],
   computed: {
     wordsTooMany() {
       return this.words.length - this.wordLimit;
@@ -94,10 +94,10 @@ export default {
     },
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
   },

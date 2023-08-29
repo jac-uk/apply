@@ -51,18 +51,19 @@ export default {
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: () => true,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     inputValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(value) {
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       },
     },
     hintId() {

@@ -51,18 +51,19 @@ export default {
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: (value) => (value instanceof Array || value === null || value === undefined),
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     inputValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(value) {
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       },
     },
     hintId() {
@@ -70,8 +71,8 @@ export default {
     },
   },
   created() {
-    if (!(this.value instanceof Array)) {
-      this.$emit('input', []);
+    if (!(this.modelValue instanceof Array)) {
+      this.$emit('update:modelValue', []);
     }
   },
 };

@@ -85,7 +85,7 @@ export default {
       required: true,
       default: '',
     },
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -103,6 +103,7 @@ export default {
       },
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       file: '',
@@ -114,14 +115,14 @@ export default {
   },
   computed: {
     haveFile() {
-      return this.value ? true : false;
+      return this.modelValue ? true : false;
     },
     fileName: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
   },

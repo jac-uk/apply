@@ -2,8 +2,9 @@
   <div>
     <Address
       id="previousAddress"
-      v-model="row"
+      :model-value="row"
       label="Previous address"
+      @update:model-value="row = $event"
     />
 
     <DateInput

@@ -134,7 +134,7 @@ export default {
       default: 'date',
       validator: (value) => (['date', 'month'].indexOf(value) !== -1),
     },
-    value: {
+    modelValue: {
       required: true,
       validator: (value) => (value instanceof Date || value === null || value === undefined),
     },
@@ -143,6 +143,7 @@ export default {
       type: Boolean,
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       day: null,
@@ -205,16 +206,16 @@ export default {
   },
   watch: {
     date(value) {
-      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
     },
-    value(newValue, oldValue) {
+    modelValue(newValue, oldValue) {
       if (!this.datesAreEqual(newValue, oldValue)) {
         this.date = newValue;
       }
     },
   },
   created() {
-    this.date = this.value;
+    this.date = this.modelValue;
   },
   methods: {
     datesAreEqual(date1, date2) {

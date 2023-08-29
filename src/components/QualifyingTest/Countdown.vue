@@ -93,6 +93,7 @@ export default {
       default: 1,
     },
   },
+  emits: ['change'],
   data: function() {
     return {
       showCountdown: true,

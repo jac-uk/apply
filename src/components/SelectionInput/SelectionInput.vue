@@ -67,19 +67,20 @@ export default {
       type: Array,
       required: true,
     },
-    value: {
+    modelValue: {
       type: [String, Array],
       required: false,
       default: null,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     selected: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     hint() {

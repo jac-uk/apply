@@ -54,7 +54,7 @@ export default {
       default: '',
       type: String,
     },
-    value: {
+    modelValue: {
       default: '',
       type: [String, Number, Boolean],
     },
@@ -64,13 +64,14 @@ export default {
       default: false,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     localValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     labelStyle() {

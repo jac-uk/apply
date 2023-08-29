@@ -22,8 +22,8 @@
     />
     <LawRelatedTasks
       :id="`tasks_${index}`"
-      :tasks.sync="row.tasks"
-      :other-tasks.sync="row.otherTasks"
+      v-model:tasks="row.tasks"
+      v-model:other-tasks="row.otherTasks"
     />
 
     <slot name="removeButton" />

@@ -54,7 +54,7 @@ export default {
       default: '',
       type: String,
     },
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -71,6 +71,7 @@ export default {
       type: Boolean,
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       showPassword: false,
@@ -86,10 +87,10 @@ export default {
   computed: {
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     fieldType() {
@@ -126,7 +127,7 @@ export default {
       }
       // don't bother checking if generic validation failed
       // if (!this.hasError) {
-      let value = this.value;
+      let value = this.modelValue;
       if (event && event.target) {
         value = event.target.value;
       }

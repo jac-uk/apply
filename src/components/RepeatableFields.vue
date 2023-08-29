@@ -49,7 +49,7 @@
 export default {
   name: 'RepeatableFields',
   props: {
-    value: {
+    modelValue: {
       validator: (value) => (value instanceof Array || value === null || value === undefined),
       required: true,
     },
@@ -68,6 +68,7 @@ export default {
       type: String,
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       rows: [],
@@ -83,10 +84,10 @@ export default {
     },
   },
   created() {
-    if (this.value instanceof Array) {
-      this.rows = this.value;
+    if (this.modelValue instanceof Array) {
+      this.rows = this.modelValue;
     } else {
-      this.$emit('input', this.rows);
+      this.$emit('update:modelValue', this.rows);
     }
 
     if (this.rows.length === 0) {

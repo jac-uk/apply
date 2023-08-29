@@ -160,6 +160,7 @@ export default {
       default: () => [],
     },
   },
+  emits: ['change', 'update:selection'],
   data() {
     return {
       searchTerm: null,
