@@ -193,7 +193,7 @@ import DateInput from '@/components/Form/DateInput';
 import RepeatableFields from '@/components/RepeatableFields';
 import Addresses from '@/components/RepeatableFields/Addresses';
 import Address from '@/components/Form/Address';
-import splitFullName from '@jac-uk/jac-kit/helpers/splitFullName';
+import { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {
   name: 'PersonalInformation',
