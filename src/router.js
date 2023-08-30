@@ -212,6 +212,9 @@ const routes = [
         ],
       },
     ],
+    meta: {
+      title: 'Vacancy',
+    },
   },
   {
     path: '/profile',
@@ -310,6 +313,9 @@ const routes = [
         },
       },
     ],
+    meta: {
+      title: 'Online Test',
+    },
   },
   // Apply for a role
   {
@@ -777,6 +783,9 @@ const routes = [
         ],
       },
     ],
+    meta: {
+      title: 'Apply',
+    },
   },
   {
     path: '/sign-in',
