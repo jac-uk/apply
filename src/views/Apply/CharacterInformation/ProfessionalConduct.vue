@@ -191,20 +191,20 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import RepeatableFields from '@/components/RepeatableFields';
-import ProfessionalMisconductDetails from '@/components/RepeatableFields/CharacterInformation/ProfessionalMisconductDetails';
-import NegligenceDetails from '@/components/RepeatableFields/CharacterInformation/NegligenceDetails';
-import WrongfulDismissalDetails from '@/components/RepeatableFields/CharacterInformation/WrongfulDismissalDetails';
-import HarassmentProceedingDetails from '@/components/RepeatableFields/CharacterInformation/HarassmentProceedingDetails';
-import DiscriminationProceedingDetails from '@/components/RepeatableFields/CharacterInformation/DiscriminationProceedingDetails';
-import RequestedToResignDetails from '@/components/RepeatableFields/CharacterInformation/RequestedToResignDetails';
-import ComplaintOrDisciplinaryActionDetails from '@/components/RepeatableFields/CharacterInformation/ComplaintOrDisciplinaryActionDetails';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import BackLink from '@/components/BackLink';
-import InfoIcon from '@/components/ModalViews/InfoIcon';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import ProfessionalMisconductDetails from '@/components/RepeatableFields/CharacterInformation/ProfessionalMisconductDetails.vue';
+import NegligenceDetails from '@/components/RepeatableFields/CharacterInformation/NegligenceDetails.vue';
+import WrongfulDismissalDetails from '@/components/RepeatableFields/CharacterInformation/WrongfulDismissalDetails.vue';
+import HarassmentProceedingDetails from '@/components/RepeatableFields/CharacterInformation/HarassmentProceedingDetails.vue';
+import DiscriminationProceedingDetails from '@/components/RepeatableFields/CharacterInformation/DiscriminationProceedingDetails.vue';
+import RequestedToResignDetails from '@/components/RepeatableFields/CharacterInformation/RequestedToResignDetails.vue';
+import ComplaintOrDisciplinaryActionDetails from '@/components/RepeatableFields/CharacterInformation/ComplaintOrDisciplinaryActionDetails.vue';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
+import BackLink from '@/components/BackLink.vue';
+import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
 import { PROFESSIONAL_CONDUCT_URL } from './character-information-constants';
 
 export default {

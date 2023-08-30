@@ -48,10 +48,10 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
-import TextField from '@/components/Form/TextField';
-import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
-import TaskDetails from '@/components/Page/TaskDetails';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextField from '@/components/Form/TextField.vue';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
+import TaskDetails from '@/components/Page/TaskDetails.vue';
 
 export default {
   name: 'Experience',

@@ -183,16 +183,16 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import RadioItem from '@/components/Form/RadioItem';
-import RadioGroup from '@/components/Form/RadioGroup';
-import TextField from '@/components/Form/TextField';
-import DateInput from '@/components/Form/DateInput';
-import RepeatableFields from '@/components/RepeatableFields';
-import Addresses from '@/components/RepeatableFields/Addresses';
-import Address from '@/components/Form/Address';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import TextField from '@/components/Form/TextField.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import Addresses from '@/components/RepeatableFields/Addresses.vue';
+import Address from '@/components/Form/Address.vue';
 import { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
 
 export default {

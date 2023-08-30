@@ -77,9 +77,9 @@
 </template>
 <script>
 import firebase from '@firebase/app';
-import LoadingMessage from '@/components/LoadingMessage';
-import Modal from '@/components/Page/Modal';
-import Countdown from '@/components/QualifyingTest/Countdown';
+import LoadingMessage from '@/components/LoadingMessage.vue';
+import Modal from '@/components/Page/Modal.vue';
+import Countdown from '@/components/QualifyingTest/Countdown.vue';
 
 export default {
   name: 'QualifyingTest',

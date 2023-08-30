@@ -31,8 +31,8 @@
   </fieldset>
 </template>
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
 
 export default {
   compatConfig: {

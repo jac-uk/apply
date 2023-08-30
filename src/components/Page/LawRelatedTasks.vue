@@ -71,11 +71,11 @@
 </template>
 
 <script>
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import TextareaInput from '@/components/Form/TextareaInput';
-import FormFieldError from '@/components/Form/FormFieldError';
-import FormField from '@/components/Form/FormField';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
+import FormField from '@/components/Form/FormField.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 
 export default {

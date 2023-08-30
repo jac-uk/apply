@@ -49,8 +49,8 @@
   </div>
 </template>
 <script>
-import FormField from '@/components/Form/FormField';
-import TextField from '@/components/Form/TextField';
+import FormField from '@/components/Form/FormField.vue';
+import TextField from '@/components/Form/TextField.vue';
 
 export default {
   compatConfig: {

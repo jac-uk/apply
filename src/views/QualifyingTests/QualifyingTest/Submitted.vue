@@ -79,7 +79,7 @@
   </div>
 </template>
 <script>
-import Banner from '@/components/Page/Banner';
+import Banner from '@/components/Page/Banner.vue';
 import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 

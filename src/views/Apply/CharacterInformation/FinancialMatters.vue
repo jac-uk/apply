@@ -170,18 +170,18 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import RepeatableFields from '@/components/RepeatableFields';
-import BankruptcyDetails from '@/components/RepeatableFields/CharacterInformation/BankruptcyDetails';
-import IvaDetails from '@/components/RepeatableFields/CharacterInformation/IvaDetails';
-import LateTaxReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateTaxReturnDetails';
-import LateVatReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateVatReturnDetails';
-import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/HmrcFineDetails';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import BackLink from '@/components/BackLink';
-import InfoIcon from '@/components/ModalViews/InfoIcon';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import BankruptcyDetails from '@/components/RepeatableFields/CharacterInformation/BankruptcyDetails.vue';
+import IvaDetails from '@/components/RepeatableFields/CharacterInformation/IvaDetails.vue';
+import LateTaxReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateTaxReturnDetails.vue';
+import LateVatReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateVatReturnDetails.vue';
+import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/HmrcFineDetails.vue';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
+import BackLink from '@/components/BackLink.vue';
+import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
 import { FINANCIAL_MATTERS_URL, BANKRUPTCY_IVA_URL, LATE_TAX_VAT_RETURNS_HMRC_URL } from './character-information-constants';
 
 export default {

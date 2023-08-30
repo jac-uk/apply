@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
-import DateInput from '@/components/Form/DateInput';
-import TextareaInput from '@/components/Form/TextareaInput';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 
 export default {
   name: 'EmploymentGaps',

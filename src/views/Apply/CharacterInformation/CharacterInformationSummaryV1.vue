@@ -140,7 +140,7 @@
   </span>
 </template>
 <script>
-import EventRenderer from '@/components/Page/EventRenderer';
+import EventRenderer from '@/components/Page/EventRenderer.vue';
 export default {
   name: 'CharacterInformationSummaryV1',
   components: {

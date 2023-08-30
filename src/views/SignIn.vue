@@ -78,12 +78,12 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
-import TextField from '@/components/Form/TextField';
+import TextField from '@/components/Form/TextField.vue';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
-import Password from '@/components/Form/Password';
+import Password from '@/components/Form/Password.vue';
 export default {
   name: 'SignIn',
   components: {

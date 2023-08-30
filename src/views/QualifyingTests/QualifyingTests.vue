@@ -117,10 +117,10 @@
 </template>
 
 <script>
-import TabsList from '@/components/Page/TabsList';
-import Table from '@/components/Page/Table/Table';
-import TableCell from '@/components/Page/Table/TableCell';
-import LoadingMessage from '@/components/LoadingMessage';
+import TabsList from '@/components/Page/TabsList.vue';
+import Table from '@/components/Page/Table/Table.vue';
+import TableCell from '@/components/Page/Table/TableCell.vue';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 import { isToday, isDateInFuture, formatDate, helperTimeLeft } from '@/helpers/date';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 

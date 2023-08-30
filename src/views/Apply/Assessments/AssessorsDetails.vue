@@ -186,12 +186,12 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import TextField from '@/components/Form/TextField';
-import BackLink from '@/components/BackLink';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
+import TextField from '@/components/Form/TextField.vue';
+import BackLink from '@/components/BackLink.vue';
+import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
 import { ASSESSOR_TYPES } from '@/helpers/constants';
 
 export default {

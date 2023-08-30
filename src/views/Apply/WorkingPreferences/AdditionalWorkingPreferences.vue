@@ -44,11 +44,11 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import SelectionInput from '@/components/SelectionInput/SelectionInput';
-import BackLink from '@/components/BackLink';
+import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'AdditionalWorkingPreferences',

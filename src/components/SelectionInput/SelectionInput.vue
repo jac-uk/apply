@@ -39,9 +39,9 @@
 </template>
 
 <script>
-import SingleChoice from '@/components/SelectionInput/SingleChoice';
-import MultipleChoice from '@/components/SelectionInput/MultipleChoice';
-import RankedChoice from '@/components/SelectionInput/RankedChoice';
+import SingleChoice from '@/components/SelectionInput/SingleChoice.vue';
+import MultipleChoice from '@/components/SelectionInput/MultipleChoice.vue';
+import RankedChoice from '@/components/SelectionInput/RankedChoice.vue';
 
 export default {
   compatConfig: {

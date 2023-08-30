@@ -45,11 +45,11 @@
 </template>
 
 <script>
-import DateMonthYearInput from '@/components/Form/DateMonthYearInput';
-import DateInput from '@/components/Form/DateInput';
-import RadioGroup from '@/components/Form/RadioGroup';
-import TextareaInput from '@/components/Form/TextareaInput';
-import RadioItem from '@/components/Form/RadioItem';
+import DateMonthYearInput from '@/components/Form/DateMonthYearInput.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
 
 export default {
   name: 'ProfessionalMisconductFieldDetails',

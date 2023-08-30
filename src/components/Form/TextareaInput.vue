@@ -42,9 +42,9 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
-import CustomHTML from '@/components/CustomHTML';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   compatConfig: {

@@ -404,13 +404,13 @@
 </template>
 
 <script>
-import Search from '@/components/Search';
-import SidePanel from '@/components/SidePanel';
-import Badge from '@/components/Badge';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import TabsList from '@/components/Page/TabsList';
-import CustomHTML from '@/components/CustomHTML';
+import Search from '@/components/Search.vue';
+import SidePanel from '@/components/SidePanel.vue';
+import Badge from '@/components/Badge.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import TabsList from '@/components/Page/TabsList.vue';
+import CustomHTML from '@/components/CustomHTML.vue';
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
 

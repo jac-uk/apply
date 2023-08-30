@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
+import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RepeatableFields from '@/components/RepeatableFields';
-import Experience from '@/components/RepeatableFields/Experience';
-import BackLink from '@/components/BackLink';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import Experience from '@/components/RepeatableFields/Experience.vue';
+import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'PostQualificationWorkExperience',

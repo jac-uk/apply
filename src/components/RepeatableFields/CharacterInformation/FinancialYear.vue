@@ -1,5 +1,5 @@
 <script>
-import TextField from '@/components/Form/TextField';
+import TextField from '@/components/Form/TextField.vue';
 import { validateFinancialYear } from '../../../helpers/date';
 
 export default {

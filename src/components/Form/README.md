@@ -120,8 +120,8 @@ Hint text will be displayed as a GOV.UK-styled hint underneath the label.
 </template>
 
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
 
 export default {
   components: {
@@ -189,9 +189,9 @@ In this example, we wrap the `<RadioItem></RadioItem>` element around conditiona
 </template>
 
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import TextField from '@/components/Form/TextField';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import TextField from '@/components/Form/TextField.vue';
 
 export default {
   components: {

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import LoadingMessage from '@/components/LoadingMessage';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
 

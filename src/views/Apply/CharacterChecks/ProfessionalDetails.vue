@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import TextField from '@/components/Form/TextField';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import TextField from '@/components/Form/TextField.vue';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 const membershipNumbers = {

@@ -116,11 +116,11 @@
 </template>
 <script>
 import firebase from '@firebase/app';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import Checkbox from '@/components/Form/Checkbox';
-import StartButton from '@/components/Page/StartButton';
-import Banner from '@/components/Page/Banner';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
+import StartButton from '@/components/Page/StartButton.vue';
+import Banner from '@/components/Page/Banner.vue';
 import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 

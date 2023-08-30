@@ -824,16 +824,16 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import TextField from '@/components/Form/TextField';
-import TextareaInput from '@/components/Form/TextareaInput';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import BackLink from '@/components/BackLink';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import TextField from '@/components/Form/TextField.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import BackLink from '@/components/BackLink.vue';
 import { transformOnSelection } from '@/helpers/array';
 
 export default {

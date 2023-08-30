@@ -366,12 +366,12 @@
 </template>
 
 <script>
-import Timeline from '@/components/Page/Timeline';
+import Timeline from '@/components/Page/Timeline.vue';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
-import DownloadLink from '@/components/DownloadLink';
+import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   name: 'VacancyDetails',

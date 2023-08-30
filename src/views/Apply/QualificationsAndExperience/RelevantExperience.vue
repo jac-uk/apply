@@ -33,12 +33,12 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RepeatableFields from '@/components/RepeatableFields';
-import NonLegalExperience from '@/components/RepeatableFields/NonLegalExperience';
-import BackLink from '@/components/BackLink';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import NonLegalExperience from '@/components/RepeatableFields/NonLegalExperience.vue';
+import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'RelevantExperience',

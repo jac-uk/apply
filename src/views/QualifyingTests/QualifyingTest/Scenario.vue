@@ -93,11 +93,11 @@
 
 <script>
 import firebase from '@firebase/app';
-import TextareaInput from '@/components/Form/TextareaInput';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
 import minusIcon from '@/assets/minus.png';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   name: 'Scenario',

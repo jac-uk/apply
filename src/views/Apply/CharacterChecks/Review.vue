@@ -491,8 +491,8 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview';
+import BackLink from '@/components/BackLink.vue';
+import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview.vue';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 export default {

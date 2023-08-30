@@ -196,7 +196,7 @@
 
 <script>
 import { auth } from '@/firebase';
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 
 export default {
   name: 'Profile',

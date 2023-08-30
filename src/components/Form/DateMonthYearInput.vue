@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import DateInput from './DateInput';
+import DateInput from './DateInput.vue';
 
 export default {
   name: 'DateMonthYearInput',
