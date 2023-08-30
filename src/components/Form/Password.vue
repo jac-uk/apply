@@ -113,13 +113,13 @@ export default {
   },
   mounted() {
     if (this.isNewPwd) {
-      this.$root.$on('validate', this.handleValidatePassword);
+      this.emitter.on('validate', this.handleValidatePassword);
     }
   },
   beforeUnmount: function() {
     this.setError('');
     if (this.isNewPwd) {
-      this.$root.$off('validate', this.handleValidatePassword);
+      this.emitter.off('validate', this.handleValidatePassword);
     }
   },
   methods: {

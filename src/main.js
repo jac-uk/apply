@@ -10,6 +10,10 @@ import browserDetect from 'vue-browser-detect-plugin';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
+// Global event emitter (fix vue warn of deprecation INSTANCE_EVENT_EMITTER)
+import mitt from 'mitt';
+const emitter = mitt();
+
 let vueInstance = false;
 auth.onAuthStateChanged( (user) => {
   store.dispatch('auth/setCurrentUser', user);
@@ -47,6 +51,9 @@ auth.onAuthStateChanged( (user) => {
 
     // Bind global filters before mounting
     vueInstance.config.globalProperties.$filters = filters;
+
+    // Bind emitter for global events
+    vueInstance.config.globalProperties.emitter = emitter;
 
     // Initialise Sentry
     if (process.env.NODE_ENV !== 'development') {

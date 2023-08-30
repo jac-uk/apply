@@ -87,16 +87,16 @@ export default {
     },
   },
   mounted: function () {
-    this.$root.$on('validate', this.handleValidate);
+    this.emitter.on('validate', this.handleValidate);
   },
   beforeUnmount: function() {
     this.setError('');
-    this.$root.$off('validate', this.handleValidate);
+    this.emitter.off('validate', this.handleValidate);
   },
   methods: {
     setError(message) {
       this.errorMessage = message;
-      this.$root.$emit('handle-error', { id: this.id, message: this.errorMessage });
+      this.emitter.emit('handle-error', { id: this.id, message: this.errorMessage });
     },
     handleValidate() {
       this.checkErrors = true;
