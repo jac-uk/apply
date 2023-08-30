@@ -38,8 +38,7 @@
     "vue-gtag": "^2.0.1",
     "vue-recaptcha-v3": "^2.0.1",
     "vue-router": "^4.2.4",
-    "vuex": "^4.1.0",
-    "vuexfire": "^3.2.5"
+    "vuex": "^4.1.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "7.22.10",

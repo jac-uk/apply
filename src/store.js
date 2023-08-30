@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { vuexfireMutations } from 'vuexfire';
 Vue.use(Vuex);
 
 // Vuex modules
@@ -38,9 +37,7 @@ const store = new Vuex.Store({
     packageVersion: process.env.PACKAGE_VERSION || '0',
     env: process.env.NODE_ENV,
   },
-  mutations: {
-    ...vuexfireMutations,
-  },
+  mutations: {},
   actions: {},
   getters: {
     appVersion: (state) => {

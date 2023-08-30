@@ -1,5 +1,5 @@
 import { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
 const collection = firestore.collection('qualifyingTestResponses');
@@ -23,6 +23,11 @@ export default {
     unbindDryRuns: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('dryRuns');
     }),
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
+    },
   },
   state: {
     records: [],
