@@ -53,6 +53,11 @@ import FormField from '@/components/Form/FormField';
 import TextField from '@/components/Form/TextField';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'Address',
   components: {
     TextField,

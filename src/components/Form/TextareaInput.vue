@@ -47,6 +47,11 @@ import FormFieldError from '@/components/Form/FormFieldError';
 import CustomHTML from '@/components/CustomHTML';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'TextareaInput',
   components: {
     FormFieldError,
