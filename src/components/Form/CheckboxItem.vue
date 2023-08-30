@@ -7,7 +7,7 @@
         class="govuk-checkboxes__input"
         type="checkbox"
         :value="value"
-        :aria-describedby="hint ? hintId : false"
+        :aria-describedby="hint ? hintId : null"
       >
       <label
         class="govuk-label govuk-checkboxes__label"

@@ -5,7 +5,7 @@
   >
     <fieldset
       class="govuk-fieldset govuk-fieldset__legend"
-      :aria-describedby="hint ? `${id}-hint` : false"
+      :aria-describedby="hint ? `${id}-hint` : null"
       role="group"
     >
       <legend

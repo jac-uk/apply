@@ -104,7 +104,7 @@ export default {
       case 'email':
         return this.type;
       default:
-        return false;
+        return null;
       }
     },
     fieldType() {
