@@ -71,7 +71,7 @@ export default {
       return this.errorMessage ? true :  false;
     },
     words() {
-      const value = this.value;
+      const value = this.modelValue;
       const result = value ? value : '';
       return [].concat(...result
         .split(/[^a-z'-]/i) //split into array at every occurance of a character which is NOT: a-z or ' or -
@@ -105,7 +105,7 @@ export default {
     validate(event) {
       this.setError('');
       if (this.checkErrors) {
-        let value = this.value;
+        let value = this.modelValue;
         if (event && event.target) {
           value = event.target.value;
         }
@@ -182,7 +182,7 @@ export default {
           }
         }
 
-        if (this.wordLimit && this.value) {
+        if (this.wordLimit && this.modelValue) {
           if (this.words.length > this.wordLimit) {
             this.setError(`Answer must be ${this.wordLimit} words or fewer`);
           } else {
