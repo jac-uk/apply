@@ -25,8 +25,8 @@ auth.onAuthStateChanged( (user) => {
         params: { id: store.getters['vacancy/id'] },
       };
       const thePageIamIn = {
-        name: router.currentRoute.name,
-        params: router.currentRoute.params,
+        name: router.currentRoute.value.name,
+        params: router.currentRoute.value.params,
       };
       const isSamePage = urlToGo.name === thePageIamIn.name && urlToGo.params.id === thePageIamIn.params.id;
       if (!isSamePage) {
