@@ -11,9 +11,7 @@
       v-if="hasCompleted"
       status="information"
     >
-      <template>
-        You have already finished this test.
-      </template>
+      You have already finished this test.
     </Banner>
 
     <template v-else>
@@ -79,9 +77,7 @@
           v-if="qtNotActivatedYet"
           status="information"
         >
-          <template>
-            This online test is not open yet.
-          </template>
+          This online test is not open yet.
         </Banner>
 
         <fieldset

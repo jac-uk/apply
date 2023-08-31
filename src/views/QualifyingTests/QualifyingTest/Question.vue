@@ -4,9 +4,7 @@
       v-if="previousTestQuestion"
       status="warning"
     >
-      <template>
-        You cannot amend your answer for this question as it was started on a previous test
-      </template>
+      You cannot amend your answer for this question as it was started on a previous test
     </Banner>
 
     <form
