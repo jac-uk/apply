@@ -40,7 +40,7 @@
 
     <TaskDetails
       :id="`tasks_${index}`"
-      v-model:details="row.taskDetails"
+      v-model:task-details="row.taskDetails"
     />
 
     <slot name="removeButton" />
