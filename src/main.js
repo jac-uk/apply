@@ -10,6 +10,8 @@ import browserDetect from 'vue-browser-detect-plugin';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
+import './styles/main.scss';
+
 // Global event emitter (fix vue warn of deprecation INSTANCE_EVENT_EMITTER)
 import mitt from 'mitt';
 const emitter = mitt();
@@ -56,12 +58,12 @@ auth.onAuthStateChanged( (user) => {
     vueInstance.config.globalProperties.emitter = emitter;
 
     // Initialise Sentry
-    if (process.env.NODE_ENV !== 'development') {
+    if (import.meta.env.NODE_ENV !== 'development') {
       Sentry.init({
         app: vueInstance,
         dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
         environment: store.getters.appEnvironment.toLowerCase(),
-        release: process.env.PACKAGE_VERSION,
+        release: import.meta.env.PACKAGE_VERSION,
         integrations: [
           new Sentry.BrowserTracing({
             routingInstrumentation: Sentry.vueRouterInstrumentation(router),
@@ -74,9 +76,9 @@ auth.onAuthStateChanged( (user) => {
       }, router);
     }
 
-    if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
+    if (import.meta.env.VITE_RECAPTCHA_TOKEN) {
       vueInstance.use(VueReCaptcha, {
-        siteKey: process.env.VUE_APP_RECAPTCHA_TOKEN,
+        siteKey: import.meta.env.VITE_RECAPTCHA_TOKEN,
       });
     }
 
