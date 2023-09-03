@@ -6,7 +6,6 @@ import * as filters from '@/filters';
 import { auth } from '@/firebase';
 import * as Sentry from '@sentry/vue';
 import VueGtag from 'vue-gtag';
-import browserDetect from 'vue-browser-detect-plugin';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
@@ -48,7 +47,6 @@ auth.onAuthStateChanged( (user) => {
     vueInstance = createApp(App)
       .use(router)
       .use(store)
-      .use(browserDetect)
       .use(VueDOMPurifyHTML);
 
     // Bind global filters before mounting
