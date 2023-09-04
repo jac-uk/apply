@@ -8,7 +8,7 @@
     "serve": "vite --mode develop",
     "staging:serve": "vite --mode staging",
     "production:serve": "vite --mode production",
-    "develop:build": "vite build --mode develop;",
+    "develop:build": "vite build --mode develop",
     "staging:build": "vite build --mode staging",
     "production:build": "vite build --mode production",
     "develop:deploy": "vite build --mode develop; firebase deploy --only hosting:develop-admin-app -P develop",
@@ -27,8 +27,6 @@
   "dependencies": {
     "@jac-uk/jac-kit": "3.0.23",
     "@ministryofjustice/frontend": "0.2.4",
-    "@rollup/plugin-inject": "^5.0.3",
-    "@sentry/tracing": "^7.64.0",
     "@sentry/vue": "^7.64.0",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vue/compat": "^3.3.4",

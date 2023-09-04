@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import inject from '@rollup/plugin-inject';
 const path = require('path');
 
 export default defineConfig({
@@ -10,9 +9,6 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
-      stream: 'stream-browserify',
-      process: 'process/browser',
-      buffer: 'buffer',
     },
     extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.vue'],  // Remove this eventually
   },
@@ -24,11 +20,6 @@ export default defineConfig({
           @import "@/styles/_shared.scss";
         `,
       },
-    },
-  },
-  build: {
-    rollupOptions: {
-      plugins: [inject({ Buffer: ['buffer', 'Buffer'], process: 'process' })],
     },
   },
   server: {
