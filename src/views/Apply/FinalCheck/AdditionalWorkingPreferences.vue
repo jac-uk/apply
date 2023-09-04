@@ -17,7 +17,9 @@
           class="govuk-summary-list__value"
         >
           <ul class="govuk-list">
-            <li>{{ item.selection }}</li>
+            <li :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, item.selection)">
+              {{ item.selection }}
+            </li>
           </ul>
         </dd>
         <dd
@@ -32,9 +34,11 @@
               >
                 <strong
                   v-if="item.selection.includes(option.answer)"
+                  :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, option.answer)"
                 > {{ option.answer }} </strong>
                 <span
                   v-else
+                  :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, option.answer)"
                 >
                   {{ option.answer }}
                 </span>
@@ -66,6 +70,8 @@
 </template>
 
 <script>
+import { getDataWelshId, getDataWelsh } from '@/helpers/language';
+
 export default {
   name: 'AdditionalWorkingPreferences',
   props: {
@@ -76,6 +82,11 @@ export default {
     vacancy: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    getDataWelsh(topic, answer) {
+      return getDataWelsh({ id: getDataWelshId(topic), answer });
     },
   },
 };

@@ -24,7 +24,7 @@
             {{ additionalWorkingPreference.topic }}
           </div>
           <SelectionInput
-            :id="`additional-working-preference-${index}`"
+            :id="getSelectionInputId(additionalWorkingPreference, index)"
             v-model="localAdditionalPreferences[index]"
             :title="additionalWorkingPreference.question"
             :answers="additionalWorkingPreference.answers"
@@ -49,6 +49,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput';
 import BackLink from '@/components/BackLink';
+import { getDataWelshId } from '@/helpers/language';
 
 export default {
   name: 'AdditionalWorkingPreferences',
@@ -79,6 +80,9 @@ export default {
     };
   },
   methods: {
+    getSelectionInputId(additionalWorkingPreference, index) {
+      return `additional-working-preference-${getDataWelshId(additionalWorkingPreference.topic)}-${index}`;
+    },
     async save() {
       this.validate();
       if (this.isValid()) {
