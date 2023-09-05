@@ -8,6 +8,7 @@ import * as firebaseui from 'firebaseui';
 
 export default {
   name: 'FirebaseUI',
+  emits: ['signInSuccess'],
   data() {
     return {
       uiConfig: {
