@@ -781,6 +781,9 @@ const routes = [
             },
           },
         ],
+        meta: {
+          title: 'Consent to character checks',
+        },
       },
     ],
     meta: {
