@@ -84,6 +84,8 @@ import TextField from '@/components/Form/TextField.vue';
 import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 import Password from '@/components/Form/Password.vue';
+import { getBrowserMeta } from '@/helpers/browser';
+
 export default {
   name: 'SignIn',
   components: {
@@ -134,7 +136,7 @@ export default {
             id: userCredential.user.uid,
             data: {
               uid: userCredential.user.uid,
-              meta: this.$browserDetect.meta,
+              meta: getBrowserMeta(),
             },
           };
           this.$store.dispatch('logs/save', objToLog);
