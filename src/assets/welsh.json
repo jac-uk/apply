@@ -681,6 +681,11 @@
   "If you wish to be considered for a Welsh speaking post, can you read and write in Welsh? (Reading and writing in Welsh is not essential for any of the vacancies, and as such will not form part of your assessment).": "Os ydych chi’n dymuno cael eich ystyried ar gyfer swydd Gymraeg, ydych chi’n gallu darllen ac ysgrifennu yn Gymraeg? (Nid yw’r gallu i ddarllen ac ysgrifennu yn Gymraeg yn hanfodol ar gyfer unrhyw un o’r swyddi gwag, ac oherwydd hynny, ni fydd yn rhan o’ch asesiad).",
   "Select all that apply": "Dewiswch bob un sy'n berthnasol",
   "Occupation of main household earner": "Galwedigaeth prif enillydd y cartref",
-  "Type of school attended": "Mynychodd y math o ysgol",
-  "Either parent attended university to gain a degree": "Mynychodd y naill riant neu'r llall i'r brifysgol i ennill gradd"
+  "Type of school attended": "Math o ysgol a fynychwyd",
+  "Either parent attended university to gain a degree": "A wnaeth y naill riant neu'r llall fynychu’r brifysgol i ennill gradd",
+  "You might not meet the nationality requirement": "Efallai na fyddwch yn bodloni'r gofyniad cenedligrwydd",
+  "Based on your answer, it looks like you do not meet the nationality requirement for the role. You can continue to apply, but it might be unlikely that you will be offered a position.": "Yn seiliedig ar eich ateb, mae'n ymddangos nad ydych yn bodloni'r gofyniad cenedligrwydd ar gyfer y rôl. Gallwch barhau i wneud cais, ond gallai fod yn annhebygol y byddwch yn cael cynnig y swydd.",
+  "Back to JAC homepage": "Yn ôl i dudalen gartref y JAC",
+  "Continue to apply": "Parhau i wneud cais",
+  "Back to top": "Yn ôl i frig y dudalen"
 }
