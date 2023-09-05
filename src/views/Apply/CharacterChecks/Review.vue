@@ -84,7 +84,7 @@
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
-          Full Name
+          Full name
         </dt>
         <dd class="govuk-summary-list__value">
           {{ application.personalDetails.fullName }}
