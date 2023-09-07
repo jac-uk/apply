@@ -352,8 +352,13 @@ export default {
   computed: {
     ...mapGetters('vacancy', [
       'getOpenDate',
+      'ref',
     ]),
     applicationOpenDatePost01042023() {
+      const usesPre01042023Questions = ['JAC00130', 'JAC00123', 'JAC00164'].includes(this.ref);
+      if (usesPre01042023Questions) {
+        return false;
+      }
       return this.getOpenDate > new Date('2023-04-01');
     },
   },
