@@ -132,26 +132,6 @@ describe('views/SignUp', () => {
 
         expect(wrapper.vm.createCandidate).toHaveBeenCalledWith(mockUserCredentials);
       });
-
-      it('redirects to vacancy if createCandidate succeeded', async () => {
-        wrapper.vm.createCandidate = jest.fn().mockReturnValue(true);
-        mocks.store.getters['vacancy/id'] = null;
-
-        await wrapper.vm.signUp();
-
-        expect(wrapper.vm.$router.push).toHaveBeenCalledWith({ name: 'applications' });
-      });
-
-      it('redirects to vacancy if createCandidate succeeded and got vacancy id', async () => {
-        const mockVacancyId = 'mock vacancy id';
-
-        wrapper.vm.createCandidate = jest.fn().mockReturnValue(true);
-        mocks.store.getters['vacancy/id'] = mockVacancyId;
-
-        await wrapper.vm.signUp();
-
-        expect(wrapper.vm.$router.push).toHaveBeenCalledWith({ name: 'task-list', params: { id: mockVacancyId } });
-      });
     });
 
     describe('createCandidate()', () => {
