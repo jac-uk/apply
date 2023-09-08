@@ -34,6 +34,10 @@ const yesWelshList = [
     ids: ['can-give-reasonable-los'],
     welsh: 'GALLAF',
   },
+  {
+    ids: ['Hoffwn'],
+    welsh: 'Hoffwn',
+  },
 ];
 const noWelshList = [
   {
@@ -67,6 +71,10 @@ const noWelshList = [
   {
     ids: ['can-give-reasonable-los'],
     welsh: 'NA ALLAF',
+  },
+  {
+    ids: ['Na'],
+    welsh: 'Na',
   },
 ];
 
@@ -179,6 +187,29 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
   return textNodes;
 };
 
+// get id for data-welsh attribute
+const getDataWelshId = (value) => {
+  return value.toLowerCase().split(' ').join('_');
+};
+
+// get welsh value for data-welsh attribute
+const getDataWelsh = ({ id, value }) => {
+  if (
+    id.includes(getDataWelshId('Secondment to the Court of Protection')) ||
+    id.includes(getDataWelshId('Posts in Wales - Welsh Language')) ||
+    id.includes(getDataWelshId('Posts in Wales - Welsh Language Continued'))
+  ) {
+    if (value === 'Yes') {
+      return 'Hoffwn';
+    } else if (value === 'No') {
+      return 'Na';
+    }
+  }
+  return '';
+};
+
 export {
-  updateLangToTextNode
+  updateLangToTextNode,
+  getDataWelshId,
+  getDataWelsh
 };

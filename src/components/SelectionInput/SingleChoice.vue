@@ -16,6 +16,7 @@
       <label
         :for="`${id}-answer-${index}`"
         class="govuk-label govuk-radios__label"
+        :data-welsh="getDataWelsh(answer.answer)"
       >
         {{ answer.answer }}
       </label>
@@ -24,6 +25,7 @@
 </template>
 
 <script>
+import { getDataWelsh } from '@/helpers/language';
 
 export default {
   compatConfig: {
@@ -55,6 +57,11 @@ export default {
       set(val) {
         this.$emit('update:modelValue', val);
       },
+    },
+  },
+  methods: {
+    getDataWelsh(answer) {
+      return getDataWelsh({ id: this.id, answer });
     },
   },
 };

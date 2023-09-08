@@ -28,6 +28,10 @@ export default {
       if (state.record === null) return null;
       return state.record.id;
     },
+    ref: (state) => {
+      if (state.record === null) return null;
+      return state.record.referenceNumber;
+    },
     isOpen: (state, getters) => () => {
       if (state.record.applicationOpenDate && state.record.applicationCloseDate) {
         const today = new Date();
