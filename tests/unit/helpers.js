@@ -7,6 +7,8 @@ const mocks = {
     params: {
       id: 'abc123',
     },
+    query: {
+    },
   },
   router: {
     push: jest.fn(),
