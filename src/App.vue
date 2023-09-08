@@ -166,7 +166,7 @@ export default {
     if (this.$route.meta.isMultilanguage) {
       setTimeout(() => {
         updateLangToTextNode(document.querySelector('#main-content'), this.language);
-      }, 0);
+      }, 10);
     }
   },
   methods: {
