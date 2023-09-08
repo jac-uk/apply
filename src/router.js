@@ -210,6 +210,9 @@ const routes = [
             },
           },
         ],
+        meta: {
+          title: 'GDPR',
+        },
       },
     ],
     meta: {
