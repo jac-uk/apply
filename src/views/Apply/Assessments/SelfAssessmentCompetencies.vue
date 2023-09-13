@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="triggerExtraction"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -74,10 +74,11 @@
             class="govuk-list"
           >
             <li
-              v-for="file in vacancy.downloads.candidateAssessementForms"
+              v-for="(file, index) in vacancy.downloads.candidateAssessementForms"
               :key="file.file"
             >
               <DownloadLink
+                :ref="`download-link-${index}`"
                 :file-name="file.file"
                 :exercise-id="vacancy.id"
                 :title="file.title"
@@ -125,6 +126,7 @@ import DownloadLink from '@/components/DownloadLink';
 import FileUpload from '@/components/Form/FileUpload';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
+import { functions } from '@/firebase';
 
 export default {
   name: 'SelfAssessmentCompetencies',
@@ -167,6 +169,12 @@ export default {
     };
   },
   computed: {
+    templatePath() {
+      return `exercise/${this.vacancy.id}/${this.vacancy.downloads.candidateAssessementForms[0].file}`;
+    },
+    documentPath() {
+      return `${this.uploadPath}/${this.formData.uploadedSelfAssessment}`;
+    },
     downloadNameGenerator() {
       let outcome = null;
       if (
@@ -182,6 +190,18 @@ export default {
     },
   },
   methods: {
+    async triggerExtraction() {
+      const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
+      // put in the application store
+      await this.$store.dispatch('application/save', { uploadedSelfAssessmentContent: response.data.result });
+      this.$router.push({
+        name: 'data-confirmation',
+        props: {
+          propKey: 'propValue',
+        },
+      });
+      return true;
+    },
     logEventAfterSave() {
       logEvent('info', 'Self-assessment & competencies uploaded', {
         applicationId: this.applicationId,

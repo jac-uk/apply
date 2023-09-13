@@ -7,16 +7,20 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Confrim your {{ statementType }}
+          Confirm your {{ statementType | lookup }}
         </h1>
 
         <ErrorSummary :errors="errors" />
 
         <TextareaInput
           id="suitability-statement-text"
-          v-model="parsedContent"
-          label="Suitability content"
-          :disabled="!parsedContent.length"
+          v-model="formData.uploadedSelfAssessmentContent"
+          todo:
+          change
+          var
+          name
+          label="Statement content"
+          :word-limit="wordLimit"
         />
 
         <button
@@ -32,14 +36,14 @@
 
 <script>
 import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
 import ApplyMixIn from '../ApplyMixIn';
+import { logEvent } from '@/helpers/logEvent';
+import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
-import { logEvent } from '@/helpers/logEvent';
 
 export default {
-  name: 'StatementOfSuitability',
+  name: 'DataConfirmation',
   components: {
     ErrorSummary,
     TextareaInput,
@@ -47,16 +51,27 @@ export default {
   },
   extends: Form,
   mixins: [ApplyMixIn],
-  data(){
+  data() {
+    const defaults = {
+      uploadedSelfAssessmentContent: {},
+      progress: {},
+    };
+    const data = this.$store.getters['application/data'](defaults);
+    const formData = { ...defaults, ...data };
     return {
-      statementType: 'Statement Of Suitability',
+      formId: 'selfAssessmentCompetencies',
+      formData: formData,
+      statementType: 'StatementOfSuitability',
     };
   },
   computed: {
+    wordLimit() {
+      return this.vacancy.selfAssessmentWordLimit;
+    },
   },
   methods: {
     logEventAfterSave() {
-      logEvent('info', 'Statement of suitability uploaded', {
+      logEvent('info', 'Statement of suitability confirmed', {
         applicationId: this.applicationId,
         candidateName: this.application.personalDetails.fullName,
         exerciseRef: this.application.exerciseRef,

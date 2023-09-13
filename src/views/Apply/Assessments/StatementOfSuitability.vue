@@ -2,8 +2,8 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="triggerExtraction"
     >
+      <!-- @submit.prevent="triggerExtraction" -->
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
@@ -90,9 +90,6 @@
           />
         </div>
 
-        {{ uploadPath }}
-        {{ vacancy.downloads.candidateAssessementForms }}
-
         <FileUpload
           id="suitability-statement-file"
           ref="suitability-statement"
@@ -103,12 +100,14 @@
           required
         />
 
-        <button
+        <ActionButton
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
+          type="primary"
+          :action="triggerExtraction"
         >
           Save and continue
-        </button>
+        </ActionButton>
       </div>
     </form>
   </div>
@@ -117,6 +116,7 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
+import ActionButton from '@/components/Form/ActionButton';
 import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
@@ -139,6 +139,7 @@ export default {
     BackLink,
     DownloadLink,
     CustomHTML,
+    ActionButton,
   },
   extends: Form,
   mixins: [ApplyMixIn],
