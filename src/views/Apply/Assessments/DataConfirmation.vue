@@ -61,7 +61,7 @@ export default {
     return {
       formId: 'selfAssessmentCompetencies',
       formData: formData,
-      statementType: 'StatementOfSuitability',
+      statementType: 'statement-of-suitability-with-competencies',
     };
   },
   computed: {
