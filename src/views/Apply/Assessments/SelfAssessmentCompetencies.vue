@@ -103,12 +103,14 @@
           label="Upload finished self assessment"
           required
         />
-        <button
+        <Button
           :disabled="!canSave(formId)"
-          class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
+          class="govuk-button info-btn--statement-of-suitability--save-and-continue"
+          type="primary"
         >
+          <!-- @click="triggerExtraction" -->
           Save and continue
-        </button>
+        </Button>
       </div>
     </form>
   </div>
@@ -127,6 +129,7 @@ import FileUpload from '@/components/Form/FileUpload';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
 import { functions } from '@/firebase';
+// import ActionButton from '@/components/Form/ActionButton';
 
 export default {
   name: 'SelfAssessmentCompetencies',
@@ -139,6 +142,7 @@ export default {
     TextareaInput,
     FileUpload,
     CustomHTML,
+    // ActionButton,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -192,14 +196,11 @@ export default {
   methods: {
     async triggerExtraction() {
       const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
-      // put in the application store
+
+      // put result the application store
       await this.$store.dispatch('application/save', { uploadedSelfAssessmentContent: response.data.result });
-      this.$router.push({
-        name: 'data-confirmation',
-        props: {
-          propKey: 'propValue',
-        },
-      });
+
+      this.$router.push({ name: 'data-confirmation' });
       return true;
     },
     logEventAfterSave() {

@@ -2,8 +2,8 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
+      @submit.prevent="save"
     >
-      <!-- @submit.prevent="triggerExtraction" -->
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
@@ -100,14 +100,12 @@
           required
         />
 
-        <ActionButton
+        <button
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
-          type="primary"
-          :action="triggerExtraction"
         >
           Save and continue
-        </ActionButton>
+        </button>
       </div>
     </form>
   </div>
@@ -116,7 +114,6 @@
 <script>
 import Form from '@/components/Form/Form';
 import ErrorSummary from '@/components/Form/ErrorSummary';
-import ActionButton from '@/components/Form/ActionButton';
 import ApplyMixIn from '../ApplyMixIn';
 import RadioGroup from '@/components/Form/RadioGroup';
 import RadioItem from '@/components/Form/RadioItem';
@@ -126,7 +123,7 @@ import BackLink from '@/components/BackLink';
 import DownloadLink from '@/components/DownloadLink';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
-import { functions } from '@/firebase';
+import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
   name: 'StatementOfSuitability',
@@ -139,7 +136,6 @@ export default {
     BackLink,
     DownloadLink,
     CustomHTML,
-    ActionButton,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -172,13 +168,12 @@ export default {
   computed: {
     downloadNameGenerator() {
       let outcome = null;
-      if (this.vacancy.assessmentOptions == 'statement-of-suitability-with-competencies') {
-        outcome = 'statement-of-suitability-with-competencies';
-      } else if (
-        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities' ||
-        this.vacancy.assessmentOptions == 'statement-of-suitability-with-skills-and-abilities-and-cv'
-      ) {
-        outcome = 'statement-of-suitability-with-skills-and-abilities';
+      if (this.vacancy.assessmentMethods) {
+        if (this.vacancy.assessmentMethods[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES]) {
+          outcome = 'statement-of-suitability-with-competencies';
+        } else if (this.vacancy.assessmentMethods[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES]) {
+          outcome = 'statement-of-suitability-with-skills-and-abilities';
+        }
       }
       const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
       if (fileName) {
@@ -188,9 +183,6 @@ export default {
     },
   },
   methods: {
-    async triggerExtraction() {
-      return await functions.httpsCallable('extractDocumentContent')();
-    },
     logEventAfterSave() {
       logEvent('info', 'Statement of suitability uploaded', {
         applicationId: this.applicationId,
