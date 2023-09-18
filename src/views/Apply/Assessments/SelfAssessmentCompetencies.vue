@@ -130,6 +130,7 @@ import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML';
 import { functions } from '@/firebase';
 // import ActionButton from '@/components/Form/ActionButton';
+import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
   name: 'SelfAssessmentCompetencies',
@@ -181,10 +182,7 @@ export default {
     },
     downloadNameGenerator() {
       let outcome = null;
-      if (
-        this.vacancy.assessmentOptions == 'self-assessment-with-competencies' ||
-        this.vacancy.assessmentOptions == 'self-assessment-with-competencies-and-cv'
-      ) {
+      if (this.vacancy.assessmentMethods && this.vacancy.assessmentMethods[ASSESSMENT_METHOD.SELF_ASSESSMENT_WITH_COMPETENCIES]) {
         const fileName = this.vacancy.uploadedCandidateAssessmentFormTemplate;
         if (fileName) {
           outcome = `self-assessment-with-competencies.${  fileName.split('.').pop()}`;

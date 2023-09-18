@@ -32,9 +32,6 @@ import GDPRCheck from '@/views/GDPR/GDPRCheck';
 
 // Applications
 import Applications from '@/views/Applications';
-import PersonalDetails from '@/views/PersonalDetails';
-import CharacterInformation from '@/views/CharacterInformation';
-import DiversityInformation from '@/views/DiversityInformation';
 
 // Apply
 import Apply from '@/views/Apply/Apply';
@@ -137,30 +134,6 @@ const router = new Router({
       },
     },
     {
-      path: '/personal-details',
-      name: 'personal-details',
-      component: PersonalDetails,
-      meta: {
-        title: 'Personal details',
-      },
-    },
-    {
-      path: '/character-information',
-      name: 'character-information',
-      component: CharacterInformation,
-      meta: {
-        title: 'Character information',
-      },
-    },
-    {
-      path: '/diversity-information',
-      name: 'diversity-information',
-      component: DiversityInformation,
-      meta: {
-        title: 'Diversity information',
-      },
-    },
-    {
       path: '/vacancy/:id',
       component: Vacancy,
       children: [
@@ -257,6 +230,7 @@ const router = new Router({
       name: 'applications',
       component: Applications,
       meta: {
+        requiresAuth: true,
         title: 'Applications',
       },
     },
@@ -848,8 +822,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters['auth/isSignedIn'];
   if (requiresAuth && !isSignedIn) {
-    // @todo Save destination so we can navigate there after sign-in
-    return next({ name: 'sign-in' });
+    return next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
     return next();
   }

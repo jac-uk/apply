@@ -15,7 +15,7 @@
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
-              :to="{ name: 'sign-in' }"
+              :to="{ name: 'sign-in', query: { nextPage: nextPage } }"
             >
               sign in
             </RouterLink>
@@ -144,6 +144,9 @@ export default {
     exerciseId () {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
+    nextPage() {
+      return this.$route.query.nextPage;
+    },
   },
   methods: {
     // @TODO: this should be handled by form
@@ -166,14 +169,7 @@ export default {
     },
     async signUp() {
       await auth.createUserWithEmailAndPassword(this.formData.email, this.formData.password).then((result)=>{
-        const candidate = this.createCandidate(result);
-        if (candidate) {
-          if (this.$store.getters['vacancy/id']) {
-            this.$router.push({ name: 'task-list', params: { id: `${this.$store.getters['vacancy/id']}` } });
-          } else {
-            this.$router.push({ name: 'applications' });
-          }
-        }
+        this.createCandidate(result);
       })
         .catch((error) => {
           this.errors.push({ ref: 'email', message: error.message });

@@ -1,4 +1,4 @@
-import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES } from '@/helpers/constants';
+import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES, ASSESSMENT_METHOD } from '@/helpers/constants';
 
 const capitalize = (value) => {
   if (!value) return '';
@@ -306,6 +306,16 @@ const lookup = (value) => {
 
     lookup[LANGUAGES.ENGLISH] = 'English';
     lookup[LANGUAGES.WELSH] = 'Cymraeg';
+
+    // assessment methods
+    lookup[ASSESSMENT_METHOD.SELF_ASSESSMENT_WITH_COMPETENCIES] = 'Self Assessment with competencies';
+    lookup[ASSESSMENT_METHOD.COVERING_LETTER] = 'Covering letter';
+    lookup[ASSESSMENT_METHOD.CV] = 'CV';
+    lookup[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_COMPETENCIES] = 'Statement of Suitability with competencies';
+    lookup[ASSESSMENT_METHOD.STATEMENT_OF_SUITABILITY_WITH_SKILLS_AND_ABILITIES] = 'Statement of Suitability with skills and abilities';
+    lookup[ASSESSMENT_METHOD.STATEMENT_OF_ELIGIBILITY] = 'Statement of eligibility';
+    lookup[ASSESSMENT_METHOD.INDEPENDENT_ASSESSMENTS] = 'Independent Assessments';
+    lookup[ASSESSMENT_METHOD.LEADERSHIP_JUDGE_ASSESSMENT] = 'Leadership Judge Assessment';
 
     return lookup[value] || value;
   }

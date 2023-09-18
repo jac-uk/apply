@@ -15,7 +15,7 @@
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
-              :to="{ name: 'sign-up' }"
+              :to="{ name: 'sign-up', query: { nextPage: nextPage } }"
             >
               create an account
             </RouterLink>
@@ -105,6 +105,9 @@ export default {
     exerciseId () {
       return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
     },
+    nextPage() {
+      return this.$route.query.nextPage;
+    },
   },
   methods: {
     // loginWithGoogle() {
@@ -140,12 +143,6 @@ export default {
           this.$store.dispatch('logs/save', objToLog);
           // LOG
 
-          this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-          if (this.$store.getters['vacancy/id']) {
-            this.$router.push({ name: 'GDPR', params: { id: `${this.$store.getters['vacancy/id']}` } });
-          } else {
-            this.$router.push({ name: 'applications' });
-          }
         })
         .catch((error) => {
           let message = error.message;

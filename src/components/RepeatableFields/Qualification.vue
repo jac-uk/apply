@@ -25,7 +25,7 @@
       />
 
       <RadioItem
-        v-if="vacancy.qualifications.includes('other') && vacancy.otherQualifications"
+        v-if="otherQualificationsRequired"
         :value="vacancy.otherQualifications"
         :label="vacancy.otherQualifications"
       />
@@ -161,6 +161,13 @@ export default {
   computed: {
     qualificationType() {
       return `qualification_type_${this.index}`;
+    },
+    otherQualificationsRequired() {
+      if (this.vacancy.qualifications) {
+        return this.vacancy.qualifications.includes('other') && this.vacancy.otherQualifications;
+      } else {
+        return false;
+      }
     },
     qualificationLocation() {
       return `qualification_location_${this.index}`;
