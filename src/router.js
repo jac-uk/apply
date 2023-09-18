@@ -34,10 +34,7 @@ import GDPR from '@/views/GDPR/GDPR.vue';
 import GDPRCheck from '@/views/GDPR/GDPRCheck.vue';
 
 // Applications
-import Applications from '@/views/Applications.vue';
-import PersonalDetails from '@/views/PersonalDetails.vue';
-import CharacterInformation from '@/views/CharacterInformation.vue';
-import DiversityInformation from '@/views/DiversityInformation.vue';
+import Applications from '@/views/Applications';
 
 // Apply
 import Apply from '@/views/Apply/Apply.vue';
@@ -122,30 +119,6 @@ const routes = [
     component: Vacancies,
     meta: {
       title: 'Vacancies',
-    },
-  },
-  {
-    path: '/personal-details',
-    name: 'personal-details',
-    component: PersonalDetails,
-    meta: {
-      title: 'Personal details',
-    },
-  },
-  {
-    path: '/character-information',
-    name: 'character-information',
-    component: CharacterInformation,
-    meta: {
-      title: 'Character information',
-    },
-  },
-  {
-    path: '/diversity-information',
-    name: 'diversity-information',
-    component: DiversityInformation,
-    meta: {
-      title: 'Diversity information',
     },
   },
   {
@@ -251,6 +224,7 @@ const routes = [
     name: 'applications',
     component: Applications,
     meta: {
+      requiresAuth: true,
       title: 'Applications',
     },
   },
@@ -845,11 +819,10 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters['auth/isSignedIn'];
   if (requiresAuth && !isSignedIn) {
-    // @todo Save destination so we can navigate there after sign-in
-    return next({ name: 'sign-in' });
+    next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
-    return next();
-  }
+    next();
+  }  
 });
 
 // Global after hook to set an appropriate title for the page

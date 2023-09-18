@@ -101,7 +101,7 @@ export default {
       this.dropDownExpanded = !this.dropDownExpanded;
     },
     signIn() {
-      this.$router.push({ name: 'sign-in' });
+      this.$router.push({ name: 'sign-in', query: { nextPage: this.$route.path } });
     },
     signOut() {
       auth.signOut();
