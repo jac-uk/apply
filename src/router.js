@@ -802,10 +802,10 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters['auth/isSignedIn'];
   if (requiresAuth && !isSignedIn) {
-    return next({ name: 'sign-in', query: { nextPage: to.path } });
+    next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
-    return next();
-  }
+    next();
+  }  
 });
 
 // Global after hook to set an appropriate title for the page
