@@ -5,7 +5,7 @@
   >
     <fieldset
       class="govuk-fieldset"
-      :aria-describedby="hint ? `${id}-hint` : false"
+      :aria-describedby="hint ? `${id}-hint` : null"
       role="group"
     >
       <legend
@@ -73,7 +73,7 @@
 </template>
 
 <script>
-import DateInput from './DateInput';
+import DateInput from './DateInput.vue';
 
 export default {
   name: 'DateMonthYearInput',

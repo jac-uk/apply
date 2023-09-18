@@ -11,7 +11,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>{{ item.type | lookup }}</li>
+            <li>{{ $filters.lookup(item.type) }}</li>
           </ul>
         </dd>
       </div>
@@ -22,7 +22,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>{{ item.location | lookup }}</li>
+            <li>{{ $filters.lookup(item.location) }}</li>
           </ul>
         </dd>
       </div>
@@ -36,7 +36,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ item.calledToBarDate | formatDate }}</li>
+            <li> {{ $filters.formatDate(item.calledToBarDate) }}</li>
           </ul>
         </dd>
       </div>
@@ -50,7 +50,7 @@
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
             <li>
-              {{ item.completedPupillage | toYesNo }}
+              {{ $filters.toYesNo(item.completedPupillage) }}
             </li>
           </ul>
         </dd>
@@ -74,7 +74,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ item.date | formatDate }}</li>
+            <li> {{ $filters.formatDate(item.date) }}</li>
           </ul>
         </dd>
       </div>
@@ -92,7 +92,7 @@
               {{ item.details }}
             </li>
             <li v-else>
-              {{ item.notCompletePupillageReason | lookup }}
+              {{ $filters.lookup(item.notCompletePupillageReason) }}
             </li>
           </ul>
         </dd>

@@ -66,20 +66,18 @@
       <Banner
         status="information"
       >
-        <template>
-          <a
-            :href="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
-            class="govuk-link info-link--submitted--banner--click-here-to-fill-out-our-feedback-survey"
-          >
-            Click here to fill out our feedback survey
-          </a>
-        </template>
+        <a
+          :href="qualifyingTestResponse.qualifyingTest.feedbackSurvey"
+          class="govuk-link info-link--submitted--banner--click-here-to-fill-out-our-feedback-survey"
+        >
+          Click here to fill out our feedback survey
+        </a>
       </Banner>
     </div>
   </div>
 </template>
 <script>
-import Banner from '@/components/Page/Banner';
+import Banner from '@/components/Page/Banner.vue';
 import { isToday, formatDate } from '@/helpers/date';
 import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
 

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TextField from '@/components/Form/TextField';
+import TextField from '@/components/Form/TextField.vue';
 
 export default {
   name: 'Addresses',

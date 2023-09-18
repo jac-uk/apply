@@ -10,7 +10,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.criminalOffences | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.criminalOffences) }}
         <EventRenderer
           v-if="characterInformation.criminalOffences"
           :events="characterInformation.criminalOffenceDetails"
@@ -24,7 +24,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.nonMotoringFixedPenaltyNotices | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.nonMotoringFixedPenaltyNotices) }}
         <EventRenderer
           v-if="characterInformation.nonMotoringFixedPenaltyNotices"
           :events="characterInformation.nonMotoringFixedPenaltyNoticesDetails"
@@ -38,7 +38,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.drivingDisqualificationDrinkDrugs | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.drivingDisqualificationDrinkDrugs) }}
         <EventRenderer
           v-if="characterInformation.drivingDisqualificationDrinkDrugs"
           :events="characterInformation.drivingDisqualificationDrinkDrugsDetails"
@@ -52,7 +52,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.endorsementsOrMotoringFixedPenalties | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.endorsementsOrMotoringFixedPenalties) }}
         <EventRenderer
           v-if="characterInformation.endorsementsOrMotoringFixedPenalties"
           :events="characterInformation.endorsementsOrMotoringFixedPenaltiesDetails"
@@ -66,7 +66,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.declaredBankruptOrIVA | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.declaredBankruptOrIVA) }}
         <EventRenderer
           v-if="characterInformation.declaredBankruptOrIVA"
           :events="characterInformation.declaredBankruptOrIVADetails"
@@ -80,7 +80,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.lateTaxReturnOrFined | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.lateTaxReturnOrFined) }}
         <EventRenderer
           v-if="characterInformation.lateTaxReturnOrFined"
           :events="characterInformation.lateTaxReturnOrFinedDetails"
@@ -95,7 +95,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.involvedInProfessionalMisconduct | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.involvedInProfessionalMisconduct) }}
         <EventRenderer
           v-if="characterInformation.involvedInProfessionalMisconduct"
           :events="characterInformation.involvedInProfessionalMisconductDetails"
@@ -110,7 +110,7 @@
       <dd
         class="govuk-summary-list__value"
       >
-        {{ characterInformation.diciplinaryActionOrAskedToResign | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.diciplinaryActionOrAskedToResign) }}
         <EventRenderer
           v-if="characterInformation.diciplinaryActionOrAskedToResign"
           :events="characterInformation.diciplinaryActionOrAskedToResignDetails"
@@ -125,7 +125,7 @@
         class="govuk-summary-list__value"
         data-welsh="other-character-issues"
       >
-        {{ characterInformation.otherCharacterIssues | toYesNo }}
+        {{ $filters.toYesNo(characterInformation.otherCharacterIssues) }}
         <EventRenderer
           v-if="characterInformation.otherCharacterIssues"
           :events="characterInformation.otherCharacterIssuesDetails"
@@ -140,7 +140,7 @@
   </span>
 </template>
 <script>
-import EventRenderer from '@/components/Page/EventRenderer';
+import EventRenderer from '@/components/Page/EventRenderer.vue';
 export default {
   name: 'CharacterInformationSummaryV1',
   components: {

@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import TextField from '@/components/Form/TextField';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import DateInput from '@/components/Form/DateInput';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import TextField from '@/components/Form/TextField.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import DateInput from '@/components/Form/DateInput.vue';
 
 export default {
   name: 'ProfessionalDetails',

@@ -18,10 +18,10 @@
               class="govuk-list"
             >
               <li v-if="item.endDate">
-                {{ item.startDate | formatDate }} to {{ item.endDate | formatDate }}
+                {{ $filters.formatDate(item.startDate) }} to {{ $filters.formatDate(item.endDate) }}
               </li>
               <li v-else>
-                {{ item.startDate | formatDate }} — current
+                {{ $filters.formatDate(item.startDate) }} — current
               </li>
             </ul>
           </dd>
@@ -59,11 +59,11 @@
                   class="govuk-body govuk-!-margin-bottom-0"
                 >
                   <span class="govuk-caption-m">
-                    {{ task | lookup }}
+                    {{ $filters.lookup(task) }}
                   </span>
                   {{ item.otherTasks }}
                 </p>
-                <span v-else>{{ task | lookup }}</span>
+                <span v-else>{{ $filters.lookup(task) }}</span>
               </li>
             </ul>
           </dd>

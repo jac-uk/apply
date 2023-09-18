@@ -18,7 +18,7 @@ example usage:
   </div>
 </template>
 <script>
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 import { auth } from '@/firebase';
 
 export default {

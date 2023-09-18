@@ -40,10 +40,15 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'Checkbox',
   components: {
     FormFieldError,
@@ -54,7 +59,7 @@ export default {
       default: '',
       type: String,
     },
-    value: {
+    modelValue: {
       default: '',
       type: [String, Number, Boolean],
     },
@@ -64,13 +69,14 @@ export default {
       default: false,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     localValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     labelStyle() {

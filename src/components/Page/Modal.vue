@@ -65,6 +65,7 @@ export default {
       default: '',
     },
   },
+  emits: ['closed', 'confirmed'],
   data(){
     return {
       modalOpen: false,

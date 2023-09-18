@@ -56,14 +56,14 @@
           class="govuk-button govuk-button--success"
           @click="() => setLanguage(LANGUAGES.ENGLISH)"
         >
-          {{ LANGUAGES.ENGLISH | lookup }}
+          {{ $filters.lookup(LANGUAGES.ENGLISH) }}
         </button>
         <button
           v-else-if="language === LANGUAGES.ENGLISH"
           class="govuk-button govuk-button--success"
           @click="() => setLanguage(LANGUAGES.WELSH)"
         >
-          {{ LANGUAGES.WELSH | lookup }}
+          {{ $filters.lookup(LANGUAGES.WELSH) }}
         </button>
       </div>
 
@@ -86,13 +86,13 @@
               v-if="vacancy.applicationOpenDate"
               class="govuk-body"
             >
-              {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
+              {{ $filters.formatDate(vacancy.applicationOpenDate, 'datetime-without-second') }}
             </span>
             <span
               v-else
               class="govuk-body"
             >
-              {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+              {{ $filters.formatEstimatedDate(vacancy.estimatedLaunchDate) }}
             </span>
           </p>
           <p v-if="vacancy.applicationCloseDate">
@@ -104,7 +104,7 @@
             <span
               class="govuk-body"
             >
-              {{ vacancy.applicationCloseDate | formatDate('datetime-without-second') }}
+              {{ $filters.formatDate(vacancy.applicationCloseDate, 'datetime-without-second') }}
             </span>
           </p>
         </div>
@@ -129,13 +129,13 @@
               v-if="vacancy.salaryGrouping"
               class="govuk-body"
             >
-              {{ vacancy.salaryGrouping | lookup }}
+              {{ $filters.lookup(vacancy.salaryGrouping) }}
             </span>
             <span
               v-if="vacancy.salary"
               class="govuk-body"
             >
-              {{ vacancy.salary | formatCurrency }}
+              {{ $filters.formatCurrency(vacancy.salary) }}
             </span>
           </template>
           <template v-else-if="vacancy.appointmentType == 'fee-paid'">
@@ -143,7 +143,7 @@
               v-if="vacancy.feePaidFee"
               class="govuk-body"
             >
-              {{ vacancy.feePaidFee | formatCurrency }}
+              {{ $filters.formatCurrency(vacancy.feePaidFee) }}
             </span>
           </template>
         </p>
@@ -377,12 +377,12 @@
 </template>
 
 <script>
-import Timeline from '@/components/Page/Timeline';
+import Timeline from '@/components/Page/Timeline.vue';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
-import DownloadLink from '@/components/DownloadLink';
+import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   name: 'VacancyDetails',

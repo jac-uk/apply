@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 
 export default {
   name: 'InfoModal',

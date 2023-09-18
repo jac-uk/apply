@@ -143,7 +143,7 @@
 </template>
 
 <script>
-import InformationReviewRenderer from '@/components/Page/InformationReviewRenderer';
+import InformationReviewRenderer from '@/components/Page/InformationReviewRenderer.vue';
 
 export default {
   name: 'FinancialMattersSummary',

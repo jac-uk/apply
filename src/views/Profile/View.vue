@@ -137,7 +137,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="personalDetails.dateOfBirth">
-                    {{ personalDetails.dateOfBirth | formatDate }}
+                    {{ $filters.formatDate(personalDetails.dateOfBirth) }}
                   </span>
                 </dd>
               </div>
@@ -196,7 +196,7 @@
 
 <script>
 import { auth } from '@/firebase';
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 
 export default {
   name: 'Profile',

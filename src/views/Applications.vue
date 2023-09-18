@@ -78,7 +78,7 @@
                       v-if="hasCompletedMoreInformation(application)"
                       class="govuk-body-s govuk-!-margin-top-0 govuk-!-margin-bottom-1"
                     >
-                      Your application is complete and <strong>has been received</strong>. However you can continue to make changes until 13:00 on {{ informationDeadline(application) | formatDate }}.
+                      Your application is complete and <strong>has been received</strong>. However you can continue to make changes until 13:00 on {{ $filters.formatDate(informationDeadline(application)) }}.
                     </div>
                   </div>
                   <RouterLink

@@ -4,9 +4,7 @@
       v-if="previousTestQuestion"
       status="warning"
     >
-      <template>
-        You cannot amend your answer for this question as it was started on a previous test
-      </template>
+      You cannot amend your answer for this question as it was started on a previous test
     </Banner>
 
     <form
@@ -50,10 +48,10 @@
 </template>
 <script>
 import firebase from '@firebase/app';
-import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis';
-import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement';
+import CriticalAnalysis from '@/views/QualifyingTests/QualifyingTest/Question/CriticalAnalysis.vue';
+import SituationalJudgement from '@/views/QualifyingTests/QualifyingTest/Question/SituationalJudgement.vue';
 import { QUALIFYING_TEST } from '@/helpers/constants';
-import Banner from '@/components/Page/Banner';
+import Banner from '@/components/Page/Banner.vue';
 
 export default {
   name: 'Question',

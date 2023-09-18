@@ -45,7 +45,7 @@
         v-if="item.investigationConclusionDate"
         class="govuk-!-margin-top-1"
       >
-        {{ item.investigationConclusionDate | formatDate }}
+        {{ $filters.formatDate(item.investigationConclusionDate) }}
       </div>
     </div>
   </div>

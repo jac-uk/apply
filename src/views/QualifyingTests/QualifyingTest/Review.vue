@@ -125,7 +125,7 @@
 
 <script>
 import firebase from '@firebase/app';
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 
 export default {

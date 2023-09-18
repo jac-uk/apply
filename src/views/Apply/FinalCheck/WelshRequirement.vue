@@ -11,7 +11,7 @@
         class="govuk-summary-list__value"
         data-welsh="applying-for-welsh-post"
       >
-        {{ application.applyingForWelshPost | toYesNo }}
+        {{ $filters.toYesNo(application.applyingForWelshPost) }}
       </dd>
     </div>
     <div
@@ -25,7 +25,7 @@
         class="govuk-summary-list__value"
         data-welsh="speak-welsh"
       >
-        {{ application.canSpeakWelsh | toYesNo }}
+        {{ $filters.toYesNo(application.canSpeakWelsh) }}
       </dd>
     </div>
     <div
@@ -42,13 +42,13 @@
           v-if="application.canReadAndWriteWelsh == false"
           data-welsh="read-and-write-welsh"
         >
-          {{ application.canReadAndWriteWelsh | toYesNo }}
+          {{ $filters.toYesNo(application.canReadAndWriteWelsh) }}
         </p>
         <p
           v-if="application.canReadAndWriteWelsh"
           data-welsh="read-and-write-welsh"
         >
-          {{ application.canReadAndWriteWelsh | lookup }}
+          {{ $filters.lookup(application.canReadAndWriteWelsh) }}
         </p>
       </dd>
     </div>

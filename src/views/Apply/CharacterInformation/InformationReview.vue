@@ -295,18 +295,18 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import BackLink from '@/components/BackLink';
-import CriminalOffencesSummary from './InformationReview/CriminalOffencesSummary';
-import FixedPenaltiesSummary from './InformationReview/FixedPenaltiesSummary';
-import MotoringOffencesSummary from './InformationReview/MotoringOffencesSummary';
-import FinancialMattersSummary from './InformationReview/FinancialMattersSummary';
-import ProfessionalConductSummary from './InformationReview/ProfessionalConductSummary';
-import FurtherInformationSummary from './InformationReview/FurtherInformationSummary';
-import Checkbox from '../../../components/Form/Checkbox';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import BackLink from '@/components/BackLink.vue';
+import CriminalOffencesSummary from './InformationReview/CriminalOffencesSummary.vue';
+import FixedPenaltiesSummary from './InformationReview/FixedPenaltiesSummary.vue';
+import MotoringOffencesSummary from './InformationReview/MotoringOffencesSummary.vue';
+import FinancialMattersSummary from './InformationReview/FinancialMattersSummary.vue';
+import ProfessionalConductSummary from './InformationReview/ProfessionalConductSummary.vue';
+import FurtherInformationSummary from './InformationReview/FurtherInformationSummary.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
 import { DECLARATION1, DECLARATION2, DECLARATION3 } from './character-information-constants';
-import Form from '@/components/Form/Form';
+import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
 
 export default {

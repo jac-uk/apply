@@ -1,5 +1,8 @@
 <template>
-  <ol class="tasklist govuk-list">
+  <ol
+    class="govuk-list"
+    style="list-style-type: auto;"
+  >
     <slot />
   </ol>
 </template>
@@ -9,9 +12,3 @@ export default {
   name: 'TaskList',
 };
 </script>
-
-<style>
-.tasklist {
-  list-style-type: auto;
-}
-</style>

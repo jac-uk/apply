@@ -2,8 +2,9 @@
   <div>
     <Address
       id="previousAddress"
-      v-model="row"
+      :model-value="row"
       label="Previous address"
+      @update:model-value="row = $event"
     />
 
     <DateInput
@@ -25,8 +26,8 @@
 </template>
 
 <script>
-import Address from '@/components/Form/Address';
-import DateInput from '@/components/Form/DateInput';
+import Address from '@/components/Form/Address.vue';
+import DateInput from '@/components/Form/DateInput.vue';
 
 export default {
   name: 'Addresses',

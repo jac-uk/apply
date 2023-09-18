@@ -133,18 +133,18 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RepeatableFields from '@/components/RepeatableFields';
-import Qualification from '@/components/RepeatableFields/Qualification';
-import RadioItem from '@/components/Form/RadioItem';
-import RadioGroup from '@/components/Form/RadioGroup';
-import TextareaInput from '@/components/Form/TextareaInput';
-import BackLink from '@/components/BackLink';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import Qualification from '@/components/RepeatableFields/Qualification.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import BackLink from '@/components/BackLink.vue';
 import * as filters from '@/filters';
-import FileUpload from '@/components/Form/FileUpload';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FileUpload from '@/components/Form/FileUpload.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
 
 export default {

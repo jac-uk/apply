@@ -86,13 +86,13 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from './ApplyMixIn';
-import BackLink from '@/components/BackLink';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import TextareaInput from '@/components/Form/TextareaInput';
+import BackLink from '@/components/BackLink.vue';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 import { transformOnSelection } from '@/helpers/array';
 
 export default {

@@ -17,7 +17,7 @@
         :key="index"
       >
         <div class="govuk-inset-text govuk-!-margin-top-0">
-          You stated on your application that you have been a {{ qualification.type | lookup }}{{ getDate(qualification) }}
+          You stated on your application that you have been a {{ $filters.lookup(qualification.type) }}{{ getDate(qualification) }}
         </div>
         <TextField
           id="barMembershipNum"
@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import TextField from '@/components/Form/TextField';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import TextField from '@/components/Form/TextField.vue';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
 
 const membershipNumbers = {

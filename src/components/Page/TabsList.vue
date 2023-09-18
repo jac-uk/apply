@@ -44,7 +44,7 @@ export default {
       default: '',
     },
   },
-
+  emits: ['update:activeTab'],
   data() {
     return {
       currentTab: this.activeTab,

@@ -15,7 +15,7 @@
         class="govuk-grid-row"
       >
         <div class="govuk-grid-column-one-half govuk-grid-column-two-thirds-from-desktop govuk-!-margin-bottom-9">
-          <CustomHTML :value="$options.filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
+          <CustomHTML :value="$filters.showHTMLBreaks(qualifyingTestResponse.testQuestions.introduction)" />
           <div
             class="govuk-character-count"
           >
@@ -24,7 +24,7 @@
               id="scenario-question"
               v-model="response.text"
               :label="`${questionNumber}. ${question.question}`"
-              :hint="$options.filters.showHTMLBreaks(question.hint) || 'Answer below:'"
+              :hint="$filters.showHTMLBreaks(question.hint) || 'Answer below:'"
               rows="10"
               required
             />
@@ -72,7 +72,7 @@
                   :class="`govuk-heading-m ${index === 0 ? 'open' : 'close'}`"
                   @click.prevent="clickAdditional(index)"
                 >
-                  {{ document.title | showAlternative(`Additional Reading ${index}`) }}
+                  {{ $filters.showAlternative(document.title, `Additional Reading ${index}`) }}
                   <button>
                     <img
                       :src="icon(index)"
@@ -93,11 +93,11 @@
 
 <script>
 import firebase from '@firebase/app';
-import TextareaInput from '@/components/Form/TextareaInput';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 import { QUALIFYING_TEST } from '@/helpers/constants';
 import plusIcon from '@/assets/plus.png';
 import minusIcon from '@/assets/minus.png';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   name: 'Scenario',

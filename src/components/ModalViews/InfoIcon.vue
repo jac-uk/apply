@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import InfoModal from '@/components/ModalViews/InfoModal';
+import InfoModal from '@/components/ModalViews/InfoModal.vue';
 
 export default {
   name: 'InfoIcon',

@@ -5,7 +5,7 @@
   >
     <fieldset
       class="govuk-fieldset"
-      :aria-describedby="hint ? `${id}-hint` : false"
+      :aria-describedby="hint ? `${id}-hint` : null"
       role="group"
     >
       <legend
@@ -71,21 +71,27 @@
 <script>
 import parseAndClipNumber from '@/helpers/Form/parseAndClipNumber';
 import zeroPad from '@/helpers/Form/zeroPad';
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'TimeInput',
   components: {
     FormFieldError,
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: (value) => (value instanceof Date || value === null || value === undefined),
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       minute: null,
@@ -137,16 +143,16 @@ export default {
   },
   watch: {
     date(value) {
-      this.$emit('input', value);
+      this.$emit('update:modelValue', value);
     },
-    value(newValue, oldValue) {
+    modelValue(newValue, oldValue) {
       if (!this.datesAreEqual(newValue, oldValue)) {
         this.date = newValue;
       }
     },
   },
   created() {
-    this.date = this.value;
+    this.date = this.modelValue;
   },
   methods: {
     datesAreEqual(date1, date2) {
