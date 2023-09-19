@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Confirm your {{ statementType | lookup }}
+          Confirm your {{ $filters.lookup(statementType) }}
         </h1>
 
         <ErrorSummary :errors="errors" />

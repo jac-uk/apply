@@ -123,7 +123,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .disabled {
   background-color: darkgrey;
 }
