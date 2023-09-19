@@ -263,13 +263,13 @@
 <script>
 import { hyphenize } from '@/filters';
 import { WELSH_POSTS_CONTACT_MAILBOX, WELSH_POSTS_EMAIL_SUBJECT } from '../../helpers/constants';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
 import ApplyMixIn from './ApplyMixIn';
-import Warning from '@/components/Page/Warning';
-import Banner from '@/components/Page/Banner';
-import TaskList from '@/components/Page/TaskList/TaskList';
-import TaskGroup from '@/components/Page/TaskList/TaskGroup';
-import Task from '@/components/Page/TaskList/Task';
+import Warning from '@/components/Page/Warning.vue';
+import Banner from '@/components/Page/Banner.vue';
+import TaskList from '@/components/Page/TaskList/TaskList.vue';
+import TaskGroup from '@/components/Page/TaskList/TaskGroup.vue';
+import Task from '@/components/Page/TaskList/Task.vue';
 
 export default {
   name: 'TaskListComponent',

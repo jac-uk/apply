@@ -18,30 +18,30 @@
 
     <TextField
       :id="`${id}--street`"
-      v-model="value.street"
+      v-model="modelValue.street"
       required
       label="Building and street"
     />
     <TextField
       :id="`${id}--street2`"
-      v-model="value.street2"
+      v-model="modelValue.street2"
       label="Building and street line 2"
       label-hidden
     />
     <TextField
       :id="`${id}--town`"
-      v-model="value.town"
+      v-model="modelValue.town"
       required
       label="Town or city"
     />
     <TextField
       :id="`${id}--county`"
-      v-model="value.county"
+      v-model="modelValue.county"
       label="County"
     />
     <TextField
       :id="`${id}--postcode`"
-      v-model="value.postcode"
+      v-model="modelValue.postcode"
       required
       label="Postcode"
       type="postcode"
@@ -49,24 +49,30 @@
   </div>
 </template>
 <script>
-import FormField from '@/components/Form/FormField';
-import TextField from '@/components/Form/TextField';
+import FormField from '@/components/Form/FormField.vue';
+import TextField from '@/components/Form/TextField.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'Address',
   components: {
     TextField,
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       required: true,
       type: Object,
     },
   },
+  emits: ['update:modelValue'],
   watch: {
-    value() {
-      this.$emit('input', this.value);
+    modelValue() {
+      this.$emit('update:modelValue', this.modelValue);
     },
   },
 };

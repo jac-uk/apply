@@ -9,7 +9,7 @@
         type="radio"
         :name="inputName[field]"
         :value="value"
-        :aria-describedby="hint ? hintId : false"
+        :aria-describedby="hint ? hintId : null"
       >
       <input
         v-else
@@ -19,7 +19,7 @@
         type="radio"
         :name="inputName"
         :value="value"
-        :aria-describedby="hint ? hintId : false"
+        :aria-describedby="hint ? hintId : null"
       >
       <label
         class="govuk-label govuk-radios__label"

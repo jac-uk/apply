@@ -87,11 +87,11 @@
 </template>
 
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import BackLink from '@/components/BackLink';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import BackLink from '@/components/BackLink.vue';
 // should the fileUpload component be used here?
-// import FileUpload from '@/components/Form/FileUpload';
+// import FileUpload from '@/components/Form/FileUpload.vue';
 
 export default {
   name: 'LeadershipSuitability',

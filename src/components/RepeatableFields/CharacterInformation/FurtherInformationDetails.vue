@@ -1,5 +1,5 @@
 <script>
-import RequestedToResignFromPositionDetails from './RequestedToResignFromPositionDetails';
+import RequestedToResignFromPositionDetails from './RequestedToResignFromPositionDetails.vue';
 export default {
   name: 'FurtherInformationDetails',
   extends: RequestedToResignFromPositionDetails,

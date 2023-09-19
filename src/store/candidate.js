@@ -1,6 +1,6 @@
 import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
 
@@ -49,6 +49,11 @@ export default {
       const ref = collection.doc(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`);
       await ref.set(data);
     },      
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
+    },
   },
   state: {
     personalDetails: null,

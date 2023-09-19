@@ -13,7 +13,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ application.applyingUnderSchedule2Three | toYesNo }}</li>
+            <li> {{ $filters.toYesNo(application.applyingUnderSchedule2Three) }}</li>
           </ul>
         </dd>
       </div>
@@ -31,7 +31,7 @@
               for="applying-under-schedule-2-d"
               data-welsh="applying-under-schedule-2-d"
             >
-              {{ application.applyingUnderSchedule2d | toYesNo }}
+              {{ $filters.toYesNo(application.applyingUnderSchedule2d) }}
             </li>
           </ul>
         </dd>

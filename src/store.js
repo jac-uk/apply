@@ -1,7 +1,4 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import { vuexfireMutations } from 'vuexfire';
-Vue.use(Vuex);
+import { createStore } from 'vuex';
 
 // Vuex modules
 import auth from '@/store/auth';
@@ -17,9 +14,9 @@ import logs from '@/store/logs';
 import connectionMonitor from '@/store/connectionMonitor';
 import session from '@/store/session';
 
-const store = new Vuex.Store({
+const store = createStore({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
-  strict: process.env.NODE_ENV !== 'production',
+  strict: import.meta.env.NODE_ENV !== 'production',
   modules: {
     auth,
     vacancies,
@@ -35,19 +32,17 @@ const store = new Vuex.Store({
     session,
   },
   state: {
-    packageVersion: process.env.PACKAGE_VERSION || '0',
-    env: process.env.NODE_ENV,
+    packageVersion: import.meta.env.PACKAGE_VERSION || '0',
+    env: import.meta.env.NODE_ENV,
   },
-  mutations: {
-    ...vuexfireMutations,
-  },
+  mutations: {},
   actions: {},
   getters: {
     appVersion: (state) => {
       return state.packageVersion;
     },
     appEnvironment: () => {
-      const projectId = process.env.VUE_APP_FIREBASE_PROJECT_ID;
+      const projectId = import.meta.env.VITE_FIREBASE_PROJECT_ID;
       if (projectId.indexOf('-develop') >= 0) {
         return 'DEVELOP';
       }

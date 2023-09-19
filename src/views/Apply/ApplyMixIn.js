@@ -2,7 +2,7 @@
 The purpose of this Mix-in is to share code between TaskList.vue and Review.vue
 */
 
-import Countdown from '@/components/Page/Countdown';
+import Countdown from '@/components/Page/Countdown.vue';
 import { mapGetters } from 'vuex';
 import {
   isLegal,

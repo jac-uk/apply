@@ -1,5 +1,5 @@
 import firebase, { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { isDate, isDateInFuture, parseEstimatedDate } from '@/helpers/date';
 
@@ -21,6 +21,11 @@ export default {
       unbindFirestoreRef('allRecords');
       return true;
     }),
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
+    },
   },
   state: {
     records: [],

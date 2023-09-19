@@ -253,14 +253,14 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import TextField from '@/components/Form/TextField';
-import DateInput from '@/components/Form/DateInput';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import TextareaInput from '@/components/Form/TextareaInput';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import TextField from '@/components/Form/TextField.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 
 export default {
   name: 'OtherProfessionalBodies',

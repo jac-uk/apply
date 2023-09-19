@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import BackLink from '@/components/BackLink';
-import FileUpload from '@/components/Form/FileUpload';
+import BackLink from '@/components/BackLink.vue';
+import FileUpload from '@/components/Form/FileUpload.vue';
 import { logEvent } from '@/helpers/logEvent';
 
 export default {

@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
-import TextField from '@/components/Form/TextField';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextField from '@/components/Form/TextField.vue';
 
 export default {
   name: 'Experience',

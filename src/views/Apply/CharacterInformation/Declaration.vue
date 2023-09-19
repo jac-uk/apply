@@ -57,8 +57,8 @@
 </template>
 
 <script>
-import BackLink from '@/components/BackLink';
-import StartButton from '@/components/Page/StartButton';
+import BackLink from '@/components/BackLink.vue';
+import StartButton from '@/components/Page/StartButton.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 
 export default {

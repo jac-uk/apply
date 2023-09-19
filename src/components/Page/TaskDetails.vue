@@ -29,9 +29,9 @@
         <option
           v-for="option in ['full-time', 'salaried-part-time', 'fee-paid', 'voluntary']"
           :key="option"
-          :value="option | lookup"
+          :value="$filters.lookup(option)"
         >
-          {{ option | lookup }}
+          {{ $filters.lookup(option) }}
         </option>
       </Select>
 
@@ -50,9 +50,9 @@
 </template>
 
 <script>
-import TextField from '@/components/Form/TextField';
-import FormField from '@/components/Form/FormField';
-import Select from '@jac-uk/jac-kit/draftComponents/Form/Select';
+import TextField from '@/components/Form/TextField.vue';
+import FormField from '@/components/Form/FormField.vue';
+import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
 
 export default {
   name: 'TaskDetails',
@@ -68,6 +68,7 @@ export default {
       required: false,
     },
   },
+  emits: ['update:tasks', 'update:otherTasks', 'update:taskDetails'],
   data() {
     return {
       localTaskDetails: { ...this.taskDetails },

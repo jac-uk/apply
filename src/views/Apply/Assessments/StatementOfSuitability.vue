@@ -112,17 +112,17 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import TextareaInput from '@/components/Form/TextareaInput';
-import FileUpload from '@/components/Form/FileUpload';
-import BackLink from '@/components/BackLink';
-import DownloadLink from '@/components/DownloadLink';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import FileUpload from '@/components/Form/FileUpload.vue';
+import BackLink from '@/components/BackLink.vue';
+import DownloadLink from '@/components/DownloadLink.vue';
 import { logEvent } from '@/helpers/logEvent';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
 import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {

@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
-import TextareaInput from '@/components/Form/TextareaInput';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 
 export default {
   name: 'DeclaredBankruptOrIVADetails',

@@ -69,10 +69,10 @@
 </template>
 <script>
 import firebase from '@firebase/app';
-import BackLink from '@/components/BackLink';
-import Form from '@/components/Form/Form';
-import Checkbox from '@/components/Form/Checkbox';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import BackLink from '@/components/BackLink.vue';
+import Form from '@/components/Form/Form.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 
 export default {
   name: 'Consent',

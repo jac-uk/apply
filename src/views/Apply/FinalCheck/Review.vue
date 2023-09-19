@@ -410,10 +410,10 @@
                     class="govuk-list"
                   >
                     <li v-if="item.endDate">
-                      <span>{{ item.startDate | formatDate }}</span> to <span>{{ item.endDate | formatDate }}</span>
+                      <span>{{ $filters.formatDate(item.startDate) }}</span> to <span>{{ $filters.formatDate(item.endDate) }}</span>
                     </li>
                     <li v-else>
-                      <span>{{ item.startDate | formatDate }}</span> — <span>current</span>
+                      <span>{{ $filters.formatDate(item.startDate) }}</span> — <span>current</span>
                     </li>
                   </ul>
                 </dd>
@@ -521,7 +521,7 @@
                   class="govuk-summary-list__value"
                   data-welsh="can-give-reasonable-los"
                 >
-                  {{ application.canGiveReasonableLOS | toYesNo }}
+                  {{ $filters.toYesNo(application.canGiveReasonableLOS) }}
                   <p v-if="application.canGiveReasonableLOS == false">
                     {{ application.cantGiveReasonableLOSDetails }}
                   </p>
@@ -553,7 +553,7 @@
                   Assessor Type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ application.firstAssessorType | lookup }}
+                  {{ $filters.lookup(application.firstAssessorType) }}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -599,7 +599,7 @@
                   Assessor Type
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  {{ application.secondAssessorType | lookup }}
+                  {{ $filters.lookup(application.secondAssessorType) }}
                 </dd>
               </div>
               <div class="govuk-summary-list__row">
@@ -778,10 +778,10 @@
                         v-if="item == 'other'"
                         class="govuk-body govuk-!-margin-bottom-0"
                       >
-                        <span class="govuk-caption-m">{{ item | lookup }}</span>
+                        <span class="govuk-caption-m">{{ $filters.lookup(item) }}</span>
                         {{ application.additionalInfo.otherSources }}
                       </p>
-                      <span v-else>{{ item | lookup }}</span>
+                      <span v-else>{{ $filters.lookup(item) }}</span>
                     </li>
                   </ul>
                   <div
@@ -1009,29 +1009,29 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import BackLink from '@/components/BackLink';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import BackLink from '@/components/BackLink.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import Warning from '@/components/Page/Warning';
-import PersonalDetails from './PersonalDetails';
-import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary';
-import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary';
-import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary';
-import FinancialMattersSummary from '@/views/Apply/CharacterInformation/InformationReview/FinancialMattersSummary';
-import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary';
-import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary';
-import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary';
-import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1';
-import Diversity from './Diversity';
-import WelshRequirement from './WelshRequirement';
-import AdditionalWorkingPreferences from './AdditionalWorkingPreferences';
+import Warning from '@/components/Page/Warning.vue';
+import PersonalDetails from './PersonalDetails.vue';
+import CriminalOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/CriminalOffencesSummary.vue';
+import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/InformationReview/FixedPenaltiesSummary.vue';
+import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary.vue';
+import FinancialMattersSummary from '@/views/Apply/CharacterInformation/InformationReview/FinancialMattersSummary.vue';
+import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary.vue';
+import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary.vue';
+import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary.vue';
+import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1.vue';
+import Diversity from './Diversity.vue';
+import WelshRequirement from './WelshRequirement.vue';
+import AdditionalWorkingPreferences from './AdditionalWorkingPreferences.vue';
 import Qualifications from './Qualifications.vue';
 import Schedule2 from './Schedule2.vue';
 import Memberships from './Memberships.vue';
 import PostQualificationExperience from './PostQualificationExperience.vue';
 import JudicialExperience from './JudicialExperience.vue';
-import GapsInEmployment from './GapsInEmployment';
-import DownloadLink from '@/components/DownloadLink';
+import GapsInEmployment from './GapsInEmployment.vue';
+import DownloadLink from '@/components/DownloadLink.vue';
 
 export default {
   name: 'Review',

@@ -12,7 +12,7 @@
             Are you a fee-paid or salaried medical member?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ application.feePaidOrSalariedJudge | toYesNo }}
+            {{ $filters.toYesNo(application.feePaidOrSalariedJudge) }}
           </dd>
         </div>
         <div
@@ -24,7 +24,7 @@
           </dt>
           <dd class="govuk-summary-list__value">
             <p class="govuk-body">
-              {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
+              {{ $filters.toYesNo(application.feePaidOrSalariedSatForThirtyDays) }}
             </p>
             <p
               v-if="application.feePaidOrSalariedSatForThirtyDays"
@@ -59,7 +59,7 @@
             Are you a fee-paid or salaried judge?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ application.feePaidOrSalariedJudge | toYesNo }}
+            {{ $filters.toYesNo(application.feePaidOrSalariedJudge) }}
           </dd>
         </div>
 
@@ -72,7 +72,7 @@
           </dt>
           <dd class="govuk-summary-list__value">
             <p class="govuk-body">
-              {{ application.feePaidOrSalariedSatForThirtyDays | toYesNo }}
+              {{ $filters.toYesNo(application.feePaidOrSalariedSatForThirtyDays) }}
             </p>
             <p
               v-if="application.feePaidOrSalariedSittingDaysDetails"
@@ -91,7 +91,7 @@
             Have you declared an appointment or appointments in a quasi-judicial body in this application?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ application.declaredAppointmentInQuasiJudicialBody | toYesNo }}
+            {{ $filters.toYesNo(application.declaredAppointmentInQuasiJudicialBody) }}
           </dd>
         </div>
 
@@ -104,7 +104,7 @@
           </dt>
           <dd class="govuk-summary-list__value">
             <p class="govuk-body">
-              {{ application.quasiJudicialSatForThirtyDays | toYesNo }}
+              {{ $filters.toYesNo(application.quasiJudicialSatForThirtyDays) }}
             </p>
             <p
               v-if="application.quasiJudicialSittingDaysDetails"

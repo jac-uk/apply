@@ -1,6 +1,6 @@
 import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
 const collection = firestore.collection('invitations');
@@ -30,6 +30,11 @@ export default {
         'status': 'accepted',
       };
       await ref.update(data);
+    },
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
     },
   },
 };

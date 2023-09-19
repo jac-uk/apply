@@ -1,6 +1,6 @@
 import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
@@ -108,6 +108,9 @@ export default {
     },
   },
   mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
+    },
     setLanguage(state, language) {
       state.language = language;
     },

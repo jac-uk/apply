@@ -6,7 +6,7 @@
       class="govuk-list"
     >
       <li class="govuk-body govuk-!-font-weight-bold">
-        {{ item.title }}<span v-if="item.title"> - </span>{{ item.date | formatDate }}
+        {{ item.title }}<span v-if="item.title"> - </span>{{ $filters.formatDate(item.date) }}
       </li>
       <li v-if="item.details">
         {{ item.details }}

@@ -1,6 +1,6 @@
 import firebase from '@firebase/app';
 import { firestore, auth } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import clone from 'clone';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { QUALIFYING_TEST_RESPONSE } from '@/helpers/constants';
@@ -61,6 +61,11 @@ export default {
         'isOutOfTime': true,
       };
       await context.dispatch('save', data);
+    },
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
     },
   },
   state: {

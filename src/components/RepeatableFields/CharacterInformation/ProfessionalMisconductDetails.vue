@@ -1,5 +1,5 @@
 <script>
-import ProfessionalMisconductFieldDetails from './ProfessionalMisconductFieldDetails';
+import ProfessionalMisconductFieldDetails from './ProfessionalMisconductFieldDetails.vue';
 export default {
   name: 'ProfessionalMisconductDetails',
   extends: ProfessionalMisconductFieldDetails,

@@ -16,17 +16,22 @@
   </fieldset>
 </template>
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'CriticalAnalysis',
   components: {
     RadioGroup,
     RadioItem,
   },
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: (value) => (value >= 0 || value === null || value === undefined),
     },
@@ -39,15 +44,16 @@ export default {
       required: true,
     },
   },
+  emits: ['update:modelValue', 'answered'],
   computed: {
     localValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
         // this.$emit('answered');
-        if (val !== this.value && this.value !== null && this.value !== undefined) {
+        if (val !== this.modelValue && this.modelValue !== null && this.modelValue !== undefined) {
           this.$emit('answered', { value: val, type: '' });
         }
       },

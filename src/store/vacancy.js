@@ -1,5 +1,5 @@
 import { firestore } from '@/firebase';
-import { firestoreAction } from 'vuexfire';
+import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
 const collection = firestore.collection('vacancies');
@@ -14,6 +14,11 @@ export default {
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('record');
     }),
+  },
+  mutations: {
+    set(state, { name, value }) {
+      state[name] = value;
+    },
   },
   state: {
     record: null,

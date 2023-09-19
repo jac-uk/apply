@@ -27,6 +27,7 @@ export default {
       default: 'Search candidate names',
     },
   },
+  emits: ['search'],
   data() {
     return {
       search: '',
