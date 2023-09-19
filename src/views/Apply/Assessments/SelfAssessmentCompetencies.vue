@@ -178,7 +178,8 @@ export default {
       return `exercise/${this.vacancy.id}/${this.vacancy.downloads.candidateAssessementForms[0].file}`;
     },
     documentPath() {
-      return `${this.uploadPath}/${this.formData.uploadedSelfAssessment}`;
+      const path = `${this.uploadPath}/${this.formData.uploadedSelfAssessment}`;
+      return path.substring(1);
     },
     downloadNameGenerator() {
       let outcome = null;
