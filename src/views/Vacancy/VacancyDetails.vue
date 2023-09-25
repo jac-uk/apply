@@ -460,7 +460,7 @@ export default {
       return this.advertType === ADVERT_TYPES.FULL;
     },
     showDownload() {
-      return this.advertType !== ADVERT_TYPES.BASIC && vacancy.downloads;
+      return this.advertType !== ADVERT_TYPES.BASIC && this.vacancy.downloads;
     },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
