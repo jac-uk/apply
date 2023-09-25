@@ -99,6 +99,7 @@
         </TaskGroup>
 
         <TaskGroup
+          v-if="isLegal"
           :title="experienceTitle"
         >
           <Task
