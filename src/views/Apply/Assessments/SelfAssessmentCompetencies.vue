@@ -31,7 +31,8 @@
               :id="`meet_requirements_${index}`"
               v-model="formData.selectionCriteriaAnswers[index].answer"
               label="Do you meet this requirement?"
-            >
+              :required="vacancy.id === '8GjaA3U51onRf2p1Z2bT'"
+              >
               <RadioItem
                 :value="true"
                 label="Yes"
