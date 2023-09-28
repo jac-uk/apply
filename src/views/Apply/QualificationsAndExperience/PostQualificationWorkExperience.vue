@@ -118,9 +118,10 @@
               Save
             </button>
             <button
+              v-if="newExperience.type"
               type="button"
               class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-              @click="() => handleRowRemove('appointment', index)"
+              @click="handleNewRowRemove"
             >
               Remove
             </button>
@@ -128,6 +129,7 @@
         </div>
 
         <div
+          v-if="hasExperience"
           class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8"
         >
           <button
@@ -137,21 +139,21 @@
           >
             Add another
           </button>
+
+          <h2 class="govuk-heading-m govuk-!-margin-top-8">
+            {{ `Your total sitting days of judicial roles are ${totalJudicialDays} days.` }}
+          </h2>
+
+          <TextareaInput
+            v-if="totalJudicialDays < vacancy.pjeDays"
+            id="experience-details"
+            v-model="formData.experienceDetails"
+            :hint="`As you have indicated you have less than ${vacancy.pjeDays} number of sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.`"
+          />
         </div>
 
-        <h2 class="govuk-heading-m govuk-!-margin-top-8">
-          {{ `Your total sitting days of judicial roles are ${totalJudicialDays} days.` }}
-        </h2>
-
-        <TextareaInput
-          v-if="totalJudicialDays < vacancy.pjeDays"
-          id="experience-details"
-          v-model="formData.experienceDetails"
-          :hint="`As you have indicated you have less than ${vacancy.pjeDays} number of sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.`"
-        />
-
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) || !hasExperience"
           class="govuk-button info-btn--post-qualification-work-experience--save-and-continue govuk-!-margin-top-8"
         >
           Save and continue
@@ -195,7 +197,10 @@ export default {
     };
   },
   computed: {
-    
+    hasExperience() {
+      return (Array.isArray(this.formData.experience) && this.formData.experience.length > 0) || 
+        (Array.isArray(this.formData.employmentGaps) && this.formData.employmentGaps.length > 0);
+    },
     totalJudicialDays() {
       let total = 0;
       if (Array.isArray(this.formData.experience)) {
@@ -206,6 +211,16 @@ export default {
         });
       }
       return total;
+    },
+  },
+  watch: {
+    hasExperience: {
+      immediate: true,
+      handler() {
+        if (!this.hasExperience) {
+          this.newExperience = {};
+        }
+      },
     },
   },
   methods: {
@@ -251,7 +266,11 @@ export default {
       this.resetEditing();
     },
     handleNewRowRemove() {
-      this.newExperience = null;
+      if (this.hasExperience) {
+        this.newExperience = null;
+      } else {
+        this.newExperience = {};
+      }
     },
     resetEditing() {
       this.editingType = null;
