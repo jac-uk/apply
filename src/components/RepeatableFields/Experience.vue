@@ -1,63 +1,146 @@
 <template>
-  <div>
-    <TextField
-      :id="experienceJobTitle"
-      v-model="row.jobTitle"
-      label="Job title"
+  <div
+    v-if="!editing"
+    style="display: flex; justify-content: space-between;"
+  >
+    <div v-if="isAppointment">
+      <h2 class="govuk-heading-m">
+        {{ row.jobTitle }}
+      </h2>
+      <p class="govuk-body">
+        {{ row.orgBusinessName }}
+      </p>
+      <div class="tag-container">
+        <span
+          v-if="workingBasis"
+          class="tag"
+        >
+          {{ workingBasis }}
+        </span>
+        <span
+          v-if="judicialType"
+          class="tag"
+        >
+          {{ judicialType }}
+        </span>
+      </div>
+    </div>
+    <div v-else>
+      <h2 class="govuk-heading-m">
+        Gap in Employment
+      </h2>
+    </div>
+
+    <div>
+      <div class="text-right">
+        <p
+          v-if="judicialDateRange"
+          class="govuk-body"
+        >
+          {{ judicialDateRange }}
+        </p>
+        <p
+          v-if="judicialDuration"
+          class="govuk-body"
+        >
+          {{ judicialDuration }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <div v-else>
+    <RadioGroup
+      :id="`experience-${type}-${index}`"
+      v-model="row.type"
+      label="Is this experience an appointment or a gap in employment?"
       required
-    />
+    >
+      <RadioItem
+        value="appointment"
+        label="It is an appointment."
+      />
+      <RadioItem
+        value="gap"
+        label="It is a gap in employment."
+      />
+    </RadioGroup>
 
-    <TextField
-      :id="experienceOrgBusinessName"
-      v-model="row.orgBusinessName"
-      label="Organisation or business name"
-      required
-    />
+    <div v-if="row.type">
+      <TextField
+        v-if="isAppointment"
+        :id="experienceJobTitle"
+        v-model="row.jobTitle"
+        label="Job title"
+        required
+      />
 
-    <DateInput
-      :id="experienceStartDate"
-      v-model="row.startDate"
-      label="Start date"
-      type="month"
-      required
-    />
+      <TextField
+        v-if="isAppointment"
+        :id="experienceOrgBusinessName"
+        v-model="row.orgBusinessName"
+        label="Organisation or business name"
+        required
+      />
 
-    <DateInput
-      :id="experienceEndDate"
-      v-model="row.endDate"
-      label="End date"
-      hint="Leave this blank if you're currently in this role."
-      type="month"
-    />
+      <DateInput
+        :id="experienceStartDate"
+        v-model="row.startDate"
+        label="Start date"
+        type="month"
+        required
+      />
 
-    <LawRelatedTasks
-      :id="`tasks_${index}`"
-      v-model:tasks="row.tasks"
-      v-model:other-tasks="row.otherTasks"
-      :show-judicial-functions="true"
-      required
-    />
+      <DateInput
+        v-if="!row.isOngoing"
+        :id="experienceEndDate"
+        v-model="row.endDate"
+        label="End date"
+        type="month"
+        required
+      />
+      <Checkbox
+        :id="experienceIsOngoing"
+        v-model="row.isOngoing"
+      >
+        Tick here if this appointment is still ongoing
+      </Checkbox>
 
-    <TaskDetails
-      :id="`tasks_${index}`"
-      v-model:task-details="row.taskDetails"
-    />
+      <LawRelatedTasks
+        v-if="isAppointment"
+        :id="`tasks_${index}`"
+        v-model:tasks="row.tasks"
+        v-model:judicial-functions="row.judicialFunctions"
+        v-model:other-tasks="row.otherTasks"
+        :show-judicial-functions="true"
+        required
+      />
 
-    <slot name="removeButton" />
+      <TaskDetails
+        v-if="isAppointment"
+        :id="`tasks_${index}`"
+        v-model:task-details="row.taskDetails"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
 import TextField from '@/components/Form/TextField.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
 import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
 import TaskDetails from '@/components/Page/TaskDetails.vue';
 
 export default {
   name: 'Experience',
   components: {
-    DateInput,
+    RadioItem,
+    RadioGroup,
     TextField,
+    DateInput,
+    Checkbox,
     LawRelatedTasks,
     TaskDetails,
   },
@@ -70,26 +153,90 @@ export default {
       required: true,
       type: Number,
     },
+    type: {
+      required: false,
+      type: String,
+      default: '',
+    },
+    editing: {
+      required: false,
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
+    isAppointment() {
+      return this.row?.type === 'appointment';
+    },
     experienceJobTitle() {
-      return `experience_job_title_${this.index}`;
+      return `experience_${this.type}_job_title_${this.index}`;
     },
     experienceOrgBusinessName() {
-      return `experience_org_business_name_${this.index}`;
+      return `experience_${this.type}_org_business_name_${this.index}`;
     },
     experienceStartDate() {
-      return `experience_start_date_${this.index}`;
+      return `experience_${this.type}_start_date_${this.index}`;
     },
     experienceEndDate() {
-      return `experience_end_date_${this.index}`;
+      return `experience_${this.type}_end_date_${this.index}`;
+    },
+    experienceIsOngoing() {
+      return `experience_${this.type}_is_ongoing_${this.index}`;
     },
     experienceTasks() {
-      return `experience_tasks_${this.index}`;
+      return `experience_${this.type}_tasks_${this.index}`;
     },
     experienceOtherTasks() {
-      return `experience_other_tasks_${this.index}`;
+      return `experience_${this.type}_other_tasks_${this.index}`;
+    },
+    workingBasis() {
+      return this.row.taskDetails ? (this.row.taskDetails.workingBasis || '') : '';
+    },
+    judicialType() {
+      return this.row.judicialFunctions ? (this.row.judicialFunctions.type || '') : '';
+    },
+    judicialDateRange() {
+      const res = [];
+      if (this.row.startDate) res.push(this.$filters.formatDate(this.row.startDate, 'MM/YYYY'));
+      if (this.row.isOngoing) {
+        res.push('Ongoing');
+      } else if (this.row.endDate) {
+        res.push(this.$filters.formatDate(this.row.endDate, 'MM/YYYY'));
+      }
+      return res.join(' - ');
+    },
+    judicialDuration() {
+      const duration = this.row.judicialFunctions?.duration;
+      if (!duration) return '';
+      return `Judicial role sitting days: ${duration} ${duration > 1 ? 'days' : 'day'}`;
+    },
+  },
+  watch: {
+    type: {
+      immediate: true,
+      handler() {
+        if (this.type) {
+          this.row.type = this.type;
+        }
+      },
     },
   },
 };
 </script>
+
+<style scoped>
+.tag-container {
+  display: flex;
+  gap: 10px;
+}
+.tag {
+  padding: 5px 8px 0;
+  background: #EEEFEF;
+  color: #383F43;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 16px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+</style>

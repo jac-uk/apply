@@ -25,7 +25,51 @@
       <CheckboxItem
         value="judicial-functions"
         label="The carrying-out of judicial functions of any court or tribunal"
-      />
+      >
+        <Select
+          id="judicial-functions-type"
+          v-model="localJudicialFunctions.type"
+          label="Is this a judicial or quasi-judicial post?"
+          required
+        >
+          <option
+            v-for="option in ['judicial-post', 'quasi-judicial-post']"
+            :key="option"
+            :value="$filters.lookup(option)"
+          >
+            {{ $filters.lookup(option) }}
+          </option>
+        </Select>
+
+        <TextField
+          id="judicial-functions-duration"
+          v-model="localJudicialFunctions.duration"
+          type="number"
+          label="How many days have you sat in this role/post (excluding training and/or sick days)?"
+          required
+        />
+
+        <Select
+          id="judicial-functions-is-legal-qualification"
+          v-model="localJudicialFunctions.isLegalQualification"
+          label="Is a legal qualification a requisite for appointment?"
+          required
+        >
+          <option
+            v-for="option in ['true', 'false']"
+            :key="option"
+            :value="$filters.lookup(option)"
+          >
+            {{ $filters.lookup(option) }}
+          </option>
+        </Select>
+
+        <TextareaInput
+          id="judicial-functions-details"
+          v-model="localJudicialFunctions.details"
+          label="Please outline the powers, procedures and main responsibilities"
+        />
+      </CheckboxItem>
 
       <CheckboxItem
         value="acting-arbitrator"
@@ -73,6 +117,8 @@
 <script>
 import CheckboxItem from '@/components/Form/CheckboxItem.vue';
 import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
+import TextField from '@/components/Form/TextField.vue';
 import TextareaInput from '@/components/Form/TextareaInput.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import FormField from '@/components/Form/FormField.vue';
@@ -83,6 +129,8 @@ export default {
   components: {
     CheckboxItem,
     CheckboxGroup,
+    Select,
+    TextField,
     TextareaInput,
     FormFieldError,
   },
@@ -116,10 +164,16 @@ export default {
       default: () => {},
       required: false,
     },
+    judicialFunctions: {
+      type: Object,
+      default: () => {},
+      required: false,
+    },
   },
-  emits: ['update:tasks', 'update:otherTasks', 'update:taskDetails'],
+  emits: ['update:tasks', 'update:otherTasks', 'update:taskDetails', 'update:judicialFunctions'],
   data() {
     return {
+      localJudicialFunctions: { ...this.judicialFunctions },
       localTaskDetails: { ...this.taskDetails },
     };
   },
@@ -145,6 +199,12 @@ export default {
     },
   },
   watch: {
+    localJudicialFunctions: {
+      handler: function(after) {
+        this.$emit('update:judicialFunctions', after);
+      },
+      deep: true,
+    },
     localTaskDetails: {
       handler: function(after) {
         this.$emit('update:taskDetails', after);
