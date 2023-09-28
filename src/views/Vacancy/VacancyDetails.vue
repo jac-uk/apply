@@ -383,6 +383,7 @@ import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML.vue';
+import _has from 'lodash/has';
 
 export default {
   name: 'VacancyDetails',
@@ -425,6 +426,9 @@ export default {
     vacancy () {
       return this.$store.state.vacancy.record;
     },
+    hasDownloads() {
+      return _has(this.vacancy, 'downloads') && Object.keys(this.vacancy.downloads).length > 0;
+    },
     user() {
       return this.$store.state.auth.currentUser;
     },
@@ -460,7 +464,7 @@ export default {
       return this.advertType === ADVERT_TYPES.FULL;
     },
     showDownload() {
-      return this.advertType !== ADVERT_TYPES.BASIC && this.vacancy.downloads;
+      return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
