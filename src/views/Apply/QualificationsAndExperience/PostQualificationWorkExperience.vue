@@ -15,25 +15,26 @@
         </p>
 
         <div
-          v-for="(experience, index) in formData.experience"
+          v-for="(experience, index) in experiences"
           :key="index"
           class="experience-container govuk-!-margin-top-8"
         >
           <Experience
             :row="experience"
             :index="index"
-            type="appointment"
-            :editing="editingType === 'appointment' && editingIndex === index"
+            :type="experience.type"
+            :editing="editingIndex === index"
           />
           <div
+            v-if="experience.type"
             class="govuk-!-margin-top-6"
             style="display: flex; justify-content: flex-end; gap: 20px;"
           >
             <button
-              v-if="editingType === 'appointment' && editingIndex === index"
+              v-if="editingIndex === index"
               type="button"
               class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowSave('appointment', index)"
+              @click="() => handleRowSave(index)"
             >
               Save
             </button>
@@ -41,87 +42,14 @@
               v-else
               type="button"
               class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowEdit('appointment', index)"
+              @click="() => handleRowEdit(index)"
             >
               Edit
             </button>
             <button
               type="button"
               class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-              @click="() => handleRowRemove('appointment', index)"
-            >
-              Remove
-            </button>
-          </div>
-        </div>
-
-        <div
-          v-for="(experience, index) in formData.employmentGaps"
-          :key="index"
-          class="experience-container govuk-!-margin-top-8"
-        >
-          <Experience
-            :row="experience"
-            :index="index"
-            type="gap"
-            :editing="editingType === 'gap' && editingIndex === index"
-          />
-          <div
-            class="govuk-!-margin-top-6"
-            style="display: flex; justify-content: flex-end; gap: 20px;"
-          >
-            <button
-              v-if="editingType === 'gap' && editingIndex === index"
-              type="button"
-              class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowSave('gap', index)"
-            >
-              Save
-            </button>
-            <button
-              v-else
-              type="button"
-              class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowEdit('gap', index)"
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-              @click="() => handleRowRemove('gap', index)"
-            >
-              Remove
-            </button>
-          </div>
-        </div>
-
-        <div
-          v-if="newExperience"
-          class="experience-container govuk-!-margin-top-8"
-        >
-          <Experience
-            :row="newExperience"
-            :index="0"
-            :editing="true"
-          />
-          <div
-            class="govuk-!-margin-top-6"
-            style="display: flex; justify-content: flex-end; gap: 20px;"
-          >
-            <button
-              v-if="newExperience.type"
-              type="button"
-              class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="handleNewRowSave"
-            >
-              Save
-            </button>
-            <button
-              v-if="newExperience.type"
-              type="button"
-              class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-              @click="handleNewRowRemove"
+              @click="() => handleRowRemove(index)"
             >
               Remove
             </button>
@@ -188,11 +116,12 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
+
     return {
       formId: 'postQualificationWorkExperience',
       formData: formData,
+      experiences: this.sortExperiences(this.getExperiences(formData)),
       newExperience: null,
-      editingType: null,
       editingIndex: null,
     };
   },
@@ -224,56 +153,65 @@ export default {
     },
   },
   methods: {
-    handleRowAdd() {
-      this.newExperience = {};
+    getExperiences(formData) {
+      const res = [];
+      if (Array.isArray(formData.experience)) {
+        formData.experience.forEach((experience) => {
+          experience.type = 'appointment';
+          res.push(experience);
+        });
+      }
+      if (Array.isArray(formData.employmentGaps)) {
+        formData.employmentGaps.forEach((employmentGap) => {
+          employmentGap.type = 'gap';
+          res.push(employmentGap);
+        });
+      }
+      return res;
     },
-    handleRowEdit(type, index) {
-      this.editingType = type;
+    sortExperiences(experiences) {
+      return experiences.sort((a, b) => {
+        if (a.isOngoing && !b.isOngoing) {
+          return -1;
+        }
+        if (!a.isOngoing && b.isOngoing) {
+          return 1;
+        }
+        if (a.isOngoing && b.isOngoing) {
+          return a.startDate > b.startDate ? -1 : 1;
+        }
+        if (a.endDate && b.endDate) {
+          return a.endDate > b.endDate ? -1 : 1;
+        }
+        return 0;
+      }); 
+    },
+    syncFormData() {
+      this.experiences = this.sortExperiences(this.experiences);
+      this.formData.experience = this.experiences.filter(experience => experience.type === 'appointment');
+      this.formData.employmentGaps = this.experiences.filter(experience => experience.type === 'gap');
+      this.$store.dispatch('application/save', this.formData);
+    },
+    handleRowAdd() {
+      this.experiences.push({});
+      this.editingIndex = this.experiences.length - 1;
+    },
+    handleRowEdit(index) {
       this.editingIndex = index;
     },
     handleRowSave() {
       this.validate();
       if (this.isValid()) {
-        this.$store.dispatch('application/save', this.formData);
+        this.syncFormData();
         this.resetEditing();
       }
     },
-    handleNewRowSave() {
-      this.validate();
-      if (this.isValid()) {
-        if (this.newExperience.type === 'appointment') {
-          if (!Array.isArray(this.formData.experience)) {
-            this.formData.experience = [];
-          }
-          this.formData.experience.push(this.newExperience);
-        } else if (this.newExperience.type === 'gap') {
-          if (!Array.isArray(this.formData.employmentGaps)) {
-            this.formData.employmentGaps = [];
-          }
-          this.formData.employmentGaps.push(this.newExperience);
-        }
-        this.$store.dispatch('application/save', this.formData);
-        this.handleNewRowRemove();
-      }
-    },
-    handleRowRemove(type, index) {
-      if (type === 'appointment') {
-        this.formData.experience.splice(index, 1);
-      } else if (type === 'gap') {
-        this.formData.employmentGaps.splice(index, 1);
-      }
-      this.$store.dispatch('application/save', this.formData);
+    handleRowRemove(index) {
+      this.experiences.splice(index, 1);
+      this.syncFormData();
       this.resetEditing();
     },
-    handleNewRowRemove() {
-      if (this.hasExperience) {
-        this.newExperience = null;
-      } else {
-        this.newExperience = {};
-      }
-    },
     resetEditing() {
-      this.editingType = null;
       this.editingIndex = null;
     },
   },
