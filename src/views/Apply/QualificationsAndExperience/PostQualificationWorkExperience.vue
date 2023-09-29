@@ -116,13 +116,18 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
+    const experiences = this.sortExperiences(this.getExperiences(formData));
+    let editingIndex = null;
+    if (experiences.length === 0) {
+      experiences.push({});
+      editingIndex = 0;
+    }
 
     return {
       formId: 'postQualificationWorkExperience',
       formData: formData,
-      experiences: this.sortExperiences(this.getExperiences(formData)),
-      newExperience: null,
-      editingIndex: null,
+      experiences,
+      editingIndex,
     };
   },
   computed: {
@@ -140,16 +145,6 @@ export default {
         });
       }
       return total;
-    },
-  },
-  watch: {
-    hasExperience: {
-      immediate: true,
-      handler() {
-        if (!this.hasExperience) {
-          this.newExperience = {};
-        }
-      },
     },
   },
   methods: {
@@ -210,6 +205,10 @@ export default {
       this.experiences.splice(index, 1);
       this.syncFormData();
       this.resetEditing();
+      if (this.experiences.length === 0) {
+        this.experiences.push({});
+        this.editingIndex = 0;
+      }
     },
     resetEditing() {
       this.editingIndex = null;

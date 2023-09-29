@@ -25,7 +25,7 @@
         </span>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="isGap">
       <h2 class="govuk-heading-m">
         Gap in Employment
       </h2>
@@ -50,10 +50,11 @@
   </div>
   <div v-else>
     <RadioGroup
-      :id="`experience-${type}-${index}`"
+      :id="`experience-${index}`"
       v-model="row.type"
       label="Is this experience an appointment or a gap in employment?"
       required
+      :class="{'govuk-!-margin-bottom-0': !row.type}"
     >
       <RadioItem
         value="appointment"
@@ -167,6 +168,9 @@ export default {
   computed: {
     isAppointment() {
       return this.row?.type === 'appointment';
+    },
+    isGap() {
+      return this.row?.type === 'gap';
     },
     experienceJobTitle() {
       return `experience_${this.type}_job_title_${this.index}`;
