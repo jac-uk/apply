@@ -98,12 +98,9 @@
           />
         </TaskGroup>
 
-        <TaskGroup
-          v-if="isLegal"
-          :title="experienceTitle"
-        >
+        <TaskGroup :title="experienceTitle">
           <Task
-            v-if="applicationParts.relevantQualifications"
+            v-if="applicationParts.relevantQualifications && isLegal"
             id="relevant-qualifications"
             title="Relevant qualifications"
             :done="applicationProgress.relevantQualifications"
