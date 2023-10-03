@@ -30,6 +30,7 @@
           id="judicial-functions-type"
           v-model="localJudicialFunctions.type"
           label="Is this a judicial or quasi-judicial post?"
+          hint="Quasi-judicial refers to a role similar to that of a judge, such as the chair of an equivalent body for which a legal qualification is required. An equivalent body is one of a quasi-judicial nature for which the powers and procedures should resemble those of a court of law and involve highly complex matters, requiring its members objectively to determine the facts and draw conclusions to reach a reasoned decision. Such decisions could result in the imposition of a penalty, and they are likely to affect the legal rights, duties or privileges of specific parties. Examples could include, but are not restricted to, disciplinary tribunals and conduct hearings for professional standards bodies, the parole board, arbitration and chairs of statutory inquiries."
           required
         >
           <option
