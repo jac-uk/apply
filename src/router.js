@@ -133,6 +133,7 @@ const router = new Router({
           name: 'vacancy-details',
           meta: {
             title: 'Vacancy details',
+            isMultilanguage: true,
           },
         },
         {
