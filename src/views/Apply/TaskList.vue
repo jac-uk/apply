@@ -199,7 +199,7 @@
           />
           <Task
             v-if="applicationParts.selfAssessmentCompetencies"
-            id="self-assessment-competencies"
+            :id="applicationProgress.selfAssessmentCompetencies ? 'data-confirmation' : 'self-assessment-competencies'"
             title="Self assessment with competencies"
             :done="applicationProgress.selfAssessmentCompetencies"
             :locked="!currentApplicationParts.selfAssessmentCompetencies"

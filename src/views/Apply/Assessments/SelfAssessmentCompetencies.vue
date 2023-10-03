@@ -2,8 +2,8 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="triggerExtraction"
     >
+      <!-- @submit.prevent="triggerExtraction" -->
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
@@ -103,14 +103,14 @@
           label="Upload finished self assessment"
           required
         />
-        <Button
+        <ActionButton
           :disabled="!canSave(formId)"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
           type="primary"
+          @click.prevent="triggerExtraction"
         >
-          <!-- @click="triggerExtraction" -->
           Save and continue
-        </Button>
+        </ActionButton>
       </div>
     </form>
   </div>
@@ -129,7 +129,7 @@ import FileUpload from '@/components/Form/FileUpload.vue';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML.vue';
 import { functions } from '@/firebase';
-// import ActionButton from '@/components/Form/ActionButton';
+import ActionButton from '@/components/Form/ActionButton';
 import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
@@ -143,7 +143,7 @@ export default {
     TextareaInput,
     FileUpload,
     CustomHTML,
-    // ActionButton,
+    ActionButton,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -194,13 +194,15 @@ export default {
   },
   methods: {
     async triggerExtraction() {
-      const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
-
-      // put result the application store
-      await this.$store.dispatch('application/save', { uploadedSelfAssessmentContent: response.data.result });
-
-      this.$router.push({ name: 'data-confirmation' });
-      return true;
+      try {
+        const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
+        await this.$store.dispatch('application/save', { uploadedSelfAssessmentContent: response.data.result });
+        this.$router.push({ name: 'data-confirmation' });
+        return true;
+      } catch (error) {
+        console.error('Error occurred during extraction:', error);
+        return false; // Return false to indicate an error
+      }
     },
     logEventAfterSave() {
       logEvent('info', 'Self-assessment & competencies uploaded', {
