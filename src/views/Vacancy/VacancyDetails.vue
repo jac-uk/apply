@@ -47,7 +47,6 @@
     </div>
 
     <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-9">
-
       <div ref="overview">
         <h2 class="govuk-heading-l">
           Overview of the role

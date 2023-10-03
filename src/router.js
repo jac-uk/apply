@@ -805,7 +805,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !isSignedIn) {
     return next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
-    next();
+    return next();
   }
 });
 
