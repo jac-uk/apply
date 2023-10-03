@@ -133,6 +133,7 @@ const router = new Router({
           name: 'vacancy-details',
           meta: {
             title: 'Vacancy details',
+            isMultilanguage: true,
           },
         },
         {
@@ -804,7 +805,7 @@ router.beforeEach((to, from, next) => {
   if (requiresAuth && !isSignedIn) {
     return next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
-    return next();
+    next();
   }
 });
 
