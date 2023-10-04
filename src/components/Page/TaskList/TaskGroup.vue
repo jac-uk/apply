@@ -36,7 +36,7 @@ export default {
     checkForSlotContent() {
       const checkForContent = (hasContent, node) => {
         // for some reason the property tag and text are not available in the node object after using vite
-        return hasContent || node.type || node.tag || (node.text && node.text.trim());
+        return hasContent || !!(node.type && node.type.name) || !!node.tag || !!(node.text && node.text.trim());
       };
       return this.$slots.default() && this.$slots.default().reduce(checkForContent, false);
     },
