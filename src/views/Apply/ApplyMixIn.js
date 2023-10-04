@@ -146,6 +146,9 @@ export default {
       this.validate();
       if (this.isValid() && this.formId) {
         this.formData.progress[this.formId] = true;
+        if (this.formId === 'postQualificationWorkExperience') {
+          this.formData.progress['employmentGaps'] = true;
+        }
         await this.$store.dispatch('application/save', this.formData);
         this.logEventAfterSave();
         this.$router.push({ name: 'task-list' });
