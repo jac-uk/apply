@@ -105,9 +105,9 @@
         />
         <ActionButton
           :disabled="!canSave(formId)"
-          class="govuk-button info-btn--statement-of-suitability--save-and-continue"
-          type="primary"
-          @click.prevent="triggerExtraction"
+          class="info-btn--statement-of-suitability--save-and-continue"
+          button-type="primary"
+          :action="triggerExtraction"
         >
           Save and continue
         </ActionButton>
@@ -196,7 +196,10 @@ export default {
     async triggerExtraction() {
       try {
         const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
-        await this.$store.dispatch('application/save', { uploadedSelfAssessmentContent: response.data.result });
+        await this.$store.dispatch('application/save', { 
+          uploadedSelfAssessmentContent: response.data.result,
+          uploadedSelfAssessment: this.formData.uploadedSelfAssessment,
+        });
         this.$router.push({ name: 'data-confirmation' });
         return true;
       } catch (error) {

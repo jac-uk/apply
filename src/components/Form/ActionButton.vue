@@ -2,6 +2,7 @@
   <button
     v-bind="$attrs"
     class="govuk-button jac-actionbutton"
+    type="button"
     :class="computedClasses"
     :disabled="isLoading || disabled"
     @click="handleClick"
@@ -38,7 +39,7 @@ export default {
       type: Number,
       default: 2000,
     },
-    type: {
+    buttonType: {
       type: String,
       default: 'secondary',
     },
@@ -62,7 +63,7 @@ export default {
         'jac-actionbutton--warning': this.hasError,
         'jac-actionbutton--success': this.isSuccess,
         'jac-actionbutton--loading': this.isLoading,
-        'govuk-button--secondary': this.type === 'secondary',
+        'govuk-button--secondary': this.buttonType === 'secondary',
       };
     },
   },
