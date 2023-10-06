@@ -652,7 +652,7 @@
                 v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
-                :to="{name: 'self-assessment-competencies'}"
+                :to="{name: 'data-confirmation'}"
               >
                 Change
               </RouterLink>
