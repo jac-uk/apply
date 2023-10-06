@@ -12,6 +12,14 @@
 
         <ErrorSummary :errors="errors" />
 
+        <RouterLink
+          v-if="formData.progress.selfAssessmentCompetencies"
+          class="govuk-link float-right"
+          :to="{ name: 'self-assessment-competencies' }"
+        >
+          Re-upload document
+        </RouterLink>
+
         <TextareaInput
           id="suitability-statement-text"
           v-model="formData.uploadedSelfAssessmentContent"

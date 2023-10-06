@@ -676,6 +676,19 @@
                   <span v-else>Not yet received</span>
                 </dd>
               </div>
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Self assessment content
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <div v-if="application.uploadedSelfAssessment">
+                    {{ application.uploadedSelfAssessmentContent }}
+                  </div>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
             </dl>
           </div>
 

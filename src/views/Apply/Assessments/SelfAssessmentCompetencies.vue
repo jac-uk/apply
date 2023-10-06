@@ -196,13 +196,14 @@ export default {
     async triggerExtraction() {
       try {
         const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
-        await this.$store.dispatch('application/save', { 
+        await this.$store.dispatch('application/save', {
           uploadedSelfAssessmentContent: response.data.result,
           uploadedSelfAssessment: this.formData.uploadedSelfAssessment,
         });
         this.$router.push({ name: 'data-confirmation' });
         return true;
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error occurred during extraction:', error);
         return false; // Return false to indicate an error
       }
