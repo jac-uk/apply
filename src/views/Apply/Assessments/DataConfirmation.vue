@@ -22,17 +22,14 @@
 
         <TextareaInput
           id="suitability-statement-text"
+          ref="statementInputRef"
           v-model="formData.uploadedSelfAssessmentContent"
-          todo:
-          change
-          var
-          name
           label="Statement content"
           :word-limit="wordLimit"
         />
 
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) || overWordLimit"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
@@ -75,6 +72,9 @@ export default {
   computed: {
     wordLimit() {
       return this.vacancy.selfAssessmentWordLimit;
+    },
+    overWordLimit() {
+      return this.formData.uploadedSelfAssessmentContent.length > this.wordLimit;
     },
   },
   methods: {
