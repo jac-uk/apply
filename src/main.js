@@ -46,6 +46,8 @@ auth.onAuthStateChanged( (user) => {
   const urlParams = new URLSearchParams(window.location.search);
   const nextPage = urlParams.get('nextPage');
   if (nextPage) router.push(nextPage);
+  else router.push('/vacancies');
+  
   if (!vueInstance) {
     vueInstance = new Vue({
       el: '#app',
