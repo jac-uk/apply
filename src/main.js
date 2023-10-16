@@ -43,9 +43,13 @@ Object.keys(filters)
 let vueInstance = false;
 auth.onAuthStateChanged( (user) => {
   store.dispatch('auth/setCurrentUser', user);
-  const urlParams = new URLSearchParams(window.location.search);
-  const nextPage = urlParams.get('nextPage');
-  if (nextPage) router.push(nextPage);
+  if (store.getters['auth/isSignedIn']) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const nextPage = urlParams.get('nextPage');
+    if (nextPage) router.push(nextPage);  
+    else router.push('/vacancies');
+  }
+  
   if (!vueInstance) {
     vueInstance = new Vue({
       el: '#app',
