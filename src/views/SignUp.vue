@@ -187,7 +187,7 @@ export default {
         fullName: this.fullName,
         email: this.formData.email,
         dateOfBirth: this.formData.dateOfBirth,
-        nationalInsuranceNumber: this.formData.nationalInsuranceNumber,
+        nationalInsuranceNumber: this.formData.nationalInsuranceNumber || null, // prevent undefined being saved
       };
       await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
       await this.$store.dispatch('candidate/create', {
