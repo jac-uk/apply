@@ -80,7 +80,7 @@ export default {
     },
     modelValue: {
       default: '',
-      type: String,
+      type: [String, Number],
     },
     type: {
       default: 'text',
@@ -94,7 +94,9 @@ export default {
         return this.modelValue;
       },
       set(val) { 
-        val = val.trim();
+        if (typeof val === 'string') {
+          val = val.trim();
+        }
         this.$emit('update:modelValue', val);
       },
     },
