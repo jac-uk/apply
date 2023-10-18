@@ -80,7 +80,7 @@ export default {
     },
     modelValue: {
       default: '',
-      type: String,
+      type: [String, Number],
     },
     type: {
       default: 'text',
@@ -94,8 +94,17 @@ export default {
         return this.modelValue;
       },
       set(val) { 
-        val = val.trim();
-        this.$emit('update:modelValue', val);
+        if (typeof val === 'string') {
+          val = val.trim();
+        }
+        
+        switch (this.type) {
+        case 'number':
+          this.$emit('update:modelValue', val ? parseFloat(val) : '');
+          break;
+        default:
+          this.$emit('update:modelValue', val);
+        }
       },
     },
     autocomplete() {
