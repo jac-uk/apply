@@ -97,7 +97,14 @@ export default {
         if (typeof val === 'string') {
           val = val.trim();
         }
-        this.$emit('update:modelValue', val);
+        
+        switch (this.type) {
+        case 'number':
+          this.$emit('update:modelValue', val ? parseFloat(val) : '');
+          break;
+        default:
+          this.$emit('update:modelValue', val);
+        }
       },
     },
     autocomplete() {
