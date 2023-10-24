@@ -836,7 +836,7 @@
                     {{ commissionerConflict.hasRelationship ? 'Yes' : 'No' }}
                   </div>
                   <div v-if="commissionerConflict.hasRelationship">
-                    {{ commissionerConflict.detail }}
+                    {{ commissionerConflict.details }}
                   </div>
                 </dd>
               </div>

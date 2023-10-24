@@ -33,7 +33,7 @@
           >
             <TextareaInput
               id="relationship"
-              v-model="commissioner.detail"
+              v-model="commissioner.details"
               label="Please provide details of your relationship."
               class="govuk-!-width-two-thirds"
             />
@@ -91,7 +91,7 @@ export default {
         commissionerConflicts: commissioners.map((commissioner) => ({
           name: commissioner.name,
           hasRelationship: null,
-          detail: '',
+          details: '',
         })),
       },
       progress: {},
@@ -113,7 +113,7 @@ export default {
     isFormValid() {
       const commissionerConflicts = this.formData.additionalInfo.commissionerConflicts;
       const isValid = commissionerConflicts.every((commissioner) => {
-        if (commissioner.hasRelationship && !commissioner.detail) {
+        if (commissioner.hasRelationship && !commissioner.details) {
           return false;
         }
         return commissioner.hasRelationship !== null;
@@ -127,7 +127,7 @@ export default {
       e.preventDefault();
       this.formData.additionalInfo.commissionerConflicts.forEach((commissioner) => {
         commissioner.hasRelationship = false;
-        commissioner.detail = '';
+        commissioner.details = '';
       });
     },
     async save() {
