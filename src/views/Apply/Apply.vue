@@ -110,6 +110,9 @@ export default {
       updateLangToTextNode(document.querySelector('#main-content'), this.language);
     }, 100);
   },
+  unmounted() {
+    this.$store.dispatch('vacancy/unbind');
+  },
   methods: {
     redirectToErrorPage() {
       this.$router.replace({ name: 'not-found' });

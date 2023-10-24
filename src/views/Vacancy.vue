@@ -43,6 +43,9 @@ export default {
       throw e;
     }
   },
+  unmounted() {
+    this.$store.dispatch('vacancy/unbind');
+  },
   methods: {
     redirectToErrorPage() {
       this.$router.replace({ name: 'not-found' });
