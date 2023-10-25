@@ -150,6 +150,9 @@ export default {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
   },
+  unmounted() {
+    this.$store.dispatch('applications/unbind');
+  },
   methods: {
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {
