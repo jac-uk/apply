@@ -109,7 +109,7 @@
           <Task
             v-if="applicationParts.postQualificationWorkExperience || applicationParts.employmentGaps"
             id="post-qualification-work-experience"
-            title="Previous judicial experience"
+            title="Post qualification experience"
             :done="applicationProgress.postQualificationWorkExperience"
             :locked="!currentApplicationParts.postQualificationWorkExperience"
           />

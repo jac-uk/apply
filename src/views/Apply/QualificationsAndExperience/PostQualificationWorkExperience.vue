@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Post qualification career history and experience
+          Career history - post qualification experience
         </h1>
 
         <p class="govuk-body-l">
@@ -28,7 +28,7 @@
           <div
             v-if="experience.type"
             class="govuk-!-margin-top-6"
-            style="display: flex; justify-content: flex-end; gap: 20px;"
+            style="display: flex; justify-content: flex-start; gap: 20px;"
           >
             <button
               v-if="editingIndex === index"
@@ -69,7 +69,7 @@
           </button>
 
           <h2 class="govuk-heading-m govuk-!-margin-top-8">
-            {{ `Your total sitting days of judicial roles are ${totalJudicialDays} days.` }}
+            {{ `You have indicated that you have ${totalJudicialDays} sitting days in total.` }}
           </h2>
 
           <TextareaInput

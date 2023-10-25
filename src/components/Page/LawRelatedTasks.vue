@@ -36,7 +36,7 @@
           <option
             v-for="option in ['judicial-post', 'quasi-judicial-post']"
             :key="option"
-            :value="$filters.lookup(option)"
+            :value="option"
           >
             {{ $filters.lookup(option) }}
           </option>
@@ -46,7 +46,7 @@
           id="judicial-functions-duration"
           v-model="localJudicialFunctions.duration"
           type="number"
-          label="How many days have you sat in this role/post (excluding training and/or sick days)?"
+          label="How many sitting days have you accumulated in this post?"
           required
         />
 
@@ -66,6 +66,7 @@
         </Select>
 
         <TextareaInput
+          v-if="localJudicialFunctions.type === 'quasi-judicial-post'"
           id="judicial-functions-details"
           v-model="localJudicialFunctions.details"
           label="Please outline the powers, procedures and main responsibilities"
@@ -202,6 +203,9 @@ export default {
   watch: {
     localJudicialFunctions: {
       handler: function(after) {
+        if (after.type === 'judicial-post') {
+          after.details = ''; // reset details when judicial is selected
+        }
         this.$emit('update:judicialFunctions', after);
       },
       deep: true,

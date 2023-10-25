@@ -52,7 +52,7 @@
     <RadioGroup
       :id="`experience-${index}`"
       v-model="row.type"
-      label="Is this experience an appointment or a gap in employment?"
+      label="Is this an appointment or a gap in employment?"
       required
       :class="{'govuk-!-margin-bottom-0': !row.type}"
     >
@@ -99,11 +99,14 @@
         type="month"
         required
       />
+      <p class="govuk-body">
+        or
+      </p>
       <Checkbox
         :id="experienceIsOngoing"
         v-model="row.isOngoing"
       >
-        Tick here if this appointment is still ongoing
+        Tick if still ongoing
       </Checkbox>
 
       <LawRelatedTasks
