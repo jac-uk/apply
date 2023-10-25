@@ -212,6 +212,9 @@ export default {
       this.openModal();
     }
   },
+  unmounted() {
+    this.$store.dispatch('candidate/unbind');
+  },
   methods: {
     openModal(){
       this.$refs.modalRef.openModal();
