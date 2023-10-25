@@ -86,9 +86,9 @@ export default {
       default: 'text',
       type: String,
     },
-    warnCPSEmail: {
-      default: false,
-      type: Boolean,
+    warnCPSEmailMsg: {
+      required: false,
+      type: String,
     },
   },
   emits: ['update:modelValue'],
@@ -132,8 +132,8 @@ export default {
   },
   watch: {
     text() {
-      if (this.warnCPSEmail && this.isCPSEmail()) {
-        this.setWarning('Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application.');
+      if (this.warnCPSEmailMsg && this.isCPSEmail()) {
+        this.setWarning(this.warnCPSEmailMsg);
       }
     },
   },

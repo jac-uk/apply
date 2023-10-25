@@ -65,7 +65,7 @@
             v-model="formData.email"
             label="Email address"
             type="email"
-            :warnCPSEmail="true"
+            :warnCPSEmailMsg="signinEmailWarning"
             :pattern="{
               match: /^((?!@judicialappointments.gov.uk\s*$).)*$/,
               message: 'You cannot sign up as a candidate using a @judicialappointments.gov.uk email address',
@@ -143,6 +143,9 @@ export default {
       formData: {},
       fullName: null,
     };
+  },
+  created() {
+    this.signinEmailWarning = 'Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application.';
   },
   computed: {
     exerciseId () {

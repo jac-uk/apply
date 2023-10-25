@@ -119,7 +119,7 @@
           v-model="formData.firstAssessorEmail"
           label="Email"
           type="email"
-          :warnCPSEmail="true"
+          :warnCPSEmailMsg="assessorEmailWarning"
           required
         />
         <TextField
@@ -166,7 +166,7 @@
           v-model="formData.secondAssessorEmail"
           label="Email"
           type="email"
-          :warnCPSEmail="true"
+          :warnCPSEmail="assessorEmailWarning"
           required
         />
         <TextField
@@ -230,6 +230,9 @@ export default {
       formId: 'assessorsDetails',
       formData: formData,
     };
+  },
+  created() {
+    this.assessorEmailWarning = 'Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors.';
   },
 };
 </script>
