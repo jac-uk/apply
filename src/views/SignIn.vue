@@ -37,12 +37,14 @@
           </p> -->
 
           <ErrorSummary :errors="errors" />
+          <WarningSummary :warningObject="warningObject" />
 
           <TextField
             id="email"
             v-model="formData.email"
             label="Email address"
             type="email"
+            :warnCPSEmail="true"
             required
           />
 
@@ -78,7 +80,9 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import WarningSummary from '@/components/Form/WarningSummary.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField.vue';
 import { auth } from '@/firebase';
@@ -90,10 +94,12 @@ export default {
   name: 'SignIn',
   components: {
     ErrorSummary,
+    WarningSummary,
     TextField,
     ChangeEmailMessage,
     Password,
   },
+  extends: Form,
   data () {
     return {
       formData: {},

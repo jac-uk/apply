@@ -34,6 +34,7 @@
           </p>
 
           <ErrorSummary :errors="errors" />
+          <WarningSummary :warningObject="warningObject" />
 
           <TextField
             id="title"
@@ -64,6 +65,7 @@
             v-model="formData.email"
             label="Email address"
             type="email"
+            :warnCPSEmail="true"
             :pattern="{
               match: /^((?!@judicialappointments.gov.uk\s*$).)*$/,
               message: 'You cannot sign up as a candidate using a @judicialappointments.gov.uk email address',
@@ -118,6 +120,7 @@ import firebase from '@firebase/app';
 import { auth } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import WarningSummary from '@/components/Form/WarningSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
 import Password from '@/components/Form/Password.vue';
 import DateInput from '@/components/Form/DateInput.vue';
@@ -127,11 +130,12 @@ export default {
   name: 'SignUp',
   components: {
     ErrorSummary,
+    WarningSummary,
     TextField,
     Password,
     DateInput,
     ChangeEmailMessage,
-  },
+},
   extends: Form,
   data () {
     return {

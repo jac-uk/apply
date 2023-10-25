@@ -11,6 +11,7 @@ export default {
     return {
       errorObject: {},
       errors: [],
+      warningObject: null,
     };
   },
   computed: {
@@ -20,6 +21,7 @@ export default {
   },
   mounted: function () {
     this.emitter.on('handle-error', this.handleError);
+    this.emitter.on('handle-warning', this.handleWarning);
     // Disable HTML5 validation
     if (this.$refs.formRef) {
       this.$refs.formRef.setAttribute('novalidate', true);
@@ -27,6 +29,7 @@ export default {
   },
   beforeUnmount: function() {
     this.emitter.off('handle-error', this.handleError);
+    this.emitter.off('handle-warning', this.handleWarning);
   },
   methods: {
     async validate() {
@@ -46,6 +49,13 @@ export default {
           updateLangToTextNode(document.querySelector('#main-content'), this.language);
         }, 0);
       }
+    },
+    handleWarning(payload) {
+      this.warningObject = {id: payload.id, message: payload.message};
+      this.scrollToErrorSummary();
+      setTimeout(() => {
+        updateLangToTextNode(document.querySelector('#main-content'), this.language);
+      }, 0);
     },
     scrollToErrorSummary(){
       //This is just scrolling to top of page
