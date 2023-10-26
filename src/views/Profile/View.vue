@@ -35,14 +35,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -137,7 +129,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <span v-if="personalDetails.dateOfBirth">
-                    {{ personalDetails.dateOfBirth | formatDate }}
+                    {{ $filters.formatDate(personalDetails.dateOfBirth) }}
                   </span>
                 </dd>
               </div>
@@ -196,7 +188,7 @@
 
 <script>
 import { auth } from '@/firebase';
-import Modal from '@/components/Page/Modal';
+import Modal from '@/components/Page/Modal.vue';
 
 export default {
   name: 'Profile',
@@ -219,6 +211,9 @@ export default {
     if (this.personalDetails.email && this.personalDetails.email !== this.$store.state.auth.currentUser.email) {
       this.openModal();
     }
+  },
+  unmounted() {
+    this.$store.dispatch('candidate/unbind');
   },
   methods: {
     openModal(){

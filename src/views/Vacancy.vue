@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import LoadingMessage from '@/components/LoadingMessage';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 
 export default {
   name: 'Vacancy',
@@ -42,6 +42,9 @@ export default {
       this.loadFailed = true;
       throw e;
     }
+  },
+  unmounted() {
+    this.$store.dispatch('vacancy/unbind');
   },
   methods: {
     redirectToErrorPage() {

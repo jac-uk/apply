@@ -41,6 +41,11 @@
 <script>
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'RankedChoice',
   props: {
     id: {
@@ -51,13 +56,14 @@ export default {
       type: Array,
       required: true,
     },
-    value: {
+    modelValue: {
       type: Array,
       default: function () { 
         return new Array(); 
       },
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       selected: [],
@@ -65,10 +71,10 @@ export default {
     };
   },
   mounted() {
-    if (this.value) {
-      this.selected = this.value;
-      for (let i = 0, len = this.value.length; i < len; ++i) {
-        this.ranking[this.value[i]] = i + 1;
+    if (this.modelValue) {
+      this.selected = this.modelValue;
+      for (let i = 0, len = this.modelValue.length; i < len; ++i) {
+        this.ranking[this.modelValue[i]] = i + 1;
       }
     }
   },
@@ -93,7 +99,7 @@ export default {
       }).map((item) => {
         return item.answer;
       });
-      this.$emit('input', this.selected);
+      this.$emit('update:modelValue', this.selected);
     },
   },  
 };

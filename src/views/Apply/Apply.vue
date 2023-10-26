@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import LoadingMessage from '@/components/LoadingMessage';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
 
@@ -109,6 +109,9 @@ export default {
     setTimeout(() => {
       updateLangToTextNode(document.querySelector('#main-content'), this.language);
     }, 100);
+  },
+  unmounted() {
+    this.$store.dispatch('vacancy/unbind');
   },
   methods: {
     redirectToErrorPage() {

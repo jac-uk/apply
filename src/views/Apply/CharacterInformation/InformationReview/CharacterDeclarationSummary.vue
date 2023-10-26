@@ -6,7 +6,7 @@
           {{ declaration1 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ characterInformation.declaration1 | toYesNo }}
+          {{ $filters.toYesNo(characterInformation.declaration1) }}
         </dd>
       </div>
     </dl>
@@ -17,7 +17,7 @@
           {{ declaration2 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ characterInformation.declaration2 | toYesNo }}
+          {{ $filters.toYesNo(characterInformation.declaration2) }}
         </dd>
       </div>
     </dl>
@@ -28,7 +28,7 @@
           {{ declaration3 }}
         </dt>
         <dd class="govuk-summary-list__value">
-          {{ characterInformation.declaration3 | toYesNo }}
+          {{ $filters.toYesNo(characterInformation.declaration3) }}
         </dd>
       </div>
     </dl>

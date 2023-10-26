@@ -19,8 +19,8 @@
 </template>
 
 <script>
-import DateMonthYearInput from '@/components/Form/DateMonthYearInput';
-import TextareaInput from '@/components/Form/TextareaInput';
+import DateMonthYearInput from '@/components/Form/DateMonthYearInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 
 export default {
   name: 'RequestedToResignFromPositionDetails',

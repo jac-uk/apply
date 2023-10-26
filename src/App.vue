@@ -44,14 +44,14 @@
               class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.ENGLISH)"
             >
-              {{ LANGUAGES.ENGLISH | lookup }}
+              {{ $filters.lookup(LANGUAGES.ENGLISH) }}
             </button>
             <button
               v-else-if="language === LANGUAGES.ENGLISH"
               class="govuk-button govuk-button--success"
               @click="setLanguage(LANGUAGES.WELSH)"
             >
-              {{ LANGUAGES.WELSH | lookup }}
+              {{ $filters.lookup(LANGUAGES.WELSH) }}
             </button>
           </div>
 
@@ -68,12 +68,12 @@
 </template>
 
 <script>
-import Header from '@/components/Page/Header';
-import Footer from '@/components/Page/Footer';
-import Banner from '@/components/Page/Banner';
-import LoadingMessage from '@/components/LoadingMessage';
+import Header from '@/components/Page/Header.vue';
+import Footer from '@/components/Page/Footer.vue';
+import Banner from '@/components/Page/Banner.vue';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 import Breadcrumb from '@/components/Breadcrumb.vue';
-import BackToTop from '@/components/BackToTop';
+import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
 
@@ -166,7 +166,7 @@ export default {
     if (this.$route.meta.isMultilanguage) {
       setTimeout(() => {
         updateLangToTextNode(document.querySelector('#main-content'), this.language);
-      }, 0);
+      }, 10);
     }
   },
   methods: {

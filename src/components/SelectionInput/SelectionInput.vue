@@ -39,11 +39,16 @@
 </template>
 
 <script>
-import SingleChoice from '@/components/SelectionInput/SingleChoice';
-import MultipleChoice from '@/components/SelectionInput/MultipleChoice';
-import RankedChoice from '@/components/SelectionInput/RankedChoice';
+import SingleChoice from '@/components/SelectionInput/SingleChoice.vue';
+import MultipleChoice from '@/components/SelectionInput/MultipleChoice.vue';
+import RankedChoice from '@/components/SelectionInput/RankedChoice.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'SelectionInput',
   components: {
     SingleChoice,
@@ -67,19 +72,20 @@ export default {
       type: Array,
       required: true,
     },
-    value: {
+    modelValue: {
       type: [String, Array],
       required: false,
       default: null,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     selected: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     hint() {

@@ -35,14 +35,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -96,10 +88,10 @@
 
 <script>
 import { auth } from '@/firebase';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import Password from '@/components/Form/Password';
-import BackLink from '@/components/BackLink';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import Password from '@/components/Form/Password.vue';
+import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'ProfileEdit',

@@ -32,15 +32,15 @@
 
     <LawRelatedTasks
       :id="`tasks_${index}`"
-      :tasks.sync="row.tasks"
-      :other-tasks.sync="row.otherTasks"
+      v-model:tasks="row.tasks"
+      v-model:other-tasks="row.otherTasks"
       :show-judicial-functions="true"
       required
     />
 
     <TaskDetails
       :id="`tasks_${index}`"
-      :task-details.sync="row.taskDetails"
+      v-model:task-details="row.taskDetails"
     />
 
     <slot name="removeButton" />
@@ -48,10 +48,10 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
-import TextField from '@/components/Form/TextField';
-import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
-import TaskDetails from '@/components/Page/TaskDetails';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextField from '@/components/Form/TextField.vue';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
+import TaskDetails from '@/components/Page/TaskDetails.vue';
 
 export default {
   name: 'Experience',

@@ -116,11 +116,11 @@
 <script>
 import firebase from '@firebase/app';
 import { auth } from '@/firebase';
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import TextField from '@/components/Form/TextField';
-import Password from '@/components/Form/Password';
-import DateInput from '@/components/Form/DateInput';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import TextField from '@/components/Form/TextField.vue';
+import Password from '@/components/Form/Password.vue';
+import DateInput from '@/components/Form/DateInput.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 
 export default {

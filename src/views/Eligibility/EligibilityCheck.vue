@@ -41,9 +41,9 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
+import Form from '@/components/Form/Form.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
 import booleanOrNull from '@/helpers/booleanOrNull';
 
 export default {
@@ -103,7 +103,7 @@ export default {
         if (this.vacancy.qualifications[i] === 'other') {
           qualifications += this.vacancy.otherQualifications;
         } else {
-          qualifications += this.$options.filters.lookup(this.vacancy.qualifications[i]);
+          qualifications += this.$filters.lookup(this.vacancy.qualifications[i]);
         }
       }
       return qualifications;

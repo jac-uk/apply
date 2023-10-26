@@ -37,13 +37,13 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import ErrorSummary from '@/components/Form/ErrorSummary';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
-import RepeatableFields from '@/components/RepeatableFields';
-import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps';
-import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploymentGaps';
-import BackLink from '@/components/BackLink';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import EmploymentGaps from '@/components/RepeatableFields/EmploymentGaps.vue';
+import NonLegalEmploymentGaps from '@/components/RepeatableFields/NonLegalEmploymentGaps.vue';
+import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'EmploymentGaps',

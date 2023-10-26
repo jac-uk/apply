@@ -22,8 +22,8 @@
     />
     <LawRelatedTasks
       :id="`tasks_${index}`"
-      :tasks.sync="row.tasks"
-      :other-tasks.sync="row.otherTasks"
+      v-model:tasks="row.tasks"
+      v-model:other-tasks="row.otherTasks"
     />
 
     <slot name="removeButton" />
@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import LawRelatedTasks from '@/components/Page/LawRelatedTasks';
-import DateInput from '@/components/Form/DateInput';
-import TextareaInput from '@/components/Form/TextareaInput';
+import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 
 export default {
   name: 'EmploymentGaps',

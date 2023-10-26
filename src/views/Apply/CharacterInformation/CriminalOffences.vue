@@ -80,15 +80,15 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import RepeatableFields from '@/components/RepeatableFields';
-import CriminalCautionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalCautionDetails';
-import CriminalConvictionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalConvictionDetails';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import BackLink from '@/components/BackLink';
-import InfoIcon from '@/components/ModalViews/InfoIcon';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import CriminalCautionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalCautionDetails.vue';
+import CriminalConvictionDetails from '@/components/RepeatableFields/CharacterInformation/CriminalConvictionDetails.vue';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
+import BackLink from '@/components/BackLink.vue';
+import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
 import { CRIMINAL_OFFENCES_URL } from './character-information-constants';
 
 export default {

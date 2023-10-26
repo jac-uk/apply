@@ -38,14 +38,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -107,7 +99,7 @@
                   v-for="(option, i) in typeOfExerciseOptions"
                   :key="i"
                   :value="option"
-                  :label="option.toString() | lookup"
+                  :label="$filters.lookup(option.toString())"
                 />
               </CheckboxGroup>
             </div>
@@ -133,8 +125,8 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
             <TabsList
+              v-model:active-tab="activeTab"
               :tabs="tabs"
-              :active-tab.sync="activeTab"
             >
               <div
                 class="govuk-tabs__panel"
@@ -215,7 +207,7 @@
                         <span
                           class="govuk-!-font-weight-bold tag-text"
                         >
-                          TYPE: {{ vacancy.typeOfExercise | lookup }}
+                          TYPE: {{ $filters.lookup(vacancy.typeOfExercise) }}
                         </span>
                       </div>
 
@@ -231,13 +223,13 @@
                             v-if="vacancy.salaryGrouping"
                             class="govuk-!-font-weight-bold tag-text"
                           >
-                            {{ vacancy.salaryGrouping | lookup }}
+                            {{ $filters.lookup(vacancy.salaryGrouping) }}
                           </span>
                           <span
                             v-if="vacancy.salary"
                             class="govuk-!-font-weight-bold tag-text"
                           >
-                            {{ vacancy.salary | formatCurrency }}
+                            {{ $filters.formatCurrency(vacancy.salary) }}
                           </span>
                         </template>
                         <template v-else-if="vacancy.appointmentType == 'fee-paid'">
@@ -248,7 +240,7 @@
                             v-if="vacancy.feePaidFee"
                             class="govuk-!-font-weight-bold tag-text"
                           >
-                            {{ vacancy.feePaidFee | formatCurrency }}
+                            {{ $filters.formatCurrency(vacancy.feePaidFee) }}
                           </span>
                         </template>
                       </div>
@@ -278,13 +270,13 @@
                           v-if="vacancy.applicationOpenDate"
                           class="govuk-body"
                         >
-                          {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
+                          {{ $filters.formatDate(vacancy.applicationOpenDate, 'datetime-without-second') }}
                         </span>
                         <span
                           v-else
                           class="govuk-body"
                         >
-                          {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                          {{ $filters.formatEstimatedDate(vacancy.estimatedLaunchDate) }}
                         </span>
                       </p>
                       <p
@@ -295,7 +287,7 @@
                           Closing Date:
                         </span>
                         <span class="govuk-body">
-                          {{ vacancy.applicationCloseDate | formatDate('datetime-without-second') }}
+                          {{ $filters.formatDate(vacancy.applicationCloseDate, 'datetime-without-second') }}
                         </span>
                       </p>
                     </div>
@@ -353,13 +345,13 @@
                             v-if="vacancy.applicationOpenDate"
                             class="govuk-body"
                           >
-                            {{ vacancy.applicationOpenDate | formatDate('datetime') }}
+                            {{ $filters.formatDate(vacancy.applicationOpenDate, 'datetime') }}
                           </span>
                           <span
                             v-else
                             class="govuk-body"
                           >
-                            {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+                            {{ $filters.formatEstimatedDate(vacancy.estimatedLaunchDate) }}
                           </span>
                         </p>
                         <p
@@ -370,7 +362,7 @@
                             Dyddiad cau:
                           </span>
                           <span class="govuk-body">
-                            {{ vacancy.applicationCloseDate | formatDate('datetime') }}
+                            {{ $filters.formatDate(vacancy.applicationCloseDate, 'datetime') }}
                           </span>
                         </p>
                         <p
@@ -427,13 +419,13 @@
 </template>
 
 <script>
-import Search from '@/components/Search';
-import SidePanel from '@/components/SidePanel';
-import Badge from '@/components/Badge';
-import CheckboxGroup from '@/components/Form/CheckboxGroup';
-import CheckboxItem from '@/components/Form/CheckboxItem';
-import TabsList from '@/components/Page/TabsList';
-import CustomHTML from '@/components/CustomHTML';
+import Search from '@/components/Search.vue';
+import SidePanel from '@/components/SidePanel.vue';
+import Badge from '@/components/Badge.vue';
+import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+import CheckboxItem from '@/components/Form/CheckboxItem.vue';
+import TabsList from '@/components/Page/TabsList.vue';
+import CustomHTML from '@/components/CustomHTML.vue';
 import { mapGetters } from 'vuex';
 import { ADVERT_TYPES } from '@/helpers/constants';
 

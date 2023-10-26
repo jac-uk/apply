@@ -1,44 +1,19 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import App from '@/App';
 import router from '@/router';
 import store from '@/store';
 import * as filters from '@/filters';
 import { auth } from '@/firebase';
 import * as Sentry from '@sentry/vue';
-import { BrowserTracing } from '@sentry/tracing';
 import VueGtag from 'vue-gtag';
-import browserDetect from 'vue-browser-detect-plugin';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 
-if (process.env.NODE_ENV !== 'development') {
-  Sentry.init({
-    Vue,
-    dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
-    environment: store.getters.appEnvironment.toLowerCase(),
-    release: process.env.PACKAGE_VERSION,
-    integrations: [
-      new BrowserTracing({
-        routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-      }),
-    ],
-  });
+import './styles/main.scss';
 
-  Vue.use(VueGtag, {
-    config: { id: 'UA-153516887-1' },
-  }, router);
-}
-
-Vue.config.productionTip = false;
-
-Vue.use(browserDetect);
-Vue.use(VueDOMPurifyHTML);
-
-// Register global filters
-Object.keys(filters)
-  .forEach((filterName) => {
-    Vue.filter(filterName, filters[filterName]);
-  });
+// Global event emitter (fix vue warn of deprecation INSTANCE_EVENT_EMITTER)
+import mitt from 'mitt';
+const emitter = mitt();
 
 let vueInstance = false;
 auth.onAuthStateChanged( (user) => {
@@ -49,19 +24,48 @@ auth.onAuthStateChanged( (user) => {
     if (nextPage) router.push(nextPage);  
     else router.push('/vacancies');
   }
-  
+
+  // Create the Vue instance, but only once
   if (!vueInstance) {
-    vueInstance = new Vue({
-      el: '#app',
-      render: h => h(App),
-      router,
-      store,
-    });
+
+    // Root instance
+    vueInstance = createApp(App)
+      .use(router)
+      .use(store)
+      .use(VueDOMPurifyHTML);
+
+    // Bind global filters before mounting
+    vueInstance.config.globalProperties.$filters = filters;
+
+    // Bind emitter for global events
+    vueInstance.config.globalProperties.emitter = emitter;
+
+    // Initialise Sentry
+    if (import.meta.env.NODE_ENV !== 'development') {
+      Sentry.init({
+        app: vueInstance,
+        dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
+        environment: store.getters.appEnvironment.toLowerCase(),
+        release: import.meta.env.PACKAGE_VERSION,
+        integrations: [
+          new Sentry.BrowserTracing({
+            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
+          }),
+        ],
+      });
+
+      vueInstance.use(VueGtag, {
+        config: { id: 'UA-153516887-1' },
+      }, router);
+    }
+
+    if (import.meta.env.VITE_RECAPTCHA_TOKEN) {
+      vueInstance.use(VueReCaptcha, {
+        siteKey: import.meta.env.VITE_RECAPTCHA_TOKEN,
+      });
+    }
+
+    // Root component
+    vueInstance.mount('#app');
   }
 });
-
-if (process.env.VUE_APP_RECAPTCHA_TOKEN) {
-  Vue.use(VueReCaptcha, {
-    siteKey: process.env.VUE_APP_RECAPTCHA_TOKEN,
-  });
-}

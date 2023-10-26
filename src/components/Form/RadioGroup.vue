@@ -6,7 +6,7 @@
   >
     <fieldset
       class="govuk-fieldset"
-      :aria-describedby="hint ? hintId : false"
+      :aria-describedby="hint ? hintId : null"
     >
       <legend
         v-if="label"
@@ -41,28 +41,34 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'RadioGroup',
   components: {
     FormFieldError,
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       required: true,
       validator: () => true,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     inputValue: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(value) {
-        this.$emit('input', value);
+        this.$emit('update:modelValue', value);
       },
     },
     hintId() {

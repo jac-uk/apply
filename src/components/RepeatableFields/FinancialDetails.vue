@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import DateInput from '@/components/Form/DateInput';
-import TextareaInput from '@/components/Form/TextareaInput';
-import FinancialYear from './CharacterInformation/FinancialYear';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
+import FinancialYear from './CharacterInformation/FinancialYear.vue';
 
 export default {
   name: 'FinancialDetails',

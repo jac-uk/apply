@@ -1,5 +1,5 @@
 <script>
-import FinancialDetails from '../FinancialDetails';
+import FinancialDetails from '../FinancialDetails.vue';
 export default {
   name: 'IvaDetails',
   extends: FinancialDetails,

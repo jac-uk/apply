@@ -51,10 +51,15 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'TextField',
   components: {
     FormFieldError,
@@ -73,23 +78,33 @@ export default {
       default: false,
       type: Boolean,
     },
-    value: {
+    modelValue: {
       default: '',
-      type: String,
+      type: [String, Number],
     },
     type: {
       default: 'text',
       type: String,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
-      set(val) {
-        val = val.trim();
-        this.$emit('input', val);
+      set(val) { 
+        if (typeof val === 'string') {
+          val = val.trim();
+        }
+        
+        switch (this.type) {
+        case 'number':
+          this.$emit('update:modelValue', val ? parseFloat(val) : '');
+          break;
+        default:
+          this.$emit('update:modelValue', val);
+        }
       },
     },
     autocomplete() {
@@ -98,7 +113,7 @@ export default {
       case 'email':
         return this.type;
       default:
-        return false;
+        return null;
       }
     },
     fieldType() {

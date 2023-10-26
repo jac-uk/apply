@@ -40,10 +40,15 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'Password',
   components: {
     FormFieldError,
@@ -54,7 +59,7 @@ export default {
       default: '',
       type: String,
     },
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -71,6 +76,7 @@ export default {
       type: Boolean,
     },
   },
+  emits: ['update:modelValue'],
   data() {
     return {
       showPassword: false,
@@ -86,10 +92,10 @@ export default {
   computed: {
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
     fieldType() {
@@ -107,13 +113,13 @@ export default {
   },
   mounted() {
     if (this.isNewPwd) {
-      this.$root.$on('validate', this.handleValidatePassword);
+      this.emitter.on('validate', this.handleValidatePassword);
     }
   },
-  beforeDestroy: function() {
+  beforeUnmount: function() {
     this.setError('');
     if (this.isNewPwd) {
-      this.$root.$off('validate', this.handleValidatePassword);
+      this.emitter.off('validate', this.handleValidatePassword);
     }
   },
   methods: {
@@ -126,7 +132,7 @@ export default {
       }
       // don't bother checking if generic validation failed
       // if (!this.hasError) {
-      let value = this.value;
+      let value = this.modelValue;
       if (event && event.target) {
         value = event.target.value;
       }

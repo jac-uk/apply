@@ -66,13 +66,13 @@
               v-if="vacancy.applicationOpenDate"
               class="govuk-body"
             >
-              {{ vacancy.applicationOpenDate | formatDate('datetime-without-second') }}
+              {{ $filters.formatDate(vacancy.applicationOpenDate, 'datetime-without-second') }}
             </span>
             <span
               v-else
               class="govuk-body"
             >
-              {{ vacancy.estimatedLaunchDate | formatEstimatedDate }}
+              {{ $filters.formatEstimatedDate(vacancy.estimatedLaunchDate) }}
             </span>
           </p>
           <p v-if="vacancy.applicationCloseDate">
@@ -84,7 +84,7 @@
             <span
               class="govuk-body"
             >
-              {{ vacancy.applicationCloseDate | formatDate('datetime-without-second') }}
+              {{ $filters.formatDate(vacancy.applicationCloseDate, 'datetime-without-second') }}
             </span>
           </p>
         </div>
@@ -109,13 +109,13 @@
               v-if="vacancy.salaryGrouping"
               class="govuk-body"
             >
-              {{ vacancy.salaryGrouping | lookup }}
+              {{ $filters.lookup(vacancy.salaryGrouping) }}
             </span>
             <span
               v-if="vacancy.salary"
               class="govuk-body"
             >
-              {{ vacancy.salary | formatCurrency }}
+              {{ $filters.formatCurrency(vacancy.salary) }}
             </span>
           </template>
           <template v-else-if="vacancy.appointmentType == 'fee-paid'">
@@ -123,7 +123,7 @@
               v-if="vacancy.feePaidFee"
               class="govuk-body"
             >
-              {{ vacancy.feePaidFee | formatCurrency }}
+              {{ $filters.formatCurrency(vacancy.feePaidFee) }}
             </span>
           </template>
         </p>
@@ -357,12 +357,13 @@
 </template>
 
 <script>
-import Timeline from '@/components/Page/Timeline';
+import Timeline from '@/components/Page/Timeline.vue';
 import createTimeline from '@/helpers/Timeline/createTimeline';
 import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
-import DownloadLink from '@/components/DownloadLink';
+import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
-import CustomHTML from '@/components/CustomHTML';
+import CustomHTML from '@/components/CustomHTML.vue';
+import _has from 'lodash/has';
 
 export default {
   name: 'VacancyDetails',
@@ -407,6 +408,9 @@ export default {
     vacancy () {
       return this.$store.state.vacancy.record;
     },
+    hasDownloads() {
+      return _has(this.vacancy, 'downloads') && Object.keys(this.vacancy.downloads).length > 0;
+    },
     user() {
       return this.$store.state.auth.currentUser;
     },
@@ -442,7 +446,7 @@ export default {
       return this.advertType === ADVERT_TYPES.FULL;
     },
     showDownload() {
-      return this.advertType !== ADVERT_TYPES.BASIC;
+      return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;

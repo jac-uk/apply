@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import Form from '@/components/Form/Form';
-import Checkbox from '@/components/Form/Checkbox';
+import Form from '@/components/Form/Form.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
 
 export default {
   name: 'GDPRCheck',

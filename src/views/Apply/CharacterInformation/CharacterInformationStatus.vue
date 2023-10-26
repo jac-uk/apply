@@ -1,5 +1,5 @@
 <script>
-import Form from '@/components/Form/Form';
+import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
 
 export default {

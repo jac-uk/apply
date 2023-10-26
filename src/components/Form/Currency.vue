@@ -31,28 +31,34 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'Currency',
   components: {
     FormFieldError,
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       default: null,
       type: String,
     },
   },
+  emits: ['update:modelValue'],
   computed: {
     currencyInput: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
   },

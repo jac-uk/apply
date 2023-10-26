@@ -98,7 +98,7 @@
             v-for="option in NOT_COMPLETE_PUPILLAGE_REASONS"
             :key="option"
             :value="option"
-            :label="option | lookup"
+            :label="$filters.lookup(option)"
           />
         </RadioGroup>
 
@@ -127,10 +127,10 @@
 </template>
 
 <script>
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import DateInput from '@/components/Form/DateInput';
-import TextareaInput from '@/components/Form/TextareaInput';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 import { NOT_COMPLETE_PUPILLAGE_REASONS } from '@/helpers/constants';
 import ApplyMixIn from '@/views/Apply/ApplyMixIn';
 

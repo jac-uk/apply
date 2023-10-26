@@ -81,15 +81,15 @@
 </template>
 
 <script>
-import ErrorSummary from '@/components/Form/ErrorSummary';
-import RadioGroup from '@/components/Form/RadioGroup';
-import RadioItem from '@/components/Form/RadioItem';
-import RepeatableFields from '@/components/RepeatableFields';
-import DrivingDisqualificationDetails from '@/components/RepeatableFields/CharacterInformation/DrivingDisqualificationDetails';
-import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus';
-import RecentDrivingConvictionDetails from '@/components/RepeatableFields/CharacterInformation/RecentDrivingConvictionDetails';
-import BackLink from '@/components/BackLink';
-import InfoIcon from '@/components/ModalViews/InfoIcon';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import RadioGroup from '@/components/Form/RadioGroup.vue';
+import RadioItem from '@/components/Form/RadioItem.vue';
+import RepeatableFields from '@/components/RepeatableFields.vue';
+import DrivingDisqualificationDetails from '@/components/RepeatableFields/CharacterInformation/DrivingDisqualificationDetails.vue';
+import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
+import RecentDrivingConvictionDetails from '@/components/RepeatableFields/CharacterInformation/RecentDrivingConvictionDetails.vue';
+import BackLink from '@/components/BackLink.vue';
+import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
 import { MOTORING_OFFENCES_URL } from './character-information-constants';
 
 export default {

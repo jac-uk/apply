@@ -1,5 +1,5 @@
 <script>
-import CriminalOffenceDetails from '../CriminalOffenceDetails';
+import CriminalOffenceDetails from '../CriminalOffenceDetails.vue';
 export default {
   name: 'FixedPenaltyDetails',
   extends: CriminalOffenceDetails,

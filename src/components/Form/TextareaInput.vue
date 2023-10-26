@@ -42,11 +42,16 @@
 </template>
 
 <script>
-import FormField from '@/components/Form/FormField';
-import FormFieldError from '@/components/Form/FormFieldError';
-import CustomHTML from '@/components/CustomHTML';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
+  compatConfig: {
+    COMPONENT_V_MODEL: false,
+    // or, for full vue 3 compat in this component:
+    //MODE: 3,
+  },
   name: 'TextareaInput',
   components: {
     FormFieldError,
@@ -54,7 +59,7 @@ export default {
   },
   extends: FormField,
   props: {
-    value: {
+    modelValue: {
       default: '',
       type: String,
     },
@@ -72,7 +77,7 @@ export default {
       type: Boolean,
     },
   },
-
+  emits: ['update:modelValue'],
   computed: {
     wordsTooMany() {
       return this.words.length - this.wordLimit;
@@ -94,10 +99,10 @@ export default {
     },
     text: {
       get() {
-        return this.value;
+        return this.modelValue;
       },
       set(val) {
-        this.$emit('input', val);
+        this.$emit('update:modelValue', val);
       },
     },
   },

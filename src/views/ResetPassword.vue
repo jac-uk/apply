@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import TextField from '@/components/Form/TextField';
-import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage';
+import TextField from '@/components/Form/TextField.vue';
+import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import { auth, functions } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
@@ -106,7 +106,7 @@ export default {
     },
     async resetPassword() {
       if (this.formData.email) {
-        let returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).route.fullPath;
+        let returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).fullPath;
         if (this.nextPage) {
           returnUrl += `?nextPage=${this.nextPage}`;
         }

@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import Search from '@/components/Search';
+import Search from '@/components/Search.vue';
 
 export default {
   name: 'Table',
@@ -160,6 +160,7 @@ export default {
       default: () => [],
     },
   },
+  emits: ['change', 'update:selection'],
   data() {
     return {
       searchTerm: null,
