@@ -76,6 +76,11 @@ export default {
       resetSent: false,
     };
   },
+  computed: {
+    nextPage() {
+      return this.$route.query.nextPage;
+    },
+  },
   methods: {
     async submit() {
       if (!this.formData.email) return;
@@ -101,7 +106,10 @@ export default {
     },
     async resetPassword() {
       if (this.formData.email) {
-        const returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).fullPath;
+        let returnUrl = location.origin + this.$router.resolve({ name: 'sign-in' }).fullPath;
+        if (this.nextPage) {
+          returnUrl += `?nextPage=${this.nextPage}`;
+        }
         this.errors = [];
         auth.sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,

@@ -65,7 +65,7 @@
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
-              :to="{ name: 'reset-password' }"
+              :to="{ name: 'reset-password', query: { nextPage: nextPage } }"
             >
               Reset your password
             </RouterLink>

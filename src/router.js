@@ -122,6 +122,7 @@ const routes = [
         name: 'vacancy-details',
         meta: {
           title: 'Vacancy details',
+          isMultilanguage: true,
         },
       },
       {

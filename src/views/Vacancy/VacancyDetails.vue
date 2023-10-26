@@ -47,26 +47,6 @@
     </div>
 
     <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-9">
-      <div
-        v-if="enableApplyInWelsh"
-        style="display: flex; justify-content: flex-end; gap: 10px;"
-      >
-        <button
-          v-if="language === LANGUAGES.WELSH"
-          class="govuk-button govuk-button--success"
-          @click="() => setLanguage(LANGUAGES.ENGLISH)"
-        >
-          {{ $filters.lookup(LANGUAGES.ENGLISH) }}
-        </button>
-        <button
-          v-else-if="language === LANGUAGES.ENGLISH"
-          class="govuk-button govuk-button--success"
-          @click="() => setLanguage(LANGUAGES.WELSH)"
-        >
-          {{ $filters.lookup(LANGUAGES.WELSH) }}
-        </button>
-      </div>
-
       <div ref="overview">
         <h2 class="govuk-heading-l">
           Overview of the role
@@ -397,11 +377,13 @@ export default {
       activeSideNavLink: 'overview',
       isVacancyOpen: false,
       LANGUAGES,
-      language: LANGUAGES.ENGLISH,
       isExpandTimeline: false,
     };
   },
   computed: {
+    language() {
+      return this.$store.state.application.language;
+    },
     sideNavigation() {
       const list = [
         {
