@@ -86,8 +86,8 @@ export default {
       default: 'text',
       type: String,
     },
-    warnCPSEmailMsg: {
-      required: false,
+    warnCpsEmailMsg: {
+      default: '',
       type: String,
     },
   },
@@ -132,8 +132,8 @@ export default {
   },
   watch: {
     text() {
-      if (this.warnCPSEmailMsg && this.isCPSEmail()) {
-        this.setWarning(this.warnCPSEmailMsg);
+      if (this.warnCpsEmailMsg && this.isCPSEmail()) {
+        this.setWarning(this.warnCpsEmailMsg);
       }
     },
   },

@@ -11,7 +11,7 @@
         </h1>
 
         <ErrorSummary :errors="errors" />
-        <WarningSummary :warningObject="warningObject" />
+        <WarningSummary :warning-object="warningObject" />
 
         <p class="govuk-body-l">
           Sometimes called 'referees', your independent assessors will give us
@@ -119,7 +119,7 @@
           v-model="formData.firstAssessorEmail"
           label="Email"
           type="email"
-          warnCPSEmailMsg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
+          warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
           required
         />
         <TextField
@@ -166,7 +166,7 @@
           v-model="formData.secondAssessorEmail"
           label="Email"
           type="email"
-          warnCPSEmailMsg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
+          warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
           required
         />
         <TextField

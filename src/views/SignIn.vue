@@ -37,14 +37,14 @@
           </p> -->
 
           <ErrorSummary :errors="errors" />
-          <WarningSummary :warningObject="warningObject" />
+          <WarningSummary :warning-object="warningObject" />
 
           <TextField
             id="email"
             v-model="formData.email"
             label="Email address"
             type="email"
-            warnCPSEmailMsg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application."
+            warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application."
             required
           />
 

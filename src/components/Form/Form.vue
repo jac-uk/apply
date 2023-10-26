@@ -46,7 +46,7 @@ export default {
       this.updateAndScroll();
     },
     handleWarning(payload) {
-      this.warningObject = {id: payload.id, message: payload.message};
+      this.warningObject = { id: payload.id, message: payload.message };
       this.updateAndScroll();
     },
     updateAndScroll() {
@@ -59,6 +59,9 @@ export default {
       //This is just scrolling to top of page
       window.setTimeout( ()=>{ this.$el.scrollIntoView(true); }, 50 );
 
+    },
+    isValid() {
+      return this.errors.length === 0;
     },
   },
 };

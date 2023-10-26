@@ -7,13 +7,16 @@
     tabindex="-1"
     data-module="govuk-warning-summary"
   >
-  <div class="govuk-warning-text">
-    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
-    <strong class="govuk-warning-text__text">
-      <span class="govuk-warning-text__assistive">Warning</span>
+    <div class="govuk-warning-text">
+      <span
+        class="govuk-warning-text__icon"
+        aria-hidden="true"
+      >!</span>
+      <strong class="govuk-warning-text__text">
+        <span class="govuk-warning-text__assistive">Warning</span>
         {{ warningObject.message }}
-    </strong>
-  </div>
+      </strong>
+    </div>
   </div>
 </template>
 
@@ -23,7 +26,7 @@ export default {
   props: {
     warningObject: {
       type: Object,
-      required: false,
+      default: null,
     },
   },
 };
