@@ -43,26 +43,22 @@ export default {
           this.errors.push({ id: item, message: this.errorObject[item] });
         }
       }
-      if (!this.isValid()) {
-        this.scrollToErrorSummary();
-        setTimeout(() => {
-          updateLangToTextNode(document.querySelector('#main-content'), this.language);
-        }, 0);
-      }
+      this.updateAndScroll();
     },
     handleWarning(payload) {
       this.warningObject = {id: payload.id, message: payload.message};
-      this.scrollToErrorSummary();
-      setTimeout(() => {
+      this.updateAndScroll();
+    },
+    updateAndScroll() {
+      this.$nextTick(() => {
         updateLangToTextNode(document.querySelector('#main-content'), this.language);
-      }, 0);
+        this.scrollToErrorSummary();
+      });
     },
     scrollToErrorSummary(){
       //This is just scrolling to top of page
-      this.$el.scrollIntoView();
-    },
-    isValid() {
-      return this.errors.length === 0;
+      window.setTimeout( ()=>{ this.$el.scrollIntoView(true); }, 50 );
+
     },
   },
 };

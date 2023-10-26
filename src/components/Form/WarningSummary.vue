@@ -1,10 +1,11 @@
 <template>
   <div
     v-if="warningObject"
-    aria-labelledby="error-summary-title"
+    class="govuk-warning-summary"
+    aria-labelledby="warning-summary-title"
     role="alert"
     tabindex="-1"
-    data-module="govuk-error-summary"
+    data-module="govuk-warning-summary"
   >
   <div class="govuk-warning-text">
     <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
@@ -27,3 +28,13 @@ export default {
   },
 };
 </script>
+<style scoped>
+.govuk-warning-summary {
+  border: 5px solid black;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+.govuk-warning-text {
+  margin-bottom: 0;
+}
+</style>
