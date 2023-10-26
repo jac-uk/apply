@@ -76,7 +76,10 @@
             v-if="totalJudicialDays < vacancy.pjeDays"
             id="experience-details"
             v-model="formData.experienceDetails"
+            label="details"
             :hint="`As you have indicated you have less than ${vacancy.pjeDays} number of sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.`"
+            :label-hidden="true"
+            required
           />
         </div>
 
