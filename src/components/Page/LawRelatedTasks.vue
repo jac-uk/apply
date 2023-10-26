@@ -47,6 +47,7 @@
           v-model="localJudicialFunctions.duration"
           type="number"
           label="How many sitting days have you accumulated in this post?"
+          hint="If the number of days is 100 or more, an approximate figure will suffice."
           required
         />
 
