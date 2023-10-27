@@ -1,5 +1,5 @@
 import { createTestSubject } from '../helpers';
-import LoadingMessage from '@/components/LoadingMessage';
+import LoadingMessage from '@/components/LoadingMessage.vue';
 
 describe('components/LoadingMessage', () => {
   let wrapper;

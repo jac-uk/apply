@@ -1,9 +1,10 @@
-// @FIXME@ *error-four* Quite a different test base, 
+// @FIXME@ *error-four* Quite a different test base,
 // couldnt manage to successfully integrate helpers
-// couldnt tell how to add necessary logic to either 
+// couldnt tell how to add necessary logic to either
 // this file or ../helpers.js
-import { createTestSubject } from '../unit/helpers';
-import App from '@/App';
+import { mount } from '@vue/test-utils';
+//import { createTestSubject } from '../unit/helpers';
+import App from '@/App.vue';
 
 const id = 12345;
 const routes = [
@@ -31,13 +32,18 @@ const routes = [
 // there seems to be a lot of specific code in here,
 //  perhaps journeys shouldn't be in units
 
-xdescribe('Sign in journey', () => {
+describe.skip('Sign in journey', () => {
   let wrapper;
 
   beforeEach(() => {
     window.scrollTo = () => {};
-    wrapper = createTestSubject(App, {
-      propsData: {},
+    // wrapper = createTestSubject(App, {
+    //   propsData: {},
+    //   stubs: ['RouterView'],
+    // });
+    wrapper = mount(App, {
+      shallow: true,
+      props: {},
       stubs: ['RouterView'],
     });
   });

@@ -1,17 +1,18 @@
 import { createTestSubject } from '../../../helpers';
+import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey.vue';
+//import { vi } from 'vitest';
 
-import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey';
-// import RadioGroup from '@/components/Form/RadioGroup';
-// import RadioItem from '@/components/Form/RadioItem';
+// import RadioGroup from '@/components/Form/RadioGroup.vue';
+// import RadioItem from '@/components/Form/RadioItem.vue';
 // import TextField from '@/components/Form/Textfield';
 // import TextareaInput from '@/components/Form/TextareaInput';
-// import CheckboxGroup from '@/components/Form/CheckboxGroup';
-// import CheckboxItem from '@/components/Form/CheckboxItem';
+// import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
+// import CheckboxItem from '@/components/Form/CheckboxItem.vue';
 
 // const application = {};
-// 
+//
 // const mockStore = {
-//   dispatch: jest.fn(),
+//   dispatch: vi.fn(),
 //   state: {
 //     application: {
 //       record: {},
@@ -22,7 +23,7 @@ import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAnd
 //   },
 // };
 
-xdescribe('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
+describe.skip('@/views/Apply/AccountProfile/EqualityAndDiversitySurvey', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(EqualityAndDiversitySurvey, {
