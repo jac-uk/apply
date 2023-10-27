@@ -13,7 +13,7 @@
         <ErrorSummary :errors="errors" />
 
         <p class="govuk-body-l">
-          The Judicial Appointments Commission (JAC) is currently comprised of Commissioners. Members come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
+          Members of the Judicial Appointments Commission (JAC) come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
         </p>
         <p class="govuk-body-l">
           Are you related to, or known to any of the JAC Commissioners? If you are in any doubt then please select 'Yes' in the list below:
