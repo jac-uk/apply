@@ -106,6 +106,9 @@
       <Checkbox
         :id="experienceIsOngoing"
         v-model="row.isOngoing"
+        label="End date"
+        :label-hidden="true"
+        required
       >
         Tick if still ongoing
       </Checkbox>
