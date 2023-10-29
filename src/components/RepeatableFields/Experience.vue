@@ -97,6 +97,7 @@
         v-model="row.endDate"
         label="End date"
         type="month"
+        :min-date="row.startDate"
         required
       />
       <p class="govuk-body">
