@@ -132,7 +132,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'date' && value) {
+        if (this.type && ['month', 'date'].includes(this.type) && value) {
           if (this.maxDate && (value > (this.maxDate))) {
             this.setError(`Enter a date before ${formatDate(this.maxDate)} for ${this.label}`);
           }
