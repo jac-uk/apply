@@ -117,7 +117,6 @@ export default {
   components: {
     RepeatableFields,
     BackLink,
-    Experience,
     ExperienceV2,
   },
   extends: Form,

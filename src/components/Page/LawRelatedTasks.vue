@@ -22,61 +22,69 @@
         </a>
       </p>
 
-      <CheckboxItem
-        value="judicial-functions"
-        label="The carrying-out of judicial functions of any court or tribunal"
-      >
-        <Select
-          id="judicial-functions-type"
-          v-model="localJudicialFunctions.type"
-          label="Is this a judicial or quasi-judicial post?"
-          hint="Quasi-judicial refers to a role similar to that of a judge, such as the chair of an equivalent body for which a legal qualification is required. An equivalent body is one of a quasi-judicial nature for which the powers and procedures should resemble those of a court of law and involve highly complex matters, requiring its members objectively to determine the facts and draw conclusions to reach a reasoned decision. Such decisions could result in the imposition of a penalty, and they are likely to affect the legal rights, duties or privileges of specific parties. Examples could include, but are not restricted to, disciplinary tribunals and conduct hearings for professional standards bodies, the parole board, arbitration and chairs of statutory inquiries."
-          required
+      <template v-if="isVersion3">
+        <CheckboxItem
+          value="judicial-functions"
+          label="The carrying-out of judicial functions of any court or tribunal"
         >
-          <option
-            v-for="option in ['judicial-post', 'quasi-judicial-post']"
-            :key="option"
-            :value="option"
+          <Select
+            id="judicial-functions-type"
+            v-model="localJudicialFunctions.type"
+            label="Is this a judicial or quasi-judicial post?"
+            hint="Quasi-judicial refers to a role similar to that of a judge, such as the chair of an equivalent body for which a legal qualification is required. An equivalent body is one of a quasi-judicial nature for which the powers and procedures should resemble those of a court of law and involve highly complex matters, requiring its members objectively to determine the facts and draw conclusions to reach a reasoned decision. Such decisions could result in the imposition of a penalty, and they are likely to affect the legal rights, duties or privileges of specific parties. Examples could include, but are not restricted to, disciplinary tribunals and conduct hearings for professional standards bodies, the parole board, arbitration and chairs of statutory inquiries."
+            required
           >
-            {{ $filters.lookup(option) }}
-          </option>
-        </Select>
+            <option
+              v-for="option in ['judicial-post', 'quasi-judicial-post']"
+              :key="option"
+              :value="option"
+            >
+              {{ $filters.lookup(option) }}
+            </option>
+          </Select>
 
-        <TextField
-          id="judicial-functions-duration"
-          v-model="localJudicialFunctions.duration"
-          type="number"
-          label="How many sitting days have you accumulated in this post?"
-          hint="If the number of days is 100 or more, an approximate figure will suffice."
-          :pattern="{
-            match: /^([^.0-]\d+|\d)$/,
-            message: 'Only positive integers can be input into the sitting days.',
-          }"
-          required
-        />
+          <TextField
+            id="judicial-functions-duration"
+            v-model="localJudicialFunctions.duration"
+            type="number"
+            label="How many sitting days have you accumulated in this post?"
+            hint="If the number of days is 100 or more, an approximate figure will suffice."
+            :pattern="{
+              match: /^([^.0-]\d+|\d)$/,
+              message: 'Only positive integers can be input into the sitting days.',
+            }"
+            required
+          />
 
-        <Select
-          id="judicial-functions-is-legal-qualification"
-          v-model="localJudicialFunctions.isLegalQualification"
-          label="Is a legal qualification a requisite for appointment?"
-          required
-        >
-          <option
-            v-for="option in ['true', 'false']"
-            :key="option"
-            :value="$filters.lookup(option)"
+          <Select
+            id="judicial-functions-is-legal-qualification"
+            v-model="localJudicialFunctions.isLegalQualification"
+            label="Is a legal qualification a requisite for appointment?"
+            required
           >
-            {{ $filters.lookup(option) }}
-          </option>
-        </Select>
+            <option
+              v-for="option in ['true', 'false']"
+              :key="option"
+              :value="$filters.lookup(option)"
+            >
+              {{ $filters.lookup(option) }}
+            </option>
+          </Select>
 
-        <TextareaInput
-          v-if="localJudicialFunctions.type === 'quasi-judicial-post'"
-          id="judicial-functions-details"
-          v-model="localJudicialFunctions.details"
-          label="Please outline the powers, procedures and main responsibilities"
+          <TextareaInput
+            v-if="localJudicialFunctions.type === 'quasi-judicial-post'"
+            id="judicial-functions-details"
+            v-model="localJudicialFunctions.details"
+            label="Please outline the powers, procedures and main responsibilities"
+          />
+        </CheckboxItem>
+      </template>
+      <template v-else>
+        <CheckboxItem
+          value="judicial-functions"
+          label="The carrying-out of judicial functions of any court or tribunal"
         />
-      </CheckboxItem>
+      </template>
 
       <CheckboxItem
         value="acting-arbitrator"
@@ -185,6 +193,9 @@ export default {
     };
   },
   computed: {
+    isVersion3 () {
+      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    },
     localTasks: {
       get() {
         return this.tasks;
