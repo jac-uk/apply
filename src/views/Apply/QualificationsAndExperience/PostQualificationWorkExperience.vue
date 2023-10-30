@@ -148,7 +148,7 @@ export default {
     };
   },
   computed: {
-    isVersion3 () {
+    isVersion3() {
       return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
     },
     hasExperience() {

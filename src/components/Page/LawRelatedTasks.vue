@@ -193,7 +193,10 @@ export default {
     };
   },
   computed: {
-    isVersion3 () {
+    vacancy() {
+      return this.$store.state.vacancy.record;
+    },
+    isVersion3() {
       return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
     },
     localTasks: {
