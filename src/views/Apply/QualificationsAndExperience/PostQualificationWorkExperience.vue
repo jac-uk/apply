@@ -67,20 +67,6 @@
           >
             Add another
           </button>
-
-          <h2 class="govuk-heading-m govuk-!-margin-top-8">
-            {{ `You have indicated that you have ${totalJudicialDays} sitting days in total.` }}
-          </h2>
-
-          <TextareaInput
-            v-if="totalJudicialDays < vacancy.pjeDays"
-            id="experience-details"
-            v-model="formData.experienceDetails"
-            label="details"
-            :hint="`As you have indicated you have less than ${vacancy.pjeDays} number of sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.`"
-            :label-hidden="true"
-            required
-          />
         </div>
 
         <button
@@ -98,13 +84,11 @@
 import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import Experience from '@/components/RepeatableFields/Experience.vue';
-import TextareaInput from '@/components/Form/TextareaInput.vue';
 import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'PostQualificationWorkExperience',
   components: {
-    TextareaInput,
     BackLink,
     Experience,
   },
@@ -128,7 +112,7 @@ export default {
 
     return {
       formId: 'postQualificationWorkExperience',
-      formData: formData,
+      formData,
       experiences,
       editingIndex,
     };
@@ -215,6 +199,19 @@ export default {
     },
     resetEditing() {
       this.editingIndex = null;
+    },
+    async save() {
+      this.validate();
+      if (this.isValid() && this.formId) {
+        this.formData.progress[this.formId] = true;
+        this.formData.progress['employmentGaps'] = true;
+        await this.$store.dispatch('application/save', this.formData);
+        if (this.totalJudicialDays < this.vacancy.pjeDays) {
+          this.$router.push({ name: 'post-qualification-work-experience-details' });
+        } else {
+          this.$router.push({ name: 'task-list' });
+        }
+      }
     },
   },
 };
