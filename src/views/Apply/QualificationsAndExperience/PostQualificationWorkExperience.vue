@@ -6,75 +6,99 @@
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
-        <h1 class="govuk-heading-xl">
-          Career history - post qualification experience
-        </h1>
 
-        <p class="govuk-body-l">
-          Starting with your most recent appointment and working back, provide details of your career to date, including all judicial and quasi-judicial appointments and any gaps in employment.
-        </p>
+        <template v-if="isVersion3">
+          <h1 class="govuk-heading-xl">
+            Career history - post qualification experience
+          </h1>
 
-        <div
-          v-for="(experience, index) in experiences"
-          :key="index"
-          class="experience-container govuk-!-margin-top-8"
-        >
-          <Experience
-            :row="experience"
-            :index="index"
-            :type="experience.type"
-            :editing="editingIndex === index"
-          />
+          <p class="govuk-body-l">
+            Starting with your most recent appointment and working back, provide details of your career to date, including all judicial and quasi-judicial appointments and any gaps in employment.
+          </p>
+          
           <div
-            v-if="experience.type"
-            class="govuk-!-margin-top-6"
-            style="display: flex; justify-content: flex-start; gap: 20px;"
+            v-for="(experience, index) in experiences"
+            :key="index"
+            class="experience-container govuk-!-margin-top-8"
+          >
+            <ExperienceV2
+              :row="experience"
+              :index="index"
+              :type="experience.type"
+              :editing="editingIndex === index"
+            />
+            <div
+              v-if="experience.type"
+              class="govuk-!-margin-top-6"
+              style="display: flex; justify-content: flex-start; gap: 20px;"
+            >
+              <button
+                v-if="editingIndex === index"
+                type="button"
+                class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                @click="() => handleRowSave(index)"
+              >
+                Save
+              </button>
+              <button
+                v-else
+                type="button"
+                class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                @click="() => handleRowEdit(index)"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
+                @click="() => handleRowRemove(index)"
+              >
+                Remove
+              </button>
+            </div>
+          </div>
+
+          <div
+            v-if="hasExperience"
+            class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8"
           >
             <button
-              v-if="editingIndex === index"
               type="button"
-              class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowSave(index)"
+              class="govuk-button govuk-button--secondary"
+              @click="handleRowAdd"
             >
-              Save
-            </button>
-            <button
-              v-else
-              type="button"
-              class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-              @click="() => handleRowEdit(index)"
-            >
-              Edit
-            </button>
-            <button
-              type="button"
-              class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-              @click="() => handleRowRemove(index)"
-            >
-              Remove
+              Add another
             </button>
           </div>
-        </div>
 
-        <div
-          v-if="hasExperience"
-          class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8"
-        >
           <button
-            type="button"
-            class="govuk-button govuk-button--secondary"
-            @click="handleRowAdd"
+            :disabled="!canSave(formId) || !hasExperience"
+            class="govuk-button info-btn--post-qualification-work-experience--save-and-continue govuk-!-margin-top-8"
           >
-            Add another
+            Save and continue
           </button>
-        </div>
+        </template>
+        <template v-else>
+          <h1 class="govuk-heading-xl">
+            Post-qualification experience
+          </h1>
 
-        <button
-          :disabled="!canSave(formId) || !hasExperience"
-          class="govuk-button info-btn--post-qualification-work-experience--save-and-continue govuk-!-margin-top-8"
-        >
-          Save and continue
-        </button>
+          <p class="govuk-body-l">
+            Provide details of your career to date including any judicial appointments or quasi-judicial appointments
+          </p>
+        
+          <RepeatableFields
+            v-model="formData.experience"
+            :component="repeatableFields.Experience"
+          />
+
+          <button
+            :disabled="!canSave(formId)"
+            class="govuk-button  info-btn--post-qualification-work-experience--save-and-continue"
+          >
+            Save and continue
+          </button>
+        </template>
       </div>
     </form>
   </div>
@@ -83,14 +107,18 @@
 <script>
 import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
+import RepeatableFields from '@/components/RepeatableFields.vue';
 import Experience from '@/components/RepeatableFields/Experience.vue';
+import ExperienceV2 from '@/components/RepeatableFields/ExperienceV2.vue';
 import BackLink from '@/components/BackLink.vue';
 
 export default {
   name: 'PostQualificationWorkExperience',
   components: {
+    RepeatableFields,
     BackLink,
     Experience,
+    ExperienceV2,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -115,9 +143,15 @@ export default {
       formData,
       experiences,
       editingIndex,
+      repeatableFields: {
+        Experience,
+      },
     };
   },
   computed: {
+    isVersion3 () {
+      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    },
     hasExperience() {
       return (Array.isArray(this.formData.experience) && this.formData.experience.length > 0) || 
         (Array.isArray(this.formData.employmentGaps) && this.formData.employmentGaps.length > 0);
@@ -205,7 +239,7 @@ export default {
       if (this.isValid() && this.formId) {
         this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
-        if (this.totalJudicialDays < this.vacancy.pjeDays) {
+        if (this.isVersion3 && this.totalJudicialDays < this.vacancy.pjeDays) {
           this.$router.push({ name: 'post-qualification-work-experience-details' });
         } else {
           this.$router.push({ name: 'task-list' });
