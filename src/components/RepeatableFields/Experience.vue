@@ -100,7 +100,10 @@
         :min-date="row.startDate"
         required
       />
-      <p class="govuk-body">
+      <p
+        v-if="!row.isOngoing"
+        class="govuk-body"
+      >
         or
       </p>
       <Checkbox
@@ -108,7 +111,7 @@
         v-model="row.isOngoing"
         label="End date"
         :label-hidden="true"
-        required
+        :required="!row.endDate"
       >
         Tick if still ongoing
       </Checkbox>
