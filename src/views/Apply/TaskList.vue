@@ -107,7 +107,7 @@
             :locked="!currentApplicationParts.relevantQualifications"
           />
           <Task
-            v-if="applicationParts.postQualificationWorkExperience || applicationParts.employmentGaps"
+            v-if="applicationParts.postQualificationWorkExperience"
             id="post-qualification-work-experience"
             title="Post qualification experience"
             :done="applicationProgress.postQualificationWorkExperience"
@@ -133,6 +133,13 @@
             title="Relevant experience"
             :done="applicationProgress.relevantExperience"
             :locked="!currentApplicationParts.relevantExperience"
+          />
+          <Task
+            v-if="applicationParts.employmentGaps"
+            id="employment-gaps"
+            title="Gaps in employment"
+            :done="applicationProgress.employmentGaps"
+            :locked="!currentApplicationParts.employmentGaps"
           />
           <Task
             v-if="applicationParts.reasonableLengthOfService"
