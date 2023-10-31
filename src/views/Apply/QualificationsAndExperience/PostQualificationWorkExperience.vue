@@ -72,7 +72,7 @@
           </div>
 
           <button
-            :disabled="!canSave(formId) || !hasExperience"
+            :disabled="!canSave(formId)"
             class="govuk-button info-btn--post-qualification-work-experience--save-and-continue govuk-!-margin-top-8"
           >
             Save and continue
@@ -121,7 +121,7 @@ export default {
   },
   extends: Form,
   mixins: [ApplyMixIn],
-  data(){
+  data() {
     const defaults =  {
       experience: null,
       employmentGaps: null,
@@ -238,7 +238,9 @@ export default {
       this.editingIndex = null;
     },
     async save() {
-      this.validate();
+      if (this.hasExperience) {
+        this.validate();
+      }
       if (this.isValid() && this.formId) {
         this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
