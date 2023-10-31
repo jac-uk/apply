@@ -103,6 +103,25 @@
             >
           </div>
         </div>
+
+        <template v-if="ongoingVisible">
+          <div class="govuk-date-input__item">
+            <p class="govuk-body">
+              or
+            </p>
+          </div>
+
+          <div class="govuk-date-input__item">
+            <Checkbox
+              :id="`${id}-ongoing`"
+              v-model.lazy="isOngoingInput"
+              label="End date"
+              :label-hidden="true"
+            >
+              Tick if still ongoing
+            </Checkbox>
+          </div>
+        </template>
       </div>
     </fieldset>
   </div>
@@ -113,6 +132,7 @@ import parseAndClipNumber from '@/helpers/Form/parseAndClipNumber';
 import { validateYear } from '@/helpers/date';
 import zeroPad from '@/helpers/Form/zeroPad';
 import FormField from '@/components/Form/FormField.vue';
+import Checkbox from '@/components/Form/Checkbox.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
@@ -123,6 +143,7 @@ export default {
   },
   name: 'DateInput',
   components: {
+    Checkbox,
     FormFieldError,
   },
   extends: FormField,
@@ -147,8 +168,16 @@ export default {
       default: false,
       type: Boolean,
     },
+    ongoingVisible: {
+      default: false,
+      type: Boolean,
+    },
+    isOngoing: {
+      default: false,
+      type: Boolean,
+    },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'update:isOngoing'],
   data() {
     return {
       day: null,
@@ -181,6 +210,19 @@ export default {
         this.year = validateYear(value);
       },
     },
+    isOngoingInput: {
+      get() {
+        return this.isOngoing;
+      },
+      set(value) {
+        if (value) {
+          this.day = null;
+          this.month = null;
+          this.year = null;
+        }
+        this.$emit('update:isOngoing', value);
+      },
+    },
     dateConstructor() {
       const day = this.type === 'month' ? 1 : this.day;
       const month = this.month;
@@ -211,6 +253,9 @@ export default {
   },
   watch: {
     date(value) {
+      if (value) {
+        this.$emit('update:isOngoing', false);
+      }
       this.$emit('update:modelValue', value);
     },
     modelValue(newValue, oldValue) {

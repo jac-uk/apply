@@ -92,29 +92,15 @@
       />
 
       <DateInput
-        v-if="!row.isOngoing"
         :id="experienceEndDate"
         v-model="row.endDate"
+        v-model:is-ongoing="row.isOngoing"
         label="End date"
         type="month"
-        :min-date="row.startDate"
+        ongoing-visible
         required
+        :min-date="row.startDate"
       />
-      <p
-        v-if="!row.isOngoing"
-        class="govuk-body"
-      >
-        or
-      </p>
-      <Checkbox
-        :id="experienceIsOngoing"
-        v-model="row.isOngoing"
-        label="End date"
-        :label-hidden="true"
-        :required="!row.endDate"
-      >
-        Tick if still ongoing
-      </Checkbox>
 
       <LawRelatedTasks
         v-if="isAppointment"
@@ -140,7 +126,6 @@ import RadioItem from '@/components/Form/RadioItem.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import TextField from '@/components/Form/TextField.vue';
 import DateInput from '@/components/Form/DateInput.vue';
-import Checkbox from '@/components/Form/Checkbox.vue';
 import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
 import TaskDetails from '@/components/Page/TaskDetails.vue';
 
@@ -151,7 +136,6 @@ export default {
     RadioGroup,
     TextField,
     DateInput,
-    Checkbox,
     LawRelatedTasks,
     TaskDetails,
   },
