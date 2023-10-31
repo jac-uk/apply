@@ -148,7 +148,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'number' && value && this.numMax) {
+        if (this.type && ['number', 'non-negative-number'].includes(this.type) && value && this.numMax) {
           if (value > this.numMax) {
             this.setError(`Please enter a number lower than ${this.numMax}`);
           }

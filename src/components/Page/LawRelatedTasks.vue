@@ -46,13 +46,9 @@
           <TextField
             id="judicial-functions-duration"
             v-model="localJudicialFunctions.duration"
-            type="number"
+            type="non-negative-number"
             label="How many sitting days have you accumulated in this post?"
             hint="Only positive integers can be input into the sitting days field. If the number of days is 100 or more, an approximate figure will suffice."
-            :pattern="{
-              match: /^([^.0-]\d+|\d)$/,
-              message: 'Only positive integers can be input into the sitting days.',
-            }"
             required
           />
 
