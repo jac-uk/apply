@@ -159,7 +159,11 @@ export default {
       let total = 0;
       if (Array.isArray(this.formData.experience)) {
         this.formData.experience.forEach((experience) => {
-          if (experience.judicialFunctions) {
+          if (
+            Array.isArray(experience.tasks) &&
+            experience.tasks.includes('judicial-functions') &&
+            experience?.judicialFunctions?.duration
+          ) {
             total += parseInt(experience.judicialFunctions.duration, 10);
           }
         });
