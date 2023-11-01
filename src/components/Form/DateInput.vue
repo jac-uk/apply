@@ -47,70 +47,75 @@
         :id="id"
         class="govuk-date-input"
       >
-        <div
-          v-if="type === 'date'"
-          class="govuk-date-input__item"
-        >
-          <div class="govuk-form-group">
-            <label
-              class="govuk-label govuk-date-input__label"
-              :for="`${id}-day`"
-            >
-              Day
-            </label>
-            <input
-              :id="`${id}-day`"
-              ref="dayInput"
-              v-model.lazy="dayInput"
-              class="govuk-input govuk-date-input__input govuk-input--width-2"
-              type="number"
-              @input="changeDay"
-            >
+        <template v-if="!isOngoingInput">
+          <div
+            v-if="type === 'date'"
+            class="govuk-date-input__item"
+          >
+            <div class="govuk-form-group">
+              <label
+                class="govuk-label govuk-date-input__label"
+                :for="`${id}-day`"
+              >
+                Day
+              </label>
+              <input
+                :id="`${id}-day`"
+                ref="dayInput"
+                v-model.lazy="dayInput"
+                class="govuk-input govuk-date-input__input govuk-input--width-2"
+                type="number"
+                @input="changeDay"
+              >
+            </div>
           </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label
-              class="govuk-label govuk-date-input__label"
-              :for="`${id}-month`"
-            >
-              Month
-            </label>
-            <input
-              :id="`${id}-month`"
-              ref="monthInput"
-              v-model.lazy="monthInput"
-              class="govuk-input govuk-date-input__input govuk-input--width-2"
-              type="number"
-              @input="changeMonth"
-            >
-          </div>
-        </div>
-        <div class="govuk-date-input__item">
-          <div class="govuk-form-group">
-            <label
-              class="govuk-label govuk-date-input__label"
-              :for="`${id}-year`"
-            >
-              Year
-            </label>
-            <input
-              :id="`${id}-year`"
-              ref="yearInput"
-              v-model.lazy="yearInput"
-              class="govuk-input govuk-date-input__input govuk-input--width-4"
-              type="number"
-            >
-          </div>
-        </div>
-
-        <template v-if="ongoingVisible">
           <div class="govuk-date-input__item">
-            <p class="govuk-body">
+            <div class="govuk-form-group">
+              <label
+                class="govuk-label govuk-date-input__label"
+                :for="`${id}-month`"
+              >
+                Month
+              </label>
+              <input
+                :id="`${id}-month`"
+                ref="monthInput"
+                v-model.lazy="monthInput"
+                class="govuk-input govuk-date-input__input govuk-input--width-2"
+                type="number"
+                @input="changeMonth"
+              >
+            </div>
+          </div>
+          <div class="govuk-date-input__item">
+            <div class="govuk-form-group">
+              <label
+                class="govuk-label govuk-date-input__label"
+                :for="`${id}-year`"
+              >
+                Year
+              </label>
+              <input
+                :id="`${id}-year`"
+                ref="yearInput"
+                v-model.lazy="yearInput"
+                class="govuk-input govuk-date-input__input govuk-input--width-4"
+                type="number"
+              >
+            </div>
+          </div>
+
+          <div class="govuk-date-input__item">
+            <p
+              v-if="ongoingVisible"
+              class="govuk-body"
+            >
               or
             </p>
           </div>
+        </template>
 
+        <template v-if="ongoingVisible">
           <div class="govuk-date-input__item">
             <Checkbox
               :id="`${id}-ongoing`"
