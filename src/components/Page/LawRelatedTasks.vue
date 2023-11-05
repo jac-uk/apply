@@ -48,7 +48,7 @@
             v-model="localJudicialFunctions.duration"
             type="non-negative-number"
             label="How many sitting days have you accumulated in this post?"
-            hint="Only positive integers can be input into the sitting days field. If the number of days is 100 or more, an approximate figure will suffice."
+            hint="Only numerical digits can be input into the sitting days field. If the number of days is 100 or more, an approximate figure will suffice."
             required
           />
 
@@ -59,11 +59,11 @@
             required
           >
             <option
-              v-for="option in ['true', 'false']"
+              v-for="option in [true, false]"
               :key="option"
-              :value="$filters.lookup(option)"
+              :value="option"
             >
-              {{ $filters.lookup(option) }}
+              {{ $filters.lookup(option.toString()) }}
             </option>
           </Select>
 
