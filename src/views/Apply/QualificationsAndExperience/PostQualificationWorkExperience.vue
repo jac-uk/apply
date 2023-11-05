@@ -242,11 +242,11 @@ export default {
         this.validate();
       }
       if (this.isValid() && this.formId) {
-        this.formData.progress[this.formId] = true;
-        await this.$store.dispatch('application/save', this.formData);
         if (this.isVersion3 && this.totalJudicialDays < this.vacancy.pjeDays) {
           this.$router.push({ name: 'post-qualification-work-experience-details' });
         } else {
+          this.formData.progress[this.formId] = true;
+          await this.$store.dispatch('application/save', this.formData);
           this.$router.push({ name: 'task-list' });
         }
       }
