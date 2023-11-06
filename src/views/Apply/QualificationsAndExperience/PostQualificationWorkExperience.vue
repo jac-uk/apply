@@ -174,6 +174,7 @@ export default {
   methods: {
     getExperiences(formData) {
       const res = [];
+      // add type to experience to differentiate between experience and employmentGaps
       if (Array.isArray(formData.experience)) {
         formData.experience.forEach((experience) => {
           experience.type = 'appointment';
@@ -207,8 +208,20 @@ export default {
     },
     syncFormData() {
       this.experiences = this.sortExperiences(this.experiences);
-      this.formData.experience = this.experiences.filter(experience => experience.type === 'appointment');
-      this.formData.employmentGaps = this.experiences.filter(experience => experience.type === 'gap');
+      this.formData.experience = this.experiences
+        .filter(experience => experience.type === 'appointment')
+        .map((experience) => {
+          const res = { ...experience };
+          delete res.type; // remove type from experience
+          return res;
+        });
+      this.formData.employmentGaps = this.experiences
+        .filter(experience => experience.type === 'gap')
+        .map((experience) => {
+          const res = { ...experience };
+          delete res.type; // remove type from employmentGaps
+          return res;
+        });
       this.$store.dispatch('application/save', this.formData);
     },
     handleRowAdd() {
