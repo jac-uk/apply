@@ -103,7 +103,6 @@
       />
 
       <LawRelatedTasks
-        v-if="isAppointment"
         :id="`tasks_${index}`"
         v-model:tasks="row.tasks"
         v-model:judicial-functions="row.judicialFunctions"
