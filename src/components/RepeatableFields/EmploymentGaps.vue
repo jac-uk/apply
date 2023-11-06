@@ -24,6 +24,7 @@
       :id="`tasks_${index}`"
       v-model:tasks="row.tasks"
       v-model:other-tasks="row.otherTasks"
+      :is-appointment="false"
     />
 
     <slot name="removeButton" />

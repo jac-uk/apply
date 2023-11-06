@@ -6,13 +6,14 @@
       :id="id"
       v-model="localTasks"
       label="Law-related tasks in this role"
+      :required="required"
     >
       <FormFieldError
         :id="id"
         :error-message="errorMessage"
       />
       <p class="govuk-hint govuk-!-margin-top-0">
-        Select all tasks you do in this role. These are defined in the
+        {{ hintText }} These are defined in the
         <a
           class="govuk-link"
           href="http://www.legislation.gov.uk/ukpga/2007/15/section/52"
@@ -22,7 +23,7 @@
         </a>
       </p>
 
-      <template v-if="isVersion3">
+      <template v-if="isApplicationVersion3 && isAppointment">
         <CheckboxItem
           value="judicial-functions"
           label="The carrying-out of judicial functions of any court or tribunal"
@@ -180,6 +181,11 @@ export default {
       default: () => {},
       required: false,
     },
+    isAppointment: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
   },
   emits: ['update:tasks', 'update:otherTasks', 'update:taskDetails', 'update:judicialFunctions'],
   data() {
@@ -189,10 +195,17 @@ export default {
     };
   },
   computed: {
+    hintText() {
+      if (this.isAppointment) {
+        return 'Select all tasks you do in this role.';
+      } else {
+        return 'If you were engaged in law related activities during this time, please select all the relevant tasks.';
+      }
+    },
     vacancy() {
       return this.$store.state.vacancy.record;
     },
-    isVersion3() {
+    isApplicationVersion3() {
       return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
     },
     localTasks: {

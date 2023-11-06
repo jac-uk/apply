@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
 
-        <template v-if="isVersion3">
+        <template v-if="isApplicationVersion3">
           <h1 class="govuk-heading-xl">
             Career history - post qualification experience
           </h1>
@@ -148,9 +148,6 @@ export default {
     };
   },
   computed: {
-    isVersion3() {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
-    },
     hasExperience() {
       return (Array.isArray(this.formData.experience) && this.formData.experience.length > 0) || 
         (Array.isArray(this.formData.employmentGaps) && this.formData.employmentGaps.length > 0);
@@ -255,7 +252,7 @@ export default {
         this.validate();
       }
       if (this.isValid() && this.formId) {
-        if (this.isVersion3 && this.totalJudicialDays < this.vacancy.pjeDays) {
+        if (this.isApplicationVersion3 && this.totalJudicialDays < this.vacancy.pjeDays) {
           this.$router.push({ name: 'post-qualification-work-experience-details' });
         } else {
           this.formData.progress[this.formId] = true;

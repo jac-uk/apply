@@ -114,6 +114,9 @@ export default {
         return false;
       }
     },
+    isApplicationVersion3() {
+      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    },
   },
   mounted() {
     // isVacancyOpen should flick to 'false' automatically when the deadline is reached

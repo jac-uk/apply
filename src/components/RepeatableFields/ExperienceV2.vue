@@ -102,18 +102,26 @@
         :min-date="row.startDate"
       />
 
+      <TextareaInput
+        v-if="isGap"
+        :id="experienceDetails"
+        v-model="row.details"
+        label="Details"
+        rows="2"
+      />
+
       <LawRelatedTasks
-        :id="`tasks_${index}`"
+        :id="experienceTasks"
         v-model:tasks="row.tasks"
         v-model:judicial-functions="row.judicialFunctions"
         v-model:other-tasks="row.otherTasks"
-        :show-judicial-functions="true"
-        required
+        :is-appointment="isAppointment"
+        :required="isAppointment"
       />
 
       <TaskDetails
         v-if="isAppointment"
-        :id="`tasks_${index}`"
+        :id="experienceTaskDetails"
         v-model:task-details="row.taskDetails"
       />
     </div>
@@ -125,6 +133,7 @@ import RadioItem from '@/components/Form/RadioItem.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import TextField from '@/components/Form/TextField.vue';
 import DateInput from '@/components/Form/DateInput.vue';
+import TextareaInput from '@/components/Form/TextareaInput.vue';
 import LawRelatedTasks from '@/components/Page/LawRelatedTasks.vue';
 import TaskDetails from '@/components/Page/TaskDetails.vue';
 
@@ -135,6 +144,7 @@ export default {
     RadioGroup,
     TextField,
     DateInput,
+    TextareaInput,
     LawRelatedTasks,
     TaskDetails,
   },
@@ -180,11 +190,14 @@ export default {
     experienceIsOngoing() {
       return `experience_${this.type}_is_ongoing_${this.index}`;
     },
+    experienceDetails() {
+      return `experience_${this.type}_details_${this.index}`;
+    },
     experienceTasks() {
       return `experience_${this.type}_tasks_${this.index}`;
     },
-    experienceOtherTasks() {
-      return `experience_${this.type}_other_tasks_${this.index}`;
+    experienceTaskDetails() {
+      return `experience_${this.type}_task_details_${this.index}`;
     },
     workingBasis() {
       return this.row.taskDetails ? (this.row.taskDetails.workingBasis || '') : '';
