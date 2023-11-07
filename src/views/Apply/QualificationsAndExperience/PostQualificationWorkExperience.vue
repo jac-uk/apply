@@ -111,6 +111,7 @@ import RepeatableFields from '@/components/RepeatableFields.vue';
 import Experience from '@/components/RepeatableFields/Experience.vue';
 import ExperienceV2 from '@/components/RepeatableFields/ExperienceV2.vue';
 import BackLink from '@/components/BackLink.vue';
+import { getApplicationTotalJudicialDays } from '@/helpers/exerciseHelper';
 
 export default {
   name: 'PostQualificationWorkExperience',
@@ -153,19 +154,7 @@ export default {
         (Array.isArray(this.formData.employmentGaps) && this.formData.employmentGaps.length > 0);
     },
     totalJudicialDays() {
-      let total = 0;
-      if (Array.isArray(this.formData.experience)) {
-        this.formData.experience.forEach((experience) => {
-          if (
-            Array.isArray(experience.tasks) &&
-            experience.tasks.includes('judicial-functions') &&
-            experience?.judicialFunctions?.duration
-          ) {
-            total += parseInt(experience.judicialFunctions.duration, 10);
-          }
-        });
-      }
-      return total;
+      return getApplicationTotalJudicialDays(this.formData);
     },
   },
   methods: {

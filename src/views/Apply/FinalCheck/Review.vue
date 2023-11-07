@@ -442,6 +442,7 @@
             </div>
 
             <PostQualificationExperience
+              :vacancy="vacancy"
               :application="application"
             />
           </div>
@@ -470,7 +471,7 @@
             />
           </div>
 
-          <div v-if="applicationParts.employmentGaps">
+          <div v-if="hasEmploymentGaps">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -1136,6 +1137,9 @@ export default {
         return true;
       }
       return false;
+    },
+    hasEmploymentGaps() {
+      return this.applicationParts.employmentGaps || (this.isApplicationVersion3 && this.applicationParts.postQualificationWorkExperience);
     },
   },
   methods: {

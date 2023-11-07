@@ -42,6 +42,7 @@ import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import TextareaInput from '@/components/Form/TextareaInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import { getApplicationTotalJudicialDays } from '@/helpers/exerciseHelper';
 
 export default {
   name: 'PostQualificationWorkExperienceDetails',
@@ -68,19 +69,7 @@ export default {
   },
   computed: {
     totalJudicialDays() {
-      let total = 0;
-      if (Array.isArray(this.formData.experience)) {
-        this.formData.experience.forEach((experience) => {
-          if (
-            Array.isArray(experience.tasks) &&
-            experience.tasks.includes('judicial-functions') &&
-            experience?.judicialFunctions?.duration
-          ) {
-            total += parseInt(experience.judicialFunctions.duration, 10);
-          }
-        });
-      }
-      return total;
+      return getApplicationTotalJudicialDays(this.formData);
     },
   },
 };

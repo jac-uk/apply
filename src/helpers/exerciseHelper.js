@@ -57,7 +57,8 @@ export {
   isMoreInformationNeeded,
   isApplicationComplete,
   hasApplicationProcess,
-  informationDeadline
+  informationDeadline,
+  getApplicationTotalJudicialDays
 };
 
 // const EXERCISE_STATES = ['draft', 'ready', 'approved', 'shortlisting', 'selection', 'recommendation', 'handover', 'archived'];
@@ -444,4 +445,20 @@ function informationDeadline(exercise) {
     }
   }
   return null;
+}
+
+function getApplicationTotalJudicialDays(application) {
+  let total = 0;
+  if (Array.isArray(application.experience)) {
+    application.experience.forEach((experience) => {
+      if (
+        Array.isArray(experience.tasks) &&
+        experience.tasks.includes('judicial-functions') &&
+        experience?.judicialFunctions?.duration
+      ) {
+        total += parseInt(experience.judicialFunctions.duration, 10);
+      }
+    });
+  }
+  return total;
 }
