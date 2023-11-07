@@ -210,7 +210,7 @@
           <Task
             v-if="applicationParts.additionalInfo"
             id="additional-information"
-            title="Additional Information"
+            title="How did you hear about the vacancy?"
             :done="applicationProgress.additionalInfo"
             :locked="!currentApplicationParts.additionalInfo"
           />
