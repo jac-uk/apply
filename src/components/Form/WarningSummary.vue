@@ -1,6 +1,6 @@
 <template>
   <div
-    v-if="warningObject"
+    v-if="showWarning"
     class="govuk-warning-summary"
     aria-labelledby="warning-summary-title"
     role="alert"
@@ -27,6 +27,11 @@ export default {
     warningObject: {
       type: Object,
       default: null,
+    },
+  },
+  computed: {
+    showWarning() {
+      return (this.warningObject !== null && this.warningObject.hasOwnProperty('message') && this.warningObject.message);
     },
   },
 };

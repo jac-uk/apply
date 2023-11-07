@@ -43,11 +43,16 @@ export default {
           this.errors.push({ id: item, message: this.errorObject[item] });
         }
       }
-      this.updateAndScroll();
+
+      if (!this.isValid()) {
+        this.updateAndScroll();
+      }
     },
     handleWarning(payload) {
       this.warningObject = { id: payload.id, message: payload.message };
-      this.updateAndScroll();
+      if (payload.message) {
+        this.updateAndScroll();
+      }
     },
     updateAndScroll() {
       this.$nextTick(() => {

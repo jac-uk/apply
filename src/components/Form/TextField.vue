@@ -135,6 +135,9 @@ export default {
       if (this.warnCpsEmailMsg && this.isCPSEmail()) {
         this.setWarning(this.warnCpsEmailMsg);
       }
+      else {
+        this.setWarning('');
+      }
     },
   },
   methods: {
