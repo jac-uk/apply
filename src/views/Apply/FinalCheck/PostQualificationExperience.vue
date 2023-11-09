@@ -99,7 +99,7 @@
             Is a legal qualification a requisite for appointment?
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ $filters.toYesNo(item.judicialFunctions.isLegalQualification) }}
+            {{ $filters.toYesNo(item.judicialFunctions.isLegalQualificationRequired) }}
           </dd>
         </div>
         <div

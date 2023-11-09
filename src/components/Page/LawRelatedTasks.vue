@@ -54,8 +54,8 @@
           />
 
           <Select
-            id="judicial-functions-is-legal-qualification"
-            v-model="localJudicialFunctions.isLegalQualification"
+            id="judicial-functions-is-legal-qualification-required"
+            v-model="localJudicialFunctions.isLegalQualificationRequired"
             label="Is a legal qualification a requisite for appointment?"
             required
           >
