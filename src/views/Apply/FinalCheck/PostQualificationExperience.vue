@@ -103,11 +103,11 @@
           </dd>
         </div>
         <div
-          v-if="item.judicialFunctions.type === 'quasi-judicial'"
+          v-if="item.judicialFunctions.type === 'quasi-judicial-post'"
           class="govuk-summary-list__row"
         >
           <dt class="govuk-summary-list__key">
-            The powers, procedures and main responsibilities
+            Powers, procedures and main responsibilities
           </dt>
           <dd class="govuk-summary-list__value">
             {{ item.judicialFunctions.details }}
@@ -165,7 +165,7 @@
     >
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
-          Details
+          Details of how you have acquired the necessary skills
         </dt>
         <dd class="govuk-summary-list__value">
           {{ application.experienceDetails }}
