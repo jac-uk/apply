@@ -37,12 +37,14 @@
           </p> -->
 
           <ErrorSummary :errors="errors" />
+          <WarningSummary :warning-object="warningObject" />
 
           <TextField
             id="email"
             v-model="formData.email"
             label="Email address"
             type="email"
+            warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application."
             required
           />
 
@@ -78,7 +80,9 @@
 </template>
 
 <script>
+import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import WarningSummary from '@/components/Form/WarningSummary.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField.vue';
 import { auth } from '@/firebase';
@@ -90,10 +94,12 @@ export default {
   name: 'SignIn',
   components: {
     ErrorSummary,
+    WarningSummary,
     TextField,
     ChangeEmailMessage,
     Password,
   },
+  extends: Form,
   data () {
     return {
       formData: {},

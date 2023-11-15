@@ -11,6 +11,7 @@
         </h1>
 
         <ErrorSummary :errors="errors" />
+        <WarningSummary :warning-object="warningObject" />
 
         <p class="govuk-body-l">
           Sometimes called 'referees', your independent assessors will give us
@@ -118,6 +119,7 @@
           v-model="formData.firstAssessorEmail"
           label="Email"
           type="email"
+          warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
           required
         />
         <TextField
@@ -164,6 +166,7 @@
           v-model="formData.secondAssessorEmail"
           label="Email"
           type="email"
+          warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that a non-CPS email address is provided for Independent Assessors."
           required
         />
         <TextField
@@ -188,6 +191,7 @@
 <script>
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import WarningSummary from '@/components/Form/WarningSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import TextField from '@/components/Form/TextField.vue';
 import BackLink from '@/components/BackLink.vue';
@@ -198,6 +202,7 @@ export default {
   name: 'AssessorsDetails',
   components: {
     ErrorSummary,
+    WarningSummary,
     TextField,
     BackLink,
     Select,

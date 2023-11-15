@@ -86,6 +86,10 @@ export default {
       default: 'text',
       type: String,
     },
+    warnCpsEmailMsg: {
+      default: '',
+      type: String,
+    },
   },
   emits: ['update:modelValue'],
   computed: {
@@ -93,11 +97,11 @@ export default {
       get() {
         return this.modelValue;
       },
-      set(val) { 
+      set(val) {
         if (typeof val === 'string') {
           val = val.trim();
         }
-        
+
         switch (this.type) {
         case 'number':
           this.$emit('update:modelValue', val ? parseFloat(val) : '');
@@ -124,6 +128,31 @@ export default {
       default:
         return this.type;
       }
+    },
+  },
+  watch: {
+    text() {
+      if (this.warnCpsEmailMsg && this.isCPSEmail()) {
+        this.setWarning(this.warnCpsEmailMsg);
+      }
+      else {
+        this.setWarning('');
+      }
+    },
+  },
+  methods: {
+    isCPSEmail() {
+      if (this.text) {
+        const domain = 'cps';
+        const extension = 'gov.uk';
+
+        // Define a regular expression pattern to match the email address
+        const pattern = new RegExp(`^\\w+@${domain}\\.${extension}$`, 'i');
+
+        // Use the RegExp.test() method to check if the email matches the pattern
+        return pattern.test(this.text);
+      }
+      return false;
     },
   },
 };
