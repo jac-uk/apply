@@ -736,6 +736,7 @@
   "How many sitting days have you accumulated in this post?": "Sawl diwrnod eistedd ydych chi wedi’u cronni yn y swydd hon?",
   "Please enter a value for How many sitting days have you accumulated in this post?": "Rhowch werth ar gyfer y Sawl diwrnod eistedd ydych chi wedi’u cronni yn y swydd hon",
   "Is a legal qualification a requisite for appointment?": "A yw cymhwyster cyfreithiol yn angenrheidiol ar gyfer y penodiad?",
+  "Only numerical digits can be input into the sitting days field. If the number of days is 100 or more, an approximate figure will suffice.": "Dim ond cyfanrifau positif gellir eu rhoi yn y maes diwrnodau eistedd. Os yw’r nifer o ddiwrnodau’n 100 neu’n fwy, bydd ffigur bras yn ddigon.",
   "Please enter a value for Is a legal qualification a requisite for appointment?": "Rhowch werth ar gyfer y A yw cymhwyster cyfreithiol yn angenrheidiol ar gyfer y penodiad",
   "Please outline the powers, procedures and main responsibilities": "Amlinellwch y pwerau, y gweithdrefnau a’r prif gyfrifoldebau",
   "Gap in Employment": "Bwlch mewn Cyflogaeth",
