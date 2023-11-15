@@ -12,15 +12,22 @@
 
         <div class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8">
           <h2 class="govuk-heading-m govuk-!-margin-top-8">
-            {{ `You have indicated that you have ${totalJudicialDays} sitting days in total.` }}
+            <span>You have indicated that you have </span>
+            <span>{{ totalJudicialDays }}</span>
+            <span> sitting days in total.</span>
           </h2>
+
+          <div class="custom-html govuk-hint">
+            <span>As you have indicated you have less than </span>
+            <span>{{ vacancy.pjeDays }}</span>
+            <span> sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.</span>
+          </div>
 
           <TextareaInput
             v-if="totalJudicialDays < vacancy.pjeDays"
             id="experience-details"
             v-model="formData.experienceDetails"
-            label="details"
-            :hint="`As you have indicated you have less than ${vacancy.pjeDays} sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.`"
+            label="Details"
             :label-hidden="true"
             required
           />

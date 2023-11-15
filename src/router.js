@@ -456,7 +456,7 @@ const routes = [
         name: 'post-qualification-work-experience-details',
         meta: {
           requiresAuth: true,
-          title: 'Post qualification experience details',
+          title: 'Post qualification experience',
           isMultilanguage: true,
         },
       },
