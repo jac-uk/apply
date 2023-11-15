@@ -56,6 +56,17 @@
         </div>
 
         <p class="govuk-body-l">
+          Before completing your self-assessment, please refer to
+          <a
+            class="govuk-link"
+            href="https://judicialappointments.gov.uk/completing-your-self-assessment/"
+            target="_blank"
+          >
+            the helpful guidance on the JAC website
+          </a>.
+        </p>
+
+        <p class="govuk-body-l">
           Download the template on this page to complete your self assessment
           competency statements. It details the specific skills and experience
           you'll need to demonstrate for this role.
