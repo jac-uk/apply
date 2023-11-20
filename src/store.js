@@ -9,7 +9,6 @@ import invitations from '@/store/invitations';
 import applications from '@/store/applications';
 import application from '@/store/application';
 import logs from '@/store/logs';
-import session from '@/store/session';
 import candidateForms from '@/store/candidateForms';
 
 const store = createStore({
@@ -24,7 +23,6 @@ const store = createStore({
     applications,
     application,
     logs,
-    session,
     candidateForms,
   },
   state: {

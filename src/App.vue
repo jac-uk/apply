@@ -156,7 +156,6 @@ export default {
   },
   async mounted() {
     try {
-      await this.$store.dispatch('session/load');
       this.loaded = true;
     } catch {
       this.loadFailed = true;
