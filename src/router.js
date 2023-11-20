@@ -88,6 +88,20 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review.vue';
 import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent.vue';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted.vue';
 
+// Candidate Forms
+// PSDQ
+import PSDQIndex from '@/views/Apply/Forms/PSDQ/Index.vue';
+import PSDQTaskList from '@/views/Apply/Forms/PSDQ/TaskList.vue';
+import PSDQReview from '@/views/Apply/Forms/PSDQ/Review.vue';
+import PSDQConfirmation from '@/views/Apply/Forms/PSDQ/Confirmation.vue';
+import PSDQCandidateAvailability from '@/views/Apply/Forms/PSDQ/Parts/CandidateAvailability.vue';
+import PSDQPanellistConflicts from '@/views/Apply/Forms/PSDQ/Parts/PanellistConflicts.vue';
+import PSDQCommissionerConflicts from '@/views/Apply/Forms/PSDQ/Parts/CommissionerConflicts.vue';
+import PSDQCharacterChecks from '@/views/Apply/Forms/PSDQ/Parts/CharacterChecks.vue';
+import PSDQReasonableAdjustments from '@/views/Apply/Forms/PSDQ/Parts/ReasonableAdjustments.vue';
+import PSDQJurisdiction from '@/views/Apply/Forms/PSDQ/Parts/Jurisdiction.vue';
+import PSDQWelshPosts from '@/views/Apply/Forms/PSDQ/Parts/WelshPosts.vue';
+
 // Error pages
 import NotFound from '@/views/NotFound.vue';
 
@@ -688,6 +702,109 @@ const routes = [
           title: 'Consent to character checks',
         },
       },
+      {
+        path: 'forms/:formId/',
+        component: PSDQIndex,
+        children: [
+          {
+            path: '',
+            component: PSDQTaskList,
+            name: 'psdq-task-list',
+            meta: {
+              requiresAuth: true,
+              title: 'Tasks',
+              isMultilanguage: true,
+            },
+          },
+          {
+            path: 'review',
+            component: PSDQReview,
+            name: 'psdq-review',
+            meta: {
+              requiresAuth: true,
+              title: 'Review',
+              isMultilanguage: true,
+            },
+          },
+          {
+            path: 'confirmation',
+            component: PSDQConfirmation,
+            name: 'psdq-confirmation',
+            meta: {
+              requiresAuth: true,
+              title: 'Confirmation',
+              isMultilanguage: true,
+            },
+          },
+          // Parts
+          {
+            path: 'candidate-availability',
+            component: PSDQCandidateAvailability,
+            name: 'psdq-tasks-candidate-availability',
+            meta: {
+              requiresAuth: true,
+              title: 'Candidate availability | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'panellist-conflicts',
+            component: PSDQPanellistConflicts,
+            name: 'psdq-tasks-panellist-conflicts',
+            meta: {
+              requiresAuth: true,
+              title: 'Panellist conflicts | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'commissioner-conflicts',
+            component: PSDQCommissionerConflicts,
+            name: 'psdq-tasks-commissioner-conflicts',
+            meta: {
+              requiresAuth: true,
+              title: 'Commissioner conflicts | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'character-checks',
+            component: PSDQCharacterChecks,
+            name: 'psdq-tasks-character-checks',
+            meta: {
+              requiresAuth: true,
+              title: 'Character checks | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'reasonable-adjustments',
+            component: PSDQReasonableAdjustments,
+            name: 'psdq-tasks-reasonable-adjustments',
+            meta: {
+              requiresAuth: true,
+              title: 'Reasonsable adjustments | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'jurisdiction',
+            component: PSDQJurisdiction,
+            name: 'psdq-tasks-jurisdiction',
+            meta: {
+              requiresAuth: true,
+              title: 'Jurisdiction | PSDQ Tasks',
+            },
+          },
+          {
+            path: 'welsh-posts',
+            component: PSDQWelshPosts,
+            name: 'psdq-tasks-welsh-posts',
+            meta: {
+              requiresAuth: true,
+              title: 'Welsh posts | PSDQ Tasks',
+            },
+          }
+        ],
+        meta: {
+          title: 'Task list',
+        },
+      },
     ],
     meta: {
       title: 'Apply',
@@ -748,7 +865,7 @@ router.beforeEach((to, from, next) => {
     next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
     next();
-  }  
+  }
 });
 
 // Global after hook to set an appropriate title for the page

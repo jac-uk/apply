@@ -119,6 +119,28 @@
                   >
                     View sent character checks consent form
                   </RouterLink>
+
+
+                  <!-- @TODO: ADD LOGIC FOR WHETHER TO DISPLAY THESE DYNAMIC BUTTONS ONCE GOT THE CANDIDATE FORM DATA COMING THRU OK
+                      - change the clas on the link too
+                  -->
+                  <RouterLink
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'psdq-tasks-candidate-availability', params: { id: application.exerciseId, formId: 123 } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    View candidate availability task
+                  </RouterLink>
+                  <RouterLink
+                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                    :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    Review
+                  </RouterLink>
+
                 </div>
               </div>
             </div>
@@ -145,10 +167,15 @@ export default {
     allVacancies() {
       return this.$store.getters['vacancies/allVacancies'];
     },
+    // candidateForms() {
+    //   //return this.$store.state.candidateForms.records;
+    // },
   },
   created() {
-    this.$store.dispatch('applications/bind');
+
+    this.$store.dispatch('applications/bind').then(() => this.$store.dispatch('applications/bindCandidateForms'));
     this.$store.dispatch('vacancies/bind');
+    this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');
