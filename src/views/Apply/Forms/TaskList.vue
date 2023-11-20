@@ -46,7 +46,6 @@
   </div>
 </template>
 <script>
-import { hyphenize } from '@/filters';
 import ApplyMixIn from '@/views/Apply/ApplyMixIn';
 import TaskList from '@/components/Page/TaskList/TaskList.vue';
 import Task from '@/components/Page/TaskList/Task.vue';
