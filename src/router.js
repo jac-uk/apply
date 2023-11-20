@@ -90,17 +90,17 @@ import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubm
 
 // Candidate Forms
 // PSDQ
-import PSDQIndex from '@/views/Apply/Forms/PSDQ/Index.vue';
-import PSDQTaskList from '@/views/Apply/Forms/PSDQ/TaskList.vue';
-import PSDQReview from '@/views/Apply/Forms/PSDQ/Review.vue';
-import PSDQConfirmation from '@/views/Apply/Forms/PSDQ/Confirmation.vue';
-import PSDQCandidateAvailability from '@/views/Apply/Forms/PSDQ/Parts/CandidateAvailability.vue';
-import PSDQPanellistConflicts from '@/views/Apply/Forms/PSDQ/Parts/PanellistConflicts.vue';
-import PSDQCommissionerConflicts from '@/views/Apply/Forms/PSDQ/Parts/CommissionerConflicts.vue';
-import PSDQCharacterChecks from '@/views/Apply/Forms/PSDQ/Parts/CharacterChecks.vue';
-import PSDQReasonableAdjustments from '@/views/Apply/Forms/PSDQ/Parts/ReasonableAdjustments.vue';
-import PSDQJurisdiction from '@/views/Apply/Forms/PSDQ/Parts/Jurisdiction.vue';
-import PSDQWelshPosts from '@/views/Apply/Forms/PSDQ/Parts/WelshPosts.vue';
+import PSDQIndex from '@/views/Apply/Forms/Index.vue';
+import PSDQTaskList from '@/views/Apply/Forms/TaskList.vue';
+import PSDQReview from '@/views/Apply/Forms/Review.vue';
+import PSDQConfirmation from '@/views/Apply/Forms/Confirmation.vue';
+import PSDQCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
+import PSDQPanellistConflicts from '@/views/Apply/Forms/Parts/PanellistConflicts.vue';
+import PSDQCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
+import PSDQCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
+import PSDQReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
+import PSDQJurisdiction from '@/views/Apply/Forms/Parts/Jurisdiction.vue';
+import PSDQWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
 
 // Error pages
 import NotFound from '@/views/NotFound.vue';
@@ -712,7 +712,7 @@ const routes = [
             name: 'psdq-task-list',
             meta: {
               requiresAuth: true,
-              title: 'Tasks',
+              title: 'Pre Selection Day Questionnaire',
               isMultilanguage: true,
             },
           },

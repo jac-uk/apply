@@ -175,7 +175,7 @@ export default {
 
     this.$store.dispatch('applications/bind').then(() => this.$store.dispatch('applications/bindCandidateForms'));
     this.$store.dispatch('vacancies/bind');
-    this.$store.dispatch('candidateForms/bind');
+    //this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');

@@ -67,7 +67,7 @@ export default {
             commissionerConflicts: true,
             characterChecks: true,
             reasonableAdjustments: true,
-            workingPreferences: true,
+            jurisdiction: true,
             welshPosts: true,
           },
           panellists: [
