@@ -61,15 +61,15 @@ export default {
           openDate: '2023-11-16',
           closeDate: '2024-12-31',
           candidateIds: ['TmA0uGoFH9WzZqLuxJAvd6Q79i72', '123'],
-          parts: {
-            candidateAvailability: true,
-            panellistConflicts: true,
-            commissionerConflicts: true,
-            characterChecks: true,
-            reasonableAdjustments: true,
-            jurisdiction: true,
-            welshPosts: true,
-          },
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+            'reasonableAdjustments',
+            'jurisdiction',
+            'welshPosts',
+          ],
           panellists: [
             { id: 'hgZO2QEZ6pUJgF6CDxOp', fullName: 'Albert Brown' },
             { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
@@ -83,12 +83,12 @@ export default {
           openDate: '2023-11-16',
           closeDate: '2024-12-31',
           candidateIds: ['123'],
-          parts: {
-            candidateAvailability: true,
-            panellistConflicts: true,
-            commissionerConflicts: true,
-            characterChecks: true,
-          },
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+          ],
           panellists: [
             { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
           ]

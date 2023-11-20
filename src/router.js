@@ -743,7 +743,7 @@ const routes = [
             name: 'psdq-tasks-candidate-availability',
             meta: {
               requiresAuth: true,
-              title: 'Candidate availability | PSDQ Tasks',
+              title: 'Candidate availability',
             },
           },
           {
@@ -752,7 +752,7 @@ const routes = [
             name: 'psdq-tasks-panellist-conflicts',
             meta: {
               requiresAuth: true,
-              title: 'Panellist conflicts | PSDQ Tasks',
+              title: 'Panellist conflicts',
             },
           },
           {
@@ -761,7 +761,7 @@ const routes = [
             name: 'psdq-tasks-commissioner-conflicts',
             meta: {
               requiresAuth: true,
-              title: 'Commissioner conflicts | PSDQ Tasks',
+              title: 'Commissioner conflicts',
             },
           },
           {
@@ -770,7 +770,7 @@ const routes = [
             name: 'psdq-tasks-character-checks',
             meta: {
               requiresAuth: true,
-              title: 'Character checks | PSDQ Tasks',
+              title: 'Character checks',
             },
           },
           {
@@ -779,7 +779,7 @@ const routes = [
             name: 'psdq-tasks-reasonable-adjustments',
             meta: {
               requiresAuth: true,
-              title: 'Reasonsable adjustments | PSDQ Tasks',
+              title: 'Reasonsable adjustments',
             },
           },
           {
@@ -788,7 +788,7 @@ const routes = [
             name: 'psdq-tasks-jurisdiction',
             meta: {
               requiresAuth: true,
-              title: 'Jurisdiction | PSDQ Tasks',
+              title: 'Jurisdiction',
             },
           },
           {
@@ -797,7 +797,7 @@ const routes = [
             name: 'psdq-tasks-welsh-posts',
             meta: {
               requiresAuth: true,
-              title: 'Welsh posts | PSDQ Tasks',
+              title: 'Welsh posts',
             },
           }
         ],
