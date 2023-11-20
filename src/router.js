@@ -702,6 +702,15 @@ const routes = [
           title: 'Consent to character checks',
         },
       },
+    ],
+    meta: {
+      title: 'Apply',
+    },
+  },
+  {
+    path: '/forms/:formId/',
+    component: PSDQIndex,
+    children: [
       {
         path: 'forms/:formId/',
         component: PSDQIndex,
@@ -802,12 +811,98 @@ const routes = [
           }
         ],
         meta: {
-          title: 'Task list',
+          requiresAuth: true,
+          title: 'Tasks',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'review',
+        component: PSDQReview,
+        name: 'psdq-review',
+        meta: {
+          requiresAuth: true,
+          title: 'Review',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'confirmation',
+        component: PSDQConfirmation,
+        name: 'psdq-confirmation',
+        meta: {
+          requiresAuth: true,
+          title: 'Confirmation',
+          isMultilanguage: true,
+        },
+      },
+      // Parts
+      {
+        path: 'candidate-availability',
+        component: PSDQCandidateAvailability,
+        name: 'psdq-tasks-candidate-availability',
+        meta: {
+          requiresAuth: true,
+          title: 'Candidate availability | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'panellist-conflicts',
+        component: PSDQPanellistConflicts,
+        name: 'psdq-tasks-panellist-conflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Panellist conflicts | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'commissioner-conflicts',
+        component: PSDQCommissionerConflicts,
+        name: 'psdq-tasks-commissioner-conflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'character-checks',
+        component: PSDQCharacterChecks,
+        name: 'psdq-tasks-character-checks',
+        meta: {
+          requiresAuth: true,
+          title: 'Character checks | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'reasonable-adjustments',
+        component: PSDQReasonableAdjustments,
+        name: 'psdq-tasks-reasonable-adjustments',
+        meta: {
+          requiresAuth: true,
+          title: 'Reasonsable adjustments | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'jurisdiction',
+        component: PSDQJurisdiction,
+        name: 'psdq-tasks-jurisdiction',
+        meta: {
+          requiresAuth: true,
+          title: 'Jurisdiction | PSDQ Tasks',
+        },
+      },
+      {
+        path: 'welsh-posts',
+        component: PSDQWelshPosts,
+        name: 'psdq-tasks-welsh-posts',
+        meta: {
+          requiresAuth: true,
+          title: 'Welsh posts | PSDQ Tasks',
         },
       },
     ],
     meta: {
-      title: 'Apply',
+      title: 'Form',
     },
   },
   {
