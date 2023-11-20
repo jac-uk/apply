@@ -89,18 +89,17 @@ import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent.vue';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted.vue';
 
 // Candidate Forms
-// PSDQ
-import PSDQIndex from '@/views/Apply/Forms/Index.vue';
-import PSDQTaskList from '@/views/Apply/Forms/TaskList.vue';
-import PSDQReview from '@/views/Apply/Forms/Review.vue';
-import PSDQConfirmation from '@/views/Apply/Forms/Confirmation.vue';
-import PSDQCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
-import PSDQPanellistConflicts from '@/views/Apply/Forms/Parts/PanellistConflicts.vue';
-import PSDQCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
-import PSDQCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
-import PSDQReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
-import PSDQJurisdiction from '@/views/Apply/Forms/Parts/Jurisdiction.vue';
-import PSDQWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
+import CandidateFormIndex from '@/views/Apply/Forms/Index.vue';
+import CandidateFormTaskList from '@/views/Apply/Forms/TaskList.vue';
+import CandidateFormReview from '@/views/Apply/Forms/Review.vue';
+import CandidateFormConfirmation from '@/views/Apply/Forms/Confirmation.vue';
+import CandidateFormCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
+import CandidateFormPanellistConflicts from '@/views/Apply/Forms/Parts/PanellistConflicts.vue';
+import CandidateFormCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
+import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
+import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
+import CandidateFormJurisdiction from '@/views/Apply/Forms/Parts/Jurisdiction.vue';
+import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
 
 // Error pages
 import NotFound from '@/views/NotFound.vue';
@@ -704,12 +703,12 @@ const routes = [
       },
       {
         path: 'forms/:formId/',
-        component: PSDQIndex,
+        component: CandidateFormIndex,
         children: [
           {
             path: '',
-            component: PSDQTaskList,
-            name: 'psdq-task-list',
+            component: CandidateFormTaskList,
+            name: 'candidate-form-task-list',
             meta: {
               requiresAuth: true,
               title: 'Pre Selection Day Questionnaire',
@@ -718,8 +717,8 @@ const routes = [
           },
           {
             path: 'review',
-            component: PSDQReview,
-            name: 'psdq-review',
+            component: CandidateFormReview,
+            name: 'candidate-form-review',
             meta: {
               requiresAuth: true,
               title: 'Review',
@@ -728,8 +727,8 @@ const routes = [
           },
           {
             path: 'confirmation',
-            component: PSDQConfirmation,
-            name: 'psdq-confirmation',
+            component: CandidateFormConfirmation,
+            name: 'candidate-form-confirmation',
             meta: {
               requiresAuth: true,
               title: 'Confirmation',
@@ -739,8 +738,8 @@ const routes = [
           // Parts
           {
             path: 'candidate-availability',
-            component: PSDQCandidateAvailability,
-            name: 'psdq-tasks-candidateAvailability',
+            component: CandidateFormCandidateAvailability,
+            name: 'candidate-form-tasks-candidateAvailability',
             meta: {
               requiresAuth: true,
               title: 'Candidate availability',
@@ -748,8 +747,8 @@ const routes = [
           },
           {
             path: 'panellist-conflicts',
-            component: PSDQPanellistConflicts,
-            name: 'psdq-tasks-panelConflicts',
+            component: CandidateFormPanellistConflicts,
+            name: 'candidate-form-tasks-panelConflicts',
             meta: {
               requiresAuth: true,
               title: 'Panellist conflicts',
@@ -757,8 +756,8 @@ const routes = [
           },
           {
             path: 'commissioner-conflicts',
-            component: PSDQCommissionerConflicts,
-            name: 'psdq-tasks-commissionerConflicts',
+            component: CandidateFormCommissionerConflicts,
+            name: 'candidate-form-tasks-commissionerConflicts',
             meta: {
               requiresAuth: true,
               title: 'Commissioner conflicts',
@@ -766,8 +765,8 @@ const routes = [
           },
           {
             path: 'character-checks',
-            component: PSDQCharacterChecks,
-            name: 'psdq-tasks-characterChecks',
+            component: CandidateFormCharacterChecks,
+            name: 'candidate-form-tasks-characterChecks',
             meta: {
               requiresAuth: true,
               title: 'Character checks',
@@ -775,8 +774,8 @@ const routes = [
           },
           {
             path: 'reasonable-adjustments',
-            component: PSDQReasonableAdjustments,
-            name: 'psdq-tasks-reasonableAdjustments',
+            component: CandidateFormReasonableAdjustments,
+            name: 'candidate-form-tasks-reasonableAdjustments',
             meta: {
               requiresAuth: true,
               title: 'Reasonsable adjustments',
@@ -784,8 +783,8 @@ const routes = [
           },
           {
             path: 'jurisdiction',
-            component: PSDQJurisdiction,
-            name: 'psdq-tasks-workingPreferences',
+            component: CandidateFormJurisdiction,
+            name: 'candidate-form-tasks-workingPreferences',
             meta: {
               requiresAuth: true,
               title: 'Jurisdiction',
@@ -793,8 +792,8 @@ const routes = [
           },
           {
             path: 'welsh-posts',
-            component: PSDQWelshPosts,
-            name: 'psdq-tasks-welshPosts',
+            component: CandidateFormWelshPosts,
+            name: 'candidate-form-tasks-welshPosts',
             meta: {
               requiresAuth: true,
               title: 'Welsh posts',

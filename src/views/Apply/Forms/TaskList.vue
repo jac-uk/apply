@@ -23,7 +23,7 @@
         <ul class="govuk-list govuk-!-margin-bottom-9">
           <Task
             v-for="part in parts"
-            :id="`psdq-tasks-${part}`"
+            :id="`candidate-form-tasks-${part}`"
             :key="part"
             :title="$filters.lookup(part)"
             :done="isDone(part)"
