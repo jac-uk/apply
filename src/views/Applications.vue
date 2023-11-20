@@ -121,11 +121,11 @@
                   </RouterLink>
 
                   <!-- @TODO: ADD LOGIC FOR WHETHER TO DISPLAY THESE DYNAMIC BUTTONS ONCE GOT THE CANDIDATE FORM DATA COMING THRU OK
-                      - change the clas on the link too
+                      - change the class on the link too
                   -->
                   <RouterLink
                     :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                    :to="{ name: 'psdq-tasks-candidate-availability', params: { id: application.exerciseId, formId: 123 } }"
+                    :to="{ name: 'candidate-form-tasks-candidateAvailability', params: { id: application.exerciseId, formId: 123 } }"
                     role="button"
                     data-module="govuk-button"
                   >
@@ -133,7 +133,7 @@
                   </RouterLink>
                   <RouterLink
                     :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                    :to="{ name: 'character-checks-review', params: { id: application.exerciseId } }"
+                    :to="{ name: 'candidate-form-review', params: { id: application.exerciseId } }"
                     role="button"
                     data-module="govuk-button"
                   >
