@@ -702,15 +702,6 @@ const routes = [
           title: 'Consent to character checks',
         },
       },
-    ],
-    meta: {
-      title: 'Apply',
-    },
-  },
-  {
-    path: '/forms/:formId/',
-    component: PSDQIndex,
-    children: [
       {
         path: 'forms/:formId/',
         component: PSDQIndex,
@@ -749,7 +740,7 @@ const routes = [
           {
             path: 'candidate-availability',
             component: PSDQCandidateAvailability,
-            name: 'psdq-tasks-candidate-availability',
+            name: 'psdq-tasks-candidateAvailability',
             meta: {
               requiresAuth: true,
               title: 'Candidate availability',
@@ -758,7 +749,7 @@ const routes = [
           {
             path: 'panellist-conflicts',
             component: PSDQPanellistConflicts,
-            name: 'psdq-tasks-panellist-conflicts',
+            name: 'psdq-tasks-panelConflicts',
             meta: {
               requiresAuth: true,
               title: 'Panellist conflicts',
@@ -767,7 +758,7 @@ const routes = [
           {
             path: 'commissioner-conflicts',
             component: PSDQCommissionerConflicts,
-            name: 'psdq-tasks-commissioner-conflicts',
+            name: 'psdq-tasks-commissionerConflicts',
             meta: {
               requiresAuth: true,
               title: 'Commissioner conflicts',
@@ -776,7 +767,7 @@ const routes = [
           {
             path: 'character-checks',
             component: PSDQCharacterChecks,
-            name: 'psdq-tasks-character-checks',
+            name: 'psdq-tasks-characterChecks',
             meta: {
               requiresAuth: true,
               title: 'Character checks',
@@ -785,7 +776,7 @@ const routes = [
           {
             path: 'reasonable-adjustments',
             component: PSDQReasonableAdjustments,
-            name: 'psdq-tasks-reasonable-adjustments',
+            name: 'psdq-tasks-reasonableAdjustments',
             meta: {
               requiresAuth: true,
               title: 'Reasonsable adjustments',
@@ -794,7 +785,7 @@ const routes = [
           {
             path: 'jurisdiction',
             component: PSDQJurisdiction,
-            name: 'psdq-tasks-jurisdiction',
+            name: 'psdq-tasks-workingPreferences',
             meta: {
               requiresAuth: true,
               title: 'Jurisdiction',
@@ -803,7 +794,7 @@ const routes = [
           {
             path: 'welsh-posts',
             component: PSDQWelshPosts,
-            name: 'psdq-tasks-welsh-posts',
+            name: 'psdq-tasks-welshPosts',
             meta: {
               requiresAuth: true,
               title: 'Welsh posts',
@@ -811,98 +802,12 @@ const routes = [
           }
         ],
         meta: {
-          requiresAuth: true,
-          title: 'Tasks',
-          isMultilanguage: true,
-        },
-      },
-      {
-        path: 'review',
-        component: PSDQReview,
-        name: 'psdq-review',
-        meta: {
-          requiresAuth: true,
-          title: 'Review',
-          isMultilanguage: true,
-        },
-      },
-      {
-        path: 'confirmation',
-        component: PSDQConfirmation,
-        name: 'psdq-confirmation',
-        meta: {
-          requiresAuth: true,
-          title: 'Confirmation',
-          isMultilanguage: true,
-        },
-      },
-      // Parts
-      {
-        path: 'candidate-availability',
-        component: PSDQCandidateAvailability,
-        name: 'psdq-tasks-candidate-availability',
-        meta: {
-          requiresAuth: true,
-          title: 'Candidate availability | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'panellist-conflicts',
-        component: PSDQPanellistConflicts,
-        name: 'psdq-tasks-panellist-conflicts',
-        meta: {
-          requiresAuth: true,
-          title: 'Panellist conflicts | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'commissioner-conflicts',
-        component: PSDQCommissionerConflicts,
-        name: 'psdq-tasks-commissioner-conflicts',
-        meta: {
-          requiresAuth: true,
-          title: 'Commissioner conflicts | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'character-checks',
-        component: PSDQCharacterChecks,
-        name: 'psdq-tasks-character-checks',
-        meta: {
-          requiresAuth: true,
-          title: 'Character checks | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'reasonable-adjustments',
-        component: PSDQReasonableAdjustments,
-        name: 'psdq-tasks-reasonable-adjustments',
-        meta: {
-          requiresAuth: true,
-          title: 'Reasonsable adjustments | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'jurisdiction',
-        component: PSDQJurisdiction,
-        name: 'psdq-tasks-jurisdiction',
-        meta: {
-          requiresAuth: true,
-          title: 'Jurisdiction | PSDQ Tasks',
-        },
-      },
-      {
-        path: 'welsh-posts',
-        component: PSDQWelshPosts,
-        name: 'psdq-tasks-welsh-posts',
-        meta: {
-          requiresAuth: true,
-          title: 'Welsh posts | PSDQ Tasks',
+          title: 'Task list',
         },
       },
     ],
     meta: {
-      title: 'Form',
+      title: 'Apply',
     },
   },
   {

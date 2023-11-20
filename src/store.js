@@ -10,6 +10,8 @@ import applications from '@/store/applications';
 import application from '@/store/application';
 import logs from '@/store/logs';
 import candidateForms from '@/store/candidateForms';
+import candidateForm from '@/store/candidateForm';
+import candidateFormResponse from '@/store/candidateFormResponse';
 
 const store = createStore({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
@@ -24,6 +26,8 @@ const store = createStore({
     application,
     logs,
     candidateForms,
+    candidateForm,
+    candidateFormResponse,
   },
   state: {
     packageVersion: import.meta.env.PACKAGE_VERSION || '0',

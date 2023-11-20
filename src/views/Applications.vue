@@ -120,7 +120,6 @@
                     View sent character checks consent form
                   </RouterLink>
 
-
                   <!-- @TODO: ADD LOGIC FOR WHETHER TO DISPLAY THESE DYNAMIC BUTTONS ONCE GOT THE CANDIDATE FORM DATA COMING THRU OK
                       - change the clas on the link too
                   -->
@@ -140,7 +139,6 @@
                   >
                     Review
                   </RouterLink>
-
                 </div>
               </div>
             </div>
@@ -167,15 +165,14 @@ export default {
     allVacancies() {
       return this.$store.getters['vacancies/allVacancies'];
     },
-    // candidateForms() {
-    //   //return this.$store.state.candidateForms.records;
-    // },
+    candidateForms() {
+      return this.$store.state.candidateForms.records;
+    },
   },
   created() {
-
-    this.$store.dispatch('applications/bind').then(() => this.$store.dispatch('applications/bindCandidateForms'));
+    this.$store.dispatch('applications/bind');  //.then(() => this.$store.dispatch('applications/bindCandidateForms'));
     this.$store.dispatch('vacancies/bind');
-    //this.$store.dispatch('candidateForms/bind');
+    this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');

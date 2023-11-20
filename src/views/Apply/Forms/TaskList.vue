@@ -8,37 +8,33 @@
       >
         Applications
       </RouterLink>
-      <Countdown
-        v-if="isVacancyOpen"
-        :close-time="vacancyCloseTime"
-        :countdown-length="60"
-      />
 
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
+
       <h1 class="govuk-heading-xl">
-        Pre Selection Day Questionnaire
+        {{ $filters.lookup(formType) }}
       </h1>
 
       <p class="govuk-body">You have been invited to a Selection Day. In order to make the arrangements we need to check the following details with you. Please complete each section and then submit the details.</p>
 
       <TaskList>
         <ul class="govuk-list govuk-!-margin-bottom-9">
-          <template v-for="part in candidateForm.parts">
-            <Task
-              :id="`psdq-tasks-${kebabize(part)}`"
-              :title="undoCamelCase(part)"
-              :done="candidateFormResponse.progress.includes(part)"
-            />
-          </template>
+          <Task
+            v-for="part in parts"
+            :id="`psdq-tasks-${part}`"
+            :key="part"
+            :title="$filters.lookup(part)"
+            :done="isDone(part)"
+          />
         </ul>
       </TaskList>
 
       <button
         :disabled="!canApply"
         class="govuk-button info-btn--task-list--review-application"
-        @click="reviewAnswers"
+        @click="reviewApplication"
       >
         Review answers
       </button>
@@ -51,73 +47,65 @@ import TaskList from '@/components/Page/TaskList/TaskList.vue';
 import Task from '@/components/Page/TaskList/Task.vue';
 
 export default {
-  name: 'PSDQTaskList',
+  name: 'CandidateFormTaskList',
   components: {
     TaskList,
     Task,
   },
+  //extends: CharacterInformationStatus,
   mixins: [ApplyMixIn],
+  data() {
+    return {
+    };
+  },
   computed: {
-    candidateFormResponse() {
-      // @TODO: Search the candidate form responses for the candidate's one
-      return {
-        formId: 123,
-        status: 'created',
-        statusLog: {},
-        progress: [
-          'candidateAvailability'
-        ],
-        candidateAvailability: {},
-        panellistConflicts: {},
-      };
+    candidate() {
+      return this.$store.state.candidate.record;
+    },
+    formId() {
+      return this.$route.params.formId;
     },
     candidateForm() {
-      return {
-        exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
-        task: 'candidateAvailability',
-        createdAt: null,
-        lastUpdated: null,
-        openDate: '2023-11-16',
-        closeDate: '2024-12-31',
-        candidateIds: ['123'],
-        parts: [
-          'candidateAvailability',
-          'panellistConflicts',
-          'commissionerConflicts',
-          'characterChecks',
-        ],
-        panellists: [
-          { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-        ]
-      };
+      return this.$store.state.candidateForm.record;
+    },
+    formType() {
+      if (!this.candidateForm) return '';
+      if (!this.candidateForm.task) return '';
+      return this.candidateForm.task.type;
+    },
+    parts() {
+      if (!this.candidateForm) return [];
+      return this.candidateForm.parts;
+    },
+    candidateFormResponse() {
+      return this.$store.state.candidateFormResponse.record;
     },
     applications() {
       return this.$store.state.applications.records;
     },
   },
   async created() {
-    // TODO check why we were doing the following?
-    // const characterInformation = this.$store.getters['candidate/characterInformation']();
-    // if (characterInformation && !this.application.characterInformationV2) {
-    //   this.application.characterInformationV2 = characterInformation;
-    //   await this.$store.dispatch('application/save', this.application);
-    // }
+    const formId = this.$route.params.formId;
+    this.$store.dispatch('candidateForm/bind', formId);
+    this.$store.dispatch('candidateFormResponse/bind', formId);
   },
   methods: {
-    kebabize(str) {
-      return str.replace(/[A-Z]+(?![a-z])|[A-Z]/g, ($, ofs) => (ofs ? "-" : "") + $.toLowerCase());
+    isDone(partRef) {
+      if (!this.candidateFormResponse) return false;
+      if (!this.candidateFormResponse.progress) return false;
+      return this.candidateFormResponse.progress[partRef];
     },
-    undoCamelCase(str) {
-      return str
-        // insert a space before all caps
-        .replace(/([A-Z])/g, ' $1')
-        // uppercase the first character
-        .replace(/^./, function(str){ return str.toUpperCase(); });
-    },
-    reviewAnswers() {
+    reviewApplication() {
       this.$router.push({ name: 'review' });
     },
   },
 };
 
 </script>
+<style scoped>
+
+.container-border-top {
+  border-top: 1px solid #b1b4b6
+}
+
+</style>
