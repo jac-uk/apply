@@ -214,6 +214,13 @@
             :done="applicationProgress.additionalInfo"
             :locked="!currentApplicationParts.additionalInfo"
           />
+          <Task
+            v-if="applicationParts.commissionerConflicts"
+            id="commissioner-conflicts"
+            title="Commissioner conflicts"
+            :done="applicationProgress.commissionerConflicts"
+            :locked="!currentApplicationParts.commissionerConflicts"
+          />
         </TaskGroup>
       </TaskList>
 

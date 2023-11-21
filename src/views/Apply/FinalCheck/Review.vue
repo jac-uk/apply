@@ -798,6 +798,51 @@
             </dl>
           </div>
 
+          <div v-if="applicationParts.commissionerConflicts">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Commissioner conflicts
+              </h2>
+              <RouterLink
+                v-if="canEdit && currentApplicationParts.commissionerConflicts"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'commissioner-conflicts'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+
+            <dl
+              v-if="application.additionalInfo && application.additionalInfo.commissionerConflicts && application.additionalInfo.commissionerConflicts.length"
+              class="govuk-summary-list govuk-!-margin-bottom-8"
+            >
+              <div
+                v-for="(commissionerConflict, index) in application.additionalInfo.commissionerConflicts"
+                :key="index"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  {{ commissionerConflict.name }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <div v-if="commissionerConflict.hasRelationship === null">
+                    No information provided
+                  </div>
+                  <div v-else>
+                    {{ commissionerConflict.hasRelationship ? 'Yes' : 'No' }}
+                  </div>
+                  <div v-if="commissionerConflict.hasRelationship">
+                    {{ commissionerConflict.details }}
+                  </div>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div
             v-if="hasStatementOfEligibility"
             class="govuk-!-margin-top-9"

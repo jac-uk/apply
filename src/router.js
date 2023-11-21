@@ -75,6 +75,7 @@ import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter.vue';
 import Review from '@/views/Apply/FinalCheck/Review.vue';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation.vue';
 import AdditionalInformation from '@/views/Apply/AdditionalInformation.vue';
+import CommissionerConflicts from '@/views/Apply/CommissionerConflicts.vue';
 
 // Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks.vue';
@@ -395,6 +396,16 @@ const routes = [
         meta: {
           requiresAuth: true,
           title: 'Additional information',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'commissioner-conflicts',
+        component: CommissionerConflicts,
+        name: 'commissioner-conflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts',
           isMultilanguage: true,
         },
       },
