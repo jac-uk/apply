@@ -172,51 +172,52 @@ export default {
       return this.$store.getters['vacancies/allVacancies'];
     },
     candidateForms() {
-      return this.$store.state.candidateForms.records;
+      //@todo: Put back
+      // return this.$store.state.candidateForms.records;
 
-      // return [
-      //   {
-      //     exercise: { id: '1qef6rsaSLvvsZHrJuw7' },
-      //     task: 'candidateAvailability',
-      //     createdAt: null,
-      //     lastUpdated: null,
-      //     openDate: '2023-11-16',
-      //     closeDate: '2024-12-31',
-      //     candidateIds: ['TmA0uGoFH9WzZqLuxJAvd6Q79i72', '123'],
-      //     parts: [
-      //       'candidateAvailability',
-      //       'panellistConflicts',
-      //       'commissionerConflicts',
-      //       'characterChecks',
-      //       'reasonableAdjustments',
-      //       'jurisdiction',
-      //       'welshPosts',
-      //     ],
-      //     panellists: [
-      //       { id: 'hgZO2QEZ6pUJgF6CDxOp', fullName: 'Albert Brown' },
-      //       { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-      //     ]
-      //   },
-      //   {
-      //     //exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
-      //     exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
-      //     task: 'candidateAvailability',
-      //     createdAt: null,
-      //     lastUpdated: null,
-      //     openDate: '2023-11-16',
-      //     closeDate: '2024-12-31',
-      //     candidateIds: ['123'],
-      //     parts: [
-      //       'candidateAvailability',
-      //       'panellistConflicts',
-      //       'commissionerConflicts',
-      //       'characterChecks',
-      //     ],
-      //     panellists: [
-      //       { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-      //     ]
-      //   },
-      // ];
+      return [
+        {
+          exercise: { id: '1qef6rsaSLvvsZHrJuw7' },
+          task: 'candidateAvailability',
+          createdAt: null,
+          lastUpdated: null,
+          openDate: '2023-11-16',
+          closeDate: '2024-12-31',
+          candidateIds: ['TmA0uGoFH9WzZqLuxJAvd6Q79i72', '123'],
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+            'reasonableAdjustments',
+            'jurisdiction',
+            'welshPosts',
+          ],
+          panellists: [
+            { id: 'hgZO2QEZ6pUJgF6CDxOp', fullName: 'Albert Brown' },
+            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+          ]
+        },
+        {
+          //exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
+          exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
+          task: 'candidateAvailability',
+          createdAt: null,
+          lastUpdated: null,
+          openDate: '2023-11-16',
+          closeDate: '2024-12-31',
+          candidateIds: ['123'],
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+          ],
+          panellists: [
+            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+          ]
+        },
+      ];
     },
     routesByExerciseId() {
       const obj = {};
@@ -236,7 +237,9 @@ export default {
   created() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
-    this.$store.dispatch('candidateForms/bind');
+
+    //@todo: Put back
+    //this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');

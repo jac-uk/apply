@@ -41,7 +41,6 @@
   </div>
 </template>
 <script>
-//import ApplyMixIn from '@/views/Apply/ApplyMixIn';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import TaskList from '@/components/Page/TaskList/TaskList.vue';
 import Task from '@/components/Page/TaskList/Task.vue';

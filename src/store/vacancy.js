@@ -50,7 +50,7 @@ export default {
     },
     getCloseDate: (state, getters, rootState, rootGetters) => {
       if (state.record === null) return null;
-      const extendedDate = rootGetters['application/getExtendedDate']();
+      const extendedDate = rootGetters['application/getExtendedDate'];
       const closeDate = extendedDate || state.record.applicationCloseDate;
       if (closeDate === null) return null;
       return new Date(closeDate);

@@ -4,42 +4,51 @@ export default {
       return this.$store.state.vacancy.record;
     },
     candidateForm() {
+      //@todo: Put back
+      //return this.$store.state.candidateForm.record;
 
-      return this.$store.state.candidateForm.record;
-
-      // return {
-      //   exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
-      //   task: 'candidateAvailability',
-      //   createdAt: null,
-      //   lastUpdated: null,
-      //   openDate: '2023-11-16',
-      //   closeDate: '2024-12-31',
-      //   candidateIds: ['123'],
-      //   parts: [
-      //     'candidateAvailability',
-      //     'panellistConflicts',
-      //     'commissionerConflicts',
-      //     'characterChecks',
-      //   ],
-      //   panellists: [
-      //     { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-      //   ]
-      // };
+      return {
+        exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
+        task: 'candidateAvailability',
+        createdAt: null,
+        lastUpdated: null,
+        openDate: '2023-11-16',
+        closeDate: '2024-12-31',
+        candidateIds: ['123'],
+        parts: [
+          'candidateAvailability',
+          'panellistConflicts',
+          'commissionerConflicts',
+          'characterChecks',
+        ],
+        panellists: [
+          { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+        ]
+      };
     },
     candidateFormResponse() {
-        return this.$store.state.candidateFormResponse.record;
+      //@todo: Put back
+      // return this.$store.state.candidateFormResponse.record;
 
       // @TODO: Search the candidate form responses for the candidate's one
-      // return {
-      //   formId: 123,
-      //   status: 'created',
-      //   statusLog: {},
-      //   progress: {
-      //     candidateAvailability: true,
-      //   },
-      //   candidateAvailability: {},
-      //   panellistConflicts: {},
-      // };
+      return {
+        formId: 123,
+        status: 'created',
+        statusLog: {},
+        progress: {
+          candidateAvailability: true,
+        },
+        candidateAvailability: [
+          {
+            location: 'London',
+            dates: [
+              '07/09/2023',
+              '08/09/2023',
+            ]
+          }
+        ],
+        panellistConflicts: {},
+      };
     },
   },
   methods: {
@@ -73,7 +82,9 @@ export default {
   },
   async created() {
     const formId = this.$route.params.formId;
-    this.$store.dispatch('candidateForm/bind', formId);
-    this.$store.dispatch('candidateFormResponse/bind', formId);
+
+    //@todo: Put back
+    //this.$store.dispatch('candidateForm/bind', formId);
+    //this.$store.dispatch('candidateFormResponse/bind', formId);
   },
 };
