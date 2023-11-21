@@ -58,7 +58,9 @@ export {
   isApplicationComplete,
   hasApplicationProcess,
   informationDeadline,
-  getApplicationTotalJudicialDays
+  getApplicationTotalJudicialDays,
+  isApplicationVersionGreaterThan,
+  isApplicationVersionLessThan
 };
 
 // const EXERCISE_STATES = ['draft', 'ready', 'approved', 'shortlisting', 'selection', 'recommendation', 'handover', 'archived'];
@@ -461,4 +463,11 @@ function getApplicationTotalJudicialDays(application) {
     });
   }
   return total;
+}
+
+function isApplicationVersionGreaterThan(exercise, version) {
+  return exercise?._applicationVersion > version;
+}
+function isApplicationVersionLessThan(exercise, version) {
+  return exercise?._applicationVersion < version;
 }

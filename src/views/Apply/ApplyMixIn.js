@@ -16,7 +16,8 @@ import {
   isMoreInformationNeeded,
   isApplicationComplete,
   hasApplicationProcess,
-  hasStatementOfEligibility
+  hasStatementOfEligibility,
+  isApplicationVersionGreaterThan
 } from '@/helpers/exerciseHelper';
 import { updateLangToTextNode } from '@/helpers/language';
 
@@ -114,8 +115,8 @@ export default {
         return false;
       }
     },
-    isApplicationVersion3() {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    isApplicationVersionGreaterThan2() {
+      return isApplicationVersionGreaterThan(this.vacancy, 2);
     },
   },
   mounted() {

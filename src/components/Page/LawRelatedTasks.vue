@@ -23,7 +23,7 @@
         </a>
       </p>
 
-      <template v-if="isApplicationVersion3 && isAppointment">
+      <template v-if="isApplicationVersionGreaterThan2 && isAppointment">
         <CheckboxItem
           value="judicial-functions"
           label="The carrying-out of judicial functions of any court or tribunal"
@@ -135,6 +135,7 @@ import TextareaInput from '@/components/Form/TextareaInput.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import FormField from '@/components/Form/FormField.vue';
 import { updateLangToTextNode } from '@/helpers/language';
+import { isApplicationVersionGreaterThan } from '@/helpers/exerciseHelper';
 
 export default {
   name: 'LawRelatedTasks',
@@ -205,8 +206,8 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
-    isApplicationVersion3() {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    isApplicationVersionGreaterThan2() {
+      return isApplicationVersionGreaterThan(this.vacancy, 2);
     },
     localTasks: {
       get() {

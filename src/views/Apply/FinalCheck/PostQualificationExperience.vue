@@ -77,7 +77,7 @@
         </dd>
       </div>
 
-      <template v-if="isApplicationVersion3 && hasJudicialFunctions(item)">
+      <template v-if="isApplicationVersionGreaterThan2 && hasJudicialFunctions(item)">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
             Is this a judicial or quasi-judicial post?
@@ -160,7 +160,7 @@
     </dl>
 
     <dl
-      v-if="isApplicationVersion3 && totalJudicialDays < vacancy.pjeDays"
+      v-if="isApplicationVersionGreaterThan2 && totalJudicialDays < vacancy.pjeDays"
       class="govuk-summary-list govuk-!-margin-bottom-8"
     >
       <div class="govuk-summary-list__row">
@@ -176,7 +176,7 @@
 </template>
 
 <script>
-import { getApplicationTotalJudicialDays } from '@/helpers/exerciseHelper';
+import { getApplicationTotalJudicialDays, isApplicationVersionGreaterThan } from '@/helpers/exerciseHelper';
 
 export default {
   name: 'PostQualificationExperience',
@@ -191,8 +191,8 @@ export default {
     },
   },
   computed: {
-    isApplicationVersion3() {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 3;
+    isApplicationVersionGreaterThan2() {
+      return isApplicationVersionGreaterThan(this.vacancy, 2);
     },
     totalJudicialDays() {
       return getApplicationTotalJudicialDays(this.application);

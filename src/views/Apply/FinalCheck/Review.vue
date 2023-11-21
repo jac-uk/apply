@@ -1139,7 +1139,7 @@ export default {
       return false;
     },
     hasEmploymentGaps() {
-      return this.applicationParts.employmentGaps || (this.isApplicationVersion3 && this.applicationParts.postQualificationWorkExperience);
+      return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
     },
   },
   methods: {
