@@ -32,7 +32,6 @@
       </TaskList>
 
       <button
-        :disabled="!canApply"
         class="govuk-button info-btn--task-list--review-application"
         @click="reviewApplication"
       >
@@ -42,7 +41,8 @@
   </div>
 </template>
 <script>
-import ApplyMixIn from '@/views/Apply/ApplyMixIn';
+//import ApplyMixIn from '@/views/Apply/ApplyMixIn';
+import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import TaskList from '@/components/Page/TaskList/TaskList.vue';
 import Task from '@/components/Page/TaskList/Task.vue';
 
@@ -53,7 +53,7 @@ export default {
     Task,
   },
   //extends: CharacterInformationStatus,
-  mixins: [ApplyMixIn],
+  mixins: [CandidateFormsMixIn],
   data() {
     return {
     };
@@ -65,9 +65,31 @@ export default {
     formId() {
       return this.$route.params.formId;
     },
-    candidateForm() {
-      return this.$store.state.candidateForm.record;
-    },
+
+    // candidateForm() {
+    //   return this.$store.state.candidateForm.record;
+    // },
+    // candidateForm() {
+    //   return {
+    //     exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
+    //     task: 'candidateAvailability',
+    //     createdAt: null,
+    //     lastUpdated: null,
+    //     openDate: '2023-11-16',
+    //     closeDate: '2024-12-31',
+    //     candidateIds: ['123'],
+    //     parts: [
+    //       'candidateAvailability',
+    //       'panellistConflicts',
+    //       'commissionerConflicts',
+    //       'characterChecks',
+    //     ],
+    //     panellists: [
+    //       { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+    //     ]
+    //   };
+    // },
+
     formType() {
       if (!this.candidateForm) return '';
       if (!this.candidateForm.task) return '';
@@ -77,18 +99,35 @@ export default {
       if (!this.candidateForm) return [];
       return this.candidateForm.parts;
     },
-    candidateFormResponse() {
-      return this.$store.state.candidateFormResponse.record;
-    },
+
+    // candidateFormResponse() {
+    //   return this.$store.state.candidateFormResponse.record;
+    // },
+
+    // candidateFormResponse() {
+    //   // @TODO: Search the candidate form responses for the candidate's one
+    //   return {
+    //     formId: 123,
+    //     status: 'created',
+    //     statusLog: {},
+    //     progress: {
+    //       candidateAvailability: true,
+    //     },
+    //     candidateAvailability: {},
+    //     panellistConflicts: {},
+    //   };
+    // },
+
     applications() {
       return this.$store.state.applications.records;
     },
   },
-  async created() {
-    const formId = this.$route.params.formId;
-    this.$store.dispatch('candidateForm/bind', formId);
-    this.$store.dispatch('candidateFormResponse/bind', formId);
-  },
+  // async created() {
+  //   const formId = this.$route.params.formId;
+
+  //   // this.$store.dispatch('candidateForm/bind', formId);
+  //   // this.$store.dispatch('candidateFormResponse/bind', formId);
+  // },
   methods: {
     isDone(partRef) {
       if (!this.candidateFormResponse) return false;

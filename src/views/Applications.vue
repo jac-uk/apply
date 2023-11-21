@@ -120,25 +120,31 @@
                     View sent character checks consent form
                   </RouterLink>
 
-                  <!-- @TODO: ADD LOGIC FOR WHETHER TO DISPLAY THESE DYNAMIC BUTTONS ONCE GOT THE CANDIDATE FORM DATA COMING THRU OK
-                      - change the class on the link too
+                  <!-- @TODO:
+                      - change class on buttons below
+                      - add dynamic form id to links
                   -->
-                  <RouterLink
-                    :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                    :to="{ name: 'candidate-form-tasks-candidateAvailability', params: { id: application.exerciseId, formId: 123 } }"
-                    role="button"
-                    data-module="govuk-button"
-                  >
-                    View candidate availability task
-                  </RouterLink>
-                  <RouterLink
-                    :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                    :to="{ name: 'candidate-form-review', params: { id: application.exerciseId } }"
-                    role="button"
-                    data-module="govuk-button"
-                  >
-                    Review
-                  </RouterLink>
+
+                  <template v-if="getRoute(application.exerciseId)">
+                    <RouterLink
+                      :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                      :to="getRoute(application.exerciseId)"
+                      role="button"
+                      data-module="govuk-button"
+                    >
+                      View candidate availability task
+                    </RouterLink>
+
+                    <RouterLink
+                      :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
+                      :to="{ name: 'candidate-form-review', params: { id: application.exerciseId, formId: 123 } }"
+                      role="button"
+                      data-module="govuk-button"
+                    >
+                      Review
+                    </RouterLink>
+                  </template>
+
                 </div>
               </div>
             </div>
@@ -166,18 +172,81 @@ export default {
       return this.$store.getters['vacancies/allVacancies'];
     },
     candidateForms() {
-      return this.$store.state.candidateForms.records;
+      //return this.$store.state.candidateForms.records;
+
+      return [
+        {
+          exercise: { id: '1qef6rsaSLvvsZHrJuw7' },
+          task: 'candidateAvailability',
+          createdAt: null,
+          lastUpdated: null,
+          openDate: '2023-11-16',
+          closeDate: '2024-12-31',
+          candidateIds: ['TmA0uGoFH9WzZqLuxJAvd6Q79i72', '123'],
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+            'reasonableAdjustments',
+            'jurisdiction',
+            'welshPosts',
+          ],
+          panellists: [
+            { id: 'hgZO2QEZ6pUJgF6CDxOp', fullName: 'Albert Brown' },
+            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+          ]
+        },
+        {
+          //exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
+          exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
+          task: 'candidateAvailability',
+          createdAt: null,
+          lastUpdated: null,
+          openDate: '2023-11-16',
+          closeDate: '2024-12-31',
+          candidateIds: ['123'],
+          parts: [
+            'candidateAvailability',
+            'panellistConflicts',
+            'commissionerConflicts',
+            'characterChecks',
+          ],
+          panellists: [
+            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
+          ]
+        },
+      ];
+    },
+    routesByExerciseId() {
+      const obj = {};
+      for (let i=0; i<this.candidateForms.length; ++i) {
+        const record = this.candidateForms[i];
+        const firstPart = record.parts[0];
+        const exerciseId = record.exercise.id;
+
+        // @TODO: Use the candidateForm id in the route below!
+
+        const route = { name: `candidate-form-tasks-${firstPart}`, params: { id: exerciseId, formId: 123 } };
+        obj[exerciseId] = route;
+      }
+      return obj;
     },
   },
   created() {
-    this.$store.dispatch('applications/bind');  //.then(() => this.$store.dispatch('applications/bindCandidateForms'));
+    this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
-    this.$store.dispatch('candidateForms/bind');
+
+    // @TODO: Put back!
+    //this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');
   },
   methods: {
+    getRoute(vacancyId) {
+      return (vacancyId in this.routesByExerciseId) ? this.routesByExerciseId[vacancyId] : '';
+    },
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {
         return false;

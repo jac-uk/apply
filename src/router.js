@@ -748,7 +748,7 @@ const routes = [
           {
             path: 'panellist-conflicts',
             component: CandidateFormPanellistConflicts,
-            name: 'candidate-form-tasks-panelConflicts',
+            name: 'candidate-form-tasks-panellistConflicts',
             meta: {
               requiresAuth: true,
               title: 'Panellist conflicts',
