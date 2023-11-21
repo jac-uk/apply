@@ -1,6 +1,7 @@
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
+import _has from 'lodash/has';
 
 const collection = firestore.collection('vacancies');
 
@@ -49,7 +50,7 @@ export default {
     },
     getCloseDate: (state, getters, rootState, rootGetters) => {
       if (state.record === null) return null;
-      const extendedDate = rootGetters['application/getExtendedDate'];
+      const extendedDate = rootGetters['application/getExtendedDate']();
       const closeDate = extendedDate || state.record.applicationCloseDate;
       if (closeDate === null) return null;
       return new Date(closeDate);
@@ -58,6 +59,13 @@ export default {
       // exclude some exercises on production
       const exclusiveReferenceNumbers = ['JAC00155', 'JAC00149'];
       return state.record ? state.record.welshPosts && !exclusiveReferenceNumbers.includes(state.record.referenceNumber) : false;
+    },
+    getSelectionDays: (state) => {
+      if (state.record === null) return null;
+      if (_has(state.record, 'selectionDays') && Array.isArray(state.record.selectionDays) && state.record.selectionDays.length > 0) {
+        return state.record.selectionDays;
+      }
+      return null;
     },
   },
 };
