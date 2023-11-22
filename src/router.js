@@ -57,6 +57,7 @@ import LeadershipJudgeDetails from '@/views/Apply/Assessments/LeadershipJudgeDet
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies.vue';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience.vue';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience.vue';
+import PostQualificationWorkExperienceDetails from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperienceDetails.vue';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications.vue';
 import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships.vue';
 import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience.vue';
@@ -445,7 +446,17 @@ const routes = [
         name: 'post-qualification-work-experience',
         meta: {
           requiresAuth: true,
-          title: 'Post-qualification work experience',
+          title: 'Post qualification experience',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'post-qualification-work-experience-details',
+        component: PostQualificationWorkExperienceDetails,
+        name: 'post-qualification-work-experience-details',
+        meta: {
+          requiresAuth: true,
+          title: 'Post qualification experience',
           isMultilanguage: true,
         },
       },
