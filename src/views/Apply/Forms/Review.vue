@@ -14,7 +14,7 @@
         class="govuk-!-margin-bottom-9"
       >
         <h2
-          class="govuk-heading-l"
+          class="govuk-heading-l govuk-!-margin-bottom-2"
           style="display:inline-block;"
         >
           {{ $filters.lookup(part) }}
