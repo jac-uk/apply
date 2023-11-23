@@ -76,6 +76,45 @@
           </div>
         </dd>
       </div>
+
+      <template v-if="isApplicationVersionGreaterThan2 && hasJudicialFunctions(item)">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is this a judicial or quasi-judicial post?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ $filters.lookup(item.judicialFunctions.type) }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            How many sitting days have you accumulated in this post?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ item.judicialFunctions.duration }}
+          </dd>
+        </div>
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            Is a legal qualification a requisite for appointment?
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ $filters.toYesNo(item.judicialFunctions.isLegalQualificationRequired) }}
+          </dd>
+        </div>
+        <div
+          v-if="item.judicialFunctions.type === 'quasi-judicial-post'"
+          class="govuk-summary-list__row"
+        >
+          <dt class="govuk-summary-list__key">
+            Powers, procedures and main responsibilities
+          </dt>
+          <dd class="govuk-summary-list__value">
+            {{ item.judicialFunctions.details }}
+          </dd>
+        </div>
+      </template>
+
       <template v-if="item.taskDetails">
         <div class="govuk-summary-list__row">
           <dt class="govuk-summary-list__key">
@@ -119,16 +158,49 @@
         </div>
       </template>
     </dl>
+
+    <dl
+      v-if="isApplicationVersionGreaterThan2 && totalJudicialDays < vacancy.pjeDays"
+      class="govuk-summary-list govuk-!-margin-bottom-8"
+    >
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+          Details of how you have acquired the necessary skills
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ application.experienceDetails }}
+        </dd>
+      </div>
+    </dl>
   </div>
 </template>
 
 <script>
+import { getApplicationTotalJudicialDays, isApplicationVersionGreaterThan } from '@/helpers/exerciseHelper';
+
 export default {
   name: 'PostQualificationExperience',
   props: {
+    vacancy: {
+      type: Object,
+      required: true,
+    },
     application: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    isApplicationVersionGreaterThan2() {
+      return isApplicationVersionGreaterThan(this.vacancy, 2);
+    },
+    totalJudicialDays() {
+      return getApplicationTotalJudicialDays(this.application);
+    },
+  },
+  methods: {
+    hasJudicialFunctions(experience) {
+      return Array.isArray(experience.tasks) && experience.tasks.includes('judicial-functions');
     },
   },
 };

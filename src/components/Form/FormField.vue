@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       errorMessage: '',
+      warningMessage: '',
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
@@ -91,12 +92,17 @@ export default {
   },
   beforeUnmount: function() {
     this.setError('');
+    this.setWarning('');
     this.emitter.off('validate', this.handleValidate);
   },
   methods: {
     setError(message) {
       this.errorMessage = message;
       this.emitter.emit('handle-error', { id: this.id, message: this.errorMessage });
+    },
+    setWarning(message) {
+      this.warningMessage = message;
+      this.emitter.emit('handle-warning', { id: this.id, message: this.warningMessage });
     },
     handleValidate() {
       this.checkErrors = true;
@@ -110,7 +116,7 @@ export default {
           value = event.target.value;
         }
 
-        if (this.required && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
+        if (this.required && !this.isOngoing && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
           } else {
@@ -126,7 +132,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'date' && value) {
+        if (this.type && ['month', 'date'].includes(this.type) && value) {
           if (this.maxDate && (value > (this.maxDate))) {
             this.setError(`Enter a date before ${formatDate(this.maxDate)} for ${this.label}`);
           }
@@ -142,7 +148,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'number' && value && this.numMax) {
+        if (this.type && ['number', 'non-negative-number'].includes(this.type) && value && this.numMax) {
           if (value > this.numMax) {
             this.setError(`Please enter a number lower than ${this.numMax}`);
           }

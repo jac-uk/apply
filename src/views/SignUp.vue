@@ -34,6 +34,7 @@
           </p>
 
           <ErrorSummary :errors="errors" />
+          <WarningSummary :warning-object="warningObject" />
 
           <TextField
             id="title"
@@ -64,6 +65,7 @@
             v-model="formData.email"
             label="Email address"
             type="email"
+            warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application."
             :pattern="{
               match: /^((?!@judicialappointments.gov.uk\s*$).)*$/,
               message: 'You cannot sign up as a candidate using a @judicialappointments.gov.uk email address',
@@ -118,6 +120,7 @@ import firebase from '@firebase/app';
 import { auth } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import WarningSummary from '@/components/Form/WarningSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
 import Password from '@/components/Form/Password.vue';
 import DateInput from '@/components/Form/DateInput.vue';
@@ -127,6 +130,7 @@ export default {
   name: 'SignUp',
   components: {
     ErrorSummary,
+    WarningSummary,
     TextField,
     Password,
     DateInput,

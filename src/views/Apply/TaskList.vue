@@ -109,7 +109,7 @@
           <Task
             v-if="applicationParts.postQualificationWorkExperience"
             id="post-qualification-work-experience"
-            title="Post-qualification work experience"
+            title="Post qualification experience"
             :done="applicationProgress.postQualificationWorkExperience"
             :locked="!currentApplicationParts.postQualificationWorkExperience"
           />
@@ -213,6 +213,13 @@
             title="How did you hear about the vacancy?"
             :done="applicationProgress.additionalInfo"
             :locked="!currentApplicationParts.additionalInfo"
+          />
+          <Task
+            v-if="applicationParts.commissionerConflicts"
+            id="commissioner-conflicts"
+            title="Commissioner conflicts"
+            :done="applicationProgress.commissionerConflicts"
+            :locked="!currentApplicationParts.commissionerConflicts"
           />
         </TaskGroup>
       </TaskList>

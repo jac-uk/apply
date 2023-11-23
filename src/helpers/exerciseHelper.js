@@ -57,7 +57,10 @@ export {
   isMoreInformationNeeded,
   isApplicationComplete,
   hasApplicationProcess,
-  informationDeadline
+  informationDeadline,
+  getApplicationTotalJudicialDays,
+  isApplicationVersionGreaterThan,
+  isApplicationVersionLessThan
 };
 
 // const EXERCISE_STATES = ['draft', 'ready', 'approved', 'shortlisting', 'selection', 'recommendation', 'handover', 'archived'];
@@ -101,6 +104,7 @@ const APPLICATION_PARTS = [
   'statementOfEligibility',
   'selfAssessmentCompetencies',
   'additionalInfo',
+  'commissionerConflicts',
 ];
 
 // application helpers
@@ -344,6 +348,7 @@ function exerciseApplicationParts(data, newValues) {
     applicationParts.push('selfAssessmentCompetencies');
   }
   applicationParts.push('additionalInfo');
+  applicationParts.push('commissionerConflicts');
   return applicationParts;
 }
 
@@ -442,4 +447,27 @@ function informationDeadline(exercise) {
     }
   }
   return null;
+}
+
+function getApplicationTotalJudicialDays(application) {
+  let total = 0;
+  if (Array.isArray(application.experience)) {
+    application.experience.forEach((experience) => {
+      if (
+        Array.isArray(experience.tasks) &&
+        experience.tasks.includes('judicial-functions') &&
+        experience?.judicialFunctions?.duration
+      ) {
+        total += parseInt(experience.judicialFunctions.duration, 10);
+      }
+    });
+  }
+  return total;
+}
+
+function isApplicationVersionGreaterThan(exercise, version) {
+  return exercise?._applicationVersion > version;
+}
+function isApplicationVersionLessThan(exercise, version) {
+  return exercise?._applicationVersion < version;
 }
