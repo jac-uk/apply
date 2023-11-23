@@ -1,3 +1,4 @@
+import { CANDIDATE_FORM_RESPONSE_STATUS } from '@/helpers/constants';
 export default {
   data() {
     return {
@@ -28,15 +29,19 @@ export default {
       if (!this.candidateForm) return [];
       return this.candidateForm.parts;
     },
-    isFormComplete() {
-      let isComplete = true;
+    areAllPartsDone() {
+      let allDone = true;
       for (let i = 0, len = this.parts.length; i < len; ++i) {
-        if (!this.isDone(this.parts[i])) isComplete = false;
+        if (!this.isDone(this.parts[i])) allDone = false;
       }
-      return isComplete;
-    },    
+      return allDone;
+    },
     candidateFormResponse() {
       return this.$store.state.candidateFormResponse.record;
+    },
+    isFormCompleted() {
+      if (!this.candidateFormResponse) return false;
+      return this.candidateFormResponse.status === CANDIDATE_FORM_RESPONSE_STATUS.COMPLETED;
     },
   },
   methods: {
@@ -70,8 +75,10 @@ export default {
       this.$router.push({ name: 'candidate-form-review' });
     },
     async submitForm() {
-      // TODO update form
-      this.$router.push({ name: 'candidate-form-confirmation' });
+      if (this.areAllPartsDone) {
+        await this.$store.dispatch('candidateFormResponse/submit');
+        this.$router.push({ name: 'candidate-form-confirmation' });
+      }
     },
   },
 };

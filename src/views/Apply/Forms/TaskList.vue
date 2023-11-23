@@ -20,13 +20,14 @@
             :key="part"
             :title="$filters.lookup(part)"
             :done="isDone(part)"
+            :locked="isFormCompleted"
           />
         </ul>
       </TaskList>
 
       <button
         class="govuk-button info-btn--task-list--review-application"
-        :disabled="!isFormComplete"
+        :disabled="!areAllPartsDone"
         @click="reviewForm"
       >
         Review answers

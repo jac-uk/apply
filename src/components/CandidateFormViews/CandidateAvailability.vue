@@ -10,11 +10,13 @@ export default {
   props: {
     application: {
       type: Object,
-      required: true,
+      required: false,
+      default: () => {},
     },
     localData: {
       type: Object,
-      required: true,
+      required: false,
+      default: () => {},
     },
   },
 };

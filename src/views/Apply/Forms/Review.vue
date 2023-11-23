@@ -1,9 +1,11 @@
 <template>
-  <div class="govuk-grid-row">
+  <div 
+    v-if="candidateFormResponse"
+    class="govuk-grid-row"
+  >
     <div class="govuk-grid-column-two-thirds">
-      <BackLink />
-      <h1 class="govuk-heading-xl">
-        Review
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
+        Review your answers
       </h1>
 
       <div 
@@ -18,6 +20,7 @@
           {{ $filters.lookup(part) }}
         </h2>
         <RouterLink
+          v-if="!isFormCompleted"
           class="govuk-link govuk-body-m change-link"
           style="display:inline-block;"
           :to="{name: `candidate-form-tasks-${part}`}"
@@ -34,8 +37,9 @@
       </div>
       
       <button
+        v-if="!isFormCompleted"
         class="govuk-button info-btn--task-list--review-application"
-        :disabled="!isFormComplete"
+        :disabled="!areAllPartsDone"
         @click="submitForm"
       >
         Submit
@@ -46,6 +50,7 @@
 <script>
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import BackLink from '@/components/BackLink.vue';
+import { shallowRef } from 'vue';
 import candidateAvailability from '@/components/CandidateFormViews/CandidateAvailability.vue';
 import characterChecks from '@/components/CandidateFormViews/CharacterChecks.vue';
 import commissionerConflicts from '@/components/CandidateFormViews/CommissionerConflicts.vue';
@@ -61,7 +66,7 @@ export default {
   mixins: [CandidateFormsMixIn],
   data() {
     return {
-      viewComponents: {
+      viewComponents: shallowRef({
         candidateAvailability,
         characterChecks,
         commissionerConflicts,
@@ -69,7 +74,7 @@ export default {
         reasonableAdjustments,
         welshPosts,
         workingPreferences,
-      },
+      }),
     };
   },
 };
