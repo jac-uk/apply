@@ -114,7 +114,7 @@ const APPLICATION_FORM_PARTS = {
   CHARACTER_CHECKS: 'characterChecks',
   REASONABLE_ADJUSTMENTS: 'reasonableAdjustments',
   WORKING_PREFERENCES: 'workingPreferences',
-}
+};
 
 const DEFAULT_WORD_COUNT = {
   ADDITIONAL_SELECTION_CRITERIA: 250,

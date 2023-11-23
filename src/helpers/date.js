@@ -138,7 +138,6 @@ const validateFinancialYear = (value) => {
   return true;
 };
 
-
 /**
  * Get dates between two dates
  * Optionally specify a step size (in days)
@@ -149,7 +148,7 @@ const validateFinancialYear = (value) => {
  */
 const dateRange = (startDate, endDate, steps = 1) => {
   const dateArray = [];
-  let currentDate = new Date(startDate);
+  const currentDate = new Date(startDate);
   while (currentDate <= new Date(endDate)) {
     dateArray.push(new Date(currentDate));
     // Use UTC date to prevent problems with time zones and DST

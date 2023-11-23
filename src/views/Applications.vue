@@ -170,7 +170,6 @@ export default {
   },
   methods: {
     exerciseHasCandidateForms(exerciseId) {
-      console.log('exerciseHasCandidateForms', exerciseId, this.candidateFormsForExercise(exerciseId));
       return this.candidateFormsForExercise(exerciseId).length;
     },
     candidateFormsForExercise(exerciseId) {
