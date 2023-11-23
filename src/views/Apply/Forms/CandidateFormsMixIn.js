@@ -10,6 +10,9 @@ export default {
     vacancy() {
       return this.$store.state.vacancy.record ? this.$store.state.vacancy.record : {};
     },
+    application() {
+      return this.$store.state.application.record;
+    },
     formId() {
       return this.$route.params.formId;
     },
