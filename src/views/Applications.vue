@@ -120,31 +120,16 @@
                     View sent character checks consent form
                   </RouterLink>
 
-                  <!-- @TODO:
-                      - change class on buttons below
-                      - add dynamic form id to links
-                  -->
-
-                  <template v-if="getRoute(application.exerciseId)">
-                    <RouterLink
-                      :class="`govuk-button govuk-button--secondary moj-button-menu__item info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                      :to="getRoute(application.exerciseId)"
-                      role="button"
-                      data-module="govuk-button"
-                    >
-                      View candidate availability task
-                    </RouterLink>
-
-                    <RouterLink
-                      :class="`govuk-button govuk-button--secondary moj-button-menu__item float-right  info-link--applications--view-good-character-checks-consent-${application.exerciseId}`"
-                      :to="{ name: 'candidate-form-review', params: { id: application.exerciseId, formId: 123 } }"
-                      role="button"
-                      data-module="govuk-button"
-                    >
-                      Review
-                    </RouterLink>
-                  </template>
-
+                  <RouterLink
+                    v-for="form in candidateFormsForExercise(application.exerciseId)"
+                    :key="form.id"
+                    :class="`govuk-button moj-button-menu__item info-link--applications--candidate-form-${form.task.type}`"
+                    :to="{ name: 'candidate-form-task-list', params: { formId: form.id } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    {{ $filters.lookup(form.task.type) }}
+                  </RouterLink>
                 </div>
               </div>
             </div>
@@ -172,81 +157,27 @@ export default {
       return this.$store.getters['vacancies/allVacancies'];
     },
     candidateForms() {
-      //@todo: Put back
-      // return this.$store.state.candidateForms.records;
-
-      return [
-        {
-          exercise: { id: '1qef6rsaSLvvsZHrJuw7' },
-          task: 'candidateAvailability',
-          createdAt: null,
-          lastUpdated: null,
-          openDate: '2023-11-16',
-          closeDate: '2024-12-31',
-          candidateIds: ['TmA0uGoFH9WzZqLuxJAvd6Q79i72', '123'],
-          parts: [
-            'candidateAvailability',
-            'panellistConflicts',
-            'commissionerConflicts',
-            'characterChecks',
-            'reasonableAdjustments',
-            'jurisdiction',
-            'welshPosts',
-          ],
-          panellists: [
-            { id: 'hgZO2QEZ6pUJgF6CDxOp', fullName: 'Albert Brown' },
-            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-          ]
-        },
-        {
-          //exercise: { id: 'B9NM1PGDaYBJxdZhhKcF' },
-          exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
-          task: 'candidateAvailability',
-          createdAt: null,
-          lastUpdated: null,
-          openDate: '2023-11-16',
-          closeDate: '2024-12-31',
-          candidateIds: ['123'],
-          parts: [
-            'candidateAvailability',
-            'panellistConflicts',
-            'commissionerConflicts',
-            'characterChecks',
-          ],
-          panellists: [
-            { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-          ]
-        },
-      ];
-    },
-    routesByExerciseId() {
-      const obj = {};
-      for (let i=0; i<this.candidateForms.length; ++i) {
-        const record = this.candidateForms[i];
-        const firstPart = record.parts[0];
-        const exerciseId = record.exercise.id;
-
-        // @TODO: Use the candidateForm id in the route below!
-
-        const route = { name: `candidate-form-tasks-${firstPart}`, params: { id: exerciseId, formId: 123 } };
-        obj[exerciseId] = route;
-      }
-      return obj;
+      return this.$store.state.candidateForms.records;
     },
   },
   created() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
-
-    //@todo: Put back
-    //this.$store.dispatch('candidateForms/bind');
+    this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');
   },
   methods: {
-    getRoute(vacancyId) {
-      return (vacancyId in this.routesByExerciseId) ? this.routesByExerciseId[vacancyId] : '';
+    exerciseHasCandidateForms(exerciseId) {
+      console.log('exerciseHasCandidateForms', exerciseId, this.candidateFormsForExercise(exerciseId));
+      return this.candidateFormsForExercise(exerciseId).length;
+    },
+    candidateFormsForExercise(exerciseId) {
+      if (!this.candidateForms) return [];
+      const forms = this.candidateForms.find(form => form.exercise.id === exerciseId);
+      if (!forms) return [];
+      return [forms];
     },
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {

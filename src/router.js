@@ -94,11 +94,11 @@ import CandidateFormTaskList from '@/views/Apply/Forms/TaskList.vue';
 import CandidateFormReview from '@/views/Apply/Forms/Review.vue';
 import CandidateFormConfirmation from '@/views/Apply/Forms/Confirmation.vue';
 import CandidateFormCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
-import CandidateFormPanellistConflicts from '@/views/Apply/Forms/Parts/PanellistConflicts.vue';
+import CandidateFormPanelConflicts from '@/views/Apply/Forms/Parts/PanelConflicts.vue';
 import CandidateFormCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
 import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
 import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
-import CandidateFormJurisdiction from '@/views/Apply/Forms/Parts/Jurisdiction.vue';
+import CandidateFormWorkingPreferences from '@/views/Apply/Forms/Parts/WorkingPreferences.vue';
 import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
 
 // Error pages
@@ -701,112 +701,112 @@ const routes = [
           title: 'Consent to character checks',
         },
       },
+    ],
+    meta: {
+      title: 'Apply',
+    },
+  },
+  {
+    path: '/forms/:formId/',
+    component: CandidateFormIndex,
+    children: [
       {
-        path: 'forms/:formId/',
-        component: CandidateFormIndex,
-        children: [
-          {
-            path: '',
-            component: CandidateFormTaskList,
-            name: 'candidate-form-task-list',
-            meta: {
-              requiresAuth: true,
-              title: 'Pre Selection Day Questionnaire',
-              isMultilanguage: true,
-            },
-          },
-          {
-            path: 'review',
-            component: CandidateFormReview,
-            name: 'candidate-form-review',
-            meta: {
-              requiresAuth: true,
-              title: 'Review',
-              isMultilanguage: true,
-            },
-          },
-          {
-            path: 'confirmation',
-            component: CandidateFormConfirmation,
-            name: 'candidate-form-confirmation',
-            meta: {
-              requiresAuth: true,
-              title: 'Confirmation',
-              isMultilanguage: true,
-            },
-          },
-          // Parts
-          {
-            path: 'candidate-availability',
-            component: CandidateFormCandidateAvailability,
-            name: 'candidate-form-tasks-candidateAvailability',
-            meta: {
-              requiresAuth: true,
-              title: 'Candidate availability',
-            },
-          },
-          {
-            path: 'panellist-conflicts',
-            component: CandidateFormPanellistConflicts,
-            name: 'candidate-form-tasks-panellistConflicts',
-            meta: {
-              requiresAuth: true,
-              title: 'Panellist conflicts',
-            },
-          },
-          {
-            path: 'commissioner-conflicts',
-            component: CandidateFormCommissionerConflicts,
-            name: 'candidate-form-tasks-commissionerConflicts',
-            meta: {
-              requiresAuth: true,
-              title: 'Commissioner conflicts',
-            },
-          },
-          {
-            path: 'character-checks',
-            component: CandidateFormCharacterChecks,
-            name: 'candidate-form-tasks-characterChecks',
-            meta: {
-              requiresAuth: true,
-              title: 'Character checks',
-            },
-          },
-          {
-            path: 'reasonable-adjustments',
-            component: CandidateFormReasonableAdjustments,
-            name: 'candidate-form-tasks-reasonableAdjustments',
-            meta: {
-              requiresAuth: true,
-              title: 'Reasonsable adjustments',
-            },
-          },
-          {
-            path: 'jurisdiction',
-            component: CandidateFormJurisdiction,
-            name: 'candidate-form-tasks-workingPreferences',
-            meta: {
-              requiresAuth: true,
-              title: 'Jurisdiction',
-            },
-          },
-          {
-            path: 'welsh-posts',
-            component: CandidateFormWelshPosts,
-            name: 'candidate-form-tasks-welshPosts',
-            meta: {
-              requiresAuth: true,
-              title: 'Welsh posts',
-            },
-          }
-        ],
+        path: '',
+        component: CandidateFormTaskList,
+        name: 'candidate-form-task-list',
         meta: {
-          title: 'Task list',
+          requiresAuth: true,
+          title: 'Pre Selection Day Questionnaire',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'review',
+        component: CandidateFormReview,
+        name: 'candidate-form-review',
+        meta: {
+          requiresAuth: true,
+          title: 'Review',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'confirmation',
+        component: CandidateFormConfirmation,
+        name: 'candidate-form-confirmation',
+        meta: {
+          requiresAuth: true,
+          title: 'Confirmation',
+          isMultilanguage: true,
+        },
+      },
+      // Parts
+      {
+        path: 'candidate-availability',
+        component: CandidateFormCandidateAvailability,
+        name: 'candidate-form-tasks-candidateAvailability',
+        meta: {
+          requiresAuth: true,
+          title: 'Candidate availability',
+        },
+      },
+      {
+        path: 'panellist-conflicts',
+        component: CandidateFormPanelConflicts,
+        name: 'candidate-form-tasks-panelConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Panellist conflicts',
+        },
+      },
+      {
+        path: 'commissioner-conflicts',
+        component: CandidateFormCommissionerConflicts,
+        name: 'candidate-form-tasks-commissionerConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts',
+        },
+      },
+      {
+        path: 'character-checks',
+        component: CandidateFormCharacterChecks,
+        name: 'candidate-form-tasks-characterChecks',
+        meta: {
+          requiresAuth: true,
+          title: 'Character checks',
+        },
+      },
+      {
+        path: 'reasonable-adjustments',
+        component: CandidateFormReasonableAdjustments,
+        name: 'candidate-form-tasks-reasonableAdjustments',
+        meta: {
+          requiresAuth: true,
+          title: 'Reasonsable adjustments',
+        },
+      },
+      {
+        path: 'jurisdiction',
+        component: CandidateFormWorkingPreferences,
+        name: 'candidate-form-tasks-workingPreferences',
+        meta: {
+          requiresAuth: true,
+          title: 'Jurisdiction',
+        },
+      },
+      {
+        path: 'welsh-posts',
+        component: CandidateFormWelshPosts,
+        name: 'candidate-form-tasks-welshPosts',
+        meta: {
+          requiresAuth: true,
+          title: 'Welsh posts',
         },
       },
     ],
     meta: {
-      title: 'Apply',
+      title: 'Questionnaire',
     },
   },
   {

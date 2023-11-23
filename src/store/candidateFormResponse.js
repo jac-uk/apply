@@ -2,6 +2,7 @@ import firebase from '@firebase/app';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
+import clone from 'clone';
 
 export default {
   namespaced: true,
@@ -27,5 +28,11 @@ export default {
   },
   state: {
     record: null,
+  },
+  getters: {
+    data: (state) => () => {
+      const data = clone(state.record);
+      return data;
+    },    
   },
 };

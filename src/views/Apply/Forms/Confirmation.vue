@@ -9,11 +9,13 @@
   </div>
 </template>
 <script>
+import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import BackLink from '@/components/BackLink.vue';
 export default {
   name: 'CandidateFormConfirmation',
   components: {
     BackLink,
   },
+  mixins: [CandidateFormsMixIn],
 };
 </script>

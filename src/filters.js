@@ -1,4 +1,4 @@
-import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES, ASSESSMENT_METHOD } from '@/helpers/constants';
+import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES, ASSESSMENT_METHOD, APPLICATION_FORM_PARTS } from '@/helpers/constants';
 
 const capitalize = (value) => {
   if (!value) return '';
@@ -317,6 +317,18 @@ const lookup = (value) => {
     lookup[ASSESSMENT_METHOD.STATEMENT_OF_ELIGIBILITY] = 'Statement of eligibility';
     lookup[ASSESSMENT_METHOD.INDEPENDENT_ASSESSMENTS] = 'Independent Assessments';
     lookup[ASSESSMENT_METHOD.LEADERSHIP_JUDGE_ASSESSMENT] = 'Leadership Judge Assessment';
+
+    // task types
+    lookup['preSelectionDayQuestionnaire'] = 'Pre Selection Day Questionnaire';
+
+    // form parts
+    lookup[APPLICATION_FORM_PARTS.CANDIDATE_AVAILABILITY] = 'Candidate Availability';
+    lookup[APPLICATION_FORM_PARTS.PANEL_CONFLICTS] = 'Panel Conflicts';
+    lookup[APPLICATION_FORM_PARTS.COMMISSIONER_CONFLICTS] = 'Commissioner Conflicts';
+    lookup[APPLICATION_FORM_PARTS.CHARACTER_CHECKS] = 'Character Checks';
+    lookup[APPLICATION_FORM_PARTS.REASONABLE_ADJUSTMENTS] = 'Reasonable Adjustments';
+    lookup[APPLICATION_FORM_PARTS.WORKING_PREFERENCES] = 'Working Preferences';
+    lookup[APPLICATION_FORM_PARTS.WELSH_POSTS] = 'Welsh Posts';
 
     return lookup[value] || value;
   }

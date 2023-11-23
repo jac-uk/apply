@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <CheckboxGroup
       :id="componentId"
       v-model="localValues"
@@ -9,28 +8,25 @@
       required
     >
       <CheckboxItem
-        v-for="(date, index) in arrValues"
+        v-for="(date, itemIndex) in arrValues"
+        :key="itemIndex"
         :value="date"
         :label="date"
-        :key="index"
       />
     </CheckboxGroup>
-
   </div>
 </template>
 
 <script>
 import Form from '@/components/Form/Form.vue';
-import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '@/views/Apply/ApplyMixIn';
 import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
 import CheckboxItem from '@/components/Form/CheckboxItem.vue';
 export default {
   name: 'MultiCheckboxGroup',
   components: {
-    ErrorSummary,
     CheckboxGroup,
-    CheckboxItem
+    CheckboxItem,
   },
   extends: Form,
   mixins: [ApplyMixIn],

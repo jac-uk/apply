@@ -7,7 +7,7 @@
       </h1>
       <button
         class="govuk-button info-btn--candidate-availability--save-and-continue"
-        @click="save('reasonableAdjustments')"
+        @click="save()"
       >
         Save and continue
       </button>
@@ -15,13 +15,17 @@
   </div>
 </template>
 <script>
+import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import BackLink from '@/components/BackLink.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 export default {
   name: 'CandidateFormReasonableAdjustments',
-  mixins: [CandidateFormsMixIn],
   components: {
     BackLink,
+  },
+  mixins: [CandidateFormsMixIn],
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.REASONABLE_ADJUSTMENTS);
   },
 };
 </script>

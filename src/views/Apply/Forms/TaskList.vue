@@ -1,23 +1,16 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <RouterLink
-        v-if="applications && applications.length > 1"
-        class="govuk-back-link"
-        :to="{ name: 'applications' }"
-      >
-        Applications
-      </RouterLink>
-
       <span class="govuk-caption-xl govuk-!-padding-bottom-2 display-block">
         {{ vacancy.referenceNumber }} {{ vacancy.name }}
       </span>
-
-      <h1 class="govuk-heading-xl">
+      <h1 class="govuk-heading-xl govuk-!-margin-bottom-4">
         {{ $filters.lookup(formType) }}
       </h1>
 
-      <p class="govuk-body">You have been invited to a Selection Day. In order to make the arrangements we need to check the following details with you. Please complete each section and then submit the details.</p>
+      <p class="govuk-body">
+        You have been invited to a Selection Day. In order to make the arrangements we need to check the following details with you. Please complete each section and then submit the details.
+      </p>
 
       <TaskList>
         <ul class="govuk-list govuk-!-margin-bottom-9">
@@ -33,7 +26,8 @@
 
       <button
         class="govuk-button info-btn--task-list--review-application"
-        @click="reviewApplication"
+        :disabled="!isFormComplete"
+        @click="reviewForm"
       >
         Review answers
       </button>
@@ -52,40 +46,6 @@ export default {
     Task,
   },
   mixins: [CandidateFormsMixIn],
-  data() {
-    return {
-    };
-  },
-  computed: {
-    candidate() {
-      return this.$store.state.candidate.record;
-    },
-    formId() {
-      return this.$route.params.formId;
-    },
-    formType() {
-      if (!this.candidateForm) return '';
-      if (!this.candidateForm.task) return '';
-      return this.candidateForm.task.type;
-    },
-    parts() {
-      if (!this.candidateForm) return [];
-      return this.candidateForm.parts;
-    },
-    applications() {
-      return this.$store.state.applications.records;
-    },
-  },
-  methods: {
-    isDone(partRef) {
-      if (!this.candidateFormResponse) return false;
-      if (!this.candidateFormResponse.progress) return false;
-      return this.candidateFormResponse.progress[partRef];
-    },
-    reviewApplication() {
-      this.$router.push({ name: 'review' });
-    },
-  },
 };
 
 </script>

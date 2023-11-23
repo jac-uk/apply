@@ -1,90 +1,74 @@
 export default {
+  data() {
+    return {
+      part: '',
+      useFormData: false,
+      formData: {},
+    };
+  },
   computed: {
     vacancy() {
-      return this.$store.state.vacancy.record;
+      return this.$store.state.vacancy.record ? this.$store.state.vacancy.record : {};
+    },
+    formId() {
+      return this.$route.params.formId;
     },
     candidateForm() {
-      //@todo: Put back
-      //return this.$store.state.candidateForm.record;
-
-      return {
-        exercise: { id: '4TZAoQDjKPHJil0wdyOq' },
-        task: 'candidateAvailability',
-        createdAt: null,
-        lastUpdated: null,
-        openDate: '2023-11-16',
-        closeDate: '2024-12-31',
-        candidateIds: ['123'],
-        parts: [
-          'candidateAvailability',
-          'panellistConflicts',
-          'commissionerConflicts',
-          'characterChecks',
-        ],
-        panellists: [
-          { id: 'tlg9eeceWesWGGeU4t04', fullName: 'Jane Jones' },
-        ]
-      };
+      return this.$store.state.candidateForm.record;
     },
+    formType() {
+      if (!this.candidateForm) return '';
+      if (!this.candidateForm.task) return '';
+      return this.candidateForm.task.type;
+    },
+    parts() {
+      if (!this.candidateForm) return [];
+      return this.candidateForm.parts;
+    },
+    isFormComplete() {
+      let isComplete = true;
+      for (let i = 0, len = this.parts.length; i < len; ++i) {
+        if (!this.isDone(this.parts[i])) isComplete = false;
+      }
+      return isComplete;
+    },    
     candidateFormResponse() {
-      //@todo: Put back
-      // return this.$store.state.candidateFormResponse.record;
-
-      // @TODO: Search the candidate form responses for the candidate's one
-      return {
-        formId: 123,
-        status: 'created',
-        statusLog: {},
-        progress: {
-          candidateAvailability: true,
-        },
-        candidateAvailability: [
-          {
-            location: 'London',
-            dates: [
-              '07/09/2023',
-              '08/09/2023',
-            ]
-          }
-        ],
-        panellistConflicts: {},
-      };
+      return this.$store.state.candidateFormResponse.record;
     },
   },
   methods: {
-    async save(currentPart) {
-      // Set the part's progress to true
-      const nextPart = this.getNextPart(currentPart);
-
+    isDone(partRef) {
+      if (!this.candidateFormResponse) return false;
+      if (!this.candidateFormResponse.progress) return false;
+      return this.candidateFormResponse.progress[partRef];
+    },
+    setupPart(part, useFormData) {
+      this.part = part;
+      this.useFormData = useFormData;
+      if (useFormData) {
+        const responseData = this.$store.getters['candidateFormResponse/data']();
+        if (responseData[part]) {
+          this.formData = { ...responseData[part] };
+        }
+      }
+    },
+    async save() {
+      await this.savePart(true);
+    },  
+    async savePart(isComplete) {
       // @TODO: Validate that the form has been completed before saving
-      const formData = { ...this.candidateFormResponse };
-      formData.progress[currentPart] = true;
-
-      // Update progress
-      this.$store.dispatch('candidateFormResponse/update', formData);
-
-      // Router call to the next part otherwise go to the review page
-      if (nextPart) {
-        this.$router.push({ name: `candidate-form-tasks-${nextPart}` });
-      }
-      else {
-        this.$router.push({ name: 'candidate-form-review' });
-      }
+      const saveData = {};
+      if (this.useFormData) saveData[this.part] = { ...this.formData };
+      saveData[`progress.${this.part}`] = isComplete;
+      await this.$store.dispatch('candidateFormResponse/update', saveData);
+      this.$router.push({ name: 'candidate-form-task-list' });
     },
-    getNextPart(currentPart) {
-      let nextItem = null;
-      const index = this.candidateForm.parts.indexOf(currentPart);
-      if(index >= 0 && index < this.candidateForm.parts.length - 1) {
-        nextItem = this.candidateForm.parts[index + 1];
-      }
-      return nextItem;
+    reviewForm() {
+      this.$router.push({ name: 'candidate-form-review' });
     },
-  },
-  async created() {
-    const formId = this.$route.params.formId;
-
-    //@todo: Put back
-    //this.$store.dispatch('candidateForm/bind', formId);
-    //this.$store.dispatch('candidateFormResponse/bind', formId);
+    async submitForm() {
+      // TODO update form
+      this.$router.push({ name: 'candidate-form-confirmation' });
+    },
   },
 };

@@ -3,11 +3,11 @@
     <div class="govuk-grid-column-two-thirds">
       <BackLink />
       <h1 class="govuk-heading-xl">
-        Panellist Conflicts
+        Panel Conflicts
       </h1>
       <button
         class="govuk-button info-btn--candidate-availability--save-and-continue"
-        @click="save('panellistConflicts')"
+        @click="save()"
       >
         Save and continue
       </button>
@@ -15,13 +15,17 @@
   </div>
 </template>
 <script>
+import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import BackLink from '@/components/BackLink.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 export default {
-  name: 'CandidateFormPanellistConflicts',
-  mixins: [CandidateFormsMixIn],
+  name: 'CandidateFormPanelConflicts',
   components: {
     BackLink,
+  },
+  mixins: [CandidateFormsMixIn],
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.PANEL_CONFLICTS);
   },
 };
 </script>
