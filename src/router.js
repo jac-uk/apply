@@ -88,6 +88,19 @@ import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review.vue';
 import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent.vue';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted.vue';
 
+// Candidate Forms
+import CandidateFormIndex from '@/views/Apply/Forms/Index.vue';
+import CandidateFormTaskList from '@/views/Apply/Forms/TaskList.vue';
+import CandidateFormReview from '@/views/Apply/Forms/Review.vue';
+import CandidateFormConfirmation from '@/views/Apply/Forms/Confirmation.vue';
+import CandidateFormCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
+import CandidateFormPanelConflicts from '@/views/Apply/Forms/Parts/PanelConflicts.vue';
+import CandidateFormCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
+import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
+import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
+import CandidateFormWorkingPreferences from '@/views/Apply/Forms/Parts/WorkingPreferences.vue';
+import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
+
 // Error pages
 import NotFound from '@/views/NotFound.vue';
 
@@ -694,6 +707,109 @@ const routes = [
     },
   },
   {
+    path: '/forms/:formId/',
+    component: CandidateFormIndex,
+    children: [
+      {
+        path: '',
+        component: CandidateFormTaskList,
+        name: 'candidate-form-task-list',
+        meta: {
+          requiresAuth: true,
+          title: 'Pre Selection Day Questionnaire',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'review',
+        component: CandidateFormReview,
+        name: 'candidate-form-review',
+        meta: {
+          requiresAuth: true,
+          title: 'Review',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'confirmation',
+        component: CandidateFormConfirmation,
+        name: 'candidate-form-confirmation',
+        meta: {
+          requiresAuth: true,
+          title: 'Confirmation',
+          isMultilanguage: true,
+        },
+      },
+      // Parts
+      {
+        path: 'candidate-availability',
+        component: CandidateFormCandidateAvailability,
+        name: 'candidate-form-tasks-candidateAvailability',
+        meta: {
+          requiresAuth: true,
+          title: 'Candidate availability',
+        },
+      },
+      {
+        path: 'panellist-conflicts',
+        component: CandidateFormPanelConflicts,
+        name: 'candidate-form-tasks-panelConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Panellist conflicts',
+        },
+      },
+      {
+        path: 'commissioner-conflicts',
+        component: CandidateFormCommissionerConflicts,
+        name: 'candidate-form-tasks-commissionerConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts',
+        },
+      },
+      {
+        path: 'character-checks',
+        component: CandidateFormCharacterChecks,
+        name: 'candidate-form-tasks-characterChecks',
+        meta: {
+          requiresAuth: true,
+          title: 'Character checks',
+        },
+      },
+      {
+        path: 'reasonable-adjustments',
+        component: CandidateFormReasonableAdjustments,
+        name: 'candidate-form-tasks-reasonableAdjustments',
+        meta: {
+          requiresAuth: true,
+          title: 'Reasonsable adjustments',
+        },
+      },
+      {
+        path: 'jurisdiction',
+        component: CandidateFormWorkingPreferences,
+        name: 'candidate-form-tasks-workingPreferences',
+        meta: {
+          requiresAuth: true,
+          title: 'Jurisdiction',
+        },
+      },
+      {
+        path: 'welsh-posts',
+        component: CandidateFormWelshPosts,
+        name: 'candidate-form-tasks-welshPosts',
+        meta: {
+          requiresAuth: true,
+          title: 'Welsh posts',
+        },
+      },
+    ],
+    meta: {
+      title: 'Questionnaire',
+    },
+  },
+  {
     path: '/sign-in',
     name: 'sign-in',
     component: SignIn,
@@ -748,7 +864,7 @@ router.beforeEach((to, from, next) => {
     next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
     next();
-  }  
+  }
 });
 
 // Global after hook to set an appropriate title for the page
