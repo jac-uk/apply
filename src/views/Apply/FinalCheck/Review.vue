@@ -683,8 +683,16 @@
                   Self assessment content
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <div v-if="application.uploadedSelfAssessment">
-                    {{ application.uploadedSelfAssessmentContent }}
+                  <div
+                    v-if="application.uploadedSelfAssessment"
+                  >
+                    <div
+                      v-for="(answer, i) in application.uploadedSelfAssessmentContent"
+                      :key="i"
+                    >
+                      {{ answer }}
+                      <hr>
+                    </div>
                   </div>
                   <span v-else>Not yet received</span>
                 </dd>

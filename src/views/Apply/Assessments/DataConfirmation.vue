@@ -21,11 +21,13 @@
         </RouterLink>
 
         <TextareaInput
+          v-for="(wordLimit,i) in wordLimits"
           id="suitability-statement-text"
+          :key="i"
           ref="statementInputRef"
-          v-model="formData.uploadedSelfAssessmentContent"
-          label="Statement content"
-          :word-limit="wordLimit"
+          v-model="formData.uploadedSelfAssessmentContent[i]"
+          :label="`Statement content section ${i + 1}`"
+          :word-limit="wordLimit[i]"
         />
 
         <button
@@ -70,14 +72,36 @@ export default {
     };
   },
   computed: {
-    wordLimit() {
-      return this.vacancy.selfAssessmentWordLimit;
+    wordLimits() {
+      return this.vacancy.selfAssessmentWordLimits.map(section => section.wordLimit);
+    },
+    selfAssessmentSections() {
+      return this.wordLimits.length;
     },
     overWordLimit() {
       return this.formData.uploadedSelfAssessmentContent.length > this.wordLimit;
     },
   },
+  created() {
+    this.formData.uploadedSelfAssessmentContent = this.processArrayWithLimit(this.formData.uploadedSelfAssessmentContent, this.selfAssessmentSections);
+  },
   methods: {
+    processArrayWithLimit(stringsArray, limit) {
+      const LAST_INDEX = limit - 1;
+
+      // Take the first `limit - 1` elements or all elements if smaller than the limit
+      const slicedArray = stringsArray.slice(0, Math.min(stringsArray.length, LAST_INDEX));
+
+      // Take the remaining items starting from the `limit` position
+      const remainingItems = stringsArray.slice(LAST_INDEX);
+
+      // If there are remaining items, join them with a comma and space and add as a single element
+      if (remainingItems.length > 0) {
+        slicedArray.push(remainingItems.join(', '));
+      }
+
+      return slicedArray;
+    },
     logEventAfterSave() {
       logEvent('info', 'Statement of suitability confirmed', {
         applicationId: this.applicationId,

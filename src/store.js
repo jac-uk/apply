@@ -11,8 +11,6 @@ import application from '@/store/application';
 import qualifyingTestResponse from '@/store/qualifyingTestResponse';
 import qualifyingTestResponses from '@/store/qualifyingTestResponses';
 import logs from '@/store/logs';
-import connectionMonitor from '@/store/connectionMonitor';
-import session from '@/store/session';
 
 const store = createStore({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
@@ -28,8 +26,6 @@ const store = createStore({
     qualifyingTestResponse,
     qualifyingTestResponses,
     logs,
-    connectionMonitor,
-    session,
   },
   state: {
     packageVersion: import.meta.env.PACKAGE_VERSION || '0',
