@@ -62,13 +62,13 @@
         class="govuk-button"
         :disabled="!application.characterChecks.consent"
       >
-        Submit
+        Save and continue
       </button>
     </div>
   </form>
 </template>
 <script>
-import firebase from '@firebase/app';
+// import firebase from '@firebase/app';
 import BackLink from '@/components/BackLink.vue';
 import Form from '@/components/Form/Form.vue';
 import Checkbox from '@/components/Form/Checkbox.vue';
@@ -106,10 +106,11 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        if (this.application.characterChecks.consent === true) {
-          this.application.characterChecks.status = 'completed';
-          this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
-        }
+        // comment out below until we get feedback from users
+        // if (this.application.characterChecks.consent === true) {
+        //   this.application.characterChecks.status = 'completed';
+        //   this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
+        // }
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'candidate-form-tasks-characterChecks-form-submitted' });
       }

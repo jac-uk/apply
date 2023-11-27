@@ -483,9 +483,9 @@
     <button
       v-if="canEdit"
       class="govuk-button"
-      @click="save"
+      @click="next"
     >
-      Save and continue
+      Continue
     </button>
   </div>
 </template>
@@ -494,8 +494,6 @@
 import BackLink from '@/components/BackLink.vue';
 import OtherProfessionalBodiesReview from './OtherProfessionalBodiesReview.vue';
 import { formatDate } from '@jac-uk/jac-kit/filters/filters';
-import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
-import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 
 export default {
   name: 'Review',
@@ -503,7 +501,6 @@ export default {
     BackLink,
     OtherProfessionalBodiesReview,
   },
-  mixins: [CandidateFormsMixIn],
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;
@@ -519,9 +516,6 @@ export default {
       return !(this.application.characterChecks && this.application.characterChecks.consent
         && this.application.characterChecks.status === 'completed');
     },
-  },
-  created() {
-    this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
   },
   methods: {
     next() {

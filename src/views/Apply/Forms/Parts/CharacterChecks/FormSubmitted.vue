@@ -1,4 +1,5 @@
-<template>
+<!-- comment out below until we get feedback from users -->
+<!-- <template>
   <div class="govuk-grid-column-two-thirds govuk-!-margin-top-8">
     <div class="govuk-panel govuk-panel--confirmation">
       <h1 class="govuk-panel__title">
@@ -36,15 +37,23 @@
       </RouterLink>
     </p>
   </div>
-</template>
+</template> -->
 
 <script>
+import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
+import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
+
 export default {
   name: 'FormSubmitted',
+  mixins: [CandidateFormsMixIn],
   computed: {
     vacancy() {
       return this.$store.state.vacancy.record;
     },
+  },
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
+    this.save();
   },
 };
 </script>
