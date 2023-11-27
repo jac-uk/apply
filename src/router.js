@@ -98,7 +98,16 @@ import CandidateFormConfirmation from '@/views/Apply/Forms/Confirmation.vue';
 import CandidateFormCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
 import CandidateFormPanelConflicts from '@/views/Apply/Forms/Parts/PanelConflicts.vue';
 import CandidateFormCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
-import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks.vue';
+import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks/CharacterChecks.vue';
+import CandidateFormCharacterChecksIntro from '@/views/Apply/Forms/Parts/CharacterChecks/Intro.vue';
+import CandidateFormCharacterChecksPersonalInformation from '@/views/Apply/Forms/Parts/CharacterChecks/PersonalInformation.vue';
+import CandidateFormCharacterChecksProfessionalDetails from '@/views/Apply/Forms/Parts/CharacterChecks/ProfessionalDetails.vue';
+import CandidateFormCharacterChecksProfessionalDetailsMagistrate from '@/views/Apply/Forms/Parts/CharacterChecks/ProfessionalDetailsMagistrate.vue';
+import CandidateFormCharacterChecksHMRC from '@/views/Apply/Forms/Parts/CharacterChecks/Hmrc.vue';
+import CandidateFormCharacterChecksOtherProfessionalBodies from '@/views/Apply/Forms/Parts/CharacterChecks/OtherProfessionalBodies.vue';
+import CandidateFormCharacterChecksReview from '@/views/Apply/Forms/Parts/CharacterChecks/Review.vue';
+import CandidateFormCharacterChecksConsent from '@/views/Apply/Forms/Parts/CharacterChecks/Consent.vue';
+import CandidateFormCharacterChecksFormSubmitted from '@/views/Apply/Forms/Parts/CharacterChecks/FormSubmitted.vue';
 import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
 import CandidateFormWorkingPreferences from '@/views/Apply/Forms/Parts/WorkingPreferences.vue';
 import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
@@ -791,9 +800,91 @@ const routes = [
         },
       },
       {
-        path: 'character-checks',
+        path: 'character-checks/',
         component: CandidateFormCharacterChecks,
-        name: 'candidate-form-tasks-characterChecks',
+        children: [
+          {
+            path: '',
+            component: CandidateFormCharacterChecksIntro,
+            name: 'candidate-form-tasks-characterChecks',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks',
+            },
+          },
+          {
+            path: 'personal-information',
+            component: CandidateFormCharacterChecksPersonalInformation,
+            name: 'candidate-form-tasks-characterChecks-personal-information',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Personal information',
+            },
+          },
+          {
+            path: 'professional-details',
+            component: CandidateFormCharacterChecksProfessionalDetails,
+            name: 'candidate-form-tasks-characterChecks-professional-details',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Professional details',
+            },
+          },
+          {
+            path: 'professional-details-magistrate',
+            component: CandidateFormCharacterChecksProfessionalDetailsMagistrate,
+            name: 'candidate-form-tasks-characterChecks-professional-details-magistrate',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Professional details',
+            },
+          },
+          {
+            path: 'HMRC',
+            component: CandidateFormCharacterChecksHMRC,
+            name: 'candidate-form-tasks-characterChecks-HMRC',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | HMRC',
+            },
+          },
+          {
+            path: 'other-professional-bodies',
+            component: CandidateFormCharacterChecksOtherProfessionalBodies,
+            name: 'candidate-form-tasks-characterChecks-other-professional-bodies',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Other professional bodies',
+            },
+          },
+          {
+            path: 'review',
+            component: CandidateFormCharacterChecksReview,
+            name: 'candidate-form-tasks-characterChecks-review',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Review',
+            },
+          },
+          {
+            path: 'consent',
+            component: CandidateFormCharacterChecksConsent,
+            name: 'candidate-form-tasks-characterChecks-consent',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Consent',
+            },
+          },
+          {
+            path: 'form-submitted',
+            component: CandidateFormCharacterChecksFormSubmitted,
+            name: 'candidate-form-tasks-characterChecks-form-submitted',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Form Submitted',
+            },
+          },
+        ],
         meta: {
           requiresAuth: true,
           title: 'Character checks',
