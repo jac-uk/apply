@@ -14,6 +14,9 @@ export default {
     application() {
       return this.$store.state.application.record;
     },
+    vacancyId() {
+      return this.vacancy.id;
+    },
     formId() {
       return this.$route.params.formId;
     },
