@@ -7,13 +7,17 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Confirm your {{ $filters.lookup(statementType) }}
+          {{ $filters.lookup(statementType) }}
         </h1>
+
+        <p class="govuk-body-l">
+          Please review your submission below, addressing any word limit issues identified.
+        </p>
 
         <ErrorSummary :errors="errors" />
 
         <RouterLink
-          v-if="formData.progress.selfAssessmentCompetencies"
+          v-if="formData.progress[statementType]"
           class="govuk-link float-right"
           :to="{ name: 'self-assessment-competencies' }"
         >
@@ -21,17 +25,17 @@
         </RouterLink>
 
         <TextareaInput
-          v-for="(wordLimit,i) in wordLimits"
+          v-for="(wordLimit, i) in wordLimits"
           id="suitability-statement-text"
           :key="i"
-          ref="statementInputRef"
+          :ref="`StatementInputRef${i}`"
           v-model="formData.uploadedSelfAssessmentContent[i]"
           :label="`Statement content section ${i + 1}`"
-          :word-limit="wordLimit[i]"
+          :word-limit="wordLimit"
         />
 
         <button
-          :disabled="!canSave(formId) || overWordLimit"
+          :disabled="!canSave(formId) || (errors.length > 0)"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
@@ -50,6 +54,9 @@ import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
 
 export default {
+  //I tried to leave this component open for refactor so
+  //it can be used other download/upload/confirm pattern
+  //input in the future - this philosophy quickly went out of the window
   name: 'DataConfirmation',
   components: {
     ErrorSummary,
@@ -77,9 +84,6 @@ export default {
     },
     selfAssessmentSections() {
       return this.wordLimits.length;
-    },
-    overWordLimit() {
-      return this.formData.uploadedSelfAssessmentContent.length > this.wordLimit;
     },
   },
   created() {
