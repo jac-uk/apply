@@ -32,14 +32,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-applications--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -157,6 +149,9 @@ export default {
   created() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
+  },
+  unmounted() {
+    this.$store.dispatch('applications/unbind');
   },
   methods: {
     vacancyExists(exerciseId) {

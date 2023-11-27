@@ -38,14 +38,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -182,7 +174,7 @@
                       {{ vacancy.name }}
                     </span>
 
-                    <div 
+                    <div
                       v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
                       style="display: flex; align-items: flex-start; margin-top: 10px;"
                     >
@@ -316,6 +308,29 @@
                       class="govuk-!-margin-top-4"
                     >
                       <hr style="height: 0.5px; border: 0; background: #b1b4b6; margin: 0;">
+
+                      <!-- @TODO: Replace this section once the location is being specified in welsh in the admin section -->
+                      <template v-if="vacancy.referenceNumber === 'JAC00192'">
+                        <div
+                          v-if="vacancy.location && (isAdvertTypeBasic(vacancy.advertType) || isAdvertTypeFull(vacancy.advertType))"
+                          style="display: flex; align-items: flex-start; margin-top: 10px;"
+                        >
+                          <img
+                            src="@/assets/location.svg"
+                            alt="Location"
+                            width="18"
+                            height="18"
+                          >
+                          <span
+                            class="govuk-body"
+                            style="margin: 0 0 0 4px;"
+                          >
+                            <!-- {{ vacancy.location }} -->
+                            Cynhelir gwrandawiadau tribiwnlys ar draws pob rhanbarth yng Nghymru, ac mae’n rhaid i ymgeiswyr fod ar gael i ymgymryd â swydd y Llywydd neu’r Dirprwy Lywydd ar fusnes y Tribiwnlys, gan deithio’n annibynnol ledled Cymru a gallu aros dros nos lle bo angen. Fodd bynnag, gellir gwneud cyfran fawr o waith y Llywydd a’r Dirprwy Lywydd o bell.
+                          </span>
+                        </div>
+                      </template>
+
                       <CustomHTML
                         v-if="vacancy.roleSummaryWelsh"
                         :value="vacancy.roleSummaryWelsh"

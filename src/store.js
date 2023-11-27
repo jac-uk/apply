@@ -8,9 +8,8 @@ import candidate from '@/store/candidate';
 import invitations from '@/store/invitations';
 import applications from '@/store/applications';
 import application from '@/store/application';
-import qualifyingTestResponse from '@/store/qualifyingTestResponse';
-import qualifyingTestResponses from '@/store/qualifyingTestResponses';
 import logs from '@/store/logs';
+import session from '@/store/session';
 
 const store = createStore({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
@@ -23,9 +22,8 @@ const store = createStore({
     invitations,
     applications,
     application,
-    qualifyingTestResponse,
-    qualifyingTestResponses,
     logs,
+    session,
   },
   state: {
     packageVersion: import.meta.env.PACKAGE_VERSION || '0',

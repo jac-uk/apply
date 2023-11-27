@@ -35,14 +35,6 @@
                 Applications
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
-              <RouterLink
-                class="govuk-link info-link--nav-vacancies--qualifying-tests"
-                :to="{ name: 'qualifying-tests' }"
-              >
-                Online tests
-              </RouterLink>
-            </li>
           </ul>
         </nav>
       </div>
@@ -219,6 +211,9 @@ export default {
     if (this.personalDetails.email && this.personalDetails.email !== this.$store.state.auth.currentUser.email) {
       this.openModal();
     }
+  },
+  unmounted() {
+    this.$store.dispatch('candidate/unbind');
   },
   methods: {
     openModal(){

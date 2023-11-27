@@ -55,6 +55,7 @@ export default {
   data() {
     return {
       errorMessage: '',
+      warningMessage: '',
       checkErrors: false,
       regex: {
         // eslint-disable-next-line
@@ -91,12 +92,17 @@ export default {
   },
   beforeUnmount: function() {
     this.setError('');
+    this.setWarning('');
     this.emitter.off('validate', this.handleValidate);
   },
   methods: {
     setError(message) {
       this.errorMessage = message;
       this.emitter.emit('handle-error', { id: this.id, message: this.errorMessage });
+    },
+    setWarning(message) {
+      this.warningMessage = message;
+      this.emitter.emit('handle-warning', { id: this.id, message: this.warningMessage });
     },
     handleValidate() {
       this.checkErrors = true;
