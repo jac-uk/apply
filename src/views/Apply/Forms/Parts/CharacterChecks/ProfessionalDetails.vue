@@ -87,7 +87,7 @@ export default {
       this.validate();
       if (this.isValid()) {
         await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'character-checks-professional-details-magistrate' });
+        this.$router.push({ name: 'candidate-form-tasks-characterChecks-professional-details-magistrate' });
       }
     },
   },

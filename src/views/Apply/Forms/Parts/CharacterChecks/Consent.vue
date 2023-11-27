@@ -111,7 +111,7 @@ export default {
           this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
         }
         await this.$store.dispatch('application/save', this.application);
-        this.$router.push({ name: 'character-checks-form-submitted' });
+        this.$router.push({ name: 'candidate-form-tasks-characterChecks-form-submitted' });
       }
     },
   },

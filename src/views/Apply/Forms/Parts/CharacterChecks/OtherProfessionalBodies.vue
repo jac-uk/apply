@@ -415,7 +415,7 @@ export default {
           });
         }
         await this.$store.dispatch('application/save', this.formData);
-        this.$router.push({ name: 'character-checks-review' });
+        this.$router.push({ name: 'candidate-form-tasks-characterChecks-review' });
       }
     },
   },

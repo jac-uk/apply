@@ -269,7 +269,7 @@ export default {
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
-        this.$router.push({ name: 'character-checks-professional-details' });
+        this.$router.push({ name: 'candidate-form-tasks-characterChecks-professional-details' });
       }
     },
     makeFullName() {

@@ -95,9 +95,9 @@ export default {
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         if ((this.vacancy.memberships && this.vacancy.memberships.length && !this.vacancy.memberships.includes('none'))) {
-          this.$router.push({ name: 'character-checks-other-professional-bodies' });
+          this.$router.push({ name: 'candidate-form-tasks-characterChecks-other-professional-bodies' });
         } else {
-          this.$router.push({ name: 'character-checks-review' });
+          this.$router.push({ name: 'candidate-form-tasks-characterChecks-review' });
         }
       }
     },

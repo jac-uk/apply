@@ -79,7 +79,7 @@ export default {
       if (this.isValid()) {
         await this.$store.dispatch('application/save', this.application);
 
-        this.$router.push({ name: 'character-checks-review' });
+        this.$router.push({ name: 'candidate-form-tasks-characterChecks-review' });
       }
     },
   },

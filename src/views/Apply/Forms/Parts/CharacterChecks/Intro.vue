@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     next () {
-      this.$router.push({ name: 'character-checks-personal-information' });
+      this.$router.push({ name: 'candidate-form-tasks-characterChecks-personal-information' });
     },
   },
 };

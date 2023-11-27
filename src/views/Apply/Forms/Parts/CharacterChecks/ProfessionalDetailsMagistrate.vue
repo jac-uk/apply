@@ -110,12 +110,12 @@ export default {
         await this.$store.dispatch('application/save', this.application);
 
         if (this.vacancy.characterChecks && this.vacancy.characterChecks.HMRC) {
-          this.$router.push({ name: 'character-checks-HMRC' });
+          this.$router.push({ name: 'candidate-form-tasks-characterChecks-HMRC' });
         } else {
           if ((this.vacancy.memberships && this.vacancy.memberships.length) && !this.vacancy.memberships.includes('none')) {
-            this.$router.push({ name: 'character-checks-other-professional-bodies' });
+            this.$router.push({ name: 'candidate-form-tasks-characterChecks-other-professional-bodies' });
           } else {
-            this.$router.push({ name: 'character-checks-review' });
+            this.$router.push({ name: 'candidate-form-tasks-characterChecks-review' });
           }
         }
       }
