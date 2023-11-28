@@ -25,33 +25,41 @@ export default {
       loadFailed: false,
     };
   },
-  async mounted() {
-    try {
-      const today = Date.now();
-      const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
-
-      if (vacancy === null) {
-        this.redirectToErrorPage();
-      } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
-        this.redirectToVacancyDetails();
-      } else {
-        await this.$store.dispatch('candidate/bind');
-        await this.$store.dispatch('application/bind');
-        if (!this.$store.state.application.record) {
-          this.redirectToVacancyDetails();
-        }
-        await this.$store.dispatch('applications/bind');
-        this.loaded = true;
-      }
-    } catch (e) {
-      this.loadFailed = true;
-      throw e;
+  watch: {
+    async vacancyId() {
+      await this.load();
+    },
+  },
+  async created() {
+    this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
+    if (this.vacancyId) {
+      await this.load();
     }
   },
-  created() {
-    this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
-  },
   methods: {
+    async load() {
+      try {
+        const today = Date.now();
+        const vacancy = await this.$store.dispatch('vacancy/bind', this.vacancyId);
+
+        if (vacancy === null) {
+          this.redirectToErrorPage();
+        } else if (this.$store.getters['vacancy/getOpenDate'] > today) {
+          this.redirectToVacancyDetails();
+        } else {
+          await this.$store.dispatch('candidate/bind');
+          await this.$store.dispatch('application/bind');
+          if (!this.$store.state.application.record) {
+            this.redirectToVacancyDetails();
+          }
+          await this.$store.dispatch('applications/bind');
+          this.loaded = true;
+        }
+      } catch (e) {
+        this.loadFailed = true;
+        throw e;
+      }
+    },
     redirectToErrorPage() {
       this.$router.replace({ name: 'exercise-not-found' });
     },
