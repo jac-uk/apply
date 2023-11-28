@@ -39,6 +39,7 @@ export default {
   },
   getters: {
     data: (state) => () => {
+      if (!state.record) return {};
       const data = clone(state.record);
       return data;
     },    
