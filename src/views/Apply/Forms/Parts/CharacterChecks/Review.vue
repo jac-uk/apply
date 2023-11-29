@@ -24,7 +24,7 @@
         v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
-        :to="{name: 'character-checks-personal-information'}"
+        :to="{name: 'candidate-form-tasks-characterChecks-personal-information'}"
       >
         Change
       </RouterLink>
@@ -296,7 +296,7 @@
         v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
-        :to="{name: 'character-checks-professional-details'}"
+        :to="{name: 'candidate-form-tasks-characterChecks-professional-details'}"
       >
         Change
       </RouterLink>
@@ -388,7 +388,7 @@
           v-if="canEdit"
           class="govuk-link govuk-body-m change-link"
           style="display:inline-block;"
-          :to="{name: 'character-checks-HMRC'}"
+          :to="{name: 'candidate-form-tasks-characterChecks-HMRC'}"
         >
           Change
         </RouterLink>
@@ -459,7 +459,7 @@
         v-if="canEdit"
         class="govuk-link govuk-body-m change-link"
         style="display:inline-block;"
-        :to="{name: 'character-checks-consent'}"
+        :to="{name: 'candidate-form-tasks-characterChecks-consent'}"
       >
         Change
       </RouterLink>
