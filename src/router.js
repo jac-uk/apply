@@ -57,6 +57,7 @@ import LeadershipJudgeDetails from '@/views/Apply/Assessments/LeadershipJudgeDet
 import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies.vue';
 import JudicialExperience from '@/views/Apply/QualificationsAndExperience/JudicialExperience.vue';
 import PostQualificationWorkExperience from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperience.vue';
+import PostQualificationWorkExperienceDetails from '@/views/Apply/QualificationsAndExperience/PostQualificationWorkExperienceDetails.vue';
 import RelevantQualifications from '@/views/Apply/QualificationsAndExperience/RelevantQualifications.vue';
 import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships.vue';
 import RelevantExperience from '@/views/Apply/QualificationsAndExperience/RelevantExperience.vue';
@@ -76,6 +77,7 @@ import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter.vue';
 import Review from '@/views/Apply/FinalCheck/Review.vue';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation.vue';
 import AdditionalInformation from '@/views/Apply/AdditionalInformation.vue';
+import CommissionerConflicts from '@/views/Apply/CommissionerConflicts.vue';
 
 // Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks.vue';
@@ -400,6 +402,16 @@ const routes = [
         },
       },
       {
+        path: 'commissioner-conflicts',
+        component: CommissionerConflicts,
+        name: 'commissioner-conflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts',
+          isMultilanguage: true,
+        },
+      },
+      {
         path: 'self-assessment-competencies',
         component: SelfAssessmentCompetencies,
         name: 'self-assessment-competencies',
@@ -435,7 +447,17 @@ const routes = [
         name: 'post-qualification-work-experience',
         meta: {
           requiresAuth: true,
-          title: 'Post-qualification work experience',
+          title: 'Post qualification experience',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'post-qualification-work-experience-details',
+        component: PostQualificationWorkExperienceDetails,
+        name: 'post-qualification-work-experience-details',
+        meta: {
+          requiresAuth: true,
+          title: 'Post qualification experience',
           isMultilanguage: true,
         },
       },

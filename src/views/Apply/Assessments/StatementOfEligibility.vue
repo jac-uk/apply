@@ -39,8 +39,8 @@
                 <TextareaInput
                   :id="`meet_requirements_details${index}`"
                   v-model="formData.selectionCriteriaAnswers[index].answerDetails"
-                  :word-limit="item.wordLimit || 250"
-                  :hint="`in ${item.wordLimit || 250} words tell us how.`"
+                  :word-limit="item.wordLimit || defaultWordCount"
+                  :hint="`in ${item.wordLimit || defaultWordCount} words tell us how.`"
                   :label="item.title"
                   label-hidden
                   required
@@ -74,6 +74,7 @@ import RadioItem from '@/components/Form/RadioItem.vue';
 import TextareaInput from '@/components/Form/TextareaInput.vue';
 import BackLink from '@/components/BackLink.vue';
 import CustomHTML from '@/components/CustomHTML.vue';
+import { DEFAULT_WORD_COUNT } from '@/helpers/constants';
 
 export default {
   name: 'StatementOfEligibility',
@@ -88,6 +89,7 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
+    const defaultWordCount = DEFAULT_WORD_COUNT.ADDITIONAL_SELECTION_CRITERIA;
     const defaults = {
       selectionCriteriaAnswers: [],
       progress: {},
@@ -110,6 +112,7 @@ export default {
     return {
       formId: 'statementOfEligibility',
       formData: formData,
+      defaultWordCount: defaultWordCount,
     };
   },
 };
