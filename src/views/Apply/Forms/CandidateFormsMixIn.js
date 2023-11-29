@@ -18,7 +18,7 @@ export default {
       return this.$route.params.formId;
     },
     candidateForm() {
-      return this.$store.state.candidateForm.record;
+      return this.$store.state.candidateForm.record ? this.$store.state.candidateForm.record : {};
     },
     formType() {
       if (!this.candidateForm) return '';
@@ -27,6 +27,7 @@ export default {
     },
     parts() {
       if (!this.candidateForm) return [];
+      if (!this.candidateForm.parts) return [];
       return this.candidateForm.parts;
     },
     areAllPartsDone() {
@@ -37,7 +38,7 @@ export default {
       return allDone;
     },
     candidateFormResponse() {
-      return this.$store.state.candidateFormResponse.record;
+      return this.$store.state.candidateFormResponse.record ? this.$store.state.candidateFormResponse.record : {};
     },
     isFormCompleted() {
       if (!this.candidateFormResponse) return false;

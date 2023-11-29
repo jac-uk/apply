@@ -12,8 +12,8 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
       const firestoreRef = collection
-      .where('candidateIds', 'array-contains', rootState.auth.currentUser.uid);
-      // TODO also restrict so only returns open forms (either look at dates or look at status)
+      .where('candidateIds', 'array-contains', rootState.auth.currentUser.uid)
+      .where('status', '==', 'open');
       return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
