@@ -1,17 +1,19 @@
 <template>
-  <div class="govuk-grid-column-full">
-    <BackLink />
+  <div :class="{ 'govuk-grid-column-full': isPage }">
+    <template v-if="isPage">
+      <BackLink />
 
-    <h1 class="govuk-heading-xl">
-      <template
-        v-if="canEdit"
-      >
-        Check your answers
-      </template>
-      <template v-else>
-        Review sent answers
-      </template>
-    </h1>
+      <h1 class="govuk-heading-xl">
+        <template
+          v-if="canEdit"
+        >
+          Check your answers
+        </template>
+        <template v-else>
+          Review sent answers
+        </template>
+      </h1>
+    </template>
 
     <div class="govuk-!-margin-top-9">
       <h2
@@ -480,13 +482,15 @@
       </dl>
     </div>
 
-    <button
-      v-if="canEdit"
-      class="govuk-button"
-      @click="next"
-    >
-      Continue
-    </button>
+    <template v-if="isPage">
+      <button
+        v-if="canEdit"
+        class="govuk-button"
+        @click="next"
+      >
+        Continue
+      </button>
+    </template>
   </div>
 </template>
 
@@ -500,6 +504,13 @@ export default {
   components: {
     BackLink,
     OtherProfessionalBodiesReview,
+  },
+  props: {
+    isPage: { // If true, this component is being used as a page
+      type: Boolean,
+      required: false,
+      default: true,
+    },
   },
   computed: {
     vacancy() {
