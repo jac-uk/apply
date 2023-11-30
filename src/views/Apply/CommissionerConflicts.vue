@@ -12,12 +12,19 @@
 
         <ErrorSummary :errors="errors" />
 
-        <p class="govuk-body-l">
-          Members of the Judicial Appointments Commission (JAC) come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
-        </p>
-        <p class="govuk-body-l">
-          Are you related to, or known to any of the JAC Commissioners? If you are in any doubt then please select 'Yes' in the list below:
-        </p>
+        <template v-if="!customSave">
+          <p class="govuk-body-l">
+            Members of the Judicial Appointments Commission (JAC) come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
+          </p>
+          <p class="govuk-body-l">
+            Are you related to, or known to any of the JAC Commissioners? If you are in any doubt then please select 'Yes' in the list below:
+          </p>
+        </template>
+        <template v-else>
+          <p class="govuk-body-l">
+            Please update this section to take into account any changes since you submitted your application.
+          </p>
+        </template>
 
         <RadioGroup
           v-for="(commissioner , index) in formData.additionalInfo.commissionerConflicts"
