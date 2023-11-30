@@ -63,7 +63,7 @@ export default {
     },
     async save() {
       await this.savePart(true);
-    },  
+    },
     async savePart(isComplete) {
       // @TODO: Validate that the form has been completed before saving
       const saveData = {};

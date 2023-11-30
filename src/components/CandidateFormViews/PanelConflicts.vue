@@ -1,30 +1,28 @@
 <template>
-  <div>
-    <dl
-      class="govuk-summary-list govuk-!-margin-bottom-8"
+  <dl
+    class="govuk-summary-list govuk-!-margin-bottom-8"
+  >
+    <div
+      v-for="(panelConflict, index) in localData.panelConflicts"
+      :key="index"
+      class="govuk-summary-list__row"
     >
-      <div
-        v-for="(panelConflict, index) in localData.panelConflicts"
-        :key="index"
-        class="govuk-summary-list__row"
-      >
-        <dt class="govuk-summary-list__key">
-          {{ panelConflict.name }}
-        </dt>
-        <dd class="govuk-summary-list__value">
-          <div v-if="panelConflict.hasRelationship === null">
-            No information provided
-          </div>
-          <div v-else>
-            {{ panelConflict.hasRelationship ? 'Yes' : 'No' }}
-          </div>
-          <div v-if="panelConflict.hasRelationship">
-            {{ panelConflict.details }}
-          </div>
-        </dd>
-      </div>
-    </dl>    
-  </div>
+      <dt class="govuk-summary-list__key">
+        {{ panelConflict.name }}
+      </dt>
+      <dd class="govuk-summary-list__value">
+        <div v-if="panelConflict.hasRelationship === null">
+          No information provided
+        </div>
+        <div v-else>
+          {{ panelConflict.hasRelationship ? 'Yes' : 'No' }}
+        </div>
+        <div v-if="panelConflict.hasRelationship">
+          {{ panelConflict.details }}
+        </div>
+      </dd>
+    </div>
+  </dl>
 </template>
 
 <script>
