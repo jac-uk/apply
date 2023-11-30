@@ -54,7 +54,7 @@
         </div>
 
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) && !customSave"
           class="govuk-button info-btn--personal-details--save-and-continue"
         >
           Save and continue
@@ -84,6 +84,13 @@ export default {
   },
   extends: Form,
   mixins: [ApplyMixIn],
+  props: {
+    customSave: { // override the default save behaviour
+      type: Function,
+      required: false,
+      default: null,
+    },
+  },
   data() {
     const commissioners = this.$store.state.vacancy.record.commissioners;
     const defaults = {
@@ -133,9 +140,13 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.isFormValid()) {
-        this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
-        this.$router.push({ name: 'task-list' });
+        if (this.customSave) {
+          await this.customSave();
+        } else {
+          this.formData.progress[this.formId] = true;
+          this.$router.push({ name: 'task-list' });
+        }
       }
     },
   },
