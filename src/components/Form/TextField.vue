@@ -151,7 +151,7 @@ export default {
         const extension = 'gov.uk';
 
         // Define a regular expression pattern to match the email address
-        const pattern = new RegExp(`^\\w+@${domain}\\.${extension}$`, 'i');
+        const pattern = new RegExp(`^.+@${domain}\\.${extension}$`, 'i');
 
         // Use the RegExp.test() method to check if the email matches the pattern
         return pattern.test(this.text);
