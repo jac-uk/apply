@@ -72,7 +72,19 @@ export default {
     };
   },
   created() {
-    this.setupPart(APPLICATION_FORM_PARTS.REASONABLE_ADJUSTMENTS, true);
+    this.setupPart(APPLICATION_FORM_PARTS.REASONABLE_ADJUSTMENTS);
+  },
+  methods: {
+    async save(){
+      const saveData = {
+        personalDetails: {
+          reasonableAdjustments: this.formData.reasonableAdjustments,
+          reasonableAdjustmentsDetails: this.formData.reasonableAdjustmentsDetails,
+        },
+      };
+      await this.$store.dispatch('application/save', saveData);
+      await this.savePart(true);
+    },
   },
 };
 </script>

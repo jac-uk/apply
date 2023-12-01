@@ -805,7 +805,7 @@ const routes = [
         name: 'candidate-form-tasks-reasonableAdjustments',
         meta: {
           requiresAuth: true,
-          title: 'Reasonsable adjustments',
+          title: 'Reasonable adjustments',
         },
       },
       {
