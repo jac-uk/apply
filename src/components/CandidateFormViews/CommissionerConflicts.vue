@@ -1,6 +1,30 @@
 <template>
-  <div>
-    Commissioner conflicts view code goes here
+  <div v-if="application && application.additionalInfo">
+    <dl
+      v-if="application.additionalInfo.commissionerConflicts && application.additionalInfo.commissionerConflicts.length"
+      class="govuk-summary-list govuk-!-margin-bottom-8"
+    >
+      <div
+        v-for="(commissionerConflict, index) in application.additionalInfo.commissionerConflicts"
+        :key="index"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          {{ commissionerConflict.name }}
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <div v-if="commissionerConflict.hasRelationship === null">
+            No information provided
+          </div>
+          <div v-else>
+            {{ commissionerConflict.hasRelationship ? 'Yes' : 'No' }}
+          </div>
+          <div v-if="commissionerConflict.hasRelationship">
+            {{ commissionerConflict.details }}
+          </div>
+        </dd>
+      </div>
+    </dl>
   </div>
 </template>
 
