@@ -4,16 +4,16 @@
   >
     <div class="govuk-summary-list__row">
       <dt class="govuk-summary-list__key">
-        {{ $filters.toYesNo(localData.reasonableAdjustments) }}
+        {{ $filters.toYesNo(application.personalDetails.reasonableAdjustments) }}
       </dt>
       <dd
         class="govuk-summary-list__value"
         data-welsh="reasonable-adjustments"
       >
         <span
-          v-if="localData.reasonableAdjustments"
+          v-if="application.personalDetails.reasonableAdjustments"
         >
-          {{ localData.reasonableAdjustmentsDetails }}
+          {{ application.personalDetails.reasonableAdjustmentsDetails }}
         </span>
       </dd>
     </div>
