@@ -12,12 +12,19 @@
 
         <ErrorSummary :errors="errors" />
 
-        <p class="govuk-body-l">
-          Members of the Judicial Appointments Commission (JAC) come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
-        </p>
-        <p class="govuk-body-l">
-          Are you related to, or known to any of the JAC Commissioners? If you are in any doubt then please select 'Yes' in the list below:
-        </p>
+        <template v-if="!customSave">
+          <p class="govuk-body-l">
+            Members of the Judicial Appointments Commission (JAC) come from a wide background to ensure the Commission has a breadth of knowledge, expertise and independence.
+          </p>
+          <p class="govuk-body-l">
+            Are you related to, or known to any of the JAC Commissioners? If you are in any doubt then please select 'Yes' in the list below:
+          </p>
+        </template>
+        <template v-else>
+          <p class="govuk-body-l">
+            Please update this section to take into account any changes since you submitted your application.
+          </p>
+        </template>
 
         <RadioGroup
           v-for="(commissioner , index) in formData.additionalInfo.commissionerConflicts"
@@ -54,7 +61,7 @@
         </div>
 
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) && !customSave"
           class="govuk-button info-btn--personal-details--save-and-continue"
         >
           Save and continue
@@ -84,6 +91,13 @@ export default {
   },
   extends: Form,
   mixins: [ApplyMixIn],
+  props: {
+    customSave: { // override the default save behaviour
+      type: Function,
+      required: false,
+      default: null,
+    },
+  },
   data() {
     const commissioners = this.$store.state.vacancy.record.commissioners;
     const defaults = {
@@ -133,9 +147,13 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.isFormValid()) {
-        this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
-        this.$router.push({ name: 'task-list' });
+        if (this.customSave) {
+          await this.customSave();
+        } else {
+          this.formData.progress[this.formId] = true;
+          this.$router.push({ name: 'task-list' });
+        }
       }
     },
   },
