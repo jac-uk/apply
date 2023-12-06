@@ -24,7 +24,8 @@
           Re-upload document
         </RouterLink>
 
-        <TextareaInput
+        <component
+          :is="components.TextareaInput"
           v-for="(wordLimit, i) in wordLimits"
           id="suitability-statement-text"
           :key="i"
@@ -35,7 +36,7 @@
         />
 
         <button
-          :disabled="!canSave(formId) || (errors.length > 0)"
+          :disabled="!canSave(formId) || overWordLimit"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
@@ -52,6 +53,7 @@ import { logEvent } from '@/helpers/logEvent';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
+import { shallowRef } from 'vue';
 
 export default {
   //I tried to leave this component open for refactor so
@@ -60,7 +62,6 @@ export default {
   name: 'DataConfirmation',
   components: {
     ErrorSummary,
-    TextareaInput,
     BackLink,
   },
   extends: Form,
@@ -76,11 +77,21 @@ export default {
       formId: 'selfAssessmentCompetencies',
       formData: formData,
       statementType: 'statement-of-suitability-with-competencies',
+      components: shallowRef({
+        TextareaInput,
+      }),
     };
   },
   computed: {
     wordLimits() {
       return this.vacancy.selfAssessmentWordLimits.map(section => section.wordLimit);
+    },
+    overWordLimit() {
+      console.log(1);
+      for (let i = 0; i < this.wordLimits.length; i++) {
+        console.log(this.$refs[`StatementInputRef${i}`].wordLimitCount);
+      }
+      return true;
     },
     selfAssessmentSections() {
       return this.wordLimits.length;
@@ -91,22 +102,28 @@ export default {
   },
   methods: {
     processArrayWithLimit(stringsArray, limit) {
+      // Filter out items that are empty strings, single spaces, "-", or a single bullet point
+      const filteredArray = stringsArray.filter(item =>
+        item !== ' ' && item !== '' && item.trim() !== '-' && item.trim() !== '•'
+      );
+
       let slicedArray;
-      if (typeof remainingItems === Array) {
+
+      if (Array.isArray(filteredArray)) {
         const LAST_INDEX = limit - 1;
 
         // Take the first `limit - 1` elements or all elements if smaller than the limit
-        slicedArray = stringsArray.slice(0, Math.min(stringsArray.length, LAST_INDEX));
+        slicedArray = filteredArray.slice(0, Math.min(filteredArray.length, LAST_INDEX));
 
         // Take the remaining items starting from the `limit` position
-        const remainingItems = stringsArray.slice(LAST_INDEX);
+        const remainingItems = filteredArray.slice(LAST_INDEX);
 
         // If there are remaining items, join them with a comma and space and add as a single element
         if (remainingItems.length > 0) {
           slicedArray.push(remainingItems.join(', '));
         }
       } else {
-        slicedArray = [stringsArray];
+        slicedArray = [filteredArray];
       }
 
       return slicedArray;
