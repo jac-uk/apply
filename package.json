@@ -19,7 +19,7 @@
     "production:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:production-candidate-app -P production",
     "test": "vitest --mode develop ",
     "test:coverage": "TZ='Europe/London' vitest run --coverage",
-    "test-ci": "TZ='Europe/London' vitest test:unit --ci --runInBand",
+    "test-ci": "TZ='Europe/London' vitest --run --poolOptions.threads.singleThread",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore"
   },
