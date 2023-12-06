@@ -17,7 +17,7 @@
         <ErrorSummary :errors="errors" />
 
         <RouterLink
-          v-if="formData.progress[statementType]"
+          v-if="formData.progress.selfAssessmentCompetencies"
           class="govuk-link float-right"
           :to="{ name: 'self-assessment-competencies' }"
         >
@@ -91,17 +91,22 @@ export default {
   },
   methods: {
     processArrayWithLimit(stringsArray, limit) {
-      const LAST_INDEX = limit - 1;
+      let slicedArray;
+      if (typeof remainingItems === Array) {
+        const LAST_INDEX = limit - 1;
 
-      // Take the first `limit - 1` elements or all elements if smaller than the limit
-      const slicedArray = stringsArray.slice(0, Math.min(stringsArray.length, LAST_INDEX));
+        // Take the first `limit - 1` elements or all elements if smaller than the limit
+        slicedArray = stringsArray.slice(0, Math.min(stringsArray.length, LAST_INDEX));
 
-      // Take the remaining items starting from the `limit` position
-      const remainingItems = stringsArray.slice(LAST_INDEX);
+        // Take the remaining items starting from the `limit` position
+        const remainingItems = stringsArray.slice(LAST_INDEX);
 
-      // If there are remaining items, join them with a comma and space and add as a single element
-      if (remainingItems.length > 0) {
-        slicedArray.push(remainingItems.join(', '));
+        // If there are remaining items, join them with a comma and space and add as a single element
+        if (remainingItems.length > 0) {
+          slicedArray.push(remainingItems.join(', '));
+        }
+      } else {
+        slicedArray = [stringsArray];
       }
 
       return slicedArray;
