@@ -25,6 +25,8 @@ const formatDate = (value, type) => {
       return objDate.toLocaleString('en-GB');
     case 'datetime-without-second':
       return objDate.toLocaleDateString('en-GB', { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric' });
+    case 'MM/YYYY': // e.g. 09/2023
+      return objDate.toLocaleDateString('en-GB', { month: '2-digit', year: 'numeric' });
     default:
       return objDate.toLocaleDateString('en-GB');
     }
@@ -142,6 +144,7 @@ const lookup = (value) => {
       'employment-appeals-tribunal': 'Employment Appeals Tribunal',
       'employment-tribunal': 'Employment Tribunal',
       'england-wales': 'England and Wales',
+      'true': 'Yes',
       'false': 'No',
       'family': 'Family',
       'fee-paid': 'Fee paid',
@@ -184,7 +187,8 @@ const lookup = (value) => {
       'legal': 'Legal',
       'linked-in': 'LinkedIn',
       'lord-chancellor': 'Lord Chancellor',
-      'lord-chief-justice': 'Lord Chief Justice',
+      'lady-chief-justice': 'Lady Chief Justice',
+      'lord-chief-justice': 'Lady Chief Justice',
       'male': 'Male',
       'multiple-choice': 'Multiple choice',
       'muslim': 'Muslim',
@@ -280,6 +284,8 @@ const lookup = (value) => {
       'full-time': 'Full-time',
       'salaried-part-time': 'Salaried part-time',
       'voluntary': 'Voluntary',
+      'judicial-post': 'Judicial',
+      'quasi-judicial-post': 'Quasi-judicial',
       // 'xxx': 'xxx',`
     };
 

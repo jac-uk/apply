@@ -46,6 +46,7 @@
       :max="numMax"
       :autocomplete="autocomplete"
       @change="validate"
+      @keydown="keydown"
     >
   </div>
 </template>
@@ -86,6 +87,10 @@ export default {
       default: 'text',
       type: String,
     },
+    warnCpsEmailMsg: {
+      default: '',
+      type: String,
+    },
   },
   emits: ['update:modelValue'],
   computed: {
@@ -93,13 +98,14 @@ export default {
       get() {
         return this.modelValue;
       },
-      set(val) { 
+      set(val) {
         if (typeof val === 'string') {
           val = val.trim();
         }
-        
+
         switch (this.type) {
         case 'number':
+        case 'non-negative-number':
           this.$emit('update:modelValue', val ? parseFloat(val) : '');
           break;
         default:
@@ -121,8 +127,42 @@ export default {
       case 'text':
       case 'email':
         return 'text'; // we are using custom email validation, so don't use html5 input types
+      case 'non-negative-number':
+        return 'number';
       default:
         return this.type;
+      }
+    },
+  },
+  watch: {
+    text() {
+      if (this.warnCpsEmailMsg && this.isCPSEmail()) {
+        this.setWarning(this.warnCpsEmailMsg);
+      }
+      else {
+        this.setWarning('');
+      }
+    },
+  },
+  methods: {
+    isCPSEmail() {
+      if (this.text) {
+        const domain = 'cps';
+        const extension = 'gov.uk';
+
+        // Define a regular expression pattern to match the email address
+        const pattern = new RegExp(`^\\w+@${domain}\\.${extension}$`, 'i');
+
+        // Use the RegExp.test() method to check if the email matches the pattern
+        return pattern.test(this.text);
+      }
+      return false;
+    },
+    keydown(event) {
+      if (this.type === 'non-negative-number') {
+        if (['e', 'E', '+', '-', '.'].includes(event.key)) {
+          event.preventDefault();
+        }
       }
     },
   },

@@ -5,7 +5,7 @@
   >
     <label
       :for="id"
-      class="govuk-heading-m govuk-!-margin-bottom-2"
+      :class="labelHidden ? 'govuk-visually-hidden' : 'govuk-heading-m govuk-!-margin-bottom-2'"
     >
       {{ label }}
     </label>
@@ -67,6 +67,10 @@ export default {
       type: Boolean,
       required: false,
       default: false,
+    },
+    labelHidden: {
+      default: false,
+      type: Boolean,
     },
   },
   emits: ['update:modelValue'],
