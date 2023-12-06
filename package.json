@@ -18,22 +18,22 @@
     "staging:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:staging-candidate-app -P staging",
     "production:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:production-candidate-app -P production",
     "test": "vitest --mode develop ",
-    "test:coverage": "TZ='Europe/London' vite test:unit --coverage",
-    "test-ci": "TZ='Europe/London' vite test:unit --ci --runInBand",
+    "test:coverage": "TZ='Europe/London' vitest run --coverage",
+    "test-ci": "TZ='Europe/London' vitest test:unit --ci --runInBand",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@jac-uk/jac-kit": "3.0.23",
     "@ministryofjustice/frontend": "0.2.4",
-    "@sentry/vue": "^7.64.0",
+    "@sentry/vue": "^7.85.0",
     "@vue/compat": "^3.3.4",
-    "autoprefixer": "^10.4.15",
+    "autoprefixer": "^10.4.16",
     "firebase": "^8.10.1",
     "firebaseui": "^4.8.0",
     "govuk-frontend": "^3.12.0",
     "mitt": "^3.0.1",
-    "vite": "^4.4.9",
+    "vite": "^5.0.0",
     "vue": "^3.3.4",
     "vue-dompurify-html": "^4.1.4",
     "vue-gtag": "^2.0.1",
@@ -43,6 +43,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.3.4",
+    "@vitest/coverage-v8": "^1.0.1",
     "@vue/compiler-sfc": "^3.3.4",
     "@vue/test-utils": "^2.4.1",
     "bufferutil": "^4.0.1",
@@ -63,12 +64,12 @@
     "postcss": "8.2.15",
     "sass": "^1.32.13",
     "vite-plugin-eslint": "^1.8.1",
-    "vitest": "^0.34.6",
+    "vitest": "^1.0.0",
     "webpack": "^5.88.2",
     "y18n": ">=4.0.1"
   },
   "engines": {
-    "node": "v16.15.1",
-    "npm": "^8.11.0"
+    "node": "v18.19.0",
+    "npm": "10.2.3"
   }
 }
