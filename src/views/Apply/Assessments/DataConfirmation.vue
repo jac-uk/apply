@@ -36,7 +36,7 @@
         />
 
         <button
-          :disabled="!canSave(formId) || overWordLimit"
+          :disabled="!canSave(formId) || errors.length > 0"
           class="govuk-button info-btn--statement-of-suitability--save-and-continue"
         >
           Save and continue
@@ -85,13 +85,6 @@ export default {
   computed: {
     wordLimits() {
       return this.vacancy.selfAssessmentWordLimits.map(section => section.wordLimit);
-    },
-    overWordLimit() {
-      console.log(1);
-      for (let i = 0; i < this.wordLimits.length; i++) {
-        console.log(this.$refs[`StatementInputRef${i}`].wordLimitCount);
-      }
-      return true;
     },
     selfAssessmentSections() {
       return this.wordLimits.length;
