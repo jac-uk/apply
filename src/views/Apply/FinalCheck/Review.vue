@@ -773,7 +773,8 @@
                 class="govuk-summary-list__row"
               >
                 <dt class="govuk-summary-list__key">
-                  I will resign my post at DWP if recommended for this post.
+                  Please note, if you work for the DWP and are recommended for appointment as a Fee-paid Medical Member, you will be required to resign from your post in order to take up appointment.
+                  Please tick to confirm that you have read this.
                 </dt>
                 <dd
                   class="govuk-summary-list__value"

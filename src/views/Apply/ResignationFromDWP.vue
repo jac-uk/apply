@@ -32,9 +32,11 @@
           v-if="formData.resignationFromDWP.workingAtDWP"
           id="resign-from-dwp"
           v-model="formData.resignationFromDWP.agreedToResign"
+          multiline-label
         >
           <span>
-            I will resign my post at DWP if recommended for this post.
+            Please note, if you work for the DWP and are recommended for appointment as a Fee-paid Medical Member, you will be required to resign from your post in order to take up appointment.
+            Please tick to confirm that you have read this.
           </span>
         </Checkbox>
 
