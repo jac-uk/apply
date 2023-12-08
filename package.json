@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.77.0",
+  "version": "1.77.1",
   "private": true,
   "scripts": {
     "dev": "vite --mode develop",
@@ -11,9 +11,9 @@
     "develop:build": "vite build --mode develop",
     "staging:build": "vite build --mode staging",
     "production:build": "vite build --mode production",
-    "develop:deploy": "vite build --mode develop; firebase deploy --only hosting:develop-admin-app -P develop",
-    "staging:deploy": "vite build --mode staging; firebase deploy --only hosting:staging-admin-app -P staging",
-    "production:deploy": "vite build --mode production; firebase deploy --only hosting:production-admin-app -P production",
+    "develop:deploy": "vite build --mode develop; firebase deploy --only hosting:develop-candidate-app -P develop",
+    "staging:deploy": "vite build --mode staging; firebase deploy --only hosting:staging-candidate-app -P staging",
+    "production:deploy": "vite build --mode production; firebase deploy --only hosting:production-candidate-app -P production",
     "develop:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:develop-candidate-app -P develop",
     "staging:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:staging-candidate-app -P staging",
     "production:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:production-candidate-app -P production",
