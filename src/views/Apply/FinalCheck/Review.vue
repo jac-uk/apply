@@ -780,7 +780,7 @@
                   class="govuk-summary-list__value"
                   data-welsh="can-give-reasonable-los"
                 >
-                  {{ $filters.toYesNo(application.resignationFromDWP.agreedToResign) }}
+                  {{ $filters.toYesNo(application.resignationFromDWP.isConfirmed) }}
                 </dd>
               </div>
             </dl>

@@ -31,7 +31,7 @@
         <Checkbox
           v-if="formData.resignationFromDWP.workingAtDWP"
           id="resign-from-dwp"
-          v-model="formData.resignationFromDWP.agreedToResign"
+          v-model="formData.resignationFromDWP.isConfirmed"
           multiline-label
         >
           <span>
@@ -75,7 +75,7 @@ export default {
     const defaults = {
       resignationFromDWP: {
         workingAtDWP: null,
-        agreedToResign: null,
+        isConfirmed: null,
       },
       progress: {},
     };
@@ -95,10 +95,10 @@ export default {
   methods: {
     isFormValid() {
       if (this.formData.resignationFromDWP.workingAtDWP === true) {
-        if (!this.formData.resignationFromDWP.agreedToResign) {
+        if (!this.formData.resignationFromDWP.isConfirmed) {
           this.errors.push({ id: 'error', message: 'Please check all boxes to continue' });
         }
-        return this.formData.resignationFromDWP.agreedToResign;
+        return this.formData.resignationFromDWP.isConfirmed;
       } else if (this.formData.resignationFromDWP.workingAtDWP === false) {
         return true;
       }
