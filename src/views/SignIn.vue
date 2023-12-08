@@ -56,6 +56,7 @@
           />
 
           <button
+            type="submit"
             class="govuk-button"
             :disabled="disabled"
           >
