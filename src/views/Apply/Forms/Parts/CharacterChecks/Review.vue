@@ -524,6 +524,7 @@ export default {
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
     canEdit() {
+      if (!this.isPage) return false; // if this component is not being used as a page, it cannot be edited
       return !(this.application.characterChecks && this.application.characterChecks.consent
         && this.application.characterChecks.status === 'completed');
     },
