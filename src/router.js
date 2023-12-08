@@ -109,7 +109,8 @@ import CandidateFormCharacterChecksReview from '@/views/Apply/Forms/Parts/Charac
 import CandidateFormCharacterChecksConsent from '@/views/Apply/Forms/Parts/CharacterChecks/Consent.vue';
 import CandidateFormCharacterChecksFormSubmitted from '@/views/Apply/Forms/Parts/CharacterChecks/FormSubmitted.vue';
 import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
-import CandidateFormWorkingPreferences from '@/views/Apply/Forms/Parts/WorkingPreferences.vue';
+import CandidateFormLocationPreferences from '@/views/Apply/Forms/Parts/LocationPreferences.vue';
+import CandidateFormJurisdictionPreferences from '@/views/Apply/Forms/Parts/JurisdictionPreferences.vue';
 import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
 
 // Error pages
@@ -900,12 +901,21 @@ const routes = [
         },
       },
       {
-        path: 'jurisdiction',
-        component: CandidateFormWorkingPreferences,
-        name: 'candidate-form-tasks-workingPreferences',
+        path: 'location',
+        component: CandidateFormLocationPreferences,
+        name: 'candidate-form-tasks-locationPreferences',
         meta: {
           requiresAuth: true,
-          title: 'Jurisdiction',
+          title: 'Location preferences',
+        },
+      },
+      {
+        path: 'jurisdiction',
+        component: CandidateFormJurisdictionPreferences,
+        name: 'candidate-form-tasks-jurisdictionPreferences',
+        meta: {
+          requiresAuth: true,
+          title: 'Jurisdiction preferences',
         },
       },
       {

@@ -332,7 +332,8 @@ const lookup = (value) => {
     lookup[APPLICATION_FORM_PARTS.COMMISSIONER_CONFLICTS] = 'Commissioner Conflicts';
     lookup[APPLICATION_FORM_PARTS.CHARACTER_CHECKS] = 'Character Checks';
     lookup[APPLICATION_FORM_PARTS.REASONABLE_ADJUSTMENTS] = 'Reasonable Adjustments';
-    lookup[APPLICATION_FORM_PARTS.WORKING_PREFERENCES] = 'Working Preferences';
+    lookup[APPLICATION_FORM_PARTS.LOCATION_PREFERENCES] = 'Location Preferences';
+    lookup[APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES] = 'Jurisdiction Preferences';
     lookup[APPLICATION_FORM_PARTS.WELSH_POSTS] = 'Welsh Posts';
 
     return lookup[value] || value;

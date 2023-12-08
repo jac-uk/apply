@@ -30,6 +30,7 @@
         <div>
           <component
             :is="viewComponents[part]"
+            :vacancy="vacancy"
             :application="application"
             :local-data="candidateFormResponse[part]"
           />
@@ -57,7 +58,8 @@ import commissionerConflicts from '@/components/CandidateFormViews/CommissionerC
 import panelConflicts from '@/components/CandidateFormViews/PanelConflicts.vue';
 import reasonableAdjustments from '@/components/CandidateFormViews/ReasonableAdjustments.vue';
 import welshPosts from '@/components/CandidateFormViews/WelshPosts.vue';
-import workingPreferences from '@/components/CandidateFormViews/WorkingPreferences.vue';
+import locationPreferences from '@/components/CandidateFormViews/LocationPreferences.vue';
+import jurisdictionPreferences from '@/components/CandidateFormViews/JurisdictionPreferences.vue';
 export default {
   name: 'CandidateFormReview',
   components: {
@@ -73,7 +75,8 @@ export default {
         panelConflicts,
         reasonableAdjustments,
         welshPosts,
-        workingPreferences,
+        locationPreferences,
+        jurisdictionPreferences,
       }),
     };
   },
