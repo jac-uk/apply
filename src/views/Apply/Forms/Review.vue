@@ -1,5 +1,5 @@
 <template>
-  <div 
+  <div
     v-if="candidateFormResponse"
     class="govuk-grid-row"
   >
@@ -8,7 +8,7 @@
         Review your answers
       </h1>
 
-      <div 
+      <div
         v-for="part in parts"
         :key="part"
         class="govuk-!-margin-bottom-9"
@@ -28,14 +28,14 @@
           Change
         </RouterLink>
         <div>
-          <component 
-            :is="viewComponents[part]" 
+          <component
+            :is="viewComponents[part]"
             :application="application"
             :local-data="candidateFormResponse[part]"
           />
         </div>
       </div>
-      
+
       <button
         v-if="!isFormCompleted"
         class="govuk-button info-btn--task-list--review-application"
