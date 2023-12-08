@@ -75,21 +75,6 @@
           label="Male"
         />
         <RadioItem
-          value="gender-neutral"
-          label="Gender neutral"
-        />
-        <RadioItem
-          value="other-gender"
-          label="Other sex"
-        >
-          <TextField
-            id="other-gender-details"
-            v-model="equalityAndDiversitySurvey.otherGenderDetails"
-            label="Other sex"
-            class="govuk-!-width-two-thirds"
-          />
-        </RadioItem>
-        <RadioItem
           value="prefer-not-to-say"
           label="Prefer not to say"
         />
