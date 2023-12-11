@@ -30,6 +30,7 @@
             <RadioGroup
               :id="`meet_requirements_${index}`"
               v-model="formData.selectionCriteriaAnswers[index].answer"
+              required
               label="Do you meet this requirement?"
             >
               <RadioItem
