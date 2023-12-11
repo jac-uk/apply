@@ -442,6 +442,7 @@
             </div>
 
             <PostQualificationExperience
+              :vacancy="vacancy"
               :application="application"
             />
           </div>
@@ -470,7 +471,7 @@
             />
           </div>
 
-          <div v-if="applicationParts.employmentGaps">
+          <div v-if="hasEmploymentGaps">
             <div
               class="govuk-!-margin-top-9"
             >
@@ -733,6 +734,53 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ application.leadershipJudgeDetails.phone }}
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div v-if="isJAC00187">
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Resignation from the Department for Work and Pensions (DWP)
+              </h2>
+              <RouterLink
+                v-if="canEdit"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'resignation-from-dwp'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+            <dl class="govuk-summary-list govuk-!-margin-bottom-8">
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
+                  Do you currently work at the Department for Work and Pensions (DWP)?
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                  data-welsh="can-give-reasonable-los"
+                >
+                  {{ $filters.toYesNo(application.resignationFromDWP.workingAtDWP) }}
+                </dd>
+              </div>
+              <div
+                v-if="application.resignationFromDWP.workingAtDWP"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Please note, if you work for the DWP and are recommended for appointment as a Fee-paid Medical Member, you will be required to resign from your post in order to take up appointment.
+                  Please tick to confirm that you have read this.
+                </dt>
+                <dd
+                  class="govuk-summary-list__value"
+                  data-welsh="can-give-reasonable-los"
+                >
+                  {{ $filters.toYesNo(application.resignationFromDWP.isConfirmed) }}
                 </dd>
               </div>
             </dl>
@@ -1136,6 +1184,9 @@ export default {
         return true;
       }
       return false;
+    },
+    hasEmploymentGaps() {
+      return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
     },
   },
   methods: {

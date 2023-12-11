@@ -34,6 +34,10 @@ export default {
     required: {
       type: Boolean,
     },
+    optionalHidden: { // if true, the optional text will be hidden
+      type: Boolean,
+      default: false,
+    },
     minLength: {
       type: Number,
       default: 0,
@@ -116,7 +120,7 @@ export default {
           value = event.target.value;
         }
 
-        if (this.required && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
+        if (this.required && !this.isOngoing && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
           } else {
@@ -132,7 +136,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'date' && value) {
+        if (this.type && ['month', 'date'].includes(this.type) && value) {
           if (this.maxDate && (value > (this.maxDate))) {
             this.setError(`Enter a date before ${formatDate(this.maxDate)} for ${this.label}`);
           }
@@ -148,7 +152,7 @@ export default {
           }
         }
 
-        if (this.type && this.type === 'number' && value && this.numMax) {
+        if (this.type && ['number', 'non-negative-number'].includes(this.type) && value && this.numMax) {
           if (value > this.numMax) {
             this.setError(`Please enter a number lower than ${this.numMax}`);
           }
