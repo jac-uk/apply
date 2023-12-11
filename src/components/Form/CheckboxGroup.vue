@@ -15,7 +15,7 @@
       >
         {{ label }}
         <span
-          v-if="!required"
+          v-if="!required && !optionalHidden"
           class="govuk-label"
           style="margin-bottom: 0;"
         >
