@@ -254,7 +254,13 @@ export default {
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);
-        this.$router.push({ name: 'character-checks-professional-details' });
+
+        if (Array.isArray(this.application.qualifications) && this.application.qualifications.length) {
+          // if candidate has stated qualifications
+          this.$router.push({ name: 'character-checks-professional-details' });
+        } else {
+          this.$router.push({ name: 'character-checks-professional-details-magistrate' });
+        }
       }
     },
     makeFullName() {
