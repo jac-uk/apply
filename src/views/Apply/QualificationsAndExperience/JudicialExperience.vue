@@ -116,6 +116,7 @@
             v-if="formData.feePaidOrSalariedJudge === true"
             id="fee-or-salaried-sat-thirty-days"
             v-model="formData.feePaidOrSalariedSatForThirtyDays"
+            required
             :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days?`"
           >
             <RadioItem
@@ -186,6 +187,7 @@
             v-if="formData.declaredAppointmentInQuasiJudicialBody === true"
             id="quasi-judicial-sat-thirty-days"
             v-model="formData.quasiJudicialSatForThirtyDays"
+            required
             :label="`Have you sat for at least ${ vacancy.pjeDays || 30 } days in one or all of these appointments?`"
           >
             <RadioItem
