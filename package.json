@@ -33,7 +33,6 @@
     "firebaseui": "^4.8.0",
     "govuk-frontend": "^3.12.0",
     "mitt": "^3.0.1",
-    "vite": "^5.0.0",
     "vue": "^3.3.4",
     "vue-dompurify-html": "^4.1.4",
     "vue-gtag": "^2.0.1",
@@ -63,13 +62,14 @@
     "node-fetch": ">=2.6.7",
     "postcss": "^8.4.31",
     "sass": "^1.32.13",
+    "vite": "^5.0.0",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^1.0.0",
     "webpack": "^5.88.2",
     "y18n": ">=4.0.1"
   },
   "engines": {
-    "node": "v18.19.0",
+    "node": "v20.10.0",
     "npm": "10.2.3"
   }
 }
