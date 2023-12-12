@@ -16,6 +16,7 @@
       :id="experienceStartDate"
       v-model="row.startDate"
       label="Start date"
+      :required="hasEnteredData"
       type="month"
     />
 
@@ -63,6 +64,9 @@ export default {
     },
     experienceEndDate() {
       return `experience_end_date_${this.index}`;
+    },
+    hasEnteredData() {
+      return !!this.row.jobTitle || !!this.row.orgBusinessName;
     },
   },
 };
