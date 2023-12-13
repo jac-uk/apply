@@ -20,25 +20,22 @@
     "develop:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:develop-candidate-app -P develop",
     "staging:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:staging-candidate-app -P staging",
     "production:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:production-candidate-app -P production",
-    "test": "vite test:unit",
-    "test:unit": "vite test:unit",
-    "test-ci": "vite test:unit --ci --runInBand --silent --forceExit",
+    "test": "vitest --mode develop ",
+    "test:coverage": "TZ='Europe/London' vitest run --coverage",
+    "test-ci": "TZ='Europe/London' vitest --run",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore",
-    "test:coverage": "TZ='Europe/London' vue-cli-service test:unit --coverage"
+    "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore"
   },
   "dependencies": {
     "@jac-uk/jac-kit": "3.0.23",
     "@ministryofjustice/frontend": "0.2.4",
-    "@sentry/vue": "^7.64.0",
-    "@vitejs/plugin-vue": "^4.3.4",
+    "@sentry/vue": "^7.85.0",
     "@vue/compat": "^3.3.4",
-    "autoprefixer": "^10.4.15",
+    "autoprefixer": "^10.4.16",
     "firebase": "^8.10.1",
     "firebaseui": "^4.8.0",
     "govuk-frontend": "^3.12.0",
     "mitt": "^3.0.1",
-    "vite": "^4.4.12",
     "vue": "^3.3.4",
     "vue-dompurify-html": "^4.1.4",
     "vue-gtag": "^2.0.1",
@@ -47,7 +44,10 @@
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "@vitest/coverage-v8": "^1.0.1",
     "@vue/compiler-sfc": "^3.3.4",
+    "@vue/test-utils": "^2.4.1",
     "bufferutil": "^4.0.1",
     "canvas": "^2.5.0",
     "clone": "^2.1.2",
@@ -61,15 +61,18 @@
     "highlight.js": ">=10.4.1",
     "is-svg": ">=4.3.0",
     "jest-extended": "^0.11.5",
+    "jsdom": "^22.1.0",
     "node-fetch": ">=2.6.7",
     "postcss": "^8.4.31",
     "sass": "^1.32.13",
+    "vite": "^5.0.0",
     "vite-plugin-eslint": "^1.8.1",
+    "vitest": "^1.0.0",
     "webpack": "^5.88.2",
     "y18n": ">=4.0.1"
   },
   "engines": {
-    "node": "v16.15.1",
-    "npm": "^8.11.0"
+    "node": "v20.10.0",
+    "npm": "10.2.3"
   }
 }

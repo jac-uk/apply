@@ -1,14 +1,15 @@
-import Vacancies from '@/views/Vacancies';
+import Vacancies from '@/views/Vacancies.vue';
 import { createTestSubject } from '../helpers';
+import { vi } from 'vitest';
 
-jest.mock('vuex', () => {
+vi.mock('vuex', () => {
     return {
-        mapGetters: jest.fn(),
+        mapGetters: vi.fn(),
     };
 });
 
-xdescribe('views/Vacancies', () => {  
-    let wrapper;  
+describe.skip('views/Vacancies', () => {
+    let wrapper;
     beforeEach(()=>{
         wrapper = createTestSubject(Vacancies, {
             stubs: ['RouterView'],
@@ -17,4 +18,5 @@ xdescribe('views/Vacancies', () => {
     it('renders the component', () => {
         expect(wrapper.exists()).toBe(true);
     });
-}); 
+});
+
