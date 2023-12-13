@@ -1,4 +1,5 @@
 import auth from '@/store/auth';
+import { vi } from 'vitest';
 
 describe('store/auth', () => {
   const mutations = auth.mutations;
@@ -30,7 +31,7 @@ describe('store/auth', () => {
 
     beforeEach(() => {
       context = {
-        commit: jest.fn(),
+        commit: vi.fn(),
         getters,
         state,
       };

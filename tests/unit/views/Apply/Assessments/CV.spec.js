@@ -1,10 +1,10 @@
-// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form
 //  component and errors due to the queryselector
 
-import CV from '@/views/Apply/Assessments/CV';
+import CV from '@/views/Apply/Assessments/CV.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Assessments/CV', () => {
+describe.skip('views/Assessments/CV', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = createTestSubject(CV, {

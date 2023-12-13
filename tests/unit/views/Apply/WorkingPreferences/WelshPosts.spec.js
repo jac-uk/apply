@@ -1,10 +1,10 @@
-// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form
 //  component and errors due to the queryselector
 
-import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts';
+import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/WorkingPreferences/WelshPosts', () => {
+describe.skip('views/WorkingPreferences/WelshPosts', () => {
     let wrapper;
     beforeEach(() => {
         wrapper = createTestSubject(WelshPosts, {
@@ -13,7 +13,7 @@ xdescribe('views/WorkingPreferences/WelshPosts', () => {
             propsData: {},
         });
     });
-    
+
     describe('template', () => {
         it('renders', () => {
             expect(wrapper.exists()).toBe(true);

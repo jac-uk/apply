@@ -77,6 +77,7 @@ import Review from '@/views/Apply/FinalCheck/Review.vue';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation.vue';
 import AdditionalInformation from '@/views/Apply/AdditionalInformation.vue';
 import CommissionerConflicts from '@/views/Apply/CommissionerConflicts.vue';
+import ResignationFromDWP from '@/views/Apply/ResignationFromDWP.vue';
 
 // Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks.vue';
@@ -410,6 +411,16 @@ const routes = [
         meta: {
           requiresAuth: true,
           title: 'Give Leadership Judge details',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'resignation-from-dwp',
+        component: ResignationFromDWP,
+        name: 'resignation-from-dwp',
+        meta: {
+          requiresAuth: true,
+          title: 'Resignation from DWP',
           isMultilanguage: true,
         },
       },

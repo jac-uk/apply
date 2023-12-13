@@ -138,7 +138,10 @@
           >{{ vacancy.exerciseMailbox }}</a>
         </p>
 
-        <div class="govuk-warning-text">
+        <div 
+          v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+          class="govuk-warning-text"
+        >
           <span
             class="govuk-warning-text__icon"
             aria-hidden="true"
@@ -363,7 +366,6 @@ import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML.vue';
-import _has from 'lodash/has';
 
 export default {
   name: 'VacancyDetails',
@@ -409,7 +411,7 @@ export default {
       return this.$store.state.vacancy.record;
     },
     hasDownloads() {
-      return _has(this.vacancy, 'downloads') && Object.keys(this.vacancy.downloads).length > 0;
+      return this.vacancy && this.vacancy.downloads && Object.values(this.vacancy.downloads).length > 0;
     },
     user() {
       return this.$store.state.auth.currentUser;

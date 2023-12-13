@@ -34,6 +34,10 @@ export default {
     required: {
       type: Boolean,
     },
+    optionalHidden: { // if true, the optional text will be hidden
+      type: Boolean,
+      default: false,
+    },
     minLength: {
       type: Number,
       default: 0,
