@@ -85,7 +85,7 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data() {
-    const commissioners = this.$store.state.vacancy.record.commissioners;
+    const commissioners = this.$store.getters['settings/getCommissioners'];
     const defaults = {
       additionalInfo: {
         commissionerConflicts: commissioners.map((commissioner) => ({
