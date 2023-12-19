@@ -4,19 +4,21 @@
       :id="experienceJobTitle"
       v-model="row.jobTitle"
       label="Job title"
+      required
     />
 
     <TextField
       :id="experienceOrgBusinessName"
       v-model="row.orgBusinessName"
       label="Organisation or business name"
+      required
     />
 
     <DateInput
       :id="experienceStartDate"
       v-model="row.startDate"
       label="Start date"
-      :required="hasEnteredData"
+      required
       type="month"
     />
 
