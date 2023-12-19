@@ -155,12 +155,7 @@ export default {
     },
   },
   async mounted() {
-    try {
-      await this.$store.dispatch('session/load');
-      this.loaded = true;
-    } catch {
-      this.loadFailed = true;
-    }
+    this.loaded = true;
   },
   updated: async function() {
     if (this.$route.meta.isMultilanguage) {

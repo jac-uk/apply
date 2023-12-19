@@ -1,10 +1,10 @@
 // @FIXME@ *form/queryselector* this suite somehow interacts with the Form
 //  component and errors due to the queryselector
 
-import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies';
+import SelfAssessmentCompetencies from '@/views/Apply/Assessments/SelfAssessmentCompetencies.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Apply/Assessments/SelfAssessmentCompetencies', () => {
+describe.skip('views/Apply/Assessments/SelfAssessmentCompetencies', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(SelfAssessmentCompetencies, {

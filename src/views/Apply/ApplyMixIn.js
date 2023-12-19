@@ -44,6 +44,11 @@ export default {
       // [develop, staging, prod]
       return ['JAC00507','JAC00660','JAC00164'].includes(this.vacancy.referenceNumber);
     },
+    isJAC00187() {
+      if (!this.vacancy) { return false; }
+      // [develop, staging, prod]
+      return ['JAC00696', 'JAC00695', 'JAC00187'].includes(this.vacancy.referenceNumber);
+    },
     vacancy() {
       return this.$store.state.vacancy.record;
     },

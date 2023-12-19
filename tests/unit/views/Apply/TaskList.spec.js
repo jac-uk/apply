@@ -1,8 +1,8 @@
 import { createTestSubject } from '../../helpers';
 
-import TaskList from '@/views/Apply/TaskList';
+import TaskList from '@/views/Apply/TaskList.vue';
 
-xdescribe('views/TaskList', () => {
+describe.skip('views/TaskList', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(TaskList, {
@@ -68,7 +68,7 @@ xdescribe('views/TaskList', () => {
       });
     });
 
-    xdescribe('role type', () => { // disabled as these tests are no longer valid now that application form is configurable (see apply#788)
+    describe.skip('role type', () => { // disabled as these tests are no longer valid now that application form is configurable (see apply#788)
 
         it('renders the 1st block h2 as Account profile', () => {
           expect(wrapper.findAll('h2').at(0).text()).toBe('1. Account profile');

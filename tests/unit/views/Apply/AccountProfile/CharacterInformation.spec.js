@@ -1,7 +1,7 @@
-import CharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation';
+import CharacterInformation from '@/views/Apply/CharacterInformation/MainCharacterInformation.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('@/views/Apply/AccountProfile/CharacterInformation', () => {
+describe.skip('@/views/Apply/AccountProfile/CharacterInformation', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(CharacterInformation, {

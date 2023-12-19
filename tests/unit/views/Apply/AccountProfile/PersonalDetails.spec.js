@@ -1,13 +1,13 @@
-// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form
 //  component and errors due to the queryselector
 
-import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails';
+import PersonalDetails from '@/views/Apply/AccountProfile/PersonalDetails.vue';
 import { createTestSubject } from '../../../helpers';
 
-import TextField from '@/components/Form/TextField';
-import DateInput from '@/components/Form/DateInput';
+import TextField from '@/components/Form/TextField.vue';
+import DateInput from '@/components/Form/DateInput.vue';
 
-xdescribe('@/views/Apply/AccountProfile/PersonalDetails', () => {
+describe.skip('@/views/Apply/AccountProfile/PersonalDetails', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(PersonalDetails, {

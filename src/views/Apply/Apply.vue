@@ -111,6 +111,9 @@ export default {
     }, 100);
   },
   unmounted() {
+    this.$store.dispatch('candidate/unbind');
+    this.$store.dispatch('application/unbind');
+    this.$store.dispatch('applications/unbind');
     this.$store.dispatch('vacancy/unbind');
   },
   methods: {

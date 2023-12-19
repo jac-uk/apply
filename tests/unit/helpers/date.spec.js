@@ -1,4 +1,5 @@
 import * as dateHelper from '@/helpers/date';
+import { vi } from 'vitest';
 
 describe('helpers/date/isDate', () => {
   it('returns true if value passed is an instance of Date', () => {
@@ -47,7 +48,7 @@ describe('helpers/date/formatDate', () => {
     expect(dateHelper.formatDate(new Date('Fri Mar 01 2013 00:00:00 GMT+0000 (Greenwich Mean Time)'))).toBe('1 March 2013');
   });
 
-  xit('returns date in 12-hour time format "hh:mm am/pm" if `type` is equal to "time"', () => {
+  it.skip('returns date in 12-hour time format "hh:mm am/pm" if `type` is equal to "time"', () => {
     expect(dateHelper.formatDate(new Date('Fri Mar 01 2013 15:06:00 GMT+0000 (Greenwich Mean Time)'), 'time')).toBe('3:06 pm');
   });
 
@@ -111,10 +112,10 @@ describe('helpers/date/isToday', () => {
 describe('helpers/date/helperTimeLeft', () => {
   const minutesAgo = (minutes) => new Date(Date.now() - (minutes * 60 * 1000));
   beforeAll(() => {
-    jest.spyOn(Date, 'now').mockImplementation(() => (new Date(2021, 4, 4)).getTime()); // mock Date.now()
+    vi.spyOn(Date, 'now').mockImplementation(() => (new Date(2021, 4, 4)).getTime()); // mock Date.now()
   });
   afterAll(() => {
-    jest.restoreAllMocks();
+    vi.restoreAllMocks();
   });
 
   it('returns 0 if value is empty', () => {

@@ -11,9 +11,9 @@
       <p
         class="govuk-body"
       >
-        We sometimes need to share the personal information we process with the individual themselves and also with other organizations. Where this is necessary we will comply with all aspects of the data protection laws. <br>
+        We sometimes need to share the personal information we process with the individual themselves and also with other organisations. Where this is necessary we will comply with all aspects of the data protection laws. <br>
         <br>
-        The organizations we share some aspects of your personal information with may include: <br>
+        The organisations we share some aspects of your personal information with may include: <br>
         <ul class="govuk-list govuk-list--bullet">
           <li>
             The judiciary (for statutory consultation) <br>
