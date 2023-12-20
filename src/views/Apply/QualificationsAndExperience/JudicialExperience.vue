@@ -217,6 +217,7 @@
             v-model="formData.skillsAquisitionDetails"
             label="Provide details of how you have acquired the necessary
           skills for this role in some other significant way."
+            required
           />
         </div>
 
