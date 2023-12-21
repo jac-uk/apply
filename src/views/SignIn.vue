@@ -3,7 +3,6 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="submit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -55,12 +54,13 @@
             required
           />
 
-          <button
-            class="govuk-button"
-            :disabled="disabled"
+          <ActionButton
+            type="primary"
+            class="govuk-!-margin-bottom-4"
+            :action="submit"
           >
             Continue
-          </button>
+          </ActionButton>
 
           <p class="govuk-body">
             Problems signing in?
@@ -89,6 +89,7 @@ import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 import Password from '@/components/Form/Password.vue';
 import { getBrowserMeta } from '@/helpers/browser';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
   name: 'SignIn',
@@ -98,6 +99,7 @@ export default {
     TextField,
     ChangeEmailMessage,
     Password,
+    ActionButton,
   },
   extends: Form,
   data () {
@@ -123,43 +125,70 @@ export default {
     //   auth.signInWithPopup(provider);
     // },
     async submit() {
-      if (this.disabled) return;
+      if (this.disabled) return false;
 
       const token = await this.$recaptcha(RECAPTCHA_ACTIONS.LOGIN.action);
       const isVerified = await this.$store.dispatch('auth/verifyRecaptcha', {
         token,
         score: RECAPTCHA_ACTIONS.LOGIN.score,
       });
-      if (!isVerified) return;
+      if (!isVerified) return false;
 
-      this.login();
+      return await this.login();
     },
     async login() {
       this.errors = [];
-      auth.signInWithEmailAndPassword(this.formData.email, this.formData.password)
-        .then((userCredential) => {
 
-          // LOG
-          const objToLog = {
-            type: 'login',
-            id: userCredential.user.uid,
-            data: {
-              uid: userCredential.user.uid,
-              meta: getBrowserMeta(),
-            },
-          };
-          this.$store.dispatch('logs/save', objToLog);
-          // LOG
+      try {
+        const userCredential = await auth.signInWithEmailAndPassword(this.formData.email, this.formData.password);
 
-        })
-        .catch((error) => {
-          let message = error.message;
-          // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
-          message = 'Either the email address and/or password you have entered is incorrect';
-          // }
-          this.errors.push(
-            { id: 'email', message: message });
-        });
+        // LOG
+        const objToLog = {
+          type: 'login',
+          id: userCredential.user.uid,
+          data: {
+            uid: userCredential.user.uid,
+            meta: getBrowserMeta(),
+          },
+        };
+
+        await this.$store.dispatch('logs/save', objToLog);
+        return true;
+
+      } catch (error) {
+
+        let message = error.message;
+        // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
+        message = 'Either the email address and/or password you have entered is incorrect';
+        // }
+        this.errors.push({ id: 'email', message: message });
+        return false;
+      }
+
+      // auth.signInWithEmailAndPassword(this.formData.email, this.formData.password)
+      //   .then((userCredential) => {
+
+      //     // LOG
+      //     const objToLog = {
+      //       type: 'login',
+      //       id: userCredential.user.uid,
+      //       data: {
+      //         uid: userCredential.user.uid,
+      //         meta: getBrowserMeta(),
+      //       },
+      //     };
+      //     this.$store.dispatch('logs/save', objToLog);
+      //     // LOG
+
+      //   })
+      //   .catch((error) => {
+      //     let message = error.message;
+      //     // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
+      //     message = 'Either the email address and/or password you have entered is incorrect';
+      //     // }
+      //     this.errors.push(
+      //       { id: 'email', message: message });
+      //   });
     },
   },
 };
