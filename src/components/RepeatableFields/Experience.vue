@@ -39,7 +39,7 @@
     />
 
     <TaskDetails
-      :id="`tasks_${index}`"
+      :id="`task_details_${index}`"
       v-model:task-details="row.taskDetails"
     />
 
