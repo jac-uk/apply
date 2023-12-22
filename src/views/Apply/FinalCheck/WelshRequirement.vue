@@ -14,43 +14,45 @@
         {{ $filters.toYesNo(application.applyingForWelshPost) }}
       </dd>
     </div>
-    <div
-      v-if="application.canSpeakWelsh != null"
-      class="govuk-summary-list__row"
-    >
-      <dt class="govuk-summary-list__key">
-        Can you speak Welsh?
-      </dt>
-      <dd
-        class="govuk-summary-list__value"
-        data-welsh="speak-welsh"
+    <div v-if="application.applyingForWelshPost">
+      <div
+        v-if="application.canSpeakWelsh != null"
+        class="govuk-summary-list__row"
       >
-        {{ $filters.toYesNo(application.canSpeakWelsh) }}
-      </dd>
-    </div>
-    <div
-      v-if="application.canReadAndWriteWelsh != null"
-      class="govuk-summary-list__row"
-    >
-      <dt class="govuk-summary-list__key">
-        Can you read and write in Welsh?
-      </dt>
-      <dd
-        class="govuk-summary-list__value"
+        <dt class="govuk-summary-list__key">
+          Can you speak Welsh?
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
+          data-welsh="speak-welsh"
+        >
+          {{ $filters.toYesNo(application.canSpeakWelsh) }}
+        </dd>
+      </div>
+      <div
+        v-if="application.canReadAndWriteWelsh != null"
+        class="govuk-summary-list__row"
       >
-        <p
-          v-if="application.canReadAndWriteWelsh == false"
-          data-welsh="read-and-write-welsh"
+        <dt class="govuk-summary-list__key">
+          Can you read and write in Welsh?
+        </dt>
+        <dd
+          class="govuk-summary-list__value"
         >
-          {{ $filters.toYesNo(application.canReadAndWriteWelsh) }}
-        </p>
-        <p
-          v-if="application.canReadAndWriteWelsh"
-          data-welsh="read-and-write-welsh"
-        >
-          {{ $filters.lookup(application.canReadAndWriteWelsh) }}
-        </p>
-      </dd>
+          <p
+            v-if="application.canReadAndWriteWelsh == false"
+            data-welsh="read-and-write-welsh"
+          >
+            {{ $filters.toYesNo(application.canReadAndWriteWelsh) }}
+          </p>
+          <p
+            v-if="application.canReadAndWriteWelsh"
+            data-welsh="read-and-write-welsh"
+          >
+            {{ $filters.lookup(application.canReadAndWriteWelsh) }}
+          </p>
+        </dd>
+      </div>
     </div>
   </dl>
 </template>

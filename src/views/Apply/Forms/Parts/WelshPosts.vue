@@ -34,55 +34,57 @@
           />
         </RadioGroup>
 
-        <RadioGroup
-          v-if="isSpeakWelshRequired"
-          id="speak-welsh"
-          v-model="formData.canSpeakWelsh"
-          required
-          label="Can you speak Welsh?"
-          hint="You will be tested on this later in the process."
-        >
-          <RadioItem
-            :value="true"
-            label="Yes"
-          />
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-        </RadioGroup>
+        <div v-if="formData.applyingForWelshPost">
+          <RadioGroup
+            v-if="isSpeakWelshRequired"
+            id="speak-welsh"
+            v-model="formData.canSpeakWelsh"
+            required
+            label="Can you speak Welsh?"
+            hint="You will be tested on this later in the process."
+          >
+            <RadioItem
+              :value="true"
+              label="Yes"
+            />
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+          </RadioGroup>
 
-        <RadioGroup
-          v-if="isReadWriteWelshRequired"
-          id="read-and-write-welsh"
-          v-model="formData.canReadAndWriteWelsh"
-          required
-          label="Can you read and write in Welsh?"
-          hint="You will be tested on this later in the process."
-        >
-          <RadioItem
-            :value="false"
-            label="No"
-          />
-          <RadioItem
-            value="read"
-            label="Read"
-          />
-          <RadioItem
-            value="write"
-            label="Write"
-          />
-          <RadioItem
-            value="both"
-            label="Both"
-          />
-        </RadioGroup>
+          <RadioGroup
+            v-if="isReadWriteWelshRequired"
+            id="read-and-write-welsh"
+            v-model="formData.canReadAndWriteWelsh"
+            required
+            label="Can you read and write in Welsh?"
+            hint="You will be tested on this later in the process."
+          >
+            <RadioItem
+              :value="false"
+              label="No"
+            />
+            <RadioItem
+              value="read"
+              label="Read"
+            />
+            <RadioItem
+              value="write"
+              label="Write"
+            />
+            <RadioItem
+              value="both"
+              label="Both"
+            />
+          </RadioGroup>
+        </div>
 
         <button
           class="govuk-button info-btn--candidate-availability--save-and-continue"
         >
           Save and continue
-        </button>        
+        </button>
       </form>
     </div>
   </div>
