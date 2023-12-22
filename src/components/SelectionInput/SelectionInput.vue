@@ -11,8 +11,13 @@
         :id="`${id}-hint`"
         class="govuk-hint"
       >
-        {{ hint }}
+        {{ hintText }}
       </span>
+
+      <FormFieldError
+        :id="id"
+        :error-message="errorMessage"
+      />
 
       <SingleChoice
         v-if="isSingleChoice"
@@ -42,6 +47,8 @@
 import SingleChoice from '@/components/SelectionInput/SingleChoice.vue';
 import MultipleChoice from '@/components/SelectionInput/MultipleChoice.vue';
 import RankedChoice from '@/components/SelectionInput/RankedChoice.vue';
+import FormField from '@/components/Form/FormField.vue';
+import FormFieldError from '@/components/Form/FormFieldError.vue';
 
 export default {
   compatConfig: {
@@ -51,10 +58,12 @@ export default {
   },
   name: 'SelectionInput',
   components: {
+    FormFieldError,
     SingleChoice,
     MultipleChoice,
     RankedChoice,
-  },  
+  },
+  extends: FormField,
   props: {
     id: {
       type: String,
@@ -88,7 +97,7 @@ export default {
         this.$emit('update:modelValue', val);
       },
     },
-    hint() {
+    hintText() {
       switch (this.type) {
       case 'single-choice':
         return 'Select one answer';

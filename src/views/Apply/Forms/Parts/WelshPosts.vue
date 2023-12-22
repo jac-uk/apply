@@ -1,21 +1,22 @@
 <template>
   <div class="govuk-grid-row">
-    <form
-      ref="formRef"
-      @submit.prevent="save"
-    >
-      <div class="govuk-grid-column-two-thirds">
-        <BackLink />
-        <h1 class="govuk-heading-xl">
-          Welsh posts
-        </h1>
+    <div class="govuk-grid-column-two-thirds">
+      <BackLink />
+      <h1 class="govuk-heading-xl">
+        Welsh Posts
+      </h1>
 
+      <p class="govuk-body-m govuk-!-margin-top-0">
+        Please update this section to take into account any changes since you submitted your application
+      </p>
+
+      <form
+        ref="formRef"
+        @submit.prevent="save"
+      >
         <ErrorSummary
           :errors="errors"
-          :show-save-button="true"
-          @save="save"
         />
-
         <RadioGroup
           v-if="isWelshAdministrationRequired"
           id="applying-for-welsh-post"
@@ -80,47 +81,70 @@
         </div>
 
         <button
-          :disabled="!canSave(formId)"
-          class="govuk-button info-btn--welsh-post--save-and-continue"
+          class="govuk-button info-btn--candidate-availability--save-and-continue"
         >
           Save and continue
         </button>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </template>
-
 <script>
-import Form from '@/components/Form/Form.vue';
-import ErrorSummary from '@/components/Form/ErrorSummary.vue';
-import ApplyMixIn from '../ApplyMixIn';
+import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
+import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
-import BackLink from '@/components/BackLink.vue';
+
+import {
+  isWelshAdministrationRequired,
+  isSpeakWelshRequired,
+  isReadWriteWelshRequired,
+  isApplyingForWelshPost
+} from '@/helpers/exerciseHelper';
 
 export default {
-  name: 'WelshPosts',
+  name: 'CandidateFormWelshPosts',
   components: {
-    ErrorSummary,
     RadioGroup,
     RadioItem,
-    BackLink,
   },
-  extends: Form,
-  mixins: [ApplyMixIn],
-  data(){
-    const defaults = {
-      applyingForWelshPost: null,
-      canSpeakWelsh: null,
-      canReadAndWriteWelsh: null,
-      progress: {},
+  mixins: [CandidateFormsMixIn],
+  data() {
+    const application = this.$store.getters['application/data']();
+    const formData = {
+      canReadAndWriteWelsh: application.canReadAndWriteWelsh,
+      canSpeakWelsh: application.canSpeakWelsh,
+      applyingForWelshPost: application.applyingForWelshPost,
     };
-    const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
     return {
-      formId: 'welshPosts',
-      formData: formData,
+      formData,
     };
+  },
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.WELSH_POSTS);
+  },
+  methods: {
+    isWelshAdministrationRequired() {
+      return isWelshAdministrationRequired(this.vacancy);
+    },
+    isSpeakWelshRequired() {
+      return isSpeakWelshRequired(this.vacancy);
+    },
+    isReadWriteWelshRequired() {
+      return isReadWriteWelshRequired(this.vacancy);
+    },
+    isApplyingForWelshPost() {
+      return isApplyingForWelshPost(this.vacancy, this.application);
+    },
+    async save(){
+      const saveData = {
+        canReadAndWriteWelsh: this.formData.canReadAndWriteWelsh,
+        canSpeakWelsh: this.formData.canSpeakWelsh,
+        applyingForWelshPost: this.formData.applyingForWelshPost,
+      };
+      await this.$store.dispatch('application/save', saveData);
+      await this.savePart(true);
+    },
   },
 };
 </script>

@@ -1,5 +1,8 @@
 <template>
-  <dl class="govuk-summary-list">
+  <dl
+    v-if="application"
+    class="govuk-summary-list"
+  >
     <div
       v-if="application.applyingForWelshPost != null"
       class="govuk-summary-list__row"
@@ -59,25 +62,18 @@
 
 <script>
 export default {
-  name: 'WelshRequirement',
+  name: 'CandidateFormViewWelshPosts',
   props: {
     application: {
       type: Object,
-      required: true,
+      required: false,
+      default: () => {},
+    },
+    localData: {
+      type: Object,
+      required: false,
+      default: () => {},
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-  .govuk-summary-list__value,
-  .govuk-summary-list__value:last-child,
-  .govuk-summary-list__key {
-    @include govuk-media-query($from: tablet) {
-      width: auto;
-    }
-  }
-  .change-link {
-    float: right;
-  }
-</style>

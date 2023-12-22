@@ -241,6 +241,12 @@ export default {
       this.personalDetails.lastName = lastName;
     }
   },
+  mounted() {
+    // back to top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  },
   methods: {
     async save() {
       this.makeFullName();
@@ -257,9 +263,9 @@ export default {
 
         if (Array.isArray(this.application.qualifications) && this.application.qualifications.length) {
           // if candidate has stated qualifications
-          this.$router.push({ name: 'character-checks-professional-details' });
+          this.$router.push({ name: 'candidate-form-tasks-characterChecks-professional-details' });
         } else {
-          this.$router.push({ name: 'character-checks-professional-details-magistrate' });
+          this.$router.push({ name: 'candidate-form-tasks-characterChecks-professional-details-magistrate' });
         }
       }
     },
