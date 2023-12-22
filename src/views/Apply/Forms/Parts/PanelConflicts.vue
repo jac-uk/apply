@@ -6,6 +6,10 @@
         Panel Conflicts
       </h1>
 
+      <p class="govuk-body-l">
+        Are you related to, or known to any of the following panellists? If you are in any doubt then please select 'Yes' in the list below:
+      </p>
+
       <form
         ref="formRef"
         @submit.prevent="save"
