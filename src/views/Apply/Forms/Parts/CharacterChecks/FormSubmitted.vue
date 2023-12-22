@@ -51,6 +51,12 @@ export default {
       return this.$store.state.vacancy.record;
     },
   },
+  mounted() {
+    // back to top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  },
   created() {
     this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
     this.save();

@@ -529,6 +529,12 @@ export default {
         && this.application.characterChecks.status === 'completed');
     },
   },
+  mounted() {
+    // back to top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  },
   methods: {
     next() {
       this.$router.push({ name: 'candidate-form-tasks-characterChecks-consent' });

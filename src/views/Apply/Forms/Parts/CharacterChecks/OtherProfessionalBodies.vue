@@ -340,6 +340,12 @@ export default {
       return null;
     },
   },
+  mounted() {
+    // back to top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  },
   methods: {
     showMembershipOption(ref) {
       return this.vacancy.memberships.indexOf(ref) >= 0;

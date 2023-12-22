@@ -102,6 +102,12 @@ export default {
       return vacancy.characterChecks && vacancy.characterChecks.HMRC;
     },
   },
+  mounted() {
+    // back to top
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  },
   methods: {
     async save() {
       this.validate();
