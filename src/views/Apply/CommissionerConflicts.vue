@@ -26,6 +26,15 @@
           </p>
         </template>
 
+        <div>
+          <button
+            class="govuk-button govuk-button--secondary"
+            @click="setNoRelationships"
+          >
+            I do not have a pre-existing relationship with any of the commissioners
+          </button>
+        </div>
+
         <RadioGroup
           v-for="(commissioner , index) in formData.additionalInfo.commissionerConflicts"
           :id="`commissioner-name-${index}`"
