@@ -1,5 +1,13 @@
 import { CANDIDATE_FORM_RESPONSE_STATUS } from '@/helpers/constants';
+import Form from '@/components/Form/Form.vue';
+import ErrorSummary from '@/components/Form/ErrorSummary.vue';
+import BackLink from '@/components/BackLink.vue';
 export default {
+  components: {
+    ErrorSummary,
+    BackLink,
+  },
+  extends: Form,
   data() {
     return {
       part: '',
@@ -8,6 +16,9 @@ export default {
     };
   },
   computed: {
+    referrer() {
+      return this.$route.query.referrer;
+    },
     vacancy() {
       return this.$store.state.vacancy.record ? this.$store.state.vacancy.record : {};
     },
@@ -65,7 +76,10 @@ export default {
       }
     },
     async save() {
-      await this.savePart(true);
+      this.validate();
+      if (this.isValid()) {
+        await this.savePart(true);
+      }
     },
     async savePart(isComplete) {
       // @TODO: Validate that the form has been completed before saving
@@ -73,7 +87,11 @@ export default {
       if (this.useFormData) saveData[this.part] = { ...this.formData };
       saveData[`progress.${this.part}`] = isComplete;
       await this.$store.dispatch('candidateFormResponse/update', saveData);
-      this.$router.push({ name: 'candidate-form-task-list' });
+      if (this.referrer === 'review') {
+        this.reviewForm();
+      } else {
+        this.$router.push({ name: 'candidate-form-task-list' });
+      }
     },
     reviewForm() {
       this.$router.push({ name: 'candidate-form-review' });

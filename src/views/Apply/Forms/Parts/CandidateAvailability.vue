@@ -6,32 +6,40 @@
         Candidate Availability
       </h1>
 
-      <CheckboxGroup
-        id="availability"
-        v-model="formData.availableDays"
-        label="Please tick all of the dates you are available"
-        required
+      <form
+        ref="formRef"
+        @submit.prevent="save"
       >
-        <CheckboxItem
-          v-for="item in candidateForm.candidateAvailabilityDates"
-          :key="item"
-          :value="item"
-          :label="`${$filters.formatDate(item.date)}. ${item.location}`"
+        <ErrorSummary
+          :errors="errors"
         />
-      </CheckboxGroup>
 
-      <button
-        class="govuk-button info-btn--candidate-availability--save-and-continue"
-        @click="save()"
-      >
-        Save and continue
-      </button>
+        <CheckboxGroup
+          id="availability"
+          v-model="formData.availableDays"
+          label="Please tick all of the dates you are available"
+          :messages="{required: 'Please choose at least one date'}"
+          required
+        >
+          <CheckboxItem
+            v-for="item in candidateForm.candidateAvailabilityDates"
+            :key="item"
+            :value="item"
+            :label="`${$filters.formatDate(item.date)}. ${item.location}`"
+          />
+        </CheckboxGroup>
+
+        <button
+          class="govuk-button info-btn--candidate-availability--save-and-continue"
+        >
+          Save and continue
+        </button>
+      </form>
     </div>
   </div>
 </template>
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
-import BackLink from '@/components/BackLink.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import CheckboxGroup from '@/components/Form/CheckboxGroup.vue';
 import CheckboxItem from '@/components/Form/CheckboxItem.vue';
@@ -39,7 +47,6 @@ import CheckboxItem from '@/components/Form/CheckboxItem.vue';
 export default {
   name: 'CandidateFormCandidateAvailability',
   components: {
-    BackLink,
     CheckboxGroup,
     CheckboxItem,
   },

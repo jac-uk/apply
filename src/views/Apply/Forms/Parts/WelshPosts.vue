@@ -10,79 +10,85 @@
         Please update this section to take into account any changes since you submitted your application
       </p>
 
-      <RadioGroup
-        v-if="isWelshAdministrationRequired"
-        id="applying-for-welsh-post"
-        v-model="formData.applyingForWelshPost"
-        required
-        label="Are you applying for a post in Wales?"
+      <form
+        ref="formRef"
+        @submit.prevent="save"
       >
-        <RadioItem
-          :value="true"
-          label="Yes"
+        <ErrorSummary
+          :errors="errors"
         />
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup>
+        <RadioGroup
+          v-if="isWelshAdministrationRequired"
+          id="applying-for-welsh-post"
+          v-model="formData.applyingForWelshPost"
+          required
+          label="Are you applying for a post in Wales?"
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          />
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
 
-      <RadioGroup
-        v-if="isSpeakWelshRequired"
-        id="speak-welsh"
-        v-model="formData.canSpeakWelsh"
-        required
-        label="Can you speak Welsh?"
-        hint="You will be tested on this later in the process."
-      >
-        <RadioItem
-          :value="true"
-          label="Yes"
-        />
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-      </RadioGroup>
+        <RadioGroup
+          v-if="isSpeakWelshRequired"
+          id="speak-welsh"
+          v-model="formData.canSpeakWelsh"
+          required
+          label="Can you speak Welsh?"
+          hint="You will be tested on this later in the process."
+        >
+          <RadioItem
+            :value="true"
+            label="Yes"
+          />
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+        </RadioGroup>
 
-      <RadioGroup
-        v-if="isReadWriteWelshRequired"
-        id="read-and-write-welsh"
-        v-model="formData.canReadAndWriteWelsh"
-        required
-        label="Can you read and write in Welsh?"
-        hint="You will be tested on this later in the process."
-      >
-        <RadioItem
-          :value="false"
-          label="No"
-        />
-        <RadioItem
-          value="read"
-          label="Read"
-        />
-        <RadioItem
-          value="write"
-          label="Write"
-        />
-        <RadioItem
-          value="both"
-          label="Both"
-        />
-      </RadioGroup>
+        <RadioGroup
+          v-if="isReadWriteWelshRequired"
+          id="read-and-write-welsh"
+          v-model="formData.canReadAndWriteWelsh"
+          required
+          label="Can you read and write in Welsh?"
+          hint="You will be tested on this later in the process."
+        >
+          <RadioItem
+            :value="false"
+            label="No"
+          />
+          <RadioItem
+            value="read"
+            label="Read"
+          />
+          <RadioItem
+            value="write"
+            label="Write"
+          />
+          <RadioItem
+            value="both"
+            label="Both"
+          />
+        </RadioGroup>
 
-      <button
-        class="govuk-button info-btn--candidate-availability--save-and-continue"
-        @click="save()"
-      >
-        Save and continue
-      </button>
+        <button
+          class="govuk-button info-btn--candidate-availability--save-and-continue"
+        >
+          Save and continue
+        </button>        
+      </form>
     </div>
   </div>
 </template>
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
-import BackLink from '@/components/BackLink.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -99,7 +105,6 @@ export default {
   components: {
     RadioGroup,
     RadioItem,
-    BackLink,
   },
   mixins: [CandidateFormsMixIn],
   data() {

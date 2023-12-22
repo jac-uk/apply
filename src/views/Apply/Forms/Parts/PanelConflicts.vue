@@ -6,43 +6,49 @@
         Panel Conflicts
       </h1>
 
-      <RadioGroup
-        v-for="(panellist , index) in formData.panelConflicts"
-        :id="`panellist-name-${index}`"
-        :key="index"
-        v-model="panellist.hasRelationship"
-        required
-        :label="panellist.name"
+      <form
+        ref="formRef"
+        @submit.prevent="save"
       >
-        <RadioItem
-          label="Yes"
-          :value="true"
-        >
-          <TextareaInput
-            id="relationship"
-            v-model="panellist.details"
-            label="Please provide details of your relationship."
-            class="govuk-!-width-two-thirds"
-          />
-        </RadioItem>
-        <RadioItem
-          label="No"
-          :value="false"
+        <ErrorSummary
+          :errors="errors"
         />
-      </RadioGroup>
+        <RadioGroup
+          v-for="(panellist , index) in formData.panelConflicts"
+          :id="`panellist-name-${index}`"
+          :key="index"
+          v-model="panellist.hasRelationship"
+          required
+          :label="panellist.name"
+        >
+          <RadioItem
+            label="Yes"
+            :value="true"
+          >
+            <TextareaInput
+              id="relationship"
+              v-model="panellist.details"
+              label="Please provide details of your relationship."
+              class="govuk-!-width-two-thirds"
+            />
+          </RadioItem>
+          <RadioItem
+            label="No"
+            :value="false"
+          />
+        </RadioGroup>
 
-      <button
-        class="govuk-button info-btn--panel-conflicts--save-and-continue"
-        @click="save()"
-      >
-        Save and continue
-      </button>
+        <button
+          class="govuk-button info-btn--panel-conflicts--save-and-continue"
+        >
+          Save and continue
+        </button>
+      </form>
     </div>
   </div>
 </template>
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
-import BackLink from '@/components/BackLink.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
 import TextareaInput from '@/components/Form/TextareaInput.vue';
@@ -50,7 +56,6 @@ import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 export default {
   name: 'CandidateFormPanelConflicts',
   components: {
-    BackLink,
     RadioGroup,
     RadioItem,
     TextareaInput,
@@ -62,7 +67,7 @@ export default {
     defaults[APPLICATION_FORM_PARTS.PANEL_CONFLICTS] = panellists.map(panellist => ({
       id: panellist.id,
       name: panellist.name,
-      hasRelationship: false,
+      hasRelationship: null,
       details: '',
     }));
     const formData = { ...defaults };

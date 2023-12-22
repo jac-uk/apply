@@ -38,19 +38,13 @@
 </template>
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
-import Form from '@/components/Form/Form.vue';
-import ErrorSummary from '@/components/Form/ErrorSummary.vue';
-import BackLink from '@/components/BackLink.vue';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 export default {
   name: 'CandidateFormLocationPreferences',
   components: {
-    ErrorSummary,
-    BackLink,
     SelectionInput,
   },
-  extends: Form,
   mixins: [CandidateFormsMixIn],
   data() {
     const application = this.$store.getters['application/data']();

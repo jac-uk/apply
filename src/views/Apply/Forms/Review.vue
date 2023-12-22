@@ -23,7 +23,7 @@
           v-if="!isFormCompleted"
           class="govuk-link govuk-body-m change-link"
           style="display:inline-block;"
-          :to="{name: `candidate-form-tasks-${part}`}"
+          :to="{name: `candidate-form-tasks-${part}`, query: { referrer: 'review' }}"
         >
           Change
         </RouterLink>
@@ -50,7 +50,6 @@
 </template>
 <script>
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
-import BackLink from '@/components/BackLink.vue';
 import { shallowRef } from 'vue';
 import candidateAvailability from '@/components/CandidateFormViews/CandidateAvailability.vue';
 import characterChecks from '@/components/CandidateFormViews/CharacterChecks.vue';
@@ -62,9 +61,6 @@ import locationPreferences from '@/components/CandidateFormViews/LocationPrefere
 import jurisdictionPreferences from '@/components/CandidateFormViews/JurisdictionPreferences.vue';
 export default {
   name: 'CandidateFormReview',
-  components: {
-    BackLink,
-  },
   mixins: [CandidateFormsMixIn],
   data() {
     return {
