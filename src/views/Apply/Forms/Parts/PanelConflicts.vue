@@ -34,6 +34,7 @@
               v-model="panellist.details"
               label="Please provide details of your relationship."
               class="govuk-!-width-two-thirds"
+              required
             />
           </RadioItem>
           <RadioItem
