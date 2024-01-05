@@ -156,11 +156,11 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.isFormValid()) {
+        this.formData.progress[this.formId] = true;
         await this.$store.dispatch('application/save', this.formData);
         if (this.customSave) {
           await this.customSave();
         } else {
-          this.formData.progress[this.formId] = true;
           this.$router.push({ name: 'task-list' });
         }
       }
