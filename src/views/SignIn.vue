@@ -63,13 +63,12 @@
           </ActionButton>
 
           <p class="govuk-body">
-            Problems signing in?
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
               :to="{ name: 'reset-password', query: { nextPage: nextPage } }"
             >
-              Reset your password
+              Forgot password?
             </RouterLink>
           </p>
           <ChangeEmailMessage />
