@@ -101,7 +101,12 @@ export default {
       this.dropDownExpanded = !this.dropDownExpanded;
     },
     signIn() {
-      this.$router.push({ name: 'sign-in', query: { nextPage: this.$route.path } });
+      let nextPage = this.$route.path;
+      // if the user is on the sign-up or reset-password page, redirect them to the vacancies page after sign-in
+      if (['/sign-up', '/reset-password'].includes(this.$route.path)) {
+        nextPage = '/vacancies';
+      }
+      this.$router.push({ name: 'sign-in', query: { nextPage: nextPage } });
     },
     signOut() {
       auth.signOut();
