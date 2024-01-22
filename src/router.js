@@ -71,6 +71,7 @@ import WelshPosts from '@/views/Apply/WorkingPreferences/WelshPosts.vue';
 import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability.vue';
 import StatementOfSuitability from '@/views/Apply/Assessments/StatementOfSuitability.vue';
 import StatementOfEligibility from '@/views/Apply/Assessments/StatementOfEligibility.vue';
+import DataConfirmation from '@/views/Apply/Assessments/DataConfirmation.vue';
 import CV from '@/views/Apply/Assessments/CV.vue';
 import CoveringLetter from '@/views/Apply/Assessments/CoveringLetter.vue';
 import Review from '@/views/Apply/FinalCheck/Review.vue';
@@ -621,6 +622,16 @@ const routes = [
         meta: {
           requiresAuth: true,
           title: 'Statement of eligibility',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'data-confirmation',
+        component: DataConfirmation,
+        name: 'data-confirmation',
+        meta: {
+          requiresAuth: true,
+          title: 'Confirm your data',
           isMultilanguage: true,
         },
       },

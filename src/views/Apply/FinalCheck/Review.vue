@@ -653,7 +653,7 @@
                 v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
                 class="govuk-link govuk-body-m change-link"
                 style="display:inline-block;"
-                :to="{name: 'self-assessment-competencies'}"
+                :to="{name: 'data-confirmation'}"
               >
                 Change
               </RouterLink>
@@ -673,6 +673,27 @@
                       :user-id="application.userId"
                       :title="application.uploadedSelfAssessment"
                     />
+                  </div>
+                  <span v-else>Not yet received</span>
+                </dd>
+              </div>
+              <div
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  Self assessment content
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <div
+                    v-if="application.uploadedSelfAssessment"
+                  >
+                    <div
+                      v-for="(answer, i) in application.uploadedSelfAssessmentContent"
+                      :key="i"
+                    >
+                      {{ answer }}
+                      <hr>
+                    </div>
                   </div>
                   <span v-else>Not yet received</span>
                 </dd>

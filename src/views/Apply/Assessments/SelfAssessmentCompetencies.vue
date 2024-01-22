@@ -2,8 +2,8 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
     >
+      <!-- @submit.prevent="triggerExtraction" -->
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
@@ -86,10 +86,11 @@
             class="govuk-list"
           >
             <li
-              v-for="file in vacancy.downloads.candidateAssessementForms"
+              v-for="(file, index) in vacancy.downloads.candidateAssessementForms"
               :key="file.file"
             >
               <DownloadLink
+                :ref="`download-link-${index}`"
                 :file-name="file.file"
                 :exercise-id="vacancy.id"
                 :title="file.title"
@@ -114,12 +115,14 @@
           label="Upload finished self assessment"
           required
         />
-        <button
+        <ActionButton
           :disabled="!canSave(formId)"
-          class="govuk-button info-btn--self-assessment-competencies--save-and-continue"
+          class="info-btn--statement-of-suitability--save-and-continue"
+          button-type="primary"
+          :action="triggerExtraction"
         >
           Save and continue
-        </button>
+        </ActionButton>
       </div>
     </form>
   </div>
@@ -137,6 +140,8 @@ import DownloadLink from '@/components/DownloadLink.vue';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML.vue';
+import { functions } from '@/firebase';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
@@ -150,6 +155,7 @@ export default {
     TextareaInput,
     FileUpload,
     CustomHTML,
+    ActionButton,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -180,6 +186,13 @@ export default {
     };
   },
   computed: {
+    templatePath() {
+      return `exercise/${this.vacancy.id}/${this.vacancy.downloads.candidateAssessementForms[0].file}`;
+    },
+    documentPath() {
+      const path = `${this.uploadPath}/${this.formData.uploadedSelfAssessment}`;
+      return path.substring(1);
+    },
     downloadNameGenerator() {
       let outcome = null;
       if (this.vacancy.assessmentMethods && this.vacancy.assessmentMethods[ASSESSMENT_METHOD.SELF_ASSESSMENT_WITH_COMPETENCIES]) {
@@ -192,6 +205,21 @@ export default {
     },
   },
   methods: {
+    async triggerExtraction() {
+      try {
+        const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
+        await this.$store.dispatch('application/save', {
+          uploadedSelfAssessmentContent: response.data.result,
+          uploadedSelfAssessment: this.formData.uploadedSelfAssessment,
+        });
+        this.$router.push({ name: 'data-confirmation' });
+        return true;
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error occurred during extraction:', error);
+        return false; // Return false to indicate an error
+      }
+    },
     logEventAfterSave() {
       logEvent('info', 'Self-assessment & competencies uploaded', {
         applicationId: this.applicationId,

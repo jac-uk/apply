@@ -22,12 +22,15 @@
       :id="id"
       v-model="text"
       class="govuk-textarea"
+      :class="disabled ? 'disabled': ''"
       name="word-count"
       :rows="rows"
+      :disabled="disabled"
       @keydown="handleLimit($event)"
       @keyup="handleLimit($event)"
       @change="validate"
     />
+
     <div
       v-if="wordLimit"
       class="govuk-hint govuk-character-count__message"
@@ -76,6 +79,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
   },
   emits: ['update:modelValue'],
   computed: {
@@ -94,7 +101,7 @@ export default {
       }
       if (this.wordsTooMany == 0) {
         result = 'You have no words remaining';
-      } 
+      }
       return result;
     },
     text: {
@@ -116,3 +123,8 @@ export default {
   },
 };
 </script>
+<style>
+.disabled {
+  background-color: darkgrey;
+}
+</style>
