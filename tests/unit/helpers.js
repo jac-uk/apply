@@ -1,5 +1,7 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils';
-import * as filters from '@/filters';
+// import { shallowMount, createLocalVue } from '@vue/test-utils';
+// import * as filters from '@/filters';
+import { vi } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
 
 const mocks = {
   route: {
@@ -11,11 +13,11 @@ const mocks = {
     },
   },
   router: {
-    push: jest.fn(),
-    replace: jest.fn(),
+    push: vi.fn(),
+    replace: vi.fn(),
   },
   store: {
-    dispatch: jest.fn(),
+    dispatch: vi.fn(),
     state: {
       vacancy: {
         record: {
@@ -81,23 +83,23 @@ const mocks = {
     },
     getters: {
       'vacancy/getCloseDate': new Date(),
-      'vacancy/isOpen': jest.fn(),
-      'vacancy/id': jest.fn(),
-      'vacancy/applicationParts': jest.fn(),
-      'application/data': () => jest.fn(),
-      // 'vacancies/bind': () => jest.fn(), //see views/vacancies.spec.js
-      'candidate/characterInformation': () => jest.fn(),
+      'vacancy/isOpen': vi.fn(),
+      'vacancy/id': vi.fn(),
+      'vacancy/applicationParts': vi.fn(),
+      'application/data': () => vi.fn(),
+      // 'vacancies/bind': () => vi.fn(), //see views/vacancies.spec.js
+      'candidate/characterInformation': () => vi.fn(),
     },
   },
 };
 
-const localVue = createLocalVue();
+// const localVue = createLocalVue();
 
-// Register global filters
-Object.keys(filters)
-  .forEach((filterName) => {
-    localVue.filter(filterName, filters[filterName]);
-  });
+// // Register global filters
+// Object.keys(filters)
+//   .forEach((filterName) => {
+//     localVue.filter(filterName, filters[filterName]);
+//   });
 
 const createTestSubject = (component, customMountOptions = {
   mocks: {},
@@ -105,7 +107,7 @@ const createTestSubject = (component, customMountOptions = {
   propsData: {},
 }) => {
   const mountOptions = {
-    localVue,
+    //localVue,
     mocks: {
       $route: mocks.route,
       $router: mocks.router,

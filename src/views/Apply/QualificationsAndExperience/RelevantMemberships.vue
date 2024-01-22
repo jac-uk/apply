@@ -17,6 +17,7 @@
           id="professional-memberships"
           v-model="formData.professionalMemberships"
           label="What professional memberships do you have?"
+          :optional-hidden="isJAC00187"
         >
           <CheckboxItem
             v-if="showMembershipOption('chartered-association-of-building-engineers')"

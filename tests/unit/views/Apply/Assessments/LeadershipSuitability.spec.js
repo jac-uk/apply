@@ -1,10 +1,10 @@
-// @FIXME@ *event handlers* 
+// @FIXME@ *event handlers*
 // this suite gives a warning due to an change event in the mount
 
-import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability';
+import LeadershipSuitability from '@/views/Apply/Assessments/LeadershipSuitability.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Assessments/LeadershipSuitability', () => {
+describe.skip('views/Assessments/LeadershipSuitability', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(LeadershipSuitability, {

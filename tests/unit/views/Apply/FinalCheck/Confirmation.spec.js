@@ -1,10 +1,10 @@
-// @FIXME@ *filters and mocked data* 
+// @FIXME@ *filters and mocked data*
 // Filters are not working for mocked data
 
-import Confirmation from '@/views/Apply/FinalCheck/Confirmation';
+import Confirmation from '@/views/Apply/FinalCheck/Confirmation.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('views/Confirmation', () => {
+describe.skip('views/Confirmation', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = createTestSubject(Confirmation,{

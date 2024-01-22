@@ -7,7 +7,7 @@
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
-            Forgotten password
+            Reset your password
           </h1>
 
           <div
@@ -27,7 +27,7 @@
             v-if="!resetSent"
           >
             <p class="govuk-body-l">
-              We'll email you a link to reset your password.
+              We will email you a link to reset your password.
             </p>
 
             <TextField
@@ -42,7 +42,7 @@
               class="govuk-button"
               :disabled="!formData.email"
             >
-              Send the link
+              Reset password
             </button>
 
             <div v-if="!isEnabled">

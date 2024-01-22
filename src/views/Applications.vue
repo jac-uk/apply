@@ -119,6 +119,17 @@
                   >
                     View sent character checks consent form
                   </RouterLink>
+
+                  <RouterLink
+                    v-for="form in candidateFormsForExercise(application.exerciseId)"
+                    :key="form.id"
+                    :class="`govuk-button moj-button-menu__item info-link--applications--candidate-form-${form.task.type}`"
+                    :to="{ name: 'candidate-form-task-list', params: { formId: form.id } }"
+                    role="button"
+                    data-module="govuk-button"
+                  >
+                    {{ $filters.lookup(form.task.type) }}
+                  </RouterLink>
                 </div>
               </div>
             </div>
@@ -145,15 +156,28 @@ export default {
     allVacancies() {
       return this.$store.getters['vacancies/allVacancies'];
     },
+    candidateForms() {
+      return this.$store.state.candidateForms.records;
+    },
   },
   created() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
+    this.$store.dispatch('candidateForms/bind');
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');
   },
   methods: {
+    exerciseHasCandidateForms(exerciseId) {
+      return this.candidateFormsForExercise(exerciseId).length;
+    },
+    candidateFormsForExercise(exerciseId) {
+      if (!this.candidateForms) return [];
+      const forms = this.candidateForms.find(form => form.exercise.id === exerciseId);
+      if (!forms) return [];
+      return [forms];
+    },
     vacancyExists(exerciseId) {
       if (!this.allVacancies) {
         return false;

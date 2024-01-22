@@ -78,6 +78,7 @@ import Review from '@/views/Apply/FinalCheck/Review.vue';
 import Confirmation from '@/views/Apply/FinalCheck/Confirmation.vue';
 import AdditionalInformation from '@/views/Apply/AdditionalInformation.vue';
 import CommissionerConflicts from '@/views/Apply/CommissionerConflicts.vue';
+import ResignationFromDWP from '@/views/Apply/ResignationFromDWP.vue';
 
 // Character Checks
 import CharacterChecks from '@/views/Apply/CharacterChecks/CharacterChecks.vue';
@@ -90,6 +91,29 @@ import CharacterChecksOtherProfessionalBodies from '@/views/Apply/CharacterCheck
 import CharacterChecksReview from '@/views/Apply/CharacterChecks/Review.vue';
 import CharacterChecksConsent from '@/views/Apply/CharacterChecks/Consent.vue';
 import CharacterChecksFormSubmitted from '@/views/Apply/CharacterChecks/FormSubmitted.vue';
+
+// Candidate Forms
+import CandidateFormIndex from '@/views/Apply/Forms/Index.vue';
+import CandidateFormTaskList from '@/views/Apply/Forms/TaskList.vue';
+import CandidateFormReview from '@/views/Apply/Forms/Review.vue';
+import CandidateFormConfirmation from '@/views/Apply/Forms/Confirmation.vue';
+import CandidateFormCandidateAvailability from '@/views/Apply/Forms/Parts/CandidateAvailability.vue';
+import CandidateFormPanelConflicts from '@/views/Apply/Forms/Parts/PanelConflicts.vue';
+import CandidateFormCommissionerConflicts from '@/views/Apply/Forms/Parts/CommissionerConflicts.vue';
+import CandidateFormCharacterChecks from '@/views/Apply/Forms/Parts/CharacterChecks/CharacterChecks.vue';
+import CandidateFormCharacterChecksIntro from '@/views/Apply/Forms/Parts/CharacterChecks/Intro.vue';
+import CandidateFormCharacterChecksPersonalInformation from '@/views/Apply/Forms/Parts/CharacterChecks/PersonalInformation.vue';
+import CandidateFormCharacterChecksProfessionalDetails from '@/views/Apply/Forms/Parts/CharacterChecks/ProfessionalDetails.vue';
+import CandidateFormCharacterChecksProfessionalDetailsMagistrate from '@/views/Apply/Forms/Parts/CharacterChecks/ProfessionalDetailsMagistrate.vue';
+import CandidateFormCharacterChecksHMRC from '@/views/Apply/Forms/Parts/CharacterChecks/Hmrc.vue';
+import CandidateFormCharacterChecksOtherProfessionalBodies from '@/views/Apply/Forms/Parts/CharacterChecks/OtherProfessionalBodies.vue';
+import CandidateFormCharacterChecksReview from '@/views/Apply/Forms/Parts/CharacterChecks/Review.vue';
+import CandidateFormCharacterChecksConsent from '@/views/Apply/Forms/Parts/CharacterChecks/Consent.vue';
+import CandidateFormCharacterChecksFormSubmitted from '@/views/Apply/Forms/Parts/CharacterChecks/FormSubmitted.vue';
+import CandidateFormReasonableAdjustments from '@/views/Apply/Forms/Parts/ReasonableAdjustments.vue';
+import CandidateFormLocationPreferences from '@/views/Apply/Forms/Parts/LocationPreferences.vue';
+import CandidateFormJurisdictionPreferences from '@/views/Apply/Forms/Parts/JurisdictionPreferences.vue';
+import CandidateFormWelshPosts from '@/views/Apply/Forms/Parts/WelshPosts.vue';
 
 // Error pages
 import NotFound from '@/views/NotFound.vue';
@@ -388,6 +412,16 @@ const routes = [
         meta: {
           requiresAuth: true,
           title: 'Give Leadership Judge details',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'resignation-from-dwp',
+        component: ResignationFromDWP,
+        name: 'resignation-from-dwp',
+        meta: {
+          requiresAuth: true,
+          title: 'Resignation from DWP',
           isMultilanguage: true,
         },
       },
@@ -727,6 +761,200 @@ const routes = [
     },
   },
   {
+    path: '/forms/:formId/',
+    component: CandidateFormIndex,
+    children: [
+      {
+        path: '',
+        component: CandidateFormTaskList,
+        name: 'candidate-form-task-list',
+        meta: {
+          requiresAuth: true,
+          title: 'Pre Selection Day Questionnaire',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'review',
+        component: CandidateFormReview,
+        name: 'candidate-form-review',
+        meta: {
+          requiresAuth: true,
+          title: 'Review',
+          isMultilanguage: true,
+        },
+      },
+      {
+        path: 'confirmation',
+        component: CandidateFormConfirmation,
+        name: 'candidate-form-confirmation',
+        meta: {
+          requiresAuth: true,
+          title: 'Confirmation',
+          isMultilanguage: true,
+        },
+      },
+      // Parts
+      {
+        path: 'candidate-availability',
+        component: CandidateFormCandidateAvailability,
+        name: 'candidate-form-tasks-candidateAvailability',
+        meta: {
+          requiresAuth: true,
+          title: 'Candidate availability',
+        },
+      },
+      {
+        path: 'panellist-conflicts',
+        component: CandidateFormPanelConflicts,
+        name: 'candidate-form-tasks-panelConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Panellist conflicts',
+        },
+      },
+      {
+        path: 'commissioner-conflicts',
+        component: CandidateFormCommissionerConflicts,
+        name: 'candidate-form-tasks-commissionerConflicts',
+        meta: {
+          requiresAuth: true,
+          title: 'Commissioner conflicts',
+        },
+      },
+      {
+        path: 'character-checks/',
+        component: CandidateFormCharacterChecks,
+        children: [
+          {
+            path: '',
+            component: CandidateFormCharacterChecksIntro,
+            name: 'candidate-form-tasks-characterChecks',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks',
+            },
+          },
+          {
+            path: 'personal-information',
+            component: CandidateFormCharacterChecksPersonalInformation,
+            name: 'candidate-form-tasks-characterChecks-personal-information',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Personal information',
+            },
+          },
+          {
+            path: 'professional-details',
+            component: CandidateFormCharacterChecksProfessionalDetails,
+            name: 'candidate-form-tasks-characterChecks-professional-details',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Professional details',
+            },
+          },
+          {
+            path: 'professional-details-magistrate',
+            component: CandidateFormCharacterChecksProfessionalDetailsMagistrate,
+            name: 'candidate-form-tasks-characterChecks-professional-details-magistrate',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Professional details',
+            },
+          },
+          {
+            path: 'HMRC',
+            component: CandidateFormCharacterChecksHMRC,
+            name: 'candidate-form-tasks-characterChecks-HMRC',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | HMRC',
+            },
+          },
+          {
+            path: 'other-professional-bodies',
+            component: CandidateFormCharacterChecksOtherProfessionalBodies,
+            name: 'candidate-form-tasks-characterChecks-other-professional-bodies',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Other professional bodies',
+            },
+          },
+          {
+            path: 'review',
+            component: CandidateFormCharacterChecksReview,
+            name: 'candidate-form-tasks-characterChecks-review',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Review',
+            },
+          },
+          {
+            path: 'consent',
+            component: CandidateFormCharacterChecksConsent,
+            name: 'candidate-form-tasks-characterChecks-consent',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Consent',
+            },
+          },
+          {
+            path: 'form-submitted',
+            component: CandidateFormCharacterChecksFormSubmitted,
+            name: 'candidate-form-tasks-characterChecks-form-submitted',
+            meta: {
+              requiresAuth: true,
+              title: 'Consent to character checks | Form Submitted',
+            },
+          },
+        ],
+        meta: {
+          requiresAuth: true,
+          title: 'Character checks',
+        },
+      },
+      {
+        path: 'reasonable-adjustments',
+        component: CandidateFormReasonableAdjustments,
+        name: 'candidate-form-tasks-reasonableAdjustments',
+        meta: {
+          requiresAuth: true,
+          title: 'Reasonable adjustments',
+        },
+      },
+      {
+        path: 'location',
+        component: CandidateFormLocationPreferences,
+        name: 'candidate-form-tasks-locationPreferences',
+        meta: {
+          requiresAuth: true,
+          title: 'Location preferences',
+        },
+      },
+      {
+        path: 'jurisdiction',
+        component: CandidateFormJurisdictionPreferences,
+        name: 'candidate-form-tasks-jurisdictionPreferences',
+        meta: {
+          requiresAuth: true,
+          title: 'Jurisdiction preferences',
+        },
+      },
+      {
+        path: 'welsh-posts',
+        component: CandidateFormWelshPosts,
+        name: 'candidate-form-tasks-welshPosts',
+        meta: {
+          requiresAuth: true,
+          title: 'Welsh posts',
+        },
+      },
+    ],
+    meta: {
+      title: 'Questionnaire',
+    },
+  },
+  {
     path: '/sign-in',
     name: 'sign-in',
     component: SignIn,
@@ -781,7 +1009,7 @@ router.beforeEach((to, from, next) => {
     next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
     next();
-  }  
+  }
 });
 
 // Global after hook to set an appropriate title for the page

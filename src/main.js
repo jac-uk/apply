@@ -16,9 +16,10 @@ import mitt from 'mitt';
 const emitter = mitt();
 
 let vueInstance = false;
-auth.onAuthStateChanged( (user) => {
+auth.onAuthStateChanged( async (user) => {
   store.dispatch('auth/setCurrentUser', user);
   if (store.getters['auth/isSignedIn']) {
+    await store.dispatch('settings/bind');
     const urlParams = new URLSearchParams(window.location.search);
     const nextPage = urlParams.get('nextPage');
     if (nextPage) router.push(nextPage);  

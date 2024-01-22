@@ -208,6 +208,12 @@
           title="Additional Information"
         >
           <Task
+            v-if="isJAC00187"
+            id="resignation-from-dwp"
+            title="Resignation from the Department for Work and Pensions (DWP)"
+            :done="applicationProgress.resignationFromDWP"
+          />
+          <Task
             v-if="applicationParts.additionalInfo"
             id="additional-information"
             title="How did you hear about the vacancy?"
@@ -225,7 +231,7 @@
       </TaskList>
 
       <button
-        :disabled="!canApply"
+        :disabled="!canApply || (isJAC00187 && !applicationProgress.resignationFromDWP)"
         class="govuk-button info-btn--task-list--review-application"
         @click="reviewApplication"
       >

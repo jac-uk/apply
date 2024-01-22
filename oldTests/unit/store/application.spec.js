@@ -2,9 +2,9 @@
 
 // import application from '@/store/application';
 
-xdescribe('store/application', () => {
+describe.skip('store/application', () => {
     it('empty suite',()=>{
 
     });
-});                
+});
 

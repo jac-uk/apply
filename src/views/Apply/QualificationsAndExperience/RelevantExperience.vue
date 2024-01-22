@@ -10,6 +10,13 @@
           Relevant experience
         </h1>
 
+        <p
+          v-if="isJAC00187"
+          class="govuk-body-l"
+        >
+          Please detail your career history in reverse chronological order.
+        </p>
+
         <ErrorSummary
           :errors="errors"
           :show-save-button="true"

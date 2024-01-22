@@ -36,6 +36,7 @@
               v-model="application.magistrateEndDate"
               label="Until date"
               hint="For example, 11 6 2020. Leave blank if this is your present role."
+              :min-date="application.magistrateStartDate"
             />
             <TextField
               id="magistrateLocation"

@@ -1,10 +1,10 @@
-// @FIXME@ *form/queryselector* this suite somehow interacts with the Form 
+// @FIXME@ *form/queryselector* this suite somehow interacts with the Form
 //  component and errors due to the queryselector
 
-import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships';
+import RelevantMemberships from '@/views/Apply/QualificationsAndExperience/RelevantMemberships.vue';
 import { createTestSubject } from '../../../helpers';
 
-xdescribe('@/views/Apply/QualificationsAndExperience/RelevantMemberships', () => {
+describe.skip('@/views/Apply/QualificationsAndExperience/RelevantMemberships', () => {
     describe('template', () => {
         let wrapper;
         beforeEach(() => {
@@ -14,10 +14,10 @@ xdescribe('@/views/Apply/QualificationsAndExperience/RelevantMemberships', () =>
                 propsData: {},
             });
         });
-        
+
         it('renders', () => {
             expect(wrapper.exists()).toBe(true);
         });
-        
+
     });
 });

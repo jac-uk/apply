@@ -12,6 +12,7 @@
       v-model="row.endDate"
       label="End date"
       type="month"
+      :required="hasEnteredData"
     />
     <TextareaInput
       :id="`details_${index}`"
@@ -24,6 +25,7 @@
       :id="`tasks_${index}`"
       v-model:tasks="row.tasks"
       v-model:other-tasks="row.otherTasks"
+      :required="hasEnteredData"
       :is-appointment="false"
     />
 

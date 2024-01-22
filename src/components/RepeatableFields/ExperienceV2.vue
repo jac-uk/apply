@@ -116,7 +116,7 @@
         v-model:judicial-functions="row.judicialFunctions"
         v-model:other-tasks="row.otherTasks"
         :is-appointment="isAppointment"
-        :required="isAppointment"
+        required
       />
 
       <TaskDetails
