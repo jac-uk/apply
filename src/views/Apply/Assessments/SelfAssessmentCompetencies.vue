@@ -141,7 +141,7 @@ import FileUpload from '@/components/Form/FileUpload.vue';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML.vue';
 import { functions } from '@/firebase';
-import ActionButton from '@/components/Form/ActionButton';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
 export default {
