@@ -5,6 +5,7 @@ export {
 };
 
 function filteredPreferences(preferences, data) {
+  if (!preferences) return [];
   const mainQuestions = [];
   const linkedQuestions = [];
   preferences.forEach(item => {
