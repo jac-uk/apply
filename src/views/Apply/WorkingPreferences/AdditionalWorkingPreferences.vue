@@ -29,6 +29,7 @@
             :title="additionalWorkingPreference.question"
             :answers="additionalWorkingPreference.answers"
             :type="additionalWorkingPreference.questionType"
+            required
           />
         </div>
 

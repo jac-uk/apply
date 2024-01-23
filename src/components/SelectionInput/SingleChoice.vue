@@ -1,31 +1,32 @@
 <template>
   <div class="govuk-radios">
-    <div
-      v-for="(answer, index) in answers"
-      :key="index"
-      class="govuk-radios__item"
+    <div 
+      v-if="config.groupAnswers"
     >
-      <input
-        :id="`${id}-answer-${index}`"
+      <div
+        v-for="(item, itemIndex) in answers"
+        :key="itemIndex"
+      >
+        <span class="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-4">{{ item.group }}</span>
+        <EditSingleChoiceAnswers
+          :id="`${id}-${itemIndex}`"
+          v-model="selected"
+          :answers="item.answers"
+        />
+      </div>
+    </div>
+    <div v-else>
+      <EditSingleChoiceAnswers
+        :id="id"
         v-model="selected"
-        :name="`${id}-answer-${index}`"
-        :value="answer.answer"
-        type="radio"
-        class="govuk-radios__input"
-      >
-      <label
-        :for="`${id}-answer-${index}`"
-        class="govuk-label govuk-radios__label"
-        :data-welsh="getDataWelsh(answer.answer)"
-      >
-        {{ answer.answer }}
-      </label>
+        :answers="answers"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import { getDataWelsh } from '@/helpers/language';
+import EditSingleChoiceAnswers from './_EditSingleChoiceAnswers.vue';
 
 export default {
   compatConfig: {
@@ -34,6 +35,9 @@ export default {
     //MODE: 3,
   },
   name: 'SingleChoice',
+  components: {
+    EditSingleChoiceAnswers,
+  },
   props: {
     id: {
       type: String,
@@ -42,6 +46,11 @@ export default {
     answers: {
       type: Array,
       required: true,
+    },
+    config: {
+      type: Object,
+      required: false,
+      default: () => ({}),
     },
     modelValue: {
       type: String,
@@ -57,11 +66,6 @@ export default {
       set(val) {
         this.$emit('update:modelValue', val);
       },
-    },
-  },
-  methods: {
-    getDataWelsh(answer) {
-      return getDataWelsh({ id: this.id, answer });
     },
   },
 };

@@ -22,22 +22,25 @@
       <SingleChoice
         v-if="isSingleChoice"
         :id="id"
-        v-model="selected"
+        v-model="localVModel"
         :answers="answers"
+        :config="config"
       />
 
       <MultipleChoice
         v-if="isMultipleChoice"
         :id="id"
-        v-model="selected"
+        v-model="localVModel"
         :answers="answers"
+        :config="config"
       />
 
       <RankedChoice
         v-if="isRankedChoice"
         :id="id"
-        v-model="selected"
+        v-model="localVModel"
         :answers="answers"
+        :config="config"
       />
     </fieldset>
   </div>  
@@ -81,17 +84,30 @@ export default {
       type: Array,
       required: true,
     },
+    config: {
+      type: Object,
+      required: false,
+      default: () => ({}),
+    },
     modelValue: {
-      type: [String, Array],
+      type: [String, Array, Object],
       required: false,
       default: null,
     },
   },
   emits: ['update:modelValue'],
   computed: {
-    selected: {
+    localVModel: {
       get() {
-        return this.modelValue;
+        if (this.modelValue) return this.modelValue;
+        switch (this.type) {
+        case 'multiple-choice':
+          return [];
+        case 'ranked-choice':
+          return {};
+        default:
+          return '';
+        }
       },
       set(val) {
         this.$emit('update:modelValue', val);

@@ -1,31 +1,32 @@
 <template>
   <div class="govuk-checkboxes">
-    <div
-      v-for="(answer, index) in answers"
-      :key="index"
-      class="govuk-checkboxes__item"
+    <div 
+      v-if="config.groupAnswers"
     >
-      <input
-        :id="`${id}-answer-${index}`"
-        v-model="selected"
-        :name="`${id}-answer-${index}`"
-        :value="answer.answer"
-        type="checkbox"
-        class="govuk-checkboxes__input"
+      <div
+        v-for="(item, itemIndex) in answers"
+        :key="itemIndex"
       >
-      <label
-        :for="`${id}-answer-${index}`"
-        class="govuk-label govuk-checkboxes__label"
-        :data-welsh="getDataWelsh(answer.answer)"
-      >
-        {{ answer.answer }}
-      </label>
+        <span class="govuk-heading-s govuk-!-margin-bottom-2 govuk-!-margin-top-4">{{ item.group }}</span>
+        <EditMultipleChoiceAnswers 
+          :id="`${id}-${itemIndex}`"
+          v-model="selected"
+          :answers="item.answers"
+        />
+      </div>
     </div>
+    <div v-else>
+      <EditMultipleChoiceAnswers 
+        :id="id"
+        v-model="selected"
+        :answers="answers"    
+      />
+    </div>    
   </div>
 </template>
 
 <script>
-import { getDataWelsh } from '@/helpers/language';
+import EditMultipleChoiceAnswers from './_EditMultipleChoiceAnswers.vue';
 
 export default {
   compatConfig: {
@@ -34,6 +35,9 @@ export default {
     //MODE: 3,
   },
   name: 'MultipleChoice',
+  components: {
+    EditMultipleChoiceAnswers,
+  },
   props: {
     id: {
       type: String,
@@ -42,6 +46,11 @@ export default {
     answers: {
       type: Array,
       required: true,
+    },
+    config: {
+      type: Object,
+      required: false,
+      default: () => ({}),
     },
     modelValue: {
       type: Array,
@@ -59,11 +68,6 @@ export default {
       set(val) {
         this.$emit('update:modelValue', val);
       },
-    },
-  },
-  methods: {
-    getDataWelsh(answer) {
-      return getDataWelsh({ id: this.id, answer });
     },
   },
 };
