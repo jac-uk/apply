@@ -99,7 +99,7 @@ export default {
       } else {
         // remove un-selected
         delete this.localVModel[event.target.value];
-        // this.$emit('update:modelValue', this.localVModel);
+        this.$emit('update:modelValue', this.localVModel);
 
         if (this.config.allowEqualRanking) {
           // reduce any ranks above the maximum rank. Leave the others alone.

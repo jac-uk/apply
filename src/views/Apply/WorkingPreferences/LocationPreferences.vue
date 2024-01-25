@@ -12,8 +12,6 @@
 
         <ErrorSummary
           :errors="errors"
-          :show-save-button="true"
-          @save="save"
         />
 
         <div v-if="filteredPreferences.length">
@@ -28,6 +26,7 @@
             :type="item.questionType"
             :label="item.question"
             required
+            @update:model-value="tidyFormData(item)"
           />
         </div>
 
@@ -41,7 +40,7 @@
         />
 
         <button
-          :disabled="!canSave(formId) || !!!formData.locationPreferences"
+          :disabled="!canSave(formId) || !formComplete"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -57,7 +56,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { filteredPreferences } from './workingPreferencesHelper';
+import { filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'LocationPreferences',
@@ -69,35 +68,33 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
+    const formId = 'locationPreferences';
     const defaults = {
-      locationPreferences: {},
+      [formId]: this.$store.state.vacancy.record[formId] ? {} : null,
       progress: {},
     };
-    const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
+    const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
     return {
-      formId: 'locationPreferences',
+      formId: formId,
       formData: formData,
     };
   },
   computed: {
     filteredPreferences() {
-      return filteredPreferences(this.vacancy.locationPreferences, this.formData);
+      return filteredPreferences(this.vacancy[this.formId], this.formData[this.formId]);
+    },
+    formComplete() {
+      if (this.filteredPreferences.length) {
+        return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
+      } else {
+        return this.formData[this.formId] ? true : false;
+      }
     },
   },
   methods: {
-    async save() {
-      this.validate();
-      if (this.isValid() && this.formId) {
-        const saveData = {};
-        saveData[`progress.${this.formId}`] = true;
-        saveData[this.formId] = {};
-        this.filteredPreferences.forEach(item => saveData[this.formId][item.question] = this.formData[this.formId][item.question]);
-        await this.$store.dispatch('application/save', saveData);
-        this.logEventAfterSave();
-        this.$router.push({ name: 'task-list' });
-      }
-    },    
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.formId], preference);
+    },
   },
 };
 </script>
