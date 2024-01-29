@@ -12,8 +12,6 @@
 
         <ErrorSummary
           :errors="errors"
-          :show-save-button="true"
-          @save="save"
         />
 
         <div v-if="filteredPreferences.length">
@@ -21,7 +19,7 @@
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`jurisdiction-preferences_${itemIndex}`"
             :key="itemIndex"
-            v-model="formData.jurisdictionPreferences[item.question]"
+            v-model="formData[formId][item.question]"
             :title="item.question"
             :answers="getAnswers(item)"
             :config="item"

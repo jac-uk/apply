@@ -19,7 +19,7 @@
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`location-preferences_${itemIndex}`"
             :key="itemIndex"
-            v-model="formData.locationPreferences[item.question]"
+            v-model="formData[formId][item.question]"
             :title="item.question"
             :answers="item.answers"
             :config="item"

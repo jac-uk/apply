@@ -12,6 +12,7 @@
           :id="`${id}-${itemIndex}`"
           v-model="selected"
           :answers="item.answers"
+          :config="item"
         />
       </div>
     </div>

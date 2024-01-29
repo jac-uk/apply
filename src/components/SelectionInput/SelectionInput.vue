@@ -118,9 +118,26 @@ export default {
       case 'single-choice':
         return 'Select one answer';
       case 'multiple-choice':
-        return 'Select all that apply';
+        switch (this.config.minimumAnswerMode) {
+        case 'some':
+          return `Select at least ${this.config.minimumAnswerQuantity} answers`;
+        default:
+          return 'Select all that apply';
+        }
       case 'ranked-choice':
-        return 'Select and rank all that apply. With 1 being your top choice';
+        // eslint-disable-next-line no-case-declarations
+        let text = '';
+        switch (this.config.minimumAnswerMode) {
+        case 'all':
+          text += 'Select and rank all answers.';
+          break;
+        case 'some':
+          return `Select and rank at least ${this.config.minimumAnswerQuantity} answers.`;
+        default:
+          return 'Select and rank all that apply.';
+        }
+        text += ' With 1 being your top choice.';
+        return text;
       default:
         return '';
       }
@@ -133,6 +150,37 @@ export default {
     },
     isRankedChoice() {
       return this.type === 'ranked-choice';
+    },
+  },
+  methods: {
+    validate() {
+      this.setError('');
+      FormField.methods.validate.call(this);
+      if (!this.errorMessage && this.checkErrors && this.config) {
+        switch (this.type) {
+        case 'multiple-choice':
+          if (this.config.minimumAnswerMode === 'some') {
+            if (this.modelValue.length < this.config.minimumAnswerQuantity) {
+              this.setError(`Please choose at least ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+            }
+          }
+          break;
+        case 'ranked-choice':
+          if (this.config.minimumAnswerMode === 'all') {
+            if (Object.keys(this.modelValue).length < this.config.answers.length) {
+              this.setError(`Please select and rank all answers for ${this.label}`);
+            }
+          }
+          if (this.config.minimumAnswerMode === 'some') {
+            if (Object.keys(this.modelValue).length < this.config.minimumAnswerQuantity) {
+              this.setError(`Please select and rank at least ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+            }
+          }
+          break;
+        default:
+          
+        }
+      }
     },
   },
 };

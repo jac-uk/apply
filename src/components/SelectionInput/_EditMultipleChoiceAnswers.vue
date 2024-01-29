@@ -36,6 +36,11 @@ export default {
       required: true,
       type: Array,
     },
+    config: {
+      type: Object,
+      required: false,
+      default: () => ({}),
+    },
     modelValue: {
       type: Array,
       default: function () { 
