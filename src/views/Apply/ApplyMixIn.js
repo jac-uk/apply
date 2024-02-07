@@ -17,6 +17,8 @@ import {
   isApplicationComplete,
   hasApplicationProcess,
   hasStatementOfEligibility,
+  hasStatementOfSuitability,
+  hasSelfAssessment,
   isApplicationVersionGreaterThan
 } from '@/helpers/exerciseHelper';
 import { updateLangToTextNode } from '@/helpers/language';
@@ -99,6 +101,12 @@ export default {
     },
     hasStatementOfEligibility() {
       return hasStatementOfEligibility(this.vacancy);
+    },
+    hasStatementOfSuitability() {
+      return hasStatementOfSuitability(this.vacancy);
+    },
+    hasSelfAssessment() {
+      return hasSelfAssessment(this.vacancy);
     },
     isApplicationComplete() {
       return isApplicationComplete(this.vacancy, this.application);

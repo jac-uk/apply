@@ -206,6 +206,21 @@ export default {
   },
   methods: {
     async triggerExtraction() {
+      this.validate();
+
+      // prevent page from reloading if return value is false
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 0);
+      });
+
+      if (this.isValid()) {
+        await this.$store.dispatch('application/save', this.formData);
+      } else {
+        return false;
+      }
+
       try {
         const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
         await this.$store.dispatch('application/save', {
