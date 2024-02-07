@@ -913,7 +913,7 @@
           </div>
 
           <div
-            v-if="hasStatementOfEligibility"
+            v-if="hasStatementOfEligibility || hasStatementOfSuitability || hasSelfAssessment"
             class="govuk-!-margin-top-9"
           >
             <h2 class="govuk-heading-l">
