@@ -5,7 +5,14 @@
       :key="index"
       class="govuk-summary-list"
     >
-      <div class="govuk-summary-list__row">
+      <QuestionRenderer
+        section="additionalWorkingPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :item="item"
+        :index="index"
+      />
+      <!-- <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key">
           {{ vacancy.additionalWorkingPreferences[index].question }}
           <span class="govuk-body govuk-!-font-size-19">
@@ -64,16 +71,20 @@
             </li>
           </ul>
         </dd>
-      </div>
+      </div> -->
     </dl>
   </div>
 </template>
 
 <script>
 import { getDataWelshId, getDataWelsh } from '@/helpers/language';
+import QuestionRenderer from '@/components/Page/QuestionRenderer.vue';
 
 export default {
   name: 'AdditionalWorkingPreferences',
+  components: {
+    QuestionRenderer,
+  },
   props: {
     application: {
       type: Object,

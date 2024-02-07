@@ -40,7 +40,6 @@
           <h1 class="govuk-heading-l">
             {{ vacancy.name }}
           </h1>
-
           <div v-if="applicationParts.personalDetails">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -144,7 +143,6 @@
               :is-legal="isLegal"
             />
           </div>
-
           <div v-if="applicationParts.locationPreferences">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -162,35 +160,11 @@
                 Change
               </RouterLink>
             </div>
-            <dl class="govuk-summary-list">
-              <dt class="govuk-summary-list__key">
-                {{ vacancy.locationQuestion }}
-              </dt>
-              <dd
-                v-if="vacancy.locationQuestionType == 'single-choice'"
-                class="govuk-summary-list__value"
-              >
-                {{ application.locationPreferences }}
-              </dd>
-              <dd
-                v-else
-                class="govuk-summary-list__value"
-              >
-                <p
-                  v-for="(item, index) in application.locationPreferences"
-                  :key="item.name"
-                  class="govuk-body"
-                >
-                  {{ item }}
-                  <strong>
-                    {{ index + 1 }}
-                  </strong>
-                  {{ item }}
-                </p>
-              </dd>
-            </dl>
+            <LocationPreferences
+              :application="application"
+              :vacancy="vacancy"
+            />
           </div>
-
           <div v-if="applicationParts.jurisdictionPreferences">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -208,33 +182,11 @@
                 Change
               </RouterLink>
             </div>
-            <dl class="govuk-summary-list">
-              <div class="govuk-summary-list__row">
-                <dt class="govuk-summary-list__key">
-                  {{ vacancy.jurisdictionQuestion }}
-                </dt>
-                <dd
-                  v-if="vacancy.jurisdictionQuestionType == 'single-choice'"
-                  class="govuk-summary-list__value"
-                >
-                  {{ application.jurisdictionPreferences }}
-                </dd>
-                <dd
-                  v-else
-                  class="govuk-summary-list__value"
-                >
-                  <p
-                    v-for="item in application.jurisdictionPreferences"
-                    :key="item.name"
-                    class="govuk-body"
-                  >
-                    {{ item }}
-                  </p>
-                </dd>
-              </div>
-            </dl>
+            <JurisdictionPreferences
+              :application="application"
+              :vacancy="vacancy"
+            />
           </div>
-
           <div v-if="applicationParts.welshPosts">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -1108,6 +1060,7 @@
             </dl>
           </div>
         </div>
+
         <!-- END download-as-pdf-div -->
 
         <button
@@ -1139,6 +1092,8 @@ import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/Ch
 import Diversity from './Diversity.vue';
 import WelshRequirement from './WelshRequirement.vue';
 import AdditionalWorkingPreferences from './AdditionalWorkingPreferences.vue';
+import LocationPreferences from './LocationPreferences.vue';
+import JurisdictionPreferences from './JurisdictionPreferences.vue';
 import Qualifications from './Qualifications.vue';
 import Schedule2 from './Schedule2.vue';
 import Memberships from './Memberships.vue';
@@ -1165,6 +1120,8 @@ export default {
     Diversity,
     WelshRequirement,
     AdditionalWorkingPreferences,
+    LocationPreferences,
+    JurisdictionPreferences,
     Qualifications,
     Schedule2,
     Memberships,
