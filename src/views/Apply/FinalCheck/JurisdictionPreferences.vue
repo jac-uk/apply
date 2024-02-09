@@ -8,7 +8,6 @@
       section="jurisdictionPreferences"
       :application="application"
       :vacancy="vacancy"
-      :item="item"
       :index="index"
     />
   </dl>

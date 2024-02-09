@@ -8,7 +8,6 @@
       section="locationPreferences"
       :application="application"
       :vacancy="vacancy"
-      :item="item"
       :index="index"
     />
   </dl>

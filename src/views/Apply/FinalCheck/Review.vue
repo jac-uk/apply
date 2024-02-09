@@ -165,6 +165,7 @@
               :vacancy="vacancy"
             />
           </div>
+
           <div v-if="applicationParts.jurisdictionPreferences">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -187,6 +188,7 @@
               :vacancy="vacancy"
             />
           </div>
+
           <div v-if="applicationParts.welshPosts">
             <div class="govuk-!-margin-top-9">
               <h2
