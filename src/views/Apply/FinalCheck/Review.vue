@@ -34,12 +34,14 @@
             Print or Download this page
           </a>
         </div>
+
         <div
           ref="download-as-pdf-div"
         >
           <h1 class="govuk-heading-l">
             {{ vacancy.name }}
           </h1>
+
           <div v-if="applicationParts.personalDetails">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -143,6 +145,7 @@
               :is-legal="isLegal"
             />
           </div>
+
           <div v-if="applicationParts.locationPreferences">
             <div class="govuk-!-margin-top-9">
               <h2
