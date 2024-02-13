@@ -26,6 +26,7 @@
       name="word-count"
       :rows="rows"
       :disabled="disabled"
+      :style="style"
       @keydown="handleLimit($event)"
       @keyup="handleLimit($event)"
       @change="validate"
@@ -82,6 +83,10 @@ export default {
     disabled: {
       default: false,
       type: Boolean,
+    },
+    style: {
+      default: '',
+      type: String,
     },
   },
   emits: ['update:modelValue'],

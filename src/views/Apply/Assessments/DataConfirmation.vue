@@ -33,6 +33,7 @@
           v-model="formData.uploadedSelfAssessmentContent[i]"
           :label="`Statement content section ${i + 1}`"
           :word-limit="wordLimit"
+          style="white-space: pre-line;"
         />
 
         <button
