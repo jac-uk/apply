@@ -1,15 +1,45 @@
 <template>
+  <template v-if="vacancy.jurisdictionPreferences">
+    <dl
+      v-for="(item, index) in vacancy.jurisdictionPreferences"
+      :key="item"
+      class="govuk-summary-list"
+    >
+      <QuestionRenderer
+        section="jurisdictionPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :index="index"
+      />
+    </dl>
+  </template>
   <dl
-    v-for="(item, index) in vacancy.jurisdictionPreferences"
-    :key="item"
+    v-else
     class="govuk-summary-list"
   >
-    <QuestionRenderer
-      section="jurisdictionPreferences"
-      :application="application"
-      :vacancy="vacancy"
-      :index="index"
-    />
+    <div class="govuk-summary-list__row">
+      <dt class="govuk-summary-list__key">
+        {{ vacancy.jurisdictionQuestion }}
+      </dt>
+      <dd
+        v-if="vacancy.jurisdictionQuestionType == 'single-choice'"
+        class="govuk-summary-list__value"
+      >
+        {{ application.jurisdictionPreferences }}
+      </dd>
+      <dd
+        v-else
+        class="govuk-summary-list__value"
+      >
+        <p
+          v-for="item in application.jurisdictionPreferences"
+          :key="item.name"
+          class="govuk-body"
+        >
+          {{ item }}
+        </p>
+      </dd>
+    </div>
   </dl>
 </template>
 

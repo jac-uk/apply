@@ -1,15 +1,46 @@
 <template>
+  <template v-if="vacancy.locationPreferences">
+    <dl
+      v-for="(item, index) in vacancy.locationPreferences"
+      :key="item"
+      class="govuk-summary-list"
+    >
+      <QuestionRenderer
+        section="locationPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :index="index"
+      />
+    </dl>
+  </template>
   <dl
-    v-for="(item, index) in vacancy.locationPreferences"
-    :key="item"
+    v-else
     class="govuk-summary-list"
   >
-    <QuestionRenderer
-      section="locationPreferences"
-      :application="application"
-      :vacancy="vacancy"
-      :index="index"
-    />
+    <dt class="govuk-summary-list__key">
+      {{ vacancy.locationQuestion }}
+    </dt>
+    <dd
+      v-if="vacancy.locationQuestionType == 'single-choice'"
+      class="govuk-summary-list__value"
+    >
+      {{ application.locationPreferences }}
+    </dd>
+    <dd
+      v-else
+      class="govuk-summary-list__value"
+    >
+      <p
+        v-for="(item, index) in application.locationPreferences"
+        :key="item.name"
+        class="govuk-body"
+      >
+        <strong>
+          {{ index + 1 }}
+        </strong>
+        {{ item }}
+      </p>
+    </dd>
   </dl>
 </template>
 
