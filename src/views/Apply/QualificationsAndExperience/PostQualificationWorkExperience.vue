@@ -243,6 +243,7 @@ export default {
       if (this.isValid() && this.formId) {
         if (this.isApplicationVersionGreaterThan2) {
           if (this.totalJudicialDays < this.vacancy.pjeDays) {
+            // go to `post qualification work experience details` page if pjeDays is required and totalJudicialDays is less than pjeDays
             this.$router.push({ name: 'post-qualification-work-experience-details' });
           } else {
             this.formData.progress[this.formId] = true;
