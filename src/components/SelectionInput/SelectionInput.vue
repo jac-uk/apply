@@ -1,6 +1,6 @@
 <template>
   <div class="govuk-form-group">
-    <fieldset 
+    <fieldset
       class="govuk-fieldset"
       :aria-describedby="`${id}-hint`"
     >
@@ -43,7 +43,7 @@
         :config="config"
       />
     </fieldset>
-  </div>  
+  </div>
 </template>
 
 <script>
@@ -52,6 +52,7 @@ import MultipleChoice from '@/components/SelectionInput/MultipleChoice.vue';
 import RankedChoice from '@/components/SelectionInput/RankedChoice.vue';
 import FormField from '@/components/Form/FormField.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
+import { isGapInIntegers } from '@/helpers/array';
 
 export default {
   compatConfig: {
@@ -154,7 +155,6 @@ export default {
   },
   methods: {
     validate() {
-      this.setError('');
       FormField.methods.validate.call(this);
       if (!this.errorMessage && this.checkErrors && this.config) {
         switch (this.type) {
@@ -162,6 +162,7 @@ export default {
           if (this.config.minimumAnswerMode === 'some') {
             if (this.modelValue.length < this.config.minimumAnswerQuantity) {
               this.setError(`Please choose at least ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+              return false;
             }
           }
           break;
@@ -169,18 +170,38 @@ export default {
           if (this.config.minimumAnswerMode === 'all') {
             if (Object.keys(this.modelValue).length < this.config.answers.length) {
               this.setError(`Please select and rank all answers for ${this.label}`);
+              return false;
             }
           }
           if (this.config.minimumAnswerMode === 'some') {
             if (Object.keys(this.modelValue).length < this.config.minimumAnswerQuantity) {
               this.setError(`Please select and rank at least ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+              return false;
+            }
+          }
+          if (this.config.allowEqualRanking) {
+            if (!this.validateNoGapInRankings(this.modelValue)) {
+              this.setError('Please ensure there are no gaps in the rankings');
+              return false;
             }
           }
           break;
         default:
-          
+
         }
       }
+    },
+    validateNoGapInRankings(rankings) {
+      const ranks = Object.values(rankings);
+      if (ranks.length === 0) {
+        return false;
+      }
+      ranks.sort((a, b) => a - b); // Sort the array in ascending order
+      // Ensure the first rank is 1
+      if (ranks[0] !== 1) {
+        return false;
+      }
+      return !isGapInIntegers(ranks);
     },
   },
 };

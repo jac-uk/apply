@@ -1,6 +1,6 @@
 /**
  * Get difference between two arrays
- * 
+ *
  * @param   {array} arr1
  * @param   {array} arr2
  * @returns {array}
@@ -11,7 +11,7 @@ const difference = (arr1, arr2) => {
 
 /**
  * Transform new value if there is a match of target value
- * 
+ *
  * Use case: vue watcher
  * e.g.
  * watch: {
@@ -19,7 +19,7 @@ const difference = (arr1, arr2) => {
  *     this.selectedList = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
  *   }
  * }
- * 
+ *
  * @param   {array}  newValue
  * @param   {array}  oldValue
  * @param   {string} targetValue
@@ -28,7 +28,7 @@ const difference = (arr1, arr2) => {
 const transformOnSelection = (newValue, oldValue, targetValue) => {
   // ensure both are array and not the same
   if (
-    Array.isArray(newValue) && 
+    Array.isArray(newValue) &&
     Array.isArray(oldValue) &&
     JSON.stringify(newValue) !== JSON.stringify(oldValue)
   ) {
@@ -45,7 +45,26 @@ const transformOnSelection = (newValue, oldValue, targetValue) => {
   return newValue;
 };
 
+/**
+ * Check if there is a gap in the array
+ * eg
+ * 2,2,3 => false
+ * 1,2,4 => true
+ * @param   {array}  arr
+ * @returns {boolean}
+ */
+const isGapInIntegers = (arr) => {
+  arr.sort((a, b) => a - b); // Sort the array in ascending order
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i + 1] - arr[i] > 1) {
+      return true; // Gap found
+    }
+  }
+  return false;
+};
+
 export {
   difference,
-  transformOnSelection
+  transformOnSelection,
+  isGapInIntegers
 };

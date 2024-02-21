@@ -19,8 +19,8 @@
       :data-welsh="getDataWelsh(answer.answer)"
     >
       {{ $filters.lookup(answer.answer) }}
-    </label>    
-    <select 
+    </label>
+    <select
       v-if="selected.indexOf(answer.answer) >= 0"
       :id="`${id}-rank-${index}`"
       v-model="localVModel[answer.answer]"
@@ -34,7 +34,7 @@
       >
         {{ score }}
       </option>
-    </select>      
+    </select>
   </div>
 </template>
 
@@ -59,8 +59,8 @@ export default {
     },
     modelValue: {
       type: Object,
-      default: function () { 
-        return new Object(); 
+      default: function () {
+        return new Object();
       },
     },
   },
@@ -73,7 +73,7 @@ export default {
   },
   computed: {
     localVModel: {
-      get() {  
+      get() {
         return this.modelValue;
       },
       set(val) {
@@ -94,7 +94,8 @@ export default {
           this.localVModel[event.target.value] = 1;
           this.$emit('update:modelValue', this.localVModel);
         } else {
-          this.localVModel[event.target.value] = this.numSelected + 1;
+          const max = Math.max(...Object.values(this.localVModel));
+          this.localVModel[event.target.value] = max + 1;
         }
       } else {
         // remove un-selected
@@ -104,7 +105,7 @@ export default {
         if (this.config.allowEqualRanking) {
           // reduce any ranks above the maximum rank. Leave the others alone.
           const maxRank = this.numSelected;
-          Object.entries(this.localVModel).forEach(([key, value]) => { 
+          Object.entries(this.localVModel).forEach(([key, value]) => {
             if (value > maxRank) this.localVModel[key] = maxRank;
           });
         } else {
@@ -145,7 +146,7 @@ export default {
           startRank = newRank;
           endRank = previousRank;
           change = 1;
-        }        
+        }
         if (previousRank < newRank) {
           startRank = previousRank;
           endRank = newRank;
@@ -158,6 +159,6 @@ export default {
         });
       }
     },
-  },   
+  },
 };
 </script>
