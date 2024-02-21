@@ -24,16 +24,15 @@
           Re-upload document
         </RouterLink>
 
-        <component
-          :is="components.TextareaInput"
+        <TextareaInput
           v-for="(section, i) in selfAssessmentSections"
-          id="suitability-statement-text"
+          :id="`self-assessment-answer-${i}`"
           :key="i"
-          :ref="`StatementInputRef${i}`"
           v-model="formData.uploadedSelfAssessmentContent[i]"
           :label="`${i + 1}. ${section.question}`"
           :word-limit="section.wordLimit"
-          style="white-space: pre-line;"
+          :style="{ 'white-space': 'pre-line' }"
+          required
         />
 
         <button
@@ -54,7 +53,6 @@ import { logEvent } from '@/helpers/logEvent';
 import ErrorSummary from '@/components/Form/ErrorSummary';
 import TextareaInput from '@/components/Form/TextareaInput';
 import BackLink from '@/components/BackLink';
-import { shallowRef } from 'vue';
 
 export default {
   //I tried to leave this component open for refactor so
@@ -64,6 +62,7 @@ export default {
   components: {
     ErrorSummary,
     BackLink,
+    TextareaInput,
   },
   extends: Form,
   mixins: [ApplyMixIn],
@@ -77,10 +76,7 @@ export default {
     return {
       formId: 'selfAssessmentCompetencies',
       formData: formData,
-      statementType: 'statement-of-suitability-with-competencies',
-      components: shallowRef({
-        TextareaInput,
-      }),
+      statementType: 'self-assessment-with-competencies',
     };
   },
   computed: {

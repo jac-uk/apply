@@ -85,8 +85,8 @@ export default {
       type: Boolean,
     },
     style: {
-      default: '',
-      type: String,
+      default: () => {},
+      type: Object,
     },
   },
   emits: ['update:modelValue'],
