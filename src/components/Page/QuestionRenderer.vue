@@ -1,20 +1,23 @@
 <template>
-  <div v-if="shouldRenderQuestion">
+  <div
+    v-if="shouldRenderQuestion"
+    class="govuk-summary-list__row"
+  >
     <dt
       class="govuk-summary-list__key"
     >
       {{ currentItem.question }}
-      <span
-        class="govuk-hint"
-      >
       <!--
-        {{ $filters.lookup(currentItem.questionType) }}
-        {{ currentItem.groupAnswers ? ' - Grouped Answers' : '' }}
-        {{ currentItem.minimumAnswerMode === 'some' ? ` - ${currentItem.minimumAnswerQuantity} Answer minimum` : '' }}
-        {{ currentItem.allowEqualRanking ? ' - Allow Equal Rank' : '' }}
-        {{ currentItem.allowLinkedQuestions ? ' - has linked Questions' : '' }}
+        <span
+          class="govuk-hint"
+        >
+          {{ $filters.lookup(currentItem.questionType) }}
+          {{ currentItem.groupAnswers ? ' - Grouped Answers' : '' }}
+          {{ currentItem.minimumAnswerMode === 'some' ? ` - ${currentItem.minimumAnswerQuantity} Answer minimum` : '' }}
+          {{ currentItem.allowEqualRanking ? ' - Allow Equal Rank' : '' }}
+          {{ currentItem.allowLinkedQuestions ? ' - has linked Questions' : '' }}
+        </span>
       -->
-      </span>
     </dt>
     <dd
       v-if="currentItem.questionType === 'multiple-choice'"
@@ -26,8 +29,8 @@
         :key="answer"
         class="govuk-body"
       >
-        <strong>
-          {{ currentItem.groupAnswers ? findGroupByAnswer(currentItem.answers, answer) + ' - ' : '' }}
+        <strong v-if="currentItem.groupAnswers">
+          {{ findGroupByAnswer(currentItem.answers, answer) + ' - ' }}
         </strong>
         {{ answer }}
       </p>
@@ -43,8 +46,14 @@
           :key="answer"
           class="govuk-body"
         >
-          <strong>{{ answerIndex }}:</strong>
-          <span>{{ currentItem.groupAnswers ? findGroupByAnswer(currentItem.answers, answer) + ' - ' : '' }}</span>
+          <strong>
+            {{ answerIndex }}:
+          </strong>
+          <span
+            v-if="currentItem.groupAnswers"
+          >
+            {{ findGroupByAnswer(currentItem.answers, answer) + ' - ' }}
+          </span>
           {{ answer }}
         </p>
       </dd>
@@ -58,7 +67,9 @@
           :key="sortedAnswers.rank"
           class="govuk-body"
         >
-          <strong>{{ sortedAnswers.rank }}:</strong>
+          <strong>
+            {{ sortedAnswers.rank }}:
+          </strong>
           <span
             v-for="(answer, sortedAnswerIndex) in sortedAnswers.answers"
             :key="answer"
@@ -113,8 +124,10 @@ export default {
       return true;
     },
     isLinkedByAnswer() {
+      // find the linked question
       const linkedQuestion = Object.keys(this.application[this.section]).find(question => question === this.currentItem.linkedQuestion);
       if (linkedQuestion) {
+        // check if the answer given for the linked question matches this questions linked answer
         const linkedAnswer = this.application[this.section][linkedQuestion];
         return linkedAnswer === this.currentItem.linkedAnswer;
       } else {
