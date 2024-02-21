@@ -26,13 +26,13 @@
 
         <component
           :is="components.TextareaInput"
-          v-for="(wordLimit, i) in wordLimits"
+          v-for="(section, i) in selfAssessmentSections"
           id="suitability-statement-text"
           :key="i"
           :ref="`StatementInputRef${i}`"
           v-model="formData.uploadedSelfAssessmentContent[i]"
-          :label="`Statement content section ${i + 1}`"
-          :word-limit="wordLimit"
+          :label="`${i + 1}. ${section.question}`"
+          :word-limit="section.wordLimit"
           style="white-space: pre-line;"
         />
 
@@ -84,15 +84,12 @@ export default {
     };
   },
   computed: {
-    wordLimits() {
-      return this.vacancy.selfAssessmentWordLimits.map(section => section.wordLimit);
-    },
     selfAssessmentSections() {
-      return this.wordLimits.length;
+      return this.vacancy.selfAssessmentWordLimits || [];
     },
   },
   created() {
-    this.formData.uploadedSelfAssessmentContent = this.processArrayWithLimit(this.formData.uploadedSelfAssessmentContent, this.selfAssessmentSections);
+    this.formData.uploadedSelfAssessmentContent = this.processArrayWithLimit(this.formData.uploadedSelfAssessmentContent, this.selfAssessmentSections.length);
   },
   methods: {
     processArrayWithLimit(stringsArray, limit) {
