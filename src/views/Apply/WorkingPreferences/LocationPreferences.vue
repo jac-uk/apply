@@ -25,7 +25,7 @@
             :config="item"
             :type="item.questionType"
             :label="item.question"
-            required
+            :required="item.questionRequired"
             @update:model-value="tidyFormData(item)"
           />
         </div>
@@ -40,7 +40,7 @@
         />
 
         <button
-          :disabled="!canSave(formId) || !formComplete"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -82,13 +82,6 @@ export default {
   computed: {
     filteredPreferences() {
       return filteredPreferences(this.vacancy[this.formId], this.formData[this.formId]);
-    },
-    formComplete() {
-      if (this.filteredPreferences.length) {
-        return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
-      } else {
-        return this.formData[this.formId] ? true : false;
-      }
     },
   },
   methods: {

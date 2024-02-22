@@ -160,6 +160,10 @@ export default {
   methods: {
     validate() {
       FormField.methods.validate.call(this);
+      if (this.required && this.modelValue === null) {
+        this.setError(`Please enter a value for ${this.label}`);
+        return false;
+      }
       if (!this.errorMessage && this.checkErrors && this.config) {
         switch (this.type) {
         case 'multiple-choice':
