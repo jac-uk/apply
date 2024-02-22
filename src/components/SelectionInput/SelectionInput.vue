@@ -122,6 +122,8 @@ export default {
         switch (this.config.minimumAnswerMode) {
         case 'some':
           return `Select at least ${this.config.minimumAnswerQuantity} answers`;
+        case 'exactly':
+          return `Select exactly ${this.config.minimumAnswerQuantity} answers`;
         default:
           return 'Select all that apply';
         }
@@ -134,6 +136,8 @@ export default {
           break;
         case 'some':
           return `Select and rank at least ${this.config.minimumAnswerQuantity} answers.`;
+        case 'exactly':
+          return `Select and rank exactly ${this.config.minimumAnswerQuantity} answers.`;
         default:
           return 'Select and rank all that apply.';
         }
@@ -165,6 +169,12 @@ export default {
               return false;
             }
           }
+          if (this.config.minimumAnswerMode === 'exactly') {
+            if (this.modelValue.length !== this.config.minimumAnswerQuantity) {
+              this.setError(`Please choose exactly ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+              return false;
+            }
+          }
           break;
         case 'ranked-choice':
           if (this.config.minimumAnswerMode === 'all') {
@@ -176,6 +186,12 @@ export default {
           if (this.config.minimumAnswerMode === 'some') {
             if (Object.keys(this.modelValue).length < this.config.minimumAnswerQuantity) {
               this.setError(`Please select and rank at least ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
+              return false;
+            }
+          }
+          if (this.config.minimumAnswerMode === 'exactly') {
+            if (Object.keys(this.modelValue).length !== this.config.minimumAnswerQuantity) {
+              this.setError(`Please select and rank exactly ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
               return false;
             }
           }
