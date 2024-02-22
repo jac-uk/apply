@@ -128,6 +128,9 @@ export default {
         return false;
       }
     },
+    isApplicationVersionGreaterThan1() {
+      return isApplicationVersionGreaterThan(this.vacancy, 1);
+    },
     isApplicationVersionGreaterThan2() {
       return isApplicationVersionGreaterThan(this.vacancy, 2);
     },

@@ -29,7 +29,7 @@
         <option
           v-for="option in ['full-time', 'salaried-part-time', 'fee-paid', 'voluntary']"
           :key="option"
-          :value="$filters.lookup(option)"
+          :value="option"
         >
           {{ $filters.lookup(option) }}
         </option>

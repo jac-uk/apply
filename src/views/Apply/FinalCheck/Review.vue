@@ -80,7 +80,7 @@
                 Change
               </RouterLink>
             </div>
-            <dl v-if="isVersion2 && application.characterInformationV2">
+            <dl v-if="isApplicationVersionGreaterThan1 && application.characterInformationV2">
               <CriminalOffencesSummary
                 :character-information="application.characterInformationV2"
                 :can-edit="isDraftApplication"
@@ -1180,9 +1180,6 @@ export default {
     };
   },
   computed: {
-    isVersion2 () {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 2;
-    },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';
     },
@@ -1196,7 +1193,7 @@ export default {
       return this.$route.name === 'character-information-review';
     },
     destinationUrl() {
-      return this.isVersion2 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
+      return this.isApplicationVersionGreaterThan1 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
     },
     canEdit () {
       if (this.isDraftApplication && this.isVacancyOpen) {

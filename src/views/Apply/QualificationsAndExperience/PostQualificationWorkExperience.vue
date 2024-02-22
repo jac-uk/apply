@@ -15,7 +15,7 @@
           <p class="govuk-body-l">
             Starting with your most recent appointment and working back, provide details of your career to date, including all judicial and quasi-judicial appointments and any gaps in employment.
           </p>
-          
+
           <div
             v-for="(experience, index) in experiences"
             :key="index"
@@ -86,7 +86,7 @@
           <p class="govuk-body-l">
             Provide details of your career to date including any judicial appointments or quasi-judicial appointments
           </p>
-        
+
           <RepeatableFields
             v-model="formData.experience"
             :component="repeatableFields.Experience"
@@ -150,7 +150,7 @@ export default {
   },
   computed: {
     hasExperience() {
-      return (Array.isArray(this.formData.experience) && this.formData.experience.length > 0) || 
+      return (Array.isArray(this.formData.experience) && this.formData.experience.length > 0) ||
         (Array.isArray(this.formData.employmentGaps) && this.formData.employmentGaps.length > 0);
     },
     totalJudicialDays() {
@@ -190,7 +190,7 @@ export default {
           return a.endDate > b.endDate ? -1 : 1;
         }
         return 0;
-      }); 
+      });
     },
     syncFormData() {
       this.experiences = this.sortExperiences(this.experiences);
@@ -241,8 +241,15 @@ export default {
         this.validate();
       }
       if (this.isValid() && this.formId) {
-        if (this.isApplicationVersionGreaterThan2 && this.totalJudicialDays < this.vacancy.pjeDays) {
-          this.$router.push({ name: 'post-qualification-work-experience-details' });
+        if (this.isApplicationVersionGreaterThan2) {
+          if (this.totalJudicialDays < this.vacancy.pjeDays) {
+            // go to `post qualification work experience details` page if pjeDays is required and totalJudicialDays is less than pjeDays
+            this.$router.push({ name: 'post-qualification-work-experience-details' });
+          } else {
+            this.formData.progress[this.formId] = true;
+            this.syncFormData();
+            this.$router.push({ name: 'task-list' });
+          }
         } else {
           this.formData.progress[this.formId] = true;
           await this.$store.dispatch('application/save', this.formData);

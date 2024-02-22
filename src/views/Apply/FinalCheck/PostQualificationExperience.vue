@@ -141,7 +141,7 @@
             Working Basis
           </dt>
           <dd class="govuk-summary-list__value">
-            {{ item.taskDetails.workingBasis }}
+            {{ $filters.lookup(item.taskDetails.workingBasis) }}
           </dd>
         </div>
 
