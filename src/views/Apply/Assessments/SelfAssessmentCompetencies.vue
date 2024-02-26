@@ -222,7 +222,11 @@ export default {
       }
 
       try {
-        const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
+        const response = await functions.httpsCallable('extractDocumentContent')({
+          templatePath: this.templatePath,
+          documentPath: this.documentPath,
+          questions: this.vacancy.selfAssessmentWordLimits.map(section => section.question ? section.question.trim() : ''),
+        });
         await this.$store.dispatch('application/save', {
           uploadedSelfAssessmentContent: response.data.result,
           uploadedSelfAssessment: this.formData.uploadedSelfAssessment,

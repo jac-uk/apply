@@ -684,15 +684,18 @@
                   Self assessment content
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <div
-                    v-if="application.uploadedSelfAssessment"
-                  >
+                  <div v-if="selfAssessmentSections">
                     <div
-                      v-for="(answer, i) in application.uploadedSelfAssessmentContent"
+                      v-for="(section, i) in selfAssessmentSections"
                       :key="i"
+                      style="white-space: pre-line;"
                     >
-                      {{ answer }}
-                      <hr>
+                      <strong>
+                        {{ `${i + 1}. ${section.question}` }}
+                      </strong>
+                      <br>
+                      {{ application.uploadedSelfAssessmentContent[i] || '' }}
+                      <hr v-if="i !== selfAssessmentSections.length - 1">
                     </div>
                   </div>
                   <span v-else>Not yet received</span>
@@ -1205,6 +1208,9 @@ export default {
     },
     hasEmploymentGaps() {
       return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
+    },
+    selfAssessmentSections() {
+      return this.vacancy.selfAssessmentWordLimits || [];
     },
   },
   methods: {
