@@ -42,7 +42,7 @@ auth.onAuthStateChanged( async (user) => {
     vueInstance.config.globalProperties.emitter = emitter;
 
     // Initialise Sentry
-    if (import.meta.env.VITE_USER_NODE_ENV !== 'development') {
+    if (import.meta.env.NODE_ENV !== 'development') {
       Sentry.init({
         app: vueInstance,
         dsn: 'https://2366ef9baa1a49bb8aa29c5262757de9@sentry.io/1499367',
@@ -57,7 +57,7 @@ auth.onAuthStateChanged( async (user) => {
     }
 
     // Config GA
-    if (import.meta.env.VITE_USER_NODE_ENV === 'production') {
+    if (import.meta.env.NODE_ENV === 'production') {
       vueInstance.use(VueGtag, {
         config: { id: 'G-EQLM6VRFCB' },
       }, router);
