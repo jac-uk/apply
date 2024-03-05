@@ -22,7 +22,7 @@ auth.onAuthStateChanged( async (user) => {
     await store.dispatch('settings/bind');
     const urlParams = new URLSearchParams(window.location.search);
     const nextPage = urlParams.get('nextPage');
-    if (nextPage) router.push(nextPage);  
+    if (nextPage) router.push(nextPage);
     else router.push('/vacancies');
   }
 
@@ -54,9 +54,12 @@ auth.onAuthStateChanged( async (user) => {
           }),
         ],
       });
+    }
 
+    // Config GA
+    if (import.meta.env.NODE_ENV === 'production') {
       vueInstance.use(VueGtag, {
-        config: { id: 'UA-153516887-1' },
+        config: { id: 'G-EQLM6VRFCB' },
       }, router);
     }
 
