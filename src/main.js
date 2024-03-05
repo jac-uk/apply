@@ -54,7 +54,10 @@ auth.onAuthStateChanged( async (user) => {
           }),
         ],
       });
+    }
 
+    // Config GA
+    if (import.meta.env.NODE_ENV === 'production') {
       vueInstance.use(VueGtag, {
         config: { id: 'G-EQLM6VRFCB' },
       }, router);
