@@ -16,7 +16,7 @@ import settings from '@/store/settings';
 
 const store = createStore({
   // Don't use strict mode in production for performance reasons (https://vuex.vuejs.org/guide/strict.html)
-  strict: import.meta.env.NODE_ENV !== 'production',
+  strict: import.meta.env.VITE_USER_NODE_ENV !== 'production',
   modules: {
     auth,
     vacancies,
@@ -33,7 +33,7 @@ const store = createStore({
   },
   state: {
     packageVersion: import.meta.env.PACKAGE_VERSION || '0',
-    env: import.meta.env.NODE_ENV,
+    env: import.meta.env.VITE_USER_NODE_ENV,
   },
   mutations: {},
   actions: {},
