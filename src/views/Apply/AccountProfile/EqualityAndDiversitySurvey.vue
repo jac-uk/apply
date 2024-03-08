@@ -57,19 +57,6 @@
         </RadioGroup>
 
         <CheckboxGroup
-          v-if="apply2024Changes"
-          id="prefer-not-say"
-          v-model="equalityAndDiversitySurvey.preferNotToSay"
-          required
-          label="Prefer not to say"
-        >
-          <CheckboxItem
-            :value="true"
-            label="Prefer not to say"
-          />
-        </CheckboxGroup>
-
-        <CheckboxGroup
           id="professional-background"
           v-model="equalityAndDiversitySurvey.professionalBackground"
           required
@@ -557,6 +544,11 @@
               class="govuk-!-width-two-thirds"
             />
           </RadioItem>
+
+          <p class="govuk-heading-s govuk-!-margin-top-6">
+            Prefer not to say
+          </p>
+
           <RadioItem
             value="prefer-not-to-say"
             label="Prefer not to say"
@@ -915,34 +907,6 @@ export default {
     },
     'equalityAndDiversitySurvey.currentLegalRole'(newValue, oldValue) {
       this.equalityAndDiversitySurvey.currentLegalRole = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
-    },
-    'equalityAndDiversitySurvey.preferNotToSay'() {
-      if (this.equalityAndDiversitySurvey.preferNotToSay === true) {
-        const fields = [
-          'otherProfessionalBackgroundDetails',
-          'otherCurrentLegalRoleDetails',
-          'otherFeePaidJudicialRoleDetails',
-          'occupationOfChildhoodEarner',
-          'stateOrFeeSchool16',
-          'parentsAttendedUniversity',
-          'stateOrFeeSchool',
-          'oxbridgeUni',
-          'firstGenerationStudent',
-          'otherEthnicGroupDetails',
-          'gender',
-          'genderIdentityDetails',
-          'otherSexualOrientationDetails',
-          'disabilityDetails',
-          'otherReligionDetails',
-          'attendedOutreachEvents',
-          'participatedInJudicialWorkshadowingScheme',
-          'hasTakenPAJE',
-        ];
-
-        for (const field of fields) {
-          this.equalityAndDiversitySurvey[field] = 'prefer-not-to-say';
-        }
-      }
     },
   },
   methods: {
