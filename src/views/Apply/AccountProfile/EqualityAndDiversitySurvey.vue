@@ -898,7 +898,8 @@ export default {
   },
   computed: {
     apply2024Changes() {
-      return this.vacancy.applicationOpenDate > new Date('2024-04-01');
+      // TODO: change back to 2024-04-01 after testing
+      return this.vacancy.applicationOpenDate > new Date('2024-03-01');
     },
   },
   watch: {
