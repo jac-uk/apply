@@ -1,4 +1,5 @@
 {
+  "Arab": "Arabaidd",
   "Home": "Hafan",
   "Vacancy": "Swydd wag",
   "Eligibility Checker": "Gwiriwr Cymhwysedd",
@@ -289,6 +290,7 @@
   "English, Welsh, Scottish, Northern Ireland, British": "Cymreig, Seisnig, Albanaidd, Gogledd Iwerddon, Prydeinig",
   "Irish": "Gwyddelig",
   "Gypsy or Irish Traveller": "Sipsi neu Deithiwr Gwyddelig",
+  "Roma": "Roma",
   "Any other White background": "Unrhyw gefndir Gwyn arall",
   "Other White background": "Cefndir Gwyn arall",
   "Mixed or multiple ethnic backgrounds": "Cefndir cymysg neu aml-ethnig",

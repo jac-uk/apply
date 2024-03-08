@@ -57,6 +57,19 @@
         </RadioGroup>
 
         <CheckboxGroup
+          v-if="apply2024Changes"
+          id="prefer-not-say"
+          v-model="equalityAndDiversitySurvey.preferNotToSay"
+          required
+          label="Prefer not to say"
+        >
+          <CheckboxItem
+            :value="true"
+            label="Prefer not to say"
+          />
+        </CheckboxGroup>
+
+        <CheckboxGroup
           id="professional-background"
           v-model="equalityAndDiversitySurvey.professionalBackground"
           required
@@ -481,6 +494,11 @@
             label="Gypsy or Irish Traveller"
           />
           <RadioItem
+            v-if="apply2024Changes"
+            value="roma"
+            label="Roma"
+          />
+          <RadioItem
             value="other-white"
             label="Any other White background"
           >
@@ -523,7 +541,11 @@
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Other ethnic group
           </p>
-
+          <RadioItem
+            v-if="apply2024Changes"
+            value="arab"
+            label="Arab"
+          />
           <RadioItem
             value="other-ethnic-group"
             label="Other"
@@ -870,6 +892,7 @@ export default {
       attendedOutreachEvents: null,
       participatedInJudicialWorkshadowingScheme: null,
       hasTakenPAJE: null,
+      preferNotToSay: null,
     };
     const data = this.$store.getters['candidate/equalityAndDiversitySurvey']();
     const equalityAndDiversitySurvey = { ...defaults, ...data };
@@ -881,12 +904,45 @@ export default {
       },
     };
   },
+  computed: {
+    apply2024Changes() {
+      return this.vacancy.applicationOpenDate > new Date('2024-04-01');
+    },
+  },
   watch: {
     'equalityAndDiversitySurvey.professionalBackground'(newValue, oldValue) {
       this.equalityAndDiversitySurvey.professionalBackground = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
     },
     'equalityAndDiversitySurvey.currentLegalRole'(newValue, oldValue) {
       this.equalityAndDiversitySurvey.currentLegalRole = transformOnSelection(newValue, oldValue, 'prefer-not-to-say');
+    },
+    'equalityAndDiversitySurvey.preferNotToSay'() {
+      if (this.equalityAndDiversitySurvey.preferNotToSay === true) {
+        const fields = [
+          'otherProfessionalBackgroundDetails',
+          'otherCurrentLegalRoleDetails',
+          'otherFeePaidJudicialRoleDetails',
+          'occupationOfChildhoodEarner',
+          'stateOrFeeSchool16',
+          'parentsAttendedUniversity',
+          'stateOrFeeSchool',
+          'oxbridgeUni',
+          'firstGenerationStudent',
+          'otherEthnicGroupDetails',
+          'gender',
+          'genderIdentityDetails',
+          'otherSexualOrientationDetails',
+          'disabilityDetails',
+          'otherReligionDetails',
+          'attendedOutreachEvents',
+          'participatedInJudicialWorkshadowingScheme',
+          'hasTakenPAJE',
+        ];
+
+        for (const field of fields) {
+          this.equalityAndDiversitySurvey[field] = 'prefer-not-to-say';
+        }
+      }
     },
   },
   methods: {
