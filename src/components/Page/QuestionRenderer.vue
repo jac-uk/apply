@@ -147,7 +147,7 @@ export default {
         } else {
           answers = question.answers;
         }
-        const answer = answers.find((answer) => answer.id === id)
+        const answer = answers.find((answer) => answer.id === id);
         return answer ? answer.answer : '';
       }
     },
