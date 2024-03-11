@@ -206,8 +206,27 @@ export default {
   },
   methods: {
     async triggerExtraction() {
+      this.validate();
+
+      // prevent page from reloading if return value is false
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve();
+        }, 0);
+      });
+
+      if (this.isValid()) {
+        await this.$store.dispatch('application/save', this.formData);
+      } else {
+        return false;
+      }
+
       try {
-        const response = await functions.httpsCallable('extractDocumentContent')({ templatePath: this.templatePath, documentPath: this.documentPath });
+        const response = await functions.httpsCallable('extractDocumentContent')({
+          templatePath: this.templatePath,
+          documentPath: this.documentPath,
+          questions: this.vacancy.selfAssessmentWordLimits.map(section => section.question ? section.question.trim() : ''),
+        });
         await this.$store.dispatch('application/save', {
           uploadedSelfAssessmentContent: response.data.result,
           uploadedSelfAssessment: this.formData.uploadedSelfAssessment,

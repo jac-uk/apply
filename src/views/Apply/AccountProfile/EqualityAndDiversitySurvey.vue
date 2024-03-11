@@ -481,6 +481,11 @@
             label="Gypsy or Irish Traveller"
           />
           <RadioItem
+            v-if="apply2024Changes"
+            value="roma"
+            label="Roma"
+          />
+          <RadioItem
             value="other-white"
             label="Any other White background"
           >
@@ -523,7 +528,11 @@
           <p class="govuk-heading-s govuk-!-margin-top-6">
             Other ethnic group
           </p>
-
+          <RadioItem
+            v-if="apply2024Changes"
+            value="arab"
+            label="Arab"
+          />
           <RadioItem
             value="other-ethnic-group"
             label="Other"
@@ -535,6 +544,11 @@
               class="govuk-!-width-two-thirds"
             />
           </RadioItem>
+
+          <p class="govuk-heading-s govuk-!-margin-top-6">
+            Prefer not to say
+          </p>
+
           <RadioItem
             value="prefer-not-to-say"
             label="Prefer not to say"
@@ -870,6 +884,7 @@ export default {
       attendedOutreachEvents: null,
       participatedInJudicialWorkshadowingScheme: null,
       hasTakenPAJE: null,
+      preferNotToSay: null,
     };
     const data = this.$store.getters['candidate/equalityAndDiversitySurvey']();
     const equalityAndDiversitySurvey = { ...defaults, ...data };
@@ -880,6 +895,11 @@ export default {
         progress: {},
       },
     };
+  },
+  computed: {
+    apply2024Changes() {
+      return this.vacancy.applicationOpenDate > new Date('2024-04-01');
+    },
   },
   watch: {
     'equalityAndDiversitySurvey.professionalBackground'(newValue, oldValue) {

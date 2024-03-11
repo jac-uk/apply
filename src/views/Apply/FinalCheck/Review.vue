@@ -81,7 +81,7 @@
                 Change
               </RouterLink>
             </div>
-            <dl v-if="isVersion2 && application.characterInformationV2">
+            <dl v-if="isApplicationVersionGreaterThan1 && application.characterInformationV2">
               <CriminalOffencesSummary
                 :character-information="application.characterInformationV2"
                 :can-edit="isDraftApplication"
@@ -641,15 +641,18 @@
                   Self assessment content
                 </dt>
                 <dd class="govuk-summary-list__value">
-                  <div
-                    v-if="application.uploadedSelfAssessment"
-                  >
+                  <div v-if="selfAssessmentSections">
                     <div
-                      v-for="(answer, i) in application.uploadedSelfAssessmentContent"
+                      v-for="(section, i) in selfAssessmentSections"
                       :key="i"
+                      style="white-space: pre-line;"
                     >
-                      {{ answer }}
-                      <hr>
+                      <strong>
+                        {{ `${i + 1}. ${section.question}` }}
+                      </strong>
+                      <br>
+                      {{ application.uploadedSelfAssessmentContent[i] || '' }}
+                      <hr v-if="i !== selfAssessmentSections.length - 1">
                     </div>
                   </div>
                   <span v-else>Not yet received</span>
@@ -870,7 +873,7 @@
           </div>
 
           <div
-            v-if="hasStatementOfEligibility"
+            v-if="hasStatementOfEligibility || hasStatementOfSuitability || hasSelfAssessment"
             class="govuk-!-margin-top-9"
           >
             <h2 class="govuk-heading-l">
@@ -1142,9 +1145,6 @@ export default {
     };
   },
   computed: {
-    isVersion2 () {
-      return this.vacancy._applicationVersion && this.vacancy._applicationVersion === 2;
-    },
     isLeadership () {
       return this.vacancy.typeOfExercise === 'leadership';
     },
@@ -1158,7 +1158,7 @@ export default {
       return this.$route.name === 'character-information-review';
     },
     destinationUrl() {
-      return this.isVersion2 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
+      return this.isApplicationVersionGreaterThan1 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
     },
     canEdit () {
       if (this.isDraftApplication && this.isVacancyOpen) {
@@ -1170,6 +1170,9 @@ export default {
     },
     hasEmploymentGaps() {
       return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
+    },
+    selfAssessmentSections() {
+      return this.vacancy.selfAssessmentWordLimits || [];
     },
   },
   methods: {

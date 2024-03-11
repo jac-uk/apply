@@ -1,4 +1,5 @@
 {
+  "Arab": "Arabaidd",
   "Home": "Hafan",
   "Vacancy": "Swydd wag",
   "Eligibility Checker": "Gwiriwr Cymhwysedd",
@@ -289,6 +290,7 @@
   "English, Welsh, Scottish, Northern Ireland, British": "Cymreig, Seisnig, Albanaidd, Gogledd Iwerddon, Prydeinig",
   "Irish": "Gwyddelig",
   "Gypsy or Irish Traveller": "Sipsi neu Deithiwr Gwyddelig",
+  "Roma": "Roma",
   "Any other White background": "Unrhyw gefndir Gwyn arall",
   "Other White background": "Cefndir Gwyn arall",
   "Mixed or multiple ethnic backgrounds": "Cefndir cymysg neu aml-ethnig",
@@ -744,5 +746,11 @@
   "You have indicated that you have": "Rydych wedi nodi bod gennych gyfanswm o",
   "sitting days in total.": "diwrnod eistedd.",
   "As you have indicated you have less than": "Gan eich bod wedi nodi bod gennych lai na",
-  "sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.": "o ddiwrnodau eistedd ar draws pob penodiad barnwrol a/neu led-farnwrol, rhowch fanylion am sut rydych wedi ennill y sgiliau angenrheidiol ar gyfer y rôl hon mewn rhyw ffordd arwyddocaol arall."
+  "sitting days across all judicial and/or quasi-judicial appointments, please provide details of how you have acquired the necessary skills for this role in some other significant way.": "o ddiwrnodau eistedd ar draws pob penodiad barnwrol a/neu led-farnwrol, rhowch fanylion am sut rydych wedi ennill y sgiliau angenrheidiol ar gyfer y rôl hon mewn rhyw ffordd arwyddocaol arall.",
+  "Please enter at least one qualification.": "Nodwch o leiaf un cymhwyster.",
+  "If you were engaged in law related activities during this time, please select all the relevant tasks. These are defined in the": "Os oeddech chi’n ymwneud â gweithgareddau sy’n ymwneud â’r gyfraith yn ystod y cyfnod hwn, dewiswch yr holl dasgau perthnasol. Mae’r rhain wedi’u diffinio yn",
+  "This post requires the successful candidate to be able to speak, read and write Welsh. Are you able to do this to a standard which will enable you to conduct the business of the Tribunal in Welsh?" : "Mae’r swydd hon yn gofyn i’r ymgeisydd llwyddiannus allu siarad, darllen ac ysgrifennu Cymraeg. Ydych chi’n gallu gwneud hyn i safon a fydd yn eich galluogi i gynnal busnes y Tribiwnlys yn Gymraeg?",
+  "If yes, there is no need to provide further information in the text box. Please simply add ‘Yes’.": "Os ydych chi, nid oes angen darparu rhagor o wybodaeth yn y blwch testun. Nodwch ‘Ydw’.",
+  "Acceptable file types: docx, doc, odt, txt, fodt": "Mathau derbyniol o ffeiliau: docx, doc, odt, txt, fodt",
+  "Statutory Eligibility - Welsh language requirements": "Cymhwysedd Statudol - Gofynion o ran y Gymraeg"
 }
