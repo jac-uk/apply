@@ -8,7 +8,7 @@
       :id="`${id}-answer-${index}`"
       v-model="selected"
       :name="`${id}-answer-${index}`"
-      :value="answer.answer"
+      :value="answer.id"
       type="checkbox"
       class="govuk-checkboxes__input"
       @change="changeSelection"
@@ -21,11 +21,11 @@
       {{ $filters.lookup(answer.answer) }}
     </label>
     <select
-      v-if="selected.indexOf(answer.answer) >= 0"
+      v-if="selected.indexOf(answer.id) >= 0"
       :id="`${id}-rank-${index}`"
-      v-model="localVModel[answer.answer]"
+      v-model="localVModel[answer.id]"
       class="govuk-select"
-      @change="changeRanking(answer.answer, $event)"
+      @change="changeRanking(answer.id, $event)"
     >
       <option
         v-for="score in numSelected"

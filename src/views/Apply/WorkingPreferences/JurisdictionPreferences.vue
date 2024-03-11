@@ -19,13 +19,13 @@
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`jurisdiction-preferences_${itemIndex}`"
             :key="itemIndex"
-            v-model="formData[formId][item.question]"
+            v-model="formData[formId][item.id]"
             :title="item.question"
             :answers="getAnswers(item)"
             :config="item"
             :type="item.questionType"
             :label="item.question"
-            required
+            :required="item.questionRequired"
             @update:model-value="tidyFormData(item)"
           />
         </div>
@@ -94,7 +94,7 @@ export default {
   methods: {
     getAnswers(config) {
       if (config.answerSource === 'jurisdictions') {
-        return this.vacancy.jurisdiction.map(item => ({ answer: item }));
+        return this.vacancy.jurisdiction.map(item => ({ answer: item, id: item }));
       } else {
         return config.answers;
       }

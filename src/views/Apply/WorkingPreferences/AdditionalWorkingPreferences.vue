@@ -23,12 +23,12 @@
           </div>
           <SelectionInput
             :id="getSelectionInputId(item, itemIndex)"
-            v-model="formData[formId][item.question]"
+            v-model="formData[formId][item.id]"
             :title="item.question"
             :answers="item.answers"
             :config="item"
             :type="item.questionType"
-            required
+            :required="item.questionRequired"
             @update:model-value="tidyFormData(item)"
           />
         </div>

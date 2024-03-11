@@ -25,14 +25,14 @@
     >
       <!-- Render multiple-choice answers -->
       <p
-        v-for="answer in application[section][currentItem.question]"
+        v-for="answer in application[section][currentItem.id]"
         :key="answer"
         class="govuk-body"
       >
         <strong v-if="currentItem.groupAnswers">
           {{ findGroupByAnswer(currentItem.answers, answer) + ' - ' }}
         </strong>
-        {{ answer }}
+        {{ getAnswerText(answer) }}
       </p>
     </dd>
     <template v-else-if="currentItem.questionType === 'ranked-choice'">
@@ -42,7 +42,7 @@
       >
         <!-- Render ranked-choice answers without equal ranking -->
         <p
-          v-for="(answerIndex, answer) in sortRankedSelection(application[section][currentItem.question])"
+          v-for="(answerIndex, answer) in sortRankedSelection(application[section][currentItem.id])"
           :key="answer"
           class="govuk-body"
         >
@@ -54,7 +54,7 @@
           >
             {{ findGroupByAnswer(currentItem.answers, answer) + ' - ' }}
           </span>
-          {{ answer }}
+          {{ getAnswerText(answer) }}
         </p>
       </dd>
       <dd
@@ -74,7 +74,7 @@
             v-for="(answer, sortedAnswerIndex) in sortedAnswers.answers"
             :key="answer"
           >
-            {{ `${answer}${(sortedAnswerIndex + 1 < sortedAnswers.answers.length) ? ', ' : ''}` }}
+            {{ `${getAnswerText(answer)}${(sortedAnswerIndex + 1 < sortedAnswers.answers.length) ? ', ' : ''}` }}
           </span>
         </p>
       </dd>
@@ -84,14 +84,14 @@
       class="govuk-summary-list__value"
     >
       <!-- Render single-choice answer -->
-      {{ application[section][currentItem.question] }}
+      {{ getAnswerText(application[section][currentItem.id]) }}
     </dd>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'LocationPreferences',
+  name: 'QuestionRenderer',
   props: {
     section: {
       type: String,
@@ -136,6 +136,21 @@ export default {
     },
   },
   methods: {
+    getAnswerText(id) {
+      if (this.vacancy[this.section][this.index].answerSource === 'jurisdictions') {
+        return this.$filters.lookup(id);
+      } else {
+        const question = this.vacancy[this.section][this.index];
+        let answers = [];
+        if (question.groupAnswers) {
+          question.answers.forEach(answerGroup => answers.push(...answerGroup.answers));
+        } else {
+          answers = question.answers;
+        }
+        const answer = answers.find((answer) => answer.id === id)
+        return answer ? answer.answer : '';
+      }
+    },
     sortRankedSelection(dataset) {
       return Object.fromEntries(Object.entries(dataset).sort((a, b) => a[1] - b[1]));
     },
@@ -151,8 +166,7 @@ export default {
     },
     findGroupByAnswer(dataset, targetAnswer) {
       for (const question of dataset) {
-
-        if (question.answers.some(answerObj => answerObj.answer === targetAnswer)) {
+        if (question.answers.some(answerObj => answerObj.id === targetAnswer)) {
           return question.group;
         }
       }

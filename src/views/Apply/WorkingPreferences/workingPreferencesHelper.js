@@ -42,7 +42,7 @@ function filteredPreferences(preferences, data) {
 function tidyData(preferences, data, preference) {
   // check whether we can remove preference that was just updated
   if (preference) {
-    const ident = preference.question;
+    const ident = preference.id;
     const type = preference.questionType;
     switch (type) {
     case 'single-choice':
@@ -64,7 +64,7 @@ function tidyData(preferences, data, preference) {
   }
   // remove unused answers
   Object.keys(data).filter(key => key !== 'progress').forEach(key => {
-    if (!preferences.find(item => item.question === key)) {
+    if (!preferences.find(item => item.id === key)) {
       delete data[key];
     }
   });  
