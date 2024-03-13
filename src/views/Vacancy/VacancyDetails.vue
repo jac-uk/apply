@@ -98,7 +98,10 @@
           </span>
         </p>
         <p v-if="vacancy.location && showLocation">
-          <span class="govuk-body govuk-!-font-weight-bold">Location:</span> <span class="govuk-body"> {{ vacancy.location }}</span>
+          <span class="govuk-body govuk-!-font-weight-bold">Location:</span>
+          <span class="govuk-body">
+            {{ language === LANGUAGES.WELSH ? vacancy.locationWelsh : vacancy.location }}
+          </span>
         </p>
         <p v-if="showAppointmentType">
           <span class="govuk-body govuk-!-font-weight-bold">
@@ -138,7 +141,7 @@
           >{{ vacancy.exerciseMailbox }}</a>
         </p>
 
-        <div 
+        <div
           v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
           class="govuk-warning-text"
         >
