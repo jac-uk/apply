@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.90.0",
+  "version": "1.91.0",
   "private": true,
   "scripts": {
     "dev": "vite --mode develop",
