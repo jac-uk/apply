@@ -1,4 +1,4 @@
-import { functions } from '@/firebase';
+import { httpsCallable } from '@firebase/functions';
 
 const module = {
   namespaced: true,
@@ -26,7 +26,7 @@ const module = {
     // eslint-disable-next-line no-empty-pattern
     async verifyRecaptcha({}, { token, score }) {
       try {
-        const res = await functions.httpsCallable('verifyRecaptcha')({ token });
+        const res = await httpsCallable('verifyRecaptcha')({ token });
         if (res.data && res.data.success) {
           return res.data.score && res.data.score > score;
         } else {

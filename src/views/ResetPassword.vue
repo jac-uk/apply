@@ -60,7 +60,8 @@
 <script>
 import TextField from '@/components/Form/TextField.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
-import { auth, functions } from '@/firebase';
+import { httpsCallable } from '@firebase/functions';
+import { auth } from '@/firebase';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
@@ -98,7 +99,7 @@ export default {
     },
     async checkEnabledUserByEmail(email) {
       try {
-        const res = await functions.httpsCallable('checkEnabledUserByEmail')({ email });
+        const res = await httpsCallable('checkEnabledUserByEmail')({ email });
         return res.data;
       } catch (error) {
         return false;

@@ -116,7 +116,7 @@
 </template>
 
 <script>
-import firebase from '@firebase/app';
+import { serverTimestamp } from '@firebase/firestore';
 import { auth } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
@@ -195,7 +195,7 @@ export default {
       };
       await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
       await this.$store.dispatch('candidate/create', {
-        created: firebase.firestore.FieldValue.serverTimestamp(),
+        created: serverTimestamp(),
       });
       await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
     },

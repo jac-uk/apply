@@ -1,6 +1,6 @@
-import { firestore } from '@/firebase';
+import { doc } from '@firebase/firestore';
 
-const docRef = firestore.doc('settings/candidateSettings');
+const docRef = doc('settings/candidateSettings');
 
 export default {
   namespaced: true,

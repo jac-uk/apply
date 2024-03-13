@@ -1,29 +1,30 @@
-import firebase from '@firebase/app';
+import { collection, doc, setDoc, serverTimestamp } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
 
-const collection = firestore.collection('candidates');
+const collectionName = 'candidates';
+const collectionRef = collection(firestore, collectionName);
 
 export default {
   namespaced: true,
   actions: {
     bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
-      const doc = await collection.doc(rootState.auth.currentUser.uid).get();
+      const doc = await doc(collectionRef,rootState.auth.currentUser.uid).get();
       // if candidate document has not been created correctly
       if (!doc.exists) {
         dispatch('create', {
-          created: firebase.firestore.FieldValue.serverTimestamp(),
+          created: serverTimestamp(),
         });
         dispatch('savePersonalDetails', {
           email: rootState.auth.currentUser.email,
         });
       }
 
-      await bindFirestoreRef('personalDetails', collection.doc(`${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize });
-      await bindFirestoreRef('characterInformation', collection.doc(`${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize });
-      await bindFirestoreRef('equalityAndDiversitySurvey', collection.doc(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('personalDetails', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize }));
+      await bindFirestoreRef('characterInformation', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize }));
+      await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize }));
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {
@@ -33,22 +34,22 @@ export default {
       return;
     }),
     create: async ({ rootState, dispatch }, data) => {
-      const ref = collection.doc(rootState.auth.currentUser.uid);
-      await ref.set(data);
+      const ref = doc(collectionRef,rootState.auth.currentUser.uid);
+      await setDoc(ref, data);
       return dispatch('bind', ref.id);
     },
     savePersonalDetails: async ({ rootState }, data) => {
-      const ref = collection.doc(`${rootState.auth.currentUser.uid}/documents/personalDetails`);
-      await ref.set(data);
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/personalDetails`);
+      await setDoc(ref, data);
     },
     saveCharacterInformation: async ({ rootState }, data) => {
-      const ref = collection.doc(`${rootState.auth.currentUser.uid}/documents/characterInformation`);
-      await ref.set(data);
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/characterInformation`);
+      await setDoc(ref, data);
     },
     saveEqualityAndDiversitySurvey: async ({ rootState }, data) => {
-      const ref = collection.doc(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`);
-      await ref.set(data);
-    },      
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`);
+      await setDoc(ref, data);
+    },
   },
   mutations: {
     set(state, { name, value }) {

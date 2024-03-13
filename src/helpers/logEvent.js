@@ -1,7 +1,7 @@
-import { functions } from '@/firebase';
+import { httpsCallable } from '@firebase/functions';
 
 const logEvent = async (type, description, details) => {
-  return await functions.httpsCallable('logEvent')({
+  return await httpsCallable('logEvent')({
     type: type,
     description: description,
     details: details,
