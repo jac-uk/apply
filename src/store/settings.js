@@ -1,12 +1,13 @@
-import { doc } from '@firebase/firestore';
+import { doc, getDoc } from '@firebase/firestore';
+import { firestore } from '@/firebase';
 
-const docRef = doc('settings/candidateSettings');
+const docRef = doc(firestore, 'settings/candidateSettings');
 
 export default {
   namespaced: true,
   actions: {
     bind: async (context) => {
-      const doc = await docRef.get();
+      const doc = await getDoc(docRef);
       context.commit('set', doc.data());
     },
   },

@@ -141,6 +141,7 @@ import FileUpload from '@/components/Form/FileUpload.vue';
 import { logEvent } from '@/helpers/logEvent';
 import CustomHTML from '@/components/CustomHTML.vue';
 import { httpsCallable } from '@firebase/functions';
+import { functions } from '@/firebase';
 import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 import { ASSESSMENT_METHOD } from '@/helpers/constants';
 
@@ -222,7 +223,7 @@ export default {
       }
 
       try {
-        const response = await httpsCallable('extractDocumentContent')({
+        const response = await httpsCallable(functions, 'extractDocumentContent')({
           templatePath: this.templatePath,
           documentPath: this.documentPath,
           questions: this.vacancy.selfAssessmentWordLimits.map(section => section.question ? section.question.trim() : ''),

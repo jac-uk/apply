@@ -156,6 +156,7 @@
 
 <script>
 import { httpsCallable } from '@firebase/functions';
+import { functions } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
@@ -216,7 +217,7 @@ export default {
     async updateEmail(currentEmailAddress, newEmailAddress) {
       let isSuccess = false;
       try {
-        const res = await httpsCallable('updateEmailAddress')({
+        const res = await httpsCallable(functions, 'updateEmailAddress')({
           currentEmailAddress,
           newEmailAddress,
         });

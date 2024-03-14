@@ -4,7 +4,7 @@ import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { isDate, isDateInFuture, parseEstimatedDate } from '@/helpers/date';
 
-const collectionName = 'applicationRecords';
+const collectionName = 'vacancies';
 const collectionRef = collection(firestore, collectionName);
 
 export default {
