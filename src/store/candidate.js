@@ -1,4 +1,4 @@
-import { collection, doc, setDoc, serverTimestamp } from '@firebase/firestore';
+import { collection, doc, setDoc, getDoc, serverTimestamp } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -11,9 +11,10 @@ export default {
   namespaced: true,
   actions: {
     bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
-      const doc = await doc(collectionRef,rootState.auth.currentUser.uid).get();
+      const docRef = doc(collectionRef,rootState.auth.currentUser.uid);
+      const docSnap = await getDoc(docRef);
       // if candidate document has not been created correctly
-      if (!doc.exists) {
+      if (!docSnap.exists()) {
         dispatch('create', {
           created: serverTimestamp(),
         });
@@ -22,9 +23,9 @@ export default {
         });
       }
 
-      await bindFirestoreRef('personalDetails', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize }));
-      await bindFirestoreRef('characterInformation', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize }));
-      await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef,(`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize }));
+      await bindFirestoreRef('personalDetails', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('characterInformation', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {
@@ -73,4 +74,3 @@ export default {
     },
   },
 };
-

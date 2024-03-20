@@ -1,4 +1,4 @@
-import { collection, doc, addDoc, serverTimestamp, where, limit, query } from '@firebase/firestore';
+import { collection, doc, addDoc, getDocs, serverTimestamp, where, limit, query } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
@@ -16,14 +16,15 @@ export default {
       if (id) {
         return dispatch('bindRef', doc(collectionRef, id));
       } else {
-        const snapshotRef = await query(
+        const snapshotRef = query(
           collectionRef,
           where('userId', '==', rootState.auth.currentUser.uid),
           where('exerciseId', '==', rootState.vacancy.record.id),
-          limit(1).get()
+          limit(1)
         );
-        if (!snapshotRef.empty) {
-          return dispatch('bindRef', doc(collectionRef, snapshotRef.docs[0].id)); // @todo refine this!
+      const docSnap = await getDocs(snapshotRef);
+        if (!docSnap.empty) {
+          return dispatch('bindRef', doc(collectionRef, docSnap.docs[0].id)); // @todo refine this!
         } else {
           return dispatch('unbind');
         }

@@ -4,7 +4,7 @@ import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import _has from 'lodash/has';
 
-const collectionName = 'applications';
+const collectionName = 'vacancies';
 const collectionRef = collection(firestore, collectionName);
 
 export default {
