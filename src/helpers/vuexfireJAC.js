@@ -10,10 +10,10 @@ const firestoreAction = (action) => {
 
     const unbindFirestoreRef = (name) => {
       const unsubscribe = state[getUnsubscribeName(name)];
-      // clear state
-      commit('set', { name, value: Array.isArray(state[name]) ? [] : null });
       if (unsubscribe) {
         unsubscribe();
+        // clear state
+        commit('set', { name, value: Array.isArray(state[name]) ? [] : null });
         commit('set', { name: getUnsubscribeName(name), value: null });
       }
     };
