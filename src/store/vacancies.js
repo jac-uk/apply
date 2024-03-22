@@ -1,18 +1,30 @@
-import firebase, { firestore } from '@/firebase';
+import { collection, query, where, orderBy } from '@firebase/firestore';
+import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { isDate, isDateInFuture, parseEstimatedDate } from '@/helpers/date';
+
+const collectionName = 'vacancies';
+const collectionRef = collection(firestore, collectionName);
 
 export default {
   namespaced: true,
   actions: {
     bind: firestoreAction(({ bindFirestoreRef }, params ) => {
-      let firestoreRef = firestore.collection('vacancies');
+      let firestoreRef = query(
+        collectionRef
+      );
       if (params && params.vacancyIds.length) {
-        firestoreRef = firestoreRef.where(firebase.firestore.FieldPath.documentId(), 'in', params.vacancyIds);
+        firestoreRef = query(
+          firestoreRef,
+          where(firestore.FieldPath.documentId(), 'in', params.vacancyIds)
+        );
         return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       } else {
-        firestoreRef = firestoreRef.orderBy('referenceNumber', 'desc');
+        firestoreRef = query(
+          firestoreRef,
+          orderBy('referenceNumber', 'desc')
+        );
         return bindFirestoreRef('allRecords', firestoreRef, { serialize: vuexfireSerialize });
       }
     }),

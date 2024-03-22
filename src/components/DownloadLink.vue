@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { storage } from '@/firebase';
+import { getStorage, ref, getDownloadURL } from 'firebase/storage';
 
 export default {
   name: 'DownloadLink',
@@ -89,19 +89,20 @@ export default {
     },
   },
   async mounted() {
-    const downloadUrl = await this.getDownloadURL();
+    const downloadUrl = await this.getFileDownloadURL();
 
     if (downloadUrl) {
       this.linkHref = downloadUrl;
     }
   },
   methods: {
-    async getDownloadURL() {
+    async getFileDownloadURL() {
+      const storage = getStorage();
       const urlString = this.filePath ? this.filePath : this.savePath + this.fileName;
-      const fileRef = storage.ref(urlString);
+      const fileRef = ref(storage, urlString);
 
       try {
-        const downloadUrl = await fileRef.getDownloadURL();
+        const downloadUrl = await getDownloadURL(fileRef);
 
         if (typeof downloadUrl === 'string' && downloadUrl.length) {
           return downloadUrl;
