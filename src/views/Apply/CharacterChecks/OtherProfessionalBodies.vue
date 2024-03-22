@@ -386,14 +386,14 @@ export default {
           this.formData.royalCollegeOfPsychiatristsInformation = null;
         }
 
-        if (!this.formData.professionalMemberships.includes('royal-institution-of-chartered-surveyors')) {
+        if (!this.formData.professionalMemberships.includes('royal-institute-of-british-architects')) {
           this.formData.royalInstituteBritishArchitectsDate = null;
           this.formData.royalInstituteBritishArchitectsStatus = null;
           this.formData.royalInstituteBritishArchitectsNumber = null;
           this.formData.royalInstituteBritishArchitectsInformation = null;
         }
 
-        if (!this.formData.professionalMemberships.includes('royal-institute-of-british-architects')) {
+        if (!this.formData.professionalMemberships.includes('royal-institution-of-chartered-surveyors')) {
           this.formData.royalInstitutionCharteredSurveyorsDate = null;
           this.formData.royalInstitutionCharteredSurveyorsStatus = null;
           this.formData.royalInstitutionCharteredSurveyorsNumber = null;
