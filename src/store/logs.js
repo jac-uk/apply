@@ -1,4 +1,4 @@
-import { collection, doc, serverTimestamp } from '@firebase/firestore';
+import { collection, doc, setDoc, serverTimestamp } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 
 const collectionName = 'logs';
@@ -10,7 +10,8 @@ export default {
     save: async (context, obj) => {
       const ref = doc(collectionRef, obj.type);
       // ref = ref.collection(obj.id).doc();
-      ref.set(
+      setDoc(
+          ref,
           {
             data: obj.data,
             type: obj.type,

@@ -117,7 +117,7 @@
 
 <script>
 import { serverTimestamp } from '@firebase/firestore';
-import { auth } from '@/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import WarningSummary from '@/components/Form/WarningSummary.vue';
@@ -172,7 +172,7 @@ export default {
       }
     },
     async signUp() {
-      await auth.createUserWithEmailAndPassword(this.formData.email, this.formData.password).then((result)=>{
+      await createUserWithEmailAndPassword(this.formData.email, this.formData.password).then((result)=>{
         this.createCandidate(result);
       })
         .catch((error) => {

@@ -61,7 +61,8 @@
 import TextField from '@/components/Form/TextField.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import { httpsCallable } from '@firebase/functions';
-import { auth, functions } from '@/firebase';
+import { functions } from '@/firebase';
+import { sendPasswordResetEmail } from 'firebase/auth';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 
 export default {
@@ -112,7 +113,7 @@ export default {
           returnUrl += `?nextPage=${this.nextPage}`;
         }
         this.errors = [];
-        auth.sendPasswordResetEmail(this.formData.email, {
+        sendPasswordResetEmail(this.formData.email, {
           url: returnUrl,
         })
           .then(() => {
