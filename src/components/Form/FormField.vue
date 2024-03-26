@@ -119,8 +119,27 @@ export default {
         if (event && event.target) {
           value = event.target.value;
         }
-
-        if (this.required && !this.isOngoing && ((value === null || value === undefined || value.length === 0) || (typeof value === 'string' && value.replace(/\s/g, '').length === 0))) {
+        const isNullOrUndefined = (value === null) || (value === undefined);
+        const isEmptyArray = (!isNullOrUndefined && Array.isArray(value) && value.length === 0);
+        const isEmptyString = (!isNullOrUndefined && typeof value === 'string' && value.replace(/\s/g, '').length === 0);
+        let isEmptyObject = false;
+        if (!isNullOrUndefined) {
+          if (value instanceof Date) {
+            if (isNaN(value)) {
+              isEmptyObject = true;
+            }
+          }
+          else if (typeof value === 'object' && Object.keys(value).length === 0) {
+            isEmptyObject = true;
+          }
+        }
+        const isEmpty = isNullOrUndefined || isEmptyString || isEmptyArray || isEmptyObject;
+        if (!this.required && isEmpty) return;
+        if (
+          this.required &&
+          !this.isOngoing &&
+          isEmpty
+        ) {
           if (this.messages && this.messages.required) {
             this.setError(this.messages.required);
           } else {
@@ -199,7 +218,6 @@ export default {
             this.setError('');
           }
         }
-
       }
     },
   },

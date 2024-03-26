@@ -1,5 +1,19 @@
 <template>
-  <div>
+  <template v-if="vacancy.additionalWorkingPreferences">
+    <dl
+      v-for="(item, index) in vacancy.additionalWorkingPreferences"
+      :key="item"
+      class="govuk-summary-list"
+    >
+      <QuestionRenderer
+        section="additionalWorkingPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :index="index"
+      />
+    </dl>
+  </template>
+  <template v-else>
     <dl
       v-for="(item, index) in application.additionalWorkingPreferences"
       :key="index"
@@ -66,14 +80,18 @@
         </dd>
       </div>
     </dl>
-  </div>
+  </template>
 </template>
 
 <script>
 import { getDataWelshId, getDataWelsh } from '@/helpers/language';
+import QuestionRenderer from '@/components/Page/QuestionRenderer.vue';
 
 export default {
   name: 'AdditionalWorkingPreferences',
+  components: {
+    QuestionRenderer,
+  },
   props: {
     application: {
       type: Object,
@@ -94,7 +112,7 @@ export default {
 
 <style lang="scss" scoped>
   .govuk-summary-list__value,
-  .govuk-summary-list__value:last-child,
+
   .govuk-summary-list__key {
     @include govuk-media-query($from: tablet) {
       width: auto;

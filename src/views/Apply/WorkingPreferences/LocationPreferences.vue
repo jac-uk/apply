@@ -12,11 +12,26 @@
 
         <ErrorSummary
           :errors="errors"
-          :show-save-button="true"
-          @save="save"
         />
 
+        <div v-if="filteredPreferences.length">
+          <SelectionInput
+            v-for="(item, itemIndex) in filteredPreferences"
+            :id="`location-preferences_${itemIndex}`"
+            :key="itemIndex"
+            v-model="formData[formId][item.id]"
+            :title="item.question"
+            :answers="item.answers"
+            :config="item"
+            :type="item.questionType"
+            :label="item.question"
+            :required="item.questionRequired"
+            @update:model-value="tidyFormData(item)"
+          />
+        </div>
+
         <SelectionInput
+          v-else
           id="location-preferences"
           v-model="formData.locationPreferences"
           :title="vacancy.locationQuestion"
@@ -25,7 +40,7 @@
         />
 
         <button
-          :disabled="!canSave(formId) || !!!formData.locationPreferences"
+          :disabled="!canSave(formId)"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -41,6 +56,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import { filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'LocationPreferences',
@@ -52,16 +68,26 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
+    const formId = 'locationPreferences';
     const defaults = {
-      locationPreferences: null,
+      [formId]: this.$store.state.vacancy.record[formId] ? {} : null,
       progress: {},
     };
-    const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
+    const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
     return {
-      formId: 'locationPreferences',
+      formId: formId,
       formData: formData,
     };
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy[this.formId], this.formData[this.formId]);
+    },
+  },
+  methods: {
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.formId], preference);
+    },
   },
 };
 </script>

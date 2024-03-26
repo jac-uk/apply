@@ -69,6 +69,6 @@ export default {
         await this.savePart(true);
       }
     },
-  },  
+  },
 };
 </script>
