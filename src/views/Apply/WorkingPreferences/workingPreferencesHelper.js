@@ -5,28 +5,38 @@ export {
   tidyData
 };
 
-function filteredPreferences(preferences, data) {
-  if (!preferences) return [];
+function filteredPreferences(vacancy, formData, formId) {
+  if (!vacancy) return [];
+  const preferences = vacancy[formId];  // all relevant preferences
+  const data = formData[formId]; // all relevant form data (for relevant preferences)
+  const allPreferences = [];
+  if (vacancy.locationPreferences) allPreferences.push(...vacancy.locationPreferences);
+  if (vacancy.jurisdictionPreferences) allPreferences.push(...vacancy.jurisdictionPreferences);
+  if (vacancy.additionalWorkingPreferences) allPreferences.push(...vacancy.additionalWorkingPreferences);
+  const allData = {};
+  if (formData.locationPreferences) Object.assign(allData, formData.locationPreferences);
+  if (formData.jurisdictionPreferences) Object.assign(allData, formData.jurisdictionPreferences);
+  if (formData.additionalWorkingPreferences) Object.assign(allData, formData.additionalWorkingPreferences);
   const mainQuestions = [];
   const linkedQuestions = [];
   preferences.forEach(item => {
     if (item.linkedQuestion && item.linkedAnswer) {
-      if (!data[item.linkedQuestion]) return;
-      const linkedQuestion = preferences.find(question => question.question === item.linkedQuestion);
+      if (!allData[item.linkedQuestion]) return;
+      const linkedQuestion = allPreferences.find(question => question.id === item.linkedQuestion);
       if (linkedQuestion) {
         switch (linkedQuestion.questionType) {
         case 'single-choice':
-          if (data[item.linkedQuestion] === item.linkedAnswer) {
+          if (allData[item.linkedQuestion] === item.linkedAnswer) {
             linkedQuestions.push(item);
           }
           break;
         case 'multiple-choice':
-          if (data[item.linkedQuestion].indexOf(item.linkedAnswer) >= 0) {
+          if (allData[item.linkedQuestion].indexOf(item.linkedAnswer) >= 0) {
             linkedQuestions.push(item);
           }
           break;
         case 'ranked-choice':
-          if (Object.keys(data[item.linkedQuestion]).includes(item.linkedAnswer)) {
+          if (Object.keys(allData[item.linkedQuestion]).includes(item.linkedAnswer)) {
             linkedQuestions.push(item);
           }
           break;

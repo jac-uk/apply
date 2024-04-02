@@ -81,7 +81,7 @@ export default {
   },
   computed: {
     filteredPreferences() {
-      return filteredPreferences(this.vacancy[this.formId], this.formData[this.formId]);
+      return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
   },
   methods: {
