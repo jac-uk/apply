@@ -8,7 +8,6 @@ export {
 function filteredPreferences(vacancy, formData, formId) {
   if (!vacancy) return [];
   const preferences = vacancy[formId];  // all relevant preferences
-  const data = formData[formId]; // all relevant form data (for relevant preferences)
   const allPreferences = [];
   if (vacancy.locationPreferences) allPreferences.push(...vacancy.locationPreferences);
   if (vacancy.jurisdictionPreferences) allPreferences.push(...vacancy.jurisdictionPreferences);
