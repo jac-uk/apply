@@ -12,12 +12,19 @@ const firestoreAction = (action) => {
     const handleError = ({ error, name, ref, context, payload }) => {
       // only print details if in develop environment
       if (context?.rootGetters?.isDevelop) {
+        // eslint-disable-next-line no-console
         console.log('error code', error.code);
+        // eslint-disable-next-line no-console
         console.log('error message', error.message);
+        // eslint-disable-next-line no-console
         console.log('error stack', error.stack);
+        // eslint-disable-next-line no-console
         console.log('state name:', name);
+        // eslint-disable-next-line no-console
         console.log('ref', ref);
+        // eslint-disable-next-line no-console
         console.log('context', context);
+        // eslint-disable-next-line no-console
         console.log('payload', payload);
       }
     };

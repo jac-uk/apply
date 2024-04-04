@@ -117,8 +117,7 @@
 
 <script>
 import { serverTimestamp } from '@firebase/firestore';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import WarningSummary from '@/components/Form/WarningSummary.vue';
