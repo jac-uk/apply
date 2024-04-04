@@ -87,7 +87,8 @@
 </template>
 
 <script>
-import { auth } from '@/firebase';
+import { getAuth, updatePassword } from 'firebase/auth';
+
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import Password from '@/components/Form/Password.vue';
@@ -109,10 +110,12 @@ export default {
   },
   methods: {
     async save() {
+      const auth = getAuth();
+      const user = auth.currentUser;
       this.validate();
       if (this.isValid()) {
         try {
-          await auth.currentUser.updatePassword(this.password);
+          await updatePassword(user, this.password);
           this.$router.push({ name: 'profile' });
         } catch (error) {
           this.errors = [{ id: 'password', message: error.message }];
