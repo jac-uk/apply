@@ -18,7 +18,7 @@ Users are: Candidate, Admin, Assessor, QT participant, Panellist, Digital team.
 Clearly describe the new functionality/change(s) to existing functionality.
 Include a link to a Miro board/image if appropriate.
 
-- [ ] 
+- [ ] Feature
 
 ## Acceptance Criteria 
 Specify the requirements of the primary user(s) for the change, update, or new feature - use the format: 
