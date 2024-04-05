@@ -10,14 +10,13 @@ assignees: ''
 ## Background
 What is the origin and context of this piece of work?
 
-## User (candidate, admin, assessor, QT participant, panellist, digital team) Story
+## User Story (Candidate, Admin, Assessor, QT participant, Panellist, Digital team) 
 As **user**, I would like **functionality** so that **benefit**. 
 
 ## Feature(s) Description
 Clearly describe the new functionality/change(s) to existing functionality.
 Include a link to a Miro board/image if appropriate.
 - [ ]
-
 ## Acceptance Criteria 
 Specify the requirements of the primary user(s) for the change, update, or new feature - use the format: 
 It's done when...
