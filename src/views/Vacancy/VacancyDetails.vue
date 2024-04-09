@@ -157,7 +157,7 @@
 
         <div class="btn-group">
           <a
-            v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+            v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly && !candidateHasApplication"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -166,7 +166,16 @@
             Apply
           </a>
           <a
-            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
+            v-if="candidateHasApplication"
+            class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
+            data-module="govuk-button"
+            style="margin-bottom: 0;"
+            @click.prevent="goToApplication()"
+          >
+            View Application
+          </a>
+          <a
+            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh && !candidateHasApplication"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -369,6 +378,9 @@ import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML.vue';
+import {
+  mapState
+} from 'vuex';
 
 export default {
   name: 'VacancyDetails',
@@ -386,6 +398,7 @@ export default {
     };
   },
   computed: {
+    ...mapState('applications', ['records']),
     language() {
       return this.$store.state.application.language;
     },
@@ -453,6 +466,9 @@ export default {
     showDownload() {
       return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
+    candidateHasApplication() {
+      return this.records.map(appl => appl.exerciseId).includes(this.vacancy.id);
+    },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
     },
@@ -469,6 +485,12 @@ export default {
       return this.$store.getters['vacancy/enableApplyInWelsh'];
     },
   },
+  created() {
+    this.$store.dispatch('applications/bind');
+  },
+  unmounted() {
+    this.$store.dispatch('applications/unbind');
+  },
   mounted() {
     this.isVacancyOpen = this.$store.getters['vacancy/isOpen']();
 
@@ -483,6 +505,9 @@ export default {
     apply(lang) {
       this.$store.dispatch('application/setLanguage', lang);
       this.$router.push({ name: 'eligibility' });
+    },
+    goToApplication() {
+      this.$router.push({ name: 'review', params: { id: this.vacancy.id } });
     },
     onSideNavLinkClick(id) {
       if (this.$refs[id]) {
