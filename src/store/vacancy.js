@@ -34,7 +34,7 @@ export default {
       return state.record.referenceNumber;
     },
     isOpen: (state, getters) => () => {
-      if (state.record.applicationOpenDate && state.record.applicationCloseDate) {
+      if (state.record?.applicationOpenDate && state.record?.applicationCloseDate) {
         const today = new Date();
         const openDate = getters.getOpenDate;
         const closeDate = getters.getCloseDate;
