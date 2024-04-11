@@ -134,7 +134,9 @@
           v-if="vacancy.exerciseMailbox"
           class="govuk-!-margin-bottom-6"
         >
-          <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
+          <span class="govuk-body govuk-!-font-weight-bold">
+            Contact:
+          </span>
           <a
             :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
             class="govuk-body govuk-link"
@@ -466,6 +468,9 @@ export default {
     showDownload() {
       return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
+    candidateHasCompletedApplication() {
+      return this.records.filter(appl => appl.status === 'applied').map(appl => appl.exerciseId).includes(this.vacancy.id);
+    },
     candidateHasApplication() {
       return this.records.map(appl => appl.exerciseId).includes(this.vacancy.id);
     },
@@ -507,7 +512,8 @@ export default {
       this.$router.push({ name: 'eligibility' });
     },
     goToApplication() {
-      this.$router.push({ name: 'review', params: { id: this.vacancy.id } });
+      const page = this.candidateHasCompletedApplication ? 'review' : 'task-list';
+      this.$router.push({ name: page, params: { id: this.vacancy.id } });
     },
     onSideNavLinkClick(id) {
       if (this.$refs[id]) {
