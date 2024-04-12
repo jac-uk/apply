@@ -8,8 +8,9 @@
       <QuestionRenderer
         section="additionalWorkingPreferences"
         :application="application"
-        :vacancy="vacancy"
+        :exercise="vacancy"
         :index="index"
+        :review="true"
       />
     </dl>
   </template>
@@ -85,7 +86,7 @@
 
 <script>
 import { getDataWelshId, getDataWelsh } from '@/helpers/language';
-import QuestionRenderer from '@/components/Page/QuestionRenderer.vue';
+import QuestionRenderer from '@jac-uk/jac-kit/draftComponents/Page/QuestionRenderer.vue';
 
 export default {
   name: 'AdditionalWorkingPreferences',

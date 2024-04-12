@@ -8,8 +8,9 @@
       <QuestionRenderer
         section="jurisdictionPreferences"
         :application="application"
-        :vacancy="vacancy"
+        :exercise="vacancy"
         :index="index"
+        :review="true"
       />
     </dl>
   </template>
@@ -44,7 +45,7 @@
 </template>
 
 <script>
-import QuestionRenderer from '@/components/Page/QuestionRenderer.vue';
+import QuestionRenderer from '@jac-uk/jac-kit/draftComponents/Page/QuestionRenderer.vue';
 
 export default {
   name: 'JurisdictionPreferences',
