@@ -177,7 +177,7 @@
             View Application
           </a>
           <a
-            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh && !candidateHasApplication"
+            v-else-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -491,7 +491,10 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('applications/bind');
+    if (this.$store.getters['auth/isSignedIn']){
+      this.$store.dispatch('applications/bind');
+    }
+
   },
   unmounted() {
     this.$store.dispatch('applications/unbind');
