@@ -5,7 +5,7 @@ import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import { CANDIDATE_FORM_RESPONSE_STATUS } from '@/helpers/constants';
 import clone from 'clone';
 
-const collectionName = 'applications';
+const collectionName = 'candidateForms';
 const collectionRef = collection(firestore, collectionName);
 
 export default {
@@ -13,19 +13,19 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }, formId) => {
       const id = rootState.auth.currentUser.uid;
-      const firestoreRef = doc(collectionRef, `candidateForms/${formId}/responses/${id}`);
+      const firestoreRef = doc(collectionRef, `${formId}/responses/${id}`);
       return bindFirestoreRef('record', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('record');
     }),
     update: async ({ rootState, state }, data) => {
-      const ref = firestore.doc(`candidateForms/${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
+      const ref = doc(collectionRef,`${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
       data.lastUpdated = serverTimestamp();
       await ref.update(data);
     },
     submit: async ({ rootState, state }) => {
-      const ref = firestore.doc(`candidateForms/${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
+      const ref = doc(collectionRef, `${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
       const saveData = {};
       saveData.status = CANDIDATE_FORM_RESPONSE_STATUS.COMPLETED;
       saveData[`statusLog.${CANDIDATE_FORM_RESPONSE_STATUS.COMPLETED}`] = serverTimestamp();

@@ -1,4 +1,4 @@
-import { collection, doc, addDoc, getDocs, setDoc, serverTimestamp, where, limit, query } from '@firebase/firestore';
+import { collection, doc, addDoc, getDocs, setDoc, serverTimestamp, where, limit, query, runTransaction } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
@@ -78,11 +78,11 @@ export default {
           return;
         }
 
-        const vacancyMetaRef = firestore.doc(`vacancies/${state.record.exerciseId}/meta/stats`);
+        const vacancyMetaRef = doc(firestore, `vacancies/${state.record.exerciseId}/meta/stats`);
         const vacancyReferenceNumber = state.record.exerciseRef;
-        const applicationRef = firestore.doc(`applications/${state.record.id}`);
+        const applicationRef = doc(firestore, `applications/${state.record.id}`);
 
-        return firestore.runTransaction(async transaction => {
+        return runTransaction(firestore, async transaction => {
           const doc = await transaction.get(vacancyMetaRef);
           let newApplicationsCount = 1;
 
