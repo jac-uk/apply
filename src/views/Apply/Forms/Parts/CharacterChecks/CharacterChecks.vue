@@ -25,11 +25,11 @@ export default {
       loadFailed: false,
     };
   },
-  watch: {
-    async vacancyId() {
-      await this.load();
-    },
-  },
+  // watch: {
+  //   async vacancyId() {
+  //     await this.load();
+  //   },
+  // },
   async created() {
     this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
     if (this.vacancyId) {
@@ -61,7 +61,7 @@ export default {
       }
     },
     redirectToErrorPage() {
-      this.$router.replace({ name: 'exercise-not-found' });
+      this.$router.replace({ name: 'not-found' });
     },
     redirectToVacancyDetails() {
       this.$router.replace({
