@@ -1,4 +1,4 @@
-import { query, collection, where, serverTimestamp } from '@firebase/firestore';import { firestore } from '@/firebase';
+import { query, collection, doc, where, serverTimestamp } from '@firebase/firestore';import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
@@ -25,7 +25,7 @@ export default {
       return unbindFirestoreRef('records');
     }),
     acceptInvitation: async (context, id) => {
-      const ref = collection.doc(id);
+      const ref = doc(collectionRef, id);
       const data = {
         'statusLog.accepted': serverTimestamp(),
         'status': 'accepted',
