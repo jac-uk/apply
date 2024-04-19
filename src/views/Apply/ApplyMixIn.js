@@ -55,7 +55,7 @@ export default {
       return this.$store.state.vacancy.record;
     },
     applicationId() {
-      return this.$route.params.applicationId;
+      return this.$route.params.applicationId || this.application?.id;
     },
     application() {
       return this.$store.state.application.record;
