@@ -1,8 +1,10 @@
+import { collection, query, where } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
-const collection = firestore.collection('candidateForms');
+const collectionName = 'candidateForms';
+const collectionRef = collection(firestore, collectionName);
 
 export default {
   namespaced: true,
@@ -11,9 +13,11 @@ export default {
   },
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
-      const firestoreRef = collection
-      .where('candidateIds', 'array-contains', rootState.auth.currentUser.uid)
-      .where('status', '==', 'open');
+      const firestoreRef = query(
+        collectionRef,
+        where('candidateIds', 'array-contains', rootState.auth.currentUser.uid),
+        where('status', '==', 'open')
+      );
       return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
