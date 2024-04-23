@@ -17,7 +17,24 @@
           :errors="errors"
         />
 
+        <div v-if="filteredPreferences.length">
+          <SelectionInput
+            v-for="(item, itemIndex) in filteredPreferences"
+            :id="`jurisdiction-preferences_${itemIndex}`"
+            :key="itemIndex"
+            v-model="formData[part][item.id]"
+            :title="item.question"
+            :answers="getAnswers(item)"
+            :config="item"
+            :type="item.questionType"
+            :label="item.question"
+            :required="item.questionRequired"
+            @update:model-value="tidyFormData(item)"
+          />
+        </div>
+
         <SelectionInput
+          v-else
           id="jurisdiction-preferences"
           v-model="formData.jurisdictionPreferences"
           :title="vacancy.jurisdictionQuestion"
@@ -40,6 +57,8 @@
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
+import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
+
 export default {
   name: 'CandidateFormJurisdictionPreferences',
   components: {
@@ -47,16 +66,22 @@ export default {
   },
   mixins: [CandidateFormsMixIn],
   data() {
-    const application = this.$store.getters['application/data']();
-    const formData = {
-      jurisdictionPreferences: application.jurisdictionPreferences,
+    const part = APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES;
+    const defaults = {
+      [part]: this.$store.state.vacancy.record[part] ? {} : null,
     };
+    const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
     return {
       formData,
     };
   },
   created() {
     this.setupPart(APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES);
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy, this.formData, this.part);
+    },
   },
   methods: {
     async save(){
@@ -68,6 +93,16 @@ export default {
         await this.$store.dispatch('application/save', saveData);
         await this.savePart(true);
       }
+    },
+    getAnswers(config) {
+      if (config.answerSource === 'jurisdictions') {
+        return this.vacancy.jurisdiction.map(item => ({ answer: item, id: item }));
+      } else {
+        return config.answers;
+      }
+    },
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.part], preference);
     },
   },  
 };

@@ -17,7 +17,25 @@
           :errors="errors"
         />
 
+
+        <div v-if="filteredPreferences.length">
+          <SelectionInput
+            v-for="(item, itemIndex) in filteredPreferences"
+            :id="`location-preferences_${itemIndex}`"
+            :key="itemIndex"
+            v-model="formData[part][item.id]"
+            :title="item.question"
+            :answers="item.answers"
+            :config="item"
+            :type="item.questionType"
+            :label="item.question"
+            :required="item.questionRequired"
+            @update:model-value="tidyFormData(item)"
+          />
+        </div>
+
         <SelectionInput
+          v-else
           id="location-preferences"
           v-model="formData.locationPreferences"
           :title="vacancy.locationQuestion"
@@ -40,6 +58,8 @@
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
+import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
+
 export default {
   name: 'CandidateFormLocationPreferences',
   components: {
@@ -47,9 +67,10 @@ export default {
   },
   mixins: [CandidateFormsMixIn],
   data() {
+    const part = APPLICATION_FORM_PARTS.LOCATION_PREFERENCES;
     const application = this.$store.getters['application/data']();
     const formData = {
-      locationPreferences: application.locationPreferences,
+      [part]: application[part],
     };
     return {
       formData,
@@ -57,6 +78,11 @@ export default {
   },
   created() {
     this.setupPart(APPLICATION_FORM_PARTS.LOCATION_PREFERENCES);
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy, this.formData, this.part);
+    },
   },
   methods: {
     async save(){
@@ -68,6 +94,9 @@ export default {
         await this.$store.dispatch('application/save', saveData);
         await this.savePart(true);
       }
+    },
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.part], preference);
     },
   },
 };
