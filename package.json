@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.93.0",
+  "version": "1.94.0",
   "private": true,
   "scripts": {
     "dev": "vite --mode develop",
@@ -33,7 +33,7 @@
     "@sentry/vue": "^7.85.0",
     "@vue/compat": "^3.3.4",
     "autoprefixer": "^10.4.16",
-    "firebase": "^8.10.1",
+    "firebase": "^10.7.1",
     "firebase-tools": "^13.0.1",
     "firebaseui": "^4.8.0",
     "govuk-frontend": "^3.12.0",

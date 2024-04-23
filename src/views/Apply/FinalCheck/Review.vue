@@ -642,6 +642,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <div v-if="selfAssessmentSections">
+                    {{ selfAssessmentSections }}
                     <div
                       v-for="(section, i) in selfAssessmentSections"
                       :key="i"
@@ -1172,7 +1173,8 @@ export default {
       return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
     },
     selfAssessmentSections() {
-      return this.vacancy.selfAssessmentWordLimits || [];
+      const hasContent = this.vacancy.selfAssessmentWordLimits.some(item => typeof item === 'object' && Object.keys(item).length > 0);
+      return hasContent ? this.vacancy.selfAssessmentWordLimits : [];
     },
   },
   methods: {

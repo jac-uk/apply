@@ -68,7 +68,7 @@
   </form>
 </template>
 <script>
-import firebase from '@firebase/app';
+import { serverTimestamp } from '@firebase/firestore';
 import BackLink from '@/components/BackLink.vue';
 import Form from '@/components/Form/Form.vue';
 import Checkbox from '@/components/Form/Checkbox.vue';
@@ -108,7 +108,7 @@ export default {
       if (this.isValid()) {
         if (this.application.characterChecks.consent === true) {
           this.application.characterChecks.status = 'completed';
-          this.application.characterChecks.completedAt = firebase.firestore.FieldValue.serverTimestamp();
+          this.application.characterChecks.completedAt = serverTimestamp();
         }
         await this.$store.dispatch('application/save', this.application);
         this.$router.push({ name: 'character-checks-form-submitted' });
