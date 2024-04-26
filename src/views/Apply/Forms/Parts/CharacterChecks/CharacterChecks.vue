@@ -25,11 +25,6 @@ export default {
       loadFailed: false,
     };
   },
-  watch: {
-    async vacancyId() {
-      await this.load();
-    },
-  },
   async created() {
     this.setupPart(APPLICATION_FORM_PARTS.CHARACTER_CHECKS);
     if (this.vacancyId) {
