@@ -17,7 +17,6 @@
           :errors="errors"
         />
 
-
         <div v-if="filteredPreferences.length">
           <SelectionInput
             v-for="(item, itemIndex) in filteredPreferences"
@@ -76,13 +75,13 @@ export default {
       formData,
     };
   },
-  created() {
-    this.setupPart(APPLICATION_FORM_PARTS.LOCATION_PREFERENCES);
-  },
   computed: {
     filteredPreferences() {
       return filteredPreferences(this.vacancy, this.formData, this.part);
     },
+  },
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.LOCATION_PREFERENCES);
   },
   methods: {
     async save(){

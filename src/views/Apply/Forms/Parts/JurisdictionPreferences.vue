@@ -75,13 +75,13 @@ export default {
       formData,
     };
   },
-  created() {
-    this.setupPart(APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES);
-  },
   computed: {
     filteredPreferences() {
       return filteredPreferences(this.vacancy, this.formData, this.part);
     },
+  },
+  created() {
+    this.setupPart(APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES);
   },
   methods: {
     async save(){
@@ -104,6 +104,6 @@ export default {
     tidyFormData(preference) {
       return tidyData(this.filteredPreferences, this.formData[this.part], preference);
     },
-  },  
+  },
 };
 </script>
