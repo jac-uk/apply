@@ -1,6 +1,4 @@
-import firebase from '@firebase/app';
-import 'firebase/firestore';
-const Timestamp = firebase.firestore.Timestamp;
+import { Timestamp } from 'firebase/firestore';
 
 const reviver = (key, value) => {
   // Convert serialized Timestamp objects to Date objects

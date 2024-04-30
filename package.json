@@ -1,6 +1,6 @@
 {
   "name": "application-form",
-  "version": "1.92.0",
+  "version": "1.96.0",
   "private": true,
   "scripts": {
     "dev": "vite --mode develop",
@@ -27,12 +27,12 @@
     "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@jac-uk/jac-kit": "3.0.23",
+    "@jac-uk/jac-kit": "4.0.0",
     "@ministryofjustice/frontend": "0.2.4",
     "@sentry/vue": "^7.85.0",
     "@vue/compat": "^3.3.4",
     "autoprefixer": "^10.4.16",
-    "firebase": "^8.10.1",
+    "firebase": "^10.11.0",
     "firebase-tools": "^13.0.1",
     "firebaseui": "^4.8.0",
     "govuk-frontend": "^3.12.0",

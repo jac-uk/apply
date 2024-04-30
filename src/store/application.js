@@ -1,4 +1,4 @@
-import firebase from '@firebase/app';
+import { collection, doc, addDoc, getDocs, setDoc, serverTimestamp, where, limit, query, runTransaction } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
@@ -6,21 +6,25 @@ import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
 import { LANGUAGES } from '@/helpers/constants';
 
-const collection = firestore.collection('applications');
+const collectionName = 'applications';
+const collectionRef = collection(firestore, collectionName);
 
 export default {
   namespaced: true,
   actions: {
     bind: async ({ rootState, dispatch }, id) => {
       if (id) {
-        return dispatch('bindRef', collection.doc(id));
+        return dispatch('bindRef', doc(collectionRef, id));
       } else {
-        const snapshotRef = await collection
-        .where('userId', '==', rootState.auth.currentUser.uid)
-        .where('exerciseId', '==', rootState.vacancy.record.id)
-        .limit(1).get();
-        if (!snapshotRef.empty) {
-          return dispatch('bindRef', collection.doc(snapshotRef.docs[0].id)); // @todo refine this!
+        const snapshotRef = query(
+          collectionRef,
+          where('userId', '==', rootState.auth.currentUser.uid),
+          where('exerciseId', '==', rootState.vacancy.record.id),
+          limit(1)
+        );
+      const docSnap = await getDocs(snapshotRef);
+        if (!docSnap.empty) {
+          return dispatch('bindRef', doc(collectionRef, docSnap.docs[0].id)); // @todo refine this!
         } else {
           return dispatch('unbind');
         }
@@ -37,16 +41,16 @@ export default {
     },
     save: async ({ rootState, state, dispatch }, data) => {
       if (state.record) {
-        const ref = collection.doc(state.record.id);
-        await ref.set(data, { merge: true });
+        const ref = doc(collectionRef, state.record.id);
+        await setDoc(ref, data, { merge: true });
       } else {
         const newDoc = data;
         newDoc.userId = rootState.auth.currentUser.uid;
         newDoc.exerciseId = rootState.vacancy.record.id;
         newDoc.exerciseName = rootState.vacancy.record.name;
         newDoc.exerciseRef = rootState.vacancy.record.referenceNumber;
-        newDoc.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-        const ref = await collection.add(newDoc);
+        newDoc.createdAt = serverTimestamp();
+        const ref = await addDoc(collectionRef, newDoc);
         dispatch('bind', ref.id);
       }
     },
@@ -55,7 +59,7 @@ export default {
         if (state.record.referenceNumber) {
           const data = {
             status: 'applied',
-            appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            appliedAt: serverTimestamp(),
           };
 
           // check if application was made in Welsh
@@ -74,15 +78,15 @@ export default {
           return;
         }
 
-        const vacancyMetaRef = firestore.doc(`vacancies/${state.record.exerciseId}/meta/stats`);
+        const vacancyMetaRef = doc(firestore, `vacancies/${state.record.exerciseId}/meta/stats`);
         const vacancyReferenceNumber = state.record.exerciseRef;
-        const applicationRef = firestore.doc(`applications/${state.record.id}`);
+        const applicationRef = doc(firestore, `applications/${state.record.id}`);
 
-        return firestore.runTransaction(async transaction => {
+        return runTransaction(firestore, async transaction => {
           const doc = await transaction.get(vacancyMetaRef);
           let newApplicationsCount = 1;
 
-          if (doc.exists) {
+          if (doc.exists()) {
             newApplicationsCount = doc.data().applicationsCount + 1;
           }
           const characters = 'abcdefghijklmnopqrstuvwxyz';
@@ -99,7 +103,7 @@ export default {
             .update(applicationRef, {
               status: 'applied',
               referenceNumber: applicationReferenceNumber,
-              appliedAt: firebase.firestore.FieldValue.serverTimestamp(),
+              appliedAt: serverTimestamp(),
             });
 
           return applicationReferenceNumber;

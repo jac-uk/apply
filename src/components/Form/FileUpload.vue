@@ -58,6 +58,7 @@
         :id="id"
         ref="file"
         type="file"
+        :accept="acceptableExtensions"
         class="govuk-file-upload"
         :class="{'govuk-input--error': hasError}"
         style="display: none;"
@@ -67,11 +68,10 @@
     </div>
   </div>
 </template>
-
 <script>
-import { storage } from '@/firebase';
-import FormField from '@/components/Form/FormField.vue';
-import FormFieldError from '@/components/Form/FormFieldError.vue';
+import { getStorage, ref, uploadBytes, getDownloadURL } from '@firebase/storage';
+import FormField from './FormField.vue';
+import FormFieldError from './FormFieldError.vue';
 
 export default {
   compatConfig: {
@@ -127,7 +127,9 @@ export default {
         return this.modelValue;
       },
       set(val) {
-        this.$emit('update:modelValue', val);
+        if (val) {
+          this.$emit('update:modelValue', val);
+        }
       },
     },
   },
@@ -172,15 +174,16 @@ export default {
       if (this.acceptableExtensions.includes(parts.pop())){
         return true;
       }
-
       return false;
     },
-    validFileSize(size){
+    fileIsEmpty(size){
+      return size <= 0;
+    },
+    fileIsTooBig(size){
       const megabyteSize = size / 1024 / 1024; // in MB
-      return megabyteSize > 2 ? false : true;
+      return megabyteSize > 2;
     },
     resetFile() {
-      this.$refs.file = null;
       this.isUploading = false;
     },
     async upload(file) {
@@ -193,31 +196,36 @@ export default {
         this.setError(`Invalid file type. Choose from: ${this.acceptableExtensions}`);
         return false;
       }
-      if (!this.validFileSize(file.size)){
+      if (this.fileIsEmpty(file.size)){
+        this.setError('File is empty.');
+        return false;
+      }
+      if (this.fileIsTooBig(file.size)){
         this.setError('File is too large. Limit: 2MB');
         return false;
       }
 
       this.isUploading = true;
       const fileName = this.generateFileName(file.name);
-      const uploadRef = storage.ref(`${this.path}/${fileName}`);
+
+      const storage = getStorage();
+      const fileRef = ref(storage ,`${this.path}/${fileName}`);
+
+      // Delete the current file in file storage
+      if (this.haveFile && this.enableDelete) {
+        this.deleteFile(this.path, this.modelValue);
+      }
 
       try {
-        const fileUploaded = await uploadRef.put(file);
-        if (fileUploaded && fileUploaded.state === 'success') {
-          this.isReplacing = false;
-          this.fileName = fileName;
-          const downloadUrl = await uploadRef.getDownloadURL();
-          this.downloadUrl = downloadUrl;
+        await uploadBytes(fileRef, file);
+        this.isReplacing = false;
+        this.fileName = fileName;
 
-          return true;
-        } else {
-          this.setError('File upload failed, please try again');
+        this.downloadUrl = await getDownloadURL(fileRef);
 
-          return false;
-        }
+        return true;
       } catch (e) {
-        this.setError('File upload failed, please try again');
+        this.setError('File upload failed, please try again [3]');
 
         return false;
       } finally {
@@ -228,18 +236,21 @@ export default {
       if (!fileName) {
         return false;
       }
-      const fileRef = storage.ref(`${this.path}/${fileName}`);
+
+      const storage = getStorage();
+      const fileRef = ref(storage, `${this.path}/${fileName}`);
 
       // Check if file exists in storage
       try {
-        const downloadUrl = await fileRef.getDownloadURL();
+        this.downloadUrl = await getDownloadURL(fileRef);
 
-        if (typeof downloadUrl === 'string' && downloadUrl.length) {
-          this.downloadUrl = downloadUrl;
+        if (typeof downloadUrl === 'string' && this.downloadUrl.length) {
           return true;
         }
         return false;
       } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e);
         return false;
       }
     },

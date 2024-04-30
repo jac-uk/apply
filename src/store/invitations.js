@@ -1,9 +1,9 @@
-import firebase from '@firebase/app';
-import { firestore } from '@/firebase';
+import { query, collection, doc, where, serverTimestamp } from '@firebase/firestore';import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
-const collection = firestore.collection('invitations');
+const collectionName = 'invitations';
+const collectionRef = collection(firestore, collectionName);
 
 export default {
   namespaced: true,
@@ -13,9 +13,10 @@ export default {
   actions: {
     bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
       if (rootState.auth.currentUser){
-        const firestoreRef = collection
-          .where('candidate.email', '==', rootState.auth.currentUser.email)
-          .where('status', 'in', ['created', 'invited', 'accepted']);
+        const firestoreRef = query(collectionRef,
+          where('candidate.email', '==', rootState.auth.currentUser.email),
+          where('status', 'in', ['created', 'invited', 'accepted'])
+        );
 
         return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       }
@@ -24,9 +25,9 @@ export default {
       return unbindFirestoreRef('records');
     }),
     acceptInvitation: async (context, id) => {
-      const ref = collection.doc(id);
+      const ref = doc(collectionRef, id);
       const data = {
-        'statusLog.accepted': firebase.firestore.FieldValue.serverTimestamp(),
+        'statusLog.accepted': serverTimestamp(),
         'status': 'accepted',
       };
       await ref.update(data);
