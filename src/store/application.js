@@ -86,7 +86,7 @@ export default {
           const doc = await transaction.get(vacancyMetaRef);
           let newApplicationsCount = 1;
 
-          if (doc.exists) {
+          if (doc.exists()) {
             newApplicationsCount = doc.data().applicationsCount + 1;
           }
           const characters = 'abcdefghijklmnopqrstuvwxyz';
