@@ -1,4 +1,4 @@
-import { collection, doc, addDoc, getDocs, setDoc, serverTimestamp, where, limit, query, runTransaction } from '@firebase/firestore';
+import { updateDoc, collection, doc, addDoc, getDocs, serverTimestamp, where, limit, query, runTransaction } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import { getIPAddress, getBrowserInfo } from '@/helpers/browser';
@@ -41,8 +41,7 @@ export default {
     },
     save: async ({ rootState, state, dispatch }, data) => {
       if (state.record) {
-        const ref = doc(collectionRef, state.record.id);
-        await setDoc(ref, data, { merge: true });
+        await updateDoc(doc(collectionRef, state.record.id), data);
       } else {
         const newDoc = data;
         newDoc.userId = rootState.auth.currentUser.uid;
