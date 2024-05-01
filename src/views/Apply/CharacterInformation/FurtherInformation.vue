@@ -11,6 +11,11 @@
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
               Further Information to be disclosed
+              <div class="govuk-grid-column-one-quarter float-right">
+                <InfoIcon
+                  :url="furtherInformationUrl"
+                />
+              </div>
             </h2>
 
             <ErrorSummary
@@ -40,11 +45,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="furtherInformation"
-            />
           </div>
         </div>
         <button

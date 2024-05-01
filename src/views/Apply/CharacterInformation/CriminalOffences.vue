@@ -11,6 +11,11 @@
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
               Criminal Offences
+              <div class="govuk-grid-column-one-quarter float-right">
+                <InfoIcon
+                  :url="criminalOffences"
+                />
+              </div>
             </h2>
 
             <ErrorSummary
@@ -61,11 +66,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="criminalOffences"
-            />
           </div>
         </div>
         <button

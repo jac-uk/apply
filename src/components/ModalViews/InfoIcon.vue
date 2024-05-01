@@ -37,6 +37,9 @@ export default {
     openModal() {
       this.$refs.openInfoModalRef.openModal();
     },
+    closeModal() {
+      this.$refs.openInfoModalRef.closeModal();
+    },
   },
 };
 </script>

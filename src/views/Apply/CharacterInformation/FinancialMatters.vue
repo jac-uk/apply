@@ -10,16 +10,16 @@
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
               Financial Matters
+              <div class="govuk-grid-column-one-quarter float-right govuk-!-padding-left-1">
+                <InfoIcon
+                  :url="financialMatters"
+                />
+              </div>
             </h2>
             <ErrorSummary
               :errors="errors"
               :show-save-button="true"
               @save="save"
-            />
-          </div>
-          <div class="govuk-grid-column-one-quarter govuk-!-padding-left-1">
-            <InfoIcon
-              :url="financialMatters"
             />
           </div>
         </div>

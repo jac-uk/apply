@@ -11,6 +11,11 @@
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
               Fixed Penalty Notices
+              <div class="govuk-grid-column-one-quarter float-right">
+                <InfoIcon
+                  :url="fixedPenaltyNotices"
+                />
+              </div>
             </h2>
 
             <ErrorSummary
@@ -40,11 +45,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="fixedPenaltyNotices"
-            />
           </div>
         </div>
         <button

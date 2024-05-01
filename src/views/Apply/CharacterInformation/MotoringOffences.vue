@@ -11,6 +11,11 @@
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
               Motoring Offences
+              <div class="govuk-grid-column-one-quarter float-right">
+                <InfoIcon
+                  :url="motoringOffences"
+                />
+              </div>
             </h2>
 
             <ErrorSummary
@@ -62,11 +67,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="motoringOffences"
-            />
           </div>
         </div>
         <button

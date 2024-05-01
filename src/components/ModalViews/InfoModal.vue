@@ -5,6 +5,7 @@
   >
     <div
       class="modal"
+      :class="modalOpen ? 'openModal': ''"
     >
       <div class="container">
         <div class="modal__title govuk-!-padding-2 govuk-heading-m">
@@ -63,12 +64,17 @@ export default {
   methods: {
     openModal() {
       this.modalOpen = true;
-      document.body.style.overflow = 'hidden';
     },
     closeModal() {
       this.modalOpen = false;
-      document.body.style.overflow = '';
     },
   },
 };
 </script>
+<style>
+.openModal {
+  background-color: white;
+  border: 4px solid black;
+  position: absolute;
+}
+</style>
