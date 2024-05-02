@@ -8,9 +8,8 @@
       <QuestionRenderer
         section="jurisdictionPreferences"
         :application="application"
-        :exercise="vacancy"
+        :vacancy="vacancy"
         :index="index"
-        :review="true"
       />
     </dl>
   </template>
@@ -60,30 +59,6 @@ export default {
     vacancy: {
       type: Object,
       required: true,
-    },
-  },
-  methods: {
-    sortRankedSelection(dataset) {
-      return Object.fromEntries(Object.entries(dataset).sort((a, b) => a[1] - b[1]));
-    },
-    sortEqualRankedSelection(dataset) {
-      const groups = {};
-      Object.entries(dataset).forEach(([answer, rank]) => {
-        if (!groups[rank]) {
-          groups[rank] = [];
-        }
-        groups[rank].push(answer);
-      });
-      return Object.entries(groups).map(([rank, answers]) => ({ rank, answers }));
-    },
-    findGroupByAnswer(dataset, targetAnswer) {
-      for (const question of dataset) {
-
-        if (question.answers.some(answerObj => answerObj.answer === targetAnswer)) {
-          return question.group;
-        }
-      }
-      return null; // Return null if the answer is not found in any group
     },
   },
 };

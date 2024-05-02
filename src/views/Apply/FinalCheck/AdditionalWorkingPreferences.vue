@@ -8,9 +8,8 @@
       <QuestionRenderer
         section="additionalWorkingPreferences"
         :application="application"
-        :exercise="vacancy"
+        :vacancy="vacancy"
         :index="index"
-        :review="true"
       />
     </dl>
   </template>
