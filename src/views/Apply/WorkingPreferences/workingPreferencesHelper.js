@@ -18,33 +18,35 @@ function filteredPreferences(vacancy, formData, formId) {
   if (formData.additionalWorkingPreferences) Object.assign(allData, formData.additionalWorkingPreferences);
   const mainQuestions = [];
   const linkedQuestions = [];
-  preferences.forEach(item => {
-    if (item.linkedQuestion && item.linkedAnswer) {
-      if (!allData[item.linkedQuestion]) return;
-      const linkedQuestion = allPreferences.find(question => question.id === item.linkedQuestion);
-      if (linkedQuestion) {
-        switch (linkedQuestion.questionType) {
-        case 'single-choice':
-          if (allData[item.linkedQuestion] === item.linkedAnswer) {
-            linkedQuestions.push(item);
+  if (Array.isArray(preferences)) {
+    preferences.forEach(item => {
+      if (item.linkedQuestion && item.linkedAnswer) {
+        if (!allData[item.linkedQuestion]) return;
+        const linkedQuestion = allPreferences.find(question => question.id === item.linkedQuestion);
+        if (linkedQuestion) {
+          switch (linkedQuestion.questionType) {
+          case 'single-choice':
+            if (allData[item.linkedQuestion] === item.linkedAnswer) {
+              linkedQuestions.push(item);
+            }
+            break;
+          case 'multiple-choice':
+            if (allData[item.linkedQuestion].indexOf(item.linkedAnswer) >= 0) {
+              linkedQuestions.push(item);
+            }
+            break;
+          case 'ranked-choice':
+            if (Object.keys(allData[item.linkedQuestion]).includes(item.linkedAnswer)) {
+              linkedQuestions.push(item);
+            }
+            break;
           }
-          break;
-        case 'multiple-choice':
-          if (allData[item.linkedQuestion].indexOf(item.linkedAnswer) >= 0) {
-            linkedQuestions.push(item);
-          }
-          break;
-        case 'ranked-choice':
-          if (Object.keys(allData[item.linkedQuestion]).includes(item.linkedAnswer)) {
-            linkedQuestions.push(item);
-          }
-          break;
         }
+      } else {
+        mainQuestions.push(item);
       }
-    } else {
-      mainQuestions.push(item);
-    }
-  });
+    });
+  }
   return mainQuestions.concat(linkedQuestions);
 }
 
@@ -76,6 +78,6 @@ function tidyData(preferences, data, preference) {
     if (!preferences.find(item => item.id === key)) {
       delete data[key];
     }
-  });  
+  });
 
 }
