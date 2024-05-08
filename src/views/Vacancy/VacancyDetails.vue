@@ -380,9 +380,6 @@ import exerciseTimeline from '@/helpers/Timeline/exerciseTimeline';
 import DownloadLink from '@/components/DownloadLink.vue';
 import { ADVERT_TYPES, LANGUAGES } from '@/helpers/constants';
 import CustomHTML from '@/components/CustomHTML.vue';
-import {
-  mapState
-} from 'vuex';
 
 export default {
   name: 'VacancyDetails',
@@ -400,7 +397,6 @@ export default {
     };
   },
   computed: {
-    ...mapState('applications', ['records']),
     language() {
       return this.$store.state.application.language;
     },
@@ -427,6 +423,9 @@ export default {
     },
     vacancy () {
       return this.$store.state.vacancy.record;
+    },
+    applications () {
+      return this.$store.state.applications.records;
     },
     hasDownloads() {
       return this.vacancy && this.vacancy.downloads && Object.values(this.vacancy.downloads).length > 0;
@@ -469,10 +468,10 @@ export default {
       return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
     candidateHasCompletedApplication() {
-      return this.records.filter(appl => appl.status === 'applied').map(appl => appl.exerciseId).includes(this.vacancy.id);
+      return this.applications.filter(appl => appl.status === 'applied').map(appl => appl.exerciseId).includes(this.vacancy.id);
     },
     candidateHasApplication() {
-      return this.records.map(appl => appl.exerciseId).includes(this.vacancy.id);
+      return this.applications.map(appl => appl.exerciseId).includes(this.vacancy.id);
     },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;

@@ -9,13 +9,13 @@ const collectionRef = collection(firestore, collectionName);
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(({ bindFirestoreRef, rootState }) => {
+    bind: firestoreAction(async ({ bindFirestoreRef, rootState }) => {
       const firestoreRef = query(
         collectionRef,
         where('userId', '==', rootState.auth.currentUser.uid),
         limit(200)  // @TODO enable paging
       );
-      return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
+      return await bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
     }),
     unbind: firestoreAction(({ unbindFirestoreRef }) => {
       return unbindFirestoreRef('records');
