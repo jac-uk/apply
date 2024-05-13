@@ -108,7 +108,7 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
         }
 
         if (!hasMatch) {
-          const texts = nodeVal.split(' '); // deal with translated date 
+          const texts = nodeVal.split(' '); // deal with translated date
           let hasWelsh = false;
           const res = [];
           texts.forEach(text => {
@@ -182,18 +182,19 @@ const updateLangToTextNode = (node, lang = LANGUAGES.ENGLISH) => {
       pushTextNode(childNode);
     });
   };
-  
+
   pushTextNode(node);
   return textNodes;
 };
 
 // get id for data-welsh attribute
 const getDataWelshId = (value) => {
-  return value.toLowerCase().split(' ').join('_');
+  return value ? value.toLowerCase().split(' ').join('_') : '';
 };
 
 // get welsh value for data-welsh attribute
 const getDataWelsh = ({ id, value }) => {
+  if (!id) return '';
   if (
     id.includes(getDataWelshId('Secondment to the Court of Protection')) ||
     id.includes(getDataWelshId('Posts in Wales - Welsh Language')) ||
