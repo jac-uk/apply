@@ -28,7 +28,7 @@
     "lint-ci": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --no-fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "@jac-uk/jac-kit": "4.1.4",
+    "@jac-uk/jac-kit": "4.1.6",
     "@ministryofjustice/frontend": "0.2.4",
     "@sentry/vue": "^7.85.0",
     "@vue/compat": "^3.3.4",

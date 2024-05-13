@@ -1,5 +1,22 @@
 <template>
-  <dl class="govuk-summary-list">
+  <template v-if="vacancy.locationPreferences">
+    <dl
+      v-for="(item, index) in vacancy.locationPreferences"
+      :key="item"
+      class="govuk-summary-list"
+    >
+      <QuestionRenderer
+        section="locationPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :index="index"
+      />
+    </dl>
+  </template>
+  <dl
+    v-else
+    class="govuk-summary-list"
+  >
     <dt class="govuk-summary-list__key">
       {{ vacancy.locationQuestion }}
     </dt>
@@ -29,8 +46,13 @@
 </template>
 
 <script>
+import QuestionRenderer from '@jac-uk/jac-kit/draftComponents/Page/QuestionRenderer.vue';
+
 export default {
   name: 'CandidateFormViewLocationPreferences',
+  components: {
+    QuestionRenderer,
+  },
   props: {
     vacancy: {
       type: Object,
