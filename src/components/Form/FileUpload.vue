@@ -107,6 +107,12 @@ export default {
         };
       },
     },
+    acceptableExtensions: {
+      type: Array,
+      default: () => {
+        return ['docx', 'doc', 'odt', 'txt', 'fodt'];
+      },
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -114,7 +120,6 @@ export default {
       file: '',
       isReplacing: false,
       isUploading: false,
-      acceptableExtensions: ['docx', 'doc', 'odt', 'txt', 'fodt'],
       downloadUrl: null,
     };
   },
