@@ -14,7 +14,16 @@
           :errors="errors"
         />
 
-        <div v-if="filteredPreferences.length">
+        <SelectionInput
+          v-if="vacancy.jurisdictionQuestion"
+          id="jurisdiction-preferences"
+          v-model="formData.jurisdictionPreferences"
+          :title="vacancy.jurisdictionQuestion"
+          :answers="vacancy.jurisdictionQuestionAnswers"
+          :type="vacancy.jurisdictionQuestionType"
+        />
+        
+        <div v-else-if="filteredPreferences.length">
           <SelectionInput
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`jurisdiction-preferences_${itemIndex}`"
@@ -29,15 +38,6 @@
             @update:model-value="tidyFormData(item)"
           />
         </div>
-
-        <SelectionInput
-          v-else
-          id="jurisdiction-preferences"
-          v-model="formData.jurisdictionPreferences"
-          :title="vacancy.jurisdictionQuestion"
-          :answers="vacancy.jurisdictionQuestionAnswers"
-          :type="vacancy.jurisdictionQuestionType"
-        />        
 
         <button
           :disabled="!canSave(formId) || !formComplete"

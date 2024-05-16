@@ -14,7 +14,16 @@
           :errors="errors"
         />
 
-        <div v-if="filteredPreferences.length">
+        <SelectionInput
+          v-if="vacancy.locationQuestion"
+          id="location-preferences"
+          v-model="formData.locationPreferences"
+          :title="vacancy.locationQuestion"
+          :answers="vacancy.locationQuestionAnswers"
+          :type="vacancy.locationQuestionType"
+        />
+
+        <div v-else-if="filteredPreferences.length">
           <SelectionInput
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`location-preferences_${itemIndex}`"
@@ -29,15 +38,6 @@
             @update:model-value="tidyFormData(item)"
           />
         </div>
-
-        <SelectionInput
-          v-else
-          id="location-preferences"
-          v-model="formData.locationPreferences"
-          :title="vacancy.locationQuestion"
-          :answers="vacancy.locationQuestionAnswers"
-          :type="vacancy.locationQuestionType"
-        />
 
         <button
           :disabled="!canSave(formId)"

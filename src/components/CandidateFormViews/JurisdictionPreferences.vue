@@ -1,20 +1,6 @@
 <template>
-  <template v-if="vacancy.jurisdictionPreferences">
-    <dl
-      v-for="(item, index) in vacancy.jurisdictionPreferences"
-      :key="item"
-      class="govuk-summary-list"
-    >
-      <QuestionRenderer
-        section="jurisdictionPreferences"
-        :application="application"
-        :vacancy="vacancy"
-        :index="index"
-      />
-    </dl>
-  </template>
   <dl
-    v-else
+    v-if="vacancy.jurisdictionQuestion"
     class="govuk-summary-list"
   >
     <div class="govuk-summary-list__row">
@@ -45,6 +31,20 @@
       </dd>
     </div>
   </dl>
+  <template v-else-if="vacancy.jurisdictionPreferences">
+    <dl
+      v-for="(item, index) in vacancy.jurisdictionPreferences"
+      :key="item"
+      class="govuk-summary-list"
+    >
+      <QuestionRenderer
+        section="jurisdictionPreferences"
+        :application="application"
+        :vacancy="vacancy"
+        :index="index"
+      />
+    </dl>
+  </template>
 </template>
 
 <script>
