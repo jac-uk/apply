@@ -134,7 +134,9 @@
           v-if="vacancy.exerciseMailbox"
           class="govuk-!-margin-bottom-6"
         >
-          <span class="govuk-body govuk-!-font-weight-bold">Contact: </span>
+          <span class="govuk-body govuk-!-font-weight-bold">
+            Contact:
+          </span>
           <a
             :href="`mailto:${vacancy.exerciseMailbox}?subject=Re:${vacancy.referenceNumber}`"
             class="govuk-body govuk-link"
@@ -157,7 +159,7 @@
 
         <div class="btn-group">
           <a
-            v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly"
+            v-if="showApplyButton && isVacancyOpen && !vacancy.inviteOnly && !candidateHasApplication"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -166,7 +168,16 @@
             Apply
           </a>
           <a
-            v-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
+            v-if="candidateHasApplication"
+            class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply"
+            data-module="govuk-button"
+            style="margin-bottom: 0;"
+            @click.prevent="goToApplication()"
+          >
+            View Application
+          </a>
+          <a
+            v-else-if="vacancy.welshPosts && showApplyButton && isVacancyOpen && !vacancy.inviteOnly && enableApplyInWelsh"
             class="govuk-button info-link--vacancy-details--check-if-you-are-eligible-and-apply govuk-!-margin-left-4"
             data-module="govuk-button"
             style="margin-bottom: 0;"
@@ -413,6 +424,9 @@ export default {
     vacancy () {
       return this.$store.state.vacancy.record;
     },
+    applications () {
+      return this.$store.state.applications.records;
+    },
     hasDownloads() {
       return this.vacancy && this.vacancy.downloads && Object.values(this.vacancy.downloads).length > 0;
     },
@@ -453,6 +467,12 @@ export default {
     showDownload() {
       return this.advertType !== ADVERT_TYPES.BASIC && this.hasDownloads;
     },
+    candidateHasCompletedApplication() {
+      return this.applications.filter(appl => appl.status === 'applied').map(appl => appl.exerciseId).includes(this.vacancy.id);
+    },
+    candidateHasApplication() {
+      return this.applications.map(appl => appl.exerciseId).includes(this.vacancy.id);
+    },
     showApplyButton() {
       return this.advertTypeFull || this.advertType === ADVERT_TYPES.BASIC;
     },
@@ -469,6 +489,15 @@ export default {
       return this.$store.getters['vacancy/enableApplyInWelsh'];
     },
   },
+  created() {
+    if (this.$store.getters['auth/isSignedIn']){
+      this.$store.dispatch('applications/bind');
+    }
+
+  },
+  unmounted() {
+    this.$store.dispatch('applications/unbind');
+  },
   mounted() {
     this.isVacancyOpen = this.$store.getters['vacancy/isOpen']();
 
@@ -483,6 +512,10 @@ export default {
     apply(lang) {
       this.$store.dispatch('application/setLanguage', lang);
       this.$router.push({ name: 'eligibility' });
+    },
+    goToApplication() {
+      const page = this.candidateHasCompletedApplication ? 'review' : 'task-list';
+      this.$router.push({ name: page, params: { id: this.vacancy.id } });
     },
     onSideNavLinkClick(id) {
       if (this.$refs[id]) {
