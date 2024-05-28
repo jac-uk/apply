@@ -211,9 +211,7 @@ export default {
     return {
       personalDetails: personalDetails,
       formId: 'personalDetails',
-      formData: {
-        progress: {},
-      },
+      formData: {},
     };
   },
   created() {
@@ -238,7 +236,7 @@ export default {
       this.makeFullName();
       this.validate();
       if (this.isValid()) {
-        this.formData.progress[this.formId] = true;
+        this.formData[`progress.${this.formId}`] = true;
         this.formData.personalDetails = this.personalDetails;
         this.formData.characterChecks = { status: 'not requested' };
         await this.$store.dispatch('application/save', this.formData);

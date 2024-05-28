@@ -18,6 +18,7 @@
       <QuestionInputView
         :config="item"
         :data="application.jurisdictionPreferences[item.id]"
+        :answer-sources="vacancy"
       />
     </dl>
   </template>  
@@ -25,7 +26,7 @@
 
 <script>
 import SelectionView from '@/components/SelectionInput/View.vue';
-import QuestionInputView from '@/components/QuestionInputView/QuestionInputView.vue';
+import QuestionInputView from '@/components/QuestionInput/QuestionInputView.vue';
 import { filteredPreferences } from '../../WorkingPreferences/workingPreferencesHelper';
 
 export default {

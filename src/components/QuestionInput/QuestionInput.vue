@@ -60,7 +60,7 @@ export default {
     // or, for full vue 3 compat in this component:
     //MODE: 3,
   },
-  name: 'SelectionInput',
+  name: 'QuestionInput',
   components: {
     FormFieldError,
     SingleChoice,

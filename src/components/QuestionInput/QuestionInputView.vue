@@ -79,6 +79,7 @@ export default {
         });
       } else {
         if (this.config.answerSource) {
+          if (!this.answerSources) return sortedAnswers;
           const answerSource = this.answerSources[this.config.answerSource];
           if (!answerSource) return sortedAnswers;
           switch (this.config.questionType) {
