@@ -51,7 +51,7 @@ export default {
   data() {
     const isV1 = isVersion1(this.$store.state.vacancy.record.additionalWorkingPreferences);
     return {
-      isV1: isV1
+      isV1: isV1,
     };
   },
   computed: {

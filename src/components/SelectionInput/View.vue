@@ -47,17 +47,17 @@ export default {
   props: {
     question: {
       type: String,
-      required: true
+      required: true,
     },
     type: {
       type: String,
-      required: true
+      required: true,
     },
     data: {
       type: [String, Array, Object],
       required: true,
     },
-  }
+  },
 };
 </script>
 
