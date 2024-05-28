@@ -21,13 +21,25 @@
           <div class="govuk-caption-xl">
             {{ item.topic }}
           </div>
+
           <SelectionInput
-            :id="getSelectionInputId(item, itemIndex)"
+            v-if="isV1"
+            :id="`additional-working-preference_${itemIndex}`"
+            v-model="v1FormData[itemIndex]"
+            :title="item.question"
+            :answers="item.answers"
+            :type="item.questionType"
+          />
+          <QuestionInput
+            v-else
+            :id="`additional-working-preference_${itemIndex}`"
+            :key="itemIndex"
             v-model="formData[formId][item.id]"
             :title="item.question"
             :answers="item.answers"
             :config="item"
             :type="item.questionType"
+            :label="item.question"
             :required="item.questionRequired"
             @update:model-value="tidyFormData(item)"
           />
@@ -49,54 +61,57 @@ import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import QuestionInput from '@/components/QuestionInput/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { getDataWelshId } from '@/helpers/language';
-import { filteredPreferences, tidyData } from './workingPreferencesHelper';
+import { filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
 
 export default {
   name: 'AdditionalWorkingPreferences',
   components: {
     ErrorSummary,
     SelectionInput,
+    QuestionInput,
     BackLink,
   },
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
     const formId = 'additionalWorkingPreferences';
+    const preferences = this.$store.state.vacancy.record[formId];
     const defaults = {
-      [formId]: this.$store.state.vacancy.record[formId] ? {} : null,
+      [formId]: preferences ? {} : null,
       progress: {},
     };
     const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
+    const v1FormData = [];  // in v1 values were stored within a `selection` property
+    const isV1 = isVersion1(preferences);
+    if (isV1) {
+      if (formData[formId] && formData[formId].length) {
+        formData[formId].forEach(item => {
+          v1FormData.push(item.selection);
+        });
+      }
+    }
     return {
       formId: formId,
       formData: formData,
+      isV1: isV1,
+      v1FormData: v1FormData,
     };
-    // The following was used as additional preferences were stored in an array [ { selection: String | Array } ]
-    // Have left it here as we may need to address backwards compatibility OR migration (unless we time the release of this code between exercises)
-    // Note: localAdditionalPreferences was used for the selectionInput v-model instead of formData
-    // const localAdditionalPreferences = {};
-    // if (formData[formId] && formData[formId].length) {
-    //   formData[formId].forEach(item => {
-    //     localAdditionalPreferences.push(item.selection);
-    //   });
-    // }
-    // return {
-    //   formId: formId,
-    //   formData: formData,
-    //   localAdditionalPreferences: localAdditionalPreferences,
-    // };
   },
   computed: {
     filteredPreferences() {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
     formComplete() {
-      if (this.filteredPreferences.length) {
-        return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
+      if (this.isV1) {
+        return this.v1FormData.length ===  this.filteredPreferences.length;
       } else {
-        return this.formData[this.formId] ? true : false;
+        if (this.filteredPreferences.length) {
+          return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
+        } else {
+          return this.formData[this.formId] ? true : false;
+        }
       }
     },
   },
@@ -104,22 +119,19 @@ export default {
     tidyFormData(preference) {
       return tidyData(this.filteredPreferences, this.formData[this.formId], preference);
     },
-    getSelectionInputId(additionalWorkingPreference, index) { // TODO do we need this?
-      return `additional-working-preference-${getDataWelshId(additionalWorkingPreference.topic)}-${index}`;
+    async save() {
+      this.validate();
+      if (this.isValid()) {
+        this.formData.progress[this.formId] = true;
+        if (this.isV1) { // The following override was used to store additional preferences in an array [ { selection: String | Array } ]
+          this.formData[this.formId] = this.v1FormData.map(item => {
+            return { selection: item };
+          });
+        }
+        await this.$store.dispatch('application/save', this.formData);
+        this.$router.push({ name: 'task-list' });
+      }
     },
-    // The following override was used to store additional preferences in an array [ { selection: String | Array } ]
-    // Have left it here as we may need to address backwards compatibility OR migration (unless we time the release of this code between exercises)
-    // async save() {
-    //   this.validate();
-    //   if (this.isValid()) {
-    //     this.formData.progress[this.formId] = true;
-    //     this.formData.additionalWorkingPreferences = this.localAdditionalPreferences.map(item => {
-    //       return { selection: item };
-    //     });
-    //     await this.$store.dispatch('application/save', this.formData);
-    //     this.$router.push({ name: 'task-list' });
-    //   }
-    // },
   },
 };
 </script>

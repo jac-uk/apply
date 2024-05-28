@@ -29,7 +29,7 @@
         />
 
         <div v-else-if="filteredPreferences.length">
-          <SelectionInput
+          <QuestionInput
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`jurisdiction-preferences_${itemIndex}`"
             :key="itemIndex"
@@ -56,6 +56,7 @@
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import QuestionInput from '@/components/QuestionInput/QuestionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
 
@@ -63,6 +64,7 @@ export default {
   name: 'CandidateFormJurisdictionPreferences',
   components: {
     SelectionInput,
+    QuestionInput,
   },
   mixins: [CandidateFormsMixIn],
   data() {
@@ -95,7 +97,7 @@ export default {
       }
     },
     getAnswers(config) {
-      if (config.answerSource === 'jurisdictions') {
+      if (config.answerSource === 'jurisdiction') {
         return this.vacancy.jurisdiction.map(item => ({ answer: item, id: item }));
       } else {
         return config.answers;

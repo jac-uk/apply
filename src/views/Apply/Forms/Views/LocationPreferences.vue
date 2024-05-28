@@ -20,28 +20,35 @@
         :data="application.locationPreferences[item.id]"
       />
     </dl>
-  </template>
+  </template>  
 </template>
 
 <script>
 import SelectionView from '@/components/SelectionInput/View.vue';
 import QuestionInputView from '@/components/QuestionInputView/QuestionInputView.vue';
-import { filteredPreferences } from '../WorkingPreferences/workingPreferencesHelper';
+import { filteredPreferences } from '../../WorkingPreferences/workingPreferencesHelper';
 
 export default {
-  name: 'LocationPreferences',
+  name: 'CandidateFormViewLocationPreferences',
   components: {
     SelectionView,
     QuestionInputView,
   },
   props: {
-    application: {
-      type: Object,
-      required: true,
-    },
     vacancy: {
       type: Object,
-      required: true,
+      required: false,
+      default: () => {},
+    },
+    application: {
+      type: Object,
+      required: false,
+      default: () => {},
+    },
+    localData: {
+      type: Object,
+      required: false,
+      default: () => {},
     },
   },
   computed: {
@@ -51,4 +58,3 @@ export default {
   },
 };
 </script>
-

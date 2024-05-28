@@ -29,7 +29,7 @@
         />
         
         <div v-else-if="filteredPreferences.length">
-          <SelectionInput
+          <QuestionInput
             v-for="(item, itemIndex) in filteredPreferences"
             :id="`location-preferences_${itemIndex}`"
             :key="itemIndex"
@@ -56,6 +56,7 @@
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import QuestionInput from '@/components/QuestionInput/QuestionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
 
@@ -63,6 +64,7 @@ export default {
   name: 'CandidateFormLocationPreferences',
   components: {
     SelectionInput,
+    QuestionInput,
   },
   mixins: [CandidateFormsMixIn],
   data() {

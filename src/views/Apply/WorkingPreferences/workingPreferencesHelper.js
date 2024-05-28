@@ -2,7 +2,8 @@
 
 export {
   filteredPreferences,
-  tidyData
+  tidyData,
+  isVersion1
 };
 
 function filteredPreferences(vacancy, formData, formId) {
@@ -80,4 +81,15 @@ function tidyData(preferences, data, preference) {
     }
   });
 
+}
+
+function isVersion1(preferences) {
+  if (
+    preferences
+    && preferences.length 
+    && Object.keys(preferences[0]).indexOf('allowLinkedQuestions') < 0
+  ) {
+    return true;
+  }
+  return false;
 }

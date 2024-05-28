@@ -51,14 +51,14 @@
 <script>
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import { shallowRef } from 'vue';
-import candidateAvailability from '@/components/CandidateFormViews/CandidateAvailability.vue';
-import characterChecks from '@/components/CandidateFormViews/CharacterChecks.vue';
-import commissionerConflicts from '@/components/CandidateFormViews/CommissionerConflicts.vue';
-import panelConflicts from '@/components/CandidateFormViews/PanelConflicts.vue';
-import reasonableAdjustments from '@/components/CandidateFormViews/ReasonableAdjustments.vue';
-import welshPosts from '@/components/CandidateFormViews/WelshPosts.vue';
-import locationPreferences from '@/components/CandidateFormViews/LocationPreferences.vue';
-import jurisdictionPreferences from '@/components/CandidateFormViews/JurisdictionPreferences.vue';
+import candidateAvailability from './Views/CandidateAvailability.vue';
+import characterChecks from './Views/CharacterChecks.vue';
+import commissionerConflicts from './Views/CommissionerConflicts.vue';
+import panelConflicts from './Views/PanelConflicts.vue';
+import reasonableAdjustments from './Views/ReasonableAdjustments.vue';
+import welshPosts from './Views/WelshPosts.vue';
+import locationPreferences from './Views/LocationPreferences.vue';
+import jurisdictionPreferences from './Views/JurisdictionPreferences.vue';
 export default {
   name: 'CandidateFormReview',
   mixins: [CandidateFormsMixIn],
