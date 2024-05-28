@@ -60,7 +60,7 @@
         <div v-if="!advertTypeFull">
           <p>
             <span class="govuk-body govuk-!-font-weight-bold">
-              Launch Date:
+              {{ language === LANGUAGES.WELSH ? 'Dyddiad lansio: ' : 'Launch Date: ' }}
             </span>
             <span
               v-if="vacancy.applicationOpenDate"
@@ -79,7 +79,9 @@
             <span
               class="govuk-body govuk-!-font-weight-bold"
             >
-              <span class="govuk-body govuk-!-font-weight-bold"> Closing Date: </span>
+              <span class="govuk-body govuk-!-font-weight-bold">
+                {{ language === LANGUAGES.WELSH ? 'Dyddiad cau: ' : 'Closing Date: ' }}
+              </span>
             </span>
             <span
               class="govuk-body"
