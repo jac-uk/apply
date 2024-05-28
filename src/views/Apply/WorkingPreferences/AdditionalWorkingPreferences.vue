@@ -61,7 +61,7 @@ import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
-import QuestionInput from '@/components/QuestionInput/QuestionInput.vue';
+import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
 import { filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
 

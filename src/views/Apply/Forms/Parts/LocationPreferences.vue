@@ -56,7 +56,7 @@
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
-import QuestionInput from '@/components/QuestionInput/QuestionInput.vue';
+import QuestionInput from '@/components/Form/QuestionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
 import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
 
