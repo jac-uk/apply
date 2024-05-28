@@ -114,6 +114,7 @@
           :path="uploadPath"
           label="Upload finished self assessment"
           required
+          :acceptable-extensions="['docx']"
         />
         <ActionButton
           :disabled="!canSave(formId)"
