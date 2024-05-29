@@ -2,7 +2,7 @@
   <div class="govuk-grid-row">
     <form
       ref="formRef"
-      @submit.prevent="save"
+      @submit.prevent="saveAndValidate"
     >
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
@@ -26,6 +26,7 @@
             :id="`applying-under-${vacancy.appliedSchedule}`"
             v-model="formData.applyingUnderSchedule2d"
             :label="`Are you applying under ${appliedSchedule}?`"
+            required
           >
             <span>
               <a
@@ -90,6 +91,7 @@
         <RepeatableFields
           v-model="formData.qualifications"
           :component="repeatableFields.Qualification"
+          required
         />
 
         <template v-if="notCompletedPupillage">
@@ -200,7 +202,7 @@ export default {
     },
   },
   methods: {
-    validate() {
+    async saveAndValidate() {
       if (this.notCompletedPupillage) {
         if (this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null) {
           this.$refs['practicing-certificate'].setError('Please provide a copy of your practicing and/or exemption certificate');
@@ -211,6 +213,7 @@ export default {
           this.$refs['exemption-certificate'].setError('');
         }
       }
+      this.save();
     },
   },
 };
