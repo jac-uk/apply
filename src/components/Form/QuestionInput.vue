@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import SingleChoice from './SingleChoice.vue';
-import MultipleChoice from './MultipleChoice.vue';
-import RankedChoice from './RankedChoice.vue';
+import SingleChoice from '../QuestionInput/SingleChoice.vue';
+import MultipleChoice from '../QuestionInput/MultipleChoice.vue';
+import RankedChoice from '../QuestionInput/RankedChoice.vue';
 import FormField from '@/components/Form/FormField.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import { isGapInIntegers } from '@/helpers/array';
