@@ -179,7 +179,7 @@ export default {
             }
           }
           if (this.config.minimumAnswerMode === 'exactly') {
-            if (this.modelValue.length !== this.config.minimumAnswerQuantity) {
+            if (this.modelValue.length != this.config.minimumAnswerQuantity) {
               this.setError(`Please choose exactly ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
               return false;
             }
