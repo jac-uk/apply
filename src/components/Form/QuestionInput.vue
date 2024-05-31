@@ -199,7 +199,7 @@ export default {
             }
           }
           if (this.config.minimumAnswerMode === 'exactly') {
-            if (Object.keys(this.modelValue).length !== this.config.minimumAnswerQuantity) {
+            if (Object.keys(this.modelValue).length != this.config.minimumAnswerQuantity) {
               this.setError(`Please select and rank exactly ${this.config.minimumAnswerQuantity} answers for ${this.label}`);
               return false;
             }
