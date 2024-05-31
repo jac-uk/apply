@@ -96,7 +96,13 @@ export default {
   methods: {
     getAnswers(config) {
       if (config.answerSource === 'jurisdiction') {
-        return this.vacancy.jurisdiction.map(item => ({ answer: item, id: item }));
+        return this.vacancy.jurisdiction.map(item => {
+          if (item === 'other') {
+            return { answer: this.vacancy.otherJurisdiction, id: item };
+          } else {
+            return { answer: item, id: item };
+          }
+        });
       } else {
         return config.answers;
       }

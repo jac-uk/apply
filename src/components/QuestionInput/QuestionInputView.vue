@@ -84,19 +84,31 @@ export default {
           if (!answerSource) return sortedAnswers;
           switch (this.config.questionType) {
           case 'single-choice':
-            sortedAnswers.push({ answer: this.$filters.lookup(this.data) });
+            if (this.data === 'other') {  // make this generic
+              sortedAnswers.push({ answer: this.answerSources.otherJurisdiction });
+            } else {
+              sortedAnswers.push({ answer: this.$filters.lookup(this.data) });
+            }
             break;
           case 'multiple-choice':
             answerSource.forEach(answer => {
               if (this.data.indexOf(answer) >= 0) {
-                sortedAnswers.push({ answer: this.$filters.lookup(answer) });
+                if (answer === 'other') {  // make this generic
+                  sortedAnswers.push({ answer: this.answerSources.otherJurisdiction });
+                } else {
+                  sortedAnswers.push({ answer: this.$filters.lookup(answer) });
+                }
               }
             });
             break;
           case 'ranked-choice':
             answerSource.forEach(answer => {
               if (Object.keys(this.data).indexOf(answer) >= 0) {
-                sortedAnswers.push({ answer: this.$filters.lookup(answer), rank: this.data[answer] });
+                if (answer === 'other') {  // make this generic
+                  sortedAnswers.push({ answer: this.answerSources.otherJurisdiction, rank: this.data[answer] });
+                } else {
+                  sortedAnswers.push({ answer: this.$filters.lookup(answer), rank: this.data[answer] });
+                }
               }
             });
             break;

@@ -8,7 +8,7 @@
       :id="`${id}-answer-${index}`"
       v-model="localVModel"
       :name="`${id}-answer-${index}`"
-      :value="config.answerSource ? answer.answer : (answer.id ? answer.id : answer.answer)"
+      :value="answer.id ? answer.id : answer.answer"
       type="checkbox"
       class="govuk-checkboxes__input"
     >
