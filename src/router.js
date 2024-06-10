@@ -961,6 +961,13 @@ const routes = [
     meta: {
       title: 'Sign In',
     },
+    beforeEnter: (to, from, next) => {
+      const isSignedIn = store.getters['auth/isSignedIn'];
+      if (isSignedIn) {
+        return next({ name: 'vacancies' });
+      }
+      return next();
+    },
   },
   {
     path: '/sign-up',
