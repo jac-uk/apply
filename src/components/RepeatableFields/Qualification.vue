@@ -23,6 +23,11 @@
         value="solicitor"
         label="Solicitor"
       />
+      <RadioItem
+        v-if="showNoLegal"
+        value="no-legal-qualification"
+        label="No legal qualification"
+      />
 
       <RadioItem
         v-if="otherQualificationsRequired"
@@ -36,7 +41,7 @@
       v-model="row.location"
       label="Where are you qualified?"
       hint="Choose 1 option."
-      required
+      :required="row.type!=='no-legal-qualification'"
     >
       <RadioItem
         value="england-wales"
@@ -118,7 +123,7 @@
         v-model="row.date"
         label="When did you qualify?"
         type="month"
-        required
+        :required="row.type!=='no-legal-qualification'"
       />
     </div>
 
@@ -151,6 +156,10 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+    showNoLegal: {
+      default: false,
+      type: Boolean,
     },
   },
   data() {

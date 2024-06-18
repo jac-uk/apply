@@ -12,6 +12,7 @@
         :row="row"
         :index="index"
         :url="url"
+        :show-no-legal="showNoLegal"
       >
         <template #removeButton>
           <button
@@ -71,6 +72,11 @@ export default {
       required: false,
       default: '',
       type: String,
+    },
+    showNoLegal: {
+      default: false,
+      required: false,
+      type: Boolean,
     },
   },
   emits: ['update:modelValue'],

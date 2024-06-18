@@ -91,6 +91,7 @@
         <RepeatableFields
           v-model="formData.qualifications"
           :component="repeatableFields.Qualification"
+          :show-no-legal="formData.applyingUnderSchedule2d"
           required
         />
 
