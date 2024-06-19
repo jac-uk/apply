@@ -164,7 +164,7 @@ export default {
   },
   extends: Form,
   mixins: [ApplyMixIn],
-  data(){
+  data() {
     const defaults = {
       qualifications: null,
       applyingUnderSchedule2d: null,
@@ -202,14 +202,22 @@ export default {
       return null;
     },
   },
+  watch: {
+    'formData.applyingUnderSchedule2d': function(newVal, oldVal) {
+      if (oldVal === true && newVal === false) {
+        this.formData.qualifications.forEach((qual)=>{
+          qual.type = null;
+        });
+      }
+    },
+  },
   methods: {
     async saveAndValidate() {
       if (this.notCompletedPupillage) {
         if (this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null) {
           this.$refs['practicing-certificate'].setError('Please provide a copy of your practicing and/or exemption certificate');
           this.$refs['exemption-certificate'].setError('Please provide a copy of your exemption and/or practicing certificate');
-        }
-        else {
+        } else {
           this.$refs['practicing-certificate'].setError('');
           this.$refs['exemption-certificate'].setError('');
         }
@@ -219,3 +227,4 @@ export default {
   },
 };
 </script>
+

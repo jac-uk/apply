@@ -288,7 +288,7 @@ const lookup = (value) => {
       'voluntary': 'Voluntary',
       'judicial-post': 'Judicial',
       'quasi-judicial-post': 'Quasi-judicial',
-      'no-legal-qualification': 'No legal qualification',
+      'no-legal-qualification': 'None of the above',
       // 'xxx': 'xxx',`
     };
 
