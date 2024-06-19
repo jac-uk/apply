@@ -26,7 +26,7 @@
       <RadioItem
         v-if="showNoLegal"
         value="no-legal-qualification"
-        label="No legal qualification"
+        label="None of the above"
       />
 
       <RadioItem
