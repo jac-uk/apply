@@ -91,7 +91,7 @@
         <RepeatableFields
           v-model="formData.qualifications"
           :component="repeatableFields.Qualification"
-          :show-no-legal="formData.applyingUnderSchedule2d"
+          :show-no-legal="formData.applyingUnderSchedule2d || formData.applyingUnderSchedule2Three"
           required
         />
 
@@ -204,6 +204,13 @@ export default {
   },
   watch: {
     'formData.applyingUnderSchedule2d': function(newVal, oldVal) {
+      if (oldVal === true && newVal === false) {
+        this.formData.qualifications.forEach((qual)=>{
+          qual.type = null;
+        });
+      }
+    },
+    'formData.applyingUnderSchedule2Three': function(newVal, oldVal) {
       if (oldVal === true && newVal === false) {
         this.formData.qualifications.forEach((qual)=>{
           qual.type = null;
