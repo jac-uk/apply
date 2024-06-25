@@ -1,5 +1,5 @@
 import { QUALIFYING_TEST, ASSESSOR_TYPES, NOT_COMPLETE_PUPILLAGE_REASONS, LANGUAGES, ASSESSMENT_METHOD, APPLICATION_FORM_PARTS } from '@/helpers/constants';
-
+import * as filters from '@jac-uk/jac-kit/filters/filters';
 const capitalize = (value) => {
   if (!value) return '';
   value = value.toString();
@@ -238,8 +238,6 @@ const lookup = (value) => {
       'salaried-court-judge': 'Salaried court judge',
       'salaried-tribunal-judge': 'Salaried tribunal judge',
       'scenario-test-qualifying-test': 'Scenario test qualifying test (QT)',
-      'schedule-23': 'Schedule 2(3)',
-      'schedule-2d': 'Schedule 2(d)',
       'scotland': 'Scotland',
       'scottish-ministers': 'Scottish ministers',
       'second-tier-immigration-and-asylum-chamber': 'Immigration and Asylum Chamber (second-tier)',
@@ -281,14 +279,11 @@ const lookup = (value) => {
       'white-black-african': 'White and Black African',
       'white-black-caribbean': 'White and Black Caribbean',
       'write': 'Write',
-      'schedule-2-d': 'Schedule 2(d)',
-      'schedule-2-3': 'Schedule 2(3)',
       'full-time': 'Full-time',
       'salaried-part-time': 'Salaried part-time',
       'voluntary': 'Voluntary',
       'judicial-post': 'Judicial',
       'quasi-judicial-post': 'Quasi-judicial',
-      'no-legal-qualification': 'None of the above',
       // 'xxx': 'xxx',`
     };
 
@@ -339,8 +334,16 @@ const lookup = (value) => {
     lookup[APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES] = 'Jurisdiction Preferences';
     lookup[APPLICATION_FORM_PARTS.WELSH_POSTS] = 'Welsh Posts';
 
-    return lookup[value] || value;
+    let found = lookup[value] || value;
+
+    // try to use jac-kit filters
+    if (value === found) {
+      found = filters.lookup(value);
+    }
+
+    return found;
   }
+
   // Default for unanswered question
   if (typeof value === 'undefined' || value === null) {
     return 'Answer not supplied';
