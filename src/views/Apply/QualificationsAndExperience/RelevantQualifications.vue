@@ -46,6 +46,7 @@
                 :id="`experience-under-${vacancy.appliedSchedule}`"
                 v-model="formData.experienceUnderSchedule2D"
                 label="Explain how you've gained experience in law."
+                required
               />
             </RadioItem>
 
@@ -78,6 +79,7 @@
                 :id="`experience-under-${vacancy.appliedSchedule}`"
                 v-model="formData.experienceUnderSchedule2Three"
                 label="Explain how you've gained experience in law."
+                required
               />
             </RadioItem>
 
