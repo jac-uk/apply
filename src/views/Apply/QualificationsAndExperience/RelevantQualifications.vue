@@ -59,6 +59,7 @@
             :id="`applying-under-${vacancy.appliedSchedule}`"
             v-model="formData.applyingUnderSchedule2Three"
             :label="`Are you applying under ${appliedSchedule}?`"
+            required
           >
             <span>
               <a
