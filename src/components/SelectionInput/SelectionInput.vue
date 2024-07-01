@@ -44,9 +44,9 @@
 </template>
 
 <script>
-import SingleChoice from '@/components/SelectionInput/SingleChoice.vue';
-import MultipleChoice from '@/components/SelectionInput/MultipleChoice.vue';
-import RankedChoice from '@/components/SelectionInput/RankedChoice.vue';
+import SingleChoice from './SingleChoice.vue';
+import MultipleChoice from './MultipleChoice.vue';
+import RankedChoice from './RankedChoice.vue';
 import FormField from '@/components/Form/FormField.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 

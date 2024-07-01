@@ -328,7 +328,7 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.application.progress.characterInformation = true;
+        this.application[`progress.${this.formId}`] = true;
         this.application.characterInformation = this.characterInformation;
         await this.$store.dispatch('application/save', this.application);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

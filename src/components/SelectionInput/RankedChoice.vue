@@ -18,7 +18,7 @@
         :for="`${id}-answer-${index}`"
         class="govuk-label govuk-checkboxes__label"
       >
-        {{ answer.answer }}
+        {{ answer.answer }} yyy
       </label>
       <select 
         v-if="selected.indexOf(answer.answer) >= 0"

@@ -891,9 +891,7 @@ export default {
     return {
       equalityAndDiversitySurvey: equalityAndDiversitySurvey,
       formId: 'equalityAndDiversitySurvey',
-      formData: {
-        progress: {},
-      },
+      formData: {},
     };
   },
   computed: {
@@ -913,7 +911,7 @@ export default {
     async save() {
       this.validate();
       if (this.isValid()) {
-        this.formData.progress[this.formId] = true;
+        this.formData[`progress.${this.formId}`] = true;
         this.formData.equalityAndDiversitySurvey = this.equalityAndDiversitySurvey;
         await this.$store.dispatch('application/save', this.formData);
         await this.$store.dispatch('candidate/saveEqualityAndDiversitySurvey', this.equalityAndDiversitySurvey);

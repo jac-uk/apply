@@ -1,4 +1,4 @@
-import { serverTimestamp, doc, collection } from '@firebase/firestore';
+import { serverTimestamp, doc, collection, updateDoc } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -22,14 +22,14 @@ export default {
     update: async ({ rootState, state }, data) => {
       const ref = doc(collectionRef,`${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
       data.lastUpdated = serverTimestamp();
-      await ref.update(data);
+      await updateDoc(ref, data);
     },
     submit: async ({ rootState, state }) => {
       const ref = doc(collectionRef, `${state.record.formId}/responses/${rootState.auth.currentUser.uid}`);
       const saveData = {};
       saveData.status = CANDIDATE_FORM_RESPONSE_STATUS.COMPLETED;
       saveData[`statusLog.${CANDIDATE_FORM_RESPONSE_STATUS.COMPLETED}`] = serverTimestamp();
-      await ref.update(saveData);
+      await updateDoc(ref, saveData);
     },
   },
   mutations: {

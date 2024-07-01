@@ -1,4 +1,5 @@
-import { query, collection, doc, where, serverTimestamp } from '@firebase/firestore';import { firestore } from '@/firebase';
+import { query, collection, doc, where, serverTimestamp, updateDoc } from '@firebase/firestore';
+import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 
@@ -30,7 +31,7 @@ export default {
         'statusLog.accepted': serverTimestamp(),
         'status': 'accepted',
       };
-      await ref.update(data);
+      await updateDoc(ref, data);
     },
   },
   mutations: {

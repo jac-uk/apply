@@ -12,20 +12,35 @@
 
         <ErrorSummary
           :errors="errors"
-          :show-save-button="true"
-          @save="save"
         />
 
         <SelectionInput
+          v-if="vacancy.jurisdictionQuestion"
           id="jurisdiction-preferences"
           v-model="formData.jurisdictionPreferences"
           :title="vacancy.jurisdictionQuestion"
           :answers="vacancy.jurisdictionQuestionAnswers"
           :type="vacancy.jurisdictionQuestionType"
         />
+        
+        <div v-else-if="filteredPreferences.length">
+          <QuestionInput
+            v-for="(item, itemIndex) in filteredPreferences"
+            :id="`jurisdiction-preferences_${itemIndex}`"
+            :key="itemIndex"
+            v-model="formData[formId][item.id]"
+            :title="item.question"
+            :answers="getAnswers(item)"
+            :config="item"
+            :type="item.questionType"
+            :label="item.question"
+            :required="item.questionRequired"
+            @update:model-value="tidyFormData(item)"
+          />
+        </div>
 
         <button
-          :disabled="!canSave(formId) || !!!formData.jurisdictionPreferences"
+          :disabled="!canSave(formId) || !formComplete"
           class="govuk-button info-btn--jurisditional-pref--save-and-continue"
         >
           Save and continue
@@ -40,28 +55,61 @@ import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import { filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'JurisdictionPreferences',
   components: {
     ErrorSummary,
     SelectionInput,
+    QuestionInput,
     BackLink,
   },
   extends: Form,
   mixins: [ApplyMixIn],
   data(){
+    const formId = 'jurisdictionPreferences';
     const defaults = {
-      jurisdictionPreferences: null,
+      [formId]: this.$store.state.vacancy.record[formId] ? {} : null,
       progress: {},
     };
-    const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
+    const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
     return {
-      formId: 'jurisdictionPreferences',
+      formId: formId,
       formData: formData,
     };
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy, this.formData, this.formId);
+    },
+    formComplete() {
+      if (this.filteredPreferences.length) {
+        return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
+      } else {
+        return this.formData[this.formId] ? true : false;
+      }
+    },
+  },
+  methods: {
+    getAnswers(config) {
+      if (config.answerSource === 'jurisdiction') {
+        return this.vacancy.jurisdiction.map(item => {
+          if (item === 'other') {
+            return { answer: this.vacancy.otherJurisdiction, id: item };
+          } else {
+            return { answer: item, id: item };
+          }
+        });
+      } else {
+        return config.answers;
+      }
+    },
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.formId], preference);
+    },
   },
 };
 </script>

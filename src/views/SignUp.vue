@@ -178,6 +178,7 @@ export default {
       })
         .catch((error) => {
           this.errors.push({ ref: 'email', message: error.message });
+          this.scrollToTop();
         });
     },
     makeFullName() {

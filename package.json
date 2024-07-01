@@ -6,6 +6,7 @@
     "dev": "vite --mode develop",
     "preview": "vite preview",
     "serve": "vite --mode develop",
+    "develop:serve": "vite --mode develop",
     "staging:serve": "vite --mode staging",
     "production:serve": "vite --mode production",
     "develop:build": "vite build --mode develop",

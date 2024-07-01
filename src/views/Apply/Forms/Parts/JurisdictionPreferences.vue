@@ -18,6 +18,7 @@
         />
 
         <SelectionInput
+          v-if="vacancy.jurisdictionQuestion"
           id="jurisdiction-preferences"
           v-model="formData.jurisdictionPreferences"
           :title="vacancy.jurisdictionQuestion"
@@ -26,6 +27,22 @@
           :messages="{ required: `Please enter a value for ${vacancy.jurisdictionQuestion}` }"
           required
         />
+
+        <div v-else-if="filteredPreferences.length">
+          <QuestionInput
+            v-for="(item, itemIndex) in filteredPreferences"
+            :id="`jurisdiction-preferences_${itemIndex}`"
+            :key="itemIndex"
+            v-model="formData[part][item.id]"
+            :title="item.question"
+            :answers="getAnswers(item)"
+            :config="item"
+            :type="item.questionType"
+            :label="item.question"
+            :required="item.questionRequired"
+            @update:model-value="tidyFormData(item)"
+          />
+        </div>
 
         <button
           class="govuk-button info-btn--jurisdiction-preferences--save-and-continue"
@@ -39,21 +56,31 @@
 <script>
 import { APPLICATION_FORM_PARTS } from '@/helpers/constants';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
+import QuestionInput from '@/components/Form/QuestionInput.vue';
 import CandidateFormsMixIn from '@/views/Apply/Forms/CandidateFormsMixIn';
+import { filteredPreferences, tidyData } from '../../WorkingPreferences/workingPreferencesHelper';
+
 export default {
   name: 'CandidateFormJurisdictionPreferences',
   components: {
     SelectionInput,
+    QuestionInput,
   },
   mixins: [CandidateFormsMixIn],
   data() {
-    const application = this.$store.getters['application/data']();
-    const formData = {
-      jurisdictionPreferences: application.jurisdictionPreferences,
+    const part = APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES;
+    const defaults = {
+      [part]: this.$store.state.vacancy.record[part] ? {} : null,
     };
+    const formData = { ...defaults, ...this.$store.getters['application/data'](defaults) };
     return {
       formData,
     };
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy, this.formData, this.part);
+    },
   },
   created() {
     this.setupPart(APPLICATION_FORM_PARTS.JURISDICTION_PREFERENCES);
@@ -69,6 +96,16 @@ export default {
         await this.savePart(true);
       }
     },
-  },  
+    getAnswers(config) {
+      if (config.answerSource === 'jurisdiction') {
+        return this.vacancy.jurisdiction.map(item => ({ answer: item, id: item }));
+      } else {
+        return config.answers;
+      }
+    },
+    tidyFormData(preference) {
+      return tidyData(this.filteredPreferences, this.formData[this.part], preference);
+    },
+  },
 };
 </script>

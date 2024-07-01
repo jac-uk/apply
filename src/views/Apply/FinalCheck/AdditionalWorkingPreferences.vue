@@ -1,79 +1,43 @@
 <template>
-  <div>
-    <dl
-      v-for="(item, index) in application.additionalWorkingPreferences"
+  <dl
+    v-if="isV1"
+    class="govuk-summary-list"
+  >
+    <SelectionView
+      v-for="(item, index) in vacancy.additionalWorkingPreferences"
       :key="index"
+      :question="item.question"
+      :type="item.questionType"
+      :data="application.additionalWorkingPreferences[index].selection"
+    />
+  </dl>
+
+  <template v-else>
+    <dl
+      v-for="item in vacancy.additionalWorkingPreferences"
+      :key="item"
       class="govuk-summary-list"
     >
-      <div class="govuk-summary-list__row">
-        <dt class="govuk-summary-list__key">
-          {{ vacancy.additionalWorkingPreferences[index].question }}
-          <span class="govuk-body govuk-!-font-size-19">
-            ({{ $filters.lookup(vacancy.additionalWorkingPreferences[index].questionType) }})
-          </span>
-        </dt>
-        <dd
-          v-if="vacancy.additionalWorkingPreferences[index].questionType === 'single-choice'"
-          class="govuk-summary-list__value"
-        >
-          <ul class="govuk-list">
-            <li :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, item.selection)">
-              {{ item.selection }}
-            </li>
-          </ul>
-        </dd>
-        <dd
-          v-if="vacancy.additionalWorkingPreferences[index].questionType === 'multiple-choice'"
-          class="govuk-summary-list__value"
-        >
-          <ul class="govuk-list">
-            <li>
-              <span
-                v-for="(option, count) in vacancy.additionalWorkingPreferences[index].answers"
-                :key="count"
-              >
-                <strong
-                  v-if="item.selection.includes(option.answer)"
-                  :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, option.answer)"
-                > {{ option.answer }} </strong>
-                <span
-                  v-else
-                  :data-welsh="getDataWelsh(vacancy.additionalWorkingPreferences[index].topic, option.answer)"
-                >
-                  {{ option.answer }}
-                </span>
-                <span
-                  v-if="count + 1 !== vacancy.additionalWorkingPreferences[index].answers.length"
-                >,</span>
-              </span>
-            </li>
-          </ul>
-        </dd>
-        <dd
-          v-if="vacancy.additionalWorkingPreferences[index].questionType === 'ranked-choice'"
-          class="govuk-summary-list__value"
-        >
-          <ul class="govuk-list">
-            <li>
-              <span
-                v-for="(choice, count) in item.selection"
-                :key="count"
-              >
-                <strong>{{ count + 1 }}.</strong> {{ choice }}
-              </span>
-            </li>
-          </ul>
-        </dd>
-      </div>
+      <QuestionInputView
+        :config="item"
+        :data="application.additionalWorkingPreferences[item.id]"
+      />
     </dl>
-  </div>
+  </template>
 </template>
 
 <script>
 import { getDataWelshId, getDataWelsh } from '@/helpers/language';
+import SelectionView from '@/components/SelectionInput/View.vue';
+import QuestionInputView from '@/components/QuestionInput/QuestionInputView.vue';
+import { filteredPreferences, isVersion1 } from '../WorkingPreferences/workingPreferencesHelper';
 
 export default {
   name: 'AdditionalWorkingPreferences',
+  components: {
+    SelectionView,
+    QuestionInputView,
+  },
   props: {
     application: {
       type: Object,
@@ -82,6 +46,17 @@ export default {
     vacancy: {
       type: Object,
       required: true,
+    },
+  },
+  data() {
+    const isV1 = isVersion1(this.$store.state.vacancy.record.additionalWorkingPreferences);
+    return {
+      isV1: isV1,
+    };
+  },
+  computed: {
+    filteredPreferences() {
+      return filteredPreferences(this.vacancy, this.application, 'additionalWorkingPreferences');
     },
   },
   methods: {
@@ -94,7 +69,7 @@ export default {
 
 <style lang="scss" scoped>
   .govuk-summary-list__value,
-  .govuk-summary-list__value:last-child,
+
   .govuk-summary-list__key {
     @include govuk-media-query($from: tablet) {
       width: auto;
