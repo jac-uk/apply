@@ -113,6 +113,7 @@ function applicationCurrentStep(exercise, application) {
   let currentStep;
   switch (application._processing.stage) {
     case 'review':
+    case 'shortlisting': // v2
       if (hasQualifyingTests(exercise)) {
         if (hasScenarioTest(exercise)) {
           if (application._processing.status === 'passedScenarioTest') {
@@ -126,8 +127,11 @@ function applicationCurrentStep(exercise, application) {
       }
       break;
     case 'shortlisted':
+    case 'selection': // v2
     case 'selected':
+    case 'scc': // v2
     case 'recommended':
+    case 'recommendation': // v2
       currentStep = application._processing.stage;
       break;
     default:
