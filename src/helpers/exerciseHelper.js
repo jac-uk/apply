@@ -79,7 +79,7 @@ export {
 // };
 
 // application process config
-const APPLICATION_STEPS = ['registration', 'passedTests', 'shortlisted', 'selected', 'recommended'];
+const APPLICATION_STEPS = ['registration', 'passedTests', 'shortlisted', 'selected', 'recommended', 'selection'];
 const APPLICATION_PARTS = [
   'personalDetails',
   'characterInformation',
@@ -173,6 +173,7 @@ function applicationContentSteps(data) {
   }
   steps.push('shortlisted');
   steps.push('selected');
+  steps.push('selection');
   steps.push('recommended');
   return steps;
 }
