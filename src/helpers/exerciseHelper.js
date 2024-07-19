@@ -111,31 +111,52 @@ const APPLICATION_PARTS = [
 function applicationCurrentStep(exercise, application) {
   if (!application._processing) { return null; }
   let currentStep;
-  switch (application._processing.stage) {
-    case 'review':
-    case 'shortlisting': // v2
-      if (hasQualifyingTests(exercise)) {
-        if (hasScenarioTest(exercise)) {
-          if (application._processing.status === 'passedScenarioTest') {
-            currentStep = 'passedTests';
-          }
-        } else {
-          if (application._processing.status === 'passedFirstTest') {
-            currentStep = 'passedTests';
+  if (exercise._processingVersion >= 2) {
+    switch (application._processing.stage) {
+      case EXERCISE_STAGE.SHORTLISTING:
+        if (hasQualifyingTests(exercise)) {
+          if (hasScenarioTest(exercise)) {
+            if (application._processing.status === APPLICATION_STATUS.SCENARIO_TEST_PASSED) {
+              currentStep = 'passedTests';
+            }
+          } else {
+            if (application._processing.status === APPLICATION_STATUS.QUALIFYING_TEST_PASSED) {
+              currentStep = 'passedTests';
+            }
           }
         }
-      }
-      break;
-    case 'shortlisted':
-    case 'selection': // v2
-    case 'selected':
-    case 'scc': // v2
-    case 'recommended':
-    case 'recommendation': // v2
-      currentStep = application._processing.stage;
-      break;
-    default:
-      currentStep = null;
+        break;
+      case EXERCISE_STAGE.SELECTION:
+      case EXERCISE_STAGE.SCC:
+      case EXERCISE_STAGE.RECOMMENDATION:
+        currentStep = application._processing.stage;
+        break;
+      default:
+        currentStep = null;
+    }
+  } else {
+    switch (application._processing.stage) {
+      case 'review':
+        if (hasQualifyingTests(exercise)) {
+          if (hasScenarioTest(exercise)) {
+            if (application._processing.status === APPLICATION_STATUS.PASSED_SCENARIO_TEST) {
+              currentStep = 'passedTests';
+            }
+          } else {
+            if (application._processing.status === APPLICATION_STATUS.PASSED_FIRST_TEST) {
+              currentStep = 'passedTests';
+            }
+          }
+        }
+        break;
+      case 'shortlisted':
+      case 'selected':
+      case 'recommended':
+        currentStep = application._processing.stage;
+        break;
+      default:
+        currentStep = null;
+    }
   }
   return currentStep;
 }
@@ -167,14 +188,23 @@ function exerciseStates(exercise) {
 }
 function applicationContentSteps(data) {
   if (!data) { return []; }
+  const exercise = data;
   const steps = [];
-  if (hasQualifyingTests(data)) {
-    steps.push('passedTests');
+  if (exercise._processingVersion >= 2) {
+    if (hasQualifyingTests(data)) {
+      steps.push('passedTests');
+    }
+    steps.push(EXERCISE_STAGE.SELECTION);
+    steps.push(EXERCISE_STAGE.SCC);
+    steps.push(EXERCISE_STAGE.RECOMMENDATION);
+  } else {
+    if (hasQualifyingTests(data)) {
+      steps.push('passedTests');
+    }
+    steps.push(EXERCISE_STAGE.SHORTLISTED);
+    steps.push(EXERCISE_STAGE.SELECTED);
+    steps.push(EXERCISE_STAGE.RECOMMENDED);
   }
-  steps.push('shortlisted');
-  steps.push('selected');
-  steps.push('selection');
-  steps.push('recommended');
   return steps;
 }
 function configuredApplicationContentSteps(exercise) {
