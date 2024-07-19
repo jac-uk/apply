@@ -5,6 +5,105 @@ const STATUS = {
   SELECTED: 'selected',
 };
 
+const EXERCISE_STAGE = {
+  // v2
+  SHORTLISTING: 'shortlisting',
+  SELECTION: 'selection',
+  SCC: 'scc',
+  RECOMMENDATION: 'recommendation',
+
+  // v2 proposed but then removed
+  APPLIED: 'applied', // to be removed
+  SELECTABLE: 'selectable', // to be removed
+
+  // v1
+  REVIEW: 'review', // to be replaced with shortlisting
+  SHORTLISTED: 'shortlisted', // to be replaced with selection
+  SELECTED: 'selected', // to be replaced with recommendation
+  RECOMMENDED: 'recommended', // to be replaced with recommendation
+  HANDOVER: 'handover', // to be removed/replaced with recommendation
+};
+
+const APPLICATION_STATUS = {
+  // v2
+  CRITICAL_ANALYSIS_PASSED: 'criticalAnalysisPassed',
+  CRITICAL_ANALYSIS_FAILED: 'criticalAnalysisFailed',
+  SITUATIONAL_JUDGEMENT_PASSED: 'situationalJudgementPassed',
+  SITUATIONAL_JUDGEMENT_FAILED: 'situationalJudgementFailed',
+  QUALIFYING_TEST_PASSED: 'qualifyingTestPassed',
+  QUALIFYING_TEST_FAILED: 'qualifyingTestFailed',
+  QUALIFYING_TEST_NOT_SUBMITTED: 'noTestSubmitted',
+  SCENARIO_TEST_PASSED: 'scenarioTestPassed',
+  SCENARIO_TEST_FAILED: 'scenarioTestFailed',
+  SCENARIO_TEST_NOT_SUBMITTED: 'noScenarioTestSubmitted',
+  SIFT_PASSED: 'siftPassed',
+  SIFT_FAILED: 'siftFailed',
+  TELEPHONE_ASSESSMENT_PASSED: 'telephoneAssessmentPassed',
+  TELEPHONE_ASSESSMENT_FAILED: 'telephoneAssessmentFailed',
+  SHORTLISTING_PASSED: 'shortlistingOutcomePassed',
+  SHORTLISTING_FAILED: 'shortlistingOutcomeFailed',
+  FULL_APPLICATION_NOT_SUBMITTED: 'fullApplicationNotSubmitted',
+  ELIGIBILITY_SCC_PASSED: 'eligibilitySCCPassed',
+  ELIGIBILITY_SCC_FAILED: 'eligibilitySCCFailed',
+  CHARACTER_AND_SELECTION_SCC_PASSED: 'characterAndSelectionSCCPassed',
+  CHARACTER_AND_SELECTION_SCC_FAILED: 'characterAndSelectionSCCFailed',
+  STATUTORY_CONSULTATION_PASSED: 'statutoryConsultationPassed',
+  STATUTORY_CONSULTATION_FAILED: 'statutoryConsultationFailed',
+  SELECTION_INVITED: 'selectionInvited',
+  REJECTED_INELIGIBLE_STATUTORY: 'rejectedIneligibleStatutory',
+  REJECTED_INELIGIBLE_ADDITIONAL: 'rejectedIneligibleAdditional',
+  REJECTED_CHARACTER: 'rejectedCharacter',
+  REJECTED_MERIT: 'rejectedMerit',
+  SELECTION_DAY_PASSED: 'selectionDayPassed',
+  SELECTION_DAY_FAILED: 'selectionDayFailed',
+  SELECTION_PASSED: 'selectionOutcomePassed',
+  SELECTION_FAILED: 'selectionOutcomeFailed',
+  SELECTION_OUTCOME_PASSED: 'selectionOutcomePassed',
+  SELECTION_OUTCOME_FAILED: 'selectionOutcomeFailed',
+  PASSED_RECOMMENDED: 'passedRecommended',
+  PASSED_NOT_RECOMMENDED: 'passedNotRecommended',
+  RECOMMENDED_IMMEDIATE: 'recommendedImmediate',
+  RECOMMENDED_FUTURE: 'recommendedFuture',
+  RECONSIDER: 'reconsider',
+  SECOND_STAGE_INVITED: 'secondStageInvited',
+  SECOND_STAGE_PASSED: 'empTiebreakerPassed',
+  SECOND_STAGE_FAILED: 'empTiebreakerFailed',
+  APPROVED_IMMEDIATE: 'approvedImmediate',
+  APPROVED_FUTURE: 'approvedFuture',
+  WITHDRAWN: 'withdrawn',
+
+  // shortlisting other
+  OTHER_PASSED: 'otherPassed',
+  OTHER_FAILED: 'otherFailed',
+
+  // v1 REVIEW
+  PASSED_SIFT: 'passedSift',
+  FAILED_SIFT: 'failedSift',
+  SUBMITTED_FIRST_TEST: 'submittedFirstTest',
+  FAILED_FIRST_TEST: 'failedFirstTest',
+  SUBMITTED_SCENARIO_TEST: 'submittedScenarioTest',
+  PASSED_FIRST_TEST: 'passedFirstTest',
+  FAILED_SCENARIO_TEST: 'failedScenarioTest',
+  PASSED_SCENARIO_TEST: 'passedScenarioTest',
+  FAILED_TELEPHONE_ASSESSMENT: 'failedTelephoneAssessment',
+  PASSED_TELEPHONE_ASSESSMENT: 'passedTelephoneAssessment',
+  NO_TEST_SUBMITTED: 'noTestSubmitted',
+  TEST_SUBMITTED_OVER_TIME: 'testSubmittedOverTime',
+  WITHDREW_APPLICATION: 'withdrewApplication',
+  REJECTED_AS_INELIGIBLE: 'rejectedAsIneligible',
+  // v1 SHORTLISTED
+  INVITED_TO_SELECTION_DAY: 'invitedToSelectionDay',
+  // v1 SELECTED
+  PASSED_SELECTION: 'passedSelection',
+  FAILED_SELECTION: 'failedSelection',
+  PASSED_BUT_NOT_RECOMMENDED: 'passedButNotRecommended',
+  // v1 RECOMMENDED
+  REJECTED_BY_CHARACTER: 'rejectedByCharacter',
+  APPROVED_FOR_IMMEDIATE_APPOINTMENT: 'approvedForImmediateAppointment',
+  APPROVED_FOR_FUTURE_APPOINTMENT: 'approvedForFutureAppointment',
+  SCC_TO_RECONSIDER: 'sccToReconsider',
+};
+
 const QUALIFYING_TEST = {
   TYPE: {
     SCENARIO: 'scenario',
@@ -141,5 +240,7 @@ export {
   ASSESSMENT_METHOD,
   APPLICATION_FORM_PARTS,
   CANDIDATE_FORM_RESPONSE_STATUS,
-  DEFAULT_WORD_COUNT
+  DEFAULT_WORD_COUNT,
+  EXERCISE_STAGE,
+  APPLICATION_STATUS
 };

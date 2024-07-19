@@ -1,6 +1,6 @@
 /*eslint func-style: ["error", "declaration"]*/
 import clone from 'clone';
-import { ASSESSMENT_METHOD } from '@/helpers/constants';
+import { ASSESSMENT_METHOD, EXERCISE_STAGE, APPLICATION_STATUS } from '@/helpers/constants';
 
 /** Used in Admin:-
 APPLICATION_STEPS,
@@ -87,7 +87,7 @@ const APPLICATION_STEPS = [
   EXERCISE_STAGE.RECOMMENDED, // v1
   EXERCISE_STAGE.SELECTION, // v2
   EXERCISE_STAGE.SCC, // v2
-  EXERCISE_STAGE.RECOMMENDATION // v2
+  EXERCISE_STAGE.RECOMMENDATION, // v2
 ];
 const APPLICATION_PARTS = [
   'personalDetails',
