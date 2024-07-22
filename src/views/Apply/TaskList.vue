@@ -31,6 +31,13 @@
         We need more information from you. Please update your application.
       </Banner>
 
+      <!-- <Banner
+        v-if="isMoreInformationNeeded && isApplicationComplete"
+        status="information"
+      >
+        Your application is complete and <strong>has been received</strong>. However you can continue to make changes until 13:00 on {{ $filters.formatDate(informationDeadline) }}.
+      </Banner> -->
+
       <TaskList>
         <TaskGroup
           title="Account profile"

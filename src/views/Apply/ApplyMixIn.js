@@ -19,7 +19,8 @@ import {
   hasStatementOfEligibility,
   hasStatementOfSuitability,
   hasSelfAssessment,
-  isApplicationVersionGreaterThan
+  isApplicationVersionGreaterThan,
+  informationDeadline
 } from '@/helpers/exerciseHelper';
 import { updateLangToTextNode } from '@/helpers/language';
 
@@ -133,6 +134,9 @@ export default {
     },
     isApplicationVersionGreaterThan2() {
       return isApplicationVersionGreaterThan(this.vacancy, 2);
+    },
+    informationDeadline() {
+      return informationDeadline(this.vacancy);
     },
   },
   mounted() {

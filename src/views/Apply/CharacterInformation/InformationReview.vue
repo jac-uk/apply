@@ -359,10 +359,9 @@ export default {
       if (this.isValid() && this.validateDeclaration()) {
         this.formData._versionNumber = 2; // @TODO check we need to include this and that here is the best place to do it
         const data = {
-          progress: {},
           characterInformationV2: this.formData,
         };
-        data.progress[this.formId] = this.isCharacterInformationComplete(this.formData);
+        data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.formData);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.formData);
         this.$router.push({ name: 'task-list' });

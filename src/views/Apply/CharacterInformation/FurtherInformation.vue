@@ -110,10 +110,9 @@ export default {
           this.characterInformation.furtherInformationDetails = null;
         }
         const data = {
-          progress: {},
           characterInformationV2: this.characterInformation,
         };
-        data.progress[this.formId] = this.isCharacterInformationComplete(this.characterInformation);
+        data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         this.$router.push({ name: 'character-information-review' });

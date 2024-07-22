@@ -22,7 +22,7 @@ export default {
           where('exerciseId', '==', rootState.vacancy.record.id),
           limit(1)
         );
-      const docSnap = await getDocs(snapshotRef);
+        const docSnap = await getDocs(snapshotRef);
         if (!docSnap.empty) {
           return dispatch('bindRef', doc(collectionRef, docSnap.docs[0].id)); // @todo refine this!
         } else {
