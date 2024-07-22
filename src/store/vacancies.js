@@ -1,4 +1,4 @@
-import { collection, query, where, orderBy } from '@firebase/firestore';
+import { collection, query, where, orderBy, documentId } from '@firebase/firestore';
 import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
@@ -17,7 +17,7 @@ export default {
       if (params && params.vacancyIds.length) {
         firestoreRef = query(
           firestoreRef,
-          where(firestore.FieldPath.documentId(), 'in', params.vacancyIds)
+          where(documentId(), 'in', params.vacancyIds)
         );
         return bindFirestoreRef('records', firestoreRef, { serialize: vuexfireSerialize });
       } else {
