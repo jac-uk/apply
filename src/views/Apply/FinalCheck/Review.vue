@@ -642,7 +642,6 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   <div v-if="selfAssessmentSections">
-                    {{ selfAssessmentSections }}
                     <div
                       v-for="(section, i) in selfAssessmentSections"
                       :key="i"
