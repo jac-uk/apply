@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
 
 export default {
   name: 'LocationPreferences',
@@ -85,8 +85,16 @@ export default {
     filteredPreferences() {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
+    isV1() {
+      return isVersion1(this.filteredPreferences);
+    },
     formComplete() {
-      return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
+      if (this.isV1) {
+        // version 1 all questions are optional
+        return true;
+      } else {
+        return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
+      }
     },
   },
   methods: {
