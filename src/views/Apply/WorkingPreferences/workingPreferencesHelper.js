@@ -61,10 +61,6 @@ function isAllRequiredFilled(filteredPreferences, formData, formId) {
     const filledPreferenceIds = _.keys(formData[formId]);
     const unfilledRequiredPreferenceIds = _.difference(requiredPreferenceIds, filledPreferenceIds);
     const isAllRequiredFilled = unfilledRequiredPreferenceIds.length === 0;
-    console.log('requiredPreferenceIds', requiredPreferenceIds);
-    console.log('filledPreferenceIds', filledPreferenceIds);
-    console.log('unfilledRequiredPreferences', unfilledRequiredPreferenceIds);
-
     return isAllRequiredFilled;
   } else {
     return formData[formId] ? true : false;
