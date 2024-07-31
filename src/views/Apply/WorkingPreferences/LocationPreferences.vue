@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Location preferences123
+          Location preferences
         </h1>
 
         <ErrorSummary
