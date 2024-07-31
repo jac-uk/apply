@@ -2,9 +2,12 @@
 
 export {
   filteredPreferences,
+  isAllRequiredFilled,
   tidyData,
   isVersion1
 };
+
+import _ from 'lodash';
 
 function filteredPreferences(vacancy, formData, formId) {
   if (!vacancy) return [];
@@ -51,6 +54,23 @@ function filteredPreferences(vacancy, formData, formId) {
   return mainQuestions.concat(linkedQuestions);
 }
 
+function isAllRequiredFilled(filteredPreferences, formData, formId) {
+  const requiredPreferences = filteredPreferences.filter((p) => p.questionRequired);
+  if (filteredPreferences.length) {
+    const requiredPreferenceIds = _.map(requiredPreferences, 'id');
+    const filledPreferenceIds = _.keys(formData[formId]);
+    const unfilledRequiredPreferenceIds = _.difference(requiredPreferenceIds, filledPreferenceIds);
+    const isAllRequiredFilled = unfilledRequiredPreferenceIds.length === 0;
+    console.log('requiredPreferenceIds', requiredPreferenceIds);
+    console.log('filledPreferenceIds', filledPreferenceIds);
+    console.log('unfilledRequiredPreferences', unfilledRequiredPreferenceIds);
+
+    return isAllRequiredFilled;
+  } else {
+    return formData[formId] ? true : false;
+  }
+}
+
 function tidyData(preferences, data, preference) {
   // check whether we can remove preference that was just updated
   if (preference) {
@@ -86,7 +106,7 @@ function tidyData(preferences, data, preference) {
 function isVersion1(preferences) {
   if (
     preferences
-    && preferences.length 
+    && preferences.length
     && Object.keys(preferences[0]).indexOf('allowLinkedQuestions') < 0
   ) {
     return true;

@@ -22,7 +22,7 @@
           :answers="vacancy.jurisdictionQuestionAnswers"
           :type="vacancy.jurisdictionQuestionType"
         />
-        
+
         <div v-else-if="filteredPreferences.length">
           <QuestionInput
             v-for="(item, itemIndex) in filteredPreferences"
@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { filteredPreferences, tidyData } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'JurisdictionPreferences',
@@ -86,11 +86,7 @@ export default {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
     formComplete() {
-      if (this.filteredPreferences.length) {
-        return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
-      } else {
-        return this.formData[this.formId] ? true : false;
-      }
+      return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
     },
   },
   methods: {

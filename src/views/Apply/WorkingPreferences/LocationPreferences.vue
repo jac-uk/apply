@@ -7,7 +7,7 @@
       <div class="govuk-grid-column-two-thirds">
         <BackLink />
         <h1 class="govuk-heading-xl">
-          Location preferences
+          Location preferences123
         </h1>
 
         <ErrorSummary
@@ -40,7 +40,7 @@
         </div>
 
         <button
-          :disabled="!canSave(formId)"
+          :disabled="!canSave(formId) || !formComplete"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { filteredPreferences, tidyData } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'LocationPreferences',
@@ -84,6 +84,9 @@ export default {
   computed: {
     filteredPreferences() {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
+    },
+    formComplete() {
+      return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
     },
   },
   methods: {
