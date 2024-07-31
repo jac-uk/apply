@@ -40,7 +40,7 @@
         </div>
 
         <button
-          :disabled="!canSave(formId) || !formComplete"
+          :disabled="disabledSave"
           class="govuk-button info-btn--location-pref--save-and-continue"
         >
           Save and continue
@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { isAllRequiredFilled, filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'LocationPreferences',
@@ -86,14 +86,18 @@ export default {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
     isV1() {
-      return isVersion1(this.filteredPreferences);
+      return !!this.vacancy.locationQuestion;
     },
     formComplete() {
+      return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
+    },
+    disabledSave() {
+      // if v1 all location preference is optional
       if (this.isV1) {
-        // version 1 all questions are optional
-        return true;
+        return false;
       } else {
-        return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
+        // if v2 it should validate mandatory questions
+        return (!this.canSave(this.formId) || !this.formComplete);
       }
     },
   },

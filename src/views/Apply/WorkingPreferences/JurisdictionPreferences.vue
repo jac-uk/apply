@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { isAllRequiredFilled, filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
 
 export default {
   name: 'JurisdictionPreferences',
@@ -86,7 +86,7 @@ export default {
       return filteredPreferences(this.vacancy, this.formData, this.formId);
     },
     isV1() {
-      return isVersion1(this.filteredPreferences);
+      return !!this.vacancy.jurisdictionQuestion;
     },
     formComplete() {
       if (this.isV1) {
