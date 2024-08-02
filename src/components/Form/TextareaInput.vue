@@ -49,6 +49,7 @@
 import FormField from '@/components/Form/FormField.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import CustomHTML from '@/components/CustomHTML.vue';
+import _ from 'lodash';
 
 export default {
   compatConfig: {
@@ -120,11 +121,15 @@ export default {
   },
 
   methods: {
-    handleLimit(e){
-      if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
-        this.handleValidate();
-      }
-    },
+    handleLimit: _.debounce(
+      function(e) {
+        if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
+          this.handleValidate();
+          console.log('handle limit');
+        }
+      },
+      1000
+    ),
   },
 };
 </script>
