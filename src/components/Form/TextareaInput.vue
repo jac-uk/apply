@@ -125,7 +125,6 @@ export default {
       function(e) {
         if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
           this.handleValidate();
-          console.log('handle limit');
         }
       },
       1000
