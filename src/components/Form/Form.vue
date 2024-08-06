@@ -34,6 +34,11 @@ export default {
   methods: {
     async validate() {
       this.emitter.emit('validate');
+      this.update();
+      if (!this.isValid()) {
+        // scroll to error summary if there are errors
+        this.scrollToErrorSummary();
+      }
     },
     handleError(payload) {
       this.errorObject[payload.id] = payload.message;
@@ -45,25 +50,25 @@ export default {
       }
 
       if (!this.isValid()) {
-        this.updateAndScroll();
+        this.update();
       }
     },
     handleWarning(payload) {
       this.warningObject = { id: payload.id, message: payload.message };
       if (payload.message) {
-        this.updateAndScroll();
+        this.update();
       }
     },
-    updateAndScroll() {
+    update() {
       this.$nextTick(() => {
         updateLangToTextNode(document.querySelector('#main-content'), this.language);
-        this.scrollToErrorSummary();
       });
     },
     scrollToErrorSummary(){
       //This is just scrolling to top of page
-      window.setTimeout( ()=>{ this.$el.scrollIntoView(true); }, 50 );
-
+      window.setTimeout(() => {
+        this.$el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
     },
     isValid() {
       return this.errors.length === 0;
