@@ -63,7 +63,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { filteredPreferences, tidyData, isVersion1 } from './workingPreferencesHelper';
+import { filteredPreferences, isAllRequiredFilled, tidyData, isVersion1 } from './workingPreferencesHelper';
 
 export default {
   name: 'AdditionalWorkingPreferences',
@@ -107,11 +107,7 @@ export default {
       if (this.isV1) {
         return this.v1FormData.length ===  this.filteredPreferences.length;
       } else {
-        if (this.filteredPreferences.length) {
-          return this.filteredPreferences.length === Object.keys(this.formData[this.formId]).length;
-        } else {
-          return this.formData[this.formId] ? true : false;
-        }
+        return isAllRequiredFilled(this.filteredPreferences, this.formData, this.formId);
       }
     },
   },
