@@ -118,6 +118,7 @@ export default {
       },
     },
   },
+
   methods: {
     handleLimit(e){
       if (this.wordLimit && [8, 46].indexOf(e.keyCode) === -1) {
