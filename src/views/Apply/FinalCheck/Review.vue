@@ -876,9 +876,22 @@
             v-if="hasStatementOfEligibility || hasStatementOfSuitability || hasSelfAssessment"
             class="govuk-!-margin-top-9"
           >
-            <h2 class="govuk-heading-l">
-              Additional Selection Criteria
-            </h2>
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Additional Selection Criteria
+              </h2>
+              <RouterLink
+                v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'data-confirmation'}"
+              >
+                Change
+              </RouterLink>
+            </div>
 
             <dl class="govuk-summary-list">
               <div
