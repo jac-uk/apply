@@ -598,6 +598,46 @@
             </dl>
           </div>
 
+          <div
+            v-if="hasStatementOfEligibility || hasStatementOfSuitability || hasSelfAssessment"
+            class="govuk-!-margin-top-9"
+          >
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-l"
+                style="display:inline-block;"
+              >
+                Additional Selection Criteria
+              </h2>
+              <RouterLink
+                v-if="canEdit && currentApplicationParts.selfAssessmentCompetencies"
+                class="govuk-link govuk-body-m change-link"
+                style="display:inline-block;"
+                :to="{name: 'data-confirmation'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+
+            <dl class="govuk-summary-list">
+              <div
+                v-for="(item, index) in application.selectionCriteriaAnswers"
+                :key="index"
+                class="govuk-summary-list__row"
+              >
+                <dt class="govuk-summary-list__key">
+                  {{ vacancy.selectionCriteria[index].title }}
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  <span v-if="item.answer">
+                    {{ item.answerDetails }}
+                  </span>
+                  <span v-else>I do not meet this requirement</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
           <div v-if="applicationParts.selfAssessmentCompetencies">
             <div class="govuk-!-margin-top-9">
               <h2
@@ -867,33 +907,6 @@
                   <div v-if="commissionerConflict.hasRelationship">
                     {{ commissionerConflict.details }}
                   </div>
-                </dd>
-              </div>
-            </dl>
-          </div>
-
-          <div
-            v-if="hasStatementOfEligibility || hasStatementOfSuitability || hasSelfAssessment"
-            class="govuk-!-margin-top-9"
-          >
-            <h2 class="govuk-heading-l">
-              Additional Selection Criteria
-            </h2>
-
-            <dl class="govuk-summary-list">
-              <div
-                v-for="(item, index) in application.selectionCriteriaAnswers"
-                :key="index"
-                class="govuk-summary-list__row"
-              >
-                <dt class="govuk-summary-list__key">
-                  {{ vacancy.selectionCriteria[index].title }}
-                </dt>
-                <dd class="govuk-summary-list__value">
-                  <span v-if="item.answer">
-                    {{ item.answerDetails }}
-                  </span>
-                  <span v-else>I do not meet this requirement</span>
                 </dd>
               </div>
             </dl>
