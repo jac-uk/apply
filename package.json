@@ -72,7 +72,7 @@
     "vite": "^5.0.13",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^1.0.0",
-    "webpack": "^5.88.2",
+    "webpack": "^5.94.0",
     "y18n": ">=4.0.1"
   },
   "engines": {
