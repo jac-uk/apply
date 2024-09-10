@@ -1,8 +1,8 @@
 <template>
   <div>
     <dl
-      v-for="item in application.qualifications"
-      :key="item.name"
+      v-for="(qualification, index) in application.qualifications"
+      :key="qualification.name"
       class="govuk-summary-list govuk-!-margin-bottom-0"
     >
       <div class="govuk-summary-list__row">
@@ -11,7 +11,7 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>{{ $filters.lookup(item.type) }}</li>
+            <li>{{ $filters.lookup(qualification.type) }}</li>
           </ul>
         </dd>
       </div>
@@ -22,26 +22,41 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li>{{ $filters.lookup(item.location) }}</li>
+            <li>{{ $filters.lookup(qualification.location) }}</li>
           </ul>
         </dd>
       </div>
 
       <div
-        v-if="item.type === 'barrister' && item.calledToBarDate"
+        v-if="qualification.type !== 'barrister' && qualification.date"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
-          Date called to the Bar 
+          Date qualified
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ $filters.formatDate(item.calledToBarDate) }}</li>
+            <li> {{ $filters.formatDate(qualification.date) }}</li>
           </ul>
         </dd>
       </div>
 
       <div
+        v-if="qualification.type === 'barrister' && qualification.calledToBarDate"
+        class="govuk-summary-list__row"
+      >
+        <dt class="govuk-summary-list__key">
+          Date called to the Bar
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <ul class="govuk-list">
+            <li> {{ $filters.formatDate(qualification.calledToBarDate) }}</li>
+          </ul>
+        </dd>
+      </div>
+
+      <div
+        v-if="qualification.type === 'barrister' && (qualification.hasOwnProperty('completedPupillage'))"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -50,18 +65,18 @@
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
             <li>
-              {{ $filters.toYesNo(item.completedPupillage) }}
+              {{ $filters.toYesNo(qualification.completedPupillage) }}
             </li>
           </ul>
         </dd>
       </div>
 
       <div
-        v-if="item.completedPupillage && item.date"
+        v-if="qualification.type === 'barrister' && qualification.completedPupillage && (qualification.hasOwnProperty('date'))"
         class="govuk-summary-list__row"
       >
         <dt
-          v-if="item.type === 'barrister'"
+          v-if="qualification.type === 'barrister'"
           class="govuk-summary-list__key"
         >
           Date completed pupillage
@@ -74,13 +89,13 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li> {{ $filters.formatDate(item.date) }}</li>
+            <li> {{ $filters.formatDate(qualification.date) }}</li>
           </ul>
         </dd>
       </div>
 
       <div
-        v-if="!item.completedPupillage && item.details"
+        v-if="qualification.type === 'barrister' && !qualification.completedPupillage && qualification.details"
         class="govuk-summary-list__row"
       >
         <dt class="govuk-summary-list__key">
@@ -88,15 +103,19 @@
         </dt>
         <dd class="govuk-summary-list__value">
           <ul class="govuk-list">
-            <li v-if="item.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
-              {{ item.details }}
+            <li v-if="qualification.notCompletePupillageReason === NOT_COMPLETE_PUPILLAGE_REASONS.OTHER">
+              {{ qualification.details }}
             </li>
             <li v-else>
-              {{ $filters.lookup(item.notCompletePupillageReason) }}
+              {{ $filters.lookup(qualification.notCompletePupillageReason) }}
             </li>
           </ul>
         </dd>
       </div>
+      <hr
+        v-if="index < application.qualifications.length - 1"
+        class="govuk-section-break govuk-section-break--l"
+      >
     </dl>
   </div>
 </template>
