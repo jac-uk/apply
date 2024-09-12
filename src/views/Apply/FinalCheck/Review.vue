@@ -5,7 +5,10 @@
       @submit.prevent="save"
     >
       <div class="govuk-grid-column-two-thirds">
-        <BackLink class="govuk-!-margin-top-0" />
+        <BackLink
+          class="govuk-!-margin-top-0"
+          title="Applications"
+        />
 
         <Countdown
           v-if="isVacancyOpen"
