@@ -159,7 +159,7 @@ export default {
       return this.$store.state.applications.records;
     },
   },
-  created() {
+  mounted() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
     this.$store.dispatch('candidateForms/bind');
