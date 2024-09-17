@@ -203,7 +203,6 @@ export default {
       this.validate();
       if (this.isValid()) {
         const data = this.$store.getters['candidate/personalDetails']();
-        let isSuccess = true;
 
         // update displayName in authentication database
         const fullName = this.getFullName();
@@ -217,13 +216,11 @@ export default {
 
         if (this.personalDetails.email !== data.email) {
           // update email in authentication database
-          isSuccess = await this.updateEmail(data.email, this.personalDetails.email);
+          await this.updateEmail(data.email, this.personalDetails.email);
         }
 
-        if (isSuccess) {
-          await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-          this.$router.push({ name: 'profile' });
-        }
+        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        this.$router.push({ name: 'profile' });
       }
     },
     async updateEmail(currentEmailAddress, newEmailAddress) {
