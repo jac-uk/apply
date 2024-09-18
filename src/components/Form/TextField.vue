@@ -37,7 +37,15 @@
       :id="id"
       :error-message="errorMessage"
     />
+
+    <div v-if="$slots['editable-once'] && text">
+      <slot
+        name="editable-once"
+      />
+    </div>
+
     <input
+      v-else
       :id="id"
       v-model="text"
       class="govuk-input"

@@ -68,7 +68,19 @@
           label="Email address"
           type="email"
           required
-        />
+        >
+          <template #editable-once>
+            <div
+              style="display: flex; justify-content: space-between; align-items: center;"
+            >
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ personalDetails.email }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </TextField>
 
         <TextField
           id="phone"
@@ -81,22 +93,45 @@
         <DateInput
           id="date-of-birth"
           v-model="personalDetails.dateOfBirth"
-          required
           :min-date="new Date('1/01/1900')"
           :max-date="new Date()"
           label="Date of birth"
           hint="For example, 27 3 1964"
-        />
+          required
+        >
+          <template #editable-once>
+            <div
+              style="display: flex; justify-content: space-between; align-items: center;"
+            >
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ formatDate(personalDetails.dateOfBirth) }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </DateInput>
 
         <TextField
           id="national-insurance-number"
           v-model="personalDetails.nationalInsuranceNumber"
           label="National Insurance number"
           hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
-          class="govuk-!-width-one-half"
           type="nino"
           required
-        />
+        >
+          <template #editable-once>
+            <div
+              style="display: flex; justify-content: space-between; align-items: center;"
+            >
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ personalDetails.nationalInsuranceNumber }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </TextField>
 
         <RadioGroup
           id="citizenship"
@@ -177,7 +212,9 @@ import TextareaInput from '@/components/Form/TextareaInput.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
 import BackLink from '@/components/BackLink.vue';
+import CandidateProfileLink from '@/components/CandidateProfileLink.vue';
 import { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
+import { formatDate } from '@/helpers/date';
 
 export default {
   name: 'PersonalDetails',
@@ -189,9 +226,13 @@ export default {
     RadioGroup,
     RadioItem,
     BackLink,
+    CandidateProfileLink,
   },
   extends: Form,
   mixins: [ApplyMixIn],
+  setup() {
+    return { formatDate };
+  },
   data(){
     const defaults = {
       title: '',
