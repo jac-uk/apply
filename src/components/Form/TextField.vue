@@ -38,7 +38,7 @@
       :error-message="errorMessage"
     />
 
-    <div v-if="$slots['editable-once'] && text">
+    <div v-if="$slots['editable-once'] && !isInitiallyEmpty">
       <slot
         name="editable-once"
       />
@@ -101,6 +101,11 @@ export default {
     },
   },
   emits: ['update:modelValue'],
+  data(){
+    return {
+      isInitiallyEmpty: this.modelValue === '' || this.modelValue === null,
+    };
+  },
   computed: {
     text: {
       get() {

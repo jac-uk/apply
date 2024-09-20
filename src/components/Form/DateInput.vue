@@ -48,7 +48,7 @@
         class="govuk-date-input"
       >
         <template v-if="!isOngoingInput">
-          <div v-if="$slots['editable-once'] && hasDate">
+          <div v-if="$slots['editable-once'] && !isInitiallyEmpty">
             <slot
               name="editable-once"
             />
@@ -198,6 +198,7 @@ export default {
       day: null,
       month: null,
       year: null,
+      isInitiallyEmpty: this.modelValue === '' || this.modelValue === null,
     };
   },
   computed: {
@@ -264,9 +265,6 @@ export default {
           this.year = value.getUTCFullYear();
         }
       },
-    },
-    hasDate() {
-      return this.dayInput && this.monthInput && this.yearInput;
     },
   },
   watch: {
