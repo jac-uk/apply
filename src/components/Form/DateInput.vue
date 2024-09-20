@@ -90,7 +90,6 @@
                   v-model.lazy="monthInput"
                   class="govuk-input govuk-date-input__input govuk-input--width-2"
                   type="number"
-                  :disabled="disabled"
                   @input="changeMonth"
                 >
               </div>
