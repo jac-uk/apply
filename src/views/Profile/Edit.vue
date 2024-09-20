@@ -155,8 +155,9 @@
 </template>
 
 <script>
+import { updateProfile } from 'firebase/auth';
 import { httpsCallable } from '@firebase/functions';
-import { functions } from '@/firebase';
+import { auth, functions } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
@@ -202,16 +203,24 @@ export default {
       this.validate();
       if (this.isValid()) {
         const data = this.$store.getters['candidate/personalDetails']();
-        let isSuccess = true;
-        if (this.personalDetails.email !== data.email) {
-          // update email in authentication database
-          isSuccess = await this.updateEmail(data.email, this.personalDetails.email);
+
+        // update displayName in authentication database
+        const fullName = this.getFullName();
+        if (fullName && this.$store.state.auth.currentUser?.displayName !== fullName) {
+          await this.updateProfile({ displayName: fullName });
+          await auth.currentUser.reload(); // reload to get new displayName
+          const newUser = { ...auth.currentUser };
+          newUser.displayName = fullName;
+          await this.$store.dispatch('auth/setCurrentUser', newUser);
         }
 
-        if (isSuccess) {
-          await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-          this.$router.push({ name: 'profile' });
+        if (this.personalDetails.email !== data.email) {
+          // update email in authentication database
+          await this.updateEmail(data.email, this.personalDetails.email);
         }
+
+        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+        this.$router.push({ name: 'profile' });
       }
     },
     async updateEmail(currentEmailAddress, newEmailAddress) {
@@ -238,6 +247,21 @@ export default {
       }
 
       return isSuccess;
+    },
+    getFullName() {
+      const names = [];
+      if (this.personalDetails.firstName) names.push(this.personalDetails.firstName);
+      if (this.personalDetails.lastName) names.push(this.personalDetails.lastName);
+      return names.join(' ');
+    },
+    async updateProfile({ displayName }) {
+      try {
+        await updateProfile(auth.currentUser, {
+          displayName,
+        });
+      } catch (error) {
+        // console.error(error);
+      }
     },
   },
 };
