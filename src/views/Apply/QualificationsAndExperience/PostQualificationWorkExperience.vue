@@ -131,6 +131,16 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
+
+    // check if candidate has filled post qualification experience before
+    const candidatePostQualificationExperience = this.$store.getters['candidate/postQualificationExperience']();
+    if (!formData.experience && candidatePostQualificationExperience?.experience) {
+      formData.experience = candidatePostQualificationExperience.experience;
+    }
+    if (!formData.employmentGaps && candidatePostQualificationExperience?.employmentGaps) {
+      formData.employmentGaps = candidatePostQualificationExperience.employmentGaps;
+    }
+
     const experiences = this.sortExperiences(this.getExperiences(formData));
     let editingIndex = null;
     if (experiences.length === 0) {
@@ -209,6 +219,10 @@ export default {
           return res;
         });
       this.$store.dispatch('application/save', this.formData);
+      this.$store.dispatch('candidate/savePostQualificationExperience', {
+        experience: this.formData.experience,
+        employmentGaps: this.formData.employmentGaps,
+      });
     },
     handleRowAdd() {
       this.experiences.push({});

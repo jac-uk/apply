@@ -26,7 +26,7 @@ export default {
       await bindFirestoreRef('personalDetails', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('characterInformation', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
-      await bindFirestoreRef('qualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/qualifications`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('relevantQualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/relevantQualifications`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
       return;
     }),
@@ -34,7 +34,7 @@ export default {
       await unbindFirestoreRef('personalDetails');
       await unbindFirestoreRef('characterInformation');
       await unbindFirestoreRef('equalityAndDiversitySurvey');
-      await unbindFirestoreRef('qualifications');
+      await unbindFirestoreRef('relevantQualifications');
       await unbindFirestoreRef('postQualificationExperience');
       return;
     }),
@@ -55,8 +55,8 @@ export default {
       const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`);
       await setDoc(ref, data);
     },
-    saveQualifications: async ({ rootState }, data) => {
-      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/qualifications`);
+    saveRelevantQualifications: async ({ rootState }, data) => {
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/relevantQualifications`);
       await setDoc(ref, data);
     },
     savePostQualificationExperience: async ({ rootState }, data) => {
@@ -73,7 +73,7 @@ export default {
     personalDetails: null,
     characterInformation: null,
     equalityAndDiversitySurvey: null,
-    qualifications: null,
+    relevantQualifications: null,
     postQualificationExperience: null,
   },
   getters: {
@@ -86,8 +86,8 @@ export default {
     equalityAndDiversitySurvey: (state) => () => {
       return clone(state.equalityAndDiversitySurvey);
     },
-    qualifications: (state) => () => {
-      return clone(state.qualifications);
+    relevantQualifications: (state) => () => {
+      return clone(state.relevantQualifications);
     },
     postQualificationExperience: (state) => () => {
       return clone(state.postQualificationExperience);
