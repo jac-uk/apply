@@ -37,7 +37,15 @@
       :id="id"
       :error-message="errorMessage"
     />
+
+    <div v-if="$slots['editable-once'] && !isInitiallyEmpty">
+      <slot
+        name="editable-once"
+      />
+    </div>
+
     <input
+      v-else
       :id="id"
       v-model="text"
       class="govuk-input"
@@ -93,6 +101,11 @@ export default {
     },
   },
   emits: ['update:modelValue'],
+  data(){
+    return {
+      isInitiallyEmpty: this.modelValue === '' || this.modelValue === null,
+    };
+  },
   computed: {
     text: {
       get() {
