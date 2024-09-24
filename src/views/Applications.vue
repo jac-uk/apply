@@ -43,7 +43,7 @@
 
         <ul class="govuk-list">
           <li
-            v-for="application in records"
+            v-for="application in applications"
             :key="application.id"
             class="govuk-!-margin-bottom-6"
           >
@@ -143,24 +143,23 @@
 </template>
 
 <script>
-import {
-  mapState
-} from 'vuex';
 import isVacancyOpen from '@/helpers/isVacancyOpen';
 import { isMoreInformationNeeded, isApplicationComplete, informationDeadline } from '@/helpers/exerciseHelper';
 
 export default {
   name: 'Applications',
   computed: {
-    ...mapState('applications', ['records']),
     allVacancies() {
       return this.$store.getters['vacancies/allVacancies'];
     },
     candidateForms() {
       return this.$store.state.candidateForms.records;
     },
+    applications() {
+      return this.$store.state.applications.records;
+    },
   },
-  created() {
+  mounted() {
     this.$store.dispatch('applications/bind');
     this.$store.dispatch('vacancies/bind');
     this.$store.dispatch('candidateForms/bind');

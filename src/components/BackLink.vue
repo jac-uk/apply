@@ -3,10 +3,19 @@
     class="govuk-back-link"
     @click="$router.back()"
   >
-    Back
+    {{ title }}
   </a>
 </template>
-
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      default: 'Back',
+    },
+  },
+};
+</script>
 <style scoped>
  .govuk-back-link {
    cursor: pointer;
