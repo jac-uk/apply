@@ -180,6 +180,12 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
+
+    // check if candidate has filled relevant qualifications before
+    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+    if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
+      formData.qualifications = candidateRelevantQualifications?.qualifications;
+    }
     return {
       formId: 'relevantQualifications',
       formData: formData,
@@ -233,6 +239,12 @@ export default {
         }
       }
       this.save();
+      if (this.formData.qualifications) {
+        await this.$store.dispatch('candidate/saveRelevantQualifications', {
+          qualifications: this.formData.qualifications,
+        });
+      }
+
     },
   },
 };

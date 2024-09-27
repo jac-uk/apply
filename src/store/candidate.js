@@ -26,12 +26,16 @@ export default {
       await bindFirestoreRef('personalDetails', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/personalDetails`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('characterInformation', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/characterInformation`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('relevantQualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/relevantQualifications`), { serialize: vuexfireSerialize });
+      await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {
       await unbindFirestoreRef('personalDetails');
       await unbindFirestoreRef('characterInformation');
       await unbindFirestoreRef('equalityAndDiversitySurvey');
+      await unbindFirestoreRef('relevantQualifications');
+      await unbindFirestoreRef('postQualificationExperience');
       return;
     }),
     create: async ({ rootState, dispatch }, data) => {
@@ -51,6 +55,14 @@ export default {
       const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`);
       await setDoc(ref, data);
     },
+    saveRelevantQualifications: async ({ rootState }, data) => {
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/relevantQualifications`);
+      await setDoc(ref, data);
+    },
+    savePostQualificationExperience: async ({ rootState }, data) => {
+      const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/postQualificationExperience`);
+      await setDoc(ref, data);
+    },
   },
   mutations: {
     set(state, { name, value }) {
@@ -61,6 +73,8 @@ export default {
     personalDetails: null,
     characterInformation: null,
     equalityAndDiversitySurvey: null,
+    relevantQualifications: null,
+    postQualificationExperience: null,
   },
   getters: {
     personalDetails: (state) => () => {
@@ -71,6 +85,12 @@ export default {
     },
     equalityAndDiversitySurvey: (state) => () => {
       return clone(state.equalityAndDiversitySurvey);
+    },
+    relevantQualifications: (state) => () => {
+      return clone(state.relevantQualifications);
+    },
+    postQualificationExperience: (state) => () => {
+      return clone(state.postQualificationExperience);
     },
   },
 };
