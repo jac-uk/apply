@@ -31,7 +31,9 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">7.</span> Have you ever entered into an Individual Voluntary Agreement (IVA)?
+          <span v-if="displayChangeLink">7.</span>
+          <span v-if="version === 3"> Have you ever entered into an Individual Voluntary Agreement (IVA) or other similar arrangement?</span>
+          <span v-else> Have you ever entered into an Individual Voluntary Agreement (IVA)?</span>
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -59,7 +61,9 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">8.</span> Have you ever filed late tax returns?
+          <span v-if="displayChangeLink">8.</span>
+          <span v-if="version === 3"> Have you ever filed late tax returns and/or made late tax payments?</span>
+          <span v-else> Have you ever filed late tax returns?</span>
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -87,7 +91,9 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">9.</span> Have you ever filed late VAT returns?
+          <span v-if="displayChangeLink">9.</span>
+          <span v-if="version === 3"> Have you ever filed late VAT returns and/or made late VAT payments?</span>
+          <span v-else> Have you ever filed late VAT returns?</span>
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -139,6 +145,37 @@
         </dd>
       </div>
     </dl>
+
+    <dl
+      v-if="version === 3"
+      class="govuk-summary-list govuk-!-margin-bottom-0"
+    >
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key widerColumn">
+          <span v-if="displayChangeLink">11.</span> Are you aware of any open HMRC enquiries into your tax affairs?
+        </dt>
+        <dd class="govuk-summary-list__value">
+          <InformationReviewRenderer
+            :data="characterInformation.hmrcTaxDetails"
+            :is-draft-application="true"
+            :display-month-year-only="false"
+          />
+        </dd>
+        <dd
+          v-if="displayChangeLink"
+          class="govuk-summary-list__actions"
+        >
+          <RouterLink
+            v-if="canEdit"
+            class="govuk-link"
+            style="display:inline-block;"
+            :to="{name: 'character-information-financial-matters'}"
+          >
+            Change
+          </RouterLink>
+        </dd>
+      </div>
+    </dl>
   </div>
 </template>
 
@@ -155,6 +192,11 @@ export default {
       type: Object,
       required: true,
       default: new Object({}),
+    },
+    version: {
+      type: Number,
+      required: true,
+      default: 2,
     },
     canEdit: {
       type: Boolean,

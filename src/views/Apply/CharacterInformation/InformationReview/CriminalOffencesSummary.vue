@@ -3,7 +3,9 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">1.</span> Have you ever been convicted for a criminal offence?
+          <span v-if="displayChangeLink">1.</span>
+          <span v-if="version === 3"> Have you ever been convicted of a criminal offence? This includes spent convictions, even if they are protected.</span>
+          <span v-else> Have you ever been convicted for a criminal offence?</span>
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -31,7 +33,9 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">2.</span> Have you ever been cautioned for a criminal offence?
+          <span v-if="displayChangeLink">2.</span>
+          <span v-if="version === 3"> Have you ever been cautioned for a criminal offence? This includes cautions that are spent, even if they are protected.</span>
+          <span v-else> Have you ever been cautioned for a criminal offence?</span>
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
@@ -71,6 +75,11 @@ export default {
       type: Object,
       required: true,
       default: new Object({}),
+    },
+    version: {
+      type: Number,
+      required: true,
+      default: 2,
     },
     canEdit: {
       type: Boolean,

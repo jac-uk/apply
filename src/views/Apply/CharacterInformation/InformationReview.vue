@@ -25,6 +25,7 @@
             <div v-if="isCriminalOffencesSectionComplete()">
               <CriminalOffencesSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -130,6 +131,7 @@
             <div v-if="isFinancialOffencesSectionComplete()">
               <FinancialMattersSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -165,6 +167,7 @@
             <div v-if="isProfessionalConductSectionComplete()">
               <ProfessionalConductSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -193,6 +196,36 @@
                 class="govuk-heading-m"
                 style="display:inline-block;"
               >
+                Civil Proceedings
+              </h2>
+            </div>
+
+            <div v-if="isFurtherInformationSectionComplete()">
+              <CivilProceedingsSummary
+                :character-information="formData"
+                :can-edit="canSave(formId)"
+                :display-change-link="isInformationReview"
+              />
+            </div>
+            <div v-else>
+              <span class="govuk-body">
+                No information provided
+              </span>
+              <RouterLink
+                v-if="canSave(formId)"
+                class="govuk-link float-right"
+                style="display:inline-block;"
+                :to="{name: 'character-information-civil-proceedings'}"
+              >
+                Change
+              </RouterLink>
+            </div>
+
+            <div class="govuk-!-margin-top-9">
+              <h2
+                class="govuk-heading-m"
+                style="display:inline-block;"
+              >
                 Further Information to be disclosed
               </h2>
             </div>
@@ -200,6 +233,7 @@
             <div v-if="isFurtherInformationSectionComplete()">
               <FurtherInformationSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -327,6 +361,7 @@ import FixedPenaltiesSummary from './InformationReview/FixedPenaltiesSummary.vue
 import MotoringOffencesSummary from './InformationReview/MotoringOffencesSummary.vue';
 import FinancialMattersSummary from './InformationReview/FinancialMattersSummary.vue';
 import ProfessionalConductSummary from './InformationReview/ProfessionalConductSummary.vue';
+import CivilProceedingsSummary from './InformationReview/CivilProceedingsSummary.vue';
 import FurtherInformationSummary from './InformationReview/FurtherInformationSummary.vue';
 import Checkbox from '@/components/Form/Checkbox.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
@@ -339,6 +374,7 @@ export default {
   components: {
     Checkbox,
     FurtherInformationSummary,
+    CivilProceedingsSummary,
     ProfessionalConductSummary,
     FinancialMattersSummary,
     MotoringOffencesSummary,
@@ -369,6 +405,9 @@ export default {
     isInformationReview() {
       return this.$route.name === 'character-information-review';
     },
+    characterInformationVersion() {
+      return this.isCharacterInformationV3 ? 3 : 2;
+    },
   },
   methods: {
     validateDeclaration() {
@@ -383,7 +422,7 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
-        this.formData._versionNumber = this.isCharacterInformationV3 ? 3 : 2; // @TODO check we need to include this and that here is the best place to do it
+        this.formData._versionNumber = this.characterInformationVersion; // @TODO check we need to include this and that here is the best place to do it
         const data = this.initCharacterInformation(this.formData);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.formData);
         await this.$store.dispatch('application/save', data);
