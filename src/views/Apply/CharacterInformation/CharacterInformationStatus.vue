@@ -7,6 +7,14 @@ export default {
   extends: Form,
   mixins: [ApplyMixIn],
   methods: {
+    initCharacterInformation(characterInformation) {
+      const data = {};
+      if (this.isCharacterInformationV3)
+        data.characterInformationV3 = characterInformation;
+      else
+        data.characterInformationV2 = characterInformation;
+      return data;
+    },
     isCharacterInformationComplete(data) {
       return this.isCriminalOffencesSectionComplete(data) &&
         this.isFixedPenaltiesSectionComplete(data) &&

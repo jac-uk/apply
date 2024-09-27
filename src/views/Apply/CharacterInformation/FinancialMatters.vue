@@ -41,6 +41,11 @@
                   required
                   :component="repeatableFields.BankruptcyDetails"
                   :url="bankruptcyOrIva"
+                  :component-props="{
+                    hint2: isCharacterInformationV3
+                      ? 'Please add details of your bankruptcy here, including date of discharge from bankruptcy, where relevant.'
+                      : 'Please add details of your bankruptcy here'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -57,7 +62,10 @@
               id="ivas"
               v-model="characterInformation.ivas"
               required
-              label="7. Have you ever entered into an Individual Voluntary Agreement (IVA)?"
+              :label="isCharacterInformationV3
+                ? '7. Have you ever entered into an Individual Voluntary Agreement (IVA) or other similar arrangement?'
+                : '7. Have you ever entered into an Individual Voluntary Agreement (IVA)?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -67,6 +75,11 @@
                   v-model="characterInformation.ivaDetails"
                   required
                   :component="repeatableFields.IvaDetails"
+                  :component-props="{
+                    hint2: isCharacterInformationV3
+                      ? 'Please add details of your IVA here, including date of discharge from IVA, where relevant.'
+                      : 'Please add details of your IVA here'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -84,7 +97,10 @@
               id="late-tax-returns"
               v-model="characterInformation.lateTaxReturns"
               required
-              label="8. Have you ever filed late tax returns?"
+              :label="isCharacterInformationV3
+                ? '8. Have you ever filed late tax returns and/or made late tax payments?'
+                : '8. Have you ever filed late tax returns?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -94,6 +110,11 @@
                   v-model="characterInformation.lateTaxReturnDetails"
                   required
                   :component="repeatableFields.LateTaxReturnDetails"
+                  :component-props="{
+                    label2: isCharacterInformationV3
+                      ? 'Date of late tax return/payment'
+                      : 'Date of late tax return'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -111,7 +132,10 @@
               id="late-vat-returns"
               v-model="characterInformation.lateVatReturns"
               required
-              label="9. Have you ever filed late VAT returns?"
+              :label="isCharacterInformationV3
+                ? '9. Have you ever filed late VAT returns and/or made late VAT payments?'
+                : '9. Have you ever filed late VAT returns?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -121,6 +145,11 @@
                   v-model="characterInformation.lateVatReturnDetails"
                   required
                   :component="repeatableFields.LateVatReturnDetails"
+                  :component-props="{
+                    label2: isCharacterInformationV3
+                      ? 'Date of late VAT return/payment'
+                      : 'Date of late VAT return'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -170,6 +199,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -215,13 +245,13 @@ export default {
     return {
       characterInformation: characterInformation,
       formId: 'characterInformation',
-      repeatableFields: {
+      repeatableFields: shallowRef({
         BankruptcyDetails,
         IvaDetails,
         LateTaxReturnDetails,
         LateVatReturnDetails,
         HmrcFineDetails,
-      },
+      }),
       financialMattersUrl: FINANCIAL_MATTERS_URL,
       bankruptcyOrIvaUrl: BANKRUPTCY_IVA_URL,
       lateTaxVatReturnsHmrcUrl: LATE_TAX_VAT_RETURNS_HMRC_URL,
@@ -257,9 +287,7 @@ export default {
         if (this.characterInformation.hmrcFines === false ) {
           this.characterInformation.hmrcFineDetails = null;
         }
-        const data = {
-          characterInformationV2: this.characterInformation,
-        };
+        const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

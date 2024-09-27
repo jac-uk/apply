@@ -108,9 +108,7 @@ export default {
         if (this.characterInformation.fixedPenalties === false ) {
           this.characterInformation.fixedPenaltyDetails = null;
         }
-        const data = {
-          characterInformationV2: this.characterInformation,
-        };
+        const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

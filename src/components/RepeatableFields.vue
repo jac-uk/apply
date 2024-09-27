@@ -13,6 +13,7 @@
         :index="index"
         :url="url"
         :show-no-legal="showNoLegal"
+        v-bind="componentProps"
       >
         <template #removeButton>
           <button
@@ -77,6 +78,11 @@ export default {
       default: false,
       required: false,
       type: Boolean,
+    },
+    componentProps: {
+      required: false,
+      default: () => ({}),
+      type: Object,
     },
   },
   emits: ['update:modelValue'],

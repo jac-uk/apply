@@ -39,6 +39,9 @@ export default {
       'getCloseDate',
       'isOpen',
     ]),
+    isDevelop() {
+      return this.$store.getters['isDevelop'];
+    },
     language() {
       return this.$store.state.application.language;
     },
@@ -51,6 +54,13 @@ export default {
       if (!this.vacancy) { return false; }
       // [develop, staging, prod]
       return ['JAC00696', 'JAC00695', 'JAC00187'].includes(this.vacancy.referenceNumber);
+    },
+    isCharacterInformationV3() {
+      if (!this.vacancy) { return false; }
+      if (this.isDevelop && ['JAC00010'].includes(this.vacancy.referenceNumber)) {
+        return true;
+      }
+      return this.vacancy.applicationOpenDate > new Date('2024-10-15');
     },
     vacancy() {
       return this.$store.state.vacancy.record;
