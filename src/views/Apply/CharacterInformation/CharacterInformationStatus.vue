@@ -6,6 +6,11 @@ export default {
   name: 'CharacterInformationStatus',
   extends: Form,
   mixins: [ApplyMixIn],
+  computed: {
+    applicationCharacterInformation() {
+      return this.isCharacterInformationV3 ? this.application.characterInformationV3 : this.application.characterInformationV2;
+    },
+  },
   methods: {
     initCharacterInformation(characterInformation) {
       const data = {};
@@ -25,7 +30,7 @@ export default {
         this.isDeclarationCompleted(data);
     },
     isCriminalOffencesSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.criminalCautions !== undefined &&
         dataToCheck.criminalConvictions !== undefined
@@ -35,7 +40,7 @@ export default {
       return false;
     },
     isFixedPenaltiesSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.fixedPenalties !== undefined
       ) {
@@ -44,7 +49,7 @@ export default {
       return false;
     },
     isMotoringOffencesSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.drivingDisqualifications !== undefined &&
         dataToCheck.recentDrivingConvictions !== undefined) {
@@ -53,19 +58,23 @@ export default {
       return false;
     },
     isFinancialOffencesSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.bankruptcies !== undefined &&
         dataToCheck.ivas !== undefined &&
         dataToCheck.lateTaxReturns !== undefined &&
         dataToCheck.lateVatReturns !== undefined &&
-        dataToCheck.hmrcFines !== undefined) {
+        dataToCheck.hmrcFines !== undefined
+      ) {
+        if (this.isCharacterInformationV3) {
+          return dataToCheck.hmrcTax !== undefined;
+        }
         return true;
       }
       return false;
     },
     isProfessionalConductSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.subjectOfAllegationOrClaimOfProfessionalMisconduct !== undefined &&
         dataToCheck.subjectOfAllegationOrClaimOfNegligence !== undefined &&
@@ -79,7 +88,7 @@ export default {
       return false;
     },
     isFurtherInformationSectionComplete(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.furtherInformation !== undefined) {
         return true;
@@ -87,7 +96,7 @@ export default {
       return false;
     },
     isDeclarationCompleted(data) {
-      const dataToCheck = data ? data : this.application.characterInformationV2;
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.declaration1 === true &&
         dataToCheck.declaration2 === true &&

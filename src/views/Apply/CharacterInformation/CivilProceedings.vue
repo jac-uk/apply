@@ -10,7 +10,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
-              Further Information to be disclosed
+              Civil Proceedings
             </h2>
 
             <ErrorSummary
@@ -20,10 +20,10 @@
             />
 
             <RadioGroup
-              id="criminal-offenses-cautions"
-              v-model="characterInformation.furtherInformation"
+              id="civil-proceedings"
+              v-model="characterInformation.civilProceedings"
               required
-              :label="`${isCharacterInformationV3 ? '20' : '18'}. Do you have any other issues that you think we should know about when considering your character?`"
+              label="19. Have you ever been, or are you currently, the subject of any civil proceedings that you have not already mentioned above? You do not need to declare any proceedings that were dismissed or withdrawn without a settlement."
             >
               <RadioItem
                 :value="true"
@@ -33,6 +33,9 @@
                   v-model="characterInformation.furtherInformationDetails"
                   required
                   :component="repeatableFields.FurtherInformationDetails"
+                  :component-props="{
+                    hint: 'Please add details of any civil proceedings, including any findings or orders made against you.'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -40,11 +43,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="furtherInformation"
-            />
           </div>
         </div>
         <button
@@ -66,25 +64,21 @@ import RepeatableFields from '@/components/RepeatableFields.vue';
 import FurtherInformationDetails from '@/components/RepeatableFields/CharacterInformation/FurtherInformationDetails.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
 import BackLink from '@/components/BackLink.vue';
-import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
-import { FURTHER_INFORMATION_URL } from './character-information-constants';
 
 export default {
-  name: 'FurtherInformation',
+  name: 'CivilProceedings',
   components: {
     ErrorSummary,
     RadioGroup,
     RadioItem,
     RepeatableFields,
     BackLink,
-    InfoIcon,
   },
   extends: CharacterInformationStatus,
   data() {
     const defaults = {
-      furtherInformation: null,
-      furtherInformationDetails: null,
-      url: '#further-information-to-be-disclosed',
+      civilProceedings: null,
+      civilProceedingsDetails: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -94,26 +88,24 @@ export default {
       repeatableFields: {
         FurtherInformationDetails,
       },
-      furtherInformationUrl: FURTHER_INFORMATION_URL,
     };
-  },
-  computed: {
-    furtherInformation() {
-      return this.furtherInformationUrl;
-    },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        if (this.characterInformation.furtherInformation === false ) {
-          this.characterInformation.furtherInformationDetails = null;
+        if (this.characterInformation.civilProceedings === false ) {
+          this.characterInformation.civilProceedingsDetails = null;
         }
         const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-        this.$router.push({ name: 'character-information-review' });
+        if (this.application.progress.characterInformation === true) {
+          this.$router.push({ name: 'character-information-review' });
+        } else {
+          this.$router.push({ name: 'character-information-further-information' });
+        }
       }
     },
   },

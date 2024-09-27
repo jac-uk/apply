@@ -23,7 +23,10 @@
               id="professional-conduct"
               v-model="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconduct"
               required
-              label="11. Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?"
+              :label="isCharacterInformationV3
+                ? '12. Have you ever been, or are you currently, the subject of a complaint or an allegation of professional misconduct? You do not need to declare any complaint that was dismissed in full.'
+                : '11. Have you ever been, or are you currently, subject of an allegation or claim of professional misconduct?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -33,6 +36,11 @@
                   v-model="characterInformation.subjectOfAllegationOrClaimOfProfessionalMisconductDetails"
                   required
                   :component="repeatableFields.ProfessionalMisconductDetails"
+                  :component-props="{
+                    hint: isCharacterInformationV3
+                      ? 'Please add details of the complaint or allegation of your professional misconduct here, including any findings against you and resulting penalty.'
+                      : 'Please add details of your professional misconduct here'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -45,7 +53,10 @@
               id="negligence-details"
               v-model="characterInformation.subjectOfAllegationOrClaimOfNegligence"
               required
-              label="12. Have you ever been, or are you currently, subject of an allegation or claim of negligence?"
+              :label="isCharacterInformationV3
+                ? '13. Have you ever been, or are you currently, the subject of an allegation or claim of professional negligence? You do not need to declare any claim that was dismissed or withdrawn without a settlement.'
+                : '12. Have you ever been, or are you currently, subject of an allegation or claim of negligence?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -55,6 +66,14 @@
                   v-model="characterInformation.subjectOfAllegationOrClaimOfNegligenceDetails"
                   required
                   :component="repeatableFields.NegligenceDetails"
+                  :component-props="{
+                    label: isCharacterInformationV3
+                      ? 'Is the claim ongoing?'
+                      : 'Is the investigation ongoing?',
+                    hint: isCharacterInformationV3
+                      ? 'Please add details of the allegation or claim of professional negligence here, including any findings against you or any settlement.'
+                      : 'Please add details of your negligence here'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -67,7 +86,7 @@
               id="wrongful-dismissal"
               v-model="characterInformation.subjectOfAllegationOrClaimOfWrongfulDismissal"
               required
-              label="13. Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?"
+              :label="`${isCharacterInformationV3 ? '14' : '13'}. Have you ever been, or are you currently, subject of an allegation or claim of wrongful dismissal?`"
             >
               <RadioItem
                 :value="true"
@@ -89,7 +108,7 @@
               id="discrimination"
               v-model="characterInformation.subjectOfAllegationOrClaimOfDiscriminationProceeding"
               required
-              label="14. Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?"
+              :label="`${isCharacterInformationV3 ? '15' : '14'}. Have you ever been, or are you currently, subject of an allegation or claim of discrimination proceedings?`"
             >
               <RadioItem
                 :value="true"
@@ -111,7 +130,7 @@
               id="harassment"
               v-model="characterInformation.subjectOfAllegationOrClaimOfHarassmentProceeding"
               required
-              label="15. Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?"
+              :label="`${isCharacterInformationV3 ? '16' : '15'}. Have you ever been, or are you currently, subject of an allegation or claim of harassment proceedings?`"
             >
               <RadioItem
                 :value="true"
@@ -133,7 +152,7 @@
               id="complaint-or-disciplinary-actions"
               v-model="characterInformation.complaintOrDisciplinaryAction"
               required
-              label="16. Have you ever been, or are you currently, subject of complaints or disciplinary action?"
+              :label="`${isCharacterInformationV3 ? '17' : '16'}. Have you ever been, or are you currently, subject of complaints or disciplinary action?`"
             >
               <RadioItem
                 :value="true"
@@ -155,7 +174,7 @@
               id="request-to-resign"
               v-model="characterInformation.requestedToResign"
               required
-              label="17. Have you ever been asked to resign from a position?"
+              :label="`${isCharacterInformationV3 ? '18' : '17'}. Have you ever been asked to resign from a position?`"
             >
               <RadioItem
                 :value="true"
@@ -291,6 +310,8 @@ export default {
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
         if (this.application.progress.characterInformation === true) {
           this.$router.push({ name: 'character-information-review' });
+        } else if (this.isCharacterInformationV3) {
+          this.$router.push({ name: 'character-information-civil-proceedings' });
         } else {
           this.$router.push({ name: 'character-information-further-information' });
         }

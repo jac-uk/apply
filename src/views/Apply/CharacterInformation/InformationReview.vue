@@ -235,6 +235,31 @@
               <ErrorSummary :errors="errors" />
             </div>
 
+            <div
+              v-if="isCharacterInformationV3"
+              class="govuk-grid-row"
+            >
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  id="declaration4"
+                  v-model="formData.declaration4"
+                  multiline-label
+                >
+                  <span>
+                    I have read the Judicial Appointments Commission’s
+                    <a
+                      class="govuk-link"
+                      href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character"
+                      target="_blank"
+                    >
+                      Good Character Guidance
+                    </a>
+                    .
+                  </span>
+                </Checkbox>
+              </div>
+            </div>
+
             <div class="govuk-grid-row">
               <div class="govuk-grid-column-full">
                 <Checkbox
@@ -329,6 +354,7 @@ export default {
       declaration1: null,
       declaration2: null,
       declaration3: null,
+      declaration4: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     return {
@@ -357,10 +383,8 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
-        this.formData._versionNumber = 2; // @TODO check we need to include this and that here is the best place to do it
-        const data = {
-          characterInformationV2: this.formData,
-        };
+        this.formData._versionNumber = this.isCharacterInformationV3 ? 3 : 2; // @TODO check we need to include this and that here is the best place to do it
+        const data = this.initCharacterInformation(this.formData);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.formData);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.formData);

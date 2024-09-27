@@ -184,6 +184,37 @@
                 label="No"
               />
             </RadioGroup>
+          </div>
+          <div class="govuk-grid-column-one-quarters" />
+        </div>
+
+        <div class="govuk-grid-row govuk-!-margin-left-0">
+          <div class="govuk-grid-column-three-quarters govuk-!-padding-left-0">
+            <RadioGroup
+              v-if="isCharacterInformationV3"
+              id="hmrc-tax-enquiries"
+              v-model="characterInformation.hmrcTax"
+              required
+              label="11. Are you aware of any open HMRC enquiries into your tax affairs?"
+            >
+              <RadioItem
+                :value="true"
+                label="Yes"
+              >
+                <RepeatableFields
+                  v-model="characterInformation.hmrcTaxDetails"
+                  required
+                  :component="repeatableFields.HmrcTaxDetails"
+                  :component-props="{
+                    hint: 'Please provide full details of any HMRC enquiries into your tax affairs.'
+                  }"
+                />
+              </RadioItem>
+              <RadioItem
+                :value="false"
+                label="No"
+              />
+            </RadioGroup>
             <button
               :disabled="!canSave(formId)"
               class="govuk-button info-btn--character-information--save-and-continue"
@@ -209,6 +240,7 @@ import IvaDetails from '@/components/RepeatableFields/CharacterInformation/IvaDe
 import LateTaxReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateTaxReturnDetails.vue';
 import LateVatReturnDetails from '@/components/RepeatableFields/CharacterInformation/LateVatReturnDetails.vue';
 import HmrcFineDetails from '@/components/RepeatableFields/CharacterInformation/HmrcFineDetails.vue';
+import HmrcTaxDetails from '@/components/RepeatableFields/CharacterInformation/HmrcTaxDetails.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
 import BackLink from '@/components/BackLink.vue';
 import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
@@ -237,7 +269,8 @@ export default {
       lateVatReturnDetails: null,
       hmrcFines: null,
       hmrcFineDetails: null,
-
+      hmrcTax: null,
+      hmrcTaxDetails: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -251,6 +284,7 @@ export default {
         LateTaxReturnDetails,
         LateVatReturnDetails,
         HmrcFineDetails,
+        HmrcTaxDetails,
       }),
       financialMattersUrl: FINANCIAL_MATTERS_URL,
       bankruptcyOrIvaUrl: BANKRUPTCY_IVA_URL,
@@ -286,6 +320,9 @@ export default {
         }
         if (this.characterInformation.hmrcFines === false ) {
           this.characterInformation.hmrcFineDetails = null;
+        }
+        if (this.characterInformation.hmrcTax === false ) {
+          this.characterInformation.hmrcTaxDetails = null;
         }
         const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);

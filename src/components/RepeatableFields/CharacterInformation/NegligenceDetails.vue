@@ -4,6 +4,11 @@ export default {
   name: 'NegligenceDetails',
   extends: ProfessionalMisconductFieldDetails,
   props: {
+    label: {
+      required: false,
+      type: String,
+      default: 'Is the investigation ongoing?',
+    },
     hint: {
       required: false,
       type: String,
