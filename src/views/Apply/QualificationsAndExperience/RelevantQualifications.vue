@@ -109,7 +109,7 @@
             :path="uploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
-            required
+            :required="isPupillageCertificateRequired"
           />
 
           <FileUpload
@@ -120,7 +120,7 @@
             :path="uploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
-            required
+            :required="isPupillageCertificateRequired"
           />
 
           <FormFieldError
@@ -212,6 +212,9 @@ export default {
       }
       return null;
     },
+    isPupillageCertificateRequired() {
+      return this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null;
+    },
   },
   watch: {
     'formData.applyingUnderSchedule2d': function(newVal, oldVal) {
@@ -232,7 +235,7 @@ export default {
   methods: {
     async saveAndValidate() {
       if (this.notCompletedPupillage) {
-        if (this.formData.uploadedExemptionCertificate === null || this.formData.uploadedPracticingCertificate === null) {
+        if (this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null) {
           this.$refs['practicing-certificate'].setError('Please provide a copy of your practicing and/or exemption certificate');
           this.$refs['exemption-certificate'].setError('Please provide a copy of your exemption and/or practicing certificate');
         } else {
