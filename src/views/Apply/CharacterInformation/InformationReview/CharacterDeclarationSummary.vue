@@ -1,5 +1,19 @@
 <template>
   <div>
+    <dl
+      v-if="version === 3"
+      class="govuk-summary-list govuk-!-margin-bottom-0"
+    >
+      <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key widerColumn">
+          I have read the Judicial Appointments Commission’s Good Character Guidance.
+        </dt>
+        <dd class="govuk-summary-list__value">
+          {{ $filters.toYesNo(characterInformation.declaration4) }}
+        </dd>
+      </div>
+    </dl>
+
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
@@ -45,6 +59,11 @@ export default {
       type: Object,
       required: true,
       default: new Object({}),
+    },
+    version: {
+      type: Number,
+      required: true,
+      default: 2,
     },
   },
   data() {
