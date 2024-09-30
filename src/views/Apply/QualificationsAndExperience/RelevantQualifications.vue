@@ -107,6 +107,7 @@
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             required
           />
