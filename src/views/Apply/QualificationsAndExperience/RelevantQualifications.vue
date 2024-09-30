@@ -118,6 +118,7 @@
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             required
           />
@@ -231,7 +232,7 @@ export default {
   methods: {
     async saveAndValidate() {
       if (this.notCompletedPupillage) {
-        if (this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null) {
+        if (this.formData.uploadedExemptionCertificate === null || this.formData.uploadedPracticingCertificate === null) {
           this.$refs['practicing-certificate'].setError('Please provide a copy of your practicing and/or exemption certificate');
           this.$refs['exemption-certificate'].setError('Please provide a copy of your exemption and/or practicing certificate');
         } else {
