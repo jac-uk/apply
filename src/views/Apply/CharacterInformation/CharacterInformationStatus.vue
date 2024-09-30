@@ -26,6 +26,7 @@ export default {
         this.isMotoringOffencesSectionComplete(data) &&
         this.isFinancialOffencesSectionComplete(data) &&
         this.isProfessionalConductSectionComplete(data) &&
+        this.isCivilProceedingsSectionComplete(data) &&
         this.isFurtherInformationSectionComplete(data) &&
         this.isDeclarationCompleted(data);
     },
@@ -87,6 +88,14 @@ export default {
       }
       return false;
     },
+    isCivilProceedingsSectionComplete(data) {
+      const dataToCheck = data ? data : this.applicationCharacterInformation;
+      if (dataToCheck !== undefined &&
+        dataToCheck.civilProceedings !== undefined) {
+        return true;
+      }
+      return false;
+    },
     isFurtherInformationSectionComplete(data) {
       const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
@@ -102,6 +111,9 @@ export default {
         dataToCheck.declaration2 === true &&
         dataToCheck.declaration3 === true
       ) {
+        if (this.isCharacterInformationV3) {
+          return dataToCheck.declaration4 === true;
+        }
         return true;
       }
       return false;

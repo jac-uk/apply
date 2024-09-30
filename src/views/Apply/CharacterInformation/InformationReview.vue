@@ -191,35 +191,37 @@
               </RouterLink>
             </div>
 
-            <div class="govuk-!-margin-top-9">
-              <h2
-                class="govuk-heading-m"
-                style="display:inline-block;"
-              >
-                Civil Proceedings
-              </h2>
-            </div>
+            <template v-if="isCharacterInformationV3">
+              <div class="govuk-!-margin-top-9">
+                <h2
+                  class="govuk-heading-m"
+                  style="display:inline-block;"
+                >
+                  Civil Proceedings
+                </h2>
+              </div>
 
-            <div v-if="isFurtherInformationSectionComplete()">
-              <CivilProceedingsSummary
-                :character-information="formData"
-                :can-edit="canSave(formId)"
-                :display-change-link="isInformationReview"
-              />
-            </div>
-            <div v-else>
-              <span class="govuk-body">
-                No information provided
-              </span>
-              <RouterLink
-                v-if="canSave(formId)"
-                class="govuk-link float-right"
-                style="display:inline-block;"
-                :to="{name: 'character-information-civil-proceedings'}"
-              >
-                Change
-              </RouterLink>
-            </div>
+              <div v-if="isFurtherInformationSectionComplete()">
+                <CivilProceedingsSummary
+                  :character-information="formData"
+                  :can-edit="canSave(formId)"
+                  :display-change-link="isInformationReview"
+                />
+              </div>
+              <div v-else>
+                <span class="govuk-body">
+                  No information provided
+                </span>
+                <RouterLink
+                  v-if="canSave(formId)"
+                  class="govuk-link float-right"
+                  style="display:inline-block;"
+                  :to="{name: 'character-information-civil-proceedings'}"
+                >
+                  Change
+                </RouterLink>
+              </div>
+            </template>
 
             <div class="govuk-!-margin-top-9">
               <h2

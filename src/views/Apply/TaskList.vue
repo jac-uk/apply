@@ -377,10 +377,13 @@ export default {
       if (!this.isProfessionalConductSectionComplete()) {
         return 'character-information-professional-conduct';
       }
+      if (this.isCharacterInformationV3 && !this.isCivilProceedingsSectionComplete()) {
+        return 'character-information-civil-proceedings';
+      }
       if (!this.isFurtherInformationSectionComplete()) {
         return 'character-information-further-information';
       }
-      if (!this.isDeclarationCompleted() || this.application.characterInformationV2) {
+      if (!this.isDeclarationCompleted() || this.application.characterInformationV2 || this.application.characterInformationV3) {
         return 'character-information-review';
       }
     },
