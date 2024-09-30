@@ -38,7 +38,7 @@
                   :component="repeatableFields.ProfessionalMisconductDetails"
                   :component-props="{
                     hint: isCharacterInformationV3
-                      ? 'Please add details of the complaint or allegation of your professional misconduct here, including any findings against you and resulting penalty.'
+                      ? 'Please add details of the complaint or allegation of professional misconduct here, including any findings against you and the resulting penalty.'
                       : 'Please add details of your professional misconduct here'
                   }"
                 />

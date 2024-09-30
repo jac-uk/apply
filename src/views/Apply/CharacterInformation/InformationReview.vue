@@ -280,13 +280,13 @@
                   multiline-label
                 >
                   <span>
-                    I have read the Judicial Appointments Commission’s
+                    I have read
                     <a
                       class="govuk-link"
                       href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character"
                       target="_blank"
                     >
-                      Good Character Guidance
+                      the Judicial Appointments Commission’s Good Character Guidance
                     </a>
                     .
                   </span>

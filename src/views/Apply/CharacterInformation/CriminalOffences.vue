@@ -23,8 +23,9 @@
               v-model="characterInformation.criminalConvictions"
               required
               :label="isCharacterInformationV3
-                ? '1. Have you ever been convicted for a criminal offence? This includes spent convictions.'
-                : '1. Have you ever been convicted of a criminal offence? This includes spent convictions, even if they are protected.'"
+                ? '1. Have you ever been convicted of a criminal offence? This includes spent convictions, even if they are protected.'
+                : '1. Have you ever been convicted for a criminal offence? This includes spent convictions.'
+              "
             >
               <RadioItem
                 :value="true"
@@ -47,8 +48,8 @@
               v-model="characterInformation.criminalCautions"
               required
               :label="isCharacterInformationV3
-                ? '2. Have you ever been cautioned for a criminal offence?'
-                : '2. Have you ever been cautioned for a criminal offence? This includes cautions that are spent, even if they are protected.'
+                ? '2. Have you ever been cautioned for a criminal offence? This includes cautions that are spent, even if they are protected.'
+                : '2. Have you ever been cautioned for a criminal offence?'
               "
             >
               <RadioItem
