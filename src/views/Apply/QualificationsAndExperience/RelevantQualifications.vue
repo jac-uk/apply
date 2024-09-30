@@ -107,8 +107,9 @@
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
-            required
+            :required="isPupillageCertificateRequired"
           />
 
           <FileUpload
@@ -117,8 +118,9 @@
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
-            required
+            :required="isPupillageCertificateRequired"
           />
 
           <FormFieldError
@@ -209,6 +211,9 @@ export default {
         return matches.length > 0;
       }
       return null;
+    },
+    isPupillageCertificateRequired() {
+      return this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null;
     },
   },
   watch: {
