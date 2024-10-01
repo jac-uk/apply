@@ -415,7 +415,9 @@ export default {
     validateDeclaration() {
       if (this.formData.declaration1 !== true ||
         this.formData.declaration2 !== true ||
-        this.formData.declaration3 !== true) {
+        this.formData.declaration3 !== true ||
+        (this.isCharacterInformationV3 && this.formData.declaration4 !== true)
+      ) {
         this.errors.push({ id: 'error', message: 'Please check all boxes to continue' });
         return false;
       }
