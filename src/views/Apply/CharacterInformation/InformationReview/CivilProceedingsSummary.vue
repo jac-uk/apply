@@ -45,11 +45,6 @@ export default {
       required: true,
       default: new Object({}),
     },
-    version: {
-      type: Number,
-      required: true,
-      default: 2,
-    },
     canEdit: {
       type: Boolean,
       required: true,
