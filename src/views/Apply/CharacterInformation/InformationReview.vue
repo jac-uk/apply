@@ -287,10 +287,7 @@
                       class="govuk-link"
                       href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character"
                       target="_blank"
-                    >
-                      the Judicial Appointments Commission’s Good Character Guidance
-                    </a>
-                    .
+                    >the Judicial Appointments Commission’s Good Character Guidance</a>.
                   </span>
                 </Checkbox>
               </div>
