@@ -1189,7 +1189,7 @@ export default {
       return this.$route.name === 'character-information-review';
     },
     destinationUrl() {
-      return this.isApplicationVersionGreaterThan1 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
+      return this.isApplicationVersionGreaterThan1 && (this.application.characterInformationV2 || this.application.characterInformationV3) ? 'character-information-review' : 'character-information-form-v1';
     },
     canEdit () {
       if (this.isDraftApplication && this.isVacancyOpen) {
@@ -1229,8 +1229,7 @@ export default {
       window.print();
     },
     getCharacterInformation(application) {
-      if (this.isCharacterInformationV3) return application.characterInformationV3;
-      return application.characterInformationV2;
+      return this.isCharacterInformationV3 ? application.characterInformationV3 : application.characterInformationV2;
     },
   },
 };
