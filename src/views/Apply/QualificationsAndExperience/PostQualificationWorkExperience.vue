@@ -16,60 +16,64 @@
             Starting with your most recent appointment and working back, provide details of your career to date, including all judicial and quasi-judicial appointments and any gaps in employment.
           </p>
 
-          <div
-            v-for="(experience, index) in experiences"
-            :key="index"
-            class="experience-container govuk-!-margin-top-8"
+          <form
+            @submit="console.log('submitting')"
           >
-            <ExperienceV2
-              :row="experience"
-              :index="index"
-              :type="experience.type"
-              :editing="editingIndex === index"
-            />
             <div
-              v-if="experience.type"
-              class="govuk-!-margin-top-6"
-              style="display: flex; justify-content: flex-start; gap: 20px;"
+              v-for="(experience, index) in experiences"
+              :key="index"
+              class="experience-container govuk-!-margin-top-8"
+            >
+              <ExperienceV2
+                :row="experience"
+                :index="index"
+                :type="experience.type"
+                :editing="editingIndex === index"
+              />
+              <div
+                v-if="experience.type"
+                class="govuk-!-margin-top-6"
+                style="display: flex; justify-content: flex-start; gap: 20px;"
+              >
+                <button
+                  v-if="editingIndex === index"
+                  type="button"
+                  class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                  @click="() => handleRowSave(index)"
+                >
+                  Save
+                </button>
+                <button
+                  v-else
+                  type="button"
+                  class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
+                  @click="() => handleRowEdit(index)"
+                >
+                  Edit
+                </button>
+                <button
+                  type="button"
+                  class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
+                  @click="() => handleRowRemove(index)"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+
+            <div
+              v-if="hasExperience"
+              class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8"
             >
               <button
-                v-if="editingIndex === index"
                 type="button"
-                class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-                @click="() => handleRowSave(index)"
+                class="govuk-button govuk-button--secondary"
+                @click="handleRowAdd"
               >
-                Save
-              </button>
-              <button
-                v-else
-                type="button"
-                class="govuk-button govuk-button--secondary govuk-!-margin-bottom-0"
-                @click="() => handleRowEdit(index)"
-              >
-                Edit
-              </button>
-              <button
-                type="button"
-                class="govuk-button govuk-button--warning govuk-!-margin-bottom-0"
-                @click="() => handleRowRemove(index)"
-              >
-                Remove
+                Add another
               </button>
             </div>
-          </div>
-
-          <div
-            v-if="hasExperience"
-            class="govuk-grid-row govuk-!-margin-left-0 govuk-!-margin-top-8"
-          >
-            <button
-              type="button"
-              class="govuk-button govuk-button--secondary"
-              @click="handleRowAdd"
-            >
-              Add another
-            </button>
-          </div>
+          </form>
 
           <button
             :disabled="!canSave(formId)"
@@ -251,6 +255,10 @@ export default {
       this.editingIndex = null;
     },
     async save() {
+      if (!this.hasExperience) {
+        this.validate( { target: { value: '' } } );
+        return;
+      }
       if (this.hasExperience) {
         this.validate();
       }
