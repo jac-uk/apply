@@ -51,8 +51,11 @@ export default {
     allVacancies: state => {
       return state.allRecords;
     },
+    publishedVacancies: state => {
+      return state.allRecords.filter(vacancy => vacancy.published);
+    },
     openVacancies: (state, getters) => {
-      const vacancies = getters.allVacancies;
+      const vacancies = getters.publishedVacancies;
       return vacancies.filter(vacancy => {
 
           // console.log(vacancy.state);
@@ -72,7 +75,7 @@ export default {
       });
     },
     futureVacancies: (state, getters) => {
-      const vacancies = getters.allVacancies;
+      const vacancies = getters.publishedVacancies;
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
@@ -86,7 +89,7 @@ export default {
       });
     },
     inProgressVacancies: (state, getters) => {
-      const vacancies = getters.allVacancies;
+      const vacancies = getters.publishedVacancies;
       return vacancies.filter(vacancy => {
         if (!vacancy.applicationCloseDate) {
           return false;
