@@ -23,7 +23,7 @@
               id="criminal-offenses-cautions"
               v-model="characterInformation.furtherInformation"
               required
-              label="18. Do you have any other issues that you think we should know about when considering your character?"
+              :label="`${isCharacterInformationV3 ? '20' : '18'}. Do you have any other issues that you think we should know about when considering your character?`"
             >
               <RadioItem
                 :value="true"
@@ -109,9 +109,7 @@ export default {
         if (this.characterInformation.furtherInformation === false ) {
           this.characterInformation.furtherInformationDetails = null;
         }
-        const data = {
-          characterInformationV2: this.characterInformation,
-        };
+        const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

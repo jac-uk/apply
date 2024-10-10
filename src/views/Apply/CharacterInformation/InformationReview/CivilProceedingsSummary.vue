@@ -3,12 +3,12 @@
     <dl class="govuk-summary-list govuk-!-margin-bottom-0">
       <div class="govuk-summary-list__row">
         <dt class="govuk-summary-list__key widerColumn">
-          <span v-if="displayChangeLink">{{ version === 3 ? '20' : '18' }}.</span> Do you have any other issues that you think we should know about when considering your character?
+          <span v-if="displayChangeLink">19.</span> Have you ever been, or are you currently, the subject of any civil proceedings that you have not already mentioned above? You do not need to declare any proceedings that were dismissed or withdrawn without a settlement.
         </dt>
         <dd class="govuk-summary-list__value">
           <InformationReviewRenderer
             id="other-character-issues"
-            :data="characterInformation.furtherInformationDetails"
+            :data="characterInformation.civilProceedingsDetails"
             :is-draft-application="true"
             :display-month-year-only="true"
           />
@@ -21,7 +21,7 @@
             v-if="canEdit"
             class="govuk-link"
             style="display:inline-block;"
-            :to="{name: 'character-information-further-information'}"
+            :to="{name: 'character-information-civil-proceedings'}"
           >
             Change
           </RouterLink>
@@ -35,7 +35,7 @@
 import InformationReviewRenderer from '@/components/Page/InformationReviewRenderer.vue';
 
 export default {
-  name: 'FurtherInformationSummary',
+  name: 'CivilProceedingsSummary',
   components: {
     InformationReviewRenderer,
   },
@@ -44,11 +44,6 @@ export default {
       type: Object,
       required: true,
       default: new Object({}),
-    },
-    version: {
-      type: Number,
-      required: true,
-      default: 2,
     },
     canEdit: {
       type: Boolean,

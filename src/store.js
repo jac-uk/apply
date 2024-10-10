@@ -57,6 +57,12 @@ const store = createStore({
     isProduction: (state, getters) => {
       return getters.appEnvironment === 'PRODUCTION';
     },
+    isStaging: (state, getters) => {
+      return getters.appEnvironment === 'STAGING';
+    },
+    isDevelop: (state, getters) => {
+      return getters.appEnvironment === 'DEVELOP';
+    },
     whichEnv: (state) => {
       return state.env;
     },

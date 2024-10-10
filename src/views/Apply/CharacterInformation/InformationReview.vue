@@ -25,6 +25,7 @@
             <div v-if="isCriminalOffencesSectionComplete()">
               <CriminalOffencesSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -130,6 +131,7 @@
             <div v-if="isFinancialOffencesSectionComplete()">
               <FinancialMattersSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -165,6 +167,7 @@
             <div v-if="isProfessionalConductSectionComplete()">
               <ProfessionalConductSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -188,6 +191,38 @@
               </RouterLink>
             </div>
 
+            <template v-if="isCharacterInformationV3">
+              <div class="govuk-!-margin-top-9">
+                <h2
+                  class="govuk-heading-m"
+                  style="display:inline-block;"
+                >
+                  Civil Proceedings
+                </h2>
+              </div>
+
+              <div v-if="isFurtherInformationSectionComplete()">
+                <CivilProceedingsSummary
+                  :character-information="formData"
+                  :can-edit="canSave(formId)"
+                  :display-change-link="isInformationReview"
+                />
+              </div>
+              <div v-else>
+                <span class="govuk-body">
+                  No information provided
+                </span>
+                <RouterLink
+                  v-if="canSave(formId)"
+                  class="govuk-link float-right"
+                  style="display:inline-block;"
+                  :to="{name: 'character-information-civil-proceedings'}"
+                >
+                  Change
+                </RouterLink>
+              </div>
+            </template>
+
             <div class="govuk-!-margin-top-9">
               <h2
                 class="govuk-heading-m"
@@ -200,6 +235,7 @@
             <div v-if="isFurtherInformationSectionComplete()">
               <FurtherInformationSummary
                 :character-information="formData"
+                :version="characterInformationVersion"
                 :can-edit="canSave(formId)"
                 :display-change-link="isInformationReview"
               />
@@ -233,6 +269,28 @@
                 </h2>
               </div>
               <ErrorSummary :errors="errors" />
+            </div>
+
+            <div
+              v-if="isCharacterInformationV3"
+              class="govuk-grid-row"
+            >
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  id="declaration4"
+                  v-model="formData.declaration4"
+                  multiline-label
+                >
+                  <span>
+                    I have read
+                    <a
+                      class="govuk-link"
+                      href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character"
+                      target="_blank"
+                    >the Judicial Appointments Commission’s Good Character Guidance</a>.
+                  </span>
+                </Checkbox>
+              </div>
             </div>
 
             <div class="govuk-grid-row">
@@ -302,6 +360,7 @@ import FixedPenaltiesSummary from './InformationReview/FixedPenaltiesSummary.vue
 import MotoringOffencesSummary from './InformationReview/MotoringOffencesSummary.vue';
 import FinancialMattersSummary from './InformationReview/FinancialMattersSummary.vue';
 import ProfessionalConductSummary from './InformationReview/ProfessionalConductSummary.vue';
+import CivilProceedingsSummary from './InformationReview/CivilProceedingsSummary.vue';
 import FurtherInformationSummary from './InformationReview/FurtherInformationSummary.vue';
 import Checkbox from '@/components/Form/Checkbox.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
@@ -314,6 +373,7 @@ export default {
   components: {
     Checkbox,
     FurtherInformationSummary,
+    CivilProceedingsSummary,
     ProfessionalConductSummary,
     FinancialMattersSummary,
     MotoringOffencesSummary,
@@ -329,6 +389,7 @@ export default {
       declaration1: null,
       declaration2: null,
       declaration3: null,
+      declaration4: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     return {
@@ -343,12 +404,17 @@ export default {
     isInformationReview() {
       return this.$route.name === 'character-information-review';
     },
+    characterInformationVersion() {
+      return this.isCharacterInformationV3 ? 3 : 2;
+    },
   },
   methods: {
     validateDeclaration() {
       if (this.formData.declaration1 !== true ||
         this.formData.declaration2 !== true ||
-        this.formData.declaration3 !== true) {
+        this.formData.declaration3 !== true ||
+        (this.isCharacterInformationV3 && this.formData.declaration4 !== true)
+      ) {
         this.errors.push({ id: 'error', message: 'Please check all boxes to continue' });
         return false;
       }
@@ -357,10 +423,8 @@ export default {
     async save() {
       this.validate();
       if (this.isValid() && this.validateDeclaration()) {
-        this.formData._versionNumber = 2; // @TODO check we need to include this and that here is the best place to do it
-        const data = {
-          characterInformationV2: this.formData,
-        };
+        this.formData._versionNumber = this.characterInformationVersion; // @TODO check we need to include this and that here is the best place to do it
+        const data = this.initCharacterInformation(this.formData);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.formData);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.formData);

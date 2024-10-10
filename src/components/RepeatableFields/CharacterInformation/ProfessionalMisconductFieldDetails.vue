@@ -11,7 +11,7 @@
         :id="`investigation_ongoing_${name}_${index}`"
         v-model="row.investigations"
         required
-        label="Is the investigation ongoing?"
+        :label="label"
         @input="handleRadioGroupChange"
       >
         <RadioItem
@@ -68,6 +68,11 @@ export default {
     index: {
       required: true,
       type: Number,
+    },
+    label: {
+      required: false,
+      type: String,
+      default: 'Is the investigation ongoing?',
     },
     hint: {
       required: false,

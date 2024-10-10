@@ -33,6 +33,11 @@
                   v-model="characterInformation.drivingDisqualificationDetails"
                   required
                   :component="repeatableFields.DrivingDisqualificationDetails"
+                  :component-props="{
+                    hint: isCharacterInformationV3
+                      ? 'Please add details of your disqualification here including the start and end dates of your disqualification period'
+                      : 'Please add details of your disqualification here including the dates of your disqualification period'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -81,6 +86,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -115,10 +121,10 @@ export default {
     return {
       characterInformation: characterInformation,
       formId: 'characterInformation',
-      repeatableFields: {
+      repeatableFields: shallowRef({
         DrivingDisqualificationDetails,
         RecentDrivingConvictionDetails,
-      },
+      }),
       motoringOffencesUrl: MOTORING_OFFENCES_URL,
     };
   },
@@ -137,9 +143,7 @@ export default {
         if (this.characterInformation.recentDrivingConvictions === false ) {
           this.characterInformation.recentDrivingConvictionDetails = null;
         }
-        const data = {
-          characterInformationV2: this.characterInformation,
-        };
+        const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

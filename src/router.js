@@ -47,6 +47,7 @@ import FixedPenaltyNotices from '@/views/Apply/CharacterInformation/FixedPenalty
 import MotoringOffences from '@/views/Apply/CharacterInformation/MotoringOffences.vue';
 import FinancialMatters from '@/views/Apply/CharacterInformation/FinancialMatters.vue';
 import ProfessionalConduct from '@/views/Apply/CharacterInformation/ProfessionalConduct.vue';
+import CivilProceedings from '@/views/Apply/CharacterInformation/CivilProceedings.vue';
 import FurtherInformation from '@/views/Apply/CharacterInformation/FurtherInformation.vue';
 import InformationReview from '@/views/Apply/CharacterInformation/InformationReview.vue';
 import EqualityAndDiversitySurvey from '@/views/Apply/AccountProfile/EqualityAndDiversitySurvey.vue';
@@ -340,6 +341,16 @@ const routes = [
             meta: {
               requiresAuth: true,
               title: 'Character information | Professional conduct',
+              isMultilanguage: true,
+            },
+          },
+          {
+            path: 'civil-proceedings',
+            component: CivilProceedings,
+            name: 'character-information-civil-proceedings',
+            meta: {
+              requiresAuth: true,
+              title: 'Character information | Civil Proceedings',
               isMultilanguage: true,
             },
           },

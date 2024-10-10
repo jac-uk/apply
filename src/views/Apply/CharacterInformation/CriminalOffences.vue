@@ -22,7 +22,10 @@
               id="criminal-offences-convictions"
               v-model="characterInformation.criminalConvictions"
               required
-              label="1. Have you ever been convicted for a criminal offence? This includes spent convictions."
+              :label="isCharacterInformationV3
+                ? '1. Have you ever been convicted of a criminal offence? This includes spent convictions, even if they are protected.'
+                : '1. Have you ever been convicted for a criminal offence? This includes spent convictions.'
+              "
             >
               <RadioItem
                 :value="true"
@@ -44,7 +47,10 @@
               id="criminal-offences-cautions"
               v-model="characterInformation.criminalCautions"
               required
-              label="2. Have you ever been cautioned for a criminal offence?"
+              :label="isCharacterInformationV3
+                ? '2. Have you ever been cautioned for a criminal offence? This includes cautions that are spent, even if they are protected.'
+                : '2. Have you ever been cautioned for a criminal offence?'
+              "
             >
               <RadioItem
                 :value="true"
@@ -80,6 +86,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -114,10 +121,10 @@ export default {
     return {
       characterInformation: characterInformation,
       formId: 'characterInformation',
-      repeatableFields: {
+      repeatableFields: shallowRef({
         CriminalCautionDetails,
         CriminalConvictionDetails,
-      },
+      }),
       criminalOffencesUrl: CRIMINAL_OFFENCES_URL,
     };
   },
@@ -136,9 +143,7 @@ export default {
         if (this.characterInformation.criminalConvictions === false ) {
           this.characterInformation.criminalConvictionDetails = null;
         }
-        const data = {
-          characterInformationV2: this.characterInformation,
-        };
+        const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);

@@ -84,39 +84,52 @@
                 Change
               </RouterLink>
             </div>
-            <dl v-if="isApplicationVersionGreaterThan1 && application.characterInformationV2">
+            <dl v-if="isApplicationVersionGreaterThan1 && (application.characterInformationV2 || application.characterInformationV3)">
               <CriminalOffencesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FixedPenaltiesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <MotoringOffencesSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FinancialMattersSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <ProfessionalConductSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
+                :can-edit="isDraftApplication"
+                :display-change-link="isInformationReview"
+              />
+              <CivilProceedingsSummary
+                v-if="characterInformationVersion === 3"
+                :character-information="getCharacterInformation(application)"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <FurtherInformationSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
                 :can-edit="isDraftApplication"
                 :display-change-link="isInformationReview"
               />
               <CharacterDeclarationSummary
-                :character-information="application.characterInformationV2"
+                :character-information="getCharacterInformation(application)"
+                :version="characterInformationVersion"
               />
             </dl>
             <dl v-else>
@@ -1110,6 +1123,7 @@ import FixedPenaltiesSummary from '@/views/Apply/CharacterInformation/Informatio
 import MotoringOffencesSummary from '@/views/Apply/CharacterInformation/InformationReview/MotoringOffencesSummary.vue';
 import FinancialMattersSummary from '@/views/Apply/CharacterInformation/InformationReview/FinancialMattersSummary.vue';
 import ProfessionalConductSummary from '@/views/Apply/CharacterInformation/InformationReview/ProfessionalConductSummary.vue';
+import CivilProceedingsSummary from '@/views/Apply/CharacterInformation/InformationReview/CivilProceedingsSummary.vue';
 import FurtherInformationSummary from '@/views/Apply/CharacterInformation/InformationReview/FurtherInformationSummary.vue';
 import CharacterDeclarationSummary from '@/views/Apply/CharacterInformation/InformationReview/CharacterDeclarationSummary.vue';
 import CharacterInformationSummaryV1 from '@/views/Apply/CharacterInformation/CharacterInformationSummaryV1.vue';
@@ -1140,6 +1154,7 @@ export default {
     MotoringOffencesSummary,
     FinancialMattersSummary,
     ProfessionalConductSummary,
+    CivilProceedingsSummary,
     FurtherInformationSummary,
     Diversity,
     WelshRequirement,
@@ -1174,7 +1189,7 @@ export default {
       return this.$route.name === 'character-information-review';
     },
     destinationUrl() {
-      return this.isApplicationVersionGreaterThan1 && this.application.characterInformationV2 ? 'character-information-review' : 'character-information-form-v1';
+      return this.isApplicationVersionGreaterThan1 && (this.application.characterInformationV2 || this.application.characterInformationV3) ? 'character-information-review' : 'character-information-form-v1';
     },
     canEdit () {
       if (this.isDraftApplication && this.isVacancyOpen) {
@@ -1190,6 +1205,9 @@ export default {
     selfAssessmentSections() {
       const hasContent = this.vacancy.selfAssessmentWordLimits.some(item => typeof item === 'object' && Object.keys(item).length > 0);
       return hasContent ? this.vacancy.selfAssessmentWordLimits : [];
+    },
+    characterInformationVersion() {
+      return this.isCharacterInformationV3 ? 3 : 2;
     },
   },
   methods: {
@@ -1209,6 +1227,9 @@ export default {
     },
     downloadHTML() {
       window.print();
+    },
+    getCharacterInformation(application) {
+      return this.isCharacterInformationV3 ? application.characterInformationV3 : application.characterInformationV2;
     },
   },
 };

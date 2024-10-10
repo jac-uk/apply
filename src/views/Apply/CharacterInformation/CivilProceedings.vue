@@ -10,7 +10,7 @@
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-three-quarters">
             <h2 class="govuk-heading-l">
-              Fixed Penalty Notices
+              Civil Proceedings
             </h2>
 
             <ErrorSummary
@@ -20,19 +20,22 @@
             />
 
             <RadioGroup
-              id="fixed-penalties"
-              v-model="characterInformation.fixedPenalties"
+              id="civil-proceedings"
+              v-model="characterInformation.civilProceedings"
               required
-              label="3. Have you received a fixed penalty notice in the last 4 years?"
+              label="19. Have you ever been, or are you currently, the subject of any civil proceedings that you have not already mentioned above? You do not need to declare any proceedings that were dismissed or withdrawn without a settlement."
             >
               <RadioItem
                 :value="true"
                 label="Yes"
               >
                 <RepeatableFields
-                  v-model="characterInformation.fixedPenaltyDetails"
+                  v-model="characterInformation.furtherInformationDetails"
                   required
-                  :component="repeatableFields.FixedPenaltyDetails"
+                  :component="repeatableFields.FurtherInformationDetails"
+                  :component-props="{
+                    hint: 'Please add details of any civil proceedings, including any findings or orders made against you.'
+                  }"
                 />
               </RadioItem>
               <RadioItem
@@ -40,11 +43,6 @@
                 label="No"
               />
             </RadioGroup>
-          </div>
-          <div class="govuk-grid-column-one-quarter">
-            <InfoIcon
-              :url="fixedPenaltyNotices"
-            />
           </div>
         </div>
         <button
@@ -63,27 +61,24 @@ import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
 import RepeatableFields from '@/components/RepeatableFields.vue';
-import FixedPenaltyDetails from '@/components/RepeatableFields/CharacterInformation/FixedPenaltyDetails.vue';
+import FurtherInformationDetails from '@/components/RepeatableFields/CharacterInformation/FurtherInformationDetails.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
 import BackLink from '@/components/BackLink.vue';
-import InfoIcon from '@/components/ModalViews/InfoIcon.vue';
-import { FIXED_PENALTY_NOTICES_URL } from './character-information-constants';
 
 export default {
-  name: 'FixedPenaltyNotices',
+  name: 'CivilProceedings',
   components: {
     ErrorSummary,
     RadioGroup,
     RadioItem,
     RepeatableFields,
     BackLink,
-    InfoIcon,
   },
   extends: CharacterInformationStatus,
   data() {
     const defaults = {
-      fixedPenalties: null,
-      fixedPenaltyDetails: null,
+      civilProceedings: null,
+      civilProceedingsDetails: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     const characterInformation = { ...defaults, ...data };
@@ -91,36 +86,28 @@ export default {
       characterInformation: characterInformation,
       formId: 'characterInformation',
       repeatableFields: {
-        FixedPenaltyDetails,
+        FurtherInformationDetails,
       },
-      fixedPenaltyNoticesUrl: FIXED_PENALTY_NOTICES_URL,
     };
-  },
-  computed: {
-    fixedPenaltyNotices() {
-      return this.fixedPenaltyNoticesUrl;
-    },
   },
   methods: {
     async save() {
       this.validate();
       if (this.isValid()) {
-        if (this.characterInformation.fixedPenalties === false ) {
-          this.characterInformation.fixedPenaltyDetails = null;
+        if (this.characterInformation.civilProceedings === false ) {
+          this.characterInformation.civilProceedingsDetails = null;
         }
         const data = this.initCharacterInformation(this.characterInformation);
         data[`progress.${this.formId}`] = this.isCharacterInformationComplete(this.characterInformation);
         await this.$store.dispatch('application/save', data);
         await this.$store.dispatch('candidate/saveCharacterInformation', this.characterInformation);
-
         if (this.application.progress.characterInformation === true) {
           this.$router.push({ name: 'character-information-review' });
         } else {
-          this.$router.push({ name: 'character-information-motoring-offences' });
+          this.$router.push({ name: 'character-information-further-information' });
         }
       }
     },
   },
 };
 </script>
-
