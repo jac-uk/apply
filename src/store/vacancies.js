@@ -75,7 +75,7 @@ export default {
       });
     },
     futureVacancies: (state, getters) => {
-      const vacancies = getters.publishedVacancies;
+      const vacancies = getters.allVacancies;
       return vacancies.filter(vacancy => {
         const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
         const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
@@ -89,7 +89,7 @@ export default {
       });
     },
     inProgressVacancies: (state, getters) => {
-      const vacancies = getters.publishedVacancies;
+      const vacancies = getters.allVacancies;
       return vacancies.filter(vacancy => {
         if (!vacancy.applicationCloseDate) {
           return false;
