@@ -80,7 +80,7 @@ describe('store/vacancies', () => {
     describe('futureVacancies', () => {
       it('returns only future vacancies', () => {
 
-        const futureVacancies = getters.futureVacancies(state, { publishedVacancies: mockVacancies });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: mockVacancies });
 
         expect(futureVacancies.length).toEqual(1);
         expect(futureVacancies[0].name).toEqual('FUTURE VACANCY');
@@ -93,7 +93,7 @@ describe('store/vacancies', () => {
           estimatedLaunchDate: futureDate,
         };
 
-        const futureVacancies = getters.futureVacancies(state, { publishedVacancies: [mockFutureVacancy, ...mockVacancies] });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: [mockFutureVacancy, ...mockVacancies] });
 
         expect(futureVacancies.length).toEqual(2);
         expect(futureVacancies[0].name).toEqual(mockName);
@@ -105,7 +105,7 @@ describe('store/vacancies', () => {
           applicationOpenDate: futureDate,
         };
 
-        const futureVacancies = getters.futureVacancies(state, { publishedVacancies: [mockFutureVacancy, ...mockVacancies] });
+        const futureVacancies = getters.futureVacancies(state, { allVacancies: [mockFutureVacancy, ...mockVacancies] });
 
         expect(futureVacancies.length).toEqual(2);
         expect(futureVacancies[0].name).toEqual(mockName);
@@ -115,7 +115,7 @@ describe('store/vacancies', () => {
     describe('inProgressVacancies', () => {
       it('returns only exercises in progress', () => {
 
-        const inProgressVacancies = getters.inProgressVacancies(state, { publishedVacancies: mockVacancies });
+        const inProgressVacancies = getters.inProgressVacancies(state, { allVacancies: mockVacancies });
 
         expect(inProgressVacancies.length).toEqual(1);
         expect(inProgressVacancies[0].name).toEqual('PROGRESS VACANCY');
@@ -128,7 +128,7 @@ describe('store/vacancies', () => {
             applicationOpenDate: pastDate,
         };
 
-        const inProgressVacancies = getters.inProgressVacancies(state, { publishedVacancies: [mockInProgressVacancy, ...mockVacancies] });
+        const inProgressVacancies = getters.inProgressVacancies(state, { allVacancies: [mockInProgressVacancy, ...mockVacancies] });
 
         expect(inProgressVacancies.length).toEqual(1);
         expect(inProgressVacancies[0].name).toEqual('PROGRESS VACANCY');
