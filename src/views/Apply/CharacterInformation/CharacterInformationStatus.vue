@@ -89,6 +89,9 @@ export default {
       return false;
     },
     isCivilProceedingsSectionComplete(data) {
+      // civilProceedings is only required for Character Information V3
+      if (!this.isCharacterInformationV3) return true;
+
       const dataToCheck = data ? data : this.applicationCharacterInformation;
       if (dataToCheck !== undefined &&
         dataToCheck.civilProceedings !== undefined) {
