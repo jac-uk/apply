@@ -199,7 +199,13 @@ export default {
         // Send email verification
         await sendEmailVerificationLink();
       } catch (error) {
-        this.error = error.message;
+
+        console.log('ERROR:');
+        console.log(error);
+
+        const message = 'There was a problem with creating the user. Please try again or report the issue to Admin.';
+        this.errors.push({ id: 'email', message: message });
+        return false;
       }
     },
   },
