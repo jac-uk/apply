@@ -118,15 +118,15 @@ export default {
       //minPasswordLength: 12,
 
       // @TODO: REVERT
-      // formData: {},
-      formData: {
-        title: 'mr',
-        firstName: 'test',
-        lastName: 'tester',
-        //email: 'omar.jebari+17@gmail.com',
-        dateOfBirth: new Date('10/10/1988'),
-        nationalInsuranceNumber: 'NN810757D',
-      },
+      formData: {},
+      // formData: {
+      //   title: 'mr',
+      //   firstName: 'test',
+      //   lastName: 'tester',
+      //   //email: 'omar.jebari+17@gmail.com',
+      //   dateOfBirth: new Date('10/10/1988'),
+      //   nationalInsuranceNumber: 'NN810757D',
+      // },
 
       fullName: null,
       //email: null,

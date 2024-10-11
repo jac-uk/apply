@@ -141,16 +141,16 @@ export default {
       minPasswordLength: 12,
 
       // @TODO: REVERT
-      // formData: {},
-      formData: {
-        // title: 'mr',
-        // firstName: 'test',
-        // lastName: 'tester',
-        email: 'omar.jebari+17@gmail.com',
-        // dateOfBirth: new Date('10/10/1988'),
-        // nationalInsuranceNumber: 'NN810757D',
-        password: 'PreciseMinds1234!',
-      },
+      formData: {},
+      // formData: {
+      //   // title: 'mr',
+      //   // firstName: 'test',
+      //   // lastName: 'tester',
+      //   email: 'omar.jebari+17@gmail.com',
+      //   // dateOfBirth: new Date('10/10/1988'),
+      //   // nationalInsuranceNumber: 'NN810757D',
+      //   password: 'PreciseMinds1234!',
+      // },
 
       fullName: null,
     };
