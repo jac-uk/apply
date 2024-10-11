@@ -103,7 +103,7 @@ export default {
     signIn() {
       let nextPage = this.$route.path;
       // if the user is on the sign-up or reset-password page, redirect them to the vacancies page after sign-in
-      if (['/sign-up', '/reset-password'].includes(this.$route.path)) {
+      if (['/sign-up-step1', '/reset-password'].includes(this.$route.path)) {
         nextPage = '/vacancies';
       }
       this.$router.push({ name: 'sign-in', query: { nextPage: nextPage } });

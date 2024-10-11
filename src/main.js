@@ -17,13 +17,57 @@ const emitter = mitt();
 
 let vueInstance = false;
 auth.onAuthStateChanged( async (user) => {
-  store.dispatch('auth/setCurrentUser', user);
-  if (store.getters['auth/isSignedIn']) {
+
+  console.log('================ onAuthStateChanged ==================');
+  console.log('-- oasc user:');
+  console.log(user);
+  console.log('-- oasc calling setCurrentUser');
+
+  await store.dispatch('auth/setCurrentUser', user);
+
+  const isSignedIn = store.getters['auth/isSignedIn'];
+  const isEmailVerified = store.getters['auth/isEmailVerified'];
+  const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
+
+  console.log(`-- oasc isSignedIn: ${isSignedIn}`);
+  console.log(`-- oasc isEmailVerified: ${isEmailVerified}`);
+  console.log(`-- oasc requiredFieldsComplete: ${requiredFieldsComplete}`);
+  console.log('-- oasc personalDetails:');
+  console.log(store.getters['candidate/personalDetails']());
+
+  console.log('-- oasc router.currentRoute:');
+  console.log(router.currentRoute.value);
+
+  if (isSignedIn) {
+
     await store.dispatch('settings/bind');
-    const urlParams = new URLSearchParams(window.location.search);
-    const nextPage = urlParams.get('nextPage');
-    if (nextPage) router.push(nextPage);
-    else router.push('/vacancies');
+
+    if (!isEmailVerified) {
+
+      console.log('-- oasc redirecting to verify email request');
+
+      router.replace({ name: 'verify-email-request' });
+      //router.replace({ name: 'verify-email-request', params: { id: 123 }, query: { search: 'vue' } });
+    }
+    else if (!requiredFieldsComplete) {
+        console.log('-- oasc redirecting to complete required fields');
+
+        router.replace({ name: 'sign-up-step2' });
+    }
+    else {
+      const urlParams = new URLSearchParams(window.location.search);
+      const nextPage = urlParams.get('nextPage');
+      if (nextPage) {
+        console.log(`-- oasc redirecting to nextPage: ${nextPage}`);
+        router.push(nextPage);
+      }
+      else {
+
+        console.log('-- oasc redirecting to: vacancies');
+
+        router.push('/vacancies');
+      }
+    }
   }
 
   // Create the Vue instance, but only once

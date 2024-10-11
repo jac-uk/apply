@@ -5,6 +5,8 @@
         ref="formRef"
       >
         <div class="govuk-grid-column-two-thirds">
+          <!-- @TODO: CHANGE TEXT BELOW! -->
+
           <h1 class="govuk-heading-xl">
             Sign in
           </h1>
@@ -14,7 +16,7 @@
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
-              :to="{ name: 'sign-up', query: { nextPage: nextPage } }"
+              :to="{ name: 'sign-up-step1', query: { nextPage: nextPage } }"
             >
               create an account
             </RouterLink>

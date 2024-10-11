@@ -7,31 +7,12 @@
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
-            Create an account
+            Create an account - Step 2
           </h1>
 
-          <p class="govuk-body-l">
-            Or
-            <RouterLink
-              class="govuk-link"
-              data-module="govuk-button"
-              :to="{ name: 'sign-in', query: { nextPage: nextPage } }"
-            >
-              sign in
-            </RouterLink>
-            if you already have an account.
-          </p>
-
-          <p class="govuk-body">
-            Find out more about how we
-            <a
-              class="govuk-link"
-              href="https://judicialappointments.gov.uk/data-protection-freedom-of-information-and-making-requests-for-your-data/"
-              target="_blank"
-            >
-              process your data.
-            </a>
-          </p>
+          <div class="govuk-body">
+            Please complete registration below to fully activate your account.
+          </div>
 
           <ErrorSummary :errors="errors" />
           <WarningSummary :warning-object="warningObject" />
@@ -60,7 +41,7 @@
             required
           />
 
-          <TextField
+          <!-- <TextField
             id="email"
             v-model="formData.email"
             label="Email address"
@@ -82,7 +63,7 @@
             :min-length="minPasswordLength"
             :is-new-pwd="true"
             required
-          />
+          /> -->
 
           <DateInput
             id="date-of-birth"
@@ -106,9 +87,8 @@
             type="submit"
             class="govuk-button"
           >
-            Create Account
+            Complete Registration
           </button>
-          <ChangeEmailMessage />
         </div>
       </form>
     </div>
@@ -116,41 +96,55 @@
 </template>
 
 <script>
-import { serverTimestamp } from '@firebase/firestore';
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import WarningSummary from '@/components/Form/WarningSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
-import Password from '@/components/Form/Password.vue';
 import DateInput from '@/components/Form/DateInput.vue';
-import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
+import { saveCandidate, makeFullName } from '@/services/candidateService';
 
 export default {
-  name: 'SignUp',
+  name: 'SignUpStep2',
   components: {
     ErrorSummary,
     WarningSummary,
     TextField,
-    Password,
+    //Password,
     DateInput,
-    ChangeEmailMessage,
   },
   extends: Form,
   data () {
     return {
-      minPasswordLength: 12,
-      formData: {},
+      //minPasswordLength: 12,
+
+      // @TODO: REVERT
+      // formData: {},
+      formData: {
+        title: 'mr',
+        firstName: 'test',
+        lastName: 'tester',
+        //email: 'omar.jebari+17@gmail.com',
+        dateOfBirth: new Date('10/10/1988'),
+        nationalInsuranceNumber: 'NN810757D',
+      },
+
       fullName: null,
+      //email: null,
     };
   },
   computed: {
-    exerciseId () {
-      return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
+    // exerciseId () {
+    //   return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
+    // },
+    // nextPage() {
+    //   return this.$route.query.nextPage;
+    // },
+    currentUser() {
+      return this.$store.getters['auth/currentUser'];
     },
-    nextPage() {
-      return this.$route.query.nextPage;
-    },
+  },
+  mounted() {
+    //this.email = this.$route.query.email;
   },
   methods: {
     // @TODO: this should be handled by form
@@ -161,7 +155,7 @@ export default {
       await this.validate();
       if (this.isValid()) {
         try {
-          await this.signUp();
+          await this.completeSignUp();
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
@@ -171,43 +165,27 @@ export default {
         this.scrollToTop();
       }
     },
-    async signUp() {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, this.formData.email, this.formData.password).then((result)=>{
-        this.createCandidate(result);
-      })
-        .catch((error) => {
-          this.errors.push({ ref: 'email', message: error.message });
-          this.scrollToTop();
+    async completeSignUp() {
+      try {
+
+        console.log(`email: ${this.currentUser.email}`);
+
+        await saveCandidate({
+          title: this.formData.title,
+          firstName: this.formData.firstName,
+          lastName: this.formData.lastName,
+          fullName: makeFullName(this.formData.firstName, this.formData.lastName),
+          email: this.currentUser.email,
+          dateOfBirth: this.formData.dateOfBirth,
+          nationalInsuranceNumber: this.formData.nationalInsuranceNumber || null, // prevent undefined being saved
         });
-    },
-    makeFullName() {
-      this.fullName = `${this.formData.firstName} ${this.formData.lastName}`;
-    },
-    async createCandidate(userCredential) {
-      this.makeFullName();
-      const personalDetails = {
-        title: this.formData.title,
-        firstName: this.formData.firstName,
-        lastName: this.formData.lastName,
-        fullName: this.fullName,
-        email: this.formData.email,
-        dateOfBirth: this.formData.dateOfBirth,
-        nationalInsuranceNumber: this.formData.nationalInsuranceNumber || null, // prevent undefined being saved
-      };
-      await this.$store.dispatch('auth/setCurrentUser', userCredential.user);
-      await this.$store.dispatch('candidate/create', {
-        created: serverTimestamp(),
-      });
-      await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
+
+        this.$router.replace({ name: 'vacancies' });
+
+      } catch (error) {
+        this.error = error.message;
+      }
     },
   },
 };
 </script>
-
-<style scoped>
-  .login-container {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-</style>

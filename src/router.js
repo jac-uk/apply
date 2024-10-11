@@ -6,9 +6,14 @@ import {
 import store from '@/store';
 
 import SignIn from '@/views/SignIn.vue';
-import SignUp from '@/views/SignUp.vue';
 import ResetPassword from '@/views/ResetPassword.vue';
 import ConfirmResetPassword from '@/views/ConfirmResetPassword.vue';
+
+import SignUpStep1 from '@/views/SignUpStep1.vue';
+import SignUpStep2 from '@/views/SignUpStep2.vue';
+
+import VerifyEmail from '@/views/VerifyEmail.vue';
+import VerifyEmailRequest from '@/views/VerifyEmailRequest.vue';
 
 // Vacancies
 // import Website from '@/Website/Home';
@@ -130,6 +135,43 @@ const routes = [
     name: 'not-found',
     meta: {
       title: 'Error',
+    },
+  },
+  {
+    path: '/verify-email-request',
+    name: 'verify-email-request',
+    component: VerifyEmailRequest,
+    meta: {
+      requiresAuth: true,
+      title: 'Verify Email Request',
+    },
+    beforeEnter: (to, from, next) => {
+      const isEmailVerified = store.getters['auth/isEmailVerified'];
+      const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
+      if (isEmailVerified) {
+        if (requiredFieldsComplete) {
+
+          console.log('-- router beforeEnter(verify-email-request) with isEmailVerified = true && requiredFieldsComplete = true so goto: vacancies');
+          return next({ name: 'vacancies' });
+
+        }
+        else {
+
+          console.log('-- router beforeEnter(verify-email-request) with isEmailVerified = true so goto: sign-up-step2');
+          return next({ name: 'sign-up-step2' });
+
+        }
+      }
+      return next();
+    },
+  },
+  {
+    path: '/verify-email',
+    name: 'verify-email',
+    component: VerifyEmail,
+    meta: {
+      requiresAuth: true,
+      title: 'Verify Email',
     },
   },
   {
@@ -981,13 +1023,40 @@ const routes = [
     },
   },
   {
-    path: '/sign-up',
-    name: 'sign-up',
-    component: SignUp,
+    path: '/sign-up-step1',
+    name: 'sign-up-step1',
+    component: SignUpStep1,
     meta: {
-      title: 'Create an account',
+      title: 'Create an account (Step 1)',
     },
   },
+  {
+    path: '/sign-up-step2',
+    name: 'sign-up-step2',
+    component: SignUpStep2,
+    meta: {
+      requiresAuth: true,
+      title: 'Create an account (Step 2)',
+    },
+    beforeEnter: (to, from, next) => {
+      const isEmailVerified = store.getters['auth/isEmailVerified'];
+      const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
+      if (!isEmailVerified) {
+
+        console.log('-- router beforeEnter(sign-up-step2) with isEmailVerified = false so goto: verify-email-request');
+        return next({ name: 'verify-email-request' });
+
+      }
+      if (requiredFieldsComplete) {
+
+        console.log('-- router beforeEnter(sign-up-step2) with requiredFieldsComplete = true so goto: vacancies');
+        return next({ name: 'vacancies' });
+
+      }
+      return next();
+    },
+  },
+
   {
     path: '/reset-password',
     name: 'reset-password',
@@ -1023,6 +1092,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters['auth/isSignedIn'];
+  const isEmailVerified = store.getters['auth/isEmailVerified'];
+  const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
+
+  console.log('================== ROUTER.beforeEach ==================');
+  console.log(`-- router isSignedIn: ${isSignedIn}`);
+  console.log(`-- router isEmailVerified: ${isEmailVerified}`);
+  console.log(`-- router requiredFieldsComplete: ${requiredFieldsComplete}`);
+
   if (requiresAuth && !isSignedIn) {
     next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
