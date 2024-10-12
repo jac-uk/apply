@@ -168,6 +168,7 @@ export default {
     async completeSignUp() {
       try {
 
+        // eslint-disable-next-line no-console
         console.log(`email: ${this.currentUser.email}`);
 
         await saveCandidate({

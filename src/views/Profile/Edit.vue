@@ -190,9 +190,6 @@ export default {
     },
   },
   async mounted() {
-
-    console.log('============ EDIT MOUNTED =============');
-
     if (!this.$store.getters['candidate/personalDetails']()) {
       await this.$store.dispatch('candidate/bind');
     }
@@ -225,7 +222,8 @@ export default {
             const newUser = { ...auth.currentUser };
             newUser.displayName = fullName;
 
-            console.log('===========> Set currenrt user!!');
+            // eslint-disable-next-line no-console
+            console.log('===========> Set current user!!');
 
             await this.$store.dispatch('auth/setCurrentUser', newUser);
           }
@@ -236,14 +234,16 @@ export default {
             // Update email in authentication database
             emailUpdated = await this.updateEmail(data.email, this.personalDetails.email);
 
+            // eslint-disable-next-line no-console
             console.log(`-- emailUpdated: ${emailUpdated}`);
           }
 
+          /* eslint-disable no-console */
           console.log('-- this.personalDetails');
           console.log(this.personalDetails);
-
           console.log('-- ERROR:');
           console.log(this.errors);
+          /* eslint-enable no-console */
 
           if (this.errors.length === 0) {
 
@@ -258,27 +258,33 @@ export default {
         }
 
       } catch (e) {
+        /* eslint-disable no-console */
         console.log('Error in save:');
         console.log(e);
+        /* eslint-enable no-console */
       }
     },
     async updateEmail(currentEmailAddress, newEmailAddress) {
       let isSuccess = false;
       try {
 
+        /* eslint-disable no-console */
         console.log('=== UPDATE EMAIL ADDRESS ===');
         console.log({
           currentEmailAddress,
           newEmailAddress,
         });
+        /* eslint-enable no-console */
 
         const res = await httpsCallable(functions, 'updateEmailAddress')({
           currentEmailAddress,
           newEmailAddress,
         });
 
+        /* eslint-disable no-console */
         console.log('res:');
         console.log(res);
+        /* eslint-enable no-console */
 
         const result = res.data;
         if (result.status === 'success') {
@@ -286,6 +292,7 @@ export default {
         } else {
           if (result.data.code === 'auth/email-already-exists') {
 
+            // eslint-disable-next-line no-console
             console.log('Email already exists!!');
 
             this.errors = [{ id: 'email', message: 'Unable to update email at this time. Please contact the administrator.' }];
@@ -297,8 +304,10 @@ export default {
         }
       } catch (error) {
 
+        /* eslint-disable no-console */
         console.log('CAUGHT ERROR IN UPDATE:');
         console.log(error);
+        /* eslint-enable no-console */
 
         this.errors = [{ id: 'email', message: 'Failed to perform action.' }];
       }

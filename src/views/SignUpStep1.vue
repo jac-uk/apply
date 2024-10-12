@@ -193,15 +193,19 @@ export default {
           email: this.formData.email,
         });
 
+        /* eslint-disable no-console */
         console.log('-- Signup USER:');
         console.log(user);
+        /* eslint-enable no-console */
 
         // Send email verification
         await sendEmailVerificationLink();
       } catch (error) {
 
+        /* eslint-disable no-console */
         console.log('ERROR:');
         console.log(error);
+        /* eslint-enable no-console */
 
         const message = 'There was a problem with creating the user. Please try again or report the issue to Admin.';
         this.errors.push({ id: 'email', message: message });

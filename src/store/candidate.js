@@ -10,8 +10,9 @@ const collectionRef = collection(firestore, collectionName);
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(async ({ bindFirestoreRef, state, commit, rootState, dispatch }) => {
+    bind: firestoreAction(async ({ bindFirestoreRef, state, rootState, dispatch }) => {
 
+      // eslint-disable-next-line no-console
       console.log('=============== CANDIDATE bind ===============');
 
       const docRef = doc(collectionRef,rootState.auth.currentUser.uid);
@@ -34,9 +35,11 @@ export default {
 
       await dispatch('checkRequiredFields');
 
+      /* eslint-disable no-console */
       console.log('-- cand state.personalDetails:');
       console.log(state.personalDetails);
       console.log(`-- cand requiredFieldsComplete: ${state.requiredFieldsComplete}`);
+      /* eslint-enable no-console */
 
       return;
     }),
@@ -92,9 +95,6 @@ export default {
     set(state, { name, value }) {
       state[name] = value;
     },
-    // setRequiredFieldsComplete(state, value) {
-    //   state.requiredFieldsComplete = value;
-    // },
   },
   state: {
     personalDetails: null,

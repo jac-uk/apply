@@ -79,8 +79,10 @@ export default {
         return await sendEmailVerificationLink();
       } catch (e) {
 
+        /* eslint-disable no-console */
         console.log('ERROR:');
         console.log(e);
+        /* eslint-enable no-console */
 
         if (e.code === 'auth/too-many-requests') {
           this.errorMessage = 'Too many email verification requests. Please try again later.';
@@ -102,8 +104,10 @@ export default {
         await this.$store.dispatch('auth/setCurrentUser', user);
       }
 
+      /* eslint-disable no-console */
       console.log('user:');
       console.log(user);
+      /* eslint-enable no-console */
 
       if (this.isEmailVerified) {
         this.$router.push({ name: 'vacancies' });

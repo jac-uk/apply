@@ -30,6 +30,7 @@ export default {
   },
   created() {
 
+    // eslint-disable-next-line no-console
     console.log('============ VerifyEmail (created called) =============');
 
     let routeName;
@@ -48,6 +49,7 @@ export default {
       routeName = 'sign-in';
     }
 
+    // eslint-disable-next-line no-console
     console.log(`-- redirecting to: ${routeName}`);
 
     // Redirect after 2 seconds

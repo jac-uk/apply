@@ -18,10 +18,12 @@ const emitter = mitt();
 let vueInstance = false;
 auth.onAuthStateChanged( async (user) => {
 
+  /* eslint-disable no-console */
   console.log('================ onAuthStateChanged ==================');
   console.log('-- oasc user:');
   console.log(user);
   console.log('-- oasc calling setCurrentUser');
+  /* eslint-enable no-console */
 
   await store.dispatch('auth/setCurrentUser', user);
 
@@ -29,14 +31,15 @@ auth.onAuthStateChanged( async (user) => {
   const isEmailVerified = store.getters['auth/isEmailVerified'];
   const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
 
+  /* eslint-disable no-console */
   console.log(`-- oasc isSignedIn: ${isSignedIn}`);
   console.log(`-- oasc isEmailVerified: ${isEmailVerified}`);
   console.log(`-- oasc requiredFieldsComplete: ${requiredFieldsComplete}`);
   console.log('-- oasc personalDetails:');
   console.log(store.getters['candidate/personalDetails']());
-
   console.log('-- oasc router.currentRoute:');
   console.log(router.currentRoute.value);
+  /* eslint-enable no-console */
 
   if (isSignedIn) {
 
@@ -44,12 +47,14 @@ auth.onAuthStateChanged( async (user) => {
 
     if (!isEmailVerified) {
 
+      // eslint-disable-next-line no-console
       console.log('-- oasc redirecting to verify email request');
 
       router.replace({ name: 'verify-email-request' });
       //router.replace({ name: 'verify-email-request', params: { id: 123 }, query: { search: 'vue' } });
     }
     else if (!requiredFieldsComplete) {
+        // eslint-disable-next-line no-console
         console.log('-- oasc redirecting to complete required fields');
 
         router.replace({ name: 'sign-up-step2' });
@@ -58,11 +63,12 @@ auth.onAuthStateChanged( async (user) => {
       const urlParams = new URLSearchParams(window.location.search);
       const nextPage = urlParams.get('nextPage');
       if (nextPage) {
+        // eslint-disable-next-line no-console
         console.log(`-- oasc redirecting to nextPage: ${nextPage}`);
         router.push(nextPage);
       }
       else {
-
+        // eslint-disable-next-line no-console
         console.log('-- oasc redirecting to: vacancies');
 
         router.push('/vacancies');
