@@ -1,71 +1,67 @@
 <template>
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">
-      <form
-        ref="formRef"
-      >
-        <div class="govuk-grid-column-two-thirds">
-          <h1 class="govuk-heading-xl">
-            Create an account - Step 2
-          </h1>
+      <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
+          Create an account - Step 2
+        </h1>
 
-          <div class="govuk-body">
-            Please complete registration below to fully activate your account.
-          </div>
-
-          <ErrorSummary :errors="errors" />
-          <WarningSummary :warning-object="warningObject" />
-
-          <TextField
-            id="title"
-            v-model="formData.title"
-            label="Title"
-            type="text"
-            required
-          />
-
-          <TextField
-            id="firstName"
-            v-model="formData.firstName"
-            label="First name"
-            type="text"
-            required
-          />
-
-          <TextField
-            id="lastName"
-            v-model="formData.lastName"
-            label="Last name"
-            type="text"
-            required
-          />
-
-          <DateInput
-            id="date-of-birth"
-            v-model="formData.dateOfBirth"
-            :min-date="new Date('1/01/1900')"
-            :max-date="new Date()"
-            label="Date of birth"
-            hint="For example, 27 3 1964."
-            required
-          />
-
-          <TextField
-            id="national-insurance-number"
-            v-model="formData.nationalInsuranceNumber"
-            label="National Insurance number"
-            hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
-            type="nino"
-          />
-
-          <ActionButton
-            type="primary"
-            :action="onSubmit"
-          >
-            Complete Registration
-          </ActionButton>
+        <div class="govuk-body">
+          Please complete registration below to fully activate your account.
         </div>
-      </form>
+
+        <ErrorSummary :errors="errors" />
+        <WarningSummary :warning-object="warningObject" />
+
+        <TextField
+          id="title"
+          v-model="formData.title"
+          label="Title"
+          type="text"
+          required
+        />
+
+        <TextField
+          id="firstName"
+          v-model="formData.firstName"
+          label="First name"
+          type="text"
+          required
+        />
+
+        <TextField
+          id="lastName"
+          v-model="formData.lastName"
+          label="Last name"
+          type="text"
+          required
+        />
+
+        <DateInput
+          id="date-of-birth"
+          v-model="formData.dateOfBirth"
+          :min-date="new Date('1/01/1900')"
+          :max-date="new Date()"
+          label="Date of birth"
+          hint="For example, 27 3 1964."
+          required
+        />
+
+        <TextField
+          id="national-insurance-number"
+          v-model="formData.nationalInsuranceNumber"
+          label="National Insurance number"
+          hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
+          type="nino"
+        />
+
+        <ActionButton
+          type="primary"
+          :action="onSubmit"
+        >
+          Complete Registration
+        </ActionButton>
+      </div>
     </div>
   </div>
 </template>
@@ -109,27 +105,23 @@ export default {
     };
   },
   computed: {
-    // exerciseId () {
-    //   return this.$store.state.vacancy.record && this.$store.state.vacancy.record.id;
-    // },
-    // nextPage() {
-    //   return this.$route.query.nextPage;
-    // },
     currentUser() {
       return this.$store.getters['auth/currentUser'];
     },
   },
-  mounted() {
-    //this.email = this.$route.query.email;
-  },
   methods: {
-    // @TODO: this should be handled by form
     scrollToTop () {
       this.$el.scrollIntoView();
     },
     async onSubmit() {
+
+      console.log('================ ign up step 2 ======================');
+
       await this.validate();
       if (this.isValid()) {
+
+        console.log('-- ss2 is valid');
+
         try {
           return await this.completeSignUp();
         } catch (error) {
@@ -142,26 +134,21 @@ export default {
       }
     },
     async completeSignUp() {
-      try {
+      // eslint-disable-next-line no-console
+      console.log(`email: ${this.currentUser.email}`);
 
-        // eslint-disable-next-line no-console
-        console.log(`email: ${this.currentUser.email}`);
+      await saveCandidate({
+        title: this.formData.title,
+        firstName: this.formData.firstName,
+        lastName: this.formData.lastName,
+        fullName: makeFullName(this.formData.firstName, this.formData.lastName),
+        email: this.currentUser.email,
+        dateOfBirth: this.formData.dateOfBirth,
+        nationalInsuranceNumber: this.formData.nationalInsuranceNumber || null, // prevent undefined being saved
+      });
 
-        await saveCandidate({
-          title: this.formData.title,
-          firstName: this.formData.firstName,
-          lastName: this.formData.lastName,
-          fullName: makeFullName(this.formData.firstName, this.formData.lastName),
-          email: this.currentUser.email,
-          dateOfBirth: this.formData.dateOfBirth,
-          nationalInsuranceNumber: this.formData.nationalInsuranceNumber || null, // prevent undefined being saved
-        });
-
-        this.$router.replace({ name: 'vacancies' });
-
-      } catch (error) {
-        this.error = error.message;
-      }
+      this.$router.replace({ name: 'vacancies' });
+      return true;
     },
   },
 };
