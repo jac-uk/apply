@@ -65,10 +65,10 @@
             <span>
               <a
                 class="govuk-link govuk-body"
-                href="http://www.legislation.gov.uk/ukpga/2007/15/schedule/2"
+                href="https://www.legislation.gov.uk/ukpga/2007/15/schedule/3"
                 target="_blank"
               >
-                http://www.legislation.gov.uk/ukpga/2007/15/schedule/2
+                https://www.legislation.gov.uk/ukpga/2007/15/schedule/3
               </a>
             </span>
 
