@@ -9,7 +9,7 @@ const createCandidate = async (personalDetails) => {
   await store.dispatch('candidate/create', {
     created: serverTimestamp(),
   });
-  await saveCandidate(personalDetails);
+  return await saveCandidate(personalDetails);
 };
 
 const saveCandidate = async (personalDetails) => {
@@ -20,6 +20,7 @@ const saveCandidate = async (personalDetails) => {
   /* eslint-enable no-console */
 
   await store.dispatch('candidate/savePersonalDetails', personalDetails);
+  return true;
 };
 
 const makeFullName = (firstName, lastName) => {

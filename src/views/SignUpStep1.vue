@@ -3,7 +3,6 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="onSubmit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -84,30 +83,13 @@
             required
           />
 
-          <!-- <DateInput
-            id="date-of-birth"
-            v-model="formData.dateOfBirth"
-            :min-date="new Date('1/01/1900')"
-            :max-date="new Date()"
-            label="Date of birth"
-            hint="For example, 27 3 1964."
-            required
-          />
-
-          <TextField
-            id="national-insurance-number"
-            v-model="formData.nationalInsuranceNumber"
-            label="National Insurance number"
-            hint="It’s on your National Insurance card, payslip or P60. For example, ‘QQ 12 34 56 C’."
-            type="nino"
-          /> -->
-
-          <button
-            type="submit"
-            class="govuk-button"
+          <ActionButton
+            type="primary"
+            :action="onSubmit"
           >
             Create Account
-          </button>
+          </ActionButton>
+
           <ChangeEmailMessage />
         </div>
       </form>
@@ -124,6 +106,7 @@ import Password from '@/components/Form/Password.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import { createCandidate } from '@/services/candidateService';
 import { createAuthUser, sendEmailVerificationLink } from '@/services/authService';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
   name: 'SignUpStep1',
@@ -132,8 +115,8 @@ export default {
     WarningSummary,
     TextField,
     Password,
-    //DateInput,
     ChangeEmailMessage,
+    ActionButton,
   },
   extends: Form,
   data () {
@@ -172,7 +155,7 @@ export default {
       await this.validate();
       if (this.isValid()) {
         try {
-          await this.signUp();
+          return await this.signUp();
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
@@ -199,7 +182,7 @@ export default {
         /* eslint-enable no-console */
 
         // Send email verification
-        await sendEmailVerificationLink();
+        return await sendEmailVerificationLink();
       } catch (error) {
 
         /* eslint-disable no-console */

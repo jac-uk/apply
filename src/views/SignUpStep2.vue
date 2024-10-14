@@ -3,7 +3,6 @@
     <div class="govuk-grid-column-full">
       <form
         ref="formRef"
-        @submit.prevent="onSubmit"
       >
         <div class="govuk-grid-column-two-thirds">
           <h1 class="govuk-heading-xl">
@@ -41,30 +40,6 @@
             required
           />
 
-          <!-- <TextField
-            id="email"
-            v-model="formData.email"
-            label="Email address"
-            type="email"
-            warn-cps-email-msg="Use of a CPS device causes multiple known issues with the JAC Digital Platform due to the device firewall settings - it is strongly recommended that applicants use a personal device to log on/submit an application."
-            :pattern="{
-              match: /^((?!@judicialappointments.gov.uk\s*$).)*$/,
-              message: 'You cannot sign up as a candidate using a @judicialappointments.gov.uk email address',
-            }"
-            required
-          />
-
-          <Password
-            id="password"
-            v-model="formData.password"
-            label="Password"
-            :hint="`For security reasons it should be ${minPasswordLength} or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *).`"
-            type="new-password"
-            :min-length="minPasswordLength"
-            :is-new-pwd="true"
-            required
-          /> -->
-
           <DateInput
             id="date-of-birth"
             v-model="formData.dateOfBirth"
@@ -83,12 +58,12 @@
             type="nino"
           />
 
-          <button
-            type="submit"
-            class="govuk-button"
+          <ActionButton
+            type="primary"
+            :action="onSubmit"
           >
             Complete Registration
-          </button>
+          </ActionButton>
         </div>
       </form>
     </div>
@@ -102,6 +77,7 @@ import WarningSummary from '@/components/Form/WarningSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import { saveCandidate, makeFullName } from '@/services/candidateService';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
   name: 'SignUpStep2',
@@ -109,8 +85,8 @@ export default {
     ErrorSummary,
     WarningSummary,
     TextField,
-    //Password,
     DateInput,
+    ActionButton,
   },
   extends: Form,
   data () {
@@ -155,7 +131,7 @@ export default {
       await this.validate();
       if (this.isValid()) {
         try {
-          await this.completeSignUp();
+          return await this.completeSignUp();
         } catch (error) {
           this.errors.push({ message: error.message });
           this.scrollToTop();
