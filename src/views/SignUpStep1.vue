@@ -182,7 +182,10 @@ export default {
         /* eslint-enable no-console */
 
         // Send email verification
-        return await sendEmailVerificationLink();
+        await sendEmailVerificationLink();
+
+        this.$router.push({ name: 'verify-email-request' });
+
       } catch (error) {
 
         /* eslint-disable no-console */
