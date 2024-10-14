@@ -45,7 +45,6 @@
         </ActionButton>
 
         <div
-          v-if="showEmailVerificationError && errorMessage"
           class="govuk-error-summary__body"
         >
           {{ errorMessage }}
@@ -64,6 +63,7 @@ export default {
   data() {
     return {
       showEmailVerificationError: false,
+      errorMessage: '',
     };
   },
   computed: {
@@ -113,7 +113,7 @@ export default {
         this.$router.push({ name: 'vacancies' });
       }
       else {
-        this.errorMessage = 'The email verification process failed, possibly because the link expired (after 3 days).<br>Please click the resend button above to get a new link sent to you.';
+        this.errorMessage = 'The email verification process failed, possibly because the link expired (after 3 days). Please click the resend button above to get a new link sent to you.';
         this.showEmailVerificationError = true;
       }
     },
