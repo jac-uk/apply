@@ -17,6 +17,7 @@
               </RouterLink>
             </li>
             <li
+              v-if="isEmailVerified"
               class="moj-side-navigation__item"
               :class="$route.name === 'profile' ? 'moj-side-navigation__item--active' : null"
             >
@@ -45,6 +46,57 @@
           class="govuk-grid-row"
         >
           <div class="govuk-grid-column-three-quarters">
+            <div
+              v-if="isSignedIn && !isEmailVerified"
+              class="govuk-notification-banner"
+              role="region"
+              aria-labelledby="govuk-notification-banner-title"
+              data-module="govuk-notification-banner"
+            >
+              <div class="govuk-notification-banner__header">
+                <h2
+                  id="govuk-notification-banner-title"
+                  class="govuk-notification-banner__title"
+                >
+                  Important
+                </h2>
+              </div>
+              <div class="govuk-notification-banner__content">
+                <p class="govuk-notification-banner__heading">
+                  You must verify your email to complete registration!<br>
+                  Click
+                  <RouterLink
+                    class="govuk-notification-banner__link"
+                    :to="{ name: 'verify-email-request' }"
+                  >
+                    here
+                  </RouterLink> for more information.
+                </p>
+              </div>
+            </div>
+
+            <div
+              v-else-if="isSignedIn && !hasCompletedSignup"
+              class="govuk-notification-banner"
+              role="region"
+              aria-labelledby="govuk-notification-banner-title"
+              data-module="govuk-notification-banner"
+            >
+              <div class="govuk-notification-banner__header">
+                <h2
+                  id="govuk-notification-banner-title"
+                  class="govuk-notification-banner__title"
+                >
+                  Important
+                </h2>
+              </div>
+              <div class="govuk-notification-banner__content">
+                <p class="govuk-notification-banner__heading">
+                  You must fill in the fields below to complete registration!
+                </p>
+              </div>
+            </div>
+
             <h3 class="float-left govuk-heading-l">
               Your profile
             </h3>
@@ -180,7 +232,7 @@
       button-text="OK"
       :cancelable="false"
       title="Change of email address"
-      message="Your email address has been changed. Please sign in again using your new email address."
+      message="Your email address has been changed. We have sent an email verification link to your inbox, so please click on that link then sign in with your new email address."
       @confirmed="signOut"
     />
   </div>
@@ -202,6 +254,15 @@ export default {
   computed: {
     personalDetails() {
       return this.$store.getters['candidate/personalDetails']();
+    },
+    isSignedIn() {
+      return this.$store.getters['auth/isSignedIn'];
+    },
+    isEmailVerified() {
+      return this.$store.getters['auth/isEmailVerified'];
+    },
+    hasCompletedSignup() {
+      return this.$store.getters['candidate/requiredFieldsComplete']();
     },
   },
   async mounted() {

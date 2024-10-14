@@ -5,6 +5,8 @@
         ref="formRef"
       >
         <div class="govuk-grid-column-two-thirds">
+          <!-- @TODO: CHANGE TEXT BELOW! -->
+
           <h1 class="govuk-heading-xl">
             Sign in
           </h1>
@@ -14,7 +16,7 @@
             <RouterLink
               class="govuk-link"
               data-module="govuk-button"
-              :to="{ name: 'sign-up', query: { nextPage: nextPage } }"
+              :to="{ name: 'sign-up-step1', query: { nextPage: nextPage } }"
             >
               create an account
             </RouterLink>
@@ -155,10 +157,7 @@ export default {
         return true;
 
       } catch (error) {
-        let message = error.message;
-        // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
-        message = 'Either the email address and/or password you have entered is incorrect';
-        // }
+        const message = 'Either the email address and/or password you have entered is incorrect';
         this.errors.push({ id: 'email', message: message });
         return false;
       }
