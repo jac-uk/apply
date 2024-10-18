@@ -51,13 +51,12 @@ export default {
     allVacancies: state => {
       return state.allRecords;
     },
+    publishedVacancies: state => {
+      return state.allRecords.filter(vacancy => vacancy.published && !['deleted', 'archived'].includes(vacancy.state));
+    },
     openVacancies: (state, getters) => {
-      const vacancies = getters.allVacancies;
+      const vacancies = getters.publishedVacancies;
       return vacancies.filter(vacancy => {
-
-          // console.log(vacancy.state);
-          const isArchived = vacancy.state === 'archived';
-          const isDeleted = vacancy.state === 'deleted';
           const openDate = vacancy.applicationOpenDate || parseEstimatedDate(vacancy.estimatedLaunchDate);
           const closeDate = vacancy.applicationCloseDate || new Date(2050, 1, 1);
           const hasOnlyEstimates = (vacancy.estimatedLaunchDate && (!vacancy.applicationOpenDate && !vacancy.applicationCloseDate));
@@ -68,7 +67,7 @@ export default {
           openDate.setHours(13);
           closeDate.setHours(13);
 
-          return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates && !isArchived && !isDeleted;
+          return (!isDateInFuture(openDate) && isDateInFuture(closeDate)) && !hasOnlyEstimates;
       });
     },
     futureVacancies: (state, getters) => {

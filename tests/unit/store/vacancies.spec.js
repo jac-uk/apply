@@ -44,7 +44,7 @@ describe('store/vacancies', () => {
 
     describe('openVacancies', () => {
       it('returns only open vacancies', () => {
-        const openVacancies = getters.openVacancies(state, { allVacancies: mockVacancies });
+        const openVacancies = getters.openVacancies(state, { publishedVacancies: mockVacancies });
 
         expect(openVacancies.length).toEqual(1);
         expect(openVacancies[0].name).toEqual('OPEN VACANCY');
@@ -58,7 +58,7 @@ describe('store/vacancies', () => {
           applicationCloseDate: futureDate,
         };
 
-        const openVacancies = getters.openVacancies(state, { allVacancies: [mockOpenVacancy, ...mockVacancies] });
+        const openVacancies = getters.openVacancies(state, { publishedVacancies: [mockOpenVacancy, ...mockVacancies] });
 
         expect(openVacancies.length).toEqual(2);
         expect(openVacancies[0].name).toEqual(mockName);
@@ -71,7 +71,7 @@ describe('store/vacancies', () => {
           applicationOpenDate: pastDate,
         };
 
-        const openVacancies = getters.openVacancies(state, { allVacancies: [mockOpenVacancy, ...mockVacancies] });
+        const openVacancies = getters.openVacancies(state, { publishedVacancies: [mockOpenVacancy, ...mockVacancies] });
 
         expect(openVacancies.length).toEqual(2);
         expect(openVacancies[0].name).toEqual(mockName);
