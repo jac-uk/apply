@@ -10,7 +10,11 @@ const collectionRef = collection(firestore, collectionName);
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
+    bind: firestoreAction(async ({ bindFirestoreRef, state, rootState, dispatch }) => {
+
+      // eslint-disable-next-line no-console
+      console.log('=============== CANDIDATE bind ===============');
+
       const docRef = doc(collectionRef,rootState.auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
       // if candidate document has not been created correctly
@@ -28,6 +32,15 @@ export default {
       await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('relevantQualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/relevantQualifications`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
+
+      await dispatch('checkRequiredFields');
+
+      /* eslint-disable no-console */
+      console.log('-- cand state.personalDetails:');
+      console.log(state.personalDetails);
+      console.log(`-- cand requiredFieldsComplete: ${state.requiredFieldsComplete}`);
+      /* eslint-enable no-console */
+
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {
@@ -63,6 +76,20 @@ export default {
       const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/postQualificationExperience`);
       await setDoc(ref, data);
     },
+    checkRequiredFields: async ({ state, commit }) => {
+      const personalDetails = state.personalDetails;
+      if (personalDetails) {
+        // Check if required fields are filled
+        const isComplete = Boolean(
+          personalDetails.dateOfBirth &&
+          personalDetails.email &&
+          personalDetails.firstName &&
+          personalDetails.lastName &&
+          personalDetails.title
+        );
+        commit('set', { name: 'requiredFieldsComplete', value: isComplete });
+      }
+    },
   },
   mutations: {
     set(state, { name, value }) {
@@ -75,6 +102,7 @@ export default {
     equalityAndDiversitySurvey: null,
     relevantQualifications: null,
     postQualificationExperience: null,
+    requiredFieldsComplete: false,    // Fields that ** MUST ** be completed in sign up
   },
   getters: {
     personalDetails: (state) => () => {
@@ -91,6 +119,9 @@ export default {
     },
     postQualificationExperience: (state) => () => {
       return clone(state.postQualificationExperience);
+    },
+    requiredFieldsComplete: (state) => () => {
+      return clone(state.requiredFieldsComplete);
     },
   },
 };
