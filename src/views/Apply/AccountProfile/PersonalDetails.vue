@@ -82,6 +82,23 @@
           </template>
         </TextField>
 
+        <MobileNumber
+          v-model="personalDetails.mobile"
+          :verified-at="personalDetails.mobileVerifiedAt"
+          :show-resend-button="!personalDetails.mobileVerifiedAt"
+          required
+        >
+          <template #editable-once>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ personalDetails.mobile }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </MobileNumber>
+
         <TextField
           id="phone"
           v-model="personalDetails.phone"
@@ -111,23 +128,6 @@
             </div>
           </template>
         </DateInput>
-
-        <MobileNumber
-          v-model="personalDetails.mobile"
-          :verified-at="personalDetails.mobileVerifiedAt"
-          :show-resend-button="!personalDetails.mobileVerifiedAt"
-          required
-        >
-          <template #editable-once>
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-              <span class="govuk-body govuk-!-margin-bottom-0">
-                {{ personalDetails.mobile }}
-              </span>
-
-              <CandidateProfileLink />
-            </div>
-          </template>
-        </MobileNumber>
 
         <TextField
           id="national-insurance-number"
