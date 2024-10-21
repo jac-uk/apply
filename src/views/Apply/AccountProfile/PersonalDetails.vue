@@ -112,6 +112,23 @@
           </template>
         </DateInput>
 
+        <MobileNumber
+          v-model="personalDetails.mobile"
+          :verified-at="personalDetails.mobileVerifiedAt"
+          :show-resend-button="!personalDetails.mobileVerifiedAt"
+          required
+        >
+          <template #editable-once>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ personalDetails.mobile }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </MobileNumber>
+
         <TextField
           id="national-insurance-number"
           v-model="personalDetails.nationalInsuranceNumber"
@@ -212,6 +229,7 @@ import TextareaInput from '@/components/Form/TextareaInput.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
 import BackLink from '@/components/BackLink.vue';
+import MobileNumber from '@/components/MobileNumber.vue';
 import CandidateProfileLink from '@/components/CandidateProfileLink.vue';
 import { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
 import { formatDate } from '@/helpers/date';
@@ -226,6 +244,7 @@ export default {
     RadioGroup,
     RadioItem,
     BackLink,
+    MobileNumber,
     CandidateProfileLink,
   },
   extends: Form,
