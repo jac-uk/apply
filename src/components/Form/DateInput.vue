@@ -190,6 +190,10 @@ export default {
       default: false,
       type: Boolean,
     },
+    disabled: {
+      default: false,
+      type: Boolean,
+    },
   },
   emits: ['update:modelValue', 'update:isOngoing'],
   data() {
