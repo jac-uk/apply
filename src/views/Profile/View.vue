@@ -136,6 +136,15 @@
 
               <div class="govuk-summary-list__row">
                 <dt class="govuk-summary-list__key">
+                  UK Mobile phone number
+                </dt>
+                <dd class="govuk-summary-list__value">
+                  {{ personalDetails.mobile }}
+                </dd>
+              </div>
+
+              <div class="govuk-summary-list__row">
+                <dt class="govuk-summary-list__key">
                   National Insurance number
                 </dt>
                 <dd class="govuk-summary-list__value">

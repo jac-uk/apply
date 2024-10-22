@@ -121,6 +121,13 @@
               hint="For example, 27 3 1964"
             />
 
+            <MobileNumber
+              v-model="personalDetails.mobile"
+              :verified-at="personalDetails.mobileVerifiedAt"
+              :show-resend-button="!personalDetails.mobileVerifiedAt"
+              required
+            />
+
             <TextField
               id="national-insurance-number"
               v-model="personalDetails.nationalInsuranceNumber"
@@ -161,6 +168,7 @@ import { auth, functions } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
+import MobileNumber from '@/components/MobileNumber.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
 
@@ -169,6 +177,7 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    MobileNumber,
     DateInput,
     BackLink,
   },
@@ -192,6 +201,8 @@ export default {
       fullName: null,
       email: null,
       phone: null,
+      mobile: null,
+      mobileVerifiedAt: null,
       dateOfBirth: null,
       nationalInsuranceNumber: null,
     };
@@ -217,6 +228,11 @@ export default {
         if (this.personalDetails.email !== data.email) {
           // update email in authentication database
           await this.updateEmail(data.email, this.personalDetails.email);
+        }
+
+        if (this.personalDetails.mobile !== data.mobile) {
+          // set mobileVerifiedAt to null if mobile number is changed so that it can be verified again
+          this.personalDetails.mobileVerifiedAt = null;
         }
 
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
