@@ -32,7 +32,7 @@ const resend = () => {
       label="UK Mobile phone number"
       hint="Please input your UK Mobile phone number in the format 0xxxxxxxxxx. This number will be verified and used for Two-factor authentication."
       type="mobile"
-      style="marginBottom: 15px"
+      style="margin-bottom: 15px"
       required
       @update:model-value="emit('update:modelValue', $event)"
     >
