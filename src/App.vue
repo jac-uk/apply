@@ -1,5 +1,17 @@
 <template>
   <div class="page-container">
+    <h1>Timeout Countdown</h1>
+    <p>Time left: {{ timeLeft }} seconds</p>
+    <button @click="startTimer">
+      Start 30-second timer
+    </button>
+    <button @click="resetTimer">
+      Reset Timer
+    </button>
+    <button @click="checkTimeLeft">
+      Check Time Left
+    </button>
+
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
@@ -76,6 +88,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
+import { startTimeout, resetTimeout, getTimeLeft, addEventListeners } from '@/services/timeoutService';
 
 export default {
   name: 'App',
@@ -92,6 +105,10 @@ export default {
       loaded: false,
       loadFailed: false,
       LANGUAGES,
+
+      // @TODO: REMOVE
+      timeLeft: 30, // Display the countdown in seconds
+      removeEventListeners: null, // To hold the function for removing the event listeners
     };
   },
   computed: {
@@ -156,6 +173,18 @@ export default {
   },
   async mounted() {
     this.loaded = true;
+
+    // Start the timer when the component mounts (page loads)
+    this.startTimer();
+
+    // Add the click listener when the component mounts
+    this.removeEventListeners = addEventListeners(this.updateDisplay, this.onTimeout);
+  },
+  beforeUnmount() {
+    // Remove the event listeners when the component is destroyed
+    if (this.removeEventListeners) {
+      this.removeEventListeners();
+    }
   },
   updated: async function() {
     if (this.$route.meta.isMultilanguage) {
@@ -168,6 +197,33 @@ export default {
     setLanguage(lang) {
       this.$store.dispatch('application/setLanguage', lang);
       updateLangToTextNode(document.querySelector('#main-content'), lang);
+    },
+
+    // Function to display the remaining time in the component
+    updateDisplay(timeLeft) {
+      this.timeLeft = timeLeft;
+    },
+
+    // Function to call when the timeout elapses
+    onTimeout() {
+      alert('The timeout has elapsed!');
+      // Add any additional logic here
+    },
+
+    // Start the timeout
+    startTimer() {
+      startTimeout(this.updateDisplay, this.onTimeout);
+    },
+
+    // Reset the timeout
+    resetTimer() {
+      resetTimeout(this.updateDisplay, this.onTimeout);
+    },
+
+    // Check and display the time left
+    checkTimeLeft() {
+      const currentTimeLeft = getTimeLeft(); // Call getTimeLeft to get the current value
+      alert(`Current time left: ${currentTimeLeft} seconds`);
     },
   },
 };
