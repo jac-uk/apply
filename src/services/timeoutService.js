@@ -2,7 +2,7 @@
 
 let countdownTimer = null;    // Holds the setTimeout reference
 let countdownInterval = null; // Holds the setInterval reference
-let timeLeft = 30;            // Time left in seconds
+let timeLeft = 30;            // Time left in seconds, now managed by the service
 let timerActive = false;      // Flag to indicate if the timer is running
 
 // Function to start the 30-second timeout
@@ -37,8 +37,7 @@ const startTimeout = (displayCallback, timeoutCallback) => {
 
 // Function to reset the timeout (and start again)
 const resetTimeout = (displayCallback, timeoutCallback) => {
-  console.log('Resetting the timeout?');
-  console.log(`timerActive: ${timerActive}`);
+  console.log('Resetting the timeout...');
   if (timerActive) { // Only reset if the timer is active
     startTimeout(displayCallback, timeoutCallback);
   }
@@ -47,6 +46,11 @@ const resetTimeout = (displayCallback, timeoutCallback) => {
 // Function to get the current value of the remaining time
 const getTimeLeft = () => {
   return timeLeft;
+};
+
+// Function to check if the timer is active
+const isTimerActive = () => {
+  return timerActive;
 };
 
 // Function to clear the timeout and stop the countdown
@@ -67,15 +71,14 @@ const addEventListeners = (displayCallback, timeoutCallback) => {
   // Add both mouse move and click event listeners
   window.addEventListener('mousemove', handleEvent);
   window.addEventListener('click', handleEvent);
-  window.addEventListener('keydown', handleEvent);
-  window.addEventListener('scroll', handleEvent);
+  window.addEventListener('keypress', handleEvent); // Listen for key presses
 
   // Return a function to remove the event listeners
   return () => {
     window.removeEventListener('mousemove', handleEvent);
     window.removeEventListener('click', handleEvent);
-    window.removeEventListener('keydown', handleEvent);
-    window.removeEventListener('scroll', handleEvent);
+    window.removeEventListener('keypress', handleEvent); // Listen for key presses
+
     console.log('Mouse move and click event listeners removed.');
   };
 };
@@ -84,6 +87,7 @@ export {
   startTimeout,
   resetTimeout,
   getTimeLeft,
+  isTimerActive,
   clearTimeoutAndInterval,
   addEventListeners
 };

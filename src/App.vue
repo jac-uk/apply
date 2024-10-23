@@ -2,9 +2,6 @@
   <div class="page-container">
     <h1>Timeout Countdown</h1>
     <p>Time left: {{ timeLeft }} seconds</p>
-    <button @click="startTimer">
-      Start 30-second timer
-    </button>
     <button @click="resetTimer">
       Reset Timer
     </button>
@@ -107,8 +104,10 @@ export default {
       LANGUAGES,
 
       // @TODO: REMOVE
-      timeLeft: 30, // Display the countdown in seconds
+      //timeLeft: 30, // Display the countdown in seconds
       removeEventListeners: null, // To hold the function for removing the event listeners
+
+      reactiveTimeLeft: 30, // This is the reactive time that will be displayed
     };
   },
   computed: {
@@ -147,6 +146,11 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+
+    // Use reactiveTimeLeft for display
+    timeLeft() {
+      return this.reactiveTimeLeft;
+    },
   },
   watch: {
     isSignedIn: {
@@ -177,7 +181,7 @@ export default {
     // Start the timer when the component mounts (page loads)
     this.startTimer();
 
-    // Add the click listener when the component mounts
+    // Add the mouse move and click listeners when the component mounts
     this.removeEventListeners = addEventListeners(this.updateDisplay, this.onTimeout);
   },
   beforeUnmount() {
@@ -199,9 +203,9 @@ export default {
       updateLangToTextNode(document.querySelector('#main-content'), lang);
     },
 
-    // Function to display the remaining time in the component
-    updateDisplay(timeLeft) {
-      this.timeLeft = timeLeft;
+    // Function to update the time left
+    updateDisplay(newTimeLeft) {
+      this.reactiveTimeLeft = newTimeLeft; // Sync with the service's timeLeft
     },
 
     // Function to call when the timeout elapses
@@ -210,7 +214,7 @@ export default {
       // Add any additional logic here
     },
 
-    // Start the timeout
+    // Start the timeout automatically on page load (no button click needed)
     startTimer() {
       startTimeout(this.updateDisplay, this.onTimeout);
     },
