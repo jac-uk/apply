@@ -1,5 +1,13 @@
 <template>
   <div class="page-container">
+    <h1>Activity Timer</h1>
+    <p v-if="timeLeft >= 0">
+      Time left: {{ timeLeft }} seconds
+    </p>
+    <p v-else>
+      Session expired!
+    </p>
+
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
@@ -76,6 +84,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
+import { USER_ACTIVITY_TIMEOUT_SECS } from './helpers/constants';
 
 export default {
   name: 'App',
@@ -92,6 +101,9 @@ export default {
       loaded: false,
       loadFailed: false,
       LANGUAGES,
+
+      timeLeft: USER_ACTIVITY_TIMEOUT_SECS, // Initialize with the default time
+
     };
   },
   computed: {
@@ -156,6 +168,11 @@ export default {
   },
   async mounted() {
     this.loaded = true;
+
+    // Set the callback function to update the time left
+    window.updateDisplayCallback = (time) => {
+      this.timeLeft = time;
+    };
   },
   updated: async function() {
     if (this.$route.meta.isMultilanguage) {
