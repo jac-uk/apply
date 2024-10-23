@@ -84,6 +84,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
+import { USER_ACTIVITY_TIMEOUT_SECS } from './helpers/constants';
 
 export default {
   name: 'App',
@@ -101,7 +102,7 @@ export default {
       loadFailed: false,
       LANGUAGES,
 
-      timeLeft: 7200, // Initialize with the default time
+      timeLeft: USER_ACTIVITY_TIMEOUT_SECS, // Initialize with the default time
 
     };
   },
