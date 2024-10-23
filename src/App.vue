@@ -86,6 +86,7 @@ import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
 import { startTimeout, resetTimeout, getTimeLeft, addEventListeners } from '@/services/timeoutService';
+import { logoutUser } from '@/services/authService.js';
 
 export default {
   name: 'App',
@@ -211,7 +212,7 @@ export default {
     // Function to call when the timeout elapses
     onTimeout() {
       alert('The timeout has elapsed!');
-      // Add any additional logic here
+      logoutUser();
     },
 
     // Start the timeout automatically on page load (no button click needed)
