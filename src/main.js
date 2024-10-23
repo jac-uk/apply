@@ -28,7 +28,7 @@ auth.onAuthStateChanged( async (user) => {
         window.updateDisplayCallback(timeLeft);
       }
     }, () => {
-      alert('User inactive for 30 seconds. Logging out...');
+      alert('User inactive for specified period. Logging out...');
       logoutUser();
     });
 

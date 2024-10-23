@@ -1,16 +1,18 @@
-let countdownTimer = null;    // Holds the setTimeout reference
-let countdownInterval = null; // Holds the setInterval reference
-let timeLeft = 30;            // Time left in seconds
-let timerActive = false;      // Flag to indicate if the timer is running
-let removeEventListeners = null; // To store the reference to remove event listeners
+import { USER_ACTIVITY_TIMEOUT_SECS } from '../helpers/constants';
 
-// Function to start the 30-second timeout
+let countdownTimer = null;
+let countdownInterval = null;
+const timeLeftInit = USER_ACTIVITY_TIMEOUT_SECS || 7200;  // Time left in seconds (2 hours default)
+let timeLeft = timeLeftInit;
+let timerActive = false;       // Flag to indicate if the timer is running
+let removeEventListeners = null;
+
 const startTimeout = (displayCallback, timeoutCallback) => {
   clearTimeout(countdownTimer);
   clearInterval(countdownInterval);
 
-  // Reset the time left to 30 seconds
-  timeLeft = 30;
+  // Reset the time left
+  timeLeft = timeLeftInit;
   timerActive = true;
 
   countdownInterval = setInterval(() => {
@@ -19,31 +21,31 @@ const startTimeout = (displayCallback, timeoutCallback) => {
       displayCallback(timeLeft);
     } else {
       clearInterval(countdownInterval);
+      timerActive = false; // Set timer as inactive when it reaches 0
     }
   }, 1000);
 
+  // Start the timeout
+  const timeoutInMilliseconds = timeLeftInit * 1000;
   countdownTimer = setTimeout(() => {
     clearInterval(countdownInterval);
-    timerActive = false;
+    timerActive = false; // Set timer as inactive
     displayCallback(0);
     console.log('Timeout completed!');
     if (timeoutCallback) timeoutCallback();
-  }, 30000);
+  }, timeoutInMilliseconds);
 };
 
-// Function to reset the timeout
 const resetTimeout = (displayCallback, timeoutCallback) => {
   if (timerActive) {
     startTimeout(displayCallback, timeoutCallback);
   }
 };
 
-// Function to get the current value of the remaining time
 const getTimeLeft = () => {
   return timeLeft;
 };
 
-// Function to clear timeout and interval
 const clearTimeoutAndInterval = () => {
   clearTimeout(countdownTimer);
   clearInterval(countdownInterval);
@@ -51,7 +53,6 @@ const clearTimeoutAndInterval = () => {
   console.log('Timeout and countdown cleared.');
 };
 
-// Function to add user activity event listeners
 const addEventListeners = (displayCallback, timeoutCallback) => {
   const resetOnActivity = () => {
     resetTimeout(displayCallback, timeoutCallback);
@@ -60,17 +61,19 @@ const addEventListeners = (displayCallback, timeoutCallback) => {
   window.addEventListener('mousemove', resetOnActivity);
   window.addEventListener('keydown', resetOnActivity);
   window.addEventListener('click', resetOnActivity);
+  window.addEventListener('scroll', resetOnActivity); // Add scroll event listener
 
   // Return a function to remove the event listeners
   return () => {
     window.removeEventListener('mousemove', resetOnActivity);
     window.removeEventListener('keydown', resetOnActivity);
     window.removeEventListener('click', resetOnActivity);
+    window.removeEventListener('scroll', resetOnActivity); // Add scroll event listener
+
     console.log('Activity event listeners removed.');
   };
 };
 
-// Function to start the activity monitor (timer + listeners)
 const startActivityMonitor = (displayCallback, timeoutCallback) => {
   console.log('Starting activity monitor...');
 
@@ -81,7 +84,6 @@ const startActivityMonitor = (displayCallback, timeoutCallback) => {
   removeEventListeners = addEventListeners(displayCallback, timeoutCallback);
 };
 
-// Function to stop the activity monitor (clears timer + removes listeners)
 const stopActivityMonitor = () => {
   console.log('Stopping activity monitor...');
 
@@ -98,5 +100,5 @@ const stopActivityMonitor = () => {
 export {
   startActivityMonitor,
   stopActivityMonitor,
-  getTimeLeft // Include the function to get remaining time
+  getTimeLeft
 };

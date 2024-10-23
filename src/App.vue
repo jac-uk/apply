@@ -101,7 +101,7 @@ export default {
       loadFailed: false,
       LANGUAGES,
 
-      timeLeft: 30, // Initialize with the default time
+      timeLeft: 7200, // Initialize with the default time
 
     };
   },
