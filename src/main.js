@@ -8,6 +8,8 @@ import * as Sentry from '@sentry/vue';
 import VueGtag from 'vue-gtag';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
+import { logoutUser } from '@/services/authService.js';
+import { startActivityMonitor, stopActivityMonitor } from '@/services/activityService.js';
 
 import './styles/main.scss';
 
@@ -20,10 +22,23 @@ auth.onAuthStateChanged( async (user) => {
   store.dispatch('auth/setCurrentUser', user);
   if (store.getters['auth/isSignedIn']) {
     await store.dispatch('settings/bind');
+
+    startActivityMonitor((timeLeft) => {
+      if (window.updateDisplayCallback) {
+        window.updateDisplayCallback(timeLeft);
+      }
+    }, () => {
+      alert('User inactive for 30 seconds. Logging out...');
+      logoutUser();
+    });
+
     const urlParams = new URLSearchParams(window.location.search);
     const nextPage = urlParams.get('nextPage');
     if (nextPage) router.push(nextPage);
     else router.push('/vacancies');
+  }
+  else {
+    stopActivityMonitor();
   }
 
   // Create the Vue instance, but only once

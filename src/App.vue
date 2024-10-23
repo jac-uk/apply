@@ -1,13 +1,12 @@
 <template>
   <div class="page-container">
-    <h1>Timeout Countdown</h1>
-    <p>Time left: {{ timeLeft }} seconds</p>
-    <button @click="resetTimer">
-      Reset Timer
-    </button>
-    <button @click="checkTimeLeft">
-      Check Time Left
-    </button>
+    <h1>Activity Timer</h1>
+    <p v-if="timeLeft >= 0">
+      Time left: {{ timeLeft }} seconds
+    </p>
+    <p v-else>
+      Session expired!
+    </p>
 
     <LoadingMessage
       v-if="loaded === false"
@@ -85,8 +84,6 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
-import { startTimeout, resetTimeout, getTimeLeft, addEventListeners } from '@/services/timeoutService';
-import { logoutUser } from '@/services/authService.js';
 
 export default {
   name: 'App',
@@ -104,11 +101,8 @@ export default {
       loadFailed: false,
       LANGUAGES,
 
-      // @TODO: REMOVE
-      //timeLeft: 30, // Display the countdown in seconds
-      removeEventListeners: null, // To hold the function for removing the event listeners
+      timeLeft: 30, // Initialize with the default time
 
-      reactiveTimeLeft: 30, // This is the reactive time that will be displayed
     };
   },
   computed: {
@@ -147,11 +141,6 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
-
-    // Use reactiveTimeLeft for display
-    timeLeft() {
-      return this.reactiveTimeLeft;
-    },
   },
   watch: {
     isSignedIn: {
@@ -179,17 +168,10 @@ export default {
   async mounted() {
     this.loaded = true;
 
-    // Start the timer when the component mounts (page loads)
-    this.startTimer();
-
-    // Add the mouse move and click listeners when the component mounts
-    this.removeEventListeners = addEventListeners(this.updateDisplay, this.onTimeout);
-  },
-  beforeUnmount() {
-    // Remove the event listeners when the component is destroyed
-    if (this.removeEventListeners) {
-      this.removeEventListeners();
-    }
+    // Set the callback function to update the time left
+    window.updateDisplayCallback = (time) => {
+      this.timeLeft = time;
+    };
   },
   updated: async function() {
     if (this.$route.meta.isMultilanguage) {
@@ -202,33 +184,6 @@ export default {
     setLanguage(lang) {
       this.$store.dispatch('application/setLanguage', lang);
       updateLangToTextNode(document.querySelector('#main-content'), lang);
-    },
-
-    // Function to update the time left
-    updateDisplay(newTimeLeft) {
-      this.reactiveTimeLeft = newTimeLeft; // Sync with the service's timeLeft
-    },
-
-    // Function to call when the timeout elapses
-    onTimeout() {
-      alert('The timeout has elapsed!');
-      logoutUser();
-    },
-
-    // Start the timeout automatically on page load (no button click needed)
-    startTimer() {
-      startTimeout(this.updateDisplay, this.onTimeout);
-    },
-
-    // Reset the timeout
-    resetTimer() {
-      resetTimeout(this.updateDisplay, this.onTimeout);
-    },
-
-    // Check and display the time left
-    checkTimeLeft() {
-      const currentTimeLeft = getTimeLeft(); // Call getTimeLeft to get the current value
-      alert(`Current time left: ${currentTimeLeft} seconds`);
     },
   },
 };
