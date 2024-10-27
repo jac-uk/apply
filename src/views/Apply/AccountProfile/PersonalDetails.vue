@@ -83,9 +83,8 @@
         </TextField>
 
         <MobileNumber
-          v-model="personalDetails.mobile"
-          :verified-at="personalDetails.mobileVerifiedAt"
-          :show-resend-button="!personalDetails.mobileVerifiedAt"
+          v-model:mobile="personalDetails.mobile"
+          v-model:mobile-verified-at="personalDetails.mobileVerifiedAt"
           required
         >
           <template #editable-once>

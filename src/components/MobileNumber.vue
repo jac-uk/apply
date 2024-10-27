@@ -1,26 +1,50 @@
 <script setup>
+import { ref, computed } from 'vue';
+import parsePhoneNumber from 'libphonenumber-js';
+import VerificationModal from '@/components/VerificationModal.vue';
 import TextField from '@/components/Form/TextField.vue';
 import { formatDate } from '@/helpers/date';
 
-const emit = defineEmits(['update:modelValue']);
-
-const props = defineProps({
-  modelValue: {
-    type: String,
-    default: null,
-  },
-  verifiedAt: {
-    type: Date,
-    default: null,
-  },
-  showResendButton: {
-    type: Boolean,
-    default: false,
-  },
+const mobile = defineModel('mobile', {
+  type: String,
+  default: '',
+});
+const mobileVerifiedAt = defineModel('mobileVerifiedAt', {
+  type: Date,
+  default: null,
 });
 
-const resend = () => {
-  // TODO: Implement
+const modelOpen = ref(false);
+
+const isValidMobile = computed(() => {
+  if (!mobile.value) return false;
+  const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
+  return phoneNumber;
+});
+
+const formattedMobile = computed(() => {
+  if (!isValidMobile.value) return null;
+  const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
+  return phoneNumber.number;
+});
+
+const openModal = () => {
+  modelOpen.value = true;
+  document.body.style.overflow = 'hidden';
+};
+
+const closeModal = () => {
+  modelOpen.value = false;
+  document.body.style.overflow = '';
+};
+
+const startVerification = async () => {
+  openModal();
+};
+
+const onVerificationSuccess = () => {
+  mobileVerifiedAt.value = new Date();
+  closeModal();
 };
 </script>
 
@@ -28,13 +52,12 @@ const resend = () => {
   <div class="govuk-form-group">
     <TextField
       id="mobile"
-      :model-value="props.modelValue"
+      v-model="mobile"
       label="UK Mobile phone number"
       hint="Please input your UK Mobile phone number in the format 0xxxxxxxxxx. This number will be verified and used for Two-factor authentication."
       type="mobile"
       style="margin-bottom: 15px"
       required
-      @update:model-value="emit('update:modelValue', $event)"
     >
       <template
         v-if="$slots['editable-once']"
@@ -50,10 +73,10 @@ const resend = () => {
       style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;"
     >
       <span
-        v-if="verifiedAt"
+        v-if="mobileVerifiedAt"
         class="govuk-hint govuk-!-margin-bottom-0"
       >
-        Verified at {{ formatDate(verifiedAt) }}
+        Verified at {{ formatDate(mobileVerifiedAt) }}
       </span>
       <span
         v-else
@@ -63,13 +86,21 @@ const resend = () => {
       </span>
 
       <button
-        v-if="showResendButton"
         type="button"
         class="govuk-button govuk-!-margin-bottom-0"
-        @click="resend"
+        :disabled="!isValidMobile"
+        @click="startVerification"
       >
-        Resend verification
+        Start verification
       </button>
     </div>
+
+    <VerificationModal
+      v-if="formattedMobile && modelOpen"
+      :open="modelOpen"
+      :mobile="formattedMobile"
+      @success="onVerificationSuccess"
+      @close="closeModal"
+    />
   </div>
 </template>
