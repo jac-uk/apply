@@ -27,9 +27,10 @@ auth.onAuthStateChanged( async (user) => {
       if (window.updateDisplayCallback) {
         window.updateDisplayCallback(timeLeft);
       }
-    }, () => {
+    }, async () => {
       alert('User inactive for specified period. Logging out...');
-      logoutUser();
+      await logoutUser();
+      router.push('/sign-in');
     });
 
     const urlParams = new URLSearchParams(window.location.search);

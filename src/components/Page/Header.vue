@@ -109,9 +109,9 @@ export default {
       }
       this.$router.push({ name: 'sign-in', query: { nextPage: nextPage } });
     },
-    signOut() {
+    async signOut() {
       //auth.signOut();
-      logoutUser();
+      await logoutUser();
       if (this.$route.name != 'vacancies') {
         this.$router.push({ name: 'vacancies' });
       }
