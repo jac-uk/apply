@@ -140,6 +140,7 @@
                 </dt>
                 <dd class="govuk-summary-list__value">
                   {{ personalDetails.mobile }}
+                  <span v-if="personalDetails.mobileVerifiedAt"> (verified)</span>
                 </dd>
               </div>
 

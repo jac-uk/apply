@@ -1,9 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue';
 import parsePhoneNumber from 'libphonenumber-js';
-import VerificationModal from '@/components/VerificationModal.vue';
+import MobileVerificationModal from '@/components/MobileVerificationModal.vue';
 import TextField from '@/components/Form/TextField.vue';
 import { formatDate } from '@/helpers/date';
+
+const emit = defineEmits(['update:mobile']);
 
 const mobile = defineModel('mobile', {
   type: String,
@@ -19,10 +21,16 @@ const modelOpen = ref(false);
 const isValidMobile = computed(() => {
   if (!mobile.value) return false;
   const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
-  return phoneNumber;
+  return phoneNumber && phoneNumber.isValid();
 });
 
-const formattedMobile = computed(() => {
+const nationalMobile = computed(() => {
+  if (!isValidMobile.value) return null;
+  const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
+  return `0${phoneNumber.nationalNumber}`;
+});
+
+const internationalMobile = computed(() => {
   if (!isValidMobile.value) return null;
   const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
   return phoneNumber.number;
@@ -39,6 +47,8 @@ const closeModal = () => {
 };
 
 const startVerification = async () => {
+  if (!isValidMobile.value) return;
+  emit('update:mobile', nationalMobile.value);
   openModal();
 };
 
@@ -95,10 +105,10 @@ const onVerificationSuccess = () => {
       </button>
     </div>
 
-    <VerificationModal
-      v-if="formattedMobile && modelOpen"
+    <MobileVerificationModal
+      v-if="isValidMobile && modelOpen"
       :open="modelOpen"
-      :mobile="formattedMobile"
+      :mobile="internationalMobile"
       @success="onVerificationSuccess"
       @close="closeModal"
     />
