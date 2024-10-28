@@ -229,11 +229,6 @@ export default {
           await this.updateEmail(data.email, this.personalDetails.email);
         }
 
-        if (this.personalDetails.mobile !== data.mobile) {
-          // set mobileVerifiedAt to null if mobile number is changed so that it can be verified again
-          this.personalDetails.mobileVerifiedAt = null;
-        }
-
         await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
         this.$router.push({ name: 'profile' });
       }
