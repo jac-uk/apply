@@ -10,6 +10,7 @@ import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 import { logoutUser } from '@/services/authService.js';
 import { startActivityMonitor, stopActivityMonitor } from '@/services/activityService.js';
+import { TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS } from '@/helpers/constants';
 
 import './styles/main.scss';
 
@@ -22,21 +23,29 @@ auth.onAuthStateChanged( async (user) => {
   store.dispatch('auth/setCurrentUser', user);
   if (store.getters['auth/isSignedIn']) {
     await store.dispatch('settings/bind');
+    await store.dispatch('candidate/bind');
+    // check if 2FA is enabled
+    if (router.currentRoute.value.name === 'sign-in' &&
+      store.state.candidate?.personalDetails?.mobile &&
+      store.state.candidate?.personalDetails?.mobileVerifiedAt < new Date(Date.now() - TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS * 24 * 60 * 60 * 1000)
+    ) {
+      await store.dispatch('auth/setVerificationModalOpen', true);
+    } else {
+      startActivityMonitor((timeLeft) => {
+        if (window.updateDisplayCallback) {
+          window.updateDisplayCallback(timeLeft);
+        }
+      }, async () => {
+        alert('User inactive for specified period. Logging out...');
+        await logoutUser();
+        router.push('/sign-in');
+      });
 
-    startActivityMonitor((timeLeft) => {
-      if (window.updateDisplayCallback) {
-        window.updateDisplayCallback(timeLeft);
-      }
-    }, async () => {
-      alert('User inactive for specified period. Logging out...');
-      await logoutUser();
-      router.push('/sign-in');
-    });
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const nextPage = urlParams.get('nextPage');
-    if (nextPage) router.push(nextPage);
-    else router.push('/vacancies');
+      const urlParams = new URLSearchParams(window.location.search);
+      const nextPage = urlParams.get('nextPage');
+      if (nextPage) router.push(nextPage);
+      else router.push('/vacancies');
+    }
   }
   else {
     stopActivityMonitor();
