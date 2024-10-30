@@ -24,5 +24,9 @@ export default {
       if (state.record === null) return null;
       return state.record.commissioners;
     },
+    getActivityTimeoutSeconds: (state) => {
+      if (state.record === null) return null;
+      return state.record.activityTimeoutSec;
+    },
   },
 };
