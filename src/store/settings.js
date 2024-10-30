@@ -32,8 +32,8 @@ export default {
     isTwoFactorAuthenticationEnabled: (state) => {
       return state?.record?.twoFactorAuthentication?.enabled || false;
     },
-    getTwoFactorAuthenticationTimeoutInDays: (state) => {
-      return state?.record?.twoFactorAuthentication?.timeoutInDays || DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS;
+    getTwoFactorAuthenticationTimeoutDays: (state) => {
+      return state?.record?.twoFactorAuthentication?.timeoutDays || DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS;
     },
   },
 };
