@@ -16,7 +16,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['success', 'close']);
+const emit = defineEmits(['success', 'cancel']);
 
 const code = ref('');
 
@@ -53,8 +53,8 @@ const verifyCode = async () => {
   return isSuccess;
 };
 
-const closeModal = () => {
-  emit('close', false);
+const cancel = () => {
+  emit('cancel', false);
 };
 </script>
 
@@ -91,7 +91,7 @@ const closeModal = () => {
               <span>
                 <button
                   class="govuk-button govuk-button--secondary govuk-!-margin-right-3"
-                  @click="closeModal"
+                  @click="cancel"
                 >
                   Cancel
                 </button>

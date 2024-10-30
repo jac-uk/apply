@@ -110,7 +110,7 @@ const onVerificationSuccess = () => {
       :open="modelOpen"
       :mobile="internationalMobile"
       @success="onVerificationSuccess"
-      @close="closeModal"
+      @cancel="closeModal"
     />
   </div>
 </template>

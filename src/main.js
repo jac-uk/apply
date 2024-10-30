@@ -23,9 +23,12 @@ auth.onAuthStateChanged( async (user) => {
   if (store.getters['auth/isSignedIn']) {
     await store.dispatch('settings/bind');
     await store.dispatch('candidate/bind');
-    const twoFactorAuthenticationTimeoutInDays = store.getters['settings/getTwoFactorAuthenticationTimeoutInDays'];
+
     // check if two-factor authentication is enabled
-    if (router.currentRoute.value.name === 'sign-in' &&
+    const isTwoFactorAuthenticationEnabled = store.getters['settings/isTwoFactorAuthenticationEnabled'];
+    const twoFactorAuthenticationTimeoutInDays = store.getters['settings/getTwoFactorAuthenticationTimeoutInDays'];
+    if (isTwoFactorAuthenticationEnabled &&
+      router.currentRoute.value.name === 'sign-in' &&
       store.state.candidate?.personalDetails?.mobile &&
       store.state.candidate?.personalDetails?.mobileVerifiedAt < new Date(Date.now() - twoFactorAuthenticationTimeoutInDays * 24 * 60 * 60 * 1000)
     ) {

@@ -81,7 +81,7 @@
       :open="verificationModalOpen"
       :mobile="internationalMobile"
       @success="onVerificationSuccess"
-      @close="closeVerificationModal"
+      @cancel="onVerificationCancel"
     />
   </div>
 </template>
@@ -217,6 +217,15 @@ export default {
       const nextPage = urlParams.get('nextPage');
       if (nextPage) this.$router.push(nextPage);
       else this.$router.push('/vacancies');
+    },
+    async onVerificationCancel() {
+      await logoutUser();
+      this.resetData();
+      this.closeVerificationModal();
+    },
+    resetData() {
+      this.formData = {};
+      this.errors = [];
     },
   },
 };
