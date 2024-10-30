@@ -121,6 +121,12 @@
               hint="For example, 27 3 1964"
             />
 
+            <MobileNumber
+              v-model:mobile="personalDetails.mobile"
+              v-model:mobile-verified-at="personalDetails.mobileVerifiedAt"
+              required
+            />
+
             <TextField
               id="national-insurance-number"
               v-model="personalDetails.nationalInsuranceNumber"
@@ -161,6 +167,7 @@ import { auth, functions } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
+import MobileNumber from '@/components/MobileNumber.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
 
@@ -169,6 +176,7 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    MobileNumber,
     DateInput,
     BackLink,
   },
@@ -192,6 +200,8 @@ export default {
       fullName: null,
       email: null,
       phone: null,
+      mobile: null,
+      mobileVerifiedAt: null,
       dateOfBirth: null,
       nationalInsuranceNumber: null,
     };
