@@ -195,8 +195,13 @@ export default {
     closeVerificationModal() {
       this.$store.dispatch('auth/setVerificationModalOpen', false);
     },
-    onVerificationSuccess() {
+    async onVerificationSuccess() {
       this.closeVerificationModal();
+
+      // update mobileVerifiedAt
+      const personalDetails = this.$store.getters['candidate/personalDetails']();
+      personalDetails.mobileVerifiedAt = new Date();
+      await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
 
       startActivityMonitor((timeLeft) => {
         if (window.updateDisplayCallback) {

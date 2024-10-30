@@ -10,7 +10,6 @@ import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
 import { logoutUser } from '@/services/authService.js';
 import { startActivityMonitor, stopActivityMonitor } from '@/services/activityService.js';
-import { TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS } from '@/helpers/constants';
 
 import './styles/main.scss';
 
@@ -24,10 +23,11 @@ auth.onAuthStateChanged( async (user) => {
   if (store.getters['auth/isSignedIn']) {
     await store.dispatch('settings/bind');
     await store.dispatch('candidate/bind');
-    // check if 2FA is enabled
+    const twoFactorAuthenticationTimeoutInDays = store.getters['settings/getTwoFactorAuthenticationTimeoutInDays'];
+    // check if two-factor authentication is enabled
     if (router.currentRoute.value.name === 'sign-in' &&
       store.state.candidate?.personalDetails?.mobile &&
-      store.state.candidate?.personalDetails?.mobileVerifiedAt < new Date(Date.now() - TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS * 24 * 60 * 60 * 1000)
+      store.state.candidate?.personalDetails?.mobileVerifiedAt < new Date(Date.now() - twoFactorAuthenticationTimeoutInDays * 24 * 60 * 60 * 1000)
     ) {
       await store.dispatch('auth/setVerificationModalOpen', true);
     } else {
