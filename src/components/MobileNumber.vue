@@ -4,6 +4,7 @@ import parsePhoneNumber from 'libphonenumber-js';
 import MobileVerificationModal from '@/components/MobileVerificationModal.vue';
 import TextField from '@/components/Form/TextField.vue';
 import { formatDate } from '@/helpers/date';
+import { isValidUKMobile } from '@jac-uk/jac-kit/helpers/Form/validatePhone';
 
 const emit = defineEmits(['update:mobile']);
 
@@ -20,8 +21,7 @@ const modelOpen = ref(false);
 
 const isValidMobile = computed(() => {
   if (!mobile.value) return false;
-  const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
-  return phoneNumber && phoneNumber.isValid();
+  return isValidUKMobile(mobile.value);
 });
 
 const nationalMobile = computed(() => {
