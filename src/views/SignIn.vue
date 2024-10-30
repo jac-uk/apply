@@ -196,7 +196,6 @@ export default {
       this.$store.dispatch('auth/setVerificationModalOpen', false);
     },
     onVerificationSuccess() {
-      console.log('onVerificationSuccess');
       this.closeVerificationModal();
 
       startActivityMonitor((timeLeft) => {
