@@ -1,6 +1,6 @@
 import { doc, getDoc } from '@firebase/firestore';
 import { firestore } from '@/firebase';
-import { DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS } from '@/helpers/constants';
+import { DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_DAYS } from '@/helpers/constants';
 
 const docRef = doc(firestore, 'settings/candidateSettings');
 
@@ -33,7 +33,7 @@ export default {
       return state?.record?.twoFactorAuthentication?.enabled || false;
     },
     getTwoFactorAuthenticationTimeoutDays: (state) => {
-      return state?.record?.twoFactorAuthentication?.timeoutDays || DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_IN_DAYS;
+      return state?.record?.twoFactorAuthentication?.timeoutDays || DEFAULT_TWO_FACTOR_AUTHENTICATION_TIMEOUT_DAYS;
     },
   },
 };
