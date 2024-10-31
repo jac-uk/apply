@@ -188,6 +188,13 @@ export default {
       password: '',
     };
   },
+  watch: {
+    'personalDetails.mobileVerifiedAt'(newValue, oldValue) {
+      if (newValue && newValue !== oldValue) {
+        this.updateMobile();
+      }
+    },
+  },
   async mounted() {
     if (!this.$store.getters['candidate/personalDetails']()) {
       await this.$store.dispatch('candidate/bind');
@@ -272,6 +279,15 @@ export default {
       } catch (error) {
         // console.error(error);
       }
+    },
+    async updateMobile() {
+      if (!this.personalDetails.mobile || !this.personalDetails.mobileVerifiedAt) {
+        return;
+      }
+      const data = this.$store.getters['candidate/personalDetails']();
+      data.mobile = this.personalDetails.mobile;
+      data.mobileVerifiedAt = this.personalDetails.mobileVerifiedAt;
+      await this.$store.dispatch('candidate/savePersonalDetails', data);
     },
   },
 };
