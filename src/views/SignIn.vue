@@ -198,9 +198,9 @@ export default {
     async onVerificationSuccess() {
       this.closeVerificationModal();
 
-      // update mobileVerifiedAt
+      // update twoFactorAuthVerifiedAt
       const personalDetails = this.$store.getters['candidate/personalDetails']();
-      personalDetails.mobileVerifiedAt = new Date();
+      personalDetails.twoFactorAuthVerifiedAt = new Date();
       await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
 
       startActivityMonitor((timeLeft) => {

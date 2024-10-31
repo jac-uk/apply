@@ -25,12 +25,13 @@ auth.onAuthStateChanged( async (user) => {
     await store.dispatch('candidate/bind');
 
     // check if two-factor authentication is enabled
-    const isTwoFactorAuthenticationEnabled = store.getters['settings/isTwoFactorAuthenticationEnabled'];
-    const twoFactorAuthenticationTimeoutDays = store.getters['settings/getTwoFactorAuthenticationTimeoutDays'];
-    if (isTwoFactorAuthenticationEnabled &&
+    const isTwoFactorAuthEnabled = store.getters['settings/isTwoFactorAuthEnabled'];
+    const twoFactorAuthTimeoutDays = store.getters['settings/getTwoFactorAuthTimeoutDays'];
+    if (isTwoFactorAuthEnabled &&
       router.currentRoute.value.name === 'sign-in' &&
       store.state.candidate?.personalDetails?.mobile &&
-      store.state.candidate?.personalDetails?.mobileVerifiedAt < new Date(Date.now() - twoFactorAuthenticationTimeoutDays * 24 * 60 * 60 * 1000)
+      store.state.candidate?.personalDetails?.mobileVerifiedAt &&
+      store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt < new Date(Date.now() - twoFactorAuthTimeoutDays * 24 * 60 * 60 * 1000)
     ) {
       await store.dispatch('auth/setVerificationModalOpen', true);
     } else {
