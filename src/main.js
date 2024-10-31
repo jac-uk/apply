@@ -30,8 +30,10 @@ auth.onAuthStateChanged( async (user) => {
     if (isTwoFactorAuthEnabled &&
       router.currentRoute.value.name === 'sign-in' &&
       store.state.candidate?.personalDetails?.mobile &&
-      store.state.candidate?.personalDetails?.mobileVerifiedAt &&
-      store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt < new Date(Date.now() - twoFactorAuthTimeoutDays * 24 * 60 * 60 * 1000)
+      store.state.candidate?.personalDetails?.mobileVerifiedAt && (
+        !store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt ||
+        store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt < new Date(Date.now() - twoFactorAuthTimeoutDays * 24 * 60 * 60 * 1000)
+      )
     ) {
       await store.dispatch('auth/setVerificationModalOpen', true);
     } else {
