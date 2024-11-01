@@ -124,6 +124,8 @@
             <MobileNumber
               v-model:mobile="personalDetails.mobile"
               v-model:mobile-verified-at="personalDetails.mobileVerifiedAt"
+              :default-mobile="defaultMobile"
+              :default-mobile-verified-at="defaultMobileVerifiedAt"
               required
             />
 
@@ -184,6 +186,8 @@ export default {
   data() {
     return {
       personalDetails: {},
+      defaultMobile: null,
+      defaultMobileVerifiedAt: null,
       minPasswordLength: 12,
       password: '',
     };
@@ -214,6 +218,8 @@ export default {
     };
     const personalDetails = { ...defaults, ...data };
     this.personalDetails = personalDetails;
+    this.defaultMobile = personalDetails.mobile;
+    this.defaultMobileVerifiedAt = personalDetails.mobileVerifiedAt;
   },
   methods: {
     async save() {
@@ -288,6 +294,8 @@ export default {
       data.mobile = this.personalDetails.mobile;
       data.mobileVerifiedAt = this.personalDetails.mobileVerifiedAt;
       await this.$store.dispatch('candidate/savePersonalDetails', data);
+      this.defaultMobile = data.mobile;
+      this.defaultMobileVerifiedAt = data.mobileVerifiedAt;
     },
   },
 };

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import parsePhoneNumber from 'libphonenumber-js';
 import MobileVerificationModal from '@/components/MobileVerificationModal.vue';
 import TextField from '@/components/Form/TextField.vue';
@@ -8,9 +8,20 @@ import { isValidUKMobile } from '@jac-uk/jac-kit/helpers/Form/validatePhone';
 
 const emit = defineEmits(['update:mobile']);
 
+const props = defineProps({
+  defaultMobile: {
+    type: String,
+    default: null,
+  },
+  defaultMobileVerifiedAt: {
+    type: Date,
+    default: null,
+  },
+});
+
 const mobile = defineModel('mobile', {
   type: String,
-  default: '',
+  default: null,
 });
 const mobileVerifiedAt = defineModel('mobileVerifiedAt', {
   type: Date,
@@ -18,6 +29,10 @@ const mobileVerifiedAt = defineModel('mobileVerifiedAt', {
 });
 
 const modelOpen = ref(false);
+
+const isMobileChanged = computed(() => {
+  return mobile.value !== props.defaultMobile;
+});
 
 const isValidMobile = computed(() => {
   if (!mobile.value) return false;
@@ -34,6 +49,14 @@ const internationalMobile = computed(() => {
   if (!isValidMobile.value) return null;
   const phoneNumber = parsePhoneNumber(mobile.value, 'GB');
   return phoneNumber.number;
+});
+
+watch(() => isMobileChanged.value, (value) => {
+  if (value) {
+    mobileVerifiedAt.value = null;
+  } else {
+    mobileVerifiedAt.value = props.defaultMobileVerifiedAt;
+  }
 });
 
 const openModal = () => {
@@ -83,7 +106,7 @@ const onVerificationSuccess = () => {
       style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;"
     >
       <span
-        v-if="mobileVerifiedAt"
+        v-if="!isMobileChanged && mobileVerifiedAt"
         class="govuk-hint govuk-!-margin-bottom-0"
       >
         Verified at {{ formatDate(mobileVerifiedAt) }}
@@ -98,7 +121,7 @@ const onVerificationSuccess = () => {
       <button
         type="button"
         class="govuk-button govuk-!-margin-bottom-0"
-        :disabled="!isValidMobile"
+        :disabled="mobileVerifiedAt || !isValidMobile"
         @click="startVerification"
       >
         Start verification
