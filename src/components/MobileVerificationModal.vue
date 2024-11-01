@@ -6,6 +6,10 @@ import { httpsCallable } from '@firebase/functions';
 import { functions } from '@/firebase';
 
 const props = defineProps({
+  title: {
+    type: String,
+    default: 'Verify your phone number',
+  },
   open: {
     type: Boolean,
     default: false,
@@ -66,11 +70,11 @@ const cancel = () => {
     <div class="modal">
       <div class="container">
         <div class="modal__title govuk-!-padding-2 govuk-heading-m">
-          Verify your phone number
+          {{ title }}
         </div>
         <div class="modal__content govuk-!-padding-4">
           <p class="modal__message govuk-body">
-            We’ve sent you a text message with a verification code.
+            We’ve sent you a text message with a verification code. Please enter the code in the box below.
           </p>
 
           <TextField

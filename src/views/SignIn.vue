@@ -78,6 +78,7 @@
 
     <MobileVerificationModal
       v-if="verificationModalOpen"
+      title="Two-factor authentication"
       :open="verificationModalOpen"
       :mobile="internationalMobile"
       @success="onVerificationSuccess"
