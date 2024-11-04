@@ -159,6 +159,15 @@
         </div>
       </div>
     </div>
+
+    <Modal
+      ref="signOutModalRef"
+      button-text="OK"
+      :cancelable="false"
+      title="Change of mobile phone number"
+      message="Your mobile phone number has been changed. Please sign in again."
+      @confirmed="signOut"
+    />
   </div>
 </template>
 
@@ -172,6 +181,7 @@ import TextField from '@/components/Form/TextField.vue';
 import MobileNumber from '@/components/MobileNumber.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import Modal from '@/components/Page/Modal.vue';
 
 export default {
   name: 'ProfileEdit',
@@ -181,6 +191,7 @@ export default {
     MobileNumber,
     DateInput,
     BackLink,
+    Modal,
   },
   extends: Form,
   data() {
@@ -286,8 +297,20 @@ export default {
         // console.error(error);
       }
     },
+    openSignOutModal(){
+      this.$refs.signOutModalRef.openModal();
+    },
+    closeSignOutModal(){
+      this.$refs.signOutModalRef.closeModal();
+    },
     async updateMobile() {
-      if (!this.personalDetails.mobile || !this.personalDetails.mobileVerifiedAt) {
+      if (
+        !this.personalDetails.mobile ||
+        !this.personalDetails.mobileVerifiedAt || (
+          this.personalDetails.mobile === this.defaultMobile &&
+          this.personalDetails.mobileVerifiedAt === this.defaultMobileVerifiedAt
+        )
+      ) {
         return;
       }
       const data = this.$store.getters['candidate/personalDetails']();
@@ -296,6 +319,12 @@ export default {
       await this.$store.dispatch('candidate/savePersonalDetails', data);
       this.defaultMobile = data.mobile;
       this.defaultMobileVerifiedAt = data.mobileVerifiedAt;
+      this.openSignOutModal();
+    },
+    async signOut() {
+      await auth.signOut();
+      this.closeSignOutModal();
+      this.$router.push({ name: 'sign-in' });
     },
   },
 };
