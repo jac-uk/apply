@@ -23,6 +23,8 @@ auth.onAuthStateChanged( async (user) => {
   if (store.getters['auth/isSignedIn']) {
     await store.dispatch('settings/bind');
 
+    let isSignedInSuccess = true;
+
     if (router.currentRoute.value.name === 'sign-in') {
       await store.dispatch('candidate/bind');
       // check if two-factor authentication is enabled
@@ -36,23 +38,26 @@ auth.onAuthStateChanged( async (user) => {
         )
       ) {
         await store.dispatch('auth/setVerificationModalOpen', true);
+        isSignedInSuccess = false;
       }
     }
 
-    startActivityMonitor((timeLeft) => {
-      if (window.updateDisplayCallback) {
-        window.updateDisplayCallback(timeLeft);
-      }
-    }, async () => {
-      alert('User inactive for specified period. Logging out...');
-      await logoutUser();
-      router.push('/sign-in');
-    });
+    if (isSignedInSuccess) {
+      startActivityMonitor((timeLeft) => {
+        if (window.updateDisplayCallback) {
+          window.updateDisplayCallback(timeLeft);
+        }
+      }, async () => {
+        alert('User inactive for specified period. Logging out...');
+        await logoutUser();
+        router.push('/sign-in');
+      });
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const nextPage = urlParams.get('nextPage');
-    if (nextPage) router.push(nextPage);
-    else router.push('/vacancies');
+      const urlParams = new URLSearchParams(window.location.search);
+      const nextPage = urlParams.get('nextPage');
+      if (nextPage) router.push(nextPage);
+      else router.push('/vacancies');
+    }
   }
   else {
     stopActivityMonitor();
