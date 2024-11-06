@@ -1,27 +1,57 @@
 import { httpsCallable } from '@firebase/functions';
 import { functions } from '@/firebase';
+import clone from 'clone';
 
 const module = {
   namespaced: true,
   state: {
     currentUser: null,
+    emailVerified: false,
   },
   mutations: {
     setCurrentUser(state, user) {
       state.currentUser = user;
     },
+    setEmailVerified(state, value) {
+      state.emailVerified = value;
+    },
   },
   actions: {
-    setCurrentUser({ commit }, user) {
+
+    setCurrentUser: async ({ commit, rootGetters, dispatch }, user) => {
+
+      // eslint-disable-next-line no-console
+      console.log('============= SET CURRENT USER =============');
+
       if (user === null) {
         commit('setCurrentUser', null);
+        commit('setEmailVerified', false);
       } else {
+
         commit('setCurrentUser', {
           uid: user.uid,
           email: user.email,
           emailVerified: user.emailVerified,
           displayName: user.displayName,
         });
+        commit('setEmailVerified', user.emailVerified);
+
+        // Get the candidate so we can detect if signup is complete
+        const personalDetails = rootGetters['candidate/personalDetails']();
+
+        /* eslint-disable no-console */
+        console.log('candidate/personalDetails:');
+        console.log(personalDetails);
+        /* eslint-enable no-console */
+
+        if (personalDetails === null) {
+
+          // eslint-disable-next-line no-console
+          console.log('-- empty so candidate/bind called');
+
+          await dispatch('candidate/bind', null, { root: true });
+        }
+
       }
     },
     // eslint-disable-next-line no-empty-pattern
@@ -41,6 +71,12 @@ const module = {
   getters: {
     isSignedIn(state) {
       return (state.currentUser !== null);
+    },
+    isEmailVerified(state) {
+      return clone(state.emailVerified);
+    },
+    currentUser(state) {
+      return clone(state.currentUser);
     },
   },
 };

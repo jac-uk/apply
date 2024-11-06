@@ -17,6 +17,7 @@
               </RouterLink>
             </li>
             <li
+              v-if="isEmailVerified"
               class="moj-side-navigation__item"
               :class="$route.name === 'profile' || $route.name === 'profile-edit' || $route.name === 'profile-password-edit' ? 'moj-side-navigation__item--active' : null"
             >
@@ -87,8 +88,8 @@
 </template>
 
 <script>
-import { getAuth, updatePassword } from 'firebase/auth';
-
+import { updatePassword } from 'firebase/auth';
+import { getAuthUser } from '@/services/authService';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import Password from '@/components/Form/Password.vue';
@@ -108,10 +109,14 @@ export default {
       password: '',
     };
   },
+  computed: {
+    isEmailVerified() {
+      return this.$store.getters['auth/isEmailVerified'];
+    },
+  },
   methods: {
     async save() {
-      const auth = getAuth();
-      const user = auth.currentUser;
+      const user = await getAuthUser();
       this.validate();
       if (this.isValid()) {
         try {

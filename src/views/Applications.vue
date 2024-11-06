@@ -15,7 +15,10 @@
                 Vacancies
               </RouterLink>
             </li>
-            <li class="moj-side-navigation__item">
+            <li
+              v-if="isEmailVerified"
+              class="moj-side-navigation__item"
+            >
               <RouterLink
                 class="govuk-link"
                 :to="{ name: 'profile' }"
@@ -157,6 +160,9 @@ export default {
     },
     applications() {
       return this.$store.state.applications.records;
+    },
+    isEmailVerified() {
+      return this.$store.getters['auth/isEmailVerified'];
     },
   },
   mounted() {

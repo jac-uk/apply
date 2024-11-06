@@ -17,6 +17,7 @@
               </RouterLink>
             </li>
             <li
+              v-if="isEmailVerified"
               class="moj-side-navigation__item"
               :class="$route.name === 'profile' || $route.name === 'profile-edit' ? 'moj-side-navigation__item--active' : null"
             >
@@ -139,13 +140,14 @@
             />
 
             <div class="text-right govuk-!-margin-top-8 govuk-!-margin-bottom-4">
-              <a
+              <ActionButton
                 class="govuk-button info-btn--character-information--save-and-continue"
-                style="cursor: pointer;"
-                @click.prevent="save"
+                type="primary"
+                :action="save"
               >
                 Save and Continue
-              </a>
+              </ActionButton>
+              <br>
             </div>
           </div>
         </div>
@@ -163,6 +165,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
   name: 'ProfileEdit',
@@ -171,6 +174,7 @@ export default {
     TextField,
     DateInput,
     BackLink,
+    ActionButton,
   },
   extends: Form,
   data() {
@@ -179,6 +183,11 @@ export default {
       minPasswordLength: 12,
       password: '',
     };
+  },
+  computed: {
+    isEmailVerified() {
+      return this.$store.getters['auth/isEmailVerified'];
+    },
   },
   async mounted() {
     if (!this.$store.getters['candidate/personalDetails']()) {
@@ -200,42 +209,93 @@ export default {
   },
   methods: {
     async save() {
-      this.validate();
-      if (this.isValid()) {
-        const data = this.$store.getters['candidate/personalDetails']();
+      try {
+        this.validate();
+        if (this.isValid()) {
+          const data = this.$store.getters['candidate/personalDetails']();
 
-        // update displayName in authentication database
-        const fullName = this.getFullName();
-        if (fullName && this.$store.state.auth.currentUser?.displayName !== fullName) {
-          await this.updateProfile({ displayName: fullName });
-          await auth.currentUser.reload(); // reload to get new displayName
-          const newUser = { ...auth.currentUser };
-          newUser.displayName = fullName;
-          await this.$store.dispatch('auth/setCurrentUser', newUser);
+          // update displayName in authentication database
+          const fullName = this.getFullName();
+          if (fullName && this.$store.state.auth.currentUser?.displayName !== fullName) {
+            await this.updateProfile({ displayName: fullName });
+            await auth.currentUser.reload(); // reload to get new displayName
+            const newUser = { ...auth.currentUser };
+            newUser.displayName = fullName;
+
+            // eslint-disable-next-line no-console
+            console.log('===========> Set current user!!');
+
+            await this.$store.dispatch('auth/setCurrentUser', newUser);
+          }
+
+          // Update email address
+          let emailUpdated = false;
+          if (this.personalDetails.email !== data.email) {
+            // Update email in authentication database
+            emailUpdated = await this.updateEmail(data.email, this.personalDetails.email);
+
+            // eslint-disable-next-line no-console
+            console.log(`-- emailUpdated: ${emailUpdated}`);
+          }
+
+          /* eslint-disable no-console */
+          console.log('-- this.personalDetails');
+          console.log(this.personalDetails);
+          console.log('-- ERROR:');
+          console.log(this.errors);
+          /* eslint-enable no-console */
+
+          if (this.errors.length === 0) {
+
+            // Update candidate details
+            await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+
+            this.$router.push({ name: 'profile' });
+          }
+          else {
+            this.scrollToTop();
+          }
         }
 
-        if (this.personalDetails.email !== data.email) {
-          // update email in authentication database
-          await this.updateEmail(data.email, this.personalDetails.email);
-        }
-
-        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        this.$router.push({ name: 'profile' });
+      } catch (e) {
+        /* eslint-disable no-console */
+        console.log('Error in save:');
+        console.log(e);
+        /* eslint-enable no-console */
       }
     },
     async updateEmail(currentEmailAddress, newEmailAddress) {
       let isSuccess = false;
       try {
+
+        /* eslint-disable no-console */
+        console.log('=== UPDATE EMAIL ADDRESS ===');
+        console.log({
+          currentEmailAddress,
+          newEmailAddress,
+        });
+        /* eslint-enable no-console */
+
         const res = await httpsCallable(functions, 'updateEmailAddress')({
           currentEmailAddress,
           newEmailAddress,
         });
+
+        /* eslint-disable no-console */
+        console.log('res:');
+        console.log(res);
+        /* eslint-enable no-console */
+
         const result = res.data;
         if (result.status === 'success') {
           isSuccess = true;
         } else {
           if (result.data.code === 'auth/email-already-exists') {
-            this.errors = [{ id: 'email', message: 'An account already exists with this email address.' }];
+
+            // eslint-disable-next-line no-console
+            console.log('Email already exists!!');
+
+            this.errors = [{ id: 'email', message: 'Unable to update email at this time. Please contact the administrator.' }];
           } else if (result.data.code === 'auth/invalid-email') {
             this.errors = [{ id: 'email', message: result.data.message }];
           } else {
@@ -243,6 +303,12 @@ export default {
           }
         }
       } catch (error) {
+
+        /* eslint-disable no-console */
+        console.log('CAUGHT ERROR IN UPDATE:');
+        console.log(error);
+        /* eslint-enable no-console */
+
         this.errors = [{ id: 'email', message: 'Failed to perform action.' }];
       }
 
@@ -262,6 +328,9 @@ export default {
       } catch (error) {
         // console.error(error);
       }
+    },
+    scrollToTop () {
+      this.$el.scrollIntoView();
     },
   },
 };
