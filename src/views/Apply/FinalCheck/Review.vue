@@ -1203,6 +1203,7 @@ export default {
       return this.applicationParts.employmentGaps || (this.isApplicationVersionGreaterThan2 && this.applicationParts.postQualificationWorkExperience);
     },
     selfAssessmentSections() {
+      if (!Array.isArray(this.vacancy.selfAssessmentWordLimits)) return [];
       const hasContent = this.vacancy.selfAssessmentWordLimits.some(item => typeof item === 'object' && Object.keys(item).length > 0);
       return hasContent ? this.vacancy.selfAssessmentWordLimits : [];
     },
