@@ -60,6 +60,7 @@ export default {
           const data = {
             status: 'applied',
             appliedAt: serverTimestamp(),
+            [`_submittedLog.${state.record._processing.stage}`]: serverTimestamp(),
           };
 
           // check if application was made in Welsh
