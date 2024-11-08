@@ -5,10 +5,14 @@ const module = {
   namespaced: true,
   state: {
     currentUser: null,
+    verificationModalOpen: false,
   },
   mutations: {
     setCurrentUser(state, user) {
       state.currentUser = user;
+    },
+    setVerificationModalOpen(state, open) {
+      state.verificationModalOpen = open;
     },
   },
   actions: {
@@ -36,6 +40,9 @@ const module = {
       } catch (error) {
         return false;
       }
+    },
+    setVerificationModalOpen({ commit }, open) {
+      commit('setVerificationModalOpen', open);
     },
   },
   getters: {
