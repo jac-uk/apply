@@ -19,7 +19,7 @@
                 :aria-current="$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
               >
-                Vacancies
+                Vacancies 123
               </RouterLink>
             </li>
             <li class="moj-side-navigation__item">
@@ -121,7 +121,7 @@
             </button>
           </template>
         </SidePanel>
-        
+
         <div class="govuk-grid-row">
           <div class="govuk-grid-column-full">
             <TabsList
