@@ -58,6 +58,21 @@ const module = {
       return (state.currentUser !== null);
     },
     isEmailVerified(state) {
+      const devTestingEmails = [
+        'application-0001@jac-dummy-email.jac',
+        'application-0002@jac-dummy-email.jac',
+        'application-0003@jac-dummy-email.jac',
+        'application-0004@jac-dummy-email.jac',
+        'application-0005@jac-dummy-email.jac',
+        'application-0006@jac-dummy-email.jac',
+        'application-0007@jac-dummy-email.jac',
+        'application-0008@jac-dummy-email.jac',
+        'application-0009@jac-dummy-email.jac',
+      ];
+
+      if (import.meta.env.VITE_USER_NODE_ENV === 'development' && devTestingEmails.includes(state?.currentUser?.email)) {
+        return true;
+      }
       return clone(state.emailVerified);
     },
     currentUser(state) {
