@@ -10,11 +10,7 @@ const collectionRef = collection(firestore, collectionName);
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(async ({ bindFirestoreRef, state, rootState, dispatch }) => {
-
-      // eslint-disable-next-line no-console
-      console.log('=============== CANDIDATE bind ===============');
-
+    bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
       const docRef = doc(collectionRef,rootState.auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
       // if candidate document has not been created correctly
@@ -34,13 +30,6 @@ export default {
       await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
 
       await dispatch('checkRequiredFields');
-
-      /* eslint-disable no-console */
-      console.log('-- cand state.personalDetails:');
-      console.log(state.personalDetails);
-      console.log(`-- cand requiredFieldsComplete: ${state.requiredFieldsComplete}`);
-      /* eslint-enable no-console */
-
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {

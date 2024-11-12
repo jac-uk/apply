@@ -148,12 +148,6 @@ export default {
       await createCandidate({
         email: this.formData.email,
       });
-
-      /* eslint-disable no-console */
-      console.log('-- Signup USER:');
-      console.log(user);
-      /* eslint-enable no-console */
-
       // Send email verification
       await sendEmailVerificationLink();
 

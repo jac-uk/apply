@@ -29,10 +29,6 @@ export default {
     };
   },
   created() {
-
-    // eslint-disable-next-line no-console
-    console.log('============ VerifyEmail (created called) =============');
-
     let routeName;
     if (this.$store.getters['auth/isSignedIn']) {
       if (!this.$store.getters['candidate/requiredFieldsComplete']()) {
@@ -48,10 +44,6 @@ export default {
       // Redirect to sign in page
       routeName = 'sign-in';
     }
-
-    // eslint-disable-next-line no-console
-    console.log(`-- redirecting to: ${routeName}`);
-
     // Redirect after 2 seconds
     setTimeout(() => {
       this.$router.replace({ name: routeName });

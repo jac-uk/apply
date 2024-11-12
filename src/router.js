@@ -150,18 +150,10 @@ const routes = [
       const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
       if (isEmailVerified) {
         if (requiredFieldsComplete) {
-
-          // eslint-disable-next-line no-console
-          console.log('-- router beforeEnter(verify-email-request) with isEmailVerified = true && requiredFieldsComplete = true so goto: vacancies');
           return next({ name: 'vacancies' });
-
         }
         else {
-
-          // eslint-disable-next-line no-console
-          console.log('-- router beforeEnter(verify-email-request) with isEmailVerified = true so goto: sign-up-step2');
           return next({ name: 'sign-up-step2' });
-
         }
       }
       return next();
@@ -1044,18 +1036,10 @@ const routes = [
       const isEmailVerified = store.getters['auth/isEmailVerified'];
       const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
       if (!isEmailVerified) {
-
-        // eslint-disable-next-line no-console
-        console.log('-- router beforeEnter(sign-up-step2) with isEmailVerified = false so goto: verify-email-request');
         return next({ name: 'verify-email-request' });
-
       }
       if (requiredFieldsComplete) {
-
-        // eslint-disable-next-line no-console
-        console.log('-- router beforeEnter(sign-up-step2) with requiredFieldsComplete = true so goto: vacancies');
         return next({ name: 'vacancies' });
-
       }
       return next();
     },
@@ -1096,16 +1080,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
   const isSignedIn = store.getters['auth/isSignedIn'];
-  const isEmailVerified = store.getters['auth/isEmailVerified'];
-  const requiredFieldsComplete = store.getters['candidate/requiredFieldsComplete']();
-
-  /* eslint-disable no-console */
-  console.log('================== ROUTER.beforeEach ==================');
-  console.log(`-- router isSignedIn: ${isSignedIn}`);
-  console.log(`-- router isEmailVerified: ${isEmailVerified}`);
-  console.log(`-- router requiredFieldsComplete: ${requiredFieldsComplete}`);
-  /* eslint-enable no-console */
-
   if (requiresAuth && !isSignedIn) {
     next({ name: 'sign-in', query: { nextPage: to.path } });
   } else {
