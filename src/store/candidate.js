@@ -10,7 +10,7 @@ const collectionRef = collection(firestore, collectionName);
 export default {
   namespaced: true,
   actions: {
-    bind: firestoreAction(async ({ bindFirestoreRef, state, rootState, dispatch }) => {
+    bind: firestoreAction(async ({ bindFirestoreRef, rootState, dispatch }) => {
       const docRef = doc(collectionRef,rootState.auth.currentUser.uid);
       const docSnap = await getDoc(docRef);
       // if candidate document has not been created correctly
