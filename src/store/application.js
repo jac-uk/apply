@@ -6,6 +6,7 @@ import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
 import { LANGUAGES } from '@/helpers/constants';
 
+
 const collectionName = 'applications';
 const collectionRef = collection(firestore, collectionName);
 
