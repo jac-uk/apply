@@ -70,7 +70,10 @@ const module = {
         'application-0009@jac-dummy-email.jac',
       ];
 
+      console.log('import.meta.env.VITE_USER_NODE_ENV', import.meta.env.VITE_USER_NODE_ENV);
+      console.log('state?.currentUser?.email', state?.currentUser?.email);
       if (import.meta.env.VITE_USER_NODE_ENV === 'development' && devTestingEmails.includes(state?.currentUser?.email)) {
+        console.log('skipped email verified');
         return true;
       }
       return clone(state.emailVerified);
