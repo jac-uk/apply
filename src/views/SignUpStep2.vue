@@ -114,14 +114,8 @@ export default {
       this.$el.scrollIntoView();
     },
     async onSubmit() {
-
-      console.log('================ ign up step 2 ======================');
-
       await this.validate();
       if (this.isValid()) {
-
-        console.log('-- ss2 is valid');
-
         try {
           return await this.completeSignUp();
         } catch (error) {
@@ -134,9 +128,6 @@ export default {
       }
     },
     async completeSignUp() {
-      // eslint-disable-next-line no-console
-      console.log(`email: ${this.currentUser.email}`);
-
       await saveCandidate({
         title: this.formData.title,
         firstName: this.formData.firstName,

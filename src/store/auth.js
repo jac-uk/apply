@@ -17,17 +17,11 @@ const module = {
     },
   },
   actions: {
-
     setCurrentUser: async ({ commit, rootGetters, dispatch }, user) => {
-
-      // eslint-disable-next-line no-console
-      console.log('============= SET CURRENT USER =============');
-
       if (user === null) {
         commit('setCurrentUser', null);
         commit('setEmailVerified', false);
       } else {
-
         commit('setCurrentUser', {
           uid: user.uid,
           email: user.email,
@@ -39,16 +33,7 @@ const module = {
         // Get the candidate so we can detect if signup is complete
         const personalDetails = rootGetters['candidate/personalDetails']();
 
-        /* eslint-disable no-console */
-        console.log('candidate/personalDetails:');
-        console.log(personalDetails);
-        /* eslint-enable no-console */
-
         if (personalDetails === null) {
-
-          // eslint-disable-next-line no-console
-          console.log('-- empty so candidate/bind called');
-
           await dispatch('candidate/bind', null, { root: true });
         }
 
