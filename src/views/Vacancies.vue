@@ -19,7 +19,7 @@
                 :aria-current="$route.name === 'vacancies' ? 'active' : null"
                 :to="{ name: 'vacancies' }"
               >
-                Vacancies 123
+                Vacancies
               </RouterLink>
             </li>
             <li class="moj-side-navigation__item">
