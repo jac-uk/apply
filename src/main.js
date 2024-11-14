@@ -66,7 +66,7 @@ auth.onAuthStateChanged( async (user) => {
         environment: store.getters.appEnvironment.toLowerCase(),
         release: import.meta.env.PACKAGE_VERSION,
         integrations: [
-        Sentry.browserTracingIntegration({ router }),
+          Sentry.browserTracingIntegration({ router }),
         ],
       });
     }
