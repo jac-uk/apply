@@ -66,9 +66,7 @@ auth.onAuthStateChanged( async (user) => {
         environment: store.getters.appEnvironment.toLowerCase(),
         release: import.meta.env.PACKAGE_VERSION,
         integrations: [
-          new Sentry.BrowserTracing({
-            routingInstrumentation: Sentry.vueRouterInstrumentation(router),
-          }),
+          Sentry.browserTracingIntegration({ router }),
         ],
       });
     }
