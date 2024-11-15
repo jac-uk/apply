@@ -58,6 +58,7 @@ const module = {
       return (state.currentUser !== null);
     },
     isEmailVerified(state) {
+      // This is for development testing only. We will remove this in production
       const devTestingEmails = [
         'application-0001@jac-dummy-email.jac',
         'application-0002@jac-dummy-email.jac',
@@ -69,8 +70,6 @@ const module = {
         'application-0008@jac-dummy-email.jac',
         'application-0009@jac-dummy-email.jac',
       ];
-
-      //if (import.meta.env.VITE_USER_NODE_ENV === 'development' && devTestingEmails.includes(state?.currentUser?.email)) {
       if (devTestingEmails.includes(state?.currentUser?.email)) {
         return true;
       }
