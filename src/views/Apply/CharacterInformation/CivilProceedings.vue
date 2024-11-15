@@ -30,7 +30,7 @@
                 label="Yes"
               >
                 <RepeatableFields
-                  v-model="characterInformation.furtherInformationDetails"
+                  v-model="characterInformation.civilProceedingsDetails"
                   required
                   :component="repeatableFields.FurtherInformationDetails"
                   :component-props="{
@@ -57,6 +57,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -85,9 +86,9 @@ export default {
     return {
       characterInformation: characterInformation,
       formId: 'characterInformation',
-      repeatableFields: {
+      repeatableFields: shallowRef({
         FurtherInformationDetails,
-      },
+      }),
     };
   },
   methods: {
