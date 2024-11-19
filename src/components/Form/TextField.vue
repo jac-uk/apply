@@ -119,7 +119,7 @@ export default {
         switch (this.type) {
         case 'number':
         case 'non-negative-number':
-          this.$emit('update:modelValue', val ? parseFloat(val) : '');
+          this.$emit('update:modelValue', val || val === 0 ? parseFloat(val) : '');
           break;
         default:
           this.$emit('update:modelValue', val);
