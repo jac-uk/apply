@@ -34,6 +34,10 @@ describe('store/auth', () => {
         commit: vi.fn(),
         getters,
         state,
+        dispatch: vi.fn(),
+        rootGetters: {
+          'candidate/personalDetails': vi.fn(() => null),  // Mocking personalDetails getter
+        },
       };
     });
 

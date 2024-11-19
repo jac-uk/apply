@@ -17,6 +17,7 @@
               </RouterLink>
             </li>
             <li
+              v-if="isEmailVerified"
               class="moj-side-navigation__item"
               :class="$route.name === 'profile' || $route.name === 'profile-edit' ? 'moj-side-navigation__item--active' : null"
             >
@@ -147,13 +148,14 @@
             />
 
             <div class="text-right govuk-!-margin-top-8 govuk-!-margin-bottom-4">
-              <a
+              <ActionButton
                 class="govuk-button info-btn--character-information--save-and-continue"
-                style="cursor: pointer;"
-                @click.prevent="save"
+                type="primary"
+                :action="save"
               >
                 Save and Continue
-              </a>
+              </ActionButton>
+              <br>
             </div>
           </div>
         </div>
@@ -182,6 +184,7 @@ import MobileNumber from '@/components/MobileNumber.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
 import Modal from '@/components/Page/Modal.vue';
+import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
   name: 'ProfileEdit',
@@ -192,6 +195,7 @@ export default {
     DateInput,
     BackLink,
     Modal,
+    ActionButton,
   },
   extends: Form,
   data() {
@@ -202,6 +206,11 @@ export default {
       minPasswordLength: 12,
       password: '',
     };
+  },
+  computed: {
+    isEmailVerified() {
+      return this.$store.getters['auth/isEmailVerified'];
+    },
   },
   watch: {
     'personalDetails.mobileVerifiedAt'(newValue, oldValue) {
@@ -234,27 +243,41 @@ export default {
   },
   methods: {
     async save() {
-      this.validate();
-      if (this.isValid()) {
-        const data = this.$store.getters['candidate/personalDetails']();
+      try {
+        this.validate();
+        if (this.isValid()) {
+          const data = this.$store.getters['candidate/personalDetails']();
 
-        // update displayName in authentication database
-        const fullName = this.getFullName();
-        if (fullName && this.$store.state.auth.currentUser?.displayName !== fullName) {
-          await this.updateProfile({ displayName: fullName });
-          await auth.currentUser.reload(); // reload to get new displayName
-          const newUser = { ...auth.currentUser };
-          newUser.displayName = fullName;
-          await this.$store.dispatch('auth/setCurrentUser', newUser);
+          // update displayName in authentication database
+          const fullName = this.getFullName();
+          if (fullName && this.$store.state.auth.currentUser?.displayName !== fullName) {
+            await this.updateProfile({ displayName: fullName });
+            await auth.currentUser.reload(); // reload to get new displayName
+            const newUser = { ...auth.currentUser };
+            newUser.displayName = fullName;
+            await this.$store.dispatch('auth/setCurrentUser', newUser);
+          }
+
+          // Update email address
+          if (this.personalDetails.email !== data.email) {
+            // Update email in authentication database
+            await this.updateEmail(data.email, this.personalDetails.email);
+          }
+          if (this.errors.length === 0) {
+
+            // Update candidate details
+            await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
+
+            this.$router.push({ name: 'profile' });
+          }
+          else {
+            this.scrollToTop();
+          }
         }
 
-        if (this.personalDetails.email !== data.email) {
-          // update email in authentication database
-          await this.updateEmail(data.email, this.personalDetails.email);
-        }
-
-        await this.$store.dispatch('candidate/savePersonalDetails', this.personalDetails);
-        this.$router.push({ name: 'profile' });
+      } catch (e) {
+        // console.log('Error in save:');
+        // console.log(e);
       }
     },
     async updateEmail(currentEmailAddress, newEmailAddress) {
@@ -269,7 +292,7 @@ export default {
           isSuccess = true;
         } else {
           if (result.data.code === 'auth/email-already-exists') {
-            this.errors = [{ id: 'email', message: 'An account already exists with this email address.' }];
+            this.errors = [{ id: 'email', message: 'Unable to update email at this time. Please contact the administrator.' }];
           } else if (result.data.code === 'auth/invalid-email') {
             this.errors = [{ id: 'email', message: result.data.message }];
           } else {
@@ -325,6 +348,9 @@ export default {
       await auth.signOut();
       this.closeSignOutModal();
       this.$router.push({ name: 'sign-in' });
+    },
+    scrollToTop () {
+      this.$el.scrollIntoView();
     },
   },
 };

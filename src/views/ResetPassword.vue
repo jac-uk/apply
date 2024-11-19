@@ -59,9 +59,8 @@ import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 import { httpsCallable } from '@firebase/functions';
 import { functions } from '@/firebase';
-import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
-
+import { sendPasswordResetLink } from '@/services/authService';
 export default {
   name: 'ResetPassword',
   components: {
@@ -113,10 +112,7 @@ export default {
           returnUrl += `?nextPage=${this.nextPage}`;
         }
         this.errors = [];
-        const auth = getAuth();
-        sendPasswordResetEmail(auth, this.formData.email, {
-          url: returnUrl,
-        })
+        sendPasswordResetLink(this.formData.email, returnUrl)
           .then(() => {
             this.resetSent = true;
           })

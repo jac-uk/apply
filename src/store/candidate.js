@@ -28,6 +28,8 @@ export default {
       await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('relevantQualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/relevantQualifications`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
+
+      await dispatch('checkRequiredFields');
       return;
     }),
     unbind: firestoreAction(async ({ unbindFirestoreRef }) => {
@@ -63,6 +65,20 @@ export default {
       const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/postQualificationExperience`);
       await setDoc(ref, data);
     },
+    checkRequiredFields: async ({ state, commit }) => {
+      const personalDetails = state.personalDetails;
+      if (personalDetails) {
+        // Check if required fields are filled
+        const isComplete = Boolean(
+          personalDetails.dateOfBirth &&
+          personalDetails.email &&
+          personalDetails.firstName &&
+          personalDetails.lastName &&
+          personalDetails.title
+        );
+        commit('set', { name: 'requiredFieldsComplete', value: isComplete });
+      }
+    },
   },
   mutations: {
     set(state, { name, value }) {
@@ -75,6 +91,7 @@ export default {
     equalityAndDiversitySurvey: null,
     relevantQualifications: null,
     postQualificationExperience: null,
+    requiredFieldsComplete: false,    // Fields that ** MUST ** be completed in sign up
   },
   getters: {
     personalDetails: (state) => () => {
@@ -91,6 +108,9 @@ export default {
     },
     postQualificationExperience: (state) => () => {
       return clone(state.postQualificationExperience);
+    },
+    requiredFieldsComplete: (state) => () => {
+      return clone(state.requiredFieldsComplete);
     },
   },
 };

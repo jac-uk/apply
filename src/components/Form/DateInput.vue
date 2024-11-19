@@ -71,7 +71,6 @@
                   v-model.lazy="dayInput"
                   class="govuk-input govuk-date-input__input govuk-input--width-2"
                   type="number"
-                  :disabled="disabled"
                   @input="changeDay"
                 >
               </div>
@@ -108,7 +107,6 @@
                   v-model.lazy="yearInput"
                   class="govuk-input govuk-date-input__input govuk-input--width-4"
                   type="number"
-                  :disabled="disabled"
                 >
               </div>
             </div>

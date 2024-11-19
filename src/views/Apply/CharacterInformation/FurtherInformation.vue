@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
@@ -91,9 +92,9 @@ export default {
     return {
       characterInformation: characterInformation,
       formId: 'characterInformation',
-      repeatableFields: {
+      repeatableFields: shallowRef({
         FurtherInformationDetails,
-      },
+      }),
       furtherInformationUrl: FURTHER_INFORMATION_URL,
     };
   },
