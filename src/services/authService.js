@@ -24,16 +24,11 @@ const sendEmailVerificationLink = async () => {
   return false;
 };
 
-const sendPasswordResetLink = async (returnUrl) => {
+const sendPasswordResetLink = async (email, returnUrl) => {
   const auth = getAuth();
-  const user = auth.currentUser;
-  if (user) {
-    await sendPasswordResetEmail(auth, user.email, {
-      url: returnUrl,
-    });
-    return true;
-  }
-  return false;
+  await sendPasswordResetEmail(auth, email, {
+    url: returnUrl,
+  });
 };
 
 export {
