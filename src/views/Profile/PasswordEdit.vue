@@ -64,13 +64,35 @@
 
           <div class="govuk-grid-column-three-quarters">
             <Password
+              id="current-password"
+              v-model="currentPassword"
+              label="Current Password"
+              type="new-password"
+              :min-length="minPasswordLength"
+              required
+            />
+          </div>
+
+          <div class="govuk-grid-column-three-quarters">
+            <Password
               id="password"
               v-model="password"
-              label="Password"
+              label="New Password"
               :hint="`For security reasons it should be ${minPasswordLength} or more characters long, contain a mix of upper- and lower-case letters, at least one digit and special character (like £, #, @, !, %, -, &, *).`"
               type="new-password"
               :min-length="minPasswordLength"
               :is-new-pwd="true"
+              required
+            />
+          </div>
+
+          <div class="govuk-grid-column-three-quarters">
+            <Password
+              id="confirm-password"
+              v-model="confirmPassword"
+              label="Confirm New Password"
+              type="new-password"
+              :min-length="minPasswordLength"
               required
             />
             <a
@@ -88,8 +110,7 @@
 </template>
 
 <script>
-import { updatePassword } from 'firebase/auth';
-import { getAuthUser } from '@/services/authService';
+import { mapPwdResetMessage, updatePwd } from '@/services/authService';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import Password from '@/components/Form/Password.vue';
@@ -106,7 +127,9 @@ export default {
   data() {
     return {
       minPasswordLength: 12,
+      currentPassword: '',
       password: '',
+      confirmPassword: '',
     };
   },
   computed: {
@@ -116,14 +139,29 @@ export default {
   },
   methods: {
     async save() {
-      const user = await getAuthUser();
+
+      if (this.password !== this.confirmPassword) {
+        this.errors = [{ id: 'confirm-password', message: 'The new password and confirm password values do not match' }];
+        return;
+      }
+      if (this.password === this.currentPassword) {
+        this.errors = [{ id: 'password', message: 'The new password should be different from the current password' }];
+        return;
+      }
+
       this.validate();
       if (this.isValid()) {
         try {
-          await updatePassword(user, this.password);
+          await updatePwd(this.currentPassword, this.password);
           this.$router.push({ name: 'profile' });
         } catch (error) {
-          this.errors = [{ id: 'password', message: error.message }];
+          let inputId = 'password';
+          const message = mapPwdResetMessage(error.code);
+          if (error.code === 'auth/invalid-credential') {
+            inputId = 'current-password';
+          }
+
+          this.errors = [{ id: inputId, message: message }];
         }
       }
     },
