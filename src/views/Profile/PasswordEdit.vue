@@ -157,10 +157,12 @@ export default {
         } catch (error) {
           let inputId = 'password';
           const message = mapPwdResetMessage(error.code);
-          if (error.code === 'auth/invalid-credential') {
+          if (Array.prototype.includes.call([
+            'auth/invalid-credential',
+            'auth/wrong-password',
+          ], error.code)) {
             inputId = 'current-password';
           }
-
           this.errors = [{ id: inputId, message: message }];
         }
       }

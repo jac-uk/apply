@@ -53,6 +53,7 @@ const mapPwdResetMessage = (errorCode) => {
   const errorMessages = {
     //'CREDENTIAL_TOO_OLD_LOGIN_AGAIN'
     'auth/invalid-credential': 'The current password is incorrect.',
+    'auth/wrong-password': 'The current password is incorrect.',
     'auth/weak-password': 'The new password is too weak. Please choose a stronger password.',
     'auth/too-many-requests': 'Too many attempts. Please try again later.',
     'auth/network-request-failed': 'Network error. Please check your internet connection.',
