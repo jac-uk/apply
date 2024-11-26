@@ -116,6 +116,10 @@ export default {
       this.setError('');
       if (this.checkErrors) {
         let value = this.modelValue;
+        if (value && /^[=+\-@]/.test(value)) {
+          value = `'${value}`;
+        }
+
         if (event && event.target) {
           value = event.target.value;
         }
