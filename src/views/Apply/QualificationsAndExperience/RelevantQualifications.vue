@@ -200,14 +200,16 @@ export default {
     if (!formData.uploadedExemptionCertificate && candidateCertificates?.uploadedExemptionCertificate) {
 
       console.log('Getting uploadedExemptionCertificate from candidate record');
+      console.log(`Value: ${candidateRelevantQualifications.uploadedExemptionCertificate}`);
 
-      formData.uploadedExemptionCertificate = candidateRelevantQualifications?.uploadedExemptionCertificate;
+      formData.uploadedExemptionCertificate = candidateRelevantQualifications.uploadedExemptionCertificate;
     }
     if (!formData.uploadedPracticingCertificate && candidateCertificates?.uploadedPracticingCertificate) {
 
       console.log('Getting uploadedPracticingCertificate from candidate record');
+      console.log(`Value: ${candidateRelevantQualifications.uploadedPracticingCertificate}`);
 
-      formData.uploadedPracticingCertificate = candidateRelevantQualifications?.uploadedPracticingCertificate;
+      formData.uploadedPracticingCertificate = candidateRelevantQualifications.uploadedPracticingCertificate;
     }
 
     return {
