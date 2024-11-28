@@ -77,6 +77,9 @@ export default {
     uploadPath() {
       return `/exercise/${this.vacancy.id}/user/${this.userId}`;
     },
+    certificateUploadPath() {
+      return `/user/${this.userId}`;
+    },
     isLegal() {
       return isLegal(this.vacancy);
     },
