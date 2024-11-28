@@ -250,6 +250,21 @@ export default {
         });
       }
 
+      console.log('this.formData.uploadedExemptionCertificate:');
+      console.log(this.formData.uploadedExemptionCertificate);
+
+      console.log('this.formData.uploadedPracticingCertificate:');
+      console.log(this.formData.uploadedPracticingCertificate);
+
+      if (this.formData.uploadedExemptionCertificate || this.formData.uploadedPracticingCertificate) {
+        // await this.$store.dispatch('candidate/saveQualificationCertificates', {
+        //   qualificationCertificates: {
+        //     uploadedExemptionCertificate: this.formData.uploadedExemptionCertificate,
+        //     uploadedPracticingCertificate: this.formData.uploadedPracticingCertificate,
+        //   },
+        // });
+      }
+
     },
   },
 };

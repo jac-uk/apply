@@ -28,7 +28,7 @@ export default {
       await bindFirestoreRef('equalityAndDiversitySurvey', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/equalityAndDiversitySurvey`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('relevantQualifications', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/relevantQualifications`), { serialize: vuexfireSerialize });
       await bindFirestoreRef('postQualificationExperience', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/postQualificationExperience`), { serialize: vuexfireSerialize });
-
+      //await bindFirestoreRef('qualificationCertificates', doc(collectionRef, `${rootState.auth.currentUser.uid}/documents/qualificationCertificates`), { serialize: vuexfireSerialize });
       await dispatch('checkRequiredFields');
       return;
     }),
@@ -38,6 +38,7 @@ export default {
       await unbindFirestoreRef('equalityAndDiversitySurvey');
       await unbindFirestoreRef('relevantQualifications');
       await unbindFirestoreRef('postQualificationExperience');
+      //await unbindFirestoreRef('qualificationCertificates');
       return;
     }),
     create: async ({ rootState, dispatch }, data) => {
@@ -65,6 +66,10 @@ export default {
       const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/postQualificationExperience`);
       await setDoc(ref, data);
     },
+    // saveQualificationCertificates: async ({ rootState }, data) => {
+    //   const ref = doc(collectionRef,`${rootState.auth.currentUser.uid}/documents/qualificationCertificates`);
+    //   await setDoc(ref, data);
+    // },
     checkRequiredFields: async ({ state, commit }) => {
       const personalDetails = state.personalDetails;
       if (personalDetails) {
@@ -91,6 +96,7 @@ export default {
     equalityAndDiversitySurvey: null,
     relevantQualifications: null,
     postQualificationExperience: null,
+    //qualificationCertificates: null,
     requiredFieldsComplete: false,    // Fields that ** MUST ** be completed in sign up
   },
   getters: {
@@ -109,6 +115,9 @@ export default {
     postQualificationExperience: (state) => () => {
       return clone(state.postQualificationExperience);
     },
+    // qualificationCertificates: (state) => () => {
+    //   return clone(state.qualificationCertificates);
+    // },
     requiredFieldsComplete: (state) => () => {
       return clone(state.requiredFieldsComplete);
     },
