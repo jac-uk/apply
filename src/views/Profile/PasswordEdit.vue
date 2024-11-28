@@ -68,7 +68,6 @@
               v-model="currentPassword"
               label="Current Password"
               type="new-password"
-              :min-length="minPasswordLength"
               required
             />
           </div>
@@ -139,7 +138,6 @@ export default {
   },
   methods: {
     async save() {
-
       if (this.password !== this.confirmPassword) {
         this.errors = [{ id: 'confirm-password', message: 'The new password and confirm password values do not match' }];
         return;
