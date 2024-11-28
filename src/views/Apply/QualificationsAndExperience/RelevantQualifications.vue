@@ -196,10 +196,19 @@ export default {
     console.log(candidateRelevantQualifications);
 
     // check if candidate has uploaded exemption/practicing certificates before
-    // const candidateCertificates = this.$store.getters['candidate/qualificationCertificates']();
-    // if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-    //   formData.qualifications = candidateRelevantQualifications?.qualifications;
-    // }
+    const candidateCertificates = this.$store.getters['candidate/qualificationCertificates']();
+    if (!formData.uploadedExemptionCertificate && candidateCertificates?.uploadedExemptionCertificate) {
+
+      console.log('Getting uploadedExemptionCertificate from candidate record');
+
+      formData.uploadedExemptionCertificate = candidateRelevantQualifications?.uploadedExemptionCertificate;
+    }
+    if (!formData.uploadedPracticingCertificate && candidateCertificates?.uploadedPracticingCertificate) {
+
+      console.log('Getting uploadedPracticingCertificate from candidate record');
+
+      formData.uploadedPracticingCertificate = candidateRelevantQualifications?.uploadedPracticingCertificate;
+    }
 
     return {
       formId: 'relevantQualifications',
