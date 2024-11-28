@@ -280,10 +280,8 @@ export default {
 
       if (this.formData.uploadedExemptionCertificate || this.formData.uploadedPracticingCertificate) {
         await this.$store.dispatch('candidate/saveQualificationCertificates', {
-          qualificationCertificates: {
-            uploadedExemptionCertificate: this.formData.uploadedExemptionCertificate,
-            uploadedPracticingCertificate: this.formData.uploadedPracticingCertificate,
-          },
+          uploadedExemptionCertificate: this.formData.uploadedExemptionCertificate,
+          uploadedPracticingCertificate: this.formData.uploadedPracticingCertificate,
         });
       }
 
