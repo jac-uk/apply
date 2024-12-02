@@ -98,14 +98,6 @@
           </template>
         </MobileNumber>
 
-        <TextField
-          id="phone"
-          v-model="personalDetails.phone"
-          label="Phone number"
-          type="tel"
-          hint="For international numbers include the country code. For example, ‘+447123456789’."
-        />
-
         <DateInput
           id="date-of-birth"
           v-model="personalDetails.dateOfBirth"
