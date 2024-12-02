@@ -99,7 +99,7 @@ export default {
       return applicationParts(this.vacancy);
     },
     currentApplicationParts() {
-      return currentApplicationParts(this.vacancy);
+      return currentApplicationParts(this.vacancy, this.application);
     },
     isMoreInformationNeeded() {
       return isMoreInformationNeeded(this.vacancy, this.application);
