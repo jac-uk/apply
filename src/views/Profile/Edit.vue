@@ -122,6 +122,14 @@
               hint="For example, 27 3 1964"
             />
 
+            <MobileNumber
+              v-model:mobile="personalDetails.mobile"
+              v-model:mobile-verified-at="personalDetails.mobileVerifiedAt"
+              :default-mobile="defaultMobile"
+              :default-mobile-verified-at="defaultMobileVerifiedAt"
+              required
+            />
+
             <TextField
               id="national-insurance-number"
               v-model="personalDetails.nationalInsuranceNumber"
@@ -153,6 +161,15 @@
         </div>
       </div>
     </div>
+
+    <Modal
+      ref="signOutModalRef"
+      button-text="OK"
+      :cancelable="false"
+      title="Change of mobile phone number"
+      message="Your mobile phone number has been changed. Please sign in again."
+      @confirmed="signOut"
+    />
   </div>
 </template>
 
@@ -163,8 +180,10 @@ import { auth, functions } from '@/firebase';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import TextField from '@/components/Form/TextField.vue';
+import MobileNumber from '@/components/MobileNumber.vue';
 import DateInput from '@/components/Form/DateInput.vue';
 import BackLink from '@/components/BackLink.vue';
+import Modal from '@/components/Page/Modal.vue';
 import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
@@ -172,14 +191,18 @@ export default {
   components: {
     ErrorSummary,
     TextField,
+    MobileNumber,
     DateInput,
     BackLink,
+    Modal,
     ActionButton,
   },
   extends: Form,
   data() {
     return {
       personalDetails: {},
+      defaultMobile: null,
+      defaultMobileVerifiedAt: null,
       minPasswordLength: 12,
       password: '',
     };
@@ -187,6 +210,13 @@ export default {
   computed: {
     isEmailVerified() {
       return this.$store.getters['auth/isEmailVerified'];
+    },
+  },
+  watch: {
+    'personalDetails.mobileVerifiedAt'(newValue, oldValue) {
+      if (newValue && newValue !== oldValue) {
+        this.updateMobile();
+      }
     },
   },
   async mounted() {
@@ -201,11 +231,15 @@ export default {
       fullName: null,
       email: null,
       phone: null,
+      mobile: null,
+      mobileVerifiedAt: null,
       dateOfBirth: null,
       nationalInsuranceNumber: null,
     };
     const personalDetails = { ...defaults, ...data };
     this.personalDetails = personalDetails;
+    this.defaultMobile = personalDetails.mobile;
+    this.defaultMobileVerifiedAt = personalDetails.mobileVerifiedAt;
   },
   methods: {
     async save() {
@@ -285,6 +319,35 @@ export default {
       } catch (error) {
         // console.error(error);
       }
+    },
+    openSignOutModal(){
+      this.$refs.signOutModalRef.openModal();
+    },
+    closeSignOutModal(){
+      this.$refs.signOutModalRef.closeModal();
+    },
+    async updateMobile() {
+      if (
+        !this.personalDetails.mobile ||
+        !this.personalDetails.mobileVerifiedAt || (
+          this.personalDetails.mobile === this.defaultMobile &&
+          this.personalDetails.mobileVerifiedAt === this.defaultMobileVerifiedAt
+        )
+      ) {
+        return;
+      }
+      const data = this.$store.getters['candidate/personalDetails']();
+      data.mobile = this.personalDetails.mobile;
+      data.mobileVerifiedAt = this.personalDetails.mobileVerifiedAt;
+      await this.$store.dispatch('candidate/savePersonalDetails', data);
+      this.defaultMobile = data.mobile;
+      this.defaultMobileVerifiedAt = data.mobileVerifiedAt;
+      this.openSignOutModal();
+    },
+    async signOut() {
+      await auth.signOut();
+      this.closeSignOutModal();
+      this.$router.push({ name: 'sign-in' });
     },
     scrollToTop () {
       this.$el.scrollIntoView();

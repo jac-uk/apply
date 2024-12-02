@@ -77,6 +77,15 @@
         </div>
       </form>
     </div>
+
+    <MobileVerificationModal
+      v-if="verificationModalOpen"
+      title="Two-factor authentication"
+      :open="verificationModalOpen"
+      :mobile="internationalMobile"
+      @success="onVerificationSuccess"
+      @cancel="onVerificationCancel"
+    />
   </div>
 </template>
 
@@ -91,6 +100,10 @@ import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 import Password from '@/components/Form/Password.vue';
 import { getBrowserMeta } from '@/helpers/browser';
 import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
+import MobileVerificationModal from '@/components/MobileVerificationModal.vue';
+import parsePhoneNumber from 'libphonenumber-js';
+import { logoutUser } from '@/services/authService.js';
+import { startActivityMonitor } from '@/services/activityService.js';
 
 export default {
   name: 'SignIn',
@@ -101,6 +114,7 @@ export default {
     ChangeEmailMessage,
     Password,
     ActionButton,
+    MobileVerificationModal,
   },
   extends: Form,
   data () {
@@ -118,6 +132,19 @@ export default {
     },
     nextPage() {
       return this.$route.query.nextPage;
+    },
+    verificationModalOpen() {
+      return this.$store.state.auth.verificationModalOpen;
+    },
+    mobile() {
+      return this.$store.state.candidate?.personalDetails?.mobile;
+    },
+    internationalMobile() {
+      const phoneNumber = parsePhoneNumber(this.mobile, 'GB');
+      return phoneNumber && phoneNumber.isValid() ? phoneNumber.number : '';
+    },
+    mobileVerifiedAt() {
+      return this.$store.state.candidate?.personalDetails?.mobileVerifiedAt;
     },
   },
   methods: {
@@ -160,31 +187,44 @@ export default {
         this.errors.push({ id: 'email', message: message });
         return false;
       }
+    },
+    openVerificationModal() {
+      this.$store.dispatch('auth/setVerificationModalOpen', true);
+    },
+    closeVerificationModal() {
+      this.$store.dispatch('auth/setVerificationModalOpen', false);
+    },
+    async onVerificationSuccess() {
+      this.closeVerificationModal();
 
-      // auth.signInWithEmailAndPassword(this.formData.email, this.formData.password)
-      //   .then((userCredential) => {
+      // update twoFactorAuthVerifiedAt
+      const personalDetails = this.$store.getters['candidate/personalDetails']();
+      personalDetails.twoFactorAuthVerifiedAt = new Date();
+      await this.$store.dispatch('candidate/savePersonalDetails', personalDetails);
 
-      //     // LOG
-      //     const objToLog = {
-      //       type: 'login',
-      //       id: userCredential.user.uid,
-      //       data: {
-      //         uid: userCredential.user.uid,
-      //         meta: getBrowserMeta(),
-      //       },
-      //     };
-      //     this.$store.dispatch('logs/save', objToLog);
-      //     // LOG
+      startActivityMonitor((timeLeft) => {
+        if (window.updateDisplayCallback) {
+          window.updateDisplayCallback(timeLeft);
+        }
+      }, async () => {
+        alert('User inactive for specified period. Logging out...');
+        await logoutUser();
+        this.$router.push('/sign-in');
+      });
 
-      //   })
-      //   .catch((error) => {
-      //     let message = error.message;
-      //     // if (['auth/wrong-password', 'auth/user-not-found'].includes(error.code)) {
-      //     message = 'Either the email address and/or password you have entered is incorrect';
-      //     // }
-      //     this.errors.push(
-      //       { id: 'email', message: message });
-      //   });
+      const urlParams = new URLSearchParams(window.location.search);
+      const nextPage = urlParams.get('nextPage');
+      if (nextPage) this.$router.push(nextPage);
+      else this.$router.push('/vacancies');
+    },
+    async onVerificationCancel() {
+      await logoutUser();
+      this.resetData();
+      this.closeVerificationModal();
+    },
+    resetData() {
+      this.formData = {};
+      this.errors = [];
     },
   },
 };

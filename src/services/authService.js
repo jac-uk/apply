@@ -64,11 +64,22 @@ const mapPwdResetMessage = (errorCode) => {
   return errorMessages[errorCode] || errorMessages.default;
 };
 
+const logoutUser = async () => {
+  const auth = getAuth();
+  try {
+    //await signOut(auth);
+    await auth.signOut();
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
+
 export {
   createAuthUser,
   getAuthUser,
   sendEmailVerificationLink,
   sendPasswordResetLink,
+  logoutUser,
   signInWithEmailAndPwd,
   mapPwdResetMessage,
   updatePwd
