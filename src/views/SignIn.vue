@@ -95,8 +95,7 @@ import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import WarningSummary from '@/components/Form/WarningSummary.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import TextField from '@/components/Form/TextField.vue';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '@/firebase';
+import { signInWithEmailAndPwd } from '@/services/authService';
 import { RECAPTCHA_ACTIONS } from '@/helpers/constants';
 import Password from '@/components/Form/Password.vue';
 import { getBrowserMeta } from '@/helpers/browser';
@@ -169,7 +168,7 @@ export default {
       this.errors = [];
 
       try {
-        const userCredential = await signInWithEmailAndPassword(auth, this.formData.email, this.formData.password);
+        const userCredential = await signInWithEmailAndPwd(this.formData.email, this.formData.password);
         // LOG
         const objToLog = {
           type: 'login',
