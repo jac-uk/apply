@@ -1,6 +1,6 @@
 <template>
   <div class="page-container">
-    <div>
+    <div v-show="false">
       <strong class="govuk-!-margin-right-3">Activity Timer</strong>
       <span v-if="timeLeft >= 0">
         Time left: {{ timeLeft }} seconds
