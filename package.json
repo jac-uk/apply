@@ -22,6 +22,7 @@
     "staging:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:staging-candidate-app -P staging",
     "production:deploy-service-offline": "rm -rf dist && mkdir dist && cp service-offline/index.html dist/index.html && firebase deploy --only hosting:production-candidate-app -P production",
     "test": "vitest --mode develop ",
+    "test:watch": "vitest --mode develop --watch ${npm_config_grep:+--testNamePattern=$npm_config_grep}",
     "test:coverage": "TZ='Europe/London' vitest run --coverage",
     "test-ci": "TZ='Europe/London' vitest --run",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
