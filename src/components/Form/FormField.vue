@@ -92,7 +92,9 @@ export default {
     },
   },
   mounted: function () {
-    this.emitter.on('validate', this.handleValidate);
+    console.log(this);
+
+    // this.emitter.on('validate', this.handleValidate);
   },
   beforeUnmount: function() {
     this.setError('');
