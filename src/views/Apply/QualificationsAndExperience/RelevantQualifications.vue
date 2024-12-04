@@ -106,7 +106,7 @@
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
-            :path="uploadPath"
+            :path="certificateUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
@@ -117,7 +117,7 @@
             ref="practicing-certificate"
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
-            :path="uploadPath"
+            :path="certificateUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
@@ -188,6 +188,30 @@ export default {
     if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
       formData.qualifications = candidateRelevantQualifications?.qualifications;
     }
+
+    console.log('Onload formData:');
+    console.log(formData);
+
+    console.log('Onload candidateRelevantQualifications:');
+    console.log(candidateRelevantQualifications);
+
+    // check if candidate has uploaded exemption/practicing certificates before
+    const candidateCertificates = this.$store.getters['candidate/qualificationCertificates']();
+    if (!formData.uploadedExemptionCertificate && candidateCertificates?.uploadedExemptionCertificate) {
+
+      console.log('Getting uploadedExemptionCertificate from candidate record');
+      console.log(`Value: ${candidateCertificates.uploadedExemptionCertificate}`);
+
+      formData.uploadedExemptionCertificate = candidateCertificates.uploadedExemptionCertificate;
+    }
+    if (!formData.uploadedPracticingCertificate && candidateCertificates?.uploadedPracticingCertificate) {
+
+      console.log('Getting uploadedPracticingCertificate from candidate record');
+      console.log(`Value: ${candidateCertificates.uploadedPracticingCertificate}`);
+
+      formData.uploadedPracticingCertificate = candidateCertificates.uploadedPracticingCertificate;
+    }
+
     return {
       formId: 'relevantQualifications',
       formData: formData,
@@ -247,6 +271,19 @@ export default {
       if (this.formData.qualifications) {
         await this.$store.dispatch('candidate/saveRelevantQualifications', {
           qualifications: this.formData.qualifications,
+        });
+      }
+
+      console.log('this.formData.uploadedExemptionCertificate:');
+      console.log(this.formData.uploadedExemptionCertificate);
+
+      console.log('this.formData.uploadedPracticingCertificate:');
+      console.log(this.formData.uploadedPracticingCertificate);
+
+      if (this.formData.uploadedExemptionCertificate || this.formData.uploadedPracticingCertificate) {
+        await this.$store.dispatch('candidate/saveQualificationCertificates', {
+          uploadedExemptionCertificate: this.formData.uploadedExemptionCertificate,
+          uploadedPracticingCertificate: this.formData.uploadedPracticingCertificate,
         });
       }
 
