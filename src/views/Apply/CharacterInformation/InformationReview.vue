@@ -272,7 +272,6 @@
             </div>
 
             <div
-              v-if="isCharacterInformationV3"
               class="govuk-grid-row"
             >
               <div class="govuk-grid-column-full">
@@ -288,6 +287,21 @@
                       href="https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character"
                       target="_blank"
                     >the Judicial Appointments Commission’s Good Character Guidance</a>.
+                  </span>
+                </Checkbox>
+              </div>
+            </div>
+
+            <div class="govuk-grid-row">
+              <div class="govuk-grid-column-full">
+                <Checkbox
+                  v-if="hasSubmittedCharInfo"
+                  id="declaration5"
+                  v-model="formData.declaration5"
+                  multiline-label
+                >
+                  <span>
+                    {{ declarationText5 }}
                   </span>
                 </Checkbox>
               </div>
@@ -364,7 +378,7 @@ import CivilProceedingsSummary from './InformationReview/CivilProceedingsSummary
 import FurtherInformationSummary from './InformationReview/FurtherInformationSummary.vue';
 import Checkbox from '@/components/Form/Checkbox.vue';
 import CharacterInformationStatus from '@/views/Apply/CharacterInformation/CharacterInformationStatus.vue';
-import { DECLARATION1, DECLARATION2, DECLARATION3 } from './character-information-constants';
+import { DECLARATION1, DECLARATION2, DECLARATION3, DECLARATION5 } from './character-information-constants';
 import Form from '@/components/Form/Form.vue';
 import ApplyMixIn from '../ApplyMixIn';
 
@@ -390,6 +404,7 @@ export default {
       declaration2: null,
       declaration3: null,
       declaration4: null,
+      declaration5: null,
     };
     const data = this.$store.getters['candidate/characterInformation']();
     return {
@@ -398,11 +413,15 @@ export default {
       declarationText1: DECLARATION1,
       declarationText2: DECLARATION2,
       declarationText3: DECLARATION3,
+      declarationText5: DECLARATION5,
     };
   },
   computed: {
     isInformationReview() {
       return this.$route.name === 'character-information-review';
+    },
+    hasSubmittedCharInfo() {
+      return Object.keys(this.$store.state.candidate.characterInformation).some(key => ['declaration1','declaration2','declaration3','declaration4','declaration5'].includes(key));
     },
     characterInformationVersion() {
       return this.isCharacterInformationV3 ? 3 : 2;
@@ -413,6 +432,7 @@ export default {
       if (this.formData.declaration1 !== true ||
         this.formData.declaration2 !== true ||
         this.formData.declaration3 !== true ||
+        (this.hasSubmittedCharInfo && this.formData.declaration5 !== true) ||
         (this.isCharacterInformationV3 && this.formData.declaration4 !== true)
       ) {
         this.errors.push({ id: 'error', message: 'Please check all boxes to continue' });
