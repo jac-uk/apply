@@ -76,7 +76,7 @@ import Breadcrumb from '@/components/Breadcrumb.vue';
 import BackToTop from '@/components/BackToTop.vue';
 import { updateLangToTextNode } from '@/helpers/language';
 import { LANGUAGES } from '@/helpers/constants';
-
+import { getTimeLeft } from '@/services/activityService';
 export default {
   name: 'App',
   components: {
@@ -92,6 +92,7 @@ export default {
       loaded: false,
       loadFailed: false,
       LANGUAGES,
+      timeLeft: getTimeLeft(),
     };
   },
   computed: {
@@ -130,6 +131,9 @@ export default {
     isSignedIn() {
       return this.$store.getters['auth/isSignedIn'];
     },
+    activityTimeoutSeconds() {
+      return this.$store.getters['settings/getActivityTimeoutSeconds'];
+    },
   },
   watch: {
     isSignedIn: {
@@ -147,15 +151,19 @@ export default {
       deep: true,
       handler(val) {
         if (val && val.length) {
-          // if (this.$store.state.vacancies.records.length) {
           this.$store.dispatch('vacancies/bind', { vacancyIds: this.invitations.map(invite => invite.vacancy.id) });
-          // }
         }
       },
     },
   },
   async mounted() {
     this.loaded = true;
+    // Start interval to update the time left every second
+    this.intervalId = setInterval(this.updateTimerDisplay, 1000);
+  },
+  beforeUnmount() {
+    // Clear the interval when the component is destroyed
+    clearInterval(this.intervalId);
   },
   updated: async function() {
     if (this.$route.meta.isMultilanguage) {
@@ -168,6 +176,10 @@ export default {
     setLanguage(lang) {
       this.$store.dispatch('application/setLanguage', lang);
       updateLangToTextNode(document.querySelector('#main-content'), lang);
+    },
+
+    updateTimerDisplay() {
+      this.timeLeft = getTimeLeft();
     },
   },
 };

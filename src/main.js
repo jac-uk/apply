@@ -8,6 +8,8 @@ import * as Sentry from '@sentry/vue';
 import VueGtag from 'vue-gtag';
 import { VueReCaptcha } from 'vue-recaptcha-v3';
 import VueDOMPurifyHTML from 'vue-dompurify-html';
+import { logoutUser } from '@/services/authService.js';
+import { startActivityMonitor, stopActivityMonitor } from '@/services/activityService.js';
 
 import './styles/main.scss';
 
@@ -32,15 +34,49 @@ auth.onAuthStateChanged( async (user) => {
         router.replace({ name: 'sign-up-step2' });
     }
     else {
-      const urlParams = new URLSearchParams(window.location.search);
-      const nextPage = urlParams.get('nextPage');
-      if (nextPage) {
-        router.push(nextPage);
+      // 2FA
+      let isSignedInSuccess = true;
+
+      if (router.currentRoute.value.name === 'sign-in') {
+        await store.dispatch('candidate/bind');
+        // check if two-factor authentication is enabled
+        const isTwoFactorAuthEnabled = store.getters['settings/isTwoFactorAuthEnabled'];
+        const twoFactorAuthTimeoutDays = store.getters['settings/getTwoFactorAuthTimeoutDays'];
+        if (isTwoFactorAuthEnabled &&
+          store.state.candidate?.personalDetails?.mobile &&
+          store.state.candidate?.personalDetails?.mobileVerifiedAt && (
+            !store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt ||
+            store.state.candidate?.personalDetails?.twoFactorAuthVerifiedAt < new Date(Date.now() - twoFactorAuthTimeoutDays * 24 * 60 * 60 * 1000)
+          )
+        ) {
+          await store.dispatch('auth/setVerificationModalOpen', true);
+          isSignedInSuccess = false;
+        }
       }
-      else {
-        router.push('/vacancies');
+
+      if (isSignedInSuccess) {
+        startActivityMonitor((timeLeft) => {
+          if (window.updateDisplayCallback) {
+            window.updateDisplayCallback(timeLeft);
+          }
+        }, async () => {
+          alert('User inactive for specified period. Logging out...');
+          await logoutUser();
+          router.push('/sign-in');
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const nextPage = urlParams.get('nextPage');
+        if (nextPage) {
+          router.push(nextPage);
+        }
+        else {
+          router.push('/vacancies');
+        }
       }
     }
+  } else {
+    stopActivityMonitor();
   }
 
   // Create the Vue instance, but only once

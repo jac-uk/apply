@@ -74,7 +74,8 @@
   </div>
 </template>
 <script>
-import { auth } from '@/firebase';
+//import { auth } from '@/firebase';
+import { logoutUser } from '@/services/authService.js';
 export default {
   name: 'Header',
   data(){
@@ -108,8 +109,9 @@ export default {
       }
       this.$router.push({ name: 'sign-in', query: { nextPage: nextPage } });
     },
-    signOut() {
-      auth.signOut();
+    async signOut() {
+      //auth.signOut();
+      await logoutUser();
       if (this.$route.name != 'vacancies') {
         this.$router.push({ name: 'vacancies' });
       }
