@@ -1,14 +1,5 @@
 <template>
   <div class="page-container">
-    <div v-show="false">
-      <strong class="govuk-!-margin-right-3">Activity Timer</strong>
-      <span v-if="timeLeft >= 0">
-        Time left: {{ timeLeft }} seconds
-      </span>
-      <span v-else>
-        Session expired!
-      </span>
-    </div>
     <LoadingMessage
       v-if="loaded === false"
       :load-failed="loadFailed"
