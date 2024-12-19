@@ -3,6 +3,7 @@
 </template>
 
 <script>
+import { isValidNumberForRegion } from 'libphonenumber-js';
 import { formatDate } from '@/helpers/date';
 
 export default {
@@ -193,6 +194,14 @@ export default {
           value = value.trim().replace(/ /g, '').toUpperCase();
           this.text = value;
           if (!this.regex.nino.test(value)) {
+            this.setError(`Enter a valid value for ${this.label}`);
+          }
+        }
+
+        if (this.type && this.type === 'mobile' && value) {
+          value = value.trim().toLowerCase();
+          this.text = value;
+          if (!isValidNumberForRegion(value, 'GB')) { // restricted to GB numbers
             this.setError(`Enter a valid value for ${this.label}`);
           }
         }
