@@ -110,6 +110,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-full-path="setExemptionCertificateFullPath"
           />
 
           <FileUpload
@@ -121,6 +122,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-full-path="setPracticingCertificateFullPath"
           />
 
           <FormFieldError
@@ -188,6 +190,9 @@ export default {
     if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
       formData.qualifications = candidateRelevantQualifications?.qualifications;
     }
+
+    // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
+
     return {
       formId: 'relevantQualifications',
       formData: formData,
@@ -245,11 +250,19 @@ export default {
       }
       this.save();
       if (this.formData.qualifications) {
+
+        // @TODO: Save the certs below too!
+
         await this.$store.dispatch('candidate/saveRelevantQualifications', {
           qualifications: this.formData.qualifications,
         });
       }
-
+    },
+    setExemptionCertificateFullPath(value) {
+      console.log(`setExemptionCertificateFullPath: ${value}`);
+    },
+    setPracticingCertificateFullPath(value) {
+      console.log(`setPracticingCertificateFullPath: ${value}`);
     },
   },
 };

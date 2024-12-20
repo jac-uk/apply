@@ -114,7 +114,7 @@ export default {
       },
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'uploadedFullPath'],
   data() {
     return {
       file: '',
@@ -192,6 +192,9 @@ export default {
       this.isUploading = false;
     },
     async upload(file) {
+
+      console.log('============= Uploading file =============');
+
       // @todo return more useful error messages
       if (!file) {
         this.setError('File upload failed, please try again');
@@ -213,8 +216,12 @@ export default {
       this.isUploading = true;
       const fileName = this.generateFileName(file.name);
 
+      const uploadedFullPath = `${this.path}/${fileName}`;
       const storage = getStorage();
-      const fileRef = ref(storage ,`${this.path}/${fileName}`);
+      const fileRef = ref(storage , uploadedFullPath);
+
+      console.log(`fileName: ${fileName}`);
+      console.log(`store to path/generatedFilename: ${uploadedFullPath}`);
 
       // Delete the current file in file storage
       if (this.haveFile && this.enableDelete) {
@@ -227,6 +234,10 @@ export default {
         this.fileName = fileName;
 
         this.downloadUrl = await getDownloadURL(fileRef);
+
+        console.log(`Donwload url: ${this.downloadUrl}`);
+
+        this.$emit('uploadedFilePath', uploadedFullPath);
 
         return true;
       } catch (e) {
