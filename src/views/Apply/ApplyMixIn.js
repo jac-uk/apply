@@ -180,6 +180,10 @@ export default {
       this.validate();
       if (this.isValid() && this.formId) {
         this.formData.progress[this.formId] = true;
+
+        console.log('Saving the formData to the application:');
+        console.log(this.formData);
+
         await this.$store.dispatch('application/save', this.formData);
         this.logEventAfterSave();
         this.$router.push({ name: 'task-list' });
