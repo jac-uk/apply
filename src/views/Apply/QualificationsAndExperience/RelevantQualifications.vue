@@ -110,7 +110,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
-            @uploaded-full-path="setExemptionCertificateFullPath"
+            @uploaded-file-path="setExemptionCertificateFullPath"
           />
 
           <FileUpload
@@ -122,7 +122,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
-            @uploaded-full-path="setPracticingCertificateFullPath"
+            @uploaded-file-path="setPracticingCertificateFullPath"
           />
 
           <FormFieldError

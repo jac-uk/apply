@@ -114,7 +114,7 @@ export default {
       },
     },
   },
-  emits: ['update:modelValue', 'uploadedFullPath'],
+  emits: ['update:modelValue', 'uploadedFilePath'],
   data() {
     return {
       file: '',
@@ -216,12 +216,12 @@ export default {
       this.isUploading = true;
       const fileName = this.generateFileName(file.name);
 
-      const uploadedFullPath = `${this.path}/${fileName}`;
+      const uploadedFilePath = `${this.path}/${fileName}`;
       const storage = getStorage();
-      const fileRef = ref(storage , uploadedFullPath);
+      const fileRef = ref(storage , uploadedFilePath);
 
       console.log(`fileName: ${fileName}`);
-      console.log(`store to path/generatedFilename: ${uploadedFullPath}`);
+      console.log(`store to path/generatedFilename: ${uploadedFilePath}`);
 
       // Delete the current file in file storage
       if (this.haveFile && this.enableDelete) {
@@ -237,7 +237,7 @@ export default {
 
         console.log(`Donwload url: ${this.downloadUrl}`);
 
-        this.$emit('uploadedFilePath', uploadedFullPath);
+        this.$emit('uploadedFilePath', uploadedFilePath);
 
         return true;
       } catch (e) {
