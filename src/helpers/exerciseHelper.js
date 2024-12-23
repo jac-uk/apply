@@ -81,7 +81,7 @@ export {
 // application process config
 const APPLICATION_STEPS = [
   'registration',
-  'passedTests', 
+  'passedTests',
   EXERCISE_STAGE.SHORTLISTED,  // v1
   EXERCISE_STAGE.SELECTED,   // v1
   EXERCISE_STAGE.RECOMMENDED, // v1
@@ -450,8 +450,19 @@ function applicationParts(data) {
   return applicationPartsMap(data); // default to all relevant parts
 }
 // application parts in current stage (n.b. returns registration by default)
-function currentApplicationParts(data) {
-  if (data._applicationContent) {
+function currentApplicationParts(data, application) {
+  if (application && application.dateExtension && new Date(application.dateExtension).getTime() > Date.now()) {
+    if (data._applicationContent) {
+      const contentList = applicationContentList(data);
+      const currentIndex = contentList.findIndex(item => item.ref === currentState(data));
+      const currentAndPreviousParts = {};
+      for (let index = 0; index <= currentIndex; index++) {
+        const element = contentList[index];
+        element.parts.forEach(el => currentAndPreviousParts[el] = true);
+      }
+      return currentAndPreviousParts;
+    }
+  } else if (data._applicationContent) {
     return data._applicationContent[currentState(data)];
   }
   return applicationPartsMap(data); // default to all relevant parts
