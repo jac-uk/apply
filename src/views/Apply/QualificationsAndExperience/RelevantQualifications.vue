@@ -258,6 +258,13 @@ export default {
         });
       }
     },
+
+    // @TODO:
+    // - should be able to leave application record as it is in terms of how it stroes and retrieves the file
+    // name and uses it in FileUpload component. Just need to store the full path in the candidate record then if we're
+    // using this value for the file upload we split the path accordingly
+    // - note that the uploaded file isnt appearing when the page is refreshed!!
+
     setExemptionCertificateFullPath(value) {
       console.log(`setExemptionCertificateFullPath: ${value}`);
     },

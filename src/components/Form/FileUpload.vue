@@ -139,8 +139,15 @@ export default {
     },
   },
   async mounted () {
+
+    console.log('======== FileUpload ========');
+    console.log('-- Mounted:');
+    console.log(`-- this.fileName: ${this.fileName}`);
+
     if (typeof this.fileName === 'string' && this.fileName.length) {
       const isUploaded = await this.verifyFile(this.fileName);
+
+      console.log(`-- isUploaded: ${isUploaded}`);
 
       if (!isUploaded) {
         this.fileName = '';
@@ -220,8 +227,8 @@ export default {
       const storage = getStorage();
       const fileRef = ref(storage , uploadedFilePath);
 
-      console.log(`fileName: ${fileName}`);
-      console.log(`store to path/generatedFilename: ${uploadedFilePath}`);
+      console.log(`-- fileName: ${fileName}`);
+      console.log(`-- uploadedFilePath: ${uploadedFilePath}`);
 
       // Delete the current file in file storage
       if (this.haveFile && this.enableDelete) {
@@ -235,7 +242,7 @@ export default {
 
         this.downloadUrl = await getDownloadURL(fileRef);
 
-        console.log(`Donwload url: ${this.downloadUrl}`);
+        console.log(`-- downloadUrl: ${this.downloadUrl}`);
 
         this.$emit('uploadedFilePath', uploadedFilePath);
 
@@ -249,6 +256,9 @@ export default {
       }
     },
     async verifyFile(fileName) {
+
+      console.log('============= Verify file =============');
+
       if (!fileName) {
         return false;
       }
@@ -259,6 +269,8 @@ export default {
       // Check if file exists in storage
       try {
         this.downloadUrl = await getDownloadURL(fileRef);
+
+        console.log(`-- downloadUrl: ${this.downloadUrl}`);
 
         if (typeof downloadUrl === 'string' && this.downloadUrl.length) {
           return true;
