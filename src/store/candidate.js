@@ -113,19 +113,21 @@ export default {
     requiredFieldsComplete: (state) => () => {
       return clone(state.requiredFieldsComplete);
     },
-    exemptionCertificateFullPath: (state) => {
+    exemptionCertificateFullPath: (getters) => {
       // Get the lastest exemption certificate (full path) in the list, if it exists
-      if (state.relevantQualifications === null) return null;
-      if (_has(state.relevantQualifications, 'uploadedExemptionCertificates') && Array.isArray(state.relevantQualifications.uploadedExemptionCertificates) && state.relevantQualifications.uploadedExemptionCertificates.length > 0) {
-        return state.relevantQualifications.uploadedExemptionCertificates[state.relevantQualifications.uploadedExemptionCertificates.length - 1];
+      const relevantQualifications = getters.relevantQualifications();
+      if (relevantQualifications === null) return null;
+      if (_has(relevantQualifications, 'uploadedExemptionCertificates') && Array.isArray(relevantQualifications.uploadedExemptionCertificates) && relevantQualifications.uploadedExemptionCertificates.length > 0) {
+        return relevantQualifications.uploadedExemptionCertificates[relevantQualifications.uploadedExemptionCertificates.length - 1];
       }
       return null;
     },
-    practicingCertificateFullPath: (state) => {
+    practicingCertificateFullPath: (getters) => {
       // Get the lastest practicing certificate (full path) in the list, if it exists
-      if (state.relevantQualifications === null) return null;
-      if (_has(state.relevantQualifications, 'uploadedPracticingCertificates') && Array.isArray(state.relevantQualifications.uploadedPracticingCertificates) && state.relevantQualifications.uploadedPracticingCertificates.length > 0) {
-        return state.relevantQualifications.uploadedPracticingCertificates[state.relevantQualifications.uploadedPracticingCertificates.length - 1];
+      const relevantQualifications = getters.relevantQualifications();
+      if (relevantQualifications === null) return null;
+      if (_has(relevantQualifications, 'uploadedPracticingCertificates') && Array.isArray(relevantQualifications.uploadedPracticingCertificates) && relevantQualifications.uploadedPracticingCertificates.length > 0) {
+        return relevantQualifications.uploadedPracticingCertificates[relevantQualifications.uploadedPracticingCertificates.length - 1];
       }
       return null;
     },
