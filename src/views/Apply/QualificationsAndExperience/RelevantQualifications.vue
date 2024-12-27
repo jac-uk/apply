@@ -208,6 +208,15 @@ export default {
     console.log('exemptionCertificateSplitPath:');
     console.log(exemptionCertificateSplitPath);
 
+    console.log('exemptionCertificateSplitPath[0]:');
+    console.log(exemptionCertificateSplitPath[0]);
+
+    console.log('exemptionCertificateSplitPath[1]:');
+    console.log(exemptionCertificateSplitPath[1]);
+
+    // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
+    // Filename to FileUpload component: exemption-certificate.docx
+
     // if (!formData.exemptionCertificateFullPath && candidateRelevantQualifications?.qualifications) {
     //   formData.uploadedExemptionCertificate = candidateRelevantQualifications?.qualifications;
     // }
