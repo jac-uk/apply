@@ -142,6 +142,7 @@ export default {
 
     console.log('======== FileUpload ========');
     console.log('-- Mounted:');
+    console.log(`-- this.path: ${this.path}`);
     console.log(`-- this.fileName: ${this.fileName}`);
 
     if (typeof this.fileName === 'string' && this.fileName.length) {
