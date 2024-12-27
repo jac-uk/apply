@@ -191,6 +191,15 @@ export default {
       formData.qualifications = candidateRelevantQualifications?.qualifications;
     }
 
+    console.log('Application data:');
+    console.log(data);
+
+    console.log('candidateRelevantQualifications:');
+    console.log(candidateRelevantQualifications);
+
+    console.log('formData:');
+    console.log(formData);
+
     // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
 
     return {
@@ -260,10 +269,11 @@ export default {
     },
 
     // @TODO:
-    // - should be able to leave application record as it is in terms of how it stroes and retrieves the file
+    // - should be able to leave application record as it is in terms of how it stores and retrieves the file
     // name and uses it in FileUpload component. Just need to store the full path in the candidate record then if we're
     // using this value for the file upload we split the path accordingly
     // - note that the uploaded file isnt appearing when the page is refreshed!!
+    // **** CURRENTLY CHECKING THE DATA COMING INTO AND OUT OF THE FILE UPLOAD COMPONENT TO SEE WHY THE FILE NAME ISNT BEING DISPLAYED
 
     setExemptionCertificateFullPath(value) {
       console.log(`setExemptionCertificateFullPath: ${value}`);
