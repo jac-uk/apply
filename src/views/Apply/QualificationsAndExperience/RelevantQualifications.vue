@@ -156,6 +156,7 @@ import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
+import { getExemptionCertificateSplitPath } from '@/services/candidateService';
 
 export default {
   name: 'RelevantQualifications',
@@ -183,21 +184,38 @@ export default {
       progress: {},
     };
     const data = this.$store.getters['application/data'](defaults);
-    const formData = { ...defaults, ...data };
-
-    // check if candidate has filled relevant qualifications before
-    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
-    if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-      formData.qualifications = candidateRelevantQualifications?.qualifications;
-    }
 
     console.log('Application data:');
     console.log(data);
 
+    const formData = { ...defaults, ...data };
+
+    console.log('Initial formData:');
+    console.log(formData);
+
+    // check if candidate has filled relevant qualifications before
+    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+
     console.log('candidateRelevantQualifications:');
     console.log(candidateRelevantQualifications);
 
-    console.log('formData:');
+    if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
+      formData.qualifications = candidateRelevantQualifications?.qualifications;
+    }
+
+    // @TODO: Certificates
+    const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
+    console.log('exemptionCertificateSplitPath:');
+    console.log(exemptionCertificateSplitPath);
+
+    // if (!formData.exemptionCertificateFullPath && candidateRelevantQualifications?.qualifications) {
+    //   formData.uploadedExemptionCertificate = candidateRelevantQualifications?.qualifications;
+    // }
+    // if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
+    //   formData.qualifications = candidateRelevantQualifications?.qualifications;
+    // }
+
+    console.log('Eventual formData:');
     console.log(formData);
 
     // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
@@ -207,6 +225,11 @@ export default {
       formData: formData,
       repeatableFields: {
         Qualification,
+      },
+      // Save full path to candidate profile when updating certificates
+      updateCertificates: {
+        exemptionCertificateFullPath: null,
+        practicingCertificateFullPath: null,
       },
       errorMessage: '',
     };
@@ -266,6 +289,20 @@ export default {
           qualifications: this.formData.qualifications,
         });
       }
+      if (this.updateCertificates.exemptionCertificateFullPath) {
+        // Exemption certificate has been added/updated so update the candidate profile
+
+        // @TODO:
+        // - Save under 'relevantQualifications' as an array AND check that saving qualifications doesnt overwrite these file paths
+        // - latest one is the current one so only update it if it's different
+        // - use a helper function to save this filepath and retrieve it (get/set)
+        // - retrieve the filepath above when the page loads so it fetches the file from the candidate profile if its unset in the application!
+
+      }
+      if (this.updateCertificates.exemptionCertificateFullPath) {
+        // Practicing certificate has been added/updated so update the candidate profile
+
+      }
     },
 
     // @TODO:
@@ -277,9 +314,11 @@ export default {
 
     setExemptionCertificateFullPath(value) {
       console.log(`setExemptionCertificateFullPath: ${value}`);
+      this.updateCertificates.exemptionCertificateFullPath = value;
     },
     setPracticingCertificateFullPath(value) {
       console.log(`setPracticingCertificateFullPath: ${value}`);
+      this.updateCertificates.practicingCertificateFullPath = value;
     },
   },
 };
