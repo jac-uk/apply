@@ -115,7 +115,7 @@ export default {
     },
     exemptionCertificateFullPath: (getters) => {
       // Get the lastest exemption certificate (full path) in the list, if it exists
-      const relevantQualifications = getters.relevantQualifications();
+      const relevantQualifications = getters.relevantQualifications;
       if (relevantQualifications === null) return null;
       if (_has(relevantQualifications, 'uploadedExemptionCertificates') && Array.isArray(relevantQualifications.uploadedExemptionCertificates) && relevantQualifications.uploadedExemptionCertificates.length > 0) {
         return relevantQualifications.uploadedExemptionCertificates[relevantQualifications.uploadedExemptionCertificates.length - 1];
@@ -124,7 +124,7 @@ export default {
     },
     practicingCertificateFullPath: (getters) => {
       // Get the lastest practicing certificate (full path) in the list, if it exists
-      const relevantQualifications = getters.relevantQualifications();
+      const relevantQualifications = getters.relevantQualifications;
       if (relevantQualifications === null) return null;
       if (_has(relevantQualifications, 'uploadedPracticingCertificates') && Array.isArray(relevantQualifications.uploadedPracticingCertificates) && relevantQualifications.uploadedPracticingCertificates.length > 0) {
         return relevantQualifications.uploadedPracticingCertificates[relevantQualifications.uploadedPracticingCertificates.length - 1];
