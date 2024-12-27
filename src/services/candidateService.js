@@ -19,7 +19,7 @@ const makeFullName = (firstName, lastName) => {
 };
 
 const getExemptionCertificateSplitPath = () => {
-  const latestExemptionCertificateFullPath = store.getters['candidate/exemptionCertificateFullPath']();
+  const latestExemptionCertificateFullPath = store.getters['candidate/exemptionCertificateFullPath'];
 
   console.log(`latestExemptionCertificateFullPath: ${latestExemptionCertificateFullPath}`);
 
