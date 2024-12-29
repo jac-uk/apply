@@ -101,12 +101,24 @@
         <template v-if="notCompletedPupillage">
           <h2>As you did not complete pupillage, please provide a copy of your exemption and or practicing certificate</h2>
 
-          <FileUpload
+          <!-- <FileUpload
             id="exemption-certificate-upload"
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
+            label="Exemption certificate"
+            :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setExemptionCertificateFullPath"
+          /> -->
+
+          <FileUpload
+            id="exemption-certificate-upload"
+            ref="exemption-certificate"
+            v-model="formData.uploadedExemptionCertificate"
+            name="exemption-certificate"
+            :path="fileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
@@ -208,11 +220,34 @@ export default {
     console.log('exemptionCertificateSplitPath:');
     console.log(exemptionCertificateSplitPath);
 
+    // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
     console.log('exemptionCertificateSplitPath[0]:');
     console.log(exemptionCertificateSplitPath[0]);
 
+    // eg exemption-certificate.docx
     console.log('exemptionCertificateSplitPath[1]:');
     console.log(exemptionCertificateSplitPath[1]);
+
+    // Check if the application has the uploadedExemptionCertificate set and, if so, use it
+    //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
+    //    => const fileUploadPath = this.uploadPath;
+    // Else if its in the candidate record
+    //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
+    //    fileUploadPath = exemptionCertificateSplitPath[0]
+
+    let fileUploadPath = this.uploadPath;
+    if (!_has(this.formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate && exemptionCertificateSplitPath.length === 2) {
+
+      console.log('-- Getting exemption certificate from the candidate profile');
+
+      formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1];
+      fileUploadPath = exemptionCertificateSplitPath[0];
+    }
+    else {
+      console.log('-- NOT Getting exemption certificate from the candidate profile');
+    }
+
+    // @TODO: see above, its returning a promise instead of the value!!
 
     // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
     // Filename to FileUpload component: exemption-certificate.docx
@@ -241,6 +276,7 @@ export default {
         practicingCertificateFullPath: null,
       },
       errorMessage: '',
+      fileUploadPath: fileUploadPath,
     };
   },
   computed: {

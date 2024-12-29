@@ -3,7 +3,7 @@
  * @param {String} filePath
  * @returns Array
  */
-const splitFilePath = async (filePath) => {
+const splitFilePath = (filePath) => {
   const splitPath = [];
   if (filePath) {
     // Find the last occurrence of the slash
