@@ -236,6 +236,10 @@ export default {
     //    fileUploadPath = exemptionCertificateSplitPath[0]
 
     let fileUploadPath = this.uploadPath;
+
+    console.log(`-- this.formData['uploadedExemptionCertificate']: ${this.formData['uploadedExemptionCertificate']}`);
+    console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
+
     if ((!_has(this.formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
 
       console.log('-- Getting exemption certificate from the candidate profile');
