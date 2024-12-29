@@ -237,7 +237,7 @@ export default {
 
     let fileUploadPath = this.uploadPath;
 
-    console.log(`-- this.formData['uploadedExemptionCertificate']: ${this.formData['uploadedExemptionCertificate']}`);
+    console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
     console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
 
     if ((!_has(this.formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
