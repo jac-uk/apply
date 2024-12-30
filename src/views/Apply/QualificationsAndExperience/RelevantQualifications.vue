@@ -101,7 +101,7 @@
         <template v-if="notCompletedPupillage">
           <h2>As you did not complete pupillage, please provide a copy of your exemption and or practicing certificate</h2>
 
-          <!-- <FileUpload
+          <FileUpload
             id="exemption-certificate-upload"
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
@@ -110,7 +110,6 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
-            @uploaded-file-path="setExemptionCertificateFullPath"
           />
 
           <FileUpload
@@ -122,31 +121,6 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
-            @uploaded-file-path="setPracticingCertificateFullPath"
-          /> -->
-
-          <FileUpload
-            id="exemption-certificate-upload"
-            ref="exemption-certificate"
-            v-model="formData.uploadedExemptionCertificate"
-            name="exemption-certificate"
-            :path="exemptionCertFileUploadPath"
-            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
-            label="Exemption certificate"
-            :required="isPupillageCertificateRequired"
-            @uploaded-file-path="setExemptionCertificateFullPath"
-          />
-
-          <FileUpload
-            id="practicing-certificate-upload"
-            ref="practicing-certificate"
-            v-model="formData.uploadedPracticingCertificate"
-            name="practicing-certificate"
-            :path="practicingCertFileUploadPath"
-            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
-            label="Practicing certificate"
-            :required="isPupillageCertificateRequired"
-            @uploaded-file-path="setPracticingCertificateFullPath"
           />
 
           <FormFieldError
@@ -180,7 +154,6 @@ import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
-import { getExemptionCertificateSplitPath, getPracticingCertificateSplitPath } from '@/services/candidateService';
 
 export default {
   name: 'RelevantQualifications',
@@ -208,116 +181,20 @@ export default {
       progress: {},
     };
     const data = this.$store.getters['application/data'](defaults);
-
-    console.log('Application data:');
-    console.log(data);
-
     const formData = { ...defaults, ...data };
-
-    console.log('Initial formData:');
-    console.log(formData);
 
     // check if candidate has filled relevant qualifications before
     const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
-
-    console.log('candidateRelevantQualifications:');
-    console.log(candidateRelevantQualifications);
-
     if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
       formData.qualifications = candidateRelevantQualifications?.qualifications;
     }
-
-    // @TODO: Certificates
-    const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
-    console.log('exemptionCertificateSplitPath:');
-    console.log(exemptionCertificateSplitPath);
-
-    // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
-    console.log('exemptionCertificateSplitPath[0]:');
-    console.log(exemptionCertificateSplitPath[0]);
-
-    // eg exemption-certificate.docx
-    console.log('exemptionCertificateSplitPath[1]:');
-    console.log(exemptionCertificateSplitPath[1]);
-
-    const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
-    console.log('practicingCertificateSplitPath:');
-    console.log(practicingCertificateSplitPath);
-
-    // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
-    console.log('practicingCertificateSplitPath[0]:');
-    console.log(practicingCertificateSplitPath[0]);
-
-    // eg practicing-certificate.docx
-    console.log('practicingCertificateSplitPath[1]:');
-    console.log(practicingCertificateSplitPath[1]);
-
-    // Check if the application has the uploadedExemptionCertificate set and, if so, use it
-    //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
-    //    => const fileUploadPath = this.uploadPath;
-    // Else if its in the candidate record
-    //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
-    //    fileUploadPath = exemptionCertificateSplitPath[0]
-
-    let exemptionCertFileUploadPath = this.uploadPath;
-    let practicingCertFileUploadPath = this.uploadPath;
-
-    // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
-    // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
-
-    if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
-
-      console.log('-- Getting exemption certificate from the CANDIDATE PROFILE');
-
-      formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
-      exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
-    }
-    else {
-      console.log('-- Getting exemption certificate from the APPLICATION');
-    }
-
-    if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
-
-      console.log('-- Getting practicing certificate from the CANDIDATE PROFILE');
-
-      formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
-      practicingCertFileUploadPath = practicingCertificateSplitPath[0];
-    }
-    else {
-      console.log('-- Getting practicing certificate from the APPLICATION');
-    }
-
-    // @TODO: see above, its returning a promise instead of the value!!
-
-    // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
-    // Filename to FileUpload component: exemption-certificate.docx
-
-    // if (!formData.exemptionCertificateFullPath && candidateRelevantQualifications?.qualifications) {
-    //   formData.uploadedExemptionCertificate = candidateRelevantQualifications?.qualifications;
-    // }
-    // if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-    //   formData.qualifications = candidateRelevantQualifications?.qualifications;
-    // }
-
-    console.log('Eventual formData:');
-    console.log(formData);
-
-    // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
-
     return {
       formId: 'relevantQualifications',
       formData: formData,
       repeatableFields: {
         Qualification,
       },
-      // Save full path to candidate profile when updating certificates
-      updateCertificates: {
-        exemptionCertificateFullPath: null,
-        practicingCertificateFullPath: null,
-      },
       errorMessage: '',
-      exemptionCertFileUploadPath: exemptionCertFileUploadPath,
-      practicingCertFileUploadPath: practicingCertFileUploadPath,
     };
   },
   computed: {
@@ -368,43 +245,11 @@ export default {
       }
       this.save();
       if (this.formData.qualifications) {
-
-        // @TODO: Save the certs below too!
-
         await this.$store.dispatch('candidate/saveRelevantQualifications', {
           qualifications: this.formData.qualifications,
         });
       }
-      if (this.updateCertificates.exemptionCertificateFullPath) {
-        // Exemption certificate has been added/updated so update the candidate profile
 
-        // @TODO:
-        // - Save under 'relevantQualifications' as an array AND check that saving qualifications doesnt overwrite these file paths
-        // - latest one is the current one so only update it if it's different
-        // - use a helper function to save this filepath and retrieve it (get/set)
-        // - retrieve the filepath above when the page loads so it fetches the file from the candidate profile if its unset in the application!
-
-      }
-      if (this.updateCertificates.exemptionCertificateFullPath) {
-        // Practicing certificate has been added/updated so update the candidate profile
-
-      }
-    },
-
-    // @TODO:
-    // - should be able to leave application record as it is in terms of how it stores and retrieves the file
-    // name and uses it in FileUpload component. Just need to store the full path in the candidate record then if we're
-    // using this value for the file upload we split the path accordingly
-    // - note that the uploaded file isnt appearing when the page is refreshed!!
-    // **** CURRENTLY CHECKING THE DATA COMING INTO AND OUT OF THE FILE UPLOAD COMPONENT TO SEE WHY THE FILE NAME ISNT BEING DISPLAYED
-
-    setExemptionCertificateFullPath(value) {
-      console.log(`setExemptionCertificateFullPath: ${value}`);
-      this.updateCertificates.exemptionCertificateFullPath = value;
-    },
-    setPracticingCertificateFullPath(value) {
-      console.log(`setPracticingCertificateFullPath: ${value}`);
-      this.updateCertificates.practicingCertificateFullPath = value;
     },
   },
 };
