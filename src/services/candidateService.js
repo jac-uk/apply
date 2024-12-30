@@ -21,7 +21,7 @@ const makeFullName = (firstName, lastName) => {
 const getExemptionCertificateSplitPath = () => {
   const latestExemptionCertificateFullPath = store.getters['candidate/exemptionCertificateFullPath'];
 
-  console.log(`latestExemptionCertificateFullPath: ${latestExemptionCertificateFullPath}`);
+  console.log(`CS latestExemptionCertificateFullPath: ${latestExemptionCertificateFullPath}`);
 
   return latestExemptionCertificateFullPath ? splitFilePath(latestExemptionCertificateFullPath) : [];
 };
@@ -29,7 +29,7 @@ const getExemptionCertificateSplitPath = () => {
 const getPracticingCertificateSplitPath = () => {
   const latestPracticingCertificateFullPath = store.getters['candidate/practicingCertificateFullPath'];
 
-  console.log(`latestPracticingCertificateFullPath: ${latestPracticingCertificateFullPath}`);
+  console.log(`CS latestPracticingCertificateFullPath: ${latestPracticingCertificateFullPath}`);
 
   return latestPracticingCertificateFullPath ? splitFilePath(latestPracticingCertificateFullPath) : [];
 };

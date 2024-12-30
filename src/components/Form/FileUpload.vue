@@ -141,14 +141,14 @@ export default {
   async mounted () {
 
     console.log('======== FileUpload ========');
-    console.log('-- Mounted:');
-    console.log(`-- this.path: ${this.path}`);
-    console.log(`-- this.fileName: ${this.fileName}`);
+    console.log('-- FU Mounted:');
+    console.log(`-- FU this.path: ${this.path}`);
+    console.log(`-- FU this.fileName: ${this.fileName}`);
 
     if (typeof this.fileName === 'string' && this.fileName.length) {
       const isUploaded = await this.verifyFile(this.fileName);
 
-      console.log(`-- isUploaded: ${isUploaded}`);
+      console.log(`-- FU isUploaded: ${isUploaded}`);
 
       if (!isUploaded) {
         this.fileName = '';
@@ -201,7 +201,7 @@ export default {
     },
     async upload(file) {
 
-      console.log('============= Uploading file =============');
+      console.log('============= FU Uploading file =============');
 
       // @todo return more useful error messages
       if (!file) {
@@ -228,8 +228,8 @@ export default {
       const storage = getStorage();
       const fileRef = ref(storage , uploadedFilePath);
 
-      console.log(`-- fileName: ${fileName}`);
-      console.log(`-- uploadedFilePath: ${uploadedFilePath}`);
+      console.log(`-- FU fileName: ${fileName}`);
+      console.log(`-- FU uploadedFilePath: ${uploadedFilePath}`);
 
       // Delete the current file in file storage
       if (this.haveFile && this.enableDelete) {
@@ -243,7 +243,7 @@ export default {
 
         this.downloadUrl = await getDownloadURL(fileRef);
 
-        console.log(`-- downloadUrl: ${this.downloadUrl}`);
+        console.log(`-- FU downloadUrl: ${this.downloadUrl}`);
 
         this.$emit('uploadedFilePath', uploadedFilePath);
 
@@ -258,7 +258,7 @@ export default {
     },
     async verifyFile(fileName) {
 
-      console.log('============= Verify file =============');
+      console.log('============= FU Verify file =============');
 
       if (!fileName) {
         return false;
@@ -271,7 +271,7 @@ export default {
       try {
         this.downloadUrl = await getDownloadURL(fileRef);
 
-        console.log(`-- downloadUrl: ${this.downloadUrl}`);
+        console.log(`-- FU downloadUrl: ${this.downloadUrl}`);
 
         if (typeof downloadUrl === 'string' && this.downloadUrl.length) {
           return true;
