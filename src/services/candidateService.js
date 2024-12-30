@@ -26,9 +26,18 @@ const getExemptionCertificateSplitPath = () => {
   return latestExemptionCertificateFullPath ? splitFilePath(latestExemptionCertificateFullPath) : [];
 };
 
+const getPracticingCertificateSplitPath = () => {
+  const latestPracticingCertificateFullPath = store.getters['candidate/practicingCertificateFullPath'];
+
+  console.log(`latestPracticingCertificateFullPath: ${latestPracticingCertificateFullPath}`);
+
+  return latestPracticingCertificateFullPath ? splitFilePath(latestPracticingCertificateFullPath) : [];
+};
+
 export {
   createCandidate,
   saveCandidate,
   makeFullName,
-  getExemptionCertificateSplitPath
+  getExemptionCertificateSplitPath,
+  getPracticingCertificateSplitPath
 };

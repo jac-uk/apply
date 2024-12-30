@@ -111,6 +111,18 @@
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
             @uploaded-file-path="setExemptionCertificateFullPath"
+          />
+
+          <FileUpload
+            id="practicing-certificate-upload"
+            ref="practicing-certificate"
+            v-model="formData.uploadedPracticingCertificate"
+            name="practicing-certificate"
+            :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
+            label="Practicing certificate"
+            :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setPracticingCertificateFullPath"
           /> -->
 
           <FileUpload
@@ -118,7 +130,7 @@
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
-            :path="fileUploadPath"
+            :path="exemptionCertFileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
@@ -130,7 +142,7 @@
             ref="practicing-certificate"
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
-            :path="uploadPath"
+            :path="practicingCertFileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
@@ -168,7 +180,7 @@ import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
-import { getExemptionCertificateSplitPath } from '@/services/candidateService';
+import { getExemptionCertificateSplitPath, getPracticingCertificateSplitPath } from '@/services/candidateService';
 
 export default {
   name: 'RelevantQualifications',
@@ -228,6 +240,18 @@ export default {
     console.log('exemptionCertificateSplitPath[1]:');
     console.log(exemptionCertificateSplitPath[1]);
 
+    const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
+    console.log('practicingCertificateSplitPath:');
+    console.log(practicingCertificateSplitPath);
+
+    // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
+    console.log('practicingCertificateSplitPath[0]:');
+    console.log(practicingCertificateSplitPath[0]);
+
+    // eg practicing-certificate.docx
+    console.log('practicingCertificateSplitPath[1]:');
+    console.log(practicingCertificateSplitPath[1]);
+
     // Check if the application has the uploadedExemptionCertificate set and, if so, use it
     //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
     //    => const fileUploadPath = this.uploadPath;
@@ -235,20 +259,32 @@ export default {
     //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
     //    fileUploadPath = exemptionCertificateSplitPath[0]
 
-    let fileUploadPath = this.uploadPath;
+    let exemptionCertFileUploadPath = this.uploadPath;
+    let practicingCertFileUploadPath = this.uploadPath;
 
-    console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
-    console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
+    // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
+    // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
 
     if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
 
-      console.log('-- Getting exemption certificate from the candidate profile');
+      console.log('-- Getting exemption certificate from the CANDIDATE PROFILE');
 
-      formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1];
-      fileUploadPath = exemptionCertificateSplitPath[0];
+      formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
+      exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
     }
     else {
-      console.log('-- NOT Getting exemption certificate from the candidate profile');
+      console.log('-- Getting exemption certificate from the APPLICATION');
+    }
+
+    if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
+
+      console.log('-- Getting practicing certificate from the CANDIDATE PROFILE');
+
+      formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
+      practicingCertFileUploadPath = practicingCertificateSplitPath[0];
+    }
+    else {
+      console.log('-- Getting practicing certificate from the APPLICATION');
     }
 
     // @TODO: see above, its returning a promise instead of the value!!
@@ -280,7 +316,8 @@ export default {
         practicingCertificateFullPath: null,
       },
       errorMessage: '',
-      fileUploadPath: fileUploadPath,
+      exemptionCertFileUploadPath: exemptionCertFileUploadPath,
+      practicingCertFileUploadPath: practicingCertFileUploadPath,
     };
   },
   computed: {
