@@ -356,14 +356,14 @@ export default {
         console.log(this.formData.qualifications);
         // @TODO: Save the certs below too!
 
-        const newRelevantQualifications = {
-          qualifications: this.formData.qualifications,
-        };
+        // const newRelevantQualifications = {
+        //   qualifications: this.formData.qualifications,
+        // };
 
-        const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+        // const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
 
-        console.log('-- RQ candidateRelevantQualifications:');
-        console.log(candidateRelevantQualifications);
+        // console.log('-- RQ candidateRelevantQualifications:');
+        // console.log(candidateRelevantQualifications);
 
         // @TODO: ENSURE WHEN THE UPDATE HAPPENS ITS GETTING THE QUALIFICATIONS FROM formData AND THE CERTS FROM HERE
 

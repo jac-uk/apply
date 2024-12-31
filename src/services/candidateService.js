@@ -37,6 +37,10 @@ const getPracticingCertificateSplitPath = () => {
 
 const updateRelevantQualifications = async (newCertificateFullPaths, newQualifications = null) {
   const relevantQualififcations = store.getters['candidate/relevantQualifications']();
+
+  console.log('-- CS candidateRelevantQualifications:');
+  console.log(candidateRelevantQualifications);
+
   if (newQualifications) {
     relevantQualififcations.qualifications = newQualifications;
   }
