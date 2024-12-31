@@ -35,7 +35,7 @@ const getPracticingCertificateSplitPath = () => {
   return latestPracticingCertificateFullPath ? splitFilePath(latestPracticingCertificateFullPath) : [];
 };
 
-const updateRelevantQualifications = async (newCertificateFullPaths, newQualifications = null) {
+const updateRelevantQualifications = async (newCertificateFullPaths, newQualifications = null) => {
   const relevantQualififcations = store.getters['candidate/relevantQualifications']();
 
   console.log('-- CS candidateRelevantQualifications:');
@@ -89,14 +89,13 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
     await store.dispatch('candidate/saveRelevantQualifications', relevantQualififcations);
   }
 
-
-
-}
+};
 
 export {
   createCandidate,
   saveCandidate,
   makeFullName,
   getExemptionCertificateSplitPath,
-  getPracticingCertificateSplitPath
+  getPracticingCertificateSplitPath,
+  updateRelevantQualifications
 };
