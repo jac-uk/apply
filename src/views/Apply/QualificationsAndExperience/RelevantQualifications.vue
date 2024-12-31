@@ -239,39 +239,42 @@ export default {
     // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
     // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
 
-    if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
-
+    // EXEMPTION CERTIFICATE
+    if (_has(formData, 'uploadedExemptionCertificate') && formData.uploadedExemptionCertificate) {
+      console.log('-- RQ Getting exemption certificate from the APPLICATION');
+    }
+    else if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
       console.log('-- RQ Getting exemption certificate from the CANDIDATE PROFILE');
+
+      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
       //formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
       exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
     }
     else {
-      console.log('-- RQ Getting exemption certificate from the APPLICATION');
+      console.log('-- RQ NOT getting exemption certificate from ANYWHERE');
     }
 
-    if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
-
+    // PRACTICING CERTIFICATE
+    if (_has(formData, 'uploadedPracticingCertificate') && formData.uploadedPracticingCertificate) {
+      console.log('-- RQ Getting practicing certificate from the APPLICATION');
+    }
+    else if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
       console.log('-- RQ Getting practicing certificate from the CANDIDATE PROFILE');
+
+      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
       //formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
       practicingCertFileUploadPath = practicingCertificateSplitPath[0];
     }
     else {
-      console.log('-- RQ Getting practicing certificate from the APPLICATION');
+      console.log('-- RQ NOT getting practicing certificate from ANYWHERE');
     }
 
     // @TODO: see above, its returning a promise instead of the value!!
 
     // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
     // Filename to FileUpload component: exemption-certificate.docx
-
-    // if (!formData.exemptionCertificateFullPath && candidateRelevantQualifications?.qualifications) {
-    //   formData.uploadedExemptionCertificate = candidateRelevantQualifications?.qualifications;
-    // }
-    // if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-    //   formData.qualifications = candidateRelevantQualifications?.qualifications;
-    // }
 
     console.log('-- RQ Eventual formData:');
     console.log(formData);
@@ -351,6 +354,7 @@ export default {
       }
       if (this.updateCertificates.exemptionCertificateFullPath) {
         // Exemption certificate has been added/updated so update the candidate profile
+        console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
 
         // @TODO:
         // - Save under 'relevantQualifications' as an array AND check that saving qualifications doesnt overwrite these file paths
@@ -359,8 +363,9 @@ export default {
         // - retrieve the filepath above when the page loads so it fetches the file from the candidate profile if its unset in the application!
 
       }
-      if (this.updateCertificates.exemptionCertificateFullPath) {
+      if (this.updateCertificates.practicingCertificateFullPath) {
         // Practicing certificate has been added/updated so update the candidate profile
+        console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
 
       }
     },
