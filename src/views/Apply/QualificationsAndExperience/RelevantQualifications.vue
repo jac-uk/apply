@@ -354,85 +354,14 @@ export default {
         console.log('-- RQ Process QUALIFICATIONS!!');
         console.log('this.formData.qualifications:');
         console.log(this.formData.qualifications);
-        // @TODO: Save the certs below too!
-
-        // const newRelevantQualifications = {
-        //   qualifications: this.formData.qualifications,
-        // };
-
-        // const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
-
-        // console.log('-- RQ candidateRelevantQualifications:');
-        // console.log(candidateRelevantQualifications);
-
-        // @TODO: ENSURE WHEN THE UPDATE HAPPENS ITS GETTING THE QUALIFICATIONS FROM formData AND THE CERTS FROM HERE
-
-        // if (this.updateCertificates.exemptionCertificateFullPath) {
-        //   // Exemption certificate has been added/updated so update the candidate profile
-        //   console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
-
-        //   if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
-
-        //     console.log('-- RQ candidateRelevantQualifications HAS uploadedExemptionCertificates array');
-
-        //     if (candidateRelevantQualifications.uploadedExemptionCertificates.length > 0) {
-
-        //       console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is not empty so checking last entry');
-
-        //       const latestEntry = candidateRelevantQualifications.uploadedExemptionCertificates[candidateRelevantQualifications.uploadedExemptionCertificates.length - 1];
-
-        //       console.log('-- RQ last entry:');
-        //       console.log(latestEntry);
-
-        //       if (latestEntry !== this.updateCertificates.exemptionCertificateFullPath) {
-
-        //         console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
-
-        //         candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
-        //       }
-        //       else {
-        //         console.log('-- RQ last entry IS EQUAL so NOT updating');
-        //       }
-        //     }
-        //     else {
-
-        //       console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
-
-        //       candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
-        //     }
-        //   }
-        //   else {
-
-        //     console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
-
-        //     candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
-        //   }
-
-        // }
-        // if (this.updateCertificates.practicingCertificateFullPath) {
-        //   // Practicing certificate has been added/updated so update the candidate profile
-        //   console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
-
-        // }
-
-        // if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
-        //   newRelevantQualifications.uploadedExemptionCertificates = candidateRelevantQualifications.uploadedExemptionCertificates;
-        // }
-        // if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates')) {
-        //   newRelevantQualifications.uploadedPracticingCertificates = candidateRelevantQualifications.uploadedPracticingCertificates;
-        // }
-        // await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
 
         await updateRelevantQualifications(this.updateCertificates, this.formData.qualifications);
+
+        // @TODO: get the loading of the cert working from the candidate profile (see stuff commented out above!)
+        // - when testing switch between .docx and .doc files!
+
       }
     },
-
-    // @TODO:
-    // - should be able to leave application record as it is in terms of how it stores and retrieves the file
-    // name and uses it in FileUpload component. Just need to store the full path in the candidate record then if we're
-    // using this value for the file upload we split the path accordingly
-    // - note that the uploaded file isnt appearing when the page is refreshed!!
-    // **** CURRENTLY CHECKING THE DATA COMING INTO AND OUT OF THE FILE UPLOAD COMPONENT TO SEE WHY THE FILE NAME ISNT BEING DISPLAYED
 
     setExemptionCertificateFullPath(value) {
       console.log(`-- RQ setExemptionCertificateFullPath: ${value}`);
