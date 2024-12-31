@@ -356,15 +356,54 @@ export default {
         console.log(this.formData.qualifications);
         // @TODO: Save the certs below too!
 
-        await this.$store.dispatch('candidate/saveRelevantQualifications', {
+        const newRelevantQualifications = {
           qualifications: this.formData.qualifications,
-        });
-      }
-      if (this.updateCertificates.exemptionCertificateFullPath) {
-        // Exemption certificate has been added/updated so update the candidate profile
-        console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
+        };
 
-        // @TODO: Get the relevantQualification details then check/retrieve the uploadedExemptionCewrtificates and append
+        const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+
+        if (this.updateCertificates.exemptionCertificateFullPath) {
+          // Exemption certificate has been added/updated so update the candidate profile
+          console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
+
+          if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
+
+            console.log('-- RQ candidateRelevantQualifications HAS uploadedExemptionCertificates array');
+
+            if (candidateRelevantQualifications.uploadedExemptionCertificates.length > 0) {
+
+              console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is not empty so checking last entry');
+
+              const latestEntry = candidateRelevantQualifications.uploadedExemptionCertificates[candidateRelevantQualifications.uploadedExemptionCertificates.length - 1];
+
+              console.log('-- RQ last entry:');
+              console.log(latestEntry);
+
+              if (latestEntry !== this.updateCertificates.exemptionCertificateFullPath) {
+
+                console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
+
+                candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
+              }
+              else {
+                console.log('-- RQ last entry IS EQUAL so NOT updating');
+              }
+            }
+            else {
+
+              console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
+
+              candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+            }
+          }
+          else {
+
+            console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
+
+            candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+          }
+
+        // @TODO: Get the relevantQualification details then check/retrieve the uploadedExemptionCertificates and append
         // this new filepath to it if it's not the latest one on the stack then call the following action in
         // candidates store: saveRelevantQualifications
 
@@ -374,11 +413,17 @@ export default {
         // - use a helper function to save this filepath and retrieve it (get/set)
         // - retrieve the filepath above when the page loads so it fetches the file from the candidate profile if its unset in the application!
 
-      }
-      if (this.updateCertificates.practicingCertificateFullPath) {
-        // Practicing certificate has been added/updated so update the candidate profile
-        console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
+        }
+        if (this.updateCertificates.practicingCertificateFullPath) {
+          // Practicing certificate has been added/updated so update the candidate profile
+          console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
 
+        }
+
+        // await this.$store.dispatch('candidate/saveRelevantQualifications', {
+        //   qualifications: this.formData.qualifications,
+        // });
+        await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
       }
     },
 
