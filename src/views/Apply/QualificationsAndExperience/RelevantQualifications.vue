@@ -388,7 +388,7 @@ export default {
 
                 console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
 
-                //candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
+                candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
               }
               else {
                 console.log('-- RQ last entry IS EQUAL so NOT updating');
@@ -398,25 +398,15 @@ export default {
 
               console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
 
-              //candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+              candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
             }
           }
           else {
 
             console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
 
-            //candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+            candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
           }
-
-        // @TODO: Get the relevantQualification details then check/retrieve the uploadedExemptionCertificates and append
-        // this new filepath to it if it's not the latest one on the stack then call the following action in
-        // candidates store: saveRelevantQualifications
-
-        // @TODO:
-        // - Save under 'relevantQualifications' as an array AND check that saving qualifications doesnt overwrite these file paths
-        // - latest one is the current one so only update it if it's different
-        // - use a helper function to save this filepath and retrieve it (get/set)
-        // - retrieve the filepath above when the page loads so it fetches the file from the candidate profile if its unset in the application!
 
         }
         if (this.updateCertificates.practicingCertificateFullPath) {
@@ -428,6 +418,13 @@ export default {
         // await this.$store.dispatch('candidate/saveRelevantQualifications', {
         //   qualifications: this.formData.qualifications,
         // });
+
+        if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates') {
+          newRelevantQualifications.uploadedExemptionCertificates = candidateRelevantQualifications.uploadedExemptionCertificates;
+        }
+        if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates') {
+          newRelevantQualifications.uploadedPracticingCertificates = candidateRelevantQualifications.uploadedPracticingCertificates;
+        }
         await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
       }
     },
