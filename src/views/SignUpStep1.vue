@@ -77,7 +77,7 @@ import TextField from '@/components/Form/TextField.vue';
 import Password from '@/components/Form/Password.vue';
 import ChangeEmailMessage from '@/components/Page/ChangeEmailMessage.vue';
 import { createCandidate } from '@/services/candidateService';
-import { createAuthUser, sendEmailVerificationLink } from '@/services/authService';
+import { createAuthUser } from '@/services/authService';
 import ActionButton from '@jac-uk/jac-kit/draftComponents/ActionButton.vue';
 
 export default {
