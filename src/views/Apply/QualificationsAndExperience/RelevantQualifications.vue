@@ -110,6 +110,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setExemptionCertificateFullPath"
           />
 
           <FileUpload
@@ -121,6 +122,7 @@
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setPracticingCertificateFullPath"
           />
 
           <FormFieldError
@@ -344,6 +346,9 @@ export default {
         }
       }
       this.save();
+
+      console.log('-- RQ Process qualifications after save!!');
+
       if (this.formData.qualifications) {
 
         // @TODO: Save the certs below too!
@@ -355,6 +360,10 @@ export default {
       if (this.updateCertificates.exemptionCertificateFullPath) {
         // Exemption certificate has been added/updated so update the candidate profile
         console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
+
+        // @TODO: Get the relevantQualification details then check/retrieve the uploadedExemptionCewrtificates and append
+        // this new filepath to it if it's not the latest one on the stack then call the following action in
+        // candidates store: saveRelevantQualifications
 
         // @TODO:
         // - Save under 'relevantQualifications' as an array AND check that saving qualifications doesnt overwrite these file paths
