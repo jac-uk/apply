@@ -362,7 +362,7 @@ export default {
 
         const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
 
-        console.log('candidateRelevantQualifications:');
+        console.log('-- RQ candidateRelevantQualifications:');
         console.log(candidateRelevantQualifications);
 
         // @TODO: ENSURE WHEN THE UPDATE HAPPENS ITS GETTING THE QUALIFICATIONS FROM formData AND THE CERTS FROM HERE
@@ -388,7 +388,7 @@ export default {
 
                 console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
 
-                candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
+                //candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
               }
               else {
                 console.log('-- RQ last entry IS EQUAL so NOT updating');
@@ -398,14 +398,14 @@ export default {
 
               console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
 
-              candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+              //candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
             }
           }
           else {
 
             console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
 
-            candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+            //candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
           }
 
         // @TODO: Get the relevantQualification details then check/retrieve the uploadedExemptionCertificates and append
