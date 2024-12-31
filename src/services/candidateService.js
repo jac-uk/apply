@@ -50,7 +50,10 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
   if (newQualifications) {
     relevantQualififcations.qualifications = newQualifications;
   }
-  if (_has(newCertificateFullPaths, 'exemptionCertificateFullPath' && newCertificateFullPaths.exemptionCertificateFullPath)) {
+
+  // @TODO: ADD THE PRACTICING ONE BELOW TOO!
+
+  if (_has(newCertificateFullPaths, 'exemptionCertificateFullPath') && newCertificateFullPaths.exemptionCertificateFullPath) {
 
     // Exemption certificate has been added/updated so update the candidate profile
     console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
