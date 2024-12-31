@@ -148,8 +148,6 @@ export default {
       await createCandidate({
         email: this.formData.email,
       });
-      // Send email verification
-      await sendEmailVerificationLink();
 
       this.$router.push({ name: 'verify-email-request' });
       return true;
