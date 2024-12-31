@@ -362,6 +362,11 @@ export default {
 
         const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
 
+        console.log('candidateRelevantQualifications:');
+        console.log(candidateRelevantQualifications);
+
+        // @TODO: ENSURE WHEN THE UPDATE HAPPENS ITS GETTING THE QUALIFICATIONS FROM formData AND THE CERTS FROM HERE
+
         if (this.updateCertificates.exemptionCertificateFullPath) {
           // Exemption certificate has been added/updated so update the candidate profile
           console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
