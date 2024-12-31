@@ -39,7 +39,7 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
   const relevantQualififcations = store.getters['candidate/relevantQualifications']();
 
   console.log('-- CS candidateRelevantQualifications:');
-  console.log(candidateRelevantQualifications);
+  console.log(relevantQualififcations);
 
   if (newQualifications) {
     relevantQualififcations.qualifications = newQualifications;
