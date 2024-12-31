@@ -51,8 +51,7 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
     relevantQualififcations.qualifications = newQualifications;
   }
 
-  // @TODO: ADD THE PRACTICING ONE BELOW TOO!
-
+  // EXEMPTION CERTIFICATE
   if (_has(newCertificateFullPaths, 'exemptionCertificateFullPath') && newCertificateFullPaths.exemptionCertificateFullPath) {
 
     // Exemption certificate has been added/updated so update the candidate profile
@@ -94,9 +93,53 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
 
       relevantQualififcations.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
     }
-
-    await store.dispatch('candidate/saveRelevantQualifications', relevantQualififcations);
   }
+
+  // PRACTICING CERTIFICATE
+  if (_has(newCertificateFullPaths, 'practicingCertificateFullPath') && newCertificateFullPaths.practicingCertificateFullPath) {
+
+    // Practicing certificate has been added/updated so update the candidate profile
+    console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
+
+    if (_has(relevantQualififcations, 'uploadedPracticingCertificates')) {
+
+      console.log('-- RQ candidateRelevantQualifications HAS uploadedPracticingCertificates array');
+
+      if (relevantQualififcations.uploadedPracticingCertificates.length > 0) {
+
+        console.log('-- RQ candidateRelevantQualifications.uploadedPracticingCertificates array is not empty so checking last entry');
+
+        const latestEntry = relevantQualififcations.uploadedPracticingCertificates[relevantQualififcations.uploadedPracticingCertificates.length - 1];
+
+        console.log('-- RQ last entry:');
+        console.log(latestEntry);
+
+        if (latestEntry !== newCertificateFullPaths.practicingCertificateFullPath) {
+
+          console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
+
+          relevantQualififcations.uploadedPracticingCertificates.push(newCertificateFullPaths.practicingCertificateFullPath);
+        }
+        else {
+          console.log('-- RQ last entry IS EQUAL so NOT updating');
+        }
+      }
+      else {
+
+        console.log('-- RQ candidateRelevantQualifications.uploadedPracticingCertificates array is empty so populate');
+
+        relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
+      }
+    }
+    else {
+
+      console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedPracticingCertificates array so create it and populate');
+
+      relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
+    }
+  }
+
+  await store.dispatch('candidate/saveRelevantQualifications', relevantQualififcations);
 
 };
 
