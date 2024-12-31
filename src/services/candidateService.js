@@ -41,6 +41,12 @@ const updateRelevantQualifications = async (newCertificateFullPaths, newQualific
   console.log('-- CS candidateRelevantQualifications:');
   console.log(relevantQualififcations);
 
+  console.log('-- CS newCertificateFullPaths:');
+  console.log(newCertificateFullPaths);
+
+  console.log('-- CS newQualifications:');
+  console.log(newQualifications);
+
   if (newQualifications) {
     relevantQualififcations.qualifications = newQualifications;
   }
