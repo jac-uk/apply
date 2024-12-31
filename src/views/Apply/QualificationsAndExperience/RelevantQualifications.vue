@@ -419,10 +419,10 @@ export default {
         //   qualifications: this.formData.qualifications,
         // });
 
-        if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates') {
+        if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
           newRelevantQualifications.uploadedExemptionCertificates = candidateRelevantQualifications.uploadedExemptionCertificates;
         }
-        if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates') {
+        if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates')) {
           newRelevantQualifications.uploadedPracticingCertificates = candidateRelevantQualifications.uploadedPracticingCertificates;
         }
         await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
