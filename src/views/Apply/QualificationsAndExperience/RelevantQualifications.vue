@@ -423,7 +423,7 @@ export default {
         // }
         // await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
 
-        await updateRelevantQualifications(this.updateCertificatesthis.formData.qualifications);
+        await updateRelevantQualifications(this.updateCertificatesthis, this.formData.qualifications);
       }
     },
 
