@@ -156,7 +156,7 @@ import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
-import { getExemptionCertificateSplitPath, getPracticingCertificateSplitPath } from '@/services/candidateService';
+import { getExemptionCertificateSplitPath, getPracticingCertificateSplitPath, updateRelevantQualifications } from '@/services/candidateService';
 
 export default {
   name: 'RelevantQualifications',
@@ -367,65 +367,63 @@ export default {
 
         // @TODO: ENSURE WHEN THE UPDATE HAPPENS ITS GETTING THE QUALIFICATIONS FROM formData AND THE CERTS FROM HERE
 
-        if (this.updateCertificates.exemptionCertificateFullPath) {
-          // Exemption certificate has been added/updated so update the candidate profile
-          console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
+        // if (this.updateCertificates.exemptionCertificateFullPath) {
+        //   // Exemption certificate has been added/updated so update the candidate profile
+        //   console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
 
-          if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
+        //   if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
 
-            console.log('-- RQ candidateRelevantQualifications HAS uploadedExemptionCertificates array');
+        //     console.log('-- RQ candidateRelevantQualifications HAS uploadedExemptionCertificates array');
 
-            if (candidateRelevantQualifications.uploadedExemptionCertificates.length > 0) {
+        //     if (candidateRelevantQualifications.uploadedExemptionCertificates.length > 0) {
 
-              console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is not empty so checking last entry');
+        //       console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is not empty so checking last entry');
 
-              const latestEntry = candidateRelevantQualifications.uploadedExemptionCertificates[candidateRelevantQualifications.uploadedExemptionCertificates.length - 1];
+        //       const latestEntry = candidateRelevantQualifications.uploadedExemptionCertificates[candidateRelevantQualifications.uploadedExemptionCertificates.length - 1];
 
-              console.log('-- RQ last entry:');
-              console.log(latestEntry);
+        //       console.log('-- RQ last entry:');
+        //       console.log(latestEntry);
 
-              if (latestEntry !== this.updateCertificates.exemptionCertificateFullPath) {
+        //       if (latestEntry !== this.updateCertificates.exemptionCertificateFullPath) {
 
-                console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
+        //         console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
 
-                candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
-              }
-              else {
-                console.log('-- RQ last entry IS EQUAL so NOT updating');
-              }
-            }
-            else {
+        //         candidateRelevantQualifications.uploadedExemptionCertificates.push(this.updateCertificates.exemptionCertificateFullPath);
+        //       }
+        //       else {
+        //         console.log('-- RQ last entry IS EQUAL so NOT updating');
+        //       }
+        //     }
+        //     else {
 
-              console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
+        //       console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
 
-              candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
-            }
-          }
-          else {
+        //       candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+        //     }
+        //   }
+        //   else {
 
-            console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
+        //     console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
 
-            candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
-          }
+        //     candidateRelevantQualifications.uploadedExemptionCertificates = [this.updateCertificates.exemptionCertificateFullPath];
+        //   }
 
-        }
-        if (this.updateCertificates.practicingCertificateFullPath) {
-          // Practicing certificate has been added/updated so update the candidate profile
-          console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
+        // }
+        // if (this.updateCertificates.practicingCertificateFullPath) {
+        //   // Practicing certificate has been added/updated so update the candidate profile
+        //   console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
 
-        }
+        // }
 
-        // await this.$store.dispatch('candidate/saveRelevantQualifications', {
-        //   qualifications: this.formData.qualifications,
-        // });
+        // if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
+        //   newRelevantQualifications.uploadedExemptionCertificates = candidateRelevantQualifications.uploadedExemptionCertificates;
+        // }
+        // if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates')) {
+        //   newRelevantQualifications.uploadedPracticingCertificates = candidateRelevantQualifications.uploadedPracticingCertificates;
+        // }
+        // await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
 
-        if (_has(candidateRelevantQualifications, 'uploadedExemptionCertificates')) {
-          newRelevantQualifications.uploadedExemptionCertificates = candidateRelevantQualifications.uploadedExemptionCertificates;
-        }
-        if (_has(candidateRelevantQualifications, 'uploadedPracticingCertificates')) {
-          newRelevantQualifications.uploadedPracticingCertificates = candidateRelevantQualifications.uploadedPracticingCertificates;
-        }
-        await this.$store.dispatch('candidate/saveRelevantQualifications', newRelevantQualifications);
+        await updateRelevantQualifications(this.updateCertificatesthis.formData.qualifications);
       }
     },
 
