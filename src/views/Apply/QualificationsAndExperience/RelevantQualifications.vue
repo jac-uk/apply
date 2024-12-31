@@ -351,6 +351,7 @@ export default {
 
       if (this.formData.qualifications) {
 
+        console.log('-- RQ Process QUALIFICATIONS!!');
         // @TODO: Save the certs below too!
 
         await this.$store.dispatch('candidate/saveRelevantQualifications', {
