@@ -264,6 +264,8 @@ export default {
     let exemptionCertFileUploadPath = this.uploadPath;
     let practicingCertFileUploadPath = this.uploadPath;
 
+    console.log(`-- RQ THIS.UPLOADPATH: ${this.uploadPath}`);
+
     // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
     // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
 
