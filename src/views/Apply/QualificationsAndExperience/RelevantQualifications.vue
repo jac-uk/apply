@@ -106,10 +106,11 @@
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
             name="exemption-certificate"
-            :path="uploadPath"
+            :path="exemptionCertFileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Exemption certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setExemptionCertificateFullPath"
           />
 
           <FileUpload
@@ -117,10 +118,11 @@
             ref="practicing-certificate"
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
-            :path="uploadPath"
+            :path="practicingCertFileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setPracticingCertificateFullPath"
           />
 
           <FormFieldError
@@ -154,6 +156,7 @@ import * as filters from '@/filters';
 import FileUpload from '@/components/Form/FileUpload.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import _has from 'lodash/has';
+import { getExemptionCertificateSplitPath, getPracticingCertificateSplitPath, updateRelevantQualifications } from '@/services/candidateService';
 
 export default {
   name: 'RelevantQualifications',
@@ -182,19 +185,20 @@ export default {
     };
     const data = this.$store.getters['application/data'](defaults);
     const formData = { ...defaults, ...data };
-
-    // check if candidate has filled relevant qualifications before
-    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
-    if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-      formData.qualifications = candidateRelevantQualifications?.qualifications;
-    }
     return {
       formId: 'relevantQualifications',
       formData: formData,
       repeatableFields: {
         Qualification,
       },
+      // Save full path to candidate profile when updating certificates
+      updateCertificates: {
+        exemptionCertificateFullPath: null,
+        practicingCertificateFullPath: null,
+      },
       errorMessage: '',
+      exemptionCertFileUploadPath: '',
+      practicingCertFileUploadPath: '',
     };
   },
   computed: {
@@ -232,7 +236,37 @@ export default {
       }
     },
   },
+  created() {
+    this.initQualifications();
+    this.initCertificates();
+  },
   methods: {
+    /**
+     * Check if candidate has filled relevant qualifications before
+     */
+    initQualifications() {
+      const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+      if (!this.formData.qualifications && candidateRelevantQualifications?.qualifications) {
+        this.formData.qualifications = candidateRelevantQualifications?.qualifications;
+      }
+    },
+    /**
+     * Initialise certificate file names and paths based on whether the data should come from the application or the candidate records
+     */
+    initCertificates() {
+      const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
+      const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
+      this.exemptionCertFileUploadPath = this.uploadPath;
+      this.practicingCertFileUploadPath = this.uploadPath;
+      if ((!_has(this.formData, 'uploadedExemptionCertificate') || !this.formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
+        this.formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
+        this.exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
+      }
+      if ((!_has(this.formData, 'uploadedPracticingCertificate') || !this.formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
+        this.formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
+        this.practicingCertFileUploadPath = practicingCertificateSplitPath[0];
+      }
+    },
     async saveAndValidate() {
       if (this.notCompletedPupillage) {
         if (this.formData.uploadedExemptionCertificate === null && this.formData.uploadedPracticingCertificate === null) {
@@ -245,11 +279,14 @@ export default {
       }
       this.save();
       if (this.formData.qualifications) {
-        await this.$store.dispatch('candidate/saveRelevantQualifications', {
-          qualifications: this.formData.qualifications,
-        });
+        await updateRelevantQualifications(this.updateCertificates, this.formData.qualifications);
       }
-
+    },
+    setExemptionCertificateFullPath(value) {
+      this.updateCertificates.exemptionCertificateFullPath = value;
+    },
+    setPracticingCertificateFullPath(value) {
+      this.updateCertificates.practicingCertificateFullPath = value;
     },
   },
 };

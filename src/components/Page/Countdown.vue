@@ -15,13 +15,15 @@
       <span
         v-if="status === 'open'"
       >
-        Time left: {{ $filters.zeroPad(minutes) }}:{{ $filters.zeroPad(seconds) }}.
+        Time left: {{ zeroPad(minutes) }}:{{ zeroPad(seconds) }}.
       </span>
     </strong>
   </div>
 </template>
 
 <script>
+import zeroPad from '@/helpers/Form/zeroPad';
+
 const second = 1000;
 const minute = 60 * second;
 
@@ -76,6 +78,7 @@ export default {
     }, second);
   },
   methods: {
+    zeroPad,
     tick(start, end) {
       const now = new Date().getTime();
 
