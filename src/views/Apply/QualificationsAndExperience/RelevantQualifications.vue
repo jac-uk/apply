@@ -101,7 +101,7 @@
         <template v-if="notCompletedPupillage">
           <h2>As you did not complete pupillage, please provide a copy of your exemption and or practicing certificate</h2>
 
-          <FileUpload
+          <!-- <FileUpload
             id="exemption-certificate-upload"
             ref="exemption-certificate"
             v-model="formData.uploadedExemptionCertificate"
@@ -119,6 +119,30 @@
             v-model="formData.uploadedPracticingCertificate"
             name="practicing-certificate"
             :path="uploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
+            label="Practicing certificate"
+            :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setPracticingCertificateFullPath"
+          /> -->
+
+          <FileUpload
+            id="exemption-certificate-upload"
+            ref="exemption-certificate"
+            v-model="formData.uploadedExemptionCertificate"
+            name="exemption-certificate"
+            :path="exemptionCertFileUploadPath"
+            :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
+            label="Exemption certificate"
+            :required="isPupillageCertificateRequired"
+            @uploaded-file-path="setExemptionCertificateFullPath"
+          />
+
+          <FileUpload
+            id="practicing-certificate-upload"
+            ref="practicing-certificate"
+            v-model="formData.uploadedPracticingCertificate"
+            name="practicing-certificate"
+            :path="practicingCertFileUploadPath"
             :acceptable-extensions="['docx', 'doc', 'odt', 'txt', 'fodt', 'pdf']"
             label="Practicing certificate"
             :required="isPupillageCertificateRequired"
@@ -187,6 +211,8 @@ export default {
 
     console.log('============ RELEVANT QUALIFICATION ===============');
 
+    // - when testing switch between .docx and .doc files!
+
     console.log('-- RQ Application data:');
     console.log(data);
 
@@ -250,7 +276,7 @@ export default {
 
       // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
-      //formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
+      formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
       exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
     }
     else {
@@ -266,7 +292,7 @@ export default {
 
       // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
-      //formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
+      formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
       practicingCertFileUploadPath = practicingCertificateSplitPath[0];
     }
     else {
@@ -356,10 +382,6 @@ export default {
         console.log(this.formData.qualifications);
 
         await updateRelevantQualifications(this.updateCertificates, this.formData.qualifications);
-
-        // @TODO: get the loading of the cert working from the candidate profile (see stuff commented out above!)
-        // - when testing switch between .docx and .doc files!
-
       }
     },
 
