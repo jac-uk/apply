@@ -270,6 +270,7 @@ export default {
     // EXEMPTION CERTIFICATE
     if (_has(formData, 'uploadedExemptionCertificate') && formData.uploadedExemptionCertificate) {
       console.log('-- RQ Getting exemption certificate from the APPLICATION');
+      console.log(`-- RQ exemptionCertFileUploadPath: ${exemptionCertFileUploadPath}`);
     }
     else if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
       console.log('-- RQ Getting exemption certificate from the CANDIDATE PROFILE');
