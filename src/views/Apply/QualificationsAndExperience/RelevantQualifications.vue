@@ -221,96 +221,96 @@ export default {
     console.log('-- RQ Initial formData:');
     console.log(formData);
 
-    // check if candidate has filled relevant qualifications before
-    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+    // // check if candidate has filled relevant qualifications before
+    // const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
 
-    console.log('-- RQ candidateRelevantQualifications:');
-    console.log(candidateRelevantQualifications);
+    // console.log('-- RQ candidateRelevantQualifications:');
+    // console.log(candidateRelevantQualifications);
 
-    if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
-      formData.qualifications = candidateRelevantQualifications?.qualifications;
-    }
+    // if (!formData.qualifications && candidateRelevantQualifications?.qualifications) {
+    //   formData.qualifications = candidateRelevantQualifications?.qualifications;
+    // }
 
-    // @TODO: Certificates
-    const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
-    console.log('-- RQ exemptionCertificateSplitPath:');
-    console.log(exemptionCertificateSplitPath);
-    if (exemptionCertificateSplitPath.length > 0) {
-      // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
-      console.log(`-- RQ exemptionCertificateSplitPath[0]: ${exemptionCertificateSplitPath[0]}`);
+    // // @TODO: Certificates
+    // const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
+    // console.log('-- RQ exemptionCertificateSplitPath:');
+    // console.log(exemptionCertificateSplitPath);
+    // if (exemptionCertificateSplitPath.length > 0) {
+    //   // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
+    //   console.log(`-- RQ exemptionCertificateSplitPath[0]: ${exemptionCertificateSplitPath[0]}`);
 
-      // eg exemption-certificate.docx
-      console.log(`-- RQ exemptionCertificateSplitPath[1]: ${exemptionCertificateSplitPath[1]}`);
-    }
+    //   // eg exemption-certificate.docx
+    //   console.log(`-- RQ exemptionCertificateSplitPath[1]: ${exemptionCertificateSplitPath[1]}`);
+    // }
 
-    const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
-    console.log('-- RQ practicingCertificateSplitPath:');
-    console.log(practicingCertificateSplitPath);
-    if (practicingCertificateSplitPath.length > 0) {
-      // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
-      console.log(`-- RQ practicingCertificateSplitPath[0]: ${practicingCertificateSplitPath[0]}`);
+    // const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
+    // console.log('-- RQ practicingCertificateSplitPath:');
+    // console.log(practicingCertificateSplitPath);
+    // if (practicingCertificateSplitPath.length > 0) {
+    //   // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
+    //   console.log(`-- RQ practicingCertificateSplitPath[0]: ${practicingCertificateSplitPath[0]}`);
 
-      // eg practicing-certificate.docx
-      console.log(`-- RQ practicingCertificateSplitPath[1]: ${practicingCertificateSplitPath[1]}`);
-    }
+    //   // eg practicing-certificate.docx
+    //   console.log(`-- RQ practicingCertificateSplitPath[1]: ${practicingCertificateSplitPath[1]}`);
+    // }
 
-    // Check if the application has the uploadedExemptionCertificate set and, if so, use it
-    //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
-    //    => const fileUploadPath = this.uploadPath;
-    // Else if its in the candidate record
-    //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
-    //    fileUploadPath = exemptionCertificateSplitPath[0]
+    // // Check if the application has the uploadedExemptionCertificate set and, if so, use it
+    // //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
+    // //    => const fileUploadPath = this.uploadPath;
+    // // Else if its in the candidate record
+    // //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
+    // //    fileUploadPath = exemptionCertificateSplitPath[0]
 
-    let exemptionCertFileUploadPath = this.uploadPath;
-    let practicingCertFileUploadPath = this.uploadPath;
+    // let exemptionCertFileUploadPath = this.uploadPath;
+    // let practicingCertFileUploadPath = this.uploadPath;
 
-    console.log(`-- RQ THIS.UPLOADPATH: ${this.uploadPath}`);
+    // console.log(`-- RQ THIS.UPLOADPATH: ${this.uploadPath}`);
 
-    // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
-    // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
+    // // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
+    // // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
 
-    // EXEMPTION CERTIFICATE
-    if (_has(formData, 'uploadedExemptionCertificate') && formData.uploadedExemptionCertificate) {
-      console.log('-- RQ Getting exemption certificate from the APPLICATION');
-      console.log(`-- RQ exemptionCertFileUploadPath: ${exemptionCertFileUploadPath}`);
-    }
-    else if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
-      console.log('-- RQ Getting exemption certificate from the CANDIDATE PROFILE');
+    // // EXEMPTION CERTIFICATE
+    // if (_has(formData, 'uploadedExemptionCertificate') && formData.uploadedExemptionCertificate) {
+    //   console.log('-- RQ Getting exemption certificate from the APPLICATION');
+    //   console.log(`-- RQ exemptionCertFileUploadPath: ${exemptionCertFileUploadPath}`);
+    // }
+    // else if ((!_has(formData, 'uploadedExemptionCertificate') || !formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
+    //   console.log('-- RQ Getting exemption certificate from the CANDIDATE PROFILE');
 
-      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
+    //   // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
-      formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
-      exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
-    }
-    else {
-      console.log('-- RQ NOT getting exemption certificate from ANYWHERE');
-    }
+    //   formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
+    //   exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
+    // }
+    // else {
+    //   console.log('-- RQ NOT getting exemption certificate from ANYWHERE');
+    // }
 
-    // PRACTICING CERTIFICATE
-    if (_has(formData, 'uploadedPracticingCertificate') && formData.uploadedPracticingCertificate) {
-      console.log('-- RQ Getting practicing certificate from the APPLICATION');
-    }
-    else if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
-      console.log('-- RQ Getting practicing certificate from the CANDIDATE PROFILE');
+    // // PRACTICING CERTIFICATE
+    // if (_has(formData, 'uploadedPracticingCertificate') && formData.uploadedPracticingCertificate) {
+    //   console.log('-- RQ Getting practicing certificate from the APPLICATION');
+    // }
+    // else if ((!_has(formData, 'uploadedPracticingCertificate') || !formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
+    //   console.log('-- RQ Getting practicing certificate from the CANDIDATE PROFILE');
 
-      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
+    //   // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
 
-      formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
-      practicingCertFileUploadPath = practicingCertificateSplitPath[0];
-    }
-    else {
-      console.log('-- RQ NOT getting practicing certificate from ANYWHERE');
-    }
+    //   formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
+    //   practicingCertFileUploadPath = practicingCertificateSplitPath[0];
+    // }
+    // else {
+    //   console.log('-- RQ NOT getting practicing certificate from ANYWHERE');
+    // }
 
-    // @TODO: see above, its returning a promise instead of the value!!
+    // // @TODO: see above, its returning a promise instead of the value!!
 
-    // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
-    // Filename to FileUpload component: exemption-certificate.docx
+    // // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
+    // // Filename to FileUpload component: exemption-certificate.docx
 
-    console.log('-- RQ Eventual formData:');
-    console.log(formData);
+    // console.log('-- RQ Eventual formData:');
+    // console.log(formData);
 
-    // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
+    // // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
 
     return {
       formId: 'relevantQualifications',
@@ -324,8 +324,8 @@ export default {
         practicingCertificateFullPath: null,
       },
       errorMessage: '',
-      exemptionCertFileUploadPath: exemptionCertFileUploadPath,
-      practicingCertFileUploadPath: practicingCertFileUploadPath,
+      exemptionCertFileUploadPath: '',
+      practicingCertFileUploadPath: '',
     };
   },
   computed: {
@@ -362,6 +362,113 @@ export default {
         });
       }
     },
+  },
+  created() {
+    // const data = this.$store.getters['application/data'](this.defaults);
+
+    // console.log('============ RELEVANT QUALIFICATION ===============');
+
+    // // - when testing switch between .docx and .doc files!
+
+    // console.log('-- RQ Application data:');
+    // console.log(data);
+
+    // //this.formData = { ...this.defaults, ...data };
+
+    // console.log('-- RQ Initial formData:');
+    // console.log(this.formData);
+
+    // check if candidate has filled relevant qualifications before
+    const candidateRelevantQualifications = this.$store.getters['candidate/relevantQualifications']();
+
+    console.log('-- RQ candidateRelevantQualifications:');
+    console.log(candidateRelevantQualifications);
+
+    if (!this.formData.qualifications && candidateRelevantQualifications?.qualifications) {
+      this.formData.qualifications = candidateRelevantQualifications?.qualifications;
+    }
+
+    // @TODO: Certificates
+    const exemptionCertificateSplitPath = getExemptionCertificateSplitPath();
+    console.log('-- RQ exemptionCertificateSplitPath:');
+    console.log(exemptionCertificateSplitPath);
+    if (exemptionCertificateSplitPath.length > 0) {
+      // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
+      console.log(`-- RQ exemptionCertificateSplitPath[0]: ${exemptionCertificateSplitPath[0]}`);
+
+      // eg exemption-certificate.docx
+      console.log(`-- RQ exemptionCertificateSplitPath[1]: ${exemptionCertificateSplitPath[1]}`);
+    }
+
+    const practicingCertificateSplitPath = getPracticingCertificateSplitPath();
+    console.log('-- RQ practicingCertificateSplitPath:');
+    console.log(practicingCertificateSplitPath);
+    if (practicingCertificateSplitPath.length > 0) {
+      // eg /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj
+      console.log(`-- RQ practicingCertificateSplitPath[0]: ${practicingCertificateSplitPath[0]}`);
+
+      // eg practicing-certificate.docx
+      console.log(`-- RQ practicingCertificateSplitPath[1]: ${practicingCertificateSplitPath[1]}`);
+    }
+
+    // Check if the application has the uploadedExemptionCertificate set and, if so, use it
+    //    Set the path for the FileUpload component (and formData.uploadedPracticingCertificate is already set!)
+    //    => const fileUploadPath = this.uploadPath;
+    // Else if its in the candidate record
+    //    formData.uploadedPracticingCertificate = exemptionCertificateSplitPath[1]
+    //    fileUploadPath = exemptionCertificateSplitPath[0]
+
+    this.exemptionCertFileUploadPath = this.uploadPath;
+    this.practicingCertFileUploadPath = this.uploadPath;
+
+    console.log(`-- RQ THIS.UPLOADPATH: ${this.uploadPath}`);
+
+    // console.log(`-- formData['uploadedExemptionCertificate']: ${formData['uploadedExemptionCertificate']}`);
+    // console.log(`-- exemptionCertificateSplitPath.length']: ${exemptionCertificateSplitPath.length}`);
+
+    // EXEMPTION CERTIFICATE
+    if (_has(this.formData, 'uploadedExemptionCertificate') && this.formData.uploadedExemptionCertificate) {
+      console.log('-- RQ Getting exemption certificate from the APPLICATION');
+      console.log(`-- RQ exemptionCertFileUploadPath: ${this.exemptionCertFileUploadPath}`);
+    }
+    else if ((!_has(this.formData, 'uploadedExemptionCertificate') || !this.formData.uploadedExemptionCertificate) && exemptionCertificateSplitPath.length === 2) {
+      console.log('-- RQ Getting exemption certificate from the CANDIDATE PROFILE');
+
+      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
+
+      this.formData.uploadedExemptionCertificate = exemptionCertificateSplitPath[1];
+      this.exemptionCertFileUploadPath = exemptionCertificateSplitPath[0];
+    }
+    else {
+      console.log('-- RQ NOT getting exemption certificate from ANYWHERE');
+    }
+
+    // PRACTICING CERTIFICATE
+    if (_has(this.formData, 'uploadedPracticingCertificate') && this.formData.uploadedPracticingCertificate) {
+      console.log('-- RQ Getting practicing certificate from the APPLICATION');
+    }
+    else if ((!_has(this.formData, 'uploadedPracticingCertificate') || !this.formData.uploadedPracticingCertificate) && practicingCertificateSplitPath.length === 2) {
+      console.log('-- RQ Getting practicing certificate from the CANDIDATE PROFILE');
+
+      // @TODO: COMMENTED OUT BELOW TO SHOW WHAT THE DATA LOOKS LIKE, NOW NEED TO TEST IT WHEN THIS IS UNCOMMENTED AND ENSURE THE FILE STILL SHOWS IN FILE UPLOAD!!
+
+      this.formData.uploadedPracticingCertificate = practicingCertificateSplitPath[1];
+      this.practicingCertFileUploadPath = practicingCertificateSplitPath[0];
+    }
+    else {
+      console.log('-- RQ NOT getting practicing certificate from ANYWHERE');
+    }
+
+    // @TODO: see above, its returning a promise instead of the value!!
+
+    // Path to FileUpload component: /exercise/gWHwfBAlA9JYqzhwELnx/user/UhG4MVCdVpbSZAyZHOgB2LIidFj2
+    // Filename to FileUpload component: exemption-certificate.docx
+
+    console.log('-- RQ Eventual formData:');
+    console.log(this.formData);
+
+    // @TODO: Similar to above check for existing files in candidate record and load it if nowt in the formData (ie the application)!
+
   },
   methods: {
     async saveAndValidate() {
