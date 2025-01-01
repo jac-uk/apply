@@ -19,128 +19,73 @@ const makeFullName = (firstName, lastName) => {
   return `${firstName} ${lastName}`;
 };
 
+/**
+ * Split the filepath to return an array of [path, filename]
+ * @returns Array
+ */
 const getExemptionCertificateSplitPath = () => {
   const latestExemptionCertificateFullPath = store.getters['candidate/exemptionCertificateFullPath'];
-
-  console.log(`CS latestExemptionCertificateFullPath: ${latestExemptionCertificateFullPath}`);
-
   return latestExemptionCertificateFullPath ? splitFilePath(latestExemptionCertificateFullPath) : [];
 };
 
+/**
+ * Split the filepath to return an array of [path, filename]
+ * @returns Array
+ */
 const getPracticingCertificateSplitPath = () => {
   const latestPracticingCertificateFullPath = store.getters['candidate/practicingCertificateFullPath'];
-
-  console.log(`CS latestPracticingCertificateFullPath: ${latestPracticingCertificateFullPath}`);
-
   return latestPracticingCertificateFullPath ? splitFilePath(latestPracticingCertificateFullPath) : [];
 };
 
+/**
+ * Update the releavant qualifications
+ * The certificates are stored in arrays where the latest entry is the current certificate
+ * New uploaded files have their filepath appended to the array
+ * @param {Object} newCertificateFullPaths
+ * @param {Array} newQualifications
+ */
 const updateRelevantQualifications = async (newCertificateFullPaths, newQualifications = null) => {
   const relevantQualififcations = store.getters['candidate/relevantQualifications']();
-
-  console.log('-- CS candidateRelevantQualifications:');
-  console.log(relevantQualififcations);
-
-  console.log('-- CS newCertificateFullPaths:');
-  console.log(newCertificateFullPaths);
-
-  console.log('-- CS newQualifications:');
-  console.log(newQualifications);
-
   if (newQualifications) {
     relevantQualififcations.qualifications = newQualifications;
   }
-
-  // EXEMPTION CERTIFICATE
+  // Exemption Certificate
   if (_has(newCertificateFullPaths, 'exemptionCertificateFullPath') && newCertificateFullPaths.exemptionCertificateFullPath) {
-
     // Exemption certificate has been added/updated so update the candidate profile
-    console.log('-- RQ exemption certificate has been added/updated so update the candidate profile');
-
     if (_has(relevantQualififcations, 'uploadedExemptionCertificates')) {
-
-      console.log('-- RQ candidateRelevantQualifications HAS uploadedExemptionCertificates array');
-
       if (relevantQualififcations.uploadedExemptionCertificates.length > 0) {
-
-        console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is not empty so checking last entry');
-
         const latestEntry = relevantQualififcations.uploadedExemptionCertificates[relevantQualififcations.uploadedExemptionCertificates.length - 1];
-
-        console.log('-- RQ last entry:');
-        console.log(latestEntry);
-
         if (latestEntry !== newCertificateFullPaths.exemptionCertificateFullPath) {
-
-          console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
-
           relevantQualififcations.uploadedExemptionCertificates.push(newCertificateFullPaths.exemptionCertificateFullPath);
-        }
-        else {
-          console.log('-- RQ last entry IS EQUAL so NOT updating');
         }
       }
       else {
-
-        console.log('-- RQ candidateRelevantQualifications.uploadedExemptionCertificates array is empty so populate');
-
         relevantQualififcations.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
       }
     }
     else {
-
-      console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedExemptionCertificates array so create it and populate');
-
       relevantQualififcations.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
     }
   }
-
-  // PRACTICING CERTIFICATE
+  // Practicing Certificate
   if (_has(newCertificateFullPaths, 'practicingCertificateFullPath') && newCertificateFullPaths.practicingCertificateFullPath) {
-
     // Practicing certificate has been added/updated so update the candidate profile
-    console.log('-- RQ practicing certificate has been added/updated so update the candidate profile');
-
     if (_has(relevantQualififcations, 'uploadedPracticingCertificates')) {
-
-      console.log('-- RQ candidateRelevantQualifications HAS uploadedPracticingCertificates array');
-
       if (relevantQualififcations.uploadedPracticingCertificates.length > 0) {
-
-        console.log('-- RQ candidateRelevantQualifications.uploadedPracticingCertificates array is not empty so checking last entry');
-
         const latestEntry = relevantQualififcations.uploadedPracticingCertificates[relevantQualififcations.uploadedPracticingCertificates.length - 1];
-
-        console.log('-- RQ last entry:');
-        console.log(latestEntry);
-
         if (latestEntry !== newCertificateFullPaths.practicingCertificateFullPath) {
-
-          console.log('-- RQ last entry IS NOT EQUAL to new one so updating');
-
           relevantQualififcations.uploadedPracticingCertificates.push(newCertificateFullPaths.practicingCertificateFullPath);
-        }
-        else {
-          console.log('-- RQ last entry IS EQUAL so NOT updating');
         }
       }
       else {
-
-        console.log('-- RQ candidateRelevantQualifications.uploadedPracticingCertificates array is empty so populate');
-
         relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
       }
     }
     else {
-
-      console.log('-- RQ candidateRelevantQualifications DOES NOT have uploadedPracticingCertificates array so create it and populate');
-
       relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
     }
   }
-
   await store.dispatch('candidate/saveRelevantQualifications', relevantQualififcations);
-
 };
 
 export {
