@@ -4,7 +4,8 @@ export {
   filteredPreferences,
   isAllRequiredFilled,
   tidyData,
-  isVersion1
+  isVersion1,
+  extractAnswers
 };
 
 import _ from 'lodash';
@@ -108,4 +109,97 @@ function isVersion1(preferences) {
     return true;
   }
   return false;
+}
+
+/**
+ * Extract answers
+ * @param {Object} config working preferences config
+ * @param {Object} data raw answers contain ids
+ * @param {Object} answerSources answer sources
+ * @param {Object} filters lookup names
+ * @returns [ { answer: String, group: String, rank: Number } ]
+*/
+function extractAnswers(config, data, answerSources, filters) {
+        const sortedAnswers = [];
+        if (config.groupAnswers) {
+          config.answers.forEach(group => {
+            group.answers.forEach(answer => {
+              switch (config.questionType) {
+              case 'single-choice':
+                if (answer.id === data) {
+                  sortedAnswers.push({ answer: answer.answer, group: group.group });
+                }
+                break;
+              case 'multiple-choice':
+                if (data.indexOf(answer.id) >= 0) {
+                  sortedAnswers.push({ answer: answer.answer, group: group.group });
+                }
+                break;
+              case 'ranked-choice':
+                if (Object.keys(data).indexOf(answer.id) >= 0) {
+                  sortedAnswers.push({ answer: answer.answer, group: group.group, rank: data[answer.id] });
+                }
+                break;
+              }
+            });
+          });
+        } else {
+          if (config.answerSource) {
+            if (!answerSources) return sortedAnswers;
+            const answerSource = answerSources[config.answerSource];
+            if (!answerSource) return sortedAnswers;
+            switch (config.questionType) {
+            case 'single-choice':
+              if (data === 'other') {  // make this generic
+                sortedAnswers.push({ answer: answerSource.otherJurisdiction });
+              } else {
+                sortedAnswers.push({ answer: filters.lookup(data) });
+              }
+              break;
+            case 'multiple-choice':
+              answerSource.forEach(answer => {
+                if (data.indexOf(answer) >= 0) {
+                  if (answer === 'other') {  // make this generic
+                    sortedAnswers.push({ answer: answerSources.otherJurisdiction });
+                  } else {
+                    sortedAnswers.push({ answer: filters.lookup(answer) });
+                  }
+                }
+              });
+              break;
+            case 'ranked-choice':
+              answerSource.forEach(answer => {
+                if (Object.keys(data).indexOf(answer) >= 0) {
+                  if (answer === 'other') {  // make this generic
+                    sortedAnswers.push({ answer: answerSource.otherJurisdiction, rank: data[answer] });
+                  } else {
+                    sortedAnswers.push({ answer: filters.lookup(answer), rank: data[answer] });
+                  }
+                }
+              });
+              break;
+            }
+          } else {
+            config.answers.forEach(answer => {
+              switch (config.questionType) {
+              case 'single-choice':
+                if (answer.id === data) {
+                  sortedAnswers.push({ answer: answer.answer });
+                }
+                break;
+              case 'multiple-choice':
+                if (data.indexOf(answer.id) >= 0) {
+                  sortedAnswers.push({ answer: answer.answer });
+                }
+                break;
+              case 'ranked-choice':
+                if (Object.keys(data).indexOf(answer.id) >= 0) {
+                  sortedAnswers.push({ answer: answer.answer, rank: data[answer.id] });
+                }
+                break;
+              }
+            });
+          }
+        }
+        return config.questionType === 'ranked-choice' ? sortedAnswers.sort((a, b) => a.rank - b.rank) : sortedAnswers;
 }
