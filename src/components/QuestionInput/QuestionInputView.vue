@@ -16,9 +16,9 @@
       >
         <strong v-if="item.rank">
           {{ item.rank }}:
-        </strong>      
+        </strong>
         <strong v-if="item.group">
-          {{ item.group }} - 
+          {{ item.group }} -
         </strong>
         {{ item.answer }}
       </p>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { extractAnswers } from '../../views/Apply/WorkingPreferences/workingPreferencesHelper.js';
 
 export default {
   name: 'QuestionInputView',
@@ -50,93 +51,8 @@ export default {
       return this.$store.state.vacancy.record;
     },
     answerData() {
-      /**
-       * TODO: this could be moved to a helper module
-       * @returns [ { answer: String, group: String, rank: Number } ]
-      */
-      const sortedAnswers = [];
-      if (this.config.groupAnswers) {
-        this.config.answers.forEach(group => {
-          group.answers.forEach(answer => {
-            switch (this.config.questionType) {
-            case 'single-choice':
-              if (answer.id === this.data) {
-                sortedAnswers.push({ answer: answer.answer, group: group.group });
-              }
-              break;
-            case 'multiple-choice':
-              if (this.data.indexOf(answer.id) >= 0) {
-                sortedAnswers.push({ answer: answer.answer, group: group.group });
-              }
-              break;
-            case 'ranked-choice':
-              if (Object.keys(this.data).indexOf(answer.id) >= 0) {
-                sortedAnswers.push({ answer: answer.answer, group: group.group, rank: this.data[answer.id] });
-              }
-              break;
-            }
-          });
-        });
-      } else {
-        if (this.config.answerSource) {
-          if (!this.answerSources) return sortedAnswers;
-          const answerSource = this.answerSources[this.config.answerSource];
-          if (!answerSource) return sortedAnswers;
-          switch (this.config.questionType) {
-          case 'single-choice':
-            if (this.data === 'other') {  // make this generic
-              sortedAnswers.push({ answer: this.answerSources.otherJurisdiction });
-            } else {
-              sortedAnswers.push({ answer: this.$filters.lookup(this.data) });
-            }
-            break;
-          case 'multiple-choice':
-            answerSource.forEach(answer => {
-              if (this.data.indexOf(answer) >= 0) {
-                if (answer === 'other') {  // make this generic
-                  sortedAnswers.push({ answer: this.answerSources.otherJurisdiction });
-                } else {
-                  sortedAnswers.push({ answer: this.$filters.lookup(answer) });
-                }
-              }
-            });
-            break;
-          case 'ranked-choice':
-            answerSource.forEach(answer => {
-              if (Object.keys(this.data).indexOf(answer) >= 0) {
-                if (answer === 'other') {  // make this generic
-                  sortedAnswers.push({ answer: this.answerSources.otherJurisdiction, rank: this.data[answer] });
-                } else {
-                  sortedAnswers.push({ answer: this.$filters.lookup(answer), rank: this.data[answer] });
-                }
-              }
-            });
-            break;
-          }
-        } else {
-          this.config.answers.forEach(answer => {
-            switch (this.config.questionType) {
-            case 'single-choice':
-              if (answer.id === this.data) {
-                sortedAnswers.push({ answer: answer.answer });
-              }
-              break;
-            case 'multiple-choice':
-              if (this.data.indexOf(answer.id) >= 0) {
-                sortedAnswers.push({ answer: answer.answer });
-              }
-              break;
-            case 'ranked-choice':
-              if (Object.keys(this.data).indexOf(answer.id) >= 0) {
-                sortedAnswers.push({ answer: answer.answer, rank: this.data[answer.id] });
-              }
-              break;
-            }          
-          });
-        }
-      }
-      return this.config.questionType === 'ranked-choice' ? sortedAnswers.sort((a, b) => a.rank - b.rank) : sortedAnswers;
-    },    
+      return extractAnswers(this.config, this.data, this.answerSources, this.$filters);
+    },
   },
 };
 </script>
