@@ -82,13 +82,21 @@
           </template>
         </TextField>
 
-        <TextField
-          id="phone"
-          v-model="personalDetails.phone"
-          label="Phone number"
-          type="tel"
-          hint="For international numbers include the country code. For example, ‘+447123456789’."
-        />
+        <MobileNumber
+          v-model:mobile="personalDetails.mobile"
+          v-model:mobile-verified-at="personalDetails.mobileVerifiedAt"
+          required
+        >
+          <template #editable-once>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span class="govuk-body govuk-!-margin-bottom-0">
+                {{ personalDetails.mobile }}
+              </span>
+
+              <CandidateProfileLink />
+            </div>
+          </template>
+        </MobileNumber>
 
         <DateInput
           id="date-of-birth"
@@ -212,6 +220,7 @@ import TextareaInput from '@/components/Form/TextareaInput.vue';
 import RadioGroup from '@/components/Form/RadioGroup.vue';
 import RadioItem from '@/components/Form/RadioItem.vue';
 import BackLink from '@/components/BackLink.vue';
+import MobileNumber from '@/components/MobileNumber.vue';
 import CandidateProfileLink from '@/components/CandidateProfileLink.vue';
 import { splitFullName } from '@jac-uk/jac-kit/helpers/splitFullName';
 import { formatDate } from '@/helpers/date';
@@ -226,6 +235,7 @@ export default {
     RadioGroup,
     RadioItem,
     BackLink,
+    MobileNumber,
     CandidateProfileLink,
   },
   extends: Form,
