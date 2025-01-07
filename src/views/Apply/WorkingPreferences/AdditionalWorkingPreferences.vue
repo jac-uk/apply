@@ -63,7 +63,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { filteredPreferences, isAllRequiredFilled, tidyData, isVersion1 } from './workingPreferencesHelper';
+import { filteredPreferences, isAllRequiredFilled, tidyData, isVersion1 } from '@/helpers/workingPreferencesHelper.js';
 
 export default {
   name: 'AdditionalWorkingPreferences',

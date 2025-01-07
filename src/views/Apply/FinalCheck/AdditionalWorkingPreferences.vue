@@ -30,7 +30,7 @@
 import { getDataWelshId, getDataWelsh } from '@/helpers/language';
 import SelectionView from '@/components/SelectionInput/View.vue';
 import QuestionInputView from '@/components/QuestionInput/QuestionInputView.vue';
-import { filteredPreferences, isVersion1 } from '../WorkingPreferences/workingPreferencesHelper';
+import { filteredPreferences, isVersion1 } from '@/helpers/workingPreferencesHelper.js';
 
 export default {
   name: 'AdditionalWorkingPreferences',

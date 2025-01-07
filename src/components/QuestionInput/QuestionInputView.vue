@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { extractAnswers } from '../../views/Apply/WorkingPreferences/workingPreferencesHelper.js';
+import { extractAnswers } from '@/helpers/workingPreferencesHelper.js';
 
 export default {
   name: 'QuestionInputView',

@@ -26,7 +26,7 @@
 <script>
 import SelectionView from '@/components/SelectionInput/View.vue';
 import QuestionInputView from '@/components/QuestionInput/QuestionInputView.vue';
-import { filteredPreferences } from '../WorkingPreferences/workingPreferencesHelper';
+import { filteredPreferences } from '@/helpers/workingPreferencesHelper.js';
 
 export default {
   name: 'LocationPreferences',

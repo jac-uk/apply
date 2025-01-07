@@ -57,7 +57,7 @@ import ApplyMixIn from '../ApplyMixIn';
 import SelectionInput from '@/components/SelectionInput/SelectionInput.vue';
 import QuestionInput from '@/components/Form/QuestionInput.vue';
 import BackLink from '@/components/BackLink.vue';
-import { isAllRequiredFilled, filteredPreferences, tidyData } from './workingPreferencesHelper';
+import { isAllRequiredFilled, filteredPreferences, tidyData } from '@/helpers/workingPreferencesHelper.js';
 
 export default {
   name: 'LocationPreferences',
