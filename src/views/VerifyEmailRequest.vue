@@ -71,6 +71,11 @@ export default {
       return this.$store.getters['auth/isEmailVerified'];
     },
   },
+  mounted: async function () {
+    if (!this.isEmailVerified) {
+      this.resend();
+    }
+  },
   methods: {
     async resend() {
       this.showEmailVerificationError = false;
