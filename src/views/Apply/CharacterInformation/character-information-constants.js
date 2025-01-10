@@ -8,6 +8,7 @@ const DECLARATION2 = `I understand that failure to declare on the application fo
 const DECLARATION3 = `I understand that failure to disclose information additional to that included on my application form,
                       upon the request of the JAC and to the timetable requested by the JAC, may also rule out further consideration
                       of my application.`;
+const DECLARATION5 =  'I confirm that if my character submission has changed since my last application, I have updated it here.';
 
 const CRIMINAL_OFFENCES_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#criminal-offences';
 const FIXED_PENALTY_NOTICES_URL = 'https://judicialappointments.gov.uk/guidance-on-the-application-process-2/good-character/good-character-guidance/#fixed-penalty-notices-including-motoring';
@@ -22,6 +23,7 @@ export {
   DECLARATION1,
   DECLARATION2,
   DECLARATION3,
+  DECLARATION5,
   CRIMINAL_OFFENCES_URL,
   FIXED_PENALTY_NOTICES_URL,
   MOTORING_OFFENCES_URL,
