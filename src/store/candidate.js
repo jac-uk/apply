@@ -3,6 +3,7 @@ import { firestore } from '@/firebase';
 import { firestoreAction } from '@/helpers/vuexfireJAC';
 import vuexfireSerialize from '@/helpers/vuexfireSerialize';
 import clone from 'clone';
+import _has from 'lodash/has';
 
 const collectionName = 'candidates';
 const collectionRef = collection(firestore, collectionName);
@@ -111,6 +112,24 @@ export default {
     },
     requiredFieldsComplete: (state) => () => {
       return clone(state.requiredFieldsComplete);
+    },
+    exemptionCertificateFullPath: (getters) => {
+      // Get the lastest exemption certificate (full path) in the list, if it exists
+      const relevantQualifications = getters.relevantQualifications;
+      if (relevantQualifications === null) return null;
+      if (_has(relevantQualifications, 'uploadedExemptionCertificates') && Array.isArray(relevantQualifications.uploadedExemptionCertificates) && relevantQualifications.uploadedExemptionCertificates.length > 0) {
+        return relevantQualifications.uploadedExemptionCertificates[relevantQualifications.uploadedExemptionCertificates.length - 1];
+      }
+      return null;
+    },
+    practicingCertificateFullPath: (getters) => {
+      // Get the lastest practicing certificate (full path) in the list, if it exists
+      const relevantQualifications = getters.relevantQualifications;
+      if (relevantQualifications === null) return null;
+      if (_has(relevantQualifications, 'uploadedPracticingCertificates') && Array.isArray(relevantQualifications.uploadedPracticingCertificates) && relevantQualifications.uploadedPracticingCertificates.length > 0) {
+        return relevantQualifications.uploadedPracticingCertificates[relevantQualifications.uploadedPracticingCertificates.length - 1];
+      }
+      return null;
     },
   },
 };

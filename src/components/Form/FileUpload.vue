@@ -114,7 +114,7 @@ export default {
       },
     },
   },
-  emits: ['update:modelValue'],
+  emits: ['update:modelValue', 'uploadedFilePath'],
   data() {
     return {
       file: '',
@@ -141,7 +141,6 @@ export default {
   async mounted () {
     if (typeof this.fileName === 'string' && this.fileName.length) {
       const isUploaded = await this.verifyFile(this.fileName);
-
       if (!isUploaded) {
         this.fileName = '';
         this.resetFile();
@@ -213,8 +212,9 @@ export default {
       this.isUploading = true;
       const fileName = this.generateFileName(file.name);
 
+      const uploadedFilePath = `${this.path}/${fileName}`;
       const storage = getStorage();
-      const fileRef = ref(storage ,`${this.path}/${fileName}`);
+      const fileRef = ref(storage , uploadedFilePath);
 
       // Delete the current file in file storage
       if (this.haveFile && this.enableDelete) {
@@ -225,8 +225,9 @@ export default {
         await uploadBytes(fileRef, file);
         this.isReplacing = false;
         this.fileName = fileName;
-
         this.downloadUrl = await getDownloadURL(fileRef);
+        // Send the uploadedFilePath back to the parent component
+        this.$emit('uploadedFilePath', uploadedFilePath);
 
         return true;
       } catch (e) {
@@ -248,7 +249,6 @@ export default {
       // Check if file exists in storage
       try {
         this.downloadUrl = await getDownloadURL(fileRef);
-
         if (typeof downloadUrl === 'string' && this.downloadUrl.length) {
           return true;
         }
