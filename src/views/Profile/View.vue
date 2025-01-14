@@ -107,7 +107,7 @@
                 class="govuk-link govuk-body-m"
                 :to="{ name: 'profile-edit' }"
               >
-                Edit
+                Edit Profile
               </RouterLink>
             </div>
 
@@ -227,7 +227,7 @@
                     style="display:inline-block;"
                     :to="{ name: 'profile-password-edit' }"
                   >
-                    Edit
+                    Edit Password
                   </RouterLink>
                 </dd>
               </div>
