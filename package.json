@@ -51,7 +51,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.3.4",
-    "@vitest/coverage-v8": "^1.0.1",
+    "@vitest/coverage-v8": "^1.6.1",
     "@vue/compiler-sfc": "^3.3.4",
     "@vue/test-utils": "^2.4.1",
     "bufferutil": "^4.0.1",
@@ -72,7 +72,7 @@
     "sass": "^1.32.13",
     "vite": "^5.4.14",
     "vite-plugin-eslint": "^1.8.1",
-    "vitest": "^1.0.0",
+    "vitest": "^1.6.1",
     "webpack": "^5.88.2",
     "y18n": ">=4.0.1"
   },
