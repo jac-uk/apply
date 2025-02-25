@@ -1,5 +1,6 @@
-import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, getAuth, signInWithEmailAndPassword, updatePassword } from 'firebase/auth';
-
+import { createUserWithEmailAndPassword, sendEmailVerification, sendPasswordResetEmail, getAuth, signInWithCustomToken, updatePassword } from 'firebase/auth';
+import { httpsCallable } from '@firebase/functions';
+import { functions } from '@/firebase';
 const createAuthUser = async (email, password) => {
   const auth = getAuth();
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -32,12 +33,23 @@ const sendPasswordResetLink = async (email, returnUrl) => {
 };
 
 const signInWithEmailAndPwd = async (email, password) => {
-  const auth = getAuth();
-  return await signInWithEmailAndPassword(
-    auth,
+  // sigh with password in the backend and get idToken
+  const response = await httpsCallable(functions, 'signIn')({
     email,
-    password
-  );
+    password,
+  });
+
+  const { success, data, error } = response.data;
+  if (!success) {
+    throw new Error(error);
+  }
+
+  // sign in with idToken
+  const auth = getAuth();
+  const customToken = data.customToken;
+  const userCredential = await signInWithCustomToken(auth, customToken);
+
+  return userCredential;
 };
 
 const  updatePwd = async(currentPwd, newPwd) => {
