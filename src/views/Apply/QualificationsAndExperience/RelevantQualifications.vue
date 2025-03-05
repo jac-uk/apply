@@ -143,6 +143,7 @@
 </template>
 
 <script>
+import { shallowRef } from 'vue';
 import Form from '@/components/Form/Form.vue';
 import ErrorSummary from '@/components/Form/ErrorSummary.vue';
 import ApplyMixIn from '../ApplyMixIn';
@@ -188,9 +189,9 @@ export default {
     return {
       formId: 'relevantQualifications',
       formData: formData,
-      repeatableFields: {
+      repeatableFields: shallowRef({
         Qualification,
-      },
+      }),
       // Save full path to candidate profile when updating certificates
       updateCertificates: {
         exemptionCertificateFullPath: null,
