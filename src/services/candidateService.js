@@ -45,47 +45,50 @@ const getPracticingCertificateSplitPath = () => {
  * @param {Array} newQualifications
  */
 const updateRelevantQualifications = async (newCertificateFullPaths, newQualifications = null) => {
-  const relevantQualififcations = store.getters['candidate/relevantQualifications']();
+  let relevantQualifications = store.getters['candidate/relevantQualifications']();
+  if (!relevantQualifications) {
+    relevantQualifications = {};
+  }
   if (newQualifications) {
-    relevantQualififcations.qualifications = newQualifications;
+    relevantQualifications.qualifications = newQualifications;
   }
   // Exemption Certificate
   if (_has(newCertificateFullPaths, 'exemptionCertificateFullPath') && newCertificateFullPaths.exemptionCertificateFullPath) {
     // Exemption certificate has been added/updated so update the candidate profile
-    if (_has(relevantQualififcations, 'uploadedExemptionCertificates')) {
-      if (relevantQualififcations.uploadedExemptionCertificates.length > 0) {
-        const latestEntry = relevantQualififcations.uploadedExemptionCertificates[relevantQualififcations.uploadedExemptionCertificates.length - 1];
+    if (_has(relevantQualifications, 'uploadedExemptionCertificates')) {
+      if (relevantQualifications.uploadedExemptionCertificates.length > 0) {
+        const latestEntry = relevantQualifications.uploadedExemptionCertificates[relevantQualifications.uploadedExemptionCertificates.length - 1];
         if (latestEntry !== newCertificateFullPaths.exemptionCertificateFullPath) {
-          relevantQualififcations.uploadedExemptionCertificates.push(newCertificateFullPaths.exemptionCertificateFullPath);
+          relevantQualifications.uploadedExemptionCertificates.push(newCertificateFullPaths.exemptionCertificateFullPath);
         }
       }
       else {
-        relevantQualififcations.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
+        relevantQualifications.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
       }
     }
     else {
-      relevantQualififcations.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
+      relevantQualifications.uploadedExemptionCertificates = [newCertificateFullPaths.exemptionCertificateFullPath];
     }
   }
   // Practicing Certificate
   if (_has(newCertificateFullPaths, 'practicingCertificateFullPath') && newCertificateFullPaths.practicingCertificateFullPath) {
     // Practicing certificate has been added/updated so update the candidate profile
-    if (_has(relevantQualififcations, 'uploadedPracticingCertificates')) {
-      if (relevantQualififcations.uploadedPracticingCertificates.length > 0) {
-        const latestEntry = relevantQualififcations.uploadedPracticingCertificates[relevantQualififcations.uploadedPracticingCertificates.length - 1];
+    if (_has(relevantQualifications, 'uploadedPracticingCertificates')) {
+      if (relevantQualifications.uploadedPracticingCertificates.length > 0) {
+        const latestEntry = relevantQualifications.uploadedPracticingCertificates[relevantQualifications.uploadedPracticingCertificates.length - 1];
         if (latestEntry !== newCertificateFullPaths.practicingCertificateFullPath) {
-          relevantQualififcations.uploadedPracticingCertificates.push(newCertificateFullPaths.practicingCertificateFullPath);
+          relevantQualifications.uploadedPracticingCertificates.push(newCertificateFullPaths.practicingCertificateFullPath);
         }
       }
       else {
-        relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
+        relevantQualifications.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
       }
     }
     else {
-      relevantQualififcations.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
+      relevantQualifications.uploadedPracticingCertificates = [newCertificateFullPaths.practicingCertificateFullPath];
     }
   }
-  await store.dispatch('candidate/saveRelevantQualifications', relevantQualififcations);
+  await store.dispatch('candidate/saveRelevantQualifications', relevantQualifications);
 };
 
 export {
