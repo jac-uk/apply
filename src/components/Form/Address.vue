@@ -46,11 +46,27 @@
       label="Postcode"
       type="postcode"
     />
+    <Select
+      :id="`${id}--country`"
+      v-model="modelValue.country"
+      label="Country"
+      required
+    >
+      <option
+        v-for="country in countries"
+        :key="country"
+        :value="country"
+      >
+        {{ country }}
+      </option>
+    </Select>
   </div>
 </template>
 <script>
 import FormField from '@/components/Form/FormField.vue';
 import TextField from '@/components/Form/TextField.vue';
+import Select from '@jac-uk/jac-kit/draftComponents/Form/Select.vue';
+import { COUNTRIES } from '@/helpers/constants';
 
 export default {
   compatConfig: {
@@ -61,6 +77,7 @@ export default {
   name: 'Address',
   components: {
     TextField,
+    Select,
   },
   extends: FormField,
   props: {
@@ -70,6 +87,11 @@ export default {
     },
   },
   emits: ['update:modelValue'],
+  data() {
+    return {
+      countries: COUNTRIES,
+    };
+  },
   watch: {
     modelValue() {
       this.$emit('update:modelValue', this.modelValue);

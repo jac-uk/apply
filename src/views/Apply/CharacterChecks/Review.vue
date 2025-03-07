@@ -217,6 +217,10 @@
             <br>
           </span>
           {{ application.personalDetails.address.current.postcode }}
+          <span v-if="application.personalDetails.address.current.country">
+            <br>
+            {{ application.personalDetails.address.current.country }}
+          </span>
         </dd>
         <dd
           v-else
