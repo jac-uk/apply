@@ -54,7 +54,7 @@
                 class="govuk-heading-m"
                 style="display:inline-block;"
               >
-                Fixed penalty notices, (including motoring)
+                Fixed penalty notices (**excluding** motoring)
               </h2>
             </div>
 
