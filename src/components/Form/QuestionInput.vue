@@ -4,8 +4,10 @@
       class="govuk-fieldset"
       :aria-describedby="`${id}-hint`"
     >
-      <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
-        {{ title }}
+      <legend :class="['govuk-fieldset__legend', { 'govuk-fieldset__legend--m': !isHTMLValue }]">
+        <CustomHTML
+          :value="title"
+        />
       </legend>
       <span
         :id="`${id}-hint`"
@@ -53,6 +55,7 @@ import RankedChoice from '../QuestionInput/RankedChoice.vue';
 import FormField from '@/components/Form/FormField.vue';
 import FormFieldError from '@/components/Form/FormFieldError.vue';
 import { isGapInIntegers } from '@/helpers/array';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   compatConfig: {
@@ -66,6 +69,7 @@ export default {
     SingleChoice,
     MultipleChoice,
     RankedChoice,
+    CustomHTML,
   },
   extends: FormField,
   props: {
@@ -160,6 +164,9 @@ export default {
     },
     isRankedChoice() {
       return this.type === 'ranked-choice';
+    },
+    isHTMLValue() {
+      return this.title && this.title.trim().charAt(0) === '<';
     },
   },
   methods: {

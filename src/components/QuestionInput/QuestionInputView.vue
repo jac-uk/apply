@@ -2,9 +2,11 @@
   <div
     class="govuk-summary-list__row"
   >
-    <dt class="govuk-summary-list__key">
+    <dt :class="{ 'govuk-summary-list__key': !isHTMLValue }">
       <span v-if="config.topic">{{ config.topic }}<br></span>
-      {{ config.question }}
+      <CustomHTML
+        :value="config.question"
+      />
     </dt>
     <dd
       class="govuk-summary-list__value"
@@ -28,9 +30,13 @@
 
 <script>
 import { extractAnswers } from '@/helpers/workingPreferencesHelper.js';
+import CustomHTML from '@/components/CustomHTML.vue';
 
 export default {
   name: 'QuestionInputView',
+  components: {
+    CustomHTML,
+  },
   props: {
     config: {
       type: Object,
@@ -52,6 +58,9 @@ export default {
     },
     answerData() {
       return extractAnswers(this.config, this.data, this.answerSources, this.$filters);
+    },
+    isHTMLValue() {
+      return this.config.question && this.config.question.trim().charAt(0) === '<';
     },
   },
 };
